@@ -1,0 +1,5625 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_unidad_de_memoria" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2022-08-27</span>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_unidad_de_memoria">9. Unidad de Memoria</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_introducción_13">9.1. Introducción</h3>
+<div class="sect3">
+<h4 id="_temario_9">9.1.1. Temario</h4>
+<div class="olist arabic">
+<ol class="arabic" start="9">
+<li>
+<p>Organización de la memoria</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Jerarquía de memoria</p>
+</li>
+<li>
+<p>Latencia y ancho de banda</p>
+</li>
+<li>
+<p>Memoria cache</p>
+</li>
+<li>
+<p>Memoria virtual</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_libro_william_stalling">9.1.2. Libro: William Stalling</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Introducir conceptos de William.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>William tiene un capítulo para la memoria principal y otro para memoria cache</p>
+</li>
+<li>
+<p>Capítulo 4 : Caché</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La introducción de la memoria cache tiene Conceptos Generales</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Capítulo 5 : Memoria Interna (DRAM)</p>
+</li>
+<li>
+<p>Capítulo 6 : Memoria Externa (Almacenamiento Periférico)</p>
+</li>
+<li>
+<p>Capítulo 8 : Sistemas Operativos: Gestión de Memoria</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_historia">9.1.3. Historia</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El gran avance del Ingeniero John Von Neumann fue desarrollar la computadora IAS en la cual los programas no eran cableados sino almacenados electrónicamente en una unidad de memoria denominada Selectron. Los programas eran "editados" mediante la escritura de tarjetas de cartón perforadas que posteriormente eran convertidas en secuencias de digitos binarios para poder ser almacenadas en código binario en la unidad de memoria Selectrón. De esta manera surgió el concepto de "programa almacenado" o software y el desarrollo de las <strong>unidades de memoria</strong>.</p>
+</li>
+<li>
+<p>La memoria no consistía de una única unidad sino que se estructuraba en distintos niveles:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Nivel cpu: registros PC,MAR,MBR, IR, IBR, Acumuladores AC y AR : registros con capacidad para almacenar una instrucción y un dato.</p>
+</li>
+<li>
+<p>Memoria principal: memoria Selectron con capacidad para almacenar programas agrupando en una sección las instrucciones y en otra sección los datos. Capacidad para direccionar 4K palabras de 40 bits cada palabra</p>
+</li>
+<li>
+<p>Memoria secundaria: Tambores magnéticos "drum" con capacidad para almacenar una colección de programas.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_interés">9.1.4. Interés</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Programación en un lenguaje de alto nivel</p>
+<div class="ulist">
+<ul>
+<li>
+<p>¿Tenemos en cuenta el concepto memoria? &#8594; Abstracción de los mecanismos de gestión de memoria por parte del S.O, hardware, etc</p>
+</li>
+<li>
+<p>Tener conocimientos de la estructura, organización y gestión de la memoria ayuda a la hora de programar &#8594; Fase de depuración, diseño, etc</p>
+</li>
+<li>
+<p>Ingeniería de programación y de sistemas</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Conocimientos previos sobre memoria: temas previos de la asignatura Estructura de Computadores.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>variable, puntero,  registros, secciones, direccionamiento, violación de segmento, linker, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Conocimiento de S.O.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Gestión de la memoria de los procesos, paginación, memoria virtual, TLB, etc</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Objetivo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Qué: Almacenar: datos e instrucciones &#8594; programas &#8594; ficheros &#8594; procesos</p>
+</li>
+<li>
+<p>Para qué:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitectura von-Neumann: programa almacenado.</p>
+</li>
+<li>
+<p>Ciclo de Instrucción: Captura (datos, instrucciones) de la CPU. Esquema de bloques CPU-RAM.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cómo: Cómo se almacenan ,cómo se capturan?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Físicamente la memoria es</p>
+<div class="ulist">
+<ul>
+<li>
+<p>chip de semiconductor conectado a la CPU.</p>
+</li>
+<li>
+<p>memoria semiconductor interna a la CPU</p>
+</li>
+<li>
+<p>memoria magnética de almacenamiento masivo</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El tema Memoria está aislado del resto de:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la arquitectura de la computadora?:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>de la CPU? del kernel?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>la programación?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>instrucciones y datos?</p>
+</li>
+<li>
+<p>qué es un array?</p>
+</li>
+<li>
+<p>un goto?</p>
+</li>
+<li>
+<p>en ensamblador que es la directiva .text?</p>
+</li>
+<li>
+<p>qué es la pila?</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_perspectivas">9.1.5. Perspectivas</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El concepto de memoria puede ser estudiado en función de diferentes perspectivas.</p>
+</li>
+<li>
+<p>Gestión de la Memoria  de los procesos en ejecución por parte del kernel del sistema operativo vs Organización de Memoria (ficheros,secciones,jerarquía de memoria ,..)</p>
+</li>
+<li>
+<p>Software:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Programación:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>variables (reserva e inicialización de memoria), punteros, asignación dinámica de la memoria malloc(), secciones de memoria (text,data,rodata,bss,etc..), pila, ..</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Herramientas:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Compilador, Linker (direcciones reubicables, resolución direcciones, segmentos de memoria,.. ), Cargador (memoria física, mapa de memoria, etc ..), volcado de memoria (objdump, ..)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sistema Operativo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Gestor de memoria virtual</p>
+</li>
+<li>
+<p>Gestión del sistema de ficheros virtual</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Hardware:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad de gestión de memoria MMU (Memory Management Unit): Convertidor del espacion de direcciones virtual en físico.</p>
+</li>
+<li>
+<p>Módulos de Memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>tarjetas,chips,conexión buses</p>
+</li>
+<li>
+<p>características: capacidad, velocidad, consumo, tecnología</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_jerarquía_de_memoria">9.1.6. Jerarquía de Memoria</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Hoy en día la tecnología de semiconductor ha conseguido avances en capacidad y memoria manteniendo la estructura por niveles en la siguente jerarquía:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Jerarquía memoria</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Niveles: L0,L1,L2</p>
+</li>
+<li>
+<p>Memoria Registros CPU</p>
+</li>
+<li>
+<p>Memoria Cache</p>
+</li>
+<li>
+<p>Memoria Principal</p>
+</li>
+<li>
+<p>Memoria Secundaria: disco, pen-drive</p>
+</li>
+<li>
+<p>Características</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Capacidad ascendente top-down</p>
+</li>
+<li>
+<p>Tiempo del ciclo de memoria ascendente top-down</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_registros_3">9.2. Registros</h3>
+<div class="sect3">
+<h4 id="_arquitectura_amd64_2">9.2.1. Arquitectura amd64</h4>
+<div class="paragraph">
+<p><span class="image"><img src="./images/instrucciones_representacion/registers_1200x800.png" alt="x86 registers"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/memoria/Table_of_x86_Registers_svg.png" alt="Table of x86 Registers svg" width="1000" height="500" title="Registers x86"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Observar que al igual que rax incluye a eax y eax incluye ax y ax incluye al, también zmm incluye a ymm e ymm incluye a xmm</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/X86#x86_registers">wiki x86</a></p>
+</li>
+<li>
+<p><a href="./basicos_x86_Registers.html">General Purpose Registers x86</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>RAX,etc</p>
+</li>
+<li>
+<p>RFLAGS</p>
+</li>
+<li>
+<p>CS-DS-SS-</p>
+</li>
+<li>
+<p>ST0-ST7</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Float Point Registers</p>
+</li>
+<li>
+<p>alias de los registros FPU</p>
+</li>
+<li>
+<p>eight 80-bit wide registers: 32-, 64-, or 80-bit floating point, 16-, 32-, or 64-bit (binary) integer, and 80-bit packed decimal integer.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>MMX</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ya en desuso y superados por XMM.</p>
+</li>
+<li>
+<p>MMX instructions: <em>integer SIMD</em> (Single Instruction Multiple Data). MMX is a  instruction set designed by Intel, introduced in 1997 with its P5-based Pentium line of microprocessors.  a single instruction can then be applied to two 32-bit integers, four 16-bit integers, or eight 8-bit integers at once.</p>
+</li>
+<li>
+<p>MM0-MM7 (64 bits).  Each register is 64 bits wide and can be used to hold either 64-bit integers, or multiple smaller integers in a "packed" format.</p>
+</li>
+<li>
+<p>packed data types: two 32-bit integers, four 16-bit integers, or eight 8-bit integers concurrently &#8594; solo enteros.</p>
+</li>
+<li>
+<p>Trabaja sólo con enteros pero por causas de compatibilidad en los cambios de contexto de los S.O. se creo un alias entre los MMX y los FPU generando el problema de no poder utilizar en una misma aplicación los FP y los MMX ya que las operaciones de uno afecta al otro.</p>
+</li>
+<li>
+<p>Los registros FP del FPU x87 tiene acceso modo pila mientras que los MMX tienen acceso aleatorio.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>XMM</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ya en desuso y superados por YMM.</p>
+</li>
+<li>
+<p>XMM0–XMM15 (128 bits)</p>
+</li>
+<li>
+<p>SSE (Streaming SIMD Extensions) instruction. Is an <em>floating point SIMD</em> instruction set extension to the x86 architecture introduced on 1999 with Pentium III.</p>
+</li>
+<li>
+<p>Evolución de los MMX. Equivalente a MMX pero con datos de tipo coma flotante.</p>
+</li>
+<li>
+<p>Se puede operar simultaneamente con los FP,MMX y XMM.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>YMM</p>
+<div class="ulist">
+<ul>
+<li>
+<p>YMM0-YMM15 (256 bits)</p>
+</li>
+<li>
+<p>La extensión de los XMM a 256 bits</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX</a>: Advanced Vector Extensions instructions</p>
+</li>
+<li>
+<p>Unicamente datos en coma flotante: <em>floating point SIMD</em></p>
+</li>
+<li>
+<p>AVX introduces a three-operand SIMD instruction format, where the destination register is distinct from the two source operands</p>
+</li>
+<li>
+<p>Compatibilidad: The AVX instructions support both 128-bit and 256-bit SIMD</p>
+</li>
+<li>
+<p>Intel comienza con este set en el 2011: Sandy Bridge processor, Q1 2011.</p>
+</li>
+<li>
+<p><a href="https://software.intel.com/en-us/blogs/2011/06/13/haswell-new-instruction-descriptions-now-available/">AVX2</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Haswell microarchitecture año 2013: Haswell processor, Q2 2013</p>
+</li>
+<li>
+<p>AVX2 - <em>Integer</em> data types expanded to 256-bit SIMD</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>ZMM</p>
+<div class="ulist">
+<ul>
+<li>
+<p>(ZMM0-ZMM31) : 512 bits</p>
+</li>
+<li>
+<p><a href="https://software.intel.com/en-us/blogs/2013/avx-512-instructions">Intel AVX-512</a>: Julio 2013</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Programs can pack eight double precision or sixteen single precision floating-point numbers, or eight 64-bit integers, or sixteen 32-bit integers within the 512-bit vectors. This enables processing of twice the number of data elements that AVX/AVX2 can process with a single instruction and four times that of SSE.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX-512 instructions</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Control_register">Control Registers x86</a>:CRx</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Controlar por ejemplo la paginación de memoria.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/X86_debug_register">Debug Registers x86</a>:DRx</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Se utilizan para implementar por ejemplo las direcciones de los puntos de ruptura: DR0-DR3</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Check</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En linux con la instrucción <code>cpuid</code> podemos chequear la compabilidad de la cpu con la extensiones ISA: mmx,sse,avx,etc</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Conceptos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SIMD: Single instruction multiple data.</p>
+</li>
+<li>
+<p>Vectorizing code: instrucción que operan con vectores &#8594; una operación sobre múltiples datos simultáneamente.</p>
+</li>
+<li>
+<p>DSP: Digital Signal Processor</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tipos de registros</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikibooks.org/wiki/Microprocessor_Design/Register_File" class="bare">https://en.wikibooks.org/wiki/Microprocessor_Design/Register_File</a></p>
+</li>
+<li>
+<p>Register File: memoria estática formada por una secuencia de registros con un bus de direcciones que mediante un decodificador selecciona uno de los registros.</p>
+</li>
+<li>
+<p>Register Banking: dos posibles interpretaciones.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Banked Registers for Interrupt Handling: En lugar de utilizar la memoria principal (pila) para  salvar y recuperar los registros cuando es interrumpido la ejecución de un proceso debido a una interrupción externa, utilizamos registros internos de la CPU para tal propósito: Se incrementa la velocidad de respuesta a una interrupción. La forma de implementar esta técnica es renombrando los registros utilizados por la rutina que interrumpe respecto de la rutina interrumpida.</p>
+</li>
+<li>
+<p>Agrupamiento por bancos: El conjunto de registros se agrupa por bancos que pueden ser accedidos simultáneamente.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_memoria_principal_ram_dinámica_dram">9.3. Memoria Principal (RAM Dinámica DRAM)</h3>
+<div class="sect3">
+<h4 id="_tipos_de_memoria_de_semicoductor">9.3.1. Tipos de memoria de semicoductor</h4>
+<table class="tableblock frame-ends grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Memory Type</th>
+<th class="tableblock halign-left valign-top">Category</th>
+<th class="tableblock halign-left valign-top">Erasure</th>
+<th class="tableblock halign-left valign-top">Write Mechanism</th>
+<th class="tableblock halign-left valign-top">Volatility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Random-access memory (RAM)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Read-write memory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Electrically, byte-level</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Electrically</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Volatile</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Read-only memory (ROM)</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>Read-only memory</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>Not possible</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Masks</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="5"><p class="tableblock"><code>Nonvolatile</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Programmable ROM (PROM)</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="4"><p class="tableblock"><code>Electrically</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Erasable PROM (EPROM)</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock"><code>Read-mostly memory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UV light,chip-level</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Electrically Erasable PROM (EEPROM)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Electrically, byte-level</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Flash memory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Electrically,block-level</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>SSD: Solide State Drive : Memoria flash de alta capacidad</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SLC, TLC y MLC (Single-, Triple- y Multi- level cell)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_memoria_principal_semiconductora">9.3.2. Memoria principal semiconductora</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ver enlace imágenes al final de los apuntes</p>
+</li>
+<li>
+<p>RAM:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Semiconductor: transistores.</p>
+</li>
+<li>
+<p>Random Acces Memory</p>
+</li>
+<li>
+<p>Operaciones de lectura y escritura</p>
+</li>
+<li>
+<p>Volátil</p>
+</li>
+<li>
+<p>Tipos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SRAM: Static RAM .</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mientras está alimentada la información no se pierde.</p>
+</li>
+<li>
+<p>Estructura de la Celda 6T: seis transistores. Tamaño y consumo elevados. Latencia y capacidad reducidas.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Memoria caché.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>DRAM: Dynamic RAM .</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Estructura de la celda: 1C1T: un condensador y un transistor. Tamaño y consumo reducidos.Latencia y capacidad elevadas.</p>
+</li>
+<li>
+<p>Memoria principal.</p>
+</li>
+<li>
+<p>Tiene fugas por lo que necesita periódicamente una reescritura (DINAMISMO).</p>
+</li>
+<li>
+<p>Asíncrona DRAM:</p>
+</li>
+<li>
+<p>Síncrona SDRAM:</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_organización">Organización</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Celda de memoria:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>es la unidad básica de almacenamiento de un bit (Binary digIT). El bit es un valor lógico <em>High</em> o <em>Low</em>, <em>1</em> o <em>0</em></p>
+</li>
+<li>
+<p>acceso a la celda:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la línea de direcciones selecciona la celda a leer o escribir</p>
+</li>
+<li>
+<p>la línea de bit es la línea de entrada/salida del bit a leer o escribir.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Matriz: las celdas de memoria se organizan en una estructura 2D matricial formadas por filas y columnas</p>
+</li>
+<li>
+<p>Bus del Sistema: bus de interconexión entre el controlador MC y la CPU.</p>
+</li>
+<li>
+<p>Bus de Memoria: bus de interconexión entre el controlador MC y la MP</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Bus Direcciones:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El bus de direcciones transfiere el código de la palabra a seleccionar</p>
+</li>
+<li>
+<p>La dirección se almacena temporalmente en el buffer de direcciones de la memoria</p>
+</li>
+<li>
+<p>El bus de direcciones se conecta al buffer de direcciones de la memoria</p>
+</li>
+<li>
+<p>El buffer de direcciones se conecta a la entrada del decodificador de  direcciones de la memoria</p>
+</li>
+<li>
+<p>La dirección se decodifica. La salida del decodificador activa la dirección de memoria del dato/instrucción a leer o escribir</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bus Datos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El dato de salida o entrada se almacena temporalmente en el buffer de datos i/o de la memoria</p>
+</li>
+<li>
+<p>Las celdas no se conectan directamente al buffer de datos i/o de la memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>las salidas de las celdas seleccionadas son amplificadas para detectar si almacenan <em>0</em> o <em>1</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El bus de datos esta conectado al buffer de datos de la memoria</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bus Control:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es necesario alimentar la memoria con una tensión continua de unos pocos voltios (1v)</p>
+</li>
+<li>
+<p>Señal de lectura y escritura que activa la CPU o el controlador E/S</p>
+</li>
+<li>
+<p>Señal de reloj de sincronismo. Sincroniza las tareas a realizar entre la MP y el controlador de memoria (MC)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bus chip select:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Señal <em>Chip Select</em> (CS) de selección del módulo de memoria que lo conecta a los buses de direcciones y de datos . Si la señal CS no está activa el módulo de memoria está desconectado de los buses.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Controlador de Memoria (MC)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La MP no se conecta directamente a la CPU. El controlador MC hace de intermediario.</p>
+</li>
+<li>
+<p>El controlador MC se conecta por un lado a la CPU y por otro lado a la memoria MP.</p>
+</li>
+<li>
+<p>La CPU envía comandos al controlador MC para que actue sobre la MP.</p>
+</li>
+<li>
+<p>El controlador MC es un secuenciador que sabe cómo actuar sobre la estructura interna de la memoria para:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>qué módulo seleccionar, qué chip selececcionar, que palabra seleccionar.</p>
+</li>
+<li>
+<p>leer y escribir un dato</p>
+</li>
+<li>
+<p>otras acciones sobre la memoria como mantenimiento, chequeo, detección de errores, etc</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Memory Management Unit (MMU)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Las direcciones con que opera la Unidad de Control de la CPU en sus registros de próposito general, contador de programa, etc, no son físicas &#8594; son virtuales</p>
+</li>
+<li>
+<p>Cuando programamos, el programador, el compilador, el linker, el desensamblador, el depurador, etc trabajan en el espacio virtual. El módulo ejecutable ELF y los procesos hacen referencia al espacio virtual.</p>
+</li>
+<li>
+<p>Los procesos (programas que están siendo ejecutados por la CPU) operan con direcciones del espacio virtual &#8594; memoria virtual del proceso</p>
+</li>
+<li>
+<p>MMU: circuito electrónico HW que convierte direcciones del espacio virtual (CPU) en direcciones físicas de la MP y que serán las que se transfieran al bus del controlador de la caché y al controlador de memoria MC para poder acceder a la memoria física.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_dram_dynamic_random_access_memory">DRAM (Dynamic Random Access Memory)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Celda</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Estructura física:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es un condensador Metal-Dielectrico-Metal(Polysilicio) fabricado en un substrato de Silicio.</p>
+</li>
+<li>
+<p>Su capacidad es del orden de femto-faradios: C=10~(-15)F</p>
+</li>
+<li>
+<p>Si le aplicamos una tensión de 1mv la carga almacenada  Q=CV= 1mv*1fF =1*10(-18) culombios que equivale a una decena de electrones.</p>
+</li>
+<li>
+<p>Su forma es la de un cilindro empotrado en el substrato.</p>
+</li>
+<li>
+<p>La sección transversal del condensador es del orden de 30 nm en el año 2010</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/22_nanometer">evolución proceso tecnológico </a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La densidad de condensadores es del orden del giga &#8594; 10~9 condensadores.</p>
+</li>
+<li>
+<p>Es necesario conectar el condensador a las líneas de direcciones y de bit para acceder a él. Se conecta a través de UN transistor CMOS que hace de interruptor.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_dram_operaciones_de_lectura_escritura_refresco">DRAM (Operaciones de lectura-escritura-refresco)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Almacenamiento:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el condensador inicialmente no está conectado a ninguna línea ya que su interruptor está abierto</p>
+<div class="ulist">
+<ul>
+<li>
+<p>en circuito abierto el condensador almacena la carga mientras está alimentado &#8594; volátil</p>
+</li>
+<li>
+<p>el condensador tiene FUGAS y se descarga a través del substrato. Es necesario reescribir el bit cada 64 ms: DYNAMIC (la información que almacena no puede ser estática, hay que REFRESCARLA PERIODICAMENTE)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Escritura:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cerramos el interruptor (línea de dirección) para conectar el condensador a la línea de bit ( línea de dato)</p>
+</li>
+<li>
+<p>A través de  la línea de bit cargamos (<em>H</em> ) o descargamos (<em>L</em>) el condesador</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Lectura:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Una vez seleccionada la celda a leer, está se conecta al Sensor de Carga (amplificador) que detecta su estado y lo escribe en el buffer i/o</p>
+</li>
+<li>
+<p>Esta lectura es DESTRUCTIVA, dejando el condensador descargado. Es necesario que el amplificador realimente el condensador a su estado original. La escritura del buffer i/o y la RE-escritura del condensador se dan simultáneamente.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Refresco</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es necesario leer y reescribir todos los condensadores. Esta operación la realiza el sensor de carga.</p>
+</li>
+<li>
+<p>Es necesario reescribir todas las celdas en un tiempo inferior a los 64ms.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejemplo_de_estructura">Ejemplo de Estructura</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.anandtech.com/print/3851/everything-you-always-wanted-to-know-about-sdram-memory-but-were-afraid-to-ask" class="bare">https://www.anandtech.com/print/3851/everything-you-always-wanted-to-know-about-sdram-memory-but-were-afraid-to-ask</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_dram_matrizarray_2d">DRAM Matriz(Array 2D)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo: un bus de direcciones de 30 líneas son 2<sup>30</sup> CELDAS, a seleccinoar UNA de ellas.</p>
+</li>
+<li>
+<p>Mediante un DEMULTIPLEXOR de 30 entradas y 2<sup>30</sup> salidas podemos seleccionar 1 de las celdas</p>
+</li>
+<li>
+<p>Un demultiplexor de 2<sup>30</sup> salidas es muy complejo y costoso</p>
+</li>
+<li>
+<p>Solución:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>organizar las CELDAS en un array 2D : Filas y columnas: 1 DEMUX o DECODIFICADOR para filas y 1 DEMUX/MUX o DECODIFICADOR para las columnas</p>
+</li>
+<li>
+<p>2<sup>30</sup> = 2<sup>15</sup>*2<sup>15</sup> = Ahora el número de salidas de cada demux se ha reducido de 2<sup>30</sup> a 2<sup>15</sup>, es decir, un factor raíz cuadrada.</p>
+</li>
+<li>
+<p>word line selecciona todas las columnas de una fila (ROW) de celdas</p>
+</li>
+<li>
+<p>bit line selecciona una de las columnas (COL) de la fila seleccionada</p>
+</li>
+<li>
+<p>el resultado es seleccionar una CELDA del ARRAY y cargar (LECTURA) el BUFFER I/O</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bus de direcciones muy denso: ejemplo de 30 líneas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Podemos diseñar un bus con la mitad de líneas y multiplexar en dos tiempos el código de direcciones(parte que selecciona la fila y parte que selecciona la columna).</p>
+</li>
+<li>
+<p>Multiplexación temporal de la dirección de filas y la dirección de columnas: REDUCIMOS EL NUMERO DE LINEAS EN LA PLACA BASE</p>
+</li>
+<li>
+<p>RAS: Row Address Strobe : Señal que válida el bus de direcciones indicando que es el código que selecciona la FILA del array.</p>
+</li>
+<li>
+<p>CAS: Row Address Strobe : Señal que válida el bus de direcciones indicando que es el código que selecciona la COLUMNA del array.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Burst (ráfaga)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Una vez seleccionada una fila de celdas (OPEN ROW) si queremos celdas consecutivas de la misma columna podemos leer o escribirlas consecutivamente en cada ciclo de reloj . Bloque de palabras a transferir a/desde la memoria Caché. El controlador de memoria ha tenido que enviar un comando a la memoria para configurar el número de palabras de la ráfaga.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_logica_del_chip_figura_5_3_del_libro">Logica del Chip (Figura 5.3 del libro)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Componentes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>buffers: direcciones y columnas</p>
+</li>
+<li>
+<p>decodificadores: decodifican el código de direccion de fila y de columna y seleccionan (fila,columna) una celda.</p>
+</li>
+<li>
+<p>sensor de carga (amplificador): detecta si la celda está cargada o descargada y da como salida un <em>H</em> o <em>L</em> en el buffer i/o.</p>
+</li>
+<li>
+<p>4 señales de control: RAS, CAS, WE, OE</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la combinación de señales de control (2<sup>4</sup>) se utiliza también para codificar los <a href="http://en.wikipedia.org/wiki/Synchronous_dynamic_random-access_memory">comandos</a> del controlador de memoria.</p>
+</li>
+<li>
+<p>COMANDOS: son ordenes a los módulos de memoria donde las características de la memoria como el timing (tiempos de latencia, ciclo, etc) y el burst length (número de palabras por bloque, longitud de la ráfaga) son programables y por lo tanto la CPU puede configurar estos parámetros.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>circuitería de refresco:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>contador de direcciones y temporizador</p>
+</li>
+<li>
+<p>la asociación JEDEC recomienda un refresco completo cada 64 ms.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_encapsulado">Encapsulado</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La memoria de semiconductor ocupa unos pocos mm<sup>2</sup> que debe de ser protegido (térmica y mecánica) y permitir que la conexiones sean robustas para permitir su soldadura a las líneas externas por lo que require un encapsulado de plástico.</p>
+</li>
+<li>
+<p>Los terminales del encapsulado se denominan PIN y son soldados a la tarjeta de memorias.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>pines o terminales:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>address bus (A0-A29)</p>
+</li>
+<li>
+<p>data bus (DQ0-DQ7) : los chips no tienen 64 pines de datos : 1,2,4,8.</p>
+</li>
+<li>
+<p>alimentación Vcc</p>
+</li>
+<li>
+<p>masa Vss</p>
+</li>
+<li>
+<p>chip select /CS</p>
+</li>
+<li>
+<p>write enable (/WE): <em>L</em>(escritura) <em>H</em> (lectura)</p>
+</li>
+<li>
+<p>output enable (/OE): <em>L</em>(los pines de datos se conectan al bus de datos)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_temporización_de_la_operación_de_lecturaescritura">Temporización de la operación de lectura/escritura</h5>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<caption class="title">Table 11. Asignación de terminales de la SDRAM</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Señales</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A0-A29</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Entrada de dirección de celda</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CLK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Entrada del reloj del bus de memoria</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/CS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Selección del chip</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/RAS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Selección de dirección de fila</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/CAS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Selección de dirección de columna</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/WE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Habilitación de escritura</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DQ0-DQ7</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Entrada/Salida de datos</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>La barra inclinada / significa señal negada: lógica negativa : se activa a nivel Low (<em>L</em>).</p>
+</div>
+<div class="paragraph">
+<p>Ejemplo extraido de <a href="http://en.wikipedia.org/wiki/Dynamic_random-access_memory#Memory_timing">wikipedia</a>:</p>
+</div>
+<table class="tableblock frame-ends grid-all stretch">
+<caption class="title">Table 12. DRAM Asíncrona: Temporización</caption>
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top"></th>
+<th class="tableblock halign-center valign-top">"50 ns"</th>
+<th class="tableblock halign-center valign-top">"60 ns"</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tRC</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>84 ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>104 ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Random read or write cycle time (from one full /RAS cycle to another)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tRAC</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>50 ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>60 ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Access time: /RAS low to valid data out</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tRCD</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>11 ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>14 ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/RAS low to /CAS low time</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tRAS</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>50 ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>60 ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/RAS pulse width (minimum /RAS low time)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tRP</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>30 ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>40 ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/RAS precharge time (minimum /RAS high time)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tPC</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>20 ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>25 ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Page-mode read or write cycle time (/CAS to /CAS)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tAA</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>25 ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>30 ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Access time: Column address valid to valid data out (includes address setup time before /CAS low)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tCAC</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>13 ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>15 ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Access time: /CAS low to valid data out</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tCAS</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>8 ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>10 ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/CAS low pulse width minimum</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Sincronismo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>DRAM : asíncrona: responds as quickly as possible to changes</p>
+</li>
+<li>
+<p>SDRAM significantly revises the asynchronous memory interface, adding a <strong>clock</strong> (and a clock enable) line. All other signals are received on the <em>rising edge</em> of the clock. No responde tan rápido como es posible, sino que espera al flanco de subida.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>NO vemos la memoria DRAM asíncrona, únicamente el concepto.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-ends grid-all stretch">
+<caption class="title">Table 13. DRAM Síncrona: Temporización</caption>
+<colgroup>
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 5.8823%;">
+<col style="width: 23.5301%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top"></th>
+<th class="tableblock halign-center valign-top" colspan="4">PC-3200 (DDR-400)</th>
+<th class="tableblock halign-center valign-top" colspan="4">PC2-6400 (DDR2-800)</th>
+<th class="tableblock halign-center valign-top" colspan="4">PC3-12800 (DDR3-1600)</th>
+<th class="tableblock halign-center valign-top" rowspan="3">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top" colspan="2"><p class="tableblock"><code>Typical</code></p></td>
+<td class="tableblock halign-center valign-top" colspan="2"><p class="tableblock"><code>Fast</code></p></td>
+<td class="tableblock halign-center valign-top" colspan="2"><p class="tableblock"><code>Typical</code></p></td>
+<td class="tableblock halign-center valign-top" colspan="2"><p class="tableblock"><code>Fast</code></p></td>
+<td class="tableblock halign-center valign-top" colspan="2"><p class="tableblock"><code>Typical</code></p></td>
+<td class="tableblock halign-center valign-top" colspan="2"><p class="tableblock"><code>Fast</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>cycles</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>time</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>cycles</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>time</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>cycles</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>time</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>cycles</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>time</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>cycles</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>time</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>cycles</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>time</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tCL</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>3</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>15ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>10ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>5</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>12.5ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>4</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>10ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>9</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>11.25ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>8</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>10 ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/CAS low to valid data out (equivalent to tCAC)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tRCD</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>4</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>20ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>10ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>5</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>12.5ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>4</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>10ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>9</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>11.25ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>8</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>10ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/RAS low to /CAS low time</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tRP</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>4</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>20ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>10ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>5</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>12.5ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>4</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>10ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>9</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>11.25ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>8</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>10ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/RAS precharge time (minimum precharge to active time)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>tRAS</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>8</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>40ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>5</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>25ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>16</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>40ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>12</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>30ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>27</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>33.75ns</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>24</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>30ns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Row active time (minimum active to precharge time)</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>When describing synchronous memory, timing is described by <strong>memory bus clock cycle counts</strong> separated by hyphens. These numbers represent tCL‐tRCD‐tRP‐tRAS in multiples of the DRAM <em>clock cycle time</em></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_latency_times">latency times</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>En este contexto latency es sinónimo de <strong>retardo</strong>. Distinto concepto de Memory Latency que es el tiempo de acceso.</p>
+</li>
+<li>
+<p>tCL  :Cas Latency . Retardo desde la señal CAS hasta la obtención del dato en el buffer i/o</p>
+</li>
+<li>
+<p>tRCD :Ras Cas Delay. Retardo de la señasl RAS hasta la señal CAS</p>
+</li>
+<li>
+<p>tRP  :Ras Precharge. Mínimo retardo entre la precarga y la activación</p>
+</li>
+<li>
+<p>tRAS :Row Active Time. Mínimo tiempo que tiene que transcurrir la activación de la fila y el inicio de la precarga.</p>
+</li>
+<li>
+<p><strong>Tacceso</strong>: tCL+tRCD : desde que se valida la dirección del bus hasta la obtención en el buffer i/o del dato referenciado.</p>
+</li>
+<li>
+<p><strong>Tciclo</strong>(lectura o escritura) del bus: tCL+tRCD+tRP+tBURST ó tCL+tRCD+tRAS(si hemos transferido un comando a la MP):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Tacceso más el retardo en ser transferido a la CPU. Tiempo entre dos lecturas o dos escrituras consecutivas,</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>tBURST: tiempo necesario para transferir un bloque de palabras:RAFAGAS: no se realizan transferencias de 1 byte: 2,4,8,16, ..</p>
+</li>
+<li>
+<p>El módulo MP es programable por lo que podemos alterar los tiempos tCL-tRCD-tRP-tRAS y también la longitud de la ráfaga(burst o bloque)</p>
+</li>
+<li>
+<p>El módulo MP suele indicar la secuencia tCL-tRCD-tRP-tRAS con valores típicos de ciclos reloj</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejemplo_pc2_6400_ddr2_800_5_5_5_16">Ejemplo PC2-6400 (DDR2-800) 5-5-5-16</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo PC2-6400 (DDR2-800) 5-5-5-16</p>
+</li>
+<li>
+<p>PC2 : SDRAM de segunda generación &#8594; Double_Data_Rate x2</p>
+</li>
+<li>
+<p>6400 MB/s de ancho de banda</p>
+</li>
+<li>
+<p>800MHz de ciclo efectivo de reloj del bus del sistema</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cada palabra se transfiere en un ciclo de 800MHz.</p>
+</li>
+<li>
+<p>Ciclo de Reloj del Bus de memoria 400MHz</p>
+</li>
+<li>
+<p>Clock cycle time = 1/400Mhz = 2.5ns</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>5-5-5-16 son los ciclos de reloj (400MHz&#8592;&#8594;2.5ns) de los tiempos tCL-tRCD-tRP-tRAS &#8594; 12.5ns-12.5ns-12.5ns-40ns</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-ends grid-all stretch">
+<caption class="title">Table 14. Glosario</caption>
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 40%;">
+<col style="width: 10%;">
+<col style="width: 40%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">tiempo</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+<th class="tableblock halign-left valign-top">tiempo</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tCL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CAS latency</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tRRD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RAS to RAS delay</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tCR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Command rate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tRTP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Read to precharge delay</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tPTP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>precharge to precharge delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tRTR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Read to read delay</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tRAS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RAS active time</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tRTW</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Read to write delay</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tRCD</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RAS to CAS delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tWR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Write recovery time</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tREF</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Refresh period</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tWTP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Write to precharge delay</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tRFC</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Row refresh cycle time</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tWTR</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Write to read delay</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Dynamic_random-access_memory#Memory_timing">memory timing</a></p>
+</li>
+<li>
+<p>Fig 5.13 del libro de texto: Lectura de SDRAM (longitud de ráfaga=4, CL=2)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_agrupamientos_módulos_rank_chips_bank">Agrupamientos: Módulos-Rank-Chips-Bank</h5>
+<div class="paragraph">
+<p>Fig 5.12 : Módulo SDRAM.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Jerarquía: Estructura de la memoria DRAM en agrupamientos de direcciones.</p>
+</li>
+</ul>
+</div>
+<div class="sect5">
+<h6 id="_channel">Channel</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Channel :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>interfaces del controlador de memoria con el bus del sistema.</p>
+</li>
+<li>
+<p>Cada canal tiene su propio bus de memoria físico.</p>
+</li>
+<li>
+<p>El controlador tiene acceso al bus del sistema y a más de un bus de memoria.</p>
+</li>
+<li>
+<p>Todos lo canales de un mismo controlador de memoria conforman todo el espacio de memoria física, por lo tanto un controlador tiene asignado un canal lógico (todo el espacio de memoria) formado por varios físicos ( distintos espacios de memoria)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_module_dimm">Module DIMM</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Module:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Proporciona la conexión física al bus de datos ( palabra de 64 bits), al bus de direcciones, al bus de control y al bus de chip-select (CS)  del BUS de MEMORIA.</p>
+</li>
+<li>
+<p>Es la tarjeta de memoria encapsulada que se inserta en el socket de la placa base conectándose al bus de memoria del controlador de memoria (MC)</p>
+</li>
+<li>
+<p>Para los PC la conexión de los módulos de memoria es <a href="http://en.wikipedia.org/wiki/DIMM">DIMM</a> y para los portátiles <a href="http://en.wikipedia.org/wiki/SO-DIMM">SO-DIMM</a>. El encapsulamiento DIMM permite disponer de conectores y de chips en ambos lados de la tarjeta (front-side y back-side)</p>
+</li>
+<li>
+<p>En el módulo están interconectados todos los  chips de memoria de la tarjeta.</p>
+</li>
+<li>
+<p>Un canal del controlador puede contectarse a más de un módulo de memoria: P.ej dos módulos de 4GB cada uno.Si un canal tiene más de un modulo, todos los modulos comparten el mismo BUS DE MEMORIA. Cada módulo implementa direcciones de memoria diferentes.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_rank">Rank</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Rank	:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es un conjunto o <em>agrupamiento de chips</em> dentro de todo el sistema de memoria (todos los módulos DIMM ,no cada módulo DIMM) que tienen en comúm la señal chip select (CS), compartiendo así el mismo espacio de direcciones.</p>
+</li>
+<li>
+<p>Así organizados, todos los chips del mismo rank pueden responder AL UNISONO al mismo bus de direcciones (filas,columnas). Al activar una señal CS y seleccionar una Fila , se consigue activar todas las columnas de todas las filas de todos los arrays de todos los chips del mismo rank. Este es el objetivo del agrupamiento.</p>
+</li>
+<li>
+<p>Un rank es independiente del resto, con direcciones de memoria <em>diferentes</em>, compartiendo el mismo bus de direcciones y bus de chip select. Un rank al ser INDEPENDIENTE puede ser precargado, refrescado, activado, etc al mismo que el resto de ranks.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_chip">Chip</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Chip	:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es el circuito integrado que contiene el <em>die</em> de semiconductor  donde están implemetadas las celdas de memoria (condensadores) y los interrruptores (transistores).</p>
+</li>
+<li>
+<p>El número de pins del chip dependerá del tamaño del dato proporcionado y de la capacidad de almacenamiento de datos.</p>
+</li>
+<li>
+<p>El número de bits <em>"N"</em> del dato proporcionado por el chip a través del buffer i/o, se indica diciendo que el chip es <em>xN</em>: x2,x4,x8,x16,x32</p>
+</li>
+<li>
+<p>Esta formado por <em>MULTIPLES bancos</em>, un <em>buffer i/o</em>, un <em>demux</em> de filas, un <em>demux</em> de columnas y la lógica de control.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_bank">Bank</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Este término es confuso ya que depende del contexto e incluso hay diversas interpretaciones.</p>
+</li>
+<li>
+<p>Bank:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Un chip se estructura en bancos independientes.</p>
+</li>
+<li>
+<p>Un banco es un conjunto, <em>agrupamiento de arrays 2D</em>.</p>
+</li>
+<li>
+<p>Si cada array envía un bit al buffer i/o, entonces, el número de arrays del banco será el mismo que el número de bits del buffer i/o.</p>
+</li>
+<li>
+<p>Así organizados, todos los arrays del mismo banco pueden responder AL UNISONO al mismo bus de direcciones (filas,columnas).Se selecciona la misma fila y la misma columna para todos los arrays del banco. Cada array del banco proporciona el bit de la celda seleccionada por lo que el número de bits proporcionados por el banco será el número de arrays del banco.</p>
+</li>
+<li>
+<p>Todos los bancos del chip forman parte del mismo buffer i/o del chip.</p>
+</li>
+<li>
+<p>El número de bits <em>"n"</em> , del dato proporcionado por el banco a través del buffer i/o, se indica diciendo que el chip es <em>xn</em>: x2,x4,x8,x16,x32</p>
+</li>
+<li>
+<p>Un banco es independiente del resto, con direcciones de memoria <em>diferentes</em>, compartiendo el mismo bus de direcciones y bus de chip select. Un banco al ser INDEPENDIENTE puede ser precargado, refrescado, activado, etc al mismo tiempo que el resto de bancos.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_array">Array</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Array:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Son agrupamientos o conjuntos de celdas organizados en filas y columnas.</p>
+</li>
+<li>
+<p>Una dirección de memoria (fila,columna) selecciona una celda del array.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_celda">Celda</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Celdas:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Una celda de memoria almacena la información de 1 o más (2,4,8,16) bits. Inicialmente, mientras no se especifique lo contrario, almacenará un único bit.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejemplo">Ejemplo</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Si un sistema tiene una capacidad de memoria principal de 16GB y la estructuramos en 4 módulos cuyos chipsx64 se organizan en 4 ranks con 16 chips/rank, 8 bancos/chip, 16 arrays/banco. Calcular el número de bits/array.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>2<sup>4</sup> x 2<sup>30</sup> x 2<sup>3</sup> bits/byte = 2<sup>2</sup> (ranks/canal) x 2<sup>4</sup> (chips/rank) x 2<sup>3</sup> (bancos/chip) x 2<sup>4</sup> (array/banco)x N (bits/array) &#8594; N = 2<sup>(4+30+3-2-4-3-4)</sup> = 2^24 bits organizados en un array 2D</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<img src="./images/icons/note.png" alt="Note">
+</td>
+<td class="content">
+Los 4 módulos al completo se organizan en 4 ranks
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Una posible solución sería 2<sup>12</sup> filas x 2^12 columnas.</p>
+</li>
+<li>
+<p>El buffer i/o de transferencia de datos al bus de memoria tiene el tamaño x64, es decir, 64 bits.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_lectura_de_una_palabra_de_la_memoria_mp">LECTURA de una palabra de la memoria MP</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Fases:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la dirección de memoria proporcionada por la CPU es convertida en dirección física por el circuito MMU</p>
+</li>
+<li>
+<p>El circuito MP debe de descomponer la dirección física de memoria en los códigos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>RANK-BANK-ROW-COLUMN</p>
+</li>
+<li>
+<p>Los códigos están asociados a &#8230;&#8203;.dentro del módulo de memoria un rank específico. Dentro del rank un bank específico. Dentro del bank una fila específica. Dentro de la fila una columna específica.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Una vez que han sido identificados el rank-bank-row, se PRECARGAN los bit_lines del banco (se polarizan con la tensión media que hay entre un cero lógico y un uno lógico).</p>
+</li>
+<li>
+<p>Una vez precargado el banco se ACTIVA (OPEN) la fila: la fila queda abierta cuando los miles de amplificadores sensores de carga detectan los contenidos de los miles de celdas de  las filas seleccionadas de todos los arrays del banco. Al conjunto de la misma fila de todos los arrays del banco se denomina <strong>página</strong> (una página está formada por filas). La página esta abierta cuando las salidas de los amplificadores recuperan los valores sensados y activan las line_bit con los datos almacenados.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Esta acción comienza con la activación de la señal /RAS y la espera del tiempo tRCD</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Una vez transcurrido el tRCD se selecciona las columnas específicas de todos los arrays del banco (x4,x8,..) y se carga el buffer i/o con el dato seleccionado.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Esta acción comienza con la activación de la señal /CAS.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_organización_avanzada_de_memorias_dram">9.3.3. Organización avanzada de memorias DRAM</h4>
+<div class="sect4">
+<h5 id="_dram_asincrona">DRAM asincrona</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>En la memoria asíncrona las acciones realizadas dependen del diálogo entre el controlador y la memoria.</p>
+</li>
+<li>
+<p>La memoria síncrona comienza y finaliza las acciones en el flanco de subida o bajada del reloj facilitando el diseño del circuito digital electrónico y permitiendo mayores velocidades en el bus.</p>
+</li>
+<li>
+<p>Although the RAM is asynchronous, the signals are typically generated by a clocked memory controller, which limits their timing to multiples of the controller&#8217;s clock cycle.</p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Dynamic_random-access_memory">DRAM</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sdram_synchronous_dram">SDRAM (Synchronous DRAM)</h5>
+<div class="sect5">
+<h6 id="_referencias">Referencias</h6>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://es.wikipedia.org/wiki/SDRAM">SDRAM</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Synchronous_dynamic_random-access_memory">SDRAM</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/DDR_SDRAM">DDR_SDRAM</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/DDR2_SDRAM">DDR2_SDRAM</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/DDR3_SDRAM">DDR3_SDRAM</a></p>
+</li>
+<li>
+<p><a href="http://www.jedec.org/standards-documents/docs/jesd-79-3d">jedec standard</a></p>
+</li>
+<li>
+<p><a href="http://www.freescale.com/webapp/sps/site/overview.jsp?code=784_LPBB_DDR" class="bare">http://www.freescale.com/webapp/sps/site/overview.jsp?code=784_LPBB_DDR</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Dynamic_random-access_memory#Memory_timing">memory timing</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Memory_timings" class="bare">http://en.wikipedia.org/wiki/Memory_timings</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/SDRAM_latency" class="bare">http://en.wikipedia.org/wiki/SDRAM_latency</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/CAS_latency" class="bare">http://en.wikipedia.org/wiki/CAS_latency</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_introducción_14">Introducción</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>El flanco del reloj es el patrón de comienzo y fin de las operaciones</p>
+</li>
+<li>
+<p>DDR (Double Data Rate)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Permite transferir el bit tanto en el flanco de bajada como de subida del reloj (<strong>doble bombeo</strong>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>frecuencia del buffer i/o</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El buffer i/o de la memoria pude ir a frecuencias x2, x4 y x8 respecto de la frecuencia de acceso a la celda.</p>
+</li>
+<li>
+<p><strong>Supercelda</strong>:Ahora una selección (fila,columna) de un array supone no la seleccion de 1 celda sino la de 2, 4 u 8 CELDAS del array.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ver las figuras que representan la transferencia de múltiples celdas al buffer i/o</p>
+</li>
+<li>
+<p>Fabricantes: Samsung, Hitachi, NEC, IBM, Siemens.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 60%;">
+<caption class="title">Table 15. Módulos DDR para PC  : características</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-center valign-top">DDR1</th>
+<th class="tableblock halign-center valign-top">DDR2</th>
+<th class="tableblock halign-center valign-top">DDR3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bit i/o: celdas/ciclo_bus</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>x2</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>x4</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>x8</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>frecuencia bus</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>f</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>2f</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>4f</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>burst mínimo</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>4</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>8</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pines DIMM</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>184</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>240</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>240</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pines SO-DIMM</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>200</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>200</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>144/200/204</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>alimentación(v)</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>2.5</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>1.8</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>1.5</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Dual In-line Memory Module (DIMM)</p>
+</li>
+<li>
+<p>Small Outline Dual In-line Memory Module (SO-DIMM)</p>
+</li>
+<li>
+<p>BW (bits/s) = BF(ciclos/s)*CW(bits/channel)*TC(transferencias/ciclo)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>BF: Frecuencia del bus del sistema (próximo a 1GHz en el año 2000)</p>
+</li>
+<li>
+<p>CW: número de bits del data bus del canal. Típicamente 64 bits (año 2000)</p>
+</li>
+<li>
+<p>TC: en un ciclo del reloj del bus del sistema el número de transferencias. Típicamente 1 (flanco de subida) o 2 (flancos de subida y bajada).</p>
+</li>
+<li>
+<p>BW (bits/s) = frecuencia efectiva*anchura bus datos= 400MHz*2*64 = 51200*10~6 bits/s = 51.2Gbps = 6400 MBps &#8592; sistema decimal (habitual)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejemplo_ddr3_800_pc3_6400_5_5_5">Ejemplo DDR3-800 / PC3-6400 5-5-5</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>módulo de memoria DDR3-800 ó PC3-6400</p>
+<div class="ulist">
+<ul>
+<li>
+<p>timing 5-5-5</p>
+</li>
+<li>
+<p>800MHz es la frecuencia efectiva del bus de datos &#8594; 800MT/s</p>
+</li>
+<li>
+<p>6400 MB/s es el ancho de banda</p>
+</li>
+<li>
+<p>DDR &#8594; La frecuencia del bus de memoria es la mita de la frecuencia efectiva = 800/2 = 400MHz. Equivale a un ciclo de reloj  de 1/400MHz = 2.5ns</p>
+</li>
+<li>
+<p>5-5-5: son los ciclos de reloj, a la frecuencia real del bus de 400MHz, de los parámetros timing tCL-tRCD-tRP</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-ends grid-all stretch">
+<caption class="title">Table 16. DDR3</caption>
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1112%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Standard name</th>
+<th class="tableblock halign-left valign-top">Memory clock(MHz)</th>
+<th class="tableblock halign-left valign-top">Cycle time(ns)</th>
+<th class="tableblock halign-left valign-top">I/O bus clock(MHz)</th>
+<th class="tableblock halign-left valign-top">Data rate(MT/s)</th>
+<th class="tableblock halign-left valign-top">Module name</th>
+<th class="tableblock halign-left valign-top">Peak transfer rate(MB/s)</th>
+<th class="tableblock halign-left valign-top">Timings(CL-tRCD-tRP)</th>
+<th class="tableblock halign-left valign-top">CAS latency(ns)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DDR3-800D</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>100</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>10</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>400</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>800</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>PC3-6400</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>6400</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5-5-5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>12½</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DDR3-800E</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>6-6-6</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>15 </code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>El 4º dígito es tRAS (mínimo retardo entre la activación y la precarga) no ha sido proporcionado. La cuarta columna proporciona tCL en nanosegundos.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Parámetros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Memory clock: 100MHz: frecuencia de acceso a las palabras. Transferencia celda &#8594; buffer i/o</p>
+</li>
+<li>
+<p>Cycle time: 10ns: en esta tabla se refiere  al período del memory clock y no tiene el significado de la definición de ciclo de memoria</p>
+</li>
+<li>
+<p>I/O bus clock: 400MHz:reloj del bus de memoria cuyos flancos(positivo,negativo) sincronizan las transferencias de las palabras.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ciclo de bus = 1/400Mhz = 2.5ns = este es el facto de tiempo de los retardos o latencias tCL,tRCD, etc</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Data rate: 800MT/s &#8594; Las transferencias se realizan a la frecuencia efectiva.</p>
+</li>
+<li>
+<p>Peak transfer rate: ancho de banda BW:6400MB/s</p>
+</li>
+<li>
+<p>timings: número de ciclos del reloj i/o bus clock de duración de los eventos:5-5-5-12½</p>
+<div class="ulist">
+<ul>
+<li>
+<p>tCL = 5 ciclos de reloj = 5 x 2.5 = 12.5ns</p>
+</li>
+<li>
+<p>tRCD = 5 ciclos de reloj = 5 x 2.5 = 12.5ns</p>
+</li>
+<li>
+<p>tRP = 5 ciclos de reloj = 5 x 2.5 = 12.5ns</p>
+</li>
+<li>
+<p>tRAS = no se ha proporcionado</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejemplo_pc3_22400_11_14_14_35">Ejemplo PC3-22400 11-14-14-35</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.corsair.com/es-es/dominator-platinum-with-corsair-link-connector-1-65v-16gb-dual-channel-ddr3-memory-kit-cmd16gx3m4a2800c11">Dominator® Platinum with Corsair Link Connector — 1.65V 16GB Dual Channel DDR3 Memory Kit (CMD16GX3M4A2800C11)</a>:</p>
+</li>
+<li>
+<p>Memory Type: DDR3</p>
+</li>
+<li>
+<p>Speed Rating: PC3-22400 (2800MHz)</p>
+</li>
+<li>
+<p>Tested Latency: 11-14-14-35</p>
+</li>
+<li>
+<p>Our Price:80€</p>
+</li>
+<li>
+<p>16GB Kit (4 x 4GB)</p>
+</li>
+<li>
+<p>Dual Channel</p>
+</li>
+<li>
+<p>Características deducidas:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ancho de banda de pico = 22400MB/s</p>
+</li>
+<li>
+<p>Data rate (1data=8Bytes) = 2800MT/s</p>
+</li>
+<li>
+<p>I/O bus effective clock = 2800MHz. I/O hace referencia al bus del buffer i/o de la memoria.</p>
+</li>
+<li>
+<p>I/O bus clock = 2800MHz / 2 = 1400MHz</p>
+</li>
+<li>
+<p>I/O bus cycle time= 1/1400MHz = 710ps</p>
+</li>
+<li>
+<p>Latencies</p>
+<div class="ulist">
+<ul>
+<li>
+<p>tCL  = 11 ciclos = 11 x 710ps = 7.8ns</p>
+</li>
+<li>
+<p>tRCD = 14 ciclos = 14 x 710ps = 10ns</p>
+</li>
+<li>
+<p>tRP  = 14 ciclos = 14 x 710ps = 10ns</p>
+</li>
+<li>
+<p>tRAS = 35 ciclos = 35 x 710ps = 24.8ns</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Mejora PC3-22400 vs PC3-6400</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mejora del I/O bus cycle time = 710ps frente a 2.5ns = una reducción de 1.79ns = 1.79/2.5 = 71%</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_diferencia_entre_pc2_6400_y_pc3_6400">Diferencia entre PC2-6400 y PC3-6400</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>No ha diferencias en cuanto a latencias ya que un 5-5-5 en los dos casos se refiere a una frecuencia del bus de memoria de 400MHz.</p>
+</li>
+<li>
+<p>Hay diferencias en cuanto a pines, tensión de alimentación, etc</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_anchos_de_banda_standard">Anchos de banda standard</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulos DDR1 SDRAM: PC-3200/PC-2700/PC-2100/PC-1600</p>
+</li>
+<li>
+<p>Módulos DDR2 SDRAM: PC2-6400/PC2-5300/PC2-4200/PC2-3200</p>
+</li>
+<li>
+<p>Módulos DDR3 SDRAM:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PC3-22400/PC3-21300/PC3-19200/PC3-17066/PC3-15000/PC3-12800/PC3-10600/PC3-8500/PC3-6400</p>
+</li>
+<li>
+<p>DDR3-2800/DDR3-2666/DDR3-2400/DDR3-2133/DDR3-1866/DDR3-1600/DDR3-1325/DDR3-1065/DDR3-800/</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>aniyosgi  diquenvsvi gega &#8594; miltar</p>
+</div>
+<div class="paragraph">
+<p>diquenvsvi gega &#8594; go home</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_capacidad">Capacidad</h5>
+<div class="sect5">
+<h6 id="_registeredbuffered_memory">Registered/Buffered Memory</h6>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Registered_memory" class="bare">http://en.wikipedia.org/wiki/Registered_memory</a></p>
+</li>
+<li>
+<p>Registered: RDIMM: Entre el controlador de memoria y el módulo de memoria hay un registro que memoriza la info de las líneas de control. Se manda el comando de control previamente a la transferencia, añadiendo un ciclo extra de bus. De esta forma se eliminan las líneas de control para la transferencia de comandos al controlador y así se disminuye la carga del bus de memoria del controlador de memoria y se consigue conectar más módulos al canal del controlador aumentando la capacidad de memoria.</p>
+</li>
+<li>
+<p>Unbuffered: UDIMM: No se latchea las info de la líneas de control.</p>
+</li>
+<li>
+<p>fully buffered:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Se registra tanto la info de las señales de control como de las señales de datos y direcciones con una reducción considerable de la carga de todos los buses del canal del controlador de memoria.</p>
+</li>
+<li>
+<p>Los datos se transfieren en serie en lugar de en paralelo reduciendo el número de líneas y por lo tanto aumentando el número de módulos de memoria conectados al canal.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_bank_switching">Bank Switching</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Bank_switching">Bank Switching</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>En arquitecturas limitadas de 8 y 16 bits se utiliza la técnica <em>memory banking</em> para aumentar la capacidad de memoria.</p>
+</li>
+<li>
+<p>En lugar de incrementar anchura del bus de direcciones incrementando el tamaño de palabra de la CPU y el bus de la placa base, se añaden más dispositivos de memoria direccionables mediante el mismo bus y un nuevo registro que selecciona uno de los dispositivos de memoria (Bank). No confundir con los bancos de los chips de memoria ni con los bancos de registros.</p>
+</li>
+<li>
+<p>Bank switching significa cambiar de banco de memoria.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_imagenes_2">9.3.4. Imagenes</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="../../images/dram/images_dram.html">Imagenes</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_memoria_cache">9.4. Memoria Cache</h3>
+<div class="sect3">
+<h4 id="_bibliografia_2">9.4.1. Bibliografia</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Libro William Stalling</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Capítulo 4.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_introducción_15">9.4.2. Introducción</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Objetivo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Principio de Localidad: Espacial y Temporal</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejercicio: Tiempo de acceso (probabilidad fallo ó exito)</p>
+</li>
+<li>
+<p>Tecnología: 6T</p>
+</li>
+<li>
+<p>Estructura</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Controladora: función</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Espacios de direcciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>memoria principal</p>
+</li>
+<li>
+<p>memoria cache</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Funciones de correspondencia entre espacios de direcciones:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mapeo Directo</p>
+</li>
+<li>
+<p>Asociación total</p>
+</li>
+<li>
+<p>Asociación por conjuntos</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_principios_basicos">9.4.3. Principios Basicos</h4>
+<div class="sect4">
+<h5 id="_tecnologia">Tecnologia</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Cell: SRAM-6T</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/cache/sram_cell_6T.png" alt="sram cell 6T"></span></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_funcionalidad_2">Funcionalidad</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Cuello de Botella von Neumann</p>
+</li>
+<li>
+<p>Memoria Cache:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Copia de una región o bloque de la memoria principal</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Principio de Localidad</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Espacial: bucles, subrutinas, arrays</p>
+</li>
+<li>
+<p>Temporal: histórico</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_jerarquía">Jerarquía</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Niveles de Cache</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Level L1: Interna a la CPU : SRAM : memorias separadas para instrucciones y memoria para datos</p>
+</li>
+<li>
+<p>Level L2: Externa/Interna a la CPU:</p>
+</li>
+<li>
+<p>Level L3: Externa a la CPU</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_interconexion">Interconexion</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>En serie CPU&#8594;L1&#8594;L2&#8594;L3&#8594;SDRAM</p>
+</li>
+<li>
+<p>CPU&#8594;L : transferencia de Palabras</p>
+</li>
+<li>
+<p>L&#8594;SDRAM: bloques</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src=".//images/cache/cache_cpu_dram.png" alt="Interconexión"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/cache/cache_cpu_dram_connection.png" alt="Interconexión"></span></p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/cache/cache_mmu_dram.png" alt="MMU"></span></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_acierto_fallo">Acierto-Fallo</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo 4.1</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_estructura_cacheprincipal">Estructura Cache/Principal</h5>
+<div class="paragraph">
+<p><span class="image"><img src="./images/cache/cache_dram_block.png" alt="Estructura de agrupamiento"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Cache: bytes &#8594; palabras &#8594; líneas</p>
+</li>
+<li>
+<p>MP: bytes &#8594; palabras &#8594; bloques</p>
+</li>
+</ul>
+</div>
+<div class="sect5">
+<h6 id="_principal">Principal</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Dirección: n bits : bus de direcciones del sistema &#8594;Capacidad=2<sup>n</sup> palabras &#8594; OJO: no bytes</p>
+</li>
+<li>
+<p>Direccionable: palabras : bus de datos del sistema</p>
+</li>
+<li>
+<p>Organizada en Bloques de K palabras</p>
+</li>
+<li>
+<p>Número de bloques : Capacidad en palabras / K</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_cache">Cache</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Dirección: Nº de Línea y Palabra</p>
+</li>
+<li>
+<p>Direccionable: Palabra</p>
+</li>
+<li>
+<p>Capacidad: C Líneas</p>
+</li>
+<li>
+<p>Organizada en Líneas de K palabras y 1 etiqueta</p>
+</li>
+<li>
+<p>Etiqueta: Asociación Línea con Bloque de la Memoria Principal</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_operacion_de_lectura">Operacion de Lectura</h5>
+<div class="paragraph">
+<p><span class="image"><img src="./images/cache/cache_read_operation.png" alt="Read Operation"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Organigrama de operaciones</p>
+</li>
+<li>
+<p>Controladora de la Caché</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_elementos_de_diseño_de_la_cache">9.4.4. Elementos de Diseño de la Cache</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Elementos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Tamaño de la Caché, Función de Correspondencia, Algoritmos de Sustitución, Política de Escritura, Tamaño de Línea, Número de Cachés</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_tamaño">Tamaño</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Contradicción: Cuanto más grande más lenta y más probabilidades de acierto.</p>
+</li>
+<li>
+<p>L1: KB</p>
+</li>
+<li>
+<p>L2: MB</p>
+</li>
+<li>
+<p>L3: MB</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_funcion_de_correspondencia">Funcion de Correspondencia</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Directa, Totalmente Asociativa, Asociativa en Grupo</p>
+</li>
+</ul>
+</div>
+<div class="sect5">
+<h6 id="_ejemplo_2">Ejemplo</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Libro W.Stalling. Capítulo 4. Ejemplo 4.2</p>
+</li>
+<li>
+<p>Ejemplo para los 3 casos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>m</em>:caché de capacidad 64 KB= 4*2^14 bytes</p>
+</li>
+<li>
+<p>MP :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>word size : 1 byte</p>
+</li>
+<li>
+<p>palabras/bloque = 4.</p>
+</li>
+<li>
+<p>capacidad = 16MB = 2<sup>24</sup>bytes= 4*2<sup>22</sup>= 4M bloques</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La  capacidad de la caché <em>m</em> son 2^14 líneas = 16K líneas</p>
+</li>
+<li>
+<p>La relación de capacidad caché/MP es 16K/4M = 1/(2^8)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_directa">Directa</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Estructura de direcciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Memoria principal : bloques de palabras</p>
+</li>
+<li>
+<p>Memoria cache : líneas de palabras</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Función de correspondecia</p>
+<div class="ulist">
+<ul>
+<li>
+<p>determinista - ningún grado de libertad en la elección de la línea correspondiente a un bloque determinado.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/cache/cache_directmap.png" alt="Direct Map Structure"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>i: número de línea de caché</p>
+</li>
+<li>
+<p>j: número de bloque de la memoria principal</p>
+</li>
+<li>
+<p>m: número de líneas en la caché</p>
+</li>
+<li>
+<p>Función de correspondencia</p>
+<div class="ulist">
+<ul>
+<li>
+<p>i = j módulo m</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Organización de la caché</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Caché + Controladora</p>
+<div class="paragraph">
+<p><span class="image"><img src="./images/cache/cache_directmap_controller.png" alt="Direct Map Controller"></span></p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Formato de direcciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Dirección física de la memoria principal: bloque-palabra</p>
+</li>
+<li>
+<p>Dirección física de la memoria cache: tag-línea-palabra</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Operación de búsqueda de una palabra en la memoria caché.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Determinar los campos de etiqueta, línea y palabra del formato de direcciones de la memoria caché.</p>
+</li>
+<li>
+<p>La palabra pudiera estar en únicamente en la línea asignada, por lo que es necesario comparar únicamente la etiqueta de dicha línea con la etiqueta del formato de direcciones.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplo 4.2</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo 4.2a</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_totalmente_asociativa">Totalmente Asociativa</h6>
+<div class="paragraph">
+<p><span class="image"><img src="./images/cache/cache_fullassociative_controller.png" alt="Full Associative Controller"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>La dirección de memoria tiene únicamente dos campos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>s bits= etiqueta: orden del bloque de MP : desde 1 hasta 4M.</p>
+</li>
+<li>
+<p>w bits= orden de la palabra dentro del bloque: desde 1 hasta 4.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>controlador de caché</p>
+<div class="ulist">
+<ul>
+<li>
+<p>todas las etiquetas de las líneas de caché son SIMULTANEAMENTE comparadas con la etiqueta de la palabra referenciada.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>si éxito, s apunta a la línea que contiene la palabra referenciada y w apunta a la palabra referenciada.</p>
+</li>
+<li>
+<p>si fracaso, s apunta al bloque de la MP que contiene la palabra referenciada y w apunta a la palabra referenciada.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>función de correspondencia</p>
+<div class="ulist">
+<ul>
+<li>
+<p>NO HAY NORMA &#8594; CADA BLOQUE DE MP PUEDE SER ASIGNADA A CUALQUIER LINEA DE LA CACHE</p>
+</li>
+<li>
+<p>LIBRE: un bloque de MP no tiene asignada ninguna línea específica y el controlador cache puede seleccionar qué línea será asignada a dicho bloque.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Formato de direcciones</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Dirección física de la memoria principal: bloque-palabra</p>
+</li>
+<li>
+<p>Dirección física de la memoria cache: tag-palabra</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Operación de búsqueda de una palabra en la memoria caché.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Determinar los campos de etiqueta y palabra del formato de direcciones de la memoria caché.</p>
+</li>
+<li>
+<p>La palabra puede estar en cualquier línea, por lo que es necesario comparar las etiquetas de todas las líneas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Diferencia con el mapeo directo:</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>el campo de etiqueta tiene s bits &gt;&gt; s-r bits</p>
+</li>
+<li>
+<p>la comparación es entre todas las etiquetas &#8594; hardware complejo &#8594; coste</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_asociativa_por_conjuntos">Asociativa por conjuntos</h6>
+<div class="paragraph">
+<p><span class="image"><img src="./images/cache/cache_setassociative.png" alt="Set Associative"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>compromiso entre el rigor de la correspondencia directa y la flexibilidad de la correspondencia totalmente asociativa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La dirección de memoria tiene 3 campos:TAG-SET-WORD &#8594; (s-d)/d/w</p>
+<div class="ulist">
+<ul>
+<li>
+<p>w bits : orden de la palabra. Con 2<sup>w</sup> palabras formo un bloque</p>
+</li>
+<li>
+<p>d bits :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CONJUNTO de bloques o SET de bloques o SUPERbloque o SUPERlínea.</p>
+</li>
+<li>
+<p>d &lt; l :dividimos la cache en v superbloques.</p>
+</li>
+<li>
+<p>Con v=2<sup>d</sup> superbloques de k bloques formo la memoria cache.</p>
+</li>
+<li>
+<p>Al número k de líneas de cada superbloque se le denomina VIA (WAY)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>estructura de la MP:  queda dividida en bloques y superbloques.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>2<sup>s</sup> es el número de bloques que si los agrupo en sets de k bloques tendré en MP 2<sup>t</sup> agrupamientos de 2<sup>d</sup> sets cada uno &#8594;
+2<sup>s</sup>*2<sup>w</sup> = 2<sup>t</sup>*2<sup>d</sup>*2<sup>w</sup> &#8594; 2<sup>s</sup>=2<sup>t</sup>*2<sup>d</sup> &#8594; Nº de bloques= Nº de etiquetas*Nºsets</p>
+</li>
+<li>
+<p>s-d bits: nº de bits de la etiqueta : ¿qué representa 2<sup>(s-d)</sup>?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>función de correspondencia</p>
+<div class="ulist">
+<ul>
+<li>
+<p>i = j modulo v &#8594; NORMA SEMIRIGIDA: CADA BLOQUE TIENE ASIGNADO UN CONJUNTO ESPECIFICO DE LINEAS PERO NO TIENE ASIGNADA LA LINEA DENTRO DEL CONJUNTO</p>
+</li>
+<li>
+<p>donde <em>v</em> es el número de superbloques, <em>j</em> es el número de bloque en MP e <em>i</em> el número de superbloque en la caché.</p>
+</li>
+<li>
+<p>dentro del superbloque <em>i</em> hay flexibilidad para asignarle una de las líneas o vías dentro del superbloque.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>número de vías</p>
+<div class="ulist">
+<ul>
+<li>
+<p>si el número de vías fuese 1 no habría ninguna libertad de asignación y estaríamos en el caso de correspondencia directa</p>
+</li>
+<li>
+<p>si el número de vías fuese 2 habría lago de libertad ya que habría que elegir una línea a sustituir de dos líneas posibles.</p>
+</li>
+<li>
+<p>si el número de vías fuese la capacidad de la caché el grado de libertad sería máximo, a sustituir una línea de m posibles.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="./images/cache/cache_setassociative_controller.png" alt="Set Associative Controller"></span></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Formato de direcciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Dirección física de la memoria principal: bloque-palabra</p>
+</li>
+<li>
+<p>Dirección física de la memoria cache: tag-set-palabra</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Operación de búsqueda de una palabra en la memoria caché.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Determinar los campos de etiqueta y set del formato de direcciones de la memoria caché.</p>
+</li>
+<li>
+<p>La palabra puede estar en cualquier línea pero únicamente del set asignado, por lo que es necesario comparar las etiquetas únicamente de las líneas de dicho set.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_comparativa_de_los_3_tipos_de_funciones">Comparativa de los 3 tipos de funciones</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>En la función de correspondencia de mapeo directo no hay ninguna libertada a la hora de seleccionar la línea de la cache, esta viene determinada por la función de correspencia. En el caso de función asociativa total la libertad es total pudiendo elegir la línea a ocupar siguiendo criterios estadísticos, etc. En el caso de función asociativa por conjuntos no hay ninguna libertad en la asignación del conjunto de líneas determinado por la función pero sí en la elección de la línea dentro del conjunto asignado por la función.</p>
+</li>
+<li>
+<p>Los dos primeros casos, mapeo directo y asociativa total, son los casos extremos de la asociativa por conjuntos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Asociativa por conjuntos con un set de una línea sería el caso de mapeo directo</p>
+</li>
+<li>
+<p>Asociativa por conjuntos con un set de todas las líneas de la caché sería el caso de asociativa total</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_memoria_virtual">9.5. Memoria Virtual</h3>
+<div class="sect3">
+<h4 id="_bibliografia_3">9.5.1. Bibliografia</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Computer Organization and Architecture: Designing for Performance. William Stalling, Cap8 Sistemas Operativos: 8.3 Gestión de la Memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Sistema Operativo:  Gestión de la Memoria</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Computer Systems A Programmer’s Perspective, Randal E. Bryant. Capítulo 9. Virtual Memory</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sistemas_operativos_gestión_de_la_memoria">9.5.2. Sistemas Operativos: Gestión de la Memoria</h4>
+<div class="sect4">
+<h5 id="_sistemas_multiproceso">Sistemas Multiproceso</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>En un sistema multitarea hay más de un proceso ejecutándose y residente en la memoria principal.</p>
+</li>
+<li>
+<p>La memoria principal es un recurso compartido por todos los procesos. En un entorno multiproceso, es necesario gestionar el recurso compartido para asignar regiones de memoria física a cada proceso, para proteger espacios de memoria entre los distintos procesos, etc</p>
+</li>
+<li>
+<p>Históricamente la memoria principal era muy limitada frente al tamaño de los programas.</p>
+</li>
+<li>
+<p>Técnicas de gestión de la memoria en sistemas operativos: swapping, particionamiento, memoria virtual, segmentación, paginación. .</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_gestión_de_la_memoria_fisica">Gestión de la Memoria Fisica</h5>
+<div class="sect5">
+<h6 id="_memoria_principal_4">Memoria Principal</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>La memoria principal es la memoria física externa a la CPU e implementada en tecnología SDRAM con una capacidad típica en el año 2010 de 4GB.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_swapping">Swapping</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Significa intercambio.</p>
+</li>
+<li>
+<p>Los programas se almacenan en el disco duro como módulos objeto ejecutables.</p>
+</li>
+<li>
+<p>Los módulos ejecutables deben cargarse en memoria para ser ejecutados, convirtiéndose en procesos.</p>
+</li>
+<li>
+<p>La memoria es <em>limitada</em> por lo que no puede almacenar todos los procesos requeridos por el usuario.</p>
+</li>
+<li>
+<p>Una solución es que los procesos utilicen tanto la memoria principal como el disco duro. En memoria  residen los procesos  que son ejecutados en un momento dado y cuando uno de dichos procesos  no requiere de la CPU (espera a un evento i/o)(no está en estado <em>ready</em>) se intercambia con el disco duro por un proceso que si requiere de la CPU (está en estado ready). La transferencia del proceso hacia la memoira principal se denomina swap-in y la transferencia hacia el disco duro swap-out.</p>
+</li>
+<li>
+<p>Se <strong>intercambia todo</strong> el proceso.</p>
+</li>
+<li>
+<p>Hay un intercambio  de procesos completos entre la memoria  y el disco duro. Este es el concepto de swap para algunos sistemas operativos como Solaris y el que se toma por definición. En Linux tiene otro significado.</p>
+</li>
+<li>
+<p>Al trasladar un proceso de memoria al disco duro se genera un <strong>hueco en la memoria</strong>. La existencia de múltiples huecos dispersados por la memoria se le denomina <em>fragmentación externa</em>.</p>
+</li>
+<li>
+<p>El inconveniente es que el swapping requiere de un operación i/o con el disco duro ralentizando el rendimiento de la computadora.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_particionamiento_fragmentación">Particionamiento (Fragmentación)</h6>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>La clave</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Sin memoria virtual el código de los procesos en la memoria física ha de ser <strong>contiguo</strong>.</p>
+</li>
+<li>
+<p>Si no utilizamos memoria virtual el <em>particionamiento dinámico</em> (el proceso ocupa justo la región de memoria que necesita)  produce fragmentación externa al eliminar particiones y el <em>particionamiento fijo</em> (el proceso ocupa menos de la región que tiene reservada) produce fragmentación interna</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>La Solución</strong> para que un proceso pueda ocupar particiones <strong>NO CONTIGUAS</strong> en la memoria FISICA : memoria VIRTUAL.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Al poder asignar particiones pequeñas fijas no contiguas el fraccionamiento externo desaparece y el interno se reduce al máximo (inferior al tamaño de la partición)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El <strong>particionamiento</strong> es una técnica para asignar memoria principal a los distintos procesos que están siendo ejecutados concurrentemente en la computadora.</p>
+</li>
+<li>
+<p>La memoria se divide en múltiples regiones o <em>particiones</em> de tamaño no uniforme.</p>
+</li>
+<li>
+<p>A un proceso se le asigna una partición de <em>igual o mayor tamaño</em>.</p>
+</li>
+<li>
+<p>Se utiliza en sistemas multitarea donde la memoria principal es compartida por múltiples procesos. De esta manera se puede <em>gestionar el compartir</em> la memoria entre los diferentes procesos, protección, permisos, superusuario, etc</p>
+</li>
+<li>
+<p>Cuando el proceso no está ready se realiza un swapping con el disco duro.</p>
+</li>
+<li>
+<p>Dos alternativas : la estructura de las particiones puede ser fijo o variable en el tiempo. En los dos casos un proceso requiere una partición, es decir, una región de posiciones de memoria <strong>contiguas</strong>.</p>
+</li>
+<li>
+<p>Particionamiento <strong>FIJO</strong> :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La memoria principal se parte en regiones cuyo tamaño no varía durante la ejecución de los procesos.</p>
+</li>
+<li>
+<p>Pariticionamiento fijo con regiones de igual tamaño o particionamiento fijo con regiones de diferente tamaño.</p>
+</li>
+<li>
+<p>A los procesos se les asigna una partición de tamaño mayor que el requerido. Esto produce <strong>fragmentación interna</strong>, ya que una zona de la partición no es aprovechada por ningún proceso.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Particionamiento variable o <strong>DINAMICO</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A cada proceso se le asigna justo la memoria que necesita. No hay fragmentación interna.</p>
+</li>
+<li>
+<p>El tamaño de las particiones cambia dinámicamente según se intercambian procesos con el disco duro adaptándose al tamaño de estos.</p>
+</li>
+<li>
+<p>La <strong>fragmentación externa</strong> es considerable. Se podría reducir compactando los huecos dispersos, para lo cual es necesario mover o reubicar los procesos en la memoria principal. La reubicación de procesos significa resolver todas las direcciones físicas nuevamente en tiempo de ejecución &#8594; puede resultar inviable el tiempo requerido.</p>
+</li>
+<li>
+<p>Hay publicidad de programas que defragmentan la memoria principal lo cual no es posible ya que únicamente el S.O. conoce las direcciones físicas de un proceso.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_alternativa">Alternativa</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>La solución a la fragmentación debido a la técnica del particionamiento de la memoria física es la técnica de memoria virtual bien segmentada o bien paginada o ambas.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_gestión_mediante_la_memoria_virtual">Gestión mediante la Memoria Virtual</h5>
+<div class="sect5">
+<h6 id="_alternativa_2">Alternativa</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Los problemas de gestionar la memoria de los procesos asignando a los procesos <em>directamente</em> un espacio de direcciones físico se resuelven mediante el mecamismo de la <em>memoria virtual</em>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_espacio_de_direcciones_virtual">Espacio de direcciones virtual</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>El programador, el compilador, el linker y los procesos no operan con direcciones físicas.</p>
+</li>
+<li>
+<p>El programador referencia la memoria en el módulo fuente con símbolos (etiquetas, variables, nombres de funciones, etc)</p>
+</li>
+<li>
+<p>El compilador y el linker traducen los símbolos a direcciones de una memoria imaginaria lineal y contigua denominada memoria virtual.</p>
+</li>
+<li>
+<p>Esta independencia de las direcciones físicas simplifica enormemente la gestión de la memoria.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_ejemplo_programa_exit">Ejemplo: programa exit</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Desensamblado del módulo objeto ejecutable residente en el disco</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>objdump -S exit</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="nl">exit:</span>     <span class="n">file</span> <span class="n">format</span> <span class="n">elf64</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mi">64</span>
+
+
+<span class="n">Disassembly</span> <span class="n">of</span> <span class="n">section</span> <span class="p">.</span><span class="n">text</span><span class="o">:</span>
+
+<span class="mo">000000000040007</span><span class="mi">8</span> <span class="o">&lt;</span><span class="p">.</span><span class="n">text</span><span class="o">&gt;:</span>
+  <span class="mi">400078</span><span class="o">:</span>	<span class="mi">48</span> <span class="n">c7</span> <span class="n">c0</span> <span class="mi">3</span><span class="n">c</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> 	<span class="n">mov</span>    <span class="err">$</span><span class="mh">0x3c</span><span class="p">,</span><span class="o">%</span><span class="n">rax</span>
+  <span class="mi">40007</span><span class="n">f</span><span class="o">:</span>	<span class="mi">48</span> <span class="n">c7</span> <span class="n">c7</span> <span class="n">ff</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> 	<span class="n">mov</span>    <span class="err">$</span><span class="mh">0xff</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>
+  <span class="mi">400086</span><span class="o">:</span>	<span class="mi">0</span><span class="n">f</span> <span class="mo">05</span>                	<span class="n">syscall</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Las direcciones 0x400078,.. son direcciones del espacio virtual. El espacio de direcciones virtual es <em>lineal</em>, contiguo y único.</p>
+</li>
+<li>
+<p>La dirección virtual <em>0x0000000000400078</em> comprende 16 dígitos hexadecimales, es decir, el espacio de direcciones virtual del proceso <em>exit</em> tiene capacidad para 2<sup>64</sup> Bytes.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_memoria_recurso_compartido">Memoria: Recurso compartido</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Cada proceso tiene su propio espacio de direcciones virtual.</p>
+</li>
+<li>
+<p>Todos los procesos han de compartir la misma memoria física.</p>
+</li>
+<li>
+<p>Todos los espacios virtuales han de ser traducidos al mismo espacio físico.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_traducción_virtual_fisico">Traducción virtual &#8594; fisico</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Cada vez que la CPU acceda a memoria para capturar instrucciones y datos o escribir resultados, será necesario <em>traducir</em> la dirección lógica en una dirección física. Es decir, las direcciones</p>
+</li>
+<li>
+<p>Esta traducción la realiza la unidad hardware <em>Management Memory Unit (MMU)</em>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_direccionamiento_lógico">Direccionamiento lógico</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>En el intercambio de procesos entre la memoria y el disco duro, las direcciones físicas de memoria donde son cargados los datos y las instrucciones pueden cambiar. Debido a ello no es factible un modelo de direccionamiento que utilice direcciones físicas absolutas.</p>
+</li>
+<li>
+<p>Las direcciones del proceso se expresan de forma <strong>relativa</strong> respecto de una <strong>dirección base</strong>. Al par dirección base y offset se le denomina <em>dirección lógica</em>.</p>
+</li>
+<li>
+<p>Esta dirección lógica es una dirección virtual, no física.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_dos_tipos_segmentación_y_paginación">Dos tipos: Segmentación y Paginación</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>El espacio de memoria virtual se puede gestionar utilizando dos mecanismos o la combinaición de ellos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Segmentación</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>La memoria virtual de un proceso se divide en unidades lógicas indivisibles denominadas segmentos</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Paginación</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>La memoria virtual de un proceso y la memoria física de la computadora se dividen en unidades denominadas páginas (lógicas en la memoria virtual y físicas en la memoria principal).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_memoria_virtual_segmentada">9.5.3. Memoria Virtual Segmentada</h4>
+<div class="sect4">
+<h5 id="_interpretación_de_la_segmentación">Interpretación de la segmentación</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La segmentación se puede aplicar tanto al espacio de direcciones físico como al espacio de direcciones virtual.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Segmentación del espacio de direcciones virtual</p>
+<div class="ulist">
+<ul>
+<li>
+<p>División de un programa (proceso) en unidades lógicas: código,variables inicializados, variables sin inicializar, datos read only, etc. División de la memoria virtual de un proceso en áreas de <strong>memoria contigua</strong> y cuyo tamaño puede variar dinámicamente. Los segmentos lógicos no se pueden dividir.</p>
+</li>
+<li>
+<p>Facilita el trabajo del compilador,linker,sharing, etc</p>
+</li>
+<li>
+<p>El espacio total de la memoria virtual formado por todos los procesos estaría formado por la dirección base  segmento y el desplazamiento (offset) del registro contador de programa.</p>
+</li>
+<li>
+<p>Se ha utilizado memoria virtual segmentada en las CPU: 80286,80386,80486 y Pentium</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Segmentación del espacio de direcciones físico.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Se utilizó en la arquitectura intel 8086 para pasar de un bus de direcciones de 16 bits a 20 bits manteniendo el tamaño de los registros con 16 bits.</p>
+</li>
+<li>
+<p>Incrementar el espacio de direcciones físicas añadiendo un registro de segmento y sin incrementar el tamaño del registro contador de programa. Por ejemplo un microprocesador Intel de 16 bits sin segmentación tiene límitado el espacio físico a 2<sup>16</sup> = 64KB. Con el mismo micro y un registro adicional de segmento RS de 16 bits podemos concatenar el registro RS con el contador de programa PC formando direcciones físicas de 32 bits con lo que tendríamos un espacio de direcciones físicas de 2<sup>32</sup> = 4GB</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_secciones">Secciones</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>cada módulo objeto reubicable está estructurado en secciones</p>
+</li>
+<li>
+<p>una sección es una división lógica, no física.</p>
+</li>
+<li>
+<p>la estructura en secciones se define en el módulo fuente</p>
+</li>
+<li>
+<p>Secciones principales</p>
+<div class="ulist">
+<ul>
+<li>
+<p>text : instrucciones</p>
+</li>
+<li>
+<p>data : variables inicializadas</p>
+</li>
+<li>
+<p>rodata: variables readonly</p>
+</li>
+<li>
+<p>bss:    variables sin inicializar</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>readelf -S maximum</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sh">There are 16 section headers, starting at offset 0x448:
+
+Section Headers:
+  <span class="o">[</span>Nr] Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  <span class="o">[</span> 0]                   NULL             0000000000000000  00000000
+       0000000000000000  0000000000000000           0     0     0
+  <span class="o">[</span> 1] .interp           PROGBITS         0000000000400158  00000158
+       000000000000001c  0000000000000000   A       0     0     1
+  <span class="o">[</span> 2] .hash             HASH             0000000000400178  00000178
+       000000000000000c  0000000000000004   A       3     0     8
+  <span class="o">[</span> 3] .dynsym           DYNSYM           0000000000400188  00000188
+       0000000000000000  0000000000000018   A       4     1     8
+  <span class="o">[</span> 4] .dynstr           STRTAB           0000000000400188  00000188
+       000000000000000b  0000000000000000   A       0     0     1
+  <span class="o">[</span> 5] .text             PROGBITS         0000000000400193  00000193
+       0000000000000037  0000000000000000  AX       0     0     1
+  <span class="o">[</span> 6] .eh_frame         PROGBITS         00000000004001d0  000001d0
+       0000000000000000  0000000000000000   A       0     0     8
+  <span class="o">[</span> 7] .dynamic          DYNAMIC          00000000006001d0  000001d0
+       00000000000000d0  0000000000000010  WA       4     0     8
+  <span class="o">[</span> 8] .data             PROGBITS         00000000006002a0  000002a0
+       000000000000000e  0000000000000000  WA       0     0     1
+  <span class="o">[</span> 9] .debug_aranges    PROGBITS         0000000000000000  000002b0
+       0000000000000030  0000000000000000           0     0     16
+  <span class="o">[</span>10] .debug_info       PROGBITS         0000000000000000  000002e0
+       0000000000000078  0000000000000000           0     0     1
+  <span class="o">[</span>11] .debug_abbrev     PROGBITS         0000000000000000  00000358
+       0000000000000014  0000000000000000           0     0     1
+  <span class="o">[</span>12] .debug_line       PROGBITS         0000000000000000  0000036c
+       000000000000004a  0000000000000000           0     0     1
+  <span class="o">[</span>13] .shstrtab         STRTAB           0000000000000000  000003b6
+       000000000000008d  0000000000000000           0     0     1
+  <span class="o">[</span>14] .symtab           SYMTAB           0000000000000000  00000848
+       0000000000000240  0000000000000018          15    20     8
+  <span class="o">[</span>15] .strtab           STRTAB           0000000000000000  00000a88
+       000000000000006f  0000000000000000           0     0     1
+Key to Flags:
+  W <span class="o">(</span>write<span class="o">)</span>, A <span class="o">(</span>alloc<span class="o">)</span>, X <span class="o">(</span>execute<span class="o">)</span>, M <span class="o">(</span>merge<span class="o">)</span>, S <span class="o">(</span>strings<span class="o">)</span>, l <span class="o">(</span>large<span class="o">)</span>
+  I <span class="o">(</span>info<span class="o">)</span>, L <span class="o">(</span><span class="nb">link </span>order<span class="o">)</span>, G <span class="o">(</span>group<span class="o">)</span>, T <span class="o">(</span>TLS<span class="o">)</span>, E <span class="o">(</span>exclude<span class="o">)</span>, x <span class="o">(</span>unknown<span class="o">)</span>
+  O <span class="o">(</span>extra OS processing required<span class="o">)</span> o <span class="o">(</span>OS specific<span class="o">)</span>, p <span class="o">(</span>processor specific<span class="o">)</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_enlace_de_secciones">Enlace de Secciones</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>el linker mezcla de forma organizada cada tipo de sección de todos los módulos objeto reubicables generando un único módulo objeto ejecutable</p>
+</li>
+<li>
+<p>Ejemplo de tres módulos objeto reubicables:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>los tres módulos fuente p1.c, p2.c, p3.c  se compilan dando lugar a p1.o, p2.o y p3.o los cuales se enlazan dando lugar al ejecutable <em>p</em></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/memvirtual/linksections.png" alt="enlace de secciones">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_segmentos_lógicos">Segmentos lógicos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>El módulo ejecutable está estructurado en segmentos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>text</p>
+<div class="ulist">
+<ul>
+<li>
+<p>código de las instrucciones a ejecutar</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>data</p>
+<div class="ulist">
+<ul>
+<li>
+<p>código de datos: variables inicializadas, sin inicializar</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>stack</p>
+<div class="ulist">
+<ul>
+<li>
+<p>pila</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>heap</p>
+<div class="ulist">
+<ul>
+<li>
+<p>montículo</p>
+</li>
+<li>
+<p>es la asignación de memoria en tiempo de ejecución</p>
+</li>
+<li>
+<p>en C la función <code>malloc()</code>: memory allocation: <code>void *malloc(size_t size)</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>size: tamaño en bytes de la memoria a asignar</p>
+</li>
+<li>
+<p>devuelve un puntero a la región de memoria asignada</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>mapa de memoria del programa en ejecución</p>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNoLyywqKU3MUXBMSSlKLS7mVFDQRQCXIEdfXRTAZVDhhga0dfEAbS4FDFCjgAfUUEeDHhCQpCHZ0tISvwaDCgsDOKhRcKnMS8zNTFYITk3PTc0rKVZQ0PBITSzQxGEDMaFkUGGOCNYaheCSxORskDjUCpqEEika6BHTJDoJGA-JJYlIgVQ8dPxgUGECTUshqRUlg8APBhWI5A3OD6F5uYkFBakpNEgaNigqwvOLUpC4dgDbjMhx" alt="Diagram">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/linux_vm_map.png" alt="MMU">
+</div>
+<div class="title">Figure 39. linux_vm_map</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/linux_vm_map_2.png" alt="MMU">
+</div>
+<div class="title">Figure 40. linux_vm_map_2</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Cada proceso tiene su propia memoria virtual independiente del resto de los procesos</p>
+</li>
+<li>
+<p>Los segmentos pueden cambiar de tamaño dinámicamente en tiempo de ejecución.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Carga del módulo objeto ejecutable</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El loader no carga el módulo ejecutable en DRAM, sino que mapea el fichero a memoria virtual, creando la tabla de páginas.</p>
+</li>
+<li>
+<p>La carga efectiva se realiza bajo demanda.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/memvirtual/load_segments.png" alt="load segments">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_evolución_memoria_intel_8086_80286">Evolución memoria Intel 8086-80286</h5>
+<div class="sect5">
+<h6 id="_8086">8086</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>80x86 &#8594; (bits bus direcciones, bits bus datos)</p>
+</li>
+<li>
+<p>8086  &#8594; (20,16) &#8594; 2<sup>20</sup>=1MB de memoria física&#8594; Modo Real</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Segmentación</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La dirección lógica esta formada por un tuple de dos valores: dirección base y offset.</p>
+</li>
+<li>
+<p>Conversión de dirección lógica a dirección física:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Con un contador de programa de 16 bits se pueden direccionar 64KB. Si añadimos un registro segmento adicional de 16 bits cuyo contenido lo desplazamos 4 bits a la izda (equivale a <strong>multiplicar por 2<sup>4</sup></strong>) tendríamos una dirección base de 20 bits a la cual añadiríamos el offset del PC de 16 bits obteniendo una dirección  física de 20 bits- &gt; espacio físico de 1MB.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Este modo de memoria se denominó <em>modo real</em>: espacio de direcciones memoria segmentada de 20 bits.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_80286">80286</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>80286 &#8594; (24,16) &#8594; 2<sup>24</sup>=16MB de memoria física&#8594; Modos Real y protegido.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Concepto de memoria Virtual: memoria generada por el compilador y por los procesos al ejecutarse</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En este caso son 4 bytes de memoria virtual &#8594; los 2 bytes más altos son el selector de segmento y los dos bytes más bajos el offset.</p>
+</li>
+<li>
+<p>Capacidad de memoria virtual &#8594; 2<sup>32</sup> = 4GB</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La memoria virtual de los procesos se parte en segmentos.</p>
+</li>
+<li>
+<p>Segmentación</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Forming different segments for data, code, and stack, and preventing their overlapping</p>
+</li>
+<li>
+<p>Cada segmento únicamente puede direccionar 64KB ya que el Contador de Programa es de 16 bits</p>
+</li>
+<li>
+<p>La conversión memoria lógica a memoria física:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Se utiliza uno de los 4 registros de segmento CS,DS,ES,SS: son de 64 bits: 16 bits visibles y 6 bytes escondidos</p>
+</li>
+<li>
+<p>Se utiliza una tabla de descripción del segmento residente en la memoria principal: cada entrada de la tabla son 8 bytes de los cuales 3 bytes son la dirección base física asociada a la dirección virtual segmentada.</p>
+</li>
+<li>
+<p>En la parte visible del registro de segmento se cargan los 2 bytes más altos de la dirección virtual (selector de segmento)</p>
+</li>
+<li>
+<p>El selector de segmento apunta a una de las entradas de la tabla de selección de descripción de segmento y carga 6 bytes de la tabla en la zona escondida del registro de segmento el cual contiene: dirección base física (3bytes), tamaño del segmento (2 bytes) y propiedades del segmento (1byte)</p>
+</li>
+<li>
+<p>dirección física: la dirección base (3bytes) más el offset (2bytes): con 3 bytes &#8594; 2<sup>24</sup>=16MB de espacio físico</p>
+</li>
+<li>
+<p>El espacio de direcciones de 4GB de memoria virtual de un segmento debiera poder traducirse en el espacio de direcciones físico de 16MB, pero únicamente puede acceder a 64KB.</p>
+</li>
+<li>
+<p>Espacio físico total: de los 16MB posibles un segmento direcciona solo 64KB y como tenemos 4 segmentos &#8594; 4*64KB=256KB totales.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Multitasking, memory management (on chip MMU), protected memory &#8594; <em>modo protegido</em>: espacio de direcciones memoria segmentada de 24 bits.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_80386">80386</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>80386 &#8594; (32,32) &#8594; Espacio Físico: 2<sup>32</sup> = 4GB</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Misma arquitectura que el 286 pero incrementa la ruta de datos de 16 bits a 32 bits, añade dos registros de segmento más (FS,GS) y añade la técnica de la paginación.</p>
+</li>
+<li>
+<p>Memoria Virtual: 6 bytes : 2<sup>48</sup> = 64TB . Los 2 bytes altos son el selector de registro y los 4 bytes bajos el offset</p>
+<div class="ulist">
+<ul>
+<li>
+<p>de los 64TB posibles los 6 segmentos pueden direccionar <em>en un momento dado</em> 4GB cada uno &#8594; 6*4GB=24GB</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Segmentación</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Selector de Segmento = 2 bytes como en el 286 &#8594; puntero a la entrada de la tabla descriptor de segmento</p>
+</li>
+<li>
+<p>Descriptor de Segmento = Contiene 4 bytes de la dirección base física</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Conversión de la dirección lógica a dirección física con sólo segmentación</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A la dirección base física (4 bytes) se le añade el offset de la dirección virtual (4bytes) &#8594; dirección física de 32 bits.</p>
+</li>
+<li>
+<p>En este caso, a diferencia del 80286, el espacio de memoria virtual de 4GB de cada segmento se pueden traducir en el espacio físico de 4GB.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>instrucciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>movl $42,%fs:(%eax)</code></p>
+</li>
+<li>
+<p>implícitamente</p>
+<div class="ulist">
+<ul>
+<li>
+<p>push, pop &#8594; SS,DS</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ver paginación 80386</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_amd64">amd64</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>amd64 &#8594; (52,64) &#8594; Espacio Físico: 2<sup>52</sup> = 4PetaBytes y Espacio Virtual 2<sup>48</sup> = 256TB</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/X86-64#Physical_address_space_details" class="bare">https://en.wikipedia.org/wiki/X86-64#Physical_address_space_details</a></p>
+</li>
+<li>
+<p><strong>No utiliza la segmentación lógica</strong> del espacio de direcciones virtual debido a que el espacio de memoria virtual de 256TB es suficiente para todos los procesos. Los segmentos lógicos (text,data,stack,heap, etc ) de un proceso se almacenan en el mismo espacio virtual asignado a dicho proceso mediante la técnica de paginación.</p>
+</li>
+<li>
+<p>Hay que tener en cuenta la limitación de la tabla de paginas virtual que depende del número de páginas virtuales y la dirección de una página física. El area de memoria principal ocupada crece exponencialmente con el tamaño de la tabla y de forma innecesaria.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/amd64_virtualformat.png" alt="MMU">
+</div>
+<div class="title">Figure 41. Formato de direcciones amd64</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_memoria_virtual_paginada">9.5.4. Memoria Virtual Paginada</h4>
+<div class="sect4">
+<h5 id="_fundamento">Fundamento</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La paginación consiste en dividir tanto la memoria <em>física</em> como la memoria <em>virtual</em> de los procesos en pequeños <em>pedazos</em> denominados páginas.</p>
+</li>
+<li>
+<p>Los pedazos de memoria física se denominan <em>marcos de página</em> y los pedazos de memoria virtual del proceso se denominan <em>páginas</em></p>
+</li>
+<li>
+<p>En este caso se asigna cada página a un marco de página diferente, quedando los trozos de proceso diseminados en zonas <strong>NO CONTIGUAS</strong> de la memoria.</p>
+</li>
+<li>
+<p>De esta manera se reduce la fragmentación interna ,ya que la memoria infrautilizada siempre será menor al tamaño de una página.</p>
+</li>
+<li>
+<p>El sistema operativo genera para cada proceso la <em>tabla de páginas</em> que mapea páginas con marcos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PTE: Page Table Entry &#8594; (index,PhysPageNumber)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Dirección lógica</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cada dirección lógica estará formada por la dirección base de la página y el offset dentro de la página. Direccionamiento <strong>no lineal</strong>, (dirección base, desplazamiento)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Traducción de dirección lógica a física.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El espacio de direcciones físico es único y contiguo, es decir, lineal.</p>
+</li>
+<li>
+<p>La dirección base de la página del proceso se asocia con la dirección base del marco: tabla de páginas.</p>
+</li>
+<li>
+<p>El offset dentro del marco será el mismo que el offset dentro de la página.</p>
+</li>
+<li>
+<p>La gestión de la paginación la realiza la MMU</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_concepto_de_memoria_virtual_paginada">Concepto de Memoria Virtual Paginada</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Debido a que no es necesario cargar todas las páginas del proceso &#8594; el espacio de memoria del <strong>PROCESO</strong> puede ser <strong>mayor</strong> que la memoria física &#8594; concepto de <strong>memoria virtual</strong></p>
+</li>
+<li>
+<p>La memoria virtual es única, contigua, es decir, <em>LINEAL</em>. Es una abstracción para no depender de las direcciones físicas.</p>
+</li>
+<li>
+<p>Por el principio de localidad en la memoria física sólo está la copia de las páginas virtuales que son necesarias dinámicamente en un momento dado.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>concepto de cache</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La memoria principal es la cache de la memoria secundaria (ficheros el disco o pendrive)</p>
+</li>
+<li>
+<p>SDRAM cache</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_fragmentación">Fragmentación</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>En el desalojo de áreas de memoria que no son necesarias se generan huecos que fragmentan la memoria física en una sucesión de áreas de memoria utilizadas y áreas no utilizadas</p>
+</li>
+<li>
+<p>La fragmentación interna será menor cuanto más pequeñas sean las páginas.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En la paginación las páginas pueden tener bytes sin utilizar, son huecos internos a las páginas.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La fragmentación externa se reduce ya que los marcos de página pueden ser asignados a un proceso independientemente del tamaño del proceso.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Un proceso ocupará los huecos dejados por las páginas que no tienen porque ser contiguas. El tamaño del proceso afectará al número de páginas requeridas en caso de que queramos tener todo el proceso residente en memoria principal.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_mmu">MMU</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad Hardware interna a la CPU</p>
+</li>
+<li>
+<p>Su entrada es el bus de direcciones virtuales y su salida el bus de direcciones físicas.</p>
+</li>
+<li>
+<p>La MMU accede a la tabla de descripción de segmentos y a la tabla de páginas y realiza la traducción de dirección virtual en dirección física</p>
+</li>
+<li>
+<p>La tabla de páginas de la MMU es la función de correspondencia que mapea el espacio virtual y el físico.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_virtual_memory_cached">Virtual Memory Cached</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Tabla de páginas con función de correspondencia fully associative (las VPages se asocian con cualquier Marco de página)</p>
+</li>
+<li>
+<p>Bit de validación</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1 &#8594; cached page</p>
+</li>
+<li>
+<p>o &#8594; uncached page: allocated o unallocated</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/vm_concept.png" alt="MMU">
+</div>
+<div class="title">Figure 42. MMU</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/vm_table.png" alt="MMU">
+</div>
+<div class="title">Figure 43. MMU</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_tabla_de_paginas">Tabla de paginas</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La tabla de páginas reside en la memoria principal SDRAM.</p>
+</li>
+<li>
+<p>Las entradas de la tabla son un puntero a marcos de página física</p>
+</li>
+<li>
+<p>Tantas entradas como páginas virtuales</p>
+</li>
+<li>
+<p>El número de página virtual es el índice de la tabla.</p>
+</li>
+<li>
+<p>La MMU accede a la tabla de páginas y realiza la traducción de dirección virtual en dirección física</p>
+</li>
+<li>
+<p>El kernel actualiza la tabla de páginas y activa las transferencias</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/vm_table_protection.png" alt="MMU">
+</div>
+<div class="title">Figure 44. Protección</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>SUP: SUPervisor: únicamente el kernel tiene acceso</p>
+</li>
+<li>
+<p>Write No: read only.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/formato_direcciones.png" alt="MMU">
+</div>
+<div class="title">Figure 45. Formato de Direcciones</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_multilevel_paging">Multilevel paging</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Debido a qué la tabla de páginas puede ser enorme se considera reducir el área de ram que consume la tabla mediante una organización jerárquica de múltiples tablas.</p>
+</li>
+<li>
+<p>La memoria se puede dividir jerárquicamente en agrupamientos de páginas. Superpáginas que agrupan páginas, hiperpáginas que agrupan superpáginas.</p>
+</li>
+<li>
+<p>Ejemplo: Paginación de 3 niveles: Nivel 1 de pedazos de 16 MB, nivel 2 de pedazos de 2MB, nivel 2 de páginas de 4KB.</p>
+</li>
+<li>
+<p>Cada nivel de agrupamiento lleva asociada una tabla de descripción de dicho nivel. La tabla de páginas se convierte en una jerarquía de múltiples tablas.</p>
+</li>
+<li>
+<p>En el proceso de traducción de la MMU la dirección virtual se descompone en múltiples campos. Cada campo será un índice de cada tabla asociada, enlazando tantas páginas como niveles.</p>
+</li>
+<li>
+<p>Si la tabla de nivel i tiene un contenido NULL no existirá las tablas de niveles superiores i+1,i+2,etc de la cadena de enlaces.</p>
+</li>
+<li>
+<p>El  hecho de acceder a múltiples tablas no ralentiza la traducción de direcciones si las tablas están implementadas en la cache interna de la MMU. Sería distinto si dichas páginas estuviesen en la memoria DRAM.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/table_multiple.png" alt="MMU" height="400">
+</div>
+<div class="title">Figure 46. Tabla de dos niveles</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/table_level_k.png" alt="MMU">
+</div>
+<div class="title">Figure 47. Tabla de K niveles</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_intel_evolución_memoria_virtual">Intel: Evolución memoria virtual</h5>
+<div class="sect5">
+<h6 id="_80386_2">80386</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Se utiliza por primera vez la paginación.</p>
+</li>
+<li>
+<p>La traducción de memoria virtual en física conlleva dos fases: primero la segmentación y a continuación la paginación (opcional)</p>
+</li>
+<li>
+<p>Ver mecanismo de segmentación.</p>
+</li>
+<li>
+<p>La segmentación traduce el espacio virtual en un espacio  lineal de 32 bits con campos:dir(10 bits)-pag(10)-offset(12)</p>
+</li>
+<li>
+<p>Se implementa dos niveles de tablas de paǵinas: dir es una tabla de punteros de tablas de páginas (directorio de páginas)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>con 10 bits se consiguen 2<sup>10</sup> punteros a tablas &#8594; 1K tablas</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>pag es el índice de la tabla de páginas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>con 10 bits se consiguen 2<sup>10</sup> entradas de tabla &#8594; 1K páginas virtuales asociadas a 1K páginas físicas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La dirección de página física son 32 bits</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Con 12 bits de offset el tamaño de página es 2<sup>12</sup>=4KB</p>
+</li>
+<li>
+<p>1K tablas donde cada tabla contiene 1K páginas son en total 1M de páginas y cada página 4KB da un total de 4GB de direcciones de memoria física.</p>
+</li>
+<li>
+<p>Por lo que de los 64TB de memoria virtual posible podemos traducir en un momento dado a 24GB de memoria segmentada y cada segmento de 4GB lineales a 4GB de memoria física.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_amd64_2">amd64</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>amd64 &#8594; 64 bits &#8594; Espacio Virtual teórico = 2<sup>64</sup> = 16 ExaBytes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Paginación y <strong>no segmentación</strong>.</p>
+</li>
+<li>
+<p>Espacio Virtual = 256 TeraBytes ya que la CPU únicamente utiliza 48 bits para el espacio de direcciones virtual <em>porque</em> es suficiente memoria para las aplicaciones actuales, utilizar los 64 bits provocaría tablas de páginas enormes bajando el rendimiento del sistema sin necesidad. No hay ni memoria secundaria para tanta memoria virtual.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_glosario">Glosario</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Espacios: Logic (segmentation) &#8594; Logic Linear (virtual,pagination) &#8594; Physical Linear</p>
+</li>
+<li>
+<p>VP: Virtual Page</p>
+</li>
+<li>
+<p>VA: Virtual Address</p>
+</li>
+<li>
+<p>PP: Physical Page</p>
+</li>
+<li>
+<p>PA: Physical Address</p>
+</li>
+<li>
+<p>VPO:VP offset</p>
+</li>
+<li>
+<p>VPN:VP number</p>
+</li>
+<li>
+<p>TLB: Translation lookaside Buffer: buffer (cache) de anticipación de la tabla de páginas. Residente en la MMU.</p>
+</li>
+<li>
+<p>PTE: Page Table Entry &#8594; (index/contenido)&#8594;(VPN/PPN)</p>
+</li>
+<li>
+<p>PTBR: Registro de control de la CPU: page table base register: pointer to TLB</p>
+</li>
+<li>
+<p>TLBI:TLB index &#8594; campo set de la cache</p>
+</li>
+<li>
+<p>TLBT: TLB tag</p>
+</li>
+<li>
+<p>PPO: PP offset</p>
+</li>
+<li>
+<p>PPN: PP number</p>
+</li>
+<li>
+<p>CO: Cache offset en el superbloque</p>
+</li>
+<li>
+<p>CT: Cache tag</p>
+</li>
+<li>
+<p>CI: Cache index ó línea</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_traducción_dirección_virtual_a_fisica">Traducción: dirección virtual a fisica</h5>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/virtualtoframe.png" alt="MMU">
+</div>
+<div class="title">Figure 48. Traducción Virtual &#8594; Física</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/mmu_hit.png" alt="MMU" height="200">
+</div>
+<div class="title">Figure 49. Resultado con éxito</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>CPU: vuelca la dirección de memoria virtual</p>
+</li>
+<li>
+<p>MMU: apunta a la entrada de la tabla de páginas ubicada en la memoria principal</p>
+</li>
+<li>
+<p>Memoria Principal: devuelve el contenido de la entrada de la tabla. MMU: A partir de la dirección lógica obtiene al dirección física.</p>
+</li>
+<li>
+<p>MMU: vuelca la dirección física en el bus de direcciones del bus del sistema.</p>
+</li>
+<li>
+<p>El dato referenciado puede estar en la memoria caché o en la memoria principal.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/mmu_fault.png" alt="MMU" height="300">
+</div>
+<div class="title">Figure 50. Resultado con fracaso</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_translation_lookaside_buffer">Translation Lookaside Buffer</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>TLB</p>
+</li>
+<li>
+<p>Es una Caché de la tabla de páginas virtuales TPV. Además de residir la tabla de páginas en la memoria principal se tiene una copia parcial de dicha tabla en una unidad de memoria interna de la MMU. Objetivo: aumentar la velocidad de acceso a la tabla ya que la solución de múltiples tablas en niveles jerárquicos requiere múltiples accesos a la memoria principal externa.</p>
+</li>
+<li>
+<p>Formato de dirección virtual si la TLB es una caché con función de correspondencia asociativa</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El índice es el campo set o superbloque típico de la cache</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/tlb_connection.png" alt="MMU">
+</div>
+<div class="title">Figure 51. Operación con TLB</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/tlb_entry.png" alt="MMU" height="100">
+</div>
+<div class="title">Figure 52. Formato Virtual con TLB</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>TLBTag</p>
+</li>
+<li>
+<p>TLBIndex</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejercicio">Ejercicio</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La arquitectura de una computadora dispone de TLB y L1 d-Cache. La memoria es direccionable byte a byte y tiene palabras de 1 byte.</p>
+</li>
+<li>
+<p>La MMU tiene una Tabla TLB (Translation Lookup Buffer)   y una memoria d-Cache según las figuras</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/tabla_cache_ejercicio.png" alt="MMU">
+</div>
+<div class="title">Figure 53. TLB y d-cache </div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Virtual addresses are 14 bits wide (n = 14).</p>
+</li>
+<li>
+<p>Physical addresses are 12 bits wide (m = 12).</p>
+</li>
+<li>
+<p>The page size is 64 bytes (P = 64).</p>
+</li>
+<li>
+<p>The TLB is four-way set associative with 16 total entries.</p>
+</li>
+<li>
+<p>The L1 d-cache is physically addressed and direct mapped, with a 4-byte line size and 16 total set.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Calcular la dirección física de la DIRECCION VIRTUAL <strong>0x03d4</strong></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Formato de Direcciones</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Dimensión de VPO</p>
+</li>
+<li>
+<p>Dimensión de PPO</p>
+</li>
+<li>
+<p>Dimensión de VPN</p>
+</li>
+<li>
+<p>Dimensión de PPN</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Número de entradas de la tabla de páginas en memoria principal y la caché TLB</p>
+</li>
+<li>
+<p>TLB</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Líneas por set de TLB</p>
+</li>
+<li>
+<p>Sets de TLB</p>
+</li>
+<li>
+<p>Tamaño TLBI</p>
+</li>
+<li>
+<p>Tamaño TLBT</p>
+</li>
+<li>
+<p>Bits por Word</p>
+</li>
+<li>
+<p>Words por línea de TLB</p>
+</li>
+<li>
+<p>Valores TLBI-TLBT</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Está PPN en TLB?</p>
+</li>
+<li>
+<p>Valor de PPN</p>
+</li>
+<li>
+<p>Valor de PA</p>
+</li>
+<li>
+<p>d-Cache</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Memory Cache: Tipo</p>
+</li>
+<li>
+<p>Sets</p>
+</li>
+<li>
+<p>Líneas/Set</p>
+</li>
+<li>
+<p>Words/Línea</p>
+</li>
+<li>
+<p>Bytes/Word</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Formato Dirección Física</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>CO</p>
+</li>
+<li>
+<p>CI</p>
+</li>
+<li>
+<p>CT</p>
+</li>
+<li>
+<p>Valores CT/CI/CO &#8594; PA</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Está PA en la caché?</p>
+</li>
+<li>
+<p>Contenido de la PA</p>
+</li>
+<li>
+<p>Resumen del resultado final</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect5">
+<h6 id="_desarrollo">Desarrollo</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Respuestas</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>El formato de direcciones es</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>VO y PO &#8594; tamaño de página : 64 bytes &#8594; 2<sup>6</sup> &#8594; 6 bits de offset tanto virtual como físico</p>
+</li>
+<li>
+<p>bits VPN= VA-VPO=14-6=8 bits &#8594; 2<sup>8</sup> = 256 páginas virtuales</p>
+</li>
+<li>
+<p>bits PPN= PA-PPO=12-6=6 bits &#8594; 2<sup>6</sup> = 64 marcos de página</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/formato_direcciones.png" alt="MMU">
+</div>
+<div class="title">Figure 54. Formato de Direcciones</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Valores de VPN y VPO</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La dirección virtual VA de 14 bits 0x03D4 se codifica en binario como: 00-0011-1101-0100 &#8594; 00001111-010100 &#8594; VPN-VPO</p>
+<div class="ulist">
+<ul>
+<li>
+<p>VPO=PPO=010100=01x4</p>
+</li>
+<li>
+<p>VPN=00001111=0x0F</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tabla de páginas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>256 puntos de entrada. Cada entrada contiene la dirección de uno de los 64 marcos de página. Es decir una tabla de 256 direcciones y palabras de 6 bits más los bits de validación, protección, etc</p>
+</li>
+<li>
+<p>La tabla en MP son 256 entradas, en cambio la TLB en caché tiene 16 entradas &#8594; direccionables con 4 bits.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>TLB</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Líneas por set de TLB: 4 vías &#8594; 4 líneas/set</p>
+</li>
+<li>
+<p>Sets de TLB: 16 entradas son 16 líneas en total agrupadas por 4 líneas/set = 4 sets</p>
+</li>
+<li>
+<p>Tamaño TLBI : para 4 set son necesarios 2 bits</p>
+</li>
+<li>
+<p>Tamaño TLBT :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>De los 8 bits necesarios para direccionar 256 entradas si 2 son para el índice TLBI, 6 serán para la etiqueta TLBT</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bits por Word: 1 byte por palabra según el enunciado</p>
+</li>
+<li>
+<p>Words por línea de TLB</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Si me fijo en el díbujo de la tabla, cada línea contiene únicamente un PPN+tag, es decir, una palabra.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Valores TLBI-TLBT</p>
+<div class="ulist">
+<ul>
+<li>
+<p>VPN es una dirección de la tabla de páginas en la memoria RAM. El controlador de caché la descompone en TLBT-TLBI</p>
+</li>
+<li>
+<p>VPN=00001111=000011-11=TLBT-TLBI=0x3-0x3</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Está PPN en TLB?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>busco en el set 0x3 de TLB si alguno de las líneas tiene un tag TLBT de 0x3 y lo tiene la segunda línea.</p>
+</li>
+<li>
+<p>La segunda línea del set 3 tiene el bit de validación a 1 por lo que la página virtual está en la memoria principal y/o d-cache.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Valor de PPN</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La segunda línea del set 3 tiene el contenido PPN=0x0D</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Valor de PA</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Son 12 bits</p>
+</li>
+<li>
+<p>La concatenación PPN(6)-PPO(6): 001101-010100=001101010100=0011-0101-0100= <strong>0x354</strong> =PA</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>d-Cache</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Memory Cache: Tipo : mapeo directo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Al ser de mapeo directo los set son de 1 línea por lo que es lo mismo decir set que línea.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sets</p>
+<div class="ulist">
+<ul>
+<li>
+<p>16 líneas</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Líneas/Set : 1</p>
+</li>
+<li>
+<p>Words/Línea: 4</p>
+</li>
+<li>
+<p>Bytes/Word: 1</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Formato dirección física</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>CO: para direccionar 4 palabras son necesarios 2 bits</p>
+</li>
+<li>
+<p>CI: para direccionar 16 líneas son necesarios 4 bits</p>
+</li>
+<li>
+<p>CT: la dirección física PA son 12 bits &#8594; CT=PA-DI-CO=12-4-2=6 bits</p>
+</li>
+<li>
+<p>Valores CT/CI/CO &#8594; PA=001101010100=001101-0101-00</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Línea 0005; Palabra 00: Tag 001101=0x0D</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Está PA en la d-Cache?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En la línea 5 el tag es 0D &#8594; coíncide con el tag de la dirección física &#8594; acierto &#8594; el dato está en d-cache</p>
+</li>
+<li>
+<p>El bit de validación es 1 por lo que su contenido está actualizado y por lo tanto válido.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Contenido de la PA:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El contenido de la palabra 0 de la linea 5 de la d-cache es el byte <strong>0x36</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Resumen del resultado final.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La dirección virtual <strong>0x03d4</strong> se corresponde con la dirección física <strong>0x354</strong> cuyo contenido es <strong>0x36</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_intel_core_i7">Intel Core i7</h5>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/corei7_virtual_memory.png" alt="MMU">
+</div>
+<div class="title">Figure 55. Memoria Core i7</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/corei7_mmu.png" alt="MMU">
+</div>
+<div class="title">Figure 56. Operación MMU</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/corei7_tlb_entry_123.png" alt="MMU">
+</div>
+<div class="title">Figure 57. Formato para las tablas de los tres primeros niveles</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/corei7_tlb_entry_4.png" alt="MMU">
+</div>
+<div class="title">Figure 58. Formato de la tabla del 4º nivel </div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/corei7_address_translation.png" alt="MMU">
+</div>
+<div class="title">Figure 59. Linux: 4 niveles</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sistemas_operativos_gestión_de_la_memoria_2">9.5.5. Sistemas Operativos: Gestión de la Memoria</h4>
+<div class="sect4">
+<h5 id="_protección">Protección</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Page level protection. HW isolation. Las páginas que gestiona la MMU tiene <em>bits de control</em> que indican los permisos de acción, acceso, etc</p>
+</li>
+<li>
+<p>Segmentation fault o Protection Fault</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_paginación_bajo_demanda">Paginación Bajo Demanda</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Paginación bajo demanda</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Las páginas de un proceso se cargan en memoria únicamente cuando son <em>demandadas</em>.No se cargan todas las páginas de un proceso de una tacada.</p>
+</li>
+<li>
+<p>Cuando una página es requerida y no está en la memoria, se genera un <em>page fault</em> por parte de la MMU y el SO se encargará de cargar la página requerida.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Principio de localidad</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Un proceso en un momento dado tiene en memoria únicamente las páginas que están utilizándose o con las que tienen probabilidad alta de ser utilizadas.</p>
+</li>
+<li>
+<p>Furthermore, time is saved because unused pages <strong>are not swapped</strong> in and out of memory, ya que ese trozo puede ser requerido con inmediatez.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_reemplazo">Reemplazo</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Reemplazar una página</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Dilema:¿qué página extraigo de la memoria? Algoritmos de reemplazo  &#8594;  Least Recently Used LRU, First Input Output (FIFO)</p>
+</li>
+<li>
+<p>La política de reemplazo la gestiona el SO.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_vm_tool">VM Tool</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La Memoria Virtual es una herramienta para:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>que la M. Principal sea una cache del disco</p>
+</li>
+<li>
+<p>Gestionar la Memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Simplifying linking: mezcla con direcciones independientes de la dirección física final</p>
+</li>
+<li>
+<p>Simplifying loading: se carga bajo demanda las páginas requeridas</p>
+</li>
+<li>
+<p>Simplifying sharing: procesos (librerías) que son compartidos.</p>
+</li>
+<li>
+<p>Simplifying memory allocation:En memoria virtual el SO o compilador distribuye los segmentos de forma contigua y luego está la flexibilidad de ubicarlos arbitrariamente en memoria física.</p>
+</li>
+<li>
+<p>Proteger los segmentos: control con los bits sup(supervisor),read,write</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_mecanismos_de_entradasalida.html">Mecanismos de Entrada/Salida</a> | ↑ Up: <a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2022-08-27 12:28:25 +0200
+</div>
+</div>
+</body>
+</html>

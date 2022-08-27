@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_representación_de_los_datos_2" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2022-08-27</span>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_representación_de_los_datos_2">13. Representación de los Datos</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_introducción_18">13.1. Introducción</h3>
+<div class="sect3">
+<h4 id="_objetivos_4">13.1.1. Objetivos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Programación:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Desarrollar programas que almacenen y procesen distintos tipos de datos como enteros con signo, caracteres, arrays, strings de distintos tamaños como 1 byte, 2 bytes, 4 bytes, etc..</p>
+</li>
+<li>
+<p>Empleo de los sufijos de los mnemónicos: analizar el tamaño de los operandos según el sufijo del mnemónico empleado, el tamaño del operando registro y el tipo de operando en memoria.</p>
+</li>
+<li>
+<p>Emplear distintos tipos de modos de direccionamiento (inmediato, directo, indirecto, indexado) de acceso a los operandos</p>
+</li>
+<li>
+<p>Empleo de Macros mediante directivas.</p>
+</li>
+<li>
+<p>Concepto de llamada al sistema operativo.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Análisis:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Comprobación del tipo de alineamiento <em>little endian</em> de los datos almacenados en memoria</p>
+</li>
+<li>
+<p>Analizar el contenido de la memoria como números con signo, caracteres, arrays y strings: tipos y tamaños de los operandos numéricos y de los operandos alfanuméricos</p>
+</li>
+<li>
+<p>Realizar la operación de desensamblaje para comprobar el lenguaje máquina del módulo ejecutable cargado en la memoria principal</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_módulos_fuente">13.1.2. Módulos fuente</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>datos_size.s</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Declaración del tamaño de los operandos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mediante las directivas  (.byte, .2byte, .short, etc ..)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Declaración de arrays de datos numéricos mediante directivas (.short,.int, etc ..)</p>
+</li>
+<li>
+<p>Declaración de datos alfanuméricos mediante:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Directivas del ensamblador (.ascii, .asciiz, .string, etc)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Empleo de Macros</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>datos_sufijos.s</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Acceso a los operandos mediante instrucciones con los sufijos  (b,w,l,q)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>datos_direccionamiento.s</strong></p>
+</li>
+<li>
+<p>Diferentes Modos de direccionamiento de los operandos: inmediato, directo, indirecto, indexado</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_requisitos_4">13.1.3. Requisitos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Teoría: representación de datos, formato de instrucciones y repertorio  ISA de la arquitectura X86.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Almacenamiento con alineamiento interno de bytes "little endian"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Práctica previa: Introducción a la programación en lenguaje ensamblador AT&amp;T x86-32</p>
+</li>
+<li>
+<p>Conceptos del lenguaje de programación C:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Punteros, array, string y operación de casting.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_leeme_2">13.2. LEEME</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Lectura del guión de prácticas  y del capítulo 3 del Libro Programming from the Ground-Up.</p>
+</li>
+<li>
+<p><a href="_apéndice_prácticas.html#prac_apu">Apuntes y Libro de Texto</a></p>
+</li>
+<li>
+<p><a href="_apéndice_prácticas.html#prac_doc_mem">Documentación Memoria</a>: Contenido y Formato de la Memoria</p>
+</li>
+<li>
+<p><a href="_apéndice_prácticas.html#prac_eval">Evaluación</a>: sistema de evaluación</p>
+</li>
+<li>
+<p><a href="_apéndice_prácticas.html#prac_plat_des">Plataforma de Desarrollo</a> : configuración de la computadora personal</p>
+</li>
+<li>
+<p><a href="_apéndice_prácticas.html#prac_prog">Programación</a> : metodología</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cuestiones_3">13.3. Cuestiones</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_apéndice_prácticas.html#prac_eval">"Autoevaluación de Prácticas"</a> opcional: <a href="_prácticas_cuestionario.html#prac_cues">Prácticas: Cuestionario</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_registros_internos_de_la_cpu">13.4. Registros internos de la CPU</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>La arquitecura amd64 dispone de:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>16 registros de propósito general (RPG) de 64 bits cada uno: rax,rbx,rcx,rdx,rsi,rdi,rsp, etc</p>
+</li>
+<li>
+<p>1 registros de estado de 64 bits: rflags</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El acceso a los registros de propósito general puede ser <em>parcial</em>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Registro RAX: es un registro de 64 bits</p>
+</li>
+<li>
+<p>Registro EAX: son los 32 bits de menor peso de RAX</p>
+</li>
+<li>
+<p>Registro AX:  son los 16 bits de menor peso de RAX</p>
+</li>
+<li>
+<p>Registro AL:  son los  8 bits de menor peso de RAX</p>
+</li>
+<li>
+<p>Registro AH:  es el byte con los bits de las posiciones 8:15 de RAX</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>En las <a href="_programación_ensamblador_att_x86.html#registros_32">"Hojas de Referencia Rápida"</a> están representados todos los nombres de los difererentes grupos de bits de cada registro de propósito general.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tamaño_de_los_datos_y_variables">13.5. Tamaño de los datos y variables</h3>
+<div class="sect3">
+<h4 id="_algoritmo_3">13.5.1. Algoritmo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>No se desarrolla ningún algoritmo. Unicamente el bloque de código de salida.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_edición_del_módulo_fuente_datos_size_s">13.5.2. Edición del Módulo fuente: datos_size.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Descargar el módulo fuente "datos_size.s" de miaulario y añadir los comentarios apropiados.</p>
+<div class="listingblock">
+<div class="content">
+<pre>### Programa: datos_size.s
+### Descripción: declarar y acceder a distintos tamaños de operandos
+### Compilación: gcc -m32 -g -o datos_size datos_size.s
+
+	## MACROS
+	.equ SYS_EXIT,	1
+	.equ SUCCESS,	0
+
+	## VARIABLES LOCALES
+	.data
+
+da1:	.byte   0x0A
+da2:	.2byte  0x0A0B
+da4:	.4byte  0x0A0B0C0D
+men1:	.ascii  "hola"
+lista:  .int    1,2,3,4,5
+
+	## INSTRUCCIONES
+	.global _start
+	.text
+_start:
+	mov $SYS_EXIT, %eax
+	mov $SUCCESS,  %ebx
+	int $0x80
+
+	.end</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compilación_3">13.5.3. Compilación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Seguir los pasos del proceso de <a href="_apéndice_prácticas.html#compilacion">compilación</a> común a todas las sesiones.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -nostartfiles -m32 -g -o datos_size datos_size.s</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_3">13.5.4. Ejecución</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>./datos_size</code></p>
+</li>
+<li>
+<p><code>echo $?</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_análisis_del_módulo_fuente_2">13.5.5. Análisis del módulo fuente</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Leer en las hojas de referencia rápida el <a href="_programación_ensamblador_att_x86.html#programa_minimalista">Programa Ejemplo Minimalista</a></p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_estructura_2">Estructura</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La estructura del programa esta formada por los siguientes elementos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cabecera</p>
+</li>
+<li>
+<p>Definición de Macros</p>
+</li>
+<li>
+<p>Sección de Datos</p>
+</li>
+<li>
+<p>Sección de Instrucciones</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_definición_de_macros">Definición de Macros</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Macro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La construcción macro se utiliza en el programa fuente para sustituir datos utilizados en el programa fuente por símbolos de texto que faciliten la lectura del código fuente.</p>
+</li>
+<li>
+<p>Para ello empleamos la directiva "EQU" cuya sintaxis es: <code>.EQU  SÍMBOLO, dato</code></p>
+</li>
+<li>
+<p>El preprocesador en la primera fase de la compilación sustituirá el texto SIMBOLO que aparece a lo largo de la sección de datos e instrucciones por el dato asociado.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Macros empleadas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SYS_EXIT : código de la llamada al sistema para finalizar el programa y devolver el control al Sistema Operativo. En la arquitectura i386 su valor es 1.</p>
+</li>
+<li>
+<p>SUCCESS  : código empleado por los programas para indicar que su ejecución se ha realizado con normalidad. Su valor es 0.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sección_de_datos">Sección de Datos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Interpretar las etiquetas y directivas de reserva de memoria e inicialización para los datos utilizando la <a href="_programación_ensamblador_att_x86.html#directivas_as">tabla de directivas</a>: identificar las variables ordinarias, strings y arrays.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sección_de_instrucciones">Sección de Instrucciones</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Determinar la instrucción de entrada al programa.</p>
+</li>
+<li>
+<p>Determinar el bloque de salida del programa.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Si un objeto de memoria es inicializado con un número entero que es representado con menos dígitos que el tamaño del objeto, los digitos de mayor peso tendrán de valor cero. Por ejemplo:  <code>.4byte 0xFF</code> equivale a <code>.4byte 0x000000FF</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_paso_a_paso_2">13.5.6. Ejecución paso a paso</h4>
+<div class="sect4">
+<h5 id="_observaciones">Observaciones</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>El depurador al visualizar el contenido de los registros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>únicamente visualiza el número de bytes del tamaño de los operandos..aunque los registros "r-x" son de 64 bits.</p>
+</li>
+<li>
+<p>con números enteros con signo no visualiza los ceros de mayor peso, es decir, ni el signo ni la extensión de signo de los números positivos.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_operaciones_2">Operaciones</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Compilar el programa con la opción de generación de la tabla de símbolos requerida por el depurador y generar el módulo binario ejecutable:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -nostartfiles -m32 -g  -o datos_size datos_size.s</code> que se corresponde con  <code>gcc -nostartfiles -m32 -g  -o modulo_ejecutable modulo_fuente.s</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir el depurador GDB, cargar el módulo binario ejecutable y comprobar que se carga la tabla de símbolos junto al módulo binario ejecutable.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gdb</code></p>
+</li>
+<li>
+<p><code>file datos_size</code></p>
+</li>
+<li>
+<p><code>info sources</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Configurar el fichero para el logging histórico de los comandos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>set trace-commands on</code></p>
+</li>
+<li>
+<p><code>set logging file datos_size_gdb_asm.txt</code></p>
+</li>
+<li>
+<p><code>set logging on</code></p>
+</li>
+<li>
+<p><code>shell ls -l datos_size_gdb_asm.txt</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Activar un punto de ruptura en la instrucción de entrada al programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>b _start</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejecutar el programa deteniéndolo en la primera instrucción del programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>run</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Análisis del contenido de la memoria principal mediante el depurador GDB:</p>
+<div class="listingblock">
+<div class="content">
+<pre>//Alineamiento de los bytes de un dato
+x /tb &amp;da1
+x /xh &amp;da2
+x /xw &amp;da4
+x /5xb &amp;da4	-&gt; Alineamiento little endian
+
+//Alineamiento de los bytes de un string
+x /5cb &amp;men1	-&gt; Alineamiento en secuencia
+x /5xb &amp;men1
+
+//Volcado de un string
+p /s (char *)&amp;men1	-&gt; imprime una cadena de caracteres desde la primera dirección hasta encontrar el caracter NULL.
+
+//Volcado de un array
+x /5xw &amp;lista		-&gt; contenido de 5 elementos de lista
+p /a &amp;lista		-&gt; dirección del array lista
+p /a &amp;lista+1          	-&gt; el depurador informa que es necesario realizar algún tipo de casting (declaración dinámica)
+p /a (void *)&amp;lista+1  	-&gt; se incrementa en 1 byte
+p /a (int  *)&amp;lista+1   -&gt; se incrementa en  1*4 bytes apuntando al segundo elemento del array
+p lista                	-&gt; el depurador informa que es necesario realizar un casting
+p (int)lista	       	-&gt; primer elemento del array
+p (int *)&amp;lista		-&gt; dirección del array lista
+p (int [5])lista	-&gt; contenido de cinco elementos de lista
+p *((int *)&amp;lista+1)	-&gt; segundo elemento de lista
+x /dw (int *)&amp;lista+1	-&gt; segundo elemento de lista
+p *(int *)&amp;lista@5 	-&gt; array artificial de 5 elementos de tipo int a partir de la dirección  &amp;lista.
+
+//volcado de una instrucción
+p &amp;_start
+x /i &amp;_start		-&gt; desensambla: convierte el código máquina en código ensamblador.
+
+//Desensamblar: Conversión del código máquina en ensamblador
+disas /r _start
+layout split</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>comando eXaminar <strong>x</strong>: vuelca el contenido de una <strong>dirección</strong> de memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>formato /nvt : "t" es el <em>tamaño</em> de variable en memoria , "v" el código del <em>valor</em> del contenido de memoria a visualizar y "n" el <em>número</em> de veces que hay que volcar secuencialmente grupos de bytes en memoria de tamaño "t" comenzando en  la dirección <em>&amp;variable</em></p>
+</li>
+<li>
+<p><code>help x</code> : formatos d (decimal) ,x (hexadecimal),t (binario) ,o (octal) ,c (character) ,a (address),i (instruction),etc</p>
+</li>
+<li>
+<p>La sintaxis del argumento del comando examinar es la misma que en lenguaje de programación de C.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>operador <strong>&amp;</strong> : se utiliza como prefijo de una etiqueta para evaluar la dirección de memoria a la que hace referencia una etiqueta</p>
+</li>
+<li>
+<p>operador <strong>*</strong> : se utiliza para evaluar el contenido de una posición de memoria mediante la indirección de un puntero</p>
+</li>
+<li>
+<p>operación de <strong>casting</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_lenguaje_de_programación_c_2.html#prog_C">Apéndice Programación Lenguaje C</a></p>
+</li>
+<li>
+<p>El casting consiste en definir o redifinir el tipo de variable. Se utiliza como prefijo de la variable a redefinir y va entre paréntesis.</p>
+</li>
+<li>
+<p>la etiqueta "lista" está definida en la sección de datos mediante la directiva ".int". Esta directiva reserva memoria para inicializar los datos a partir de la dirección &amp;lista pero NO es una declaración de tipo por lo que el depurador NO tiene información sobre el tipo de elementos del array lista y por ello es necesario realizar declaraciones en modo casting.</p>
+</li>
+<li>
+<p>Ej. (char *): el tipo <code>char *</code> es un puntero a un entero de 1 byte.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>comando Print <strong>p</strong>: Evalua el argumento del comando y el valor resultante lo imprime en pantalla</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La sintaxis del argumento del comando examinar es la misma que en lenguaje de programación de C.</p>
+</li>
+<li>
+<p>Ej. p /a &amp;lista : evalua &amp;lista cuyo valor resulante se imprime con formato tipo "a" (address)</p>
+</li>
+<li>
+<p>formatos de impresión: los mismos que eXaminar: <code>help x</code></p>
+</li>
+<li>
+<p>operador @: <strong>dirección</strong>@<strong>n</strong>: array artificial: evalua la expresión a la izda de @ y debe ser una dirección de memoria. Crea una array artificial de longitud el valor del parámetro a la derecha del operador @.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>comando <strong>disas</strong> : desensambla el código binario traduciéndolo a código ensamblador.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tamaño_de_los_operandos">13.6. Tamaño de los Operandos</h3>
+<div class="sect3">
+<h4 id="_edición_del_módulo_fuente_datos_sufijos_s">13.6.1. Edición del Módulo fuente: datos_sufijos.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Descargar el módulo fuente "datos_sufijos.s" de miaulario y añadir los comentarios apropiados.</p>
+<div class="listingblock">
+<div class="content">
+<pre>### Programa: datos_sufijos.s
+### Descripción: utilizar distintos sufijos para los mnemónicos indicado distintos tamaños de operandos
+### Compilación: gcc -nostartfiles -m32 -g -o datos_sufijos datos_sufijos.s
+
+	## MACROS
+	.equ SYS_EXIT,	1
+	.equ SUCCESS,	0
+
+	## VARIABLES LOCALES
+	.data
+
+da1:	.byte   0x0A
+da2:	.2byte  0x0A0B
+da4:	.4byte  0x0A0B0C0D
+saludo:	.ascii  "hola"
+lista:  .int    1,2,3,4,5
+
+	## INSTRUCCIONES
+	.global _start
+	.text
+_start:
+
+	## Reset de Registros
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+
+	## Carga de datos
+	## mov da1,da4		ERROR: por referenciar las dos direcciones efectivas de los dos operandos a la memoria principal
+	mov  da4,%eax
+	movl da4,%ebx
+	movw da4,%cx
+	movb da4,%dl
+
+	## Reset de Registros
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+
+	## Carga de datos
+	mov  da4,%al		#aplica el tamaño de AL
+	## movw  da4,%al	ERROR: incoherencia entre -w y AL
+	movb da4,%ebx  	        #AVISO, NO error: incoherencia entre el regisro BL y el sufijo
+
+
+
+	mov  da1,%ecx
+	mov  da4,%dx
+
+	## Reset de Registros
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+
+	## Carga de datos
+
+        mov  da1,%al
+
+	## inc da1     	ERROR: por ser la dirección efectiva del operando una referencia a la memoria principal no restringe el tamaño del operando. Al no especificar tampoco sufijo el ensamblador no reconoce el tamaño del operando.
+	incb da1
+	incw da2
+	incl da4
+
+## salida
+	mov $SYS_EXIT, %eax
+	mov $SUCCESS,  %ebx
+	int $0x80
+
+	.end</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compilación_4">13.6.2. Compilación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Seguir los pasos de la <a href="_apéndice_prácticas.html#compilacion_asm">compilación </a> de un módulo en lenguaje ensamblador.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -nostartfiles -m32 -g -o datos_sufijos datos_sufijos.s</code></p>
+</li>
+<li>
+<p><strong>Aviso:</strong> empleando <em>%bl</em> en lugar de <em>%ebx</em> debido <em>b</em> como sufijo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es un aviso de la sintaxis de la instrucción <code>movb da4,%ebx</code>, NO es un error.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_4">13.6.3. Ejecución</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>./datos_sufijos</code></p>
+</li>
+<li>
+<p><code>echo $?</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_análisis_del_módulo_fuente_3">13.6.4. Análisis del módulo fuente</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Sufijos de los mnemónicos indicando distintos tamaños de los operandos: b,w,l</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>movw da4,%cx</code>  : el sufijo "w" de 2 bytes y el registro destino CX de dos bytes.</p>
+</li>
+<li>
+<p><code>movw da4,%al</code>  : el sufijo "w" impone una transferencia de 2 bytes a un registro destino AL de 1 byte &#8594; error en el ensamblaje.</p>
+</li>
+<li>
+<p><code>movb da4,%ebx</code> : el sufijo "b" no es coherente con el registro destino EBX de 4 bytes y el ensamblaje se produce con BL.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sin sufijo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>xor  %eax,%eax</code> : operandos fuente y destino EAX de 4 bytes</p>
+</li>
+<li>
+<p><code>mov  da4,%al</code>  : el registro destino AL limita la transferencia a 1 byte y no hay contradicción con el sufijo ya que éste no existe.</p>
+</li>
+<li>
+<p><code>mov  da1,%ecx</code> : de los dos operandos, registro y memoria, es el registro quien prioriza el tamaño de la transferencia.</p>
+</li>
+<li>
+<p><code>inc da1</code>       : Al ser la dirección efectiva del operando una referencia a la memoria principal no restringe el tamaño del operando. Al no especificar tampoco un sufijo el ensamblador no reconoce el tamaño del operando &#8594; error en el ensamblaje</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deducción_del_tamaño_del_operando_en_una_instrucción">13.6.5. Deducción del tamaño del operando en una instrucción</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Diferencia entre la referencia a un operando en memoria o registro</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Un operando referenciado mediante una dirección de memoria no tiene un tamaño específico para el assembler.</p>
+</li>
+<li>
+<p>En cambio el nombre de un registro si es asociado a un tamaño de operando por el assembler.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>En una instrucción con un único operando en memoria el tamaño es deducido por el assembler gracias al sufijo del mnemónico, por lo tanto en este caso si el mnemónico no tiene sufijo el assembler no traducirá la instrucción.</p>
+</li>
+<li>
+<p>En una instrucción con dos operandos, uno en memoria y otro en un registro, es el operando en el registro o el sufijo quienes especifican el tamaño de los dos operandos fuente y destino:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Si el mnemónico tiene sufijo, es dicho sufijo quien especifica el tamaño de los operandos fuente y destino.</p>
+</li>
+<li>
+<p>Si el mnemónico no tiene sufijo, es el tamaño del registro quien especifica el tamaño de los operandos fuente y destino.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Casos de error</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>En el caso de que el mnemónico tenga un sufijo mayor que el tamaño del registro destino.</p>
+</li>
+<li>
+<p>En el caso de que el mnemónico no tenga sufijo y el tamaño del registro fuente sea mayor que el registro destino.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_paso_a_paso_3">13.6.6. Ejecución paso a paso</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Compilar el programa con la opción de generación de la tabla de símbolos requerida por el depurador y generar el módulo binario ejecutable:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -nostartfiles -m32 -g  -o datos_sufijo datos_sufijo.s</code> donde modulo_fuente se sustituye por el nombre del archivo que se desea compilar.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir el depurador GDB, cargar el módulo binario ejecutable y comprobar que se carga la tabla de símbolos junto al módulo binario ejecutable.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gdb</code></p>
+</li>
+<li>
+<p><code>file modulo_ejecutable</code></p>
+</li>
+<li>
+<p><code>info sources</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Configurar el fichero para el logging histórico de los comandos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>set trace-commands on</code></p>
+</li>
+<li>
+<p><code>set logging file datos_sufijo_gdb_asm.txt</code></p>
+</li>
+<li>
+<p><code>set logging on</code></p>
+</li>
+<li>
+<p><code>shell ls -l datos_sufijo_gdb_asm.txt</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Activar un punto de ruptura en la instrucción de entrada al programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>b _start</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejecutar el programa deteniéndolo en la primera instrucción del programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>run</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>abrir la ventana de visualización de los registros</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>layout regs</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Análisis del contenido de la memoria principal mediante el depurador GDB.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejecutar el programa paso a paso analizando el resultado de la ejecución de cada instrucción</p>
+</li>
+<li>
+<p><code>n</code></p>
+</li>
+<li>
+<p>RET, RET, RET, &#8230;&#8203;.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modos_de_direccionamiento_3">13.7. Modos de Direccionamiento</h3>
+<div class="sect3">
+<h4 id="_edición_del_módulo_fuente_datos_direccionamiento_s">13.7.1. Edición del Módulo fuente: datos_direccionamiento.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Descargar el módulo fuente "datos_direccionamiento.s" de miaulario y añadir los comentarios apropiados.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>### Program:     datos_direccionamiento.s
+### Descripción: Emplear estructuras de datos con diferentes direccionamientos
+### Compilación: gcc -m32 -g -o datos_direccionamiento datos_direccionamiento.s
+###		 sin la opción startfiles al utilizar el punto de entrada referenciado con la etiqueta "main"
+
+	## MACROS
+	.equ SYS_EXIT,	1
+	.equ SUCCESS,	0
+
+	## VARIABLES LOCALES
+	.data
+
+	.align 4				     # Alineamiento con direcciones de MP múltiplos de 4
+da2:	.2byte  0x0A0B,0b0000111101011100,-21,0xFFFF # Array da2 de elementos de 2 bytes
+	.align 4
+lista:  .word    1,2,3,4,5	# Array lista de elementos de 2 bytes
+	.align 8
+buffer:	.space  100		# Array buffer de 100 bytes
+	.align 2
+saludo:
+	.string "Hola"		# Array saludo de elementos de 1 byte por ser caracteres
+
+	## INSTRUCCIONES
+	.global main
+	.text
+main:
+
+	## RESET
+
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+	xor  %esi,%esi
+        xor  %edi,%edi
+
+	## ALGORITMO sum1toN
+
+	## Direccionamiento inmediato
+	mov $4,%si
+	## Direccionamiento indexado
+bucle:	add lista(,%esi,2),%di
+	## Direccionamiento a registro
+	dec %si
+	## Direccionamiento relativo al PC
+	jns bucle
+
+
+	## EJERCICIOS SOBRE DIRECCIONAMIENTO
+
+	## Direccionamiento indirecto
+	lea buffer,%eax		#inicializo el puntero EAX
+	## mov da2,(%eax) ERROR: la dirección efectiva de los dos operandos hacen referencia a la memoria principal
+	mov da2,%bx
+	mov %bx, (%eax)
+	## Direccionamiento directo
+	incw da2
+	## Direccionamiento indexado
+	lea  da2,%ebx
+	## inc 2(%ebx) ERROR: dirección efectiva a memoria y no hay sufijo
+	incw 2(%ebx)
+
+	mov $3,%esi
+	mov da2(,%esi,2),%ebx
+
+	## SALIDA
+
+	mov $SYS_EXIT, %eax
+	mov $SUCCESS,  %ebx
+	int $0x80
+
+	.end</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compilación_5">13.7.2. Compilación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Seguir los pasos de la <a href="_apéndice_prácticas.html#compilacion_asm">compilación </a> de un módulo en lenguaje ensamblador.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El punto de entrada no es "_start".</p>
+</li>
+<li>
+<p><code>gcc -nostartfiles -m32 -g -o datos_direccionamiento datos_direccionamiento.s</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_5">13.7.3. Ejecución</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>./datos_direccionamiento</code></p>
+</li>
+<li>
+<p><code>echo $?</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_análisis_del_módulo_fuente_4">13.7.4. Análisis del módulo fuente</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Alineación de datos mediante la directiva <code>.align n</code> asigna una dirección de memoria múltiplo de <em>n</em> al siguiente dato declarado.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+NO está permitido que en el caso de una instrucción con dos operandos, ambos estén en la memoria principal. Uno o los dos operandos han de estar en los registros de propósito general.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_paso_a_paso_4">13.7.5. Ejecución paso a paso</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Compilar el programa con la opción de generación de la tabla de símbolos requerida por el depurador y generar el módulo binario ejecutable:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -nostartfiles -m32 -g  -o datos_direccionamiento datos_direccionamiento.s</code> donde modulo_fuente se sustituye por el nombre del archivo que se desea compilar.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir el depurador GDB, cargar el módulo binario ejecutable y comprobar que se carga la tabla de símbolos junto al módulo binario ejecutable.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gdb</code></p>
+</li>
+<li>
+<p><code>file datos_direccionamiento</code></p>
+</li>
+<li>
+<p><code>info sources</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Configurar el fichero para el logging histórico de los comandos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>set trace-commands on</code></p>
+</li>
+<li>
+<p><code>set logging file datos_direccionamiento_gdb_asm.txt</code></p>
+</li>
+<li>
+<p><code>set logging on</code></p>
+</li>
+<li>
+<p><code>shell ls -l datos_direccionamiento_gdb_asm.txt</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Activar un punto de ruptura en la instrucción de entrada al programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>b _start</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejecutar el programa deteniéndolo en la primera instrucción del programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>run</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Array <em>da2</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Imprimir la dirección de memoria del array <em>da2</em> y el contenido del primer elemento: <code>x /xh &amp;da2</code></p>
+</li>
+<li>
+<p>4 elementos de 2bytes del array da2: <code>x /4xh &amp;da2</code></p>
+</li>
+<li>
+<p><code>p /x (short[4])da2</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Array <em>lista</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ptype lista</code></p>
+</li>
+<li>
+<p><code>p (short[5])lista</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Array <em>buffer</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ptype buffer</code></p>
+</li>
+<li>
+<p>Imprimir la dirección de memoria del array <em>buffer</em> y comprobar su alineamiento: <code>p &amp;buffer</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>String</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ptype saludo</code> : no debug info &#8594; no admite referencia elemento array expresión <em>saludo[n]</em></p>
+</li>
+<li>
+<p><code>p /c (char[5])saludo</code>   :casting array</p>
+</li>
+<li>
+<p><code>x /5c (char *)&amp;saludo</code>  :casting puntero</p>
+</li>
+<li>
+<p><code>p /c *(char *)&amp;saludo</code>  :casting puntero e indirección</p>
+</li>
+<li>
+<p><code>p /s (char *)&amp;saludo</code>   :casting puntero y formato string</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html">Introducción a la Programación en Lenguaje Ensamblador AT&amp;T x86-32</a> | ↑ Up: <a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_operaciones_aritméticas_y_lógicas.html">Operaciones Aritméticas y Lógicas</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2022-08-27 12:28:25 +0200
+</div>
+</div>
+</body>
+</html>
