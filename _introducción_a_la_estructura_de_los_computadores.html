@@ -664,7 +664,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-08-27</span>
+<span id="revdate">2022-08-30</span>
 </div>
 </div>
 <div id="content">
@@ -687,7 +687,7 @@ pre.rouge {
 <ul>
 <li>
 <p>Arquitectura: Organización, Estructura: Qué, Cómo, Implementación (tecnología)</p>
-<div class="imageblock text-center">
+<div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/introduccion/vehicle_arch.jpg" alt="vehicle arch">
 </div>
@@ -808,16 +808,16 @@ pre.rouge {
 <span class="m">00000000004001</span><span class="n">a0</span> <span class="p">&lt;</span><span class="n">PASCALMAIN</span><span class="p">&gt;:</span>
   <span class="m">4001</span><span class="n">a0</span><span class="p">:</span>	<span class="m">55</span>                   	<span class="n">push</span>   <span class="p">%</span><span class="n">rbp</span>
   <span class="m">4001</span><span class="n">a1</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">e5</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rsp</span><span class="p">,%</span><span class="n">rbp</span>
-  <span class="m">4001</span><span class="n">a4</span><span class="p">:</span>	<span class="m">48</span> <span class="m">83</span> <span class="n">ec</span> <span class="m">10</span>          	<span class="n">sub</span>    <span class="mh">$0</span><span class="n">x10</span><span class="p">,%</span><span class="n">rsp</span>
+  <span class="m">4001</span><span class="n">a4</span><span class="p">:</span>	<span class="m">48</span> <span class="m">83</span> <span class="n">ec</span> <span class="m">10</span>          	<span class="n">sub</span>    <span class="p">$</span><span class="m">0x10</span><span class="p">,%</span><span class="n">rsp</span>
   <span class="m">4001</span><span class="n">a8</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="m">5</span><span class="n">d</span> <span class="n">f8</span>          	<span class="n">mov</span>    <span class="p">%</span><span class="n">rbx</span><span class="p">,-</span><span class="m">0x8</span><span class="p">(%</span><span class="n">rbp</span><span class="p">)</span>
   <span class="m">4001</span><span class="n">ac</span><span class="p">:</span>	<span class="n">e8</span> <span class="n">b7</span> <span class="m">3</span><span class="n">e</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">414068</span> <span class="p">&lt;</span><span class="n">FPC_INITIALIZEUNITS</span><span class="p">&gt;</span>
 <span class="p">#</span> <span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="k">writeln</span><span class="p">(</span><span class="s">'hello world'</span><span class="p">)</span>
   <span class="m">4001</span><span class="n">b1</span><span class="p">:</span>	<span class="n">e8</span> <span class="n">ca</span> <span class="m">93</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">419580</span> <span class="p">&lt;</span><span class="n">fpc_get_output</span><span class="p">&gt;</span>
   <span class="m">4001</span><span class="n">b6</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">c3</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rax</span><span class="p">,%</span><span class="n">rbx</span>
   <span class="m">4001</span><span class="n">b9</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">de</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rbx</span><span class="p">,%</span><span class="n">rsi</span>
-  <span class="m">4001</span><span class="n">bc</span><span class="p">:</span>	<span class="m">48</span> <span class="n">ba</span> <span class="n">c0</span> <span class="n">f6</span> <span class="m">61</span> <span class="m">00</span> <span class="m">00</span> 	<span class="n">movabs</span> <span class="mh">$0</span><span class="n">x61f6c0</span><span class="p">,%</span><span class="n">rdx</span>
+  <span class="m">4001</span><span class="n">bc</span><span class="p">:</span>	<span class="m">48</span> <span class="n">ba</span> <span class="n">c0</span> <span class="n">f6</span> <span class="m">61</span> <span class="m">00</span> <span class="m">00</span> 	<span class="n">movabs</span> <span class="p">$</span><span class="m">0x61f6c0</span><span class="p">,%</span><span class="n">rdx</span>
   <span class="m">4001</span><span class="n">c3</span><span class="p">:</span>	<span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-  <span class="m">4001</span><span class="n">c6</span><span class="p">:</span>	<span class="n">bf</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>       	<span class="n">mov</span>    <span class="mh">$0</span><span class="n">x0</span><span class="p">,%</span><span class="n">edi</span>
+  <span class="m">4001</span><span class="n">c6</span><span class="p">:</span>	<span class="n">bf</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>       	<span class="n">mov</span>    <span class="p">$</span><span class="m">0x0</span><span class="p">,%</span><span class="n">edi</span>
   <span class="m">4001</span><span class="n">cb</span><span class="p">:</span>	<span class="n">e8</span> <span class="m">78</span> <span class="m">96</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">419848</span> <span class="p">&lt;</span><span class="n">FPC_WRITE_TEXT_SHORTSTR</span><span class="p">&gt;</span>
   <span class="m">4001</span><span class="n">d0</span><span class="p">:</span>	<span class="n">e8</span> <span class="m">13</span> <span class="m">3</span><span class="n">d</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">413</span><span class="n">ee8</span> <span class="p">&lt;</span><span class="n">FPC_IOCHECK</span><span class="p">&gt;</span>
   <span class="m">4001</span><span class="n">d5</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">df</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rbx</span><span class="p">,%</span><span class="n">rdi</span>
@@ -957,9 +957,6 @@ ISBN 0-273-76919-7 . 2012</pre>
 <p><a href="http://williamstallings.com/COA/COA7e.html">COA 7ª</a></p>
 </li>
 <li>
-<p><a href="http://www.pearsonhighered.com/educator/academic/product/0,,0131856448,00+en-USS_01DBC.html">Pearson</a></p>
-</li>
-<li>
 <p><a href="https://www.pearson.com/us/higher-education/program/Stallings-Pearson-e-Text-for-Computer-Organization-and-Architecture-Access-Code-Card-11th-Edition/PGM2043621.html">11º Ed 2019</a></p>
 </li>
 </ul>
@@ -1002,6 +999,9 @@ Published by Bartlett Publishing in Broken Arrow, Oklahom</pre>
 </div>
 </li>
 <li>
+<p><a href="https://upcommons.upc.edu/handle/2117/115067">El ensamblador&#8230;&#8203; pero si es muy fácil</a>: IA-32 (i386) (sintaxis AT&amp;T)</p>
+</li>
+<li>
 <p>Documentación de los Manuales: La mayoría de las aplicaciones y herramientas software de la fundación GNU y Linux disponen de Manuales bien on-line o bien localmente en la propia máquina. Manual del compilador gcc: <code>$man gcc</code></p>
 </li>
 </ul>
@@ -1024,29 +1024,7 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 <div class="ulist">
 <ul>
 <li>
-<p>David A. Patterson, John L. Hennessy. Computer Organizarion and Design. The Hardware / Software Interface. RISC-V Edition. Morgan Kaufmann Series in Computer Architecture. 2017.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Libro Standard de la mayoría de las Universidades.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Randal E. Bryant, David R. O&#8217;Hallaron. Computer Systems: A Programmer&#8217;s Perspective. Addison-Wesley. 2nd Edition. 2010.</p>
-</li>
-<li>
-<p>Paul Carter. PC Assembly Language. Acceso libre. 2006.</p>
-</li>
-<li>
-<p>K.N.King. C programming, a Modern Approach W.W. Norton 2ªEd. 2008.</p>
-</li>
-<li>
-<p>Jeff Duntemann. Assembly Language Step-by-Step: Programming with Linux. Wiley Ed. 3rd Edition. 2009.</p>
-</li>
-<li>
-<p>Kip R. Irvine. Assembly Language for x86 Processors. Pearson. 6th Edition. 2014.</p>
+<p>enlace</p>
 </li>
 </ul>
 </div>
@@ -1100,6 +1078,28 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 </ul>
 </div>
 </li>
+<li>
+<p>Carlos Juan de Dios Ursua</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ingeniería Eléctrica y Electrónica</p>
+</li>
+<li>
+<p>Master en Robótica y Automatización</p>
+</li>
+<li>
+<p>Profesor Asociado (Teoría Estructura Computadores)</p>
+</li>
+<li>
+<p>Edificio de Los Tejos, planta 2ª, Sala de Asociados del departamento de INGENIERÍA ELÉCTRICA, ELECTRÓNICA Y DE COMUNICACIÓN.</p>
+</li>
+<li>
+<p>carlos.juandediosATunavarra.es</p>
+</li>
+</ul>
+</div>
+</li>
 </ul>
 </div>
 </div>
@@ -1124,37 +1124,52 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 </div>
 </div>
 <div class="sect2">
-<h3 id="_calendario">1.9. Calendario</h3>
+<h3 id="_servicio_informático">1.9. Servicio Informático</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Académico</p>
+<p><a href="https://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/AccesoRemotoVDI.pdf">Acceso Remoto VDI</a></p>
 </li>
 <li>
-<p><a href="http://www.unavarra.es/tramitacion-academica/informacion-academica/aulas">calendario-aulas-semanal</a></p>
-<div class="listingblock">
-<div class="content">
-<pre> https://academicos.unavarra.es/pds/consultaPublica/look%5Bconpub%5DInicioPubHora?entradaPublica=true&amp;idiomaPais=es.ES</pre>
+<p><a href="http://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/GERES.pdf">Reservas</a></p>
+</li>
+</ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_calendarios">1.10. Calendarios</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Teoría: Grupo1 GG Viernes 15:00 A318 ; Grupo2 GG Viernes 17:00 A207 ; Grupo91 GG Lunes 19:00 A135</p>
+<p><a href="https://www.unavarra.es/sites/estudios/calendarios.html">Calendario administrativo</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Teoría: Grupo1 GG Jueves 15:00 A318 ; Grupo2 GG Viernes 17:00 A207 ; Grupo91 GG Lunes 19:00 A135</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><a href="http://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/Horario1C.htm">Calendario Prácticas Serv Info</a></p>
+<p>Prácticas</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/Horario1C.htm">Calendario Aulas Informática 1Cuatrimestre</a></p>
 </li>
 <li>
-<p><a href="https://www.unavarra.es/sites/estudios/calendarios.html" class="bare">https://www.unavarra.es/sites/estudios/calendarios.html</a></p>
+<p><a href="https://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/Horario2C.htm">Calendario Aulas Informática 2Cuatrimestre</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://www.unavarra.es/sites/grados/informatica-y-telecomunicacion/ingenieria-informatica/horarios-y-aulas.html#cCentralUPNA">Horarios y Aulas</a></p>
 <div class="ulist">
 <ul>
 <li>
 <p>Teoría</p>
-<table class="tableblock frame-all grid-all" style="width: 60%;">
+<table class="tableblock frame-all grid-all" style="width: 80%;">
 <colgroup>
 <col style="width: 16.6666%;">
 <col style="width: 16.6666%;">
@@ -1174,24 +1189,24 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>15:00</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>T91-A135</code></p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PG1G2-A303</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>T1-A125</code></p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>T1-A318</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>17:00</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>T91-A327</code></p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PG2-A303</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>T2-A234</code></p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>T2-A207</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>19:00</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>T91-A135</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>P91</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PG1-A336</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1204,101 +1219,103 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 </li>
 <li>
 <p>Prácticas</p>
-<table class="tableblock frame-all grid-all" style="width: 80%;">
+<table class="tableblock frame-all grid-all" style="width: 40%;">
 <colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 25%;">
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A310 P3</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A310 P2</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A306 P91</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>P-ARQ P1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A336 PG1 17:00</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A303 PG1G2 15:00</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>15:00-17:00</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>17:00-19:00</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>19:00-21:00</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>19:00-21:00</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>P327 P91 19:00</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>A306 PG2   17:00</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>30/9</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>30/9</code></p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>14/10</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>14/10</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5/10</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>3/10</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>5/10</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>28/10</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>28/10</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>19/10</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>17/10</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>19/10</code></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>24/10</code></p></td>
 <td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>2/11</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2/11</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>11/11</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>11/11</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>16/11</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>7/11</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>16/11</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>25/11</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>25/11</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>30/11</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>30/11</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>21/11</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>23/11</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>28/11</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>30/11</code></p></td>
 </tr>
 </tbody>
 </table>
 </li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>T1: Aula A318</p>
+<p>P91: 3/10,17/10,24/10,7/11,21/11,28/11</p>
 </li>
 <li>
-<p>T2: Aula A207</p>
+<p>PG1: 3/10,17/10,24/10,7/11,21/11,28/11</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>PG2: 5/10,19/10,2/11,16/11,23/11,30/11</p>
+</li>
+<li>
+<p>PG1G2: 5/10,19/10,2/11,16/11,23/11,30/11</p>
+</li>
+<li>
+<p>T1: Aula A125</p>
+</li>
+<li>
+<p>T2: Aula A234</p>
 </li>
 <li>
 <p>T91: Aula A135</p>
 </li>
 <li>
-<p>P3: Jueves a las 15:00 en A310&#8594; Grupos de teoría G1 y G2</p>
+<p>PG1G2: Miércoles a las 15:00 en E-ISM/A303 (40 puestos) &#8594; Prácticas de los Grupos de teoría G1 y G2</p>
 </li>
 <li>
-<p>P2: Jueves a las 17:00 en A310 &#8594; Grupo de teoría G2</p>
+<p>PG2: Miércoles a las 17:00 en A306 (36 puestos) &#8594; Prácticas del Grupo de teoría G2</p>
 </li>
 <li>
-<p>P1:  Martes a las 19:00 en P-ARQ&#8594; Grupo de teoría G1</p>
+<p>PG1: Lunes a las 19:00 en A336 (36 puestos) &#8594; Prácticas del Grupo de teoría G1</p>
 </li>
 <li>
-<p>P91: Martes a las 19:00 en  &#8594; Grupo de teoría Euskera</p>
+<p>P91: Lunes a las 17:00 en A327 (20 puestos) &#8594; Prácticas del Grupo de teoría Euskera</p>
 </li>
 <li>
 <p>Prof Andrés Garde: 3 Grupos de Castellano P1,P2,P3</p>
 </li>
 <li>
-<p>Prof Cándido Aramburu: Grupo Euskera: Aula A306</p>
+<p>Prof Carlos Juan de Dios: Grupos Castellanos T1-T2</p>
 </li>
 <li>
-<p>Aula P-ARQ: Aula Arquitectura, segunda planta del edificio Pinos. Aula con 30 puestos y sistema de video proyección.
-Software igual que el resto del aulario.</p>
+<p>Prof Cándido Aramburu: Grupo Euskera T91-P91</p>
+</li>
+<li>
+<p>Aula E-ISM: 34 puestos</p>
 </li>
 <li>
 <p>Semanas del curso :</p>
@@ -1327,11 +1344,10 @@ Software igual que el resto del aulario.</p>
 <p>Fiestas</p>
 <div class="listingblock">
 <div class="content">
-<pre>12 de octubre (Fiesta Nacional de España).
-01 de noviembre (Festividad de Todos los Santos).
-03 de diciembre (San Francisco Javier, Día de Navarra).
-06 de diciembre (Día de la Constitución).
-08 de diciembre (Inmaculada Concepción).</pre>
+<pre>12 de octubre miércoles (Fiesta Nacional de España).
+01 de noviembre martes (Festividad de Todos los Santos).
+03 de diciembre martes (San Francisco Javier, Día de Navarra).
+06 de diciembre jueves (Día de la Constitución).</pre>
 </div>
 </div>
 </li>
@@ -1339,42 +1355,46 @@ Software igual que el resto del aulario.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_grupos_de_prácticas">1.10. Grupos de Prácticas</h3>
+<h3 id="_grupos_de_prácticas">1.11. Grupos de Prácticas</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>P1,P2,P3</p>
+<p>PG1,PG2,PG1G2</p>
 <div class="listingblock">
 <div class="content">
-<pre>P1				P2					P3
-
-Aguirre Eguizabal, Endika        Espinoza Zarate, Danny Alexander Da Cunha Moreira, Diogo Manuel
-Aldanondo Jimenez, Roberto       Ezziani , Yasin                  de la Nava Ortego, Asier
-Aldaz Burgoa, Miguel             Flamarique Arellano, Aritz       Dealbert Gonçalves, Pablo
-Aller Errea, Yeray               Gallo Ansa, Borja                Diez de Rada Beltran, Alba
-Alvarez Garcia, David            Garde Gurpegui, Andrés           Hijarrubia Bezares, Odei
-Andreu Mangado, Alvaro           Gomez Jauregui, Samuel           Lopez Goñi, Juan
-Aranguren Ortiz, Javier          Itoiz Garcia, Raúl               Muñoz Lahoz, David
-Arriazu Muñoz, Jon               Jimenez Navarcorena, Oscar       Peñas Escribano, Lucas
-Arribillaga Ciriza, Ekaitz       Kamp Ortega, Axel                Perez de Iriarte Les, Mikelats
-Artazcoz Velaz, Javier           Larralde Baldanta, Ibai          Resano Aisa, Jaime
-Arteaga Mayor, Diego             Leon Iso, Oriol                  Reviriego Reinaldo, Adrián
-Ayala Lauroba, Dennis            Lopez de Vicente, Miguel         Salvoch Vilches, Mikel
-Azcoiti Peña, Luis               Mancho Gochi, Daniel             Sanchez Monreal, Julen
-Azcona Recari, Guillermo         Marin Munarriz, Adriana          Santos Garzon, Jaider Felipe
-Barandiaran Lasheras, Nerea      Monclus Radigales, Pablo         Sarango Quizhpe, Alexánder
-Barriuso Cervera, Pablo          Morala Martinez, Andrea          Sola Delgado, Iván
-Basterra Arteaga, Paula          Morales Zufia, Martín            Sotomayor Ramos, Eliezer
-Bastida Vidaurre, Andrés         Muro Marco, Javier               Tarragona Rebollo, Odei
-Blasco Di Rosa, Sol              Navascues Martinez, Ivan         Uranga Roldan, Aitor
-Bodziony , Karolina Maria        Pernaut Murolas, Javier          Urdiroz Arroyo, Iker
-Bouzarhoun el Asry, Wassim       Rodriguez Meneses, Julen         Valencia Aldunate, Sergio
-Cardenas Curicho, Solange Samanta Ruiz Cabodevilla, Adrian        Varela Martinez, Iñigo
-Castilla Jaurrieta, Pedro        Ruiz Oyarzun, Carlos             Verde Perez, Pablo
-Ciordia Barcos, Antonino         Sagaseta de Ilurdoz Sanchez, Miguel Vergara Dominguez, Sergio
-Cojocaru , Mihail                Sanchez Albardiaz, Juan          Vons Vons, Igor Volodimir
-Couceiro Eizaguirre, Javier      Zubiri Remirez, Fermín           Zabalegui Murugarren, Iker
-Razvant Sofrone, Dragos</pre>
+<pre>PG1                            PG2                          PG1G2
+Alén Urra, Saúl                Elcid Beperet, Iker          Goikoetxea Macua, Jon
+Alonso Gómez, Ana              Fernandez Illera, Iker       Goñi Lara, Iker
+Altamirano Trujillo, Ruth N.   Fernández Picorelli, Marina  Isturitz Sesma, Eneko
+Álvarez Alonso, Markel         Flamarique Arellano, Aritz   Orradre Berdusán, Joaquín
+Andreu Mangado, Alvaro         Fortun Iñurrieta, Lucas N.   Pascal Alegría, Xabier
+Apesteguía Vázquez, Alejandro  Gallo Ansa, Borja            Portuondo Varona, Helen
+Arriazu Muñoz, Jon             Garatea Larrayoz, Iñaki      Ripoll Baños, Izar
+Ayechu Garriz, Santiago        Garcia Vilas, Jorge Daniel   Romero Sádaba, Irene
+Azcona Furtado, Lucía          Gil Gil, Santiago            Ruiz de Gopegui Rubio, Paula
+Aznarez Gil, Iñigo             Gómez Ciganda, Iker Javier   Sola Bienzobas, Fermín
+Baigorrotegui Gil, Oier        Granda Saritama, Anthony D.  Solaegui Garralda, Beñat
+Bayona Restrepo, Karol Julian  Hualde Romero, Israel        Taberna Maceira, Alain
+Bellera Alsina, Alberto        Iribarren Ruíz, Beñat        Zamboran Maldonado, Andrea
+Calleja Pascual, Vidal         Juanotena Ezkurra, Joseba    Martínez Sesma, Álvaro
+Cascan Ustarroz, Eduardo       Juárez Jiménez, Adrián       Meléndez Uriz, Alejandro
+Cerezo Uriz, Iñaki             Labat García, Pablo          Mellado Ilundain, Iñaki
+Chacón Flores, Malena Paola    Labiano Garcia, Martin J.    Molina Puyuelo, Alejandro
+Cordido Pérez, Elena           Larrayoz Díaz, Asier         Monreal Ayanz, Ander
+Couceiro Eizaguirre, Javier    Larrayoz Urra, Carlota       Moral Garcia, Haizea
+Cuello Tejero, Jorge           Latasa Sancha, Iván          Oroz Azcárate, Ángel
+de la Ossa Goñi, Miguel        Liébana Revuelta, Diego      Pérez Álvarez, Ángel
+Díaz Ochoa, Alex               Longás Saragüeta, Endika J.  Redrejo Fernández, Misael
+Dobromirova Karailieva, Z.     Lumbreras Corredor, Imanol   Saiz Larraz, Eder
+Ezponda Igea, Eduardo          Martínez Arpón, Alain        Santos Garzon, Jaider Felipe
+Goicoechea Elío, María         Martínez de Goñi, Unai       Sanz Sanz, Iván
+			                                    Sola Alba, Alejandro
+                                                            Tellechea Zamanillo, Sergio
+                                                            Turrillas Remiro, Ethan
+                                                            Urroz Velasco, Ibai
+                                                            Vadillo Navarro, Asier
+                                                            Yarhui Sarate, Yerson Caleb
+                                                            Zheng , Yushan</pre>
 </div>
 </div>
 </li>
@@ -1382,7 +1402,7 @@ Razvant Sofrone, Dragos</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_metodología">1.11. Metodología</h3>
+<h3 id="_metodología">1.12. Metodología</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1480,7 +1500,7 @@ Razvant Sofrone, Dragos</pre>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="_distribución_de_créditos">1.11.1. Distribución de créditos</h4>
+<h4 id="_distribución_de_créditos">1.12.1. Distribución de créditos</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1525,7 +1545,7 @@ Razvant Sofrone, Dragos</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_distribución_de_créditos_de_las_prácticas">1.11.2. Distribución de créditos de las Prácticas</h4>
+<h4 id="_distribución_de_créditos_de_las_prácticas">1.12.2. Distribución de créditos de las Prácticas</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1536,7 +1556,7 @@ Razvant Sofrone, Dragos</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_evaluación">1.12. Evaluación</h3>
+<h3 id="_evaluación">1.13. Evaluación</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1550,7 +1570,7 @@ Razvant Sofrone, Dragos</pre>
 <p>teoría: parcial cada 2 temas &#8594; 4 pruebas parciales. Nota media mínima de 4</p>
 </li>
 <li>
-<p>10%(asistencia y actitud en clase y laboratorio)+30%(prácticas y trabajos)+45%(conceptos y ejercicios)+15%(programación)</p>
+<p>15%(asistencia y actitud en clase y laboratorio)+35%(prácticas y trabajos)+35%(conceptos y ejercicios)+15%(programación)</p>
 </li>
 </ul>
 </div>
@@ -1564,7 +1584,7 @@ Razvant Sofrone, Dragos</pre>
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-OBLIGATORIEDAD DE LAS PRACTICAS: hay que asistir al 14/16 horas  de las prácticas y entregar el 100% de las memorias dentro del plazo establecido en miaulario.
+OBLIGATORIEDAD de las prácticas: hay que asistir al 14/16 horas  de las prácticas y entregar el 100% de las memorias dentro del plazo establecido en miaulario.
 </td>
 </tr>
 </table>
@@ -1576,7 +1596,7 @@ OBLIGATORIEDAD DE LAS PRACTICAS: hay que asistir al 14/16 horas  de las práctic
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-OBLIGATORIEDAD DE LAS PRUEBAS TEORICAS: Para la realización de la media es necesario haber realizado TODAS las pruebas teóricas: las de evaluación contínua y las del examen final.
+OBLIGATORIEDAD de las pruebas teóricas: Para la realización de la media es necesario haber realizado TODAS las pruebas teóricas y haber obtenido una superior a 4 puntos en CADA una de ellas: las de evaluación contínua y las del examen final.
 </td>
 </tr>
 </table>
@@ -1596,7 +1616,7 @@ OBLIGATORIEDAD DE LAS PRUEBAS TEORICAS: Para la realización de la media es nece
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejercicios_mediante_resolución_de_problemas">1.13. Ejercicios mediante resolución de problemas</h3>
+<h3 id="_ejercicios_mediante_resolución_de_problemas">1.14. Ejercicios mediante resolución de problemas</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1609,9 +1629,9 @@ OBLIGATORIEDAD DE LAS PRUEBAS TEORICAS: Para la realización de la media es nece
 </div>
 </div>
 <div class="sect2">
-<h3 id="_prácticas">1.14. Prácticas</h3>
+<h3 id="_prácticas">1.15. Prácticas</h3>
 <div class="sect3">
-<h4 id="_memorias">1.14.1. Memorias</h4>
+<h4 id="_memorias">1.15.1. Memorias</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1695,7 +1715,7 @@ OBLIGATORIEDAD DE LAS PRUEBAS TEORICAS: Para la realización de la media es nece
 </div>
 </div>
 <div class="sect3">
-<h4 id="_estaciones_de_trabajo_32_y_64_bits">1.14.2. Estaciones de Trabajo: 32 y 64 bits</h4>
+<h4 id="_estaciones_de_trabajo_32_y_64_bits">1.15.2. Estaciones de Trabajo: 32 y 64 bits</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1719,22 +1739,6 @@ comprobación -&gt; dpkg -l gcc-multilib</pre>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_proyectos">1.15. Proyectos</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Los proyectos deben ser propuestos por los alumnos durante la primera parte de la asignatura para su aprobación.</p>
-</li>
-<li>
-<p>Parte II de la asignatura: Optativo</p>
-</li>
-<li>
-<p>Utilización de la tarjeta Raspberry Pi (linux/ARM) o de la tarjeta DE1-SoC (linux/ARM) del laboratorio remoto</p>
-</li>
-</ul>
 </div>
 </div>
 <div class="sect2">
@@ -1811,19 +1815,6 @@ comprobación -&gt; dpkg -l gcc-multilib</pre>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_programación">1.16.2. Programación</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://www.ic.unicamp.br/en/~edson/disciplinas/mc404/2017-2s/abef/IAS-Assembler/assembler.html">ias assembler unicamp online</a></p>
-</li>
-<li>
-<p><a href="https://www.onlinegdb.com/classroom">gdb online</a></p>
-</li>
-</ul>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -1833,7 +1824,7 @@ comprobación -&gt; dpkg -l gcc-multilib</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-27 12:28:25 +0200
+Last updated 2022-08-30 07:09:28 +0200
 </div>
 </div>
 </body>
