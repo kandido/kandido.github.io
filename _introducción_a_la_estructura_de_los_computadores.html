@@ -808,16 +808,16 @@ pre.rouge {
 <span class="m">00000000004001</span><span class="n">a0</span> <span class="p">&lt;</span><span class="n">PASCALMAIN</span><span class="p">&gt;:</span>
   <span class="m">4001</span><span class="n">a0</span><span class="p">:</span>	<span class="m">55</span>                   	<span class="n">push</span>   <span class="p">%</span><span class="n">rbp</span>
   <span class="m">4001</span><span class="n">a1</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">e5</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rsp</span><span class="p">,%</span><span class="n">rbp</span>
-  <span class="m">4001</span><span class="n">a4</span><span class="p">:</span>	<span class="m">48</span> <span class="m">83</span> <span class="n">ec</span> <span class="m">10</span>          	<span class="n">sub</span>    <span class="p">$</span><span class="m">0x10</span><span class="p">,%</span><span class="n">rsp</span>
+  <span class="m">4001</span><span class="n">a4</span><span class="p">:</span>	<span class="m">48</span> <span class="m">83</span> <span class="n">ec</span> <span class="m">10</span>          	<span class="n">sub</span>    <span class="mh">$0</span><span class="n">x10</span><span class="p">,%</span><span class="n">rsp</span>
   <span class="m">4001</span><span class="n">a8</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="m">5</span><span class="n">d</span> <span class="n">f8</span>          	<span class="n">mov</span>    <span class="p">%</span><span class="n">rbx</span><span class="p">,-</span><span class="m">0x8</span><span class="p">(%</span><span class="n">rbp</span><span class="p">)</span>
   <span class="m">4001</span><span class="n">ac</span><span class="p">:</span>	<span class="n">e8</span> <span class="n">b7</span> <span class="m">3</span><span class="n">e</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">414068</span> <span class="p">&lt;</span><span class="n">FPC_INITIALIZEUNITS</span><span class="p">&gt;</span>
 <span class="p">#</span> <span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="k">writeln</span><span class="p">(</span><span class="s">'hello world'</span><span class="p">)</span>
   <span class="m">4001</span><span class="n">b1</span><span class="p">:</span>	<span class="n">e8</span> <span class="n">ca</span> <span class="m">93</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">419580</span> <span class="p">&lt;</span><span class="n">fpc_get_output</span><span class="p">&gt;</span>
   <span class="m">4001</span><span class="n">b6</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">c3</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rax</span><span class="p">,%</span><span class="n">rbx</span>
   <span class="m">4001</span><span class="n">b9</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">de</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rbx</span><span class="p">,%</span><span class="n">rsi</span>
-  <span class="m">4001</span><span class="n">bc</span><span class="p">:</span>	<span class="m">48</span> <span class="n">ba</span> <span class="n">c0</span> <span class="n">f6</span> <span class="m">61</span> <span class="m">00</span> <span class="m">00</span> 	<span class="n">movabs</span> <span class="p">$</span><span class="m">0x61f6c0</span><span class="p">,%</span><span class="n">rdx</span>
+  <span class="m">4001</span><span class="n">bc</span><span class="p">:</span>	<span class="m">48</span> <span class="n">ba</span> <span class="n">c0</span> <span class="n">f6</span> <span class="m">61</span> <span class="m">00</span> <span class="m">00</span> 	<span class="n">movabs</span> <span class="mh">$0</span><span class="n">x61f6c0</span><span class="p">,%</span><span class="n">rdx</span>
   <span class="m">4001</span><span class="n">c3</span><span class="p">:</span>	<span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
-  <span class="m">4001</span><span class="n">c6</span><span class="p">:</span>	<span class="n">bf</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>       	<span class="n">mov</span>    <span class="p">$</span><span class="m">0x0</span><span class="p">,%</span><span class="n">edi</span>
+  <span class="m">4001</span><span class="n">c6</span><span class="p">:</span>	<span class="n">bf</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>       	<span class="n">mov</span>    <span class="mh">$0</span><span class="n">x0</span><span class="p">,%</span><span class="n">edi</span>
   <span class="m">4001</span><span class="n">cb</span><span class="p">:</span>	<span class="n">e8</span> <span class="m">78</span> <span class="m">96</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">419848</span> <span class="p">&lt;</span><span class="n">FPC_WRITE_TEXT_SHORTSTR</span><span class="p">&gt;</span>
   <span class="m">4001</span><span class="n">d0</span><span class="p">:</span>	<span class="n">e8</span> <span class="m">13</span> <span class="m">3</span><span class="n">d</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">413</span><span class="n">ee8</span> <span class="p">&lt;</span><span class="n">FPC_IOCHECK</span><span class="p">&gt;</span>
   <span class="m">4001</span><span class="n">d5</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">df</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rbx</span><span class="p">,%</span><span class="n">rdi</span>
@@ -1216,9 +1216,6 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 </tbody>
 </table>
 </li>
-</ul>
-</div>
-</li>
 <li>
 <p>Prácticas</p>
 <table class="tableblock frame-all grid-all" style="width: 40%;">
@@ -1265,6 +1262,9 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 </tr>
 </tbody>
 </table>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
