@@ -438,6 +438,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
 <style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
                        font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
              .nav-footer{text-align: center; margin-top: auto;}
@@ -449,7 +462,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-08-31</span>
+<span id="revdate">2022-09-01</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -478,7 +491,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="_representación_de_las_instrucciones.html#_introducción_3">5.3. Introducción</a>
+<li><a href="_representación_de_las_instrucciones.html#_introducción">5.3. Introducción</a>
 <ul class="sectlevel3">
 <li><a href="_representación_de_las_instrucciones.html#_lenguaje_máquina_y_el_formato_binario">5.3.1. Lenguaje máquina y el formato binario</a>
 </li>
@@ -488,7 +501,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="_representación_de_las_instrucciones.html#_arquitectura_2">5.4. Arquitectura</a>
+<li><a href="_representación_de_las_instrucciones.html#_arquitectura_3">5.4. Arquitectura</a>
 <ul class="sectlevel3">
 <li><a href="_representación_de_las_instrucciones.html#_contexto">5.4.1. Contexto</a>
 </li>
@@ -504,7 +517,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="_representación_de_las_instrucciones.html#_estructura_de_la_computadora">5.6. Estructura de la  Computadora</a>
 <ul class="sectlevel3">
-<li><a href="_representación_de_las_instrucciones.html#_arquitectura_3">5.6.1. Arquitectura</a>
+<li><a href="_representación_de_las_instrucciones.html#_arquitectura_4">5.6.1. Arquitectura</a>
 </li>
 <li><a href="_representación_de_las_instrucciones.html#_cpu_2">5.6.2. CPU</a>
 </li>
@@ -662,7 +675,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect2">
-<h3 id="_introducción_3">5.3. Introducción</h3>
+<h3 id="_introducción">5.3. Introducción</h3>
 <div class="sect3">
 <h4 id="_lenguaje_máquina_y_el_formato_binario">5.3.1. Lenguaje máquina y el formato binario</h4>
 <div class="paragraph">
@@ -740,16 +753,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
-<div class="imageblock text-center">
+<div class="imageblock text-center text-center kroki-format-svg kroki">
 <div class="content">
-<img src="./images/proceso_compilacion/proceso_compilacion.png" alt="proceso compilacion">
+<img src="https://kroki.io/graphviz/svg/eNqNj00KwkAMhfeeIszeEwiCFnVjsegBSmYaNHV-SmpX4mE8gCuP0Is5rVgRRFzm5X0vLwXvBasDrOA8Uml7LxobYNmQPxEkCsZTyIQqCYZqdBzl0GlJcBVbLIJ008DNdmmPqIWPbm2xJPVh2OiSYsKcPQoH2FKj2aC2T9ua_ZHkF7AoyTSnAVAJyr5vQR5SckEYn4usbxw6vWcMt3evJsOL9Sv5XaFWQ4UvPstaSNob5gX79uoik0fN5ORz989luDwAO-SAQg==" alt="proceso_compilacion.png">
 </div>
-<div class="title">Figure 21. Proceso de Compilación</div>
+<div class="title">Figure 31. Proceso de Compilación</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_arquitectura_2">5.4. Arquitectura</h3>
+<h3 id="_arquitectura_3">5.4. Arquitectura</h3>
 <div class="sect3">
 <h4 id="_contexto">5.4.1. Contexto</h4>
 <div class="ulist">
@@ -940,7 +953,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="_estructura_de_la_computadora">5.6. Estructura de la  Computadora</h3>
 <div class="sect3">
-<h4 id="_arquitectura_3">5.6.1. Arquitectura</h4>
+<h4 id="_arquitectura_4">5.6.1. Arquitectura</h4>
 <div class="imageblock kroki">
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNrT1kUG2grIQBtFiqsGRRIPrwZTqaOLS5BrcDBBpShW2mkTMFVBwam0mDgHkODWgVfq4hjiiEups0KAQig0sGzQA8vX1dc_yNMRu6nwsBpegRWkH06MUhJTFp0DS5v4bAgAkMOang==" alt="Diagram">
@@ -991,7 +1004,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="./images/von_neumann/ias_structure.png" alt="ias structure">
 </div>
-<div class="title">Figure 22. IAS Structure</div>
+<div class="title">Figure 32. IAS Structure</div>
 </div>
 </div>
 <div class="sect3">
@@ -1086,7 +1099,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <img src="./images/von_neumann/ias_architecture.png" alt="ias architecture">
 </div>
-<div class="title">Figure 23. IAS_Architecture</div>
+<div class="title">Figure 33. IAS_Architecture</div>
 </div>
 </div>
 </div>
@@ -1776,7 +1789,7 @@ locations</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-31 16:04:13 +0200
+Last updated 2022-09-01 12:09:11 +0200
 </div>
 </div>
 </body>

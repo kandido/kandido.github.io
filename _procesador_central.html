@@ -653,6 +653,19 @@ pre.rouge {
   background-color: #f8f8f8;
 }
 </style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
 <style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
                        font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
              .nav-footer{text-align: center; margin-top: auto;}
@@ -664,7 +677,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-08-31</span>
+<span id="revdate">2022-09-01</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -679,7 +692,7 @@ pre.rouge {
 </li>
 <li><a href="_procesador_central.html#_refs_2">7.2. Refs</a>
 </li>
-<li><a href="_procesador_central.html#_introducción_9">7.3. Introducción</a>
+<li><a href="_procesador_central.html#_introducción_7">7.3. Introducción</a>
 </li>
 <li><a href="_procesador_central.html#_conjunto_de_instrucciones">7.4. Conjunto de Instrucciones</a>
 <ul class="sectlevel3">
@@ -709,7 +722,7 @@ pre.rouge {
 </li>
 <li><a href="_procesador_central.html#_microarquitectura_unidades_funcionales">7.7. Microarquitectura: Unidades Funcionales</a>
 <ul class="sectlevel3">
-<li><a href="_procesador_central.html#_introducción_10">7.7.1. Introducción</a>
+<li><a href="_procesador_central.html#_introducción_8">7.7.1. Introducción</a>
 </li>
 <li><a href="_procesador_central.html#_implementación_del_ciclo_de_instrucción">7.7.2. Implementación del ciclo de instrucción</a>
 </li>
@@ -725,7 +738,7 @@ pre.rouge {
 </li>
 <li><a href="_procesador_central.html#_arquitecturas_ciscrisc">7.8. Arquitecturas CISC/RISC</a>
 <ul class="sectlevel3">
-<li><a href="_procesador_central.html#_introducción_11">7.8.1. Introducción</a>
+<li><a href="_procesador_central.html#_introducción_9">7.8.1. Introducción</a>
 </li>
 <li><a href="_procesador_central.html#_tabla_comparativa">7.8.2. Tabla Comparativa</a>
 </li>
@@ -815,7 +828,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_introducción_9">7.3. Introducción</h3>
+<h3 id="_introducción_7">7.3. Introducción</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1160,7 +1173,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/von_neumann/ias_architecture.png" alt="ias architecture">
 </div>
-<div class="title">Figure 24. IAS_Architecture</div>
+<div class="title">Figure 35. IAS_Architecture</div>
 </div>
 </div>
 <div class="sect3">
@@ -1169,7 +1182,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/cpu/12_5.jpg" alt="12 5">
 </div>
-<div class="title">Figure 25. Diagrama de Estados</div>
+<div class="title">Figure 36. Diagrama de Estados</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1327,7 +1340,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/von_neumann/ias_operation.png" alt="ias operation">
 </div>
-<div class="title">Figure 26. IAS Operation</div>
+<div class="title">Figure 37. IAS Operation</div>
 </div>
 </li>
 </ul>
@@ -1376,7 +1389,7 @@ pre.rouge {
 <div class="sect2">
 <h3 id="_microarquitectura_unidades_funcionales">7.7. Microarquitectura: Unidades Funcionales</h3>
 <div class="sect3">
-<h4 id="_introducción_10">7.7.1. Introducción</h4>
+<h4 id="_introducción_8">7.7.1. Introducción</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1546,7 +1559,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/cpu/12_6.jpg" alt="12 6">
 </div>
-<div class="title">Figure 27. Flujo de Datos. Ciclo de Captación</div>
+<div class="title">Figure 38. Flujo de Datos. Ciclo de Captación</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1718,7 +1731,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/cpu/datapath.jpg" alt="datapath">
 </div>
-<div class="title">Figure 28. Datapath</div>
+<div class="title">Figure 39. Datapath</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1804,7 +1817,7 @@ pre.rouge {
 <div class="sect2">
 <h3 id="_arquitecturas_ciscrisc">7.8. Arquitecturas CISC/RISC</h3>
 <div class="sect3">
-<h4 id="_introducción_11">7.8.1. Introducción</h4>
+<h4 id="_introducción_9">7.8.1. Introducción</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2133,7 +2146,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/cpu/12_9.jpg" alt="12 9">
 </div>
-<div class="title">Figure 29. Segmentación en 2 etapas</div>
+<div class="title">Figure 40. Segmentación en 2 etapas</div>
 </div>
 <div class="ulist">
 <ul>
@@ -2146,19 +2159,19 @@ pre.rouge {
 <div class="content">
 <img src="./images/cpu/12_10.jpg" alt="12 10">
 </div>
-<div class="title">Figure 30. Diagrama de tiempos con segmentación de 6 etapas</div>
+<div class="title">Figure 41. Diagrama de tiempos con segmentación de 6 etapas</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/cpu/12_11.jpg" alt="12 11">
 </div>
-<div class="title">Figure 31. Diagrama de tiempos. Salto incondicional</div>
+<div class="title">Figure 42. Diagrama de tiempos. Salto incondicional</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/cpu/12_12.jpg" alt="12 12">
 </div>
-<div class="title">Figure 32. Flujo de instrucciones con segmentación de 6 etapas</div>
+<div class="title">Figure 43. Flujo de instrucciones con segmentación de 6 etapas</div>
 </div>
 </div>
 </div>
@@ -2193,7 +2206,7 @@ pre.rouge {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-31 16:04:13 +0200
+Last updated 2022-09-01 12:09:11 +0200
 </div>
 </div>
 </body>

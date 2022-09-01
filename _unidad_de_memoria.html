@@ -653,6 +653,19 @@ pre.rouge {
   background-color: #f8f8f8;
 }
 </style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
 <style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
                        font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
              .nav-footer{text-align: center; margin-top: auto;}
@@ -664,7 +677,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-08-31</span>
+<span id="revdate">2022-09-01</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -679,7 +692,7 @@ pre.rouge {
 </li>
 <li><a href="_unidad_de_memoria.html"><span class="toc-current">9. Unidad de Memoria</span></a>
 <ul class="sectlevel2">
-<li><a href="_unidad_de_memoria.html#_introducción_13">9.1. Introducción</a>
+<li><a href="_unidad_de_memoria.html#_introducción_11">9.1. Introducción</a>
 <ul class="sectlevel3">
 <li><a href="_unidad_de_memoria.html#_temario_9">9.1.1. Temario</a>
 </li>
@@ -717,7 +730,7 @@ pre.rouge {
 <ul class="sectlevel3">
 <li><a href="_unidad_de_memoria.html#_bibliografia_2">9.4.1. Bibliografia</a>
 </li>
-<li><a href="_unidad_de_memoria.html#_introducción_15">9.4.2. Introducción</a>
+<li><a href="_unidad_de_memoria.html#_introducción_13">9.4.2. Introducción</a>
 </li>
 <li><a href="_unidad_de_memoria.html#_principios_basicos">9.4.3. Principios Basicos</a>
 </li>
@@ -771,7 +784,7 @@ pre.rouge {
 <h2 id="_unidad_de_memoria">9. Unidad de Memoria</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_introducción_13">9.1. Introducción</h3>
+<h3 id="_introducción_11">9.1. Introducción</h3>
 <div class="sect3">
 <h4 id="_temario_9">9.1.1. Temario</h4>
 <div class="olist arabic">
@@ -2710,7 +2723,7 @@ Los 4 módulos al completo se organizan en 4 ranks
 </div>
 </div>
 <div class="sect5">
-<h6 id="_introducción_14">Introducción</h6>
+<h6 id="_introducción_12">Introducción</h6>
 <div class="ulist">
 <ul>
 <li>
@@ -3173,7 +3186,7 @@ Los 4 módulos al completo se organizan en 4 ranks
 </div>
 </div>
 <div class="sect3">
-<h4 id="_introducción_15">9.4.2. Introducción</h4>
+<h4 id="_introducción_13">9.4.2. Introducción</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -4419,13 +4432,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/linux_vm_map.png" alt="MMU">
 </div>
-<div class="title">Figure 39. linux_vm_map</div>
+<div class="title">Figure 50. linux_vm_map</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/linux_vm_map_2.png" alt="MMU">
 </div>
-<div class="title">Figure 40. linux_vm_map_2</div>
+<div class="title">Figure 51. linux_vm_map_2</div>
 </div>
 <div class="ulist">
 <ul>
@@ -4674,7 +4687,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/amd64_virtualformat.png" alt="MMU">
 </div>
-<div class="title">Figure 41. Formato de direcciones amd64</div>
+<div class="title">Figure 52. Formato de direcciones amd64</div>
 </div>
 </div>
 </div>
@@ -4843,13 +4856,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/vm_concept.png" alt="MMU">
 </div>
-<div class="title">Figure 42. MMU</div>
+<div class="title">Figure 53. MMU</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/vm_table.png" alt="MMU">
 </div>
-<div class="title">Figure 43. MMU</div>
+<div class="title">Figure 54. MMU</div>
 </div>
 </div>
 <div class="sect4">
@@ -4880,7 +4893,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/vm_table_protection.png" alt="MMU">
 </div>
-<div class="title">Figure 44. Protección</div>
+<div class="title">Figure 55. Protección</div>
 </div>
 <div class="ulist">
 <ul>
@@ -4896,7 +4909,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/formato_direcciones.png" alt="MMU">
 </div>
-<div class="title">Figure 45. Formato de Direcciones</div>
+<div class="title">Figure 56. Formato de Direcciones</div>
 </div>
 </div>
 <div class="sect4">
@@ -4930,13 +4943,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/table_multiple.png" alt="MMU" height="400">
 </div>
-<div class="title">Figure 46. Tabla de dos niveles</div>
+<div class="title">Figure 57. Tabla de dos niveles</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/table_level_k.png" alt="MMU">
 </div>
-<div class="title">Figure 47. Tabla de K niveles</div>
+<div class="title">Figure 58. Tabla de K niveles</div>
 </div>
 </div>
 <div class="sect4">
@@ -5081,13 +5094,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/virtualtoframe.png" alt="MMU">
 </div>
-<div class="title">Figure 48. Traducción Virtual &#8594; Física</div>
+<div class="title">Figure 59. Traducción Virtual &#8594; Física</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/mmu_hit.png" alt="MMU" height="200">
 </div>
-<div class="title">Figure 49. Resultado con éxito</div>
+<div class="title">Figure 60. Resultado con éxito</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -5112,7 +5125,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/mmu_fault.png" alt="MMU" height="300">
 </div>
-<div class="title">Figure 50. Resultado con fracaso</div>
+<div class="title">Figure 61. Resultado con fracaso</div>
 </div>
 </div>
 <div class="sect4">
@@ -5141,13 +5154,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/tlb_connection.png" alt="MMU">
 </div>
-<div class="title">Figure 51. Operación con TLB</div>
+<div class="title">Figure 62. Operación con TLB</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/tlb_entry.png" alt="MMU" height="100">
 </div>
-<div class="title">Figure 52. Formato Virtual con TLB</div>
+<div class="title">Figure 63. Formato Virtual con TLB</div>
 </div>
 <div class="ulist">
 <ul>
@@ -5173,7 +5186,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/tabla_cache_ejercicio.png" alt="MMU">
 </div>
-<div class="title">Figure 53. TLB y d-cache </div>
+<div class="title">Figure 64. TLB y d-cache </div>
 </div>
 <div class="ulist">
 <ul>
@@ -5337,7 +5350,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/formato_direcciones.png" alt="MMU">
 </div>
-<div class="title">Figure 54. Formato de Direcciones</div>
+<div class="title">Figure 65. Formato de Direcciones</div>
 </div>
 </li>
 </ol>
@@ -5572,31 +5585,31 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/corei7_virtual_memory.png" alt="MMU">
 </div>
-<div class="title">Figure 55. Memoria Core i7</div>
+<div class="title">Figure 66. Memoria Core i7</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_mmu.png" alt="MMU">
 </div>
-<div class="title">Figure 56. Operación MMU</div>
+<div class="title">Figure 67. Operación MMU</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_tlb_entry_123.png" alt="MMU">
 </div>
-<div class="title">Figure 57. Formato para las tablas de los tres primeros niveles</div>
+<div class="title">Figure 68. Formato para las tablas de los tres primeros niveles</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_tlb_entry_4.png" alt="MMU">
 </div>
-<div class="title">Figure 58. Formato de la tabla del 4º nivel </div>
+<div class="title">Figure 69. Formato de la tabla del 4º nivel </div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_address_translation.png" alt="MMU">
 </div>
-<div class="title">Figure 59. Linux: 4 niveles</div>
+<div class="title">Figure 70. Linux: 4 niveles</div>
 </div>
 </div>
 </div>
@@ -5717,7 +5730,7 @@ Key to Flags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-31 16:04:13 +0200
+Last updated 2022-09-01 12:09:11 +0200
 </div>
 </div>
 </body>

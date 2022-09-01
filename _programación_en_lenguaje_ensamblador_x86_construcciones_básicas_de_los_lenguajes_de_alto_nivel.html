@@ -653,6 +653,19 @@ pre.rouge {
   background-color: #f8f8f8;
 }
 </style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
 <style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
                        font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
              .nav-footer{text-align: center; margin-top: auto;}
@@ -664,7 +677,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-08-31</span>
+<span id="revdate">2022-09-01</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -685,7 +698,7 @@ pre.rouge {
 <ul class="sectlevel2">
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_temario_6">6.1. Temario</a>
 </li>
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_introducción_4">6.2. Introducción</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_introducción_2">6.2. Introducción</a>
 <ul class="sectlevel3">
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_objetivos_2">6.2.1. Objetivos</a>
 </li>
@@ -779,7 +792,7 @@ pre.rouge {
 </li>
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_subrutinas">6.10. Subrutinas</a>
 <ul class="sectlevel3">
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_introducción_6">6.10.1. Introducción</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_introducción_4">6.10.1. Introducción</a>
 </li>
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_lenguaje_c_sentencia_función">6.10.2. Lenguaje C: Sentencia Función</a>
 </li>
@@ -803,7 +816,7 @@ pre.rouge {
 </li>
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_llamadas_al_sistema_operativo">6.11. Llamadas al Sistema Operativo</a>
 <ul class="sectlevel3">
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_introducción_8">6.11.1. Introducción</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_introducción_6">6.11.1. Introducción</a>
 </li>
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_ejemplos_3">6.11.2. Ejemplos</a>
 </li>
@@ -874,7 +887,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_introducción_4">6.2. Introducción</h3>
+<h3 id="_introducción_2">6.2. Introducción</h3>
 <div class="sect3">
 <h4 id="_objetivos_2">6.2.1. Objetivos</h4>
 <div class="ulist">
@@ -985,7 +998,7 @@ pre.rouge {
 <div class="sect3">
 <h4 id="_registros_internos_a_la_cpu_2">6.3.4. Registros internos a la CPU</h4>
 <div class="sect4">
-<h5 id="_introducción_5">introducción</h5>
+<h5 id="_introducción_3">introducción</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1617,10 +1630,11 @@ La sintaxis del lenguaje ensamblador depende del traductor del proceso de ensamb
 </li>
 </ul>
 </div>
-<div class="imageblock kroki">
+<div class="imageblock text-center text-center kroki-format-svg kroki">
 <div class="content">
-<img src="https://kroki.io/graphviz/svg/eNqNj89Kw0AQxu95imHPFgpCL6UFDdWLwWKPImF2d6gT90-YNBelD-MDeOoj5MXcJBgVRHqb-eb7zXxjeS9YP8MtvGVj9Qi2ZljB5XwOT8sMGn4lWKnFxUItM1V0J9u6CDcthQNBrmC2hq1QLdFQg56THHstj75mhzZK303c1a4YELUJya0dVqR-Ge51RWnDNQcUjvBArWaD2o22Ow4vJP8Bm4pMe5gAlaPshxQUoCAfhXEcbIfEsdcHxnB3Cj9ebL42f0do1BThD59jLSTdB5aWQ_fuE1MmzZQUSn_OZTh-AvC4iVc=" alt="proceso_compilacion.png">
+<img src="https://kroki.io/graphviz/svg/eNqNj00KwkAMhfeeIszeEwiCFnVjsegBSmYaNHV-SmpX4mE8gCuP0Is5rVgRRFzm5X0vLwXvBasDrOA8Uml7LxobYNmQPxEkCsZTyIQqCYZqdBzl0GlJcBVbLIJ008DNdmmPqIWPbm2xJPVh2OiSYsKcPQoH2FKj2aC2T9ua_ZHkF7AoyTSnAVAJyr5vQR5SckEYn4usbxw6vWcMt3evJsOL9Sv5XaFWQ4UvPstaSNob5gX79uoik0fN5ORz989luDwAO-SAQg==" alt="proceso_compilacion.png">
 </div>
+<div class="title">Figure 34. Proceso de Compilación</div>
 </div>
 </div>
 <div class="sect3">
@@ -3325,7 +3339,7 @@ swapbytes:
 <div class="sect2">
 <h3 id="_subrutinas">6.10. Subrutinas</h3>
 <div class="sect3">
-<h4 id="_introducción_6">6.10.1. Introducción</h4>
+<h4 id="_introducción_4">6.10.1. Introducción</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -3340,7 +3354,7 @@ swapbytes:
 <div class="sect3">
 <h4 id="_lenguaje_c_sentencia_función">6.10.2. Lenguaje C: Sentencia Función</h4>
 <div class="sect4">
-<h5 id="_introducción_7">Introducción</h5>
+<h5 id="_introducción_5">Introducción</h5>
 <div class="paragraph">
 <p>El objetivo de las funciones es descomponer el programa en módulos de código para dotar al programa de una estructura organizada que facilite el desarrollo del programa y su mantenimiento.
 La librería standard "libc" son colecciones de funciones básicas desarrolladas en el lenguaje C que son reutilizadas por la mayoría de los programas. De esta manera el programador no tiene que inventar la rueda.
@@ -3945,7 +3959,7 @@ call sumMtoN</pre>
 <div class="sect2">
 <h3 id="_llamadas_al_sistema_operativo">6.11. Llamadas al Sistema Operativo</h3>
 <div class="sect3">
-<h4 id="_introducción_8">6.11.1. Introducción</h4>
+<h4 id="_introducción_6">6.11.1. Introducción</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -4071,7 +4085,7 @@ call sumMtoN</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-31 16:04:13 +0200
+Last updated 2022-09-01 12:09:11 +0200
 </div>
 </div>
 </body>

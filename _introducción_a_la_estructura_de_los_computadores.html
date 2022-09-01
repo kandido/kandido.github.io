@@ -653,6 +653,19 @@ pre.rouge {
   background-color: #f8f8f8;
 }
 </style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
 <style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
                        font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
              .nav-footer{text-align: center; margin-top: auto;}
@@ -664,7 +677,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-08-31</span>
+<span id="revdate">2022-09-01</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -711,7 +724,7 @@ pre.rouge {
 </li>
 <li><a href="_introducción_a_la_estructura_de_los_computadores.html#_estaciones_de_trabajo_32_y_64_bits">1.12.2. Estaciones de Trabajo: 32 y 64 bits</a>
 </li>
-<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_github">1.12.3. Github</a>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_registrarse">1.12.3. Registrarse</a>
 </li>
 </ul>
 </li>
@@ -787,7 +800,7 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>Arquitectura: Orrdenización, Estructura: Qué, Cómo, Implementación (tecnología)</p>
+<p>Arquitectura: Organización, Estructura: Qué, Cómo, Implementación (tecnología)</p>
 <div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/introduccion/vehicle_arch.jpg" alt="vehicle arch">
@@ -1562,6 +1575,8 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 <h3 id="_recursos_informáticos">1.12. Recursos Informáticos</h3>
 <div class="sect3">
 <h4 id="_upna">1.12.1. UPNA</h4>
+<div class="sect4">
+<h5 id="_servicio_informático">servicio informático</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1588,20 +1603,36 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://laboratoriosvirtuales.unavarra.es/" class="bare">https://laboratoriosvirtuales.unavarra.es/</a> &#8594; ¿?</p>
+<p><a href="https://laboratoriosvirtuales.unavarra.es/">acceso general</a> &#8594; ¿?</p>
 </li>
-<li>
-<p><a href="https://laboratoriosvirtuales.unavarra.es/fpga/#/" class="bare">https://laboratoriosvirtuales.unavarra.es/fpga/#/</a> &#8594; laboratorio remoto FPGA-Raspberry</p>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_laboratorio_remoto_armfpga">laboratorio remoto ARM/FPGA</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Guacamole login</p>
+<p>No se contempla la utilización del laboratorio remoto ARM/FPGA dentro del plan de la asignatura pero se encuentra disponible para quien desee utilizarlo, para lo cual es necesario abrir una cuenta de acceso.</p>
+</li>
+<li>
+<p><a href="https://laboratoriosvirtuales.unavarra.es/fpga/#/">acceso fpga</a> &#8594; laboratorio remoto FPGA-Raspberry</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Guacamole login &#8594; credenciales UPNA</p>
 </li>
 <li>
 <p>Acceso a la tarjeta DE1-SoC (ARM) &#8594; login  &#8594; Consola shell linux</p>
 </li>
 <li>
 <p>Acceso a la tarjeta Raspberry (ARM) &#8594; login &#8594; Consola shell linux</p>
+</li>
+<li>
+<p>Acceso a la tarjeta Xilinx (ARM) &#8594; login &#8594; Consola shell linux</p>
 </li>
 </ul>
 </div>
@@ -1621,41 +1652,12 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 </li>
 </ul>
 </div>
-</li>
-</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_estaciones_de_trabajo_32_y_64_bits">1.12.2. Estaciones de Trabajo: 32 y 64 bits</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Es necesario disponer de una plataforma linux de 64 bits con el sistema operativo instalado de forma nativa o virtual (VMware, Virtualbox, Virtio, etc). Por ejemplo en el laboratorio está instalada la distribución Ubuntu.</p>
-</li>
-<li>
-<p>Sistema Operativo linux/gnu. Distribución Ubuntu con una versión superior a la 18.</p>
-</li>
-<li>
-<p>Instalar las herramientas de programación de bajo nivel: <strong>binutils</strong>, Compilador <strong>gcc</strong>,  Debugger <strong>gdb</strong>, Editor <strong>vim</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>instalar mediante el comando <code>sudo apt-get install binutils gcc gcc-multilib gdb vim</code></p>
-</li>
-<li>
-<p>comprobar mediante el comando <code>dpkg -l binutils gcc gcc-multilib gdb vim</code> que el estado de cada uno de los programas es <em>ii</em></p>
-</li>
-<li>
-<p>comprobar las versiones: <code>gcc --version &amp;&amp; as --version &amp;&amp; ld --version &amp;&amp; gdb --version &amp;&amp; vim --version</code></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Para la edición de los programas en C y en ASM se podrá utilizar el editor preferido y/o el IDE preferido.</p>
-</li>
-</ul>
-</div>
+<div class="sect4">
+<h5 id="_arquitectura">Arquitectura</h5>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1669,14 +1671,80 @@ Si la estación de trabajo particular de un alumno es Ubuntu (64 bits) sobre un 
 </table>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_github">1.12.3. Github</h4>
+<div class="sect4">
+<h5 id="_qué_instalar">Qué instalar</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Es necesario tener una cuenta abierta en la plataforma de repositorios Github.</p>
+<p>Es necesario disponer de un PC con una CPU  cuya arquitectura sea x86-64 ó amd64  y un Sistema Operativo <a href="https://linuxfoundation.org/">linux</a>/https://www.gnu.org/software/[GNU] mediante la distribución distribución <a href="https://ubuntu.com/download">Ubuntu</a>. La distribución Ubuntu que sea reciente con una versión superior a la 18. Se recomienda la distribución Ubuntu ya que es la distribución instalada en el laboratorio de informática donde se realizan las prácticas.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El Sistema operativo puede estar instalado de forma nativa o virtual (VMware, Virtualbox, <a href="https://libvirt.org/">Virtio</a>, etc).</p>
 </li>
 </ul>
+</div>
+</li>
+<li>
+<p>Para la realización de las prácticas es necesaria una instalación mínima con las herramientas de programación de bajo nivel: <strong>binutils</strong>, Compilador <strong>gcc</strong>,  Debugger <strong>gdb</strong>, Editor <strong>vim</strong></p>
+</li>
+<li>
+<p>En Ubuntu:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>realizar la instalación de los paquetes mediante el comando <code>sudo apt-get install binutils gcc gcc-multilib gdb vim</code></p>
+</li>
+<li>
+<p>comprobar la instalación de los paquetes mediante el comando <code>dpkg -l binutils gcc gcc-multilib gdb vim</code> que el estado de cada uno de los programas es <em>ii</em></p>
+</li>
+<li>
+<p>comprobar las versiones: <code>gcc --version &amp;&amp; as --version &amp;&amp; ld --version &amp;&amp; gdb --version &amp;&amp; vim --version</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Para la edición de los programas en los lenguajes C y ensamblador ASM se podrá utilizar además del editor Vim, el editor preferido (nano,sublime,gedit,kate,emacs,etc..) y/o el IDE preferido (Visual Studio Code, Eclipse, etc..)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_registrarse">1.12.3. Registrarse</h4>
+<div class="sect4">
+<h5 id="_miaulario">miaulario</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://miaulario.unavarra.es/portal">Miaulario</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_github">Github</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Es necesario tener una cuenta abierta en la plataforma de repositorios <a href="https://github.com/">Github</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_google">Google</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://support.google.com/accounts/answer/27441">Google account</a></p>
+</li>
+<li>
+<p><a href="https://www.google.com/chrome/">Navegador Google Chrome</a>: permite seleccionar el idioma</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -1685,7 +1753,7 @@ Si la estación de trabajo particular de un alumno es Ubuntu (64 bits) sobre un 
 <div class="ulist">
 <ul>
 <li>
-<p>PG1,PG2,PG1G2</p>
+<p>3 Grupos de prácticas en castellano: PG1,PG2,PG1G2</p>
 <div class="listingblock">
 <div class="content">
 <pre>PG1                            PG2                          PG1G2
@@ -1934,10 +2002,13 @@ OBLIGATORIEDAD de las prácticas y de las pruebas teóricas:
 <div class="ulist">
 <ul>
 <li>
-<p>Los exámenes de teoría tendrán preguntas teóricas sobre conceptos vistos en clase (30%) y ejercicios (60%).</p>
+<p>Los exámenes de teoría tendrán preguntas teóricas sobre conceptos vistos en clase y ejercicios con una distribución "aproximada" en el primer  parcial del: 20% preguntas sobre conceptos teóricos y un 80% de ejercicios ; y para el segundo parcial: 60% preguntas sobre conceptos teóricos y un 40% de ejercicios.</p>
 </li>
 <li>
-<p>El examen de programación en papel se realizará sin ordenador y con las hojas de referencia de las instrucciones en el lenguaje ensamblador, el depurador GDB y las instrucciones del lenguaje C.</p>
+<p>El examen de programación en papel se realizará sin ordenador y con las hojas de referencia de las instrucciones en el lenguaje ensamblador, el depurador GDB y las sentencias del lenguaje C.</p>
+</li>
+<li>
+<p>El examen de prácticas en el laboratorio se realizará con las memorias de prácticas y las hojas de referencia y sin poder utilizar ninguna información electrónica ni de forma remota (acceso a internet) ni de forma local (pendrive USB,etc).</p>
 </li>
 <li>
 <p>Calendario:</p>
@@ -1961,7 +2032,7 @@ convocatoria recuperación: (Temas 1,2,3,4,5,6,7,8 y 9 y prácticas): 28/01/2023
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-31 16:04:13 +0200
+Last updated 2022-09-01 12:09:11 +0200
 </div>
 </div>
 </body>

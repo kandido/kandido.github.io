@@ -653,6 +653,19 @@ pre.rouge {
   background-color: #f8f8f8;
 }
 </style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
 <style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
                        font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
              .nav-footer{text-align: center; margin-top: auto;}
@@ -664,7 +677,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-08-31</span>
+<span id="revdate">2022-09-01</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -681,23 +694,25 @@ pre.rouge {
 </li>
 <li><a href="_representación_de_los_datos.html#_objetivo">3.2. Objetivo</a>
 </li>
-<li><a href="_representación_de_los_datos.html#_introducción">3.3. Introducción</a>
+<li><a href="_representación_de_los_datos.html#_datos_e_instrucciones_codificación_binaria">3.3. Datos e Instrucciones: Codificación Binaria</a>
 </li>
 <li><a href="_representación_de_los_datos.html#_bit_byte_palabra">3.4. Bit, Byte, Palabra</a>
 </li>
 <li><a href="_representación_de_los_datos.html#_números_enteros">3.5. Números Enteros</a>
 <ul class="sectlevel3">
-<li><a href="_representación_de_los_datos.html#_introducción_2">3.5.1. introducción</a>
+<li><a href="_representación_de_los_datos.html#_base_decimal">3.5.1. Base Decimal</a>
 </li>
-<li><a href="_representación_de_los_datos.html#_base_binaria">3.5.2. Base binaria</a>
+<li><a href="_representación_de_los_datos.html#_base_binaria">3.5.2. Base Binaria</a>
 </li>
-<li><a href="_representación_de_los_datos.html#_base_octal">3.5.3. Base Octal</a>
+<li><a href="_representación_de_los_datos.html#_conversión_decimal_binaria">3.5.3. Conversión Decimal-Binaria</a>
 </li>
-<li><a href="_representación_de_los_datos.html#_calculadora">3.5.4. Calculadora</a>
+<li><a href="_representación_de_los_datos.html#_base_octal">3.5.4. Base Octal</a>
 </li>
-<li><a href="_representación_de_los_datos.html#_python">3.5.5. Python</a>
+<li><a href="_representación_de_los_datos.html#_calculadora">3.5.5. Calculadora</a>
 </li>
-<li><a href="_representación_de_los_datos.html#_enteros_con_signo">3.5.6. Enteros con Signo</a>
+<li><a href="_representación_de_los_datos.html#_python">3.5.6. Python</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_enteros_con_signo">3.5.7. Enteros con Signo</a>
 </li>
 </ul>
 </li>
@@ -807,17 +822,20 @@ pre.rouge {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_introducción">3.3. Introducción</h3>
+<h3 id="_datos_e_instrucciones_codificación_binaria">3.3. Datos e Instrucciones: Codificación Binaria</h3>
 <div class="ulist">
 <ul>
 <li>
 <p>Un programa almacenado en la memoria principal se representa en <em>lenguaje máquina</em> y está compuesto por datos e instrucciones . El lenguaje de la máquina es el lenguaje binario formado por los símbolos <em>0</em> y <em>1</em>. Por lo tanto los datos e instrucciones de un programa almacenado en la memoria principal debe de codificarse y representarse mediante estos dos símbolos.</p>
 </li>
 <li>
-<p>Las instrucciones son órdenes que debe capturar, interpretar y ejecutar (ciclo de instrucción) la Unidad Central de Proceso (CPU): sumar, restar, transferir, parar, etc</p>
+<p>Los datos tienen un valor númerico que pueden ser procesados por la Unidad Aritmetico Lógica (ALU) para realizar operaciones aritméticas como la suma, resta, etc ó lógicas como las operaciones not,or,etc.</p>
 </li>
 <li>
-<p>Los datos tienen un valor númerico que pueden ser procesados por la Unidad Aritmetico Lógica (ALU) para realizar operaciones aritméticas como la suma, resta, etc ó lógicas como las operaciones not,or,etc</p>
+<p>Los datos son secuencias de <em>0</em> y <em>1</em> almacenados en la memoria que son capturados por la CPU para ser procesados pej mediante operaciones aritméticas como la suma.</p>
+</li>
+<li>
+<p>Las instrucciones son secuencias de <em>0</em> y <em>1</em> almacenados en la memoria que son capturados por la CPU para ser interpretados y proceder a su ejecución. Pej la instrucción "sumar" dos números enteros.</p>
 </li>
 </ul>
 </div>
@@ -837,7 +855,7 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>En linux <code>sudo lshw -C system</code> &#8594; anchura: <strong>64 bits</strong></p>
+<p>En linux +sudo lshw -C system | more + &#8594; anchura: <strong>64 bits</strong></p>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="sh">    lur
@@ -861,11 +879,11 @@ pre.rouge {
 <div class="sect2">
 <h3 id="_números_enteros">3.5. Números Enteros</h3>
 <div class="sect3">
-<h4 id="_introducción_2">3.5.1. introducción</h4>
+<h4 id="_base_decimal">3.5.1. Base Decimal</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Sistema Posicional:</p>
+<p>Son representados mediante un Sistema Posicional basado en:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -873,22 +891,32 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>Dígitos, Valor?</p>
-</li>
-<li>
-<p>Centenas, decenas, unidades</p>
+<p>Representación mediante la combinación de diez Dígitos: 0,1,2,3,&#8230;&#8203;,9</p>
 </li>
 <li>
 <p>Posición &#8594; índice</p>
 </li>
 <li>
-<p>Posición &#8594; pesos &#8594; Potencias <em>base<sup>posición</sup></em></p>
+<p>Pesos de cada posición&#8594; son potencias de la forma <em>10<sup>posición</sup></em> &#8594; &#8230;&#8203;,Centenas, decenas, unidades</p>
 </li>
 <li>
-<p>Valor= sumatorio de digitos ponderados con su peso posicional</p>
+<p>Valor representado = sumatorio de digitos ponderados con su peso posicional</p>
 </li>
 <li>
-<p>Ejemplo: 1197</p>
+<p>Ejemplo: Dada la representación 1197 de un número decimal entero, calcular su valor.</p>
+<div class="listingblock">
+<div class="content">
+<pre>Posición        3       2       1       0
+Peso         	10^3    10^2    10^1    10^0
+             	1000    100     10      1
+Digito	        1       1       9       7
+Ponderación  	1*1000  1*100   9*10    7*1
+
+Valor		1*1000+1*100+9*10+7*1=mil ciento noventa y siete.
+
+La representación uno-uno-nueve-siete tiene el valor mil ciento noventa y siete</pre>
+</div>
+</div>
 </li>
 </ul>
 </div>
@@ -900,17 +928,49 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_base_binaria">3.5.2. Base binaria</h4>
+<h4 id="_base_binaria">3.5.2. Base Binaria</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Base 2 . Digitos : 0,1.</p>
+<p>Número codificado en Base 2</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Representación mediante la combinación de dos Dígitos: 0,1</p>
 </li>
 <li>
-<p>Pesos 2<sup>0</sup>,2<sup>1</sup>,2<sup>2</sup>,2<sup>3</sup>,2<sup>4</sup> &#8594; 1,2,4,8,16</p>
+<p>Posición &#8594; índice</p>
 </li>
 <li>
-<p>Conversión Decimal-Binaria:</p>
+<p>Pesos de cada posición&#8594; son potencias de la forma <em>2<sup>posición</sup></em> &#8594; &#8230;&#8203;2<sup>5</sup>,2<sup>4</sup>,2<sup>3</sup>,2<sup>2</sup>,2<sup>1</sup>,2<sup>0</sup>&#8230;&#8203;,64,32,16,8,4,2,1</p>
+</li>
+<li>
+<p>Valor representado = sumatorio de digitos ponderados con su peso posicional</p>
+</li>
+<li>
+<p>Ejemplo: Dada la representación 1010 de un número binario entero, calcular su valor.</p>
+<div class="listingblock">
+<div class="content">
+<pre>Posición        3       2       1       0
+Peso         	2^3   	2^2   	2^1     2^0
+             	8    	4     	2       1
+Dígitos         1       0       1       0
+Ponderación     1*8     0*4     1*2     0*1
+
+Valor		1*8+0*4+1*2+0*1 = diez
+
+La representación uno-cero-uno-cero tiene el valor diez</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_conversión_decimal_binaria">3.5.3. Conversión Decimal-Binaria</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -929,7 +989,7 @@ pre.rouge {
 <p>La división se termina cuando un cociente no es divisible por 2, es decir, el cociente es 1. Este cociente es el MSB.</p>
 </li>
 <li>
-<p>Ejemplo: decimal 1197 &#8594; binario 10010101101</p>
+<p>Ejemplo: Valor 1197 &#8594; Calcular su representación en código binario &#8594; Solución: 10010101101</p>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 3. Conversión decimal binario</caption>
 <colgroup>
@@ -994,9 +1054,6 @@ pre.rouge {
 </li>
 </ul>
 </div>
-</li>
-</ul>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 11.1111%;">
@@ -1045,14 +1102,14 @@ pre.rouge {
 </table>
 </div>
 <div class="sect3">
-<h4 id="_base_octal">3.5.3. Base Octal</h4>
+<h4 id="_base_octal">3.5.4. Base Octal</h4>
 <div class="ulist">
 <ul>
 <li>
 <p>Base 8</p>
 </li>
 <li>
-<p>Digitos: 0-7</p>
+<p>Digitos: 0,1,2,3,4,5,6,7</p>
 </li>
 <li>
 <p>Pesos: 8 elevado a la posición</p>
@@ -1064,7 +1121,17 @@ pre.rouge {
 <p>Conversión Octal &#8592;&#8594; Binario y viceversa &#8594; cada digito octal se descompone en un binario de 3 bits</p>
 </li>
 <li>
-<p>decimal 1197 &#8594; binario 10010101101 &#8594; octal 02255</p>
+<p>decimal 1197 &#8594; Calcular su representación en código octal.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>solución a) binario 10010101101 &#8594; octal 02255</p>
+</li>
+<li>
+<p>solución b) divisiones sucesivas por la base 8.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1088,14 +1155,20 @@ pre.rouge {
 <p>Hexadecimal &#8592;&#8594; Binario y viceversa &#8594; cada digito hexadecimal se descompone en un binario de 4 bits</p>
 </li>
 <li>
-<p>decimal 1197 &#8594; binario 10010101101 &#8594; 0x4AD</p>
+<p>decimal 1197 &#8594; Calcular su representación en código hexadecimal</p>
+</li>
+<li>
+<p>Solución a) binario 10010101101 &#8594; 0x4AD</p>
+</li>
+<li>
+<p>Solución b) divisiones sucesivas por la base 16.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_calculadora">3.5.4. Calculadora</h4>
+<h4 id="_calculadora">3.5.5. Calculadora</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1132,7 +1205,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_python">3.5.5. Python</h4>
+<h4 id="_python">3.5.6. Python</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1157,7 +1230,14 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_enteros_con_signo">3.5.6. Enteros con Signo</h4>
+<h4 id="_enteros_con_signo">3.5.7. Enteros con Signo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Se van a estudiar dos formatos: Signo-Magnitud y Complemento a 2, siendo este último el más extendido en las arquitecturas de los computadores.</p>
+</li>
+</ul>
+</div>
 <div class="sect4">
 <h5 id="_signo_magnitud">Signo-Magnitud</h5>
 <div class="ulist">
@@ -1176,13 +1256,13 @@ pre.rouge {
 <p>Ejemplo :</p>
 </li>
 <li>
-<p><em>+1197 : 010010101101</em></p>
+<p>Valor <em>+1197</em> &#8594; Representación 010010101101</p>
 </li>
 <li>
-<p>-1197 : 110010101101</p>
+<p>Valor <em>-1197</em> &#8594; Representación 110010101101</p>
 </li>
 <li>
-<p>¿Cómo se representa el  cero?</p>
+<p>¿Cómo se representa el valor cero?</p>
 </li>
 </ul>
 </div>
@@ -1200,6 +1280,16 @@ pre.rouge {
 <ul>
 <li>
 <p>Positivos: Igual que el formato signo-magnitud: Bit MSB= 0. Pesos: potencia 2<sup>posición</sup>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>More Significant Bit (MSB) &#8594; posición más elevado con valor distinto de cero.</p>
+</li>
+<li>
+<p>Less Significant Bit (LSB)</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>Negativos: Transformación del número con la misma magnitud pero positivo mediante la función Complemento a 2.</p>
@@ -1213,7 +1303,7 @@ pre.rouge {
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNqNkTEOwzAIRef4FOzRF5BktHIS1GNkyuFrO1VEsVuFxdbHH56BKISIEHaSRF28BtrZaagRVHA7LOh83yxBKYNUNQPs3hiwi2hlmjVF81ScnuYnGwdKbzu7P2HJUJWC0uUqjrYRzcvfGq5XyPEz5Ms3ledY22ykzsYX4waj1GjW79nauF1dhn3Mj1Y33DEdTsJ20ckbTKtVAg==" alt="Diagram">
 </div>
-<div class="title">Figure 20. Complemento a 2. Longitud 3 bits.</div>
+<div class="title">Figure 30. Complemento a 2. Longitud 3 bits.</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1230,7 +1320,7 @@ pre.rouge {
 <p>Pinto los valores de forma alternante: <em>0, +1, -1, +2, -2,&#8230;&#8203;.</em></p>
 </li>
 <li>
-<p>Representar el número positivo <em>+4</em> en complemento a 2</p>
+<p>Ejercicio: Representar el número positivo <em>+4</em> en complemento a 2</p>
 </li>
 </ul>
 </div>
@@ -1252,30 +1342,33 @@ pre.rouge {
 <p>El valor -1 se codifica con todos los dígitos unos <em>111111111111111</em></p>
 </li>
 <li>
-<p>Extensión de Signo: un 1 por la izda es como en los positivos un cero por la izda: no tiene valor y se puede elimar la repetición de 1 por la izda dejando el último de los más significativos. <em>11110111</em> es equivalente a <em>10111</em>.</p>
+<p>Extensión de Signo: un 1 por la izda es como en los positivos un cero por la izda: no tiene valor y se puede eliminar la repetición de 1 por la izda dejando el último <em>1</em> de los más significativos. <em>11110111</em> es equivalente a <em>10111</em>.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Función Complemento a 2</strong>:  El complemento a 2 de un número entero equivale a cambiar su signo. La conversión entre números enteros positivos y negativos en complemento a 2 se puede realizar mediante distintos métodos (ejemplos de complemento a 2 del número entero con código binario X):</p>
+<p><strong>Función Complemento a 2</strong>:  El complemento a 2 de un número entero equivale a cambiar su signo. La conversión entre números enteros positivos y negativos en complemento a 2 se puede realizar mediante distintos métodos.</p>
+</li>
+<li>
+<p>Ejemplos de obtención del complemento a 2 del número entero binario X:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Realizar la operación lógica complemento (negación) del código X y sumar 1 &#8594; ~X+1</p>
+<p>Método 1: Realizar la operación lógica complemento (negación) de X y sumar 1 &#8594; ~X+1</p>
 <div class="ulist">
 <ul>
 <li>
 <p>X=0101 tiene valor <em>+5</em> en complemento a 2</p>
 </li>
 <li>
-<p>¿el código del valor -5? <em>~0101 + 1 = 1010 + 1 = 1011 = -5</em></p>
+<p>¿El complemento a 2 de 0101? <em>~0101 + 1 = 1010 + 1 = 1011 = -5</em> &#8594; El valor del complemento a 2 equivale a cambiar de signo.</p>
 </li>
 <li>
 <p>X=1111 tiene valor -1 en complemento a 2</p>
 </li>
 <li>
-<p>¿el código del valor <em>+1</em>? <em>~1111 + 1 = 0000 + 1 = 0001 = +1</em></p>
+<p>¿El complemento a 2 de 1111? <em>~1111 + 1 = 0000 + 1 = 0001 = +1</em></p>
 </li>
 <li>
 <p>X=0110011100010101010000 &#8594; positivo por tener el bit más significativo (MSB) cero</p>
@@ -1287,7 +1380,7 @@ pre.rouge {
 </div>
 </li>
 <li>
-<p>Empezando por la posición 0 del código X (bit X<sub>0</sub>) copiar todos los dígitos hasta llegar al primer dígito 1 y a partir de ahí negar todos los dígitos hasta el bit más significativo (MSB).</p>
+<p>Método 2: Empezando por la posición 0 del código X (bit X<sub>0</sub>) copiar todos los dígitos hasta llegar al primer dígito 1 y a partir de ahí negar todos los dígitos hasta el bit más significativo (MSB).</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1303,7 +1396,7 @@ pre.rouge {
 </div>
 </li>
 <li>
-<p>Realizar la operación aritmética 0-X</p>
+<p>Método 3: Realizar la operación aritmética 0-X</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1373,21 +1466,37 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>Números Reales</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Coma Fija</p>
+<p>Números Reales en Coma Fija:</p>
 <div class="ulist">
 <ul>
 <li>
 <p>1234.56789</p>
 </li>
 <li>
-<p>Sistema Posicional &#8594; pesos de los dígitos fracción</p>
+<p>Sistema Posicional</p>
+<div class="ulist">
+<ul>
+<li>
+<p>posición de los dígitos fracción: -1,-2,-3,&#8230;&#8203;</p>
+</li>
+<li>
+<p>pesos de los dígitos fracción: 10<sup>-1</sup>, 10<sup>-2</sup>, 10<sup>-3</sup></p>
+</li>
+<li>
+<p>ponderación 1234.56789 = 1*10<sup>3</sup>+2*10<sup>2</sup>+3*10<sup>1</sup>+4*10<sup>0</sup>+5*10<sup>-1</sup>+6*10<sup>-2</sup>+7*10<sup>-3</sup>+8*10<sup>-4</sup>+9*10<sup>-5</sup></p>
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Base Binaria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1010.101 &#8594;  1*2<sup>3</sup>+0*2<sup>2</sup>+0*2<sup>1</sup>+1*2<sup>0</sup>+1*2<sup>-1</sup>+0*2<sup>-1</sup>+1*2<sup>-2</sup> &#8594; 10.625</p>
 </li>
 </ul>
 </div>
@@ -1425,10 +1534,10 @@ pre.rouge {
 </div>
 </li>
 <li>
-<p>El <strong>exponente</strong> es el número entero al que se eleva la base de la potencia. Depende del lugar de la coma en la mantisa.</p>
+<p>El <strong>exponente</strong> es el número entero al que se eleva la base de la potencia. Depende del lugar de la coma en la mantisa. En este caso es -33.</p>
 </li>
 <li>
-<p>La <strong>base</strong> es la base de la potencia.</p>
+<p>La <strong>base</strong> es la base de la potencia. En este ejemplo es 10.</p>
 </li>
 </ul>
 </div>
@@ -1469,10 +1578,10 @@ pre.rouge {
 </div>
 </li>
 <li>
-<p>Código Binario: 10011010010.10010001011000010</p>
+<p>Código Binario coma fija: 10011010010.10010001011000010</p>
 </li>
 <li>
-<p>Notación científica: 1.001101001010010001011000010*2<sup>+10</sup> &#8594; coma flotante</p>
+<p>Notación científica: 1.001101001010010001011000010*2<sup>+10</sup> &#8594; coma flotante &#8594; la parte entera siempre vale 1.</p>
 </li>
 </ul>
 </div>
@@ -1505,7 +1614,7 @@ pre.rouge {
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>p = .1E0 y q = .9999E0 &#8594; Error relativo=0.1E-3&lt;0.5E(-4+1) &#8594; precisión de 4 cifras significativas</p>
+<p>p = 1E0 y q = .9999E0 &#8594; Error relativo=0.1E-3&lt;0.5E(-4+1) &#8594; precisión de 4 cifras significativas</p>
 </li>
 <li>
 <p>Una calculadora, A, trabaja en base 2 con mantisa de 22 bits y otra, B, trabaja en base 16 con 6 dígitos de precision (24 bits). ¿Cuál de las dos es más precisa?</p>
@@ -1831,6 +1940,9 @@ oating-point computations</a></p>
 </ul>
 </div>
 </li>
+<li>
+<p>fijarse la relación del código entre J y ^J, entre M y ^M&#8230;&#8203;</p>
+</li>
 </ul>
 </div>
 <div class="literalblock">
@@ -1904,33 +2016,6 @@ oating-point computations</a></p>
        076   62    3E    &gt;                           176   126   7E    ~
        077   63    3F    ?                           177   127   7F    DEL</pre>
 </div>
-</div>
-</li>
-<li>
-<p><code>showkey -a</code> : espera a pulsar una letra y visualiza el código ASCII de la letra pulsada</p>
-<div class="ulist">
-<ul>
-<li>
-<p>útil para descubrir el código de cada carácter en ascii standard y  el de caracteres ñ, á, é, í, ó, ú si en el código en que el sistema esté configurado.</p>
-</li>
-<li>
-<p>útil para descubri el código de control de combinaciones Ctrl-C, CR, Ctrl-CR, Ctrl-D</p>
-<div class="literalblock">
-<div class="content">
-<pre>\ 	 92 0134 0x5c   -&gt; tecla ESC: escape
-^J 	 10 0012 0x0a   -&gt; teclas Ctrl-CR: Salto de línea
-^M 	 13 0015 0x0d   -&gt; tecla CR: Retorno de Carro
-^C 	  3 0003 0x03   -&gt; teclas Ctrl-c
-^D 	  4 0004 0x04   -&gt; teclas Ctrl-d
-ñ       195 0303 0xc3   -&gt; MSB: More Significand Byte.
- 	177 0261 0xb1   -&gt; LSB: Less Significand Byte</pre>
-</div>
-</div>
-</li>
-<li>
-<p>UPNA &#8594; 0x55-0x50-0x4e-0x41-0x00 donde 0x00 es el caracter NUL de fin de cadena.</p>
-</li>
-</ul>
 </div>
 </li>
 <li>
@@ -2019,7 +2104,7 @@ oating-point computations</a></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Se describe con el prefijo U+ seguido de un número entero (integers from 0 to 0x10FFFF). Al código se le llama "code point".</p>
+<p>Se describe con el prefijo U+ seguido de un número entero (integers from 0 to 0x10FFFF). Al código se le llama <strong>code point"</strong></p>
 </li>
 </ul>
 </div>
@@ -2035,9 +2120,21 @@ oating-point computations</a></p>
 <p>Uses one byte[note 1] (8 bits) for the first 128 code points, and up to 4 bytes for other characters. The first 128 Unicode code points represent the ASCII characters, which means that any ASCII text is also a UTF-8 text.</p>
 </li>
 <li>
-<p>La <em>ñ</em> da como salida 0xc3b1 . El terminal está configurado con salida Unicode UTF8 según la variable de entorno local. Mediante el comando <code>locale charmap</code>  volcamos con que codificación tenemos la salida del terminal. Mediante <code>locale -m</code> los posibles. Podría haber sido iso-8859-1 en lugar de utf8.</p>
+<p>La <em>ñ</em> da como salida 0xc3b1 . El terminal está configurado con salida Unicode UTF8 según la variable de entorno local. Mediante el comando <strong>locale charmap</strong>  volcamos con que codificación tenemos la entrada/salida del terminal. Mediante <code>locale -m</code> los posibles. Podría haber sido iso-8859-1 en lugar de utf8.</p>
 </li>
 </ul>
+</div>
+</li>
+<li>
+<p><code>localectl --status</code> &#8594; codificación de entrada del teclado</p>
+<div class="listingblock">
+<div class="content">
+<pre>  System Locale: LANG=eu_ES.UTF-8
+                  LANGUAGE=eu_ES:eu:en_GB:en
+       VC Keymap: n/a
+      X11 Layout: es
+       X11 Model: pc105</pre>
+</div>
 </div>
 </li>
 <li>
@@ -2087,6 +2184,56 @@ oating-point computations</a></p>
 </li>
 <li>
 <p><code>man utf-8</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>showkey -a</code> : espera a pulsar una letra y visualizará el código de la letra pulsada en la codificación de entrada del sistema operativo.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El código de los caracteres del ASCII standard (7bits) coincide con el UTF8 pero no así para el resto de caracteres ASCII extendido.</p>
+</li>
+<li>
+<p>útil para descubrir el código de cada carácter en ascii standard y  el de caracteres ñ, á, é, í, ó, ú si en el código en que el sistema esté configurado (UTF8)</p>
+</li>
+<li>
+<p>útil para descubri el código de control de combinaciones Ctrl-C, CR, Ctrl-CR, Ctrl-D</p>
+<div class="literalblock">
+<div class="content">
+<pre>\ 	 92 0134 0x5c   -&gt; tecla ESC: escape
+^J 	 10 0012 0x0a   -&gt; teclas Ctrl-CR: Salto de línea
+^M 	 13 0015 0x0d   -&gt; tecla CR: Retorno de Carro
+^C 	  3 0003 0x03   -&gt; teclas Ctrl-c
+^D 	  4 0004 0x04   -&gt; teclas Ctrl-d
+ñ       195 0303 0xc3   -&gt; MSB: More Significand Byte.
+ 	177 0261 0xb1   -&gt; LSB: Less Significand Byte</pre>
+</div>
+</div>
+</li>
+<li>
+<p>UPNA &#8594; 0x55-0x50-0x4e-0x41-0x00 donde 0x00 es el caracter NUL de fin de cadena.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentos HTML</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ñ &#8594; &amp;#x00F1 &#8594; utiliza el código "unicode point"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sistema operativo : variables del entorno</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>env | grep LC_</code></p>
 </li>
 </ul>
 </div>
@@ -2251,7 +2398,7 @@ oating-point computations</a></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>locale -a</code> &#8594; LC_CTYPE</p>
+<p><code>locale -a</code> &#8594; C.UTF8</p>
 </li>
 <li>
 <p>ñ &#8594; <code>env printf <em>\u00f1  \n</em></code> : incluir las simples comillas</p>
@@ -2278,7 +2425,7 @@ oating-point computations</a></p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-31 16:04:13 +0200
+Last updated 2022-09-01 12:09:11 +0200
 </div>
 </div>
 </body>

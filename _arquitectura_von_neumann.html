@@ -653,6 +653,19 @@ pre.rouge {
   background-color: #f8f8f8;
 }
 </style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
 <style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
                        font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
              .nav-footer{text-align: center; margin-top: auto;}
@@ -664,7 +677,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-08-31</span>
+<span id="revdate">2022-09-01</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -1002,11 +1015,11 @@ pre.rouge {
 <h4 id="_ejemplo_del_programa_sum1ton">2.2.2. Ejemplo del Programa sum1toN</h4>
 <div class="sect4">
 <h5 id="_código">Código</h5>
-<div class="imageblock text-center">
+<div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/von_neumann/ias_code_machine.png" alt="ias code machine">
 </div>
-<div class="title">Figure 12. IAS Codigo Maquina</div>
+<div class="title">Figure 12. IAS Código Maquina</div>
 </div>
 </div>
 <div class="sect4">
@@ -1078,7 +1091,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect4">
-<h5 id="_arquitectura">Arquitectura</h5>
+<h5 id="_arquitectura_2">Arquitectura</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1140,7 +1153,7 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 </li>
 </ul>
 </div>
-<div class="imageblock text-center">
+<div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/von_neumann/ias_architecture.png" alt="ias architecture">
 </div>
@@ -1150,7 +1163,7 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 <ul>
 <li>
 <p>Arquitectura Interna de la CPU : Microarquitectura</p>
-<div class="imageblock text-center">
+<div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/von_neumann/ias_structure.png" alt="ias structure">
 </div>
@@ -1170,10 +1183,11 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 <ul>
 <li>
 <p>3 FASES: Captura, Interpreta y Ejecuta las instrucciones secuencialmente: <strong>Ciclo de Instrucción</strong></p>
-<div class="imageblock kroki">
+<div class="imageblock text-center text-center kroki-format-svg kroki">
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNrjUiAWBBQd3lyRmZuo4JlXXFJUmpyceXhzHhe6Km1dCoA2hnE1ChSAmkFuHGpYaQONQxfBFp7aWIJZG-wWbeSQrEFzaZlCDYbbMd1fg8VbNTCEcDmIE1ySWFQCi3M7kKucEwtKSosS4SKeeSWpRQVFqSWJ4LQCcSBQ3DUrNbkUKgQW1Abr90jMKUEYj8-lJLldAc3thMKYpFBXQAt1AI0ylEI=" alt="Diagram">
 </div>
+<div class="title">Figure 15. Ciclo de Instrucción</div>
 </div>
 </li>
 </ul>
@@ -1202,10 +1216,11 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 <h4 id="_memorias_2">2.3.3. Memorias</h4>
 <div class="sect4">
 <h5 id="_memoria_principal">Memoria Principal</h5>
-<div class="imageblock kroki">
+<div class="imageblock text-center text-center kroki-format-svg kroki">
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNrjcvEMcnV29vT3cw1WgAFnf78QVz9PF38uLgUUoK2LFWhzGVQYQAFIWY2CgSEGBAqTbJohVU0zooZpqMpqFLCCUdNwx4IlVU1LHI2FQRCnadQwjYsLAAegt6o=" alt="Diagram">
 </div>
+<div class="title">Figure 16. Direccionamiento del contenido de la Memoria Principal</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1293,10 +1308,11 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 </li>
 <li>
 <p>Bus de Datos, Bus de Direcciones y Bus de Control (Lectura/Escritura)</p>
-<div class="imageblock kroki">
+<div class="imageblock text-center text-center kroki-format-svg kroki">
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNrT1kUG2grIQBtFiqsGRRIPrwZTqaOLS5BrcDBBpShW2mkTMFVBwam0mDgHkODWgVfq4hjiiEups0KAQig0sGzQA8vX1dc_yNMRu6nwsBpegRWkH06MUhJTFp0DS5v4bAgAkMOang==" alt="Diagram">
 </div>
+<div class="title">Figure 17. Conexión CPU-Memoria Principal</div>
 </div>
 </li>
 </ul>
@@ -1418,10 +1434,11 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 </li>
 <li>
 <p><em>Data Format</em></p>
-<div class="imageblock kroki">
+<div class="imageblock text-center text-center kroki-format-svg kroki">
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNpTUFAwUFBQMFQgFxhbcmnrAgGYIBdoc9WAzKpRoADUAM0IpoIZlLuDGuHBBQAINT0F" alt="Diagram">
 </div>
+<div class="title">Figure 18. Formato de los datos</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1433,10 +1450,11 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 </li>
 <li>
 <p><em>Instruction Format</em></p>
-<div class="imageblock kroki">
+<div class="imageblock text-center text-center kroki-format-svg kroki">
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNrjstFFBT6paSUKnnnFJTABO1QVQZnpGagKdO24uBQMFJCAhQIaMLRUMEJWYYShQsHYkksb2R5tXUxAUIGuNlcNsqE1CpiAoAKFGpAh_gUKzvkpqRA1jikpRanFxSj68CuAGEK5S6gSJlwAMBlXCQ==" alt="Diagram">
 </div>
+<div class="title">Figure 19. Formato de las instrucciones</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1487,11 +1505,11 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 </li>
 <li>
 <p>En la arquitectura von Neumann datos e instrucciones comparten el mismo espacio de direcciones de memoria.</p>
-<div class="imageblock text-center">
+<div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/von_neumann/ias_code_machine.png" alt="ias code machine">
 </div>
-<div class="title">Figure 15. IAS Codigo Maquina</div>
+<div class="title">Figure 20. IAS Codigo Maquina</div>
 </div>
 </li>
 </ul>
@@ -1713,11 +1731,11 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 <ul>
 <li>
 <p>Instruction Set (William Stalling)</p>
-<div class="imageblock text-center">
+<div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/von_neumann/ias_instruction.png" alt="ias instruction">
 </div>
-<div class="title">Figure 16. IAS_Instruction_Set</div>
+<div class="title">Figure 21. IAS_Instruction_Set</div>
 </div>
 </li>
 </ul>
@@ -1804,10 +1822,11 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 </div>
 <div class="sect2">
 <h3 id="_isa">2.7. ISA</h3>
-<div class="imageblock kroki">
+<div class="imageblock text-center text-center kroki-format-svg kroki">
 <div class="content">
 <img src="https://kroki.io/graphviz/svg/eNqNUktOw0AM3XMKK-tUiC6phJSmFAU1tErhAG7GDSMlmTCZrBAHYsGqR8jF8ORDQ0tLV5nYz8_PfhYy0Vi8wgO8X0Gw9mB0B859aXQVm0ojCIIUwVdZURkUSqMz2ePmSmdoVDmMRVSQNkpLZWtl3lDFUuXUwM5zWwZ_9XIRLqSMu-BFWCe4Xl7WfVqVjOu4beCRNOq3qv5C4MTgz9L2uJWWeSwLTJsmx9FuqwXyImAhc-LYaSBrACE1dWuDmzFspCmdw_YRJZLnUVbxz7th8OKYSrlJudjzXS9yDgFPCvaYW1j5bjCN3CByQ_6ETcHeXVsRDI20Q_4KtLr9eidkomDJF4Bd4m9kRNsWlQsF84pyQ21i1o5d73LwNqVK2ZojKc6sv7n-2a6XSex41tGUMuZUgDBuHDl3lLZ4oNjChwM03M-stNySJrYJR56WJqs_jYxxtKh3if2uMTXKV7mQtq6197-uTqgEC-bcrHcbM2mFt2d0MntyVZOrj29OWkQ_" alt="isa-ias">
 </div>
+<div class="title">Figure 22. Instruction Set Architecture (ISA)</div>
 </div>
 </div>
 <div class="sect2">
@@ -2003,10 +2022,11 @@ Java version: openjdk version "1.8.0_131"
 </div>
 </div>
 </div>
-<div class="imageblock kroki">
+<div class="imageblock text-center text-center kroki-format-svg kroki">
 <div class="content">
 <img src="https://kroki.io/graphviz/svg/eNpLyUwvSizIUHBXqOZSCChOLU3JTz68OSUzPV9B105Byb8oPTEPpCQ3UQkkEBTiA6Jc84oTc5NyElPyi3TtgjNzS3MSkzMPb86z5lKoBQCSdhxn" alt="fases-programa">
 </div>
+<div class="title">Figure 23. Fases de la Programación</div>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -2087,10 +2107,11 @@ El paso de una descripción en un lenguaje de alto nivel a bajo nivel se realiza
 </div>
 <div class="sect4">
 <h5 id="_organigrama">Organigrama</h5>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./images/von_neumann/sum1toN_organigrama.svg" alt="Diagrama de Flujo">
 </div>
+<div class="title">Figure 24. Organigrama: Diagrama de Flujo</div>
 </div>
 </div>
 <div class="sect4">
@@ -2431,11 +2452,11 @@ uno:   .data 1  <span class="p">;</span></code></pre>
 <ul>
 <li>
 <p>La primera instrucción está almacenada en los 20 bits de la izda de la posición de memoria y la segunda instrucción en la dcha.</p>
-<div class="imageblock text-center">
+<div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/von_neumann/ias_code_machine.png" alt="ias code machine">
 </div>
-<div class="title">Figure 17. IAS Codigo Maquina</div>
+<div class="title">Figure 25. IAS Codigo Maquina</div>
 </div>
 </li>
 </ul>
@@ -2443,17 +2464,13 @@ uno:   .data 1  <span class="p">;</span></code></pre>
 </li>
 <li>
 <p>Contenido de los Registros:</p>
-</li>
-</ul>
-</div>
-<div class="imageblock text-center">
+<div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/von_neumann/ias_registers.png" alt="ias registers">
 </div>
-<div class="title">Figure 18. IAS Registros</div>
+<div class="title">Figure 26. IAS Registros</div>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>Ejercicio:</p>
 <div class="ulist">
@@ -2604,16 +2621,17 @@ uno:   .data 1  <span class="p">;</span></code></pre>
 </li>
 <li>
 <p>RTL: lenguaje de bajo nivel que tiene en cuenta la ISA de la computadora</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./images/von_neumann/nn1_orga.svg" alt="Diagrama de Flujo: Alto Nivel y RTL">
 </div>
+<div class="title">Figure 27. Diagrama de Flujo: Pseudocódigo y RTL</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect4">
@@ -2800,16 +2818,17 @@ De esta manera se pueden realizar operaciones de aritméticas y lógicas sobre l
 </li>
 <li>
 <p>RTL: lenguaje de bajo nivel que tiene en cuenta la ISA de la computadora</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="./images/von_neumann/vectorABC_orga.svg" alt="Diagrama de Flujo: Alto Nivel y RTL">
 </div>
+<div class="title">Figure 28. Diagrama de Flujo: Pseudocódigo y RTL</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect4">
@@ -2908,7 +2927,7 @@ cero:		.data 0</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>simulación con el emulador IASsim</p>
+<p>Realizar la ejecución del código binario con el emulador IASsim</p>
 </li>
 </ul>
 </div>
@@ -2918,7 +2937,7 @@ cero:		.data 0</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>vector_iniciar_A_B_C.ias:</p>
+<p>Desarrollar el código fuente del programa vector_iniciar_A_B_C.ias:</p>
 </li>
 </ul>
 </div>
@@ -2928,7 +2947,7 @@ cero:		.data 0</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>simulación con el emulador IASsim</p>
+<p>Realizar la ejecución del código binario con el emulador IASsim</p>
 </li>
 </ul>
 </div>
@@ -2938,7 +2957,7 @@ cero:		.data 0</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>vectorA+B.ias:</p>
+<p>Desarrollar el código fuente del programa vectorA+B.ias:</p>
 </li>
 </ul>
 </div>
@@ -2948,7 +2967,7 @@ cero:		.data 0</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>simulación con el emulador IASsim</p>
+<p>Realizar la ejecución del código binario con el emulador IASsim</p>
 </li>
 </ul>
 </div>
@@ -2957,11 +2976,11 @@ cero:		.data 0</pre>
 </div>
 <div class="sect2">
 <h3 id="_operación_de_la_máquina_ias">2.9. Operación de la Máquina IAS</h3>
-<div class="imageblock text-center">
+<div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/von_neumann/ias_operation.png" alt="ias operation">
 </div>
-<div class="title">Figure 19. IAS Operation</div>
+<div class="title">Figure 29. IAS Operation</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3033,7 +3052,7 @@ cero:		.data 0</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-08-31 16:04:13 +0200
+Last updated 2022-09-01 12:09:11 +0200
 </div>
 </div>
 </body>
