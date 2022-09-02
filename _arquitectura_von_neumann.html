@@ -90,7 +90,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 </ul>
 </li>
-<li><a href="_arquitectura_von_neumann.html#_isaarquitectura_del_repertorio_de_instrucciones_de_la_máquina_ias">2.4. ISA:Arquitectura del Repertorio de Instrucciones de la máquina IAS</a>
+<li><a href="_arquitectura_von_neumann.html#_isa_arquitectura_del_repertorio_de_instrucciones_de_la_máquina_ias">2.4. ISA: Arquitectura del Repertorio de Instrucciones de la máquina IAS</a>
 <ul class="sectlevel3">
 <li><a href="_arquitectura_von_neumann.html#_formato_de_los_datos_e_instrucciones_de_la_computadora_ias">2.4.1. Formato de los datos e Instrucciones de la Computadora IAS</a>
 </li>
@@ -772,7 +772,7 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 </div>
 </div>
 <div class="sect2">
-<h3 id="_isaarquitectura_del_repertorio_de_instrucciones_de_la_máquina_ias">2.4. ISA:Arquitectura del Repertorio de Instrucciones de la máquina IAS</h3>
+<h3 id="_isa_arquitectura_del_repertorio_de_instrucciones_de_la_máquina_ias">2.4. ISA: Arquitectura del Repertorio de Instrucciones de la máquina IAS</h3>
 <div class="sect3">
 <h4 id="_formato_de_los_datos_e_instrucciones_de_la_computadora_ias">2.4.1. Formato de los datos e Instrucciones de la Computadora IAS</h4>
 <div class="ulist">
@@ -883,6 +883,18 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 </div>
 <div class="sect3">
 <h4 id="_repertorio_isa">2.4.2. Repertorio ISA</h4>
+<div class="sect4">
+<h5 id="_lenguaje_rtl">Lenguaje RTL</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Información sobre el lenguaje de transferencia entre registros (RTL) en el <a href="_rtl_register_transfer_language.html#RTL_lang">Apéndice</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_repertorio_de_la_máquina_ias">Repertorio de la máquina IAS</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1102,6 +1114,7 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 </ul>
 </div>
 </div>
+</div>
 <div class="sect3">
 <h4 id="_interfaz_isa">2.4.3. Interfaz ISA</h4>
 <div class="ulist">
@@ -1296,11 +1309,71 @@ sumar:  AC 	&lt;- AC + M[suma]
 </div>
 </div>
 <div class="sect4">
+<h5 id="_lenguaje_ensamblador_wstalling_de_la_máquina_ias">Lenguaje ensamblador WStalling de la máquina IAS</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo fuente sum1toN.ws</p>
+<div class="listingblock">
+<div class="content">
+<pre>; CABECERA
+; 1ª version : sum1toN_v1.ias
+; Calcula la suma de una secuencia de numeros enteros: suma = 1+2+..+n
+; dato de entrada : n
+; dato de salida  : suma
+; Algoritmo : bucle de n iteraciones
+;             Los sumandos se van generando en sentido descendente de n a 0
+;             Se sale del bucle si el sumando es negativo -&gt; -1
+; Estructuras de datos : variables n y suma . Constante uno.
+; Lenguaje ensamblador: William Stalling
+; Arquitectura de la máquina IAS de Von Neumann
+
+;;;;;;;;;;;;;;;; SECCION DE INSTRUCCIONES
+;Arquitectura orientada a Acumulador (AC)
+;Registros accesibles : AC
+; algoritmo: bucle que genera la secuencia n, n-1, n-2,...0,-1 si n&gt;=0
+bucle:	LOAD 	M(n)       	; AC &lt;- M[n]
+	SUB  	M(uno)     	; AC &lt;- AC-M[uno]
+	STOR 	M(suma)		; M[suma] &lt;- AC
+	JMP+    bucle		; Si AC &gt;= 0, salto a bucle
+	; fin del bucle
+	HALT			; stop
+
+
+;;;;;;;;;;;;;;;;;;;SECCION DE DATOS
+; Declaracion de etiquetas, reserva de memoria externa, inicializacion.
+; Variables ordinarias
+n:	.data	5 ; variable sumando
+uno:	.data	1 ; cte
+suma:	.data	0 ; sumas parciales y resultado final</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Se ha desarrollado la sección de datos para la reserva de memoria.</p>
+</li>
+<li>
+<p>Se ha realizado un BUCLE SENCILLO ya que el bucle es la construcción necesaria en el algoritmo final.</p>
+</li>
+<li>
+<p>Se ha realizado la operación RESTA ya que es una operación necesaria en el algoritmo final.</p>
+</li>
+<li>
+<p>Se ha COMENTADO el código</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
 <h5 id="_lenguaje_ensamblador_iassim">Lenguaje ensamblador iassim</h5>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>El desarrollo del módulo fuente en lenguaje ensamblador iassim NO se realiza de principio a fin sino que se va realizando <strong>POR PASOS</strong>, empezando por un código lo más sencillo posible que será testeado y depurado antes de ir desarrollando hasta llegar al código completo</p>
+<p>El desarrollo del módulo fuente en lenguaje ensamblador NO se realiza de principio a fin sino que se va realizando <strong>POR PASOS</strong>, empezando por un código lo más sencillo posible que será testeado y depurado antes de ir desarrollando hasta llegar al código completo</p>
 </div>
 </div>
 </div>
@@ -1523,19 +1596,19 @@ suma:	.data	0 ; sumas parciales y resultado final</pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Para la programación de bajo nivel es necesario conocer las principales características de la arquitectura ISA de la computadora, la Estructura de la computadora , Formato de datos e instrucciones y repertorio de instrucciones.</p>
+<p>Para la programación de bajo nivel es necesario conocer las principales características de la arquitectura ISA de la computadora: la Estructura de la computadora (memoria,registros,etc) , Formato de datos (formato complemento a 2,etc) e instrucciones y el Repertorio de Instrucciones (operaciones, modos de direccionamiento, etc ..)</p>
 </li>
 <li>
-<p>La programación en lenguaje ensamblador no se realiza directamente en dicho lenguaje sino que se sigue una estrategia top-down comenzando por una descripción en lenguje de pseudocódigo.</p>
+<p>La programación en lenguaje ensamblador no se realiza directamente en dicho lenguaje sino que se sigue una estrategia top-down comenzando por una descripción en lenguaje de pseudocódigo, organigrama, lenguaje RTL, etc</p>
 </li>
 <li>
-<p>Es el diseño de repertorio de instrucciones ISA de la computadora el que facilita o dificulta la programación de bajo nivel. Un repertorio excesivamente limitado como la máquina IAS de von Neumann dificulta la realización de expresiones matemáticas tan sencillas como una multiplicación seguida de la división. La secuencia de instrucciones RTL deberá tener en cuenta el facilitar el desarrollo del algoritmo.</p>
+<p>Es el diseño del repertorio de instrucciones ISA de la computadora el que facilita o dificulta la programación de bajo nivel. Un repertorio excesivamente limitado como la máquina IAS de von Neumann dificulta la realización de expresiones matemáticas tan sencillas como una multiplicación seguida de la división. La secuencia de instrucciones RTL deberá tener en cuenta el facilitar el desarrollo del algoritmo.</p>
 </li>
 <li>
 <p>La programación del algoritmo en lenguaje ensamblador sigue una estrategia ascendente comenzando por una versión incompleta y lo más sencilla posible del programa a desarrollar.</p>
 </li>
 <li>
-<p>Cada versión desarrollada del programa en lenguaje ensamblador ha de ser depurada y verificada mediante el simulador IASSim.</p>
+<p>Cada versión desarrollada del programa en lenguaje ensamblador ha de ser depurada y verificada mediante un simulador y un depurador que permita la ejecución en modo paso a paso para analizar resultados parciales.</p>
 </li>
 </ol>
 </div>
