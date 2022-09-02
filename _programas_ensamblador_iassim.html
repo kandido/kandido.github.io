@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_programas_ensamblador_iassim" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2022-09-02</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+<ul class="sectlevel1">
+<li><a href="_programas_ensamblador_iassim.html"><span class="toc-current">21. Programas ensamblador IASSim</span></a>
+<ul class="sectlevel2">
+<li><a href="_programas_ensamblador_iassim.html#iassim_ejemplos">21.1. Ejemplo 1: sum1toN.ias</a>
+<ul class="sectlevel3">
+<li><a href="_programas_ensamblador_iassim.html#_lenguaje_ensamblador_iassim_2">21.1.1. Lenguaje ensamblador iassim</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html#_ejemplo_2_productocociente">21.1.2. Ejemplo 2: Producto/Cociente</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html#_ejemplo_3_vectores">21.1.3. Ejemplo 3: Vectores</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_simulador_iassim_2.html">22. Simulador IASSim</a>
+</li>
+<li><a href="_lenguajes_de_programación_para_sum1ton.html">23. Lenguajes de programación para sum1toN</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">24. RTL Register Transfer Language</a>
+</li>
+<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html">25. Formato de Instrucción: ISA Intel x86-64</a>
+</li>
+<li><a href="_fpu_x87.html">26. FPU x87</a>
+</li>
+<li><a href="_pila.html">27. Pila</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_2.html">28. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">29. Lenguaje de Programación C</a>
+</li>
+<li><a href="_apéndice_prácticas.html">30. Apéndice Prácticas</a>
+</li>
+<li><a href="_arquitectura_amd64_4.html">31. Arquitectura amd64</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">32. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">33. Miaulario: Videoconferencia</a>
+</li>
+</ul>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_programas_ensamblador_iassim">21. Programas ensamblador IASSim</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="iassim_ejemplos">21.1. Ejemplo 1: sum1toN.ias</h3>
+<div class="sect3">
+<h4 id="_lenguaje_ensamblador_iassim_2">21.1.1. Lenguaje ensamblador iassim</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>2ª Versión</strong>: módulo fuente  <em>sum1toN_v2.ias</em>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La 2ª versión implementa un bucle cuyo cuerpo realiza una suma parcial donde uno de los sumandos varía en cada iteración.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sh">;;;;;;;;;;;;;; CABECERA
+; ; 2ª version : sum1toN_v2.ias
+;;;;;;;;;;;;;;;; SECCION DE INSTRUCCIONES
+;Arquitectura orientada a Acumulador (AC)
+;Registros accesibles : AC
+; algoritmo: Bucle que realiza la operación suma = n + suma si n&gt;=0
+; inicio bucle
+bucle:  S(x)-&gt;Ac+  n   	; AC &lt;- M[n] .Cargar sumando
+        Cc-&gt;S(x)   sumar  ; si AC &gt;= 0, PC &lt;- sumar .Si el sumando &lt; 0 fin del bucle
+        halt            ; stop
+        .empty		; un 20-bit 0, para que el nº de instrucciones sea par.
+        ; realizar la suma
+sumar:  S(x)-&gt;Ah+  suma ; AC &lt;- AC + M[suma]
+        At-&gt;S(x)   suma ; M[suma] &lt;- AC
+
+;;;;;;;;;;;;;;;;;;;SECCION DE DATOS
+; Declaracion de etiquetas, reserva de memoria externa, inicializacion.
+; Variables ordinarias
+n:	.data	5 ; variable sumando
+uno:	.data	1 ; cte
+suma:	.data	0 ; sumas parciales y resultado final</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Se ha desarrollado la sección de datos.</p>
+</li>
+<li>
+<p>Se ha realizado un BUCLE con la operación SUMA en el cuerpo del bucle y con PARADA al salirse del bucle.</p>
+</li>
+<li>
+<p>Se ha COMENTADO el código</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Versión Demo</strong> <em>tutorial.ias</em>: la versión demo que se incluye en el archivo de descarga del simulador.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sh">loop:   S(x)-&gt;Ac+  n    ;load n into AC
+        Cc-&gt;S(x)   pos  ;if AC &gt;= 0, jump to pos
+        halt            ;otherwise done
+        .empty          ;a 20-bit 0
+pos:    S(x)-&gt;Ah+  sum  ;add n to the sum
+        At-&gt;S(x)   sum  ;put total back at sum
+        S(x)-&gt;Ac+  n    ;load n into AC
+        S(x)-&gt;Ah-  one  ;decrement n
+        At-&gt;S(x)   n    ;store decremented n
+        Cu-&gt;S(x)   loop ;go back and do it again
+n:     .data 5  ;will loop 6 times total
+one:   .data 1  ;constant for decrementing n
+sum:   .data 0  ;where the running/final total is kept</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Ejemplo con la <strong>Versión Demo</strong>  <em>tutorial.ias</em>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>cambiar el nombre del módulo fuente: <em>sum1toN.ias</em></p>
+</li>
+<li>
+<p>reeditar el programa con etiquetas y comentarios en castellano.</p>
+</li>
+<li>
+<p>comentar el código con la información de los módulos descritos en las fases previas del desarrollo del programa</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sh">;;;;;;;;;;;;;; CABECERA
+; Modulo fuente sum1toN.ias
+; Calcula la suma de una secuencia de numeros enteros: suma = 1+2+..+n
+; dato de entrada : N y dato de salida : suma
+; Algoritmo : bucle de N iteraciones
+;             Los sumandos se van generando en sentido descendente de n a -1
+;             Si el sumando es negativo -&gt; -1 , no se realiza la suma y finaliza el bucle
+; Estructuras de datos : variables n y suma . Constante uno.
+; Lenguaje ensamblador: IASSim
+; ISA: Arquitectura de la maquina IAS de Von Neumann
+
+;;;;;;;;;;;;;;;; SECCION DE INSTRUCCIONES
+;Arquitectura orientada a Acumulador (AC)
+;Registros accesibles : AC
+; algoritmo: Bucle que genera los sumandos n, n-1, .... -1
+;	     y realiza la operación suma = n + suma si n&gt;=0
+
+; inicio bucle : suma y generacion de sumandos
+bucle:  S(x)-&gt;Ac+  n    	;cargar sumando
+        Cc-&gt;S(x)   sumar  	;si el sumando &lt; 0 fin del bucle
+	; fin del bucle
+        halt            	; stop
+        .empty          	;a 20-bit 0 para que el nº de instrucciones sea par.
+	; realizar la suma
+sumar:  S(x)-&gt;Ah+  sum  ;
+        At-&gt;S(x)   sum  ;
+	; actualizar sumando
+        S(x)-&gt;Ac+  n    ;
+        S(x)-&gt;Ah-  uno  ;
+        At-&gt;S(x)   n    ;
+        ; siguiente iteracion
+	Cu-&gt;S(x)   bucle ;
+
+;;;;;;;;;;;;;;;;;;;SECCION DE DATOS
+; Declaracion de etiquetas, reserva de memoria externa, inicializacion.
+; Variables ordinarias
+n:     .data 5  ; sumando e inicializacion
+sum:   .data 0  ; suma parcial y final
+; constantes
+uno:   .data 1  ;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo_2_productocociente">21.1.2. Ejemplo 2: Producto/Cociente</h4>
+<div class="sect4">
+<h5 id="_enunciado_2">Enunciado</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Desarrollar el programa que realice la operación \(N(N+1)/2\) equivalente a obtener el resultado de la suma del Tutorial1 \(\sum_{i=1}^{N}i=N(N+1)/2\).</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pseudocódigo del algoritmo</p>
+</li>
+<li>
+<p>Organigrama del algoritmo</p>
+</li>
+<li>
+<p>Programa en lenguaje RTL&#8594; Comentar apropiadamente el programa (cabecera con metainformación,secciones estructurales,bloques funcionales).</p>
+</li>
+<li>
+<p>Programa en lenguaje Ensamblador</p>
+</li>
+<li>
+<p>Ejecutar el programa paso a paso analizando el valor de los registros al ejecutar la multiplicación y la división.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A TENER EN CUENTA en la descripción RTL:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El producto de dos números de M dígitos da como resultado un número de 2M dígitos, es decir, el doble que los multiplicandos. Esto dificulta las operaciones aritméticas posteriores a la multiplación en la expresión matemática. Por ello dejaremos la operación multiplicación para el final dando prioridad a la suma y a la división</p>
+<div class="ulist">
+<ul>
+<li>
+<p>\(N(N+1)/2 = ((N+1)/2) * N \)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La división puede tener resto 1 ó 0 dependiendo de si el dividendo es par o impar</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Si N es impar &#8594; (N+1)/2 tiene el resto 0 &#8594;  \(((N+1)/2) * N \) donde N+1 es par</p>
+</li>
+<li>
+<p>Si N es par   &#8594; (N+1)/2 tiene el resto 1 &#8594; (N+1) = Cociente*2+Resto &#8594; \(N(N+1)/2 = N*C+N/2\) donde N es par</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La división por una potencia de 2 como 2<sup>1</sup> se realiza mediante una operación lógica: desplazar 1  bit a la izda el dividendo. El número de bits a desplazar es el valor del exponente.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>descripción RTL  <strong>AC &#8592; AC&lt;&lt;1</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_pseudocódigo_2">Pseudocódigo</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción del algoritmo mediante expresiones modo texto en lenguaje NATURAL</p>
+</li>
+<li>
+<p>VARIABLES:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>variable suma : almacena los resultados parciales y final</p>
+</li>
+<li>
+<p>variable N    : almacena el dato de entrada</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Estructura del CODIGO imperativo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La construcción de instrucciones básica es una asignación</p>
+<div class="ulist">
+<ul>
+<li>
+<p>\(suma = N(N+1)/2 \)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_organigramas_alto_nivel_y_rtl">Organigramas: Alto Nivel y RTL</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción gráfica del algoritmo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Alto Nivel: lenguaje natural imperativo</p>
+</li>
+<li>
+<p>RTL: lenguaje de bajo nivel que tiene en cuenta la ISA de la computadora</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/von_neumann/nn1_orga.svg" alt="Diagrama de Flujo: Alto Nivel y RTL">
+</div>
+<div class="title">Figure 71. Diagrama de Flujo: Pseudocódigo y RTL</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_lenguaje_ensamblador_ias">Lenguaje Ensamblador IAS</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>sum1toN_mul.ias</p>
+<div class="listingblock">
+<div class="content">
+<pre>; Suma de los primeros N numeros enteros. Y=N(N+1)/2
+; CPU IAS
+; lenguaje ensamblador: simaulador IASSim
+; Ejercicio 2.1 del libro de William Stalling, Estructura de Computadores
+
+; SECCION DE INSTRUCCIONES
+; ¿Es N par? -&gt; Resto de N/2
+S(x)-&gt;Ac+ n    ;01 n   ;AC    &lt;- M[n]
+.
+.
+; Caso 1º: N par
+.
+.
+; Caso 2º: N impar
+.
+.
+; Multiplicación N(N+1)/2
+.
+.
+; SECCION DE DATOS
+; Declaracion e inicializacion de variables
+y:     .data 0  ;resultado
+
+; Declaracion de las Constantes
+n:    .data 5   ;parametro N
+uno:  .data 1
+dos:  .data 2</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_simulación">simulación</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>simulación con el emulador IASsim</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo_3_vectores">21.1.3. Ejemplo 3: Vectores</h4>
+<div class="sect4">
+<h5 id="_enunciado_3">Enunciado</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Realizar la suma <em>C = A + B</em> de dos vectores A y B de 10 elementos cada uno inicializados ambos con los valores del 1 al 10.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Para acceder a cada elemento de un vector es necesario ir incrementando la dirección absoluta de memoria del operando en la instrucción que accede a los elementos del vector, por lo tanto, es necesario modificar el campo de operando de la instrucción. Hay una instrucción de transferencia de los 12 bits del campo de operando a los 12 bits de menor peso del registro AC , es decir,
+AC(28:39) &#8592; M[operando](8:19) . Y otra instrucción que realiza la transferencia inversa M[operando (8:19)] &#8592; AC(28:39).
+De esta manera se pueden realizar operaciones de aritméticas y lógicas sobre los 12 bits del campo de operando de una instrucción.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Pseudocódigo del algoritmo</p>
+</li>
+<li>
+<p>Organigrama del algoritmo</p>
+</li>
+<li>
+<p>Programa en lenguaje RTL &#8594; Comentar apropiadamente el programa (cabecera con metainformación,secciones estructurales,bloques funcionales).</p>
+</li>
+<li>
+<p>Programa en lenguaje Ensamblador: Se aconseja no realizar el programa directamente en su totalidad sino por fases, comenzando por una versión sencilla e ir avanzando hasta completar el programa en la versión final. Por ejemplo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1ª versión : Inicializar el vector A[i]=i</p>
+</li>
+<li>
+<p>2ª versión : Inicializar los vectores A[i]=i, B[i]=i, C[i]=i</p>
+</li>
+<li>
+<p>3ª versión : C[i]=A[i]+B[i]</p>
+</li>
+<li>
+<p>Posibles variables : len:longitud del vector, A0: dirección del primer elemento del Vector A, i: índice del vector, etc.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejecutar el programa paso a paso depurando las distintas versiones del programa.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_pseudocódigo_3">Pseudocódigo</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción del algoritmo mediante expresiones modo texto en lenguaje NATURAL</p>
+</li>
+<li>
+<p>VARIABLES:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>variables vector A,B,C : Declararlas e inicializarlas A[i]=i, B[i]=i, C[i]=0</p>
+</li>
+<li>
+<p>variable len : almacena el tamaño de los vectores</p>
+</li>
+<li>
+<p>variable A0    : almacena la dirección del primer elemento de vector A</p>
+</li>
+<li>
+<p>variable i    : índice al elemento de posición i de cualquier vector</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Estructura del CODIGO imperativo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La construcción de instrucciones básica es un bucle</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El bucle cuenta las iteraciones en sentido descendente</p>
+</li>
+<li>
+<p>Se inicializa el índice "i"=len-1 y</p>
+</li>
+<li>
+<p>En cada iteración se asigna A[i]=i , B[i]=i, C[i]=A[i]+B[i]</p>
+</li>
+<li>
+<p>En cada iteración se actualiza el índice i=i-1</p>
+</li>
+<li>
+<p>Se sale del bucle cuando i=-1</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_organigramas_1ª_versión_alto_nivel_y_rtl">Organigramas (1ª versión): Alto Nivel y RTL</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción gráfica del algoritmo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Alto Nivel: lenguaje natural imperativo</p>
+</li>
+<li>
+<p>RTL: lenguaje de bajo nivel que tiene en cuenta la ISA de la computadora</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/von_neumann/vectorABC_orga.svg" alt="Diagrama de Flujo: Alto Nivel y RTL">
+</div>
+<div class="title">Figure 72. Diagrama de Flujo: Pseudocódigo y RTL</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_organigrama_2ª_versión_rtl">Organigrama (2ª versión):  RTL</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Una posibilidad: inicializar los 3 vectores A[], B[] y C[]</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_organigrama_3ª_versión_rtl">Organigrama (3ª versión): RTL</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Versión definitiva: El vector C[] = A[]+B[]</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_lenguaje_ensamblador_ias_1ª_versión">Lenguaje Ensamblador IAS (1ª versión)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>vector_iniciar_A.ias</p>
+<div class="listingblock">
+<div class="content">
+<pre>; vector_iniciar_A.ias
+; Inicializar el vector A
+; A es un vector  de tamano "len" que esta almacenados en secuencia. La direccion del primer elemento de A se guardo en la variable A0
+; inicializamos el vector  A[i]=i
+; El acceso a los elementos del array se realiza escribiendo en el campo de direcciones de la instruccion de lectura/escritura.
+; Unicamente puden tener etiquetas las instrucciones de las izquierda por lo que habrá que utilizar las instrucciones Cu'-&gt;S(x) etiqueta [Salto a la instrucción derecha en la posición etiqueta] y Cu'-&gt;S(x) etiqueta [Salto a la instrucción izquierda en la posición etiqueta] para ALINEAR todas las etiquetas en instrucciones izquierda.
+; Es necesario saber si las instrucciones de las direcciones bucle,suma y C estan a la izda o derecha de la palabra de memoria.
+; El numero de instrucciones ha de ser par. Utilizar .empty en caso impar.
+; sin acentos en los comentarios
+; Help online : manual de referencia -&gt; tipos de datos
+; View -&gt; Preferences -&gt; Capacidad de Memoria Selectron
+
+
+;;;;;;;;;;;;;;;;;;SECCION DE INSTRUCCIONES
+
+;;;;;;;;;;; Inicializo indice i = len - 1
+dcha1:	Cu'-&gt;S(x)   dcha1	; salta a la dcha de dcha1
+	S(x)-&gt;Ac+  len		;
+	S(x)-&gt;Ah-  uno		;
+	At-&gt;S(x)   i		;
+
+;;;;;;;;; inicio while : condicion elemento &gt; 0
+bucle: 	Cc-&gt;S(x)   actu_A   	;si AC &gt;= 0, salto a Actu_A
+	Cu-&gt;S(x)   fin
+
+;;;;;;;;; Actualizo vector A[i]=i
+	; actualizo el puntero a A[i]
+actu_A:		S(x)-&gt;Ac+  cero		;
+	S(x)-&gt;Ah+  A0		;inicializo puntero con A[0]
+	S(x)-&gt;Ah+  i		;inicializo puntero con A[0]+i
+	Ap-&gt;S(x)  wa		;Actualizo campo de direcciones de la instruccion IZDA localizada en "wa" M[wa](8:19) &lt;- AC(28:39)
+	; actualizo A[i]=i
+	S(x)-&gt;Ac+  i	  	;
+	Cu-&gt;S(x)  wa		; salta a la izda de wa
+wa:	At-&gt;S(x)   100		;M[100]&lt;-AC. La direccion 100 cambia en tiempo de ejecucion.
+
+
+;;;;;;;;;; Siguiente iteracion
+	S(x)-&gt;Ac+  i		;
+	S(x)-&gt;Ah-  uno		;
+	At-&gt;S(x)   i		;
+	Cc-&gt;S(x)   bucle
+	.empty
+fin:	halt
+	.empty
+
+
+;;;;;;;;;;;;;;;;SECCION DE DATOS
+
+;;;;;;; variables ordinarias
+len:		.data 10	; longitud vectores A[], B[] y C[]
+A0:		.data 30	; direccion A[0]
+i:		.data 0		; indice del array
+
+;;;;;;;; constantes
+uno:		.data 1		;
+cero:		.data 0</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_simulación_1ª_versión">Simulación (1ª versión)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Realizar la ejecución del código binario con el emulador IASsim</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_lenguaje_ensamblador_ias_2ª_versión">Lenguaje Ensamblador IAS (2ª versión)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Desarrollar el código fuente del programa vector_iniciar_A_B_C.ias:</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_simulación_2ª_versión">Simulación (2ª versión)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Realizar la ejecución del código binario con el emulador IASsim</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_lenguaje_ensamblador_ias_3ª_versión">Lenguaje Ensamblador IAS (3ª versión)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Desarrollar el código fuente del programa vectorA+B.ias:</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_simulación_3ª_versión">Simulación (3ª versión)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Realizar la ejecución del código binario con el emulador IASsim</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_simulador_iassim_2.html">Simulador IASSim</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2022-09-02 15:42:44 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

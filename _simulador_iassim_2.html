@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_simulador_iassim_2" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2022-09-02</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+<ul class="sectlevel1">
+<li><a href="_programas_ensamblador_iassim.html">21. Programas ensamblador IASSim</a>
+</li>
+<li><a href="_simulador_iassim_2.html"><span class="toc-current">22. Simulador IASSim</span></a>
+<ul class="sectlevel2">
+<li><a href="_simulador_iassim_2.html#iassim_install">22.1. Máquina Virtual Java JVM</a>
+</li>
+<li><a href="_simulador_iassim_2.html#_simulador_ias">22.2. Simulador IAS</a>
+</li>
+<li><a href="_simulador_iassim_2.html#_simulacióndepuración">22.3. Simulación/Depuración</a>
+</li>
+</ul>
+</li>
+<li><a href="_lenguajes_de_programación_para_sum1ton.html">23. Lenguajes de programación para sum1toN</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">24. RTL Register Transfer Language</a>
+</li>
+<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html">25. Formato de Instrucción: ISA Intel x86-64</a>
+</li>
+<li><a href="_fpu_x87.html">26. FPU x87</a>
+</li>
+<li><a href="_pila.html">27. Pila</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_2.html">28. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">29. Lenguaje de Programación C</a>
+</li>
+<li><a href="_apéndice_prácticas.html">30. Apéndice Prácticas</a>
+</li>
+<li><a href="_arquitectura_amd64_4.html">31. Arquitectura amd64</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">32. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">33. Miaulario: Videoconferencia</a>
+</li>
+</ul>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_simulador_iassim_2">22. Simulador IASSim</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="iassim_install">22.1. Máquina Virtual Java JVM</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Instalar el Kit de Desarrollo Java (<a href="http://openjdk.java.net/">Java Development Kit-JDK</a>) en el sistema ubuntu</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://packages.ubuntu.com/bionic/openjdk-11-jdk">openjdk-11-jdk</a> en la distribución linux/GNU ubuntu 18.0 bionic.</p>
+</li>
+<li>
+<p>Comprobar que se tiene acceso al paquete: <code>apt-cache search openjdk-11-jdk</code></p>
+</li>
+<li>
+<p>Instalar el paquete: <code>sudo apt-get install openjdk-11-jdk</code></p>
+</li>
+<li>
+<p>Comprobar que está instalado el paquete: <code>dpkg -l openjdk-11-jdk</code></p>
+</li>
+<li>
+<p>Comprobar la versión de java instalada: <code>java --version</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>datos de la instalación en Ubuntu 17</p>
+<div class="listingblock">
+<div class="content">
+<pre>Date: September 15, 2017.
+Emulator version: IASSim2.0.4
+Emulator command: java -cp IASSim2.0.4.jar:jhall.jar:IASSimHelp2.0.jar iassim.Main -m IAS.cpu
+Operating System: GNU/linux
+	Distributor ID:	Ubuntu
+	Description:	Ubuntu 17.04
+	Release:	17.04
+	Codename:	zesty
+Java version: openjdk version "1.8.0_131"
+              OpenJDK Runtime Environment (build 1.8.0_131-8u131-b11-2ubuntu1.17.04.3-b11)
+              OpenJDK 64-Bit Server VM (build 25.131-b11, mixed mode)</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>IASSim se ejecuta en la máquina virtual de Java JVM, por lo tanto es un requisito tener instalada la máquina virtual JVM. Virtualizar una máquina consiste en instalar una capa SW por encima de cualquier Sistema Operativo (Linux, MacOS, Windows) de tal forma que cualquier aplicación (Por ejemplo IASSim) que se instale sobre la capa de virtualización no depende del Sistema Operativo y así se consigue independizar la aplicación (Por ejemplo IASSim) de los diferentes Sistemas Operativos.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_simulador_ias">22.2. Simulador IAS</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>IASSim : Herramienta de simulación de la computadora IAS de Von Neumann útil para la simulación de la ejecución paso a paso de las instrucciones de un programa en código máquina. Permite visulalizar el contenido de la memoria principal Selectron y de los registros de la CPU al finalizar cada ciclo de instrucción.</p>
+</li>
+<li>
+<p><a href="http://www.cs.colby.edu/djskrien/IASSim/">IASSim Web</a> : Al hacer click nos conectamos al repositorio del simulador IASSim.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Descargar el Simulador IASSim2.0.4 : archivo zip</p>
+</li>
+<li>
+<p>Descomprimir el archivo IASSim2.0.4.zip.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir el Simulador mediante el comando:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>../IASSim2.0.4$ <code>java -cp IASSim2.0.4.jar:jhall.jar:IASSimHelp2.0.jar iassim.Main -m IAS.cpu</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>En Windows se puede hacer doble click sobre el archivo por lotes con extensión <em>.bat</em>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_simulacióndepuración">22.3. Simulación/Depuración</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Los objetivos de la simulación son dos:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Interpretar la ejecución de cada instrucción observando como  varía la memoria y los registros</p>
+</li>
+<li>
+<p>Depurar posibles errores en el desarrollo del programa.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><a href="https://www.linuxvoice.com/john-von-neumann/" class="bare">https://www.linuxvoice.com/john-von-neumann/</a></p>
+</li>
+<li>
+<p>Es necesario conocer la codificación hexadecimal de los números enteros y su conversión a código binario.</p>
+</li>
+<li>
+<p>Al programa <strong>Demo</strong> <em>tutorial.ias</em> que viene con el propio emulador le llamaremos <em>sum1toN.ias</em></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>El archivo zip descargado ha debido de ser descomprimido: observar los archivos extraídos, uno de ellos son las instrucciones de apertura del emulador.</p>
+</li>
+<li>
+<p>Abrir el emulador:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En linux mediante el comando en línea: <code>java -cp IASSim2.0.4.jar:jhall.jar:IASSimHelp2.0.jar iassim.Main -m IAS.cpu</code></p>
+</li>
+<li>
+<p>En windows: Doble click en el archivo por lotes con la extensión <em>*.bat</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ayuda: <code>Help &#8594; General IASSim Help &#8594; Assembly Language &#8594; Sintaxis y Regular Instructions</code> : manual del lenguaje ensamblador</p>
+</li>
+<li>
+<p>Borrar el contenido de la memoria tanto interna como externa. <code>Execute &#8594; Clear all</code></p>
+</li>
+<li>
+<p>Desactivar el modo depuración : <code>Execute &#8594; Debug Mode NO seleccionado</code></p>
+</li>
+<li>
+<p>Cargar el programa <em>sum1toN.ias</em> en lenguaje ensamblador : <code>File &#8594; Open &#8594;  sum1toN.ias</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Lenguaje ensamblador: creado por los autores de la aplicación <em>IASSim</em>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ventana RAM Selectrons: direcciones y contenido en código hexadecimal,decimal,binario&#8230;&#8203; Anchura memoria : 20 ó 40 bits.</p>
+</li>
+<li>
+<p>Seleccionar la ventana con el código fuente en lenguaje ensamblador.</p>
+</li>
+<li>
+<p>Ensamblar y Cargar el módulo ejecutable en memoria     : <code>Execute &#8594; Assemble &amp; Load</code></p>
+</li>
+<li>
+<p>Analizar el mapa de memoria : sección de instrucciones y sección de datos</p>
+</li>
+<li>
+<p>Activar el modo depuración 				    : <code>Execute &#8594; Debug Mode</code></p>
+</li>
+<li>
+<p>Ejecución de cada instrucción paso a paso               : <code>Step by Step</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Contenido de la Memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La primera instrucción está almacenada en los 20 bits de la izda de la posición de memoria y la segunda instrucción en la dcha.</p>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/von_neumann/ias_code_machine.png" alt="ias code machine">
+</div>
+<div class="title">Figure 73. IAS Codigo Maquina</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Contenido de los Registros:</p>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/von_neumann/ias_registers.png" alt="ias registers">
+</div>
+<div class="title">Figure 74. IAS Registros</div>
+</div>
+</li>
+<li>
+<p>Ejercicio:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Antes de la ejecución de cada instrucción interpretarla: interpretar la instrucción en lenguaje máquina.</p>
+</li>
+<li>
+<p>preveer el nuevo contenido de la sección de datos de la memoria</p>
+</li>
+<li>
+<p>preveer el nuevo contenido de los registros de la CPU.</p>
+</li>
+<li>
+<p>preveer la próxima instrucción a ejecutar</p>
+</li>
+<li>
+<p>Deducir el organigrama del programa.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_programas_ensamblador_iassim.html">Programas ensamblador IASSim</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_lenguajes_de_programación_para_sum1ton.html">Lenguajes de programación para sum1toN</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2022-09-02 15:42:44 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>
