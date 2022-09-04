@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-02</span>
+<span id="revdate">2022-09-04</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -70,11 +70,11 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 <li><a href="_operaciones_aritmeticas_y_logicas.html#_aritmetica_binaria">4.4. Aritmetica Binaria</a>
 <ul class="sectlevel3">
-<li><a href="_operaciones_aritmeticas_y_logicas.html#_suma_en_módulo_2_binaria_en_binario_puro">4.4.1. Suma en módulo 2 (binaria) en binario puro</a>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_suma_en_módulo_2_binaria_en_binario_puro_nº_naturales">4.4.1. Suma en módulo 2 (binaria) en binario puro (Nº NATURALES)</a>
 </li>
 <li><a href="_operaciones_aritmeticas_y_logicas.html#_resta_en_módulo_2_binaria_en_binario_puro">4.4.2. Resta en módulo 2 (binaria) en binario puro</a>
 </li>
-<li><a href="_operaciones_aritmeticas_y_logicas.html#_resta_en_módulo_2_binaria_en_complemento_a_2">4.4.3. Resta en módulo 2 (binaria) en complemento a 2</a>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_sumaresta_en_módulo_2_binaria_en_complemento_a_2">4.4.3. Suma/Resta en módulo 2 (binaria) en complemento a 2</a>
 </li>
 <li><a href="_operaciones_aritmeticas_y_logicas.html#_suma_en_módulo_16_hexadecimal">4.4.4. Suma en Módulo 16 (Hexadecimal)</a>
 </li>
@@ -174,7 +174,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="ulist">
 <ul>
 <li>
-<p>Operaciones aritméticas de suma y resta con datos representados en código binario.</p>
+<p>Operaciones aritméticas de suma y resta con números naturales y enteros representados en código binario.</p>
 </li>
 <li>
 <p>Operaciones lógicas de datos representados en código binario.</p>
@@ -197,7 +197,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="ulist">
 <ul>
 <li>
-<p>La Unidad Aritmetico Lógica (ALU) es la unidad hardware básica encargada de realizar las operaciones de cálculo aritmético como la suma y resta y de realizar operaciones lógicas de tipo booleano como las operaciones not, or, and, etc</p>
+<p>La Unidad Aritmetico Lógica (ALU) es la unidad hardware básica encargada de realizar las operaciones de cálculo aritmético como la suma y resta y de realizar operaciones lógicas de tipo booleano como las operaciones NOT, OR, AND, etc</p>
 </li>
 </ul>
 </div>
@@ -205,76 +205,109 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="sect2">
 <h3 id="_aritmetica_binaria">4.4. Aritmetica Binaria</h3>
 <div class="sect3">
-<h4 id="_suma_en_módulo_2_binaria_en_binario_puro">4.4.1. Suma en módulo 2 (binaria) en binario puro</h4>
+<h4 id="_suma_en_módulo_2_binaria_en_binario_puro_nº_naturales">4.4.1. Suma en módulo 2 (binaria) en binario puro (Nº NATURALES)</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Suma de datos binarios en código binario puro</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Interpretación <strong>modular</strong> &#8594; módulo 100.000 &#8594; Interpretación modular gráfica  mediante la circuferencia. Qué ocurre en el cuenta-kilómetros parcial del coche cuando llegamos a 99.999.</p>
+<p>Los  números naturales no tienen la marca de un signo ya que son todos positivos: 0,1,2,3&#8230;&#8203;.</p>
 </li>
 <li>
-<p>Suma en módulo 2. El <strong>acarreo</strong> se produce al llegar o pasar el valor  <em>2</em>.</p>
+<p>Suma de datos en código binario puro</p>
 <div class="ulist">
 <ul>
 <li>
-<p>1+1=uno más uno = dos &gt;=2 &#8594; al resultado dos le resto 2 (2-2=0) y me llevo una.</p>
-</li>
+<p>Concepto de operación <strong>modular</strong></p>
+<div class="ulist">
+<ul>
 <li>
-<p>1+1+1=uno más uno más uno = tres &gt;=2 &#8594; al resultado tres le resto 2 (3-2=1) y me llevo una.</p>
+<p>Ejemplo: módulo 100.000 &#8594; Interpretación modular gráfica  mediante la circunferencia. Qué ocurre en el cuenta-kilómetros parcial del coche cuando llegamos a 99.999.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>10011011+00011011 = 10110110</p>
+<p>Suma binaria en módulo 2. El <strong>acarreo</strong> (llevada) se produce al llegar o pasar el valor  <em>2</em>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1+1=uno más uno = dos &gt;=2 &#8594; al valor dos le resto el módulo 2 (2-2=0) y me llevo una. El valor 2 en binario se representa como 1 0, donde el cero es la representación en la misma posición que el digito sumando y el 1 la llevada a la siguiente posición.</p>
+</li>
+<li>
+<p>1+1+1=uno más uno más uno = tres &gt;=2 &#8594; al valor tres le resto el módulo 2 (3-2=1) y me llevo una. El valor 3 en binario se representa como 1 1, donde el uno de la derecha es la representación en la misma posición que el digito sumando y el 1 de la izda es la llevada a la siguiente posición.</p>
 </li>
 </ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejercicio: calcular la suma de 10011011+00011011 = 10110110</p>
+<div class="listingblock">
+<div class="content">
+<pre>Llevadas --&gt;          1 1   1 1
+
+                  1 0 0 1 1 0 1 1  &lt;--sumando
+      	        + 0 0 0 1 1 0 1 1  &lt;--sumando
+
+Valor suma            1 3 2 1 3 2
+                *****************
+Resultado --&gt;     1 0 1 1 0 1 1 0  &lt;--suma</pre>
+</div>
 </div>
 </li>
 </ul>
 </div>
 <div class="sect4">
-<h5 id="_overflow_desbordamiento">Overflow-Desbordamiento</h5>
+<h5 id="_overflow_ó_desbordamiento">Overflow ó Desbordamiento</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Ocurre cuando:</p>
+<p>Se dice que la suma o resta se ha desbordado cuando:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>El valor a representar está fuera de rango</p>
+<p>El valor del resultado a representar está fuera del rango debido a la limitación del número de digitos.</p>
 </li>
 <li>
 <p>El resultado de la operación aritmética tiene un tamaño superior al permitido por la palabra de memoria o registro donde se almacena.</p>
 </li>
-</ul>
-</div>
+<li>
+<p>La solución sería aumentar el número de digitos que representan al dato, pero no siempre se puede.</p>
 </li>
 <li>
-<p>Provoca errores: al inicializar variables de tipo entero, en las operaciones aritméticas suma y resta.</p>
+<p>Lógicamente si se da un desbordamiento el resultado que proporciona la ALU no es correcto. La ALU dispone de un flag o banderín de desbordamiento OF (overflow flag) que almacena un bit. Si el bit OF=1 significa que la  última operación realizada por la ALU ha producido overflow. El programador puede saber si ha habido error de overflow leyendo el banderín OF.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>Ejemplos:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Representar el valor 8 en binario de dos bits. Con dos bits el valor máximo es el 3 y las operaciones se realizan en módulo 4</p>
-<div class="ulist">
-<ul>
-<li>
-<p>3+1 = 0 &#8594; suma modular. Representar gráficamente mediante la rueda.</p>
-</li>
-<li>
-<p>8 = 8 - 4*n = 0 donde n es cualquier entero positivo</p>
-</li>
-</ul>
+<p>La unidad ALU dispone de dos registros de entrada de "1 byte", AL y BL, cada uno donde almacena dos datos : 10011011 y 10011011. Dispone también de un registro de salida de 1 byte, CL. Calcular el resultado de la suma en formato binario puro: CL &#8592; AL+BL y el valor del banderín OF.</p>
+<div class="listingblock">
+<div class="content">
+<pre>Llevadas --&gt;          1 1   1 1
+
+                  1 0 0 1 1 0 1 1  &lt;--AL
+      	        + 1 0 0 1 1 0 1 1  &lt;--BL
+
+Valor suma        2   1 3 2 1 3 2
+                *****************
+Resultado --&gt;  1  0 0 1 1 0 1 1 0  &lt;--suma
+
+CL : 0 0 1 1 0 1 1 0
+OF : 1</pre>
+</div>
 </div>
 </li>
 <li>
-<p>10011011+10011011 = 100110110 = Error overflow o desbordamiento= suma modular = 00110110</p>
+<p>Error de overflow ya que la ALU ha calculado el resultado de la suma: 00110110</p>
+</li>
+<li>
+<p>El resultado correcto 100110110 está fuera del rango de un registro de 8 bits. El rango permitido serían los números comprendidos entre 0000000 y 11111111, es decir, valores comprendidos entre 0 y 255. El dato 100110110 cuyo valor es 310. La solución sería diseñar una nueva CPU con registros cuyo tamaño de palabra sea mayor que 1 byte, pej 2 bytes. Entonces si a la entrada de la ALU tenemos AX=0000000010011011 BX=0000000010011011 , el resultado de la operación CX &#8592;AX+BX sería 0000000100110110 y OF=0 &#8594; no hay error de overflow.</p>
 </li>
 </ul>
 </div>
@@ -288,21 +321,9 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="ulist">
 <ul>
 <li>
-<p>Resta de datos binarios en binario puro. Resta en módulo 2. Interpretación modular gráfica  mediante la circuferencia.</p>
+<p>Para poder restar dos números naturales (sin signo) es necesario que el valor del minuendo sea superior al del sustraendo.</p>
 <div class="ulist">
 <ul>
-<li>
-<p>10110110 - 10011011 = 00011011</p>
-<div class="listingblock">
-<div class="content">
-<pre>		1 0 1 1 0 1 1 0  &lt;--minuendo
-      	      - 1 0 0 1 1 0 1 1  &lt;--sustraendo
-LLevadas --&gt;          1   1 1
-              *****************
-                0 0 0 1 1 0 1 1</pre>
-</div>
-</div>
-</li>
 <li>
 <p>0-0 = 0</p>
 </li>
@@ -313,16 +334,32 @@ LLevadas --&gt;          1   1 1
 <p>1-0 = 0</p>
 </li>
 <li>
-<p>Cuando el minuendo en la posición p es menor que el sustraendo es necesario sumar el módulo al minuendo de la posición p y sumar la llevada al sustraendo de la posición p+1</p>
+<p>¿Qué ocurre si a 0 le tengo que restar 1? Al valor 0 NO se el puede resta el valor 1. Cuando un dígito del minuendo en la posición "p" es menor que el dígito en la misma posición "p" del sustraendo, la solución es sumarle al minuendo de la posición p el módulo (2 en binario) y al mismo tiempo también sumarle el mismo valor al sustraendo pero a través de la posición "p+1", con lo cual si sumamos el mismo valor tanto al minuendo como al sustraendo el resultado de la resta no se ve afectado.</p>
 </li>
 <li>
-<p>0-1   &#8594; 0+módulo-1=0+2-1= 1 y llevada 1 a la posición siguiente</p>
+<p>posición "p": minuendo 0 - sustraendo1 &#8594; En el minuendo 0+módulo-1=0+2-1= 1. El valor 2 en la posición "p" equivale al valor 1 en la posición "p+1". En la posición "p+1" sumaremos 1 al sustraendo.</p>
 </li>
 <li>
-<p>0-1-1 &#8594; 0+módulo-1-1=0+2-1-1= 0 y llevada 1 a la posición siguiente</p>
+<p>posición "p": minuendo 0 - sustranedo 1 - llevada 1 &#8594; En el minuendo 0+módulo-1-1=0+2-1-1=0 y llevada 1 que sumaremos a la posición siguiente del sustraendo.</p>
 </li>
 <li>
-<p>1-1-1 &#8594; 1+módulo-1-1=1+2-1-1= 1 y llevada 1 a la posición siguiente</p>
+<p>posición "p": 1-1-1 &#8594; en el sustraendo 1+módulo-1-1=1+2-1-1= 1 y llevada 1 que sumaremos a la posición siguiente del sustraendo.</p>
+</li>
+<li>
+<p>10110110 - 10011011 = 00011011</p>
+<div class="listingblock">
+<div class="content">
+<pre>Sumar crédito al minuendo            2  2     2  2
+
+                            1  0  1  1  0  1  1  0  &lt;--minuendo
+      	                  - 1  0  0  1  1  0  1  1  &lt;--sustraendo
+
+
+Sumar llevada al sustraendo       1  1     1  1
+                          *************************
+Resta                       0  0  0  1  1  0  1  1</pre>
+</div>
+</div>
 </li>
 </ul>
 </div>
@@ -331,50 +368,131 @@ LLevadas --&gt;          1   1 1
 </div>
 </div>
 <div class="sect3">
-<h4 id="_resta_en_módulo_2_binaria_en_complemento_a_2">4.4.3. Resta en módulo 2 (binaria) en complemento a 2</h4>
+<h4 id="_sumaresta_en_módulo_2_binaria_en_complemento_a_2">4.4.3. Suma/Resta en módulo 2 (binaria) en complemento a 2</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Suma de datos con signo. Codificación en complemento a 2.</p>
+<p>Repasar el formato complemento a 2 para números enteros con signo</p>
 </li>
-<li>
-<p>10011011+00011011 =  10110110</p>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_suma">suma</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>El primer sumando es negativo y el segundo es positivo, es decir, su suma es una resta.</p>
+<p>Realizar la suma de en complemento a 2 de números enteros de 1 byte 00100101 y 0111</p>
 </li>
 <li>
-<p>El primer sumando convertido a positivo : Complementar 10011011 sumar 1 = 01100100+1 = 01100101 = 64+32+4+1 = 101</p>
-</li>
+<p>Los dos datos empiezan por cero, luego son positivos según el formato complemento a 2</p>
+<div class="ulist">
+<ul>
 <li>
-<p>El segundo sumando es 00011011 = 16+8+2+1 = 27</p>
-</li>
-<li>
-<p>La operación en decimal es -101+27=-74</p>
-</li>
-<li>
-<p>El resultado  convertido a positivo : complemento a 2 = 01001001+1 = 01001010 = 64+8+2 = 74</p>
+<p>extiendo los sumandos para tener todos el mismo tamaño. 0111 extendiendo el bit de signo 0 es 00000111</p>
+<div class="listingblock">
+<div class="content">
+<pre>Llevadas --&gt;              1 1 1
+
+                  0 0 1 0 0 1 0 1  &lt;--AL
+      	        + 0 0 0 0 0 1 1 1  &lt;--BL
+
+Valor suma                1 3 2 2
+                *****************
+Resultado --&gt;     0 0 1 0 1 1 0 0  &lt;--suma</pre>
+</div>
+</div>
 </li>
 </ul>
 </div>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_resta">resta</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La resta X-Y equivale a la suma X+(-Y). La resta -X-Y equivale a la suma <em><code>(-X)</code>(-Y)</em>. Por lo que la ALU las restas la realiza mediante la operación suma y cambiando de signo a los operandos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo: realizar la resta 27-101 en complemento a 2 utilizando registros de 1 byte</p>
+<div class="listingblock">
+<div class="content">
+<pre>primero codifico tanto el minuendo +27 como el sustraendo +101
+  +27 -&gt; 00011011
+ +101 -&gt; 01100101
+
+-101 es el complemento a 2 de +101 -&gt; 10011011
+
+La operación equivale a la suma (-101)+27 -&gt; 10011011+00011011
+
+Llevadas --&gt;          1 1   1 1
+
+                  1 0 0 1 1 0 1 1  &lt;--AL
+      	        + 0 0 0 1 1 0 1 1  &lt;--BL
+
+Valor suma            1 3 2 1 3 2
+                *****************
+Resultado --&gt;     1 0 1 1 0 1 1 0  &lt;--suma</pre>
+</div>
+</div>
+</li>
+<li>
+<p>¿ Cuál es el valor del resultado?</p>
+<div class="listingblock">
+<div class="content">
+<pre>el resultado tiene el bit de la posición más significativa a 1 por lo que su valor es negativo en complemento a 2. Si es negativo no puedo calcular su valor mediante sumas ponderadas ya que no es una representación posicional. Tengo que cambiar lo de signo para hacerlo positivo y así poder calcular su valor por suma ponderada.
+
+Complemento a 2 del resultado 10110110 -&gt; 01001010 cuyo valor es +74 , por lo que el valor de 10110010 es -74.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>repetir la operación cambiando de computadora y utilizando registros de 2 bytes. Basarse en el apartado anterior.</p>
+<div class="listingblock">
+<div class="content">
+<pre>Extiendo el bit de signo del número negativo 10011011 hasta completar los 16 bits
+  AX &lt;-- 1111111110011011   (-101)
+Extiendo el bit de signo del número positivo 00011011 hasta completar los 16 bits
+  BX &lt;-- 0000000000011011   (+27)
+Extiendo el bit de signo del resultado negativo 10110110 hasta completar los 16 bits
+  CX &lt;-- 1111111110110110   (-74)</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect4">
 <h5 id="_overflow_en_complemento_a_2_c2">Overflow en Complemento a 2 (C2)</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>En las operaciones aritméticas suma y resta el resultado es de un tamaño fuera del rango de posibles representaciones, por lo que el valor resultante no es válido.</p>
+<p>El desbordamiento u overflow ocurre en las operaciones aritméticas suma y resta cuando el resultado de la operación es de un tamaño fuera del rango de posibles representaciones, por lo que el valor resultante no es válido y provoca errores.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>10000000+10000000 = 00000000 = Overflow</p>
+<p>Ejemplo de suma utilizando registros de 2 bytes : 10000000+10000000 = 00000000 &#8658; Overflow</p>
+</li>
+<li>
+<p>Error ya que -128-128 no es cero.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Si los dos sumandos son negativos el resultado no puede ser positivo</p>
+<div class="listingblock">
+<div class="content">
+<pre>Para que el resultado fuese correcto deberíamos utilizar registros de un tamaño superior al byte, por ejemplo 9 bits. En este caso realizamos nuevamente la operación extendiendo los datos 1 bit más:
+110000000+110000000 = 100000000 -&gt; no hay overflow -&gt; la suma de dos números negativos ha dado negativo
+
+si realizamos la operación en decimal -&gt; (-128)+(-128) = (-256)</pre>
+</div>
+</div>
 </li>
 <li>
 <p>Si los dos sumandos son positivos el resultado no puede ser negativo</p>
@@ -456,6 +574,9 @@ Observar que al realizar operaciones aritméticas de suma y resta, el código de
 <div class="ulist">
 <ul>
 <li>
+<p>Todo lo visto anteriormente para números binarios se puede realizar en cualquier otra base, por ejemplo en números codificados en hexadecimal.</p>
+</li>
+<li>
 <p>Resta en módulo 16:</p>
 <div class="ulist">
 <ul>
@@ -466,7 +587,7 @@ Observar que al realizar operaciones aritméticas de suma y resta, el código de
 <p>0x4308 - 0x1ABC = 0x</p>
 <div class="listingblock">
 <div class="content">
-<pre>		0x 4 3 0 8 &lt;-- Minuendo
+<pre>                0x 4 3 0 8 &lt;-- Minuendo
       	      - 0x 1 A B C &lt;-- Sustraendo
 LLevadas --&gt;       1 1 1
               *************
@@ -894,8 +1015,9 @@ LLevadas --&gt;       1 1 1
 <p>La ALU es interna a la CPU y procesa datos numéricos enteros almacenaddos en los registros de propósito general.</p>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/ditaa/svg/eNrllt9LwzAQx5_bv-IelSJhIj6JsE4fBIdjUhQpHaENUpiJJBEU8i_5V_iPyTrXbtmuaeoYgvfU5sflk7vclwNobMS4lnQOEylyppSQkPBSw9FokhwH4LQxexGypHD9rpnkFKbDcRid9LAosE9D3EShCSqrFhmUDJkxm9uD-lj8OGgHi7Z9mdWX2d5tYMrU21zTQqwvrdbFyT1clZLleSk4U3sCE1jML9s4l5ZZgT4_g_nXJ2dUdUkUkoId0cez1fwQ7B69kknQl5N2Syj5GRreJo7dThpSv_1HfxL7IgRSy4knDwlsh-B02Z4_-6QlcroxlvasyAx5tl1r0iBP1I_GLj2kIF1QBu5emaS8ELNBw7Y2elptqsEXgjFltCAPstRs_6gt0tFJXtEa66oZ25LmIbYLqX0ulZYChojuHJojPgBHBym1qOCPROc_cfhn6ekAVBfVFMAA4g_NYFXslquY8lxAwWo21Z9q1UHe8KqDdKTMt3fbvR4Nfr_W1V_lkGYLfm9Z6NUO110n1UK5fJvQ65p-QQy9r9r0ot8r_SEh" alt="Diagram">
+<img src="https://kroki.io/ditaa/svg/eNrllt9LwzAQx5_bv-IelTLCtlcZrNMHweGoFEXGJLRBCjORJIJC_nhZ57ot3TVNHUXwnto0uXx6P74cwN5mjGtJ17CQImNKCQkpLzRczBbpZQBOm7M3IQsKN5-aSU4hmc7DaNDBosC-DXEThSYordxkUDLkizk-HlTX4tdBM1hU92V2T6Z-2kDC1Mda01wcbi33xekDXBeSZVkhOFNnAhOnHZDBpIlza6vmQI9HPnxwHKfDgKHJ2r8QrHQ65ZKghbNsl0_yszS9Sx2nnTSkKv0nfxL7RwgsLSeePCSwHYLTZXP-apW39XK0tuzYkCukatu2pEFK1I_G7jykH11QBu7fmaQ8Fy_DPdvB6qg8VIFv9CJhNCePstDs_KgCa7lJO3VFe6ytZtQVzUNrN0r7WigtBUwR3embI-6Bo4WUWlTwR6Lznzj8s_TcA9VV-QlgCPGXZrBrdstVTHkmIGcVm-pOtRsgb3k5QDpS5ju6nd6PBr_b5OqvcsisBb-3Veg1DVdDJ9VCuXyb0Os3kaHTLyYeNh59A0rkHLU=" alt="Diagram">
 </div>
+<div class="title">Figure 30. Arquitectura Intel x86 de 32 bits</div>
 </div>
 </li>
 </ul>
@@ -962,21 +1084,21 @@ LLevadas --&gt;       1 1 1
 </table>
 </li>
 <li>
-<p>Carry flag:</p>
+<p>Carry flag CF:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>se activa si la llevada afecta a una posición de bit mayor que del ancho de palabra (word size) de la ALU en una operación aritmética de números enteros sin signo o con signo</p>
+<p>se activa si la llevada afecta a una posición de bit mayor que del ancho de palabra (word size) de la ALU en una operación aritmética de <strong>números enteros sin signo o con signo</strong></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Overflow flag:</p>
+<p>Overflow flag OF:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>se activa si teniendo en cuenta el bit de mayor peso MSB (aunque esté fuera el word size) indicase error en la operación aritmética con números enteros con signo. Si no se tiene en cuenta el MSB fuera del word size, la operación es correcta.</p>
+<p>se activa si teniendo en cuenta el bit de mayor peso MSB (aunque esté fuera el word size) indicase error en la operación aritmética con <strong>números enteros con signo</strong>. Si no se tiene en cuenta el MSB fuera del word size, la operación es correcta.</p>
 </li>
 </ul>
 </div>
@@ -1018,19 +1140,35 @@ LLevadas --&gt;       1 1 1
 <pre>  11111111
 + 00000001
 __________
- 100000000 -&gt; hay acarreo y también overflow ya que si consideramos el MSB=1 de la posición 8ª el resultado sería erróneo, es decir, si realizasemos una    extensión de signo el resultado sería erroneo y por lo tanto hay que rechazar el dígito fuera de rango con lo que la operación es correcta. El bit de signo es el de la posición más alta del "word size" (posición 7ª)
+ 100000000 -&gt; ¿ Hay acarreo y SI hay Overflow? -&gt; Esa suma NO es correcta, ya que para realizar la operación con 9 bits los operandos tienen que ser de 9 bits y por lo tanto hay que extender el bit de signo. La suma con 9 bits sería:
 
+  111111111
++ 000000001
+___________
+  000000000 -&gt; Hay acarreo y NO hay Overflow. CF=1 y OF=0.
+
+Nunca va haber overflow si sumamos datos de signo contrario
+
+ A=11110000
+ B=00010100
+ A-B=A+(-B)
 
  A :    11110000
 -B :   +11101100
 ________________
-A–B:   111011100 -&gt; hay acarreo pero no overflow ya que el MSB=1 en una posición fuera del "word size" no afecta al signo del resultado, ya que las posiciones del MSB (8ª) y la anterior (7ª) del bit de signo tienen el mismo dígito de valor 1
+A–B:    11011100 -&gt; Hay acarreo pero NO overflow. La suman de dos datos negativos da como resultado un número también negativo.CF=1 y OF=0
 
+ A=10000000
+ B=10000000
+ A+B
 
- A :    10000000
--B :   +10000000
-________________
-A–B:   100000000 -&gt; hay acarreo. Hay también overflow ya que el bit MSB de valor 1 es diferente de la posición anterior ( 7ª, bit de signo) de valor 0.  Los dos sumandos son negativos (bit de signo posición 7ª) y el bit de signo del resultado (bit posición 7ª) es positivo luego el resultado es erróneo.</pre>
+ Para hacer la suma con 9 dígitos en lugar de 8 bits, extiendo los dos operandos hasta completar los 9 dígitos
+ A :    110000000
+ B :   +110000000
+_________________
+A+B:    100000000
+
+ Observamos que no hay overflow en el caso de que utilizasemos 9 dígitos. Pero si la ALU está operando con registros de 8 bits SÍ HAY overflow. Los dos sumandos son negativos (bit de signo posición 7ª) y el bit de signo del resultado (bit posición 7ª) es positivo luego el resultado es erróneo. En la posición 7 también hay acarreo -&gt; CF=OF=1</pre>
 </div>
 </div>
 </li>
@@ -1065,7 +1203,7 @@ A–B:   100000000 -&gt; hay acarreo. Hay también overflow ya que el bit MSB de
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-02 15:42:44 +0200
+Last updated 2022-09-04 21:51:14 +0200
 </div>
 </div>
 <script type="text/x-mathjax-config">
