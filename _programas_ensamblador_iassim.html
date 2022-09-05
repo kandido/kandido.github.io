@@ -23,6 +23,221 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 <!-- Change some CSS.
 <style>
 .imageblock{
@@ -47,7 +262,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-04</span>
+<span id="revdate">2022-09-05</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -84,27 +299,29 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 <li><a href="_simulador_iassim_2.html">22. Simulador IASSim</a>
 </li>
-<li><a href="_lenguajes_de_programación_para_sum1ton.html">23. Lenguajes de programación para sum1toN</a>
+<li><a href="_lenguajes_ensamblador.html">23. Lenguajes Ensamblador</a>
 </li>
-<li><a href="_rtl_register_transfer_language.html">24. RTL Register Transfer Language</a>
+<li><a href="_lenguajes_de_programación_para_sum1ton.html">24. Lenguajes de programación para sum1toN</a>
 </li>
-<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html">25. Formato de Instrucción: ISA Intel x86-64</a>
+<li><a href="_rtl_register_transfer_language.html">25. RTL Register Transfer Language</a>
 </li>
-<li><a href="_fpu_x87.html">26. FPU x87</a>
+<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html">26. Formato de Instrucción: ISA Intel x86-64</a>
 </li>
-<li><a href="_pila.html">27. Pila</a>
+<li><a href="_fpu_x87.html">27. FPU x87</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html">28. Llamadas al Sistema Operativo</a>
+<li><a href="_pila.html">28. Pila</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html">29. Lenguaje de Programación C</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
 </li>
-<li><a href="_apéndice_prácticas.html">30. Apéndice Prácticas</a>
+<li><a href="_lenguaje_de_programación_c_2.html">30. Lenguaje de Programación C</a>
 </li>
-<li><a href="_arquitectura_amd64_4.html">31. Arquitectura amd64</a>
+<li><a href="_apéndice_prácticas.html">31. Apéndice Prácticas</a>
 </li>
-<li><a href="_exámenes_de_cursos_anteriores.html">32. Exámenes de Cursos Anteriores</a>
+<li><a href="_arquitectura_amd64_4.html">32. Arquitectura amd64</a>
 </li>
-<li><a href="_miaulario_videoconferencia.html">33. Miaulario: Videoconferencia</a>
+<li><a href="_exámenes_de_cursos_anteriores.html">33. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">34. Miaulario: Videoconferencia</a>
 </li>
 </ul>
 </li>
@@ -137,27 +354,27 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <p>La 2ª versión implementa un bucle cuyo cuerpo realiza una suma parcial donde uno de los sumandos varía en cada iteración.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="sh">;;;;;;;;;;;;;; CABECERA
-; ; 2ª version : sum1toN_v2.ias
-;;;;;;;;;;;;;;;; SECCION DE INSTRUCCIONES
-;Arquitectura orientada a Acumulador (AC)
-;Registros accesibles : AC
-; algoritmo: Bucle que realiza la operación suma = n + suma si n&gt;=0
-; inicio bucle
-bucle:  S(x)-&gt;Ac+  n   	; AC &lt;- M[n] .Cargar sumando
-        Cc-&gt;S(x)   sumar  ; si AC &gt;= 0, PC &lt;- sumar .Si el sumando &lt; 0 fin del bucle
-        halt            ; stop
-        .empty		; un 20-bit 0, para que el nº de instrucciones sea par.
-        ; realizar la suma
-sumar:  S(x)-&gt;Ah+  suma ; AC &lt;- AC + M[suma]
-        At-&gt;S(x)   suma ; M[suma] &lt;- AC
+<pre class="rouge highlight"><code data-lang="sh"><span class="p">;;;;;;;;;;;;;;</span> CABECERA
+<span class="p">;</span> <span class="p">;</span> 2ª version : sum1toN_v2.ias
+<span class="p">;;;;;;;;;;;;;;;;</span> SECCION DE INSTRUCCIONES
+<span class="p">;</span>Arquitectura orientada a Acumulador <span class="o">(</span>AC<span class="o">)</span>
+<span class="p">;</span>Registros accesibles : AC
+<span class="p">;</span> algoritmo: Bucle que realiza la operación suma <span class="o">=</span> n + suma si n&gt;<span class="o">=</span>0
+<span class="p">;</span> inicio bucle
+bucle:  S<span class="o">(</span>x<span class="o">)</span>-&gt;Ac+  n   	<span class="p">;</span> AC &lt;- M[n] .Cargar sumando
+        Cc-&gt;S<span class="o">(</span>x<span class="o">)</span>   sumar  <span class="p">;</span> si AC <span class="o">&gt;=</span> 0, PC &lt;- sumar .Si el sumando &lt; 0 fin del bucle
+        halt            <span class="p">;</span> stop
+        .empty		<span class="p">;</span> un 20-bit 0, para que el nº de instrucciones sea par.
+        <span class="p">;</span> realizar la suma
+sumar:  S<span class="o">(</span>x<span class="o">)</span>-&gt;Ah+  suma <span class="p">;</span> AC &lt;- AC + M[suma]
+        At-&gt;S<span class="o">(</span>x<span class="o">)</span>   suma <span class="p">;</span> M[suma] &lt;- AC
 
-;;;;;;;;;;;;;;;;;;;SECCION DE DATOS
-; Declaracion de etiquetas, reserva de memoria externa, inicializacion.
-; Variables ordinarias
-n:	.data	5 ; variable sumando
-uno:	.data	1 ; cte
-suma:	.data	0 ; sumas parciales y resultado final</code></pre>
+<span class="p">;;;;;;;;;;;;;;;;;;;</span>SECCION DE DATOS
+<span class="p">;</span> Declaracion de etiquetas, reserva de memoria externa, inicializacion.
+<span class="p">;</span> Variables ordinarias
+n:	.data	5 <span class="p">;</span> variable sumando
+uno:	.data	1 <span class="p">;</span> cte
+suma:	.data	0 <span class="p">;</span> sumas parciales y resultado final</code></pre>
 </div>
 </div>
 </li>
@@ -177,19 +394,19 @@ suma:	.data	0 ; sumas parciales y resultado final</code></pre>
 <p><strong>Versión Demo</strong> <em>tutorial.ias</em>: la versión demo que se incluye en el archivo de descarga del simulador.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="sh">loop:   S(x)-&gt;Ac+  n    ;load n into AC
-        Cc-&gt;S(x)   pos  ;if AC &gt;= 0, jump to pos
-        halt            ;otherwise done
-        .empty          ;a 20-bit 0
-pos:    S(x)-&gt;Ah+  sum  ;add n to the sum
-        At-&gt;S(x)   sum  ;put total back at sum
-        S(x)-&gt;Ac+  n    ;load n into AC
-        S(x)-&gt;Ah-  one  ;decrement n
-        At-&gt;S(x)   n    ;store decremented n
-        Cu-&gt;S(x)   loop ;go back and do it again
-n:     .data 5  ;will loop 6 times total
-one:   .data 1  ;constant for decrementing n
-sum:   .data 0  ;where the running/final total is kept</code></pre>
+<pre class="rouge highlight"><code data-lang="sh">loop:   S<span class="o">(</span>x<span class="o">)</span>-&gt;Ac+  n    <span class="p">;</span>load n into AC
+        Cc-&gt;S<span class="o">(</span>x<span class="o">)</span>   pos  <span class="p">;</span><span class="k">if </span>AC <span class="o">&gt;=</span> 0, jump to pos
+        halt            <span class="p">;</span>otherwise <span class="k">done</span>
+        .empty          <span class="p">;</span>a 20-bit 0
+pos:    S<span class="o">(</span>x<span class="o">)</span>-&gt;Ah+  <span class="nb">sum</span>  <span class="p">;</span>add n to the <span class="nb">sum
+        </span>At-&gt;S<span class="o">(</span>x<span class="o">)</span>   <span class="nb">sum</span>  <span class="p">;</span>put total back at <span class="nb">sum
+        </span>S<span class="o">(</span>x<span class="o">)</span>-&gt;Ac+  n    <span class="p">;</span>load n into AC
+        S<span class="o">(</span>x<span class="o">)</span>-&gt;Ah-  one  <span class="p">;</span>decrement n
+        At-&gt;S<span class="o">(</span>x<span class="o">)</span>   n    <span class="p">;</span>store decremented n
+        Cu-&gt;S<span class="o">(</span>x<span class="o">)</span>   loop <span class="p">;</span>go back and <span class="k">do </span>it again
+n:     .data 5  <span class="p">;</span>will loop 6 <span class="nb">times </span>total
+one:   .data 1  <span class="p">;</span>constant <span class="k">for </span>decrementing n
+<span class="nb">sum</span>:   .data 0  <span class="p">;</span>where the running/final total is kept</code></pre>
 </div>
 </div>
 </li>
@@ -207,46 +424,46 @@ sum:   .data 0  ;where the running/final total is kept</code></pre>
 <p>comentar el código con la información de los módulos descritos en las fases previas del desarrollo del programa</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="sh">;;;;;;;;;;;;;; CABECERA
-; Modulo fuente sum1toN.ias
-; Calcula la suma de una secuencia de numeros enteros: suma = 1+2+..+n
-; dato de entrada : N y dato de salida : suma
-; Algoritmo : bucle de N iteraciones
-;             Los sumandos se van generando en sentido descendente de n a -1
-;             Si el sumando es negativo -&gt; -1 , no se realiza la suma y finaliza el bucle
-; Estructuras de datos : variables n y suma . Constante uno.
-; Lenguaje ensamblador: IASSim
-; ISA: Arquitectura de la maquina IAS de Von Neumann
+<pre class="rouge highlight"><code data-lang="sh"><span class="p">;;;;;;;;;;;;;;</span> CABECERA
+<span class="p">;</span> Modulo fuente sum1toN.ias
+<span class="p">;</span> Calcula la suma de una secuencia de numeros enteros: suma <span class="o">=</span> 1+2+..+n
+<span class="p">;</span> dato de entrada : N y dato de salida : suma
+<span class="p">;</span> Algoritmo : bucle de N iteraciones
+<span class="p">;</span>             Los sumandos se van generando en sentido descendente de n a <span class="nt">-1</span>
+<span class="p">;</span>             Si el sumando es negativo -&gt; <span class="nt">-1</span> , no se realiza la suma y finaliza el bucle
+<span class="p">;</span> Estructuras de datos : variables n y suma <span class="nb">.</span> Constante uno.
+<span class="p">;</span> Lenguaje ensamblador: IASSim
+<span class="p">;</span> ISA: Arquitectura de la maquina IAS de Von Neumann
 
-;;;;;;;;;;;;;;;; SECCION DE INSTRUCCIONES
-;Arquitectura orientada a Acumulador (AC)
-;Registros accesibles : AC
-; algoritmo: Bucle que genera los sumandos n, n-1, .... -1
-;	     y realiza la operación suma = n + suma si n&gt;=0
+<span class="p">;;;;;;;;;;;;;;;;</span> SECCION DE INSTRUCCIONES
+<span class="p">;</span>Arquitectura orientada a Acumulador <span class="o">(</span>AC<span class="o">)</span>
+<span class="p">;</span>Registros accesibles : AC
+<span class="p">;</span> algoritmo: Bucle que genera los sumandos n, n-1, .... <span class="nt">-1</span>
+<span class="p">;</span>	     y realiza la operación suma <span class="o">=</span> n + suma si n&gt;<span class="o">=</span>0
 
-; inicio bucle : suma y generacion de sumandos
-bucle:  S(x)-&gt;Ac+  n    	;cargar sumando
-        Cc-&gt;S(x)   sumar  	;si el sumando &lt; 0 fin del bucle
-	; fin del bucle
-        halt            	; stop
-        .empty          	;a 20-bit 0 para que el nº de instrucciones sea par.
-	; realizar la suma
-sumar:  S(x)-&gt;Ah+  sum  ;
-        At-&gt;S(x)   sum  ;
-	; actualizar sumando
-        S(x)-&gt;Ac+  n    ;
-        S(x)-&gt;Ah-  uno  ;
-        At-&gt;S(x)   n    ;
-        ; siguiente iteracion
-	Cu-&gt;S(x)   bucle ;
+<span class="p">;</span> inicio bucle : suma y generacion de sumandos
+bucle:  S<span class="o">(</span>x<span class="o">)</span>-&gt;Ac+  n    	<span class="p">;</span>cargar sumando
+        Cc-&gt;S<span class="o">(</span>x<span class="o">)</span>   sumar  	<span class="p">;</span>si el sumando &lt; 0 fin del bucle
+	<span class="p">;</span> fin del bucle
+        halt            	<span class="p">;</span> stop
+        .empty          	<span class="p">;</span>a 20-bit 0 para que el nº de instrucciones sea par.
+	<span class="p">;</span> realizar la suma
+sumar:  S<span class="o">(</span>x<span class="o">)</span>-&gt;Ah+  <span class="nb">sum</span>  <span class="p">;</span>
+        At-&gt;S<span class="o">(</span>x<span class="o">)</span>   <span class="nb">sum</span>  <span class="p">;</span>
+	<span class="p">;</span> actualizar sumando
+        S<span class="o">(</span>x<span class="o">)</span>-&gt;Ac+  n    <span class="p">;</span>
+        S<span class="o">(</span>x<span class="o">)</span>-&gt;Ah-  uno  <span class="p">;</span>
+        At-&gt;S<span class="o">(</span>x<span class="o">)</span>   n    <span class="p">;</span>
+        <span class="p">;</span> siguiente iteracion
+	Cu-&gt;S<span class="o">(</span>x<span class="o">)</span>   bucle <span class="p">;</span>
 
-;;;;;;;;;;;;;;;;;;;SECCION DE DATOS
-; Declaracion de etiquetas, reserva de memoria externa, inicializacion.
-; Variables ordinarias
-n:     .data 5  ; sumando e inicializacion
-sum:   .data 0  ; suma parcial y final
-; constantes
-uno:   .data 1  ;</code></pre>
+<span class="p">;;;;;;;;;;;;;;;;;;;</span>SECCION DE DATOS
+<span class="p">;</span> Declaracion de etiquetas, reserva de memoria externa, inicializacion.
+<span class="p">;</span> Variables ordinarias
+n:     .data 5  <span class="p">;</span> sumando e inicializacion
+<span class="nb">sum</span>:   .data 0  <span class="p">;</span> suma parcial y final
+<span class="p">;</span> constantes
+uno:   .data 1  <span class="p">;</span></code></pre>
 </div>
 </div>
 </li>
@@ -263,7 +480,7 @@ uno:   .data 1  ;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Desarrollar el programa que realice la operación \(N(N+1)/2\) equivalente a obtener el resultado de la suma del Tutorial1 \(\sum_{i=1}^{N}i=N(N+1)/2\).</p>
+<p>Desarrollar el programa que realice la operación <span class="image"><img src="stem-a3ef31d08a1158c0afb82de5e1356b09.png" alt="stem a3ef31d08a1158c0afb82de5e1356b09" width="69" height="12"></span> equivalente a obtener el resultado de la suma del Tutorial1 <span class="image"><img src="stem-6a8358250cebdf5525b034e7a0433dbe.png" alt="stem 6a8358250cebdf5525b034e7a0433dbe" width="110" height="36"></span>.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -293,7 +510,7 @@ uno:   .data 1  ;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>\(N(N+1)/2 = ((N+1)/2) * N \)</p>
+<p><span class="image"><img src="stem-36ebe480a3c4a98c2b9df2e7bc9f2c77.png" alt="stem 36ebe480a3c4a98c2b9df2e7bc9f2c77" width="173" height="12"></span></p>
 </li>
 </ul>
 </div>
@@ -303,10 +520,10 @@ uno:   .data 1  ;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Si N es impar &#8594; (N+1)/2 tiene el resto 0 &#8594;  \(((N+1)/2) * N \) donde N+1 es par</p>
+<p>Si N es impar &#8594; (N+1)/2 tiene el resto 0 &#8594;  <span class="image"><img src="stem-f3deaac169cec04d17cd3def719988ef.png" alt="stem f3deaac169cec04d17cd3def719988ef" width="88" height="12"></span> donde N+1 es par</p>
 </li>
 <li>
-<p>Si N es par   &#8594; (N+1)/2 tiene el resto 1 &#8594; (N+1) = Cociente*2+Resto &#8594; \(N(N+1)/2 = N*C+N/2\) donde N es par</p>
+<p>Si N es par   &#8594; (N+1)/2 tiene el resto 1 &#8594; (N+1) = Cociente*2+Resto &#8594; <span class="image"><img src="stem-d0d087abb4110b64a52971e8890020bf.png" alt="stem d0d087abb4110b64a52971e8890020bf" width="157" height="12"></span> donde N es par</p>
 </li>
 </ul>
 </div>
@@ -356,7 +573,7 @@ uno:   .data 1  ;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>\(suma = N(N+1)/2 \)</p>
+<p><span class="image"><img src="stem-2ed7c8e36dfe141b836d6cb2d0c59239.png" alt="stem 2ed7c8e36dfe141b836d6cb2d0c59239" width="117" height="12"></span></p>
 </li>
 </ul>
 </div>
@@ -741,32 +958,8 @@ cero:		.data 0</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-04 21:51:14 +0200
+Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  messageStyle: "none",
-  tex2jax: {
-    inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]],
-    ignoreClass: "nostem|nolatexmath"
-  },
-  asciimath2jax: {
-    delimiters: [["\\$", "\\$"]],
-    ignoreClass: "nostem|noasciimath"
-  },
-  TeX: { equationNumbers: { autoNumber: "none" } }
-})
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
-  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
-      data.math.root.display = "block"
-    }
-    return data
-  })
-})
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

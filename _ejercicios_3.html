@@ -23,6 +23,221 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 <!-- Change some CSS.
 <style>
 .imageblock{
@@ -47,7 +262,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-04</span>
+<span id="revdate">2022-09-05</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -159,33 +374,33 @@ and N are positive integers with N &gt; 1. Note: The IAS did not have assembly l
 <p>Desarrollo:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">; Suma de los primeros N numeros enteros. Y=N(N+1)/2
-; CPU IAS
-; lenguaje ensamblador: simaulador IASSim
-; Ejercicio 2.1 del libro de William Stalling, Estructura de Computadores
+<pre class="rouge highlight"><code data-lang="c"><span class="p">;</span> <span class="n">Suma</span> <span class="n">de</span> <span class="n">los</span> <span class="n">primeros</span> <span class="n">N</span> <span class="n">numeros</span> <span class="n">enteros</span><span class="p">.</span> <span class="n">Y</span><span class="o">=</span><span class="n">N</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="p">;</span> <span class="n">CPU</span> <span class="n">IAS</span>
+<span class="p">;</span> <span class="n">lenguaje</span> <span class="n">ensamblador</span><span class="o">:</span> <span class="n">simaulador</span> <span class="n">IASSim</span>
+<span class="p">;</span> <span class="n">Ejercicio</span> <span class="mi">2</span><span class="p">.</span><span class="mi">1</span> <span class="n">del</span> <span class="n">libro</span> <span class="n">de</span> <span class="n">William</span> <span class="n">Stalling</span><span class="p">,</span> <span class="n">Estructura</span> <span class="n">de</span> <span class="n">Computadores</span>
 
-; SECCION DE INSTRUCCIONES
-S(x)-&gt;Ac+ n    ;01 n   ;AC    &lt;- M[n]
-S(x)-&gt;Ah+ uno  ;05 uno ;AC    &lt;- AC+1
-At-&gt;S(x) y     ;11 y   ;M[y]  &lt;- AC
-S(x)-&gt;R y      ;09 y   ;AR    &lt;- M[y]
-S(x)*R-&gt;A n    ;0B n   ;AC:AR &lt;- AR*M[n]
-R-&gt;A           ;0A     ;AC    &lt;- AR
-A/S(x)-&gt;R dos  ;0C 2   ;AR    &lt;- AC/2
-R-&gt;A           ;0A     ;AC    &lt;- AR
-At-&gt;S(x) y     ;11 y   ;M[y]  &lt;- AC
-halt
-; como el número de instrucciones  es par no es necesaria la directiva .empty
+<span class="p">;</span> <span class="n">SECCION</span> <span class="n">DE</span> <span class="n">INSTRUCCIONES</span>
+<span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Ac</span><span class="o">+</span> <span class="n">n</span>    <span class="p">;</span><span class="mo">01</span> <span class="n">n</span>   <span class="p">;</span><span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">M</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+<span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Ah</span><span class="o">+</span> <span class="n">uno</span>  <span class="p">;</span><span class="mo">05</span> <span class="n">uno</span> <span class="p">;</span><span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">AC</span><span class="o">+</span><span class="mi">1</span>
+<span class="n">At</span><span class="o">-&gt;</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">y</span>     <span class="p">;</span><span class="mi">11</span> <span class="n">y</span>   <span class="p">;</span><span class="n">M</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>  <span class="o">&lt;-</span> <span class="n">AC</span>
+<span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">R</span> <span class="n">y</span>      <span class="p">;</span><span class="mi">09</span> <span class="n">y</span>   <span class="p">;</span><span class="n">AR</span>    <span class="o">&lt;-</span> <span class="n">M</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>
+<span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">R</span><span class="o">-&gt;</span><span class="n">A</span> <span class="n">n</span>    <span class="p">;</span><span class="mi">0</span><span class="n">B</span> <span class="n">n</span>   <span class="p">;</span><span class="n">AC</span><span class="o">:</span><span class="n">AR</span> <span class="o">&lt;-</span> <span class="n">AR</span><span class="o">*</span><span class="n">M</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+<span class="n">R</span><span class="o">-&gt;</span><span class="n">A</span>           <span class="p">;</span><span class="mi">0</span><span class="n">A</span>     <span class="p">;</span><span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">AR</span>
+<span class="n">A</span><span class="o">/</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">R</span> <span class="n">dos</span>  <span class="p">;</span><span class="mi">0</span><span class="n">C</span> <span class="mi">2</span>   <span class="p">;</span><span class="n">AR</span>    <span class="o">&lt;-</span> <span class="n">AC</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">R</span><span class="o">-&gt;</span><span class="n">A</span>           <span class="p">;</span><span class="mi">0</span><span class="n">A</span>     <span class="p">;</span><span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">AR</span>
+<span class="n">At</span><span class="o">-&gt;</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">y</span>     <span class="p">;</span><span class="mi">11</span> <span class="n">y</span>   <span class="p">;</span><span class="n">M</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>  <span class="o">&lt;-</span> <span class="n">AC</span>
+<span class="n">halt</span>
+<span class="p">;</span> <span class="n">como</span> <span class="n">el</span> <span class="n">n</span><span class="err">ú</span><span class="n">mero</span> <span class="n">de</span> <span class="n">instrucciones</span>  <span class="n">es</span> <span class="n">par</span> <span class="n">no</span> <span class="n">es</span> <span class="n">necesaria</span> <span class="n">la</span> <span class="n">directiva</span> <span class="p">.</span><span class="n">empty</span>
 
 
-; SECCION DE DATOS
-; Declaracion e inicializacion de variables
-y:     .data 0  ;resultado
+<span class="p">;</span> <span class="n">SECCION</span> <span class="n">DE</span> <span class="n">DATOS</span>
+<span class="p">;</span> <span class="n">Declaracion</span> <span class="n">e</span> <span class="n">inicializacion</span> <span class="n">de</span> <span class="n">variables</span>
+<span class="n">y</span><span class="o">:</span>     <span class="p">.</span><span class="n">data</span> <span class="mi">0</span>  <span class="p">;</span><span class="n">resultado</span>
 
-; Declaracion de las Constantes
-n:    .data 5   ;parametro N
-uno:  .data 1
-dos:  .data 2</code></pre>
+<span class="p">;</span> <span class="n">Declaracion</span> <span class="n">de</span> <span class="n">las</span> <span class="n">Constantes</span>
+<span class="n">n</span><span class="o">:</span>    <span class="p">.</span><span class="n">data</span> <span class="mi">5</span>   <span class="p">;</span><span class="n">parametro</span> <span class="n">N</span>
+<span class="n">uno</span><span class="o">:</span>  <span class="p">.</span><span class="n">data</span> <span class="mi">1</span>
+<span class="n">dos</span><span class="o">:</span>  <span class="p">.</span><span class="n">data</span> <span class="mi">2</span></code></pre>
 </div>
 </div>
 </li>
@@ -200,23 +415,23 @@ dos:  .data 2</code></pre>
 <p>Desarrollo:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">; adds up the values n+...+3+2+1(+0) in a loop and stores
-; the sum in memory at the location labeled "sum"
+<pre class="rouge highlight"><code data-lang="c"><span class="p">;</span> <span class="n">adds</span> <span class="n">up</span> <span class="n">the</span> <span class="n">values</span> <span class="n">n</span><span class="o">+</span><span class="p">...</span><span class="o">+</span><span class="mi">3</span><span class="o">+</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">(</span><span class="o">+</span><span class="mi">0</span><span class="p">)</span> <span class="n">in</span> <span class="n">a</span> <span class="n">loop</span> <span class="n">and</span> <span class="n">stores</span>
+<span class="p">;</span> <span class="n">the</span> <span class="n">sum</span> <span class="n">in</span> <span class="n">memory</span> <span class="n">at</span> <span class="n">the</span> <span class="n">location</span> <span class="n">labeled</span> <span class="s">"sum"</span>
 
-loop:   S(x)-&gt;Ac+  n    ;load n into AC
-        Cc-&gt;S(x)   pos  ;if AC &gt;= 0, jump to pos
-        halt            ;otherwise done
-        .empty          ;a 20-bit 0
-pos:    S(x)-&gt;Ah+  sum  ;add n to the sum
-        At-&gt;S(x)   sum  ;put total back at sum
-        S(x)-&gt;Ac+  n    ;load n into AC
-        S(x)-&gt;Ah-  one  ;decrement n
-        At-&gt;S(x)   n    ;store decremented n
-        Cu-&gt;S(x)   loop ;go back and do it again
+<span class="n">loop</span><span class="o">:</span>   <span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Ac</span><span class="o">+</span>  <span class="n">n</span>    <span class="p">;</span><span class="n">load</span> <span class="n">n</span> <span class="n">into</span> <span class="n">AC</span>
+        <span class="n">Cc</span><span class="o">-&gt;</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="n">pos</span>  <span class="p">;</span><span class="k">if</span> <span class="n">AC</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">jump</span> <span class="n">to</span> <span class="n">pos</span>
+        <span class="n">halt</span>            <span class="p">;</span><span class="n">otherwise</span> <span class="n">done</span>
+        <span class="p">.</span><span class="n">empty</span>          <span class="p">;</span><span class="n">a</span> <span class="mi">20</span><span class="o">-</span><span class="n">bit</span> <span class="mi">0</span>
+<span class="n">pos</span><span class="o">:</span>    <span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Ah</span><span class="o">+</span>  <span class="n">sum</span>  <span class="p">;</span><span class="n">add</span> <span class="n">n</span> <span class="n">to</span> <span class="n">the</span> <span class="n">sum</span>
+        <span class="n">At</span><span class="o">-&gt;</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="n">sum</span>  <span class="p">;</span><span class="n">put</span> <span class="n">total</span> <span class="n">back</span> <span class="n">at</span> <span class="n">sum</span>
+        <span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Ac</span><span class="o">+</span>  <span class="n">n</span>    <span class="p">;</span><span class="n">load</span> <span class="n">n</span> <span class="n">into</span> <span class="n">AC</span>
+        <span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Ah</span><span class="o">-</span>  <span class="n">one</span>  <span class="p">;</span><span class="n">decrement</span> <span class="n">n</span>
+        <span class="n">At</span><span class="o">-&gt;</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="n">n</span>    <span class="p">;</span><span class="n">store</span> <span class="n">decremented</span> <span class="n">n</span>
+        <span class="n">Cu</span><span class="o">-&gt;</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>   <span class="n">loop</span> <span class="p">;</span><span class="n">go</span> <span class="n">back</span> <span class="n">and</span> <span class="k">do</span> <span class="n">it</span> <span class="n">again</span>
 
-n:     .data 5  ;will loop 6 times total
-one:   .data 1  ;constant for decrementing n
-sum:   .data 0  ;where the running/final total is kept</code></pre>
+<span class="n">n</span><span class="o">:</span>     <span class="p">.</span><span class="n">data</span> <span class="mi">5</span>  <span class="p">;</span><span class="n">will</span> <span class="n">loop</span> <span class="mi">6</span> <span class="n">times</span> <span class="n">total</span>
+<span class="n">one</span><span class="o">:</span>   <span class="p">.</span><span class="n">data</span> <span class="mi">1</span>  <span class="p">;</span><span class="n">constant</span> <span class="k">for</span> <span class="n">decrementing</span> <span class="n">n</span>
+<span class="n">sum</span><span class="o">:</span>   <span class="p">.</span><span class="n">data</span> <span class="mi">0</span>  <span class="p">;</span><span class="n">where</span> <span class="n">the</span> <span class="n">running</span><span class="o">/</span><span class="n">final</span> <span class="n">total</span> <span class="n">is</span> <span class="n">kept</span></code></pre>
 </div>
 </div>
 </li>
@@ -988,7 +1203,7 @@ on the 8086 that involves two 16-bit operands. How long does it take to fetch th
 </div>
 </li>
 <li>
-<p>positivos con n bits&#8594; \(\sum_{i=0}^{n-1}b_i 2^i\).</p>
+<p>positivos con n bits&#8594; <span class="image"><img src="stem-f678c9d0d14304c22a6a5f69b7fc132a.png" alt="stem f678c9d0d14304c22a6a5f69b7fc132a" width="43" height="36"></span>.</p>
 </li>
 <li>
 <p>negativos con n bits</p>
@@ -2728,17 +2943,17 @@ NS32000.</p>
 <p>A simple IF statement such as <em>IF a &gt; b</em> THEN can be implemented using a numerical representation method, that is, making the <em>Boolean value</em> manifest, as opposed to a <em>flow of control</em> method, which represents the value of a Boolean expression by a point reached in the program. (Primero transcribir el lenguaje ASM del enunciado a lenguaje RTL). A compiler might implement <em>IF a &gt; b THEN</em> with the following <strong>x86 code</strong>:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">        ; Sintaxis de Intel: Opeación Op_destino, Op_fuente
-	SUB CX, CX ;set register CX to 0
-	MOV AX, B ;move contents of location B to register AX
-	CMP AX, A ;compare contents of register AX and location A
-	JLE TEST ;jump if A &lt;= B
-	INC CX ;add 1 to contents of register CX
-TEST 	JCXZ OUT ;jump if contents of CX equal 0
+<pre class="rouge highlight"><code data-lang="c">        <span class="p">;</span> <span class="n">Sintaxis</span> <span class="n">de</span> <span class="n">Intel</span><span class="o">:</span> <span class="n">Opeaci</span><span class="err">ó</span><span class="n">n</span> <span class="n">Op_destino</span><span class="p">,</span> <span class="n">Op_fuente</span>
+	<span class="n">SUB</span> <span class="n">CX</span><span class="p">,</span> <span class="n">CX</span> <span class="p">;</span><span class="n">set</span> <span class="k">register</span> <span class="n">CX</span> <span class="n">to</span> <span class="mi">0</span>
+	<span class="n">MOV</span> <span class="n">AX</span><span class="p">,</span> <span class="n">B</span> <span class="p">;</span><span class="n">move</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">location</span> <span class="n">B</span> <span class="n">to</span> <span class="k">register</span> <span class="n">AX</span>
+	<span class="n">CMP</span> <span class="n">AX</span><span class="p">,</span> <span class="n">A</span> <span class="p">;</span><span class="n">compare</span> <span class="n">contents</span> <span class="n">of</span> <span class="k">register</span> <span class="n">AX</span> <span class="n">and</span> <span class="n">location</span> <span class="n">A</span>
+	<span class="n">JLE</span> <span class="n">TEST</span> <span class="p">;</span><span class="n">jump</span> <span class="k">if</span> <span class="n">A</span> <span class="o">&lt;=</span> <span class="n">B</span>
+	<span class="n">INC</span> <span class="n">CX</span> <span class="p">;</span><span class="n">add</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">contents</span> <span class="n">of</span> <span class="k">register</span> <span class="n">CX</span>
+<span class="n">TEST</span> 	<span class="n">JCXZ</span> <span class="n">OUT</span> <span class="p">;</span><span class="n">jump</span> <span class="k">if</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">CX</span> <span class="n">equal</span> <span class="mi">0</span>
 
-THEN 	XXXXX
+<span class="n">THEN</span> 	<span class="n">XXXXX</span>
 
-OUT 	XXXXX</code></pre>
+<span class="n">OUT</span> 	<span class="n">XXXXX</span></code></pre>
 </div>
 </div>
 </li>
@@ -2753,17 +2968,17 @@ OUT 	XXXXX</code></pre>
 <p>A compiler might generate the following code:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">	MOV EAX, B ;move contents of location B to register EAX
-	CMP EAX, C ;compare contents of register EAX and location C
-	MOV BL, 0 ;0 represents false
-	JLE N1 ;jump if (B &lt;= C)
-	MOV BL, 1 ;1 represents false
-N1 	MOV EAX, D
-	CMP EAX, F
-	MOV BH, 0
-	JNE N2
-	MOV BH, 1
-N2 	OR BL, BH</code></pre>
+<pre class="rouge highlight"><code data-lang="c">	<span class="n">MOV</span> <span class="n">EAX</span><span class="p">,</span> <span class="n">B</span> <span class="p">;</span><span class="n">move</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">location</span> <span class="n">B</span> <span class="n">to</span> <span class="k">register</span> <span class="n">EAX</span>
+	<span class="n">CMP</span> <span class="n">EAX</span><span class="p">,</span> <span class="n">C</span> <span class="p">;</span><span class="n">compare</span> <span class="n">contents</span> <span class="n">of</span> <span class="k">register</span> <span class="n">EAX</span> <span class="n">and</span> <span class="n">location</span> <span class="n">C</span>
+	<span class="n">MOV</span> <span class="n">BL</span><span class="p">,</span> <span class="mi">0</span> <span class="p">;</span><span class="mi">0</span> <span class="n">represents</span> <span class="nb">false</span>
+	<span class="n">JLE</span> <span class="n">N1</span> <span class="p">;</span><span class="n">jump</span> <span class="k">if</span> <span class="p">(</span><span class="n">B</span> <span class="o">&lt;=</span> <span class="n">C</span><span class="p">)</span>
+	<span class="n">MOV</span> <span class="n">BL</span><span class="p">,</span> <span class="mi">1</span> <span class="p">;</span><span class="mi">1</span> <span class="n">represents</span> <span class="nb">false</span>
+<span class="n">N1</span> 	<span class="n">MOV</span> <span class="n">EAX</span><span class="p">,</span> <span class="n">D</span>
+	<span class="n">CMP</span> <span class="n">EAX</span><span class="p">,</span> <span class="n">F</span>
+	<span class="n">MOV</span> <span class="n">BH</span><span class="p">,</span> <span class="mi">0</span>
+	<span class="n">JNE</span> <span class="n">N2</span>
+	<span class="n">MOV</span> <span class="n">BH</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">N2</span> 	<span class="n">OR</span> <span class="n">BL</span><span class="p">,</span> <span class="n">BH</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -2803,13 +3018,13 @@ N2 	OR BL, BH</code></pre>
 <p>Sustituir el salto por SETcc</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">	SUB CX, CX ;set register CX to 0
-	MOV AX, B  ;move contents of location B to register AX
-	CMP AX, A  ;compare contents of register AX and location A
-	SETGT CX   ;CX = (a GT b)
-TEST 	JCXZ OUT   ;jump if contents of CX equal 0
-THEN    XXXXXX
-OUT	XXXXXX</code></pre>
+<pre class="rouge highlight"><code data-lang="c">	<span class="n">SUB</span> <span class="n">CX</span><span class="p">,</span> <span class="n">CX</span> <span class="p">;</span><span class="n">set</span> <span class="k">register</span> <span class="n">CX</span> <span class="n">to</span> <span class="mi">0</span>
+	<span class="n">MOV</span> <span class="n">AX</span><span class="p">,</span> <span class="n">B</span>  <span class="p">;</span><span class="n">move</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">location</span> <span class="n">B</span> <span class="n">to</span> <span class="k">register</span> <span class="n">AX</span>
+	<span class="n">CMP</span> <span class="n">AX</span><span class="p">,</span> <span class="n">A</span>  <span class="p">;</span><span class="n">compare</span> <span class="n">contents</span> <span class="n">of</span> <span class="k">register</span> <span class="n">AX</span> <span class="n">and</span> <span class="n">location</span> <span class="n">A</span>
+	<span class="n">SETGT</span> <span class="n">CX</span>   <span class="p">;</span><span class="n">CX</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="n">GT</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">TEST</span> 	<span class="n">JCXZ</span> <span class="n">OUT</span>   <span class="p">;</span><span class="n">jump</span> <span class="k">if</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">CX</span> <span class="n">equal</span> <span class="mi">0</span>
+<span class="n">THEN</span>    <span class="n">XXXXXX</span>
+<span class="n">OUT</span>	<span class="n">XXXXXX</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -2818,14 +3033,14 @@ OUT	XXXXXX</code></pre>
 <p>b.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">MOV EAX, B ; move from location B to register EAX
-CMP EAX, C
-SETG BL ; Setcc SETGreater ;BL = 0/1 depending on result
-MOV EAX, D
-CMP EAX, F
-MOV BH, 0
-SETE BH ; Setcc SETEqual ;BH= 0 ó 1 dependiendo del resultado
-OR BL, BH</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">MOV</span> <span class="n">EAX</span><span class="p">,</span> <span class="n">B</span> <span class="p">;</span> <span class="n">move</span> <span class="n">from</span> <span class="n">location</span> <span class="n">B</span> <span class="n">to</span> <span class="k">register</span> <span class="n">EAX</span>
+<span class="n">CMP</span> <span class="n">EAX</span><span class="p">,</span> <span class="n">C</span>
+<span class="n">SETG</span> <span class="n">BL</span> <span class="p">;</span> <span class="n">Setcc</span> <span class="n">SETGreater</span> <span class="p">;</span><span class="n">BL</span> <span class="o">=</span> <span class="mi">0</span><span class="o">/</span><span class="mi">1</span> <span class="n">depending</span> <span class="n">on</span> <span class="n">result</span>
+<span class="n">MOV</span> <span class="n">EAX</span><span class="p">,</span> <span class="n">D</span>
+<span class="n">CMP</span> <span class="n">EAX</span><span class="p">,</span> <span class="n">F</span>
+<span class="n">MOV</span> <span class="n">BH</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">SETE</span> <span class="n">BH</span> <span class="p">;</span> <span class="n">Setcc</span> <span class="n">SETEqual</span> <span class="p">;</span><span class="n">BH</span><span class="o">=</span> <span class="mi">0</span> <span class="err">ó</span> <span class="mi">1</span> <span class="n">dependiendo</span> <span class="n">del</span> <span class="n">resultado</span>
+<span class="n">OR</span> <span class="n">BL</span><span class="p">,</span> <span class="n">BH</span></code></pre>
 </div>
 </div>
 </li>
@@ -2846,21 +3061,21 @@ OR BL, BH</code></pre>
 <p>Declaración:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">#include &lt;stdio.h&gt;
-void main (void)
-{
-  struct{
-    int a;
-    int pad; //
-    double b;
-    int* c;
-    char d[7];
-    short e;
-    int f;
-    char q[4];
-  } s={.a=0x11121314,.pad=0,.b=0x2122232425262728,.d={'A','B','C','D','E','F','G'},.e=0x5152,.f=0x61626364,.q="abc"};
-  s.c=&amp;s.e;
-}</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="kt">void</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">struct</span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">pad</span><span class="p">;</span> <span class="c1">//</span>
+    <span class="kt">double</span> <span class="n">b</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">c</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">d</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+    <span class="kt">short</span> <span class="n">e</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">f</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">q</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+  <span class="p">}</span> <span class="n">s</span><span class="o">=</span><span class="p">{.</span><span class="n">a</span><span class="o">=</span><span class="mh">0x11121314</span><span class="p">,.</span><span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">,.</span><span class="n">b</span><span class="o">=</span><span class="mh">0x2122232425262728</span><span class="p">,.</span><span class="n">d</span><span class="o">=</span><span class="p">{</span><span class="sc">'A'</span><span class="p">,</span><span class="sc">'B'</span><span class="p">,</span><span class="sc">'C'</span><span class="p">,</span><span class="sc">'D'</span><span class="p">,</span><span class="sc">'E'</span><span class="p">,</span><span class="sc">'F'</span><span class="p">,</span><span class="sc">'G'</span><span class="p">},.</span><span class="n">e</span><span class="o">=</span><span class="mh">0x5152</span><span class="p">,.</span><span class="n">f</span><span class="o">=</span><span class="mh">0x61626364</span><span class="p">,.</span><span class="n">q</span><span class="o">=</span><span class="s">"abc"</span><span class="p">};</span>
+  <span class="n">s</span><span class="p">.</span><span class="n">c</span><span class="o">=&amp;</span><span class="n">s</span><span class="p">.</span><span class="n">e</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 </li>
@@ -2913,9 +3128,9 @@ void main (void)
 <p>declaración de la variable s1:  tipo estructura</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">struct {
-double i; //0x1112131415161718 ; 8 bytes
-} s1;</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="k">struct</span> <span class="p">{</span>
+<span class="kt">double</span> <span class="n">i</span><span class="p">;</span> <span class="c1">//0x1112131415161718 ; 8 bytes</span>
+<span class="p">}</span> <span class="n">s1</span><span class="p">;</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -2937,10 +3152,10 @@ double i; //0x1112131415161718 ; 8 bytes
 <p>declaración de la variable s2:  tipo estructura</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">struct {
-int i; //0x11121314 ; 4 bytes
-int j; //0x15161718
-} s2;</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="k">struct</span> <span class="p">{</span>
+<span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="c1">//0x11121314 ; 4 bytes</span>
+<span class="kt">int</span> <span class="n">j</span><span class="p">;</span> <span class="c1">//0x15161718</span>
+<span class="p">}</span> <span class="n">s2</span><span class="p">;</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -2973,21 +3188,21 @@ int j; //0x15161718
 <p>Write a small program to determine the endianness of machine and report the results. Run the program on a computer available to you and turn in the output.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">#include &lt;stdio.h&gt;
-main()
-{
-  int integer; /*4 bytes*/
-  char *p;
-  integer = 0x30313233; /* ASCII for chars '0', '1', '2', '3' */
-  p = (char *)&amp;integer
-    if (*p=='0' &amp;&amp; *(p+1)=='1' &amp;&amp; *(p+2)=='2' &amp;&amp; *(p+3)=='3')
-      printf("This is a big endian machine.\n");
-    else if (*p=='3' &amp;&amp; *(p+1)=='2' &amp;&amp; *(p+2)=='1' &amp;&amp; *(p+3)=='0')
-      printf("This is a little endian machine.\n");
+<pre class="rouge highlight"><code data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">integer</span><span class="p">;</span> <span class="cm">/*4 bytes*/</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+  <span class="n">integer</span> <span class="o">=</span> <span class="mh">0x30313233</span><span class="p">;</span> <span class="cm">/* ASCII for chars '0', '1', '2', '3' */</span>
+  <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">integer</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="o">==</span><span class="sc">'0'</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="sc">'1'</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">==</span><span class="sc">'2'</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">==</span><span class="sc">'3'</span><span class="p">)</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"This is a big endian machine.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="o">==</span><span class="sc">'3'</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="sc">'2'</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">==</span><span class="sc">'1'</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="o">==</span><span class="sc">'0'</span><span class="p">)</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"This is a little endian machine.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
 
 
-    else
-      printf("Error in logic to determine machine endian-ness.\n");</code></pre>
+    <span class="k">else</span>
+      <span class="n">printf</span><span class="p">(</span><span class="s">"Error in logic to determine machine endian-ness.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span></code></pre>
 </div>
 </div>
 </li>
@@ -3220,12 +3435,12 @@ mov da2(,%esi,2),%ebx</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">x en %ebp+8, y en %ebp+12
+<pre class="rouge highlight"><code data-lang="c"><span class="n">x</span> <span class="n">en</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">y</span> <span class="n">en</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">12</span>
 
-1 movl 12(%ebp), %eax
-2 imull 8(%ebp) 			; EDX:EAX&lt;-x*y[63-32:31-0] ; imul: multiplicación de enteros con signo
-3 movl %eax, (%esp) 			; pila &lt;-x*y[31:0]
-4 movl %edx, 4(%esp) 			; pila &lt;-x*y[63:32]</code></pre>
+<span class="mi">1</span> <span class="n">movl</span> <span class="mi">12</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">eax</span>
+<span class="mi">2</span> <span class="n">imull</span> <span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">)</span> 			<span class="p">;</span> <span class="n">EDX</span><span class="o">:</span><span class="n">EAX</span><span class="o">&lt;-</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">63</span><span class="o">-</span><span class="mi">32</span><span class="o">:</span><span class="mi">31</span><span class="o">-</span><span class="mi">0</span><span class="p">]</span> <span class="p">;</span> <span class="n">imul</span><span class="o">:</span> <span class="n">multiplicaci</span><span class="err">ó</span><span class="n">n</span> <span class="n">de</span> <span class="n">enteros</span> <span class="n">con</span> <span class="n">signo</span>
+<span class="mi">3</span> <span class="n">movl</span> <span class="o">%</span><span class="n">eax</span><span class="p">,</span> <span class="p">(</span><span class="o">%</span><span class="n">esp</span><span class="p">)</span> 			<span class="p">;</span> <span class="n">pila</span> <span class="o">&lt;-</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">31</span><span class="o">:</span><span class="mi">0</span><span class="p">]</span>
+<span class="mi">4</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="mi">4</span><span class="p">(</span><span class="o">%</span><span class="n">esp</span><span class="p">)</span> 			<span class="p">;</span> <span class="n">pila</span> <span class="o">&lt;-</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">63</span><span class="o">:</span><span class="mi">32</span><span class="p">]</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -3261,15 +3476,15 @@ mov da2(,%esi,2),%ebx</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">x en ebp+8, y en ebp+12
+<pre class="rouge highlight"><code data-lang="c"><span class="n">x</span> <span class="n">en</span> <span class="n">ebp</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">y</span> <span class="n">en</span> <span class="n">ebp</span><span class="o">+</span><span class="mi">12</span>
 
-1 movl 8(%ebp), %edx	; edx&lt;-x
-2 movl %edx, %eax	; copiar x en eax
-3 sarl $31, %edx 	; edx lo lleno con el bit de signo de x , ya que forma parte del dividendo.
-                        ; edx:eax &lt;- x
-4 idivl 12(%ebp)        ; EAX&lt;-Cociente{x/y} , EDX&lt;-Resto{x/y]}
-5 movl %eax, 4(%esp)    ; pila &lt;- Cociente{x/y}
-6 movl %edx, (%esp)     ; pila &lt;- x%y  ; x%y = Resto{x/y}</code></pre>
+<span class="mi">1</span> <span class="n">movl</span> <span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">edx</span>	<span class="p">;</span> <span class="n">edx</span><span class="o">&lt;-</span><span class="n">x</span>
+<span class="mi">2</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span>	<span class="p">;</span> <span class="n">copiar</span> <span class="n">x</span> <span class="n">en</span> <span class="n">eax</span>
+<span class="mi">3</span> <span class="n">sarl</span> <span class="err">$</span><span class="mi">31</span><span class="p">,</span> <span class="o">%</span><span class="n">edx</span> 	<span class="p">;</span> <span class="n">edx</span> <span class="n">lo</span> <span class="n">lleno</span> <span class="n">con</span> <span class="n">el</span> <span class="n">bit</span> <span class="n">de</span> <span class="n">signo</span> <span class="n">de</span> <span class="n">x</span> <span class="p">,</span> <span class="n">ya</span> <span class="n">que</span> <span class="n">forma</span> <span class="n">parte</span> <span class="n">del</span> <span class="n">dividendo</span><span class="p">.</span>
+                        <span class="p">;</span> <span class="n">edx</span><span class="o">:</span><span class="n">eax</span> <span class="o">&lt;-</span> <span class="n">x</span>
+<span class="mi">4</span> <span class="n">idivl</span> <span class="mi">12</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">)</span>        <span class="p">;</span> <span class="n">EAX</span><span class="o">&lt;-</span><span class="n">Cociente</span><span class="p">{</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">}</span> <span class="p">,</span> <span class="n">EDX</span><span class="o">&lt;-</span><span class="n">Resto</span><span class="p">{</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">]}</span>
+<span class="mi">5</span> <span class="n">movl</span> <span class="o">%</span><span class="n">eax</span><span class="p">,</span> <span class="mi">4</span><span class="p">(</span><span class="o">%</span><span class="n">esp</span><span class="p">)</span>    <span class="p">;</span> <span class="n">pila</span> <span class="o">&lt;-</span> <span class="n">Cociente</span><span class="p">{</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">}</span>
+<span class="mi">6</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="p">(</span><span class="o">%</span><span class="n">esp</span><span class="p">)</span>     <span class="p">;</span> <span class="n">pila</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">%</span><span class="n">y</span>  <span class="p">;</span> <span class="n">x</span><span class="o">%</span><span class="n">y</span> <span class="o">=</span> <span class="n">Resto</span><span class="p">{</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">}</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -3282,14 +3497,14 @@ mov da2(,%esi,2),%ebx</pre>
 <p>Módulo asm</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">x en ebp+8, y en ebp+12
+<pre class="rouge highlight"><code data-lang="c"><span class="n">x</span> <span class="n">en</span> <span class="n">ebp</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">y</span> <span class="n">en</span> <span class="n">ebp</span><span class="o">+</span><span class="mi">12</span>
 
-1 movl 8(%ebp), %edx	; edx&lt;-x
-2 movl %edx, %eax	; copiar x en eax
-3 cltd			; extiende el signo del operando en eax a edx
-4 idivl 12(%ebp)        ; EAX&lt;-Cociente{x/y} , EDX&lt;-Resto{x/y]}
-5 movl %eax, 4(%esp)    ; pila &lt;- Cociente{x/y}
-6 movl %edx, (%esp)     ; pila &lt;- x%y  ; x%y = Resto{x/y}</code></pre>
+<span class="mi">1</span> <span class="n">movl</span> <span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">edx</span>	<span class="p">;</span> <span class="n">edx</span><span class="o">&lt;-</span><span class="n">x</span>
+<span class="mi">2</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span>	<span class="p">;</span> <span class="n">copiar</span> <span class="n">x</span> <span class="n">en</span> <span class="n">eax</span>
+<span class="mi">3</span> <span class="n">cltd</span>			<span class="p">;</span> <span class="n">extiende</span> <span class="n">el</span> <span class="n">signo</span> <span class="n">del</span> <span class="n">operando</span> <span class="n">en</span> <span class="n">eax</span> <span class="n">a</span> <span class="n">edx</span>
+<span class="mi">4</span> <span class="n">idivl</span> <span class="mi">12</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">)</span>        <span class="p">;</span> <span class="n">EAX</span><span class="o">&lt;-</span><span class="n">Cociente</span><span class="p">{</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">}</span> <span class="p">,</span> <span class="n">EDX</span><span class="o">&lt;-</span><span class="n">Resto</span><span class="p">{</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">]}</span>
+<span class="mi">5</span> <span class="n">movl</span> <span class="o">%</span><span class="n">eax</span><span class="p">,</span> <span class="mi">4</span><span class="p">(</span><span class="o">%</span><span class="n">esp</span><span class="p">)</span>    <span class="p">;</span> <span class="n">pila</span> <span class="o">&lt;-</span> <span class="n">Cociente</span><span class="p">{</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">}</span>
+<span class="mi">6</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="p">(</span><span class="o">%</span><span class="n">esp</span><span class="p">)</span>     <span class="p">;</span> <span class="n">pila</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">%</span><span class="n">y</span>  <span class="p">;</span> <span class="n">x</span><span class="o">%</span><span class="n">y</span> <span class="o">=</span> <span class="n">Resto</span><span class="p">{</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">}</span></code></pre>
 </div>
 </div>
 </li>
@@ -3310,23 +3525,23 @@ mov da2(,%esi,2),%ebx</pre>
 <p>Interpretar el módulo ASM en lenguaje RTL</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">void store_prod(num_t *dest, unsigned x, num_t y) {
-*dest = x*y;
-}</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="kt">void</span> <span class="nf">store_prod</span><span class="p">(</span><span class="n">num_t</span> <span class="o">*</span><span class="n">dest</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">x</span><span class="p">,</span> <span class="n">num_t</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+<span class="o">*</span><span class="n">dest</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">dest en ebp+8, x en ebp+12, y en ebp+16
+<pre class="rouge highlight"><code data-lang="c"><span class="n">dest</span> <span class="n">en</span> <span class="n">ebp</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">x</span> <span class="n">en</span> <span class="n">ebp</span><span class="o">+</span><span class="mi">12</span><span class="p">,</span> <span class="n">y</span> <span class="n">en</span> <span class="n">ebp</span><span class="o">+</span><span class="mi">16</span>
 
-1 movl 12(%ebp), %eax
-2 movl 20(%ebp), %ecx
-3 imull %eax, %ecx
-4 mull 16(%ebp)
-5 leal (%ecx,%edx), %edx
-6 movl 8(%ebp), %ecx
-7 movl %eax, (%ecx)
-8 movl %edx, 4(%ecx)</code></pre>
+<span class="mi">1</span> <span class="n">movl</span> <span class="mi">12</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">eax</span>
+<span class="mi">2</span> <span class="n">movl</span> <span class="mi">20</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">ecx</span>
+<span class="mi">3</span> <span class="n">imull</span> <span class="o">%</span><span class="n">eax</span><span class="p">,</span> <span class="o">%</span><span class="n">ecx</span>
+<span class="mi">4</span> <span class="n">mull</span> <span class="mi">16</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">)</span>
+<span class="mi">5</span> <span class="n">leal</span> <span class="p">(</span><span class="o">%</span><span class="n">ecx</span><span class="p">,</span><span class="o">%</span><span class="n">edx</span><span class="p">),</span> <span class="o">%</span><span class="n">edx</span>
+<span class="mi">6</span> <span class="n">movl</span> <span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">ecx</span>
+<span class="mi">7</span> <span class="n">movl</span> <span class="o">%</span><span class="n">eax</span><span class="p">,</span> <span class="p">(</span><span class="o">%</span><span class="n">ecx</span><span class="p">)</span>
+<span class="mi">8</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="mi">4</span><span class="p">(</span><span class="o">%</span><span class="n">ecx</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </li>
@@ -3373,16 +3588,16 @@ mov da2(,%esi,2),%ebx</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">1 jle .L2 if &lt;=, goto dest2
-2 .L5: dest1:
-3 movl %edx, %eax
-4 sarl %eax
-5 subl %eax, %edx
-6 leal (%edx,%edx,2), %edx
-7 testl %edx, %edx
-8 jg .L5 if &gt;, goto dest1
-9 .L2: dest2:
-10 movl %edx, %eax</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="mi">1</span> <span class="n">jle</span> <span class="p">.</span><span class="n">L2</span> <span class="k">if</span> <span class="o">&lt;=</span><span class="p">,</span> <span class="k">goto</span> <span class="n">dest2</span>
+<span class="mi">2</span> <span class="p">.</span><span class="n">L5</span><span class="o">:</span> <span class="n">dest1</span><span class="o">:</span>
+<span class="mi">3</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span>
+<span class="mi">4</span> <span class="n">sarl</span> <span class="o">%</span><span class="n">eax</span>
+<span class="mi">5</span> <span class="n">subl</span> <span class="o">%</span><span class="n">eax</span><span class="p">,</span> <span class="o">%</span><span class="n">edx</span>
+<span class="mi">6</span> <span class="n">leal</span> <span class="p">(</span><span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="o">%</span><span class="n">edx</span>
+<span class="mi">7</span> <span class="n">testl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">edx</span>
+<span class="mi">8</span> <span class="n">jg</span> <span class="p">.</span><span class="n">L5</span> <span class="k">if</span> <span class="o">&gt;</span><span class="p">,</span> <span class="k">goto</span> <span class="n">dest1</span>
+<span class="mi">9</span> <span class="p">.</span><span class="n">L2</span><span class="o">:</span> <span class="n">dest2</span><span class="o">:</span>
+<span class="mi">10</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -3391,14 +3606,14 @@ mov da2(,%esi,2),%ebx</pre>
 <p>Módulo objeto reubicable :las posiciones de memoria son relativas a la dirección de referencia "silly" (dirección cero del módulo reubicable)</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">1 	8: 7e 0d jle 17 &lt;silly+0x17&gt; Target = dest2
-2 	a: 89 d0 mov %edx,%eax dest1:
-3 	c: d1 f8 sar %eax
-4 	e: 29 c2 sub %eax,%edx
-5 	10: 8d 14 52 lea (%edx,%edx,2),%edx
-6 	13: 85 d2 test %edx,%edx
-7 	15: 7f f3 jg a &lt;silly+0xa&gt; Target = dest1
-8 	17: 89 d0 mov %edx,%eax dest2:</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="mi">1</span> 	<span class="mi">8</span><span class="o">:</span> <span class="mi">7</span><span class="n">e</span> <span class="mi">0</span><span class="n">d</span> <span class="n">jle</span> <span class="mi">17</span> <span class="o">&lt;</span><span class="n">silly</span><span class="o">+</span><span class="mh">0x17</span><span class="o">&gt;</span> <span class="n">Target</span> <span class="o">=</span> <span class="n">dest2</span>
+<span class="mi">2</span> 	<span class="n">a</span><span class="o">:</span> <span class="mi">89</span> <span class="n">d0</span> <span class="n">mov</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span> <span class="n">dest1</span><span class="o">:</span>
+<span class="mi">3</span> 	<span class="n">c</span><span class="o">:</span> <span class="n">d1</span> <span class="n">f8</span> <span class="n">sar</span> <span class="o">%</span><span class="n">eax</span>
+<span class="mi">4</span> 	<span class="n">e</span><span class="o">:</span> <span class="mi">29</span> <span class="n">c2</span> <span class="n">sub</span> <span class="o">%</span><span class="n">eax</span><span class="p">,</span><span class="o">%</span><span class="n">edx</span>
+<span class="mi">5</span> 	<span class="mi">10</span><span class="o">:</span> <span class="mi">8</span><span class="n">d</span> <span class="mi">14</span> <span class="mi">52</span> <span class="n">lea</span> <span class="p">(</span><span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="o">%</span><span class="n">edx</span>
+<span class="mi">6</span> 	<span class="mi">13</span><span class="o">:</span> <span class="mi">85</span> <span class="n">d2</span> <span class="n">test</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="o">%</span><span class="n">edx</span>
+<span class="mi">7</span> 	<span class="mi">15</span><span class="o">:</span> <span class="mi">7</span><span class="n">f</span> <span class="n">f3</span> <span class="n">jg</span> <span class="n">a</span> <span class="o">&lt;</span><span class="n">silly</span><span class="o">+</span><span class="mh">0xa</span><span class="o">&gt;</span> <span class="n">Target</span> <span class="o">=</span> <span class="n">dest1</span>
+<span class="mi">8</span> 	<span class="mi">17</span><span class="o">:</span> <span class="mi">89</span> <span class="n">d0</span> <span class="n">mov</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span> <span class="n">dest2</span><span class="o">:</span></code></pre>
 </div>
 </div>
 </li>
@@ -3406,14 +3621,14 @@ mov da2(,%esi,2),%ebx</pre>
 <p>Módulo objeto ejecutable : El linker ha resuelto las posiciones de memoria relativas del módulo objeto reubicable convirtiendolas en direcciones de memoria absolutas.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">1 804839c: 7e 0d jle 80483ab &lt;silly+0x17&gt;
-2 804839e: 89 d0 mov %edx,%eax
-3 80483a0: d1 f8 sar %eax
-4 80483a2: 29 c2 sub %eax,%edx
-5 80483a4: 8d 14 52 lea (%edx,%edx,2),%edx
-6 80483a7: 85 d2 test %edx,%edx
-7 80483a9: 7f f3 jg 804839e &lt;silly+0xa&gt;
-8 80483ab: 89 d0 mov %edx,%eax</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="mi">1</span> <span class="mi">804839</span><span class="n">c</span><span class="o">:</span> <span class="mi">7</span><span class="n">e</span> <span class="mi">0</span><span class="n">d</span> <span class="n">jle</span> <span class="mi">80483</span><span class="n">ab</span> <span class="o">&lt;</span><span class="n">silly</span><span class="o">+</span><span class="mh">0x17</span><span class="o">&gt;</span>
+<span class="mi">2</span> <span class="mi">804839</span><span class="n">e</span><span class="o">:</span> <span class="mi">89</span> <span class="n">d0</span> <span class="n">mov</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span>
+<span class="mi">3</span> <span class="mi">80483</span><span class="n">a0</span><span class="o">:</span> <span class="n">d1</span> <span class="n">f8</span> <span class="n">sar</span> <span class="o">%</span><span class="n">eax</span>
+<span class="mi">4</span> <span class="mi">80483</span><span class="n">a2</span><span class="o">:</span> <span class="mi">29</span> <span class="n">c2</span> <span class="n">sub</span> <span class="o">%</span><span class="n">eax</span><span class="p">,</span><span class="o">%</span><span class="n">edx</span>
+<span class="mi">5</span> <span class="mi">80483</span><span class="n">a4</span><span class="o">:</span> <span class="mi">8</span><span class="n">d</span> <span class="mi">14</span> <span class="mi">52</span> <span class="n">lea</span> <span class="p">(</span><span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="o">%</span><span class="n">edx</span>
+<span class="mi">6</span> <span class="mi">80483</span><span class="n">a7</span><span class="o">:</span> <span class="mi">85</span> <span class="n">d2</span> <span class="n">test</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="o">%</span><span class="n">edx</span>
+<span class="mi">7</span> <span class="mi">80483</span><span class="n">a9</span><span class="o">:</span> <span class="mi">7</span><span class="n">f</span> <span class="n">f3</span> <span class="n">jg</span> <span class="mi">804839</span><span class="n">e</span> <span class="o">&lt;</span><span class="n">silly</span><span class="o">+</span><span class="mh">0xa</span><span class="o">&gt;</span>
+<span class="mi">8</span> <span class="mi">80483</span><span class="n">ab</span><span class="o">:</span> <span class="mi">89</span> <span class="n">d0</span> <span class="n">mov</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span></code></pre>
 </div>
 </div>
 </li>
@@ -3477,26 +3692,26 @@ mov da2(,%esi,2),%ebx</pre>
 <p>Módulo C:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">(a) Original C code
-1 int absdiff(int x, int y) {
-2 if (x &lt; y)
-3 return y - x;
-4 else
-5 return x - y;
-6 }
+<pre class="rouge highlight"><code data-lang="c"><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">Original</span> <span class="n">C</span> <span class="n">code</span>
+<span class="mi">1</span> <span class="kt">int</span> <span class="nf">absdiff</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">2</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">)</span>
+<span class="mi">3</span> <span class="k">return</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">;</span>
+<span class="mi">4</span> <span class="k">else</span>
+<span class="mi">5</span> <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span>
+<span class="mi">6</span> <span class="p">}</span>
 
-(b) Equivalent goto version
-1 int gotodiff(int x, int y) {
-2 int result;
-3 if (x &gt;= y)
-4 goto x_ge_y;
-5 result = y - x;
-6 goto done;
-7 x_ge_y:
-8 result = x - y;
-9 done:
-10 return result;
-11 }</code></pre>
+<span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="n">Equivalent</span> <span class="k">goto</span> <span class="n">version</span>
+<span class="mi">1</span> <span class="kt">int</span> <span class="nf">gotodiff</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">2</span> <span class="kt">int</span> <span class="n">result</span><span class="p">;</span>
+<span class="mi">3</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">y</span><span class="p">)</span>
+<span class="mi">4</span> <span class="k">goto</span> <span class="n">x_ge_y</span><span class="p">;</span>
+<span class="mi">5</span> <span class="n">result</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">x</span><span class="p">;</span>
+<span class="mi">6</span> <span class="k">goto</span> <span class="n">done</span><span class="p">;</span>
+<span class="mi">7</span> <span class="n">x_ge_y</span><span class="o">:</span>
+<span class="mi">8</span> <span class="n">result</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">;</span>
+<span class="mi">9</span> <span class="n">done</span><span class="o">:</span>
+<span class="mi">10</span> <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="mi">11</span> <span class="p">}</span></code></pre>
 </div>
 </div>
 </li>
@@ -3504,18 +3719,18 @@ mov da2(,%esi,2),%ebx</pre>
 <p>Módulo ASM:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">(c) Generated assembly code
-x at %ebp+8, y at %ebp+12
-1 movl 8(%ebp), %edx Get x
-2 movl 12(%ebp), %eax Get y
-3 cmpl %eax, %edx Compare x:y
-4 jge .L2 if &gt;= goto x_ge_y
-5 subl %edx, %eax Compute result = y-x
-6 jmp .L3 Goto done
-7 .L2: x_ge_y:
-8 subl %eax, %edx Compute result = x-y
-9 movl %edx, %eax Set result as return value
-10 .L3: done: Begin completion code</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="n">Generated</span> <span class="n">assembly</span> <span class="n">code</span>
+<span class="n">x</span> <span class="n">at</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">y</span> <span class="n">at</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">12</span>
+<span class="mi">1</span> <span class="n">movl</span> <span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">edx</span> <span class="n">Get</span> <span class="n">x</span>
+<span class="mi">2</span> <span class="n">movl</span> <span class="mi">12</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">eax</span> <span class="n">Get</span> <span class="n">y</span>
+<span class="mi">3</span> <span class="n">cmpl</span> <span class="o">%</span><span class="n">eax</span><span class="p">,</span> <span class="o">%</span><span class="n">edx</span> <span class="n">Compare</span> <span class="n">x</span><span class="o">:</span><span class="n">y</span>
+<span class="mi">4</span> <span class="n">jge</span> <span class="p">.</span><span class="n">L2</span> <span class="k">if</span> <span class="o">&gt;=</span> <span class="k">goto</span> <span class="n">x_ge_y</span>
+<span class="mi">5</span> <span class="n">subl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span> <span class="n">Compute</span> <span class="n">result</span> <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="n">x</span>
+<span class="mi">6</span> <span class="n">jmp</span> <span class="p">.</span><span class="n">L3</span> <span class="n">Goto</span> <span class="n">done</span>
+<span class="mi">7</span> <span class="p">.</span><span class="n">L2</span><span class="o">:</span> <span class="n">x_ge_y</span><span class="o">:</span>
+<span class="mi">8</span> <span class="n">subl</span> <span class="o">%</span><span class="n">eax</span><span class="p">,</span> <span class="o">%</span><span class="n">edx</span> <span class="n">Compute</span> <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="n">y</span>
+<span class="mi">9</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span> <span class="n">Set</span> <span class="n">result</span> <span class="n">as</span> <span class="k">return</span> <span class="n">value</span>
+<span class="mi">10</span> <span class="p">.</span><span class="n">L3</span><span class="o">:</span> <span class="n">done</span><span class="o">:</span> <span class="n">Begin</span> <span class="n">completion</span> <span class="n">code</span></code></pre>
 </div>
 </div>
 </li>
@@ -3537,14 +3752,14 @@ x at %ebp+8, y at %ebp+12
 <p>Módulo C:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">1 int dw_loop(int x, int y, int n) {
-2 do {
-3 x += n;
-4 y *= n;
-5 n--;
-6 } while ((n &gt; 0) &amp;&amp; (y &lt; n));
-7 return x;
-8 }</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="mi">1</span> <span class="kt">int</span> <span class="nf">dw_loop</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">2</span> <span class="k">do</span> <span class="p">{</span>
+<span class="mi">3</span> <span class="n">x</span> <span class="o">+=</span> <span class="n">n</span><span class="p">;</span>
+<span class="mi">4</span> <span class="n">y</span> <span class="o">*=</span> <span class="n">n</span><span class="p">;</span>
+<span class="mi">5</span> <span class="n">n</span><span class="o">--</span><span class="p">;</span>
+<span class="mi">6</span> <span class="p">}</span> <span class="k">while</span> <span class="p">((</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">));</span>
+<span class="mi">7</span> <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
+<span class="mi">8</span> <span class="p">}</span></code></pre>
 </div>
 </div>
 </li>
@@ -3552,20 +3767,20 @@ x at %ebp+8, y at %ebp+12
 <p>Módulo ASM:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">x at %ebp+8, y at %ebp+12, n at %ebp+16
+<pre class="rouge highlight"><code data-lang="c"><span class="n">x</span> <span class="n">at</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">y</span> <span class="n">at</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">12</span><span class="p">,</span> <span class="n">n</span> <span class="n">at</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">16</span>
 
-1 movl 8(%ebp), %eax
-2 movl 12(%ebp), %ecx
-3 movl 16(%ebp), %edx
-4 .L2:
-5 addl %edx, %eax
-6 imull %edx, %ecx
-7 subl $1, %edx
-8 testl %edx, %edx
-9 jle .L5
-10 cmpl %edx, %ecx
-11 jl .L2
-12 .L5:</code></pre>
+<span class="mi">1</span> <span class="n">movl</span> <span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">eax</span>
+<span class="mi">2</span> <span class="n">movl</span> <span class="mi">12</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">ecx</span>
+<span class="mi">3</span> <span class="n">movl</span> <span class="mi">16</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">edx</span>
+<span class="mi">4</span> <span class="p">.</span><span class="n">L2</span><span class="o">:</span>
+<span class="mi">5</span> <span class="n">addl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span>
+<span class="mi">6</span> <span class="n">imull</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">ecx</span>
+<span class="mi">7</span> <span class="n">subl</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="n">edx</span>
+<span class="mi">8</span> <span class="n">testl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">edx</span>
+<span class="mi">9</span> <span class="n">jle</span> <span class="p">.</span><span class="n">L5</span>
+<span class="mi">10</span> <span class="n">cmpl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">ecx</span>
+<span class="mi">11</span> <span class="n">jl</span> <span class="p">.</span><span class="n">L2</span>
+<span class="mi">12</span> <span class="p">.</span><span class="n">L5</span><span class="o">:</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -3587,15 +3802,15 @@ x at %ebp+8, y at %ebp+12
 <p>Módulo C:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">1 int loop_while(int a, int b)
-2 {
-3 int result = 1;
-4 while (a &lt; b) {
-5 result *= (a+b);
-6 a++;
-7 }
-8 return result;
-9 }</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="mi">1</span> <span class="kt">int</span> <span class="n">loop_while</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="mi">2</span> <span class="p">{</span>
+<span class="mi">3</span> <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="mi">4</span> <span class="k">while</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="mi">5</span> <span class="n">result</span> <span class="o">*=</span> <span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">);</span>
+<span class="mi">6</span> <span class="n">a</span><span class="o">++</span><span class="p">;</span>
+<span class="mi">7</span> <span class="p">}</span>
+<span class="mi">8</span> <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="mi">9</span> <span class="p">}</span></code></pre>
 </div>
 </div>
 </li>
@@ -3604,22 +3819,22 @@ x at %ebp+8, y at %ebp+12
 variables in the C code. Create a table of register usage for this function.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">a at %ebp+8, b at %ebp+12
+<pre class="rouge highlight"><code data-lang="c"><span class="n">a</span> <span class="n">at</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">b</span> <span class="n">at</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">12</span>
 
-1 movl 8(%ebp), %ecx
-2 movl 12(%ebp), %ebx
-3 movl $1, %eax
-4 cmpl %ebx, %ecx
-5 jge .L11
-6 leal (%ebx,%ecx), %edx
-7 movl $1, %eax
-8 .L12:
-9 imull %edx, %eax
-10 addl $1, %ecx
-11 addl $1, %edx
-12 cmpl %ecx, %ebx
-13 jg .L12
-14 .L11:</code></pre>
+<span class="mi">1</span> <span class="n">movl</span> <span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">ecx</span>
+<span class="mi">2</span> <span class="n">movl</span> <span class="mi">12</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">ebx</span>
+<span class="mi">3</span> <span class="n">movl</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span>
+<span class="mi">4</span> <span class="n">cmpl</span> <span class="o">%</span><span class="n">ebx</span><span class="p">,</span> <span class="o">%</span><span class="n">ecx</span>
+<span class="mi">5</span> <span class="n">jge</span> <span class="p">.</span><span class="n">L11</span>
+<span class="mi">6</span> <span class="n">leal</span> <span class="p">(</span><span class="o">%</span><span class="n">ebx</span><span class="p">,</span><span class="o">%</span><span class="n">ecx</span><span class="p">),</span> <span class="o">%</span><span class="n">edx</span>
+<span class="mi">7</span> <span class="n">movl</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span>
+<span class="mi">8</span> <span class="p">.</span><span class="n">L12</span><span class="o">:</span>
+<span class="mi">9</span> <span class="n">imull</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span>
+<span class="mi">10</span> <span class="n">addl</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="n">ecx</span>
+<span class="mi">11</span> <span class="n">addl</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="n">edx</span>
+<span class="mi">12</span> <span class="n">cmpl</span> <span class="o">%</span><span class="n">ecx</span><span class="p">,</span> <span class="o">%</span><span class="n">ebx</span>
+<span class="mi">13</span> <span class="n">jg</span> <span class="p">.</span><span class="n">L12</span>
+<span class="mi">14</span> <span class="p">.</span><span class="n">L11</span><span class="o">:</span></code></pre>
 </div>
 </div>
 </li>
@@ -3634,20 +3849,20 @@ variables in the C code. Create a table of register usage for this function.</p>
 <p>Módulo C:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">1 int fact_for_goto(int n)
-2 {
-3 int i = 2;
-4 int result = 1;
-5 if (!(i &lt;= n))
-6 goto done;
-7 loop:
-8 result *= i;
-9 i++;
-10 if (i &lt;= n)
-11 goto loop;
-12 done:
-13 return result;
-14 }</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="mi">1</span> <span class="kt">int</span> <span class="n">fact_for_goto</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="mi">2</span> <span class="p">{</span>
+<span class="mi">3</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="mi">4</span> <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="mi">5</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">))</span>
+<span class="mi">6</span> <span class="k">goto</span> <span class="n">done</span><span class="p">;</span>
+<span class="mi">7</span> <span class="n">loop</span><span class="o">:</span>
+<span class="mi">8</span> <span class="n">result</span> <span class="o">*=</span> <span class="n">i</span><span class="p">;</span>
+<span class="mi">9</span> <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="mi">10</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span>
+<span class="mi">11</span> <span class="k">goto</span> <span class="n">loop</span><span class="p">;</span>
+<span class="mi">12</span> <span class="n">done</span><span class="o">:</span>
+<span class="mi">13</span> <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="mi">14</span> <span class="p">}</span></code></pre>
 </div>
 </div>
 </li>
@@ -3655,20 +3870,20 @@ variables in the C code. Create a table of register usage for this function.</p>
 <p>Módulo asm</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">Argument: n at %ebp+8
-Registers: n in %ecx, i in %edx, result in %eax
+<pre class="rouge highlight"><code data-lang="c"><span class="nl">Argument:</span> <span class="n">n</span> <span class="n">at</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">8</span>
+<span class="n">Registers</span><span class="o">:</span> <span class="n">n</span> <span class="n">in</span> <span class="o">%</span><span class="n">ecx</span><span class="p">,</span> <span class="n">i</span> <span class="n">in</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="n">result</span> <span class="n">in</span> <span class="o">%</span><span class="n">eax</span>
 
-1 movl 8(%ebp), %ecx Get n
-2 movl $2, %edx Set i to 2 (init)
-3 movl $1, %eax Set result to 1
-4 cmpl $1, %ecx Compare n:1 (!test)
-5 jle .L14 If &lt;=, goto done
-6 .L17: loop:
-7 imull %edx, %eax Compute result *= i (body)
-8 addl $1, %edx Increment i (update)
-9 cmpl %edx, %ecx Compare n:i (test)
-10 jge .L17 If &gt;=, goto loop
-11 .L14: done:</code></pre>
+<span class="mi">1</span> <span class="n">movl</span> <span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="n">ebp</span><span class="p">),</span> <span class="o">%</span><span class="n">ecx</span> <span class="n">Get</span> <span class="n">n</span>
+<span class="mi">2</span> <span class="n">movl</span> <span class="err">$</span><span class="mi">2</span><span class="p">,</span> <span class="o">%</span><span class="n">edx</span> <span class="n">Set</span> <span class="n">i</span> <span class="n">to</span> <span class="mi">2</span> <span class="p">(</span><span class="n">init</span><span class="p">)</span>
+<span class="mi">3</span> <span class="n">movl</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span> <span class="n">Set</span> <span class="n">result</span> <span class="n">to</span> <span class="mi">1</span>
+<span class="mi">4</span> <span class="n">cmpl</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="n">ecx</span> <span class="n">Compare</span> <span class="n">n</span><span class="o">:</span><span class="mi">1</span> <span class="p">(</span><span class="o">!</span><span class="n">test</span><span class="p">)</span>
+<span class="mi">5</span> <span class="n">jle</span> <span class="p">.</span><span class="n">L14</span> <span class="n">If</span> <span class="o">&lt;=</span><span class="p">,</span> <span class="k">goto</span> <span class="n">done</span>
+<span class="mi">6</span> <span class="p">.</span><span class="n">L17</span><span class="o">:</span> <span class="n">loop</span><span class="o">:</span>
+<span class="mi">7</span> <span class="n">imull</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span> <span class="n">Compute</span> <span class="n">result</span> <span class="o">*=</span> <span class="n">i</span> <span class="p">(</span><span class="n">body</span><span class="p">)</span>
+<span class="mi">8</span> <span class="n">addl</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="n">edx</span> <span class="n">Increment</span> <span class="n">i</span> <span class="p">(</span><span class="n">update</span><span class="p">)</span>
+<span class="mi">9</span> <span class="n">cmpl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">ecx</span> <span class="n">Compare</span> <span class="n">n</span><span class="o">:</span><span class="n">i</span> <span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<span class="mi">10</span> <span class="n">jge</span> <span class="p">.</span><span class="n">L17</span> <span class="n">If</span> <span class="o">&gt;=</span><span class="p">,</span> <span class="k">goto</span> <span class="n">loop</span>
+<span class="mi">11</span> <span class="p">.</span><span class="n">L14</span><span class="o">:</span> <span class="n">done</span><span class="o">:</span></code></pre>
 </div>
 </div>
 </li>
@@ -3689,35 +3904,35 @@ Registers: n in %ecx, i in %edx, result in %eax
 <p>Editar y ejecutar el siguiente programa en lenguaje C interpretando el resultado sabiendo que lista es una "variable puntero" que apunta al elemento lista[0].</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">#include &lt;stdio.h&gt;
+<pre class="rouge highlight"><code data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
 
-void main (void)
-{
+  <span class="kt">int</span> <span class="n">lista</span><span class="p">[]</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
 
-  int lista[]={1,2,3,4,5};
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> **********ARRAY LISTA***********"</span><span class="p">);</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> *******lista es una VARIABLE PUNTERO*******"</span><span class="p">);</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> **la variable lista contiene la dirección de lista[0]*******</span><span class="se">\n\n</span><span class="s">"</span><span class="p">)</span> <span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> lista[0] = %d es el 1º elemento de lista </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">lista</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> lista = %p es la dirección del 1º elemento </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">lista</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> &amp;lista[0] = %p es la dirección del 1º elemento </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">lista</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> *lista = %d equivale a lista[0] </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">lista</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> *&amp;lista = %p equivale a lista </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*&amp;</span><span class="n">lista</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> **&amp;lista = %d equivale a lista[0] </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">**&amp;</span><span class="n">lista</span><span class="p">);</span>
 
-  printf ("\n **********ARRAY LISTA***********");
-  printf ("\n *******lista es una VARIABLE PUNTERO*******");
-  printf ("\n **la variable lista contiene la dirección de lista[0]*******\n\n") ;
-  printf("\n lista[0] = %d es el 1º elemento de lista \n", lista[0]);
-  printf("\n lista = %p es la dirección del 1º elemento \n", lista);
-  printf("\n &amp;lista[0] = %p es la dirección del 1º elemento \n", &amp;lista[0]);
-  printf("\n *lista = %d equivale a lista[0] \n", *lista);
-  printf("\n *&amp;lista = %p equivale a lista \n", *&amp;lista);
-  printf("\n **&amp;lista = %d equivale a lista[0] \n", **&amp;lista);
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"</span><span class="se">\n\n</span><span class="s"> *******ARITMETICA DE PUNTEROS*******"</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> *(lista+1) = %d equivale a lista[1] </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">lista</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> *(lista+4) = %d equivale a lista[4] </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">lista</span><span class="o">+</span><span class="mi">4</span><span class="p">));</span>
 
-  printf ("\n\n *******ARITMETICA DE PUNTEROS*******");
-  printf("\n *(lista+1) = %d equivale a lista[1] \n", *(lista+1));
-  printf("\n *(lista+4) = %d equivale a lista[4] \n", *(lista+4));
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"</span><span class="se">\n\n</span><span class="s"> *******CASTING*******"</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> (int *)lista = %p  </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">lista</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> *(int *)lista = %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">lista</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> *(int)lista+1 = %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">lista</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> *(int)lista+4 = %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span><span class="n">lista</span><span class="o">+</span><span class="mi">4</span><span class="p">);</span>
 
-  printf ("\n\n *******CASTING*******");
-  printf("\n (int *)lista = %p  \n", (int *)lista);
-  printf("\n *(int *)lista = %d \n", *(int *)lista);
-  printf("\n *(int)lista+1 = %d \n", *(int *)lista+1);
-  printf("\n *(int)lista+4 = %d \n", *(int *)lista+4);
-
-  printf("\n *((short *)lista+1) = %d . Ahora lista lo declaro con elementos de 2  bytes \n", *((short *)lista+1));
-}</code></pre>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> *((short *)lista+1) = %d . Ahora lista lo declaro con elementos de 2  bytes </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="p">((</span><span class="kt">short</span> <span class="o">*</span><span class="p">)</span><span class="n">lista</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 </li>
@@ -4119,9 +4334,9 @@ b.. Valid/LRU/Tag/Set/Offset &#8594; 1/3/21/7/4</p>
 <p>4.15 Consider the following code:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">for (i=0; i=20; i++)
-   for ( j=0; j=10; j++)
-         a[i] = a[i] * j ;</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+   <span class="k">for</span> <span class="p">(</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">=</span><span class="mi">10</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+         <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">j</span> <span class="p">;</span></code></pre>
 </div>
 </div>
 <div class="olist loweralpha">
@@ -5139,8 +5354,8 @@ formats are used. In one format, the 8-bit opcode specifies an I/O operation; th
 <p>8.11 Suppose the program statement</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">for (i = 1; i &lt;= n; i++)
-  a[i] = b[i] + c[i];</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+  <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">];</span></code></pre>
 </div>
 </div>
 </li>
@@ -5158,22 +5373,22 @@ formats are used. In one format, the 8-bit opcode specifies an I/O operation; th
 <p>Programa arquitectura load/store (espacio de direcciones virtual)</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">            SECCION CODIGO
-            Ri &lt;- 1
-            Ra &lt;- n
-loop_start: R1 &lt;- b[Ri]
-            R2 &lt;- c[Ri]
-            R3 &lt;- R1+R2
-            a[Ri] &lt;- R3
-            Flags &lt;- Ri&lt;Ra
-            Flags:PC &lt;- loop_start
-            CPU &lt;- halt
-            SECCION DATOS INICIALIZADOS
-uno:        1
-n:          1000
-a:          array a[1000]
-b:          array b[1000]
-c:          array c[1000]</code></pre>
+<pre class="rouge highlight"><code data-lang="c">            <span class="n">SECCION</span> <span class="n">CODIGO</span>
+            <span class="n">Ri</span> <span class="o">&lt;-</span> <span class="mi">1</span>
+            <span class="n">Ra</span> <span class="o">&lt;-</span> <span class="n">n</span>
+<span class="n">loop_start</span><span class="o">:</span> <span class="n">R1</span> <span class="o">&lt;-</span> <span class="n">b</span><span class="p">[</span><span class="n">Ri</span><span class="p">]</span>
+            <span class="n">R2</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">[</span><span class="n">Ri</span><span class="p">]</span>
+            <span class="n">R3</span> <span class="o">&lt;-</span> <span class="n">R1</span><span class="o">+</span><span class="n">R2</span>
+            <span class="n">a</span><span class="p">[</span><span class="n">Ri</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">R3</span>
+            <span class="n">Flags</span> <span class="o">&lt;-</span> <span class="n">Ri</span><span class="o">&lt;</span><span class="n">Ra</span>
+            <span class="n">Flags</span><span class="o">:</span><span class="n">PC</span> <span class="o">&lt;-</span> <span class="n">loop_start</span>
+            <span class="n">CPU</span> <span class="o">&lt;-</span> <span class="n">halt</span>
+            <span class="n">SECCION</span> <span class="n">DATOS</span> <span class="n">INICIALIZADOS</span>
+<span class="n">uno</span><span class="o">:</span>        <span class="mi">1</span>
+<span class="n">n</span><span class="o">:</span>          <span class="mi">1000</span>
+<span class="n">a</span><span class="o">:</span>          <span class="n">array</span> <span class="n">a</span><span class="p">[</span><span class="mi">1000</span><span class="p">]</span>
+<span class="n">b</span><span class="o">:</span>          <span class="n">array</span> <span class="n">b</span><span class="p">[</span><span class="mi">1000</span><span class="p">]</span>
+<span class="n">c</span><span class="o">:</span>          <span class="n">array</span> <span class="n">c</span><span class="p">[</span><span class="mi">1000</span><span class="p">]</span></code></pre>
 </div>
 </div>
 </li>
@@ -5838,17 +6053,17 @@ Whenever this happens, the BIU automatically resets the queue and then begins to
 <p>12.14 The Motorola 680x0 machines include the instruction <em>Decrement and Branch According to Condition</em>, which has the following form:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">     DBcc Dn, displacement
+<pre class="rouge highlight"><code data-lang="c">     <span class="n">DBcc</span> <span class="n">Dn</span><span class="p">,</span> <span class="n">displacement</span>
 
-where cc is one of the testable conditions, Dn is a general-purpose register, and displacement
-specifies the target address relative to the current address.
+<span class="n">where</span> <span class="n">cc</span> <span class="n">is</span> <span class="n">one</span> <span class="n">of</span> <span class="n">the</span> <span class="n">testable</span> <span class="n">conditions</span><span class="p">,</span> <span class="n">Dn</span> <span class="n">is</span> <span class="n">a</span> <span class="n">general</span><span class="o">-</span><span class="n">purpose</span> <span class="k">register</span><span class="p">,</span> <span class="n">and</span> <span class="n">displacement</span>
+<span class="n">specifies</span> <span class="n">the</span> <span class="n">target</span> <span class="n">address</span> <span class="n">relative</span> <span class="n">to</span> <span class="n">the</span> <span class="n">current</span> <span class="n">address</span><span class="p">.</span>
 
-The instruction can be defined as follows:
-   if (cc = False)
-     then begin
-     Dn := (Dn) - 1;
-     if Dn != -1 then PC := (PC) + displacement end
-   else PC := (PC) + 2;</code></pre>
+<span class="n">The</span> <span class="n">instruction</span> <span class="n">can</span> <span class="n">be</span> <span class="n">defined</span> <span class="n">as</span> <span class="n">follows</span><span class="o">:</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">cc</span> <span class="o">=</span> <span class="n">False</span><span class="p">)</span>
+     <span class="n">then</span> <span class="n">begin</span>
+     <span class="n">Dn</span> <span class="o">:=</span> <span class="p">(</span><span class="n">Dn</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+     <span class="k">if</span> <span class="n">Dn</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="n">then</span> <span class="n">PC</span> <span class="o">:=</span> <span class="p">(</span><span class="n">PC</span><span class="p">)</span> <span class="o">+</span> <span class="n">displacement</span> <span class="n">end</span>
+   <span class="k">else</span> <span class="n">PC</span> <span class="o">:=</span> <span class="p">(</span><span class="n">PC</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -5857,9 +6072,9 @@ The instruction can be defined as follows:
 <p>When the instruction is executed, the condition is first tested to determine whether the termination condition for the loop is satisfied. If so, no operation is performed and execution continues at the next instruction in sequence. If the condition is false, the specified data register is decremented and checked to see if it is less than zero. If it is less than zero, the loop is terminated and execution continues at the next instruction in sequence. Otherwise, the program branches to the specified location. Now consider the following assembly-language program fragment:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">AGAIN CMPM.L (A0)+, (A1)+
-      DBNE D1, AGAIN
-      NOP</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">AGAIN</span> <span class="n">CMPM</span><span class="p">.</span><span class="n">L</span> <span class="p">(</span><span class="n">A0</span><span class="p">)</span><span class="o">+</span><span class="p">,</span> <span class="p">(</span><span class="n">A1</span><span class="p">)</span><span class="o">+</span>
+      <span class="n">DBNE</span> <span class="n">D1</span><span class="p">,</span> <span class="n">AGAIN</span>
+      <span class="n">NOP</span></code></pre>
 </div>
 </div>
 </li>
@@ -6071,11 +6286,11 @@ N = number of executed instructions, J = number of jump instructions, D = number
 <p>E e I se solapan &#8594; N etapas E|I</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">     +-----+
-     |  E  |
-     +-----+
-     |  I  |
-     +-----+</code></pre>
+<pre class="rouge highlight"><code data-lang="c">     <span class="o">+-----+</span>
+     <span class="o">|</span>  <span class="n">E</span>  <span class="o">|</span>
+     <span class="o">+-----+</span>
+     <span class="o">|</span>  <span class="n">I</span>  <span class="o">|</span>
+     <span class="o">+-----+</span></code></pre>
 </div>
 </div>
 </li>
@@ -6111,19 +6326,19 @@ N = number of executed instructions, J = number of jump instructions, D = number
 <p>Si hay dependencias D no se solapa por lo que hay una fracción de las D instrucciones que hay que sumar.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">     +-----+
-     |  E  |
-     +-----+
-     |  I  |
-     +-----+
-                    -&gt; N+alfaxD
-     +-----+
-     |  E  |
-     +-----+
-     |  I  |
-     +-----+
-     |  D  |
-     +-----+</code></pre>
+<pre class="rouge highlight"><code data-lang="c">     <span class="o">+-----+</span>
+     <span class="o">|</span>  <span class="n">E</span>  <span class="o">|</span>
+     <span class="o">+-----+</span>
+     <span class="o">|</span>  <span class="n">I</span>  <span class="o">|</span>
+     <span class="o">+-----+</span>
+                    <span class="o">-&gt;</span> <span class="n">N</span><span class="o">+</span><span class="n">alfaxD</span>
+     <span class="o">+-----+</span>
+     <span class="o">|</span>  <span class="n">E</span>  <span class="o">|</span>
+     <span class="o">+-----+</span>
+     <span class="o">|</span>  <span class="n">I</span>  <span class="o">|</span>
+     <span class="o">+-----+</span>
+     <span class="o">|</span>  <span class="n">D</span>  <span class="o">|</span>
+     <span class="o">+-----+</span></code></pre>
 </div>
 </div>
 </li>
@@ -6141,15 +6356,15 @@ N = number of executed instructions, J = number of jump instructions, D = number
 <p>Dividimos E en E1 (lectura RPG) y E2 (ALU y escritura RPG)</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">     +-----+
-     |  D  |
-     +-----+
-     | E2  |
-     +-----+
-     | E1  |
-     +-----+
-     |  I  |
-     +-----+</code></pre>
+<pre class="rouge highlight"><code data-lang="c">     <span class="o">+-----+</span>
+     <span class="o">|</span>  <span class="n">D</span>  <span class="o">|</span>
+     <span class="o">+-----+</span>
+     <span class="o">|</span> <span class="n">E2</span>  <span class="o">|</span>
+     <span class="o">+-----+</span>
+     <span class="o">|</span> <span class="n">E1</span>  <span class="o">|</span>
+     <span class="o">+-----+</span>
+     <span class="o">|</span>  <span class="n">I</span>  <span class="o">|</span>
+     <span class="o">+-----+</span></code></pre>
 </div>
 </div>
 </li>
@@ -6185,13 +6400,13 @@ N = number of executed instructions, J = number of jump instructions, D = number
 <p>Las dos instrucciones anteriores al salto (Add y Store) en lugar de los 2 NOOP después del salto Branch.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">Load ra&lt;-M
-Load rb&lt;-M
-Noop
-Branch X
-Add  rc&lt;-ra+rb
-Store M&lt;-rc
-Next</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">Load</span> <span class="n">ra</span><span class="o">&lt;-</span><span class="n">M</span>
+<span class="n">Load</span> <span class="n">rb</span><span class="o">&lt;-</span><span class="n">M</span>
+<span class="n">Noop</span>
+<span class="n">Branch</span> <span class="n">X</span>
+<span class="n">Add</span>  <span class="n">rc</span><span class="o">&lt;-</span><span class="n">ra</span><span class="o">+</span><span class="n">rb</span>
+<span class="n">Store</span> <span class="n">M</span><span class="o">&lt;-</span><span class="n">rc</span>
+<span class="n">Next</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -6220,9 +6435,9 @@ Next</code></pre>
 <p>13.5 Consider the following code fragment in a high-level language:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">for I in 1...100 loop
-    S ← S + Q(I).VAL
-end loop;</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="k">for</span> <span class="n">I</span> <span class="n">in</span> <span class="mi">1</span><span class="p">...</span><span class="mi">100</span> <span class="n">loop</span>
+    <span class="n">S</span> <span class="err">←</span> <span class="n">S</span> <span class="o">+</span> <span class="n">Q</span><span class="p">(</span><span class="n">I</span><span class="p">).</span><span class="n">VAL</span>
+<span class="n">end</span> <span class="n">loop</span><span class="p">;</span></code></pre>
 </div>
 </div>
 </li>
@@ -6230,13 +6445,13 @@ end loop;</code></pre>
 <p>Assume that Q is an array of 32-byte records and the VAL field is in the first 4 bytes of each record. Using x86 code, we can compile this program fragment as follows:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">    MOV ECX,1 ;use register ECX to hold I
-LP: IMUL EAX, ECX, 32 ;get offset in EAX
-    MOV EBX, Q[EAX] ;load VAL field
-    ADD S, EBX ;add to S
-    INC ECX ;increment I
-    CMP ECX, 101 :compare to 101
-    JNE LP ;loop until I = 100</code></pre>
+<pre class="rouge highlight"><code data-lang="c">    <span class="n">MOV</span> <span class="n">ECX</span><span class="p">,</span><span class="mi">1</span> <span class="p">;</span><span class="n">use</span> <span class="k">register</span> <span class="n">ECX</span> <span class="n">to</span> <span class="n">hold</span> <span class="n">I</span>
+<span class="n">LP</span><span class="o">:</span> <span class="n">IMUL</span> <span class="n">EAX</span><span class="p">,</span> <span class="n">ECX</span><span class="p">,</span> <span class="mi">32</span> <span class="p">;</span><span class="n">get</span> <span class="n">offset</span> <span class="n">in</span> <span class="n">EAX</span>
+    <span class="n">MOV</span> <span class="n">EBX</span><span class="p">,</span> <span class="n">Q</span><span class="p">[</span><span class="n">EAX</span><span class="p">]</span> <span class="p">;</span><span class="n">load</span> <span class="n">VAL</span> <span class="n">field</span>
+    <span class="n">ADD</span> <span class="n">S</span><span class="p">,</span> <span class="n">EBX</span> <span class="p">;</span><span class="n">add</span> <span class="n">to</span> <span class="n">S</span>
+    <span class="n">INC</span> <span class="n">ECX</span> <span class="p">;</span><span class="n">increment</span> <span class="n">I</span>
+    <span class="n">CMP</span> <span class="n">ECX</span><span class="p">,</span> <span class="mi">101</span> <span class="o">:</span><span class="n">compare</span> <span class="n">to</span> <span class="mi">101</span>
+    <span class="n">JNE</span> <span class="n">LP</span> <span class="p">;</span><span class="n">loop</span> <span class="n">until</span> <span class="n">I</span> <span class="o">=</span> <span class="mi">100</span></code></pre>
 </div>
 </div>
 </li>
@@ -6251,8 +6466,8 @@ LP: IMUL EAX, ECX, 32 ;get offset in EAX
 <p>VAL field: primeros 4 bytes del registro.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">typedef struct {int VAL;....) Data;
-Data Q[100];</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span><span class="kt">int</span> <span class="n">VAL</span><span class="p">;....)</span> <span class="n">Data</span><span class="p">;</span>
+<span class="n">Data</span> <span class="n">Q</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span></code></pre>
 </div>
 </div>
 </li>
@@ -6260,15 +6475,15 @@ Data Q[100];</code></pre>
 <p>Q(i).VAL : El campo VAL de cada registro Q(i)</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">    ## El bucle suma los campos VAL de los 100 registros
-    MOV ECX,1 ;use register ECX to hold I #Indice de registro del array Q
-LP: IMUL EAX, ECX, 32 ;get offset in EAX  #EAX: dirección relativa del campo VAL del registro al que apunta el índice ECX del array Q
-                                          #Cada 32 bytes un registro
-    MOV EBX, Q[EAX] ;load VAL field       #Q en ensamblador se estructrua en bytes. 100registrosx32bytes/registro=3200registros
-    ADD S, EBX      ;add to S             #Suma de los 4 bytes del campo VAL
-    INC ECX         ;increment I          #siguiente registro
-    CMP ECX, 101    ;compare to 101       #ultimo+1 registro?
-    JNE LP          ;loop until I = 100   #Siguiente interacción si no ultimo</code></pre>
+<pre class="rouge highlight"><code data-lang="c">    <span class="cp">## El bucle suma los campos VAL de los 100 registros
+</span>    <span class="n">MOV</span> <span class="n">ECX</span><span class="p">,</span><span class="mi">1</span> <span class="p">;</span><span class="n">use</span> <span class="k">register</span> <span class="n">ECX</span> <span class="n">to</span> <span class="n">hold</span> <span class="n">I</span> <span class="err">#</span><span class="n">Indice</span> <span class="n">de</span> <span class="n">registro</span> <span class="n">del</span> <span class="n">array</span> <span class="n">Q</span>
+<span class="n">LP</span><span class="o">:</span> <span class="n">IMUL</span> <span class="n">EAX</span><span class="p">,</span> <span class="n">ECX</span><span class="p">,</span> <span class="mi">32</span> <span class="p">;</span><span class="n">get</span> <span class="n">offset</span> <span class="n">in</span> <span class="n">EAX</span>  <span class="err">#</span><span class="n">EAX</span><span class="o">:</span> <span class="n">direcci</span><span class="err">ó</span><span class="n">n</span> <span class="n">relativa</span> <span class="n">del</span> <span class="n">campo</span> <span class="n">VAL</span> <span class="n">del</span> <span class="n">registro</span> <span class="n">al</span> <span class="n">que</span> <span class="n">apunta</span> <span class="n">el</span> <span class="err">í</span><span class="n">ndice</span> <span class="n">ECX</span> <span class="n">del</span> <span class="n">array</span> <span class="n">Q</span>
+                                          <span class="cp">#Cada 32 bytes un registro
+</span>    <span class="n">MOV</span> <span class="n">EBX</span><span class="p">,</span> <span class="n">Q</span><span class="p">[</span><span class="n">EAX</span><span class="p">]</span> <span class="p">;</span><span class="n">load</span> <span class="n">VAL</span> <span class="n">field</span>       <span class="err">#</span><span class="n">Q</span> <span class="n">en</span> <span class="n">ensamblador</span> <span class="n">se</span> <span class="n">estructrua</span> <span class="n">en</span> <span class="n">bytes</span><span class="p">.</span> <span class="mi">100</span><span class="n">registrosx32bytes</span><span class="o">/</span><span class="n">registro</span><span class="o">=</span><span class="mi">3200</span><span class="n">registros</span>
+    <span class="n">ADD</span> <span class="n">S</span><span class="p">,</span> <span class="n">EBX</span>      <span class="p">;</span><span class="n">add</span> <span class="n">to</span> <span class="n">S</span>             <span class="err">#</span><span class="n">Suma</span> <span class="n">de</span> <span class="n">los</span> <span class="mi">4</span> <span class="n">bytes</span> <span class="n">del</span> <span class="n">campo</span> <span class="n">VAL</span>
+    <span class="n">INC</span> <span class="n">ECX</span>         <span class="p">;</span><span class="n">increment</span> <span class="n">I</span>          <span class="err">#</span><span class="n">siguiente</span> <span class="n">registro</span>
+    <span class="n">CMP</span> <span class="n">ECX</span><span class="p">,</span> <span class="mi">101</span>    <span class="p">;</span><span class="n">compare</span> <span class="n">to</span> <span class="mi">101</span>       <span class="err">#</span><span class="n">ultimo</span><span class="o">+</span><span class="mi">1</span> <span class="n">registro</span><span class="o">?</span>
+    <span class="n">JNE</span> <span class="n">LP</span>          <span class="p">;</span><span class="n">loop</span> <span class="n">until</span> <span class="n">I</span> <span class="o">=</span> <span class="mi">100</span>   <span class="err">#</span><span class="n">Siguiente</span> <span class="n">interacci</span><span class="err">ó</span><span class="n">n</span> <span class="n">si</span> <span class="n">no</span> <span class="n">ultimo</span></code></pre>
 </div>
 </div>
 </li>
@@ -6289,9 +6504,9 @@ LP: IMUL EAX, ECX, 32 ;get offset in EAX  #EAX: dirección relativa del campo VA
 <p>13.6 Consider the following loop:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">S := 0;
-   for K := 1 to 100 do
-S := S - K;</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">S</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="k">for</span> <span class="n">K</span> <span class="o">:=</span> <span class="mi">1</span> <span class="n">to</span> <span class="mi">100</span> <span class="k">do</span>
+<span class="n">S</span> <span class="o">:=</span> <span class="n">S</span> <span class="o">-</span> <span class="n">K</span><span class="p">;</span></code></pre>
 </div>
 </div>
 </li>
@@ -6299,12 +6514,12 @@ S := S - K;</code></pre>
 <p>A straightforward translation of this into a <em>generic</em> assembly language would look something like this:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">   LD R1, 0          ;keep value of S in R1
-   LD R2,1           ;keep value of K in R2
-LP SUB R1, R1, R2    ;S := S - K
-   BEQ R2, 100, EXIT ;done if K = 100          #Branch EQual
-   ADD R2, R2, 1     ;else increment K
-   JMP LP            ;back to start of loop</code></pre>
+<pre class="rouge highlight"><code data-lang="c">   <span class="n">LD</span> <span class="n">R1</span><span class="p">,</span> <span class="mi">0</span>          <span class="p">;</span><span class="n">keep</span> <span class="n">value</span> <span class="n">of</span> <span class="n">S</span> <span class="n">in</span> <span class="n">R1</span>
+   <span class="n">LD</span> <span class="n">R2</span><span class="p">,</span><span class="mi">1</span>           <span class="p">;</span><span class="n">keep</span> <span class="n">value</span> <span class="n">of</span> <span class="n">K</span> <span class="n">in</span> <span class="n">R2</span>
+<span class="n">LP</span> <span class="n">SUB</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span>    <span class="p">;</span><span class="n">S</span> <span class="o">:=</span> <span class="n">S</span> <span class="o">-</span> <span class="n">K</span>
+   <span class="n">BEQ</span> <span class="n">R2</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">EXIT</span> <span class="p">;</span><span class="n">done</span> <span class="k">if</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">100</span>          <span class="err">#</span><span class="n">Branch</span> <span class="n">EQual</span>
+   <span class="n">ADD</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mi">1</span>     <span class="p">;</span><span class="k">else</span> <span class="n">increment</span> <span class="n">K</span>
+   <span class="n">JMP</span> <span class="n">LP</span>            <span class="p">;</span><span class="n">back</span> <span class="n">to</span> <span class="n">start</span> <span class="n">of</span> <span class="n">loop</span></code></pre>
 </div>
 </div>
 </li>
@@ -6339,8 +6554,8 @@ LP SUB R1, R1, R2    ;S := S - K
 <p>Salto incondicional. En el programa original se ejecutará el salto después de <code>SUB R1, R1, R2</code>. Solución:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">   JMP LP            ;back to start of loop
-   ADD R2, R2, 1     ;else increment K</code></pre>
+<pre class="rouge highlight"><code data-lang="c">   <span class="n">JMP</span> <span class="n">LP</span>            <span class="p">;</span><span class="n">back</span> <span class="n">to</span> <span class="n">start</span> <span class="n">of</span> <span class="n">loop</span>
+   <span class="n">ADD</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mi">1</span>     <span class="p">;</span><span class="k">else</span> <span class="n">increment</span> <span class="n">K</span></code></pre>
 </div>
 </div>
 </li>
@@ -6361,8 +6576,8 @@ LP SUB R1, R1, R2    ;S := S - K
 <p>Si lo dejamos como está el salto será después del ADD R2, R2, 1. Solución:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">   BEQ R2, 100, EXIT ;done if K = 100          #Branch EQual
-LP SUB R1, R1, R2    ;S := S - K</code></pre>
+<pre class="rouge highlight"><code data-lang="c">   <span class="n">BEQ</span> <span class="n">R2</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">EXIT</span> <span class="p">;</span><span class="n">done</span> <span class="k">if</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">100</span>          <span class="err">#</span><span class="n">Branch</span> <span class="n">EQual</span>
+<span class="n">LP</span> <span class="n">SUB</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span>    <span class="p">;</span><span class="n">S</span> <span class="o">:=</span> <span class="n">S</span> <span class="o">-</span> <span class="n">K</span></code></pre>
 </div>
 </div>
 </li>
@@ -6376,12 +6591,12 @@ LP SUB R1, R1, R2    ;S := S - K</code></pre>
 <p>Solución 1ª:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">   LD R1, 0          ;keep value of S in R1
-   LD R2,1           ;keep value of K in R2
-LP BEQ R2, 100, EXIT ;done if K = 100          #Branch EQual
-   SUB R1, R1, R2    ;S := S - K
-   JMP LP            ;back to start of loop
-   ADD R2, R2, 1     ;else increment K</code></pre>
+<pre class="rouge highlight"><code data-lang="c">   <span class="n">LD</span> <span class="n">R1</span><span class="p">,</span> <span class="mi">0</span>          <span class="p">;</span><span class="n">keep</span> <span class="n">value</span> <span class="n">of</span> <span class="n">S</span> <span class="n">in</span> <span class="n">R1</span>
+   <span class="n">LD</span> <span class="n">R2</span><span class="p">,</span><span class="mi">1</span>           <span class="p">;</span><span class="n">keep</span> <span class="n">value</span> <span class="n">of</span> <span class="n">K</span> <span class="n">in</span> <span class="n">R2</span>
+<span class="n">LP</span> <span class="n">BEQ</span> <span class="n">R2</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">EXIT</span> <span class="p">;</span><span class="n">done</span> <span class="k">if</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">100</span>          <span class="err">#</span><span class="n">Branch</span> <span class="n">EQual</span>
+   <span class="n">SUB</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span>    <span class="p">;</span><span class="n">S</span> <span class="o">:=</span> <span class="n">S</span> <span class="o">-</span> <span class="n">K</span>
+   <span class="n">JMP</span> <span class="n">LP</span>            <span class="p">;</span><span class="n">back</span> <span class="n">to</span> <span class="n">start</span> <span class="n">of</span> <span class="n">loop</span>
+   <span class="n">ADD</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mi">1</span>     <span class="p">;</span><span class="k">else</span> <span class="n">increment</span> <span class="n">K</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -6396,13 +6611,13 @@ LP BEQ R2, 100, EXIT ;done if K = 100          #Branch EQual
 <p>Solución Definitiva:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">   LD R1, 0          ;keep value of S in R1
-   LD R2,1           ;keep value of K in R2
-LP BEQ R2, 100, EXIT ;done if K = 100          #Branch EQual
-   NOP
-   ADD R2, R2, 1     ;else increment K
-   JMP LP            ;back to start of loop
-   SUB R1, R1, R2    ;S := S - K</code></pre>
+<pre class="rouge highlight"><code data-lang="c">   <span class="n">LD</span> <span class="n">R1</span><span class="p">,</span> <span class="mi">0</span>          <span class="p">;</span><span class="n">keep</span> <span class="n">value</span> <span class="n">of</span> <span class="n">S</span> <span class="n">in</span> <span class="n">R1</span>
+   <span class="n">LD</span> <span class="n">R2</span><span class="p">,</span><span class="mi">1</span>           <span class="p">;</span><span class="n">keep</span> <span class="n">value</span> <span class="n">of</span> <span class="n">K</span> <span class="n">in</span> <span class="n">R2</span>
+<span class="n">LP</span> <span class="n">BEQ</span> <span class="n">R2</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">EXIT</span> <span class="p">;</span><span class="n">done</span> <span class="k">if</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">100</span>          <span class="err">#</span><span class="n">Branch</span> <span class="n">EQual</span>
+   <span class="n">NOP</span>
+   <span class="n">ADD</span> <span class="n">R2</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="mi">1</span>     <span class="p">;</span><span class="k">else</span> <span class="n">increment</span> <span class="n">K</span>
+   <span class="n">JMP</span> <span class="n">LP</span>            <span class="p">;</span><span class="n">back</span> <span class="n">to</span> <span class="n">start</span> <span class="n">of</span> <span class="n">loop</span>
+   <span class="n">SUB</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span>    <span class="p">;</span><span class="n">S</span> <span class="o">:=</span> <span class="n">S</span> <span class="o">-</span> <span class="n">K</span></code></pre>
 </div>
 </div>
 </li>
@@ -6413,12 +6628,12 @@ LP BEQ R2, 100, EXIT ;done if K = 100          #Branch EQual
 <p>13.7 A RISC machine may do both a mapping of symbolic registers to actual registers and a <em>rearrangement</em> of instructions for pipeline efficiency. An interesting question arises as to the order in which these two operations should be done. Consider the following program fragment:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c"> LD SR1,A          ;load A into symbolic register 1
- LD SR2, B         ;load B into symbolic register 2
- ADD SR3, SR1, SR2 ;add contents of SR1 and SR2 and store in SR3
- LD SR4, C
- LD SR5,D
- ADD SR6, SR4, SR5</code></pre>
+<pre class="rouge highlight"><code data-lang="c"> <span class="n">LD</span> <span class="n">SR1</span><span class="p">,</span><span class="n">A</span>          <span class="p">;</span><span class="n">load</span> <span class="n">A</span> <span class="n">into</span> <span class="n">symbolic</span> <span class="k">register</span> <span class="mi">1</span>
+ <span class="n">LD</span> <span class="n">SR2</span><span class="p">,</span> <span class="n">B</span>         <span class="p">;</span><span class="n">load</span> <span class="n">B</span> <span class="n">into</span> <span class="n">symbolic</span> <span class="k">register</span> <span class="mi">2</span>
+ <span class="n">ADD</span> <span class="n">SR3</span><span class="p">,</span> <span class="n">SR1</span><span class="p">,</span> <span class="n">SR2</span> <span class="p">;</span><span class="n">add</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">SR1</span> <span class="n">and</span> <span class="n">SR2</span> <span class="n">and</span> <span class="n">store</span> <span class="n">in</span> <span class="n">SR3</span>
+ <span class="n">LD</span> <span class="n">SR4</span><span class="p">,</span> <span class="n">C</span>
+ <span class="n">LD</span> <span class="n">SR5</span><span class="p">,</span><span class="n">D</span>
+ <span class="n">ADD</span> <span class="n">SR6</span><span class="p">,</span> <span class="n">SR4</span><span class="p">,</span> <span class="n">SR5</span></code></pre>
 </div>
 </div>
 <div class="olist loweralpha">
@@ -6497,10 +6712,10 @@ Some of these are easily simulated using either register R0, which is always set
 <p>13.12 Consider the following code fragment:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c"> if K &gt; 10
-   L := K + 1
- else
-   L := K - 1;</code></pre>
+<pre class="rouge highlight"><code data-lang="c"> <span class="k">if</span> <span class="n">K</span> <span class="o">&gt;</span> <span class="mi">10</span>
+   <span class="n">L</span> <span class="o">:=</span> <span class="n">K</span> <span class="o">+</span> <span class="mi">1</span>
+ <span class="k">else</span>
+   <span class="n">L</span> <span class="o">:=</span> <span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span></code></pre>
 </div>
 </div>
 </li>
@@ -6508,25 +6723,25 @@ Some of these are easily simulated using either register R0, which is always set
 <p>A straightforward translation of this statement into SPARC assembler could take the following form:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">    sethi %hi(K), %r8        ;load high-order 22 bits of address of location
-                         ;K into register r8
-    ld [%r8 + %lo(K)], %r8   ;load contents of location K into r8
-    cmp %r8, 10              ;compare contents of r8 with 10
-    ble L1                   ;branch if (r8) &lt;= 10
-    nop
-    sethi %hi(K), %r9
-    ld [%r9 + %lo(K)], %r9   ;load contents of location K into r9
-    inc %r9                  ;add 1 to (r9)
-    sethi %hi(L), %r10
-    st %r9, [%r10 + %lo(L)]  ;store (r9) into location L
-    b L2
-    nop
-L1: sethi %hi(K), %r11
-    ld [%r11 + %lo(K)], %r12 ;load contents of location K into r12
-    dec %r12                 ;subtract 1 from (r12)
-    sethi %hi(L), %r13
-    st %r12, [%r13 + %lo(L)] ;store (r12) into location L
-L2:</code></pre>
+<pre class="rouge highlight"><code data-lang="c">    <span class="n">sethi</span> <span class="o">%</span><span class="n">hi</span><span class="p">(</span><span class="n">K</span><span class="p">),</span> <span class="o">%</span><span class="n">r8</span>        <span class="p">;</span><span class="n">load</span> <span class="n">high</span><span class="o">-</span><span class="n">order</span> <span class="mi">22</span> <span class="n">bits</span> <span class="n">of</span> <span class="n">address</span> <span class="n">of</span> <span class="n">location</span>
+                         <span class="p">;</span><span class="n">K</span> <span class="n">into</span> <span class="k">register</span> <span class="n">r8</span>
+    <span class="n">ld</span> <span class="p">[</span><span class="o">%</span><span class="n">r8</span> <span class="o">+</span> <span class="o">%</span><span class="n">lo</span><span class="p">(</span><span class="n">K</span><span class="p">)],</span> <span class="o">%</span><span class="n">r8</span>   <span class="p">;</span><span class="n">load</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">location</span> <span class="n">K</span> <span class="n">into</span> <span class="n">r8</span>
+    <span class="n">cmp</span> <span class="o">%</span><span class="n">r8</span><span class="p">,</span> <span class="mi">10</span>              <span class="p">;</span><span class="n">compare</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">r8</span> <span class="n">with</span> <span class="mi">10</span>
+    <span class="n">ble</span> <span class="n">L1</span>                   <span class="p">;</span><span class="n">branch</span> <span class="k">if</span> <span class="p">(</span><span class="n">r8</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">10</span>
+    <span class="n">nop</span>
+    <span class="n">sethi</span> <span class="o">%</span><span class="n">hi</span><span class="p">(</span><span class="n">K</span><span class="p">),</span> <span class="o">%</span><span class="n">r9</span>
+    <span class="n">ld</span> <span class="p">[</span><span class="o">%</span><span class="n">r9</span> <span class="o">+</span> <span class="o">%</span><span class="n">lo</span><span class="p">(</span><span class="n">K</span><span class="p">)],</span> <span class="o">%</span><span class="n">r9</span>   <span class="p">;</span><span class="n">load</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">location</span> <span class="n">K</span> <span class="n">into</span> <span class="n">r9</span>
+    <span class="n">inc</span> <span class="o">%</span><span class="n">r9</span>                  <span class="p">;</span><span class="n">add</span> <span class="mi">1</span> <span class="n">to</span> <span class="p">(</span><span class="n">r9</span><span class="p">)</span>
+    <span class="n">sethi</span> <span class="o">%</span><span class="n">hi</span><span class="p">(</span><span class="n">L</span><span class="p">),</span> <span class="o">%</span><span class="n">r10</span>
+    <span class="n">st</span> <span class="o">%</span><span class="n">r9</span><span class="p">,</span> <span class="p">[</span><span class="o">%</span><span class="n">r10</span> <span class="o">+</span> <span class="o">%</span><span class="n">lo</span><span class="p">(</span><span class="n">L</span><span class="p">)]</span>  <span class="p">;</span><span class="n">store</span> <span class="p">(</span><span class="n">r9</span><span class="p">)</span> <span class="n">into</span> <span class="n">location</span> <span class="n">L</span>
+    <span class="n">b</span> <span class="n">L2</span>
+    <span class="n">nop</span>
+<span class="n">L1</span><span class="o">:</span> <span class="n">sethi</span> <span class="o">%</span><span class="n">hi</span><span class="p">(</span><span class="n">K</span><span class="p">),</span> <span class="o">%</span><span class="n">r11</span>
+    <span class="n">ld</span> <span class="p">[</span><span class="o">%</span><span class="n">r11</span> <span class="o">+</span> <span class="o">%</span><span class="n">lo</span><span class="p">(</span><span class="n">K</span><span class="p">)],</span> <span class="o">%</span><span class="n">r12</span> <span class="p">;</span><span class="n">load</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">location</span> <span class="n">K</span> <span class="n">into</span> <span class="n">r12</span>
+    <span class="n">dec</span> <span class="o">%</span><span class="n">r12</span>                 <span class="p">;</span><span class="n">subtract</span> <span class="mi">1</span> <span class="n">from</span> <span class="p">(</span><span class="n">r12</span><span class="p">)</span>
+    <span class="n">sethi</span> <span class="o">%</span><span class="n">hi</span><span class="p">(</span><span class="n">L</span><span class="p">),</span> <span class="o">%</span><span class="n">r13</span>
+    <span class="n">st</span> <span class="o">%</span><span class="n">r12</span><span class="p">,</span> <span class="p">[</span><span class="o">%</span><span class="n">r13</span> <span class="o">+</span> <span class="o">%</span><span class="n">lo</span><span class="p">(</span><span class="n">L</span><span class="p">)]</span> <span class="p">;</span><span class="n">store</span> <span class="p">(</span><span class="n">r12</span><span class="p">)</span> <span class="n">into</span> <span class="n">location</span> <span class="n">L</span>
+<span class="n">L2</span><span class="o">:</span></code></pre>
 </div>
 </div>
 </li>
@@ -6557,32 +6772,8 @@ L2:</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-04 21:51:14 +0200
+Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  messageStyle: "none",
-  tex2jax: {
-    inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]],
-    ignoreClass: "nostem|nolatexmath"
-  },
-  asciimath2jax: {
-    delimiters: [["\\$", "\\$"]],
-    ignoreClass: "nostem|noasciimath"
-  },
-  TeX: { equationNumbers: { autoNumber: "none" } }
-})
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
-  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
-      data.math.root.display = "block"
-    }
-    return data
-  })
-})
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

@@ -23,6 +23,221 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 <!-- Change some CSS.
 <style>
 .imageblock{
@@ -47,7 +262,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-04</span>
+<span id="revdate">2022-09-05</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -3460,15 +3675,15 @@ Los 4 módulos al completo se organizan en 4 ranks
 <p><code>objdump -S exit</code></p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">exit:     file format elf64-x86-64
+<pre class="rouge highlight"><code data-lang="c"><span class="nl">exit:</span>     <span class="n">file</span> <span class="n">format</span> <span class="n">elf64</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mi">64</span>
 
 
-Disassembly of section .text:
+<span class="n">Disassembly</span> <span class="n">of</span> <span class="n">section</span> <span class="p">.</span><span class="n">text</span><span class="o">:</span>
 
-0000000000400078 &lt;.text&gt;:
-  400078:	48 c7 c0 3c 00 00 00 	mov    $0x3c,%rax
-  40007f:	48 c7 c7 ff 00 00 00 	mov    $0xff,%rdi
-  400086:	0f 05                	syscall</code></pre>
+<span class="mo">000000000040007</span><span class="mi">8</span> <span class="o">&lt;</span><span class="p">.</span><span class="n">text</span><span class="o">&gt;:</span>
+  <span class="mi">400078</span><span class="o">:</span>	<span class="mi">48</span> <span class="n">c7</span> <span class="n">c0</span> <span class="mi">3</span><span class="n">c</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> 	<span class="n">mov</span>    <span class="err">$</span><span class="mh">0x3c</span><span class="p">,</span><span class="o">%</span><span class="n">rax</span>
+  <span class="mi">40007</span><span class="n">f</span><span class="o">:</span>	<span class="mi">48</span> <span class="n">c7</span> <span class="n">c7</span> <span class="n">ff</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> 	<span class="n">mov</span>    <span class="err">$</span><span class="mh">0xff</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>
+  <span class="mi">400086</span><span class="o">:</span>	<span class="mi">0</span><span class="n">f</span> <span class="mo">05</span>                	<span class="n">syscall</span></code></pre>
 </div>
 </div>
 </li>
@@ -3652,44 +3867,44 @@ Disassembly of section .text:
 <pre class="rouge highlight"><code data-lang="sh">There are 16 section headers, starting at offset 0x448:
 
 Section Headers:
-  [Nr] Name              Type             Address           Offset
+  <span class="o">[</span>Nr] Name              Type             Address           Offset
        Size              EntSize          Flags  Link  Info  Align
-  [ 0]                   NULL             0000000000000000  00000000
+  <span class="o">[</span> 0]                   NULL             0000000000000000  00000000
        0000000000000000  0000000000000000           0     0     0
-  [ 1] .interp           PROGBITS         0000000000400158  00000158
+  <span class="o">[</span> 1] .interp           PROGBITS         0000000000400158  00000158
        000000000000001c  0000000000000000   A       0     0     1
-  [ 2] .hash             HASH             0000000000400178  00000178
+  <span class="o">[</span> 2] .hash             HASH             0000000000400178  00000178
        000000000000000c  0000000000000004   A       3     0     8
-  [ 3] .dynsym           DYNSYM           0000000000400188  00000188
+  <span class="o">[</span> 3] .dynsym           DYNSYM           0000000000400188  00000188
        0000000000000000  0000000000000018   A       4     1     8
-  [ 4] .dynstr           STRTAB           0000000000400188  00000188
+  <span class="o">[</span> 4] .dynstr           STRTAB           0000000000400188  00000188
        000000000000000b  0000000000000000   A       0     0     1
-  [ 5] .text             PROGBITS         0000000000400193  00000193
+  <span class="o">[</span> 5] .text             PROGBITS         0000000000400193  00000193
        0000000000000037  0000000000000000  AX       0     0     1
-  [ 6] .eh_frame         PROGBITS         00000000004001d0  000001d0
+  <span class="o">[</span> 6] .eh_frame         PROGBITS         00000000004001d0  000001d0
        0000000000000000  0000000000000000   A       0     0     8
-  [ 7] .dynamic          DYNAMIC          00000000006001d0  000001d0
+  <span class="o">[</span> 7] .dynamic          DYNAMIC          00000000006001d0  000001d0
        00000000000000d0  0000000000000010  WA       4     0     8
-  [ 8] .data             PROGBITS         00000000006002a0  000002a0
+  <span class="o">[</span> 8] .data             PROGBITS         00000000006002a0  000002a0
        000000000000000e  0000000000000000  WA       0     0     1
-  [ 9] .debug_aranges    PROGBITS         0000000000000000  000002b0
+  <span class="o">[</span> 9] .debug_aranges    PROGBITS         0000000000000000  000002b0
        0000000000000030  0000000000000000           0     0     16
-  [10] .debug_info       PROGBITS         0000000000000000  000002e0
+  <span class="o">[</span>10] .debug_info       PROGBITS         0000000000000000  000002e0
        0000000000000078  0000000000000000           0     0     1
-  [11] .debug_abbrev     PROGBITS         0000000000000000  00000358
+  <span class="o">[</span>11] .debug_abbrev     PROGBITS         0000000000000000  00000358
        0000000000000014  0000000000000000           0     0     1
-  [12] .debug_line       PROGBITS         0000000000000000  0000036c
+  <span class="o">[</span>12] .debug_line       PROGBITS         0000000000000000  0000036c
        000000000000004a  0000000000000000           0     0     1
-  [13] .shstrtab         STRTAB           0000000000000000  000003b6
+  <span class="o">[</span>13] .shstrtab         STRTAB           0000000000000000  000003b6
        000000000000008d  0000000000000000           0     0     1
-  [14] .symtab           SYMTAB           0000000000000000  00000848
+  <span class="o">[</span>14] .symtab           SYMTAB           0000000000000000  00000848
        0000000000000240  0000000000000018          15    20     8
-  [15] .strtab           STRTAB           0000000000000000  00000a88
+  <span class="o">[</span>15] .strtab           STRTAB           0000000000000000  00000a88
        000000000000006f  0000000000000000           0     0     1
 Key to Flags:
-  W (write), A (alloc), X (execute), M (merge), S (strings), l (large)
-  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)
-  O (extra OS processing required) o (OS specific), p (processor specific)</code></pre>
+  W <span class="o">(</span>write<span class="o">)</span>, A <span class="o">(</span>alloc<span class="o">)</span>, X <span class="o">(</span>execute<span class="o">)</span>, M <span class="o">(</span>merge<span class="o">)</span>, S <span class="o">(</span>strings<span class="o">)</span>, l <span class="o">(</span>large<span class="o">)</span>
+  I <span class="o">(</span>info<span class="o">)</span>, L <span class="o">(</span><span class="nb">link </span>order<span class="o">)</span>, G <span class="o">(</span>group<span class="o">)</span>, T <span class="o">(</span>TLS<span class="o">)</span>, E <span class="o">(</span>exclude<span class="o">)</span>, x <span class="o">(</span>unknown<span class="o">)</span>
+  O <span class="o">(</span>extra OS processing required<span class="o">)</span> o <span class="o">(</span>OS specific<span class="o">)</span>, p <span class="o">(</span>processor specific<span class="o">)</span></code></pre>
 </div>
 </div>
 </li>
@@ -5100,32 +5315,8 @@ Key to Flags:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-04 21:51:14 +0200
+Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  messageStyle: "none",
-  tex2jax: {
-    inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]],
-    ignoreClass: "nostem|nolatexmath"
-  },
-  asciimath2jax: {
-    delimiters: [["\\$", "\\$"]],
-    ignoreClass: "nostem|noasciimath"
-  },
-  TeX: { equationNumbers: { autoNumber: "none" } }
-})
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
-  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
-      data.math.root.display = "block"
-    }
-    return data
-  })
-})
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

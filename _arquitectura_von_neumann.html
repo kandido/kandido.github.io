@@ -23,6 +23,221 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 <!-- Change some CSS.
 <style>
 .imageblock{
@@ -47,7 +262,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-04</span>
+<span id="revdate">2022-09-05</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -160,7 +375,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="ulist">
 <ul>
 <li>
-<p>Calcular la suma  \(\sum_{i=1}^{N}i=N(N+1)/2\)</p>
+<p>Calcular la suma  <span class="image"><img src="stem-6a8358250cebdf5525b034e7a0433dbe.png" alt="stem 6a8358250cebdf5525b034e7a0433dbe" width="110" height="36"></span></p>
 </li>
 </ul>
 </div>
@@ -383,7 +598,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="sect3">
 <h4 id="_ejemplo_del_programa_sum1ton">2.2.2. Ejemplo del Programa sum1toN</h4>
 <div class="sect4">
-<h5 id="_código_binario_para_calcular_sum_i15i">Código binario para calcular \(\sum_{i=1}^{5}i\)</h5>
+<h5 id="_código_binario_para_calcular_sum_i15i">Código binario para calcular <span class="image"><img src="stem-344f1b9074e57a7fd3edf54179f0a15c.png" alt="stem 344f1b9074e57a7fd3edf54179f0a15c" width="25" height="36"></span></h5>
 <div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/von_neumann/ias_code_machine.png" alt="ias code machine">
@@ -407,10 +622,10 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <p>A diferencia de la programación declarativa: el algoritmo implementa QUÉ queremos que haga la computadora, no el COMO, no directamente las órdenes que ha de ejecutar.</p>
 </li>
 <li>
-<p>Por ejemplo la operación \(\sum_{i=1}^{5}i\) , se puede describir en python como:</p>
+<p>Por ejemplo la operación <span class="image"><img src="stem-344f1b9074e57a7fd3edf54179f0a15c.png" alt="stem 344f1b9074e57a7fd3edf54179f0a15c" width="25" height="36"></span> , se puede describir en python como:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="python">sum(range(5,0,-1))</code></pre>
+<pre class="rouge highlight"><code data-lang="python"><span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span></code></pre>
 </div>
 </div>
 </li>
@@ -1209,7 +1424,7 @@ El paso de una descripción en un lenguaje de alto nivel a bajo nivel se realiza
 <div class="ulist">
 <ul>
 <li>
-<p>Calcular la suma \(\sum_{i=1}^{N}i=N(N+1)/2\)</p>
+<p>Calcular la suma <span class="image"><img src="stem-6a8358250cebdf5525b034e7a0433dbe.png" alt="stem 6a8358250cebdf5525b034e7a0433dbe" width="110" height="36"></span></p>
 </li>
 </ul>
 </div>
@@ -1628,32 +1843,8 @@ suma:	.data	0 ; sumas parciales y resultado final</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-04 21:51:14 +0200
+Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  messageStyle: "none",
-  tex2jax: {
-    inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]],
-    ignoreClass: "nostem|nolatexmath"
-  },
-  asciimath2jax: {
-    delimiters: [["\\$", "\\$"]],
-    ignoreClass: "nostem|noasciimath"
-  },
-  TeX: { equationNumbers: { autoNumber: "none" } }
-})
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
-  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
-      data.math.root.display = "block"
-    }
-    return data
-  })
-})
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

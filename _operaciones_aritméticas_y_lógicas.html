@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-04</span>
+<span id="revdate">2022-09-05</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -300,9 +300,12 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <ul>
 <li>
 <p>Descargar el módulo fuente "op_arit_log.s" de miaulario y añadir los comentarios apropiados.</p>
+</li>
+</ul>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="nasm">### Programa:     op_arit_log.s
+<pre>### Programa:     op_arit_log.s
 ### Descripción: Emplear estructuras de datos con diferentes operaciones lógicas y aritméticas.
 ### Compilación: gcc -m32 -g -o op_arit_log op_arit_log.s
 
@@ -388,11 +391,8 @@ main:
 	mov $SUCCESS,  %ebx
 	int $0x80
 
-	.end</code></pre>
+	.end</pre>
 </div>
-</div>
-</li>
-</ul>
 </div>
 <div class="colist arabic">
 <table>
@@ -584,32 +584,8 @@ El depurador al visualizar el contenido de los registros: Unicamente visualiza e
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-04 21:51:14 +0200
+Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  messageStyle: "none",
-  tex2jax: {
-    inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]],
-    ignoreClass: "nostem|nolatexmath"
-  },
-  asciimath2jax: {
-    delimiters: [["\\$", "\\$"]],
-    ignoreClass: "nostem|noasciimath"
-  },
-  TeX: { equationNumbers: { autoNumber: "none" } }
-})
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
-  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
-      data.math.root.display = "block"
-    }
-    return data
-  })
-})
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

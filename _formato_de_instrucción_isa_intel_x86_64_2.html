@@ -23,6 +23,221 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 <!-- Change some CSS.
 <style>
 .imageblock{
@@ -47,7 +262,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-04</span>
+<span id="revdate">2022-09-05</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -72,37 +287,39 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 <li><a href="_simulador_iassim_2.html">22. Simulador IASSim</a>
 </li>
-<li><a href="_lenguajes_de_programación_para_sum1ton.html">23. Lenguajes de programación para sum1toN</a>
+<li><a href="_lenguajes_ensamblador.html">23. Lenguajes Ensamblador</a>
 </li>
-<li><a href="_rtl_register_transfer_language.html">24. RTL Register Transfer Language</a>
+<li><a href="_lenguajes_de_programación_para_sum1ton.html">24. Lenguajes de programación para sum1toN</a>
 </li>
-<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html"><span class="toc-current">25. Formato de Instrucción: ISA Intel x86-64</span></a>
+<li><a href="_rtl_register_transfer_language.html">25. RTL Register Transfer Language</a>
+</li>
+<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html"><span class="toc-current">26. Formato de Instrucción: ISA Intel x86-64</span></a>
 <ul class="sectlevel2">
-<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html#form_inst">25.1. Formato de Instrucción: ISA Intel x86-64</a>
+<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html#form_inst">26.1. Formato de Instrucción: ISA Intel x86-64</a>
 <ul class="sectlevel3">
-<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html#_ejemplo_subq_16rsp">25.1.1. Ejemplo subq    $16,%rsp</a>
+<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html#_ejemplo_subq_16rsp">26.1.1. Ejemplo subq    $16,%rsp</a>
 </li>
-<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html#_otros_x86_32">25.1.2. Otros x86-32</a>
-</li>
-</ul>
+<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html#_otros_x86_32">26.1.2. Otros x86-32</a>
 </li>
 </ul>
 </li>
-<li><a href="_fpu_x87.html">26. FPU x87</a>
+</ul>
 </li>
-<li><a href="_pila.html">27. Pila</a>
+<li><a href="_fpu_x87.html">27. FPU x87</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html">28. Llamadas al Sistema Operativo</a>
+<li><a href="_pila.html">28. Pila</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html">29. Lenguaje de Programación C</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
 </li>
-<li><a href="_apéndice_prácticas.html">30. Apéndice Prácticas</a>
+<li><a href="_lenguaje_de_programación_c_2.html">30. Lenguaje de Programación C</a>
 </li>
-<li><a href="_arquitectura_amd64_4.html">31. Arquitectura amd64</a>
+<li><a href="_apéndice_prácticas.html">31. Apéndice Prácticas</a>
 </li>
-<li><a href="_exámenes_de_cursos_anteriores.html">32. Exámenes de Cursos Anteriores</a>
+<li><a href="_arquitectura_amd64_4.html">32. Arquitectura amd64</a>
 </li>
-<li><a href="_miaulario_videoconferencia.html">33. Miaulario: Videoconferencia</a>
+<li><a href="_exámenes_de_cursos_anteriores.html">33. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">34. Miaulario: Videoconferencia</a>
 </li>
 </ul>
 </li>
@@ -119,12 +336,12 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_formato_de_instrucción_isa_intel_x86_64_2">25. Formato de Instrucción: ISA Intel x86-64</h2>
+<h2 id="_formato_de_instrucción_isa_intel_x86_64_2">26. Formato de Instrucción: ISA Intel x86-64</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="form_inst">25.1. Formato de Instrucción: ISA Intel x86-64</h3>
+<h3 id="form_inst">26.1. Formato de Instrucción: ISA Intel x86-64</h3>
 <div class="sect3">
-<h4 id="_ejemplo_subq_16rsp">25.1.1. Ejemplo subq    $16,%rsp</h4>
+<h4 id="_ejemplo_subq_16rsp">26.1.1. Ejemplo subq    $16,%rsp</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -222,7 +439,7 @@ ve an addressing-form specifier byte (called the ModR/M &#8230;&#8203;). Este ca
 </div>
 </div>
 <div class="sect3">
-<h4 id="_otros_x86_32">25.1.2. Otros x86-32</h4>
+<h4 id="_otros_x86_32">26.1.2. Otros x86-32</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -245,15 +462,15 @@ ve an addressing-form specifier byte (called the ModR/M &#8230;&#8203;). Este ca
 <p>Hola mundo x86</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">08048190 &lt;_start&gt;:
- 8048190:	b8 04 00 00 00       	mov    $0x4,%eax
- 8048195:	bb 01 00 00 00       	mov    $0x1,%ebx
- 804819a:	b9 f4 9f 04 08       	mov    $0x8049ff4,%ecx
- 804819f:	8b 15 ff 9f 04 08    	mov    0x8049fff,%edx
- 80481a5:	cd 80                	int    $0x80
- 80481a7:	b8 01 00 00 00       	mov    $0x1,%eax
- 80481ac:	bb 00 00 00 00       	mov    $0x0,%ebx
- 80481b1:	cd 80                	int    $0x80</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="mi">08048190</span> <span class="o">&lt;</span><span class="n">_start</span><span class="o">&gt;:</span>
+ <span class="mi">8048190</span><span class="o">:</span>	<span class="n">b8</span> <span class="mo">04</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>       	<span class="n">mov</span>    <span class="err">$</span><span class="mh">0x4</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span>
+ <span class="mi">8048195</span><span class="o">:</span>	<span class="n">bb</span> <span class="mo">01</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>       	<span class="n">mov</span>    <span class="err">$</span><span class="mh">0x1</span><span class="p">,</span><span class="o">%</span><span class="n">ebx</span>
+ <span class="mi">804819</span><span class="n">a</span><span class="o">:</span>	<span class="n">b9</span> <span class="n">f4</span> <span class="mi">9</span><span class="n">f</span> <span class="mo">04</span> <span class="mi">08</span>       	<span class="n">mov</span>    <span class="err">$</span><span class="mh">0x8049ff4</span><span class="p">,</span><span class="o">%</span><span class="n">ecx</span>
+ <span class="mi">804819</span><span class="n">f</span><span class="o">:</span>	<span class="mi">8</span><span class="n">b</span> <span class="mi">15</span> <span class="n">ff</span> <span class="mi">9</span><span class="n">f</span> <span class="mo">04</span> <span class="mi">08</span>    	<span class="n">mov</span>    <span class="mh">0x8049fff</span><span class="p">,</span><span class="o">%</span><span class="n">edx</span>
+ <span class="mi">80481</span><span class="n">a5</span><span class="o">:</span>	<span class="n">cd</span> <span class="mi">80</span>                	<span class="kt">int</span>    <span class="err">$</span><span class="mh">0x80</span>
+ <span class="mi">80481</span><span class="n">a7</span><span class="o">:</span>	<span class="n">b8</span> <span class="mo">01</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>       	<span class="n">mov</span>    <span class="err">$</span><span class="mh">0x1</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span>
+ <span class="mi">80481</span><span class="n">ac</span><span class="o">:</span>	<span class="n">bb</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span>       	<span class="n">mov</span>    <span class="err">$</span><span class="mh">0x0</span><span class="p">,</span><span class="o">%</span><span class="n">ebx</span>
+ <span class="mi">80481</span><span class="n">b1</span><span class="o">:</span>	<span class="n">cd</span> <span class="mi">80</span>                	<span class="kt">int</span>    <span class="err">$</span><span class="mh">0x80</span></code></pre>
 </div>
 </div>
 </li>
@@ -289,32 +506,8 @@ ve an addressing-form specifier byte (called the ModR/M &#8230;&#8203;). Este ca
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-04 21:51:14 +0200
+Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  messageStyle: "none",
-  tex2jax: {
-    inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]],
-    ignoreClass: "nostem|nolatexmath"
-  },
-  asciimath2jax: {
-    delimiters: [["\\$", "\\$"]],
-    ignoreClass: "nostem|noasciimath"
-  },
-  TeX: { equationNumbers: { autoNumber: "none" } }
-})
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
-  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
-      data.math.root.display = "block"
-    }
-    return data
-  })
-})
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

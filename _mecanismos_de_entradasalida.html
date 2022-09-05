@@ -23,6 +23,221 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 <!-- Change some CSS.
 <style>
 .imageblock{
@@ -47,7 +262,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-04</span>
+<span id="revdate">2022-09-05</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -1028,15 +1243,15 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <p>Transferencia de 512 bytes entre el puerto 0x380 y un buffer.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">      mov %bx,buf ; destination address. BX es un puntero a un buffer
-      mov $512,%si ; count. Número de bytes a transferir
-      mov $0x380,%dx ; source port. DX es un puntero al puerto
-loop:
-      in %dx,%al ; get byte from i/o port. AL&lt;-DX
-      mov %al,(%bx) ; store in buffer      M[bx]&lt;-AL
-      inc %bx ; next memory location in buf
-      dec %si ; decrement bytes left
-      jnz loop</code></pre>
+<pre class="rouge highlight"><code data-lang="c">      <span class="n">mov</span> <span class="o">%</span><span class="n">bx</span><span class="p">,</span><span class="n">buf</span> <span class="p">;</span> <span class="n">destination</span> <span class="n">address</span><span class="p">.</span> <span class="n">BX</span> <span class="n">es</span> <span class="n">un</span> <span class="n">puntero</span> <span class="n">a</span> <span class="n">un</span> <span class="n">buffer</span>
+      <span class="n">mov</span> <span class="err">$</span><span class="mi">512</span><span class="p">,</span><span class="o">%</span><span class="n">si</span> <span class="p">;</span> <span class="n">count</span><span class="p">.</span> <span class="n">N</span><span class="err">ú</span><span class="n">mero</span> <span class="n">de</span> <span class="n">bytes</span> <span class="n">a</span> <span class="n">transferir</span>
+      <span class="n">mov</span> <span class="err">$</span><span class="mh">0x380</span><span class="p">,</span><span class="o">%</span><span class="n">dx</span> <span class="p">;</span> <span class="n">source</span> <span class="n">port</span><span class="p">.</span> <span class="n">DX</span> <span class="n">es</span> <span class="n">un</span> <span class="n">puntero</span> <span class="n">al</span> <span class="n">puerto</span>
+<span class="n">loop</span><span class="o">:</span>
+      <span class="n">in</span> <span class="o">%</span><span class="n">dx</span><span class="p">,</span><span class="o">%</span><span class="n">al</span> <span class="p">;</span> <span class="n">get</span> <span class="n">byte</span> <span class="n">from</span> <span class="n">i</span><span class="o">/</span><span class="n">o</span> <span class="n">port</span><span class="p">.</span> <span class="n">AL</span><span class="o">&lt;-</span><span class="n">DX</span>
+      <span class="n">mov</span> <span class="o">%</span><span class="n">al</span><span class="p">,(</span><span class="o">%</span><span class="n">bx</span><span class="p">)</span> <span class="p">;</span> <span class="n">store</span> <span class="n">in</span> <span class="n">buffer</span>      <span class="n">M</span><span class="p">[</span><span class="n">bx</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">AL</span>
+      <span class="n">inc</span> <span class="o">%</span><span class="n">bx</span> <span class="p">;</span> <span class="n">next</span> <span class="n">memory</span> <span class="n">location</span> <span class="n">in</span> <span class="n">buf</span>
+      <span class="n">dec</span> <span class="o">%</span><span class="n">si</span> <span class="p">;</span> <span class="n">decrement</span> <span class="n">bytes</span> <span class="n">left</span>
+      <span class="n">jnz</span> <span class="n">loop</span></code></pre>
 </div>
 </div>
 </li>
@@ -1090,13 +1305,13 @@ loop:
 <p>Pseudo-código</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">While (STATUS == BUSY)
-   ; // wait until device is not busy . Puerto ocupado.
-Write data to DATA register // dato a transmitir el puerto out
-Write command to COMMAND register  // registro de control
-   // Doing so starts the device and executes the command
-While (STATUS == BUSY)
-   ; // wait until device is done with your request</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">While</span> <span class="p">(</span><span class="n">STATUS</span> <span class="o">==</span> <span class="n">BUSY</span><span class="p">)</span>
+   <span class="p">;</span> <span class="c1">// wait until device is not busy . Puerto ocupado.</span>
+<span class="n">Write</span> <span class="n">data</span> <span class="n">to</span> <span class="n">DATA</span> <span class="k">register</span> <span class="c1">// dato a transmitir el puerto out</span>
+<span class="n">Write</span> <span class="n">command</span> <span class="n">to</span> <span class="n">COMMAND</span> <span class="k">register</span>  <span class="c1">// registro de control</span>
+   <span class="c1">// Doing so starts the device and executes the command</span>
+<span class="n">While</span> <span class="p">(</span><span class="n">STATUS</span> <span class="o">==</span> <span class="n">BUSY</span><span class="p">)</span>
+   <span class="p">;</span> <span class="c1">// wait until device is done with your request</span></code></pre>
 </div>
 </div>
 </li>
@@ -2010,9 +2225,9 @@ While (STATUS == BUSY)
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">MOV AH, 0Eh   ; Imprime carácter en la pantalla
-MOV AL, '!'   ; carácter a imprimir
-INT 10h       ; Llamada a las funciones de video del BIOS</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">MOV</span> <span class="n">AH</span><span class="p">,</span> <span class="mi">0</span><span class="n">Eh</span>   <span class="p">;</span> <span class="n">Imprime</span> <span class="n">car</span><span class="err">á</span><span class="n">cter</span> <span class="n">en</span> <span class="n">la</span> <span class="n">pantalla</span>
+<span class="n">MOV</span> <span class="n">AL</span><span class="p">,</span> <span class="sc">'!'</span>   <span class="p">;</span> <span class="n">car</span><span class="err">á</span><span class="n">cter</span> <span class="n">a</span> <span class="n">imprimir</span>
+<span class="n">INT</span> <span class="mi">10</span><span class="n">h</span>       <span class="p">;</span> <span class="n">Llamada</span> <span class="n">a</span> <span class="n">las</span> <span class="n">funciones</span> <span class="n">de</span> <span class="n">video</span> <span class="n">del</span> <span class="n">BIOS</span></code></pre>
 </div>
 </div>
 </li>
@@ -2024,7 +2239,7 @@ INT 10h       ; Llamada a las funciones de video del BIOS</code></pre>
 
 00h 	0000:0000h 	Processor 	Divide by zero
 01h 	0000:0004h 	Processor 	Single step
-02h 	0000:0008h 	Processor 	Non maskable interrupt (NMI)
+02h 	0000:0008h 	Processor 	Non maskable interrupt <span class="o">(</span>NMI<span class="o">)</span>
 03h 	0000:000Ch 	Processor 	Breakpoint
 04h 	0000:0010h 	Processor 	Arithmetic overflow
 05h 	0000:0014h 	Software 	Print screen
@@ -2048,7 +2263,7 @@ INT 10h       ; Llamada a las funciones de video del BIOS</code></pre>
 17h 	0000:005Ch 	Software 	Parallel printer support services
 18h 	0000:0060h 	Software 	Load and run ROM BASIC
 19h 	0000:0064h 	Software 	DOS loading routine
-1Ah 	0000:0068h 	Software 	Real time clock service routines
+1Ah 	0000:0068h 	Software 	Real <span class="nb">time </span>clock service routines
 1Bh 	0000:006Ch 	Software 	CRTL - BREAK service routines
 1Ch 	0000:0070h 	Software 	User timer service routine
 1Dh 	00000074h 	Software 	Video control parameter table
@@ -2071,7 +2286,7 @@ INT 10h       ; Llamada a las funciones de video del BIOS</code></pre>
 65h-66h 	  	Software 	Not used
 67h 	  	Software 	EMS support routines
 68h-6Fh 	0000:01BCh 	Software 	Not used
-70h 	0000:01c0h 	Hardware 	Real time clock
+70h 	0000:01c0h 	Hardware 	Real <span class="nb">time </span>clock
 71h 	0000:01C4h 	Hardware 	Redirect interrupt cascade
 72h-74h 	0000:01C8h - 0000:01D0h 	Hardware 	Reserved - Do not use
 75h 	0000:01D4h 	Hardware 	Math coprocessor exception
@@ -2257,25 +2472,25 @@ INT 10h       ; Llamada a las funciones de video del BIOS</code></pre>
 <p>Example XT-PIC IRQ Assignment , <a href="http://www.intel.co.jp/content/dam/www/public/us/en/documents/white-papers/msg-signaled-interrupts-paper.pdf">intel interrupts paper</a>: Esta configuración es un ejemplo, es decir, el SO puede <strong>reprogramarla</strong> y variar su configuración.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="sh">IRQ 	Interrupt Hardware Device (vector de la tabla)
+<pre class="rouge highlight"><code data-lang="sh">IRQ 	Interrupt Hardware Device <span class="o">(</span>vector de la tabla<span class="o">)</span>
 0 	32 Timer
 1 	33 Keyboard
 2 	34 PIC Cascade
-3 	35 Second Serial Port (COM2)
-4 	36 First Serial Port (COM 1)
+3 	35 Second Serial Port <span class="o">(</span>COM2<span class="o">)</span>
+4 	36 First Serial Port <span class="o">(</span>COM 1<span class="o">)</span>
 5 	37 &lt;Free&gt;
 6 	38 Floppy Disk
 7 	39 &lt;Free&gt;
 8 	40 System Clock
 9 	41 &lt;Free&gt;
-10 	42 Network Interface Card(NIC)
+10 	42 Network Interface Card<span class="o">(</span>NIC<span class="o">)</span>
 11 	43 USB Port, and Sound Card
-12 	44 Mouse (PS2)
+12 	44 Mouse <span class="o">(</span>PS2<span class="o">)</span>
 13 	45 Math Co-Processor
 14 	46 IDE Channel 1
 15 	47 IDE Channel 2
 
-Note: Linux* requires IRQ 0, 2, and 13 to be as shown.</code></pre>
+Note: Linux<span class="k">*</span> requires IRQ 0, 2, and 13 to be as shown.</code></pre>
 </div>
 </div>
 </li>
@@ -2659,12 +2874,12 @@ Note: Linux* requires IRQ 0, 2, and 13 to be as shown.</code></pre>
 <p>OUTx : Sends a byte (or word or dword) on a I/O location. Traditional names are <em>outb</em>, <em>outw</em> and <em>outl</em> respectively. The "a" modifier enforces <em>val</em> to be placed in the eax register before the asm command is issued and "Nd" allows for one-byte constant values to be assembled as constants, freeing the edx register for other cases.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">static inline
-void outb( unsigned short port, unsigned char val )
-{
-    asm volatile( "outb %0, %1"
-                  : : "a"(val), "Nd"(port) );
-}</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="k">static</span> <span class="kr">inline</span>
+<span class="kt">void</span> <span class="nf">outb</span><span class="p">(</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">port</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">val</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">asm</span> <span class="k">volatile</span><span class="p">(</span> <span class="s">"outb %0, %1"</span>
+                  <span class="o">:</span> <span class="o">:</span> <span class="s">"a"</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="s">"Nd"</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> <span class="p">);</span>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -2682,14 +2897,14 @@ void outb( unsigned short port, unsigned char val )
 <p>INx : Receives a byte (or word or dword) from an I/O location. Traditional names are <em>inb</em>, <em>inw</em> and <em>inl</em> respectively.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">static inline
-unsigned char inb( unsigned short port )
-{
-    unsigned char ret;
-    asm volatile( "inb %1, %0"
-                  : "=a"(ret) : "Nd"(port) );
-    return ret;
-}</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="k">static</span> <span class="kr">inline</span>
+<span class="kt">unsigned</span> <span class="kt">char</span> <span class="nf">inb</span><span class="p">(</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">port</span> <span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">ret</span><span class="p">;</span>
+    <span class="n">asm</span> <span class="k">volatile</span><span class="p">(</span> <span class="s">"inb %1, %0"</span>
+                  <span class="o">:</span> <span class="s">"=a"</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">:</span> <span class="s">"Nd"</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> <span class="p">);</span>
+    <span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 </li>
@@ -2734,9 +2949,9 @@ port can be given with an immediate value or a value in the DX register.</p>
 <p>i/o devices don&#8217;t collide with memory, as they use a different <em>address space</em>, with different instructions to read and write values to addresses (ports). CPU  decode the memory-I/O bus transaction instructions to select I/O ports These devices cannot be addressed using machine code instructions that targets memory. What is happening is that there are two different signals: <em>MREQ</em> and <em>IOREQ</em>. The first one is asserted on every memory instruction, the second one, on every I/O instruction. So this code&#8230;&#8203;</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">MOV DX,1234h
-MOV AL,[DX]    ;reads memory address 1234h (memory address space)
-IN AL,DX       ;reads I/O port 1234h (I/O address space)</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">MOV</span> <span class="n">DX</span><span class="p">,</span><span class="mi">1234</span><span class="n">h</span>
+<span class="n">MOV</span> <span class="n">AL</span><span class="p">,[</span><span class="n">DX</span><span class="p">]</span>    <span class="p">;</span><span class="n">reads</span> <span class="n">memory</span> <span class="n">address</span> <span class="mi">1234</span><span class="n">h</span> <span class="p">(</span><span class="n">memory</span> <span class="n">address</span> <span class="n">space</span><span class="p">)</span>
+<span class="n">IN</span> <span class="n">AL</span><span class="p">,</span><span class="n">DX</span>       <span class="p">;</span><span class="n">reads</span> <span class="n">I</span><span class="o">/</span><span class="n">O</span> <span class="n">port</span> <span class="mi">1234</span><span class="n">h</span> <span class="p">(</span><span class="n">I</span><span class="o">/</span><span class="n">O</span> <span class="n">address</span> <span class="n">space</span><span class="p">)</span></code></pre>
 </div>
 </div>
 </li>
@@ -2792,57 +3007,57 @@ IN AL,DX       ;reads I/O port 1234h (I/O address space)</code></pre>
 <p>Mapeo del <a href="http://wiki.osdev.org/8259_PIC">PIC</a></p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">/* remap the PIC controller interrupts to our vectors
-   rather than the 8 + 70 as mapped by default */
+<pre class="rouge highlight"><code data-lang="c"><span class="cm">/* remap the PIC controller interrupts to our vectors
+   rather than the 8 + 70 as mapped by default */</span>
 
-#define	PIC1		0x20
+<span class="cp">#define	PIC1		0x20
 #define	PIC2		0xA0
 #define	PIC1_COMMAND	PIC1
 #define	PIC1_DATA	(PIC1+1)
 #define	PIC2_COMMAND	PIC2
 #define	PIC2_DATA	(PIC2+1)
 #define	PIC_EOI		0x20
+</span>
+<span class="cp">#define	ICW1_ICW4	0x01		</span><span class="cm">/* ICW4 (not) needed */</span><span class="cp">
+#define	ICW1_SINGLE	0x02		</span><span class="cm">/* Single (cascade) mode */</span><span class="cp">
+#define	ICW1_INTERVAL4	0x04		</span><span class="cm">/* Call address interval 4 (8) */</span><span class="cp">
+#define	ICW1_LEVEL	0x08		</span><span class="cm">/* Level triggered (edge) mode */</span><span class="cp">
+#define	ICW1_INIT	0x10		</span><span class="cm">/* Initialization - required! */</span><span class="cp">
+</span>
+<span class="cp">#define	ICW4_8086	0x01		</span><span class="cm">/* 8086/88 (MCS-80/85) mode */</span><span class="cp">
+#define	ICW4_AUTO	0x02		</span><span class="cm">/* Auto (normal) EOI */</span><span class="cp">
+#define	ICW4_BUF_SLAVE	0x08		</span><span class="cm">/* Buffered mode/slave */</span><span class="cp">
+#define	ICW4_BUF_MASTER	0x0C		</span><span class="cm">/* Buffered mode/master */</span><span class="cp">
+#define	ICW4_SFNM	0x10		</span><span class="cm">/* Special fully nested (not) */</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">remap_pics</span><span class="p">(</span><span class="kt">int</span> <span class="n">pic1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">pic2</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">UCHAR</span>	<span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">;</span>
 
-#define	ICW1_ICW4	0x01		/* ICW4 (not) needed */
-#define	ICW1_SINGLE	0x02		/* Single (cascade) mode */
-#define	ICW1_INTERVAL4	0x04		/* Call address interval 4 (8) */
-#define	ICW1_LEVEL	0x08		/* Level triggered (edge) mode */
-#define	ICW1_INIT	0x10		/* Initialization - required! */
+	<span class="n">a1</span><span class="o">=</span><span class="n">inb</span><span class="p">(</span><span class="n">PIC1_DATA</span><span class="p">);</span>
+	<span class="n">a2</span><span class="o">=</span><span class="n">inb</span><span class="p">(</span><span class="n">PIC2_DATA</span><span class="p">);</span>
 
-#define	ICW4_8086	0x01		/* 8086/88 (MCS-80/85) mode */
-#define	ICW4_AUTO	0x02		/* Auto (normal) EOI */
-#define	ICW4_BUF_SLAVE	0x08		/* Buffered mode/slave */
-#define	ICW4_BUF_MASTER	0x0C		/* Buffered mode/master */
-#define	ICW4_SFNM	0x10		/* Special fully nested (not) */
+	<span class="n">outb</span><span class="p">(</span><span class="n">PIC1_COMMAND</span><span class="p">,</span> <span class="n">ICW1_INIT</span><span class="o">+</span><span class="n">ICW1_ICW4</span><span class="p">);</span>
+	<span class="n">io_wait</span><span class="p">();</span>
+	<span class="n">outb</span><span class="p">(</span><span class="n">PIC2_COMMAND</span><span class="p">,</span> <span class="n">ICW1_INIT</span><span class="o">+</span><span class="n">ICW1_ICW4</span><span class="p">);</span>
+	<span class="n">io_wait</span><span class="p">();</span>
+	<span class="n">outb</span><span class="p">(</span><span class="n">PIC1_DATA</span><span class="p">,</span> <span class="n">pic1</span><span class="p">);</span>
+	<span class="n">io_wait</span><span class="p">();</span>
+	<span class="n">outb</span><span class="p">(</span><span class="n">PIC2_DATA</span><span class="p">,</span> <span class="n">pic2</span><span class="p">);</span>
+	<span class="n">io_wait</span><span class="p">();</span>
+	<span class="n">outb</span><span class="p">(</span><span class="n">PIC1_DATA</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+	<span class="n">io_wait</span><span class="p">();</span>
+	<span class="n">outb</span><span class="p">(</span><span class="n">PIC2_DATA</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+	<span class="n">io_wait</span><span class="p">();</span>
 
-void remap_pics(int pic1, int pic2)
-{
-	UCHAR	a1, a2;
+	<span class="n">outb</span><span class="p">(</span><span class="n">PIC1_DATA</span><span class="p">,</span> <span class="n">ICW4_8086</span><span class="p">);</span>
+	<span class="n">io_wait</span><span class="p">();</span>
+	<span class="n">outb</span><span class="p">(</span><span class="n">PIC2_DATA</span><span class="p">,</span> <span class="n">ICW4_8086</span><span class="p">);</span>
+	<span class="n">io_wait</span><span class="p">();</span>
 
-	a1=inb(PIC1_DATA);
-	a2=inb(PIC2_DATA);
-
-	outb(PIC1_COMMAND, ICW1_INIT+ICW1_ICW4);
-	io_wait();
-	outb(PIC2_COMMAND, ICW1_INIT+ICW1_ICW4);
-	io_wait();
-	outb(PIC1_DATA, pic1);
-	io_wait();
-	outb(PIC2_DATA, pic2);
-	io_wait();
-	outb(PIC1_DATA, 4);
-	io_wait();
-	outb(PIC2_DATA, 2);
-	io_wait();
-
-	outb(PIC1_DATA, ICW4_8086);
-	io_wait();
-	outb(PIC2_DATA, ICW4_8086);
-	io_wait();
-
-	outb(PIC1_DATA, a1);
-	outb(PIC2_DATA, a2);
-}</code></pre>
+	<span class="n">outb</span><span class="p">(</span><span class="n">PIC1_DATA</span><span class="p">,</span> <span class="n">a1</span><span class="p">);</span>
+	<span class="n">outb</span><span class="p">(</span><span class="n">PIC2_DATA</span><span class="p">,</span> <span class="n">a2</span><span class="p">);</span>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 </li>
@@ -2881,40 +3096,40 @@ void remap_pics(int pic1, int pic2)
 <p>Acceso a un puerto en linux desde el espacio de usuario</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">/* led_bloq_mayus.c: very simple example of port I/O
+<pre class="rouge highlight"><code data-lang="c"><span class="cm">/* led_bloq_mayus.c: very simple example of port I/O
  *
  * This code active LED keyboard CAP, just a port write, a pause,
  * and a port read. Compile with `gcc -O2 -o led_bloq_mayus led_bloq_mayus.c',
  * and run as root with `sudo ./led_bloq_mayus'.
- */
+ */</span>
 
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/io.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/io.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#define BASEPORT 0x0060 </span><span class="cm">/* keyboard */</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+        <span class="cm">/* Get access to the ports */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ioperm</span><span class="p">(</span><span class="n">BASEPORT</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span><span class="n">perror</span><span class="p">(</span><span class="s">"ioperm"</span><span class="p">);</span> <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);}</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n\t\t</span><span class="s"> Port -&gt; registro status: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">inb</span><span class="p">(</span><span class="n">BASEPORT</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
 
-#define BASEPORT 0x0060 /* keyboard */
+        <span class="cm">/* Set the data signals (D0-7) of the port to all low (0) */</span>
+        <span class="n">outb</span><span class="p">(</span><span class="mh">0xED</span><span class="p">,</span> <span class="n">BASEPORT</span><span class="p">);</span>
 
-int main()
-{
-        /* Get access to the ports */
-        if (ioperm(BASEPORT, 3, 1)) {perror("ioperm"); exit(1);}
-        printf("\n\t\t Port -&gt; registro status: %d\n", inb(BASEPORT + 1));
+        <span class="cm">/* Sleep for a while (100 ms) */</span>
+        <span class="n">usleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> </span><span class="se">\t\t</span><span class="s">Activa el LED de la tecla BLOQ MAYUS </span><span class="se">\n</span><span class="s"> "</span><span class="p">);</span>
+        <span class="n">outb</span><span class="p">(</span><span class="mh">0x07</span><span class="p">,</span> <span class="n">BASEPORT</span><span class="p">);</span>
 
-        /* Set the data signals (D0-7) of the port to all low (0) */
-        outb(0xED, BASEPORT);
+        <span class="n">usleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
 
-        /* Sleep for a while (100 ms) */
-        usleep(1000);
-        printf("\n \t\tActiva el LED de la tecla BLOQ MAYUS \n ");
-        outb(0x07, BASEPORT);
-
-        usleep(1000);
-
-        /* We don't need the ports anymore */
-        if (ioperm(BASEPORT, 3, 0)) {perror("ioperm"); exit(1);}
-    exit(0);
-}</code></pre>
+        <span class="cm">/* We don't need the ports anymore */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ioperm</span><span class="p">(</span><span class="n">BASEPORT</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span><span class="n">perror</span><span class="p">(</span><span class="s">"ioperm"</span><span class="p">);</span> <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);}</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -3051,32 +3266,8 @@ int main()
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-04 21:51:14 +0200
+Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  messageStyle: "none",
-  tex2jax: {
-    inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]],
-    ignoreClass: "nostem|nolatexmath"
-  },
-  asciimath2jax: {
-    delimiters: [["\\$", "\\$"]],
-    ignoreClass: "nostem|noasciimath"
-  },
-  TeX: { equationNumbers: { autoNumber: "none" } }
-})
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
-  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
-      data.math.root.display = "block"
-    }
-    return data
-  })
-})
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

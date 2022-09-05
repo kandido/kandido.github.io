@@ -23,6 +23,221 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 <!-- Change some CSS.
 <style>
 .imageblock{
@@ -47,7 +262,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-04</span>
+<span id="revdate">2022-09-05</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -230,13 +445,13 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="content">
 <pre class="rouge highlight"><code data-lang="sh">    lur
     descripción: Notebook
-    producto: 20F1S0H400 (LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560)
+    producto: 20F1S0H400 <span class="o">(</span>LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560<span class="o">)</span>
     fabricante: LENOVO
     versión: ThinkPad L560
     serie: MP15YSW7
     anchura: 64 bits
     capacidades: smbios-2.8 dmi-2.8 smp vsyscall32
-    configuración: administrator_password=disabled chassis=notebook family=ThinkPad L560 power-on_password=disabled sku=LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560 uuid=4C2F45AA-0A2C-B211-A85C-B5C56EB5BBAC</code></pre>
+    configuración: <span class="nv">administrator_password</span><span class="o">=</span>disabled <span class="nv">chassis</span><span class="o">=</span>notebook <span class="nv">family</span><span class="o">=</span>ThinkPad L560 power-on_password<span class="o">=</span>disabled <span class="nv">sku</span><span class="o">=</span>LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560 <span class="nv">uuid</span><span class="o">=</span>4C2F45AA-0A2C-B211-A85C-B5C56EB5BBAC</code></pre>
 </div>
 </div>
 </li>
@@ -586,10 +801,10 @@ La representación uno-cero-uno-cero tiene el valor diez</pre>
 <p>help(builtins)</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="python">bin(1197) -&gt; '0b10010101101'
-oct(1197) -&gt; '02255'
-hex(1197) -&gt; '0x4ad'
-int(0x4ad) -&gt; 1197</code></pre>
+<pre class="rouge highlight"><code data-lang="python"><span class="nb">bin</span><span class="p">(</span><span class="mi">1197</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">'0b10010101101'</span>
+<span class="nb">oct</span><span class="p">(</span><span class="mi">1197</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">'02255'</span>
+<span class="nb">hex</span><span class="p">(</span><span class="mi">1197</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">'0x4ad'</span>
+<span class="nb">int</span><span class="p">(</span><span class="mh">0x4ad</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mi">1197</span></code></pre>
 </div>
 </div>
 </li>
@@ -927,10 +1142,10 @@ int(0x4ad) -&gt; 1197</code></pre>
 <p>Parte Fracción: 0.56789</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="scala">0.56789 * 2 = 1.13578 = 1 + 0.13578 -&gt; 1, bit de la posición -1
-0.13578 * 2 = 0.27156 -&gt; 0, bit de la posición -2
-0.27156 * 2 = 0.54312 -&gt; 0,  bit de la posición -3
-0.54312 * 2 = 1.08624 = 1 + 0.08624 -&gt; 1, bit de la posición -4</code></pre>
+<pre class="rouge highlight"><code data-lang="scala"><span class="mf">0.56789</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">=</span> <span class="mf">1.13578</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.13578</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="o">,</span> <span class="n">bit</span> <span class="n">de</span> <span class="n">la</span> <span class="n">posición</span> <span class="o">-</span><span class="mi">1</span>
+<span class="mf">0.13578</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">=</span> <span class="mf">0.27156</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">bit</span> <span class="n">de</span> <span class="n">la</span> <span class="n">posición</span> <span class="o">-</span><span class="mi">2</span>
+<span class="mf">0.27156</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">=</span> <span class="mf">0.54312</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="o">,</span>  <span class="n">bit</span> <span class="n">de</span> <span class="n">la</span> <span class="n">posición</span> <span class="o">-</span><span class="mi">3</span>
+<span class="mf">0.54312</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">=</span> <span class="mf">1.08624</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.08624</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="o">,</span> <span class="n">bit</span> <span class="n">de</span> <span class="n">la</span> <span class="n">posición</span> <span class="o">-</span><span class="mi">4</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -1444,12 +1659,12 @@ oating-point computations</a></p>
 <p><code>python</code></p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="python">ord('A')
-hex(ord('A'))
-chr(65)
-chr(0x41)
-[hex(ord(c)) for c in "Hola"]
-[chr(c) for c in [0x48, 0x6f, 0x6c, 0x61, 0x20, 0x4d, 0x75, 0x6e, 0x64, 0x6f]]</code></pre>
+<pre class="rouge highlight"><code data-lang="python"><span class="nb">ord</span><span class="p">(</span><span class="s">'A'</span><span class="p">)</span>
+<span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s">'A'</span><span class="p">))</span>
+<span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span>
+<span class="nb">chr</span><span class="p">(</span><span class="mh">0x41</span><span class="p">)</span>
+<span class="p">[</span><span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"Hola"</span><span class="p">]</span>
+<span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x6f</span><span class="p">,</span> <span class="mh">0x6c</span><span class="p">,</span> <span class="mh">0x61</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x4d</span><span class="p">,</span> <span class="mh">0x75</span><span class="p">,</span> <span class="mh">0x6e</span><span class="p">,</span> <span class="mh">0x64</span><span class="p">,</span> <span class="mh">0x6f</span><span class="p">]]</span></code></pre>
 </div>
 </div>
 </li>
@@ -1639,7 +1854,7 @@ chr(0x41)
 <p><a href="http://www.unicode.org/charts/PDF/U2200.pdf">U2200</a></p>
 </li>
 <li>
-<p>&#x2228;</p>
+<p>hexadecimal x2228 &#8594; &#x2228; ó en decimal 8744 &#8744;</p>
 </li>
 <li>
 <p>&#x22bc;</p>
@@ -1795,32 +2010,8 @@ chr(0x41)
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-04 21:51:14 +0200
+Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  messageStyle: "none",
-  tex2jax: {
-    inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]],
-    ignoreClass: "nostem|nolatexmath"
-  },
-  asciimath2jax: {
-    delimiters: [["\\$", "\\$"]],
-    ignoreClass: "nostem|noasciimath"
-  },
-  TeX: { equationNumbers: { autoNumber: "none" } }
-})
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
-  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
-      data.math.root.display = "block"
-    }
-    return data
-  })
-})
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

@@ -23,6 +23,221 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 <!-- Change some CSS.
 <style>
 .imageblock{
@@ -47,7 +262,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-04</span>
+<span id="revdate">2022-09-05</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -72,61 +287,63 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 <li><a href="_simulador_iassim_2.html">22. Simulador IASSim</a>
 </li>
-<li><a href="_lenguajes_de_programación_para_sum1ton.html">23. Lenguajes de programación para sum1toN</a>
+<li><a href="_lenguajes_ensamblador.html">23. Lenguajes Ensamblador</a>
 </li>
-<li><a href="_rtl_register_transfer_language.html">24. RTL Register Transfer Language</a>
+<li><a href="_lenguajes_de_programación_para_sum1ton.html">24. Lenguajes de programación para sum1toN</a>
 </li>
-<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html">25. Formato de Instrucción: ISA Intel x86-64</a>
+<li><a href="_rtl_register_transfer_language.html">25. RTL Register Transfer Language</a>
 </li>
-<li><a href="_fpu_x87.html">26. FPU x87</a>
+<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html">26. Formato de Instrucción: ISA Intel x86-64</a>
 </li>
-<li><a href="_pila.html">27. Pila</a>
+<li><a href="_fpu_x87.html">27. FPU x87</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html"><span class="toc-current">28. Llamadas al Sistema Operativo</span></a>
+<li><a href="_pila.html">28. Pila</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_2.html"><span class="toc-current">29. Llamadas al Sistema Operativo</span></a>
 <ul class="sectlevel2">
-<li><a href="_llamadas_al_sistema_operativo_2.html#llamadas_SO">28.1. Introducción</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#llamadas_SO">29.1. Introducción</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_manuales_de_las_llamadas">28.2. Manuales de las llamadas</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_manuales_de_las_llamadas">29.2. Manuales de las llamadas</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_llamada_indirecta">28.3. Llamada INDIRECTA</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_llamada_indirecta">29.3. Llamada INDIRECTA</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_llamada_directa">28.4. LLamada DIRECTA</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_llamada_directa">29.4. LLamada DIRECTA</a>
 <ul class="sectlevel3">
-<li><a href="_llamadas_al_sistema_operativo_2.html#_argumentos_de_la_llamada_directa">28.4.1. Argumentos de la llamada directa</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_argumentos_de_la_llamada_directa">29.4.1. Argumentos de la llamada directa</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_códigos_de_la_llamada_directa">28.4.2. Códigos de la llamada directa</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_códigos_de_la_llamada_directa">29.4.2. Códigos de la llamada directa</a>
 </li>
 </ul>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_ejemplos_lenguaje_c">28.5. Ejemplos: lenguaje C</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_ejemplos_lenguaje_c">29.5. Ejemplos: lenguaje C</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_ejemplos_asm_indirecto">28.6. Ejemplos: ASM INDIRECTO</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_ejemplos_asm_indirecto">29.6. Ejemplos: ASM INDIRECTO</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_ejemplos_asm_directo">28.7. Ejemplos: ASM DIRECTO</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_ejemplos_asm_directo">29.7. Ejemplos: ASM DIRECTO</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_línea_de_comandos">28.8. Línea de Comandos</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_línea_de_comandos">29.8. Línea de Comandos</a>
 <ul class="sectlevel3">
-<li><a href="_llamadas_al_sistema_operativo_2.html#_procedimiento">28.8.1. Procedimiento</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_procedimiento">29.8.1. Procedimiento</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_stack_initialization">28.8.2. Stack Initialization</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_stack_initialization">29.8.2. Stack Initialization</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_rutina_principal_con_retorno">28.8.3. Rutina principal con Retorno</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_rutina_principal_con_retorno">29.8.3. Rutina principal con Retorno</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_ejercicios_suma_linea_com_s_maximum_linea_com_s">28.8.4. Ejercicios: suma_linea_com.s ,maximum_linea_com.s</a>
-</li>
-</ul>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_ejercicios_suma_linea_com_s_maximum_linea_com_s">29.8.4. Ejercicios: suma_linea_com.s ,maximum_linea_com.s</a>
 </li>
 </ul>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html">29. Lenguaje de Programación C</a>
+</ul>
 </li>
-<li><a href="_apéndice_prácticas.html">30. Apéndice Prácticas</a>
+<li><a href="_lenguaje_de_programación_c_2.html">30. Lenguaje de Programación C</a>
 </li>
-<li><a href="_arquitectura_amd64_4.html">31. Arquitectura amd64</a>
+<li><a href="_apéndice_prácticas.html">31. Apéndice Prácticas</a>
 </li>
-<li><a href="_exámenes_de_cursos_anteriores.html">32. Exámenes de Cursos Anteriores</a>
+<li><a href="_arquitectura_amd64_4.html">32. Arquitectura amd64</a>
 </li>
-<li><a href="_miaulario_videoconferencia.html">33. Miaulario: Videoconferencia</a>
+<li><a href="_exámenes_de_cursos_anteriores.html">33. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">34. Miaulario: Videoconferencia</a>
 </li>
 </ul>
 </li>
@@ -143,10 +360,10 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_llamadas_al_sistema_operativo_2">28. Llamadas al Sistema Operativo</h2>
+<h2 id="_llamadas_al_sistema_operativo_2">29. Llamadas al Sistema Operativo</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="llamadas_SO">28.1. Introducción</h3>
+<h3 id="llamadas_SO">29.1. Introducción</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -205,8 +422,8 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <p>Ejemplo</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">* printf() -&gt; write(int fd, const void *buf, size_t count) -&gt; [RAX-RDI-RSI-RDX-R10-R8-R9,syscall] -&gt; kernel syscall write
-* API      -&gt;        wrapper function                      -&gt;                ABI                  -&gt;  kernel syscall</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="o">*</span> <span class="n">printf</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">write</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">RAX</span><span class="o">-</span><span class="n">RDI</span><span class="o">-</span><span class="n">RSI</span><span class="o">-</span><span class="n">RDX</span><span class="o">-</span><span class="n">R10</span><span class="o">-</span><span class="n">R8</span><span class="o">-</span><span class="n">R9</span><span class="p">,</span><span class="n">syscall</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">kernel</span> <span class="n">syscall</span> <span class="n">write</span>
+<span class="o">*</span> <span class="n">API</span>      <span class="o">-&gt;</span>        <span class="n">wrapper</span> <span class="n">function</span>                      <span class="o">-&gt;</span>                <span class="n">ABI</span>                  <span class="o">-&gt;</span>  <span class="n">kernel</span> <span class="n">syscall</span></code></pre>
 </div>
 </div>
 </li>
@@ -214,7 +431,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 </div>
 <div class="sect2">
-<h3 id="_manuales_de_las_llamadas">28.2. Manuales de las llamadas</h3>
+<h3 id="_manuales_de_las_llamadas">29.2. Manuales de las llamadas</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -269,7 +486,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 </div>
 <div class="sect2">
-<h3 id="_llamada_indirecta">28.3. Llamada INDIRECTA</h3>
+<h3 id="_llamada_indirecta">29.3. Llamada INDIRECTA</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -286,7 +503,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 </div>
 <div class="sect2">
-<h3 id="_llamada_directa">28.4. LLamada DIRECTA</h3>
+<h3 id="_llamada_directa">29.4. LLamada DIRECTA</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -307,16 +524,16 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <p>Códigos "System call number" disponibles en el fichero <em>/usr/include/asm/unistd_32.h</em></p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">## Macros en el fichero macros_x86-64_gas.h
-
-## Llamadas al Sistema
-.equ	STDIN_ID,  0		# input-device (keyboard)
-.equ	STDOUT_ID, 1		# output-device (screen)
-.equ	SYS_READ,  0		# ID-number for 'read'
-.equ	SYS_WRITE, 1		# ID-number for 'write'
-.equ	SYS_OPEN,  2		# ID-number for 'open'
-.equ	SYS_CLOSE, 3		# ID-number for 'close'
-.equ	SYS_EXIT,  60		# ID-number for 'exit'</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="cp">## Macros en el fichero macros_x86-64_gas.h
+</span>
+<span class="cp">## Llamadas al Sistema
+</span><span class="p">.</span><span class="n">equ</span>	<span class="n">STDIN_ID</span><span class="p">,</span>  <span class="mi">0</span>		<span class="err">#</span> <span class="n">input</span><span class="o">-</span><span class="n">device</span> <span class="p">(</span><span class="n">keyboard</span><span class="p">)</span>
+<span class="p">.</span><span class="n">equ</span>	<span class="n">STDOUT_ID</span><span class="p">,</span> <span class="mi">1</span>		<span class="err">#</span> <span class="n">output</span><span class="o">-</span><span class="n">device</span> <span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+<span class="p">.</span><span class="n">equ</span>	<span class="n">SYS_READ</span><span class="p">,</span>  <span class="mi">0</span>		<span class="err">#</span> <span class="n">ID</span><span class="o">-</span><span class="n">number</span> <span class="k">for</span> <span class="err">'</span><span class="n">read</span><span class="err">'</span>
+<span class="p">.</span><span class="n">equ</span>	<span class="n">SYS_WRITE</span><span class="p">,</span> <span class="mi">1</span>		<span class="err">#</span> <span class="n">ID</span><span class="o">-</span><span class="n">number</span> <span class="k">for</span> <span class="err">'</span><span class="n">write</span><span class="err">'</span>
+<span class="p">.</span><span class="n">equ</span>	<span class="n">SYS_OPEN</span><span class="p">,</span>  <span class="mi">2</span>		<span class="err">#</span> <span class="n">ID</span><span class="o">-</span><span class="n">number</span> <span class="k">for</span> <span class="err">'</span><span class="n">open</span><span class="err">'</span>
+<span class="p">.</span><span class="n">equ</span>	<span class="n">SYS_CLOSE</span><span class="p">,</span> <span class="mi">3</span>		<span class="err">#</span> <span class="n">ID</span><span class="o">-</span><span class="n">number</span> <span class="k">for</span> <span class="err">'</span><span class="n">close</span><span class="err">'</span>
+<span class="p">.</span><span class="n">equ</span>	<span class="n">SYS_EXIT</span><span class="p">,</span>  <span class="mi">60</span>		<span class="err">#</span> <span class="n">ID</span><span class="o">-</span><span class="n">number</span> <span class="k">for</span> <span class="err">'</span><span class="n">exit</span><span class="err">'</span></code></pre>
 </div>
 </div>
 </li>
@@ -329,7 +546,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </ul>
 </div>
 <div class="sect3">
-<h4 id="_argumentos_de_la_llamada_directa">28.4.1. Argumentos de la llamada directa</h4>
+<h4 id="_argumentos_de_la_llamada_directa">29.4.1. Argumentos de la llamada directa</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -368,7 +585,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 </div>
 <div class="sect3">
-<h4 id="_códigos_de_la_llamada_directa">28.4.2. Códigos de la llamada directa</h4>
+<h4 id="_códigos_de_la_llamada_directa">29.4.2. Códigos de la llamada directa</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -405,7 +622,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejemplos_lenguaje_c">28.5. Ejemplos: lenguaje C</h3>
+<h3 id="_ejemplos_lenguaje_c">29.5. Ejemplos: lenguaje C</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -432,7 +649,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejemplos_asm_indirecto">28.6. Ejemplos: ASM INDIRECTO</h3>
+<h3 id="_ejemplos_asm_indirecto">29.6. Ejemplos: ASM INDIRECTO</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -442,8 +659,8 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <p><code>exit(status_value)</code></p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">mov $status_value,%rdi
-call exit</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">mov</span> <span class="err">$</span><span class="n">status_value</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>
+<span class="n">call</span> <span class="n">exit</span></code></pre>
 </div>
 </div>
 </li>
@@ -451,9 +668,9 @@ call exit</code></pre>
 <p><code>syscall(exit_code,status_value)</code></p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">mov $60,%rax
-mov $status_value,%rdi
-call syscall</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">mov</span> <span class="err">$</span><span class="mi">60</span><span class="p">,</span><span class="o">%</span><span class="n">rax</span>
+<span class="n">mov</span> <span class="err">$</span><span class="n">status_value</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>
+<span class="n">call</span> <span class="n">syscall</span></code></pre>
 </div>
 </div>
 </li>
@@ -461,10 +678,10 @@ call syscall</code></pre>
 <p><code>write(int fd, const void *buf, size_t count)</code></p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">mov fd,%rdi			#fd es la refencia al fichero donde se va a escribir
-mov $buffer_address_label, %rsi #dirección de memoria de lo que se va a escribir en el fichero
-mov size,%rdx			#tamaño del buffer de memoria que se va a escribir
-call write			#orden de escritura al kernel a través de la librería libc</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">mov</span> <span class="n">fd</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>			<span class="err">#</span><span class="n">fd</span> <span class="n">es</span> <span class="n">la</span> <span class="n">refencia</span> <span class="n">al</span> <span class="n">fichero</span> <span class="n">donde</span> <span class="n">se</span> <span class="n">va</span> <span class="n">a</span> <span class="n">escribir</span>
+<span class="n">mov</span> <span class="err">$</span><span class="n">buffer_address_label</span><span class="p">,</span> <span class="o">%</span><span class="n">rsi</span> <span class="err">#</span><span class="n">direcci</span><span class="err">ó</span><span class="n">n</span> <span class="n">de</span> <span class="n">memoria</span> <span class="n">de</span> <span class="n">lo</span> <span class="n">que</span> <span class="n">se</span> <span class="n">va</span> <span class="n">a</span> <span class="n">escribir</span> <span class="n">en</span> <span class="n">el</span> <span class="n">fichero</span>
+<span class="n">mov</span> <span class="n">size</span><span class="p">,</span><span class="o">%</span><span class="n">rdx</span>			<span class="err">#</span><span class="n">tama</span><span class="err">ñ</span><span class="n">o</span> <span class="n">del</span> <span class="n">buffer</span> <span class="n">de</span> <span class="n">memoria</span> <span class="n">que</span> <span class="n">se</span> <span class="n">va</span> <span class="n">a</span> <span class="n">escribir</span>
+<span class="n">call</span> <span class="n">write</span>			<span class="err">#</span><span class="n">orden</span> <span class="n">de</span> <span class="n">escritura</span> <span class="n">al</span> <span class="n">kernel</span> <span class="n">a</span> <span class="n">trav</span><span class="err">é</span><span class="n">s</span> <span class="n">de</span> <span class="n">la</span> <span class="n">librer</span><span class="err">í</span><span class="n">a</span> <span class="n">libc</span></code></pre>
 </div>
 </div>
 </li>
@@ -472,11 +689,11 @@ call write			#orden de escritura al kernel a través de la librería libc</code>
 <p><code>syscall(write_code,int fd, const void *buf, size_t count)</code></p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">mov $1,%rax
-mov $1,%rdi			# 1 es el código del fichero pantalla. En unix los dispositivos son ficheros.
-mov $buffer_address_label,%rsi
-mov size,%rdx
-call syscall</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">mov</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="n">rax</span>
+<span class="n">mov</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>			<span class="err">#</span> <span class="mi">1</span> <span class="n">es</span> <span class="n">el</span> <span class="n">c</span><span class="err">ó</span><span class="n">digo</span> <span class="n">del</span> <span class="n">fichero</span> <span class="n">pantalla</span><span class="p">.</span> <span class="n">En</span> <span class="n">unix</span> <span class="n">los</span> <span class="n">dispositivos</span> <span class="n">son</span> <span class="n">ficheros</span><span class="p">.</span>
+<span class="n">mov</span> <span class="err">$</span><span class="n">buffer_address_label</span><span class="p">,</span><span class="o">%</span><span class="n">rsi</span>
+<span class="n">mov</span> <span class="n">size</span><span class="p">,</span><span class="o">%</span><span class="n">rdx</span>
+<span class="n">call</span> <span class="n">syscall</span></code></pre>
 </div>
 </div>
 </li>
@@ -484,16 +701,16 @@ call syscall</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejemplos_asm_directo">28.7. Ejemplos: ASM DIRECTO</h3>
+<h3 id="_ejemplos_asm_directo">29.7. Ejemplos: ASM DIRECTO</h3>
 <div class="ulist">
 <ul>
 <li>
 <p>exit</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">mov $60,%rax
-mov $status_value,%rdi
-syscall</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">mov</span> <span class="err">$</span><span class="mi">60</span><span class="p">,</span><span class="o">%</span><span class="n">rax</span>
+<span class="n">mov</span> <span class="err">$</span><span class="n">status_value</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>
+<span class="n">syscall</span></code></pre>
 </div>
 </div>
 </li>
@@ -501,11 +718,11 @@ syscall</code></pre>
 <p>write</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">mov $1,%rax
-mov $1,%rdi			# 1 es el código del fichero pantalla. En unix los dispositivos son ficheros.
-mov $buffer_address_label,%rsi
-mov size,%rdx
-syscall</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">mov</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="n">rax</span>
+<span class="n">mov</span> <span class="err">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>			<span class="err">#</span> <span class="mi">1</span> <span class="n">es</span> <span class="n">el</span> <span class="n">c</span><span class="err">ó</span><span class="n">digo</span> <span class="n">del</span> <span class="n">fichero</span> <span class="n">pantalla</span><span class="p">.</span> <span class="n">En</span> <span class="n">unix</span> <span class="n">los</span> <span class="n">dispositivos</span> <span class="n">son</span> <span class="n">ficheros</span><span class="p">.</span>
+<span class="n">mov</span> <span class="err">$</span><span class="n">buffer_address_label</span><span class="p">,</span><span class="o">%</span><span class="n">rsi</span>
+<span class="n">mov</span> <span class="n">size</span><span class="p">,</span><span class="o">%</span><span class="n">rdx</span>
+<span class="n">syscall</span></code></pre>
 </div>
 </div>
 </li>
@@ -513,9 +730,9 @@ syscall</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_línea_de_comandos">28.8. Línea de Comandos</h3>
+<h3 id="_línea_de_comandos">29.8. Línea de Comandos</h3>
 <div class="sect3">
-<h4 id="_procedimiento">28.8.1. Procedimiento</h4>
+<h4 id="_procedimiento">29.8.1. Procedimiento</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -625,7 +842,7 @@ int  main (int parc, char *parv[])
 </div>
 </div>
 <div class="sect3">
-<h4 id="_stack_initialization">28.8.2. Stack Initialization</h4>
+<h4 id="_stack_initialization">29.8.2. Stack Initialization</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -696,7 +913,7 @@ int  main (int parc, char *parv[])
 </div>
 </div>
 <div class="sect3">
-<h4 id="_rutina_principal_con_retorno">28.8.3. Rutina principal con Retorno</h4>
+<h4 id="_rutina_principal_con_retorno">29.8.3. Rutina principal con Retorno</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -706,45 +923,45 @@ int  main (int parc, char *parv[])
 <p>Ejemplo: <em>imprimir_arg.s</em></p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">### gcc imprimir_arg.s
+<pre class="rouge highlight"><code data-lang="c"><span class="cp">### gcc imprimir_arg.s
 ### ./a.out 'Hola Mundo'
 ###
 ###
+</span>
+        <span class="p">.</span><span class="n">equ</span> <span class="n">STDOUT</span><span class="p">,</span><span class="mi">1</span>
+        <span class="p">.</span><span class="n">equ</span> <span class="n">SYSWRITE</span><span class="p">,</span><span class="mi">1</span>
+        <span class="p">.</span><span class="n">equ</span> <span class="n">EXIT_SUCCESS</span><span class="p">,</span><span class="mh">0XFF</span>
+        <span class="p">.</span><span class="n">equ</span> <span class="n">ARGV1</span><span class="p">,</span><span class="mi">8</span>
 
-        .equ STDOUT,1
-        .equ SYSWRITE,1
-        .equ EXIT_SUCCESS,0XFF
-        .equ ARGV1,8
 
+<span class="n">mensaje</span><span class="o">:</span>
+        <span class="p">.</span><span class="n">ascii</span> <span class="s">"Introducir un mensaje como argumento del programa. Si el mensaje tiene espacios blancos, poner el mensaje entre comillas simples ''</span><span class="se">\n</span><span class="s">"</span>
+        <span class="p">.</span><span class="n">equ</span> <span class="n">LON</span><span class="p">,.</span> <span class="o">-</span> <span class="n">mensaje</span>    <span class="err">#</span><span class="n">longitud</span> <span class="n">del</span> <span class="n">mensaje</span>
 
-mensaje:
-        .ascii "Introducir un mensaje como argumento del programa. Si el mensaje tiene espacios blancos, poner el mensaje entre comillas simples ''\n"
-        .equ LON,. - mensaje    #longitud del mensaje
+        <span class="p">.</span><span class="n">section</span> <span class="p">.</span><span class="n">text</span>
+        <span class="p">.</span><span class="n">global</span> <span class="n">main</span>
+<span class="n">main</span><span class="o">:</span>
+        <span class="n">push</span> <span class="o">%</span><span class="n">rsi</span>               <span class="err">#</span><span class="n">salvo</span> <span class="n">el</span> <span class="n">argumento</span> <span class="n">argv</span>
+        <span class="cp">## comprobar que la ĺínea de comandos tiene dos argumentos
+</span>        <span class="n">cmp</span> <span class="err">$</span><span class="mi">2</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>
+        <span class="n">je</span> <span class="n">imp_arg</span>
+        <span class="cp">## si solo tengo el programa sin argumentos :imprimir en la pantalla
+</span>        <span class="n">mov</span> <span class="err">$</span><span class="n">SYSWRITE</span><span class="p">,</span><span class="o">%</span><span class="n">rax</span>
+        <span class="n">mov</span> <span class="err">$</span><span class="n">STDOUT</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>        <span class="err">#</span><span class="n">fd</span> <span class="n">es</span> <span class="n">la</span> <span class="n">refencia</span> <span class="n">al</span> <span class="n">fichero</span> <span class="n">donde</span> <span class="n">se</span> <span class="n">va</span> <span class="n">a</span> <span class="n">escribir</span>
+        <span class="n">mov</span> <span class="err">$</span><span class="n">mensaje</span><span class="p">,</span> <span class="o">%</span><span class="n">rsi</span>               <span class="err">#</span><span class="n">direcci</span><span class="err">ó</span><span class="n">n</span> <span class="n">de</span> <span class="n">memoria</span> <span class="n">de</span> <span class="n">lo</span> <span class="n">que</span> <span class="n">se</span> <span class="n">va</span> <span class="n">a</span> <span class="n">escribir</span> <span class="n">en</span> <span class="n">el</span> <span class="n">fichero</span>
+        <span class="n">mov</span> <span class="err">$</span><span class="n">LON</span><span class="p">,</span><span class="o">%</span><span class="n">rdx</span>                   <span class="err">#</span><span class="n">tama</span><span class="err">ñ</span><span class="n">o</span> <span class="n">del</span> <span class="n">buffer</span> <span class="n">de</span> <span class="n">memoria</span> <span class="n">que</span> <span class="n">se</span> <span class="n">va</span> <span class="n">a</span> <span class="n">escribir</span>
+        <span class="n">syscall</span>                  <span class="err">#</span><span class="n">orden</span> <span class="n">de</span> <span class="n">escritura</span> <span class="n">al</span> <span class="n">kernel</span>
+        <span class="n">jmp</span> <span class="n">salida</span>
+<span class="n">imp_arg</span><span class="o">:</span>
+        <span class="n">pop</span>  <span class="o">%</span><span class="n">rsi</span>           <span class="err">#</span><span class="n">el</span> <span class="n">stack</span> <span class="n">pointer</span> <span class="n">apunta</span> <span class="n">al</span> <span class="o">%</span><span class="n">rsi</span> <span class="n">salvado</span> <span class="n">y</span> <span class="n">lo</span> <span class="n">recupero</span> <span class="o">-&gt;</span> <span class="n">argv</span> <span class="o">-&gt;</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">add</span> <span class="err">$</span><span class="n">ARGV1</span><span class="p">,</span> <span class="o">%</span><span class="n">rsi</span>    <span class="err">#</span><span class="n">rsi</span> <span class="n">apunta</span> <span class="n">al</span> <span class="n">primer</span> <span class="n">puntero</span><span class="p">,</span> <span class="n">si</span> <span class="n">le</span> <span class="n">sumo</span> <span class="mi">8</span> <span class="n">apunto</span> <span class="n">al</span> <span class="n">segundo</span> <span class="n">puntero</span>
+        <span class="n">mov</span> <span class="p">(</span><span class="o">%</span><span class="n">rsi</span><span class="p">),</span> <span class="o">%</span><span class="n">rdi</span>    <span class="err">#</span><span class="n">mediante</span> <span class="n">la</span> <span class="n">indirecci</span><span class="err">ó</span><span class="n">n</span> <span class="n">tengo</span> <span class="n">el</span> <span class="n">segundo</span> <span class="n">puntero</span>
+        <span class="n">call</span> <span class="n">puts</span>
 
-        .section .text
-        .global main
-main:
-        push %rsi               #salvo el argumento argv
-        ## comprobar que la ĺínea de comandos tiene dos argumentos
-        cmp $2,%rdi
-        je imp_arg
-        ## si solo tengo el programa sin argumentos :imprimir en la pantalla
-        mov $SYSWRITE,%rax
-        mov $STDOUT,%rdi        #fd es la refencia al fichero donde se va a escribir
-        mov $mensaje, %rsi               #dirección de memoria de lo que se va a escribir en el fichero
-        mov $LON,%rdx                   #tamaño del buffer de memoria que se va a escribir
-        syscall                  #orden de escritura al kernel
-        jmp salida
-imp_arg:
-        pop  %rsi           #el stack pointer apunta al %rsi salvado y lo recupero -&gt; argv -&gt; argv[0]
-        add $ARGV1, %rsi    #rsi apunta al primer puntero, si le sumo 8 apunto al segundo puntero
-        mov (%rsi), %rdi    #mediante la indirección tengo el segundo puntero
-        call puts
+<span class="n">salida</span><span class="o">:</span>
+        <span class="n">ret</span>
 
-salida:
-        ret
-
-        .end</code></pre>
+        <span class="p">.</span><span class="n">end</span></code></pre>
 </div>
 </div>
 </li>
@@ -752,7 +969,7 @@ salida:
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ejercicios_suma_linea_com_s_maximum_linea_com_s">28.8.4. Ejercicios: suma_linea_com.s ,maximum_linea_com.s</h4>
+<h4 id="_ejercicios_suma_linea_com_s_maximum_linea_com_s">29.8.4. Ejercicios: suma_linea_com.s ,maximum_linea_com.s</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -763,75 +980,75 @@ salida:
 <p>Introducir los datos del programa <em>suma_linea_com.s</em> (suma de dos sumandos) a través de la línea de comandos</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">### función: sumar dos números enteros de un dígito.
+<pre class="rouge highlight"><code data-lang="c"><span class="cp">### función: sumar dos números enteros de un dígito.
 ###          los sumandos se pasan a través de la línea de comandos
-        ## Compilación en la arquitectura x86-64
-        ## gcc  -nostartfiles -g -o sum_input sum_imput.s
-        ## run 5 7
-        ##  x /x  %rsp              -&gt;3                 argc:número de argumentos
-        ##  x /a  (char**)($rsp+8)  -&gt; 0xffffd0a4:	0xffffd26e
-        ##  x /c  *(char**)($rsp+8) -&gt; 0xffffd26e:	47 '/'
-        ##  x /s  *(char**)($rsp+8) -&gt; 0xffffd26e:	 "/home/candido/tutoriales/as_tutorial/algoritmos_x86-32/basicos/sum_input"
-        ##  p /s *(char**)($rsp+8)  -&gt; 0xffffd26e "/home/candido/tutoriales/as_tutorial/algoritmos_x86-32/basicos/sum_input"
-        ##  x /s  *(char**)($rsp+16) -&gt; 0xffffd2b7:	 "5"
-        ##  x /s  *(char**)($rsp+24) -&gt; 0xffffd2b9:	 "7"
+</span>        <span class="cp">## Compilación en la arquitectura x86-64
+</span>        <span class="cp">## gcc  -nostartfiles -g -o sum_input sum_imput.s
+</span>        <span class="cp">## run 5 7
+</span>        <span class="cp">##  x /x  %rsp              -&gt;3                 argc:número de argumentos
+</span>        <span class="cp">##  x /a  (char**)($rsp+8)  -&gt; 0xffffd0a4:	0xffffd26e
+</span>        <span class="cp">##  x /c  *(char**)($rsp+8) -&gt; 0xffffd26e:	47 '/'
+</span>        <span class="cp">##  x /s  *(char**)($rsp+8) -&gt; 0xffffd26e:	 "/home/candido/tutoriales/as_tutorial/algoritmos_x86-32/basicos/sum_input"
+</span>        <span class="cp">##  p /s *(char**)($rsp+8)  -&gt; 0xffffd26e "/home/candido/tutoriales/as_tutorial/algoritmos_x86-32/basicos/sum_input"
+</span>        <span class="cp">##  x /s  *(char**)($rsp+16) -&gt; 0xffffd2b7:	 "5"
+</span>        <span class="cp">##  x /s  *(char**)($rsp+24) -&gt; 0xffffd2b9:	 "7"
+</span>
+        <span class="p">.</span><span class="n">section</span> <span class="p">.</span><span class="n">text</span>
+<span class="p">.</span><span class="n">globl</span> <span class="n">_start</span>
+<span class="n">_start</span><span class="o">:</span>
 
-        .section .text
-.globl _start
-_start:
+        <span class="cp">## instrucciones aclaratorias
+</span>
+	<span class="n">lea</span> <span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="n">rsp</span><span class="p">),</span><span class="o">%</span><span class="n">rax</span>       <span class="err">#</span><span class="n">eax</span> <span class="n">contiene</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">la</span> <span class="n">direcci</span><span class="err">ó</span><span class="n">n</span> <span class="n">de</span> <span class="n">la</span> <span class="n">pila</span> <span class="n">que</span> <span class="n">contiene</span> <span class="n">el</span> <span class="n">pointer</span> <span class="n">al</span> <span class="n">argumento</span> <span class="n">string</span>
+        <span class="n">mov</span> <span class="mi">8</span><span class="p">(</span><span class="o">%</span><span class="n">rsp</span><span class="p">),</span><span class="o">%</span><span class="n">rbx</span>       <span class="err">#</span><span class="n">ebx</span> <span class="n">tiene</span> <span class="n">el</span> <span class="n">contendio</span> <span class="n">de</span> <span class="n">la</span> <span class="n">pila</span><span class="o">=</span> <span class="n">direcci</span><span class="err">ó</span><span class="n">n</span> <span class="n">del</span> <span class="n">string</span>
+        <span class="n">xor</span> <span class="o">%</span><span class="n">rcx</span><span class="p">,</span><span class="o">%</span><span class="n">rcx</span>
+        <span class="n">movb</span> <span class="p">(</span><span class="o">%</span><span class="n">rbx</span><span class="p">),</span><span class="o">%</span><span class="n">cl</span>        <span class="err">#</span><span class="n">caracter</span> <span class="n">ASCII</span>
 
-        ## instrucciones aclaratorias
+        <span class="cp">## string argument pointers
+</span>        <span class="n">mov</span> <span class="mi">16</span><span class="p">(</span><span class="o">%</span><span class="n">rsp</span><span class="p">),</span><span class="o">%</span><span class="n">rax</span>       <span class="err">#</span><span class="n">eax</span> <span class="n">tiene</span> <span class="n">el</span> <span class="n">contendio</span> <span class="n">de</span> <span class="n">la</span> <span class="n">pila</span><span class="o">=</span> <span class="n">direcci</span><span class="err">ó</span><span class="n">n</span> <span class="n">del</span> <span class="n">string</span><span class="p">.</span> <span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">mov</span> <span class="mi">24</span><span class="p">(</span><span class="o">%</span><span class="n">rsp</span><span class="p">),</span><span class="o">%</span><span class="n">rbx</span>       <span class="err">#</span><span class="n">eax</span> <span class="n">tiene</span> <span class="n">el</span> <span class="n">contendio</span> <span class="n">de</span> <span class="n">la</span> <span class="n">pila</span><span class="o">=</span> <span class="n">direcci</span><span class="err">ó</span><span class="n">n</span> <span class="n">del</span> <span class="n">string</span><span class="p">.</span> <span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="cp">## fetch string indirect
+</span>        <span class="cp">## convert ascii numbers to values
+</span>        <span class="n">xor</span> <span class="o">%</span><span class="n">rcx</span><span class="p">,</span><span class="o">%</span><span class="n">rcx</span>
+        <span class="n">xor</span> <span class="o">%</span><span class="n">rdx</span><span class="p">,</span><span class="o">%</span><span class="n">rdx</span>
+        <span class="n">movb</span> <span class="p">(</span><span class="o">%</span><span class="n">rax</span><span class="p">),</span><span class="o">%</span><span class="n">cl</span>         <span class="err">#</span> <span class="n">indirecci</span><span class="err">ó</span><span class="n">n</span> <span class="n">para</span> <span class="n">acceder</span> <span class="n">al</span> <span class="n">string</span> <span class="n">referenciado</span> <span class="n">por</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">movb</span> <span class="p">(</span><span class="o">%</span><span class="n">rbx</span><span class="p">),</span><span class="o">%</span><span class="n">dl</span>         <span class="err">#</span> <span class="n">indirecci</span><span class="err">ó</span><span class="n">n</span> <span class="n">para</span> <span class="n">acceder</span> <span class="n">al</span> <span class="n">string</span> <span class="n">referenciado</span> <span class="n">por</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sub</span> <span class="err">$</span><span class="mh">0x30</span><span class="p">,</span><span class="o">%</span><span class="n">rcx</span>
+        <span class="n">sub</span> <span class="err">$</span><span class="mh">0x30</span><span class="p">,</span><span class="o">%</span><span class="n">rdx</span>
 
-	lea 8(%rsp),%rax       #eax contiene argv[1] la dirección de la pila que contiene el pointer al argumento string
-        mov 8(%rsp),%rbx       #ebx tiene el contendio de la pila= dirección del string
-        xor %rcx,%rcx
-        movb (%rbx),%cl        #caracter ASCII
+        <span class="n">mov</span> <span class="o">%</span><span class="n">rcx</span><span class="p">,</span><span class="o">%</span><span class="n">rsi</span>
+        <span class="n">mov</span> <span class="o">%</span><span class="n">rdx</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>
 
-        ## string argument pointers
-        mov 16(%rsp),%rax       #eax tiene el contendio de la pila= dirección del string. argv[2]
-        mov 24(%rsp),%rbx       #eax tiene el contendio de la pila= dirección del string. argv[3]
-        ## fetch string indirect
-        ## convert ascii numbers to values
-        xor %rcx,%rcx
-        xor %rdx,%rdx
-        movb (%rax),%cl         # indirección para acceder al string referenciado por argv[1]
-        movb (%rbx),%dl         # indirección para acceder al string referenciado por argv[1]
-        sub $0x30,%rcx
-        sub $0x30,%rdx
+        <span class="n">call</span> <span class="n">suma</span>
 
-        mov %rcx,%rsi
-        mov %rdx,%rdi
-
-        call suma
-
-	## salida
-        mov %rax,%rdi
-	mov  $60, %rax	    #1 is the exit() syscall
-	syscall
+	<span class="cp">## salida
+</span>        <span class="n">mov</span> <span class="o">%</span><span class="n">rax</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>
+	<span class="n">mov</span>  <span class="err">$</span><span class="mi">60</span><span class="p">,</span> <span class="o">%</span><span class="n">rax</span>	    <span class="err">#</span><span class="mi">1</span> <span class="n">is</span> <span class="n">the</span> <span class="n">exit</span><span class="p">()</span> <span class="n">syscall</span>
+	<span class="n">syscall</span>
 
 
-### Función que calcula la suma entre dos valores
-	.type suma, @function
-	.section .text
-suma:
-	## prologo
-	push %rbp
-	mov %rsp,%rbp
-	sub $8,%rsp            #reserva de memoria
+<span class="cp">### Función que calcula la suma entre dos valores
+</span>	<span class="p">.</span><span class="n">type</span> <span class="n">suma</span><span class="p">,</span> <span class="err">@</span><span class="n">function</span>
+	<span class="p">.</span><span class="n">section</span> <span class="p">.</span><span class="n">text</span>
+<span class="n">suma</span><span class="o">:</span>
+	<span class="cp">## prologo
+</span>	<span class="n">push</span> <span class="o">%</span><span class="n">rbp</span>
+	<span class="n">mov</span> <span class="o">%</span><span class="n">rsp</span><span class="p">,</span><span class="o">%</span><span class="n">rbp</span>
+	<span class="n">sub</span> <span class="err">$</span><span class="mi">8</span><span class="p">,</span><span class="o">%</span><span class="n">rsp</span>            <span class="err">#</span><span class="n">reserva</span> <span class="n">de</span> <span class="n">memoria</span>
 
-	## captura de argumentos
-	mov %rdi,%rax      #1º argumento
-	mov %rsi,%rcx     #2º argumento
-	## cuerpo
-	addl %ecx,%eax          #
-	## guardar resultado
-	## el resultado está en EAX
-salto:
-	## epilogo
-
-	mov %rbp,%rsp           # frame anterior
-	pop %rbp
-	ret                     # recuperar dirección de retorno</code></pre>
+	<span class="cp">## captura de argumentos
+</span>	<span class="n">mov</span> <span class="o">%</span><span class="n">rdi</span><span class="p">,</span><span class="o">%</span><span class="n">rax</span>      <span class="err">#</span><span class="mi">1</span><span class="err">º</span> <span class="n">argumento</span>
+	<span class="n">mov</span> <span class="o">%</span><span class="n">rsi</span><span class="p">,</span><span class="o">%</span><span class="n">rcx</span>     <span class="err">#</span><span class="mi">2</span><span class="err">º</span> <span class="n">argumento</span>
+	<span class="cp">## cuerpo
+</span>	<span class="n">addl</span> <span class="o">%</span><span class="n">ecx</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span>          <span class="err">#</span>
+	<span class="cp">## guardar resultado
+</span>	<span class="cp">## el resultado está en EAX
+</span><span class="n">salto</span><span class="o">:</span>
+	<span class="cp">## epilogo
+</span>
+	<span class="n">mov</span> <span class="o">%</span><span class="n">rbp</span><span class="p">,</span><span class="o">%</span><span class="n">rsp</span>           <span class="err">#</span> <span class="n">frame</span> <span class="n">anterior</span>
+	<span class="n">pop</span> <span class="o">%</span><span class="n">rbp</span>
+	<span class="n">ret</span>                     <span class="err">#</span> <span class="n">recuperar</span> <span class="n">direcci</span><span class="err">ó</span><span class="n">n</span> <span class="n">de</span> <span class="n">retorno</span></code></pre>
 </div>
 </div>
 </li>
@@ -860,32 +1077,8 @@ salto:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-04 21:51:14 +0200
+Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  messageStyle: "none",
-  tex2jax: {
-    inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]],
-    ignoreClass: "nostem|nolatexmath"
-  },
-  asciimath2jax: {
-    delimiters: [["\\$", "\\$"]],
-    ignoreClass: "nostem|noasciimath"
-  },
-  TeX: { equationNumbers: { autoNumber: "none" } }
-})
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
-  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
-      data.math.root.display = "block"
-    }
-    return data
-  })
-})
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

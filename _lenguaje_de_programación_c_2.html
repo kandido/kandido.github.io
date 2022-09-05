@@ -23,6 +23,221 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 <!-- Change some CSS.
 <style>
 .imageblock{
@@ -47,7 +262,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-04</span>
+<span id="revdate">2022-09-05</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -72,69 +287,71 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 <li><a href="_simulador_iassim_2.html">22. Simulador IASSim</a>
 </li>
-<li><a href="_lenguajes_de_programación_para_sum1ton.html">23. Lenguajes de programación para sum1toN</a>
+<li><a href="_lenguajes_ensamblador.html">23. Lenguajes Ensamblador</a>
 </li>
-<li><a href="_rtl_register_transfer_language.html">24. RTL Register Transfer Language</a>
+<li><a href="_lenguajes_de_programación_para_sum1ton.html">24. Lenguajes de programación para sum1toN</a>
 </li>
-<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html">25. Formato de Instrucción: ISA Intel x86-64</a>
+<li><a href="_rtl_register_transfer_language.html">25. RTL Register Transfer Language</a>
 </li>
-<li><a href="_fpu_x87.html">26. FPU x87</a>
+<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html">26. Formato de Instrucción: ISA Intel x86-64</a>
 </li>
-<li><a href="_pila.html">27. Pila</a>
+<li><a href="_fpu_x87.html">27. FPU x87</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html">28. Llamadas al Sistema Operativo</a>
+<li><a href="_pila.html">28. Pila</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html"><span class="toc-current">29. Lenguaje de Programación C</span></a>
+<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html"><span class="toc-current">30. Lenguaje de Programación C</span></a>
 <ul class="sectlevel2">
-<li><a href="_lenguaje_de_programación_c_2.html#prog_C">29.1. Introducción</a>
+<li><a href="_lenguaje_de_programación_c_2.html#prog_C">30.1. Introducción</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_casting">29.2. Casting</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_casting">30.2. Casting</a>
 <ul class="sectlevel3">
-<li><a href="_lenguaje_de_programación_c_2.html#_concepto_3">29.2.1. Concepto</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_concepto_3">30.2.1. Concepto</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_ejemplo_4">29.2.2. Ejemplo</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_ejemplo_4">30.2.2. Ejemplo</a>
 </li>
 </ul>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_puntero">29.3. Puntero</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_puntero">30.3. Puntero</a>
 <ul class="sectlevel3">
-<li><a href="_lenguaje_de_programación_c_2.html#_referencias_2">29.3.1. Referencias</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_referencias_2">30.3.1. Referencias</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_introducción_23">29.3.2. Introducción</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_introducción_23">30.3.2. Introducción</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_concepto_4">29.3.3. Concepto</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_concepto_4">30.3.3. Concepto</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_módulo_ilustrativo">29.3.4. Módulo Ilustrativo</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_módulo_ilustrativo">30.3.4. Módulo Ilustrativo</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_declaración_2">29.3.5. Declaración</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_declaración_2">30.3.5. Declaración</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_operador_dirección">29.3.6. Operador Dirección</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_operador_dirección">30.3.6. Operador Dirección</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_operador_indirección_o_dereferencia">29.3.7. Operador Indirección o Dereferencia</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_operador_indirección_o_dereferencia">30.3.7. Operador Indirección o Dereferencia</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_ejemplo_5">29.3.8. Ejemplo</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_ejemplo_5">30.3.8. Ejemplo</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_aplicaciones_de_los_punteros">29.3.9. Aplicaciones de los punteros</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_aplicaciones_de_los_punteros">30.3.9. Aplicaciones de los punteros</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_string_literal">29.3.10. String Literal</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_string_literal">30.3.10. String Literal</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_puntero_a_puntero">29.3.11. Puntero a Puntero</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_puntero_a_puntero">30.3.11. Puntero a Puntero</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_string_variable">29.3.12. String Variable</a>
+<li><a href="_lenguaje_de_programación_c_2.html#_string_variable">30.3.12. String Variable</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html#_funciones_2">29.3.13. Funciones</a>
-</li>
-</ul>
+<li><a href="_lenguaje_de_programación_c_2.html#_funciones_2">30.3.13. Funciones</a>
 </li>
 </ul>
 </li>
-<li><a href="_apéndice_prácticas.html">30. Apéndice Prácticas</a>
+</ul>
 </li>
-<li><a href="_arquitectura_amd64_4.html">31. Arquitectura amd64</a>
+<li><a href="_apéndice_prácticas.html">31. Apéndice Prácticas</a>
 </li>
-<li><a href="_exámenes_de_cursos_anteriores.html">32. Exámenes de Cursos Anteriores</a>
+<li><a href="_arquitectura_amd64_4.html">32. Arquitectura amd64</a>
 </li>
-<li><a href="_miaulario_videoconferencia.html">33. Miaulario: Videoconferencia</a>
+<li><a href="_exámenes_de_cursos_anteriores.html">33. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">34. Miaulario: Videoconferencia</a>
 </li>
 </ul>
 </li>
@@ -151,10 +368,10 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_lenguaje_de_programación_c_2">29. Lenguaje de Programación C</h2>
+<h2 id="_lenguaje_de_programación_c_2">30. Lenguaje de Programación C</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="prog_C">29.1. Introducción</h3>
+<h3 id="prog_C">30.1. Introducción</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -164,16 +381,16 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 </div>
 <div class="sect2">
-<h3 id="_casting">29.2. Casting</h3>
+<h3 id="_casting">30.2. Casting</h3>
 <div class="sect3">
-<h4 id="_concepto_3">29.2.1. Concepto</h4>
+<h4 id="_concepto_3">30.2.1. Concepto</h4>
 <div class="ulist">
 <ul>
 <li>
 <p>Sintaxis</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">(type_name) expression</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="p">(</span><span class="n">type_name</span><span class="p">)</span> <span class="n">expression</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -191,17 +408,17 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ejemplo_4">29.2.2. Ejemplo</h4>
+<h4 id="_ejemplo_4">30.2.2. Ejemplo</h4>
 <div class="ulist">
 <ul>
 <li>
 <p>Ejemplo de la división de números enteros</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">int i=8,j=5;
-float x;
-x = i / j;
-x = (float) i / j;</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="n">j</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="n">i</span> <span class="o">/</span> <span class="n">j</span><span class="p">;</span></code></pre>
 </div>
 </div>
 </li>
@@ -230,15 +447,15 @@ x = (float) i / j;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_puntero">29.3. Puntero</h3>
+<h3 id="_puntero">30.3. Puntero</h3>
 <div class="sect3">
-<h4 id="_referencias_2">29.3.1. Referencias</h4>
+<h4 id="_referencias_2">30.3.1. Referencias</h4>
 <div class="paragraph">
 <p>Libro de texto K.N. King: Capítulo 11. Pointers. Pg241</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_introducción_23">29.3.2. Introducción</h4>
+<h4 id="_introducción_23">30.3.2. Introducción</h4>
 <div class="paragraph">
 <p>El concepto de puntero es fundamental en programación imperativa de bajo nivel ya que simplifica el código para la programación de algoritmos que incluyen estructuras de datos sencillas o complejas.</p>
 </div>
@@ -256,7 +473,7 @@ Para el aprendizaje de: conceptos relacionados con los punteros, su sintaxis, su
 </div>
 </div>
 <div class="sect3">
-<h4 id="_concepto_4">29.3.3. Concepto</h4>
+<h4 id="_concepto_4">30.3.3. Concepto</h4>
 <div class="sect4">
 <h5 id="_memoria_3">Memoria</h5>
 <div class="ulist">
@@ -403,81 +620,81 @@ El libro de K.N.King distingue entre "variable puntero" y puntero. En la literat
 </div>
 </div>
 <div class="sect3">
-<h4 id="_módulo_ilustrativo">29.3.4. Módulo Ilustrativo</h4>
+<h4 id="_módulo_ilustrativo">30.3.4. Módulo Ilustrativo</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">/* Iniciación a los punteros.*/
+<pre class="rouge highlight"><code data-lang="c"><span class="cm">/* Iniciación a los punteros.*/</span>
 
-#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
 
-void main (void)
-{
-
-  /* Concepto */
+  <span class="cm">/* Concepto */</span>
 
 
 
-  /*Operador Dirección*/
+  <span class="cm">/*Operador Dirección*/</span>
 
-  int   i, k, *p, *q;
-  float x, y, *r, *s;
-  char  c, d, *u, *v;
-  i = 10;
-  k = 100;
-  x = 3E-10f;
-  y = 3.1416;
-  c = 'A';
-  d = '@';
+  <span class="kt">int</span>   <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">r</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
+  <span class="kt">char</span>  <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="o">*</span><span class="n">u</span><span class="p">,</span> <span class="o">*</span><span class="n">v</span><span class="p">;</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="n">k</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="mf">3E-10</span><span class="n">f</span><span class="p">;</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="p">.</span><span class="mi">1416</span><span class="p">;</span>
+  <span class="n">c</span> <span class="o">=</span> <span class="sc">'A'</span><span class="p">;</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="sc">'@'</span><span class="p">;</span>
 
-  p = &amp;i;
-  q = &amp;k;
-  r = &amp;x;
-  s = &amp;y;
-  u = &amp;c;
-  v = &amp;d;
+  <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">k</span><span class="p">;</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">;</span>
+  <span class="n">u</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">;</span>
+  <span class="n">v</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">;</span>
 
-  printf("Introducir un carácter \n");
-  scanf("%c",&amp;c);
-  printf("El carácter leído es el %c \n", c);
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Introducir un carácter </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">"%c"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"El carácter leído es el %c </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
 
-  /*Operador Indirección*/
+  <span class="cm">/*Operador Indirección*/</span>
 
-  printf("El carácter leído es el %c \n", *u);
-  printf("El valor de la variable i es %d o también  %d \n", i, *p);
-  printf("El valor de PI es %f o también %f \n", y, *s);
+  <span class="n">printf</span><span class="p">(</span><span class="s">"El carácter leído es el %c </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"El valor de la variable i es %d o también  %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"El valor de PI es %f o también %f </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
 
-  /*String Variable*/
-  /*Array*/
-  char cadena[]="Hola";
+  <span class="cm">/*String Variable*/</span>
+  <span class="cm">/*Array*/</span>
+  <span class="kt">char</span> <span class="n">cadena</span><span class="p">[]</span><span class="o">=</span><span class="s">"Hola"</span><span class="p">;</span>
 
-  /*Puntero*/
-  char *saludo="Hola";
-  char **pt_saludo;
+  <span class="cm">/*Puntero*/</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">saludo</span><span class="o">=</span><span class="s">"Hola"</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="o">**</span><span class="n">pt_saludo</span><span class="p">;</span>
 
-  pt_saludo = &amp;saludo;
+  <span class="n">pt_saludo</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">saludo</span><span class="p">;</span>
 
-  exit (0);
-}</code></pre>
+  <span class="n">exit</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span></code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_declaración_2">29.3.5. Declaración</h4>
+<h4 id="_declaración_2">30.3.5. Declaración</h4>
 <div class="paragraph">
 <p>Syntaxis: <code>type *pointer_variable</code></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">int   i, k, *p, *q;
-float x, y, *r, *s;
-char  c, d, *u, *v;
-i = 10;
-k = 100;
-x = 3E-10f;
-y = 3.1416;
-c = 'A';
-d = '@';</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="kt">int</span>   <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">r</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
+<span class="kt">char</span>  <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="o">*</span><span class="n">u</span><span class="p">,</span> <span class="o">*</span><span class="n">v</span><span class="p">;</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">3E-10</span><span class="n">f</span><span class="p">;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="p">.</span><span class="mi">1416</span><span class="p">;</span>
+<span class="n">c</span> <span class="o">=</span> <span class="sc">'A'</span><span class="p">;</span>
+<span class="n">d</span> <span class="o">=</span> <span class="sc">'@'</span><span class="p">;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -485,20 +702,20 @@ d = '@';</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_operador_dirección">29.3.6. Operador Dirección</h4>
+<h4 id="_operador_dirección">30.3.6. Operador Dirección</h4>
 <div class="paragraph">
 <p>Símbolo <em>&amp;</em></p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">p = &amp;i;
-q = &amp;k;
-r = &amp;x;
-s = &amp;y;
-u = &amp;c;
-v = &amp;d;
-scanf(&amp;c);
-scanf(u);</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span>
+<span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">k</span><span class="p">;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">;</span>
+<span class="n">u</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">;</span>
+<span class="n">v</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">;</span>
+<span class="n">scanf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+<span class="n">scanf</span><span class="p">(</span><span class="n">u</span><span class="p">);</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -511,7 +728,7 @@ scanf(u);</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_operador_indirección_o_dereferencia">29.3.7. Operador Indirección o Dereferencia</h4>
+<h4 id="_operador_indirección_o_dereferencia">30.3.7. Operador Indirección o Dereferencia</h4>
 <div class="paragraph">
 <p>Símbolo <em>*</em></p>
 </div>
@@ -520,13 +737,13 @@ scanf(u);</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">printf("El valor de la variable i es %d o %d \n", i, *p);
-printf("El valor de PI es %f o %f \n", y, *s);</code></pre>
+<pre class="rouge highlight"><code data-lang="c"><span class="n">printf</span><span class="p">(</span><span class="s">"El valor de la variable i es %d o %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"El valor de PI es %f o %f </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span></code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ejemplo_5">29.3.8. Ejemplo</h4>
+<h4 id="_ejemplo_5">30.3.8. Ejemplo</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -552,7 +769,7 @@ printf("El valor de PI es %f o %f \n", y, *s);</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_aplicaciones_de_los_punteros">29.3.9. Aplicaciones de los punteros</h4>
+<h4 id="_aplicaciones_de_los_punteros">30.3.9. Aplicaciones de los punteros</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -718,7 +935,7 @@ printf("El valor de PI es %f o %f \n", y, *s);</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_string_literal">29.3.10. String Literal</h4>
+<h4 id="_string_literal">30.3.10. String Literal</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -794,7 +1011,7 @@ printf("El valor de PI es %f o %f \n", y, *s);</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_puntero_a_puntero">29.3.11. Puntero a Puntero</h4>
+<h4 id="_puntero_a_puntero">30.3.11. Puntero a Puntero</h4>
 <div class="imageblock kroki">
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNpTUFBQKCiJLyhRAIFSBShI5gKR2rq62lAazADRQBZYrgaIgBy7GgUwA0wDWXj1AQBe3xOV" alt="Diagram">
@@ -819,7 +1036,7 @@ printf("El valor de PI es %f o %f \n", y, *s);</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_string_variable">29.3.12. String Variable</h4>
+<h4 id="_string_variable">30.3.12. String Variable</h4>
 <div class="sect4">
 <h5 id="_nombre_del_array">Nombre del Array</h5>
 <div class="ulist">
@@ -849,7 +1066,7 @@ printf("El valor de PI es %f o %f \n", y, *s);</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_funciones_2">29.3.13. Funciones</h4>
+<h4 id="_funciones_2">30.3.13. Funciones</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -884,32 +1101,8 @@ printf("El valor de PI es %f o %f \n", y, *s);</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-09-04 21:51:14 +0200
+Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  messageStyle: "none",
-  tex2jax: {
-    inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]],
-    ignoreClass: "nostem|nolatexmath"
-  },
-  asciimath2jax: {
-    delimiters: [["\\$", "\\$"]],
-    ignoreClass: "nostem|noasciimath"
-  },
-  TeX: { equationNumbers: { autoNumber: "none" } }
-})
-MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
-  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
-    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
-      data.math.root.display = "block"
-    }
-    return data
-  })
-})
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>
