@@ -478,7 +478,7 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>Desarrollar un programa en lenguaje C que realice la suma <span class="image"><img src="stem-b62553236db33038ff2c74759b488899.png" alt="stem b62553236db33038ff2c74759b488899" width="25" height="36"></span> cuyo resultado es <span class="image"><img src="stem-a3ef31d08a1158c0afb82de5e1356b09.png" alt="stem a3ef31d08a1158c0afb82de5e1356b09" width="69" height="12"></span> con la arquitectura <em>i386</em> utilizando el <a href="_apéndice_prácticas.html#prac_prog">método de programación</a> de descripción inicial en lenguaje pseudocódigo y organigrama.</p>
+<p>Desarrollar un programa en lenguaje C que realice la suma \(\sum_{i=1}^{N}i\) cuyo resultado es \(N(N+1)/2\) con la arquitectura <em>i386</em> utilizando el <a href="_apéndice_prácticas.html#prac_prog">método de programación</a> de descripción inicial en lenguaje pseudocódigo y organigrama.</p>
 </li>
 </ul>
 </div>
@@ -959,7 +959,7 @@ Comprobar que el contenido del fichero <em>sum1toN_gdb_C.txt</em> es correcto.
 <div class="ulist">
 <ul>
 <li>
-<p>Desarrollar un programa en lenguaje ensamblador AT&amp;T con la arquitectura <em>i386</em> que realice la suma <span class="image"><img src="stem-b62553236db33038ff2c74759b488899.png" alt="stem b62553236db33038ff2c74759b488899" width="25" height="36"></span> cuyo resultado es <span class="image"><img src="stem-a3ef31d08a1158c0afb82de5e1356b09.png" alt="stem a3ef31d08a1158c0afb82de5e1356b09" width="69" height="12"></span> utilizando el <a href="_apéndice_prácticas.html#prac_prog">método de programación</a> de descripción inicial en lenguaje pseudocódigo y organigrama.</p>
+<p>Desarrollar un programa en lenguaje ensamblador AT&amp;T con la arquitectura <em>i386</em> que realice la suma \(\sum_{i=1}^{N}i\) cuyo resultado es \(N(N+1)/2\) utilizando el <a href="_apéndice_prácticas.html#prac_prog">método de programación</a> de descripción inicial en lenguaje pseudocódigo y organigrama.</p>
 </li>
 </ul>
 </div>
@@ -1235,5 +1235,29 @@ bucle:
 Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

@@ -480,7 +480,7 @@ uno:   .data 1  <span class="p">;</span></code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Desarrollar el programa que realice la operación <span class="image"><img src="stem-a3ef31d08a1158c0afb82de5e1356b09.png" alt="stem a3ef31d08a1158c0afb82de5e1356b09" width="69" height="12"></span> equivalente a obtener el resultado de la suma del Tutorial1 <span class="image"><img src="stem-6a8358250cebdf5525b034e7a0433dbe.png" alt="stem 6a8358250cebdf5525b034e7a0433dbe" width="110" height="36"></span>.</p>
+<p>Desarrollar el programa que realice la operación \(N(N+1)/2\) equivalente a obtener el resultado de la suma del Tutorial1 \(\sum_{i=1}^{N}i=N(N+1)/2\).</p>
 <div class="ulist">
 <ul>
 <li>
@@ -510,7 +510,7 @@ uno:   .data 1  <span class="p">;</span></code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><span class="image"><img src="stem-36ebe480a3c4a98c2b9df2e7bc9f2c77.png" alt="stem 36ebe480a3c4a98c2b9df2e7bc9f2c77" width="173" height="12"></span></p>
+<p>\(N(N+1)/2 = ((N+1)/2) * N \)</p>
 </li>
 </ul>
 </div>
@@ -520,10 +520,10 @@ uno:   .data 1  <span class="p">;</span></code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Si N es impar &#8594; (N+1)/2 tiene el resto 0 &#8594;  <span class="image"><img src="stem-f3deaac169cec04d17cd3def719988ef.png" alt="stem f3deaac169cec04d17cd3def719988ef" width="88" height="12"></span> donde N+1 es par</p>
+<p>Si N es impar &#8594; (N+1)/2 tiene el resto 0 &#8594;  \(((N+1)/2) * N \) donde N+1 es par</p>
 </li>
 <li>
-<p>Si N es par   &#8594; (N+1)/2 tiene el resto 1 &#8594; (N+1) = Cociente*2+Resto &#8594; <span class="image"><img src="stem-d0d087abb4110b64a52971e8890020bf.png" alt="stem d0d087abb4110b64a52971e8890020bf" width="157" height="12"></span> donde N es par</p>
+<p>Si N es par   &#8594; (N+1)/2 tiene el resto 1 &#8594; (N+1) = Cociente*2+Resto &#8594; \(N(N+1)/2 = N*C+N/2\) donde N es par</p>
 </li>
 </ul>
 </div>
@@ -573,7 +573,7 @@ uno:   .data 1  <span class="p">;</span></code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p><span class="image"><img src="stem-2ed7c8e36dfe141b836d6cb2d0c59239.png" alt="stem 2ed7c8e36dfe141b836d6cb2d0c59239" width="117" height="12"></span></p>
+<p>\(suma = N(N+1)/2 \)</p>
 </li>
 </ul>
 </div>
@@ -961,5 +961,29 @@ cero:		.data 0</pre>
 Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

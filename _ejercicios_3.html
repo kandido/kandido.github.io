@@ -1203,7 +1203,7 @@ on the 8086 that involves two 16-bit operands. How long does it take to fetch th
 </div>
 </li>
 <li>
-<p>positivos con n bits&#8594; <span class="image"><img src="stem-f678c9d0d14304c22a6a5f69b7fc132a.png" alt="stem f678c9d0d14304c22a6a5f69b7fc132a" width="43" height="36"></span>.</p>
+<p>positivos con n bits&#8594; \(\sum_{i=0}^{n-1}b_i 2^i\).</p>
 </li>
 <li>
 <p>negativos con n bits</p>
@@ -6775,5 +6775,29 @@ Some of these are easily simulated using either register R0, which is always set
 Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

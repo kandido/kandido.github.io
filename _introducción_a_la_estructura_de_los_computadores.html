@@ -812,6 +812,18 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 <li>
 <p><a href="http://www.unavarra.es/ficha-docente?rangoLetras=a-z&amp;uid=364">PDI Profesorado</a></p>
 </li>
+<li>
+<p>Tutorías</p>
+<div class="listingblock">
+<div class="content">
+<pre>Tutoría online (cita previa) y Presencial
+Lugar: Edificio Los Tejos 2ª Planta, Despacho 2028 (Prof. Cándido Aramburu)
+
+        Miércoles : 10:00-13:00
+        Jueves:     10:00-13:00</pre>
+</div>
+</div>
+</li>
 </ul>
 </div>
 </li>
@@ -838,7 +850,7 @@ Es una habilidad a adquirir por el profesional informático el acceder y utiliza
 </div>
 </li>
 <li>
-<p>Carlos Juan de Dios Ursua</p>
+<p>Carlos Juan de Dios Ursúa</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1686,5 +1698,29 @@ convocatoria recuperación: (Temas 1,2,3,4,5,6,7,8 y 9 y prácticas): 28/01/2023
 Last updated 2022-09-05 10:43:18 +0200
 </div>
 </div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>
