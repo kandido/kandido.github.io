@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-08</span>
+<span id="revdate">2022-09-09</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -367,7 +367,7 @@ and N are positive integers with N &gt; 1. Note: The IAS did not have assembly l
 <div class="olist loweralpha">
 <ol class="loweralpha">
 <li>
-<p>Use the equation Sum(Y)= N(N+1)/2 when writing the IAS program.</p>
+<p>Use the equation <strong>Sum(Y)= N(N+1)/2</strong> when writing the IAS program. Comentar los conceptos de: datos, instrucciones, memoria principal, registros, secciones, operación, operando, campo de operaciones, campo de operando, dirección de memoria, contenido de memoria, referencia al operando, operando implicito, direccionamiento del operando, direccionamiento directo del operando, código binario, código hexadecimal, código de operación, código del campo de operando. Ejecutar el programa fuente con el emulador IASSIm.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -379,17 +379,22 @@ and N are positive integers with N &gt; 1. Note: The IAS did not have assembly l
 <span class="p">;</span> <span class="n">lenguaje</span> <span class="n">ensamblador</span><span class="o">:</span> <span class="n">simaulador</span> <span class="n">IASSim</span>
 <span class="p">;</span> <span class="n">Ejercicio</span> <span class="mi">2</span><span class="p">.</span><span class="mi">1</span> <span class="n">del</span> <span class="n">libro</span> <span class="n">de</span> <span class="n">William</span> <span class="n">Stalling</span><span class="p">,</span> <span class="n">Estructura</span> <span class="n">de</span> <span class="n">Computadores</span>
 
+
+<span class="p">;</span> <span class="n">El</span> <span class="n">algoritmo</span> <span class="n">que</span> <span class="n">seguimos</span> <span class="n">es</span> <span class="o">:</span> <span class="n">primero</span> <span class="n">la</span> <span class="n">suma</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span> <span class="n">continuaci</span><span class="err">ó</span><span class="n">n</span> <span class="n">la</span> <span class="n">multiplicaci</span><span class="err">ó</span><span class="n">n</span> <span class="n">N</span><span class="p">(</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="n">y</span> <span class="n">finalmente</span> <span class="n">la</span> <span class="n">divisi</span><span class="err">ó</span><span class="n">n</span><span class="p">.</span> <span class="n">Cada</span> <span class="n">resultado</span> <span class="n">se</span> <span class="n">guarda</span> <span class="n">en</span> <span class="n">la</span> <span class="n">memoria</span> <span class="n">principal</span> <span class="n">si</span> <span class="n">fuera</span> <span class="n">necesario</span><span class="p">.</span>
+
+<span class="p">;</span> <span class="n">Describimos</span> <span class="n">el</span> <span class="n">programa</span> <span class="n">en</span> <span class="mi">4</span> <span class="n">lenguajes</span><span class="o">:</span> <span class="n">lenguaje</span> <span class="n">ensamblador</span> <span class="n">iassim</span><span class="p">,</span> <span class="n">lenguaje</span> <span class="n">m</span><span class="err">á</span><span class="n">quina</span> <span class="n">binario</span><span class="p">,</span> <span class="n">lenguaje</span> <span class="n">RTL</span> <span class="n">y</span> <span class="n">lenguaje</span> <span class="n">ensamblador</span> <span class="n">WStalling</span>
+
 <span class="p">;</span> <span class="n">SECCION</span> <span class="n">DE</span> <span class="n">INSTRUCCIONES</span>
-<span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Ac</span><span class="o">+</span> <span class="n">n</span>    <span class="p">;</span><span class="mo">01</span> <span class="n">n</span>   <span class="p">;</span><span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">M</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-<span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Ah</span><span class="o">+</span> <span class="n">uno</span>  <span class="p">;</span><span class="mo">05</span> <span class="n">uno</span> <span class="p">;</span><span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">AC</span><span class="o">+</span><span class="mi">1</span>
-<span class="n">At</span><span class="o">-&gt;</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">y</span>     <span class="p">;</span><span class="mi">11</span> <span class="n">y</span>   <span class="p">;</span><span class="n">M</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>  <span class="o">&lt;-</span> <span class="n">AC</span>
-<span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">R</span> <span class="n">y</span>      <span class="p">;</span><span class="mi">09</span> <span class="n">y</span>   <span class="p">;</span><span class="n">AR</span>    <span class="o">&lt;-</span> <span class="n">M</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>
-<span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">R</span><span class="o">-&gt;</span><span class="n">A</span> <span class="n">n</span>    <span class="p">;</span><span class="mi">0</span><span class="n">B</span> <span class="n">n</span>   <span class="p">;</span><span class="n">AC</span><span class="o">:</span><span class="n">AR</span> <span class="o">&lt;-</span> <span class="n">AR</span><span class="o">*</span><span class="n">M</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
-<span class="n">R</span><span class="o">-&gt;</span><span class="n">A</span>           <span class="p">;</span><span class="mi">0</span><span class="n">A</span>     <span class="p">;</span><span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">AR</span>
-<span class="n">A</span><span class="o">/</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">R</span> <span class="n">dos</span>  <span class="p">;</span><span class="mi">0</span><span class="n">C</span> <span class="mi">2</span>   <span class="p">;</span><span class="n">AR</span>    <span class="o">&lt;-</span> <span class="n">AC</span><span class="o">/</span><span class="mi">2</span>
-<span class="n">R</span><span class="o">-&gt;</span><span class="n">A</span>           <span class="p">;</span><span class="mi">0</span><span class="n">A</span>     <span class="p">;</span><span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">AR</span>
-<span class="n">At</span><span class="o">-&gt;</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">y</span>     <span class="p">;</span><span class="mi">11</span> <span class="n">y</span>   <span class="p">;</span><span class="n">M</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>  <span class="o">&lt;-</span> <span class="n">AC</span>
-<span class="n">halt</span>
+ <span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Ac</span><span class="o">+</span> <span class="n">n</span>    <span class="p">;</span>        <span class="mo">01</span> <span class="n">n</span>   <span class="p">;</span>        <span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">M</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>      <span class="p">;</span><span class="n">LOAD</span>   <span class="n">M</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+ <span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Ah</span><span class="o">+</span> <span class="n">uno</span>  <span class="p">;</span>        <span class="mo">05</span> <span class="n">uno</span> <span class="p">;</span>        <span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">AC</span><span class="o">+</span><span class="mi">1</span>      <span class="p">;</span><span class="n">ADD</span>    <span class="n">M</span><span class="p">(</span><span class="n">uno</span><span class="p">)</span>
+ <span class="n">At</span><span class="o">-&gt;</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">y</span>     <span class="p">;</span>        <span class="mi">11</span> <span class="n">y</span>   <span class="p">;</span>        <span class="n">M</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>  <span class="o">&lt;-</span> <span class="n">AC</span>        <span class="p">;</span><span class="n">STORE</span>  <span class="n">M</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+ <span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">R</span> <span class="n">y</span>      <span class="p">;</span>        <span class="mi">09</span> <span class="n">y</span>   <span class="p">;</span>        <span class="n">AR</span>    <span class="o">&lt;-</span> <span class="n">M</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>      <span class="p">;</span><span class="n">LOAD</span>   <span class="n">MQ</span><span class="p">,</span><span class="n">M</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+ <span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">R</span><span class="o">-&gt;</span><span class="n">A</span> <span class="n">n</span>    <span class="p">;</span>        <span class="mi">0</span><span class="n">B</span> <span class="n">n</span>   <span class="p">;</span>        <span class="n">AC</span><span class="o">:</span><span class="n">AR</span> <span class="o">&lt;-</span> <span class="n">AR</span><span class="o">*</span><span class="n">M</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>   <span class="p">;</span><span class="n">MUL</span>    <span class="n">M</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+ <span class="n">R</span><span class="o">-&gt;</span><span class="n">A</span>           <span class="p">;</span>        <span class="mi">0</span><span class="n">A</span>     <span class="p">;</span>        <span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">AR</span>        <span class="p">;</span><span class="n">LOAD</span>   <span class="n">MQ</span>
+ <span class="n">A</span><span class="o">/</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">R</span> <span class="n">dos</span>  <span class="p">;</span>        <span class="mi">0</span><span class="n">C</span> <span class="mi">2</span>   <span class="p">;</span>        <span class="n">AR</span>    <span class="o">&lt;-</span> <span class="n">AC</span><span class="o">/</span><span class="mi">2</span>      <span class="p">;</span><span class="n">DIV</span>    <span class="n">M</span><span class="p">(</span><span class="n">dos</span><span class="p">)</span>
+ <span class="n">R</span><span class="o">-&gt;</span><span class="n">A</span>           <span class="p">;</span>        <span class="mi">0</span><span class="n">A</span>     <span class="p">;</span>        <span class="n">AC</span>    <span class="o">&lt;-</span> <span class="n">AR</span>        <span class="p">;</span><span class="n">LOAD</span>   <span class="n">MQ</span>
+ <span class="n">At</span><span class="o">-&gt;</span><span class="n">S</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">y</span>     <span class="p">;</span>        <span class="mi">11</span> <span class="n">y</span>   <span class="p">;</span>        <span class="n">M</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>  <span class="o">&lt;-</span> <span class="n">AC</span>        <span class="p">;</span><span class="n">STORE</span>  <span class="n">y</span>
+ <span class="n">halt</span>
 <span class="p">;</span> <span class="n">como</span> <span class="n">el</span> <span class="n">n</span><span class="err">ú</span><span class="n">mero</span> <span class="n">de</span> <span class="n">instrucciones</span>  <span class="n">es</span> <span class="n">par</span> <span class="n">no</span> <span class="n">es</span> <span class="n">necesaria</span> <span class="n">la</span> <span class="n">directiva</span> <span class="p">.</span><span class="n">empty</span>
 
 
@@ -408,7 +413,7 @@ and N are positive integers with N &gt; 1. Note: The IAS did not have assembly l
 </div>
 </li>
 <li>
-<p>Do it the “hard way,” without using the equation from part (a).</p>
+<p>Do it the “hard way” without using the equation from part (a): \(\sum_{i=1}^{5}i\)</p>
 <div class="ulist">
 <ul>
 <li>
@@ -442,9 +447,7 @@ and N are positive integers with N &gt; 1. Note: The IAS did not have assembly l
 </div>
 </li>
 <li>
-<p>On the IAS, what would the machine code instruction look like to load the
-contents of memory address 2 to the accumulator? How many trips to memory does the CPU need to make to complete this instruction
-during the instruction cycle?</p>
+<p>On the IAS, what would the machine code instruction look like to load the contents of memory address 2 to the accumulator? How many trips to memory does the CPU need to make to complete this instruction during the instruction cycle?</p>
 <div class="ulist">
 <ul>
 <li>
@@ -452,10 +455,10 @@ during the instruction cycle?</p>
 <div class="ulist">
 <ul>
 <li>
-<p>0x01002</p>
+<p>0x01002: Código de Operación 01 y referencia al operando 002</p>
 </li>
 <li>
-<p>Dos accesos: captura de la instrucción y captura del operando</p>
+<p>Dos accesos a la memoria principal: captura de la instrucción y captura del operando</p>
 </li>
 </ul>
 </div>
@@ -464,9 +467,11 @@ during the instruction cycle?</p>
 </div>
 </li>
 <li>
-<p>On the IAS, describe in English the process that the CPU must undertake to read a
-value from memory and to write a value to memory in terms of what is put into the
-MAR, MBR, address bus, data bus, and control bus.</p>
+<p>On the IAS, describe in English the process that the CPU must undertake to read a value from memory and to write a value to memory in terms of what is put into the MAR, MBR, address bus, data bus, and control bus.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Desarrollo:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="sh">Lectura
@@ -482,6 +487,16 @@ Data Bus    &lt;- MBR
 Control Bus &lt;- Write</code></pre>
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>A esta descripción del flujo de información se le denomina ruta de datos de la CPU.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>Given the memory contents of the IAS computer shown below,</p>
@@ -496,8 +511,7 @@ Control Bus &lt;- Write</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>show the assembly language code for the program, starting at address 08A. Explain
-what this program does.</p>
+<p>show the assembly language code for the program, starting at address 08A. Explain what this program does.</p>
 </li>
 <li>
 <p>Desarrollo:</p>
@@ -545,13 +559,20 @@ what this program does.</p>
 </tr>
 </tbody>
 </table>
+<div class="ulist">
+<ul>
+<li>
+<p>A este proceso inverso a ensamblar (lenguaje ensamblador &#8594; código binario) se le denomina desensamblar (código binario &#8594; lenguaje ensamblador)</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>El programa realiza la siguiente función:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Si el contenido de 0x0FA es positivo copia el contenido de memoria de la posición 0x0FA a la posición 0xFB y salta a la posición 0x08D, dejando en el acumulador el contenido de 0xFA.Si Si el contenido de 0x0FA es negativo  copia el contenido de memoria de la posición 0x0FA a la posición 0xFB cambiado de y salta a la posición 0x08D, dejando en el acumulador el contenido de 0xFA en positivo, es decir, el módulo.</p>
+<p>Si el contenido de 0x0FA es positivo copia el contenido de memoria de la posición 0x0FA a la posición 0xFB y salta a la posición 0x08D, dejando en el acumulador el contenido de 0xFA. Si el contenido de 0x0FA es negativo  copia el contenido de memoria de la posición 0x0FA a la posición 0xFB cambiado de signo y salta a la posición 0x08D, dejando en el acumulador el contenido de 0xFA en positivo, es decir, el módulo.</p>
 </li>
 </ul>
 </div>
@@ -586,12 +607,50 @@ what this program does.</p>
 </div>
 </li>
 <li>
-<p>The ENIAC was a decimal machine, where a register was represented by a ring of
-10 vacuum tubes. At any time, only one vacuum tube was in the ON state, representing
-one of the 10 digits. Assuming that ENIAC had the capability to have multiple
-vacuum tubes in the ON and OFF state simultaneously, why is this representation
-“wasteful” and what range of integer values could we represent using the 10 vacuum
-tubes?</p>
+<p>Considerar una computadora con las siguientes instrucciones:</p>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Código de Operación</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Descripción</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0001</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Load AC from memory</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0010</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Store AC to memory</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0101</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Add to AC from memory</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p>¿Cuál es el formato de instrucciones? ¿ Cuál es el tamaño de los registros contador de programa y registro de instrucciones? ¿Cuál es el tamaño del bus de datos y del bus de direcciones?</p>
+</li>
+<li>
+<p>Describir las fases de los ciclos de instrucción de la CPU al ejecutar dicho programa teniendo en cuenta la siguiente figura:</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/ejercicios/ciclo_instruccion_1.png" alt="ciclo instruccion 1">
+</div>
+<div class="title">Figure 70. Ciclos de Instrucción</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>The ENIAC was a <strong>decimal machine</strong>, where a register was represented by a ring of 10 vacuum tubes. At any time, only one vacuum tube was in the ON state, representing one of the 10 digits. Assuming that ENIAC had the capability to have multiple vacuum tubes in the ON and OFF state simultaneously, why is this representation “wasteful” and what range of integer values could we represent using the 10 vacuum tubes?</p>
 <div class="ulist">
 <ul>
 <li>
@@ -659,10 +718,10 @@ count:</p>
 <p>T=1/f= 25ns: ciclo del reloj de la CPU: duración mínima de una microoperación.</p>
 </li>
 <li>
-<p>CPI: ciclos por instrucción: valor medio = 1*(45/100)+2*(32/100)+2*(15/100)+2*(8/100)=0,45+0,64+0,30+0,16=1.55</p>
+<p>CPI: ciclos por instrucción: valor medio = 1*(45/100)+2*(32/100)+2*(15/100)+2*(8/100)=0,45+0,64+0,30+0,16=1.55 cpi</p>
 </li>
 <li>
-<p>MIPS: Millones de Inst. por seg: (1/CPI)(inst/ciclo)* F_clock(ciclos/seg)*10<sup>-6</sup>=(1/1.55)*40*10<sup>6</sup>*10<sup>-6</sup>=25.8</p>
+<p>MIPS: Millones de Inst. por seg: (1/CPI)(inst/ciclo)* F_clock(ciclos/seg)*10<sup>-6</sup>=(1/1.55)*40*10<sup>6</sup>*10<sup>-6</sup>=25.8 mips</p>
 </li>
 <li>
 <p>T=(1/MIPS)(seg/millones de instr)*100.000*10<sup>-6</sup>=3.87ms</p>
@@ -681,66 +740,6 @@ count:</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The hypothetical machine  has two I/O instructions:</p>
-<div class="listingblock">
-<div class="content">
-<pre>	0011 Load AC from I/O
-	0011 Store AC to I/O</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>In these cases, the 12-bit address identifies a particular I/O device. Show the program
-execution  for the following program:</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Load AC from device 5.</p>
-</li>
-<li>
-<p>Add contents of memory location 940.</p>
-</li>
-<li>
-<p>Store AC to device 6.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Assume that the next value retrieved from device 5 is 3 and that location 940 contains
-a value of 2.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Desarrollo:</p>
-<div class="literalblock">
-<div class="content">
-<pre>.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.</pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
 <p>Consider a hypothetical microprocessor generating a 16-bit address (for example, assume
 that the program counter and the address registers are 16 bits wide) and having
 a 16-bit data bus.</p>
@@ -756,14 +755,33 @@ if it is connected to an “8-bit memory”?</p>
 </li>
 <li>
 <p>What architectural features will allow this microprocessor to access a separate
-“I/O space”?</p>
-</li>
-<li>
-<p>If an input and an output instruction can specify an 8-bit I/O port number, how
+“I/O space”?
 many 8-bit I/O ports can the microprocessor support? How many 16-bit I/O
 ports? Explain.</p>
 <div class="ulist">
 <ul>
+<li>
+<p>Tener en cuenta que:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Espacio de  direcciones: conjunto de direcciones de un mismo bus de direcciones. La capacidad se expresa en BYTES.</p>
+</li>
+<li>
+<p>El Espacio Memoria Principal y el Espacio Controlador E/S son espacios <strong>diferentes</strong>. Comparten el <strong>mismo bus de direcciones</strong> del bus del sistema pero hay una señal de control que activa la conexión con la memoria principal o con el controlador E/S.</p>
+</li>
+<li>
+<p>"16 bit memory": 16 bits word size . Data bus de 16 bits</p>
+</li>
+<li>
+<p>"8 bit memory": 8 bits word size . Data bus de 16 bits</p>
+</li>
+<li>
+<p>I/O port number: numero de puertos del controlador E/S. Cada puerto para un periférico. Se diferencia el puerto de entrada del puerto de salida. 8 bit I/O port es un puerto con un data buffer de 8 bits y un 16 bit I/O port es un puerto con un data buffer de 16 bits.</p>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>Desarrollo:</p>
 <div class="ulist">
@@ -773,7 +791,7 @@ ports? Explain.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>interconexiones periféricos, puertos, controlador E/S, memoria principal, CPU, buses</p>
+<p>las interconexiones entre periféricos, puertos, controlador E/S, memoria principal, CPU, buses indicando el modo de operación con cada uno de los buses.</p>
 <div class="imageblock kroki">
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNrj4uKq4dLDAgEmDwLV" alt="Diagram">
@@ -782,21 +800,6 @@ ports? Explain.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Espacio de  direcciones: conjunto de direcciones de un mismo bus de direcciones. La capacidad se expresa en BYTES.</p>
-</li>
-<li>
-<p>El Espacio Memoria Principal y el Espacio Controlador E/S son espacios diferentes. Comparten el mismo bus de direccione del bus del sistema pero hay una señal de control que activa la conexión con la memoria principal o con el controlador E/S.</p>
-</li>
-<li>
-<p>"16 bit memory": 16 bits word size &#8594; data bus</p>
-</li>
-<li>
-<p>"8 bit memory": 8 bits word size &#8594; data bus</p>
-</li>
-<li>
-<p>I/O port number: numero de puertos del controlador E/S. Cada puerto para un periférico. Se diferencia el puerto de entrada del puerto de salida. 8 bit I/O port es un puerto con un data buffer de 8 bits y un 16 bit I/O port es un puerto con un data buffer de 16 bits.</p>
 </li>
 <li>
 <p>a)2<sup>16</sup>Bytes. 64KB. En el bus de datos se transfieren datos de dos bytes.</p>
@@ -808,7 +811,7 @@ ports? Explain.</p>
 <p>c)En el bus del sistema hace falta una señal de control : señal I/O</p>
 </li>
 <li>
-<p>d) 2<sup>8</sup>= 256 puertos de entrada y 256 puertos de salida en el controlador E/S independientemente del tamaño del buffer I/O si es de 8 bits o 16 bits.</p>
+<p>d) 2<sup>8</sup>= Direccionamiento de 256 puertos de entrada y 256 puertos de salida en el controlador E/S independientemente del tamaño del buffer I/O si es de 8 bits o 16 bits.</p>
 </li>
 </ul>
 </div>
@@ -928,6 +931,12 @@ operation?</p>
 </li>
 <li>
 <p>The Intel 8088 microprocessor has a read bus timing similar to that of Figure 3.19, but requires four processor clock cycles. The valid data is on the bus for an amount of time that extends into the fourth processor clock cycle. Assume a processor clock rate of 8 MHz.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/ejercicios/memoria_rw_sync.png" alt="memoria rw sync">
+</div>
+<div class="title">Figure 71. Cronograma de una operación Read/Write de la Memoria Principal</div>
+</div>
 <div class="olist loweralpha">
 <ol class="loweralpha">
 <li>
@@ -1148,7 +1157,10 @@ on the 8086 that involves two 16-bit operands. How long does it take to fetch th
 </div>
 </li>
 <li>
-<p>For each of the following packed decimal numbers, show the decimal value:</p>
+<p>Escribir el caracter a con acento (á) en el código universal UTF-8 (hexadecimal) y en el código Unicode.</p>
+</li>
+<li>
+<p>For each of the following packed decimal numbers, show the decimal value</p>
 <div class="olist loweralpha">
 <ol class="loweralpha">
 <li>
@@ -1185,7 +1197,7 @@ on the 8086 that involves two 16-bit operands. How long does it take to fetch th
 </div>
 </li>
 <li>
-<p>Another representation of binary integers that is sometimes encountered is ones complement. Positive integers are represented in the same way as sign magnitude.A negative integer is represented by taking the Boolean complement of each bit of the corresponding positive number. Note: Ones complement arithmetic disappeared from hardware in the 1960s, but still survives checksum calculations for the Internet Protocol (IP) and the Transmission Control Protocol (TCP).</p>
+<p>(NO hacer) Another representation of binary integers that is sometimes encountered is ones complement. Positive integers are represented in the same way as sign magnitude.A negative integer is represented by taking the Boolean complement of each bit of the corresponding positive number. Note: Ones complement arithmetic disappeared from hardware in the 1960s, but still survives checksum calculations for the Internet Protocol (IP) and the Transmission Control Protocol (TCP).</p>
 <div class="olist loweralpha">
 <ol class="loweralpha">
 <li>
@@ -1468,7 +1480,7 @@ Campo fracción mantisa (52 bits) = 001101001010010001011000010__0</pre>
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNqVjzEOgkAURHtO8UrNZhNYCi1stdPGE3yXTdwEFgMUFnslC-MRuJhALMDY-LqZ-fmZgYyJ7cV3LQtM_u3ttKaTSvpnjQuMcYLSSs9ZqpmfEM8R9vcbisxsIHJoxFrfvwJHCZ1vBU51U8W_3uYZeTqrjTH8Iv1M6B-h8NZRuHLcwCpFKGXQjbNXWSfTtRoqvgHF-T_n" alt="Diagram">
 </div>
-<div class="title">Figure 70. IEEE-754 precisión simple (32 bits)</div>
+<div class="title">Figure 72. IEEE-754 precisión simple (32 bits)</div>
 </div>
 </li>
 </ul>
@@ -1510,7 +1522,7 @@ Campo fracción mantisa (52 bits) = 001101001010010001011000010__0</pre>
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNpT0NbV1oUBBAsNaHMp1BjUGBpAgEKNApAJQUACDAzAqIZLgVjzjA0VjA0UgMDIGEQYKWABBgDzBRtp" alt="Diagram">
 </div>
-<div class="title">Figure 71. Formato IEEE-754  precisión simple</div>
+<div class="title">Figure 73. Formato IEEE-754  precisión simple</div>
 </div>
 </li>
 </ul>
@@ -1694,15 +1706,15 @@ Campo fracción mantisa (52 bits) = 001101001010010001011000010__0</pre>
 <p>SOLUCION:</p>
 <div class="listingblock">
 <div class="content">
-<pre> 		1010		1010
-	      x 1010	      x	1111
-	    ********	    ********
-		0000		1010
-               1010	       1010
-	      0000	      1010
-	     1010	     1010
-	    ********	    ********
-	     1100100	    10010110</pre>
+<pre>                1010            1010
+              x 1010          x 1111
+            ********        ********
+                0000            1010
+               1010            1010
+              0000            1010
+             1010            1010
+            ********        ********
+             1100100        10010110</pre>
 </div>
 </div>
 </li>
@@ -1730,19 +1742,19 @@ Campo fracción mantisa (52 bits) = 001101001010010001011000010__0</pre>
 <p>A&#183;B  &#8594;  A&amp;B &#8594; A&#8743;B</p>
 </li>
 <li>
-<p>&#195;	= 01010101</p>
+<p>&#195;        = 01010101</p>
 </li>
 <li>
-<p>&#195;+1	= 01010110</p>
+<p>&#195;+1      = 01010110</p>
 </li>
 <li>
-<p>A+B		= 11111010</p>
+<p>A+B           = 11111010</p>
 </li>
 <li>
-<p>A*B		= 10100000</p>
+<p>A&#183;B      = 10100000</p>
 </li>
 <li>
-<p>A&#8853;B	= 01011010</p>
+<p>A&#8853;B     = 01011010</p>
 </li>
 </ul>
 </div>
@@ -1805,7 +1817,7 @@ Campo fracción mantisa (52 bits) = 001101001010010001011000010__0</pre>
 </div>
 </li>
 <li>
-<p>Dadas las operaciones lógicas SAR X,n(shift arithmetic right X, n), SLR X,n(shift logic right X,n) , SAL X,n(shift arithmetic left X, n) y SLL X,n(shift logic left X, n) donde X es el operando, xxR significa derecha, xxL significa izquierda y n es el número de posiciones a desplazar. Realizar las siguientes operaciones con el operando A=10101010: SAR A,4, SLR A,4, SAL A, 4 y SLL A,4 de forma manual y también mediante un programa en lenguaje C:</p>
+<p>Dadas las operaciones lógicas SAR X,n (shift arithmetic right X, n), SLR X,n (shift logic right X,n) , SAL X,n (shift arithmetic left X, n) y SLL X,n (shift logic left X, n) donde X es el operando, xxR significa derecha, xxL significa izquierda y n es el número de posiciones a desplazar. Realizar las siguientes operaciones con el operando A=10101010: SAR A,4, SLR A,4, SAL A, 4 y SLL A,4 de forma manual y también mediante un programa en lenguaje C:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1824,7 +1836,7 @@ Campo fracción mantisa (52 bits) = 001101001010010001011000010__0</pre>
 </div>
 </li>
 <li>
-<p>Realizar la multiplicación A&#183;2<sup>2</sup> y A&#183;2<sup>-2</sup> donde A=10101010 primero manualmente y después mediante operaciones lógicas.</p>
+<p>Realizar la multiplicación A&#183;2<sup>2</sup> y A&#183;2<sup>-2</sup> donde A=10101010 primero aritméticamente y después mediante operaciones lógicas.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1834,7 +1846,7 @@ Campo fracción mantisa (52 bits) = 001101001010010001011000010__0</pre>
 <p>A&#183;2<sup>-2</sup> = 101010.10</p>
 </li>
 <li>
-<p>Con operaciones lógicas:</p>
+<p>Con operaciones lógicas la operación A&#183;2<sup>2</sup></p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
@@ -1879,10 +1891,10 @@ campo de operando (registro o registro con desplazamiento)</p>
 <p>1º Campo: código de operación: 64 instrucciones : 2<sup>6</sup>  &#8594; 6 bits</p>
 </div>
 <div class="paragraph">
-<p>2º Campo: modo de direccionamiento: 2 tipos: 2<sup>1</sup>	&#8594; 1 bit</p>
+<p>2º Campo: modo de direccionamiento: 2 tipos: 2<sup>1</sup>        &#8594; 1 bit</p>
 </div>
 <div class="paragraph">
-<p>3º Campo: registro: 32 registros: 2<sup>5</sup>			&#8594; 5 bits</p>
+<p>3º Campo: registro: 32 registros: 2<sup>5</sup>                   &#8594; 5 bits</p>
 </div>
 <div class="paragraph">
 <p>4º Campo: Desplazamiento nº entero: (32-(6+1+5))bits	&#8594; 20 bits</p>
@@ -3120,7 +3132,7 @@ NS32000.</p>
 <div class="content">
 <img src="./images/ejercicios/little_endian.png" alt="little endian">
 </div>
-<div class="title">Figure 72. Little Endian</div>
+<div class="title">Figure 74. Little Endian</div>
 </div>
 <div class="olist loweralpha">
 <ol class="loweralpha">
@@ -4831,8 +4843,10 @@ formats are used. In one format, the 8-bit opcode specifies an I/O operation; th
 </li>
 <li>
 <p>7.6 For programmed I/O, Figure 7.5 indicates that the processor is stuck in a wait loop doing status checking of an I/O device. To increase efficiency, the I/O software could be written so that the processor periodically checks the status of the device. If the device is not ready, the processor can jump to other tasks. After some timed interval, the processor comes back to check status again.</p>
-<div class="paragraph">
-<p><span class="image"><img src="./images/ejercicios/7-5.png" alt="7 5"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/ejercicios/7-5.png" alt="7 5">
+</div>
 </div>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
@@ -5236,7 +5250,7 @@ formats are used. In one format, the 8-bit opcode specifies an I/O operation; th
 <div class="content">
 <img src="./images/ejercicios/8_6.png" alt="VM">
 </div>
-<div class="title">Figure 73. VM</div>
+<div class="title">Figure 75. VM</div>
 </div>
 <div class="ulist">
 <ul>
