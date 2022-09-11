@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-09</span>
+<span id="revdate">2022-09-11</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -319,9 +319,11 @@ pre.rouge {
 <ul class="sectlevel3">
 <li><a href="_arquitectura_von_neumann.html#_estrategia_del_desarrollo_de_un_programa_en_lenguaje_ensamblador">2.5.1. Estrategia del Desarrollo de un Programa en Lenguaje Ensamblador</a>
 </li>
-<li><a href="_arquitectura_von_neumann.html#_ejemplo_1_sum1ton_ias">2.5.2. Ejemplo 1: sum1toN.ias</a>
+<li><a href="_arquitectura_von_neumann.html#_codificación_binaria_hexadecimal">2.5.2. Codificación Binaria-Hexadecimal</a>
 </li>
-<li><a href="_arquitectura_von_neumann.html#_ejemplos_de_programas_en_lenguaje_iassim">2.5.3. Ejemplos de Programas en Lenguaje IASSim</a>
+<li><a href="_arquitectura_von_neumann.html#_ejemplo_1_sum1ton_ias">2.5.3. Ejemplo 1: sum1toN.ias</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_ejemplos_de_programas_en_lenguaje_iassim">2.5.4. Ejemplos de Programas en Lenguaje IASSim</a>
 </li>
 </ul>
 </li>
@@ -1110,7 +1112,10 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 <div class="ulist">
 <ul>
 <li>
-<p>Información sobre el lenguaje de transferencia entre registros (RTL) en el <a href="_rtl_register_transfer_language.html#RTL_lang">Apéndice</a></p>
+<p>Información sobre el Lenguaje de Transferencia entre Registros (RTL) en el <a href="_rtl_register_transfer_language.html#RTL_lang">Apéndice</a></p>
+</li>
+<li>
+<p>El lenguaje de transferencia entre registros permite describir programas a nivel de microoperaciones al igual que los lenguajes máquina binario y lenguaje ensamblador. La ventaja del lenguaje RTL es que su sintaxis es independiente de la arquitectura de la computadora, es decir, es un lenguaje Universal. Por lo tanto si describimos un programa en el lenguaje RTL su transcripción a un lenguaje ensamblador de arquitectura esapecífica como la arquitectura amd64,ARM, RISC-V,etc resulta mucho más sencilla.</p>
 </li>
 </ul>
 </div>
@@ -1162,7 +1167,7 @@ La Estructura es el HOW de la máquina. De qué hardware disponemos para poder e
 <th class="tableblock halign-left valign-top">Instruction name</th>
 <th class="tableblock halign-center valign-top">Op</th>
 <th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">RTL</th>
+<th class="tableblock halign-left valign-top">Register Transfer Language (RTL)</th>
 </tr>
 </thead>
 <tbody>
@@ -1418,7 +1423,88 @@ El paso de una descripción en un lenguaje de alto nivel a bajo nivel se realiza
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ejemplo_1_sum1ton_ias">2.5.2. Ejemplo 1: sum1toN.ias</h4>
+<h4 id="_codificación_binaria_hexadecimal">2.5.2. Codificación Binaria-Hexadecimal</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejecutar el programa en lenguaje python:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="python"><span class="c1"># Tabla decimal-binario-hexadecimal
+</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">):</span>
+  <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">"  0b"</span><span class="o">+</span><span class="s">'{:b}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">zfill</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+  <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">"  0b"</span><span class="o">+</span><span class="s">'{:9_b}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">"  0x"</span><span class="o">+</span><span class="s">'{:_x}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+  <span class="k">print</span><span class="p">()</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>los dígitos binarios son 2: el 0 y el 1</p>
+</li>
+<li>
+<p>los dígitos hexadecimales son 16: 0-1-2-3-4-5-6-7-8-9-A-B-C-D-E-F que se corresponden con los valores 0-1-2- hasta el valor 15.</p>
+</li>
+<li>
+<p>El valor 9 se representan en binario como 1001 donde el peso de cada dígito viene determinado por su posición: 2<sup>3</sup>, 2<sup>2</sup>, 2<sup>1</sup>, 2<sup>0</sup></p>
+<div class="ulist">
+<ul>
+<li>
+<p>El valor del número 1001 es la suma ponderada del los digitos del número con su peso: 1*2<sup>3</sup>+0*2<sup>2</sup>+0*2<sup>1</sup>+1*2<sup>0</sup></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>En hexadecimal</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el número 0xA tiene el valor 10, el 0xB 11, el 0xC 12</p>
+</li>
+<li>
+<p>el número 0x10 tiene el valor 1*16<sup>1</sup>+0*16<sup>0</sup> = 16</p>
+</li>
+<li>
+<p>el número 0xFD tiene el valor 15*16<sup>1</sup>+13*16<sup>0</sup> = 240+13 = 253</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Relación hexadecimal-binario</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el número 0xF6 se convierte en binario mediante la conversión de cada dígito hexadecimal en un grupo de 4 dígitos binarios. F (valor 15) en binario 1111 y 6 (valor 6) en binario 1010. Por lo que al número hexadecimal 0xF6 le corresponde el binario 0b11111010</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplos de números de 1 byte: decimal-binario-hexadecimal</p>
+<div class="listingblock">
+<div class="content">
+<pre>16 0b0001_0000 0x10 17 0b0001_0001 0x11 18 0b0001_0010 0x12 19 0b0001_0011 0x13 20 0b0001_0100 0x14 21 0b0001_0101 0x15
+22 0b0001_0110 0x16 23 0b0001_0111 0x17 24 0b0001_1000 0x18 25 0b0001_1001 0x19 26 0b0001_1010 0x1a 27 0b0001_1011 0x1b
+28 0b0001_1100 0x1c 29 0b0001_1101 0x1d 30 0b0001_1110 0x1e 31 0b0001_1111 0x1f
+
+
+192 0b1100_0000 0xc0 193 0b1100_0001 0xc1 194 0b1100_0010 0xc2 195 0b1100_0011 0xc3 196 0b1100_0100 0xc4 197 0b1100_0101 0xc5
+198 0b1100_0110 0xc6 199 0b1100_0111 0xc7 200 0b1100_1000 0xc8 201 0b1100_1001 0xc9 202 0b1100_1010 0xca 203 0b1100_1011 0xcb
+204 0b1100_1100 0xcc 205 0b1100_1101 0xcd 206 0b1100_1110 0xce 207 0b1100_1111 0xcf</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo_1_sum1ton_ias">2.5.3. Ejemplo 1: sum1toN.ias</h4>
 <div class="sect4">
 <h5 id="_enunciado">Enunciado</h5>
 <div class="ulist">
@@ -1755,7 +1841,7 @@ suma:	.data	0 ; sumas parciales y resultado final</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ejemplos_de_programas_en_lenguaje_iassim">2.5.3. Ejemplos de Programas en Lenguaje IASSim</h4>
+<h4 id="_ejemplos_de_programas_en_lenguaje_iassim">2.5.4. Ejemplos de Programas en Lenguaje IASSim</h4>
 <div class="ulist">
 <ul>
 <li>
