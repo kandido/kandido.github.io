@@ -256,7 +256,7 @@ pre.rouge {
              .nav-footer{text-align: center; margin-top: auto;}
              .nav-footer > p > a {white-space: nowrap;}</style>
 </head>
-<body id="_lenguajes_de_programación_para_sum1ton" class="book">
+<body id="_lenguajes_de_programación_de_alto_y_bajo_nivel" class="book">
 <div id="header">
 <h1>Estructura de Computadores  (240306)</h1>
 <div class="details">
@@ -283,15 +283,25 @@ pre.rouge {
 </li>
 <li><a href="_viii_apéndices.html">VIII Apéndices</a>
 <ul class="sectlevel1">
-<li><a href="_lenguajes_de_programación_para_sum1ton.html"><span class="toc-current">21. Lenguajes de programación para sum1toN</span></a>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html"><span class="toc-current">21. Lenguajes de programación de Alto y Bajo Nivel</span></a>
 <ul class="sectlevel2">
-<li><a href="_lenguajes_de_programación_para_sum1ton.html#sum1toN_lang">21.1. Otros Lenguajes para sum1toN</a>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#lang_altovsbajo">21.1. Lenguajes de alto nivel vs lenguajes de bajo nivel</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#_traductores_del_proceso_de_ensamblaje">21.2. Traductores del proceso de ensamblaje</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#_assembler_as">21.3. Assembler "as"</a>
+<ul class="sectlevel3">
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#_directivas">21.3.1. Directivas</a>
+</li>
+</ul>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#sum1toN_lang">21.4. Otros Lenguajes para sum1toN</a>
 </li>
 </ul>
 </li>
 <li><a href="_lenguaje_de_programación_c_2.html">22. Lenguaje de Programación C</a>
 </li>
-<li><a href="_lenguajes_ensamblador.html">23. Lenguajes Ensamblador</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html">23. Lenguajes de programación en Ensamblador</a>
 </li>
 <li><a href="_arquitectura_amd64_4.html">24. Arquitectura amd64</a>
 </li>
@@ -307,13 +317,15 @@ pre.rouge {
 </li>
 <li><a href="_pila.html">30. Pila</a>
 </li>
-<li><a href="_fpu_x87.html">31. FPU x87</a>
+<li><a href="_arquitectura_de_una_computadora.html">31. Arquitectura de una Computadora</a>
 </li>
-<li><a href="_apéndice_prácticas.html">32. Apéndice Prácticas</a>
+<li><a href="_fpu_x87.html">32. FPU x87</a>
 </li>
-<li><a href="_exámenes_de_cursos_anteriores.html">33. Exámenes de Cursos Anteriores</a>
+<li><a href="_apéndice_prácticas.html">33. Apéndice Prácticas</a>
 </li>
-<li><a href="_miaulario_videoconferencia.html">34. Miaulario: Videoconferencia</a>
+<li><a href="_exámenes_de_cursos_anteriores.html">34. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">35. Miaulario: Videoconferencia</a>
 </li>
 </ul>
 </li>
@@ -330,10 +342,130 @@ pre.rouge {
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_lenguajes_de_programación_para_sum1ton">21. Lenguajes de programación para sum1toN</h2>
+<h2 id="_lenguajes_de_programación_de_alto_y_bajo_nivel">21. Lenguajes de programación de Alto y Bajo Nivel</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="sum1toN_lang">21.1. Otros Lenguajes para sum1toN</h3>
+<h3 id="lang_altovsbajo">21.1. Lenguajes de alto nivel vs lenguajes de bajo nivel</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Aunque en los años 1960 se programaba en el lenguaje máquina y lenguaje ensamblador, esto resultaba muy poco productivo ya que refequería mucho esfuerzo y tiempo.</p>
+</li>
+<li>
+<p>La solución fue abstraer funciones de la computadora mediante lenguajes de alto nivel:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.tiobe.com/tiobe-index/" class="bare">https://www.tiobe.com/tiobe-index/</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El empleo de lenguajes de alto nivel efectivos para los programadores requiere de un traductor al lenguaje máquina de la computadora.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_traductores_del_proceso_de_ensamblaje">21.2. Traductores del proceso de ensamblaje</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Existen dos lenguajes ensamblador para la ISA i386/amd64, dos sintaxis diferentes, que deben de ser traducidos por diferentes traductores de ensamblador produciendo un módulo binario en el mismo lenguaje máquina.</p>
+</li>
+<li>
+<p>los traductores de ensamblador  "NASM" (Netwide Asm), "FASM", "MASM", "TASM", and "YASM" traducen módulos fuente que utilizan la sintaxis del lenguaje ensamblador <strong>intel</strong> a modulos binarios para las arquitecturas i386/amd64</p>
+</li>
+<li>
+<p>El traductor "as" de la fundación GNU traduce módulos fuente  que utilizan las sintaxis del lenguaje de ensamblador <strong>AT&amp;T</strong> a módulos binarios para las arquitecturas i386/amd64</p>
+</li>
+<li>
+<p>La traducción entre la representación del módulo fuente en lenguaje ensamblador almacenado en un fichero del disco duro y la representación del programa en lenguaje máquina se da en el <a href="_apéndice_prácticas.html#fases_compilacion">proceso de ensamblaje</a>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo Fuente en lenguaje ensamblador &#8594; Traductor Ensamblador &#8594; Módulo Objeto Reubicable &#8594; Linker &#8594; Módulo Objeto Ejecutable Binario&#8594; Cargador &#8594; Proceso</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo: hola_mundo.s &#8594; <strong>as</strong> &#8594; hola_mundo.o &#8594; <strong>ld</strong> &#8594; hola_mundo (formato ELF) &#8594; <strong>loader</strong> &#8594; hola_mundo (memoria principal) &#8594; creación proceso (hola_mundo en ejecución). "as", "ld" y "loader" son las herramientas GNU necesarias para la creación de un proceso a partir del módulo en lenguaje ensamblador.</p>
+</li>
+<li>
+<p>el linker <strong>ld</strong> mezcla el módulo objeto con módulos del entorno del sistema operativo y con módulos de las librerías.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center kroki-format-svg kroki">
+<div class="content">
+<img src="https://kroki.io/graphviz/svg/eNqNj00KwkAMhfeeIszeEwiCFnVjsegBSmYaNHV-SmpX4mE8gCuP0Is5rVgRRFzm5X0vLwXvBasDrOA8Uml7LxobYNmQPxEkCsZTyIQqCYZqdBzl0GlJcBVbLIJ008DNdmmPqIWPbm2xJPVh2OiSYsKcPQoH2FKj2aC2T9ua_ZHkF7AoyTSnAVAJyr5vQR5SckEYn4usbxw6vWcMt3evJsOL9Sv5XaFWQ4UvPstaSNob5gX79uoik0fN5ORz989luDwAO-SAQg==" alt="Proceso de Compilación">
+</div>
+<div class="title">Figure 72. Proceso de Compilación</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_assembler_as">21.3. Assembler "as"</h3>
+<div class="sect3">
+<h4 id="_directivas">21.3.1. Directivas</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Directivas del traductor ensamblador "as" utilizado por el sistema GNU/linux para el lenguaje ensamblador AT&amp;T.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Al assembler de GNU también se el conoce como "gas".</p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/binutils/">binutils</a> &#8594; <a href="https://sourceware.org/binutils/docs-2.26/as/index.html">as assembler</a>: manual oficial</p>
+</li>
+<li>
+<p><a href="http://www.coranac.com/files/gba/re-ejected-gasref.pdf">gas ref card</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>.word reserva 2 bytes en amd64.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://docs.oracle.com/cd/E26502_01/html/E28388/eoiyg.html">oracle</a></p>
+</li>
+<li>
+<p><a href="https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent">opciones para x86 y x86-64</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_manual">Manual</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://sourceware.org/binutils/docs/as/">binutils as</a>: manual oficial</p>
+</li>
+<li>
+<p><a href="http://asm.sourceforge.net/howto/Assembly-HOWTO.html">Linux Assembly howto</a>: referencias a diferentes assemblers</p>
+</li>
+<li>
+<p><a href="http://web.mit.edu/gnu/doc/html/as_1.html">MIT</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sum1toN_lang">21.4. Otros Lenguajes para sum1toN</h3>
 <div class="ulist">
 <ul>
 <li>
