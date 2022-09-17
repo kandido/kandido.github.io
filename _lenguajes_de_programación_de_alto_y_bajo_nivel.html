@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-14</span>
+<span id="revdate">2022-09-17</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -283,49 +283,39 @@ pre.rouge {
 </li>
 <li><a href="_viii_apéndices.html">VIII Apéndices</a>
 <ul class="sectlevel1">
-<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html"><span class="toc-current">21. Lenguajes de programación de Alto y Bajo Nivel</span></a>
+<li><a href="_arquitectura_de_una_computadora.html">21. Arquitectura de una Computadora</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">22. RTL Register Transfer Language</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html">23. Programas ensamblador IASSim</a>
+</li>
+<li><a href="_simulador_iassim_2.html">24. Simulador IASSim</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html"><span class="toc-current">25. Lenguajes de programación de Alto y Bajo Nivel</span></a>
 <ul class="sectlevel2">
-<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#lang_altovsbajo">21.1. Lenguajes de alto nivel vs lenguajes de bajo nivel</a>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#lang_altovsbajo">25.1. Lenguajes de programación de alto nivel vs lenguajes de bajo nivel</a>
 </li>
-<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#_traductores_del_proceso_de_ensamblaje">21.2. Traductores del proceso de ensamblaje</a>
-</li>
-<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#_assembler_as">21.3. Assembler "as"</a>
-<ul class="sectlevel3">
-<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#_directivas">21.3.1. Directivas</a>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#sum1toN_lang">25.2. Ejemplo sum1toN en distintos lenguajes de Programación</a>
 </li>
 </ul>
 </li>
-<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#sum1toN_lang">21.4. Otros Lenguajes para sum1toN</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html">26. Lenguajes de programación en Ensamblador</a>
 </li>
-</ul>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html">27. Toolchain: Cadena de Herramientas en el proceso de compilación</a>
 </li>
-<li><a href="_lenguaje_de_programación_c_2.html">22. Lenguaje de Programación C</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html">28. Llamadas al Sistema Operativo</a>
 </li>
-<li><a href="_lenguajes_de_programación_en_ensamblador.html">23. Lenguajes de programación en Ensamblador</a>
+<li><a href="_pila.html">29. Pila</a>
 </li>
-<li><a href="_arquitectura_amd64_4.html">24. Arquitectura amd64</a>
+<li><a href="_lenguaje_de_programación_c_2.html">30. Lenguaje de Programación C</a>
 </li>
-<li><a href="_programas_ensamblador_iassim.html">25. Programas ensamblador IASSim</a>
+<li><a href="_fpu_x87.html">31. FPU x87</a>
 </li>
-<li><a href="_simulador_iassim_2.html">26. Simulador IASSim</a>
+<li><a href="_apéndice_prácticas.html">32. Apéndice Prácticas</a>
 </li>
-<li><a href="_rtl_register_transfer_language.html">27. RTL Register Transfer Language</a>
+<li><a href="_exámenes_de_cursos_anteriores.html">33. Exámenes de Cursos Anteriores</a>
 </li>
-<li><a href="_formato_de_instrucción_isa_intel_x86_64_2.html">28. Formato de Instrucción: ISA Intel x86-64</a>
-</li>
-<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
-</li>
-<li><a href="_pila.html">30. Pila</a>
-</li>
-<li><a href="_arquitectura_de_una_computadora.html">31. Arquitectura de una Computadora</a>
-</li>
-<li><a href="_fpu_x87.html">32. FPU x87</a>
-</li>
-<li><a href="_apéndice_prácticas.html">33. Apéndice Prácticas</a>
-</li>
-<li><a href="_exámenes_de_cursos_anteriores.html">34. Exámenes de Cursos Anteriores</a>
-</li>
-<li><a href="_miaulario_videoconferencia.html">35. Miaulario: Videoconferencia</a>
+<li><a href="_miaulario_videoconferencia.html">34. Miaulario: Videoconferencia</a>
 </li>
 </ul>
 </li>
@@ -342,10 +332,10 @@ pre.rouge {
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_lenguajes_de_programación_de_alto_y_bajo_nivel">21. Lenguajes de programación de Alto y Bajo Nivel</h2>
+<h2 id="_lenguajes_de_programación_de_alto_y_bajo_nivel">25. Lenguajes de programación de Alto y Bajo Nivel</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="lang_altovsbajo">21.1. Lenguajes de alto nivel vs lenguajes de bajo nivel</h3>
+<h3 id="lang_altovsbajo">25.1. Lenguajes de programación de alto nivel vs lenguajes de bajo nivel</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -368,104 +358,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_traductores_del_proceso_de_ensamblaje">21.2. Traductores del proceso de ensamblaje</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Existen dos lenguajes ensamblador para la ISA i386/amd64, dos sintaxis diferentes, que deben de ser traducidos por diferentes traductores de ensamblador produciendo un módulo binario en el mismo lenguaje máquina.</p>
-</li>
-<li>
-<p>los traductores de ensamblador  "NASM" (Netwide Asm), "FASM", "MASM", "TASM", and "YASM" traducen módulos fuente que utilizan la sintaxis del lenguaje ensamblador <strong>intel</strong> a modulos binarios para las arquitecturas i386/amd64</p>
-</li>
-<li>
-<p>El traductor "as" de la fundación GNU traduce módulos fuente  que utilizan las sintaxis del lenguaje de ensamblador <strong>AT&amp;T</strong> a módulos binarios para las arquitecturas i386/amd64</p>
-</li>
-<li>
-<p>La traducción entre la representación del módulo fuente en lenguaje ensamblador almacenado en un fichero del disco duro y la representación del programa en lenguaje máquina se da en el <a href="_apéndice_prácticas.html#fases_compilacion">proceso de ensamblaje</a>:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Módulo Fuente en lenguaje ensamblador &#8594; Traductor Ensamblador &#8594; Módulo Objeto Reubicable &#8594; Linker &#8594; Módulo Objeto Ejecutable Binario&#8594; Cargador &#8594; Proceso</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Ejemplo: hola_mundo.s &#8594; <strong>as</strong> &#8594; hola_mundo.o &#8594; <strong>ld</strong> &#8594; hola_mundo (formato ELF) &#8594; <strong>loader</strong> &#8594; hola_mundo (memoria principal) &#8594; creación proceso (hola_mundo en ejecución). "as", "ld" y "loader" son las herramientas GNU necesarias para la creación de un proceso a partir del módulo en lenguaje ensamblador.</p>
-</li>
-<li>
-<p>el linker <strong>ld</strong> mezcla el módulo objeto con módulos del entorno del sistema operativo y con módulos de las librerías.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="imageblock text-center text-center kroki-format-svg kroki">
-<div class="content">
-<img src="https://kroki.io/graphviz/svg/eNqNj00KwkAMhfeeIszeEwiCFnVjsegBSmYaNHV-SmpX4mE8gCuP0Is5rVgRRFzm5X0vLwXvBasDrOA8Uml7LxobYNmQPxEkCsZTyIQqCYZqdBzl0GlJcBVbLIJ008DNdmmPqIWPbm2xJPVh2OiSYsKcPQoH2FKj2aC2T9ua_ZHkF7AoyTSnAVAJyr5vQR5SckEYn4usbxw6vWcMt3evJsOL9Sv5XaFWQ4UvPstaSNob5gX79uoik0fN5ORz989luDwAO-SAQg==" alt="Proceso de Compilación">
-</div>
-<div class="title">Figure 72. Proceso de Compilación</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_assembler_as">21.3. Assembler "as"</h3>
-<div class="sect3">
-<h4 id="_directivas">21.3.1. Directivas</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Directivas del traductor ensamblador "as" utilizado por el sistema GNU/linux para el lenguaje ensamblador AT&amp;T.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Al assembler de GNU también se el conoce como "gas".</p>
-</li>
-<li>
-<p><a href="https://www.gnu.org/software/binutils/">binutils</a> &#8594; <a href="https://sourceware.org/binutils/docs-2.26/as/index.html">as assembler</a>: manual oficial</p>
-</li>
-<li>
-<p><a href="http://www.coranac.com/files/gba/re-ejected-gasref.pdf">gas ref card</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p>.word reserva 2 bytes en amd64.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><a href="https://docs.oracle.com/cd/E26502_01/html/E28388/eoiyg.html">oracle</a></p>
-</li>
-<li>
-<p><a href="https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent">opciones para x86 y x86-64</a></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="sect4">
-<h5 id="_manual">Manual</h5>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://sourceware.org/binutils/docs/as/">binutils as</a>: manual oficial</p>
-</li>
-<li>
-<p><a href="http://asm.sourceforge.net/howto/Assembly-HOWTO.html">Linux Assembly howto</a>: referencias a diferentes assemblers</p>
-</li>
-<li>
-<p><a href="http://web.mit.edu/gnu/doc/html/as_1.html">MIT</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sum1toN_lang">21.4. Otros Lenguajes para sum1toN</h3>
+<h3 id="sum1toN_lang">25.2. Ejemplo sum1toN en distintos lenguajes de Programación</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -576,45 +469,6 @@ pre.rouge {
   <span class="p">}</span>
  <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> La suma es = %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">suma</span><span class="p">);</span>
 <span class="p">}</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Lenguaje ensamblador INTEL y assembler nasm</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="nasm"><span class="c1">;;; Programa: sum1toN.asm</span>
-<span class="c1">;;; Descripción: realiza la suma de la serie 1,2,3,...N</span>
-<span class="c1">;;; Lenguaje INTEL</span>
-<span class="c1">;;; Assembler NASM</span>
-
-<span class="c1">;;; nasm -hf -&gt; ayuda de la opción f</span>
-<span class="c1">;;; Ensamblaje nasm -g -f elf  sum1toN.asm -o sum1toN.o</span>
-<span class="c1">;;; linker -&gt; ld -m elf_i386    -o sum1toN sum1toN.o</span>
-
-	<span class="k">BITS</span> <span class="mi">32</span>	<span class="c1">; cpu MODE</span>
-        <span class="c1">;;  Declaración de variables</span>
-        <span class="nf">section</span> <span class="nv">.data</span>
-
-<span class="nl">n:</span>	<span class="kd">dd</span> <span class="mi">5</span>	<span class="c1">; 4 bytes</span>
-
-        <span class="nf">global</span> <span class="nv">_start</span>
-
-        <span class="c1">;;  Comienzo del código</span>
-        <span class="nf">section</span> <span class="nv">.text</span>
-<span class="nl">_start:</span>
-        <span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span><span class="mi">0</span> <span class="c1">; ECX implementa la variable suma</span>
-        <span class="nf">mov</span> <span class="nb">edx</span><span class="p">,[</span><span class="nv">n</span><span class="p">]</span>  <span class="c1">; EDX implementa es un alias de la variable n</span>
-<span class="nl">bucle:</span>
-        <span class="nf">add</span> <span class="nb">ecx</span><span class="p">,</span><span class="nb">edx</span>
-        <span class="nf">sub</span> <span class="nb">edx</span><span class="p">,</span><span class="mi">1</span>
-        <span class="nf">jnz</span> <span class="nv">bucle</span>
-
-        <span class="nf">mov</span> <span class="nb">ebx</span><span class="p">,</span> <span class="nb">ecx</span> <span class="c1">; el argumento de salida al S.O. a través de EBX según convenio</span>
-
-        <span class="c1">;; salida</span>
-        <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span><span class="mi">1</span>  <span class="c1">; código de la llamada al sistema operativo: subrutina exit</span>
-        <span class="nf">int</span> <span class="mh">0x80</span>     <span class="c1">; llamada al sistema operativo</span></code></pre>
 </div>
 </div>
 </li>
@@ -748,7 +602,7 @@ pre.rouge {
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_lenguaje_de_programación_c_2.html">Lenguaje de Programación C</a> →</p>
+<p>← Previous: <a href="_simulador_iassim_2.html">Simulador IASSim</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_lenguajes_de_programación_en_ensamblador.html">Lenguajes de programación en Ensamblador</a> →</p>
 </div>
 </div>
 <div id="footer">

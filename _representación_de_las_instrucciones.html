@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-14</span>
+<span id="revdate">2022-09-17</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -90,33 +90,35 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 </ul>
 </li>
-<li><a href="_representación_de_las_instrucciones.html#_representación_de_las_instrucciones_en_el_lenguaje_ensamblador_asm_para_computadoras_en_general">5.5. Representación de las instrucciones en el lenguaje ensamblador (ASM) para computadoras en general</a>
+<li><a href="_representación_de_las_instrucciones.html#_instrucciones_en_lenguaje_máquina_de_la_arquitectura_x86">5.5. Instrucciones en lenguaje máquina de la arquitectura x86</a>
+</li>
+<li><a href="_representación_de_las_instrucciones.html#_representación_de_las_instrucciones_en_el_lenguaje_ensamblador_asm_para_computadoras_en_general">5.6. Representación de las instrucciones en el lenguaje ensamblador (ASM) para computadoras en general</a>
 <ul class="sectlevel3">
-<li><a href="_representación_de_las_instrucciones.html#_introducción">5.5.1. Introducción</a>
+<li><a href="_representación_de_las_instrucciones.html#_introducción">5.6.1. Introducción</a>
 </li>
-<li><a href="_representación_de_las_instrucciones.html#_códigos_de_operación">5.5.2. Códigos de Operación</a>
+<li><a href="_representación_de_las_instrucciones.html#_códigos_de_operación">5.6.2. Códigos de Operación</a>
 </li>
-<li><a href="_representación_de_las_instrucciones.html#_operandos_modos_de_direccionamiento">5.5.3. Operandos: Modos de Direccionamiento</a>
+<li><a href="_representación_de_las_instrucciones.html#_operandos_modos_de_direccionamiento">5.6.3. Operandos: Modos de Direccionamiento</a>
 </li>
 </ul>
 </li>
-<li><a href="_representación_de_las_instrucciones.html#_lenguaje_intel_versus_lenguaje_att">5.6. Lenguaje Intel versus Lenguaje  AT&amp;T</a>
+<li><a href="_representación_de_las_instrucciones.html#gas_sintax_direcci">5.7. Lenguaje Intel versus Lenguaje  AT&amp;T</a>
 <ul class="sectlevel3">
-<li><a href="_representación_de_las_instrucciones.html#_lenguajes_ensamblador_de_la_arquitectura_i386amd64">5.6.1. Lenguajes ensamblador de la arquitectura  i386/amd64</a>
+<li><a href="_representación_de_las_instrucciones.html#_lenguajes_ensamblador_de_la_arquitectura_i386amd64">5.7.1. Lenguajes ensamblador de la arquitectura  i386/amd64</a>
 </li>
-<li><a href="_representación_de_las_instrucciones.html#_sintaxis_de_las_instrucciones_en_el_lenguaje_intel">5.6.2. Sintaxis de las instrucciones en el lenguaje INTEL</a>
+<li><a href="_representación_de_las_instrucciones.html#_sintaxis_de_las_instrucciones_en_el_lenguaje_intel">5.7.2. Sintaxis de las instrucciones en el lenguaje INTEL</a>
 </li>
 </ul>
 </li>
-<li><a href="_representación_de_las_instrucciones.html#_operandos_modos_de_direccionamiento_2">5.7. Operandos: Modos de Direccionamiento</a>
+<li><a href="_representación_de_las_instrucciones.html#_operandos_modos_de_direccionamiento_2">5.8. Operandos: Modos de Direccionamiento</a>
 <ul class="sectlevel3">
-<li><a href="_representación_de_las_instrucciones.html#_localización_2">5.7.1. Localización</a>
+<li><a href="_representación_de_las_instrucciones.html#_localización_2">5.8.1. Localización</a>
 </li>
-<li><a href="_representación_de_las_instrucciones.html#_modos_de_direccionamiento">5.7.2. Modos de Direccionamiento</a>
+<li><a href="_representación_de_las_instrucciones.html#_modos_de_direccionamiento">5.8.2. Modos de Direccionamiento</a>
 </li>
 </ul>
 </li>
-<li><a href="_representación_de_las_instrucciones.html#_programas_en_lenguaje_asm_y_lenguaje_binario">5.8. Programas en lenguaje ASM y lenguaje Binario</a>
+<li><a href="_representación_de_las_instrucciones.html#_programas_en_lenguaje_asm_y_lenguaje_binario">5.9. Programas en lenguaje ASM y lenguaje Binario</a>
 </li>
 </ul>
 </li>
@@ -184,10 +186,10 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="ulist">
 <ul>
 <li>
-<p>Capítulo 12: Conjuntos de Instrucciones : Características y Funciones (Datos, Operandos y Operaciones)</p>
+<p>Capítulo 10: Conjuntos de Instrucciones : Características y Funciones (Datos, Operandos y Operaciones)</p>
 </li>
 <li>
-<p>Capítulo 13: Conjuntos de Instrucciones: Formatos de instrucciones y Modos de Direccionamiento (Lenguaje Ensamblador)</p>
+<p>Capítulo 11: Conjuntos de Instrucciones: Formatos de instrucciones y Modos de Direccionamiento (Lenguaje Ensamblador)</p>
 </li>
 <li>
 <p>Apéndice B: Lenguaje Ensamblador y Toolchain</p>
@@ -240,7 +242,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="sect3">
 <h4 id="_lenguajes_de_alto_nivel">5.3.1. Lenguajes de alto nivel</h4>
 <div class="paragraph">
-<p>Los lenguajes de alto nivel como Java, Python, C, etc &#8230;&#8203; se desarrollaron para facilitar la tarea de programar algoritmos, estructuras de datos, etc&#8230;&#8203;utilizando un lenguaje sencillo de manejar por los programadores. En cambio, los datos y las instrucciones que manejan las CPU de las computadoras están en otro lenguaje, el lenguaje MAQUINA, que depende del tipo de procesador (intel,AMD,RISC-V,etc&#8230;&#8203;) de la computadora. El lenguaje máquina de un procesador intel de nuestra computadora difiere del lenguaje MAQUINA del procesador arm de un smartphone.</p>
+<p>Los lenguajes de alto nivel como Java, Python, C, etc &#8230;&#8203; se desarrollaron para facilitar la tarea de programar algoritmos, estructuras de datos, etc&#8230;&#8203;utilizando un lenguaje sencillo de manejar por los programadores. En cambio, los datos y las instrucciones que manejan las CPU de las computadoras están en otro lenguaje, el lenguaje MAQUINA BINARIO, que depende del tipo de procesador (intel,AMD,RISC-V,etc&#8230;&#8203;) de la computadora. El lenguaje máquina de un procesador intel de nuestra computadora difiere del lenguaje MAQUINA del procesador arm de un smartphone.</p>
 </div>
 <div class="paragraph">
 <p>Al igual que los datos, las instrucciones también es necesario codificarlas en un formato BINARIO. Los programas en lenguaje máquina formados por datos e instrucciones binarias están preparados para ser cargados en la memoria principal RAM y ser procesados por la CPU.</p>
@@ -248,7 +250,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="ulist">
 <ul>
 <li>
-<p>Ejemplos de lenguajes de Programación en el <a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#lang_altovsbajo">Apéndice</a>.</p>
+<p>Ejemplos de lenguajes de Programación de alto y bajo nivel:  <a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#lang_altovsbajo">Apéndice</a>.</p>
 </li>
 </ul>
 </div>
@@ -269,7 +271,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="ulist">
 <ul>
 <li>
-<p>El lenguaje binario implica un <em>formato de la instrucción</em>.</p>
+<p>El lenguaje binario implica un <strong>formato de la instrucción</strong>.</p>
 </li>
 </ul>
 </div>
@@ -279,7 +281,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="ulist">
 <ul>
 <li>
-<p>El lenguaje ensamblador implica una <em>sintaxis</em></p>
+<p>El lenguaje ensamblador implica una <strong>sintaxis</strong></p>
 </li>
 </ul>
 </div>
@@ -291,7 +293,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <p>La representación de las instrucciones en lenguaje binario permite su almacenamiento en la memoria principal así como facilitar el ciclo de instrucción mediante su decodificación y ejecución por parte de la CPU.</p>
 </li>
 <li>
-<p>La representación de las instrucciones en lenguaje simbólico tiene como objetivo facilitar la tarea del programador en la interpretación  de las instrucciones y en el desarrollo de programas en lenguaje ensamblador.</p>
+<p>La representación de las instrucciones en lenguaje simbólico, como es el texto, tiene como objetivo facilitar la tarea del programador en la interpretación  de las instrucciones y en el desarrollo de programas en lenguaje ensamblador.</p>
 </li>
 <li>
 <p>El estudio de los formatos de las instrucciones máquina de  un procesador específico se enmarca dentro del concepto ISA de la Arquitectura del Procesador <a href="_arquitectura_de_una_computadora.html#estr_comp">Ver apéndice</a></p>
@@ -582,9 +584,19 @@ La arquitectura x86 está orientada a Reg/Mem, por lo que no se puede referencia
 </div>
 </div>
 <div class="sect2">
-<h3 id="_representación_de_las_instrucciones_en_el_lenguaje_ensamblador_asm_para_computadoras_en_general">5.5. Representación de las instrucciones en el lenguaje ensamblador (ASM) para computadoras en general</h3>
+<h3 id="_instrucciones_en_lenguaje_máquina_de_la_arquitectura_x86">5.5. Instrucciones en lenguaje máquina de la arquitectura x86</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ver el apéndice <a href="_lenguajes_de_programación_en_ensamblador.html#intel_i386_hola_asmbin">Apéndice</a> a modo de comprender un ejemplo. No es posible programar manualmente en lenguaje máquina en una computadora actual.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_representación_de_las_instrucciones_en_el_lenguaje_ensamblador_asm_para_computadoras_en_general">5.6. Representación de las instrucciones en el lenguaje ensamblador (ASM) para computadoras en general</h3>
 <div class="sect3">
-<h4 id="_introducción">5.5.1. Introducción</h4>
+<h4 id="_introducción">5.6.1. Introducción</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -594,7 +606,7 @@ La arquitectura x86 está orientada a Reg/Mem, por lo que no se puede referencia
 </div>
 </div>
 <div class="sect3">
-<h4 id="_códigos_de_operación">5.5.2. Códigos de Operación</h4>
+<h4 id="_códigos_de_operación">5.6.2. Códigos de Operación</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -627,7 +639,7 @@ locations</p>
 <p>En el lenguaje ensamblador a la palabra que indica el tipo de opeación, por ejemplo ADD para una suma, se le denomina <strong>mnemónico</strong> y suele estar en lengua inglesa, permitiendo intuir fácilmente de que operación se trata.</p>
 </li>
 <li>
-<p>La mejor forma de prácticar con los mnemónicos del lenguaje ensamblador es programando, lo cual se verá en el siguiente tema &lt;&lt;repertorio_instruc_oper, lenguaje ensamblador x86]]</p>
+<p>La mejor forma de prácticar con los mnemónicos del lenguaje ensamblador es programando, lo cual se verá en el siguiente tema <a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#repertorio_instruc_oper">lenguaje ensamblador x86</a></p>
 </li>
 </ul>
 </div>
@@ -636,7 +648,7 @@ locations</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_operandos_modos_de_direccionamiento">5.5.3. Operandos: Modos de Direccionamiento</h4>
+<h4 id="_operandos_modos_de_direccionamiento">5.6.3. Operandos: Modos de Direccionamiento</h4>
 <div class="sect4">
 <h5 id="_localización">Localización</h5>
 <div class="ulist">
@@ -920,9 +932,9 @@ locations</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_lenguaje_intel_versus_lenguaje_att">5.6. Lenguaje Intel versus Lenguaje  AT&amp;T</h3>
+<h3 id="gas_sintax_direcci">5.7. Lenguaje Intel versus Lenguaje  AT&amp;T</h3>
 <div class="sect3">
-<h4 id="_lenguajes_ensamblador_de_la_arquitectura_i386amd64">5.6.1. Lenguajes ensamblador de la arquitectura  i386/amd64</h4>
+<h4 id="_lenguajes_ensamblador_de_la_arquitectura_i386amd64">5.7.1. Lenguajes ensamblador de la arquitectura  i386/amd64</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -935,7 +947,7 @@ locations</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sintaxis_de_las_instrucciones_en_el_lenguaje_intel">5.6.2. Sintaxis de las instrucciones en el lenguaje INTEL</h4>
+<h4 id="_sintaxis_de_las_instrucciones_en_el_lenguaje_intel">5.7.2. Sintaxis de las instrucciones en el lenguaje INTEL</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1003,26 +1015,10 @@ locations</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-La sintaxis del lenguaje ensamblador depende del traductor del proceso de ensamblaje (assembler) utilizado, en este caso, se utiliza el assembler NASM.
+La sintaxis del lenguaje ensamblador depende del traductor del proceso de ensamblaje (assembler) utilizado, en este caso, se utiliza el assembler NASM. Ver un ejemplo en el <a href="_lenguajes_de_programación_en_ensamblador.html#sum1toN_nasm">Apéndice</a> de un programa en lenguaje ensamblador intel y assembler "NetWide Asm" (nasm)
 </td>
 </tr>
 </table>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Ejemplo <a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#sum1toN_lang">sum1toN.asm</a> de programa en lenguaje ensamblador intel y assembler "NetWide Asm" (nasm).</p>
-</li>
-<li>
-<p>Tutorial completo <a href="_ix_bibliografía.html#NASM_tuto">NASM tutorialspoint</a></p>
-</li>
-<li>
-<p>Apuntes de la  <a href="_ix_bibliografía.html#NASM_bristol">Universidad de Bristol</a></p>
-</li>
-<li>
-<p>Apuntes del <a href="_ix_bibliografía.html#paul_carter">Dr. Paul Carter</a> y <a href="_ix_bibliografía.html#pc_asm">Dr. Paul Carter</a></p>
-</li>
-</ul>
 </div>
 <div class="sect4">
 <h5 id="_gnu_assembly_gas">GNU Assembly (Gas)</h5>
@@ -1155,9 +1151,9 @@ La sintaxis del lenguaje ensamblador depende del traductor del proceso de ensamb
 </div>
 </div>
 <div class="sect2">
-<h3 id="_operandos_modos_de_direccionamiento_2">5.7. Operandos: Modos de Direccionamiento</h3>
+<h3 id="_operandos_modos_de_direccionamiento_2">5.8. Operandos: Modos de Direccionamiento</h3>
 <div class="sect3">
-<h4 id="_localización_2">5.7.1. Localización</h4>
+<h4 id="_localización_2">5.8.1. Localización</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1197,7 +1193,7 @@ La sintaxis del lenguaje ensamblador depende del traductor del proceso de ensamb
 </div>
 </div>
 <div class="sect3">
-<h4 id="_modos_de_direccionamiento">5.7.2. Modos de Direccionamiento</h4>
+<h4 id="_modos_de_direccionamiento">5.8.2. Modos de Direccionamiento</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1368,7 +1364,7 @@ La sintaxis del lenguaje ensamblador depende del traductor del proceso de ensamb
 </div>
 </div>
 <div class="sect2">
-<h3 id="_programas_en_lenguaje_asm_y_lenguaje_binario">5.8. Programas en lenguaje ASM y lenguaje Binario</h3>
+<h3 id="_programas_en_lenguaje_asm_y_lenguaje_binario">5.9. Programas en lenguaje ASM y lenguaje Binario</h3>
 <div class="ulist">
 <ul>
 <li>
