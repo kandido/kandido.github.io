@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-17</span>
+<span id="revdate">2022-09-20</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -301,23 +301,27 @@ pre.rouge {
 </li>
 <li><a href="_lenguajes_de_programación_en_ensamblador.html#_lenguaje_att">26.1.2. lenguaje AT&amp;T</a>
 </li>
-<li><a href="_lenguajes_de_programación_en_ensamblador.html#_discusión_por_qué_asm_att">26.1.3. Discusión por qué ASM AT&amp;T</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#assembler_as_i386">26.1.3. Características arquitectura i386</a>
 </li>
-<li><a href="_lenguajes_de_programación_en_ensamblador.html#_transferencia_2">26.1.4. TRANSFERENCIA</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#assembler_as_directivas_i386">26.1.4. Assembler (Traductor Ensamblador): Directivas</a>
 </li>
-<li><a href="_lenguajes_de_programación_en_ensamblador.html#_aritméticos_2">26.1.5. ARITMÉTICOS</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_discusión_por_qué_asm_att">26.1.5. Discusión por qué ASM AT&amp;T</a>
 </li>
-<li><a href="_lenguajes_de_programación_en_ensamblador.html#_lógicos_2">26.1.6. LÓGICOS</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_transferencia_2">26.1.6. TRANSFERENCIA</a>
 </li>
-<li><a href="_lenguajes_de_programación_en_ensamblador.html#_misceláneos_2">26.1.7. MISCELÁNEOS</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_aritméticos_2">26.1.7. ARITMÉTICOS</a>
 </li>
-<li><a href="_lenguajes_de_programación_en_ensamblador.html#_saltos_generales_2">26.1.8. SALTOS  (generales)</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_lógicos_2">26.1.8. LÓGICOS</a>
 </li>
-<li><a href="_lenguajes_de_programación_en_ensamblador.html#_saltos_sin_signo_cardinal_saltos_con_signo_integer_2">26.1.9. SALTOS  Sin Signo (Cardinal) SALTOS Con Signo (Integer)</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_misceláneos_2">26.1.9. MISCELÁNEOS</a>
 </li>
-<li><a href="_lenguajes_de_programación_en_ensamblador.html#_flags_oditszapc_2">26.1.10. FLAGS (ODITSZAPC)</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_saltos_generales_2">26.1.10. SALTOS  (generales)</a>
 </li>
-<li><a href="_lenguajes_de_programación_en_ensamblador.html#_sufijos">26.1.11. Sufijos</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_saltos_sin_signo_cardinal_saltos_con_signo_integer_2">26.1.11. SALTOS  Sin Signo (Cardinal) SALTOS Con Signo (Integer)</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_flags_oditszapc_2">26.1.12. FLAGS (ODITSZAPC)</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_sufijos">26.1.13. Sufijos</a>
 </li>
 </ul>
 </li>
@@ -489,7 +493,27 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_discusión_por_qué_asm_att">26.1.3. Discusión por qué ASM AT&amp;T</h4>
+<h4 id="assembler_as_i386">26.1.3. Características arquitectura i386</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent:">Assembler: Características dependientes de la arquitectura x86</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="assembler_as_directivas_i386">26.1.4. Assembler (Traductor Ensamblador): Directivas</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://sourceware.org/binutils/docs-2.26/as/Pseudo-Ops.html#Pseudo-Ops:">Directivas del traductor Assembler</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_discusión_por_qué_asm_att">26.1.5. Discusión por qué ASM AT&amp;T</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -499,7 +523,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_transferencia_2">26.1.4. TRANSFERENCIA</h4>
+<h4 id="_transferencia_2">26.1.6. TRANSFERENCIA</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 9.0909%;">
@@ -669,7 +693,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_aritméticos_2">26.1.5. ARITMÉTICOS</h4>
+<h4 id="_aritméticos_2">26.1.7. ARITMÉTICOS</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 9.0909%;">
@@ -870,7 +894,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_lógicos_2">26.1.6. LÓGICOS</h4>
+<h4 id="_lógicos_2">26.1.8. LÓGICOS</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 9.0909%;">
@@ -942,7 +966,7 @@ pre.rouge {
 </table>
 </div>
 <div class="sect3">
-<h4 id="_misceláneos_2">26.1.7. MISCELÁNEOS</h4>
+<h4 id="_misceláneos_2">26.1.9. MISCELÁNEOS</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 9.0909%;">
@@ -986,7 +1010,7 @@ pre.rouge {
 </table>
 </div>
 <div class="sect3">
-<h4 id="_saltos_generales_2">26.1.8. SALTOS  (generales)</h4>
+<h4 id="_saltos_generales_2">26.1.10. SALTOS  (generales)</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1014,7 +1038,7 @@ RET     Retorno de subrutina            RET</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_saltos_sin_signo_cardinal_saltos_con_signo_integer_2">26.1.9. SALTOS  Sin Signo (Cardinal) SALTOS Con Signo (Integer)</h4>
+<h4 id="_saltos_sin_signo_cardinal_saltos_con_signo_integer_2">26.1.11. SALTOS  Sin Signo (Cardinal) SALTOS Con Signo (Integer)</h4>
 <div class="listingblock">
 <div class="content">
 <pre>Nombre  Comentario                      Código          Operación
@@ -1042,7 +1066,7 @@ JNLE    Saltar si no es menor o igual   JNLE Dest       (= JG)</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_flags_oditszapc_2">26.1.10. FLAGS (ODITSZAPC)</h4>
+<h4 id="_flags_oditszapc_2">26.1.12. FLAGS (ODITSZAPC)</h4>
 <div class="listingblock">
 <div class="content">
 <pre>O: Overflow resultado de operac. sin signo es muy grande o pequeño.
@@ -1058,7 +1082,7 @@ C: Carry resultado de operac. sin signo es muy grande o inferior a cero</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_sufijos">26.1.11. Sufijos</h4>
+<h4 id="_sufijos">26.1.13. Sufijos</h4>
 <div class="ulist">
 <ul>
 <li>

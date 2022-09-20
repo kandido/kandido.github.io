@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-17</span>
+<span id="revdate">2022-09-20</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -288,6 +288,8 @@ pre.rouge {
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_objetivos_2">6.2.1. Objetivos</a>
 </li>
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_requisitos_2">6.2.2. Requisitos</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_referencias">6.2.3. Referencias</a>
 </li>
 </ul>
 </li>
@@ -329,7 +331,7 @@ pre.rouge {
 <ul class="sectlevel3">
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_operaciones_aritméticas">6.6.1. Operaciones aritméticas</a>
 </li>
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_procesamiento_condicional">6.6.2. Procesamiento Condicional</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_procesamiento_condicional_cmptestsetcc">6.6.2. Procesamiento Condicional: CMP,TEST,SETcc</a>
 </li>
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_saltos">6.6.3. Saltos</a>
 </li>
@@ -484,6 +486,22 @@ pre.rouge {
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_referencias">6.2.3. Referencias</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Manual Assembler as: <a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html#toolchain">Apéndice: Cadena de herramientas Toolchain "as i386"</a></p>
+</li>
+<li>
+<p><strong>Leerse</strong> los ocho primeros apartados del manual "Assembler as": <a href="_lenguajes_de_programación_en_ensamblador.html#assembler_as_i386">Apéndice: Características "as i386"</a></p>
+</li>
+<li>
+<p>Manual Assembler as: <a href="_lenguajes_de_programación_en_ensamblador.html#assembler_as_directivas_i386">Apéndice: Directivas "as i386"</a></p>
 </li>
 </ul>
 </div>
@@ -914,17 +932,12 @@ A–B:   100000000 -&gt; hay acarreo. Hay también overflow ya que el bit MSB de
 </div>
 <div class="sect4">
 <h5 id="_directivas_de_la_sección_de_datos">Directivas de la Sección de Datos</h5>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-<strong>Recomendable</strong> leerse los seis primeros apartados por lo menos y sobre todo lo referente a las <a href="https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent:">directivas dependientes de la arquitectura x86</a>
-</td>
-</tr>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Referencia <a href="_lenguajes_de_programación_en_ensamblador.html#assembler_as_directivas_i386">Apéndice</a></p>
+</li>
+</ul>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 12. Directivas básicas</caption>
@@ -1222,7 +1235,7 @@ b (byte) 1byte</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>En cada apartado que se estudia a continuación aplicar los códigos de operación al analizar el código del programa <a href="_lenguajes_de_programación_en_ensamblador.html#sum1toN_att_32">sum1toN att x86-32</a></p>
+<p>En cada apartado que se estudia a continuación analizar el código del programa <a href="_lenguajes_de_programación_en_ensamblador.html#sum1toN_att_32">sum1toN att x86-32</a> interpretando los códigos de operación.</p>
 </li>
 </ul>
 </div>
@@ -1402,13 +1415,16 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_procesamiento_condicional">6.6.2. Procesamiento Condicional</h4>
+<h4 id="_procesamiento_condicional_cmptestsetcc">6.6.2. Procesamiento Condicional: CMP,TEST,SETcc</h4>
 <div class="sect4">
 <h5 id="_boolean_comparación">Boolean &amp; Comparación</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>NOT</p>
+<p><a href="https://www.felixcloutier.com/x86/">Manual x86 quick</a></p>
+</li>
+<li>
+<p><a href="https://www.felixcloutier.com/x86/not">NOT</a></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1418,7 +1434,7 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </div>
 </li>
 <li>
-<p>AND</p>
+<p><a href="https://www.felixcloutier.com/x86/and">AND</a></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1431,7 +1447,26 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </div>
 </li>
 <li>
-<p>OR</p>
+<p><a href="https://www.felixcloutier.com/x86/or">OR</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Clear CF,OF</p>
+</li>
+<li>
+<p><a href="https://www.felixcloutier.com/x86/xor">XOR</a></p>
+</li>
+<li>
+<p>Clear CF,OF</p>
+</li>
+<li>
+<p>Modifica SF,ZF,PF</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://www.felixcloutier.com/x86/test">TEST</a></p>
 <div class="ulist">
 <ul>
 <li>
@@ -1444,37 +1479,40 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </div>
 </li>
 <li>
-<p>XOR</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Clear CF,OF</p>
-</li>
-<li>
-<p>Modifica SF,ZF,PF</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>TEST</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Clear CF,OF</p>
-</li>
-<li>
-<p>Modifica SF,ZF,PF</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>CMP</p>
+<p><a href="https://www.felixcloutier.com/x86/cmp">CMP</a></p>
 <div class="ulist">
 <ul>
 <li>
 <p>Modifica CF,OF,SF,ZF,PF,AF</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://www.felixcloutier.com/x86/setcc">SETcc</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>No modifica ningún flag. Modifica el operando.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://www.felixcloutier.com/x86/jcc">Jcc</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>jump short: el valor del operando es relativo al PC</p>
+</li>
+<li>
+<p>Chequea los flags CF, OF, PF, SF, and ZF.</p>
+</li>
+<li>
+<p>"less” and “greater”: compara números con signo: jl, jle, jg, jge, etc&#8230;&#8203;</p>
+</li>
+<li>
+<p>“above” and “below” : compara números sin signo: ja, jae, jb, jbe, etc&#8230;&#8203;</p>
 </li>
 </ul>
 </div>
@@ -1487,10 +1525,12 @@ Non-integral results are truncated (chopped) towards 0</pre>
 <h4 id="_saltos">6.6.3. Saltos</h4>
 <div class="sect4">
 <h5 id="_indirectos">Indirectos</h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Símbolo <em><strong></em> para indicar indirección en los saltos y diferenciarlos del direccionamiento relativo. En cambio en los movimientos MOV no hace falta el símbolo <em></strong></em> ya que no hay saltos relativos.</p>
+<div class="paragraph">
+<p>Símbolo <code>*</code>:</p>
+</div>
+<div class="paragraph">
+<p>El Símbolo asterisco  para indicar indirección en los saltos y diferenciarlos del direccionamiento relativo.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre>jmp bucle   -&gt; salto relativo a EIP
@@ -1501,8 +1541,8 @@ jmp *(mem)
 jmp *table(%ebx,%esi,4)</pre>
 </div>
 </div>
-</li>
-</ul>
+<div class="paragraph">
+<p>En cambio en los movimientos MOV no hace falta el símbolo asterisco ya que no hay movimientos con direccionamiento relativo.</p>
 </div>
 </div>
 </div>
@@ -2008,6 +2048,16 @@ call sumMtoN</pre>
 <div class="sect3">
 <h4 id="_estado_de_la_pila">6.8.10. Estado de la pila</h4>
 <div class="sect4">
+<h5 id="_análisis">Análisis</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La pila es una estructura dinámica cuyo estado (registros puntero EIP,EBP,ESP) cambian según se realizan llamadas y retornos de subrutinas. Razonar el contenido de dichos registros y verificarlo con el depurador GDB.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
 <h5 id="_previo_al_salto_de_la_llamada_a_la_subrutina">Previo al salto  de la llamada a la subrutina</h5>
 <div class="ulist">
 <ul>
@@ -2032,17 +2082,17 @@ call sumMtoN</pre>
 </div>
 </li>
 <li>
-<p>Contenido de los  registros EIP,EBP,ESP:</p>
+<p>Analizar el contenido de los  registros EIP,EBP,ESP:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>RIP:</p>
+<p>EIP: instruction pointer    &#8594;</p>
 </li>
 <li>
-<p>EBP:</p>
+<p>EBP: stack bottom pointer   &#8594;</p>
 </li>
 <li>
-<p>ESP:</p>
+<p>ESP: stack top pointer      &#8594;</p>
 </li>
 </ul>
 </div>
@@ -2068,17 +2118,17 @@ call sumMtoN</pre>
 </div>
 </li>
 <li>
-<p>Contenido de los  registros EIP,EBP,ESP:</p>
+<p>Analizar el contenido de los  registros EIP,EBP,ESP:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>RIP:</p>
+<p>EIP: instruction pointer    &#8594;</p>
 </li>
 <li>
-<p>EBP:</p>
+<p>EBP: stack bottom pointer   &#8594;</p>
 </li>
 <li>
-<p>ESP:</p>
+<p>ESP: stack top pointer      &#8594;</p>
 </li>
 </ul>
 </div>
@@ -2101,17 +2151,17 @@ call sumMtoN</pre>
 </div>
 </li>
 <li>
-<p>Contenido de los  registros EIP,EBP,ESP:</p>
+<p>Analizar el contenido de los  registros EIP,EBP,ESP:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>EIP:</p>
+<p>EIP: instruction pointer    &#8594;</p>
 </li>
 <li>
-<p>EBP:</p>
+<p>EBP: stack bottom pointer   &#8594;</p>
 </li>
 <li>
-<p>ESP:</p>
+<p>ESP: stack top pointer      &#8594;</p>
 </li>
 </ul>
 </div>
@@ -2137,17 +2187,17 @@ call sumMtoN</pre>
 </div>
 </li>
 <li>
-<p>Contenido de los  registros EIP,EBP,ESP:</p>
+<p>Analizar el contenido de los  registros EIP,EBP,ESP:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>EIP:</p>
+<p>EIP: instruction pointer    &#8594;</p>
 </li>
 <li>
-<p>EBP:</p>
+<p>EBP: stack bottom pointer   &#8594;</p>
 </li>
 <li>
-<p>ESP:</p>
+<p>ESP: stack top pointer      &#8594;</p>
 </li>
 </ul>
 </div>
@@ -2180,17 +2230,17 @@ call sumMtoN</pre>
 </div>
 </li>
 <li>
-<p>Contenido de los  registros EIP,EBP,ESP:</p>
+<p>Analizar el contenido de los  registros EIP,EBP,ESP:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>EIP:</p>
+<p>EIP: instruction pointer    &#8594;</p>
 </li>
 <li>
-<p>EBP:</p>
+<p>EBP: stack bottom pointer   &#8594;</p>
 </li>
 <li>
-<p>ESP:</p>
+<p>ESP: stack top pointer      &#8594;</p>
 </li>
 </ul>
 </div>

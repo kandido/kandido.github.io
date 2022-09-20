@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-17</span>
+<span id="revdate">2022-09-20</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -2731,9 +2731,6 @@ MOVE.L  (A1)+,D2
 </li>
 <li>
 <p>Comparar los computadores de 1,2 y 3 direcciones escribiendo los programas para calcular la expresión X= (A+B*C)/(D-E*F) siendo los repertorios los siguientes:</p>
-</li>
-</ol>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre>0 Address 	1 Address 	2 Address 		3 Address
@@ -2749,9 +2746,6 @@ DIV 		DIV M</pre>
 <ul>
 <li>
 <p>SOLUCION:</p>
-</li>
-</ul>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre>PUSH A      LOAD   E     MOV R0, E     MUL R0, E, F
@@ -2768,8 +2762,10 @@ DIV         STO    X
 POP X</pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>If the last operation performed on a computer with an 8-bit word was an addition in which the two operands were 00000010 and 00000011, what would be the value of the following flags?</p>
 <div class="ulist">
@@ -2806,7 +2802,7 @@ POP X</pre>
 </div>
 </li>
 <li>
-<p>The x86 Compare instruction (CMP) subtracts the source operand from the destination operand; it updates the status flags (C, P, A, Z, S, O) but does not alter either of the operands. The CMP instruction can be used to determine if the destination operand is greater than, equal to, or less than the source operand.</p>
+<p>The x86 Compare instruction (CMP) <strong>subtracts</strong> the source operand from the destination operand; it updates the status flags (C, P, A, Z, S, O) but does not alter either of the operands. The CMP instruction can be used to determine if the destination operand is greater than, equal to, or less than the source operand.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha">
 <li>
@@ -2827,16 +2823,16 @@ POP X</pre>
 </li>
 <li>
 <p>a. Enteros sin signo</p>
-<table class="tableblock frame-all grid-all stretch">
+<table class="tableblock frame-all grid-all" style="width: 80%;">
 <caption class="title">Table 19. CMP/EFLAFS</caption>
 <colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
 </colgroup>
 <thead>
 <tr>
@@ -2851,47 +2847,47 @@ POP X</pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dest&gt;Source</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest&gt;Source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dest=Source</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest=Source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dest&lt;Source</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest&lt;Source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
 </tr>
 </tbody>
 </table>
 </li>
 <li>
 <p>b. Enteros con signo</p>
-<table class="tableblock frame-all grid-all stretch">
+<table class="tableblock frame-all grid-all" style="width: 80%;">
 <caption class="title">Table 20. CMP/EFLAFS</caption>
 <colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
 </colgroup>
 <thead>
 <tr>
@@ -2906,31 +2902,31 @@ POP X</pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dest&gt;Source</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest&gt;Source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dest=Source</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest=Source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Dest&lt;Source</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>x</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>?</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest&lt;Source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
 </tr>
 </tbody>
 </table>
@@ -2945,27 +2941,40 @@ POP X</pre>
 </div>
 </li>
 <li>
-<p>Many microprocessor instruction SETS include an instruction that tests a condition
-and sets a destination operand if the condition is true. Examples include the <em>SETcc</em>
-on the x86, the Scc on the Motorola MC68000, and the Scond on the National
-NS32000.</p>
+<p>Many microprocessor instruction SETS include an instruction that tests a condition and sets a destination operand if the condition is true. Examples include the <em>SETcc</em> on the x86 processor, the <em>Scc</em> on the Motorola MC68000 processor, and the <em>Scond</em> on the National NS32000 processor. <a href="http://www.felixcloutier.com/x86/">Manual Intel quick</a>: interpretar los nmemónicos y operando de la instrucción SETcc</p>
 <div class="olist loweralpha">
 <ol class="loweralpha">
 <li>
-<p>A simple IF statement such as <em>IF a &gt; b</em> THEN can be implemented using a numerical representation method, that is, making the <em>Boolean value</em> manifest, as opposed to a <em>flow of control</em> method, which represents the value of a Boolean expression by a point reached in the program. (Primero transcribir el lenguaje ASM del enunciado a lenguaje RTL). A compiler might implement <em>IF a &gt; b THEN</em> with the following <strong>x86 code</strong>:</p>
+<p>There are a few differences among these instructions:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SETcc and Scc operate only on a byte, whereas Scond operates on byte, word, and doubleword operands.</p>
+</li>
+<li>
+<p>SETcc and Scond set the operand to integer one if true and to zero if false. Scc sets the byte to all binary ones if true and all zeros if false. What are the relative advantages and disadvantages of these differences?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>None of these instructions set any of the condition code flags, and thus an explicit test of the result of the instruction is required to determine its value. Discuss whether condition codes should be set as a result of this instruction (test). <a href="http://www.felixcloutier.com/x86/">Manual Intel quick</a>: interpretar la instrucción TEST.</p>
+</li>
+<li>
+<p>A simple IF statement such as <em>IF a &gt; b</em> THEN can be implemented using a numerical representation method, that is, making the <em>Boolean value</em> manifest, as opposed to a <em>flow of control</em> method, which represents the value of a Boolean expression by a point reached in the program. (Primero transcribir el lenguaje ASM del enunciado a lenguaje RTL). Interpretar las instrucciones: <a href="http://www.felixcloutier.com/x86/">Manual Intel quick</a>. A compiler might implement <em>IF a &gt; b THEN</em> with the following <strong>x86 code</strong>:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="c">        <span class="p">;</span> <span class="n">Sintaxis</span> <span class="n">de</span> <span class="n">Intel</span><span class="o">:</span> <span class="n">Opeaci</span><span class="err">ó</span><span class="n">n</span> <span class="n">Op_destino</span><span class="p">,</span> <span class="n">Op_fuente</span>
-	<span class="n">SUB</span> <span class="n">CX</span><span class="p">,</span> <span class="n">CX</span> <span class="p">;</span><span class="n">set</span> <span class="k">register</span> <span class="n">CX</span> <span class="n">to</span> <span class="mi">0</span>
-	<span class="n">MOV</span> <span class="n">AX</span><span class="p">,</span> <span class="n">B</span> <span class="p">;</span><span class="n">move</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">location</span> <span class="n">B</span> <span class="n">to</span> <span class="k">register</span> <span class="n">AX</span>
-	<span class="n">CMP</span> <span class="n">AX</span><span class="p">,</span> <span class="n">A</span> <span class="p">;</span><span class="n">compare</span> <span class="n">contents</span> <span class="n">of</span> <span class="k">register</span> <span class="n">AX</span> <span class="n">and</span> <span class="n">location</span> <span class="n">A</span>
-	<span class="n">JLE</span> <span class="n">TEST</span> <span class="p">;</span><span class="n">jump</span> <span class="k">if</span> <span class="n">A</span> <span class="o">&lt;=</span> <span class="n">B</span>
-	<span class="n">INC</span> <span class="n">CX</span> <span class="p">;</span><span class="n">add</span> <span class="mi">1</span> <span class="n">to</span> <span class="n">contents</span> <span class="n">of</span> <span class="k">register</span> <span class="n">CX</span>
-<span class="n">TEST</span> 	<span class="n">JCXZ</span> <span class="n">OUT</span> <span class="p">;</span><span class="n">jump</span> <span class="k">if</span> <span class="n">contents</span> <span class="n">of</span> <span class="n">CX</span> <span class="n">equal</span> <span class="mi">0</span>
+<pre class="rouge highlight"><code data-lang="nasm">        <span class="c1">; Sintaxis de Intel: Opeación Op_destino, Op_fuente</span>
+        <span class="nf">SUB</span> <span class="nb">CX</span><span class="p">,</span> <span class="nb">CX</span> <span class="c1">;set register CX to 0</span>
+        <span class="nf">MOV</span> <span class="nb">AX</span><span class="p">,</span> <span class="nv">B</span> <span class="c1">;move contents of location B to register AX</span>
+        <span class="nf">CMP</span> <span class="nb">AX</span><span class="p">,</span> <span class="nv">A</span> <span class="c1">;compare contents of register AX and location A</span>
+        <span class="nf">JLE</span> <span class="nv">TEST</span> <span class="c1">;jump if A &lt;= B</span>
+        <span class="nf">INC</span> <span class="nb">CX</span> <span class="c1">;add 1 to contents of register CX</span>
+<span class="nf">TEST</span>    <span class="nv">JCXZ</span> <span class="nv">OUT</span> <span class="c1">;jump if contents of CX equal 0</span>
 
-<span class="n">THEN</span> 	<span class="n">XXXXX</span>
+<span class="nf">THEN</span>    <span class="nv">XXXXX</span>
 
-<span class="n">OUT</span> 	<span class="n">XXXXX</span></code></pre>
+<span class="nf">OUT</span>     <span class="nv">XXXXX</span></code></pre>
 </div>
 </div>
 </li>
