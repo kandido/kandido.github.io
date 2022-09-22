@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-20</span>
+<span id="revdate">2022-09-22</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -295,11 +295,13 @@ pre.rouge {
 </li>
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_estructura_de_la_computadora_con_arquitectura_intel_x86_64">6.3. Estructura de la  Computadora con Arquitectura Intel x86-64</a>
 <ul class="sectlevel3">
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_intro">6.3.1. Intro</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_manuales_isa_x86">6.3.1. Manuales ISA x86</a>
 </li>
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_cpu_memoria">6.3.2. CPU-Memoria</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_intro">6.3.2. Intro</a>
 </li>
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_registros_internos_a_la_cpu_x86">6.3.3. Registros internos a la CPU x86</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_cpu_memoria">6.3.3. CPU-Memoria</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_registros_internos_a_la_cpu_x86">6.3.4. Registros internos a la CPU x86</a>
 </li>
 </ul>
 </li>
@@ -331,13 +333,19 @@ pre.rouge {
 <ul class="sectlevel3">
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_operaciones_aritméticas">6.6.1. Operaciones aritméticas</a>
 </li>
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_procesamiento_condicional_cmptestsetcc">6.6.2. Procesamiento Condicional: CMP,TEST,SETcc</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_extensión_del_signo">6.6.2. Extensión del signo</a>
 </li>
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_saltos">6.6.3. Saltos</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_cambio_de_tamaño">6.6.3. Cambio de tamaño</a>
 </li>
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_desplazamiento_y_rotación">6.6.4. Desplazamiento y rotación</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_operaciones_booleanas">6.6.4. Operaciones Booleanas</a>
 </li>
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_cambiar_el_endianess">6.6.5. Cambiar el Endianess</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_procesamiento_condicional_cmptestsetcc">6.6.5. Procesamiento Condicional: CMP,TEST,SETcc</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_saltos">6.6.6. Saltos</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_desplazamiento_y_rotación">6.6.7. Desplazamiento y rotación</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_cambiar_el_endianess">6.6.8. Cambiar el Endianess</a>
 </li>
 </ul>
 </li>
@@ -510,7 +518,33 @@ pre.rouge {
 <div class="sect2">
 <h3 id="_estructura_de_la_computadora_con_arquitectura_intel_x86_64">6.3. Estructura de la  Computadora con Arquitectura Intel x86-64</h3>
 <div class="sect3">
-<h4 id="_intro">6.3.1. Intro</h4>
+<h4 id="_manuales_isa_x86">6.3.1. Manuales ISA x86</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.intel.es/content/www/es/es/architecture-and-technology/64-ia-32-architectures-software-developer-vol-1-manual.html" class="bare">https://www.intel.es/content/www/es/es/architecture-and-technology/64-ia-32-architectures-software-developer-vol-1-manual.html</a></p>
+</li>
+<li>
+<p>8 Volúmenes: 1,2A,2B,2C,3A,3B,3C,3D</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Volume 1: Basic Architecture</p>
+</li>
+<li>
+<p>Volumes 2A, 2B and 2C: Instruction Set Reference</p>
+</li>
+<li>
+<p>Volumes 3A, 3B, 3C and 3D: System Programming Guide</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_intro">6.3.2. Intro</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -526,7 +560,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_cpu_memoria">6.3.2. CPU-Memoria</h4>
+<h4 id="_cpu_memoria">6.3.3. CPU-Memoria</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -536,7 +570,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_registros_internos_a_la_cpu_x86">6.3.3. Registros internos a la CPU x86</h4>
+<h4 id="_registros_internos_a_la_cpu_x86">6.3.4. Registros internos a la CPU x86</h4>
 <div class="sect4">
 <h5 id="_introducción_3">introducción</h5>
 <div class="ulist">
@@ -896,6 +930,32 @@ A–B:   100000000 -&gt; hay acarreo. Hay también overflow ya que el bit MSB de
 </div>
 <div class="ulist">
 <ul>
+<li>
+<p>Segment Registers: CS,DS,ES,FS,GS,SS</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/X86_memory_segmentation" class="bare">https://en.wikipedia.org/wiki/X86_memory_segmentation</a></p>
+</li>
+<li>
+<p>Normalmente se utilizan de forma implicita: las instrucciones están en el segmento de código en direcciones relativas al registro CS, los datos están el segment data en direcciones relativas al registro DS, la pila están el segmento stack en direcciones relativas al registro SS.</p>
+</li>
+<li>
+<p>utilización explícita:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>movl $42, %fs:(%eax)  ; M[fs:eax]&#8592;42) ; eax contiene la dirección relativa a la dirección FS</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El Sistema Operativo utiliza los registros segmento en la gestión de memoria virtual mediante los mecanismos de paginación y segmentación: <a href="https://nixhacker.com/segmentation-in-intel-64-bit/" class="bare">https://nixhacker.com/segmentation-in-intel-64-bit/</a> : La gestión de la memoria es un tema de la segunda parte de la asignatura.</p>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>Los registros fp, mmx y xmm se utilizan para ejecutar instrucciones complejas como la tangente que operan con números reales en coma flotante o instrucciones que ejecutan operaciones sobre múltiples datos enteros (Single Instruction Multiple Data) (P.ej producto escalar).</p>
 </li>
@@ -1262,6 +1322,8 @@ b (byte) 1byte</pre>
 </div>
 <div class="sect3">
 <h4 id="_tipo_de_descripción_de_códigos_de_operación_en_el_manual_de_intel">6.5.4. Tipo de descripción de Códigos de Operación en el Manual de Intel</h4>
+<div class="sect4">
+<h5 id="_operación_mov">Operación MOV</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -1297,7 +1359,39 @@ C7       MOV r/m32,imm32   2/2           Move immediate dword to r/m dword</code
 <div class="ulist">
 <ul>
 <li>
+<p>MOV NO afecta a ningún flag</p>
+</li>
+<li>
 <p>dword :double word: 32 bits</p>
+</li>
+<li>
+<p>r8: registro de 8 bits</p>
+</li>
+<li>
+<p>r/m8 : registro de cualquier tamaño o posición de memoria de 8 bits</p>
+</li>
+<li>
+<p>imm8 : operando inmediato de 8 bits</p>
+</li>
+<li>
+<p>reg8 : registro de 8 bits</p>
+</li>
+<li>
+<p>Sreg : registros segmento &#8594; CS,DS,ES,FS,GS,SS</p>
+</li>
+<li>
+<p>The moffs8, moffs16, and moffs32 operands specify a simple offset relative to the segment base, where 8, 16, and 32 refer to the size of the data. The address-size attribute of the instruction determines the size of the offset, either 16 or 32 bits.</p>
+<div class="listingblock">
+<div class="content">
+<pre>https://www.intel.es/content/www/es/es/architecture-and-technology/64-ia-32-architectures-software-developer-vol-1-manual.html
+3.7.4 Specifying a Segment Selector
+The segment selector can be specified either implicitly or explicitly. [...] The processor automatically chooses a segment according to the rules given in Table 3-5.
+
+SS Any memory reference which uses the ESP or EBP register as a base register.
+
+DS All data references, except when relative to stack or string destination.</pre>
+</div>
+</div>
 </li>
 </ul>
 </div>
@@ -1315,6 +1409,7 @@ la sintaxis del lenguage ASM de los manuales  no es  la sintaxis de AT&amp;T sin
 </td>
 </tr>
 </table>
+</div>
 </div>
 </div>
 </div>
@@ -1379,8 +1474,11 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </ul>
 </div>
 </li>
-<li>
-<p>Extensión de signo</p>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_extensión_del_signo">6.6.2. Extensión del signo</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1394,9 +1492,9 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Cambio de tamaño</p>
+</div>
+<div class="sect3">
+<h4 id="_cambio_de_tamaño">6.6.3. Cambio de tamaño</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1406,23 +1504,15 @@ Non-integral results are truncated (chopped) towards 0</pre>
 <p>movzbl src,Reg &#8594; Mov Byte to Long</p>
 </li>
 <li>
-<p>movzwl src,Reg &#8594; Mov Byte to Long</p>
-</li>
-</ul>
-</div>
+<p>movzwl src,Reg &#8594; Mov Word to Long</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_procesamiento_condicional_cmptestsetcc">6.6.2. Procesamiento Condicional: CMP,TEST,SETcc</h4>
-<div class="sect4">
-<h5 id="_boolean_comparación">Boolean &amp; Comparación</h5>
+<h4 id="_operaciones_booleanas">6.6.4. Operaciones Booleanas</h4>
 <div class="ulist">
 <ul>
-<li>
-<p><a href="https://www.felixcloutier.com/x86/">Manual x86 quick</a></p>
-</li>
 <li>
 <p><a href="https://www.felixcloutier.com/x86/not">NOT</a></p>
 <div class="ulist">
@@ -1453,9 +1543,13 @@ Non-integral results are truncated (chopped) towards 0</pre>
 <li>
 <p>Clear CF,OF</p>
 </li>
+</ul>
+</div>
+</li>
 <li>
 <p><a href="https://www.felixcloutier.com/x86/xor">XOR</a></p>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>Clear CF,OF</p>
 </li>
@@ -1465,6 +1559,77 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </ul>
 </div>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_procesamiento_condicional_cmptestsetcc">6.6.5. Procesamiento Condicional: CMP,TEST,SETcc</h4>
+<div class="sect4">
+<h5 id="_cmp">CMP</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.felixcloutier.com/x86/cmp">CMP</a></p>
+</li>
+<li>
+<p>Modifica CF,OF,SF,ZF,PF,AF</p>
+</li>
+<li>
+<p>The condition codes used by the Jcc, CMOVcc, and SETcc instructions are based on the results of a CMP instruction</p>
+</li>
+<li>
+<p>Compares the first source operand with the second source operand and sets the status flags in the EFLAGS register according to the results. The comparison is performed by subtracting the second operand from the first operand and then setting the status flags in the same manner as the SUB instruction. When an immediate value is used as an operand, it is sign-extended to the length of the first operand.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es decir, hay que saber interpretar la instrucción de resta SUB y en concreto el flag OF  para signed overflow y CF para unsigned overflow.</p>
+</li>
+<li>
+<p>Ejercicios:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Realizar el <a href="_ejercicios_3.html#cmp_ejercicio">ejercicio instrucción CMP</a> y también en el guión de prácticas que se estudia los saltos realizar la interpretación manual de las instrucciones CMP.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sub">SUB</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.felixcloutier.com/x86/sub">SUB</a></p>
+</li>
+<li>
+<p>Subtracts the second operand (source operand) from the first operand (destination operand) and stores the result in the destination operand. When an immediate value is used as an operand, it is sign-extended to the length of the destination operand format.</p>
+</li>
+<li>
+<p>The SUB instruction performs integer subtraction.</p>
+</li>
+<li>
+<p>It evaluates the result for both signed and unsigned integer operands and sets the OF and CF flags to indicate an overflow in the signed or unsigned result, respectively. The SF flag indicates the sign of the signed result.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es decir, realiza la resta tanto interpretando los operandos como números naturales y números con signo ya que la representación binaria del resultado es la misma. En caso de overflow utiliza el flag OF para la interpretación con signo y para el overflow sin signo el flag CF.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_test">TEST</h5>
+<div class="ulist">
+<ul>
 <li>
 <p><a href="https://www.felixcloutier.com/x86/test">TEST</a></p>
 <div class="ulist">
@@ -1478,16 +1643,13 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </ul>
 </div>
 </li>
-<li>
-<p><a href="https://www.felixcloutier.com/x86/cmp">CMP</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Modifica CF,OF,SF,ZF,PF,AF</p>
-</li>
 </ul>
 </div>
-</li>
+</div>
+<div class="sect4">
+<h5 id="_setcc">SETcc</h5>
+<div class="ulist">
+<ul>
 <li>
 <p><a href="https://www.felixcloutier.com/x86/setcc">SETcc</a></p>
 <div class="ulist">
@@ -1498,6 +1660,13 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </ul>
 </div>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_jcc">Jcc</h5>
+<div class="ulist">
+<ul>
 <li>
 <p><a href="https://www.felixcloutier.com/x86/jcc">Jcc</a></p>
 <div class="ulist">
@@ -1522,7 +1691,7 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_saltos">6.6.3. Saltos</h4>
+<h4 id="_saltos">6.6.6. Saltos</h4>
 <div class="sect4">
 <h5 id="_indirectos">Indirectos</h5>
 <div class="paragraph">
@@ -1547,7 +1716,7 @@ jmp *table(%ebx,%esi,4)</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_desplazamiento_y_rotación">6.6.4. Desplazamiento y rotación</h4>
+<h4 id="_desplazamiento_y_rotación">6.6.7. Desplazamiento y rotación</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1598,7 +1767,7 @@ jmp *table(%ebx,%esi,4)</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_cambiar_el_endianess">6.6.5. Cambiar el Endianess</h4>
+<h4 id="_cambiar_el_endianess">6.6.8. Cambiar el Endianess</h4>
 <div class="listingblock">
 <div class="content">
 <pre>## Cambio del endianess en EAX. Previamente guarda el original de EAX y al final restaura EAX

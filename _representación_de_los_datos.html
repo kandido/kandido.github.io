@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-20</span>
+<span id="revdate">2022-09-22</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -1614,6 +1614,9 @@ oating-point computations</a></p>
 <p><code>man iso_8859_1</code>: latin-1: ascii extendido: 0x80-0xFF</p>
 </li>
 <li>
+<p><code>man iso_8859-1 | grep ñ</code></p>
+</li>
+<li>
 <p><a href="http://www.theasciicode.com.ar/ascii-printable-characters/vertical-bar-vbar-vertical-line-vertical-slash-ascii-code-124.html" class="bare">http://www.theasciicode.com.ar/ascii-printable-characters/vertical-bar-vbar-vertical-line-vertical-slash-ascii-code-124.html</a></p>
 <div class="ulist">
 <ul>
@@ -1705,7 +1708,7 @@ oating-point computations</a></p>
 <p>Uses one byte[note 1] (8 bits) for the first 128 code points, and up to 4 bytes for other characters. The first 128 Unicode code points represent the ASCII characters, which means that any ASCII text is also a UTF-8 text.</p>
 </li>
 <li>
-<p>La <em>ñ</em> da como salida 0xc3b1 . El terminal está configurado con salida Unicode UTF8 según la variable de entorno local. Mediante el comando <strong>locale charmap</strong>  volcamos con que codificación tenemos la entrada/salida del terminal. Mediante <code>locale -m</code> los posibles. Podría haber sido iso-8859-1 en lugar de utf8.</p>
+<p>La <em>ñ</em> da como salida 0xc3b1 . El terminal está configurado con salida Unicode UTF-8 según la variable de entorno local. Mediante el comando <strong>locale charmap</strong>  volcamos con que codificación tenemos la entrada/salida del terminal. Mediante <code>locale -m</code> los posibles. Podría haber sido iso-8859-1 (ascii extendido) en lugar de utf8.</p>
 </li>
 </ul>
 </div>
@@ -1739,11 +1742,11 @@ oating-point computations</a></p>
 <p><a href="http://www.fileformat.info/info/unicode/char/f1/index.htm">unicode ñ</a></p>
 </li>
 <li>
-<p>la ñ tiene unicode point <em>U+00F1</em> ó hex_code_utf8 <em>0xC3B1</em></p>
+<p>la ñ tiene <strong>unicode point <em>U+00F1</em></strong> ó <strong>hex_code_utf8 <em>0xC3B1</em></strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>en la wikipedia utf-8 explica cómo pasare de unicode point a hex code.</p>
+<p>en la wikipedia utf-8 explica cómo pasar de unicode point a hex code.</p>
 </li>
 <li>
 <p><a href="https://unicode-table.com/es/00F1/" class="bare">https://unicode-table.com/es/00F1/</a></p>
@@ -1752,7 +1755,7 @@ oating-point computations</a></p>
 </div>
 </li>
 <li>
-<p>Problema Para copiar los caracteres no US-ASCII de la barra URL de firefox: <a href="https://es.wikipedia.org/wiki/Conmutaci%C3%B3n_de_circuitos" class="bare">https://es.wikipedia.org/wiki/Conmutaci%C3%B3n_de_circuitos</a>. &#8594; C3B3 es el código hexadecimal del código utf-8 del carácter ó.</p>
+<p>Problema para copiar los caracteres no US-ASCII de la barra URL de firefox: <a href="https://es.wikipedia.org/wiki/Conmutaci%C3%B3n_de_circuitos" class="bare">https://es.wikipedia.org/wiki/Conmutaci%C3%B3n_de_circuitos</a>. &#8594; C3B3 es el código hexadecimal del código utf-8 del carácter ó.</p>
 </li>
 <li>
 <p>wikipedia utf-8:</p>
@@ -1793,7 +1796,8 @@ oating-point computations</a></p>
 ^C 	  3 0003 0x03   -&gt; teclas Ctrl-c
 ^D 	  4 0004 0x04   -&gt; teclas Ctrl-d
 ñ       195 0303 0xc3   -&gt; MSB: More Significand Byte.
- 	177 0261 0xb1   -&gt; LSB: Less Significand Byte</pre>
+ 	177 0261 0xb1   -&gt; LSB: Less Significand Byte
+        hex_code_utf8   -&gt; 0xC3B1</pre>
 </div>
 </div>
 </li>
@@ -1809,6 +1813,19 @@ oating-point computations</a></p>
 <ul>
 <li>
 <p>ñ &#8594; &amp;#x00F1 &#8594; utiliza el código "unicode point"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>URL &#8594; en la barra de direcciones de un navegador poner camión &#8594; enter</p>
+<div class="ulist">
+<ul>
+<li>
+<p>copiar la URL y copiarla en una nueva barra &#8594; <a href="https://www.google.com/search?channel=fs&amp;client=ubuntu&amp;q=cami%C3%B3n" class="bare">https://www.google.com/search?channel=fs&amp;client=ubuntu&amp;q=cami%C3%B3n</a></p>
+</li>
+<li>
+<p>%C3%B3 es el UTF-8 hex_code de ó</p>
 </li>
 </ul>
 </div>
