@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-22</span>
+<span id="revdate">2022-09-23</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -1598,7 +1598,7 @@ suma:	M[suma] &lt;- 0		; variable suma parcial y final
 ;Registros accesibles : AC
 	; inicio bucle : suma y generación de sumandos
 bucle:	AC 	&lt;- M[n]		; cargar sumando
-	AC&gt;=0 : PC &lt;- sumar	; si el sumando &lt; 0 fin del bucle
+	AC&gt;=0 : PC &lt;- sumar	; si el sumando &lt; 0 fin del bucle y si es &gt;0 salto a sumar
 	; fin del bucle
 	stop
 	; realizar la suma
@@ -1641,11 +1641,21 @@ sumar:  AC 	&lt;- AC + M[suma]
 ;Registros accesibles : AC
 ; algoritmo: bucle que genera la secuencia n, n-1, n-2,...0,-1 si n&gt;=0
 bucle:	LOAD 	M(n)       	; AC &lt;- M[n]
-	SUB  	M(uno)     	; AC &lt;- AC-M[uno]
-	STOR 	M(suma)		; M[suma] &lt;- AC
-	JMP+    bucle		; Si AC &gt;= 0, salto a bucle
+	JMP+    sumar		; Si AC &gt;= 0, salto a sumar
 	; fin del bucle
 	HALT			; stop
+
+	; realizar la suma
+sumar:  ADD	M(suma)         ; AC &lt;- AC+M(suma)
+	STOR 	M(suma)		; M[suma] &lt;- AC
+	; actualizar sumando
+        LOAD 	M(n)       	; AC &lt;- M[n]
+	SUB  	M(uno)     	; AC &lt;- AC-M[uno]
+	STOR 	M(n)		; M[suma] &lt;- AC
+	; comprobar condición bucle
+	JMP    bucle		; salto incondiconal
+
+
 
 
 ;;;;;;;;;;;;;;;;;;;SECCION DE DATOS
@@ -1688,7 +1698,7 @@ suma:	.data	0 ; sumas parciales y resultado final</pre>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>1ª Versión</strong>: módulo fuente  <em>sum1toN_v1.ias</em>:</p>
+<p>módulo fuente  <em>sum1toN_A.ias</em>:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1698,20 +1708,24 @@ suma:	.data	0 ; sumas parciales y resultado final</pre>
 <p>Sintaxis &#8594; etiqueta: operacion operando ;comentario &#8594; 4 Columnas</p>
 </li>
 <li>
+<p>Sólo puede haber etiquetas que apunten a instrucciones ubicadas al <strong>derecha</strong> de una palabra.</p>
+</li>
+<li>
 <p>Los símbolos para indicar la operación (Ej. S(x)&#8594;Ac+) no son mnemónicos</p>
 </li>
 <li>
 <p>No utilizar tildes ni en los comentarios ni en las etiquetas, ya que únicamente se admite código ASCII no extendido.</p>
 </li>
 <li>
-<p>Si el número de instrucciones es impar se ha de rellenar la palabra de 40 bits de la última instrucción con los 20 bits de menor peso a cero.</p>
+<p>Si el número de instrucciones es impar se ha de rellenar la palabra de 40 bits de la última instrucción con los 20 bits de menor peso a cero para conseguir que el número de instrucciones del programa sea <strong>par</strong>: utilizar la directiva <strong>.empty</strong></p>
 </li>
 <li>
 <p>La sección de instrucciones  debe de ir previamente a la sección de datos</p>
 <div class="listingblock">
 <div class="content">
 <pre>; CABECERA
-; 1ª version : sum1toN_v1.ias
+; Este código necesita ser DEPURADO
+; 1ª version : sum1toN_A.ias
 ; Calcula la suma de una secuencia de numeros enteros: suma = 1+2+..+n
 ; dato de entrada : n
 ; dato de salida  : suma
@@ -1755,7 +1769,110 @@ suma:	.data	0 ; sumas parciales y resultado final</pre>
 <li>
 <p>Se ha COMENTADO el código</p>
 </li>
+<li>
+<p><strong>FALTA</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>añadir las instrucciones para salvar los operandos en la dirección de memoria "n" en cada iteracción del bucle</p>
+</li>
+<li>
+<p>añadir las instrucciones para realizar la suma parcial en cada iteracción del bucle</p>
+</li>
+<li>
+<p>Ver versión del programa en lenguaje RTL ():</p>
+<div class="listingblock">
+<div class="content">
+<pre>SECCION INSTRUCCIONES
+bucle:	AC 	&lt;- M[n]		; cargar sumando
+	AC&gt;=0 : PC &lt;- sumar	; si el sumando &lt; 0 fin del bucle y si no salto a sumar
+	stop
+	; realizar la suma
+sumar:  AC 	&lt;- AC + M[suma]
+	M[suma] &lt;- AC
+	; actualizar sumando
+	AC 	&lt;- M[n]
+	AC 	&lt;- AC - M[uno]
+	M[n]  	&lt;- AC
+	PC 	&lt;- bucle	; salto incondicional
+
+SECCION DATOS
+n:	5		; variable sumando e inicializacion
+uno:	1		; variable sumando e inicializacion
+suma:	0		; variable suma parcial y final</pre>
+</div>
+</div>
+</li>
 </ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Versión rectificada</p>
+<div class="listingblock">
+<div class="content">
+<pre>; CABECERA
+; Codigo rectificado
+; Version : sum1toN_A.ias
+; Calcula la suma de una secuencia de numeros enteros: suma = 1+2+..+n
+; dato de entrada : n
+; dato de salida  : suma
+; Algoritmo : bucle de n iteraciones
+;             Los sumandos se van generando en sentido descendente de n a 0
+;             Se sale del bucle si el sumando es negativo -&gt; -1
+; Estructuras de datos : variables n y suma . Constante uno.
+; Lenguaje ensamblador: IASSim
+; Arquitectura de la maquina IAS de Von Neumann
+
+;;;;;;;;;;;;;;;; SECCION DE INSTRUCCIONES
+;Arquitectura orientada a Acumulador (AC)
+;Registros accesibles : AC
+; algoritmo: bucle que genera la secuencia n, n-1, n-2,...0,-1 si n&gt;=0
+bucle:	S(x)-&gt;Ac+  n    	; AC &lt;- M[n]
+	Cc-&gt;S(x)   sumar	; si el sumando &lt; 0 fin del bucle y si no salto a sumar
+	; fin del bucle
+	halt			; stop
+	.empty
+	; realizar la suma
+sumar:  S(x)-&gt;Ah+  suma         ; AC &lt;- AC + M[suma]
+        At-&gt;S(x)   suma         ; suma &lt;- AC
+; actualizar sumando
+        S(x)-&gt;Ac+  n    	; AC &lt;- M[n]
+        S(x)-&gt;Ah-  uno          ; AC &lt;- AC - M[uno]
+        At-&gt;S(x)   n            ; n &lt;- AC
+	Cu-&gt;S(x)   bucle        ; salto incondicional a la instrucción izda de bucle
+
+;;;;;;;;;;;;;;;;;;;SECCION DE DATOS
+; Declaracion de etiquetas, reserva de memoria externa, inicializacion.
+; Variables ordinarias
+n:	.data	5 ; variable sumando
+uno:	.data	1 ; cte
+suma:	.data	0 ; sumas parciales y resultado final</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Versión B</p>
+<div class="listingblock">
+<div class="content">
+<pre>; Version : sum1toN_B.ias
+; Calcula la suma de una secuencia de numeros enteros: suma = 1+2+..+n
+loop:      S(x)-&gt;Ac+  n    ;load n into AC
+           S(x)-&gt;Ah+  sum  ;add n to the sum
+           At-&gt;S(x)   sum  ;put total back at sum
+           S(x)-&gt;Ac+  n    ;load n into AC
+           S(x)-&gt;Ah-  one  ;decrement n
+           At-&gt;S(x)   n    ;store decremented n
+           Cc'-&gt;S(x)  loop ;if AC &gt;= 0, jump to pos right instruction
+           halt            ;otherwise done
+
+
+n:       .data 5  ;will loop 6 times total
+one:     .data 1  ;constant for decrementing n
+sum:     .data 0  ;where the running/final total is kept</pre>
+</div>
 </div>
 </li>
 </ul>

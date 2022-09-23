@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-22</span>
+<span id="revdate">2022-09-23</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -291,11 +291,9 @@ pre.rouge {
 <ul class="sectlevel2">
 <li><a href="_programas_ensamblador_iassim.html#iassim_ejemplos">23.1. Ejemplo 1: sum1toN.ias</a>
 <ul class="sectlevel3">
-<li><a href="_programas_ensamblador_iassim.html#_lenguaje_ensamblador_iassim_2">23.1.1. Lenguaje ensamblador iassim</a>
+<li><a href="_programas_ensamblador_iassim.html#_ejemplo_2_productocociente">23.1.1. Ejemplo 2: Producto/Cociente</a>
 </li>
-<li><a href="_programas_ensamblador_iassim.html#_ejemplo_2_productocociente">23.1.2. Ejemplo 2: Producto/Cociente</a>
-</li>
-<li><a href="_programas_ensamblador_iassim.html#_ejemplo_3_vectores">23.1.3. Ejemplo 3: Vectores</a>
+<li><a href="_programas_ensamblador_iassim.html#_ejemplo_3_vectores">23.1.2. Ejemplo 3: Vectores</a>
 </li>
 </ul>
 </li>
@@ -342,54 +340,8 @@ pre.rouge {
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="iassim_ejemplos">23.1. Ejemplo 1: sum1toN.ias</h3>
-<div class="sect3">
-<h4 id="_lenguaje_ensamblador_iassim_2">23.1.1. Lenguaje ensamblador iassim</h4>
 <div class="ulist">
 <ul>
-<li>
-<p><strong>2ª Versión</strong>: módulo fuente  <em>sum1toN_v2.ias</em>:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>La 2ª versión implementa un bucle cuyo cuerpo realiza una suma parcial donde uno de los sumandos varía en cada iteración.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="sh"><span class="p">;;;;;;;;;;;;;;</span> CABECERA
-<span class="p">;</span> <span class="p">;</span> 2ª version : sum1toN_v2.ias
-<span class="p">;;;;;;;;;;;;;;;;</span> SECCION DE INSTRUCCIONES
-<span class="p">;</span>Arquitectura orientada a Acumulador <span class="o">(</span>AC<span class="o">)</span>
-<span class="p">;</span>Registros accesibles : AC
-<span class="p">;</span> algoritmo: Bucle que realiza la operación suma <span class="o">=</span> n + suma si n&gt;<span class="o">=</span>0
-<span class="p">;</span> inicio bucle
-bucle:  S<span class="o">(</span>x<span class="o">)</span>-&gt;Ac+  n   	<span class="p">;</span> AC &lt;- M[n] .Cargar sumando
-        Cc-&gt;S<span class="o">(</span>x<span class="o">)</span>   sumar  <span class="p">;</span> si AC <span class="o">&gt;=</span> 0, PC &lt;- sumar .Si el sumando &lt; 0 fin del bucle
-        halt            <span class="p">;</span> stop
-        .empty		<span class="p">;</span> un 20-bit 0, para que el nº de instrucciones sea par.
-        <span class="p">;</span> realizar la suma
-sumar:  S<span class="o">(</span>x<span class="o">)</span>-&gt;Ah+  suma <span class="p">;</span> AC &lt;- AC + M[suma]
-        At-&gt;S<span class="o">(</span>x<span class="o">)</span>   suma <span class="p">;</span> M[suma] &lt;- AC
-
-<span class="p">;;;;;;;;;;;;;;;;;;;</span>SECCION DE DATOS
-<span class="p">;</span> Declaracion de etiquetas, reserva de memoria externa, inicializacion.
-<span class="p">;</span> Variables ordinarias
-n:	.data	5 <span class="p">;</span> variable sumando
-uno:	.data	1 <span class="p">;</span> cte
-suma:	.data	0 <span class="p">;</span> sumas parciales y resultado final</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Se ha desarrollado la sección de datos.</p>
-</li>
-<li>
-<p>Se ha realizado un BUCLE con la operación SUMA en el cuerpo del bucle y con PARADA al salirse del bucle.</p>
-</li>
-<li>
-<p>Se ha COMENTADO el código</p>
-</li>
-</ul>
-</div>
-</li>
 <li>
 <p><strong>Versión Demo</strong> <em>tutorial.ias</em>: la versión demo que se incluye en el archivo de descarga del simulador.</p>
 <div class="listingblock">
@@ -472,9 +424,8 @@ uno:   .data 1  <span class="p">;</span></code></pre>
 </li>
 </ul>
 </div>
-</div>
 <div class="sect3">
-<h4 id="_ejemplo_2_productocociente">23.1.2. Ejemplo 2: Producto/Cociente</h4>
+<h4 id="_ejemplo_2_productocociente">23.1.1. Ejemplo 2: Producto/Cociente</h4>
 <div class="sect4">
 <h5 id="_enunciado_2">Enunciado</h5>
 <div class="ulist">
@@ -516,7 +467,7 @@ uno:   .data 1  <span class="p">;</span></code></pre>
 </div>
 </li>
 <li>
-<p>La división puede tener resto 1 ó 0 dependiendo de si el dividendo es par o impar</p>
+<p>La división de un  número entero por 2 puede tener resto 1 ó 0 dependiendo de si el dividendo es par o impar</p>
 <div class="ulist">
 <ul>
 <li>
@@ -615,7 +566,7 @@ uno:   .data 1  <span class="p">;</span></code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>sum1toN_mul.ias</p>
+<p>versión sum1toN_mul_A.ias</p>
 <div class="listingblock">
 <div class="content">
 <pre>; Suma de los primeros N numeros enteros. Y=N(N+1)/2
@@ -648,6 +599,42 @@ dos:  .data 2</pre>
 </div>
 </div>
 </li>
+<li>
+<p>versión simplificada sum1toM_mul.ias: realizo primero la multiplicación N(N+1) y el resultado siempre es par. A continuación divido por 2.</p>
+<div class="listingblock">
+<div class="content">
+<pre>; Suma de los primeros N numeros enteros. Y=N(N+1)/2
+; CPU IAS
+; lenguaje ensamblador: simaulador IASSim
+; Ejercicio 2.1 del libro de William Stalling, Estructura de Computadores
+
+; SECCION DE INSTRUCCIONES
+S(x)-&gt;Ac+ n    ;01 n   ;AC    &lt;- M[n]
+S(x)-&gt;Ah+ uno  ;05 uno ;AC    &lt;- AC+1
+At-&gt;S(x) y     ;11 y   ;M[y]  &lt;- AC
+S(x)-&gt;R y      ;09 y   ;AR    &lt;- M[y]
+S(x)*R-&gt;A n    ;0B n   ;AC:AR &lt;- AR*M[n]
+; Caso particular donde AC=0
+R-&gt;A           ;0A     ;AC    &lt;- AR
+A/S(x)-&gt;R dos  ;0C 2   ;AR    &lt;- AC/2
+;Al ser par el dividendo el resto es cero
+R-&gt;A           ;0A     ;AC    &lt;- AR
+At-&gt;S(x) y     ;11 y   ;M[y]  &lt;- AC
+halt
+; como el numero de instrucciones  es par no es necesaria la directiva .empty
+
+
+; SECCION DE DATOS
+; Declaracion e inicializacion de variables
+y:     .data 0  ;resultado
+
+; Declaracion de las Constantes
+n:    .data 5   ;parametro N
+uno:  .data 1
+dos:  .data 2</pre>
+</div>
+</div>
+</li>
 </ul>
 </div>
 </div>
@@ -663,7 +650,7 @@ dos:  .data 2</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ejemplo_3_vectores">23.1.3. Ejemplo 3: Vectores</h4>
+<h4 id="_ejemplo_3_vectores">23.1.2. Ejemplo 3: Vectores</h4>
 <div class="sect4">
 <h5 id="_enunciado_3">Enunciado</h5>
 <div class="ulist">
