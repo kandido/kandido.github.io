@@ -2530,6 +2530,9 @@ e)Indirecto con desplazamiento con registro base R2</pre>
 </tr>
 </tbody>
 </table>
+</li>
+</ol>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 50%;">
 <colgroup>
 <col style="width: 50%;">
@@ -2616,10 +2619,8 @@ MOVE.L  (A1)+,D2
 	A1&lt;-A1+4; (A1=0x1202+0x4=0x1206) A1:00001206</pre>
 </div>
 </div>
-</li>
-</ul>
-</div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Mostrar el contenido de todos los registros  y posiciones de memoria afectadas (sin  incluir el PC) por la ejecución de cada una  de las instrucciones, suponiendo que  partimos siempre de las condiciones iniciales  especificadas:</p>
 <table class="tableblock frame-all grid-all" style="width: 70%;">
@@ -2640,6 +2641,12 @@ MOVE.L  (A1)+,D2
 </tr>
 </tbody>
 </table>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 50%;">
 <colgroup>
 <col style="width: 50%;">
@@ -2682,7 +2689,8 @@ MOVE.L  (A1)+,D2
 </tr>
 </tbody>
 </table>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Para la arquitectura M68000-32 de Motorola, suponiendo que se dan las siguientes  condiciones iniciales, mostrar el contenido  de todos los registros y posiciones de  memoria afectadas (incluyendo el PC) por la ejecución de cada una de las instrucciones.  Suponer, además, que las instrucciones  están en posiciones consecutivas de  memoria, a partir de la dirección $2000, y que se ejecutan en secuencia.</p>
 <table class="tableblock frame-all grid-all" style="width: 50%;">
@@ -2727,6 +2735,9 @@ MOVE.L  (A1)+,D2
 </tr>
 </tbody>
 </table>
+</li>
+</ol>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 70%;">
 <colgroup>
 <col style="width: 50%;">
@@ -2745,7 +2756,8 @@ MOVE.L  (A1)+,D2
 </tr>
 </tbody>
 </table>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Comparar los computadores de 1, 2 y 3 direcciones escribiendo los programas para calcular la expresión X= (A+B*C)/(D-E*F) siendo los repertorios de cada uno de ellos los siguientes:</p>
 <div class="listingblock">
@@ -2823,14 +2835,17 @@ POP X</pre>
 <div id="cmp_ejercicio" class="olist arabic">
 <ol class="arabic">
 <li>
-<p>The x86 Compare instruction (CMP) <strong>subtracts</strong> the source operand from the destination operand; it updates the status flags (C, P, A, Z, S, O) but does not alter either of the operands. The CMP instruction can be used to determine if the destination operand is greater than, equal to, or less than the source operand.</p>
+<p>The x86 Compare instruction (CMP) <strong>subtracts</strong> the source operand from the destination operand; it updates the status flags (C, P, A, Z, S, O) but does not alter either of the operands. The CMP instruction can be used to determine if the destination operand is greater than, equal to, or less than the source operand.Cuando se ejecuta CMP hay dos flags de overflow en el registro EFLAGS: el flag <strong>CF</strong> no hace la función de Carrier Flag sino la función de overflow flag si se comparan números sin signo. Si se comparan números con signo el flag de overlfow es <strong>OF</strong>.</p>
 <div class="olist loweralpha">
-<ol class="loweralpha">
+<ol class="loweralpha" type="a">
 <li>
 <p>Suppose the two operands are treated as unsigned integers. Show which status flags are relevant to determine the relative size of the two integer and what values of the flags correspond to greater than, equal to, or less than.</p>
 </li>
 <li>
 <p>Suppose the two operands are treated as twos complement signed integers. Show which status flags are relevant to determine the relative size of the two integer and what values of the flags correspond to greater than, equal to, or less than.</p>
+</li>
+<li>
+<p>Cómo varían los flags de signo SF y overflow OF para operandos con signo de 1 byte: si el operando destino es 0x80 y el operando fuente es 0x7F; si el operando destino es 0x7F y el operando fuente 0x81.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2899,10 +2914,13 @@ POP X</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>para el caso Destino &gt; Fuente,  la resta Destino - Fuente da lugar a  SF=OF y CF=0</p>
+<p>CF es el flag de overflow.</p>
 </li>
 <li>
-<p>para el caso Destino &lt; Fuente, la resta Destino - Fuente da lugar a  SF&lt;&gt;OF y CF=1</p>
+<p>Sin signo &#8594; para el caso Destino &gt; Fuente, la resta Destino - Fuente da lugar a   CF=0 y OF según la resta con signo. El flag de signo no vaŕía SF=X.</p>
+</li>
+<li>
+<p>Sin signo &#8594; para el caso Destino &lt; Fuente, la resta Destino - Fuente da lugar a   CF=1 y OF según la resta con signo. El flag de signo no varía SF=X.</p>
 </li>
 </ul>
 </div>
@@ -2961,9 +2979,29 @@ POP X</pre>
 </tr>
 </tbody>
 </table>
+<div class="ulist">
+<ul>
+<li>
+<p>OF es el flag de overflow.</p>
 </li>
 <li>
-<p>** : Cuidado con el tamaño de los operandos:  Pej operandos de 8 bits con OP_destino=-255 y OP_fuente=+1, entonces OP_destino - OP_fuente = -255-1, en C2 = 0x80+0xFF=0x17F=1_0111_1111= Sí hay oveflow ya que MSB de valor 1 es distinto al bit de signo 0. Este análisis es erróneo ya que con 8 bits el rango de valores es <code>(-128,+127)</code> y por lo tanto -255 está fuera de rango.</p>
+<p>Con signo &#8594; para el caso Destino &gt; Fuente, la resta Destino - Fuente da lugar a  CF según la resta sin signo. SF=0 ó 1. OF=SF</p>
+</li>
+<li>
+<p>Con signo &#8594; para el caso Destino &lt; Fuente, la resta Destino - Fuente da lugar a  CF según la resta sin signo. SF=0 ó 1. OF&lt;&gt;SF</p>
+</li>
+<li>
+<p>CONCLUSION</p>
+<div class="listingblock">
+<div class="content">
+<pre> CMP realiza los dos casos simultaneamente (con signo y sin signo) por lo que afecta a los dos flags de overflow CF y OF
+ para el caso Destino &gt; Fuente,  la resta Destino - Fuente da lugar a  SF=OF y CF=0
+ para el caso Destino &lt; Fuente, la resta Destino - Fuente da lugar a  SF&lt;&gt;OF y CF=1</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -3071,11 +3109,11 @@ POP X</pre>
 <p>Sustituir el salto <code>JLE Op_destino</code> por <code>SETcc</code></p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="nasm">	<span class="nf">SUB</span> <span class="nb">CX</span><span class="p">,</span> <span class="nb">CX</span> <span class="c1">;set register CX to 0</span>
-	<span class="nf">MOV</span> <span class="nb">AX</span><span class="p">,</span> <span class="nv">B</span>  <span class="c1">;move contents of location B to register AX</span>
-	<span class="nf">CMP</span> <span class="nb">AX</span><span class="p">,</span> <span class="nv">A</span>  <span class="c1">;compare contents of register AX and location A</span>
+<pre class="rouge highlight"><code data-lang="nasm">        <span class="nf">SUB</span> <span class="nb">CX</span><span class="p">,</span> <span class="nb">CX</span> <span class="c1">;set register CX to 0</span>
+        <span class="nf">MOV</span> <span class="nb">AX</span><span class="p">,</span> <span class="nv">B</span>  <span class="c1">;move contents of location B to register AX</span>
+        <span class="nf">CMP</span> <span class="nb">AX</span><span class="p">,</span> <span class="nv">A</span>  <span class="c1">;compare contents of register AX and location A</span>
 
-	<span class="nf">SETGT</span> <span class="nb">CX</span>   <span class="c1">;CX = (a GT b)</span>
+        <span class="nf">SETGT</span> <span class="nb">CX</span>   <span class="c1">;CX = (a GT b)</span>
 <span class="nl">TEST:</span>	<span class="nf">JCXZ</span> <span class="nv">OUT</span>   <span class="c1">;jump if contents of CX equal 0</span>
 <span class="nl">THEN:</span>   <span class="nf">XXXXXX</span>
 <span class="nl">OUT:</span>    <span class="nf">XXXXXX</span></code></pre>

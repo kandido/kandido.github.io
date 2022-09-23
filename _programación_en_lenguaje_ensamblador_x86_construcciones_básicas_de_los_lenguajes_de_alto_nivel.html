@@ -1578,7 +1578,7 @@ Non-integral results are truncated (chopped) towards 0</pre>
 <p>The condition codes used by the Jcc, CMOVcc, and SETcc instructions are based on the results of a CMP instruction</p>
 </li>
 <li>
-<p>Compares the first source operand with the second source operand and sets the status flags in the EFLAGS register according to the results. The comparison is performed by subtracting the second operand from the first operand and then setting the status flags in the same manner as the SUB instruction. When an immediate value is used as an operand, it is sign-extended to the length of the first operand.</p>
+<p>Compares the first source operand with the second source operand and sets the status flags in the EFLAGS register according to the results. The comparison is performed by subtracting the second operand from the first operand and then setting the status flags in the same manner as the <strong>SUB instruction</strong>. When an immediate value is used as an operand, it is sign-extended to the length of the first operand.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1635,6 +1635,9 @@ Non-integral results are truncated (chopped) towards 0</pre>
 <div class="ulist">
 <ul>
 <li>
+<p>Computes the bit-wise logical <strong>AND</strong> of first operand (source 1 operand) and the second operand (source 2 operand)</p>
+</li>
+<li>
 <p>Clear CF,OF</p>
 </li>
 <li>
@@ -1655,7 +1658,10 @@ Non-integral results are truncated (chopped) towards 0</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>No modifica ningún flag. Modifica el operando.</p>
+<p>SETcc operand</p>
+</li>
+<li>
+<p>No modifica ningún flag. Modifica el operando si se cumple la condición.</p>
 </li>
 </ul>
 </div>
@@ -1663,14 +1669,20 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </ul>
 </div>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_saltos">6.6.6. Saltos</h4>
 <div class="sect4">
-<h5 id="_jcc">Jcc</h5>
+<h5 id="_condicionales_jcc">Condicionales: Jcc</h5>
 <div class="ulist">
 <ul>
 <li>
 <p><a href="https://www.felixcloutier.com/x86/jcc">Jcc</a></p>
 <div class="ulist">
 <ul>
+<li>
+<p>Comprueba la condición y si se cumple se ejecuta el salto a la dirección referenciada en el campo de operando.</p>
+</li>
 <li>
 <p>jump short: el valor del operando es relativo al PC</p>
 </li>
@@ -1686,12 +1698,12 @@ Non-integral results are truncated (chopped) towards 0</pre>
 </ul>
 </div>
 </li>
+<li>
+<p>Antes de un salto condicional es necesario ejecutar algún tipo de instrucción donde la relación (aritmética, lógica, etc ) de los operandos sea condición para la ejecución del salto. Instrucciones previas pueden ser: CMP y TEST.</p>
+</li>
 </ul>
 </div>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_saltos">6.6.6. Saltos</h4>
 <div class="sect4">
 <h5 id="_indirectos">Indirectos</h5>
 <div class="paragraph">
