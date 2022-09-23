@@ -2530,9 +2530,6 @@ e)Indirecto con desplazamiento con registro base R2</pre>
 </tr>
 </tbody>
 </table>
-</li>
-</ol>
-</div>
 <table class="tableblock frame-all grid-all" style="width: 50%;">
 <colgroup>
 <col style="width: 50%;">
@@ -2619,8 +2616,10 @@ MOVE.L  (A1)+,D2
 	A1&lt;-A1+4; (A1=0x1202+0x4=0x1206) A1:00001206</pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>Mostrar el contenido de todos los registros  y posiciones de memoria afectadas (sin  incluir el PC) por la ejecución de cada una  de las instrucciones, suponiendo que  partimos siempre de las condiciones iniciales  especificadas:</p>
 <table class="tableblock frame-all grid-all" style="width: 70%;">
@@ -2641,12 +2640,6 @@ MOVE.L  (A1)+,D2
 </tr>
 </tbody>
 </table>
-</li>
-</ol>
-</div>
-</li>
-</ul>
-</div>
 <table class="tableblock frame-all grid-all" style="width: 50%;">
 <colgroup>
 <col style="width: 50%;">
@@ -2689,8 +2682,7 @@ MOVE.L  (A1)+,D2
 </tr>
 </tbody>
 </table>
-<div class="olist arabic">
-<ol class="arabic">
+</li>
 <li>
 <p>Para la arquitectura M68000-32 de Motorola, suponiendo que se dan las siguientes  condiciones iniciales, mostrar el contenido  de todos los registros y posiciones de  memoria afectadas (incluyendo el PC) por la ejecución de cada una de las instrucciones.  Suponer, además, que las instrucciones  están en posiciones consecutivas de  memoria, a partir de la dirección $2000, y que se ejecutan en secuencia.</p>
 <table class="tableblock frame-all grid-all" style="width: 50%;">
@@ -2735,9 +2727,6 @@ MOVE.L  (A1)+,D2
 </tr>
 </tbody>
 </table>
-</li>
-</ol>
-</div>
 <table class="tableblock frame-all grid-all" style="width: 70%;">
 <colgroup>
 <col style="width: 50%;">
@@ -2756,8 +2745,7 @@ MOVE.L  (A1)+,D2
 </tr>
 </tbody>
 </table>
-<div class="olist arabic">
-<ol class="arabic">
+</li>
 <li>
 <p>Comparar los computadores de 1, 2 y 3 direcciones escribiendo los programas para calcular la expresión X= (A+B*C)/(D-E*F) siendo los repertorios de cada uno de ellos los siguientes:</p>
 <div class="listingblock">
@@ -2830,12 +2818,8 @@ POP X</pre>
 </ul>
 </div>
 </li>
-</ol>
-</div>
-<div id="cmp_ejercicio" class="olist arabic">
-<ol class="arabic">
 <li>
-<p>The x86 Compare instruction (CMP) <strong>subtracts</strong> the source operand from the destination operand; it updates the status flags (C, P, A, Z, S, O) but does not alter either of the operands. The CMP instruction can be used to determine if the destination operand is greater than, equal to, or less than the source operand.Cuando se ejecuta CMP hay dos flags de overflow en el registro EFLAGS: el flag <strong>CF</strong> no hace la función de Carrier Flag sino la función de overflow flag si se comparan números sin signo. Si se comparan números con signo el flag de overlfow es <strong>OF</strong>.</p>
+<p><a id="cmp_ejercicio"></a>The x86 Compare instruction (CMP) <strong>subtracts</strong> the source operand from the destination operand; it updates the status flags (C, P, A, Z, S, O) but does not alter either of the operands. The CMP instruction can be used to determine if the destination operand is greater than, equal to, or less than the source operand.Cuando se ejecuta CMP hay dos flags de overflow en el registro EFLAGS: el flag <strong>CF</strong> no hace la función de Carrier Flag sino la función de overflow flag si se comparan números sin signo. Si se comparan números con signo el flag de overlfow es <strong>OF</strong>.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -3012,7 +2996,7 @@ POP X</pre>
 <li>
 <p>Many microprocessor instruction SETS include an instruction that tests a condition and sets a destination operand if the condition is true. Examples include the <em>SETcc</em> on the x86 processor, the <em>Scc</em> on the Motorola MC68000 processor, and the <em>Scond</em> on the National NS32000 processor. <a href="http://www.felixcloutier.com/x86/">Manual Intel quick</a>: interpretar los nmemónicos y operando de la instrucción SETcc</p>
 <div class="olist loweralpha">
-<ol class="loweralpha">
+<ol class="loweralpha" type="a">
 <li>
 <p>There are a few differences among these instructions:</p>
 <div class="ulist">
