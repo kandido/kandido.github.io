@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-24</span>
+<span id="revdate">2022-09-26</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -295,7 +295,7 @@ pre.rouge {
 </li>
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_estructura_de_la_computadora_con_arquitectura_intel_x86_64">6.3. Estructura de la  Computadora con Arquitectura Intel x86-64</a>
 <ul class="sectlevel3">
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_manuales_isa_x86">6.3.1. Manuales ISA x86</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_manuales_intel_isa_x86">6.3.1. Manuales Intel ISA x86</a>
 </li>
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_intro">6.3.2. Intro</a>
 </li>
@@ -379,7 +379,13 @@ pre.rouge {
 <ul class="sectlevel3">
 <li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_introducción_6">6.9.1. Introducción</a>
 </li>
-<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_ejemplos_2">6.9.2. Ejemplos</a>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_arquitectura_amd64_2">6.9.2. Arquitectura amd64</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_arquitectura_i386">6.9.3. Arquitectura i386</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_códigos_de_llamada_2">6.9.4. Códigos de llamada</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#_ejemplo_3">6.9.5. Ejemplo</a>
 </li>
 </ul>
 </li>
@@ -511,6 +517,9 @@ pre.rouge {
 <li>
 <p>Manual Assembler as: <a href="_lenguajes_de_programación_en_ensamblador.html#assembler_as_directivas_i386">Apéndice: Directivas "as i386"</a></p>
 </li>
+<li>
+<p>Referencias a manuales en el <a href="_lenguajes_de_programación_en_ensamblador.html#leng_asm">Apéndice</a></p>
+</li>
 </ul>
 </div>
 </div>
@@ -518,7 +527,7 @@ pre.rouge {
 <div class="sect2">
 <h3 id="_estructura_de_la_computadora_con_arquitectura_intel_x86_64">6.3. Estructura de la  Computadora con Arquitectura Intel x86-64</h3>
 <div class="sect3">
-<h4 id="_manuales_isa_x86">6.3.1. Manuales ISA x86</h4>
+<h4 id="_manuales_intel_isa_x86">6.3.1. Manuales Intel ISA x86</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1305,7 +1314,7 @@ b (byte) 1byte</pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://www.felixcloutier.com/x86/">manual Intel quick</a>: <strong>manual no oficial recomendado</strong></p>
+<p><a href="http://www.felixcloutier.com/x86/">manual Intel quick</a>: <strong>recomendado</strong></p>
 </li>
 </ul>
 </div>
@@ -2489,26 +2498,35 @@ call sumMtoN</pre>
 </div>
 </div>
 </li>
-<li>
-<p>Ejemplo arquitectura i386</p>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_arquitectura_amd64_2">6.9.2. Arquitectura amd64</h4>
+<div class="sect4">
+<h5 id="_códigos_de_llamada">Códigos de llamada</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Los 6 primeros argumentos se pasan a través de los registros: [EBX-ECX-EDX-ESI-EDI-EBP] previamente a la instrucción de la llamada <code>int 0x80</code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="rouge highlight"><code data-lang="c"><span class="o">*</span> <span class="n">printf</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">write</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">EBX</span><span class="o">-</span><span class="n">ECX</span><span class="o">-</span><span class="n">EDX</span><span class="o">-</span><span class="n">ESI</span><span class="o">-</span><span class="n">EDI</span><span class="o">-</span><span class="n">EBP</span><span class="p">,</span><span class="kt">int</span> <span class="mh">0x80</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">kernel</span> <span class="n">syscall</span> <span class="n">write</span>
-<span class="o">*</span> <span class="n">API</span>      <span class="o">-&gt;</span>        <span class="n">wrapper</span> <span class="n">function</span>                      <span class="o">-&gt;</span>                <span class="n">ABI</span>                  <span class="o">-&gt;</span>  <span class="n">kernel</span> <span class="n">syscall</span></code></pre>
-</div>
-</div>
+<p>'/usr/include/asm/unistd_64.h ': declaración de macros con el código de la llamada en la arquitectura x86-64</p>
+</li>
+<li>
+<p><em>/usr/include/bits/syscall.h</em>  : macros antiguas también válidas en la arquitectura x86-32</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Ejemplo arquitectura amd64</p>
+</div>
+<div class="sect4">
+<h5 id="_argumentos">Argumentos</h5>
 <div class="ulist">
 <ul>
+<li>
+<p>Ejemplo arquitectura <strong>amd64</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Para pasar los argumentos no se utiliza la pila (memoria externa) sino los registros RPG (memoria interna de la CPU)</p>
+</li>
 <li>
 <p>Los 6 primeros argumentos se pasan a través de los registros: [RAX-RDI-RSI-RDX-R10-R8-R9] previamente a la instrucción de la llamada <code>syscall</code></p>
 <div class="listingblock">
@@ -2524,12 +2542,667 @@ call sumMtoN</pre>
 </ul>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_ejemplos_2">6.9.2. Ejemplos</h4>
+<div class="sect4">
+<h5 id="_ejemplos_amd64">Ejemplos amd64</h5>
 <div class="ulist">
 <ul>
 <li>
 <p>Ver en el <a href="_llamadas_al_sistema_operativo_2.html#llamadas_SO">Apéndice</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_arquitectura_i386">6.9.3. Arquitectura i386</h4>
+<div class="sect4">
+<h5 id="_norma">Norma</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>ABI SystemV i386: Aplication Binary Interface (ABI)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La norma ABI SystemV i386 es la norma oficial donde se describe la interfaz binaria, es decir, como se comunican los distintos módulos de un programa a nivel binario, a  nivel de lenguaje máquina.</p>
+</li>
+<li>
+<p>La llamada al kernel se realiza mediante la instrucción <code>int $0x80</code> donde int es el mnemónico de interrupción (se interrumpe el programa de usuario en ejecución para llamar a una función del kernel)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_códigos_de_llamada_2">6.9.4. Códigos de llamada</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><em>/usr/include/asm/unistd_32.h</em> : declaración de macros con el código de la llamada</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>/usr/include/bits/syscall.h</em>: macros antiguas también válidas</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>llamadas típicas:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>exit-fork-read-write-open-close-&#8230;&#8203;</strong></p>
+<table class="tableblock frame-all grid-all" style="width: 80%;">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 10%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top" colspan="3">exit - terminate current process</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ebx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">return code</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">(This call does not return)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><strong>fork - create child process</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 in the clone; process id of clone or EAGAIN or ENOMEM in caller</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><strong>read - read from file or device</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ebx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file descriptor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ecx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address of the buffer to read into</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maximum number of bytes to read</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number of bytes actually read  :  EAGAIN  :  EBADF  :  EFAULT  :  EINTR  :  EINVAL  :  EIO  :  EISDIR</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><strong>write - write to file or device</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ebx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file descriptor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ecx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address of the buffer to write from</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maximum number of bytes to write</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number of bytes actually sent  :  EAGAIN  :  EBADF  :  EFAULT  :  EINTR  :  EINVAL  :  EIO  :  ENOSPC  :  EPIPE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><strong>open - open, create, or truncate a file or device</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ebx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address of zero-terminated pathname</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ecx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file access bits</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file permission mode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file descriptor of opened file  :  EACCESS  :  EEXIST  :  EFAULT  :  EISDIR  :  ELOOP  :  EMFILE,  :  ENAMETOOLONG  :  ENFILE  :  ENOENT  :  ENODEV  :  ENODIR  :  ENOMEM  :  ENOSPC  :  ENXIO  :  EROFS  :  ETXTBSY</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><strong>close - close a file or device</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ebx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file descriptor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zero for success  :  EBADF</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><strong>waitpid - wait for a processes to terminate</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ebx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">process id of the process to wait for</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ecx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0, or address of buffer to hold exit state</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">option flags  :  0  :  WNOHANG  :  WUNTRACED</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pid of finished process  :  ECHILD  :  EINVAL  :  ERESTART</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ecx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">exit state of finished process, if non-zero value was input in ecx</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><strong>create - create a file</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ebx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address of zero-terminated pathname</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ecx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file permission mode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">file descriptor of opened file  :  EACCESS  :  EEXIST  :  EFAULT  :  EISDIR  :  ELOOP  :  EMFILE,  :  ENAMETOOLONG  :  ENFILE  :  ENOENT  :  ENODEV  :  ENODIR  :  ENOMEM  :  ENOSPC  :  ENXIO  :  EROFS  :  ETXTBSY</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Note</p></td>
+<td class="tableblock halign-left valign-top" colspan="2"><p class="tableblock">This call is identical to calling open with access bits O_CREATE : O_WRONLY : O_TRUNC</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><strong>link - create a hard link to a file</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ebx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address of zero-terminated pathname of existing file name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ecx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address of zero-terminated pathname of new name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0  :  EACCESS  :  EIO  :  EPERM  :  EEXIST  :  EFAULT  :  ELOOP  :  EMLINK  :  ENAMETOOLONG  :  ENOENT  :  ENOMEM  :  ENOSPC  :  ENOTDIR  :  EPERM  :  EROFS  :  EXDEV</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><strong>unlink - delete a name and remove file when not busy</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ebx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address of zero-terminated pathname of existing file name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0  :  EACCES  :  EFAULT  :  EIO  :  EISDIR  :  ELOOP  :  ENAMETOOLONG  :  ENOENT  :  ENOMEM  :  ENOTDIR  :  EPERM  :  EROFS</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><strong>execve - execute a program</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ebx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address of zero-terminated pathname of program</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ecx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address of zero-terminated list of addresses of zero-terminated argument strings</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">edx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address of zero-terminated list of addresses of zero-terminated environment strings</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If success, no return because the new program inherits resources and overwrites caller; otherwise: E2BIG  :  EACCES  :  EINVAL  :  EIO  :  EISDIR  :  ELIBBAD  :  ELOOP  :  ENFILE  :  ENOEXEC  :  ENOENT  :  ENOMEM  :  ENOTDIR  :  EFAULT  :  ENAMETOOLONG  :  EPERM  :  ETXTBUSY</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" colspan="3"><p class="tableblock"><strong>chdir - change working directory</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ebx</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address of zero-terminated pathname of existing directory</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Out</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0  :  EACCES  :  EBADF  :  EFAULT  :  EIO  :  ELOOP  :  ENAMETOOLONG  :  ENOENT  :  ENOMEM  :  ENOTDIR</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>File descriptors</p>
+<div class="ulist">
+<ul>
+<li>
+<p>0 (STDIN): The standard input for the terminal device (normally the keyboard). Diferenciar la macro STDOUT_FILEIN de la macro stdin.</p>
+</li>
+<li>
+<p>1 (STDOUT): The standard output for the terminal device (normally the terminal screen). Diferenciar la macro STDOUT_FILENO de la macro stdout.</p>
+</li>
+<li>
+<p>2 (STDERR): The standard error output for the terminal device (normally the terminal screen)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_como_pasar_los_argumentos">Como pasar los argumentos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Para pasar los argumentos no se utiliza la pila (memoria externa) sino los registros RPG (memoria interna de la CPU)</p>
+</li>
+<li>
+<p>Los 6 primeros argumentos se pasan a través de los registros: [EBX-ECX-EDX-ESI-EDI-EBP] previamente a la instrucción de la llamada <code>int $0x80</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="o">*</span> <span class="n">printf</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">write</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="n">EBX</span><span class="o">-</span><span class="n">ECX</span><span class="o">-</span><span class="n">EDX</span><span class="o">-</span><span class="n">ESI</span><span class="o">-</span><span class="n">EDI</span><span class="o">-</span><span class="n">EBP</span><span class="p">,</span><span class="kt">int</span> <span class="mh">0x80</span><span class="p">]</span> <span class="o">-&gt;</span> <span class="n">kernel</span> <span class="n">syscall</span> <span class="n">write</span>
+<span class="o">*</span> <span class="n">API</span>      <span class="o">-&gt;</span>        <span class="n">wrapper</span> <span class="n">function</span>                      <span class="o">-&gt;</span>                <span class="n">ABI</span>                  <span class="o">-&gt;</span>  <span class="n">kernel</span> <span class="n">syscall</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Pasar los argumentos 1º-2º-3º-4º-5º-6º a través de los registros <em>EBX-ECX-EDX-ESI-EDI-EBP</em> en el orden indicado en el prototipo de la función en C:</p>
+</li>
+<li>
+<p>Ej: llamada a la <em>syscall exit</em> del kernel desde un módulo fuente en lenguaje ASM:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>man 3 exit</code></p>
+</li>
+<li>
+<p><code>syscall(exit_code,int status)</code></p>
+</li>
+<li>
+<p>módulo asm</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="nf">mov</span> <span class="kc">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+<span class="nf">mov</span> <span class="kc">$</span><span class="nv">status_value</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>
+<span class="nf">int</span> <span class="kc">$</span><span class="mh">0x80</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ej: llamada a la <em>syscall write</em> del kernel desde un módulo fuente en lenguaje ASM:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>man 2 write</code></p>
+</li>
+<li>
+<p><code>syscall(write_code,int fd, const void *buf, size_t count)</code></p>
+</li>
+<li>
+<p>módulo asm</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="nf">mov</span> <span class="kc">$</span><span class="mi">4</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+<span class="nf">mov</span> <span class="kc">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>
+<span class="nf">mov</span> <span class="kc">$</span><span class="nv">buffer_address_label</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>
+<span class="nf">mov</span> <span class="nb">si</span><span class="nv">ze</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+<span class="nf">int</span> <span class="kc">$</span><span class="mh">0x80</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Valor de Retorno</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El valor de retorno se pasa a través del registro <em>EAX</em></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_llamadas_a_las_funciones_de_la_librería_standard_de_c">LLamadas a las funciones de la librería standard de C</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Desde ASM se puede llamar a las funciones de la librería de C instalada en linux: <em>libc</em></p>
+</li>
+<li>
+<p>Para llamar a la función <em>printf()</em> utilizamos la instrucción <code>call printf</code></p>
+</li>
+<li>
+<p>Los argumentos de la función se pasan previamente a la llamada.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Los argumentos se pasan a través de la <strong>pila</strong> en el sentido Dcha&#8594;Izda a como estan definidos.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Es necesario linkar el módulo objeto con la librería <em>libc</em></p>
+</li>
+<li>
+<p>Ej:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Programación C</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="n">planetas</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"El número de planetas es %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">planetas</span><span class="p">);</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Programación ASM</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm">     <span class="nf">.section</span> <span class="nv">.data</span>
+<span class="nl">cadena:</span>
+     <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">El</span> <span class="nv">n</span><span class="err">ú</span><span class="nv">mero</span> <span class="nv">de</span> <span class="nv">planetas</span> <span class="nb">es</span> <span class="o">%</span><span class="nv">d</span> <span class="err">\</span><span class="nv">n</span><span class="err">"</span>
+<span class="nl">planetas:</span>
+     <span class="nf">.long</span> <span class="mi">0</span>
+     <span class="nf">.section</span> <span class="nv">.text</span>
+<span class="nl">_start:</span>
+     <span class="nf">movl</span> <span class="kc">$</span><span class="mi">9</span><span class="p">,</span><span class="nv">planetas</span>
+     <span class="nf">push</span> <span class="nv">planetas</span>
+     <span class="nf">push</span> <span class="nv">cadena</span>
+     <span class="nf">call</span> <span class="nv">printf</span>
+     <span class="nf">call</span> <span class="nv">exit</span>
+     <span class="nf">.end</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_línea_de_comandos">Línea de comandos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Process Initialization</p>
+</li>
+<li>
+<p>en el kernel está declarada la función main(): <code>extern int main (int argc , char* argv[] , char* envp[]) ;</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>declaración y definición del módulo principal</p>
+</li>
+<li>
+<p><em>argc</em> is a non-negative argument count;</p>
+</li>
+<li>
+<p><em>argv</em> is an array of argument strings, with argv[argc]==0;</p>
+</li>
+<li>
+<p><em>envp</em> is an array of environment strings, also terminated by a null pointer.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Stack Initialization</p>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<caption class="title">Table 13. Convenio ABI: Stack</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Stack Reference</th>
+<th class="tableblock halign-center valign-top">Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">arguments strings</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4n(%esp)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">- pointer to nº string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8(%esp)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">- pointer to 2º argument string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4(%esp)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">- pointer to 1º argument string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0(%esp)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">- argc</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo_3">6.9.5. Ejemplo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Introducir los datos del programa suma.s a través de 	a línea de comandos</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="scala"><span class="o">##</span><span class="k">#</span> <span class="n">función</span><span class="k">:</span> <span class="kt">sumar</span> <span class="kt">dos</span> <span class="kt">números</span> <span class="kt">enteros</span> <span class="kt">de</span> <span class="kt">un</span> <span class="kt">dígito.</span>
+<span class="k">###</span>          <span class="kt">los</span> <span class="kt">sumandos</span> <span class="kt">se</span> <span class="kt">pasan</span> <span class="kt">a</span> <span class="kt">través</span> <span class="kt">de</span> <span class="kt">la</span> <span class="kt">línea</span> <span class="kt">de</span> <span class="kt">comandos</span>
+        <span class="o">#</span><span class="k">#</span> <span class="n">gcc</span> <span class="o">-</span><span class="n">m32</span> <span class="o">-</span><span class="n">nostartfiles</span> <span class="o">-</span><span class="n">g</span> <span class="o">-</span><span class="n">o</span> <span class="n">sum_input</span> <span class="nv">sum_imput</span><span class="o">.</span><span class="py">s</span>
+        <span class="o">#</span><span class="k">#</span> <span class="n">run</span> <span class="mi">5</span> <span class="mi">7</span>
+        <span class="o">#</span><span class="k">#</span>  <span class="n">x</span> <span class="o">/</span><span class="nf">a</span>  <span class="o">(</span><span class="n">char</span><span class="o">**)(</span><span class="nc">$esp</span><span class="o">+</span><span class="mi">4</span><span class="o">)</span>  <span class="o">-&gt;</span> <span class="mh">0xffffd0a4</span><span class="k">:</span>	<span class="err">0</span><span class="kt">xffffd26e</span>
+        <span class="o">#</span><span class="k">#</span>  <span class="n">x</span> <span class="o">/</span><span class="n">c</span>  <span class="o">*(</span><span class="n">char</span><span class="o">**)(</span><span class="nc">$esp</span><span class="o">+</span><span class="mi">4</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="mh">0xffffd26e</span><span class="k">:</span>	<span class="err">47</span> <span class="kt">'/'</span>
+        <span class="k">##</span>  <span class="kt">x</span> <span class="kt">/s</span>  <span class="kt">*</span><span class="o">(</span><span class="kt">char**</span><span class="o">)(</span><span class="kt">$esp+</span><span class="err">4</span><span class="o">)</span> <span class="kt">-&gt;</span> <span class="err">0</span><span class="kt">xffffd26e:</span>	 <span class="err">"</span><span class="kt">/home/candido/tutoriales/as_tutorial/algoritmos_x86-</span><span class="err">32</span><span class="kt">/basicos/sum_input</span><span class="err">"</span>
+        <span class="k">##</span>  <span class="kt">p</span> <span class="kt">/s</span> <span class="kt">*</span><span class="o">(</span><span class="kt">char**</span><span class="o">)(</span><span class="kt">$esp+</span><span class="err">4</span><span class="o">)</span>  <span class="kt">-&gt;</span> <span class="err">0</span><span class="kt">xffffd26e</span> <span class="err">"</span><span class="kt">/home/candido/tutoriales/as_tutorial/algoritmos_x86-</span><span class="err">32</span><span class="kt">/basicos/sum_input</span><span class="err">"</span>
+        <span class="k">##</span>  <span class="kt">x</span> <span class="kt">/s</span>  <span class="kt">*</span><span class="o">(</span><span class="kt">char**</span><span class="o">)(</span><span class="kt">$esp+</span><span class="err">8</span><span class="o">)</span> <span class="kt">-&gt;</span> <span class="err">0</span><span class="kt">xffffd2b7:</span>	 <span class="err">"5"</span>
+        <span class="k">##</span>  <span class="kt">x</span> <span class="kt">/s</span>  <span class="kt">*</span><span class="o">(</span><span class="kt">char**</span><span class="o">)(</span><span class="kt">$esp+</span><span class="err">12</span><span class="o">)</span> <span class="kt">-&gt;</span> <span class="err">0</span><span class="kt">xffffd2b9:</span>	 <span class="err">"7"</span>
+
+        <span class="kt">.section</span> <span class="kt">.text</span>
+	<span class="o">.</span><span class="py">globl</span> <span class="nc">_start</span>
+<span class="nc">_start</span><span class="k">:</span>
+
+        <span class="k">##</span> <span class="kt">instrucciones</span> <span class="kt">aclaratorias</span>
+
+	<span class="n">leal</span> <span class="mi">8</span><span class="o">(%</span><span class="n">esp</span><span class="o">),%</span><span class="n">eax</span>       <span class="k">#</span><span class="n">eax</span> <span class="n">contiene</span> <span class="n">argv</span><span class="o">[</span><span class="err">1</span><span class="o">]</span> <span class="n">la</span> <span class="n">dirección</span> <span class="n">de</span> <span class="n">la</span> <span class="n">pila</span> <span class="n">que</span> <span class="n">contiene</span> <span class="n">el</span> <span class="n">pointer</span> <span class="n">al</span> <span class="n">argumento</span> <span class="n">string</span>
+        <span class="n">movl</span> <span class="mi">8</span><span class="o">(%</span><span class="n">esp</span><span class="o">),%</span><span class="n">ebx</span>       <span class="k">#</span><span class="n">ebx</span> <span class="n">tiene</span> <span class="n">el</span> <span class="n">contendio</span> <span class="n">de</span> <span class="n">la</span> <span class="n">pila</span><span class="k">=</span> <span class="n">dirección</span> <span class="n">del</span> <span class="n">string</span>
+        <span class="n">xor</span> <span class="o">%</span><span class="n">ecx</span><span class="o">,%</span><span class="n">ecx</span>
+        <span class="nf">movb</span> <span class="o">(%</span><span class="n">ebx</span><span class="o">),%</span><span class="n">cl</span>        <span class="k">#</span><span class="n">caracter</span> <span class="nc">ASCII</span>
+
+        <span class="o">#</span><span class="k">#</span> <span class="n">string</span> <span class="n">argument</span> <span class="n">pointers</span>
+        <span class="n">movl</span> <span class="mi">8</span><span class="o">(%</span><span class="n">esp</span><span class="o">),%</span><span class="n">eax</span>       <span class="k">#</span><span class="n">eax</span> <span class="n">tiene</span> <span class="n">el</span> <span class="n">contendio</span> <span class="n">de</span> <span class="n">la</span> <span class="n">pila</span><span class="k">=</span> <span class="n">dirección</span> <span class="n">del</span> <span class="n">string</span><span class="o">.</span> <span class="n">argv</span><span class="o">[</span><span class="err">1</span><span class="o">]</span>
+        <span class="n">movl</span> <span class="mi">12</span><span class="o">(%</span><span class="n">esp</span><span class="o">),%</span><span class="n">ebx</span>       <span class="k">#</span><span class="n">eax</span> <span class="n">tiene</span> <span class="n">el</span> <span class="n">contendio</span> <span class="n">de</span> <span class="n">la</span> <span class="n">pila</span><span class="k">=</span> <span class="n">dirección</span> <span class="n">del</span> <span class="n">string</span><span class="o">.</span> <span class="n">argv</span><span class="o">[</span><span class="err">2</span><span class="o">]</span>
+        <span class="o">#</span><span class="k">#</span> <span class="n">fetch</span> <span class="n">string</span> <span class="n">indirect</span>
+        <span class="o">#</span><span class="k">#</span> <span class="n">convert</span> <span class="n">ascii</span> <span class="n">numbers</span> <span class="n">to</span> <span class="n">values</span>
+        <span class="n">xor</span> <span class="o">%</span><span class="n">ecx</span><span class="o">,%</span><span class="n">ecx</span>
+        <span class="n">xor</span> <span class="o">%</span><span class="n">edx</span><span class="o">,%</span><span class="n">edx</span>
+        <span class="nf">movb</span> <span class="o">(%</span><span class="n">eax</span><span class="o">),%</span><span class="n">cl</span>         <span class="k">#</span> <span class="n">indirección</span> <span class="n">para</span> <span class="n">acceder</span> <span class="n">al</span> <span class="n">string</span> <span class="n">referenciado</span> <span class="n">por</span> <span class="n">argv</span><span class="o">[</span><span class="err">1</span><span class="o">]</span>
+        <span class="nf">movb</span> <span class="o">(%</span><span class="n">ebx</span><span class="o">),%</span><span class="n">dl</span>         <span class="k">#</span> <span class="n">indirección</span> <span class="n">para</span> <span class="n">acceder</span> <span class="n">al</span> <span class="n">string</span> <span class="n">referenciado</span> <span class="n">por</span> <span class="n">argv</span><span class="o">[</span><span class="err">1</span><span class="o">]</span>
+        <span class="n">subl</span> <span class="n">$0x30</span><span class="o">,%</span><span class="n">ecx</span>
+        <span class="n">subl</span> <span class="n">$0x30</span><span class="o">,%</span><span class="n">edx</span>
+
+        <span class="n">push</span> <span class="o">%</span><span class="n">ecx</span>
+        <span class="n">push</span> <span class="o">%</span><span class="n">edx</span>
+
+        <span class="n">call</span> <span class="n">suma</span>
+
+	<span class="o">#</span><span class="k">#</span> <span class="n">salida</span>
+        <span class="n">movl</span> <span class="o">%</span><span class="n">eax</span><span class="o">,%</span><span class="n">ebx</span>
+	<span class="n">movl</span>  <span class="n">$1</span><span class="o">,</span> <span class="o">%</span><span class="n">eax</span>	    <span class="k">#</span><span class="mi">1</span> <span class="n">is</span> <span class="n">the</span> <span class="nf">exit</span><span class="o">()</span> <span class="n">syscall</span>
+	<span class="n">int</span>   <span class="n">$0x80</span>
+
+
+<span class="o">##</span><span class="k">#</span> <span class="nc">Función</span> <span class="n">que</span> <span class="n">calcula</span> <span class="n">el</span> <span class="n">máximo</span> <span class="n">entre</span> <span class="n">dos</span> <span class="n">valores</span>
+	<span class="o">.</span><span class="py">type</span> <span class="n">suma</span><span class="o">,</span> <span class="nd">@function</span>
+	<span class="o">.</span><span class="py">section</span> <span class="o">.</span><span class="py">text</span>
+<span class="n">suma</span><span class="k">:</span>
+	<span class="k">##</span> <span class="kt">prologo</span>
+	<span class="n">push</span> <span class="o">%</span><span class="n">ebp</span>
+	<span class="n">movl</span> <span class="o">%</span><span class="n">esp</span><span class="o">,%</span><span class="n">ebp</span>
+	<span class="n">subl</span> <span class="n">$1</span><span class="o">,%</span><span class="n">esp</span>            <span class="k">#</span><span class="n">reserva</span> <span class="n">de</span> <span class="n">memoria</span>
+	<span class="n">push</span> <span class="o">%</span><span class="n">ebx</span>
+	<span class="n">push</span> <span class="o">%</span><span class="n">edi</span>
+	<span class="n">push</span> <span class="o">%</span><span class="n">esi</span>
+	<span class="o">#</span><span class="k">#</span> <span class="n">captura</span> <span class="n">de</span> <span class="n">argumentos</span>
+	<span class="n">movl</span> <span class="mi">8</span><span class="o">(%</span><span class="n">ebp</span><span class="o">),%</span><span class="n">eax</span>      <span class="k">#</span><span class="mi">1</span><span class="n">º</span> <span class="n">argumento</span>
+	<span class="n">movl</span> <span class="mi">12</span><span class="o">(%</span><span class="n">ebp</span><span class="o">),%</span><span class="n">ecx</span>     <span class="k">#</span><span class="mi">2</span><span class="n">º</span> <span class="n">argumento</span>
+	<span class="o">#</span><span class="k">#</span> <span class="n">cuerpo</span>
+	<span class="n">addl</span> <span class="o">%</span><span class="n">ecx</span><span class="o">,%</span><span class="n">eax</span>          <span class="k">#</span>
+	<span class="o">#</span><span class="k">#</span> <span class="n">guardar</span> <span class="n">resultado</span>
+	<span class="o">#</span><span class="k">#</span> <span class="n">el</span> <span class="n">resultado</span> <span class="n">está</span> <span class="n">en</span> <span class="nc">EAX</span>
+<span class="n">salto</span><span class="k">:</span>
+	<span class="k">##</span> <span class="kt">epilogo</span>
+	<span class="n">pop</span> <span class="o">%</span><span class="n">esi</span>
+	<span class="n">pop</span> <span class="o">%</span><span class="n">edi</span>
+	<span class="n">pop</span> <span class="o">%</span><span class="n">ebx</span>
+	<span class="n">mov</span> <span class="o">%</span><span class="n">ebp</span><span class="o">,%</span><span class="n">esp</span>           <span class="k">#</span> <span class="n">frame</span> <span class="n">anterior</span>
+	<span class="n">pop</span> <span class="o">%</span><span class="n">ebp</span>
+	<span class="n">ret</span>                     <span class="k">#</span> <span class="n">recuperar</span> <span class="n">dirección</span> <span class="n">de</span> <span class="n">retorno</span></code></pre>
+</div>
+</div>
 </li>
 </ul>
 </div>

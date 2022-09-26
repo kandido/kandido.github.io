@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-24</span>
+<span id="revdate">2022-09-26</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -319,7 +319,7 @@ pre.rouge {
 </li>
 <li><a href="_llamadas_al_sistema_operativo_2.html#_ejemplos_asm_directo">28.7. Ejemplos: ASM DIRECTO</a>
 </li>
-<li><a href="_llamadas_al_sistema_operativo_2.html#_línea_de_comandos">28.8. Línea de Comandos</a>
+<li><a href="_llamadas_al_sistema_operativo_2.html#_línea_de_comandos_2">28.8. Línea de Comandos</a>
 <ul class="sectlevel3">
 <li><a href="_llamadas_al_sistema_operativo_2.html#_procedimiento">28.8.1. Procedimiento</a>
 </li>
@@ -511,7 +511,7 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>La llamada se realiza mediante la instrucción ensamblador <code>syscall</code> en x86-64 y <code>int 0x80</code> en x86-32</p>
+<p>La llamada se realiza mediante la instrucción ensamblador <code>syscall</code> en x86-64 y <code>int $0x80</code> en x86-32</p>
 </li>
 <li>
 <p>Los argumentos de la llamada se pasan a través de los registros de propósito general GPR</p>
@@ -730,7 +730,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect2">
-<h3 id="_línea_de_comandos">28.8. Línea de Comandos</h3>
+<h3 id="_línea_de_comandos_2">28.8. Línea de Comandos</h3>
 <div class="sect3">
 <h4 id="_procedimiento">28.8.1. Procedimiento</h4>
 <div class="ulist">
@@ -855,7 +855,7 @@ int  main (int parc, char *parv[])
 <li>
 <p>El kernel pasa los argumentos <strong>argc</strong> y <strong>argv</strong> de la función global main a través de la PILA. La función main es la función llamada.</p>
 <table class="tableblock frame-all grid-all" style="width: 50%;">
-<caption class="title">Table 24. Convenio ABI: Stack</caption>
+<caption class="title">Table 25. Convenio ABI: Stack</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
