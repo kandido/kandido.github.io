@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-26</span>
+<span id="revdate">2022-09-28</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -327,9 +327,11 @@ pre.rouge {
 </li>
 <li><a href="_lenguajes_de_programación_en_ensamblador.html#_intel_x86_32_i386">26.2. Intel x86-32 /i386</a>
 <ul class="sectlevel3">
-<li><a href="_lenguajes_de_programación_en_ensamblador.html#intel_i386_hola_asmbin">26.2.1. hola_mundo.s</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#sum1toN_att_32">26.2.1. sum1toN.s</a>
 </li>
-<li><a href="_lenguajes_de_programación_en_ensamblador.html#_hola_mundo_código_máquina_binario">26.2.2. hola_mundo: Código Máquina Binario</a>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#intel_i386_hola_asmbin">26.2.2. hola_mundo.s</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_hola_mundo_código_máquina_binario">26.2.3. hola_mundo: Código Máquina Binario</a>
 </li>
 </ul>
 </li>
@@ -1113,13 +1115,15 @@ C: Carry resultado de operac. sin signo es muy grande o inferior a cero</pre>
 </div>
 <div class="sect2">
 <h3 id="_intel_x86_32_i386">26.2. Intel x86-32 /i386</h3>
-<div id="sum1toN_att_32" class="ulist">
+<div class="sect3">
+<h4 id="sum1toN_att_32">26.2.1. sum1toN.s</h4>
+<div class="ulist">
 <ul>
 <li>
 <p>Lenguaje ensamblador ATT para la arquitectura x86-32</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="nasm"><span class="err">###</span> <span class="nl">Programa:</span> <span class="nf">sum.s</span>
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">###</span> <span class="nl">Programa:</span> <span class="nf">sum1toN.s</span>
 <span class="err">###</span> <span class="nf">Descripci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">realiza</span> <span class="nv">la</span> <span class="nv">suma</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">serie</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="nv">...N</span>
 <span class="err">###</span> <span class="nf">gcc</span> <span class="o">-</span><span class="nv">m32</span> <span class="o">-</span><span class="nv">g</span> <span class="o">-</span><span class="nv">nostartfiles</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span> <span class="nv">sum1toN.s</span>
 <span class="err">###</span> <span class="nf">Ensamblaje</span> <span class="nv">as</span> <span class="o">--</span><span class="mi">32</span> <span class="o">--</span><span class="nb">gs</span><span class="nv">tabs</span> <span class="nv">fuente.s</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">objeto.o</span>
@@ -1155,8 +1159,9 @@ C: Carry resultado de operac. sin signo es muy grande o inferior a cero</pre>
 </li>
 </ul>
 </div>
+</div>
 <div class="sect3">
-<h4 id="intel_i386_hola_asmbin">26.2.1. hola_mundo.s</h4>
+<h4 id="intel_i386_hola_asmbin">26.2.2. hola_mundo.s</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1221,7 +1226,7 @@ C: Carry resultado de operac. sin signo es muy grande o inferior a cero</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_hola_mundo_código_máquina_binario">26.2.2. hola_mundo: Código Máquina Binario</h4>
+<h4 id="_hola_mundo_código_máquina_binario">26.2.3. hola_mundo: Código Máquina Binario</h4>
 <div class="ulist">
 <ul>
 <li>

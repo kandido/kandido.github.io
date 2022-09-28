@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-26</span>
+<span id="revdate">2022-09-28</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -503,9 +503,9 @@ Control Bus &lt;- Write</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="sh">Address Contents
-08A 010FA210FB
+08A 010FA110FB
 08B 010FA0F08D
-08C 020FA210FB</code></pre>
+08C 020FA110FB</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -535,7 +535,7 @@ Control Bus &lt;- Write</code></pre>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">08A</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">010FA210FB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">010FA110FB</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">AC&#8592;M[0FA]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">M[0FB]&#8592;AC</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LOAD  M[0FA]</p></td>
@@ -551,7 +551,7 @@ Control Bus &lt;- Write</code></pre>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">08C</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">020FA210FB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">020FA110FB</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">AC&#8592;-M[0FA]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">M[0FB]&#8592;AC</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">LOAD -M[0FA]</p></td>
@@ -562,7 +562,7 @@ Control Bus &lt;- Write</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Contents: instrucción izda 010FA (Cod Op 01 Address 0FA) e instrucción dcha 210FB -</p>
+<p>Contents: instrucción izda 010FA (Cod Op 01 Address 0FA) e instrucción dcha 110FB -</p>
 </li>
 <li>
 <p>A este proceso inverso a ensamblar (lenguaje ensamblador &#8594; código binario) se le denomina desensamblar (código binario &#8594; lenguaje ensamblador)</p>
@@ -636,10 +636,7 @@ Control Bus &lt;- Write</code></pre>
 </tbody>
 </table>
 <div class="olist loweralpha">
-<ol class="loweralpha">
-<li>
-<p>¿Cuál es el formato de instrucciones? ¿ Cuál es el tamaño de los registros contador de programa y registro de instrucciones? ¿Cuál es el tamaño del bus de datos y del bus de direcciones?</p>
-</li>
+<ol class="loweralpha" type="a">
 <li>
 <p>Describir las fases de los ciclos de instrucción de la CPU al ejecutar dicho programa teniendo en cuenta la siguiente figura:</p>
 <div class="imageblock text-center">
@@ -648,6 +645,9 @@ Control Bus &lt;- Write</code></pre>
 </div>
 <div class="title">Figure 69. Ciclos de Instrucción</div>
 </div>
+</li>
+<li>
+<p>¿Cuál es el formato de instrucciones? ¿ Cuál es el tamaño de los registros contador de programa y registro de instrucciones? ¿Cuál es el tamaño del bus de datos y del bus de direcciones?</p>
 </li>
 </ol>
 </div>
