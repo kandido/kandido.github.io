@@ -1165,24 +1165,60 @@ LLevadas --&gt;       1 1 1
 </div>
 </li>
 <li>
-<p>Ejemplos</p>
+<p>Ejemplos:</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Hay que diferenciar los casos suma CON signo y suma SIN signo. En el primer caso detectamos el error matemático únicamente con el flag OF y en el segundo caso detectamos el error matemático únicamente con el flag CF.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Números CON signo (complemento a 2):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>para saber si hay overflow siempre se suma&#8230;&#8203;una resta se puede convertir en suma</p>
+</li>
+<li>
+<p>El carrier flag CF no tiene sentido. Unicamente interpreto OF para saber si hay error en la operación aritmética.</p>
 <div class="listingblock">
 <div class="content">
 <pre>  11111111
 + 00000001
 __________
- 100000000 -&gt; ¿ Hay acarreo y SI hay Overflow? -&gt; Esa suma NO es correcta, ya que para realizar la operación con 9 bits los operandos tienen que ser de 9 bits y por lo tanto hay que extender el bit de signo. La suma con 9 bits sería:
+ 100000000 -&gt; Esta suma NO es correcta, ya que para representar el resultado con 9 bits los operandos tienen que ser de 9 bits y por lo tanto hay que extender el bit de signo de los operandos de 8 bits. La suma con 9 bits sería:
 
+operandos y resultado con 9 bits:
   111111111
 + 000000001
 ___________
-  000000000 -&gt; Hay acarreo y NO hay Overflow. CF=1 y OF=0.
+  000000000 -&gt; NO hay Overflow ya que los operandos de la suma son de distinto signo
+
+operandos y resultado con 8 bits:
+  11111111
++ 00000001
+___________
+  00000000 -&gt; NO hay Overflow ya que los operandos de la suma son de distinto signo
+
 
 Nunca va haber overflow si sumamos datos de signo contrario
 
+
+ Resta A-B donde
  A=11110000
  B=00010100
- A-B=A+(-B)
+ A-B=A+(-B) -&gt; Convierto la resta en suma
 
  A :    11110000
 -B :   +11101100
@@ -1199,12 +1235,43 @@ A–B:    11011100 -&gt; Hay acarreo pero NO overflow. La suman de dos datos neg
 _________________
 A+B:    100000000
 
- Observamos que no hay overflow en el caso de que utilizasemos 9 dígitos. Pero si la ALU está operando con registros de 8 bits SÍ HAY overflow. Los dos sumandos son negativos (bit de signo posición 7ª) y el bit de signo del resultado (bit posición 7ª) es positivo luego el resultado es erróneo. En la posición 7 también hay acarreo -&gt; CF=OF=1</pre>
+ Observamos que no hay overflow en el caso de que utilizasemos 9 dígitos. Pero si la ALU está operando con registros de 8 bits SÍ HAY overflow. Los dos sumandos son negativos (bit de signo posición 7ª) y el bit de signo del resultado (bit posición 7ª) es positivo luego el resultado es erróneo.</pre>
 </div>
 </div>
 </li>
+</ul>
+</div>
+</li>
+<li>
+<p>números SIN signo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El overflow flag OF no tiene sentido. Unicamente interpreto CF para saber si hay error en la operación aritmética.</p>
+<div class="listingblock">
+<div class="content">
+<pre>  11111111
++ 00000001
+__________
+  00000000 -&gt; Hay acarreo en el bit más significativo luego CF=1. Conceptualmente hay overflow por lo que el resultado que obtiene la ALU aunque electrónicamente es correcto, no lo es matemáticamente (511+1=0). El efecto overflow lo detecto con CF=1.
+
+Extiendo los operandos de la operación anterior con 1 bit.
+  011111111
++ 000000001
+___________
+  100000000 -&gt; No hay acarreo -&gt; CF=0. Esta suma es correcta matemáticamente ya que 511+1=512 y por lo tanto no hay overflow -&gt; CF=0</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Se ve nuevamente en  el próximo capítulo <a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#CFR">Programación en Lenguaje Ensamblador (x86)</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
