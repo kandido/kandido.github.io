@@ -910,30 +910,22 @@ pre.rouge {
 </ul>
 </div>
 </li>
-<li>
-<p>Ejemplos</p>
-<div class="listingblock">
-<div class="content">
-<pre>  11111111
-+ 00000001
-__________
- 100000000 -&gt; hay acarreo y también overflow ya que si consideramos el MSB=1 de la posición 8ª el resultado sería erróneo, es decir, si realizasemos una    extensión de signo el resultado sería erroneo y por lo tanto hay que rechazar el dígito fuera de rango con lo que la operación es correcta. El bit de signo es el de la posición más alta del "word size" (posición 7ª)
-
-
- A :    11110000
--B :   +11101100
-________________
-A–B:   111011100 -&gt; hay acarreo pero no overflow ya que el MSB=1 en una posición fuera del "word size" no afecta al signo del resultado, ya que las posiciones del MSB (8ª) y la anterior (7ª) del bit de signo tienen el mismo dígito de valor 1
-
-
- A :    10000000
--B :   +10000000
-________________
-A–B:   100000000 -&gt; hay acarreo. Hay también overflow ya que el bit MSB de valor 1 es diferente de la posición anterior ( 7ª, bit de signo) de valor 0.  Los dos sumandos son negativos (bit de signo posición 7ª) y el bit de signo del resultado (bit posición 7ª) es positivo luego el resultado es erróneo.</pre>
-</div>
-</div>
-</li>
 </ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_casos_de_overflow">Casos de Overflow</h5>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Ejemplos de errores matemáticos por overflow: <a href="_operaciones_aritmeticas_y_logicas.html#of_cf_unsigned_signed">activación de los flags CF y OF</a>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect4">
