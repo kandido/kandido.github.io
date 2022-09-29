@@ -135,6 +135,26 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <h3 id="_programas_x86_32">19.1. Programas  x86-32</h3>
 <div class="sect3">
 <h4 id="programa_minimalista">19.1.1. Programa Minimalista</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>minimalista.s</p>
+<div class="listingblock">
+<div class="content">
+<pre>### Programa: minimalista.s
+### gcc -m32 -g  -o minimalista minimalista.s
+
+        .global main
+        .section .text
+main:
+        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
+        int $0x80     # llamada al sistema operativo
+        .end</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
 <div class="sect4">
 <h5 id="_estructura_del_programa">Estructura del programa</h5>
 <div class="ulist">
