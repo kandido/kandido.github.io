@@ -307,7 +307,9 @@ pre.rouge {
 </li>
 <li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_depuración">12.5.6. Depuración</a>
 </li>
-<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_documento_memoria">12.5.7. Documento Memoria</a>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_recordatorio_documento_memoria">12.5.7. Recordatorio: Documento Memoria</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_continuamos_con_más_ejercicios">12.5.8. Continuamos con más ejercicios</a>
 </li>
 </ul>
 </li>
@@ -400,10 +402,7 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>Conocimientos muy básicos de una arquitectura ISA: Arquitectura modelo Von Neumann( Microarquitectura CPU, arquitectura Memoria Principal, ciclo de instrucción), representación de datos y operaciones aritméticas, formato de  instrucciones y programación básica en lenguaje ensamblador y lenguaje máquina. Por ejemplo la máquina IAS de John von Neumann.</p>
-</li>
-<li>
-<p>Haber desarrollado un progama sencillo en lenguaje ensamblador : Por ejemplo de la máquina IAS de John von Neumann.</p>
+<p>Conocimientos muy básicos de una arquitectura ISA: Arquitectura modelo Von Neumann( Microarquitectura CPU, arquitectura Memoria Principal, ciclo de instrucción), representación de datos y operaciones aritméticas, formato de  instrucciones y programación básica en lenguaje ensamblador y lenguaje máquina con la máquina IAS de John von Neumann, la sintaxis del lenguaje ensamblador AT&amp;T x86 y la arquitectura básico del procesador x86-64 y x86-32 de intel.</p>
 </li>
 </ul>
 </div>
@@ -413,9 +412,6 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>Haber emulado o ejecutador</p>
-</li>
-<li>
 <p>Tener configurada la "Plataforma de Desarrollo" GNU/linux(AMD64)/x86_64(Intel ó AMD) con las herramientas apropiadas.</p>
 </li>
 <li>
@@ -423,6 +419,12 @@ pre.rouge {
 </li>
 <li>
 <p>Estar dado de alta en el sitio de la asignatura en servidor miaulario.</p>
+</li>
+<li>
+<p>Haber realizado la simulación de ejecución de un programa en lenguaje ensamblador y lenguaje máquina.  Por ejemplo en la máquina IAS de John von Neumann mediante el emulador Web IASSim</p>
+</li>
+<li>
+<p>Haber analizado la sintaxis y estructura de un programa sencillo en lenguaje ensamblador AT&amp;T x86, compilado, ejecutado  y analizada la ejecución del programa paso a paso mediante el depurador GDB.</p>
 </li>
 </ul>
 </div>
@@ -439,8 +441,24 @@ pre.rouge {
 <li>
 <p><a href="_practicando_la_programación_desde_el_principio.html#prac_apu">Apuntes y Libro de Texto</a></p>
 </li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+La memoria se realiza en tiempo real durante la realización de la práctica y es la única documentación impresa que se utilizará el día del examen, por lo que debe de estar bien documentada. La memoria se entrega unos días después de la realización de la memoria a través de MiAulario/TAREAS siguiendo las indicaciones especificadas en <a href="_practicando_la_programación_desde_el_principio.html#prac_doc_mem">Apéndice: Contenido y Formato de la Memoria</a> y en la fecha indicada en MiAulario/TAREAS.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p><a href="_practicando_la_programación_desde_el_principio.html#prac_doc_mem">Documentación Memoria</a>: Contenido y Formato de la Memoria</p>
+<p><strong>Abrir en el Escritorio de la computadora un documento texto que será la MEMORIA donde se irá añadiendo toda la información obtenida durante toda la sesión de prácticas</strong></p>
 </li>
 <li>
 <p><a href="_practicando_la_programación_desde_el_principio.html#prac_eval">Evaluación</a>: sistema de evaluación</p>
@@ -498,19 +516,21 @@ pre.rouge {
  Programa: sum1toN.c
  Descripción: realiza la suma de la serie 1,2,3,...N
  Es el programa en lenguaje C equivalente a sum1toN.ias de la máquina IAS de von Neumann
+ y equivalente al programa sum1toN.s en lenguaje ensamblador AT&amp;T
 Lenguaje:       C99
 Descripción:    Suma de los primeros 5 números naturales
 Entrada:        Definida en una variable
-Salida:         Sin salida
+Salida:         Sin salida periférica&lt;&lt;&lt;&lt;s
 Compilación:    gcc -m32 -g -o sum1toN sum1toN.c
-S.O:            GNU/linux 3.2.0 ubuntu 12.04 x86-64
+S.O:            GNU/linux 5.4.0-128-generic ubuntu 20.04 x86-64
 Librería:       /usr/lib/x86_64-linux-gnu/libc.so
-CPU:            Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz
-Compilador:     gcc version 4.6.4 (Ubuntu/Linaro 4.6.4-1ubuntu1~12.04)
-Ensamblador:    GNU assembler version 2.22
-Linker/Loader:  GNU ld (GNU Binutils for Ubuntu) 2.22
+PC:		ThinkPad L560 product: 20F1S0H400 serial: MP15YSW7
+CPU:            Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz width:64 bits
+Compilador:     gcc version 9.4.0
+Ensamblador:    GNU assembler version 2.34
+Linker/Loader:  GNU ld (GNU Binutils for Ubuntu) 2.34
 Asignatura:     Estructura de Computadores
-Fecha:          25/09/2018
+Fecha:          25/09/2022
 Autor:          Cándido Aramburu
 */</code></pre>
 </div>
@@ -546,6 +566,23 @@ void  main (void) {
 <ul>
 <li>
 <p><code>gcc -m32 -g -o sum1toN sum1toN.c</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>listar los ficheros: <code>ls -l sum1toN*</code>. ¿Qué representa cada uno de ellos?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>gcc --save-temps -m32 -g -o sum1toN sum1toN.c</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>listar los ficheros: <code>ls -l sum1toN*</code>. ¿Qué representan los nuevos ficheros?</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -622,7 +659,14 @@ void  main (void) {
 <div class="ulist">
 <ul>
 <li>
-<p><code>gcc -m32 -g -o sum1toN sum1toN.c</code> : Inserta la "Tabla de Símbolos" en el módulo binario ejecutable.</p>
+<p><code>gcc -m32 -g -o sum1toN sum1toN.c</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>opción <strong>-g</strong>: Inserta la "Tabla de Símbolos" en el módulo binario ejecutable.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>En la línea de comandos emplear el TABULADOR TAB para Completar los nombres: <code>gcc -m32 -g -o sum1TAB suTAB</code></p>
@@ -635,43 +679,80 @@ void  main (void) {
 <div class="ulist">
 <ul>
 <li>
-<p>Abrir el depurador: <code>gdb</code></p>
+<p>Abrir el depurador: <code>gdb</code> para comenzar la sesión de depuración.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Ventana: línea de comandos propios del debugger.</p>
+<p>Ventana con el prompt <strong>(gdb)</strong>: línea de comandos propios del debugger que serán interpretados por el GDB.</p>
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_abrir_una_nueva_ventana">abrir una nueva ventana</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>(gdb) <code>layout src</code> ó <code>Control-x Control-a</code></p>
+</li>
+<li>
+<p>navegar entre las dos ventanas: <code>Control-x o</code> y sino también <code>focus src</code> y <code>focus cmd</code></p>
+</li>
+<li>
+<p><code>help focus</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_logging">Logging</h5>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+El logging hay que configurarlo con las dos ventanas abiertas: la ventana de comandos y la ventana del código source. Si se hace teniendo solamente la ventana de comandos, luego al abrir más ventanas deja de loggear.
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Logging:</p>
+<p>Salvar toda la sesión de depuración en el fichero <em>sum1toN_gdb_c.txt</em></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Entradas &#8594;  <code>set trace-commands on</code>,</p>
+<p>Entradas &#8594;  (gdb) <code>set trace-commands on</code>,</p>
 </li>
 <li>
-<p>Salidas &#8594;   <code>set logging file sum1toN_gdb_c.txt</code></p>
+<p>Salidas &#8594;   (gdb) <code>set logging file sum1toN_gdb_c.txt</code></p>
 </li>
 <li>
 <p>Activación &#8594;  <code>set logging on</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>Copying output to sum1toN_gdb_c.txt.
+Copying debug output to sum1toN_gdb_c.txt.</pre>
+</div>
+</div>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p>Cada vez que salga y entre en el debugger en la misma sesión de prácticas y utilice el mismo fichero histórico <em>sum1toN_gdb_c.txt</em> hay que realizar la configuración anterior con las dos ventanas abiertas.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_comandos_linux">Comandos linux</h5>
+<h5 id="_comandos_linux_desde_la_línea_de_comandos_gdb">Comandos linux desde la línea de comandos gdb</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -697,6 +778,28 @@ void  main (void) {
 </div>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_comprobar_el_histórico_de_la_sesión_de_depuración">COMPROBAR el histórico de la sesión de depuración</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Abrir una consola y en la carpeta de trabajo comprobar que existe el fichero <em>sum1toN_gdb_c.txt</em> y que contiene los comandos gdb ejecutados anteriormente.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Es muy frustante darse cuenta después de dos horas de trabajo que no se ha guardado todo el trabajo
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect4">
@@ -799,7 +902,7 @@ Observar que el depurador confirma la existencia de la tabla de símbolos, impre
 </div>
 </div>
 <div class="sect4">
-<h5 id="_análisis_de_la_memoria">Análisis de la memoria</h5>
+<h5 id="_análisis_de_la_memoria_principal_dram">Análisis de la memoria principal DRAM</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -877,15 +980,27 @@ Comprobar que el contenido del fichero <em>sum1toN_gdb_C.txt</em> es correcto.
 </div>
 </div>
 <div class="sect3">
-<h4 id="_documento_memoria">12.5.7. Documento Memoria</h4>
+<h4 id="_recordatorio_documento_memoria">12.5.7. Recordatorio: Documento Memoria</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>En la consola abrimos el fichero <code>gedit  sum1toN_gdb_C.txt</code> que contiene todos los comandos utilizados con sus volcados.</p>
+<p>Ir salvando el trabajo y comentándolo según se va realizando.</p>
+</li>
+<li>
+<p>En la consola abrimos el fichero <code>sum1toN_gdb_C.txt</code> que contiene todos los comandos utilizados con sus volcados.</p>
 </li>
 <li>
 <p>Guardar el contenido de <em>sum1toN_gdb_C.txt</em> en el Documento Memoria añadiendo los comentarios necesarios.</p>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_continuamos_con_más_ejercicios">12.5.8. Continuamos con más ejercicios</h4>
+<div class="sect4">
+<h5 id="_jugar_con_el_módulo_fuente">Jugar con el módulo fuente</h5>
+<div class="ulist">
+<ul>
 <li>
 <p>Cambios en el Módulo fuente en lenguaje C.</p>
 <div class="ulist">
@@ -916,6 +1031,13 @@ Comprobar que el contenido del fichero <em>sum1toN_gdb_C.txt</em> es correcto.
 </ul>
 </div>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_jugar_con_el_depurador">Jugar con el depurador</h5>
+<div class="ulist">
+<ul>
 <li>
 <p>GDB</p>
 <div class="ulist">
@@ -949,6 +1071,7 @@ Comprobar que el contenido del fichero <em>sum1toN_gdb_C.txt</em> es correcto.
 </div>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -1220,6 +1343,13 @@ bucle:
 <ul>
 <li>
 <p>Ejemplo en el apéndice : <a href="_lenguajes_de_programación_en_ensamblador.html#sum1toN_att_64">sum1toN.s</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Analizar el código, compilarlo, ejecutarlo y comprobar mediante el debugger que efectivamente los registros son de 64 bits.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
