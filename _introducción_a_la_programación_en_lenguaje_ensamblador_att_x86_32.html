@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-09-30</span>
+<span id="revdate">2022-10-01</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -1104,41 +1104,41 @@ Comprobar que el contenido del fichero <em>sum1toN_gdb_C.txt</em> es correcto.
 <p>Lenguaje ensamblador AT&amp;T de GNU para la arquitectura i386 &#8594; lenguaje GNU as &#8594; lenguaje gas</p>
 <div class="listingblock">
 <div class="content">
-<pre>### Programa: sum1toN.s
-### Descripción: realiza la suma de la serie 1,2,3,...N. La entrada se define en el propio programa y la salida se pasa al S.O.
-### Lenguaje: Lenguaje ensamblador de GNU para la arquitectura i386 -&gt; GNU as -&gt; gas -&gt; AT&amp;T
-### Es el programa en lenguaje AT&amp;T i386 equivalente a sum.ias de la máquina IAS de von Neumann
-### gcc -m32 -g -nostartfiles -o sum1toN  sum1toN.s
-### Ensamblaje as --32 --gstabs sum1toN.s -o sum1toN.o
-### linker -&gt; ld -melf_i386   -o sum1toN sum1toN.o
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">###</span> <span class="nl">Programa:</span> <span class="nf">sum1toN.s</span>
+<span class="err">###</span> <span class="nf">Descripci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">realiza</span> <span class="nv">la</span> <span class="nv">suma</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">serie</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="nv">...N.</span> <span class="nv">La</span> <span class="nv">entrada</span> <span class="nv">se</span> <span class="nv">define</span> <span class="nv">en</span> <span class="nv">el</span> <span class="nv">propio</span> <span class="nv">programa</span> <span class="nv">y</span> <span class="nv">la</span> <span class="nv">salida</span> <span class="nv">se</span> <span class="nv">pasa</span> <span class="nb">al</span> <span class="nv">S.O.</span>
+<span class="err">###</span> <span class="nl">Lenguaje:</span> <span class="nf">Lenguaje</span> <span class="nv">ensamblador</span> <span class="nv">de</span> <span class="nv">GNU</span> <span class="nv">para</span> <span class="nv">la</span> <span class="nv">arquitectura</span> <span class="nv">i386</span> <span class="o">-&gt;</span> <span class="nv">GNU</span> <span class="nv">as</span> <span class="o">-&gt;</span> <span class="nv">gas</span> <span class="o">-&gt;</span> <span class="nv">AT</span><span class="o">&amp;</span><span class="nv">T</span>
+<span class="err">###</span> <span class="nf">Es</span> <span class="nv">el</span> <span class="nv">programa</span> <span class="nv">en</span> <span class="nv">lenguaje</span> <span class="nv">AT</span><span class="o">&amp;</span><span class="nv">T</span> <span class="nv">i386</span> <span class="nv">equivalente</span> <span class="nv">a</span> <span class="nv">sum.ias</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">m</span><span class="err">á</span><span class="nv">quina</span> <span class="nv">IAS</span> <span class="nv">de</span> <span class="nv">von</span> <span class="nv">Neumann</span>
+<span class="err">###</span> <span class="nf">gcc</span> <span class="o">-</span><span class="nv">m32</span> <span class="o">-</span><span class="nv">g</span> <span class="o">-</span><span class="nv">nostartfiles</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span>  <span class="nv">sum1toN.s</span>
+<span class="err">###</span> <span class="nf">Ensamblaje</span> <span class="nv">as</span> <span class="o">--</span><span class="mi">32</span> <span class="o">--</span><span class="nb">gs</span><span class="nv">tabs</span> <span class="nv">sum1toN.s</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN.o</span>
+<span class="err">###</span> <span class="nf">linker</span> <span class="o">-&gt;</span> <span class="nv">ld</span> <span class="o">-</span><span class="nv">melf_i386</span>   <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span> <span class="nv">sum1toN.o</span>
 
-        ##  Declaración de variables
-	##  SECCION DE DATOS
-        .section .data
+        <span class="err">##</span>  <span class="nf">Declaraci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">de</span> <span class="nv">variables</span>
+	<span class="err">##</span>  <span class="nf">SECCION</span> <span class="nv">DE</span> <span class="nv">DATOS</span>
+        <span class="nf">.section</span> <span class="nv">.data</span>
 
-n:      .int 5
+<span class="nl">n:</span>      <span class="nf">.int</span> <span class="mi">5</span>
 
-        .global _start
+        <span class="nf">.global</span> <span class="nv">_start</span>
 
-        ##  Comienzo del código
-	##  SECCION DE INSTRUCCIONES
-        .section .text
-_start:
-        mov $0,%ecx # ECX implementa la variable suma
-        mov n,%edx
-bucle:
-        add %edx,%ecx
-        sub $1,%edx
-        jnz bucle
+        <span class="err">##</span>  <span class="nf">Comienzo</span> <span class="nv">del</span> <span class="nv">c</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span>
+	<span class="err">##</span>  <span class="nf">SECCION</span> <span class="nv">DE</span> <span class="nv">INSTRUCCIONES</span>
+        <span class="nf">.section</span> <span class="nv">.text</span>
+<span class="nl">_start:</span>
+        <span class="nf">mov</span> <span class="kc">$</span><span class="mi">0</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span> <span class="err">#</span> <span class="nb">ECX</span> <span class="nv">implementa</span> <span class="nv">la</span> <span class="nv">variable</span> <span class="nv">suma</span>
+        <span class="nf">mov</span> <span class="nv">n</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+<span class="nl">bucle:</span>
+        <span class="nf">add</span> <span class="o">%</span><span class="nb">edx</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>
+        <span class="nf">sub</span> <span class="kc">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+        <span class="nf">jnz</span> <span class="nv">bucle</span>
 
-        mov %ecx, %ebx # el argumento de salida al S.O. a través de EBX según convenio ABI i386
+        <span class="nf">mov</span> <span class="o">%</span><span class="nb">ecx</span><span class="p">,</span> <span class="o">%</span><span class="nb">ebx</span> <span class="err">#</span> <span class="nv">el</span> <span class="nv">argumento</span> <span class="nv">de</span> <span class="nv">salida</span> <span class="nb">al</span> <span class="nv">S.O.</span> <span class="nv">a</span> <span class="nv">trav</span><span class="err">é</span><span class="nv">s</span> <span class="nv">de</span> <span class="nb">EBX</span> <span class="ow">seg</span><span class="err">ú</span><span class="nv">n</span> <span class="nv">convenio</span> <span class="nv">ABI</span> <span class="nv">i386</span>
 
-        ## salida
-        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
-        int $0x80     # llamada al sistema operativo para que ejecute la subrutina según el valor de EAX
+        <span class="err">##</span> <span class="nf">salida</span>
+        <span class="nf">mov</span> <span class="kc">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="nb">eax</span>  <span class="err">#</span> <span class="nv">c</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">llamada</span> <span class="nb">al</span> <span class="nb">si</span><span class="nv">stema</span> <span class="nv">operativo</span><span class="p">:</span> <span class="nv">subrutina</span> <span class="nv">exit</span>
+        <span class="nf">int</span> <span class="kc">$</span><span class="mh">0x80</span>     <span class="err">#</span> <span class="nv">llamada</span> <span class="nb">al</span> <span class="nb">si</span><span class="nv">stema</span> <span class="nv">operativo</span> <span class="nv">para</span> <span class="nv">que</span> <span class="nv">ejecute</span> <span class="nv">la</span> <span class="nv">subrutina</span> <span class="ow">seg</span><span class="err">ú</span><span class="nv">n</span> <span class="nv">el</span> <span class="nv">valor</span> <span class="nv">de</span> <span class="nb">EAX</span>
 
 
-        .end</pre>
+        <span class="nf">.end</span></code></pre>
 </div>
 </div>
 </li>
