@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-10-01</span>
+<span id="revdate">2022-10-04</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -355,7 +355,9 @@ pre.rouge {
 </li>
 <li><a href="_practicando_la_programación_desde_el_principio.html#_programar_y_depurar_desde_cero">28.9. Programar y Depurar desde cero</a>
 <ul class="sectlevel3">
-<li><a href="_practicando_la_programación_desde_el_principio.html#_empezando">28.9.1. Empezando</a>
+<li><a href="_practicando_la_programación_desde_el_principio.html#empezando_asm">28.9.1. Empezando: ASM</a>
+</li>
+<li><a href="_practicando_la_programación_desde_el_principio.html#empezando_c">28.9.2. Empezando: C</a>
 </li>
 </ul>
 </li>
@@ -1179,7 +1181,7 @@ collect2: error: ld returned 1 exit status</pre>
 <div class="sect2">
 <h3 id="_programar_y_depurar_desde_cero">28.9. Programar y Depurar desde cero</h3>
 <div class="sect3">
-<h4 id="_empezando">28.9.1. Empezando</h4>
+<h4 id="empezando_asm">28.9.1. Empezando: ASM</h4>
 <div class="sect4">
 <h5 id="_herramientas_2">herramientas</h5>
 <div class="ulist">
@@ -1333,15 +1335,16 @@ help p
 </ul>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_compilación_y_depuración_módulo_fuente_en_lenguaje_c">Compilación y depuración módulo fuente en lenguaje C</h5>
+</div>
+<div class="sect3">
+<h4 id="empezando_c">28.9.2. Empezando: C</h4>
 <div class="ulist">
 <ul>
 <li>
 <p>sum1toN.c</p>
 <div class="listingblock">
 <div class="content">
-<pre>/*
+<pre class="rouge highlight"><code data-lang="c"><span class="cm">/*
 Programa: sum1toN.c
 
 gcc -g -m32 -o sum1toN sum1toN.c
@@ -1349,22 +1352,22 @@ file sum1toN
 ./sum1toN
 echo $?
 
-*/
+*/</span>
 
-// Declaración de la función exit()
-#include &lt;stdlib.h&gt;
-
-// Módulo Principal
-int  main (void) {
-  //Declaración de variables locales e inicialización de los parámetros del bucle
-  int sum=0,n=5;
-  //Bucle que genera los sumandos y realiza la suma
-  while(n&gt;0){ 	//Condición de salida del bucle cuando el sumando es negativo
-    sum+=n;
-    n--;     	//Actualización del sumando
-  }
-  exit (sum);
-}	   	//exit: finaliza la ejecución del programa y devuelve el argumento sum al S.operativo.</pre>
+<span class="c1">// Declaración de la función exit()</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="c1">// Módulo Principal</span>
+<span class="kt">int</span>  <span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">//Declaración de variables locales e inicialización de los parámetros del bucle</span>
+  <span class="kt">int</span> <span class="n">sum</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+  <span class="c1">//Bucle que genera los sumandos y realiza la suma</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span> 	<span class="c1">//Condición de salida del bucle cuando el sumando es negativo</span>
+    <span class="n">sum</span><span class="o">+=</span><span class="n">n</span><span class="p">;</span>
+    <span class="n">n</span><span class="o">--</span><span class="p">;</span>     	<span class="c1">//Actualización del sumando</span>
+  <span class="p">}</span>
+  <span class="n">exit</span> <span class="p">(</span><span class="n">sum</span><span class="p">);</span>
+<span class="p">}</span>	   	<span class="c1">//exit: finaliza la ejecución del programa y devuelve el argumento sum al S.operativo.</span></code></pre>
 </div>
 </div>
 </li>
@@ -1410,13 +1413,18 @@ q ó quit</pre>
 <div class="listingblock">
 <div class="content">
 <pre>ptype sum
+whatis sum
+p /d sum
+p /x sum
+p /t sum
+p /o sum
+p /a &amp;sum
 p sum
 p &amp;sum
 set var sum=22
 p sum
 set var {int}&amp;sum=-3
-p /x sum
-whatis sum</pre>
+p /x sum</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1430,7 +1438,6 @@ help layout
 layout src
 layout asm
 layout split</pre>
-</div>
 </div>
 </div>
 </div>
