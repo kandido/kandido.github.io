@@ -1158,7 +1158,7 @@ on the 8086 that involves two 16-bit operands. How long does it take to fetch th
 </div>
 </li>
 <li>
-<p>Escribir el caracter a con acento (á) en el código universal UTF-8 (hexadecimal) y en el código Unicode.</p>
+<p>Escribir el carácter <strong>a</strong> con acento <strong>á</strong> en el código universal UTF-8 (hexadecimal), en el código Unicode(U+XXXX) y en ascii extendido consultando el enlace <a href="https://charset.org/utf-8">UTF-8</a></p>
 </li>
 <li>
 <p>For each of the following packed decimal numbers, show the decimal value</p>
@@ -1289,13 +1289,13 @@ on the 8086 that involves two 16-bit operands. How long does it take to fetch th
 <div class="listingblock">
 <div class="content">
 <pre>Parte Entera: 1234 : 10011010010
-Parte Fracción: 0.6789: 0.10010001011000010
-Número 12345.6789: 10011010010.10010001011000010</pre>
+Parte Fracción: 0.56789: 0.100100010110000101
+Número 1234.56789: 10011010010.100100010110000101</pre>
 </div>
 </div>
 </li>
 <li>
-<p>En notación científica: 1.001101001010010001011000010*2+10</p>
+<p>En notación científica: 1.0011010010100100010110000101*2^+10</p>
 </li>
 <li>
 <p>En precisión simple punto flotante:</p>
@@ -1313,7 +1313,7 @@ Campo fracción mantisa (23 bits)= 00110100101001000101100</pre>
 <div class="content">
 <pre>Campo signo: + : 0
 Campo Exponente (11 bits): 10+1023 = 1033 = 10000001001
-Campo fracción mantisa (52 bits) = 001101001010010001011000010__0</pre>
+Campo fracción mantisa (52 bits) = 0011010010100100010110000101__0</pre>
 </div>
 </div>
 </li>
@@ -2819,7 +2819,7 @@ POP X</pre>
 </div>
 </li>
 <li>
-<p><a id="cmp_ejercicio"></a>The x86 Compare instruction (CMP) <strong>subtracts</strong> the source operand from the destination operand; it updates the status flags (C, P, A, Z, S, O) but does not alter either of the operands. The CMP instruction can be used to determine if the destination operand is greater than, equal to, or less than the source operand.Cuando se ejecuta CMP hay dos flags de overflow en el registro EFLAGS: el flag <strong>CF</strong> no hace la función de Carrier Flag sino la función de overflow flag si se comparan números sin signo. Si se comparan números con signo el flag de overlfow es <strong>OF</strong>.</p>
+<p><a id="cmp_ejercicio"></a>The x86 Compare instruction (CMP) <strong>subtracts</strong> the source operand from the destination operand; it updates the status flags (C, P, A, Z, S, O) but does not alter either of the operands. The CMP instruction can be used to determine if the destination operand is greater than, equal to, or less than the source operand.Cuando se ejecuta CMP hay dos flags de overflow en el registro EFLAGS: el flag <strong>CF</strong> no hace la función de Carrier Flag sino la función de overflow flag si se comparan números sin signo. Si se comparan números con signo el flag de overlfow es <strong>OF</strong>. Leer los apuntes referentes a <a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#prog_condicional">instrucciones condicionales</a></p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -2898,7 +2898,7 @@ POP X</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>CF es el flag de overflow.</p>
+<p>CF es el flag de overflow en este caso.</p>
 </li>
 <li>
 <p>Sin signo &#8594; para el caso Destino &gt; Fuente, la resta Destino - Fuente da lugar a   CF=0 y OF según la resta con signo. El flag de signo no vaŕía SF=X.</p>
@@ -2939,9 +2939,9 @@ POP X</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0/1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0/1</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Dest=Source</p></td>
@@ -2957,14 +2957,46 @@ POP X</pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">x</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0/1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0**</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1/0</p></td>
 </tr>
 </tbody>
 </table>
 <div class="ulist">
 <ul>
+<li>
+<p>Relación entre SF y OF</p>
+</li>
+<li>
+<p>Datos de 1 Byte: Ejemplo A &gt; B</p>
+<div class="listingblock">
+<div class="content">
+<pre>1 Byte : valor máximo +127, valor mínimo -128 y operaciones de la computadora en módulo 2^8=256
+Si A=+127 y B= -8 -&gt; A &gt; B
+instrucción CMP -&gt; A-B=+127-(-8)=+135
++135 &gt; +127  -&gt; OF=1
+La computadora computa +135 en módulo 256, es decir, el resultado A-B=+135-módulo=+135-256=-121 -&gt; signo negativo -&gt; SF=1
+La relación entre OF y SF es siempre OF=SF para el caso A &gt; B</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Datos de 1 Byte: Ejemplo A &lt; B</p>
+<div class="listingblock">
+<div class="content">
+<pre>1 Byte : valor máximo +127, valor mínimo -128 y operaciones de la computadora en módulo 2^8=256
+Si A=-128 y B= +8 -&gt; A&lt;B
+instrucción CMP -&gt; A-B=-128-(+8)=-136
+-136 &lt; -128  -&gt; OF=1
+La computadora computa -136 en módulo 256, es decir, el resultado A-B=-136+módulo=-136+256=+120 -&gt; signo positivo -&gt; SF=0
+La relación entre OF y SF es siempre OF&lt;&gt;SF para el caso A &lt; B</pre>
+</div>
+</div>
+</li>
+<li>
+<p>interpretación gráfica: describir los dos ejemplos anteriores bien posicionando los vectores A y B en una recta o en un círculo y marcando el valor de los valores máximo, mínimo y módulo.</p>
+</li>
 <li>
 <p>OF es el flag de overflow.</p>
 </li>
@@ -3005,7 +3037,7 @@ POP X</pre>
 <p>SETcc and Scc operate only on a byte, whereas Scond operates on byte, word, and doubleword operands.</p>
 </li>
 <li>
-<p>SETcc and Scond set the operand to integer one if true and to zero if false. Scc sets the byte to all binary ones if true and all zeros if false. What are the relative advantages and disadvantages of these differences?</p>
+<p>SETcc and Scond set the operand to integer <strong>one if true</strong> and to <strong>zero if false</strong>,es decir, lógica positiva. Scc sets the byte to all binary ones if true and all zeros if false. What are the relative advantages and disadvantages of these differences?</p>
 </li>
 </ul>
 </div>
@@ -3014,7 +3046,7 @@ POP X</pre>
 <p>None of these instructions set any of the condition code flags, and thus an explicit test of the result of the instruction is required to determine its value. Discuss whether condition codes should be set as a result of this instruction (test). <a href="http://www.felixcloutier.com/x86/">Manual Intel quick</a>: interpretar la instrucción TEST.</p>
 </li>
 <li>
-<p>A simple IF statement such as <em>IF a &gt; b</em> THEN can be implemented using a numerical representation method, that is, making the <em>Boolean value</em> manifest, as opposed to a <em>flow of control</em> method, which represents the value of a Boolean expression by a point reached in the program. (Primero transcribir el lenguaje ASM del enunciado a lenguaje RTL). Interpretar las instrucciones: <a href="http://www.felixcloutier.com/x86/">Manual Intel quick</a>. A compiler might implement <em>IF a &gt; b THEN</em> with the following <strong>x86 code</strong>:</p>
+<p>A simple IF statement such as <em>IF b &gt; a</em> THEN can be implemented using a numerical representation method, that is, making the <em>Boolean value</em> manifest (utilizando una variable booleana en memoria), as opposed to a <em>flow of control</em> method, which represents the value of a Boolean expression by a point reached in the program (con saltos condicionales). (Primero transcribir el lenguaje ASM del enunciado a lenguaje RTL). Leer los apuntes referentes a <a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#prog_condicional">instrucciones condicionales</a> Interpretar las instrucciones: <a href="http://www.felixcloutier.com/x86/">Manual Intel quick</a>. A compiler might implement <em>IF b &gt; a THEN</em> with the following <strong>x86 code</strong> for implement the <em>flow of control</em> method:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="nasm">        <span class="c1">; Sintaxis de Intel: Opeación Op_destino, Op_fuente</span>
@@ -3022,14 +3054,21 @@ POP X</pre>
         <span class="nf">MOV</span> <span class="nb">AX</span><span class="p">,</span> <span class="nv">B</span> <span class="c1">;move contents of location B to register AX</span>
         <span class="nf">CMP</span> <span class="nb">AX</span><span class="p">,</span> <span class="nv">A</span> <span class="c1">;compare contents of register AX and location A</span>
 
-        <span class="nf">JLE</span> <span class="nv">TEST</span> <span class="c1">;jump if A &lt;= B</span>
+        <span class="nf">JLE</span> <span class="nv">TEST</span> <span class="c1">;salto si Op_destino &lt; Op_fuente or Op_destino=Op_fuente -&gt; B&lt;A or B=A</span>
         <span class="nf">INC</span> <span class="nb">CX</span> <span class="c1">;add 1 to contents of register CX</span>
 <span class="nl">TEST:</span>   <span class="nf">JCXZ</span> <span class="nv">OUT</span> <span class="c1">;jump if contents of CX equal 0</span>
 
-<span class="nl">THEN:</span>   <span class="nf">XXXXX</span>
+<span class="nl">THEN:</span>   <span class="nf">XXXXX</span>  <span class="c1">; B&gt;A</span>
 
-<span class="nl">OUT:</span>    <span class="nf">XXXXX</span></code></pre>
+<span class="nl">OUT:</span>    <span class="nf">XXXXX</span>  <span class="c1">; B&lt;A or B=A</span></code></pre>
 </div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Escribir este mismo programa utilizando la instrucción SETcc que ahorra memoria y tiempo de ejecución.</p>
+</li>
+</ul>
 </div>
 </li>
 <li>
@@ -3045,17 +3084,24 @@ POP X</pre>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="nasm">	<span class="nf">MOV</span> <span class="nb">EAX</span><span class="p">,</span> <span class="nv">B</span> <span class="c1">;move contents of location B to register EAX</span>
 	<span class="nf">CMP</span> <span class="nb">EAX</span><span class="p">,</span> <span class="nv">C</span> <span class="c1">;compare contents of register EAX and location C</span>
-	<span class="nf">MOV</span> <span class="nb">BL</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;0 represents false</span>
-	<span class="nf">JLE</span> <span class="nv">N1</span> <span class="c1">;jump if (B &lt;= C)</span>
-	<span class="nf">MOV</span> <span class="nb">BL</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;1 represents false</span>
+	<span class="nf">MOV</span> <span class="nb">BL</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;0 represents false -&gt; la instrucción MOV NO afecta a los registros</span>
+	<span class="nf">JLE</span> <span class="nv">N1</span> <span class="c1">;jump if B&lt;C or B=C</span>
+	<span class="nf">MOV</span> <span class="nb">BL</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;1 represents true</span>
 <span class="nf">N1</span> 	<span class="nv">MOV</span> <span class="nb">EAX</span><span class="p">,</span> <span class="nv">D</span>
 	<span class="nf">CMP</span> <span class="nb">EAX</span><span class="p">,</span> <span class="nv">F</span>
-	<span class="nf">MOV</span> <span class="nb">BH</span><span class="p">,</span> <span class="mi">0</span>
-	<span class="nf">JNE</span> <span class="nv">N2</span>
-	<span class="nf">MOV</span> <span class="nb">BH</span><span class="p">,</span> <span class="mi">1</span>
+	<span class="nf">MOV</span> <span class="nb">BH</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;0 represents false</span>
+	<span class="nf">JNE</span> <span class="nv">N2</span> <span class="c1">;jump if F&lt;&gt;D</span>
+	<span class="nf">MOV</span> <span class="nb">BH</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;1 represents true</span>
 <span class="nf">N2</span> 	<span class="nv">OR</span> <span class="nb">BL</span><span class="p">,</span> <span class="nb">BH</span></code></pre>
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>¿Cuál es el valor de BL para los casos falso y verdadero?</p>
+</li>
+<li>
+<p>Escribir este mismo programa utilizando la instrucción SETcc que ahorra memoria y tiempo de ejecución.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -3063,6 +3109,9 @@ POP X</pre>
 </li>
 <li>
 <p>a. <code>JLE Op_destino</code></p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -3097,10 +3146,10 @@ POP X</pre>
         <span class="nf">MOV</span> <span class="nb">AX</span><span class="p">,</span> <span class="nv">B</span>  <span class="c1">;move contents of location B to register AX</span>
         <span class="nf">CMP</span> <span class="nb">AX</span><span class="p">,</span> <span class="nv">A</span>  <span class="c1">;compare contents of register AX and location A</span>
 
-        <span class="nf">SETGT</span> <span class="nb">CX</span>   <span class="c1">;CX = (a GT b)</span>
+        <span class="nf">SETGE</span> <span class="nb">CX</span>   <span class="c1">;CX = (b GE a) en lógica positiva</span>
 <span class="nl">TEST:</span>	<span class="nf">JCXZ</span> <span class="nv">OUT</span>   <span class="c1">;jump if contents of CX equal 0</span>
-<span class="nl">THEN:</span>   <span class="nf">XXXXXX</span>
-<span class="nl">OUT:</span>    <span class="nf">XXXXXX</span></code></pre>
+<span class="nl">THEN:</span>   <span class="nf">XXXXXX</span>     <span class="c1">;si verdadero</span>
+<span class="nl">OUT:</span>    <span class="nf">XXXXXX</span>     <span class="c1">;si falso</span></code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -3111,17 +3160,23 @@ POP X</pre>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="nasm"><span class="nf">MOV</span> <span class="nb">EAX</span><span class="p">,</span> <span class="nv">B</span> <span class="c1">; move from location B to register EAX</span>
 <span class="nf">CMP</span> <span class="nb">EAX</span><span class="p">,</span> <span class="nv">C</span>
-<span class="nf">SETG</span> <span class="nb">BL</span> <span class="c1">; Setcc SETGreater ;BL = 0/1 depending on result</span>
+<span class="nf">SETG</span> <span class="nb">BL</span> <span class="c1">; Setcc SETGreater ;BL = 0/1 depending on result B&gt;C</span>
 <span class="nf">MOV</span> <span class="nb">EAX</span><span class="p">,</span> <span class="nv">D</span>
 <span class="nf">CMP</span> <span class="nb">EAX</span><span class="p">,</span> <span class="nv">F</span>
 <span class="nf">MOV</span> <span class="nb">BH</span><span class="p">,</span> <span class="mi">0</span>
-<span class="nf">SETE</span> <span class="nb">BH</span> <span class="c1">; Setcc SETEqual ;BH= 0 ó 1 dependiendo del resultado</span>
+<span class="nf">SETE</span> <span class="nb">BH</span> <span class="c1">; Setcc SETEqual ;BH= 0 ó 1 dependiendo del resultado D=F</span>
 <span class="nf">OR</span> <span class="nb">BL</span><span class="p">,</span> <span class="nb">BH</span></code></pre>
 </div>
 </div>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p>Si BL ó BH es verdadero la sentencia a evaluar (B &gt; C) OR (D == F) es verdadera</p>
+</li>
+<li>
+<p>BL : variable lógica A con lógica positiva</p>
 </li>
 </ul>
 </div>
@@ -3189,9 +3244,6 @@ POP X</pre>
 </li>
 <li>
 <p>Para una arquitectura little endian el mapa de direcciones en memoria es el de la figura de abajo. Asociar la declaración de las estructuras s1 y s2 en lenguaje C y su inicialización con el mapa de direcciones indicando las direcciones en memoria de los elementos de las estructuras.</p>
-</li>
-</ol>
-</div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/ejercicios/little_endian.png" alt="little endian">
@@ -3258,8 +3310,16 @@ POP X</pre>
 </li>
 <li>
 <p>0x04 : 18 17 16 15</p>
-<div class="ulist">
-<ul>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
 <li>
 <p>Write a small program to determine the endianness of machine and report the results. Run the program on a computer available to you and turn in the output.</p>
 <div class="listingblock">
@@ -3281,13 +3341,8 @@ POP X</pre>
       <span class="n">printf</span><span class="p">(</span><span class="s">"Error in logic to determine machine endian-ness.</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span></code></pre>
 </div>
 </div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>SOLUCION:</p>
 <div class="ulist">
@@ -3315,7 +3370,7 @@ POP X</pre>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#mnemonicos_basicos_explicados">Explicación breve del modus operandi de los códigos mnemónicos</a>. Para información más detallada ir al <a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#repertorio_instruc_oper">Manual del Repertoriod e Instrucciones de INTEL</a></p>
+<p>Explicación breve de las operaciones de los  <a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#mnemonicos_basicos_explicados">códigos mnemónicos más básicos</a>. Para información más detallada ir al <a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#repertorio_instruc_oper">Manual del Repertorio de Instrucciones de INTEL</a></p>
 </li>
 </ul>
 </div>
@@ -3359,7 +3414,7 @@ POP X</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>si la sección de datos  presenta el código siguiente:</p>
+<p>teniendo en cuenta que la sección de datos  presenta el código siguiente:</p>
 <div class="listingblock">
 <div class="content">
 <pre>	.data
@@ -3457,7 +3512,7 @@ movq %ebx,da4</pre>
 </div>
 </li>
 <li>
-<p>Describir en lenguaje RTL el código</p>
+<p>Describir en lenguaje RTL el código:</p>
 <div class="listingblock">
 <div class="content">
 <pre>lea buffer,%eax
@@ -3506,9 +3561,6 @@ mov da2(,%esi,2),%ebx</pre>
 <ul>
 <li>
 <p>SOLUCION: Módulo asm:</p>
-</li>
-</ul>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c"><span class="n">x</span> <span class="n">en</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">y</span> <span class="n">en</span> <span class="o">%</span><span class="n">ebp</span><span class="o">+</span><span class="mi">12</span>
@@ -3519,8 +3571,7 @@ mov da2(,%esi,2),%ebx</pre>
 <span class="mi">4</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="mi">4</span><span class="p">(</span><span class="o">%</span><span class="n">esp</span><span class="p">)</span> 			<span class="p">;</span> <span class="n">pila</span> <span class="o">&lt;-</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">63</span><span class="o">:</span><span class="mi">32</span><span class="p">]</span></code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>Pila: arquitectura i386 &#8594; x86-32 &#8594; palabra=4bytes. EL crecimiento de la pila es hacia direcciones de la memoria más bajas.</p>
 <div class="imageblock kroki">
@@ -3547,9 +3598,6 @@ mov da2(,%esi,2),%ebx</pre>
 <ul>
 <li>
 <p>Solución: Módulo asm</p>
-</li>
-</ul>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c"><span class="n">x</span> <span class="n">en</span> <span class="n">ebp</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">y</span> <span class="n">en</span> <span class="n">ebp</span><span class="o">+</span><span class="mi">12</span>
@@ -3567,8 +3615,10 @@ mov da2(,%esi,2),%ebx</pre>
 <ul>
 <li>
 <p>Mismo enunciado anterior pero utilizando la instrucción  de extensión de signo <code>cltd</code></p>
-<div class="ulist">
-<ul>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>Módulo asm</p>
 <div class="listingblock">
@@ -3582,9 +3632,6 @@ mov da2(,%esi,2),%ebx</pre>
 <span class="mi">5</span> <span class="n">movl</span> <span class="o">%</span><span class="n">eax</span><span class="p">,</span> <span class="mi">4</span><span class="p">(</span><span class="o">%</span><span class="n">esp</span><span class="p">)</span>    <span class="p">;</span> <span class="n">pila</span> <span class="o">&lt;-</span> <span class="n">Cociente</span><span class="p">{</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">}</span>
 <span class="mi">6</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="p">(</span><span class="o">%</span><span class="n">esp</span><span class="p">)</span>     <span class="p">;</span> <span class="n">pila</span> <span class="o">&lt;-</span> <span class="n">x</span><span class="o">%</span><span class="n">y</span>  <span class="p">;</span> <span class="n">x</span><span class="o">%</span><span class="n">y</span> <span class="o">=</span> <span class="n">Resto</span><span class="p">{</span><span class="n">x</span><span class="o">/</span><span class="n">y</span><span class="p">}</span></code></pre>
 </div>
-</div>
-</li>
-</ul>
 </div>
 </li>
 </ul>
@@ -3659,9 +3706,6 @@ mov da2(,%esi,2),%ebx</pre>
 <ul>
 <li>
 <p>módulo fuente:</p>
-</li>
-</ul>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c"><span class="mi">1</span> <span class="n">jle</span> <span class="p">.</span><span class="n">L2</span> <span class="k">if</span> <span class="o">&lt;=</span><span class="p">,</span> <span class="k">goto</span> <span class="n">dest2</span>
@@ -3676,8 +3720,7 @@ mov da2(,%esi,2),%ebx</pre>
 <span class="mi">10</span> <span class="n">movl</span> <span class="o">%</span><span class="n">edx</span><span class="p">,</span> <span class="o">%</span><span class="n">eax</span></code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>Módulo objeto reubicable :las posiciones de memoria son relativas a la dirección de referencia "silly" (dirección cero del módulo reubicable)</p>
 <div class="listingblock">
@@ -4034,8 +4077,8 @@ lista                	: 1 -&gt; equivale a lista[0]
 </div>
 <div class="sect2">
 <h3 id="_capitulo_4_memoria_cache">10.8. Capitulo 4: Memoria Cache</h3>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Ejemplo 4.2a Pg118. The system has a Cache memory of 64KB  and Main Memory of 16MB with a byte word size and four word block size. For a cache controller with direct mapping correspondence function search the main memory block addresses correspondences to cache memory 0x0CE7 number line .</p>
 <div class="ulist">
@@ -4107,7 +4150,7 @@ lista                	: 1 -&gt; equivale a lista[0]
 </div>
 </li>
 <li>
-<p>4.1 A set-associative cache consists of 64 lines, or slots, divided into four-line sets. Main memory contains 4K blocks of 128 words each. Show the format of main memory addresses.</p>
+<p>A set-associative cache consists of 64 lines, or slots, divided into four-line sets. Main memory contains 4K blocks of 128 words each. Show the format of main memory addresses.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -4170,8 +4213,7 @@ lista                	: 1 -&gt; equivale a lista[0]
 </div>
 </li>
 <li>
-<p>4.3 For the hexadecimal main memory addresses 111111, 666666,BBBBBB, show the following
-information, in hexadecimal format:</p>
+<p>For the hexadecimal main memory addresses 111111, 666666,BBBBBB, show the following information, in hexadecimal format:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha">
 <li>
@@ -4230,7 +4272,7 @@ information, in hexadecimal format:</p>
 </ol>
 </div>
 </li>
-</ul>
+</ol>
 </div>
 <table class="tableblock frame-ends grid-all" style="width: 80%;">
 <caption class="title">Table 22. Direcciones</caption>
@@ -4269,10 +4311,10 @@ information, in hexadecimal format:</p>
 </tr>
 </tbody>
 </table>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>4.5 Consider a 32-bit microprocessor that has an on-chip 16-KByte four-way set-associative cache. Assume that the cache has a line size of four 32-bit words.</p>
+<p>Consider a 32-bit microprocessor that has an on-chip 16-KByte four-way set-associative cache. Assume that the cache has a line size of four 32-bit words.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha">
 <li>
@@ -4345,7 +4387,7 @@ b&#8230;&#8203;   Set 143, cualquier línea, la doblepalabra número 2.</p>
 </div>
 </li>
 <li>
-<p>4.7 The Intel 80486 has an on-chip, unified cache. It contains 8 KBytes and has a four-way set-associative organization and a block length of four 32-bit words. The cache is organized into 128 sets. There is a single “line valid bit” and three bits, B0, B1, and B2
+<p>The Intel 80486 has an on-chip, unified cache. It contains 8 KBytes and has a four-way set-associative organization and a block length of four 32-bit words. The cache is organized into 128 sets. There is a single “line valid bit” and three bits, B0, B1, and B2
 (the “LRU” bits), per line. On a cache miss, the 80486 reads a 16-byte line from main memory in a bus memory read burst.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha">
@@ -4407,7 +4449,7 @@ b.. Valid/LRU/Tag/Set/Offset &#8594; 1/3/21/7/4</p>
 </div>
 </li>
 <li>
-<p>4.15 Consider the following code:</p>
+<p>Consider the following code:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="rouge highlight"><code data-lang="c"><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="mi">20</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
@@ -4447,7 +4489,7 @@ b.. Valid/LRU/Tag/Set/Offset &#8594; 1/3/21/7/4</p>
 </div>
 </li>
 <li>
-<p>4.18 Consider a cache of 4 lines of 16 bytes each. Main memory is divided into blocks of
+<p>Consider a cache of 4 lines of 16 bytes each. Main memory is divided into blocks of
 16 bytes each. That is, block 0 has bytes with addresses 0 through 15, and so on. Now
 consider a program that accesses memory in the following sequence of addresses:</p>
 <div class="literalblock">
@@ -4472,7 +4514,7 @@ using the least recently used replacement scheme.</p>
 </div>
 </li>
 <li>
-<p>4.21 Consider a single-level cache with an access time of 2.5 ns, a line size of 64 bytes, and a
+<p>Consider a single-level cache with an access time of 2.5 ns, a line size of 64 bytes, and a
 hit ratio of H = 0.95. Main memory uses a block transfer capability that has a firstword
 (4 bytes) access time of 50 ns and an access time of 5 ns for each word thereafter.</p>
 <div class="olist loweralpha">
@@ -4489,7 +4531,7 @@ reduce the average memory access time?</p>
 </div>
 </li>
 <li>
-<p>4.24 On the Motorola 68020 microprocessor, a cache access takes two clock cycles. Data
+<p>On the Motorola 68020 microprocessor, a cache access takes two clock cycles. Data
 access from main memory over the bus to the processor takes three clock cycles in the
 case of no wait state insertion; the data are delivered to the processor in parallel with
 delivery to the cache.</p>
@@ -4507,20 +4549,20 @@ per memory cycle.What conclusion can you draw from the results?</p>
 </div>
 </li>
 <li>
-<p>4.27 For a system with two levels of cache, define Tc1 first-level cache access time; Tc2
+<p>For a system with two levels of cache, define Tc1 first-level cache access time; Tc2
 second-level cache access time; Tm memory access time;H1 first-level cache hit
 ratio;H2 combined first/second level cache hit ratio. Provide an equation for Ta for
 a read operation.</p>
 </li>
-</ul>
+</ol>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_capitulo_5_memoria_sincrona_dinamica_ram_sdram">10.9. Capitulo 5: Memoria Sincrona Dinamica RAM (SDRAM)</h3>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>5.x La arquitectura de un computador Intel tiene un bus del sistema con una frecuencia de reloj de 100MHz, el ancho del bus de datos son 64 bits y el ancho del bus de direcciones de la placa base es de 48 bits.</p>
+<p>La arquitectura de un computador Intel tiene un bus del sistema con una frecuencia de reloj de 100MHz, el ancho del bus de datos son 64 bits y el ancho del bus de direcciones de la placa base es de 48 bits.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha">
 <li>
@@ -4556,7 +4598,7 @@ a read operation.</p>
 </div>
 </li>
 <li>
-<p>5.2 Consider a dynamic RAM that must be given a refresh cycle 64 times per ms. Each refresh operation requires 150 ns; a memory cycle requires 250 ns.What percentage of the memory’s total operating time must be given to refreshes?</p>
+<p>Consider a dynamic RAM that must be given a refresh cycle 64 times per ms. Each refresh operation requires 150 ns; a memory cycle requires 250 ns.What percentage of the memory’s total operating time must be given to refreshes?</p>
 <div class="ulist">
 <ul>
 <li>
@@ -4586,7 +4628,7 @@ a read operation.</p>
 </div>
 </li>
 <li>
-<p>5.3 Figure 5.16 shows a simplified timing diagram for a DRAM read operation over a bus. The access time is considered to last from t1 to t2. Then there is a recharge time, lasting from t2 to t3, during which the DRAM chips will have to recharge before the processor can access them again.</p>
+<p>Figure 5.16 shows a simplified timing diagram for a DRAM read operation over a bus. The access time is considered to last from t1 to t2. Then there is a recharge time, lasting from t2 to t3, during which the DRAM chips will have to recharge before the processor can access them again.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha">
 <li>
@@ -4651,7 +4693,7 @@ a read operation.</p>
 </div>
 </li>
 <li>
-<p>5.4 Figure 5.6 indicates how to construct a module of chips that can store 1 MByte based on a group of four 256-Kbyte chips. Let’s say this module of chips is packaged as a single 1-Mbyte chip, where the word size is 1 byte. Give a high-level chip diagram of how to construct an 8-Mbyte computer memory using eight 1-Mbyte chips. Be sure to show the address lines in your diagram and what the address lines are used for.</p>
+<p>Figure 5.6 indicates how to construct a module of chips that can store 1 MByte based on a group of four 256-Kbyte chips. Let’s say this module of chips is packaged as a single 1-Mbyte chip, where the word size is 1 byte. Give a high-level chip diagram of how to construct an 8-Mbyte computer memory using eight 1-Mbyte chips. Be sure to show the address lines in your diagram and what the address lines are used for.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -4681,7 +4723,7 @@ a read operation.</p>
 </div>
 </li>
 <li>
-<p>5.5 On a typical Intel 8086-based system, connected via system bus to DRAM memory, for a read operation, RAS is activated by the trailing edge of the Address Enable signal (Figure 3.19). However, due to propagation and other delays, RAS does not go active until 50 ns after Address Enable returns to a low. Assume the latter occurs in the middle of the second half of state T1 (somewhat earlier than in Figure 3.19). Data are read by the processor at the end of T3. For timely presentation to the processor, however, data must be provided 60 ns earlier by memory. This interval accounts for propagation delays along the data paths (from memory to processor) and processor data hold time requirements. Assume a clocking rate of 10 MHz.</p>
+<p>On a typical Intel 8086-based system, connected via system bus to DRAM memory, for a read operation, RAS is activated by the trailing edge of the Address Enable signal (Figure 3.19). However, due to propagation and other delays, RAS does not go active until 50 ns after Address Enable returns to a low. Assume the latter occurs in the middle of the second half of state T1 (somewhat earlier than in Figure 3.19). Data are read by the processor at the end of T3. For timely presentation to the processor, however, data must be provided 60 ns earlier by memory. This interval accounts for propagation delays along the data paths (from memory to processor) and processor data hold time requirements. Assume a clocking rate of 10 MHz.</p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
@@ -4753,7 +4795,7 @@ a read operation.</p>
 </ol>
 </div>
 </li>
-</ul>
+</ol>
 </div>
 </div>
 <div class="sect2">
