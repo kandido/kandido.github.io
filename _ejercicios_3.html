@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-10-10</span>
+<span id="revdate">2022-10-17</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -306,6 +306,8 @@ pre.rouge {
 <li><a href="_ejercicios_3.html#_if_then_else">10.7.5. If-Then-Else</a>
 </li>
 <li><a href="_ejercicios_3.html#_do_while_loops">10.7.6. Do-While Loops</a>
+</li>
+<li><a href="_ejercicios_3.html#ejer_llamada_subru">10.7.7. Llamada a la subrutina</a>
 </li>
 </ul>
 </li>
@@ -3045,6 +3047,47 @@ La relación entre OF y SF es siempre OF&lt;&gt;SF para el caso A &lt; B</pre>
 </div>
 </li>
 <li>
+<p>Interpretación de los flags CF y OF con la instrucción suma  aritmética ADD. Al igual que con SUB el flag CF responde al overflow de la suma aritmética SIN signo y el flag OF responde al overflow de la suma aritmética con signo. Comprobarlo con el programa:</p>
+<div class="listingblock">
+<div class="content">
+<pre>#### explicación de la relación de CF y OF con el oveflow
+#### las instrucciones ADD y SUB hacen la interpretación de SIMULTANEA de operación CON y SIN signo
+#### CF es el resultado del overflow de la operación (add,sub,etc) SIN signo
+#### OF es el resultado del overflow de la operación (add,sub,etc) CON signo
+#### ¿En qué operaración aritmética CF NO es overflow sin signo y  SÍ es un CARRY puro?
+
+
+	.section .data
+oper1:	.byte 0x80 # con signo -128 y sin signo 256
+oper2:  .byte 0x7F # con signo +127 y sin signo 255
+
+oper3: 	.byte 0x00 # con signo 0 y sin signo 0
+oper4:	.byte 0xFF # con signo -1 y sin signo 511
+
+	.section .text
+	.global main
+main:	push %ebp
+	mov %esp,%ebp
+
+	mov oper1,%al
+	mov oper2,%bl
+	mov oper3,%cl
+	mov oper4,%dl
+
+	subb $0x01,%al # comprobar que sin signo no hay overflow (CF=0) y con signo sí hay overflow (OF=1)
+	addb $0x01,%bl # comprobar que sin signo no hay overflow (CF=0) y con signo sí hay overflow (OF=1)
+
+	subb $0x01,%cl # comprobar que sin signo sí hay overflow (CF=1) y con signo no hay overflow (OF=0)
+	addb $0x01,%dl # comprobar que sin signo sí hay overflow (CF=1) y con signo no hay overflow (OF=0)
+
+	mov %esp,%ebp
+	pop %ebp
+	ret
+	.end</pre>
+</div>
+</div>
+</li>
+<li>
 <p>Many microprocessor instruction SETS include an instruction that tests a condition and sets a destination operand if the condition is true. Examples include the <em>SETcc</em> on the x86 processor, the <em>Scc</em> on the Motorola MC68000 processor, and the <em>Scond</em> on the National NS32000 processor. <a href="http://www.felixcloutier.com/x86/">Manual Intel quick</a>: interpretar los nmemónicos y operando de la instrucción SETcc</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
@@ -4042,6 +4085,85 @@ variables in the C code. Create a table of register usage for this function.</p>
 </div>
 </li>
 </ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ejer_llamada_subru">10.7.7. Llamada a la subrutina</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Analizar la subrutina sumMtoN.s</p>
+<div class="listingblock">
+<div class="content">
+<pre>##Subrutina: sumMtoN
+##Descripción: calcula la suma de números enteros en secuencia desde el 1o sumando hasta el 2o sumando
+##	Argumentos de entrada: 1o sumando y 2o sumando los argumentos los pasa la rutina principal a través de la pila:
+##	1o se apila el último argumento y finalmente se apila el 1o argumento.
+##	Argumento de salida: es el resultado de la suma y se pasa a la rutina principal a través del registro EAX.
+##	Variables locales: se implementa una variable local en la pila pero no se utiliza
+
+	.type sumMtoN, @function # declara la etiqueta sumMtoN
+
+sumMtoN:
+	## Próĺogo: Crea el nuevo frame del stack
+	pushl %ebp #salvar el frame pointer antiguo
+	movl %esp, %ebp #actualizar el frame pointer nuevo
+	## Reserva una palabra en la pila como variable local
+	## Variable local en memoria externa: suma
+	subl $4, %esp
+	## Captura de argumentos
+	movl 8( %ebp), %ebx #1o argumento copiado en %ebx
+	movl 12( %ebp), %ecx #2o argumento copiado en %ecx
+
+	## suma la secuencia entre el valor del 1oarg y el valor del 2oarg
+	## 1o arg &lt; 2oarg
+	## utilizo como variable local EDX en lugar de la reserva externa para variable local: optimiza velocidad
+	## Inicializo la variable local suma
+	movl $0, %edx
+
+	## Número de iteracciones
+	mov %ecx, %eax
+	sub %ebx, %eax
+
+bucle:
+	add %ebx, %edx
+	inc %ebx
+	sub $1, %eax
+	jns bucle
+
+	## Salvo el resultado de la suma como el valor de retorno
+	movl %edx, %eax
+
+	## Epílogo: Recupera el frame antiguo
+	movl %ebp, %esp #restauro el stack pointer
+	popl %ebp #restauro el frame pointer
+
+	## Retorno a la rutina principal
+	ret
+	.end</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Programar una rutina main con llamada a la subrutina sumMtoN. Salir de main con la llamada a sistema exit. Ejecutar el programa con el depurador GDB y comprobar que el comando "next" <strong>entra</strong> en la subrutina sumMtoN. Estando dentro de la subrutina interpretar el comando "backtrace" <strong>bt</strong> que informa sobre el número y estado de los frames del stack.</p>
+</li>
+<li>
+<p>Programar una rutina main con llamada a la subrutina sumMtoN. Nada más entrar en main editar el prólogo de main (creación de un nuevo frame) y terminar main con el epílogo (fin del frame) y con la instrucción "ret".  Estando dentro de la subrutina interpretar el comando "backtrace" <strong>bt</strong> que informa sobre el número y estado de los frames del stack.</p>
+<div class="listingblock">
+<div class="content">
+<pre>	## Próĺogo: Crea el nuevo frame del stack
+	pushl %ebp #salvar el frame pointer antiguo
+	movl %esp, %ebp #actualizar el frame pointer nuevo
+
+
+
+	## Epílogo: Recupera el frame antiguo
+	movl %ebp, %esp #restauro el stack pointer
+	popl %ebp #restauro el frame pointer</pre>
+</div>
 </div>
 </li>
 </ol>
