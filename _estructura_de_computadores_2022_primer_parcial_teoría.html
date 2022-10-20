@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_estructura_de_computadores_2022_primer_parcial_teoría" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2022-10-20</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+<ul class="sectlevel1">
+<li><a href="_arquitectura_de_una_computadora.html">21. Arquitectura de una Computadora</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">22. RTL Register Transfer Language</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html">23. Programas ensamblador IASSim</a>
+</li>
+<li><a href="_simulador_iassim_2.html">24. Simulador IASSim</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html">25. Lenguajes de programación de Alto y Bajo Nivel</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html">26. Lenguajes de programación en Ensamblador</a>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html">27. Toolchain: Cadena de Herramientas en el proceso de compilación</a>
+</li>
+<li><a href="_practicando_la_programación_desde_el_principio.html">28. Practicando la Programación desde el principio</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_pila.html">30. Pila</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">31. Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">32. FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html"><span class="toc-current">33. Estructura de Computadores 2022: Primer Parcial Teoría</span></a>
+<ul class="sectlevel2">
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html#_ejercicios_de_los_temas_1_6">33.1. Ejercicios de los Temas 1-6</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html#_programación_en_lenguaje_ensamblador">33.2. Programación en Lenguaje Ensamblador</a>
+</li>
+</ul>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">34. Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">35. Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">36. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">37. Miaulario: Videoconferencia</a>
+</li>
+</ul>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_estructura_de_computadores_2022_primer_parcial_teoría">33. Estructura de Computadores 2022: Primer Parcial Teoría</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Apellidos:</strong></p>
+</li>
+<li>
+<p><strong>Nombre:</strong></p>
+</li>
+<li>
+<p><strong>Grupo:</strong></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_ejercicios_de_los_temas_1_6">33.1. Ejercicios de los Temas 1-6</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Dado un computador con arquitectura Von Neumann, un bus de datos de 8 hilos y un bus de direcciones de 4 hilos.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Dibuja un esquema de la arquitectura del computador en el que aparezcan los principales elementos vistos en clase (0.5 pts)</p>
+<div class="listingblock">
+<div class="content">
+<pre>.
+.
+.
+.
+.
+.
+.
+.
+.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Define los bits que debe tener cada uno de los siguientes registros (0.4 pts):</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>PC &#8594;</p>
+</li>
+<li>
+<p>IR &#8594;</p>
+</li>
+<li>
+<p>MAR &#8594;</p>
+</li>
+<li>
+<p>MBR &#8594;</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Calcula la capacidad de almacenamiento de la memoria en Bytes (0.5 pts)</p>
+<div class="listingblock">
+<div class="content">
+<pre>.
+.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Extendiendo el bus de direcciones a 8 hilos y con la siguiente tabla de memoria:</p>
+<table class="tableblock frame-all grid-all" style="width: 30%;">
+<caption class="title">Table 26. Memoria</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">…</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">…</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x0A</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">LOAD 0x27</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">…</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">…</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x26</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x16</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x27</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x4A</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0x28</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0xF3</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">…</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">…</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<div class="ulist">
+<ul>
+<li>
+<p>Empleando los registros de los apartados anteriore, más el bus del sistema y el acumulador, describe las fases del funcionamiento de un ciclo de instrucción en la máquina <strong>IAS</strong> con el PC=0x0A y el contenido de registros y buses. Para ello, rellena la siguiente tabla empleando tantas columnas como consideres necesarias.: (1’6 pts)</p>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 27. Ciclo de Instrucción</caption>
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4288%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">1</th>
+<th class="tableblock halign-left valign-top">2</th>
+<th class="tableblock halign-left valign-top">3</th>
+<th class="tableblock halign-left valign-top">4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Descripción</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>PC</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>IR</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MAR</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MBR</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Bus Datos</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Bus Control</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Bus Direcc.</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Acumulador</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 28. Ciclo de Instrucción</caption>
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4285%;">
+<col style="width: 21.4288%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">5</th>
+<th class="tableblock halign-left valign-top">6</th>
+<th class="tableblock halign-left valign-top">7</th>
+<th class="tableblock halign-left valign-top">8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Descripción Fases</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>PC</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>IR</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MAR</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MBR</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Bus Datos</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Bus Control</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Bus Direcc.</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Acumulador</em></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Realiza la suma en hexadecimal con tres dígitos, mostrando las llevadas, de los siguientes enteros sin signo y muestra el resultado en hexadecimal y en binario: 0xF7+0x2A (0.5 pto)</p>
+<div class="listingblock">
+<div class="content">
+<pre>Llevadas -&gt;
+
+Sumando  -&gt;
+
+Sumando  -&gt;
+
+Suma     -&gt;</pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</li>
+<li>
+<p>Realiza la siguiente resta de números sin signo 1010010 – 110110 (0.5 pto)</p>
+<div class="listingblock">
+<div class="content">
+<pre>Minuendo    -&gt;
+
+Sustraendo  -&gt;
+
+Llevadas    -&gt;
+
+Resta       -&gt;</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Con el <strong>mínimo</strong> número de digitos para que el resultado matemático sea correcto realizar las operaciones siguienets dados los números: A: 0101011 y B: 11011</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Siendo enteros sin signo: (1 pto)</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Realiza la suma C = A <em>+</em> B</p>
+<div class="listingblock">
+<div class="content">
+<pre>.
+.
+.
+.
+.
+.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Representa A, B y C en hexadecimal y decimal</p>
+<div class="listingblock">
+<div class="content">
+<pre>.
+.
+.
+.</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Siendo enteros en Complemento a 2 (1 pto)</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Realiza la suma C = A <em>+</em> B</p>
+<div class="listingblock">
+<div class="content">
+<pre>.
+.
+.
+.
+.
+.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Representa A, B y C en hexadecimal y decimal</p>
+<div class="listingblock">
+<div class="content">
+<pre>.
+.
+.
+.</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Siendo enteros en Signo-Magnitud (1 pto)</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Razona para obtener el resultado de la suma C = A <em>+</em> B</p>
+<div class="listingblock">
+<div class="content">
+<pre>.
+.
+.
+.
+.
+.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Representa A, B y C en hexadecimal y decimal</p>
+<div class="listingblock">
+<div class="content">
+<pre>.
+.
+.
+.</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Realiza la multiplicación en binario de los números naturales 0x26 y 0x3C (0.4 pto)</p>
+<div class="listingblock">
+<div class="content">
+<pre>.
+.
+.
+.
+.
+.
+.
+.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Un computador tiene los siguientes valores almacenados:</p>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 29. Memoria</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" colspan="2">REGISTROS</th>
+<th class="tableblock halign-left valign-top" colspan="2">MEMORIA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Registro</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contenido</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dirección</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contenido</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EAX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">87</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">87</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">01</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EBX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">02</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">88</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">07</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ECX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">89</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">03</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">02</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">08</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0F</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">…</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">…</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">94</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">95</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">00</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Indica el modo de direccionamiento de cada instrucción y determina para una de ellas el valor del operando introducido en EDX con los siguientes modos de direccionamiento: (0.3 pts cada uno)</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 50%;">
+<col style="width: 16.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Modo</th>
+<th class="tableblock halign-left valign-top">Valor Operando</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">movb $0x89, %edx</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">movb %eax, %edx</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">movb (%ecx,%ebx,4), %edx</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">movb (%eax), %edx</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">movb 0x88, %edx</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">movb -3(%ecx), %edx</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Si la última operación realizada en un computador intel de 8 bits es la suma de los siguientes números en complemento a 2: 10001011 y 10101101, <strong>razona</strong> cuál el valor de los siguientes banderines (0,2 pts cada una)</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Overflow Flag :</p>
+</li>
+<li>
+<p>Carry Flag :</p>
+</li>
+<li>
+<p>Zero Flag :</p>
+</li>
+<li>
+<p>Sign Flag :</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_programación_en_lenguaje_ensamblador">33.2. Programación en Lenguaje Ensamblador</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Desarrolla el programa <strong>main</strong> completo en el lenguaje ensamblador AT&amp;T de la arquitectura intel x86 que sume 4 a una variable entera <strong>n</strong> (tamaño 2 bytes) inicialmente definida con valor n = 5 y almacene el resultado en otra variable <strong>sum</strong> (tamaño 4 bytes) y devuelva el resultado al sistema operativo. Añadir al programa 5 comentarios que consideres básicos.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_fpu_x87.html">FPU x87</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">Estructura de Computadores 2022: Primer Parcial Prácticas</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2022-09-14 15:29:34 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

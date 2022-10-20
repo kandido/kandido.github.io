@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-10-17</span>
+<span id="revdate">2022-10-20</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -2185,7 +2185,7 @@ sumMtoN:
 		push   xxx
 # Cuerpo
 		mov 8(%ebp),%ebx	#capturo el 1º argumento
-		mov 16(%ebp),%ecx	#capturo el 2º argumento
+		mov 12(%ebp),%ecx	#capturo el 2º argumento
 		xxx xxx
 		xxx xxx
 # Epílogo
@@ -3080,7 +3080,7 @@ sumMtoN:
 <span class="nl">_start:</span>
      <span class="nf">movl</span> <span class="kc">$</span><span class="mi">9</span><span class="p">,</span><span class="nv">planetas</span>
      <span class="nf">push</span> <span class="nv">planetas</span>
-     <span class="nf">push</span> <span class="nv">cadena</span>
+     <span class="nf">push</span> <span class="kc">$</span><span class="nv">cadena</span>
      <span class="nf">call</span> <span class="nv">printf</span>
      <span class="nf">call</span> <span class="nv">exit</span>
      <span class="nf">.end</span></code></pre>
@@ -3235,9 +3235,9 @@ sumMtoN:
 	<span class="o">#</span><span class="k">#</span> <span class="n">cuerpo</span>
 	<span class="n">addl</span> <span class="o">%</span><span class="n">ecx</span><span class="o">,%</span><span class="n">eax</span>          <span class="k">#</span>
 	<span class="o">#</span><span class="k">#</span> <span class="n">guardar</span> <span class="n">resultado</span>
+
 	<span class="o">#</span><span class="k">#</span> <span class="n">el</span> <span class="n">resultado</span> <span class="n">está</span> <span class="n">en</span> <span class="nc">EAX</span>
-<span class="n">salto</span><span class="k">:</span>
-	<span class="k">##</span> <span class="kt">epilogo</span>
+	<span class="o">#</span><span class="k">#</span> <span class="n">epilogo</span>
 	<span class="n">pop</span> <span class="o">%</span><span class="n">esi</span>
 	<span class="n">pop</span> <span class="o">%</span><span class="n">edi</span>
 	<span class="n">pop</span> <span class="o">%</span><span class="n">ebx</span>
