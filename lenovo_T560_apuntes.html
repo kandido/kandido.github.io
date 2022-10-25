@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Lenovo ThinkPad T560</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="book">
+<div id="header">
+<h1>Lenovo ThinkPad T560</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2022-10-23</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_general">1. General</a>
+<ul class="sectlevel2">
+<li><a href="#_serial_number">1.1. Serial Number</a></li>
+</ul>
+</li>
+<li><a href="#_baseboard">2. Baseboard</a></li>
+<li><a href="#_cpu">3. CPU</a></li>
+<li><a href="#_memory_dram">4. Memory DRAM</a>
+<ul class="sectlevel2">
+<li><a href="#_caracteristicas">4.1. caracteristicas</a></li>
+<li><a href="#_memory_map">4.2. memory map</a></li>
+</ul>
+</li>
+<li><a href="#_virtual_memory">5. Virtual Memory</a>
+<ul class="sectlevel2">
+<li><a href="#_analysis">5.1. analysis</a></li>
+</ul>
+</li>
+<li><a href="#_cache">6. Cache</a>
+<ul class="sectlevel2">
+<li><a href="#_analysis_2">6.1. analysis</a></li>
+</ul>
+</li>
+<li><a href="#_hard_disk">7. Hard Disk</a>
+<ul class="sectlevel2">
+<li><a href="#_benchmark">7.1. benchmark</a></li>
+</ul>
+</li>
+<li><a href="#_bios">8. BIOS</a>
+<ul class="sectlevel2">
+<li><a href="#_conceptos">8.1. conceptos</a></li>
+<li><a href="#_analisis">8.2. analisis</a></li>
+<li><a href="#_memory_map_2">8.3. memory map</a></li>
+</ul>
+</li>
+<li><a href="#_uefi">9. UEFI</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_general">1. General</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code>lshw -h</code></p>
+</li>
+<li>
+<p><code>sudo lshw -X</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>Refresh
+Notebook
+  info comercial del portátil
+    sku: Stock Keeping Unit : número de referencia único
+         LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560 -&gt; product: 20F1S0H400
+
+  info de la bios</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>product: 20F1S0H400 (LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560)
+vendor: LENOVO
+version: ThinkPad L560
+serial: MP15YSW7
+width: 64 bits
+capabilities:
+	SMBIOS version 2.8,
+	DMI version 2.8,
+	Symmetric Multi-Processing,
+	32-bit prozesuak
+configuration:
+	administrator_password: disabled
+	chassis: notebook
+	family: ThinkPad L560
+	power-on_password: disabled
+	sku: LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560
+	uuid: 819AF1D7-F15C-CB11-8E0E-EA4C006016AC</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>inxi -c 0 -ACdGMNSz</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>System:    Kernel: 5.4.0-128-generic x86_64 bits: 64 Desktop: Gnome 3.36.9 Distro: Ubuntu 20.04.5 LTS (Focal Fossa)
+Machine:   Type: Laptop System: LENOVO product: 20F1S0H400 v: ThinkPad L560 serial: &lt;filter&gt;
+           Mobo: LENOVO model: 20F1S0H400 v: 0B98417 WIN serial: &lt;filter&gt; UEFI [Legacy]: LENOVO v: N1HET87W (1.51 )
+           date: 09/26/2019
+CPU:       Topology: Dual Core model: Intel Core i5-6300U bits: 64 type: MT MCP L2 cache: 3072 KiB
+           Speed: 800 MHz min/max: 400/3000 MHz Core speeds (MHz): 1: 800 2: 800 3: 800 4: 800
+Graphics:  Device-1: Intel Skylake GT2 [HD Graphics 520] driver: i915 v: kernel
+           Display: server: X.Org 1.20.13 driver: vesa unloaded: fbdev,modesetting resolution: 1366x768~60Hz
+           OpenGL: renderer: Mesa Intel HD Graphics 520 (SKL GT2) v: 4.6 Mesa 21.2.6
+Audio:     Device-1: Intel Sunrise Point-LP HD Audio driver: snd_hda_intel
+           Sound Server: ALSA v: k5.4.0-128-generic
+Network:   Device-1: Intel Ethernet I219-LM driver: e1000e
+           Device-2: Intel Wireless 8260 driver: iwlwifi
+Drives:    Local Storage: total: 465.76 GiB used: 297.26 GiB (63.8%)
+           ID-1: /dev/sda vendor: Seagate model: ST500LM021-1KJ152 size: 465.76 GiB
+           Optical-1: /dev/sr0 vendor: HL-DT-ST model: DVD-ROM DUE0N dev-links: cdrom,dvd
+           Features: speed: 24 multisession: yes audio: yes dvd: yes rw: none</pre>
+</div>
+</div>
+</li>
+<li>
+<p>qué diferencia hay con Full? <code>inxi -c 0 -F</code></p>
+</li>
+<li>
+<p>inxi -x ó inxi -xx ó -xxx &#8594; info extra</p>
+</li>
+<li>
+<p><code>hwinfo</code></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_serial_number">1.1. Serial Number</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>The serial number of the system unit is written on the label attached to the bottom of the computer. &#8594; no hay etiqueta</p>
+</li>
+<li>
+<p>Haga clic en Detectar dispositivo para PC Lenovo con Windows . Se requiere Lenovo Service Bridge (LSB) y debe descargarse.</p>
+</li>
+<li>
+<p>When the computer was manufactured, the EEPROM on the system board was loaded with the serial
+numbers of the system and all major components. These numbers need to remain the same throughout the
+life of the computer.</p>
+</li>
+<li>
+<p>A service part Field Replacement Unit (FRU) is used to replace a defective part installed or attached to the computer. Service part FRUs are identified by a 7-digit number on the part itself (for example, FRU P/N 11x1111): lo utilizan el servicio técnico de mantenimiento</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_baseboard">2. Baseboard</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code>lshw -X</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>product: 20F1S0H400
+vendor: LENOVO
+version: 0B98417 WIN  -&gt; ¿?
+serial: C1KS65V0053
+slot: Not Available</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>sudo dmidecode -t baseboard</code></p>
+<div class="listingblock">
+<div class="content">
+<pre># dmidecode 3.2
+Getting SMBIOS data from sysfs.
+SMBIOS 2.8 present.
+
+Handle 0x000D, DMI type 2, 15 bytes
+Base Board Information
+	Manufacturer: LENOVO
+	Product Name: 20F1S0H400
+	Version: 0B98417 WIN
+	Serial Number: C1KS65V0053
+	Asset Tag: Not Available
+	Features:
+		Board is a hosting board
+		Board is replaceable
+	Location In Chassis: Not Available
+	Chassis Handle: 0x0000
+	Type: Motherboard
+	Contained Object Handles: 0</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>sudo dmidecode -t system |  more</code></p>
+<div class="listingblock">
+<div class="content">
+<pre># dmidecode 3.2
+Getting SMBIOS data from sysfs.
+SMBIOS 2.8 present.
+
+Handle 0x000C, DMI type 1, 27 bytes
+System Information
+	Manufacturer: LENOVO
+	Product Name: 20F1S0H400
+	Version: ThinkPad L560
+	Serial Number: MP15YSW7
+	UUID: d7f19a81-5cf1-11cb-8e0e-ea4c006016ac
+	Wake-up Type: Power Switch
+	SKU Number: LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560
+	Family: ThinkPad L560
+
+Handle 0x0023, DMI type 12, 5 bytes
+System Configuration Options
+
+Handle 0x002F, DMI type 15, 31 bytes
+System Event Log
+	Area Length: 66 bytes
+	Header Start Offset: 0x0000
+	Header Length: 16 bytes
+	Data Start Offset: 0x0010
+	Access Method: General-purpose non-volatile data functions
+	Access Address: 0x00F0
+	Status: Valid, Not Full
+	Change Token: 0x00000003
+	Header Format: Type 1
+	Supported Log Type Descriptors: 4
+	Descriptor 1: POST error
+	Data Format 1: POST results bitmap
+	Descriptor 2: PCI system error
+	Data Format 2: None
+	Descriptor 3: System reconfigured
+	Data Format 3: None
+	Descriptor 4: Log area reset/cleared
+	Data Format 4: None</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cpu">3. CPU</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><code>cat /proc/cpuinfo</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 78
+model name	: Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+stepping	: 3
+microcode	: 0xf0
+cpu MHz		: 558.218
+cache size	: 3072 KB
+physical id	: 0
+siblings	: 4
+core id		: 0
+cpu cores	: 2
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit srbds mmio_stale_data
+bogomips	: 4999.90
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 78
+model name	: Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+stepping	: 3
+microcode	: 0xf0
+cpu MHz		: 549.859
+cache size	: 3072 KB
+physical id	: 0
+siblings	: 4
+core id		: 1
+cpu cores	: 2
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit srbds mmio_stale_data
+bogomips	: 4999.90
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 78
+model name	: Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+stepping	: 3
+microcode	: 0xf0
+cpu MHz		: 580.395
+cache size	: 3072 KB
+physical id	: 0
+siblings	: 4
+core id		: 0
+cpu cores	: 2
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit srbds mmio_stale_data
+bogomips	: 4999.90
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 78
+model name	: Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+stepping	: 3
+microcode	: 0xf0
+cpu MHz		: 532.906
+cache size	: 3072 KB
+physical id	: 0
+siblings	: 4
+core id		: 1
+cpu cores	: 2
+apicid		: 3
+initial apicid	: 3
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 22
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa itlb_multihit srbds mmio_stale_data
+bogomips	: 4999.90
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 39 bits physical, 48 bits virtual
+power management:</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>lscpu</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>Architecture:                    x86_64
+CPUaren op-modua(k):             32-bit, 64-bit
+Byte Order:                      Little Endian
+Address sizes:                   39 bits physical, 48 bits virtual
+CPU(s):                          4
+On-line CPU(s) list:             0-3
+Core bakoitzeko hari kopurua:    2
+Socket bakoitzeko core kopurua:  2
+Socket(s):                       1
+NUMA noduak:                     1
+Fabrikatzailearen IDa:           GenuineIntel
+CPU familia:                     6
+Modeloa:                         78
+Model name:                      Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+Stepping-a:                      3
+CPU MHz:                         600.001
+CPU max MHz:                     3000,0000
+CPU min MHz:                     400,0000
+BogoMIPS:                        4999.90
+Birtualizazioa:                  VT-x
+L1d cachea:                      64 KiB
+L1i cachea:                      64 KiB
+L2 cachea:                       512 KiB
+L3 cachea:                       3 MiB
+NUMA node0 CPU(s):               0-3
+Vulnerability Itlb multihit:     KVM: Mitigation: Split huge pages
+Vulnerability L1tf:              Mitigation; PTE Inversion; VMX conditional cache flushes, SMT vulnerable
+Vulnerability Mds:               Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerability Meltdown:          Mitigation; PTI
+Vulnerability Mmio stale data:   Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerability Spec store bypass: Mitigation; Speculative Store Bypass disabled via prctl and seccomp
+Vulnerability Spectre v1:        Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:        Mitigation; Retpolines, IBPB conditional, IBRS_FW, STIBP conditional, RSB filling, PBRSB-eIBRS Not affected
+Vulnerability Srbds:             Mitigation; Microcode
+Vulnerability Tsx async abort:   Mitigation; Clear CPU buffers; SMT vulnerable
+Flags:                           fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht
+                                  tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc
+                                 cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 s
+                                 se4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb
+                                  invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 h
+                                 le avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm
+                                  ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_memory_dram">4. Memory DRAM</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_caracteristicas">4.1. caracteristicas</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sudo inxi -m</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>Memory:    RAM: total: 11.47 GiB used: 3.78 GiB (33.0%)
+           Array-1: capacity: 32 GiB slots: 2 EC: None
+           Device-1: ChannelA-DIMM0 size: 4 GiB speed: 1600 MT/s
+           Device-2: ChannelB-DIMM0 size: 8 GiB speed: 1600 MT/s</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>sudo dmidecode --type 17</code></p>
+</li>
+<li>
+<p><code>sudo lshw -short -C memory</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>H/W path &#8594; /0/100/1f.2                  memory         Memory controller</p>
+<div class="listingblock">
+<div class="content">
+<pre>/0 is /system/bus ,where system = computer and bus = motherboard
+
+/0/0 is system/bus/memory
+
+/0/1 is system/bus/processor
+
+/0/1/0 is /system/bus/processor/memory ,which looks like memory for the CPU rather than the system's RAM</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>cat /proc/meminfo</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>MemTotal:       12027156 kB
+MemFree:         5346604 kB
+MemAvailable:    8782580 kB
+Buffers:          140860 kB
+Cached:          3067448 kB
+SwapCached:            0 kB
+Active:          3203044 kB
+Inactive:        1901048 kB
+Active(anon):    2123232 kB
+Inactive(anon):   230560 kB
+Active(file):    1079812 kB
+Inactive(file):  1670488 kB
+Unevictable:      272460 kB
+Mlocked:            2612 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:               476 kB
+Writeback:             0 kB
+AnonPages:       2160456 kB
+Mapped:           960012 kB
+Shmem:            504628 kB
+KReclaimable:    1005808 kB
+Slab:            1177132 kB
+SReclaimable:    1005808 kB
+SUnreclaim:       171324 kB
+KernelStack:       16320 kB
+PageTables:        39668 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     6013576 kB
+Committed_AS:   11389628 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:       39468 kB
+VmallocChunk:          0 kB
+Percpu:             4208 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:     16384 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:      556944 kB
+DirectMap2M:    10737664 kB
+DirectMap1G:     1048576 kB</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://access.redhat.com/solutions/1823" class="bare">https://access.redhat.com/solutions/1823</a></p>
+</li>
+<li>
+<p><a href="https://www.yugabyte.com/blog/linux-performance-tuning-memory-disk-io/" class="bare">https://www.yugabyte.com/blog/linux-performance-tuning-memory-disk-io/</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>free -m</code></p>
+</li>
+<li>
+<p><code>memconf.v3.16.pl</code> &#8594; en descargas</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sudo ./memconf.v3.16.pl</code> &#8594; lo mismo que inxi no?</p>
+<div class="listingblock">
+<div class="content">
+<pre>memconf:  V3.16 27-Jul-2022 https://sourceforge.net/projects/memconf/
+hostname: lur
+LENOVO 20F1S0H400 (Dual-Core Hyper-Threaded Intel(R) Corporation Intel(R) Core(TM) i5-6300U @ 2.40GHz)
+Memory Error Correction: None
+Maximum Memory: 32768MB (32GB)
+ChannelA-DIMM0 BANK 0: 4096MB 1600 MT/s Synchronous DDR3 SODIMM, Samsung M471B5173EB0-YK0
+ChannelB-DIMM0 BANK 2: 8192MB 1600 MT/s Synchronous DDR3 SODIMM, Samsung M471B1G73EB0-YK0
+empty memory sockets: None
+total memory = 12288MB (12GB)</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_memory_map">4.2. memory map</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://files.osdev.org/mirrors/geezer/osd/ram/index.htm#layout" class="bare">https://files.osdev.org/mirrors/geezer/osd/ram/index.htm#layout</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_virtual_memory">5. Virtual Memory</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_analysis">5.1. analysis</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>vmstat -s</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>    12027156 K total memory
+      2526116 K used memory
+      3201932 K active memory
+      1922412 K inactive memory
+      5388488 K free memory
+       121736 K buffer memory
+      3990816 K swap cache
+            0 K total swap
+            0 K used swap
+            0 K free swap
+       122794 non-nice user cpu ticks
+         4793 nice user cpu ticks
+        46484 system cpu ticks
+      1948629 idle cpu ticks
+       206450 IO-wait cpu ticks
+            0 IRQ cpu ticks
+         6755 softirq cpu ticks
+            0 stolen cpu ticks
+      5618967 pages paged in
+      1410252 pages paged out
+            0 pages swapped in
+            0 pages swapped out
+      5131692 interrupts
+     12615282 CPU context switches
+   1665211217 boot time
+        15823 forks</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>vmstat -a</code></p>
+</li>
+<li>
+<p><code>vmstat -f</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cache">6. Cache</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_analysis_2">6.1. analysis</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ls /sys/devices/system/cpu/cpu0/cache/</code> &#8594; index0  index1  index2  index3</p>
+</li>
+<li>
+<p><code>ls /sys/devices/system/cpu/cpu0/cache/index0</code> &#8594; toda la información</p>
+<div class="listingblock">
+<div class="content">
+<pre>coherency_line_size  level           physical_line_partition  shared_cpu_map  type    ways_of_associativity
+id                   number_of_sets  shared_cpu_list          size            uevent</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>cat /sys/devices/system/cpu/cpu0/cache/index0/level</code> &#8594; 1  &#8594; cache nivel 1 DATA</p>
+</li>
+<li>
+<p><code>cat /sys/devices/system/cpu/cpu0/cache/index1/level</code> &#8594; 1  &#8594; cache nivel 1 INSTRUCTION</p>
+</li>
+<li>
+<p><code>getconf LEVEL1_DCACHE_LINESIZE</code> &#8594; 64</p>
+</li>
+<li>
+<p><code>getconf -a</code></p>
+</li>
+<li>
+<p><code>getconf TABTAB</code></p>
+</li>
+<li>
+<p>Aligning to cache line</p>
+</li>
+<li>
+<p>gcc -DLEVEL1_DCACHE_LINESIZE=<code>getconf LEVEL1_DCACHE_LINESIZE</code> &#8230;&#8203;</p>
+</li>
+<li>
+<p>standard aligned_alloc function or one of the compiler specific specifiers such as <em>attribute</em>align(64) or __declspec(align(64)).</p>
+</li>
+<li>
+<p><code>sudo blkid</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hard_disk">7. Hard Disk</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_benchmark">7.1. benchmark</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>lsblk</code></p>
+</li>
+<li>
+<p><code>lsblk /dev/sda</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda      8:0    0 465,8G  0 disk
+├─sda1   8:1    0   100G  0 part
+├─sda2   8:2    0     1K  0 part
+└─sda5   8:5    0   365G  0 part /</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>sudo fdisk -l /dev/sda</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>Disk /dev/sda: 465,78 GiB, 500107862016 bytes, 976773168 sectors
+Disk model: ST500LM021-1KJ15
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+Disklabel type: dos
+Disk identifier: 0x2bd2c32a
+
+Gailua     Abio     Start   Amaiera Sektoreak   Size Id Moeta
+/dev/sda1  *           63 209717247 209717185   100G  7 HPFS/NTFS/exFAT
+/dev/sda2       209719294 976773119 767053826 365,8G  5 Extended
+/dev/sda5       209719296 975239167 765519872   365G 83 Linux</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>sudo hdparm -Ttv /dev/sda5</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>/dev/sda5:
+ multcount     = 16 (on)
+ IO_support    =  1 (32-bit)
+ readonly      =  0 (off)
+ readahead     = 256 (on)
+ geometry      = 60801/255/63, sectors = 765519872, start = 209719296
+ Timing cached reads:   11802 MB in  1.99 seconds = 5920.73 MB/sec
+ Timing buffered disk reads: 384 MB in  3.00 seconds = 127.93 MB/sec</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>este resultado depende del número de procesos activos y de la cantidad de memoria libre</p>
+</li>
+<li>
+<p>si lo repito</p>
+<div class="listingblock">
+<div class="content">
+<pre>/dev/sda5:
+ multcount     = 16 (on)
+ IO_support    =  1 (32-bit)
+ readonly      =  0 (off)
+ readahead     = 256 (on)
+ geometry      = 60801/255/63, sectors = 765519872, start = 209719296
+ Timing cached reads:   12304 MB in  1.99 seconds = 6173.33 MB/sec
+ Timing buffered disk reads: 390 MB in  3.01 seconds = 129.78 MB/sec</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>sudo hdparm -I /dev/sda | more</code> &#8594; bestial</p>
+<div class="listingblock">
+<div class="content">
+<pre>ATA device, with non-removable media
+	Model Number:       ST500LM021-1KJ152
+	Serial Number:      W62ET7YG
+	Firmware Revision:  0004LIM1
+	Transport:          Serial, ATA8-AST, SATA 1.0a, SATA II Extensions, SATA Rev 2.5, SATA Rev 2.6, SATA Rev 3.0
+Standards:
+	Used: unknown (minor revision code 0x0029)
+	Supported: 8 7 6 5
+	Likely used: 8
+Configuration:
+	Logical		max	current
+	cylinders	16383	16383
+	heads		15	16
+	sectors/track	63	63
+	--
+	CHS current addressable sectors:    16514064
+	LBA    user addressable sectors:   268435455
+	LBA48  user addressable sectors:   976773168
+	Logical  Sector size:                   512 bytes
+	Physical Sector size:                  4096 bytes
+	Logical Sector-0 offset:                  0 bytes
+	device size with M = 1024*1024:      476940 MBytes
+	device size with M = 1000*1000:      500107 MBytes (500 GB)
+	cache/buffer size  = unknown
+	Form Factor: 2.5 inch
+	Nominal Media Rotation Rate: 7200
+Capabilities:
+	LBA, IORDY(can be disabled)
+	Queue depth: 32
+	Standby timer values: spec'd by Standard, no device specific minimum
+	R/W multiple sector transfer: Max = 16	Current = 16
+	Advanced power management level: 254
+	Recommended acoustic management value: 254, current value: 0
+	DMA: mdma0 mdma1 mdma2 udma0 udma1 udma2 udma3 udma4 udma5 *udma6</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>udma6</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bios">8. BIOS</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_conceptos">8.1. conceptos</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>sudo biosdecode ¿?</p>
+</li>
+<li>
+<p>man dmidecode</p>
+<div class="listingblock">
+<div class="content">
+<pre>DMI table decoder
+/sys/firmware/dmi/tables
+SMBIOS  stands  for  System Management BIOS, while DMI stands for Desktop Management Interface
+types
+  0 -&gt; bios info -&gt; dmidecode -t 0 ,es decir, type bios, es decir, info de la entrada de la tabla relativa a la info de la propia bios
+  5 -&gt; memory controller  -&gt; no da info -&gt; info memo la 17
+
+  7 -&gt; cache memory
+
+
+Handle code-&gt; code hace referencia a una de las entradas de la tabla, por ejemplo:  Handle 0x0002, DMI type 7, 19 bytes significa que esa entrada
+              es la referenciada como 0x0002, lontitud 19Bytes, tipo 7 -&gt; es la cache level 1 data.</pre>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://www.kernel.org/doc/Documentation/ABI/testing/sysfs-firmware-dmi-entries" class="bare">https://www.kernel.org/doc/Documentation/ABI/testing/sysfs-firmware-dmi-entries</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_analisis">8.2. analisis</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>lshw -X</code> &#8594; notebook &#8594; motherboard &#8594; bios</p>
+<div class="listingblock">
+<div class="content">
+<pre>vendor: LENOVO
+version: N1HET87W (1.51 )
+size: 128KiB
+capacity: 16MiB
+capabilities:
+	PCI bus,
+	Plug-and-Play,
+	BIOS EEPROM can be upgraded,
+	BIOS shadowing,
+	Booting from CD-ROM/DVD,
+	Selectable boot path,
+	Enhanced Disk Drive extensions,
+	3.5" 720KB floppy,
+	Print Screen key,
+	i8042 keyboard controller,
+	INT14 serial line control,
+	INT17 printer control,
+	INT10 CGA/Mono video,
+	ACPI,
+	USB legacy emulation,
+	BIOS boot specification,
+	UEFI specification is supported</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>sudo dmidecode -t 0</code></p>
+<div class="listingblock">
+<div class="content">
+<pre># dmidecode 3.2
+Getting SMBIOS data from sysfs.
+SMBIOS 2.8 present.
+
+Handle 0x000B, DMI type 0, 24 bytes
+BIOS Information
+	Vendor: LENOVO
+	Version: N1HET87W (1.51 )
+	Release Date: 09/26/2019
+	Address: 0xE0000
+	Runtime Size: 128 kB
+	ROM Size: 16 MB
+	Characteristics:
+		PCI is supported
+		PNP is supported
+		BIOS is upgradeable
+		BIOS shadowing is allowed
+		Boot from CD is supported
+		Selectable boot is supported
+		EDD is supported
+		3.5"/720 kB floppy services are supported (int 13h)
+		Print screen service is supported (int 5h)
+		8042 keyboard services are supported (int 9h)
+		Serial services are supported (int 14h)
+		Printer services are supported (int 17h)
+		CGA/mono video services are supported (int 10h)
+		ACPI is supported
+		USB legacy is supported
+		BIOS boot specification is supported
+		Targeted content distribution is supported
+		UEFI is supported
+	BIOS Revision: 1.51
+	Firmware Revision: 1.51</pre>
+</div>
+</div>
+</li>
+<li>
+<p>aparece al ejecutar el Diagnose UEFI ( módulos: system, cpu, memory)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SMBIOS</p>
+</li>
+<li>
+<p><a href="https://hmong.es/wiki/SMBIOS" class="bare">https://hmong.es/wiki/SMBIOS</a></p>
+</li>
+<li>
+<p>fecha: 09/26/2019  &#8594;</p>
+</li>
+<li>
+<p>Versión N1HET87W (1.51)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>inxi -M</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>UEFI [Legacy]: LENOVO v: N1HET87W (1.51 ) date: 09/26/2019</pre>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://pcsupport.lenovo.com/" class="bare">https://pcsupport.lenovo.com/</a> &#8594; serial: MP15YSW7</p>
+<div class="ulist">
+<ul>
+<li>
+<p>controladores y software &#8594; update bios &#8594; descargar Lenovo BIOS</p>
+</li>
+<li>
+<p>unzip &#8594; file type cab</p>
+</li>
+<li>
+<p>sudo apt-get install cabextract</p>
+</li>
+<li>
+<p>cabextract *.cab</p>
+</li>
+<li>
+<p><a href="https://xmlgrid.net/" class="bare">https://xmlgrid.net/</a> &#8594; firmware.metainfo.xml</p>
+</li>
+<li>
+<p>firmware.bin</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_memory_map_2">8.3. memory map</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/E820" class="bare">https://en.wikipedia.org/wiki/E820</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://wiki.osdev.org/Detecting_Memory_(x86)#BIOS_Function:_INT_0x15.2C_EAX_.3D_0xE820" class="bare">https://wiki.osdev.org/Detecting_Memory_(x86)#BIOS_Function:_INT_0x15.2C_EAX_.3D_0xE820</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_uefi">9. UEFI</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>diagnostico Lenovo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>reboot &#8594; logo lenovo &#8594; F10</p>
+<div class="ulist">
+<ul>
+<li>
+<p>hay test rápidos y otros más extensos</p>
+</li>
+<li>
+<p>para poder salvar la información hay que instalar la aplicación de diagnóstico en un USB y arrancar desde el USB. Ver el manual de mantenimiento: Bootable diagnostic programs &#8594; googling &#8594; <a href="https://support.lenovo.com/es/es//solutions/ht506581-lenovo-diagnostic-solutions-downloads" class="bare">https://support.lenovo.com/es/es//solutions/ht506581-lenovo-diagnostic-solutions-downloads</a> &#8594; spain &#8594; serial code &#8594; <a href="https://pcsupport.lenovo.com/es/es/solutions/bootableusb" class="bare">https://pcsupport.lenovo.com/es/es/solutions/bootableusb</a></p>
+<div class="listingblock">
+<div class="content">
+<pre>Necesitará una unidad flash USB con al menos 2 GB. Nota: El contenido de la unidad flash se borrará como parte de este proceso. Recordatorio : antes de ejecutar los diagnósticos de Linux en los sistemas de destino, asegúrese de que el arranque seguro esté desactivado y, lo que es más importante, el modo de arranque esté configurado en UEFI Only o UEFI Firstly en la configuración del BIOS .
+BIOS -&gt;Seguridad-&gt;Arranque seguro-&gt;Arranque seguro: Deshabilitado
+BIOS -&gt;Inicio-&gt;UEFI/arranque heredado: solo UEFI o UEFI en primer lugar</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>después habrá que dejarlo otra vez en modo BIOS?</p>
+</li>
+<li>
+<p>la creación del USB bootable linux hay que hacerla desde Windows, ya que &#8230;&#8203;BootableGenerator.exe</p>
+<div class="listingblock">
+<div class="content">
+<pre>Nota: Se requiere una máquina con Windows para los siguientes pasos. Una vez creada la unidad USB de arranque, puede utilizar la unidad en un sistema Linux.
+Inserte una unidad flash.
+
+Descargue el archivo iso de Lenovo Linux Diagnostics (https://download.lenovo.com/pccbbs/thinkvantage_en/ldiag_4.44.2_linux.iso) en el sistema, pero no extraiga ningún archivo.
+
+Descargue y ejecute el archivo generador de arranque (https://download.lenovo.com/pccbbs/thinkvantage_en/lenovo_bootable_generator2.1.1.exe) . Instale y siga las instrucciones en pantalla.
+
+Ejecute BootableGenerator.exe desde el acceso directo del escritorio o el menú de inicio.
+
+Seleccione la unidad flash en la que desea que se escriban Lenovo Linux Diagnostics .
+
+Haga clic o toque Buscar . Busque y seleccione el archivo de arranque de Lenovo Linux que descargó.
+Seleccione Archivo
+
+Haga clic o toque Generar para iniciar el proceso.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2022-10-23 17:36:12 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>
