@@ -445,58 +445,257 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-10-23</span>
+<span id="revdate">2022-10-25</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_general">1. General</a>
+<li><a href="#_intro">1. Intro</a>
 <ul class="sectlevel2">
-<li><a href="#_serial_number">1.1. Serial Number</a></li>
+<li><a href="#_cddvd_drive_es_rom">1.1. cd/dvd drive es ROM</a></li>
+<li><a href="#_install_cddvd_drive">1.2. install cd/dvd drive</a></li>
 </ul>
 </li>
-<li><a href="#_baseboard">2. Baseboard</a></li>
-<li><a href="#_cpu">3. CPU</a></li>
-<li><a href="#_memory_dram">4. Memory DRAM</a>
+<li><a href="#_plataforma">2. Plataforma</a>
 <ul class="sectlevel2">
-<li><a href="#_caracteristicas">4.1. caracteristicas</a></li>
-<li><a href="#_memory_map">4.2. memory map</a></li>
+<li><a href="#_comandos_linux">2.1. comandos linux</a></li>
+<li><a href="#_serial_number">2.2. Serial Number</a></li>
 </ul>
 </li>
-<li><a href="#_virtual_memory">5. Virtual Memory</a>
+<li><a href="#_baseboard">3. Baseboard</a></li>
+<li><a href="#_completo_microarquitectura_cpumemoriachipset_recomendado">4. COMPLETO: MICROARQUITECTURA: CPU+Memoria+Chipset: recomendado</a>
 <ul class="sectlevel2">
-<li><a href="#_analysis">5.1. analysis</a></li>
+<li><a href="#_web_info">4.1. web info</a>
+<ul class="sectlevel3">
+<li><a href="#_wikichip">4.1.1. wikichip</a></li>
+<li><a href="#_intel">4.1.2. intel</a></li>
+<li><a href="#_cpu_world">4.1.3. cpu-world</a></li>
 </ul>
 </li>
-<li><a href="#_cache">6. Cache</a>
-<ul class="sectlevel2">
-<li><a href="#_analysis_2">6.1. analysis</a></li>
 </ul>
 </li>
-<li><a href="#_hard_disk">7. Hard Disk</a>
+<li><a href="#_cpu">5. CPU</a>
 <ul class="sectlevel2">
-<li><a href="#_benchmark">7.1. benchmark</a></li>
+<li><a href="#_comandos_linux_2">5.1. comandos linux</a></li>
 </ul>
 </li>
-<li><a href="#_bios">8. BIOS</a>
+<li><a href="#_memory_dram">6. Memory DRAM</a>
 <ul class="sectlevel2">
-<li><a href="#_conceptos">8.1. conceptos</a></li>
-<li><a href="#_analisis">8.2. analisis</a></li>
-<li><a href="#_memory_map_2">8.3. memory map</a></li>
+<li><a href="#_caracteristicas">6.1. caracteristicas</a></li>
+<li><a href="#_memory_map">6.2. memory map</a></li>
 </ul>
 </li>
-<li><a href="#_uefi">9. UEFI</a></li>
+<li><a href="#_virtual_memory">7. Virtual Memory</a>
+<ul class="sectlevel2">
+<li><a href="#_analysis">7.1. analysis</a></li>
+</ul>
+</li>
+<li><a href="#_cache">8. Cache</a>
+<ul class="sectlevel2">
+<li><a href="#_analysis_2">8.1. analysis</a></li>
+</ul>
+</li>
+<li><a href="#_chipset">9. Chipset</a>
+<ul class="sectlevel2">
+<li><a href="#_codename">9.1. codename</a></li>
+<li><a href="#_comandos_linux_3">9.2. comandos linux</a></li>
+<li><a href="#_info_web_del_chipset_de_intel_skylake_sunrise_point_lp">9.3. info web del chipset de intel skylake: Sunrise Point-LP</a>
+<ul class="sectlevel3">
+<li><a href="#_wikichip_2">9.3.1. wikichip</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_graphics">10. Graphics</a></li>
+<li><a href="#_hard_disk">11. Hard Disk</a>
+<ul class="sectlevel2">
+<li><a href="#_benchmark">11.1. benchmark</a></li>
+</ul>
+</li>
+<li><a href="#_bios">12. BIOS</a>
+<ul class="sectlevel2">
+<li><a href="#_analisis">12.1. analisis</a></li>
+<li><a href="#_memory_map_2">12.2. memory map</a></li>
+</ul>
+</li>
+<li><a href="#_uefi">13. UEFI</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_general">1. General</h2>
+<h2 id="_intro">1. Intro</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
+<p>Año 2016: Septiembre</p>
+<div class="ulist">
+<ul>
+<li>
+<p>viene sin drive CD/DVD &#8594; El (HL-DT-ST DVD-ROM DU90N SCSI CdRom Device) llega en Julio 2017</p>
+</li>
+<li>
+<p>es ROM : Read Only Memory &#8594; no graba</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://content.etilize.com/User-Manual/1032877634.pdf">Manual</a></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_cddvd_drive_es_rom">1.1. cd/dvd drive es ROM</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>El dvd/cd NO GRABA, SOLO LEE</p>
+</li>
+<li>
+<p><a href="https://certification.ubuntu.com/catalog/component/scsi/5313/scsi%3AHL-DT-STDVD-ROMDUE0N/">ubuntu garantiza</a></p>
+</li>
+<li>
+<p>dvd DUE0N</p>
+<div class="listingblock">
+<div class="content">
+<pre>  *-cdrom
+       descripción: DVD reader
+       producto: DVD-ROM DUE0N
+       fabricante: HL-DT-ST
+       id físico: 0.0.0
+       información del bus: scsi@1:0.0.0
+       nombre lógico: /dev/cdrom
+       nombre lógico: /dev/dvd
+       nombre lógico: /dev/sr0
+       versión: LCD1
+       capacidades: removable audio dvd
+       configuración: ansiversion=5 status=nodisc</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Solución: dvd/cd ASUS externo USB prestado</p>
+<div class="listingblock">
+<div class="content">
+<pre>*-cdrom
+       descripción: DVD-RAM writer
+       producto: SDRW-08D2S-U
+       fabricante: ASUS
+       id físico: 0.0.0
+       información del bus: scsi@2:0.0.0
+       nombre lógico: /dev/cdrw
+       nombre lógico: /dev/dvdrw
+       nombre lógico: /dev/sr1
+       versión: F601
+       capacidades: removable audio cd-r cd-rw dvd dvd-r dvd-ram
+       configuración: status=open</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_install_cddvd_drive">1.2. install cd/dvd drive</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://support.lenovo.com/es/en/solutions/pd103955" class="bare">https://support.lenovo.com/es/en/solutions/pd103955</a></p>
+</li>
+<li>
+<p>Manual pg 69 : Replacing the optical drive</p>
+</li>
+<li>
+<p>Remove the battery pack. See “Replacing the battery pack” on page 59 .</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_plataforma">2. Plataforma</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_comandos_linux">2.1. comandos linux</h3>
+<div class="ulist">
+<ul>
+<li>
 <p><code>lshw -h</code></p>
+</li>
+<li>
+<p><a href="./lenovo_T560.html">Lenovo T560 ThinkPad</a></p>
+</li>
+<li>
+<p><code>sudo lshw -short</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>H/W path         Device      Class          Description
+=======================================================
+                             system         20F1S0H400 (LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560)
+/0                           bus            20F1S0H400
+/0/2                         memory         64KiB L1 cache
+/0/3                         memory         64KiB L1 cache
+/0/4                         memory         512KiB L2 cache
+/0/5                         memory         3MiB L3 cache
+/0/6                         processor      Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+/0/7                         memory         12GiB System Memory
+/0/7/0                       memory         4GiB SODIMM DDR3 Synchronous 1600 MHz (0,6 ns)
+/0/7/1                       memory         8GiB SODIMM DDR3 Synchronous 1600 MHz (0,6 ns)
+/0/b                         memory         128KiB BIOS
+/0/100                       bridge         Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Host Bridge/DRAM Registers
+/0/100/2                     display        Skylake GT2 [HD Graphics 520]
+/0/100/8                     generic        Xeon E3-1200 v5/v6 / E3-1500 v5 / 6th/7th/8th Gen Core Processor Gaussian Mixture Model
+/0/100/14                    bus            Sunrise Point-LP USB 3.0 xHCI Controller
+/0/100/14/0      usb1        bus            xHCI Host Controller
+/0/100/14/0/7                multimedia     Integrated Camera
+/0/100/14/0/8                communication  Bluetooth wireless interface
+/0/100/14/0/a                bus            USB2.0 Hub
+/0/100/14/1      usb2        bus            xHCI Host Controller
+/0/100/14.2                  generic        Sunrise Point-LP Thermal subsystem
+/0/100/16                    communication  Sunrise Point-LP CSME HECI #1
+/0/100/16.3                  communication  Sunrise Point-LP Active Management Technology - SOL
+/0/100/17                    storage        Sunrise Point-LP SATA Controller [AHCI mode]
+/0/100/1c                    bridge         Sunrise Point-LP PCI Express Root Port #4
+/0/100/1c/0      wlp2s0      network        Wireless 8260
+/0/100/1c.4                  bridge         Sunrise Point-LP PCI Express Root Port #5
+/0/100/1c.4/0                generic        SD/MMC Card Reader Controller
+/0/100/1c.5                  bridge         Sunrise Point-LP PCI Express Root Port #6
+/0/100/1f                    bridge         Sunrise Point-LP LPC Controller
+/0/100/1f.2                  memory         Memory controller
+/0/100/1f.3                  multimedia     Sunrise Point-LP HD Audio
+/0/100/1f.4                  bus            Sunrise Point-LP SMBus
+/0/100/1f.6      enp0s31f6   network        Ethernet Connection I219-LM
+/0/0                         system         PnP device PNP0c02
+/0/1                         system         PnP device PNP0c02
+/0/8                         system         PnP device PNP0c02
+/0/9                         system         PnP device PNP0b00
+/0/a                         generic        PnP device INT3f0d
+/0/c                         generic        PnP device LEN0071
+/0/d                         generic        PnP device LEN004d
+/0/e                         system         PnP device PNP0c02
+/0/f                         system         PnP device PNP0c02
+/0/10                        system         PnP device PNP0c31
+/0/11            scsi0       storage
+/0/11/0.0.0      /dev/sda    disk           500GB ST500LM021-1KJ15
+/0/11/0.0.0/1    /dev/sda1   volume         100GiB Windows NTFS volume
+/0/11/0.0.0/2    /dev/sda2   volume         365GiB Extended partition
+/0/11/0.0.0/2/5  /dev/sda5   volume         365GiB EXT4 volume
+/0/12            scsi1       storage
+/0/12/0.0.0      /dev/cdrom  disk           DVD-ROM DUE0N
+/1                           power          00NY488
+/2               virbr0-nic  network        Ethernet interface</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sunrise Point-LP es el codename del chipset de intel</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p><code>sudo lshw -X</code></p>
@@ -557,19 +756,11 @@ Drives:    Local Storage: total: 465.76 GiB used: 297.26 GiB (63.8%)
 </div>
 </div>
 </li>
-<li>
-<p>qué diferencia hay con Full? <code>inxi -c 0 -F</code></p>
-</li>
-<li>
-<p>inxi -x ó inxi -xx ó -xxx &#8594; info extra</p>
-</li>
-<li>
-<p><code>hwinfo</code></p>
-</li>
 </ul>
 </div>
+</div>
 <div class="sect2">
-<h3 id="_serial_number">1.1. Serial Number</h3>
+<h3 id="_serial_number">2.2. Serial Number</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -592,7 +783,7 @@ life of the computer.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_baseboard">2. Baseboard</h2>
+<h2 id="_baseboard">3. Baseboard</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -678,15 +869,363 @@ System Event Log
 </div>
 </div>
 </li>
+<li>
+<p><code>hwinfo</code> &#8594; <strong>awesome</strong></p>
+</li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_cpu">3. CPU</h2>
+<h2 id="_completo_microarquitectura_cpumemoriachipset_recomendado">4. COMPLETO: MICROARQUITECTURA: CPU+Memoria+Chipset: recomendado</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_web_info">4.1. web info</h3>
+<div class="sect3">
+<h4 id="_wikichip">4.1.1. wikichip</h4>
 <div class="ulist">
 <ul>
+<li>
+<p><a href="https://en.wikichip.org/wiki/intel/microarchitectures/skylake_(client" class="bare">https://en.wikichip.org/wiki/intel/microarchitectures/skylake_(client</a>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>recomendado</strong> &#8594; esquema de la microarquitectura</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://en.wikichip.org/wiki/intel/cores/skylake_u" class="bare">https://en.wikichip.org/wiki/intel/cores/skylake_u</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Skylake U Processors &#8594; tabla con resument de core i5-6300U</p>
+<div class="listingblock">
+<div class="content">
+<pre>Main Processor:
+Model		Launched		Price		Family	Cores	Threads	L3$	L4$	TDP	Frequency
+i5-6300U	27 September 2015	$ 281.00	Core i5	2	4	3 MiB	--	15 W	2.4 GHz
+
+Turbo Boost:
+1 Core	2 Cores
+3 GHz	2.9 GHz
+
+Memory:
+Max Mem
+32 GiB
+
+IGP:
+GPU			Frequency	Turbo
+HD Graphics 520		300 MHz		1,000 MHz
+
+Major Feature Diff:
+Turbo	SMT	AVX2	TXT	TSX	vPro
+✔	✔	✔	✔	✔	✔</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Turbo Boost Technology (TBT) is a microprocessor technology developed by Intel that attempts to enable temporary higher performance</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_intel">4.1.2. intel</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.intel.com/content/www/us/en/products/platforms/details/skylake-u-y/docs.html?s=Newest" class="bare">https://www.intel.com/content/www/us/en/products/platforms/details/skylake-u-y/docs.html?s=Newest</a></p>
+</li>
+<li>
+<p><a href="https://ark.intel.com/content/www/es/es/ark/products/88190/intel-core-i56300u-processor-3m-cache-up-to-3-00-ghz.html" class="bare">https://ark.intel.com/content/www/es/es/ark/products/88190/intel-core-i56300u-processor-3m-cache-up-to-3-00-ghz.html</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cpu_world">4.1.3. cpu-world</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.cpu-world.com/cgi-bin/SearchSite.pl" class="bare">https://www.cpu-world.com/cgi-bin/SearchSite.pl</a> &#8594; Search: core i5-6300U &#8594; No sé lo que significa las S-spec QJ8M, SR2F0, etc</p>
+</li>
+<li>
+<p>Intel&#174; Core&#8482; i5-6300U CPU @ 2.40GHz</p>
+</li>
+<li>
+<p><a href="https://www.cpu-world.com/CPUs/CPU.html" class="bare">https://www.cpu-world.com/CPUs/CPU.html</a> &#8594; Search: core i5-6300U &#8594; 31 matches &#8594;</p>
+<div class="listingblock">
+<div class="content">
+<pre>Intel Core i5-6300U Mobile processor - FJ8066201924931
+Intel Core i5-6300U specifications General information Type CPU / Microprocessor Market segment Mobile Family Intel Core i5 Mobile Model number i5-6300U CPU part number FJ8066201924931 is an OEM/tray microprocessor Frequency 2.4 GHz /</pre>
+</div>
+</div>
+</li>
+<li>
+<p><a href="https://www.cpu-world.com/CPUs/Core_i5/Intel-Core%20i5-6300U%20Mobile%20processor.html" class="bare">https://www.cpu-world.com/CPUs/Core_i5/Intel-Core%20i5-6300U%20Mobile%20processor.html</a></p>
+</li>
+<li>
+<p>microarchitecture &#8594; Skylake</p>
+</li>
+<li>
+<p>mucha información:</p>
+<div class="listingblock">
+<div class="content">
+<pre>General information
+	Type	CPU / Microprocessor
+	Market segment	Mobile
+	Family	Intel Core i5 Mobile
+	Model number  ? 	i5-6300U
+	CPU part number		FJ8066201924931 is an OEM/tray microprocessor
+	Frequency  ? 		2.4 GHz / 2400 MHz
+	Maximum turbo frequency	3 GHz / 3000 MHz
+	Clock multiplier  ? 	24
+	Package			1356-ball micro-FCBGA
+	Socket			BGA1356
+	Size			1.65" x 0.94" / 4.2cm x 2.4cm
+	Introduction date	September 1, 2015 (announcement)
+				September 1, 2015 (availability in Asia)
+				September 27, 2015 (availability elsewhere)
+	Price at introduction	$281
+S-spec numbers
+	Part number	ES/QS processors	Production processors
+	 		QJ8M			SR2F0
+	FJ8066201924931	+
+	Unknown					+
+
+
+Architecture / Microarchitecture
+	Microarchitecture	Skylake
+	Processor core  ? 	Skylake-U
+	Core stepping  ? 	D1
+	CPUIDs	406E3
+	Manufacturing process	0.014 micron
+	Data width		64 bit
+	The number of CPU cores	2
+	The number of threads	4
+	Floating Point Unit	Integrated
+	Level 1 cache size  ? 	2 x 32 KB 8-way set associative instruction caches
+	2 x 32 KB 8-way set associative data caches
+	Level 2 cache size  ? 	2 x 256 KB 4-way set associative caches
+	Level 3 cache size	3 MB 12-way set associative shared cache
+	Physical memory		32 GB
+	Multiprocessing		Not supported
+	Extensions &amp; Technologies	MMX instructions
+					SSE / Streaming SIMD Extensions
+					SSE2 / Streaming SIMD Extensions 2
+					SSE3 / Streaming SIMD Extensions 3
+					SSSE3 / Supplemental Streaming SIMD Extensions 3
+					SSE4 / SSE4.1 + SSE4.2 / Streaming SIMD Extensions 4  ?
+					AES / Advanced Encryption Standard instructions
+					AVX / Advanced Vector Extensions
+					AVX2 / Advanced Vector Extensions 2.0
+					BMI / BMI1 + BMI2 / Bit Manipulation instructions
+					F16C / 16-bit Floating-Point conversion instructions
+					FMA3 / 3-operand Fused Multiply-Add instructions
+					EM64T / Extended Memory 64 technology / Intel 64  ?
+					HT / Hyper-Threading technology  ?
+					VT-x / Virtualization technology  ?
+					VT-d / Virtualization for directed I/O
+					TBT 2.0 / Turbo Boost technology 2.0  ?
+					TSX / Transactional Synchronization Extensions
+	Security Features
+					NX / XD / Execute disable bit  ?
+					TXT / Trusted Execution technology
+					MPX / Memory Protection Extensions
+					SGX / Software Guard Extensions
+	Low power features		Enhanced SpeedStep technology  ?
+
+Integrated peripherals / components
+	Display controller	3 displays
+	Integrated graphics	GPU Type: HD 520
+				Graphics tier: 		GT2
+				Microarchitecture: 	Gen 9 LP
+				Execution units: 	24
+				Base frequency (MHz): 	300
+				Maximum frequency (MHz): 1000
+
+	Memory controller	 The number of controllers: 1
+		Memory channels (per controller): 	2
+		Memory channels (total): 		2
+		Supported memory: DDR3L-1600, LPDDR3-1866, DDR4-2133
+
+	Other peripherals	PCI Express 3.0 interface (12 lanes)
+				SATA controller
+				USB controller
+				USB OTG
+				eMMC 5.0
+				SDXC 3.0
+				Legacy I/O
+Electrical / Thermal parameters
+	Maximum operating temperature  ? 	100°C
+	Thermal Design Power  ? 		15 Watt
+
+Notes on Intel Core i5-6300U
+	Configurable TDP-down feature is supported. In TDP-down mode the CPU has 7.5 Watt TDP</pre>
+</div>
+</div>
+</li>
+<li>
+<p>FAQ</p>
+<div class="listingblock">
+<div class="content">
+<pre>FAQ
+Q: Can I upgrade my Intel i5-6300U microprocessor?
+A: No. CPUs like this one are soldered on a board, as a result, upgrading or replacing them is extremely difficult.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>news</p>
+<div class="listingblock">
+<div class="content">
+<pre>Aug 17, 2015: Intel Skylake microarchitecture was launched two weeks ago, and the company plans to release more Skylake parts in September and Q4 2015. Overall, this year Intel is going to release 18 desktop and at least 15 mobile Skylake processors, including high-performance "H" series mobile CPUs, 15 Watt "U" series systems on a chip, and Core M chips. Details of the "H" and Core M products are not known yet, but specifications of "U" parts have been posted last week by FanlessTech news site.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>CPU ID information for the Core i5-6300U &#8594; <a href="https://www.cpu-world.com/Download/CPU_identification.html" class="bare">https://www.cpu-world.com/Download/CPU_identification.html</a> &#8594; exe win</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Submission details
+	Manufacturer:	Intel	Measured frequency:	2496 MHz
+	CPU Family:	Core i5 Mobile	Comment:	Found in a prototype version of the HP EliteBook 820 G3. Engineering sample.
+	Processor Number:	i5-6300U
+	Part number (supplied):	FJ8066201924931	Submitted by:	crazybubba64
+	Part number (guessed):
+	FJ8066201924931
+	Submitted on:
+	S-Spec Number:	QJ8M	CWID version:	0.5
+
+General information
+	Vendor:	GenuineIntel
+	Processor name (BIOS):	Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+	Cores:	2
+	Logical processors:	4
+	Base frequency:	2500 MHz
+	Maximum frequency:	3000 MHz
+	Bus / reference frequency:	100 MHz
+	Processor type:	Original OEM Processor
+	CPUID signature:	406E3
+	Family:	6 (06h)
+	Model:	78 (04Eh)
+	Stepping:	3 (03h)
+	TLB/Cache details:	64-byte Prefetching
+	Data TLB: 1-GB pages, 4-way set associative, 4 entries
+	Data TLB: 4-KB Pages, 4-way set associative, 64 entries
+	Instruction TLB: 4-KByte pages, 8-way set associative, 64 entries
+	L2 TLB: 1-MB, 4-way set associative, 64-byte line size
+	Shared 2nd-Level TLB: 4-KB / 2-MB pages, 6-way associative, 1536 entries. Plus, 1-GB pages, 4-way, 16 entries
+
+Cache details
+	Cache:		L1 data		L1 instruction			L2				L3
+	Size:		2 x 32 KB	2 x 32 KB			2 x 256 KB			3 MB
+	Associativity:	8-way set associative	8-way setassociative	4-way setassociative		12-way setassociative
+	Line size:	64 bytes	64 bytes			64 bytes			64 bytes
+	Comments:	Direct-mapped	Direct-mapped			Non-inclusiveDirect-mapped	Inclusive Shared between all cores
+
+Supported instructions
+Instruction set extensions				Additional instructions
+MMX							ADCX/ADOX instructions
+SSE							Advanced Bit manipulation
+SSE2							CLFLUSH
+SSE3							CLFLUSHOPT
+SSSE3							CMOV
+SSE4.1							CMPXCHG16B
+SSE4.2							CMPXCHG8B
+AES							Enhanced REP MOVSB/STOSB
+AVX							FXSAVE/FXRSTORE
+AVX2							INVPCID
+BMI1							MONITOR/MWAIT
+BMI2							MOVBE
+F16C							PCLMULDQ
+FMA							POPCNT
+Memory Protection Extensions (MPX)				PREFETCH/PREFETCHW
+Supervisor-Mode Access Prevention and CLAC / STAC instructions	RD/WR FSGSBASE instructions
+Supervisor Mode Execution Protection				RDRAND
+Software Guard Extensions (SGX)					RDSEED
+TSX (HLE interface)						RDTSCP
+TSX (RTM interface)						SYSENTER/SYSEXIT
+ 								XSAVE/XRESTORE states
+ 								XSETBV/XGETBV are enabled
+
+Integrated features and technologies
+Major features				Other features
+On-chip Floating Point Unit		1 GB large page support
+64-bit / Intel 64			36-bit page-size extensions
+NX bit/XD-bit				64-bit debug store
+Hyper-Threading Technology		Advanced programmable interrupt controller
+Intel Virtualization			CPL qualified debug store
+Intel Trusted Execution technology	Clock modulation duty cycle extension
+Turbo Boost				Debug store
+Enhanced SpeedStep			Debugging extensions
+ 					Digital Thermal Sensor capability
+				 	Extended xAPIC support
+				 	Intel Processor Trace
+				 	LAHF/SAHF support in 64-bit mode
+				 	Machine check architecture
+				 	Machine check exception
+				 	Memory-type range registers
+				 	Model-specific registers
+				 	Package thermal management
+				 	Page attribute table
+				 	Page global extension
+				 	Page-size extensions (4MB pages)
+				 	Pending break enable
+				 	Perfmon and Debug capability
+				 	Physical address extensions
+				 	Power Limit Notification capability
+				 	Process context identifiers
+				 	Self-snoop
+				 	TSC rate is ensured to be invariant across all states
+				 	Thermal monitor
+				 	Thermal monitor 2
+				 	Thermal monitor and software controlled clock facilities
+				 	Time stamp counter
+				 	Timestamp counter deadline
+				 	Virtual 8086-mode enhancements
+				 	xTPR Update Control</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikichip.org/wiki/intel/cores/skylake_u" class="bare">https://en.wikichip.org/wiki/intel/cores/skylake_u</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Skylake U (SKL-U) is the name of the core for Intel&#8217;s line of low-power mobile processors based on the Skylake microarchitecture serving as a successor to Broadwell U</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cpu">5. CPU</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_comandos_linux_2">5.1. comandos linux</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>cpuid</code> &#8594; <strong>bestial</strong></p>
+</li>
+<li>
+<p><code>hwinfo --cpu</code></p>
+</li>
 <li>
 <p><code>cat /proc/cpuinfo</code></p>
 <div class="listingblock">
@@ -850,15 +1389,25 @@ Flags:                           fpu vme de pse tsc msr pae mce cx8 apic sep mtr
 </div>
 </div>
 </li>
+<li>
+<p><code>inxi</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>CPU: Dual Core Intel Core i5-6300U (-MT MCP-) speed/min/max: 600/400/3000 MHz Kernel: 5.4.0-128-generic x86_64 Up: 1h 07m
+Mem: 3834.5/11745.3 MiB (32.6%) Storage: 465.76 GiB (63.8% used) Procs: 317 Shell: bash 5.0.17 inxi: 3.0.38</pre>
+</div>
+</div>
+</li>
 </ul>
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="_memory_dram">4. Memory DRAM</h2>
+<h2 id="_memory_dram">6. Memory DRAM</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_caracteristicas">4.1. caracteristicas</h3>
+<h3 id="_caracteristicas">6.1. caracteristicas</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -996,7 +1545,7 @@ total memory = 12288MB (12GB)</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_memory_map">4.2. memory map</h3>
+<h3 id="_memory_map">6.2. memory map</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1008,10 +1557,10 @@ total memory = 12288MB (12GB)</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_virtual_memory">5. Virtual Memory</h2>
+<h2 id="_virtual_memory">7. Virtual Memory</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_analysis">5.1. analysis</h3>
+<h3 id="_analysis">7.1. analysis</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1059,10 +1608,10 @@ total memory = 12288MB (12GB)</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_cache">6. Cache</h2>
+<h2 id="_cache">8. Cache</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_analysis_2">6.1. analysis</h3>
+<h3 id="_analysis_2">8.1. analysis</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1110,10 +1659,162 @@ id                   number_of_sets  shared_cpu_list          size            ue
 </div>
 </div>
 <div class="sect1">
-<h2 id="_hard_disk">7. Hard Disk</h2>
+<h2 id="_chipset">9. Chipset</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_benchmark">7.1. benchmark</h3>
+<h3 id="_codename">9.1. codename</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Sunrise Point-LP</strong> es el codename del chipset de intel skylake</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_comandos_linux_3">9.2. comandos linux</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sudo lshw -short | grep "Sunrise Point-LP"</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>/0/100/14                    bus            Sunrise Point-LP USB 3.0 xHCI Controller
+/0/100/14.2                  generic        Sunrise Point-LP Thermal subsystem
+/0/100/16                    communication  Sunrise Point-LP CSME HECI #1
+/0/100/16.3                  communication  Sunrise Point-LP Active Management Technology - SOL
+/0/100/17                    storage        Sunrise Point-LP SATA Controller [AHCI mode]
+/0/100/1c                    bridge         Sunrise Point-LP PCI Express Root Port #4
+/0/100/1c.4                  bridge         Sunrise Point-LP PCI Express Root Port #5
+/0/100/1c.5                  bridge         Sunrise Point-LP PCI Express Root Port #6
+/0/100/1f                    bridge         Sunrise Point-LP LPC Controller
+/0/100/1f.3                  multimedia     Sunrise Point-LP HD Audio
+/0/100/1f.4                  bus            Sunrise Point-LP SMBus</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>hwinfo | grep -i "Sunrise Point-LP"</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>candido@lur:~$ hwinfo | grep -i "Sunrise Point-LP"
+  Model: "Intel Sunrise Point-LP SATA Controller [AHCI mode]"
+  Device: pci 0x9d03 "Sunrise Point-LP SATA Controller [AHCI mode]"
+  Model: "Intel Sunrise Point-LP PMC"
+  Device: pci 0x9d21 "Sunrise Point-LP PMC"
+  Model: "Intel Sunrise Point-LP PCI Express Root Port #4"
+  Device: pci 0x9d13 "Sunrise Point-LP PCI Express Root Port #4"
+  Model: "Intel Sunrise Point-LP LPC Controller"
+  Device: pci 0x9d48 "Sunrise Point-LP LPC Controller"
+  Model: "Intel Sunrise Point-LP PCI Express Root Port #6"
+  Device: pci 0x9d15 "Sunrise Point-LP PCI Express Root Port #6"
+  Model: "Intel Sunrise Point-LP CSME HECI #1"
+  Device: pci 0x9d3a "Sunrise Point-LP CSME HECI #1"
+  Model: "Intel Sunrise Point-LP HD Audio"
+  Device: pci 0x9d70 "Sunrise Point-LP HD Audio"
+  Model: "Intel Sunrise Point-LP Active Management Technology - SOL"
+  Device: pci 0x9d3d "Sunrise Point-LP Active Management Technology - SOL"
+  Model: "Intel Sunrise Point-LP Thermal subsystem"
+  Device: pci 0x9d31 "Sunrise Point-LP Thermal subsystem"
+  Model: "Intel Sunrise Point-LP PCI Express Root Port #5"
+  Device: pci 0x9d14 "Sunrise Point-LP PCI Express Root Port #5"
+  Model: "Intel Sunrise Point-LP USB 3.0 xHCI Controller"
+  Device: pci 0x9d2f "Sunrise Point-LP USB 3.0 xHCI Controller"
+  Model: "Intel Sunrise Point-LP SMBus"
+  Device: pci 0x9d23 "Sunrise Point-LP SMBus"</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>lspci | grep "Sunrise Point-LP"</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>00:14.0 USB controller: Intel Corporation Sunrise Point-LP USB 3.0 xHCI Controller (rev 21)
+00:14.2 Signal processing controller: Intel Corporation Sunrise Point-LP Thermal subsystem (rev 21)
+00:16.0 Communication controller: Intel Corporation Sunrise Point-LP CSME HECI #1 (rev 21)
+00:16.3 Serial controller: Intel Corporation Sunrise Point-LP Active Management Technology - SOL (rev 21)
+00:17.0 SATA controller: Intel Corporation Sunrise Point-LP SATA Controller [AHCI mode] (rev 21)
+00:1c.0 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port #4 (rev f1)
+00:1c.4 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port #5 (rev f1)
+00:1c.5 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port #6 (rev f1)
+00:1f.0 ISA bridge: Intel Corporation Sunrise Point-LP LPC Controller (rev 21)
+00:1f.2 Memory controller: Intel Corporation Sunrise Point-LP PMC (rev 21)
+00:1f.3 Audio device: Intel Corporation Sunrise Point-LP HD Audio (rev 21)
+00:1f.4 SMBus: Intel Corporation Sunrise Point-LP SMBus (rev 21)</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_info_web_del_chipset_de_intel_skylake_sunrise_point_lp">9.3. info web del chipset de intel skylake: Sunrise Point-LP</h3>
+<div class="sect3">
+<h4 id="_wikichip_2">9.3.1. wikichip</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikichip.org/wiki/intel/cores/skylake_u" class="bare">https://en.wikichip.org/wiki/intel/cores/skylake_u</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Skylake U (SKL-U) is the name of the core for Intel&#8217;s line of low-power mobile processors based on the Skylake microarchitecture serving as a successor to Broadwell U</p>
+</li>
+<li>
+<p>Skylake U based processors are a <strong>single-chip</strong> solution - the <strong>chipset</strong> is packaged in the same physical casing as the CPU in a <strong>multi-chip package (MCP)</strong>. Note that some models (the Iris IGPs) are actually a 3 dice chip configuration since they incorporate an on-package cache (OPC) in addition to the hub and CPU. Communication between the separate dies are done via a lightweight On-Package Interconnect (OPI) interface, allowing for 4 GT/s transfer rate. All Skylake U processors use Socket BGA-1356 and all Iris models include 64 MiB of side cache.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En un chip Socket BGA-1356 : die CPU y die chipset (Platform Hub Controller)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>modelo Standard : 2-die configuration GT2 Graphics</p>
+</li>
+<li>
+<p>modelo Premium: 3-die configuration GT3 Graphics with OPC &#8594; On-package cache &#8594; memoria cache extra para graphics?</p>
+</li>
+<li>
+<p><code>sudo lshw | grep -i graphics</code> &#8594; product: Skylake GT2 [HD Graphics 520] &#8594; por lo que mi chip es el modelo Standard</p>
+</li>
+<li>
+<p>HD Graphics 520 (Gen9.5 GT2)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_graphics">10. Graphics</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Integrated Graphics Processor (IGP): An integrated graphics processor (IGP) (sometimes integrated/shared graphics solutions) is a graphics processing unit (GPU) that has been integrated into a system and shares the same resources (e.g. memory, I/O) with the rest of the system. Most IGPs are usually found either as part of the chipset (e.g. on the motherboard) or as part of the microprocessor itself (i.e. share the same die), although that is not strictly required.</p>
+</li>
+<li>
+<p>Skylake GT2 [HD Graphics 520] &#8594; la IGP en este caso es parte del chipset Sunrise Point-LP</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hard_disk">11. Hard Disk</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_benchmark">11.1. benchmark</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1241,42 +1942,10 @@ Capabilities:
 </div>
 </div>
 <div class="sect1">
-<h2 id="_bios">8. BIOS</h2>
+<h2 id="_bios">12. BIOS</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_conceptos">8.1. conceptos</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>sudo biosdecode ¿?</p>
-</li>
-<li>
-<p>man dmidecode</p>
-<div class="listingblock">
-<div class="content">
-<pre>DMI table decoder
-/sys/firmware/dmi/tables
-SMBIOS  stands  for  System Management BIOS, while DMI stands for Desktop Management Interface
-types
-  0 -&gt; bios info -&gt; dmidecode -t 0 ,es decir, type bios, es decir, info de la entrada de la tabla relativa a la info de la propia bios
-  5 -&gt; memory controller  -&gt; no da info -&gt; info memo la 17
-
-  7 -&gt; cache memory
-
-
-Handle code-&gt; code hace referencia a una de las entradas de la tabla, por ejemplo:  Handle 0x0002, DMI type 7, 19 bytes significa que esa entrada
-              es la referenciada como 0x0002, lontitud 19Bytes, tipo 7 -&gt; es la cache level 1 data.</pre>
-</div>
-</div>
-</li>
-<li>
-<p><a href="https://www.kernel.org/doc/Documentation/ABI/testing/sysfs-firmware-dmi-entries" class="bare">https://www.kernel.org/doc/Documentation/ABI/testing/sysfs-firmware-dmi-entries</a></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_analisis">8.2. analisis</h3>
+<h3 id="_analisis">12.1. analisis</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1404,7 +2073,7 @@ BIOS Information
 </div>
 </div>
 <div class="sect2">
-<h3 id="_memory_map_2">8.3. memory map</h3>
+<h3 id="_memory_map_2">12.2. memory map</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1423,7 +2092,7 @@ BIOS Information
 </div>
 </div>
 <div class="sect1">
-<h2 id="_uefi">9. UEFI</h2>
+<h2 id="_uefi">13. UEFI</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -1490,7 +2159,7 @@ Haga clic o toque Generar para iniciar el proceso.</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-10-23 17:36:12 +0200
+Last updated 2022-10-25 20:07:56 +0200
 </div>
 </div>
 <script type="text/x-mathjax-config">
