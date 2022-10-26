@@ -321,11 +321,15 @@ pre.rouge {
 <ul class="sectlevel3">
 <li><a href="_procesador_central.html#_linux_commands">7.8.1. linux commands</a>
 </li>
-<li><a href="_procesador_central.html#_web_info">7.8.2. Web info</a>
+<li><a href="_procesador_central.html#_apps">7.8.2. apps</a>
 </li>
-<li><a href="_procesador_central.html#_platform">7.8.3. Platform</a>
+<li><a href="_procesador_central.html#_web_info">7.8.3. Web info</a>
 </li>
-<li><a href="_procesador_central.html#_cpu">7.8.4. cpu</a>
+<li><a href="_procesador_central.html#_operating_system">7.8.4. Operating system</a>
+</li>
+<li><a href="_procesador_central.html#_platform">7.8.5. Platform</a>
+</li>
+<li><a href="_procesador_central.html#_cpu">7.8.6. cpu</a>
 </li>
 </ul>
 </li>
@@ -1640,10 +1644,11 @@ memory BUS: address, data, control (R/W)</pre>
 <div class="content">
 <pre>sudo lshw  --help
  man lshw
-hwinfo  --help
+sudo hwinfo  --help
  man hwinfo
 sudo dmidecode --help
- man hwinfo</pre>
+ man hwinfo
+sudo inxi</pre>
 </div>
 </div>
 </li>
@@ -1651,7 +1656,17 @@ sudo dmidecode --help
 </div>
 </div>
 <div class="sect3">
-<h4 id="_web_info">7.8.2. Web info</h4>
+<h4 id="_apps">7.8.2. apps</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>cpu-x</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_web_info">7.8.3. Web info</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1680,7 +1695,23 @@ sudo dmidecode --help
 </div>
 </div>
 <div class="sect3">
-<h4 id="_platform">7.8.3. Platform</h4>
+<h4 id="_operating_system">7.8.4. Operating system</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>uname -a</p>
+<div class="listingblock">
+<div class="content">
+<pre>Ubuntu/GNU/linux 20.04
+kernel linux 5.4.0-131-generic</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_platform">7.8.5. Platform</h4>
 <div class="sect4">
 <h5 id="_comandos">comandos</h5>
 <div class="ulist">
@@ -1703,6 +1734,86 @@ sudo dmidecode --help
 <li>
 <p>sudo dmidecode -system</p>
 </li>
+<li>
+<p>uname -a</p>
+</li>
+<li>
+<p>arch</p>
+</li>
+<li>
+<p>sudo cpu-x</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_informe_lenovo_thinkpad_t560">informe Lenovo Thinkpad T560</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>listado de características básicas</p>
+<div class="listingblock">
+<div class="content">
+<pre>modelo computadora: 20F1S0H400 (LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560)
+modelo CPU : Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+Arquitectura CPU: x86_64 -&gt; comando arch
+Word width : 64
+Capacidad de Memoria: 12GiB System Memory -&gt; 4+8
+Chipset or PCH: Sunrise Point-LP
+Graphics: Skylake GT2 [HD Graphics 520]
+Frecuencia reloj : 2.40 GHz
+
+Memoria Cache
+	64KiB L1 cache
+	64KiB L1 cache
+	512KiB L2 cache
+	3MiB L3 cache</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cpu">7.8.6. cpu</h4>
+<div class="sect4">
+<h5 id="_comandos_2">comandos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>list</p>
+<div class="listingblock">
+<div class="content">
+<pre> sudo lshw -C cpu
+ lscpu
+ sudo dmidecode -t processor
+ cpuid
+ cat /proc/cpuinfo
+sudo cpu-x</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_web_info_2">web info</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.cpu-world.com/CPUs/Core_i5/Intel-Core%20i5-6300U%20Mobile%20processor.html">cpu-world</a></p>
+</li>
+<li>
+<p><a href="https://ark.intel.com/content/www/es/es/ark/products/series/88393/6th-generation-intel-core-i5-processors.html">Intel: procesadores core i5 6ª generación</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://ark.intel.com/content/www/es/es/ark/products/88190/intel-core-i56300u-processor-3m-cache-up-to-3-00-ghz.html">Intel: Core i5-6300U</a></p>
+</li>
+</ul>
+</div>
+</li>
 </ul>
 </div>
 </div>
@@ -1714,61 +1825,154 @@ sudo dmidecode --help
 <p>listado de características básicas</p>
 <div class="listingblock">
 <div class="content">
-<pre>modelo computadora
-modelo CPU
-Arquitectura CPU
-Word Size CPU
-Capacidad de Memoria
-Chipset
-
-Frecuencia reloj
-
-Memoria Cache</pre>
+<pre>modelo CPU: Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+Arquitectura: x86_64
+Socket(s):                       1  -&gt; Soldado o
+Byte Order:                      Little Endian
+Address sizes:                   39 bits physical, 48 bits virtual
+Número de núcleos: 2
+Número de hebras: 2 por núcleo
+Frecuencia:
+   clock: 100MHz  -&gt; frecuencia de la Placa Base
+   2.4GHz -&gt; marketing
+   600 MHz -&gt; frecuencia de la cpu en el momento de ejecución del comando
+   Multiplicador : valor máximo 24 -&gt; freq_cpu=24xFreq_motherboard -&gt; el multiplicador es dinámico, cambia continuamente de valor.
+Microarquitectura: Skylake 14 nm -&gt; Skylake-U
+Package: BGA
+Virtualization:   VT-x  -&gt; cpu soporta Intel Virtualization
+Flags :
+  lm : long mode -&gt; funcionamiento de la CPU en modo 64 bits
+  x86_64 : arquitectura -&gt; word width
+  SSE, AVX -&gt; Extensión de la ISA base con más instrucciones
+  vmx: virtualización enabled by BIOS
+CPUIDs	406E3 -&gt; código identificador de la CPU -&gt; necesario para actualizar el microcódigo
+Maximum operating temperature  	100°C
+Thermal Design Power   	15 Watt  _&gt; consumo</pre>
 </div>
 </div>
 </li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_cpu">7.8.4. cpu</h4>
-<div class="sect4">
-<h5 id="_comandos_2">comandos</h5>
+<li>
+<p>Intel Core&#8482; i5-6300U &#8594; significado del código comercial</p>
 <div class="ulist">
 <ul>
 <li>
-<p>sudo lshw -C cpu</p>
+<p>para realizar búsquedas en Google utilizo el nombre comercial "i5-6300U"</p>
 </li>
 <li>
-<p>sudo dmidecode -t processor</p>
+<p>Inter Corporation</p>
 </li>
 <li>
-<p>cpuid</p>
+<p>brand: core</p>
 </li>
 <li>
-<p>cat /proc/cpuinfo</p>
+<p>family: i5</p>
 </li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_informe_2">informe</h5>
+<li>
+<p>Generación 6ª: 6</p>
 <div class="ulist">
 <ul>
 <li>
-<p>listado de características básicas</p>
+<p>versión: 6000</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>segmento notebook (portátiles): U</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Fecha: 2015 3º cuatrimestre.</p>
+</li>
+<li>
+<p>El frecuencia de la CPU es el ciclo de reloj de los ciclos máquina del ciclo de instrucción.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la duración de los ciclos de instrucción y sus fases se expresan en ciclos de reloj, no en MHz.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A destacar el codename de la microarquitectura: <strong>Skylake-U</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>nos da información de todos los recursos hardware de la CPU.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>On chip (integración de módulos en el mismo chip): <strong>la integración de módulos en el mismo chip es importante</strong></p>
 <div class="listingblock">
 <div class="content">
-<pre>modelo CPU
-Número de núcleos
-Número de hebras
-Frecuencia
-Microarquitectura
-Consumo
-Package</pre>
+<pre>Cores -&gt; 2 núcleos
+x87 FPU on chip  -&gt; Float Point Unit : procesa números reales a diferencia de la ALU que procesa enteros
+Chipset or PCH (Platform Hub)</pre>
 </div>
 </div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno integrado en un substrato de silicio diferente.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>socket: <a href="https://globalamericaninc.com/types-of-cpu-sockets/" class="bare">https://globalamericaninc.com/types-of-cpu-sockets/</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.cpu-world.com/CPUs/Core_i5/Intel-Core%20i5-6300U%20Mobile%20processor.html">cpu-world</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Package : 1356-ball micro-FCBGA</p>
+</li>
+<li>
+<p>Socket BGA1356 &#8594;  BGA &#8594; soldado a la placa base &#8594; no actualizable</p>
+</li>
+<li>
+<p>los 1356 pines del chip pertenecen a todos los módulos integrados en el mismo chip:  los 2 núcleos y a los controladores del chipset.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>sudo hwinfo | grep -i socket</code> &#8594; "U3E1"  &#8594; ¿no encuentro info?</p>
+</li>
+<li>
+<p><code>sudo dmidecode -t processor | grep -i socket</code> &gt; Socket designation: "U3E1"</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_datos_erróneos">Datos erróneos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sudo lshw -C cpu</code> &#8594; size: 975MHz</p>
+</li>
+<li>
+<p><code>sudo dmidecode -t processor | grep -i freq</code> &#8594; me dice que la frecuencia máxima son 8GHz</p>
 </li>
 </ul>
 </div>
