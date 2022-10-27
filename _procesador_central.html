@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-10-26</span>
+<span id="revdate">2022-10-27</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -317,7 +317,7 @@ pre.rouge {
 </li>
 </ul>
 </li>
-<li><a href="_procesador_central.html#_personal_pc">7.8. Personal PC</a>
+<li><a href="_procesador_central.html#_personal_pc_laptop_t520">7.8. Personal PC: Laptop T520</a>
 <ul class="sectlevel3">
 <li><a href="_procesador_central.html#_linux_commands">7.8.1. linux commands</a>
 </li>
@@ -1630,7 +1630,19 @@ memory BUS: address, data, control (R/W)</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_personal_pc">7.8. Personal PC</h3>
+<h3 id="_personal_pc_laptop_t520">7.8. Personal PC: Laptop T520</h3>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/laptop_T520/laptop_view_up.jpg" alt="laptop view up">
+</div>
+<div class="title">Figure 38. Laptop_T520: Vista interna</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/laptop_T520/plataforma_hardisk_off.jpg" alt="plataforma hardisk off">
+</div>
+<div class="title">Figure 39. plataforma_hardisk_off</div>
+</div>
 <div class="sect3">
 <h4 id="_linux_commands">7.8.1. linux commands</h4>
 <div class="ulist">
@@ -1699,7 +1711,7 @@ sudo inxi</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>uname -a</p>
+<p><code>uname -a</code></p>
 <div class="listingblock">
 <div class="content">
 <pre>Ubuntu/GNU/linux 20.04
@@ -1717,31 +1729,22 @@ kernel linux 5.4.0-131-generic</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>sudo lshw -X</p>
-</li>
-<li>
-<p>sudo lshw | more</p>
-</li>
-<li>
-<p>sudo lshw &gt; miplataforma.txt</p>
-</li>
-<li>
-<p>sudo lshw -html</p>
-</li>
-<li>
-<p>sudo lshw -short</p>
-</li>
-<li>
-<p>sudo dmidecode -system</p>
-</li>
-<li>
-<p>uname -a</p>
-</li>
-<li>
-<p>arch</p>
-</li>
-<li>
-<p>sudo cpu-x</p>
+<p>listado</p>
+<div class="listingblock">
+<div class="content">
+<pre>sudo lshw -X
+sudo lshw | more
+sudo lshw &gt; miplataforma.txt
+sudo lshw -html
+sudo lshw -short
+sudo dmidecode -system
+uname -a
+arch
+sudo cpu-x
+inxi
+inxi -c 0 -ACdGMNSz</pre>
+</div>
+</div>
 </li>
 </ul>
 </div>
@@ -1760,7 +1763,15 @@ Arquitectura CPU: x86_64 -&gt; comando arch
 Word width : 64
 Capacidad de Memoria: 12GiB System Memory -&gt; 4+8
 Chipset or PCH: Sunrise Point-LP
+  USB 3.0 xHCI Controller
+  SATA Controller [AHCI mode]
+  PCI Express Root Port
+  LPC Controller
+  HD Audio
 Graphics: Skylake GT2 [HD Graphics 520]
+Network:
+  Wireless 8260
+  Ethernet Connection I219-LM
 Frecuencia reloj : 2.40 GHz
 
 Memoria Cache
@@ -1777,6 +1788,18 @@ Memoria Cache
 </div>
 <div class="sect3">
 <h4 id="_cpu">7.8.6. cpu</h4>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/laptop_T520/cpu_package.jpg" alt="cpu package">
+</div>
+<div class="title">Figure 40. cpu_package</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/laptop_T520/skylake-family-table.jpg" alt="skylake family table">
+</div>
+<div class="title">Figure 41. skylake-family-table</div>
+</div>
 <div class="sect4">
 <h5 id="_comandos_2">comandos</h5>
 <div class="ulist">
@@ -1906,6 +1929,25 @@ Thermal Design Power   	15 Watt  _&gt; consumo</pre>
 </ul>
 </div>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_nivel_de_integracion_cpu_chipset">nivel de integracion: cpu-chipset</h5>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/laptop_T520/esquema_chipset100_cpu6gen.png" alt="esquema chipset100 cpu6gen">
+</div>
+<div class="title">Figure 42. Esquema CPU Chipset discreto</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/laptop_T520/esquema_skylake-u-mobile-diagram.png" alt="esquema skylake u mobile diagram" width="100%"">
+</div>
+<div class="title">Figure 43. Esquema CPU Chipset integrado, scaledwidth=</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>On chip (integración de módulos en el mismo chip): <strong>la integración de módulos en el mismo chip es importante</strong></p>
 <div class="listingblock">
@@ -1930,6 +1972,9 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </tr>
 </table>
 </div>
+</div>
+<div class="sect4">
+<h5 id="_socket">Socket</h5>
 <div class="ulist">
 <ul>
 <li>
@@ -2311,7 +2356,7 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 <div class="content">
 <img src="./images/cpu/12_9.jpg" alt="12 9">
 </div>
-<div class="title">Figure 38. Segmentación en 2 etapas</div>
+<div class="title">Figure 44. Segmentación en 2 etapas</div>
 </div>
 <div class="ulist">
 <ul>
@@ -2324,19 +2369,19 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 <div class="content">
 <img src="./images/cpu/12_10.jpg" alt="12 10">
 </div>
-<div class="title">Figure 39. Diagrama de tiempos con segmentación de 6 etapas</div>
+<div class="title">Figure 45. Diagrama de tiempos con segmentación de 6 etapas</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/cpu/12_11.jpg" alt="12 11">
 </div>
-<div class="title">Figure 40. Diagrama de tiempos. Salto incondicional</div>
+<div class="title">Figure 46. Diagrama de tiempos. Salto incondicional</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/cpu/12_12.jpg" alt="12 12">
 </div>
-<div class="title">Figure 41. Flujo de instrucciones con segmentación de 6 etapas</div>
+<div class="title">Figure 47. Flujo de instrucciones con segmentación de 6 etapas</div>
 </div>
 </div>
 </div>
