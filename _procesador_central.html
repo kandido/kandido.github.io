@@ -285,19 +285,19 @@ pre.rouge {
 </li>
 <li><a href="_procesador_central.html#_ejemplos_intel_x86_motorola_68000_mips_arm">7.4.2. Ejemplos: Intel x86, Motorola 68000, MIPS, ARM</a>
 </li>
-<li><a href="_procesador_central.html#_fases_de_ejecución_de_una_instrucción">7.4.3. Fases de Ejecución de una Instrucción</a>
-</li>
-<li><a href="_procesador_central.html#_ejemplo_máquina_ias_de_von_neumann">7.4.4. Ejemplo: máquina IAS de Von-Neumann</a>
-</li>
 </ul>
 </li>
 <li><a href="_procesador_central.html#_microarquitectura_unidades_funcionales_desde_la_perspectiva_hw">7.5. Microarquitectura: Unidades Funcionales desde la perspectiva HW</a>
 <ul class="sectlevel3">
 <li><a href="_procesador_central.html#_introducción_8">7.5.1. Introducción</a>
 </li>
-<li><a href="_procesador_central.html#_implementación_del_ciclo_de_instrucción_cpu">7.5.2. Implementación del ciclo de instrucción: CPU</a>
+<li><a href="_procesador_central.html#_fases_de_ejecución_de_una_instrucción">7.5.2. Fases de Ejecución de una Instrucción</a>
 </li>
-<li><a href="_procesador_central.html#_unidad_de_control_microprogramada">7.5.3. Unidad de Control Microprogramada</a>
+<li><a href="_procesador_central.html#_ejemplo_máquina_ias_de_von_neumann">7.5.3. Ejemplo: máquina IAS de Von-Neumann</a>
+</li>
+<li><a href="_procesador_central.html#_implementación_del_ciclo_de_instrucción_cpu">7.5.4. Implementación del ciclo de instrucción: CPU</a>
+</li>
+<li><a href="_procesador_central.html#_unidad_de_control_microprogramada">7.5.5. Unidad de Control Microprogramada</a>
 </li>
 </ul>
 </li>
@@ -471,24 +471,9 @@ pre.rouge {
 </div>
 </li>
 <li>
-<p><em>Microarquitectura</em></p>
-<div class="ulist">
-<ul>
-<li>
-<p>Las unidades básicas de la CPU son: Unidad de Control (UC), y la Ruta de Datos (ALU,FPU,MMU,Registros y circuitos de enrutamiento como multiplexores, conmutadores,  etc).</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>El ciclo de instrucción puede ser secuencial o segmentado, permitiendo el solapamiento en el tiempo de la ejecución de más de una instrucción (técnicas de paralelismo a nivel de instrucción, ILP)</p>
-</li>
-<li>
-<p>La microarquitectura de la CPU puede implementar más de una ruta de datos permitiendo así la ejecución simultánea de más de una instrucción. Los procesadores que utilizan dicha tecnología se denominan procesadores superescalares.</p>
-</li>
-<li>
-<p>La CPU se puede  ver desde el punto de vista del programador o desde el punto de vista del diseñador electrónico.</p>
-</li>
+<p>La CPU se puede  ver desde el punto de vista del programador o desde el punto de vista del diseñador de procesadores (microarquitectura)</p>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Desde el punto de vista del <em>programador</em> interesa conocer:</p>
 <div class="ulist">
@@ -503,6 +488,25 @@ pre.rouge {
 <p>Modos de Funcionamiento de la CPU: modo superusuario, modo usuario, modo interrupción. Los distintos modos de funcionamiento permiten proteger el buen funcioamiento de la cpu según se realicen tareas de usuario, de administrador, de compartición de recursos, etc ..</p>
 </li>
 </ul>
+</div>
+</li>
+<li>
+<p>Desde el punto de vista de la <em>Microarquitectura</em> u organización interna de la CPU.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Las unidades básicas de la CPU son: Unidad de Control (UC), y la Ruta de Datos (ALU,FPU,MMU,Registros y circuitos de enrutamiento como multiplexores, conmutadores,  etc).</p>
+</li>
+<li>
+<p>La microarquitectura de la CPU puede implementar más de una ruta de datos permitiendo así la ejecución simultánea de más de una instrucción. Los procesadores que utilizan dicha tecnología se denominan procesadores superescalares.</p>
+</li>
+<li>
+<p>El ciclo de instrucción puede ser secuencial o segmentado, permitiendo el solapamiento en el tiempo de la ejecución de más de una instrucción (técnicas de paralelismo a nivel de instrucción, ILP)</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
 </div>
 </li>
 <li>
@@ -634,8 +638,50 @@ pre.rouge {
 </ul>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_microarquitectura_unidades_funcionales_desde_la_perspectiva_hw">7.5. Microarquitectura: Unidades Funcionales desde la perspectiva HW</h3>
 <div class="sect3">
-<h4 id="_fases_de_ejecución_de_una_instrucción">7.4.3. Fases de Ejecución de una Instrucción</h4>
+<h4 id="_introducción_8">7.5.1. Introducción</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Se conoce con el nombre microarquitectura a la arquitectura interna del microprocesador.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La microarquitectura es el diseño e implementación del ciclo de instrucción del conjunto de instrucciones definido por ISA.</p>
+</li>
+<li>
+<p>Ejemplos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>IAS</p>
+</li>
+<li>
+<p>Intel: 4004, 8008, 8051, x86</p>
+</li>
+<li>
+<p>AMD: x86</p>
+</li>
+<li>
+<p>ARM: Cortex</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El prefijo micro (microelectrónica, microprocesador, microarquitectura, microbus, microprograma, microcódigo, micro-operación, etc) está relacionado con el tamaño de los transistores, de los primeros circuitos integrados o chips, que eran del orden de decenas de MICROMETROS. Todo lo que ocurre en el entorno de la computadora en esa dimensión suele llevar el prefijo micro</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_fases_de_ejecución_de_una_instrucción">7.5.2. Fases de Ejecución de una Instrucción</h4>
 <div class="sect4">
 <h5 id="_estructura">Estructura</h5>
 <div class="imageblock text-center">
@@ -837,7 +883,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ejemplo_máquina_ias_de_von_neumann">7.4.4. Ejemplo: máquina IAS de Von-Neumann</h4>
+<h4 id="_ejemplo_máquina_ias_de_von_neumann">7.5.3. Ejemplo: máquina IAS de Von-Neumann</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -858,50 +904,8 @@ pre.rouge {
 </ul>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_microarquitectura_unidades_funcionales_desde_la_perspectiva_hw">7.5. Microarquitectura: Unidades Funcionales desde la perspectiva HW</h3>
 <div class="sect3">
-<h4 id="_introducción_8">7.5.1. Introducción</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Se conoce con el nombre microarquitectura a la arquitectura interna del microprocesador.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>La microarquitectura es el diseño e implementación del ciclo de instrucción del conjunto de instrucciones definido por ISA.</p>
-</li>
-<li>
-<p>Ejemplos</p>
-<div class="ulist">
-<ul>
-<li>
-<p>IAS</p>
-</li>
-<li>
-<p>Intel: 4004, 8008, 8051, x86</p>
-</li>
-<li>
-<p>AMD: x86</p>
-</li>
-<li>
-<p>ARM: Cortex</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>El prefijo micro (microelectrónica, microprocesador, microarquitectura, microbus, microprograma, microcódigo, micro-operación, etc) está relacionado con el tamaño de los transistores, de los primeros circuitos integrados o chips, que eran del orden de decenas de MICROMETROS. Todo lo que ocurre en el entorno de la computadora en esa dimensión suele llevar el prefijo micro</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_implementación_del_ciclo_de_instrucción_cpu">7.5.2. Implementación del ciclo de instrucción: CPU</h4>
+<h4 id="_implementación_del_ciclo_de_instrucción_cpu">7.5.4. Implementación del ciclo de instrucción: CPU</h4>
 <div class="sect4">
 <h5 id="_cómo_implementar_el_ciclo_de_instrucción">¿Cómo implementar el ciclo de instrucción?</h5>
 <div class="ulist">
@@ -1269,7 +1273,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_unidad_de_control_microprogramada">7.5.3. Unidad de Control Microprogramada</h4>
+<h4 id="_unidad_de_control_microprogramada">7.5.5. Unidad de Control Microprogramada</h4>
 <div class="ulist">
 <ul>
 <li>
