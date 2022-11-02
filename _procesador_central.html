@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-10-27</span>
+<span id="revdate">2022-11-02</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -317,7 +317,7 @@ pre.rouge {
 </li>
 </ul>
 </li>
-<li><a href="_procesador_central.html#_personal_pc_laptop_t520">7.8. Personal PC: Laptop T520</a>
+<li><a href="_procesador_central.html#_personal_pc_laptop_t560">7.8. Personal PC: Laptop T560</a>
 <ul class="sectlevel3">
 <li><a href="_procesador_central.html#_linux_commands">7.8.1. linux commands</a>
 </li>
@@ -335,7 +335,7 @@ pre.rouge {
 </li>
 <li><a href="_procesador_central.html#_arquitecturas_ciscrisc">7.9. Arquitecturas CISC/RISC</a>
 <ul class="sectlevel3">
-<li><a href="_procesador_central.html#_introducción_9">7.9.1. Introducción</a>
+<li><a href="_procesador_central.html#_introducción_10">7.9.1. Introducción</a>
 </li>
 <li><a href="_procesador_central.html#_tabla_comparativa">7.9.2. Tabla Comparativa</a>
 </li>
@@ -350,8 +350,6 @@ pre.rouge {
 </ul>
 </li>
 <li><a href="_procesador_central.html#_ejercicios">7.11. Ejercicios</a>
-</li>
-<li><a href="_procesador_central.html#_imagenes">7.12. Imagenes</a>
 </li>
 </ul>
 </li>
@@ -1381,10 +1379,15 @@ memory BUS: address, data, control (R/W)</pre>
 </div>
 <div class="sect3">
 <h4 id="_intel_4004">7.6.2. Intel 4004</h4>
+<div class="sect4">
+<h5 id="_introducción_9">introducción</h5>
 <div class="ulist">
 <ul>
 <li>
 <p>Intel: Intel fue fundada el 18 de julio de 1968 como Integrated Electronics Corporation</p>
+</li>
+<li>
+<p>El primer microprocesador integrado i4004 formó parte de la familia "4001, 4002, 4003, &amp; 4004 Micro Computer Set" <strong>MCS-4 chipset</strong>.</p>
 </li>
 <li>
 <p><a href="https://es.wikipedia.org/wiki/Intel_4004" class="bare">https://es.wikipedia.org/wiki/Intel_4004</a></p>
@@ -1395,42 +1398,80 @@ memory BUS: address, data, control (R/W)</pre>
 <div class="content">
 <pre>Fecha: Diciembre 1971
 Coste: 60$
-Tecnología: nodo 10 um</pre>
+Tecnología: nodo 10 um
+Arquitectura de 4 bits</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_isa">ISA</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Development Programmer&#8217;s View of Computer Architecture:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ISA:</p>
+<div class="listingblock">
+<div class="content">
+<pre>  - instrucciones: códigos de operación y modos de direccionamiento
+  --- El conjunto de instrucciones está formado por 46 instrucciones
+  --- Modos de direccionamiento: directo, indirecto, inmediato.
+  - formato de datos
+  --- Datos de 4 bits de ancho
+  - formato de instrucciones
+  --- 41 instrucciones son de 8 bits de ancho y 5 de 16 bits de ancho.
+  - organización de la memoria
+  --- datos e instrucciones separados en memorias diferentes -&gt; Arquitectura Harvard, no Neumann.
+  - registros
+  --- 16 registros de proposito general
+  --- 3 registros de 12 bits para apuntar a distintos frames del stack</pre>
 </div>
 </div>
 </li>
 <li>
-<p>Development Programmer&#8217;s View of Computer Architecture:</p>
+<p>tools</p>
 <div class="listingblock">
 <div class="content">
-<pre>ISA:
-  - instrucciones: códigos de operación y modos de direccionamiento
-  - formato de datos
-  - formato de instrucciones
-  - organización de la memoria
-  - registros</pre>
+<pre>assembly language
+assembler translate</pre>
 </div>
 </div>
 </li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_microarquitectura">Microarquitectura</h5>
+<div class="ulist">
+<ul>
 <li>
 <p>Microarchitecture: HW (no electronics, functional units) View of Computer Architecture</p>
 <div class="listingblock">
 <div class="content">
-<pre>Architecture Size
+<pre>Architecture Size : 4 bits
 Ciclo de Instrucción
  FI-ID-EI
 Unidades
  CU
   uoperations bus
-  udata bus
+  udata bus -&gt; 4 bits
  AU
-  PC
+  PC -&gt; 12 bits
+  stack pointers -&gt; 12 bits
  BU
-  memory Address Bus
-  memory Data Bus
-  MAR
-  MBR
-  Memory Bank
+  memory Address_bus/Data_bus -&gt;
+    ATENCIÓN: un único bus para las direcciones y para los datos -&gt; bus compartido, por lo que son necesarios ciclos diferentes en el tiempo.
+    direcciones de 12 bits y bus de direcciones de 4 bits:  (multiplexación temporal de 3 ciclos de 4 bits para completar la dirección)
+  MAR/MBR : un único registro con doble funcionalidad -&gt; 4 bits
+  4 bancos de memoria: Memory Bank -&gt; memory control bus (chip_select, R/W) de la unidad de control
  IU
   IR, IBR
  EU
@@ -1439,39 +1480,82 @@ Unidades
  Registers
   RPG (General-Purpose Registers)
   Stack
-Clock Frequency
-Chipset</pre>
+Clock Frequency: 740KHz
+Chipset MSC-4</pre>
 </div>
 </div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_memoria">Memoria</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Address multiplexing 12bits=4bits/ciclo x 3ciclos</p>
+<p>(Se verá en el tema siguiente sobre la unidad de memoria)</p>
+</li>
+<li>
+<p>Organización de la memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Bus compartido data/address:un único bus de datos y direcciones de 4 bits.</p>
+</li>
+<li>
+<p>Address multiplexing &#8594; dirección de 12bits=4bits/ciclo x 3ciclos, es decir, la unidad de control necesita 3 ciclos de reloj para completar los 12 bits de direcciones.</p>
+</li>
+<li>
+<p>Tanto la memoria de programa en ROM como de programa en RAM tienen capacidad de 2<sup>12</sup> Bytes, 4KBytes</p>
+</li>
+<li>
+<p>En cambio la memoria de datos en RAM tiene otro tipo de direccionamiento y capacidad de 5120 bits</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Platform architecture</p>
+<p><strong>Chipset</strong>: constelación de chips.</p>
 <div class="listingblock">
 <div class="content">
-<pre>CPU
-MEMORY
-memory BUS: address, data, control (R/W)</pre>
+<pre>the i4004 microprocessor chip, which integrates the instruction sequencer, instruction decoder, subroutine stack, ALU, and sixteen 4 bit data registers. This was the first single-chip microprocessor in history.
+the i4001 ROM chip combines a 256x8 bit mask-programmable ROM and four software-controllable input/output ports.
+the i4002 RAM chip with 320 bits of RAM (4 registers of 20 words of 4 bit) and four software-controllable output ports:
+  Bus compartido para datos y direcciones
+the i4003 output expander, basically a 10-bit serial-in parallel-out shift-register.</pre>
 </div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Capacidad de memoria = 2<sup>12</sup></p>
+<p>A minimal MCS4 system consists of one i4004 CPU and one i4001 ROM chip (and a few external components like the two-phase clock generator), while the largest system  sixteen ROM chips (4 KBytes) and sixteen 4002 RAM chips (640 Bytes).</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A diferencia de las arquitecturas actuales, se observa que el chipset incluye la memoria y esta es controlada por la propia CPU a través de instrucciones de gestión de memoria como las instrucciones DCL y SRC que se utilizaban para seleccionar el banco de memoria primero y la dirección del dato después antes de proceder a realizar operaciones con dicho dato.</p>
 </li>
 <li>
-<p>Capacidad un Bank =</p>
+<p>La organización de la memoria RAM en bancos/chips/registro/palabra es como sigue (se verá en el tema siguiente sobre la unidad de memoria):</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>el objetivo de los Bancos de Memoria es incrementar la capacidad de memoria por encima de la limitación del Contador de Programa y del Bus de Direcciones.</p>
+<div class="listingblock">
+<div class="content">
+<pre>A cada banco (línea CM de la cpu 4004) se pueden conectar hasta 4 chips RAM 4002
+El sistema se puede configurar que tenga 4 o 8 bancos.
+Por lo tanto el máximo de chips que admite el sistema es de 32.
+Cuando se selecciona una instrucción o dato de memoria RAM, se selecciona uno de los bancos,  para el banco seleccionado se selecciona uno de los chips y para el chip seleccionado la palabra (instrucción o dato) de uno de los 4 registros del chip.</pre>
+</div>
+</div>
 </li>
 </ul>
 </div>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -1634,16 +1718,16 @@ memory BUS: address, data, control (R/W)</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_personal_pc_laptop_t520">7.8. Personal PC: Laptop T520</h3>
+<h3 id="_personal_pc_laptop_t560">7.8. Personal PC: Laptop T560</h3>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/laptop_T520/laptop_view_up.jpg" alt="laptop view up">
+<img src="./images/laptop_T560/laptop_view_up.jpg" alt="laptop view up">
 </div>
-<div class="title">Figure 38. Laptop_T520: Vista interna</div>
+<div class="title">Figure 38. Laptop_T560: Vista interna</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/laptop_T520/plataforma_hardisk_off.jpg" alt="plataforma hardisk off">
+<img src="./images/laptop_T560/plataforma_hardisk_off.jpg" alt="plataforma hardisk off">
 </div>
 <div class="title">Figure 39. plataforma_hardisk_off</div>
 </div>
@@ -1794,13 +1878,13 @@ Memoria Cache
 <h4 id="_cpu">7.8.6. cpu</h4>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/laptop_T520/cpu_package.jpg" alt="cpu package">
+<img src="./images/laptop_T560/cpu_package.jpg" alt="cpu package">
 </div>
 <div class="title">Figure 40. cpu_package</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/laptop_T520/skylake-family-table.jpg" alt="skylake family table">
+<img src="./images/laptop_T560/skylake-family-table.jpg" alt="skylake family table">
 </div>
 <div class="title">Figure 41. skylake-family-table</div>
 </div>
@@ -1940,13 +2024,13 @@ Thermal Design Power   	15 Watt  _&gt; consumo</pre>
 <h5 id="_nivel_de_integracion_cpu_chipset">nivel de integracion: cpu-chipset</h5>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/laptop_T520/esquema_chipset100_cpu6gen.png" alt="esquema chipset100 cpu6gen">
+<img src="./images/laptop_T560/esquema_chipset100_cpu6gen.png" alt="esquema chipset100 cpu6gen">
 </div>
 <div class="title">Figure 42. Esquema CPU Chipset discreto</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/laptop_T520/esquema_skylake-u-mobile-diagram.png" alt="esquema skylake u mobile diagram" width="100%"">
+<img src="./images/laptop_T560/esquema_skylake-u-mobile-diagram.png" alt="esquema skylake u mobile diagram" width="100%"">
 </div>
 <div class="title">Figure 43. Esquema CPU Chipset integrado, scaledwidth=</div>
 </div>
@@ -2031,7 +2115,7 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 <div class="sect2">
 <h3 id="_arquitecturas_ciscrisc">7.9. Arquitecturas CISC/RISC</h3>
 <div class="sect3">
-<h4 id="_introducción_9">7.9.1. Introducción</h4>
+<h4 id="_introducción_10">7.9.1. Introducción</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2276,14 +2360,14 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 <div class="ulist">
 <ul>
 <li>
-<p>suppose  we can run two memory operations in <strong>parallel</strong> [but only if they have <strong>no dependencies</strong>, of course]. are there dependencies between these two instructions? well, it depends on the values of $5 and $2. if $5 is 0, and $2 is 4, then they depend on each other: we must run the store before the load.</p>
+<p>suppose  we can run two memory operations in <strong>parallel</strong> [but only if they have <strong>no dependencies</strong>, of course]. are there dependencies between these two instructions? well, it depends on the values of $5 and $2, es decir, del contenido de las direcciones de memoria 5 y 2. Si el contenido de la dirección $5 is 0, y el contenido de la dirección $2 is 4, then they <strong>depend</strong> on each other: we must run the store before the load y <strong>no</strong> se pueden ejecutar en paralelo.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>in a VLIW approach, our compiler decides which instructions are safe to run in parallel. there&#8217;s no way our compiler can tell for sure if there is a dependence here. so we must stay on the safe side, and dictate that the store must always run before the load. if this were a bigger piece of code, we could analyze the code and try to build a proof that shows there is no dependence. [modern parallelizing compilers actually do this!]</p>
+<p>in a <strong>VLIW</strong> approach, our compiler decides which instructions are safe to run in parallel. there&#8217;s no way our compiler can tell for sure if there is a dependence here. so we must stay on the safe side, and dictate that the store must always run before the load. if this were a bigger piece of code, we could analyze the code and try to build a proof that shows there is no dependence. [modern parallelizing compilers actually do this!]</p>
 </li>
 <li>
-<p>if we decide on a SUPERSCALAR approach, we have a piece of hardware on our processor that decides whether we can run instructions in parallel. the problem is easier, because this dependence check will happen in a piece of hardware on our processor, as the code is run. so we will know what the values of $2 and $5 are. this means that we will always know if it is safe to run these two instructions in parallel.</p>
+<p>if we decide on a <strong>SUPERSCALAR</strong> approach, we have a piece of hardware on our processor that decides whether we can run instructions in parallel. the problem is easier, because this dependence check will happen in a piece of hardware on our processor, as the code is run. so we will know what the values of $2 and $5 are. this means that we will always know if it is safe to run these two instructions in parallel. Por lo tanto unas veces las dos instrucciones serán ejecutadas en paralelo y otras no.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2304,7 +2388,7 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 <div class="ulist">
 <ul>
 <li>
-<p>Pipeline: cauce o tubería.</p>
+<p>Pipeline: cauce o tubería. Segmentación en serie.</p>
 </li>
 <li>
 <p>Ejemplo de Lavado de coches</p>
@@ -2358,7 +2442,7 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/cpu/12_9.jpg" alt="12 9">
+<img src="./images/cpu/12_9.jpg" alt="12 9" width="960" height="600">
 </div>
 <div class="title">Figure 44. Segmentación en 2 etapas</div>
 </div>
@@ -2371,21 +2455,28 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/cpu/12_10.jpg" alt="12 10">
+<img src="./images/cpu/12_10.jpg" alt="12 10" width="960" height="600">
 </div>
 <div class="title">Figure 45. Diagrama de tiempos con segmentación de 6 etapas</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/cpu/12_11.jpg" alt="12 11">
+<img src="./images/cpu/12_11.jpg" alt="12 11" width="960" height="600">
 </div>
 <div class="title">Figure 46. Diagrama de tiempos. Salto incondicional</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/cpu/12_12.jpg" alt="12 12">
+<img src="./images/cpu/12_12.jpg" alt="12 12" width="960" height="600">
 </div>
 <div class="title">Figure 47. Flujo de instrucciones con segmentación de 6 etapas</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Un salto obliga a vaciar la tubería &#8594; nueva microrden para la Unidad de Control &#8594; empty pipe</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -2401,15 +2492,8 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_imagenes">7.12. Imagenes</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="./images/cpu/images_cpu.html">Imagenes</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>/// * <a href="./images/cpu/images_cpu.html">Imagenes</a></p>
 </div>
 </div>
 </div>
