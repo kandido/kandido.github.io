@@ -335,9 +335,9 @@ pre.rouge {
 </li>
 <li><a href="_procesador_central.html#_instruction_level_parallelism_ilp">7.9. Instruction Level Parallelism (ILP)</a>
 <ul class="sectlevel3">
-<li><a href="_procesador_central.html#_vliw_vs_superscalar">7.9.1. VLIW vs Superscalar</a>
+<li><a href="_procesador_central.html#_pipeline_segmentacion">7.9.1. Pipeline (Segmentacion)</a>
 </li>
-<li><a href="_procesador_central.html#_pipeline_segmentacion">7.9.2. Pipeline (Segmentacion)</a>
+<li><a href="_procesador_central.html#_vliw_vs_superscalar">7.9.2. VLIW vs Superscalar</a>
 </li>
 </ul>
 </li>
@@ -357,23 +357,25 @@ pre.rouge {
 </li>
 </ul>
 </li>
-<li><a href="_procesador_central.html#_arm_cortex_a76cortex_a55">7.11. ARM Cortex-A76/Cortex-A55</a>
+<li><a href="_procesador_central.html#_skylake_u">7.11. Skylake-U</a>
+</li>
+<li><a href="_procesador_central.html#_arm_cortex_a76cortex_a55">7.12. ARM Cortex-A76/Cortex-A55</a>
 <ul class="sectlevel3">
-<li><a href="_procesador_central.html#_intro_2">7.11.1. Intro</a>
+<li><a href="_procesador_central.html#_intro_2">7.12.1. Intro</a>
 </li>
-<li><a href="_procesador_central.html#_teléfono_huawei_p30_pro">7.11.2. Teléfono Huawei P30 Pro</a>
+<li><a href="_procesador_central.html#_teléfono_huawei_p30_pro">7.12.2. Teléfono Huawei P30 Pro</a>
 </li>
-<li><a href="_procesador_central.html#_isa_cortex_a76cortex_a55">7.11.3. ISA Cortex-A76/Cortex-A55</a>
+<li><a href="_procesador_central.html#_isa_cortex_a76cortex_a55">7.12.3. ISA Cortex-A76/Cortex-A55</a>
 </li>
-<li><a href="_procesador_central.html#_multicore">7.11.4. Multicore</a>
+<li><a href="_procesador_central.html#_multicore">7.12.4. Multicore</a>
 </li>
-<li><a href="_procesador_central.html#_microarquitectura_cortex_a76">7.11.5. Microarquitectura Cortex-A76</a>
+<li><a href="_procesador_central.html#_microarquitectura_cortex_a76">7.12.5. Microarquitectura Cortex-A76</a>
 </li>
-<li><a href="_procesador_central.html#_microarquitectura_cortex_a55">7.11.6. Microarquitectura Cortex-A55</a>
+<li><a href="_procesador_central.html#_microarquitectura_cortex_a55">7.12.6. Microarquitectura Cortex-A55</a>
 </li>
 </ul>
 </li>
-<li><a href="_procesador_central.html#_ejercicios">7.12. Ejercicios</a>
+<li><a href="_procesador_central.html#_ejercicios">7.13. Ejercicios</a>
 </li>
 </ul>
 </li>
@@ -2188,7 +2190,103 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </ul>
 </div>
 <div class="sect3">
-<h4 id="_vliw_vs_superscalar">7.9.1. VLIW vs Superscalar</h4>
+<h4 id="_pipeline_segmentacion">7.9.1. Pipeline (Segmentacion)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Pipeline: cauce o tubería. Segmentación en serie.</p>
+</li>
+<li>
+<p>Ejemplo de Lavado de coches</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Fases: Humedecer - Enjabonar - Cepillar - Aclarar - Secar - Abrillantar</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Máquina Secuencial</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cola de coches ante la máquina</p>
+</li>
+<li>
+<p>Si un coche está en cualquiera de las fases no entra el siguiente coche.</p>
+</li>
+<li>
+<p>El intervalo de tiempo de salida de coches será la suma de todas las fases. ¿Cada cuanto tiempo sale un coche del lavadero?</p>
+</li>
+<li>
+<p><strong>Througput (Producción)</strong>: Número de coches de salida por unidad de tiempo</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Segmentación frente a Secuencial.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En lugar de tener una máquina que realice todas la fases tenemos máquinas independientes que realizan cada fase.</p>
+</li>
+<li>
+<p>El intervalo de tiempo de salida de coches será el de la duración de la fase de mayor duración.</p>
+</li>
+<li>
+<p>El througput, del número de coches atendidos por unidad de tiempo, aumenta.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Flujo de Instrucciones con segmentación en 2 etapas</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cpu/12_9.jpg" alt="12 9" width="960" height="600">
+</div>
+<div class="title">Figure 44. Segmentación en 2 etapas</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>En caso de que los tiempos de cada etapa sean distintos o halla penalización por saltos en el flujo , se producirán tiempos de espera.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cpu/12_10.jpg" alt="12 10" width="960" height="600">
+</div>
+<div class="title">Figure 45. Diagrama de tiempos con segmentación de 6 etapas</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cpu/12_11.jpg" alt="12 11" width="960" height="600">
+</div>
+<div class="title">Figure 46. Diagrama de tiempos. Salto incondicional</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cpu/12_12.jpg" alt="12 12" width="960" height="600">
+</div>
+<div class="title">Figure 47. Flujo de instrucciones con segmentación de 6 etapas</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Un salto obliga a vaciar la tubería &#8594; nueva microrden para la Unidad de Control &#8594; empty pipe</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_vliw_vs_superscalar">7.9.2. VLIW vs Superscalar</h4>
 <div class="sect4">
 <h5 id="_vliw">VLIW</h5>
 <div class="ulist">
@@ -2289,102 +2387,28 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </li>
 </ul>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cpu/vliwpipeline.svg.png" alt="vliwpipeline.svg" width="400" height="300">
 </div>
-</div>
-<div class="sect3">
-<h4 id="_pipeline_segmentacion">7.9.2. Pipeline (Segmentacion)</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Pipeline: cauce o tubería. Segmentación en serie.</p>
-</li>
-<li>
-<p>Ejemplo de Lavado de coches</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Fases: Humedecer - Enjabonar - Cepillar - Aclarar - Secar - Abrillantar</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Máquina Secuencial</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Cola de coches ante la máquina</p>
-</li>
-<li>
-<p>Si un coche está en cualquiera de las fases no entra el siguiente coche.</p>
-</li>
-<li>
-<p>El intervalo de tiempo de salida de coches será la suma de todas las fases. ¿Cada cuanto tiempo sale un coche del lavadero?</p>
-</li>
-<li>
-<p><strong>Througput (Producción)</strong>: Número de coches de salida por unidad de tiempo</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Segmentación frente a Secuencial.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>En lugar de tener una máquina que realice todas la fases tenemos máquinas independientes que realizan cada fase.</p>
-</li>
-<li>
-<p>El intervalo de tiempo de salida de coches será el de la duración de la fase de mayor duración.</p>
-</li>
-<li>
-<p>El througput, del número de coches atendidos por unidad de tiempo, aumenta.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Flujo de Instrucciones con segmentación en 2 etapas</p>
-</li>
-</ul>
+<div class="title">Figure 48. VLIW</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/cpu/12_9.jpg" alt="12 9" width="960" height="600">
+<img src="./images/cpu/superscalarpipeline.svg.png" alt="superscalarpipeline.svg" width="400" height="300">
 </div>
-<div class="title">Figure 44. Segmentación en 2 etapas</div>
+<div class="title">Figure 49. Superscalar de dos vías (2-way)</div>
 </div>
+</div>
+<div class="sect4">
+<h5 id="_aplicaciones_vliw">Aplicaciones VLIW</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>En caso de que los tiempos de cada etapa sean distintos o halla penalización por saltos en el flujo , se producirán tiempos de espera.</p>
+<p>La aplicación típica de la técnica VLIW son los procesadores "Digital Processing Signal DSP" como el TI’s TMS320C6x y el ADI’s Tiger-SHARC que procesan digitalmente y en tiempo real señales de audio, video, comunicaciones, etc. No son procesadores genéricos sino que la ISA y la microarquitectura están especializados en realizar operaciones matemáticas a gran velocidad y con gran número de datos. Hoy en día su gran mercado es la telefonía móvil. Por ejemplo: Cadence® Tensilica® Vision P6 DSP for its 10nm Kirin 970 mobile application processor, which debuted in Huawei’s new Mate 10 Series mobile phones. Due to its wide VLIW SIMD architecture, highly optimized instruction set and expertly tuned imaging library, the DSP is an ideal platform for emerging imaging applications such as 3D sensing, human/machine interface, AR/VR and biometric identification for the mobile platform.</p>
 </li>
 </ul>
 </div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="./images/cpu/12_10.jpg" alt="12 10" width="960" height="600">
-</div>
-<div class="title">Figure 45. Diagrama de tiempos con segmentación de 6 etapas</div>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="./images/cpu/12_11.jpg" alt="12 11" width="960" height="600">
-</div>
-<div class="title">Figure 46. Diagrama de tiempos. Salto incondicional</div>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="./images/cpu/12_12.jpg" alt="12 12" width="960" height="600">
-</div>
-<div class="title">Figure 47. Flujo de instrucciones con segmentación de 6 etapas</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Un salto obliga a vaciar la tubería &#8594; nueva microrden para la Unidad de Control &#8594; empty pipe</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -2533,9 +2557,28 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_arm_cortex_a76cortex_a55">7.11. ARM Cortex-A76/Cortex-A55</h3>
+<h3 id="_skylake_u">7.11. Skylake-U</h3>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cpu/skylake_block_diagram.svg.png" alt="skylake block diagram.svg" width="700" height="400">
+</div>
+<div class="title">Figure 50. Skylake microarchitecture</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Front End &#8594; Unidad de Control</p>
+</li>
+<li>
+<p>Observar dos rutas de operaciones completamente diferentes: MOP y uOP.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_arm_cortex_a76cortex_a55">7.12. ARM Cortex-A76/Cortex-A55</h3>
 <div class="sect3">
-<h4 id="_intro_2">7.11.1. Intro</h4>
+<h4 id="_intro_2">7.12.1. Intro</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2551,11 +2594,11 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_teléfono_huawei_p30_pro">7.11.2. Teléfono Huawei P30 Pro</h4>
+<h4 id="_teléfono_huawei_p30_pro">7.12.2. Teléfono Huawei P30 Pro</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>El teléfono Huawei P30 Pro modelo VOG-L29 incorpora un System On Chip (SoC) Huawei <strong>Kirin 980</strong>. El SoC integra tanto los cores como el chipset.</p>
+<p>El teléfono Huawei P30 Pro modelo VOG-L29 incorpora un MultiProcessor System On Chip (MPSoC) Huawei <strong>Kirin 980</strong>. El SoC integra tanto los cores como el chipset.</p>
 <div class="listingblock">
 <div class="content">
 <pre>August 31, 2018
@@ -2565,9 +2608,15 @@ Kirin 980 is a 64-bit high-performance mobile ARM LTE SoC designed by HiSilicon 
 </li>
 </ul>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cpu/Huawei-HiSilicon-Kirin-980-MPSoC.png" alt="Huawei HiSilicon Kirin 980 MPSoC" width="400" height="300">
+</div>
+<div class="title">Figure 51. Kirin MPSoC)</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="_isa_cortex_a76cortex_a55">7.11.3. ISA Cortex-A76/Cortex-A55</h4>
+<h4 id="_isa_cortex_a76cortex_a55">7.12.3. ISA Cortex-A76/Cortex-A55</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2593,7 +2642,7 @@ ver manual ISA ARMv8.2-A de la compañia ARM</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_multicore">7.11.4. Multicore</h4>
+<h4 id="_multicore">7.12.4. Multicore</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2616,7 +2665,7 @@ ver manual ISA ARMv8.2-A de la compañia ARM</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_microarquitectura_cortex_a76">7.11.5. Microarquitectura Cortex-A76</h4>
+<h4 id="_microarquitectura_cortex_a76">7.12.5. Microarquitectura Cortex-A76</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2644,7 +2693,7 @@ ver manual ISA ARMv8.2-A de la compañia ARM</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_microarquitectura_cortex_a55">7.11.6. Microarquitectura Cortex-A55</h4>
+<h4 id="_microarquitectura_cortex_a55">7.12.6. Microarquitectura Cortex-A55</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2668,7 +2717,7 @@ ver manual ISA ARMv8.2-A de la compañia ARM</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejercicios">7.12. Ejercicios</h3>
+<h3 id="_ejercicios">7.13. Ejercicios</h3>
 <div class="ulist">
 <ul>
 <li>
