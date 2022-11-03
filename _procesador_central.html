@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-11-02</span>
+<span id="revdate">2022-11-03</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -333,23 +333,47 @@ pre.rouge {
 </li>
 </ul>
 </li>
-<li><a href="_procesador_central.html#_arquitecturas_ciscrisc">7.9. Arquitecturas CISC/RISC</a>
+<li><a href="_procesador_central.html#_instruction_level_parallelism_ilp">7.9. Instruction Level Parallelism (ILP)</a>
 <ul class="sectlevel3">
-<li><a href="_procesador_central.html#_introducción_10">7.9.1. Introducción</a>
+<li><a href="_procesador_central.html#_vliw_vs_superscalar">7.9.1. VLIW vs Superscalar</a>
 </li>
-<li><a href="_procesador_central.html#_tabla_comparativa">7.9.2. Tabla Comparativa</a>
+<li><a href="_procesador_central.html#_pipeline_segmentacion">7.9.2. Pipeline (Segmentacion)</a>
 </li>
 </ul>
 </li>
-<li><a href="_procesador_central.html#_instruction_level_parallelism_ilp">7.10. Instruction Level Parallelism (ILP)</a>
+<li><a href="_procesador_central.html#_arquitecturas_ciscrisc">7.10. Arquitecturas CISC/RISC</a>
 <ul class="sectlevel3">
-<li><a href="_procesador_central.html#_vliw_vs_superscalar">7.10.1. VLIW vs Superscalar</a>
+<li><a href="_procesador_central.html#_introducción_10">7.10.1. Introducción</a>
 </li>
-<li><a href="_procesador_central.html#_pipeline_segmentacion">7.10.2. Pipeline (Segmentacion)</a>
+<li><a href="_procesador_central.html#_cisc">7.10.2. CISC</a>
+</li>
+<li><a href="_procesador_central.html#_risc">7.10.3. RISC</a>
+</li>
+<li><a href="_procesador_central.html#_cuestiones">7.10.4. Cuestiones</a>
+</li>
+<li><a href="_procesador_central.html#_sw">7.10.5. SW</a>
+</li>
+<li><a href="_procesador_central.html#_tabla_comparativa">7.10.6. Tabla Comparativa</a>
 </li>
 </ul>
 </li>
-<li><a href="_procesador_central.html#_ejercicios">7.11. Ejercicios</a>
+<li><a href="_procesador_central.html#_arm_cortex_a76cortex_a55">7.11. ARM Cortex-A76/Cortex-A55</a>
+<ul class="sectlevel3">
+<li><a href="_procesador_central.html#_intro_2">7.11.1. Intro</a>
+</li>
+<li><a href="_procesador_central.html#_teléfono_huawei_p30_pro">7.11.2. Teléfono Huawei P30 Pro</a>
+</li>
+<li><a href="_procesador_central.html#_isa_cortex_a76cortex_a55">7.11.3. ISA Cortex-A76/Cortex-A55</a>
+</li>
+<li><a href="_procesador_central.html#_multicore">7.11.4. Multicore</a>
+</li>
+<li><a href="_procesador_central.html#_microarquitectura_cortex_a76">7.11.5. Microarquitectura Cortex-A76</a>
+</li>
+<li><a href="_procesador_central.html#_microarquitectura_cortex_a55">7.11.6. Microarquitectura Cortex-A55</a>
+</li>
+</ul>
+</li>
+<li><a href="_procesador_central.html#_ejercicios">7.12. Ejercicios</a>
 </li>
 </ul>
 </li>
@@ -2113,123 +2137,7 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_arquitecturas_ciscrisc">7.9. Arquitecturas CISC/RISC</h3>
-<div class="sect3">
-<h4 id="_introducción_10">7.9.1. Introducción</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>CISC: Complex Instruction Set Computer</p>
-</li>
-<li>
-<p>RISC: Reduced Instruction Set Computer</p>
-</li>
-<li>
-<p>CISC y RISC son dos filosofías de diseño de un computador, dos arquitecturas.</p>
-</li>
-</ul>
-</div>
-<div class="sect4">
-<h5 id="_cisc">CISC</h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Ejemplos: Motorola 68k, Intel x86.</p>
-</li>
-<li>
-<p>Instrucciones de varios bytes y no uniformes.</p>
-</li>
-<li>
-<p>Necesita un HW complejo que ocupa mucho espacio y necesita muchos ciclos de reloj.</p>
-</li>
-<li>
-<p>La arquitectura del lenguaje ensamblador está próxima a un lenguaje de alto nivel cómo el lenguaje C por lo que facilita la tarea a los compiladores y a los programadores de lenguaje ensamblador.</p>
-</li>
-<li>
-<p>En cambio complica el diseño e implementación de elementos hardware como la CPU.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_risc">RISC</h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Ejemplos: PowerPC, ARM, MIPS and SPARC</p>
-</li>
-<li>
-<p>Apuesta por un Hardware sencillo por lo que las instrucciones han de ser sencillas, regulares.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Un HW sencillo es rápido y ocupa poca área del chip.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Inconveniente: Gran número de accesos a memoria para capturar las instrucciones, los operandos y  el resultado.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Solución: incrementar la memoria interna: el número de Registros internos y la memoria caché. Para lo cual hay espacio debido al HW sencillo.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_cuestiones">Cuestiones</h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Qué arquitectura optimiza el tamaño de bytes del programa</p>
-</li>
-<li>
-<p>Qué arquitectura optimiza el tiempo de ejecución del cada instrucción</p>
-</li>
-<li>
-<p>Qué arquitectura optimiza el tamaño y coste de fabricación de la CPU</p>
-</li>
-<li>
-<p>Qué arquitectura optimiza el consumo</p>
-</li>
-<li>
-<p>Qué arquitectura optimiza el número de capturas a memoria. ¿Existe indepencia entre captura y ejecución de instrucciones?</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_sw">SW</h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Un programa ensamblador de una arquitectura RISC tiene más instrucciones que un CISC</p>
-</li>
-<li>
-<p>Cada instrucción RISC se ejecuta en menor tiempo que una CISC.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_tabla_comparativa">7.9.2. Tabla Comparativa</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="http://cs.stanford.edu/people/eroberts/courses/soco/projects/risc/risccisc/">RISC vs CISC</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_instruction_level_parallelism_ilp">7.10. Instruction Level Parallelism (ILP)</h3>
+<h3 id="_instruction_level_parallelism_ilp">7.9. Instruction Level Parallelism (ILP)</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2280,7 +2188,7 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </ul>
 </div>
 <div class="sect3">
-<h4 id="_vliw_vs_superscalar">7.10.1. VLIW vs Superscalar</h4>
+<h4 id="_vliw_vs_superscalar">7.9.1. VLIW vs Superscalar</h4>
 <div class="sect4">
 <h5 id="_vliw">VLIW</h5>
 <div class="ulist">
@@ -2384,7 +2292,7 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_pipeline_segmentacion">7.10.2. Pipeline (Segmentacion)</h4>
+<h4 id="_pipeline_segmentacion">7.9.2. Pipeline (Segmentacion)</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2481,7 +2389,286 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejercicios">7.11. Ejercicios</h3>
+<h3 id="_arquitecturas_ciscrisc">7.10. Arquitecturas CISC/RISC</h3>
+<div class="sect3">
+<h4 id="_introducción_10">7.10.1. Introducción</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>CISC: Complex Instruction Set Computer</p>
+</li>
+<li>
+<p>RISC: Reduced Instruction Set Computer</p>
+</li>
+<li>
+<p>CISC y RISC son dos filosofías de diseño de un computador, dos arquitecturas.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cisc">7.10.2. CISC</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplos: Motorola 68k, Intel x86.</p>
+</li>
+<li>
+<p>El objetivo fué conseguir programas que ocupasen poca memoria DRAM, ya que en los inicios la memoria era costosa. Había que conseguir instrucciones que realizasen operaciones complejas para que el programa no fuese muy largo.</p>
+</li>
+<li>
+<p>El repertorio abarca Instrucciones de varios bytes y no uniformes.</p>
+</li>
+<li>
+<p>Necesita un HW complejo que ocupa mucho espacio y necesita muchos ciclos de reloj.</p>
+</li>
+<li>
+<p>La arquitectura del lenguaje ensamblador está próxima a un lenguaje de alto nivel cómo el lenguaje C por lo que facilita la tarea a los compiladores y a los programadores de lenguaje ensamblador.</p>
+</li>
+<li>
+<p>En cambio complica el diseño e implementación de elementos hardware como la CPU.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_risc">7.10.3. RISC</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplos: PowerPC, ARM, MIPS and SPARC</p>
+</li>
+<li>
+<p>El origen fue diseñar un microprocesador con bajo presupuesto por lo que la apuesta fue una microarquitectura con un Hardware sencillo que ejecutase instrucciones también sencillas, regulares.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Un HW sencillo es rápido y ocupa poca área del chip. Es fácil incrementar el número de etapas pipeline.</p>
+</li>
+<li>
+<p>La consecuencia fue un micro de bajo consumo que más adelante se haría con todo el mercado de telefonía móvil.</p>
+</li>
+<li>
+<p>El repertorio de instrucciones es reducido con pocos códigos de operación y direccionamientos sencillos, lo que daría lugar a programas con un gran número de instrucciones máquina.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Inconveniente:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Requiere de más capacidad de memoria para almacenar programas extensos. Deja de ser un inconveniente si se abaratan las unidades de memoria DRAM.</p>
+</li>
+<li>
+<p>Gran número de accesos a memoria para capturar las instrucciones, los operandos y  el resultado. Deja de ser un inconveniente si se utilizan memorias de latencia reducida.</p>
+</li>
+<li>
+<p>Solución: incrementar la memoria interna: el número de Registros internos y la memoria caché. Para lo cual hay espacio debido al core de area reducida</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Core de área reducida permite:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>incrementar la capacidad de memoria interna ultrarápida.</p>
+</li>
+<li>
+<p>incrementar el número de vías de la arquitectura superescalar.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cuestiones">7.10.4. Cuestiones</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Qué arquitectura optimiza el tamaño de bytes del programa</p>
+</li>
+<li>
+<p>Qué arquitectura optimiza el tiempo de ejecución del cada instrucción</p>
+</li>
+<li>
+<p>Qué arquitectura optimiza el tamaño y coste de fabricación de la CPU</p>
+</li>
+<li>
+<p>Qué arquitectura optimiza el consumo</p>
+</li>
+<li>
+<p>Qué arquitectura optimiza el número de capturas a memoria. ¿Existe indepencia entre captura y ejecución de instrucciones?</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sw">7.10.5. SW</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Un programa ensamblador de una arquitectura RISC tiene más instrucciones que un CISC</p>
+</li>
+<li>
+<p>Cada instrucción RISC se ejecuta en menor tiempo que una CISC.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tabla_comparativa">7.10.6. Tabla Comparativa</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://cs.stanford.edu/people/eroberts/courses/soco/projects/risc/risccisc/">RISC vs CISC</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_arm_cortex_a76cortex_a55">7.11. ARM Cortex-A76/Cortex-A55</h3>
+<div class="sect3">
+<h4 id="_intro_2">7.11.1. Intro</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Arm_(company" class="bare">https://en.wikipedia.org/wiki/Arm_(company</a>)</p>
+</li>
+<li>
+<p>ARM : Acorn (bellota) RISC Machine &#8594; Advanced RISC Machines</p>
+</li>
+<li>
+<p>Arquitectura RISC.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_teléfono_huawei_p30_pro">7.11.2. Teléfono Huawei P30 Pro</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El teléfono Huawei P30 Pro modelo VOG-L29 incorpora un System On Chip (SoC) Huawei <strong>Kirin 980</strong>. El SoC integra tanto los cores como el chipset.</p>
+<div class="listingblock">
+<div class="content">
+<pre>August 31, 2018
+Kirin 980 is a 64-bit high-performance mobile ARM LTE SoC designed by HiSilicon and introduced in late 2018. Fabricated on TSMC's 7 nm process, the 980 incorporates four big Cortex-A76 cores operating at up to 2.6 GHz along with four little Cortex-A55 cores operating at up to 1.8 GHz. This SoC has an LTE modem supporting 1.4 Gbps download (Cat21), incorporates an ARM Mali-G76, and supports LPDDR4X-4266 memory.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_isa_cortex_a76cortex_a55">7.11.3. ISA Cortex-A76/Cortex-A55</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitectura  ISA ARMv8.2-A</p>
+<div class="listingblock">
+<div class="content">
+<pre>64 bits
+ver manual ISA ARMv8.2-A de la compañia ARM</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Microarquitectura</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_multicore">7.11.4. Multicore</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>8 núcleos</p>
+</li>
+<li>
+<p>arquitectura heterogénea big.LITTLE: 2 tipos de core &gt; 4+4</p>
+<div class="ulist">
+<ul>
+<li>
+<p>big cores : alto rendimiento y consumo moderado &#8594; Cortex-A76</p>
+</li>
+<li>
+<p>LITTLE.cores: rendimiento moderado y bajo consumo &#8594; Cortex-A55</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_microarquitectura_cortex_a76">7.11.5. Microarquitectura Cortex-A76</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/ARM_Cortex-A76" class="bare">https://en.wikipedia.org/wiki/ARM_Cortex-A76</a></p>
+<div class="listingblock">
+<div class="content">
+<pre>The Cortex-A76 frontend is a 4-wide decode out-of-order superscalar design. It can fetch 4 instructions per cycle. And[clarification needed] rename and dispatch 4 Mops, and 8 µops per cycle. The out-of-order window size is 128 entries. The backend is 8 execution ports with a pipeline depth of 13 stages and the execution latencies of 11 stages</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>superscalar : ruta de datos de 4 vías (4-way)</p>
+</li>
+<li>
+<p>pipeline: 13 etapas</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_microarquitectura_cortex_a55">7.11.6. Microarquitectura Cortex-A55</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/ARM_Cortex-A55" class="bare">https://en.wikipedia.org/wiki/ARM_Cortex-A55</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>superscalar: ruta de datos de 2 vías (2-way)</p>
+</li>
+<li>
+<p>pipeline: 8 etapas</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicios">7.12. Ejercicios</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2489,6 +2676,9 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </li>
 <li>
 <p>Capítulo 13 del libro de texto William Stalling</p>
+</li>
+<li>
+<p><a href="../ejercicios/ejercicios.html">Ejercicios</a></p>
 </li>
 </ul>
 </div>
