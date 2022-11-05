@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-11-04</span>
+<span id="revdate">2022-11-05</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -283,13 +283,15 @@ pre.rouge {
 </li>
 <li><a href="_unidad_de_memoria.html#_libro_william_stalling">9.1.2. Libro: William Stalling</a>
 </li>
-<li><a href="_unidad_de_memoria.html#_historia">9.1.3. Historia</a>
+<li><a href="_unidad_de_memoria.html#_refs_2">9.1.3. Refs</a>
 </li>
-<li><a href="_unidad_de_memoria.html#_interés">9.1.4. Interés</a>
+<li><a href="_unidad_de_memoria.html#_historia">9.1.4. Historia</a>
 </li>
-<li><a href="_unidad_de_memoria.html#_perspectivas">9.1.5. Perspectivas</a>
+<li><a href="_unidad_de_memoria.html#_interés">9.1.5. Interés</a>
 </li>
-<li><a href="_unidad_de_memoria.html#_jerarquía_de_memoria">9.1.6. Jerarquía de Memoria</a>
+<li><a href="_unidad_de_memoria.html#_perspectivas">9.1.6. Perspectivas</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_jerarquía_de_memoria">9.1.7. Jerarquía de Memoria</a>
 </li>
 </ul>
 </li>
@@ -307,7 +309,7 @@ pre.rouge {
 </li>
 <li><a href="_unidad_de_memoria.html#_organización_avanzada_de_memorias_dram">9.3.3. Organización avanzada de memorias DRAM</a>
 </li>
-<li><a href="_unidad_de_memoria.html#_imagenes">9.3.4. Imagenes</a>
+<li><a href="_unidad_de_memoria.html#_thinkpad_t560">9.3.4. Thinkpad T560</a>
 </li>
 </ul>
 </li>
@@ -320,6 +322,10 @@ pre.rouge {
 <li><a href="_unidad_de_memoria.html#_principios_basicos">9.4.3. Principios Basicos</a>
 </li>
 <li><a href="_unidad_de_memoria.html#_elementos_de_diseño_de_la_cache">9.4.4. Elementos de Diseño de la Cache</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_políticas">9.4.5. Políticas</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_thinkpad_l560">9.4.6. Thinkpad L560</a>
 </li>
 </ul>
 </li>
@@ -433,7 +439,24 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_historia">9.1.3. Historia</h4>
+<h4 id="_refs_2">9.1.3. Refs</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>What Every Programmer Should Know About Memory. Ulrich Drepper. Red Hat, Inc.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>su lectura completa requiere un nivel avanzado</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_historia">9.1.4. Historia</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -459,7 +482,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_interés">9.1.4. Interés</h4>
+<h4 id="_interés">9.1.5. Interés</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -583,7 +606,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_perspectivas">9.1.5. Perspectivas</h4>
+<h4 id="_perspectivas">9.1.6. Perspectivas</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -591,6 +614,9 @@ pre.rouge {
 </li>
 <li>
 <p>Gestión de la Memoria  de los procesos en ejecución por parte del kernel del sistema operativo vs Organización de Memoria (ficheros,secciones,jerarquía de memoria ,..)</p>
+</li>
+<li>
+<p>ISA: acceso a memoria, modos de direccionamiento, little endian, etc</p>
 </li>
 <li>
 <p>Software:</p>
@@ -659,7 +685,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_jerarquía_de_memoria">9.1.6. Jerarquía de Memoria</h4>
+<h4 id="_jerarquía_de_memoria">9.1.7. Jerarquía de Memoria</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -673,13 +699,13 @@ pre.rouge {
 </div>
 </li>
 <li>
-<p>Niveles: L0,L1,L2</p>
+<p>Niveles: L0,L1,L2,L3,L4</p>
 </li>
 <li>
-<p>Memoria Registros CPU</p>
+<p>Memoria Registros CPU &#8594; L0</p>
 </li>
 <li>
-<p>Memoria Cache</p>
+<p>Memoria Cache &#8594; L1,L2,L3</p>
 </li>
 <li>
 <p>Memoria Principal</p>
@@ -702,17 +728,35 @@ pre.rouge {
 </li>
 </ul>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memoria/MemoryHierarchy.png" alt="MemoryHierarchy" width="600" height="400">
+</div>
+<div class="title">Figure 61. Memory Hierarchy</div>
+</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_registros_2">9.2. Registros</h3>
 <div class="sect3">
 <h4 id="_arquitectura_amd64_3">9.2.1. Arquitectura amd64</h4>
-<div class="paragraph">
-<p><span class="image"><img src="./images/instrucciones_representacion/registers_1200x800.png" alt="x86 registers"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/instrucciones_representacion/registers_1200x800.png" alt="registers 1200x800">
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="./images/memoria/Table_of_x86_Registers_svg.png" alt="Table of x86 Registers svg" width="1000" height="500" title="Registers x86"></span></p>
+<div class="title">Figure 62. x86 registers</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memoria/Table_of_x86_Registers_svg.png" alt="Table of x86 Registers svg" width="1000" height="500">
+</div>
+<div class="title">Figure 63. Registers x86</div>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/memoria/instruction_extensions_simd.png" alt="instruction extensions simd" width="600" height="300">
+</div>
+<div class="title">Figure 64. SIMD instructions evolution</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1088,6 +1132,30 @@ pre.rouge {
 </li>
 </ul>
 </div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/tarjeta_micron_1.png" alt="tarjeta micron 1">
+</div>
+<div class="title">Figure 65. System</div>
+</div>
+<div class="paragraph">
+<p>Cada módulo se inserta en un slot de la placa base de la computadora.</p>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/tarjeta_micron_2.png" alt="tarjeta micron 2">
+</div>
+<div class="title">Figure 66. System</div>
+</div>
+<div class="paragraph">
+<p>Una tarjeta es un agrupamiento por chips. Los chips suelen estar soldados por ambas caras de la tarjeta.</p>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/tarjeta_esquema.png" alt="tarjeta esquema">
+</div>
+<div class="title">Figure 67. System</div>
+</div>
 <div class="sect4">
 <h5 id="_organización">Organización</h5>
 <div class="ulist">
@@ -1199,6 +1267,16 @@ pre.rouge {
 </ul>
 </div>
 </li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/images/dram/system.png" alt="system">
+</div>
+<div class="title">Figure 68. System</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Controlador de Memoria (MC)</p>
 <div class="ulist">
@@ -1231,6 +1309,16 @@ pre.rouge {
 </ul>
 </div>
 </li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/System_Bus_Structure_RAM_Controller.gif" alt="System Bus Structure RAM Controller">
+</div>
+<div class="title">Figure 69. System</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Memory Management Unit (MMU)</p>
 <div class="ulist">
@@ -1282,7 +1370,7 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p><a href="http://en.wikipedia.org/wiki/22_nanometer">evolución proceso tecnológico </a></p>
+<p><a href="https://en.wikipedia.org/wiki/3_nm_process">evolución proceso tecnológico</a>: 3nm node en el año 2023</p>
 </li>
 </ul>
 </div>
@@ -1300,6 +1388,18 @@ pre.rouge {
 </div>
 </li>
 </ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/cell_1t1c.png" alt="cell 1t1c">
+</div>
+<div class="title">Figure 70. cell_1t1c</div>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/cell_capacitor.png" alt="cell capacitor">
+</div>
+<div class="title">Figure 71. cell_capacitor</div>
 </div>
 </div>
 <div class="sect4">
@@ -1441,6 +1541,50 @@ pre.rouge {
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/array1.png" alt="array1">
+</div>
+<div class="title">Figure 72. Array de celdas</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Organización de celdas en una dimensión: 1D:  Filas.</p>
+</li>
+<li>
+<p>Un circuito decodificador de filas</p>
+</li>
+<li>
+<p>1024 filas y cada fila son 16 celdas.</p>
+</li>
+<li>
+<p>El buffer i/o es de 16 bits.</p>
+</li>
+<li>
+<p>Al direccionar una fila se conectan las 16 celdas al buffer i/o.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/array2.png" alt="array2">
+</div>
+<div class="title">Figure 73. Array de celdas 2D</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Organización de celdas en dos dimensiones: 2D: matriz de filas y columnas</p>
+</li>
+<li>
+<p>Dos decodificadores: un decodificador de filas y un decodificador de columnas.</p>
+</li>
+<li>
+<p>Cada par (fila, columna) accede a una celda.</p>
 </li>
 </ul>
 </div>
@@ -2048,6 +2192,37 @@ pre.rouge {
 </li>
 </ul>
 </div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/rank1.png" alt="rank1">
+</div>
+<div class="title">Figure 74. Rank: agrupamiento de chips en el módulo de memoria DIMM</div>
+</div>
+<div class="paragraph">
+<p><strong>RANK</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>4 módulos DIMM con 4 chips cada uno.</p>
+</li>
+<li>
+<p>Agrupamiento de chips en el SISTEMA de memoria ( todos los módulo de memoria DIMM).</p>
+</li>
+<li>
+<p>En este caso cada Rank agrupa todos los chips del mismo módulo.</p>
+</li>
+<li>
+<p>Cada chip select selecciona un rank diferente.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/rank2.png" alt="rank2">
+</div>
+<div class="title">Figure 75. Rank</div>
+</div>
 </div>
 <div class="sect5">
 <h6 id="_chip">Chip</h6>
@@ -2074,6 +2249,47 @@ pre.rouge {
 </li>
 </ul>
 </div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/bank2.png" alt="bank2">
+</div>
+<div class="title">Figure 76. Chipx16</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Chipx16 formado por 4 bancos y 1 buffer i/o de 16 bits.</p>
+</li>
+<li>
+<p>Cada banco proporciona 16 bits al buffer i/o.</p>
+</li>
+<li>
+<p>Cada banco son 16 arrays 2D &#8594; el 16 es la 3D</p>
+</li>
+<li>
+<p>Cada array tiene 8192 filas y 512 columnas. 2<sup>13</sup> filas x  2<sup>9</sup> columnas = 2<sup>22</sup> celdas</p>
+</li>
+<li>
+<p>Capacidad de cada banco 3D: 2<sup>22</sup> celdas x 16 bits = 4*2<sup>20</sup>*2Bytes=8MBytes</p>
+</li>
+<li>
+<p>Cada banco 3D es un espacio de direcciones de 8MB independiente.</p>
+</li>
+<li>
+<p>Chipx16 : 4 Bancos : 32 MB &#8594; 16M x2Bytes DRAM &#8594; 16M x16bits DRAM</p>
+<div class="ulist">
+<ul>
+<li>
+<p>bus de datos: 16 bits &#8594; 2 bytes</p>
+</li>
+<li>
+<p>bus de direcciones: para una capacidad de 32 MB : 2<sup>25</sup> &#8594; 25 hilos</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect5">
 <h6 id="_bank">Bank</h6>
@@ -2081,6 +2297,13 @@ pre.rouge {
 <ul>
 <li>
 <p>Este término es confuso ya que depende del contexto e incluso hay diversas interpretaciones.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En el caso de la cpu de intel 4004 es &#8230;&#8203; (ver Tema CPU apartado i4004)</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>Bank:</p>
@@ -2099,7 +2322,7 @@ pre.rouge {
 <p>Así organizados, todos los arrays del mismo banco pueden responder AL UNISONO al mismo bus de direcciones (filas,columnas).Se selecciona la misma fila y la misma columna para todos los arrays del banco. Cada array del banco proporciona el bit de la celda seleccionada por lo que el número de bits proporcionados por el banco será el número de arrays del banco.</p>
 </li>
 <li>
-<p>Todos los bancos del chip forman parte del mismo buffer i/o del chip.</p>
+<p><strong>Todos</strong> los bancos del chip forman parte del <strong>mismo</strong> buffer i/o del chip.</p>
 </li>
 <li>
 <p>El número de bits <em>"n"</em> , del dato proporcionado por el banco a través del buffer i/o, se indica diciendo que el chip es <em>xn</em>: x2,x4,x8,x16,x32</p>
@@ -2109,6 +2332,54 @@ pre.rouge {
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/bank1.png" alt="bank1">
+</div>
+<div class="title">Figure 77. Bank: Array en el chip de memoria DIMM</div>
+</div>
+<div class="paragraph">
+<p>Tres chips. Cada Chip esta formado por un <strong>BANCO</strong>. Un banco es un agrupamiento de Arrays.</p>
+</div>
+<div class="paragraph">
+<p>Chip x2 DRAM:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>x2 significa un chip con un buffer i/o de 2 bits &#8594; bus de datos de 2 bits</p>
+</li>
+<li>
+<p>Un banco con 2 arrays. Cada array proporciona 1 bit.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Chip x4 DRAM:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>x4 significa un chip con un buffer i/o de 4 bits &#8594; bus de datos de 4 bits</p>
+</li>
+<li>
+<p>Un banco con 4 arrays. Cada array proporciona 1 bit.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Chip x8 DRAM:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>x8 significa un chip buffer i/o de 8 bits &#8594; bus de datos de 8 bits</p>
+</li>
+<li>
+<p>Un banco con 8 arrays. Cada array proporciona 1 bit.</p>
 </li>
 </ul>
 </div>
@@ -2186,6 +2457,22 @@ Los 4 módulos al completo se organizan en 4 ranks
 </li>
 <li>
 <p>El buffer i/o de transferencia de datos al bus de memoria tiene el tamaño x64, es decir, 64 bits.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_página">Página</h5>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/page.png" alt="page">
+</div>
+<div class="title">Figure 78. Page</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Una página abarca múltiples columnas de la misma fila. Al buffer i/o se descargan más columnas que la requerida, de esta forma la salida i/o hace de buffer guardando datos adyacentes al solicitado. En el siguiente acceso puede que el dato requerido ya esté en el buffer y la latencia de la lectura es mucho más rápida. Por ejemplo en el caso de querer leer un array si el array ha sido almacenado en un página se podría leer toda la página con un solo acceso a las celdas y posteriormente transferir el contenido del buffer por ráfagas.</p>
 </li>
 </ul>
 </div>
@@ -2677,12 +2964,6 @@ Los 4 módulos al completo se organizan en 4 ranks
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>aniyosgi  diquenvsvi gega &#8594; miltar</p>
-</div>
-<div class="paragraph">
-<p>diquenvsvi gega &#8594; go home</p>
-</div>
 </div>
 <div class="sect4">
 <h5 id="_capacidad">Capacidad</h5>
@@ -2725,7 +3006,7 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="ulist">
 <ul>
 <li>
-<p>En arquitecturas limitadas de 8 y 16 bits se utiliza la técnica <em>memory banking</em> para aumentar la capacidad de memoria.</p>
+<p>En arquitecturas limitadas de 8 y 16 bits (Por ejemplo intel 4004) se utiliza la técnica <em>memory banking</em> para aumentar la capacidad de memoria.</p>
 </li>
 <li>
 <p>En lugar de incrementar anchura del bus de direcciones incrementando el tamaño de palabra de la CPU y el bus de la placa base, se añaden más dispositivos de memoria direccionables mediante el mismo bus y un nuevo registro que selecciona uno de los dispositivos de memoria (Bank). No confundir con los bancos de los chips de memoria ni con los bancos de registros.</p>
@@ -2741,13 +3022,70 @@ Los 4 módulos al completo se organizan en 4 ranks
 </div>
 </div>
 <div class="sect3">
-<h4 id="_imagenes">9.3.4. Imagenes</h4>
+<h4 id="_thinkpad_t560">9.3.4. Thinkpad T560</h4>
+<div class="sect4">
+<h5 id="_comandos_3">comandos</h5>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="../../images/dram/images_dram.html">Imagenes</a></p>
+<p>listado</p>
+<div class="listingblock">
+<div class="content">
+<pre>sudo lshw -short -C memory
+sudo lshw -class memory
+lspci | grep -i mem -&gt; memory controller -&gt; chipset
+sudo inxi -m
+sudo cpu-x
+sudo dmidecode -t memory
+sudo dmidecode -t 16
+lsmem
+free
+cat /proc/meminfo
+ https://access.redhat.com/solutions/406773</pre>
+</div>
+</div>
 </li>
 </ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_análisis_2">análisis</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sudo dmidecode -t 17</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>  DDR3
+  Transfer rate 1600 MT/s
+  channel A
+  channel B
+  bank locator bank0
+  bank locator bank2
+  SODIMM DDR3 Synchronous 1600 MHz (0,6 ns)
+  -bank:0 -&gt; slot: ChannelA-DIMM0
+  -bank:2 -&gt; slot: ChannelB-DIMM0</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>slot: A memory slot is each individual plug for memory</p>
+</li>
+<li>
+<p>bank: A bank, is just a grouping of memory slots</p>
+</li>
+<li>
+<p>channel: A channel is a memory bus that is dedicated for data to travel from the CPU to the RAM modules</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>sudo hwinfo | grep -i mem -A 10</code></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -2843,8 +3181,11 @@ Los 4 módulos al completo se organizan en 4 ranks
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="./images/cache/sram_cell_6T.png" alt="sram cell 6T"></span></p>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/cache/sram_cell_6T.png" alt="sram cell 6T">
+</div>
+<div class="title">Figure 79. SRAM-cell</div>
 </div>
 </div>
 <div class="sect4">
@@ -2852,14 +3193,26 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="ulist">
 <ul>
 <li>
-<p>Cuello de Botella von Neumann</p>
+<p>Cuello de Botella von Neumann: la latencia del ciclo de instrucción es mucho menor que la latencia de acceso a la memoria principal &#8594; tiempos muertos de la CPU.</p>
 </li>
 <li>
 <p>Memoria Cache:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Copia de una región o bloque de la memoria principal</p>
+<p>Integrada en la CPU con tiempos de accesos un orden de magnitud menor que la memoria DRAM.</p>
+</li>
+<li>
+<p>Es la Copia de regiones o bloques de la memoria principal.</p>
+</li>
+<li>
+<p>Acierto-Fallo: Si la instrucción/dato a la que apunta la dirección de memoria principal DRAM está en la memoria caché, la cpu captura la instrucción o dato de la Memoria caché interna a la cpu cuyo tiempo de acceso es mucho menor que la memoria externa DRAM.</p>
+</li>
+<li>
+<p>Hit-Miss</p>
+</li>
+<li>
+<p>Ejemplo 4.1 del libro</p>
 </li>
 </ul>
 </div>
@@ -2869,10 +3222,10 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="ulist">
 <ul>
 <li>
-<p>Espacial: bucles, subrutinas, arrays</p>
+<p>Espacial: bucles, subrutinas, arrays &#8594; almacenamiento de instrucciones y datos en direcciones próximas.</p>
 </li>
 <li>
-<p>Temporal: histórico</p>
+<p>Temporal: histórico &#8594; secuencia de acceso a datos e instrucciones en direcciones próximas.</p>
 </li>
 </ul>
 </div>
@@ -2918,30 +3271,32 @@ Los 4 módulos al completo se organizan en 4 ranks
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="./images/cache/cache_cpu_dram.png" alt="Interconexión"></span></p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cache/cache_cpu_dram.png" alt="cache cpu dram">
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="./images/cache/cache_cpu_dram_connection.png" alt="Interconexión"></span></p>
+<div class="title">Figure 80. Interconexión</div>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="./images/cache/cache_mmu_dram.png" alt="MMU"></span></p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cache/cache_cpu_dram_connection.png" alt="cache cpu dram connection">
 </div>
+<div class="title">Figure 81. Interconexión</div>
 </div>
-<div class="sect4">
-<h5 id="_acierto_fallo">Acierto-Fallo</h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Ejemplo 4.1</p>
-</li>
-</ul>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cache/cache_mmu_dram.png" alt="cache mmu dram">
+</div>
+<div class="title">Figure 82. MMU</div>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_estructura_cacheprincipal">Estructura Cache/Principal</h5>
-<div class="paragraph">
-<p><span class="image"><img src="./images/cache/cache_dram_block.png" alt="Estructura de agrupamiento"></span></p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cache/cache_dram_block.png" alt="cache dram block">
+</div>
+<div class="title">Figure 83. Estructura de agrupamiento</div>
 </div>
 <div class="ulist">
 <ul>
@@ -2950,6 +3305,9 @@ Los 4 módulos al completo se organizan en 4 ranks
 </li>
 <li>
 <p>MP: bytes &#8594; palabras &#8594; bloques</p>
+</li>
+<li>
+<p>Se copian bloques de la Memoria Principal en líneas de la Memoria Caché, por lo que, el tamaño de un bloque y de una línea es el mismo.</p>
 </li>
 </ul>
 </div>
@@ -2997,8 +3355,11 @@ Los 4 módulos al completo se organizan en 4 ranks
 </div>
 <div class="sect4">
 <h5 id="_operacion_de_lectura">Operacion de Lectura</h5>
-<div class="paragraph">
-<p><span class="image"><img src="./images/cache/cache_read_operation.png" alt="Read Operation"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_read_operation.png" alt="[align=&quot;center&quot;">
+</div>
+<div class="title">Figure 84. Read Operation (RA: Read Address)</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3048,11 +3409,21 @@ Los 4 módulos al completo se organizan en 4 ranks
 </div>
 </div>
 <div class="sect4">
-<h5 id="_funcion_de_correspondencia">Funcion de Correspondencia</h5>
+<h5 id="_funcion_de_correspondencia_memoria_principalmemoria_caché">Funcion de Correspondencia Memoria_Principal/Memoria_Caché</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Directa, Totalmente Asociativa, Asociativa en Grupo</p>
+<p>Distintas formas de asociar los bloques de la Memoria Principal con las líneas de la Memoria Caché.</p>
+</li>
+<li>
+<p>Tipos de correspondencia Bloque &lt;&#8594; Línea:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Directa (Direct mapping), Totalmente Asociativa (Full associative), Asociativa en Grupo (Set associative)</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -3068,7 +3439,7 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="ulist">
 <ul>
 <li>
-<p><em>m</em>:caché de capacidad 64 KB= 4*2^14 bytes</p>
+<p><em>m</em>:caché de capacidad 64 KB= 4*2<sup>14</sup> bytes</p>
 </li>
 <li>
 <p>MP :</p>
@@ -3081,7 +3452,7 @@ Los 4 módulos al completo se organizan en 4 ranks
 <p>palabras/bloque = 4.</p>
 </li>
 <li>
-<p>capacidad = 16MB = 2<sup>24</sup>bytes= 4*2<sup>22</sup>= 4M bloques</p>
+<p>capacidad = 16MB = 2<sup>24</sup>bytes= 2<sup>24</sup>bytes / (4bytes/bloque)= 2<sup>22</sup> bloques = 4M bloques</p>
 </li>
 </ul>
 </div>
@@ -3090,16 +3461,16 @@ Los 4 módulos al completo se organizan en 4 ranks
 </div>
 </li>
 <li>
-<p>La  capacidad de la caché <em>m</em> son 2^14 líneas = 16K líneas</p>
+<p>La capacidad <em>m</em> de la caché = 4*2<sup>14</sup> bytes / (4bytes/línea) = 2<sup>14</sup> líneas = 16K líneas</p>
 </li>
 <li>
-<p>La relación de capacidad caché/MP es 16K/4M = 1/(2^8)</p>
+<p>Como un bloque de la MP equivale a un línea de la Caché &#8594; La relación de capacidad caché/MP es 16K/4M = 1/(2<sup>8</sup>)</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_directa">Directa</h6>
+<h6 id="_asociación_directa">Asociación Directa</h6>
 <div class="ulist">
 <ul>
 <li>
@@ -3112,23 +3483,32 @@ Los 4 módulos al completo se organizan en 4 ranks
 <li>
 <p>Memoria cache : líneas de palabras</p>
 </li>
+<li>
+<p>El tamaño de un bloque de la memoria principal es el mismo que el tamaño de una línea de la Caché.</p>
+</li>
 </ul>
 </div>
 </li>
 <li>
-<p>Función de correspondecia</p>
+<p>Función de correspondecia de la controladora de la Caché:</p>
 <div class="ulist">
 <ul>
 <li>
 <p>determinista - ningún grado de libertad en la elección de la línea correspondiente a un bloque determinado.</p>
 </li>
+<li>
+<p>el <strong>campo de línea</strong> de la dirección de memoria principal apunta a la única línea de la Caché donde puede estar la palabra que busca la controladora. Si el <strong>campo tag</strong> de la dirección de memoria principal coincide con el campo tag de la línea de la Caché, significa que la palabra buscada está en esa línea y puede ser capturada de la línea caché ya que es una copia del bloque de la memoria principal, se dice que ha habido un "hit". En caso de fallo ("miss") habrá que capturar la palabra de la Memoria Principal, por lo que la latencia será la suma del tiempo empleado en comprobación del tag más el de accesso a la palabra de la memoria principal.</p>
+</li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="./images/cache/cache_directmap.png" alt="Direct Map Structure"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_directmap.png" alt="[align=&quot;center&quot;">
+</div>
+<div class="title">Figure 85. Direct Map Structure</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3156,9 +3536,12 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="ulist">
 <ul>
 <li>
-<p>Caché + Controladora</p>
-<div class="paragraph">
-<p><span class="image"><img src="./images/cache/cache_directmap_controller.png" alt="Direct Map Controller"></span></p>
+<p>Memoria_Caché/Controladora_Caché/Memoria_Principal</p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_directmap_controller.png" alt="[align=&quot;center&quot;">
+</div>
+<div class="title">Figure 86. Direct Map Controller</div>
 </div>
 </li>
 </ul>
@@ -3195,7 +3578,20 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="ulist">
 <ul>
 <li>
-<p>Ejemplo 4.2a</p>
+<p>Apartado a)</p>
+</li>
+<li>
+<p>Formato de la dirección de memoria en campos:</p>
+<div class="listingblock">
+<div class="content">
+<pre>2^2^ palabras -&gt; campo palabra de 2 bits
+2^14^ líneas  -&gt; campo de línea de 14 bis
+resto de bits (24-14-2)=8 -&gt; campo de etiqueta de 8 bits</pre>
+</div>
+</div>
+</li>
+<li>
+<p>&#8230;&#8203;continuar</p>
 </li>
 </ul>
 </div>
@@ -3205,11 +3601,27 @@ Los 4 módulos al completo se organizan en 4 ranks
 </div>
 <div class="sect5">
 <h6 id="_totalmente_asociativa">Totalmente Asociativa</h6>
-<div class="paragraph">
-<p><span class="image"><img src="./images/cache/cache_fullassociative_controller.png" alt="Full Associative Controller"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_fullassociative_controller.png" alt="[align=&quot;center&quot;">
+</div>
+<div class="title">Figure 87. "Full Associative Controller!</div>
 </div>
 <div class="ulist">
 <ul>
+<li>
+<p>La correspondencia totalmente asociativa significa que no hay correspondencia</p>
+<div class="ulist">
+<ul>
+<li>
+<p>NO HAY NORMA &#8594; CADA BLOQUE DE MP PUEDE SER ASIGNADA A CUALQUIER LINEA DE LA CACHE</p>
+</li>
+<li>
+<p>LIBRE: un bloque de MP no tiene asignada ninguna línea específica y el controlador cache puede seleccionar qué línea será asignada a dicho bloque.</p>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>La dirección de memoria tiene únicamente dos campos</p>
 <div class="ulist">
@@ -3232,10 +3644,10 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="ulist">
 <ul>
 <li>
-<p>si éxito, s apunta a la línea que contiene la palabra referenciada y w apunta a la palabra referenciada.</p>
+<p>en caso de éxito, s apunta a la línea que contiene la palabra referenciada y w apunta a la palabra referenciada.</p>
 </li>
 <li>
-<p>si fracaso, s apunta al bloque de la MP que contiene la palabra referenciada y w apunta a la palabra referenciada.</p>
+<p>en caso de fracaso, s apunta al bloque de la MP que contiene la palabra referenciada y w apunta a la palabra referenciada.</p>
 </li>
 </ul>
 </div>
@@ -3243,65 +3655,66 @@ Los 4 módulos al completo se organizan en 4 ranks
 </ul>
 </div>
 </li>
-<li>
-<p>función de correspondencia</p>
-<div class="ulist">
-<ul>
-<li>
-<p>NO HAY NORMA &#8594; CADA BLOQUE DE MP PUEDE SER ASIGNADA A CUALQUIER LINEA DE LA CACHE</p>
-</li>
-<li>
-<p>LIBRE: un bloque de MP no tiene asignada ninguna línea específica y el controlador cache puede seleccionar qué línea será asignada a dicho bloque.</p>
-<div class="ulist">
-<ul>
 <li>
 <p>Formato de direcciones</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>Dirección física de la memoria principal: bloque-palabra</p>
 </li>
 <li>
 <p>Dirección física de la memoria cache: tag-palabra</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Operación de búsqueda de una palabra en la memoria caché.</p>
 </li>
 </ul>
 </div>
 </li>
+<li>
+<p>Operación de búsqueda de una palabra en la memoria caché.</p>
+<div class="ulist">
+<ul>
 <li>
 <p>Determinar los campos de etiqueta y palabra del formato de direcciones de la memoria caché.</p>
 </li>
 <li>
 <p>La palabra puede estar en cualquier línea, por lo que es necesario comparar las etiquetas de todas las líneas</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Diferencia con el mapeo directo:</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
+<p>Diferencia con el mapeo directo:</p>
+<div class="ulist">
+<ul>
+<li>
 <p>el campo de etiqueta tiene s bits &gt;&gt; s-r bits</p>
 </li>
 <li>
-<p>la comparación es entre todas las etiquetas &#8594; hardware complejo &#8594; coste</p>
+<p>la comparación es entre todas las etiquetas (etiquetas de gran longitud) &#8594; hardware complejo &#8594; coste</p>
+</li>
+<li>
+<p>Ejemplo 4.2 : Formato de la dirección de memoria en campos:</p>
+<div class="listingblock">
+<div class="content">
+<pre>2^2^ palabras -&gt; campo palabra de 2 bits
+resto de bits (24-2)=22 -&gt; campo de etiqueta de 22 bits</pre>
+</div>
+</div>
+</li>
+<li>
+<p>&#8230;&#8203;continuar</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_asociativa_por_conjuntos">Asociativa por conjuntos</h6>
-<div class="paragraph">
-<p><span class="image"><img src="./images/cache/cache_setassociative.png" alt="Set Associative"></span></p>
+<h6 id="_asociativa_por_conjuntos">Asociativa por Conjuntos</h6>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_setassociative.png" alt="Set Associative">
+</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3310,9 +3723,12 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="ulist">
 <ul>
 <li>
-<p>La dirección de memoria tiene 3 campos:TAG-SET-WORD &#8594; (s-d)/d/w</p>
+<p>La dirección de memoria tiene 3 campos:TAG-SET-WORD &#8594; (s-d-w)/d/w</p>
 <div class="ulist">
 <ul>
+<li>
+<p>k líneas por conjunto.</p>
+</li>
 <li>
 <p>w bits : orden de la palabra. Con 2<sup>w</sup> palabras formo un bloque</p>
 </li>
@@ -3327,7 +3743,7 @@ Los 4 módulos al completo se organizan en 4 ranks
 <p>d &lt; l :dividimos la cache en v superbloques.</p>
 </li>
 <li>
-<p>Con v=2<sup>d</sup> superbloques de k bloques formo la memoria cache.</p>
+<p>Con v=2<sup>d</sup> superbloques de k líneas/bloque formo la memoria cache.</p>
 </li>
 <li>
 <p>Al número k de líneas de cada superbloque se le denomina VIA (WAY)</p>
@@ -3343,11 +3759,11 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="ulist">
 <ul>
 <li>
-<p>2<sup>s</sup> es el número de bloques que si los agrupo en sets de k bloques tendré en MP 2<sup>t</sup> agrupamientos de 2<sup>d</sup> sets cada uno &#8594;
-2<sup>s</sup>*2<sup>w</sup> = 2<sup>t</sup>*2<sup>d</sup>*2<sup>w</sup> &#8594; 2<sup>s</sup>=2<sup>t</sup>*2<sup>d</sup> &#8594; Nº de bloques= Nº de etiquetas*Nºsets</p>
+<p>2<sup>s</sup> es el número de bloques de la MP,  que si los agrupo en sets de k bloques tendré en la MP 2<sup>t</sup> agrupamientos de 2<sup>d</sup> sets cada uno &#8594;
+2<sup>s</sup>*2<sup>w</sup> = 2<sup>t</sup>*2<sup>d</sup>*k*2<sup>w</sup> &#8594; 2<sup>s</sup>=2<sup>t</sup>*2<sup>d</sup>*k &#8594; Nº de bloques en MP = Nº de gruposX*Nºsets en la Caché*Líneas en el Set</p>
 </li>
 <li>
-<p>s-d bits: nº de bits de la etiqueta : ¿qué representa 2<sup>(s-d)</sup>?</p>
+<p>s-d bits: nº de bits de la etiqueta</p>
 </li>
 </ul>
 </div>
@@ -3389,8 +3805,11 @@ Los 4 módulos al completo se organizan en 4 ranks
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p><span class="image"><img src="./images/cache/cache_setassociative_controller.png" alt="Set Associative Controller"></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_setassociative_controller.png" alt="[align=&quot;center&quot;">
+</div>
+<div class="title">Figure 88. Set Associative Controller</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3420,6 +3839,27 @@ Los 4 módulos al completo se organizan en 4 ranks
 </ul>
 </div>
 </li>
+<li>
+<p>Ejemplo 4.2 : sets con 2 vías</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Formato de la dirección de memoria en campos:</p>
+<div class="listingblock">
+<div class="content">
+<pre>2^2^ palabras -&gt; campo palabra de 2 bits
+k=2
+El número de Sets en la caché -&gt; m / k = 2^14^/2 = 2^13^ conjuntos en la Caché -&gt; d=13 bits
+Etiqueta : resto de bits = (24-13-2)= 9 bits</pre>
+</div>
+</div>
+</li>
+<li>
+<p>&#8230;&#8203;continuar</p>
+</li>
+</ul>
+</div>
+</li>
 </ul>
 </div>
 </div>
@@ -3445,7 +3885,97 @@ Los 4 módulos al completo se organizan en 4 ranks
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_assoc_size.png" alt="[align=&quot;center&quot;">
 </div>
+<div class="title">Figure 89. Probabilidad de éxito en función del tamaño y la función de asociación</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_políticas">9.4.5. Políticas</h4>
+<div class="sect4">
+<h5 id="_reemplazo">Reemplazo</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La política de reemplazo de la controladora de la caché es según la cual cuando se produce un "miss" se tiene que seleccionar un línea de la caché para ser eliminada de la caché y dejar sitio al bloque capturado de la memoria principal. La política más popular es la  least-recently used (LRU) según la cual se descartan primero los elementos menos usados recientemente</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_escritura">Escritura</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Al igual que con la Lectura, con la Escritura la CPU escribe en la Caché, por lo que el contenido de la línea donde se ha realizado la escritura no coincide con el bloque asociado en la Memoria Principal. La política de Escritura consiste en especificar cuando se realiza la copia de la línea de la cache y los bloques de memoria asociados con diferente contenido. La política "Write-Back" consiste en realizar la actualización o copia en el momento en el que se va a descartar dicha línea según la política de Reemplazo.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_thinkpad_l560">9.4.6. Thinkpad L560</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>cpuid | more</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>  --- cache 0 ---
+      cache type                           = data cache (1)
+      cache level                          = 0x1 (1)
+      ways of associativity                = 0x8 (8)
+      number of sets                       = 0x40 (64)
+      (size synth)                         = 32768 (32 KB)
+      ¿tamaño de línea?                    32KB=2^15^Bytes= 64sets x 8líneas/set x n_bytes/línea=512*n=2^9^*n -&gt; n=2^6^=64Bytes
+      Mode: 0x01 (Write Back)
+ --- cache 1 ---
+      cache type                           = instruction cache (2)
+      cache level                          = 0x1 (1)
+      ways of associativity                = 0x8 (8)
+      number of sets                       = 0x40 (64)
+      (size synth)                         = 32768 (32 KB)
+      Mode: 0x01 (Write Back)
+--- cache 2 ---
+      cache type                           = unified cache (3)
+      cache level                          = 0x2 (2)
+      ways of associativity                = 0x4 (4)
+      number of sets                       = 0x400 (1024)
+      (size synth)                         = 262144 (256 KB)
+      ¿tamaño de línea?                    256KB=2^18^Bytes= 1024sets x 4líneas/set x n_bytes/línea=2^12^*n -&gt; n=2^6^=64Bytes
+      --- cache 3 ---
+      cache type                           = unified cache (3)
+      cache level                          = 0x3 (3)
+      ways of associativity                = 0xc (12)
+      number of sets                       = 0x1000 (4096)
+      (size synth)                         = 3145728 (3 MB)</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>getconf LEVEL1_DCACHE_LINESIZE</code></p>
+</li>
+<li>
+<p><code>getconf LEVELTABTAB</code></p>
+</li>
+<li>
+<p><code>sudo hwinfo | grep -i cache -A 10</code></p>
+</li>
+<li>
+<p><code>sudo dmidecode -t 17</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>cache &#8594; write-back instruction</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -4017,13 +4547,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/linux_vm_map.png" alt="MMU">
 </div>
-<div class="title">Figure 61. linux_vm_map</div>
+<div class="title">Figure 90. linux_vm_map</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/linux_vm_map_2.png" alt="MMU">
 </div>
-<div class="title">Figure 62. linux_vm_map_2</div>
+<div class="title">Figure 91. linux_vm_map_2</div>
 </div>
 <div class="ulist">
 <ul>
@@ -4272,7 +4802,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/amd64_virtualformat.png" alt="MMU">
 </div>
-<div class="title">Figure 63. Formato de direcciones amd64</div>
+<div class="title">Figure 92. Formato de direcciones amd64</div>
 </div>
 </div>
 </div>
@@ -4441,13 +4971,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/vm_concept.png" alt="MMU">
 </div>
-<div class="title">Figure 64. MMU</div>
+<div class="title">Figure 93. MMU</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/vm_table.png" alt="MMU">
 </div>
-<div class="title">Figure 65. MMU</div>
+<div class="title">Figure 94. MMU</div>
 </div>
 </div>
 <div class="sect4">
@@ -4478,7 +5008,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/vm_table_protection.png" alt="MMU">
 </div>
-<div class="title">Figure 66. Protección</div>
+<div class="title">Figure 95. Protección</div>
 </div>
 <div class="ulist">
 <ul>
@@ -4494,7 +5024,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/formato_direcciones.png" alt="MMU">
 </div>
-<div class="title">Figure 67. Formato de Direcciones</div>
+<div class="title">Figure 96. Formato de Direcciones</div>
 </div>
 </div>
 <div class="sect4">
@@ -4528,13 +5058,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/table_multiple.png" alt="MMU" height="400">
 </div>
-<div class="title">Figure 68. Tabla de dos niveles</div>
+<div class="title">Figure 97. Tabla de dos niveles</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/table_level_k.png" alt="MMU">
 </div>
-<div class="title">Figure 69. Tabla de K niveles</div>
+<div class="title">Figure 98. Tabla de K niveles</div>
 </div>
 </div>
 <div class="sect4">
@@ -4679,13 +5209,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/virtualtoframe.png" alt="MMU">
 </div>
-<div class="title">Figure 70. Traducción Virtual &#8594; Física</div>
+<div class="title">Figure 99. Traducción Virtual &#8594; Física</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/mmu_hit.png" alt="MMU" height="200">
 </div>
-<div class="title">Figure 71. Resultado con éxito</div>
+<div class="title">Figure 100. Resultado con éxito</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -4710,7 +5240,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/mmu_fault.png" alt="MMU" height="300">
 </div>
-<div class="title">Figure 72. Resultado con fracaso</div>
+<div class="title">Figure 101. Resultado con fracaso</div>
 </div>
 </div>
 <div class="sect4">
@@ -4739,13 +5269,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/tlb_connection.png" alt="MMU">
 </div>
-<div class="title">Figure 73. Operación con TLB</div>
+<div class="title">Figure 102. Operación con TLB</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/tlb_entry.png" alt="MMU" height="100">
 </div>
-<div class="title">Figure 74. Formato Virtual con TLB</div>
+<div class="title">Figure 103. Formato Virtual con TLB</div>
 </div>
 <div class="ulist">
 <ul>
@@ -4771,7 +5301,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/tabla_cache_ejercicio.png" alt="MMU">
 </div>
-<div class="title">Figure 75. TLB y d-cache </div>
+<div class="title">Figure 104. TLB y d-cache </div>
 </div>
 <div class="ulist">
 <ul>
@@ -4935,7 +5465,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/formato_direcciones.png" alt="MMU">
 </div>
-<div class="title">Figure 76. Formato de Direcciones</div>
+<div class="title">Figure 105. Formato de Direcciones</div>
 </div>
 </li>
 </ol>
@@ -5170,31 +5700,31 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/corei7_virtual_memory.png" alt="MMU">
 </div>
-<div class="title">Figure 77. Memoria Core i7</div>
+<div class="title">Figure 106. Memoria Core i7</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_mmu.png" alt="MMU">
 </div>
-<div class="title">Figure 78. Operación MMU</div>
+<div class="title">Figure 107. Operación MMU</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_tlb_entry_123.png" alt="MMU">
 </div>
-<div class="title">Figure 79. Formato para las tablas de los tres primeros niveles</div>
+<div class="title">Figure 108. Formato para las tablas de los tres primeros niveles</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_tlb_entry_4.png" alt="MMU">
 </div>
-<div class="title">Figure 80. Formato de la tabla del 4º nivel </div>
+<div class="title">Figure 109. Formato de la tabla del 4º nivel </div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_address_translation.png" alt="MMU">
 </div>
-<div class="title">Figure 81. Linux: 4 niveles</div>
+<div class="title">Figure 110. Linux: 4 niveles</div>
 </div>
 </div>
 </div>
@@ -5247,7 +5777,7 @@ Key to Flags:
 </div>
 </div>
 <div class="sect4">
-<h5 id="_reemplazo">Reemplazo</h5>
+<h5 id="_reemplazo_2">Reemplazo</h5>
 <div class="ulist">
 <ul>
 <li>
