@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-11-05</span>
+<span id="revdate">2022-11-10</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -297,7 +297,9 @@ pre.rouge {
 </li>
 <li><a href="_unidad_de_memoria.html#_registros_2">9.2. Registros</a>
 <ul class="sectlevel3">
-<li><a href="_unidad_de_memoria.html#_arquitectura_amd64_3">9.2.1. Arquitectura amd64</a>
+<li><a href="_unidad_de_memoria.html#_isa_4">9.2.1. ISA</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_arquitectura_amd64_3">9.2.2. Arquitectura amd64</a>
 </li>
 </ul>
 </li>
@@ -739,7 +741,23 @@ pre.rouge {
 <div class="sect2">
 <h3 id="_registros_2">9.2. Registros</h3>
 <div class="sect3">
-<h4 id="_arquitectura_amd64_3">9.2.1. Arquitectura amd64</h4>
+<h4 id="_isa_4">9.2.1. ISA</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Los  registros son unidades de memoria de capacidad una única palabra (instrucción, dato, dirección de memoria, resultado temporal, etc ) y de latencia del orden de 1 ns. Nominación típica de estos registros son el Contador de Programa, el Registro de Instrucción, el Acumulador, el Buffer de Datos, etc&#8230;&#8203;. Son utilizados por la Unidad de Control en la ruta de datos de la microarquitectura de la CPU como parte fundamental del ciclo de instrucción. Estos registros no  son accesibles por el programador.</p>
+</li>
+<li>
+<p>Los registros accesibles por el programador son el nivel L0 de la jerarquía de memoria de la arquitectura de la computadora. Son conocidos los Registros de Propósito General referenciados en el campo de dirección del formato de instrucción de la Arquitectura del Repertorio de Instrucciones (ISA). En el caso de la arquitectura x86-32 están los registros de propósito general de EXtensión: EXA, EXB, EXC, ESP, ESI, etc&#8230;&#8203;. (extensión de la arquitectura anterior de 16 bits AX,BX,CX, etc&#8230;&#8203;).</p>
+</li>
+<li>
+<p>Debido a que los  registros forman parte de la microarquitectura de la cpu, este apartado se podría estudiar también dentro del tema dedicado a la CPU.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_arquitectura_amd64_3">9.2.2. Arquitectura amd64</h4>
 <div class="imageblock">
 <div class="content">
 <img src="./images/instrucciones_representacion/registers_1200x800.png" alt="registers 1200x800">
@@ -1488,6 +1506,16 @@ pre.rouge {
 <li>
 <p>Mediante un DEMULTIPLEXOR de 30 entradas y 2<sup>30</sup> salidas podemos seleccionar 1 de las celdas</p>
 </li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/dram/demux.png" alt="demux">
+</div>
+<div class="title">Figure 72. Demultiplexor/Decoder</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Un demultiplexor de 2<sup>30</sup> salidas es muy complejo y costoso</p>
 </li>
@@ -1548,7 +1576,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/dram/array1.png" alt="array1">
 </div>
-<div class="title">Figure 72. Array de celdas</div>
+<div class="title">Figure 73. Array de celdas</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1573,7 +1601,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/dram/array2.png" alt="array2">
 </div>
-<div class="title">Figure 73. Array de celdas 2D</div>
+<div class="title">Figure 74. Array de celdas 2D</div>
 </div>
 <div class="ulist">
 <ul>
@@ -2196,7 +2224,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/dram/rank1.png" alt="rank1">
 </div>
-<div class="title">Figure 74. Rank: agrupamiento de chips en el módulo de memoria DIMM</div>
+<div class="title">Figure 75. Rank: agrupamiento de chips en el módulo de memoria DIMM</div>
 </div>
 <div class="paragraph">
 <p><strong>RANK</strong>:</p>
@@ -2221,7 +2249,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/dram/rank2.png" alt="rank2">
 </div>
-<div class="title">Figure 75. Rank</div>
+<div class="title">Figure 76. Rank</div>
 </div>
 </div>
 <div class="sect5">
@@ -2253,7 +2281,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/dram/bank2.png" alt="bank2">
 </div>
-<div class="title">Figure 76. Chipx16</div>
+<div class="title">Figure 77. Chipx16</div>
 </div>
 <div class="ulist">
 <ul>
@@ -2339,7 +2367,7 @@ pre.rouge {
 <div class="content">
 <img src="./images/dram/bank1.png" alt="bank1">
 </div>
-<div class="title">Figure 77. Bank: Array en el chip de memoria DIMM</div>
+<div class="title">Figure 78. Bank: Array en el chip de memoria DIMM</div>
 </div>
 <div class="paragraph">
 <p>Tres chips. Cada Chip esta formado por un <strong>BANCO</strong>. Un banco es un agrupamiento de Arrays.</p>
@@ -2467,7 +2495,7 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="content">
 <img src="./images/dram/page.png" alt="page">
 </div>
-<div class="title">Figure 78. Page</div>
+<div class="title">Figure 79. Page</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3185,7 +3213,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/sram_cell_6T.png" alt="sram cell 6T">
 </div>
-<div class="title">Figure 79. SRAM-cell</div>
+<div class="title">Figure 80. SRAM-cell</div>
 </div>
 </div>
 <div class="sect4">
@@ -3275,19 +3303,19 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_cpu_dram.png" alt="cache cpu dram">
 </div>
-<div class="title">Figure 80. Interconexión</div>
+<div class="title">Figure 81. Interconexión</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/cache/cache_cpu_dram_connection.png" alt="cache cpu dram connection">
 </div>
-<div class="title">Figure 81. Interconexión</div>
+<div class="title">Figure 82. Interconexión</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/cache/cache_mmu_dram.png" alt="cache mmu dram">
 </div>
-<div class="title">Figure 82. MMU</div>
+<div class="title">Figure 83. MMU</div>
 </div>
 </div>
 <div class="sect4">
@@ -3296,7 +3324,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_dram_block.png" alt="cache dram block">
 </div>
-<div class="title">Figure 83. Estructura de agrupamiento</div>
+<div class="title">Figure 84. Estructura de agrupamiento</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3359,7 +3387,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_read_operation.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 84. Read Operation (RA: Read Address)</div>
+<div class="title">Figure 85. Read Operation (RA: Read Address)</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3508,7 +3536,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_directmap.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 85. Direct Map Structure</div>
+<div class="title">Figure 86. Direct Map Structure</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3541,7 +3569,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_directmap_controller.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 86. Direct Map Controller</div>
+<div class="title">Figure 87. Direct Map Controller</div>
 </div>
 </li>
 </ul>
@@ -3605,7 +3633,7 @@ resto de bits (24-14-2)=8 -&gt; campo de etiqueta de 8 bits</pre>
 <div class="content">
 <img src="./images/cache/cache_fullassociative_controller.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 87. "Full Associative Controller!</div>
+<div class="title">Figure 88. "Full Associative Controller!</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3809,7 +3837,7 @@ resto de bits (24-2)=22 -&gt; campo de etiqueta de 22 bits</pre>
 <div class="content">
 <img src="./images/cache/cache_setassociative_controller.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 88. Set Associative Controller</div>
+<div class="title">Figure 89. Set Associative Controller</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3889,7 +3917,7 @@ Etiqueta : resto de bits = (24-13-2)= 9 bits</pre>
 <div class="content">
 <img src="./images/cache/cache_assoc_size.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 89. Probabilidad de éxito en función del tamaño y la función de asociación</div>
+<div class="title">Figure 90. Probabilidad de éxito en función del tamaño y la función de asociación</div>
 </div>
 </div>
 </div>
@@ -4547,13 +4575,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/linux_vm_map.png" alt="MMU">
 </div>
-<div class="title">Figure 90. linux_vm_map</div>
+<div class="title">Figure 91. linux_vm_map</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/linux_vm_map_2.png" alt="MMU">
 </div>
-<div class="title">Figure 91. linux_vm_map_2</div>
+<div class="title">Figure 92. linux_vm_map_2</div>
 </div>
 <div class="ulist">
 <ul>
@@ -4802,7 +4830,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/amd64_virtualformat.png" alt="MMU">
 </div>
-<div class="title">Figure 92. Formato de direcciones amd64</div>
+<div class="title">Figure 93. Formato de direcciones amd64</div>
 </div>
 </div>
 </div>
@@ -4971,13 +4999,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/vm_concept.png" alt="MMU">
 </div>
-<div class="title">Figure 93. MMU</div>
+<div class="title">Figure 94. MMU</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/vm_table.png" alt="MMU">
 </div>
-<div class="title">Figure 94. MMU</div>
+<div class="title">Figure 95. MMU</div>
 </div>
 </div>
 <div class="sect4">
@@ -5008,7 +5036,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/vm_table_protection.png" alt="MMU">
 </div>
-<div class="title">Figure 95. Protección</div>
+<div class="title">Figure 96. Protección</div>
 </div>
 <div class="ulist">
 <ul>
@@ -5024,7 +5052,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/formato_direcciones.png" alt="MMU">
 </div>
-<div class="title">Figure 96. Formato de Direcciones</div>
+<div class="title">Figure 97. Formato de Direcciones</div>
 </div>
 </div>
 <div class="sect4">
@@ -5058,13 +5086,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/table_multiple.png" alt="MMU" height="400">
 </div>
-<div class="title">Figure 97. Tabla de dos niveles</div>
+<div class="title">Figure 98. Tabla de dos niveles</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/table_level_k.png" alt="MMU">
 </div>
-<div class="title">Figure 98. Tabla de K niveles</div>
+<div class="title">Figure 99. Tabla de K niveles</div>
 </div>
 </div>
 <div class="sect4">
@@ -5209,13 +5237,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/virtualtoframe.png" alt="MMU">
 </div>
-<div class="title">Figure 99. Traducción Virtual &#8594; Física</div>
+<div class="title">Figure 100. Traducción Virtual &#8594; Física</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/mmu_hit.png" alt="MMU" height="200">
 </div>
-<div class="title">Figure 100. Resultado con éxito</div>
+<div class="title">Figure 101. Resultado con éxito</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -5240,7 +5268,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/mmu_fault.png" alt="MMU" height="300">
 </div>
-<div class="title">Figure 101. Resultado con fracaso</div>
+<div class="title">Figure 102. Resultado con fracaso</div>
 </div>
 </div>
 <div class="sect4">
@@ -5269,13 +5297,13 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/tlb_connection.png" alt="MMU">
 </div>
-<div class="title">Figure 102. Operación con TLB</div>
+<div class="title">Figure 103. Operación con TLB</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/tlb_entry.png" alt="MMU" height="100">
 </div>
-<div class="title">Figure 103. Formato Virtual con TLB</div>
+<div class="title">Figure 104. Formato Virtual con TLB</div>
 </div>
 <div class="ulist">
 <ul>
@@ -5301,7 +5329,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/tabla_cache_ejercicio.png" alt="MMU">
 </div>
-<div class="title">Figure 104. TLB y d-cache </div>
+<div class="title">Figure 105. TLB y d-cache </div>
 </div>
 <div class="ulist">
 <ul>
@@ -5465,7 +5493,7 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/formato_direcciones.png" alt="MMU">
 </div>
-<div class="title">Figure 105. Formato de Direcciones</div>
+<div class="title">Figure 106. Formato de Direcciones</div>
 </div>
 </li>
 </ol>
@@ -5700,31 +5728,31 @@ Key to Flags:
 <div class="content">
 <img src="./images/memvirtual/corei7_virtual_memory.png" alt="MMU">
 </div>
-<div class="title">Figure 106. Memoria Core i7</div>
+<div class="title">Figure 107. Memoria Core i7</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_mmu.png" alt="MMU">
 </div>
-<div class="title">Figure 107. Operación MMU</div>
+<div class="title">Figure 108. Operación MMU</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_tlb_entry_123.png" alt="MMU">
 </div>
-<div class="title">Figure 108. Formato para las tablas de los tres primeros niveles</div>
+<div class="title">Figure 109. Formato para las tablas de los tres primeros niveles</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_tlb_entry_4.png" alt="MMU">
 </div>
-<div class="title">Figure 109. Formato de la tabla del 4º nivel </div>
+<div class="title">Figure 110. Formato de la tabla del 4º nivel </div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memvirtual/corei7_address_translation.png" alt="MMU">
 </div>
-<div class="title">Figure 110. Linux: 4 niveles</div>
+<div class="title">Figure 111. Linux: 4 niveles</div>
 </div>
 </div>
 </div>
