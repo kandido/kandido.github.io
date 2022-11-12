@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-11-11</span>
+<span id="revdate">2022-11-12</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -357,25 +357,9 @@ pre.rouge {
 </li>
 </ul>
 </li>
-<li><a href="_procesador_central.html#_skylake_u">7.11. Skylake-U</a>
+<li><a href="_procesador_central.html#_microarquitecturas_modernas">7.11. Microarquitecturas Modernas</a>
 </li>
-<li><a href="_procesador_central.html#_arm_cortex_a76cortex_a55">7.12. ARM Cortex-A76/Cortex-A55</a>
-<ul class="sectlevel3">
-<li><a href="_procesador_central.html#_intro_2">7.12.1. Intro</a>
-</li>
-<li><a href="_procesador_central.html#_teléfono_huawei_p30_pro">7.12.2. Teléfono Huawei P30 Pro</a>
-</li>
-<li><a href="_procesador_central.html#_isa_cortex_a76cortex_a55">7.12.3. ISA Cortex-A76/Cortex-A55</a>
-</li>
-<li><a href="_procesador_central.html#_multicore">7.12.4. Multicore</a>
-</li>
-<li><a href="_procesador_central.html#_microarquitectura_cortex_a76">7.12.5. Microarquitectura Cortex-A76</a>
-</li>
-<li><a href="_procesador_central.html#_microarquitectura_cortex_a55">7.12.6. Microarquitectura Cortex-A55</a>
-</li>
-</ul>
-</li>
-<li><a href="_procesador_central.html#_ejercicios">7.13. Ejercicios</a>
+<li><a href="_procesador_central.html#_ejercicios">7.12. Ejercicios</a>
 </li>
 </ul>
 </li>
@@ -2630,183 +2614,27 @@ La cpu y el chipset están en el mismo chip pero en "dies" diferentes. Cada uno 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_skylake_u">7.11. Skylake-U</h3>
-<div class="imageblock text-center">
-<div class="content">
-<img src="./images/cpu/skylake_block_diagram.svg.png" alt="skylake block diagram.svg" width="700" height="400">
-</div>
-<div class="title">Figure 53. Skylake microarchitecture</div>
-</div>
+<h3 id="_microarquitecturas_modernas">7.11. Microarquitecturas Modernas</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Front End &#8594; Unidad de Control</p>
+<p>En el <a href="_apéndice_unidad_cpu.html#apendice_cpu">Apéndice</a> se comentan las siguientes microarquitecturas:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Computadora ThinkPad TL560:  microarquitectura Skylake de la CPU intel x86-64</p>
 </li>
 <li>
-<p>Observar dos rutas de operaciones completamente diferentes: MOP y uOP.</p>
+<p>Teléfono Huawei 30 Pro: ARM Cortex-A76 y ARM Cortex-A55</p>
 </li>
-<li>
-<p>Concepto de out-of-order execution (OoO) y microoperación (uOP):</p>
-<div class="listingblock">
-<div class="content">
-<pre>The microprocessors with out-of-order execution are translating all instructions into microoperations - abbreviated µops or uops. A simple instruction such as ADD EAX,EBX generates only one µop, while an instruction like ADD EAX,[MEM1] may generate two: one for reading from memory into a temporary (unnamed) register, and one for adding the contents of the temporary register to EAX. The instruction ADD [MEM1],EAX may
-generate three µops: one for reading from memory, one for adding, and one for writing the result back to memory. The advantage of this is that the µops can be executed out of order.
-Example:
-	; Example 2.1. Out of order processing
-	mov eax, [mem1]
-	imul eax, 5
-	add eax, [mem2]
-	mov [mem3], eax
-Here, the ADD EAX,[MEM2] instruction is split into two µops. The advantage of this is that the microprocessor can fetch the value of [MEM2] at the SAME TIME as it is doing the multiplication. If none of the data are in the cache, then the microprocessor will start to fetch [MEM2] immediately after starting to fetch [MEM1], and long before the multiplication can start.</pre>
-</div>
+</ul>
 </div>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_arm_cortex_a76cortex_a55">7.12. ARM Cortex-A76/Cortex-A55</h3>
-<div class="sect3">
-<h4 id="_intro_2">7.12.1. Intro</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Arm_(company" class="bare">https://en.wikipedia.org/wiki/Arm_(company</a>)</p>
-</li>
-<li>
-<p>ARM : Acorn (bellota) RISC Machine &#8594; Advanced RISC Machines</p>
-</li>
-<li>
-<p>Arquitectura RISC.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_teléfono_huawei_p30_pro">7.12.2. Teléfono Huawei P30 Pro</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>El teléfono Huawei P30 Pro modelo VOG-L29 incorpora un MultiProcessor System On Chip (MPSoC) Huawei <strong>Kirin 980</strong>. El SoC integra tanto los cores como el chipset.</p>
-<div class="listingblock">
-<div class="content">
-<pre>August 31, 2018
-Kirin 980 is a 64-bit high-performance mobile ARM LTE SoC designed by HiSilicon and introduced in late 2018. Fabricated on TSMC's 7 nm process, the 980 incorporates four big Cortex-A76 cores operating at up to 2.6 GHz along with four little Cortex-A55 cores operating at up to 1.8 GHz. This SoC has an LTE modem supporting 1.4 Gbps download (Cat21), incorporates an ARM Mali-G76, and supports LPDDR4X-4266 memory.</pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="./images/cpu/Huawei-HiSilicon-Kirin-980-MPSoC.png" alt="Huawei HiSilicon Kirin 980 MPSoC" width="400" height="300">
-</div>
-<div class="title">Figure 54. Kirin MPSoC</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_isa_cortex_a76cortex_a55">7.12.3. ISA Cortex-A76/Cortex-A55</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>Arquitectura  ISA ARMv8.2-A</p>
-<div class="listingblock">
-<div class="content">
-<pre>64 bits
-ver manual ISA ARMv8.2-A de la compañia ARM</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Microarquitectura</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_multicore">7.12.4. Multicore</h4>
-<div class="ulist">
-<ul>
-<li>
-<p>8 núcleos</p>
-</li>
-<li>
-<p>arquitectura heterogénea big.LITTLE: 2 tipos de core &gt; 4+4</p>
-<div class="ulist">
-<ul>
-<li>
-<p>big cores : alto rendimiento y consumo moderado &#8594; Cortex-A76</p>
-</li>
-<li>
-<p>LITTLE.cores: rendimiento moderado y bajo consumo &#8594; Cortex-A55</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_microarquitectura_cortex_a76">7.12.5. Microarquitectura Cortex-A76</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
-</li>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/ARM_Cortex-A76" class="bare">https://en.wikipedia.org/wiki/ARM_Cortex-A76</a></p>
-<div class="listingblock">
-<div class="content">
-<pre>The Cortex-A76 frontend is a 4-wide decode out-of-order superscalar design. It can fetch 4 instructions per cycle. And[clarification needed] rename and dispatch 4 Mops, and 8 µops per cycle. The out-of-order window size is 128 entries. The backend is 8 execution ports with a pipeline depth of 13 stages and the execution latencies of 11 stages</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>superscalar : ruta de datos de 4 vías (4-way)</p>
-</li>
-<li>
-<p>pipeline: 13 etapas</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_microarquitectura_cortex_a55">7.12.6. Microarquitectura Cortex-A55</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/ARM_Cortex-A55" class="bare">https://en.wikipedia.org/wiki/ARM_Cortex-A55</a></p>
-</li>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
-<div class="ulist">
-<ul>
-<li>
-<p>superscalar: ruta de datos de 2 vías (2-way)</p>
-</li>
-<li>
-<p>pipeline: 8 etapas</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejercicios">7.13. Ejercicios</h3>
+<h3 id="_ejercicios">7.12. Ejercicios</h3>
 <div class="ulist">
 <ul>
 <li>

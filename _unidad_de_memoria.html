@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-11-11</span>
+<span id="revdate">2022-11-12</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -114,7 +114,9 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 <li><a href="_unidad_de_memoria.html#_políticas">9.4.5. Políticas</a>
 </li>
-<li><a href="_unidad_de_memoria.html#_thinkpad_l560">9.4.6. Thinkpad L560</a>
+<li><a href="_unidad_de_memoria.html#_ejemplo_de_optimización">9.4.6. Ejemplo de Optimización</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_thinkpad_l560">9.4.7. Thinkpad L560</a>
 </li>
 </ul>
 </li>
@@ -519,7 +521,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="content">
 <img src="./images/memoria/MemoryHierarchy.png" alt="MemoryHierarchy" width="600" height="400">
 </div>
-<div class="title">Figure 61. Memory Hierarchy</div>
+<div class="title">Figure 59. Memory Hierarchy</div>
 </div>
 </div>
 </div>
@@ -547,19 +549,19 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="content">
 <img src="./images/instrucciones_representacion/registers_1200x800.png" alt="registers 1200x800">
 </div>
-<div class="title">Figure 62. x86 registers</div>
+<div class="title">Figure 60. x86 registers</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/memoria/Table_of_x86_Registers_svg.png" alt="Table of x86 Registers svg" width="1000" height="500">
 </div>
-<div class="title">Figure 63. Registers x86</div>
+<div class="title">Figure 61. Registers x86</div>
 </div>
 <div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/memoria/instruction_extensions_simd.png" alt="instruction extensions simd" width="600" height="300">
 </div>
-<div class="title">Figure 64. SIMD instructions evolution</div>
+<div class="title">Figure 62. SIMD instructions evolution</div>
 </div>
 <div class="ulist">
 <ul>
@@ -887,7 +889,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <p>Un programa almacenado en una memoria secundaria (disco externo) ha de ser cargado por el sistema operativo en la Memoria Principal para poder ser ejecutado por la CPU. La Unidad de Control captura instrucciones/datos que están en la memoria principal.</p>
 </li>
 <li>
-<p>Las operaciones que realiza la CPU con la memoria principal son la LECTURA Y la ESCRITURA (Read/Write) de datos e instrucciones binarias.</p>
+<p>Las operaciones que realiza la CPU con la memoria principal son la <strong>LECTURA</strong> y la <strong>ESCRITURA</strong> (Read/Write) de datos e instrucciones binarias.</p>
 </li>
 <li>
 <p>RAM:</p>
@@ -963,7 +965,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="content">
 <img src="./images/dram/tarjeta_micron_1.png" alt="tarjeta micron 1">
 </div>
-<div class="title">Figure 65. System</div>
+<div class="title">Figure 63. Dual Inline Memory Module (DIMM)</div>
 </div>
 <div class="paragraph">
 <p>Cada módulo se inserta en un slot de la placa base de la computadora.</p>
@@ -972,16 +974,16 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="content">
 <img src="./images/dram/tarjeta_micron_2.png" alt="tarjeta micron 2">
 </div>
-<div class="title">Figure 66. System</div>
+<div class="title">Figure 64. Dual Inline Memory Module (DIMM)</div>
 </div>
 <div class="paragraph">
-<p>Una tarjeta es un agrupamiento por chips. Los chips suelen estar soldados por ambas caras de la tarjeta.</p>
+<p>Una tarjeta ó Módulo es un agrupamiento por chips. Los chips suelen estar soldados por ambas caras del módulo DIMM.</p>
 </div>
 <div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/dram/tarjeta_esquema.png" alt="tarjeta esquema">
 </div>
-<div class="title">Figure 67. System</div>
+<div class="title">Figure 65. Dual Inline Memory Module (DIMM)</div>
 </div>
 <div class="sect4">
 <h5 id="_organización">Organización</h5>
@@ -1105,9 +1107,9 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 <div class="imageblock text-center text-center">
 <div class="content">
-<img src="./images/dram/images/dram/system.png" alt="system">
+<img src="./images/dram/system.png" alt="system">
 </div>
-<div class="title">Figure 68. System</div>
+<div class="title">Figure 66. Computer System</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1149,7 +1151,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="content">
 <img src="./images/dram/System_Bus_Structure_RAM_Controller.gif" alt="System Bus Structure RAM Controller">
 </div>
-<div class="title">Figure 69. System</div>
+<div class="title">Figure 67. Memory Controller</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1227,13 +1229,13 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="content">
 <img src="./images/dram/cell_1t1c.png" alt="cell 1t1c">
 </div>
-<div class="title">Figure 70. cell_1t1c</div>
+<div class="title">Figure 68. cell_1t1c</div>
 </div>
 <div class="imageblock text-center text-center">
 <div class="content">
 <img src="./images/dram/cell_capacitor.png" alt="cell capacitor">
 </div>
-<div class="title">Figure 71. cell_capacitor</div>
+<div class="title">Figure 69. cell_capacitor</div>
 </div>
 </div>
 <div class="sect4">
@@ -1328,7 +1330,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="content">
 <img src="./images/dram/demux.png" alt="demux">
 </div>
-<div class="title">Figure 72. Demultiplexor/Decoder</div>
+<div class="title">Figure 70. Demultiplexor/Decoder</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1392,7 +1394,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="content">
 <img src="./images/dram/array1.png" alt="array1">
 </div>
-<div class="title">Figure 73. Array de celdas</div>
+<div class="title">Figure 71. Array de celdas</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1429,7 +1431,7 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <div class="content">
 <img src="./images/dram/array2.png" alt="array2">
 </div>
-<div class="title">Figure 74. Array de celdas 2D</div>
+<div class="title">Figure 72. Array de celdas 2D</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1611,9 +1613,12 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <div class="ulist">
 <ul>
 <li>
-<p>Module:</p>
+<p>Dual Inline Memory Module (DIMM):</p>
 <div class="ulist">
 <ul>
+<li>
+<p>Dual Inline significa que la tarjeta o módulo tiene conectores en ambas caras de la tarjeta.</p>
+</li>
 <li>
 <p>Proporciona la conexión física al bus de datos ( palabra de 64 bits), al bus de direcciones, al bus de control y al bus de chip-select (CS)  del BUS de MEMORIA.</p>
 </li>
@@ -1661,7 +1666,7 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <div class="content">
 <img src="./images/dram/rank1.png" alt="rank1">
 </div>
-<div class="title">Figure 75. Rank: agrupamiento de chips en el módulo de memoria DIMM</div>
+<div class="title">Figure 73. Rank: agrupamiento de chips en el módulo de memoria DIMM</div>
 </div>
 <div class="paragraph">
 <p><strong>RANK</strong>:</p>
@@ -1686,7 +1691,7 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <div class="content">
 <img src="./images/dram/rank2.png" alt="rank2">
 </div>
-<div class="title">Figure 76. Rank</div>
+<div class="title">Figure 74. Rank</div>
 </div>
 </div>
 <div class="sect5">
@@ -1709,6 +1714,9 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <li>
 <p>Esta formado por <em>MULTIPLES bancos</em>, un <em>buffer i/o</em>, un <em>demux</em> de filas, un <em>demux</em> de columnas y la lógica de control.</p>
 </li>
+<li>
+<p>Cada Banco tiene un registro denominado ROW-BUFFER.</p>
+</li>
 </ul>
 </div>
 </li>
@@ -1718,7 +1726,7 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <div class="content">
 <img src="./images/dram/bank2.png" alt="bank2">
 </div>
-<div class="title">Figure 77. Chipx16</div>
+<div class="title">Figure 75. Chipx16</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1726,10 +1734,7 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <p>Chipx16 formado por 4 bancos y 1 buffer i/o de 16 bits.</p>
 </li>
 <li>
-<p>Cada banco proporciona 16 bits al buffer i/o.</p>
-</li>
-<li>
-<p>Cada banco son 16 arrays 2D &#8594; el 16 es la 3D</p>
+<p>Cada banco son 16 arrays 2D &#8594; el 16 es la 3D, y 8196x512 es cada array 2D</p>
 </li>
 <li>
 <p>Cada array tiene 8192 filas y 512 columnas. 2<sup>13</sup> filas x  2<sup>9</sup> columnas = 2<sup>22</sup> celdas</p>
@@ -1804,7 +1809,7 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <div class="content">
 <img src="./images/dram/bank1.png" alt="bank1">
 </div>
-<div class="title">Figure 78. Bank: Array en el chip de memoria DIMM</div>
+<div class="title">Figure 76. Bank: Array en el chip de memoria DIMM</div>
 </div>
 <div class="paragraph">
 <p>Tres chips. Cada Chip esta formado por un <strong>BANCO</strong>. Un banco es un agrupamiento de Arrays.</p>
@@ -1850,6 +1855,25 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 </div>
 </div>
 <div class="sect5">
+<h6 id="_página_row_buffer">Página / Row-Buffer</h6>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/dram/page.png" alt="page">
+</div>
+<div class="title">Figure 77. Page</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>No confundir con las páginas virtuales del Sistema Operativo</p>
+</li>
+<li>
+<p>Una página abarca múltiples filas del mismo banco. Al conjunto de la misma fila de todos los arrays del banco se denomina <strong>página</strong> (una página está formada por filas). Por lo tanto el contenido del ROW-BUFFER es el de un página. Al row-buffer se descargan más columnas que la requerida, de esta forma el row-buffer hace de buffer guardando datos adyacentes al solicitado. En el siguiente acceso puede que el dato requerido ya esté en el buffer y la latencia de la lectura es mucho más rápida. Por ejemplo en el caso de querer leer un array si el array ha sido almacenado en un página se podría leer toda la página con un solo acceso a las celdas y posteriormente transferir el contenido del buffer por ráfagas.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
 <h6 id="_array">Array</h6>
 <div class="ulist">
 <ul>
@@ -1879,6 +1903,85 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <ul>
 <li>
 <p>Una celda de memoria almacena la información de 1 o más (2,4,8,16) bits. Inicialmente, mientras no se especifique lo contrario, almacenará un único bit.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_lectura_de_una_palabra_de_la_memoria_mp">LECTURA de una palabra de la memoria MP</h5>
+<div class="sect5">
+<h6 id="_selección_de_chipbancofilascolumna">Selección de Chip/Banco/Filas/Columna</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Proceso de Lectura dentro de UN chip:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Se selecciona primero UN banco. A continuación se selecciona una fila, la misma fila de todos los arrays de ese banco. En este ejemplo serían 16 filas de 512 columnas cada fila. Las 16 filas se vuelcan en el ROW-BUFFER del banco seleccionado. En este caso el ROW-BUFFER tiene 16x512 bits, es decir, 2<sup>13</sup> bits, 8Kbits</p>
+</li>
+<li>
+<p>A continuación, del ROW-BUFFER, se selecciona UNA columna de cada fila, es decir, de los 8Kbits se seleccionan 16 bits que son transferidos al Buffer i/o del chip.</p>
+</li>
+<li>
+<p>El dato a transferir por el bus de datos puede estar formado por el dato de uno o más chips. En este ejemplo si el bus de datos es de de 16 bits la salida del chipx16 es suficiente. En el caso de un bus de datos de 64 bits habría que concatenar las salidas i/o de 4 Chipsx16.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_precargaopenrow">Precarga/OpenRow</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Fases:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la dirección de memoria proporcionada por la CPU es convertida en dirección física por el circuito MMU</p>
+</li>
+<li>
+<p>El circuito MP debe de descomponer la dirección física de memoria en los códigos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>RANK-BANK-ROW-COLUMN</p>
+</li>
+<li>
+<p>Los códigos están asociados a: dentro del módulo de memoria un rank específico, dentro del rank un bank específico, dentro del bank una fila específica y dentro de la fila una columna específica.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Una vez que han sido identificados el rank-bank-row, se PRECARGAN los bit_lines del banco (se polarizan con la tensión media que hay entre un cero lógico y un uno lógico).</p>
+</li>
+<li>
+<p>Una vez precargado el banco se ACTIVA (OPEN) la fila: la fila queda abierta cuando los miles de amplificadores sensores de carga detectan los contenidos de los miles de celdas de  las filas seleccionadas de todos los arrays del banco. La página esta abierta cuando las salidas de los amplificadores recuperan los valores sensados y activan las line_bit con los datos almacenados.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Esta acción comienza con la activación de la señal /RAS y la espera del tiempo tRCD</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Una vez transcurrido el tRCD se selecciona las columnas específicas de todos los arrays del banco (x4,x8,..) y se carga el buffer i/o con el dato seleccionado.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Esta acción comienza con la activación de la señal /CAS.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1926,82 +2029,13 @@ Los 4 módulos al completo se organizan en 4 ranks
 </ul>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_página">Página</h5>
-<div class="imageblock text-center text-center">
-<div class="content">
-<img src="./images/dram/page.png" alt="page">
-</div>
-<div class="title">Figure 79. Page</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Una página abarca múltiples columnas de la misma fila. Al buffer i/o se descargan más columnas que la requerida, de esta forma la salida i/o hace de buffer guardando datos adyacentes al solicitado. En el siguiente acceso puede que el dato requerido ya esté en el buffer y la latencia de la lectura es mucho más rápida. Por ejemplo en el caso de querer leer un array si el array ha sido almacenado en un página se podría leer toda la página con un solo acceso a las celdas y posteriormente transferir el contenido del buffer por ráfagas.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_lectura_de_una_palabra_de_la_memoria_mp">LECTURA de una palabra de la memoria MP</h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Fases:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>la dirección de memoria proporcionada por la CPU es convertida en dirección física por el circuito MMU</p>
-</li>
-<li>
-<p>El circuito MP debe de descomponer la dirección física de memoria en los códigos:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>RANK-BANK-ROW-COLUMN</p>
-</li>
-<li>
-<p>Los códigos están asociados a &#8230;&#8203;.dentro del módulo de memoria un rank específico. Dentro del rank un bank específico. Dentro del bank una fila específica. Dentro de la fila una columna específica.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Una vez que han sido identificados el rank-bank-row, se PRECARGAN los bit_lines del banco (se polarizan con la tensión media que hay entre un cero lógico y un uno lógico).</p>
-</li>
-<li>
-<p>Una vez precargado el banco se ACTIVA (OPEN) la fila: la fila queda abierta cuando los miles de amplificadores sensores de carga detectan los contenidos de los miles de celdas de  las filas seleccionadas de todos los arrays del banco. Al conjunto de la misma fila de todos los arrays del banco se denomina <strong>página</strong> (una página está formada por filas). La página esta abierta cuando las salidas de los amplificadores recuperan los valores sensados y activan las line_bit con los datos almacenados.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Esta acción comienza con la activación de la señal /RAS y la espera del tiempo tRCD</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Una vez transcurrido el tRCD se selecciona las columnas específicas de todos los arrays del banco (x4,x8,..) y se carga el buffer i/o con el dato seleccionado.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Esta acción comienza con la activación de la señal /CAS.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
 </div>
 <div class="sect3">
 <h4 id="_organización_avanzada_de_memorias_dram">9.3.3. Organización avanzada de memorias DRAM</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Información detallada en el <a href="#organizacion_dram">Apéndice</a></p>
+<p>Información detallada en el <a href="_apéndice_unidad_de_memoria_dram.html#apendice_organizacion_dram">Apéndice</a></p>
 </li>
 </ul>
 </div>
@@ -2093,7 +2127,7 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="content">
 <img src="./images/dram/ddr1_frequency.png" alt="ddr1 frequency">
 </div>
-<div class="title">Figure 80. Velocidad de transferencia DDR</div>
+<div class="title">Figure 78. Velocidad de transferencia DDR</div>
 </div>
 </div>
 <div class="sect5">
@@ -2166,7 +2200,7 @@ Cuando programamos una instrucción como "movw sum,%ax", el controlador de memor
 <div class="content">
 <img src="./images/dram/clock.png" alt="clock">
 </div>
-<div class="title">Figure 81. Velocidad de transferencia</div>
+<div class="title">Figure 79. Velocidad de transferencia</div>
 </div>
 </div>
 </div>
@@ -2221,7 +2255,7 @@ Cuando programamos una instrucción como "movw sum,%ax", el controlador de memor
 <div class="content">
 <img src="./images/dram/ddr2_frequency.png" alt="ddr2 frequency">
 </div>
-<div class="title">Figure 82. Velocidad de transferencia DDR2</div>
+<div class="title">Figure 80. Velocidad de transferencia DDR2</div>
 </div>
 </div>
 <div class="sect4">
@@ -2256,7 +2290,7 @@ Cuando programamos una instrucción como "movw sum,%ax", el controlador de memor
 <div class="content">
 <img src="./images/dram/ddr3_frequency.png" alt="ddr3 frequency">
 </div>
-<div class="title">Figure 83. Velocidad de transferencia DDR3</div>
+<div class="title">Figure 81. Velocidad de transferencia DDR3</div>
 </div>
 <table class="tableblock frame-ends grid-all stretch">
 <caption class="title">Table 14. DDR3</caption>
@@ -2707,7 +2741,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/sram_cell_6T.png" alt="sram cell 6T">
 </div>
-<div class="title">Figure 84. SRAM-cell</div>
+<div class="title">Figure 82. SRAM-cell</div>
 </div>
 </div>
 <div class="sect4">
@@ -2797,19 +2831,19 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_cpu_dram.png" alt="cache cpu dram">
 </div>
-<div class="title">Figure 85. Interconexión</div>
+<div class="title">Figure 83. Interconexión</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/cache/cache_cpu_dram_connection.png" alt="cache cpu dram connection">
 </div>
-<div class="title">Figure 86. Interconexión</div>
+<div class="title">Figure 84. Interconexión</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/cache/cache_mmu_dram.png" alt="cache mmu dram">
 </div>
-<div class="title">Figure 87. MMU</div>
+<div class="title">Figure 85. MMU</div>
 </div>
 </div>
 <div class="sect4">
@@ -2818,7 +2852,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_dram_block.png" alt="cache dram block">
 </div>
-<div class="title">Figure 88. Estructura de agrupamiento</div>
+<div class="title">Figure 86. Estructura de agrupamiento</div>
 </div>
 <div class="ulist">
 <ul>
@@ -2881,7 +2915,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_read_operation.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 89. Read Operation (RA: Read Address)</div>
+<div class="title">Figure 87. Read Operation (RA: Read Address)</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3030,7 +3064,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_directmap.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 90. Direct Map Structure</div>
+<div class="title">Figure 88. Direct Map Structure</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3063,7 +3097,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_directmap_controller.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 91. Direct Map Controller</div>
+<div class="title">Figure 89. Direct Map Controller</div>
 </div>
 </li>
 </ul>
@@ -3127,7 +3161,7 @@ resto de bits (24-14-2)=8 -&gt; campo de etiqueta de 8 bits</pre>
 <div class="content">
 <img src="./images/cache/cache_fullassociative_controller.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 92. "Full Associative Controller!</div>
+<div class="title">Figure 90. "Full Associative Controller!</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3331,7 +3365,7 @@ resto de bits (24-2)=22 -&gt; campo de etiqueta de 22 bits</pre>
 <div class="content">
 <img src="./images/cache/cache_setassociative_controller.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 93. Set Associative Controller</div>
+<div class="title">Figure 91. Set Associative Controller</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3411,7 +3445,7 @@ Etiqueta : resto de bits = (24-13-2)= 9 bits</pre>
 <div class="content">
 <img src="./images/cache/cache_assoc_size.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 94. Probabilidad de éxito en función del tamaño y la función de asociación</div>
+<div class="title">Figure 92. Probabilidad de éxito en función del tamaño y la función de asociación</div>
 </div>
 </div>
 </div>
@@ -3423,7 +3457,7 @@ Etiqueta : resto de bits = (24-13-2)= 9 bits</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>La política de reemplazo de la controladora de la caché es según la cual cuando se produce un "miss" se tiene que seleccionar un línea de la caché para ser eliminada de la caché y dejar sitio al bloque capturado de la memoria principal. La política más popular es la  least-recently used (LRU) según la cual se descartan primero los elementos menos usados recientemente</p>
+<p>La política de reemplazo de la controladora de la caché es según la cual cuando se produce un "miss" se tiene que seleccionar un línea de la caché para ser eliminada de la caché y dejar sitio al bloque capturado de la memoria principal. La política más popular es la  <strong>least-recently used (LRU)</strong> según la cual se descartan primero los elementos menos usados recientemente</p>
 </li>
 </ul>
 </div>
@@ -3433,14 +3467,34 @@ Etiqueta : resto de bits = (24-13-2)= 9 bits</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Al igual que con la Lectura, con la Escritura la CPU escribe en la Caché, por lo que el contenido de la línea donde se ha realizado la escritura no coincide con el bloque asociado en la Memoria Principal. La política de Escritura consiste en especificar cuando se realiza la copia de la línea de la cache y los bloques de memoria asociados con diferente contenido. La política "Write-Back" consiste en realizar la actualización o copia en el momento en el que se va a descartar dicha línea según la política de Reemplazo.</p>
+<p>Al igual que con la Lectura, con la Escritura la CPU escribe en la Caché, por lo que el contenido de la línea donde se ha realizado la escritura no coincide con el bloque asociado en la Memoria Principal. La política de Escritura consiste en especificar cuando se realiza la copia de la línea de la cache y los bloques de memoria asociados con diferente contenido. La política <strong>Write-Back</strong> consiste en realizar la actualización o copia en el momento en el que se va a descartar dicha línea según la política de Reemplazo.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_thinkpad_l560">9.4.6. Thinkpad L560</h4>
+<h4 id="_ejemplo_de_optimización">9.4.6. Ejemplo de Optimización</h4>
+<div class="sect4">
+<h5 id="_producto_matricial">Producto Matricial</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://johnnysswlab.com/make-your-programs-run-faster-by-better-using-the-data-cache/" class="bare">https://johnnysswlab.com/make-your-programs-run-faster-by-better-using-the-data-cache/</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>El producto matricial en lenguaje C implementado mediante un bucle que accede a los Arrays de datos es un ejemplo de cómo tener en cuenta la organización de la memoria Caché a la hora de programar el algoritmo. En el ejemplo se ve la técnica "loop interchange" para modificar el orden de captura de los elementos de los arrays.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_thinkpad_l560">9.4.7. Thinkpad L560</h4>
 <div class="ulist">
 <ul>
 <li>
