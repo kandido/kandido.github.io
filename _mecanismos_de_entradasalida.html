@@ -301,7 +301,7 @@ pre.rouge {
 </li>
 <li><a href="_mecanismos_de_entradasalida.html#_buses">8.5.5. Buses</a>
 </li>
-<li><a href="_mecanismos_de_entradasalida.html#_analisis_portatil_lenovo_disco_duro">8.5.6. Analisis: Portatil Lenovo - Disco Duro</a>
+<li><a href="_mecanismos_de_entradasalida.html#_analisis_lenovo_t520_disco_duro">8.5.6. Analisis:  Lenovo T520 - Disco Duro</a>
 </li>
 </ul>
 </li>
@@ -350,6 +350,8 @@ pre.rouge {
 <li><a href="_mecanismos_de_entradasalida.html#_tipos_de_interrupciones">8.9.5. Tipos de Interrupciones</a>
 </li>
 <li><a href="_mecanismos_de_entradasalida.html#_tabla_de_los_vectores_de_interrupciones">8.9.6. Tabla de los Vectores de interrupciones</a>
+</li>
+<li><a href="_mecanismos_de_entradasalida.html#_proceso_de_atención_a_las_interrupciones">8.9.7. Proceso de atención a las interrupciones</a>
 </li>
 </ul>
 </li>
@@ -889,10 +891,10 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>puertos mapeados en la memoria principal</p>
+<p>puertos mapeados en la memoria principal &#8594; <strong>MMIO</strong></p>
 </li>
 <li>
-<p>direcciones de los puertos en un espacio diferente de la memoria principal: espacio i/o.</p>
+<p>direcciones de los puertos en un espacio diferente de la memoria principal: espacio i/o. <strong>IO</strong> ó <strong>PMIO</strong></p>
 </li>
 </ul>
 </div>
@@ -976,17 +978,17 @@ pre.rouge {
 <p>Periférico</p>
 </li>
 <li>
-<p>Al espacio de direcciones utilizado por los periféricos se le denomina <strong>bus address</strong></p>
+<p>Al espacio de direcciones utilizado por los periféricos se le denomina <strong>devices address</strong>  ya que son direcciones visibles para el periférico, es su espacio de direcciones independiente de la computadora.</p>
 </li>
 <li>
-<p>Hará falta mapear, traducir, direcciones bus a direcciones virtuales de la cpu</p>
+<p>Hará falta mapear, traducir, direcciones device a direcciones virtuales visibles para la cpu</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Mapa en el fichero <em>/proc/ioports</em></p>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/ditaa/svg/eNrjUkAFzgGhCgSAU2kxF4pAWGZRSWliDj49jikpRanFaPqggngtCy5ITE7lwiaGIqitCwHauE2CKtFG0VeDRsOBf1pacWoJklQNLn2ovk8sKMjJTE3Brs8ZyZ1Qhq4dSEJXF8GFuVPBEZeNuUBLMvPSIUbm55UU5eckpuQXIduoDQ8NnD4Egsx8ZKkapHAEB1MNXBifIahSyKrBLqkBJylyDHFJLctMToUaQgWXIMKEhNSCHiZEJB1fePRgSQIRWJIAWMIGkQYQlkcRZSNSGiDOheCox64Ue64CADafujQ=" alt="Diagram">
+<img src="https://kroki.io/ditaa/svg/eNrjUkAFzgGhCviBi2uYp7MrF4pYWGZRSWliDj5tjikpRanFxVzYBPHaF1yQmJzKhU0MRVBbFwK0cZsEVaKNoq8GjYYD_7S04tQSJKkaXPpQfZ9YUJCTmZqCXZ8zkjuhDF07kISuLoILc6eCIy4bc4GWZOalQ4zMzyspys9JTMkvQrZRGx4aOH0IBJn5yFI1SOEIDqYauDA-Q1ClkFWDXVIDTlTkGOKSWpaZnAo1hAouQYQJCakFPUyISDq-8OjBkgQisCQBsIQNIg0gLI8iykakNECcC8FRj10p9lwFANkAupo=" alt="Diagram">
 </div>
 </div>
 </li>
@@ -1197,7 +1199,7 @@ pre.rouge {
 </div>
 </div>
 <div class="sect3">
-<h4 id="_analisis_portatil_lenovo_disco_duro">8.5.6. Analisis: Portatil Lenovo - Disco Duro</h4>
+<h4 id="_analisis_lenovo_t520_disco_duro">8.5.6. Analisis:  Lenovo T520 - Disco Duro</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1213,7 +1215,7 @@ pre.rouge {
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/io/Intel_5_Series_architecture.png" alt="Lenovo T520">
+<img src="./images/io/Intel_5_Series_architecture.png" alt="Intel 5 Series architecture">
 </div>
 <div class="title">Figure 53. Lenovo T520</div>
 </div>
@@ -1456,7 +1458,7 @@ pre.rouge {
 </div>
 </li>
 <li>
-<p>Es necesario ejecutar programas de atención al periférico cuando este lo requiera: sincronización</p>
+<p>Es necesario ejecutar programas de atención al periférico cuando este lo requiera: <strong>Sincronización</strong> . Sincronizar significa especificar o indicar cuando se va a realizar la transferencia entre el host(anfitrión) y el periférico.</p>
 </li>
 <li>
 <p>El anfitrión consulta el bit de estado del controlador i/o</p>
@@ -1639,10 +1641,10 @@ pre.rouge {
 <p>Mapeo de direcciones</p>
 </li>
 <li>
-<p>Hará falta una unidad hardware de traducción de direcciones bus a direcciones físicas : iommu</p>
+<p>Hará falta una unidad hardware de traducción del espacio de direcciones del DISPOSITIVO a direcciones físicas de la Memoria Principal : <strong>iommu</strong></p>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/ditaa/svg/eNqdk10LgjAUhu_9Fede_AcRaN10MYyiqO4sZw36EKdBsB-fpu2ro5MGoj47Z3t5984Dc8yWG_gZKIwq7hlgy4qySq5m1fLy4uxk0TBNC8qt9g6CG8I6T07UQxighUalH7TDB4Ti0OgX1rv7I2QRtzDOMk5LrUT09WuGiVZ-M5nk-ZXRFO-fafq7j2AKkdIfBApLGPYpuNWbsftZF1s_xxdcHrw0FfjSoB4HtP6CpWdqwa_uj51CYnwx9Di0xWS1-CzW5FMMKFuFZECugDl9ssb9EcqEAxrKlGd_pM72zBmhqMoyWjSTRB4rEqEdGqG92neiMqTgYVSEpNF1hBYxIZsxV8dxS1ylw9a-ASV656E=" alt="Diagram">
+<img src="https://kroki.io/ditaa/svg/eNqdk10LgjAUhu_9Fede_AcRmHXhxTCKorqznDXoQ5wGwn58mrUPOzppIOqzc7aXd-8cMEew3MDPwOB8sQ2DhWOwLcuLMr6ahctLxdmpQ_0kySnnDgbBDmGdxSfqIAzQQqPS9drhAkJxaPSLzvvzR0gYtTBKU04LrUT09WuGiVZ-Mxln2ZXRBO8PNP2fD28KM6Xf8xSW0O9TcKs3Y_ezLrZ-jhVcHrwwFbjSoB4HtP6cJWfagV_dbzuFxPhi6HFoi8lq8V6sSagYULbyyYBcAXP6ZI37I5QJCzSUKc_-SF3XM2uEZmWa0ryZJPJYkQjt0Ajt1b4TlSEFD6MiJI2uIxRGhGzGXB3LLbGVDlv7AhIM6Ac=" alt="Diagram">
 </div>
 </div>
 </li>
@@ -1861,7 +1863,7 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>Extensión del apartado anterior sobre  implementación de la interfaZ i/o driven-interruption.</p>
+<p>Extensión del apartado anterior sobre  implementación de la interfaz i/o driven-interruption.</p>
 </li>
 </ul>
 </div>
@@ -2025,10 +2027,13 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>Es una entrada de la cpu.</p>
+<p>Non-Maskable Interrupt (NMI)</p>
 </li>
 <li>
-<p>The NMI (is a hardware driven interrupt much like the PIC interrupts but the NMI goes diretcly the cpu, and not via the PIC controller.</p>
+<p>Es una señal de entrada de la cpu.</p>
+</li>
+<li>
+<p>The NMI (is a hardware driven interrupt much like the PIC interrupts but the NMI goes directly the cpu, and not via the PIC controller. No se puede enmascarar y anular este servicio, por lo tanto se utiliza para casos críticos.</p>
 </li>
 <li>
 <p>Aplicaciones</p>
@@ -2129,17 +2134,17 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>Son originadas por la propia CPU al final del ciclo de instrucción en la fase de interrupción</p>
+<p>Son originadas por la propia CPU al final del ciclo de instrucción en respuesta a un evento. El ciclo de instrucción por lo tanto tiene una fase más: la fase de interrupción</p>
 </li>
 <li>
 <p>Se denominan <em>exceptions</em></p>
 <div class="ulist">
 <ul>
 <li>
-<p><em>Interrupt Software</em> : originadas por la instrucción <code>syscall</code>: Llamadas al Sistema</p>
+<p><em>Software Interrupt</em> : originadas por la instrucción <code>syscall</code> en la arquitectura x86-64 y por la instrucción <code>int $0x80</code> en la arquitectura x86-32: Se interrumpe al kernel mediante las Llamadas al Sistema.</p>
 </li>
 <li>
-<p>Originadas por un <em>Error</em>: Fault, Trap, Abort.</p>
+<p>Originadas por un <em>Error</em>: Fault, Trap, Abort, Segment Violation.</p>
 </li>
 </ul>
 </div>
@@ -2159,10 +2164,10 @@ pre.rouge {
 <div class="ulist">
 <ul>
 <li>
-<p>Maskable: IRQ</p>
+<p>Maskable: IRQ &#8594; se pueden desactivar durante el intervalo de tiempo que no queremos que nos interrumpan.</p>
 </li>
 <li>
-<p>Non-Maskable: NMI</p>
+<p>Non-Maskable: NMI &#8594; no se pueden desactivar.</p>
 </li>
 </ul>
 </div>
@@ -2235,7 +2240,7 @@ pre.rouge {
 <p>Tabla IVT.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="rouge highlight"><code data-lang="sh">Interrupt Address 	Type Description
+<pre class="rouge highlight"><code data-lang="sh">Interrupt Address 	Type            Description
 
 00h 	0000:0000h 	Processor 	Divide by zero
 01h 	0000:0004h 	Processor 	Single step
@@ -2389,7 +2394,7 @@ pre.rouge {
 <p><a href="https://en.wikipedia.org/wiki/Interrupt_descriptor_table">Interrupt Descriptor Table IDT</a></p>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/ditaa/svg/eNp1k11vmzAUhu_zK460m0wTWoB0zW4mJaFMXORjTaJeu-ZArTAbGUKZ1B8_G2NsVa0vUCI9r3nOyZtZlpzhUBQNtvAG2f4MX0CfN0iwoZLVLRN8Frjz7ZPPn53Zol-oM16qv4B9AetYjvD8DxYGWjootNAjNig7zA2xckRkif0ug4y3KOWtbg22dVhssY1Ecq0F4y3M1Zjx1wENPbGlRQ8dyqISrwN4GEFP7m66U9x43oAkvETAniLmmMN8c7jskzHmGf-wsYx3pGI5iJoKtYD5JYlG2hO_n9aEHaMIXLRAOsIq8lypzNM6O39P9dNEI2-Q1RQVNw0X5FaZzUTeFD8ttRW1FBSbRkhosPyLakWi0_vkJuTNsH4_w_l0MpCnvrHQabxNu9dS_ZLcaMSe7HaCW0KvgRVwzrHnnFj4N3KUpFK3ihap7qif8IQfbOJISn8Tseebfli2pZMMp872q3tIjxdQ2xHSYE4vnFq7rljJhznoC9KrAZ1VOJV3R-gL4-hjTiycynvKdgmklSAt42VwHFr8oPpm_p061vcutgzUI303T-8R0UIRqSYuCoAcC8aHWgEEvyB7_PMfn6YRHw==" alt="Diagram">
+<img src="https://kroki.io/ditaa/svg/eNp1k81uozAURvd5iivNJqMZ1ACZNrOplIQyYpGflkRdu-ZCrTA2MoRSqQ8_BmNsVVMvUCKdzzn35mOWRCc45HmNDXxAsj_BN-jPB0RYU8mqhgk-8-z58cXnr85s0S3UGS_tv4D5AdayDOHlHRYaWlrIN9AT1ihbzDSxskRgiP0ugYQ3KOW1ajS2tVhosI1EcqkE4w3M1Zjh9wH1HbGlQQ8tyrwUbwN4GEFH7td0p7jyrAZJeIGAHUXMMIP55nDeR2PMMb41sYS3pGQZiIoKtYD5OQpG2hG_m9aELaMIXDRAWsJK8lKqzPM6Od3E_VNHA2eQ1RQV1x7OybXUmwmcKX4baisqKSjWtZBQY_EX1YpE2--T65Azw_rzDKc01ZCjvjFQOt7Wu1dS_ZNca4SO7HaCG0IvnhGwzqHjHBn4D3KUpFS3igZp31E34Qg_mMSRFO4mQsc3_m_ZllbSnzrbre4gPp5BbUdIjVk9f2rtumQFH-agr0gvGrRW_lTeHaGvjKOLWTF_Km-a7CKIS0EaxgvvOLT4QfVNv519rOtsbOmpR_xpns4hgoUi4p44KwAyzBkfagXg3UPy9PgT0mdg5qWq_wHGRRaV" alt="Diagram">
 </div>
 </div>
 <div class="ulist">
@@ -2417,14 +2422,14 @@ pre.rouge {
 <p>0x30-0xFF: <em>exceptions SW</em></p>
 </li>
 <li>
-<p>0x80</p>
+<p>0x80 &#8594; LLAMADAS AL SISTEMA</p>
 <div class="ulist">
 <ul>
 <li>
 <p>isa x86-64: <em>syscall</em></p>
 </li>
 <li>
-<p>isa x86: <em>int 0x80</em></p>
+<p>isa x86: <em>int $0x80</em></p>
 </li>
 </ul>
 </div>
@@ -2573,6 +2578,27 @@ Note: Linux<span class="k">*</span> requires IRQ 0, 2, and 13 to be as shown.</c
 </div>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_proceso_de_atención_a_las_interrupciones">8.9.7. Proceso de atención a las interrupciones</h4>
+<div class="sect4">
+<h5 id="_flujo_de_operaciones">Flujo de operaciones</h5>
+<div class="imageblock">
+<div class="content">
+<img src="./images/io/interruption_flow.jpg" alt="interruption flow">
+</div>
+<div class="title">Figure 54. Flujo de Operaciones</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejemplo_procesamiento_de_la_interrupción_originada_por_el_teclado">Ejemplo: Procesamiento de la interrupción originada por el teclado.</h5>
+<div class="imageblock">
+<div class="content">
+<img src="./images/io/keyboard_interruption.jpg" alt="keyboard interruption">
+</div>
+<div class="title">Figure 55. Interrupción del Teclado</div>
 </div>
 </div>
 </div>
@@ -2782,13 +2808,13 @@ Note: Linux<span class="k">*</span> requires IRQ 0, 2, and 13 to be as shown.</c
 <div class="content">
 <img src="./images/io/isa_8086.png" alt="isa 8086">
 </div>
-<div class="title">Figure 54. Arquitectura Bus ISA</div>
+<div class="title">Figure 56. Arquitectura Bus ISA</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/io/isa_8086_interfaz.png" alt="isa 8086 interfaz">
 </div>
-<div class="title">Figure 55. Interfaz Bus ISA</div>
+<div class="title">Figure 57. Interfaz Bus ISA</div>
 </div>
 </div>
 <div class="sect3">
@@ -2797,7 +2823,7 @@ Note: Linux<span class="k">*</span> requires IRQ 0, 2, and 13 to be as shown.</c
 <div class="content">
 <img src="./images/io/pci_80x86.png" alt="pci 80x86">
 </div>
-<div class="title">Figure 56. Arquitectura Bus PCI</div>
+<div class="title">Figure 58. Arquitectura Bus PCI</div>
 </div>
 </div>
 <div class="sect3">
@@ -2806,7 +2832,7 @@ Note: Linux<span class="k">*</span> requires IRQ 0, 2, and 13 to be as shown.</c
 <div class="content">
 <img src="./images/io/north_south_bridge.png" alt="north south bridge">
 </div>
-<div class="title">Figure 57. North and South Bridges</div>
+<div class="title">Figure 59. North and South Bridges</div>
 </div>
 </div>
 <div class="sect3">
@@ -2843,7 +2869,7 @@ Note: Linux<span class="k">*</span> requires IRQ 0, 2, and 13 to be as shown.</c
 <div class="content">
 <img src="./images/io/x58blockdiagram_corei7.jpg" alt="x58blockdiagram corei7">
 </div>
-<div class="title">Figure 58. corei7 x58 chipset: año 2008</div>
+<div class="title">Figure 60. corei7 x58 chipset: año 2008</div>
 </div>
 <div class="paragraph">
 <p>Chipsets supporting LGA 1366, LGA 2011, and LGA 2011-v3 CPUs.: X58 (2008), X79 (2011), X99 (2014).</p>
