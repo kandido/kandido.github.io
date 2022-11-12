@@ -92,21 +92,25 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <ul class="sectlevel2">
 <li><a href="_apéndice_unidad_cpu.html#apendice_cpu">31.1. Microarquitecturas Modernas (Año 2000 en adelante)</a>
 </li>
-<li><a href="_apéndice_unidad_cpu.html#_skylake_u">31.2. Skylake-U</a>
+<li><a href="_apéndice_unidad_cpu.html#_intel_coffe_lake_2017_ice_lake2019">31.2. Intel: Coffe Lake (2017), Ice Lake(2019)</a>
 </li>
-<li><a href="_apéndice_unidad_cpu.html#_arm_cortex_a76cortex_a55">31.3. ARM Cortex-A76/Cortex-A55</a>
+<li><a href="_apéndice_unidad_cpu.html#_amd_zen4">31.3. AMD: Zen4</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html#_skylake_u">31.4. Skylake-U</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html#_arm_cortex_a76cortex_a55">31.5. ARM Cortex-A76/Cortex-A55</a>
 <ul class="sectlevel3">
-<li><a href="_apéndice_unidad_cpu.html#_intro_2">31.3.1. Intro</a>
+<li><a href="_apéndice_unidad_cpu.html#_intro_2">31.5.1. Intro</a>
 </li>
-<li><a href="_apéndice_unidad_cpu.html#_teléfono_huawei_p30_pro">31.3.2. Teléfono Huawei P30 Pro</a>
+<li><a href="_apéndice_unidad_cpu.html#_teléfono_huawei_p30_pro">31.5.2. Teléfono Huawei P30 Pro</a>
 </li>
-<li><a href="_apéndice_unidad_cpu.html#_isa_cortex_a76cortex_a55">31.3.3. ISA Cortex-A76/Cortex-A55</a>
+<li><a href="_apéndice_unidad_cpu.html#_isa_cortex_a76cortex_a55">31.5.3. ISA Cortex-A76/Cortex-A55</a>
 </li>
-<li><a href="_apéndice_unidad_cpu.html#_multicore">31.3.4. Multicore</a>
+<li><a href="_apéndice_unidad_cpu.html#_multicore">31.5.4. Multicore</a>
 </li>
-<li><a href="_apéndice_unidad_cpu.html#_microarquitectura_cortex_a76">31.3.5. Microarquitectura Cortex-A76</a>
+<li><a href="_apéndice_unidad_cpu.html#_microarquitectura_cortex_a76">31.5.5. Microarquitectura Cortex-A76</a>
 </li>
-<li><a href="_apéndice_unidad_cpu.html#_microarquitectura_cortex_a55">31.3.6. Microarquitectura Cortex-A55</a>
+<li><a href="_apéndice_unidad_cpu.html#_microarquitectura_cortex_a55">31.5.6. Microarquitectura Cortex-A55</a>
 </li>
 </ul>
 </li>
@@ -167,7 +171,21 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 </div>
 <div class="sect2">
-<h3 id="_skylake_u">31.2. Skylake-U</h3>
+<h3 id="_intel_coffe_lake_2017_ice_lake2019">31.2. Intel: Coffe Lake (2017), Ice Lake(2019)</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.youtube.com/watch?v=1CXE2f2Syd4" class="bare">https://www.youtube.com/watch?v=1CXE2f2Syd4</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_amd_zen4">31.3. AMD: Zen4</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_skylake_u">31.4. Skylake-U</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -184,13 +202,10 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="ulist">
 <ul>
 <li>
-<p>Front End &#8594; Unidad de Control</p>
+<p>Front End &#8594; Bloque de la U.C. que adelanta las fases de captura y decodificación.</p>
 </li>
 <li>
-<p>Observar dos rutas de operaciones completamente diferentes: MOP y uOP.</p>
-</li>
-<li>
-<p>Concepto de out-of-order execution (OoO) y microoperación (uOP):</p>
+<p>Concepto de out-of-order execution (OoO) y microoperación (uOP, no confundir con el microcódigo de la unidad de control):</p>
 <div class="listingblock">
 <div class="content">
 <pre>The microprocessors with out-of-order execution are translating all instructions into microoperations - abbreviated µops or uops. A simple instruction such as ADD EAX,EBX generates only one µop, while an instruction like ADD EAX,[MEM1] may generate two: one for reading from memory into a temporary (unnamed) register, and one for adding the contents of the temporary register to EAX. The instruction ADD [MEM1],EAX may
@@ -205,13 +220,26 @@ Here, the ADD EAX,[MEM2] instruction is split into two µops. The advantage of t
 </div>
 </div>
 </li>
+<li>
+<p>Observar dos rutas de operaciones completamente diferentes: MOP y uOP.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>MOP: macro instrucciones : son las instrucciones ISA de intel de tipo CISC</p>
+</li>
+<li>
+<p>uOP: las instrucciones ISA del tipo CISC se dividen en instrucciones más sencillas del tipo RISC.</p>
+</li>
+</ul>
+</div>
+</li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_arm_cortex_a76cortex_a55">31.3. ARM Cortex-A76/Cortex-A55</h3>
+<h3 id="_arm_cortex_a76cortex_a55">31.5. ARM Cortex-A76/Cortex-A55</h3>
 <div class="sect3">
-<h4 id="_intro_2">31.3.1. Intro</h4>
+<h4 id="_intro_2">31.5.1. Intro</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -227,7 +255,7 @@ Here, the ADD EAX,[MEM2] instruction is split into two µops. The advantage of t
 </div>
 </div>
 <div class="sect3">
-<h4 id="_teléfono_huawei_p30_pro">31.3.2. Teléfono Huawei P30 Pro</h4>
+<h4 id="_teléfono_huawei_p30_pro">31.5.2. Teléfono Huawei P30 Pro</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -249,7 +277,7 @@ Kirin 980 is a 64-bit high-performance mobile ARM LTE SoC designed by HiSilicon 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_isa_cortex_a76cortex_a55">31.3.3. ISA Cortex-A76/Cortex-A55</h4>
+<h4 id="_isa_cortex_a76cortex_a55">31.5.3. ISA Cortex-A76/Cortex-A55</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -275,7 +303,7 @@ ver manual ISA ARMv8.2-A de la compañia ARM</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_multicore">31.3.4. Multicore</h4>
+<h4 id="_multicore">31.5.4. Multicore</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -298,7 +326,7 @@ ver manual ISA ARMv8.2-A de la compañia ARM</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_microarquitectura_cortex_a76">31.3.5. Microarquitectura Cortex-A76</h4>
+<h4 id="_microarquitectura_cortex_a76">31.5.5. Microarquitectura Cortex-A76</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -326,7 +354,7 @@ ver manual ISA ARMv8.2-A de la compañia ARM</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_microarquitectura_cortex_a55">31.3.6. Microarquitectura Cortex-A55</h4>
+<h4 id="_microarquitectura_cortex_a55">31.5.6. Microarquitectura Cortex-A55</h4>
 <div class="ulist">
 <ul>
 <li>
