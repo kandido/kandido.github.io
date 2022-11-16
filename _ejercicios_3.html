@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-11-12</span>
+<span id="revdate">2022-11-16</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -4264,7 +4264,186 @@ lista                	: 1 -&gt; equivale a lista[0]
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Ejemplo 4.2a Pg118. The system has a Cache memory of 64KB  and Main Memory of 16MB with a byte word size and four word block size. For a cache controller with direct mapping correspondence function search the main memory block addresses correspondences to cache memory 0x0CE7 number line .</p>
+<p>Libro William Stalling Ejemplo 4.2a Pg125. Calcular para una controladora de Caché con Asociación de Mapeo Directo, qué línea de la memoria caché (tag/línea/word) está asociada a la dirección 0x02ABCD de la memoria principal.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Formato de la dirección de memoria principal (Bloque MPrincipal/Word)</p>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNqz0UUGRiYKSZklxQgBOy5tXQJAm6tGAQSScvKTsxXySnOTUovAAiDh8PyiFCCLGFNsYMxiKyMjuCvsbHTLrSBcOwAY1CVl" alt="Diagram">
+</div>
+</div>
+</li>
+<li>
+<p>Formato de la dirección de memoria principal (Tag/Línea Caché/Word)</p>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNqz0UUHRiYKSZklxaiCdlzaukQBba4aBQWFkMR0BQioUfDJzEtVyCvNTUotAnEVFMLzi1KALOJNtNHVKNYt0rSyALvLzkZXt8jK0ATiSCCv3MoIIgEA2W4tJA==" alt="Diagram">
+</div>
+</div>
+</li>
+<li>
+<p>Memoria Cache</p>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNpTUMAGtHUJAm0urDoVapDYLo4hjtiUcCGZj42pjUsAaCvQfJ_MvNREqFUhiekQW8Pzi1KMYQwjkByIYQhjGFBsq4KCAboHa9AZNZgyFNtqOCC2GtHbVopcXJCad3hXTklmbiJdAwpmJ31DCikn2ejqWiRllhTr2tnoGiZVlqTiZQAAoTK6rQ==" alt="Diagram">
+</div>
+</div>
+</li>
+<li>
+<p>0x02ABCD = 0000-0010-1010-1011-1100-1101</p>
+</li>
+<li>
+<p>Block/Word &#8594;  0000001010101011110011/01 &#8594; Block=0000001010101011110011 Word=01 &#8594; block=0x0AAF3 word=01</p>
+</li>
+<li>
+<p>Tag/Line/Word &#8594; 00000010/10101011110011/01 &#8594; Tag=00000010 Line=10101011110011 Word=01 &#8594; tag=02 line=0x2AF3 word=01</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Tag 0x02 Línea 0x2AF3 Word 1</p>
+</li>
+<li>
+<p>Cuando la CPU lance la dirección 0x02ABCD, la controladora de la Caché irá a la línea 0x2AF3 y si el Tag de esa línea es 0x02 quiere decir que el contenido de datos (4 bytes)  de esa línea es una copia del contenido de datos (4 bytes) del bloque 0x0AAF3 y por lo tanto la palabra 01 de ese bloque de la memoria principal está en esa línea de la caché &#8594; hit. En caso de que en esa línea el tag no sea 02, los datos de esa línea no son una copia del bloque y la controladora de la caché tendrá que pedir a la controladora de la memoria principal una copia del bloque para la caché y otra copia para la CPU.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Repetir el ejercicio anterior mediante multiplicaciones y divisiones binarias respondiendo a los siguientes apartados:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>completar la tabla asociando líneas de la Memoria Caché con direcciones de la MPrincipal (primera palabra de cada bloque)</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Línea</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Dirección MP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Dirección MP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Dirección MP</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Dirección MP</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x000000</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x010000</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0x000004</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2<sup>14</sup> -1</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>la relación línea - dirección MP ( excepto tag) es una multiplicación x4, ya que cada línea y bloque tienen 4 bytes.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>para última linea:  2<sup>14</sup> -1 = 0x4000-1=0x3FFF &#8594; 0x3FFF x 4 = 14 unos seguidos de 2_ceros(x4)= 0xFFFC</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Dirección 0x010000 &#8594; los 4 digitos de menor peso (16bits), es decir, todos menos el tag, equivalen al bus de direcciones de la Caché, pero no direcciones de línea, sino de bytes, es decir la capacidad de la caché en bytes.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>calcular la dirección lineal 0x0000B de la MP con dirección Bloque/Palabra se corresponde:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>dirección bloque/palabra = dirección MP dividido por 4 &#8594; el cociente es el número de bloque y el resto el número de palabra</p>
+</li>
+<li>
+<p>0x0000B  &#xF7; 4  &#8594; 11=2x4+3  &#8594; bloque Nº 2 y palabra Nº 3</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>calcular para la dirección MP 0x02ABCD con que dirección Bloque/Palabra se corresponde:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>0x02ABCD &#xF7; 4 &#8594; muevo la coma dos posiciones a la izda (1/4=2<sup>-2</sup>) &#8594; parte entera Bloque Nº 0xAAF3 y parte fracción Word Nº01</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>calcular al Bloque Nº 0xAAF3 qué línea le corresponde:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>i= j mod m , donde m=2<sup>14</sup> &#8594; la línea es el resto de dividir 0xAAF3 entre 2<sup>14</sup> &#8594; parte fracción de mover la coma 14 posiciones a la izda &#8594; 0x2AF3</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>calcular para la dirección MP 0x02ABCD con que byte y línea de la caché se corresponde:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>byte &#8594; 0xABCD</p>
+</li>
+<li>
+<p>línea &#8594; 0xABCD &#xF7; 4  &#8594; muevo la coma dos bits a la izda y tomo la parte entera &#8594; 0x2AF3</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>calcular  para la dirección MP 0x02ABCD con que word de la caché se corresponde</p>
+<div class="ulist">
+<ul>
+<li>
+<p>word  &#8594; 0xABCD en módulo 4 &#8594; muevo la coma dos bits a la izda y tomo la parte fracción &#8594; 01</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>William Stalling Ejemplo 4.2a Pg125 : The system has a Cache memory of 64KB  and Main Memory of 16MB with a byte word size and four word block size. For a cache controller with direct mapping correspondence function search the main memory block addresses correspondences to cache memory <strong>0x0CE7 number line</strong> .</p>
 <div class="ulist">
 <ul>
 <li>
@@ -4272,7 +4451,7 @@ lista                	: 1 -&gt; equivale a lista[0]
 <div class="ulist">
 <ul>
 <li>
-<p>Memoria principal: 16MB, byte word, 4 byte block.</p>
+<p>Memoria principal: 16MB, 1word=1byte, 1block=4 byte.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -4298,7 +4477,7 @@ lista                	: 1 -&gt; equivale a lista[0]
 <p>i=j mod m donde i es el número de línea, j el número de bloque y m el número de líneas de la caché.</p>
 </li>
 <li>
-<p>la dirección de 24 bits se descompone en : etiqueta-línea-palabra</p>
+<p>la dirección de 24 bits se descompone en 3 campos : etiqueta-línea-palabra</p>
 <div class="imageblock kroki">
 <div class="content">
 <img src="https://kroki.io/ditaa/svg/eNqz0UUGRiYKSZklxQgBOy5tXbxAm6smJDFdAQxqFHwy81IV8kpzk1KLahTC84tSgIKETbDR1bUAW2sHZOkamkCcAOQYQUQBW50lTA==" alt="Diagram">
@@ -4306,23 +4485,23 @@ lista                	: 1 -&gt; equivale a lista[0]
 </div>
 </li>
 <li>
-<p>Cada tag agrupa 16K bloques &#8594; 16K bloquesx4bytes/bloquexnúmero de tags N=16MB &#8594; 2<sup>14</sup>x2<sup>2</sup>xN=2<sup>24</sup>bytes &#8594; N=2<sup>8</sup> Tags</p>
+<p>Cada tag agrupa 16K bloques &#8594; (16K bloques/tag)x(4bytes/bloque)x(número de tags N)= CapacidadMemPrincipal=16MB &#8594; 2<sup>14</sup>x2<sup>2</sup>xN=2<sup>24</sup>bytes &#8594; N=2<sup>8</sup> Tags &#8594; Como cada agrupamiento Tag equivale a la capacidad de la Caché &#8594; La MPrincipal equivale a 256 Cachés.</p>
 </li>
 <li>
-<p>0CE7 : 14 bits: 00-1100-1110-0111. Buscamos las direcciones de memoria asociadas a dicha línea.</p>
+<p>dirección línea 0CE7 :  dirección línea de 14 bits: 00-1100-1110-0111. Buscamos las direcciones de memoria asociadas a dicha línea.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Tag 0, 	Linea 0CE7, Palabra 0 	&#8594; 0000-0000-00-1100-1110-0111-00 = 0000-0000-0011-0011-1001-1100 &#8594; 00339C</p>
+<p>Dirección MemPrincipal = Tag 0,   Linea 0CE7, Palabra 0 &#8594; 0000-0000-00-1100-1110-0111-00 = 0000-0000-0011-0011-1001-1100 &#8594; 00339C</p>
 </li>
 <li>
-<p>Tag 1, 	Línea 0CE7, Palabra 0 	&#8594; cambia el primer dígito a 1 					&#8594; 01339C</p>
+<p>Dirección MemPrincipal = Tag 1,   Línea 0CE7, Palabra 0 &#8594; cambia el primer campo a 01 				       &#8594; 01339C</p>
 </li>
 <li>
-<p>Tag 255,	Línea 0CE7, Palabra 0 	&#8594; cambia el primer dígito a FF					&#8594; FF339C</p>
+<p>Dirección MemPrincipal = Tag 255, Línea 0CE7, Palabra 0 &#8594; cambia el primer campo a FF				       &#8594; FF339C</p>
 </li>
 <li>
-<p>Las direcciones de memoria son la dirección de la primera palabra de bloque en Memoria Principal.</p>
+<p>Las direcciones de memoria de un bloque son la dirección de la primera palabra del bloque en la Memoria Principal.</p>
 </li>
 </ul>
 </div>
