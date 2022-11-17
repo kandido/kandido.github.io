@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-11-16</span>
+<span id="revdate">2022-11-17</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -1995,7 +1995,7 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <div class="ulist">
 <ul>
 <li>
-<p>Si un sistema tiene una capacidad de memoria principal de 16GB y la estructuramos en 4 módulos cuyos chipsx64 se organizan en 4 ranks con 16 chips/rank, 8 bancos/chip, 16 arrays/banco. Calcular el número de bits/array.</p>
+<p>Si un sistema tiene una capacidad de memoria principal de 16GB y la estructuramos en 4 módulos cuyos chipsx16 se organizan en 4 ranks con 16 chips/rank, 8 bancos/chip, 16 arrays/banco. Calcular el número de bits/array.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2021,10 +2021,10 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="ulist">
 <ul>
 <li>
-<p>Una posible solución sería 2<sup>12</sup> filas x 2^12 columnas.</p>
+<p>Una posible solución sería 2<sup>12</sup> filas x 2<sup>12</sup> columnas.</p>
 </li>
 <li>
-<p>El buffer i/o de transferencia de datos al bus de memoria tiene el tamaño x64, es decir, 64 bits.</p>
+<p>El buffer i/o de transferencia de datos al bus de memoria tiene el tamaño x16, es decir, 16 bits.</p>
 </li>
 </ul>
 </div>
