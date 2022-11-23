@@ -82,7 +82,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <ul class="sectlevel3">
 <li><a href="_imágenes_bit_map_portable.html#_ficheros_incluidos">18.2.1. Ficheros incluidos</a>
 </li>
-<li><a href="_imágenes_bit_map_portable.html#_ejemplo_6">18.2.2. Ejemplo</a>
+<li><a href="_imágenes_bit_map_portable.html#_ejemplo_de_compilación_automática">18.2.2. Ejemplo de compilación automática</a>
 </li>
 </ul>
 </li>
@@ -90,9 +90,9 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <ul class="sectlevel3">
 <li><a href="_imágenes_bit_map_portable.html#_codificación">18.3.1. Codificación</a>
 </li>
-<li><a href="_imágenes_bit_map_portable.html#_mapa_de_memoria">18.3.2. Mapa de memoria</a>
+<li><a href="_imágenes_bit_map_portable.html#_mapa_de_memoria_monitor_buffer">18.3.2. Mapa de memoria: Monitor &#8594; Buffer</a>
 </li>
-<li><a href="_imágenes_bit_map_portable.html#_fichero">18.3.3. Fichero</a>
+<li><a href="_imágenes_bit_map_portable.html#_fichero_bmp">18.3.3. Fichero BMP</a>
 </li>
 </ul>
 </li>
@@ -100,7 +100,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <ul class="sectlevel3">
 <li><a href="_imágenes_bit_map_portable.html#_descripción">18.4.1. Descripción</a>
 </li>
-<li><a href="_imágenes_bit_map_portable.html#_funciones">18.4.2. Funciones</a>
+<li><a href="_imágenes_bit_map_portable.html#_funciones_del_programa">18.4.2. Funciones del programa</a>
 </li>
 </ul>
 </li>
@@ -138,7 +138,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Práctica introductoria al examen final por lo que es necesario realizarla de forma <strong>individual</strong> para obtener el mayor rendimiento. Las dudas se preguntan exclusivamente al profesor ya que son de interés general.
+Práctica introductoria al examen final por lo que se aconseja realizarla de forma <strong>individual</strong> para obtener el mayor rendimiento.
 </td>
 </tr>
 </table>
@@ -146,7 +146,7 @@ Práctica introductoria al examen final por lo que es necesario realizarla de fo
 <div class="ulist">
 <ul>
 <li>
-<p>El objetivo de la práctica es desarrollar una subrutina en lenguaje ensamblador equivalente a una función de C dentro de una aplicaciónd de generación de imágenes con formato BMP.</p>
+<p>El objetivo de la práctica es desarrollar una subrutina en lenguaje ensamblador equivalente a una función de C dentro de una aplicación de generación de imágenes con formato BMP.</p>
 </li>
 <li>
 <p>Los cuatro primeros ejercicios en lenguaje C se realizarán de forma guiada con el profesor y el resto de forma <strong>individual</strong>.</p>
@@ -171,7 +171,7 @@ Práctica introductoria al examen final por lo que es necesario realizarla de fo
 <p><code>comp_ejec_vis.sh</code> : script que automatiza las tareas de compilar, ejecutar y visualizar llamando al script Makefile.</p>
 </li>
 <li>
-<p><code>Makefile_C</code> : script que automatiza la tarea de compilación del programa fuente C</p>
+<p><code>Makefile_C</code> : script que automatiza la tarea de compilación del programa fuente C.</p>
 </li>
 <li>
 <p><code>Makefile_pixels_as</code>: script que automatiza la tarea de ensamblaje, compilación y enlazado de los módulos fuentes C y asm.</p>
@@ -187,10 +187,10 @@ Práctica introductoria al examen final por lo que es necesario realizarla de fo
 <div class="ulist">
 <ul>
 <li>
-<p><em>bitmap_gen_test.c</em>: Genera un imagen bitmap 512x512 en formato BMP y la guarda en el fichero <em>test.bmp</em>.</p>
+<p><em>bitmap_gen_test.c</em>: Genera una imagen bitmap 512x512 en formato BMP y la guarda en el fichero <em>test.bmp</em>.</p>
 </li>
 <li>
-<p><em>cuadrado_128x128.c</em>: Genera un imagen bitmap DIMENSIONxDIMENSION en formato BMP y la guarda en el fichero <em>test.bmp</em>.</p>
+<p><em>cuadrado_128x128.c</em>: Genera una imagen bitmap DIMENSIONxDIMENSION en formato BMP y la guarda en el fichero <em>test.bmp</em>.</p>
 </li>
 <li>
 <p><em>cuadrados_4.c</em>: Genera cuatro rectángulos anidados bitmap en formato BMP y guarda la imagen en el fichero <em>test.bmp</em>.</p>
@@ -221,7 +221,7 @@ Práctica introductoria al examen final por lo que es necesario realizarla de fo
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ejemplo_6">18.2.2. Ejemplo</h4>
+<h4 id="_ejemplo_de_compilación_automática">18.2.2. Ejemplo de compilación automática</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -247,10 +247,11 @@ Práctica introductoria al examen final por lo que es necesario realizarla de fo
 <div class="ulist">
 <ul>
 <li>
-<p>El formato BitMapPortable (BPM) es un formato de imagen escalar, es decir, contiene los datos de cada pixel codificando la intensidad de los componentes RGB de color tal como  se visualizará en la pantalla.</p>
+<p>El formato BitMapPortable (BPM) es un formato de imagen escalar, es decir, contiene los datos de <strong>cada pixel</strong> codificando la intensidad de los componentes RGB de color tal como  se visualizarán en la pantalla.</p>
 </li>
 <li>
-<p>La pantalla está formada por una matriz bidimensional de pixeles, donde cada pixel es un punto discreto de la pantalla programable. La matriz  de la pantalla está vinculada a una estructura de datos tipo array bidimensional 2D de filas (eje horizontal) y columnas (eje vertical) almacenada en la memoria de la tarjeta de video. El origen de coordenadas del array es la esquina inferior izquierda. A cada par (x,y) del array 2D le corresponde el color de un pixel.</p>
+<p>La pantalla de la computadora está formada por una matriz bidimensional de pixeles, donde cada pixel está ubicado en un punto discreto de la pantalla programable. Físicamente el monitor de la computadora puede ser de diferentes tipos: CRT, LCD, LED, OLED, Plasma, etc. Desde el punto de vista funcional supongamos un monitor tipo LED donde cada pixel esta formado por 3 diodos Leds: un led azul, otro led verde y el tercer led rojo. La combinación de los 3 colores básicos da lugar a todos los colores posibles. Las dimensiones de un pixel, es decir 3 leds, es de unas pocas decenas de micras. Un portátil con una pantalla de 15.6" tiene 15" de anchura por 12" de altura. El comando +xdpyinfo | grep <em>dimensions:</em>
++ informa de : 1366x768 pixels (361x203 millimeters=73283 mm<sup>2</sup>) &#8594;73283mm<sup>2</sup>/(1366x768 pixels)=0,07mm<sup>2</sup>/pixel=70000um<sup>2</sup>/pixel. La matriz de pixeles de la pantalla está vinculada a una estructura de datos tipo array bidimensional 2D de filas (eje horizontal) y columnas (eje vertical) almacenada en la memoria de la tarjeta de video. El origen de coordenadas del array es la esquina inferior izquierda. A cada par (x,y) del array 2D le corresponde el color de un pixel.</p>
 </li>
 <li>
 <p>True Color: cada elemento del array contiene un dato formada por 3 campos, donde cada campo representa un color (Blue-Green-Red) y ocupa un byte . Cada componente de color R-G-B está codificado con un byte que indica la intensidad del color. Ejemplos:</p>
@@ -275,64 +276,62 @@ Práctica introductoria al examen final por lo que es necesario realizarla de fo
 </div>
 </li>
 <li>
-<p>Una imagen de tamaño en pixeles 512x512 dara lugar a un array de 512 pixeles x 512 pixeles x 3 bytes/pixel</p>
+<p>Una imagen de tamaño en pixeles 512x512 dara lugar a un array de 512 pixeles x 512 pixeles x 3 bytes/pixel = 786432Bytes = 768KB</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mapa_de_memoria">18.3.2. Mapa de memoria</h4>
+<h4 id="_mapa_de_memoria_monitor_buffer">18.3.2. Mapa de memoria: Monitor &#8594; Buffer</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Al escribir los colores del array2D MxN en la memoria lineal donde cada dirección es <strong>un byte</strong>, la estructura de datos o buffer se escribe de la siguiente forma:</p>
+<p>Al escribir los colores del array2D MxN en la memoria lineal donde cada dirección de memoria es <strong>un byte</strong>, la estructura de datos o buffer tiene sus componentes distribuidos de la siguiente forma:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>F0C0BGR-F0C1BGR-&#8230;&#8203;-F0C_(N-1)BGR-F1C0BGR-&#8230;&#8203;-F1C_(N-1)BGR-&#8230;&#8203;.-F_(M-1)C0BGR-F_(M-1)C1BGR-&#8230;&#8203;-F_(M-1)C_(N-1)BGR que se corresponden con las posiciones relativas 0-1-2-3-4-5-&#8230;&#8203;..-(MxNx3-1)</p>
+<p>F0C0BGR-F0C1BGR-&#8230;&#8203;-F0C_(N-1)BGR-F1C0BGR-&#8230;&#8203;-F1C_(N-1)BGR-&#8230;&#8203;.-F_(M-1)C0BGR-F_(M-1)C1BGR-&#8230;&#8203;-F_(M-1)C_(N-1)BGR que se corresponden con las posiciones relativas 0-1-2-3-4-5-&#8230;&#8203;..-(MxNx3-1). Donde F0 es la fila 0, C0 la columna 0 y BGR la secuencia de 3 bytes Blue-Green-Red.</p>
 </li>
 <li>
-<p>F0C0BGR:  pixel de la Fila cero Columna cero</p>
-<div class="ulist">
-<ul>
-<li>
-<p>3 bytes en el orden azul-verde-rojo.</p>
+<p>longitud total del buffer de memoria: MxNx3 bytes</p>
 </li>
 <li>
-<p>longitud total del buffer: MxNx3 bytes</p>
-</li>
-<li>
-<p>El byte azul ocupará dentro del buffer la posición relativa  0 , el verde la posición 1 y el rojo la posición 3.</p>
-</li>
-</ul>
+<p>Interpretación de F0C0BGR:</p>
+<div class="listingblock">
+<div class="content">
+<pre>*** pixel BGR de la Fila cero Columna cero
+*** BGR: 3 bytes en el orden azul-verde-rojo.
+*** El byte azul ocupará dentro del buffer la posición relativa 0, el byte verde la posición 1 y el byte rojo la posición 2. Posiciones relativas a la dirección del primer byte del buffer.</pre>
+</div>
 </div>
 </li>
 <li>
-<p>F0C1BGR: byte azul &#8594; posición 3 dentro del buffer</p>
+<p>F0C1BGR:</p>
+<div class="listingblock">
+<div class="content">
+<pre>el byte blue está en la posición 3 dentro del buffer
+el byte green está en la posición 4 dentro del buffer
+el byte red está en la posición 5 dentro del buffer</pre>
+</div>
+</div>
 </li>
 <li>
-<p>F0C_(N-1)BGR:  El byte azul está en la posición 3*(N-1), el verde en 3*(N-1)+1 y el rojo en 3*(N-1)+2.</p>
+<p>Fila cero del monitor: F0C_(N-1)BGR:  En el buffer, el byte azul está en la posición 3*(N-1), el verde en 3*(N-1)+1 y el rojo en 3*(N-1)+2.</p>
 </li>
 <li>
-<p>F1C0BGR:  byte azul &#8594; posición 3*N</p>
+<p>Fila uno del monitor: F1C0BGR:  byte azul &#8594; posición 3*N</p>
 </li>
 <li>
-<p>F1C_(N-1)BGR:  byte azul &#8594; posición 3*N+3*(N-1)</p>
+<p>Fila uno del monitor: F1C_(N-1)BGR:  byte azul &#8594; posición 3*N+3*(N-1)</p>
 </li>
 <li>
 <p>F_iC_jBGR:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>byte azul  &#8594; posición 3*N*i+3*j     donde 0&lt;i&lt;M y 0&lt;j&lt;N</p>
-</li>
-<li>
-<p>byte verde &#8594; posición (3*N*i+3*j)+1 donde 0&lt;i&lt;M y 0&lt;j&lt;N</p>
-</li>
-<li>
-<p>byte rojo  &#8594; posición (3*N*i+3*j)+2 donde 0&lt;i&lt;M y 0&lt;j&lt;N</p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="content">
+<pre>byte azul  -&gt; posición 3*N*i+3*j     donde 0&lt;i&lt;M y 0&lt;j&lt;N
+byte verde -&gt; posición (3*N*i+3*j)+1 donde 0&lt;i&lt;M y 0&lt;j&lt;N
+byte rojo  -&gt; posición (3*N*i+3*j)+2 donde 0&lt;i&lt;M y 0&lt;j&lt;N</pre>
+</div>
 </div>
 </li>
 </ul>
@@ -342,7 +341,7 @@ Práctica introductoria al examen final por lo que es necesario realizarla de fo
 </div>
 </div>
 <div class="sect3">
-<h4 id="_fichero">18.3.3. Fichero</h4>
+<h4 id="_fichero_bmp">18.3.3. Fichero BMP</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -362,24 +361,34 @@ Práctica introductoria al examen final por lo que es necesario realizarla de fo
 <div class="ulist">
 <ul>
 <li>
-<p>Genera un array de pixeles y lo salva en el fichero test.bmp</p>
+<p>El programa <em>bitmap_gen_test</em> genera un array 2D de pixeles y lo salva en el fichero <em>test.bmp</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Las dimensiones del array se definen en el programa fuente <em>bitmap_gen_test.c</em></p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_funciones">18.4.2. Funciones</h4>
+<h4 id="_funciones_del_programa">18.4.2. Funciones del programa</h4>
 <div class="sect4">
 <h5 id="_main">main()</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Descripción de bloques</p>
+<p>Función principal</p>
+</li>
+<li>
+<p>Descripción de bloques:</p>
 <div class="listingblock">
 <div class="content">
-<pre>RGB_data buffer[512][512]  : variable local done se declara y genera el array 2D "buffer" de pixeles donde cada pixel es del tipo RGB_data
+<pre>RGB_data buffer[512][512]  : variable local done se declara y almacena el array 2D "buffer" de pixeles donde cada pixel es del tipo RGB_data
 
-Tipo RGB_data:  3 bytes consecutivos donde el primero es la intensidad de azul, el segundo verde y el tercero rojo. Las intensidades son números enteros sin signo.</pre>
+Tipo de variable RGB_data:  3 bytes consecutivos donde el primero es la intensidad de azul, el segundo verde y el tercero rojo. Las intensidades son números enteros sin signo. Por ejemplo: 0x7F-0xFF-0x00  representa una intensidad 50% de azul, una intensidad 100% de verde y una intensidad 0% de rojo</pre>
 </div>
 </div>
 </li>
@@ -391,10 +400,13 @@ Tipo RGB_data:  3 bytes consecutivos donde el primero es la intensidad de azul, 
 <div class="ulist">
 <ul>
 <li>
-<p>Inicializa a cero el array 2D de pixeles "buffer"</p>
+<p>Es una función de la librería standard libc &#8594; <code>man memset</code> &#8594; está declarada en la cabecera <em>string.h</em></p>
 </li>
 <li>
-<p>Esta función no se encuentra en ningún módulo fuente editado por el programador, por lo que debe ser una función definida en &#8230;&#8203; ¿?. Leer el prototipo de dicha función e interpretarlo.</p>
+<p>Inicializa a 0 el array 2D de pixeles "buffer".</p>
+</li>
+<li>
+<p>Ver como ejemplo la llamada a la función memset() en el módulo <em>bitmap_gen_test.c</em></p>
 </li>
 </ul>
 </div>
@@ -404,7 +416,20 @@ Tipo RGB_data:  3 bytes consecutivos donde el primero es la intensidad de azul, 
 <div class="ulist">
 <ul>
 <li>
-<p>Genera el fichero "test.bmp" y escribe en dicho fichero el contenido del array 2D de pixeles con nombre buffer.</p>
+<p>Genera el fichero <em>test.bmp</em> y escribe en dicho fichero el contenido del array 2D de pixeles con nombre buffer.</p>
+</li>
+<li>
+<p>Para pasar el argumento buffer es necesario realizar el casting (BYTE*). Ver la declaración del tipo BYTE en el módulo <em>bitmap_gen_test.c</em></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_estructura_rgb_data">estructura RGB_data</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Ver la declaración del tipo <em>RGB_data</em> en el módulo <em>bitmap_gen_test.c</em>.</p>
 </li>
 </ul>
 </div>
@@ -428,6 +453,9 @@ Tipo RGB_data:  3 bytes consecutivos donde el primero es la intensidad de azul, 
 </li>
 <li>
 <p>buffer[i][j].r : byte red del pixel de la posición (i,j)</p>
+</li>
+<li>
+<p>cada elemento de la matriz buffer[i][j] es una estructura de datos <em>RGB_data</em> declarada por el programador con los elementos b,g y r.</p>
 </li>
 </ul>
 </div>
