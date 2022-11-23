@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-11-17</span>
+<span id="revdate">2022-11-23</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -1578,7 +1578,7 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <div class="ulist">
 <ul>
 <li>
-<p>Jerarquía: Estructura de la memoria DRAM en agrupamientos de direcciones.</p>
+<p>Jerarquía: Estructura de la memoria DRAM en agrupamientos de direcciones</p>
 </li>
 </ul>
 </div>
@@ -1649,10 +1649,10 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <div class="ulist">
 <ul>
 <li>
-<p>Es un conjunto o <em>agrupamiento de chips</em> dentro de todo el sistema de memoria (todos los módulos DIMM ,no cada módulo DIMM) que tienen en comúm la señal chip select (CS), compartiendo así el mismo espacio de direcciones.</p>
+<p>Es un conjunto o <em>agrupamiento de bancos</em> dentro de todo el sistema de memoria (todos los módulos DIMM ,no cada módulo DIMM). Donde los bancos están implementados en Chips. Para seleccionar los bancos de un rank hay contectar los chips de dichos bancos de tal forma que la señal chip select (CS) sea común a todos ellos, compartiendo así el mismo espacio de direcciones.</p>
 </li>
 <li>
-<p>Así organizados, todos los chips del mismo rank pueden responder AL UNISONO al mismo bus de direcciones (filas,columnas). Al activar una señal CS y seleccionar una Fila , se consigue activar todas las columnas de todas las filas de todos los arrays de todos los chips del mismo rank. Este es el objetivo del agrupamiento.</p>
+<p>Así organizados, todos los bancos de los chips del mismo rank pueden responder AL UNISONO al mismo bus de direcciones (filas,columnas). Al activar la señal CS y seleccionar una Fila , se consigue activar todas las columnas de todas las filas de todos los arrays de todos los bancos de los chips del mismo rank. Este es el objetivo del agrupamiento.</p>
 </li>
 <li>
 <p>Un rank es independiente del resto, con direcciones de memoria <em>diferentes</em>, compartiendo el mismo bus de direcciones y bus de chip select. Un rank al ser INDEPENDIENTE puede ser precargado, refrescado, activado, etc al mismo que el resto de ranks.</p>
@@ -1677,10 +1677,10 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <p>4 módulos DIMM con 4 chips cada uno.</p>
 </li>
 <li>
-<p>Agrupamiento de chips en el SISTEMA de memoria ( todos los módulo de memoria DIMM).</p>
+<p>Agrupamiento de los bancos de los chips en el SISTEMA de memoria ( todos los módulo de memoria DIMM).</p>
 </li>
 <li>
-<p>En este caso cada Rank agrupa todos los chips del mismo módulo.</p>
+<p>En este caso cada Rank agrupa todos los chips del mismo módulo y por lo tanto todos los bancos de cada chip.</p>
 </li>
 <li>
 <p>Cada chip select selecciona un rank diferente.</p>
@@ -1713,9 +1713,6 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 </li>
 <li>
 <p>Esta formado por <em>MULTIPLES bancos</em>, un <em>buffer i/o</em>, un <em>demux</em> de filas, un <em>demux</em> de columnas y la lógica de control.</p>
-</li>
-<li>
-<p>Cada Banco tiene un registro denominado ROW-BUFFER.</p>
 </li>
 </ul>
 </div>
@@ -1772,6 +1769,9 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <li>
 <p>En el caso de la cpu de intel 4004 es &#8230;&#8203; (ver Tema CPU apartado i4004)</p>
 </li>
+<li>
+<p>En el entorno linux si ejecutamos el comando "lshw -C memory" aparece información de los distintos bancos, donde en este entorno banco esta asociado a slot de memoria de la placa base.</p>
+</li>
 </ul>
 </div>
 </li>
@@ -1780,16 +1780,38 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <div class="ulist">
 <ul>
 <li>
-<p>Un chip se estructura en bancos independientes.</p>
+<p>Un chip se estructura en bancos.</p>
 </li>
 <li>
-<p>Un banco es un conjunto, <em>agrupamiento de arrays 2D</em>.</p>
+<p>Los bancos se agrupan de forma lógica en Ranks conectando el mismo orden o número de banco de distintos chips.</p>
 </li>
 <li>
-<p>Si cada array envía un bit al buffer i/o, entonces, el número de arrays del banco será el mismo que el número de bits del buffer i/o.</p>
+<p>Un banco es un conjunto, <em>agrupamiento de arrays 2D</em>,al agrupar arrays 2D tenemos una estructura 3D.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Al dibujar la estructura 3D observar que para dirección (fila-columna) tenemos un dato de tamaño el número de arrays del banco.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Si cada array contribuye con un bit al buffer i/o, entonces, el número de arrays del banco será el mismo que el número de bits del buffer i/o.</p>
 </li>
 <li>
-<p>Así organizados, todos los arrays del mismo banco pueden responder AL UNISONO al mismo bus de direcciones (filas,columnas).Se selecciona la misma fila y la misma columna para todos los arrays del banco. Cada array del banco proporciona el bit de la celda seleccionada por lo que el número de bits proporcionados por el banco será el número de arrays del banco.</p>
+<p>Así organizados, todos los arrays del mismo orden de banco de distintos chips pueden responder AL UNISONO al mismo bus de direcciones (filas,columnas). Cada array del banco proporciona el bit de la celda seleccionada por lo que el número de bits del dato proporcionado por el banco será el número de arrays del banco.</p>
 </li>
 <li>
 <p><strong>Todos</strong> los bancos del chip forman parte del <strong>mismo</strong> buffer i/o del chip.</p>
@@ -1798,10 +1820,7 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <p>El número de bits <em>"n"</em> , del dato proporcionado por el banco a través del buffer i/o, se indica diciendo que el chip es <em>xn</em>: x2,x4,x8,x16,x32</p>
 </li>
 <li>
-<p>Un banco es independiente del resto, con direcciones de memoria <em>diferentes</em>, compartiendo el mismo bus de direcciones y bus de chip select. Un banco al ser INDEPENDIENTE puede ser precargado, refrescado, activado, etc al mismo tiempo que el resto de bancos.</p>
-</li>
-</ul>
-</div>
+<p>Bancos de distintos chips son independientes unos de otros, con direcciones de memoria <em>diferentes</em>, compartiendo el mismo bus de direcciones y bus de chip select. Un banco al ser INDEPENDIENTE del resto puede ser precargado, refrescado, activado, etc al mismo tiempo que el resto de bancos del mismo rank: PARALELISMO a nivel de Bancos, con el objetivo de reducir los tiempos de acceso a la memoria DRAM.</p>
 </li>
 </ul>
 </div>
@@ -1868,7 +1887,10 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <p>No confundir con las páginas virtuales del Sistema Operativo</p>
 </li>
 <li>
-<p>Una página abarca múltiples filas del mismo banco. Al conjunto de la misma fila de todos los arrays del banco se denomina <strong>página</strong> (una página está formada por filas). Por lo tanto el contenido del ROW-BUFFER es el de un página. Al row-buffer se descargan más columnas que la requerida, de esta forma el row-buffer hace de buffer guardando datos adyacentes al solicitado. En el siguiente acceso puede que el dato requerido ya esté en el buffer y la latencia de la lectura es mucho más rápida. Por ejemplo en el caso de querer leer un array si el array ha sido almacenado en un página se podría leer toda la página con un solo acceso a las celdas y posteriormente transferir el contenido del buffer por ráfagas.</p>
+<p>Cada conjunto de Bancos del mismo orden (pej Banco número 3) de diferentes chips del mismo Rank, tienen asocidado un "registro virtual" denominado ROW-BUFFER. Es virtual o lógico ya que abarca distintos chips físicos.</p>
+</li>
+<li>
+<p>Una página abarca los datos (misma fila, misma columna de los distintos arrays del banco) de la misma dirección de fila (Pej número 2) de diferentes bancos con el mismo orden o número de banco (Pej número 3). Al conjunto de filas de todos los  banco se denomina <strong>página</strong> (una página está formada por filas). Por lo tanto el contenido del ROW-BUFFER es el de una página. Al row-buffer se descargan más columnas que la requerida, de esta forma el row-buffer hace de CACHE (copia) guardando datos adyacentes al solicitado, pero que no son requeridos inicialmente. Posteriormente se seleccionan todas las columnas del mismo orden (pej columna 2) de cada fila del row-buffer y se cargan en el buffer i/o.  En el siguiente acceso a memoria puede que el dato requerido ya esté en el buffer, por lo que NO es necesaria descargar el dato de las celdas del array y por lo tanto se reduce la latencia y la lectura del dato es mucho más rápida. Por ejemplo en el caso de querer leer un array si el array ha sido almacenado en un página se podría leer toda la página con un solo acceso a las celdas y posteriormente transferir el contenido del buffer por ráfagas.</p>
 </li>
 </ul>
 </div>
@@ -1918,22 +1940,46 @@ Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tan
 <div class="ulist">
 <ul>
 <li>
-<p>Proceso de Lectura dentro de UN chip:</p>
-<div class="ulist">
-<ul>
+<p>Ejemplo de Lectura: Memoria de 4 chipsx4 con 8 bancos por chip y bancos con 4 arrays 1024x512 cada uno. La memoria está organizada en 1 rank de 32 bancos.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
 <li>
-<p>Se selecciona primero UN banco. A continuación se selecciona una fila, la misma fila de todos los arrays de ese banco. En este ejemplo serían 16 filas de 512 columnas cada fila. Las 16 filas se vuelcan en el ROW-BUFFER del banco seleccionado. En este caso el ROW-BUFFER tiene 16x512 bits, es decir, 2<sup>13</sup> bits, 8Kbits</p>
+<p>El controlador de Memoria recibe una dirección física en el espacio lineal y lo mapea al espacio Rank/Bank/Row/Column</p>
 </li>
 <li>
-<p>A continuación, del ROW-BUFFER, se selecciona UNA columna de cada fila, es decir, de los 8Kbits se seleccionan 16 bits que son transferidos al Buffer i/o del chip.</p>
+<p>Se selecciona un número de rank:  (pej 1)</p>
 </li>
 <li>
-<p>El dato a transferir por el bus de datos puede estar formado por el dato de uno o más chips. En este ejemplo si el bus de datos es de de 16 bits la salida del chipx16 es suficiente. En el caso de un bus de datos de 64 bits habría que concatenar las salidas i/o de 4 Chipsx16.</p>
+<p>Se selecciona un número de banco entre 1 y 8: (pej 3)</p>
 </li>
-</ul>
+<li>
+<p>Se selecciona una fila entre 1 y 1024: (pej 2)</p>
+</li>
+<li>
+<p>Quedan seleccionadas todas las filas (pej fila 2) de todos los bancos (pej banco número 3) del mismo rank (pej rank número 1)</p>
+</li>
+<li>
+<p>los datos (4 bits: b<sub>3</sub>b<sub>2</sub>b<sub>1</sub>b<sub>0</sub>) de todas las columnas (512 columnas)  de las filas seleccionadas (la fila 2)  del banco seleccionado (el número 2) de cada chip ( chips) se descargan en el ROW-BUFFER.</p>
+</li>
+<li>
+<p>Se selecciona un número de columna (pej 2)</p>
+</li>
+<li>
+<p>Todas las columnas de orden 2 se descargan en los 4 bufferes i/o (uno de cada chip). Dato de 4bits/columna x 4chips = 16 bits</p>
+</li>
+<li>
+<p>La salida de los 4 bufferes i/o (16bits) activan las líneas del bus de datos (16 hilos).</p>
+</li>
+</ol>
 </div>
 </li>
 </ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/dram/row-buffer.png" alt="row buffer">
+</div>
+<div class="title">Figure 80. Page on Row-Buffer: Rank_1/Banco_3/Fila_2</div>
 </div>
 </div>
 <div class="sect5">
@@ -2127,7 +2173,7 @@ Los 4 módulos al completo se organizan en 4 ranks
 <div class="content">
 <img src="./images/dram/ddr1_frequency.png" alt="ddr1 frequency">
 </div>
-<div class="title">Figure 80. Velocidad de transferencia DDR</div>
+<div class="title">Figure 81. Velocidad de transferencia DDR</div>
 </div>
 </div>
 <div class="sect5">
@@ -2200,7 +2246,7 @@ Cuando programamos una instrucción como "movw sum,%ax", el controlador de memor
 <div class="content">
 <img src="./images/dram/clock.png" alt="clock">
 </div>
-<div class="title">Figure 81. Velocidad de transferencia</div>
+<div class="title">Figure 82. Velocidad de transferencia</div>
 </div>
 </div>
 </div>
@@ -2255,7 +2301,7 @@ Cuando programamos una instrucción como "movw sum,%ax", el controlador de memor
 <div class="content">
 <img src="./images/dram/ddr2_frequency.png" alt="ddr2 frequency">
 </div>
-<div class="title">Figure 82. Velocidad de transferencia DDR2</div>
+<div class="title">Figure 83. Velocidad de transferencia DDR2</div>
 </div>
 </div>
 <div class="sect4">
@@ -2290,7 +2336,7 @@ Cuando programamos una instrucción como "movw sum,%ax", el controlador de memor
 <div class="content">
 <img src="./images/dram/ddr3_frequency.png" alt="ddr3 frequency">
 </div>
-<div class="title">Figure 83. Velocidad de transferencia DDR3</div>
+<div class="title">Figure 84. Velocidad de transferencia DDR3</div>
 </div>
 <table class="tableblock frame-ends grid-all stretch">
 <caption class="title">Table 14. DDR3</caption>
@@ -2741,7 +2787,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/sram_cell_6T.png" alt="sram cell 6T">
 </div>
-<div class="title">Figure 84. SRAM-cell</div>
+<div class="title">Figure 85. SRAM-cell</div>
 </div>
 </div>
 <div class="sect4">
@@ -2815,7 +2861,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_levels.jpg" alt="cache levels">
 </div>
-<div class="title">Figure 85. 3 Levels</div>
+<div class="title">Figure 86. 3 Levels</div>
 </div>
 <div class="ulist">
 <ul>
@@ -2844,19 +2890,19 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_cpu_dram.png" alt="cache cpu dram">
 </div>
-<div class="title">Figure 86. Interconexión</div>
+<div class="title">Figure 87. Interconexión</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/cache/cache_cpu_dram_connection.png" alt="cache cpu dram connection">
 </div>
-<div class="title">Figure 87. Interconexión</div>
+<div class="title">Figure 88. Interconexión</div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="./images/cache/cache_mmu_dram.png" alt="cache mmu dram">
 </div>
-<div class="title">Figure 88. MMU</div>
+<div class="title">Figure 89. MMU</div>
 </div>
 </div>
 <div class="sect4">
@@ -2865,7 +2911,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_dram_block.png" alt="cache dram block">
 </div>
-<div class="title">Figure 89. Estructura de agrupamiento</div>
+<div class="title">Figure 90. Estructura de agrupamiento</div>
 </div>
 <div class="ulist">
 <ul>
@@ -2928,7 +2974,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_read_operation.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 90. Read Operation (RA: Read Address)</div>
+<div class="title">Figure 91. Read Operation (RA: Read Address)</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3077,7 +3123,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_directmap.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 91. Direct Map Structure</div>
+<div class="title">Figure 92. Direct Map Structure</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3110,7 +3156,7 @@ cat /proc/meminfo
 <div class="content">
 <img src="./images/cache/cache_directmap_controller.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 92. Direct Map Controller</div>
+<div class="title">Figure 93. Direct Map Controller</div>
 </div>
 </li>
 </ul>
@@ -3174,7 +3220,7 @@ resto de bits (24-14-2)=8 -&gt; campo de etiqueta de 8 bits</pre>
 <div class="content">
 <img src="./images/cache/cache_fullassociative_controller.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 93. "Full Associative Controller!</div>
+<div class="title">Figure 94. "Full Associative Controller!</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3378,7 +3424,7 @@ resto de bits (24-2)=22 -&gt; campo de etiqueta de 22 bits</pre>
 <div class="content">
 <img src="./images/cache/cache_setassociative_controller.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 94. Set Associative Controller</div>
+<div class="title">Figure 95. Set Associative Controller</div>
 </div>
 <div class="ulist">
 <ul>
@@ -3458,7 +3504,7 @@ Etiqueta : resto de bits = (24-13-2)= 9 bits</pre>
 <div class="content">
 <img src="./images/cache/cache_assoc_size.png" alt="[align=&quot;center&quot;">
 </div>
-<div class="title">Figure 95. Probabilidad de éxito en función del tamaño y la función de asociación</div>
+<div class="title">Figure 96. Probabilidad de éxito en función del tamaño y la función de asociación</div>
 </div>
 </div>
 </div>
