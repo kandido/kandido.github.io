@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-11-23</span>
+<span id="revdate">2022-11-24</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -4513,7 +4513,7 @@ lista                	: 1 -&gt; equivale a lista[0]
 </div>
 </li>
 <li>
-<p>A set-associative cache consists of 64 lines, or slots, divided into four-line sets. Main memory contains 4K blocks of 128 words each. Show the format of main memory addresses.</p>
+<p>A set-associative cache consists of 64 lines, or slots, divided into four-line sets. Main memory contains 4K blocks of 128 words each. Show the format of main memory addresses. Calculate the 0x7FAFA memory address show in hexadecimal code the cache format. How know the cache controller if the 0x7FAFA is in cache memory.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -4568,6 +4568,9 @@ lista                	: 1 -&gt; equivale a lista[0]
 <ul>
 <li>
 <p>Tag/Set/Word : 8/4/7</p>
+</li>
+<li>
+<p>0x7FAFA &#8594; Tag 0xFF, Set 0x6, Word 0x7A. If Tag 0xFF is on any of the four lines of Set 0x6, then a "hit" has occurred.</p>
 </li>
 </ul>
 </div>
@@ -4628,15 +4631,6 @@ lista                	: 1 -&gt; equivale a lista[0]
 </li>
 <li>
 <p>Sol:</p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
 <table class="tableblock frame-ends grid-all" style="width: 80%;">
 <caption class="title">Table 17. Direcciones</caption>
 <colgroup>
@@ -4674,8 +4668,13 @@ lista                	: 1 -&gt; equivale a lista[0]
 </tr>
 </tbody>
 </table>
-<div class="olist arabic">
-<ol class="arabic">
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
 <li>
 <p>Consider a 32-bit microprocessor that has an on-chip 16-KByte four-way set-associative cache. Assume that the cache has a line size of four 32-bit words.</p>
 <div class="olist loweralpha">
