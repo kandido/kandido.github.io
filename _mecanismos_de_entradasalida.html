@@ -2600,6 +2600,56 @@ Note: Linux<span class="k">*</span> requires IRQ 0, 2, and 13 to be as shown.</c
 </div>
 <div class="title">Figure 55. Interrupción del Teclado</div>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Se pulsa una tecla y el controlador del teclado activa la señal IRQ1 del PIC</p>
+</li>
+<li>
+<p>El PIC examina si la IRQ1 está autorizada a interrumpir y si no hay interrupciones de mayor prioridad. En tal caso, el PIC activa la entrada INTR de la CPU</p>
+</li>
+<li>
+<p>La CPU interrumpe (suspende) la ejecución del proceso main_application.</p>
+</li>
+<li>
+<p>La CPU comprueba que el flag IF autoriza la interrupción, confirma al PIC la aceptación de la interrupción y solicita el vector de interrupción asociado a la IRQ1.</p>
+</li>
+<li>
+<p>El PIC envía al bus de direcciones el vector 129 (0x81)</p>
+</li>
+<li>
+<p>El PIC desactiva la solicitud de interrupción INTR a la CPU para poder gestionar otra IRQ.</p>
+</li>
+<li>
+<p>La CPU guarda en el Interrupt Stack el contexto (Flag Register,Code Segment,Instruction Pointer)</p>
+</li>
+<li>
+<p>La CPU resetea el flag IF (IF=0) desautorizando ser interrumpido durante el cambio de contexto del proceso interrumpido por el contexto de la rutina ISR. Captura el vector de interrupción 129 de la tabla de vectores de interrupción&#8594; captura de la tabla la entrada 129x4 &#8594; 0x81*4=0x204 que contiene la dirección de La Interruption Service Routine ISR asociada al periférico teclado.</p>
+</li>
+<li>
+<p>La CPU actualiza CS:IP (0x206:0x204)  para saltar a la dirección de la ISR 129 y comienza su ejecución</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>La ISR salva los "registros no modificables" en el Interrupt Stack &#8594;  Frame: Saved registers . Autoriza las interrupciones IF=1 (Posibilidad de anidamiento de interrupciones)</p>
+</li>
+<li>
+<p>La ISR accede al periférico y se captura el valor de la tecla pulsada a través del data bus.</p>
+</li>
+<li>
+<p>Fin de la ISR . Se desautorizan las interrupciones (IF=0) durante la recuperación del anterior contexto. La CPU recupera los "registros no modificables" del Interrupt Stack &#8594; Frame: Saved registers</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Se recupera el anterior contexto y por lo tanto también la dirección de retorno actualizando el contador de programa CS:IP</p>
+</li>
+<li>
+<p>Continua la ejecución del programa interrumpido main_application</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </div>
