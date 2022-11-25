@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-11-24</span>
+<span id="revdate">2022-11-25</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -692,7 +692,7 @@ Control Bus &lt;- Write</code></pre>
 <p>Describir las fases de los ciclos de instrucción de la CPU al ejecutar dicho programa teniendo en cuenta la siguiente figura:</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/ejercicios/ciclo_instruccion_1.png" alt="ciclo instruccion 1">
+<img src="../HTML/images/ejercicios/ciclo_instruccion_1.png" alt="ciclo instruccion 1">
 </div>
 <div class="title">Figure 97. Ciclos de Instrucción</div>
 </div>
@@ -987,7 +987,7 @@ operation?</p>
 <p>The Intel 8088 microprocessor has a read bus timing similar to that of Figure 3.19, but requires four processor clock cycles. The valid data is on the bus for an amount of time that extends into the fourth processor clock cycle. Assume a processor clock rate of 8 MHz.</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/ejercicios/memoria_rw_sync.png" alt="memoria rw sync">
+<img src="../HTML/images/ejercicios/memoria_rw_sync.png" alt="memoria rw sync">
 </div>
 <div class="title">Figure 98. Cronograma de una operación Read/Write de la Memoria Principal</div>
 </div>
@@ -3351,7 +3351,7 @@ main:	push %ebp
 <p>Para una arquitectura little endian el mapa de direcciones en memoria es el de la figura de abajo. Asociar la declaración de las estructuras s1 y s2 en lenguaje C y su inicialización con el mapa de direcciones indicando las direcciones en memoria de los elementos de las estructuras.</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/ejercicios/little_endian.png" alt="little endian">
+<img src="../HTML/images/ejercicios/little_endian.png" alt="little endian">
 </div>
 <div class="title">Figure 101. Little Endian</div>
 </div>
@@ -5313,7 +5313,7 @@ formats are used. In one format, the 8-bit opcode specifies an I/O operation; th
 <p>7.6 For programmed I/O, Figure 7.5 indicates that the processor is stuck in a wait loop doing status checking of an I/O device. To increase efficiency, the I/O software could be written so that the processor periodically checks the status of the device. If the device is not ready, the processor can jump to other tasks. After some timed interval, the processor comes back to check status again.</p>
 <div class="imageblock">
 <div class="content">
-<img src="./images/ejercicios/7-5.png" alt="7 5">
+<img src="../HTML/images/ejercicios/7-5.png" alt="7 5">
 </div>
 </div>
 <div class="olist loweralpha">
@@ -5716,7 +5716,7 @@ formats are used. In one format, the 8-bit opcode specifies an I/O operation; th
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="./images/ejercicios/8_6.png" alt="VM">
+<img src="../HTML/images/ejercicios/8_6.png" alt="VM">
 </div>
 <div class="title">Figure 102. VM</div>
 </div>
@@ -6122,12 +6122,12 @@ formats are used. In one format, the 8-bit opcode specifies an I/O operation; th
 <p>Randal Capítulo 9: Figure 9.19 shows the formats of the virtual and physical addresses. Since each page is 26 =64 bytes, the low-order 6 bits of the virtual and physical addresses serve as the VPO and PPO respectively.The high-order 8 bits of the virtual address serve as the VPN. The high-order 6 bits of the physical address serve as the PPN. Figure 9.20 shows a snapshot of our little memory system, including the TLB (Figure 9.20(a)), a portion of the page table (Figure 9.20(b)), and the L1 cache (Figure 9.20(c)). Above the figures of the TLB and cache, we have also shown how the bits of the virtual and physical addresses are partitioned by the hardware as it accesses these devices.</p>
 <div class="imageblock">
 <div class="content">
-<img src="./images/ejercicios/randal_9-19.png" alt="randal 9 19">
+<img src="../HTML/images/ejercicios/randal_9-19.png" alt="randal 9 19">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/ejercicios/randal_9-20.png" alt="randal 9 20">
+<img src="../HTML/images/ejercicios/randal_9-20.png" alt="randal 9 20">
 </div>
 </div>
 <div class="ulist">
@@ -6467,7 +6467,7 @@ Whenever this happens, the BIU automatically resets the queue and then begins to
 </ul>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="./images/ejercicios/cpu_12-13.png" alt="cpu 12 13" title="Predicción de Salto"></span></p>
+<p><span class="image"><img src="../HTML/images/ejercicios/cpu_12-13.png" alt="cpu 12 13" title="Predicción de Salto"></span></p>
 </div>
 <div class="ulist">
 <ul>
@@ -6599,7 +6599,7 @@ Whenever this happens, the BIU automatically resets the queue and then begins to
 <li>
 <p>12.15 Redraw Figures 12.19c (14.21c), assuming that the conditional branch is not taken</p>
 <div class="paragraph">
-<p><span class="image"><img src="./images/ejercicios/14-21.png" alt="14 21"></span></p>
+<p><span class="image"><img src="../HTML/images/ejercicios/14-21.png" alt="14 21"></span></p>
 </div>
 <div class="ulist">
 <ul>
@@ -6673,7 +6673,7 @@ Whenever this happens, the BIU automatically resets the queue and then begins to
 <li>
 <p>12.16 Table 14.5 summarizes statistics from [MACD84] concerning branch behavior for various classes of applications. With the exception of type 1 branch behavior, there is no noticeable difference among the application classes. Determine the fraction of all branches that go to the branch target address for the scientific environment. Repeat for commercial and systems environments.</p>
 <div class="paragraph">
-<p><span class="image"><img src="./images/ejercicios/14-5.png" alt="14 5"></span></p>
+<p><span class="image"><img src="../HTML/images/ejercicios/14-5.png" alt="14 5"></span></p>
 </div>
 <div class="ulist">
 <ul>
@@ -6736,7 +6736,7 @@ Whenever this happens, the BIU automatically resets the queue and then begins to
 <p>13.3 We wish to determine the execution time for a given program using the various pipelining schemes discussed in Section 13.5. Let
 N = number of executed instructions, J = number of jump instructions, D = number of memory accesses. For the simple sequential scheme (Figure 13.6a) for a RISC architecture, the execution time is 2N+D stages. Derive formulas for two-stage, three-stage, and four-stage pipelining.</p>
 <div class="paragraph">
-<p><span class="image"><img src="./images/ejercicios/15-6.png" alt="15 6"></span></p>
+<p><span class="image"><img src="../HTML/images/ejercicios/15-6.png" alt="15 6"></span></p>
 </div>
 <div class="ulist">
 <ul>
@@ -6871,7 +6871,7 @@ N = number of executed instructions, J = number of jump instructions, D = number
 <li>
 <p>13.4 Reorganize the code sequence in Figure 13.6d to reduce the number of NOOPs. Figura del ejercicio 13.3 d).</p>
 <div class="paragraph">
-<p><span class="image"><img src="./images/ejercicios/risc_pipelining_13-6.png" alt="risc pipelining 13 6" title="Diagrama de Tiempos.Segmentación de 4 Etapas"></span></p>
+<p><span class="image"><img src="../HTML/images/ejercicios/risc_pipelining_13-6.png" alt="risc pipelining 13 6" title="Diagrama de Tiempos.Segmentación de 4 Etapas"></span></p>
 </div>
 <div class="ulist">
 <ul>
@@ -7015,7 +7015,7 @@ N = number of executed instructions, J = number of jump instructions, D = number
 <li>
 <p>Delayed Branch</p>
 <div class="paragraph">
-<p><span class="image"><img src="./images/ejercicios/15-7.png" alt="15 7"></span></p>
+<p><span class="image"><img src="../HTML/images/ejercicios/15-7.png" alt="15 7"></span></p>
 </div>
 <div class="ulist">
 <ul>

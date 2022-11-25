@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-11-24</span>
+<span id="revdate">2022-11-25</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -88,11 +88,13 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 <li><a href="_imágenes_bit_map_portable.html#_formato_bmp">18.3. Formato BMP</a>
 <ul class="sectlevel3">
-<li><a href="_imágenes_bit_map_portable.html#_codificación">18.3.1. Codificación</a>
+<li><a href="_imágenes_bit_map_portable.html#_pantalla_pixel">18.3.1. Pantalla: pixel</a>
 </li>
-<li><a href="_imágenes_bit_map_portable.html#_mapa_de_memoria_monitor_buffer">18.3.2. Mapa de memoria: Monitor &#8594; Buffer</a>
+<li><a href="_imágenes_bit_map_portable.html#_codificación">18.3.2. Codificación</a>
 </li>
-<li><a href="_imágenes_bit_map_portable.html#_fichero_bmp">18.3.3. Fichero BMP</a>
+<li><a href="_imágenes_bit_map_portable.html#_mapa_de_memoria_monitor_buffer">18.3.3. Mapa de memoria: Monitor &#8594; Buffer</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_fichero_bmp">18.3.4. Fichero BMP</a>
 </li>
 </ul>
 </li>
@@ -243,18 +245,27 @@ Práctica introductoria al examen final por lo que se aconseja realizarla de for
 <div class="sect2">
 <h3 id="_formato_bmp">18.3. Formato BMP</h3>
 <div class="sect3">
-<h4 id="_codificación">18.3.1. Codificación</h4>
+<h4 id="_pantalla_pixel">18.3.1. Pantalla: pixel</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>La pantalla de la computadora está formada por una matriz bidimensional de pixeles, donde cada pixel está ubicado en un punto discreto de la pantalla programable. Físicamente el monitor de la computadora puede ser de diferentes tipos: CRT, LCD, LED, OLED, Plasma, etc. Desde el punto de vista funcional supongamos un monitor tipo LED donde cada pixel esta formado por 3 diodos Leds: un led azul, otro led verde y el tercer led rojo. La combinación de los 3 colores básicos da lugar a todos los colores posibles. Las dimensiones de un pixel, es decir 3 leds, es de unas pocas centenas de micrómetros. Un portátil con una pantalla de 15.6" tiene 15" de anchura por 12" de altura. El comando <code>xdpyinfo | grep <em>dimensions:</em></code> informa de : 1366x768 pixels (361x203 millimeters=73283 mm<sup>2</sup>) &#8594;73283mm<sup>2</sup>/(1366x768 pixels)=0,07mm<sup>2</sup>/pixel=70000um<sup>2</sup>/pixel,es decir, un cuadrado de 265um de lado.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_codificación">18.3.2. Codificación</h4>
 <div class="ulist">
 <ul>
 <li>
 <p>El formato BitMapPortable (BPM) es un formato de imagen escalar, es decir, contiene los datos de <strong>cada pixel</strong> codificando la intensidad de los componentes RGB de color tal como  se visualizarán en la pantalla.</p>
 </li>
 <li>
-<p>La pantalla de la computadora está formada por una matriz bidimensional de pixeles, donde cada pixel está ubicado en un punto discreto de la pantalla programable. Físicamente el monitor de la computadora puede ser de diferentes tipos: CRT, LCD, LED, OLED, Plasma, etc. Desde el punto de vista funcional supongamos un monitor tipo LED donde cada pixel esta formado por 3 diodos Leds: un led azul, otro led verde y el tercer led rojo. La combinación de los 3 colores básicos da lugar a todos los colores posibles. Las dimensiones de un pixel, es decir 3 leds, es de unas pocas decenas de micras. Un portátil con una pantalla de 15.6" tiene 15" de anchura por 12" de altura. El comando +xdpyinfo | grep <em>dimensions:</em>
-+ informa de : 1366x768 pixels (361x203 millimeters=73283 mm<sup>2</sup>) &#8594;73283mm<sup>2</sup>/(1366x768 pixels)=0,07mm<sup>2</sup>/pixel=70000um<sup>2</sup>/pixel. La matriz de pixeles de la pantalla está vinculada a una estructura de datos tipo array bidimensional 2D de filas (eje horizontal) y columnas (eje vertical) almacenada en la memoria de la tarjeta de video. El origen de coordenadas del array es la esquina inferior izquierda. A cada par (x,y) del array 2D le corresponde el color de un pixel.</p>
+<p>En el formato BPM, la matriz de pixeles de la pantalla está vinculada a una estructura de datos tipo array bidimensional 2D de filas (eje horizontal) y columnas (eje vertical) almacenada en la memoria de la tarjeta de video. El origen de coordenadas del array es la esquina inferior izquierda. A cada par (x,y) del array 2D le corresponde el color de un pixel.</p>
 </li>
 <li>
-<p>True Color: cada elemento del array contiene un dato formada por 3 campos, donde cada campo representa un color (Blue-Green-Red) y ocupa un byte . Cada componente de color R-G-B está codificado con un byte que indica la intensidad del color. Ejemplos:</p>
+<p>True Color: cada elemento del array contiene un dato formada por 3 campos, donde cada campo representa un color (Blue-Green-Red) y ocupa un byte .Cada componente de color R-G-B está codificado con un byte que indica la intensidad del color. Ejemplos:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -282,7 +293,7 @@ Práctica introductoria al examen final por lo que se aconseja realizarla de for
 </div>
 </div>
 <div class="sect3">
-<h4 id="_mapa_de_memoria_monitor_buffer">18.3.2. Mapa de memoria: Monitor &#8594; Buffer</h4>
+<h4 id="_mapa_de_memoria_monitor_buffer">18.3.3. Mapa de memoria: Monitor &#8594; Buffer</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -341,7 +352,7 @@ byte rojo  -&gt; posición (3*N*i+3*j)+2 donde 0&lt;i&lt;M y 0&lt;j&lt;N</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_fichero_bmp">18.3.3. Fichero BMP</h4>
+<h4 id="_fichero_bmp">18.3.4. Fichero BMP</h4>
 <div class="ulist">
 <ul>
 <li>
