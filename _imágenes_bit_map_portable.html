@@ -23,6 +23,221 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
 <!-- Change some CSS.
 <style>
 .imageblock{
@@ -489,6 +704,18 @@ Tipo de variable RGB_data:  3 bytes consecutivos donde el primero es la intensid
 </div>
 <div class="sect2">
 <h3 id="_ejercicios_4">18.5. Ejercicios</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+El último ejercicio consistente en una subrutina en lenguaje ensamblador suele ser la base del examen de prácticas.
+</td>
+</tr>
+</table>
+</div>
 <div class="sect3">
 <h4 id="_programación_en_c_2">18.5.1. Programación en C</h4>
 <div class="ulist">
@@ -521,7 +748,7 @@ Tipo de variable RGB_data:  3 bytes consecutivos donde el primero es la intensid
 <div class="ulist">
 <ul>
 <li>
-<p>x e y son el origen de coordenadas del cuadrado.</p>
+<p>x e y son el origen de coordenadas del cuadrado (esquina inferior izquierda)</p>
 </li>
 <li>
 <p>maximo es la coordenada mayor del cuadrado.</p>
@@ -560,10 +787,10 @@ Tipo de variable RGB_data:  3 bytes consecutivos donde el primero es la intensid
 <p>La subrutina implementa el doble bucle.</p>
 </li>
 <li>
-<p>De forma implícita, en la propia subrutina, consideraremos los argumentos x=y=0.</p>
+<p>De forma implícita, en la propia subrutina, consideraremos los argumentos x=y=0 que definen el origen de coordenadas del cuadrado.</p>
 </li>
 <li>
-<p>Azul, rojo y verde son las intensidades de todos los pixeles del cuadrado.</p>
+<p>Todos los pixeles del cuadrado tienen el mismo color cuya intensidad se define con las variables azul, verde y rojo.</p>
 </li>
 </ul>
 </div>
@@ -580,6 +807,148 @@ Tipo de variable RGB_data:  3 bytes consecutivos donde el primero es la intensid
 </li>
 <li>
 <p>Lo mismo que en el apartado anterior con el módulo <strong>bmp_as.c</strong> para la subrutina <em>pixels_generator</em></p>
+</li>
+<li>
+<p>Interpretar los comandos gdb en el caso siguiente:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="o">+</span><span class="n">file</span> <span class="n">bmp_imagen</span>
+<span class="n">Leyendo</span> <span class="n">s</span><span class="err">í</span><span class="n">mbolos</span> <span class="n">desde</span> <span class="n">bmp_imagen</span><span class="p">...</span><span class="n">hecho</span><span class="p">.</span>
+<span class="o">+</span><span class="n">b</span> <span class="n">main</span>
+<span class="n">Punto</span> <span class="n">de</span> <span class="n">interrupci</span><span class="err">ó</span><span class="n">n</span> <span class="mi">1</span> <span class="n">at</span> <span class="mh">0x851</span><span class="o">:</span> <span class="n">file</span> <span class="n">bmp_imagen</span><span class="p">.</span><span class="n">c</span><span class="p">,</span> <span class="n">line</span> <span class="mi">128</span><span class="p">.</span>
+<span class="o">+</span><span class="n">run</span>
+<span class="n">Starting</span> <span class="n">program</span><span class="o">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">candido</span><span class="o">/</span><span class="n">Dropbox</span><span class="o">/</span><span class="n">apuntes</span><span class="o">/</span><span class="n">apuntes_Estr_Computadores</span><span class="o">/</span><span class="n">upna</span><span class="o">/</span><span class="n">practicas</span><span class="o">/</span><span class="n">x86</span><span class="o">/</span><span class="n">BMP</span><span class="o">/</span><span class="n">bmp_imagen</span>
+
+<span class="n">Breakpoint</span> <span class="mi">1</span><span class="p">,</span> <span class="n">main</span> <span class="p">(</span><span class="n">argc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="mh">0xffffcb54</span><span class="p">)</span> <span class="n">at</span> <span class="n">bmp_imagen</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">128</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">s</span>
+<span class="n">pixels_generator</span> <span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">maximo</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">reg_mem</span><span class="o">=</span><span class="mh">0xfff3ca9c</span><span class="p">)</span> <span class="n">at</span> <span class="n">bmp_imagen</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">112</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">ptype</span> <span class="n">buffer</span>
+<span class="n">El</span> <span class="n">s</span><span class="err">í</span><span class="n">mbolo</span> <span class="err">«</span><span class="n">buffer</span><span class="err">»</span> <span class="n">no</span> <span class="n">est</span><span class="err">á</span> <span class="n">en</span> <span class="n">el</span> <span class="n">contexto</span> <span class="n">actual</span><span class="p">.</span>
+<span class="o">+</span><span class="n">ptype</span> <span class="n">reg_mem</span>
+<span class="n">type</span> <span class="o">=</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">BYTE</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">g</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span> <span class="p">(</span><span class="o">*</span><span class="p">)[</span><span class="mi">512</span><span class="p">]</span>
+<span class="o">+</span><span class="n">finish</span>
+<span class="n">Correr</span> <span class="n">hasta</span> <span class="n">la</span> <span class="n">salida</span> <span class="n">desde</span> <span class="err">#</span><span class="mi">0</span>  <span class="n">pixels_generator</span> <span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">maximo</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">reg_mem</span><span class="o">=</span><span class="mh">0xfff3ca9c</span><span class="p">)</span> <span class="n">at</span> <span class="n">bmp_imagen</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">114</span>
+<span class="mh">0x5655588a</span> <span class="n">in</span> <span class="n">main</span> <span class="p">(</span><span class="n">argc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="mh">0xffffcb54</span><span class="p">)</span> <span class="n">at</span> <span class="n">bmp_imagen</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">139</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">ptype</span> <span class="n">buffer</span>
+<span class="n">type</span> <span class="o">=</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">BYTE</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">g</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span> <span class="p">[</span><span class="mi">512</span><span class="p">][</span><span class="mi">512</span><span class="p">]</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">xb</span> <span class="o">&amp;</span><span class="n">buffer</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span>
+<span class="err">$</span><span class="mi">1</span> <span class="o">=</span> <span class="mh">0xfff3ca9c</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">x</span> <span class="o">&amp;</span><span class="n">buffer</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">x</span> <span class="p">(</span><span class="o">*</span> <span class="n">RGB_data</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span>
+<span class="n">Un</span> <span class="n">syntax</span> <span class="n">error</span> <span class="n">en</span> <span class="n">la</span> <span class="n">expresi</span><span class="err">ó</span><span class="n">n</span><span class="p">,</span> <span class="n">cerca</span> <span class="n">de</span> <span class="err">«</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="err">»</span><span class="p">.</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">x</span> <span class="p">(</span><span class="n">RGB_data</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span> <span class="p">(</span><span class="n">RGB_data</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span> <span class="o">&amp;</span><span class="n">buffer</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span> <span class="n">buffer</span>
+<span class="n">value</span> <span class="n">requires</span> <span class="mi">786432</span> <span class="n">bytes</span><span class="p">,</span> <span class="n">which</span> <span class="n">is</span> <span class="n">more</span> <span class="n">than</span> <span class="n">max</span><span class="o">-</span><span class="n">value</span><span class="o">-</span><span class="n">size</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">2</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">}</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">r</span>
+<span class="err">$</span><span class="mi">3</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span> <span class="o">*</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">No</span> <span class="n">se</span> <span class="n">puede</span> <span class="n">acceder</span> <span class="n">a</span> <span class="n">la</span> <span class="n">memoria</span> <span class="n">en</span> <span class="n">la</span> <span class="n">direcci</span><span class="err">ó</span><span class="n">n</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span> <span class="o">*</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">4</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">5</span> <span class="o">=</span> <span class="mh">0xfff3ca9c</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">6</span> <span class="o">=</span> <span class="mh">0xfff3ca9f</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">7</span> <span class="o">=</span> <span class="mh">0xfff3ca9f</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">8</span> <span class="o">=</span> <span class="mh">0xfff3ca9f</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">].</span><span class="n">g</span>
+<span class="err">$</span><span class="mi">9</span> <span class="o">=</span> <span class="mh">0xfff3caa0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">].</span><span class="n">r</span>
+<span class="err">$</span><span class="mi">10</span> <span class="o">=</span> <span class="mh">0xfff3caa1</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">11</span> <span class="o">=</span> <span class="mh">0xfff54b5c</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">12</span> <span class="o">=</span> <span class="mh">0xff</span>
+<span class="o">+</span><span class="n">p</span>  <span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">13</span> <span class="o">=</span> <span class="mi">255</span> <span class="sc">'\377'</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">14</span> <span class="o">=</span> <span class="mh">0xff</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="o">*</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">)</span>
+<span class="err">$</span><span class="mi">15</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="n">buffer</span><span class="p">[</span><span class="mi">512</span><span class="p">][</span><span class="mi">512</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">16</span> <span class="o">=</span> <span class="mh">0x3d</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="n">buffer</span><span class="p">[</span><span class="mi">511</span><span class="p">][</span><span class="mi">511</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">17</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="n">buffer</span><span class="p">[</span><span class="mi">511</span><span class="p">][</span><span class="mi">511</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">18</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">}</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">19</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span> <span class="o">=</span> <span class="mh">0xff</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mh">0xff</span><span class="p">}</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="o">*</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">)</span>
+<span class="err">$</span><span class="mi">20</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="o">*</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">63</span><span class="p">)</span>
+<span class="err">$</span><span class="mi">21</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="o">*</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">65</span><span class="p">)</span>
+<span class="err">$</span><span class="mi">22</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">)</span>
+<span class="mh">0xfff44adc</span><span class="o">:</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">23</span> <span class="o">=</span> <span class="mh">0xfff54b5c</span>
+<span class="o">+</span><span class="n">p</span> <span class="mh">0xfff54b5c</span> <span class="o">-</span> <span class="mh">0xfff44adc</span>
+<span class="err">$</span><span class="mi">24</span> <span class="o">=</span> <span class="mi">65664</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">))</span>
+<span class="mh">0xfff54b5c</span><span class="o">:</span>	<span class="mh">0xff</span>	<span class="mh">0x00</span>	<span class="mh">0xff</span>
+<span class="o">+</span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">))</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">++</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">))</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«</span><span class="o">+</span><span class="n">x</span><span class="err">»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">+</span><span class="mh">0xfff54b5c</span><span class="o">:</span>     <span class="mh">0xff</span>    <span class="mh">0x00</span>    <span class="mh">0xff</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«</span><span class="mh">0xfff54b5c</span><span class="err">»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">+</span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">))</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">++</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">))</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«</span><span class="o">+</span><span class="n">x</span><span class="err">»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">+</span><span class="mh">0xfff54b5c</span><span class="o">:</span>     <span class="mh">0xff</span>    <span class="mh">0x00</span>    <span class="mh">0xff</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«</span><span class="mh">0xfff54b5c</span><span class="err">»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">25</span> <span class="o">=</span> <span class="mh">0xfff3ca9f</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span> <span class="p">(</span><span class="n">RGB_data</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">1</span>
+<span class="mh">0xfff3ca9f</span><span class="o">:</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">quit</span>
+
+<span class="n">DENTRO</span> <span class="n">DE</span> <span class="n">LA</span> <span class="n">SUBRUTINA</span> <span class="n">puedo</span> <span class="n">utilizar</span> <span class="n">los</span> <span class="n">tipos</span> <span class="n">declarados</span> <span class="n">en</span> <span class="n">main</span>
+
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">ptype</span> <span class="n">RGB_data</span>
+<span class="n">type</span> <span class="o">=</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">BYTE</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">g</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span>  <span class="o">*</span><span class="p">(</span><span class="n">RGB_data</span> <span class="o">*</span><span class="p">)</span><span class="n">RGB_ptr</span>
+<span class="err">$</span><span class="mi">29</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span> <span class="sc">'\000'</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span> <span class="sc">'\000'</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">255</span> <span class="sc">'\377'</span><span class="p">}</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span>  <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">RGB_data</span> <span class="o">*</span><span class="p">)</span><span class="n">RGB_ptr</span><span class="p">).</span><span class="n">r</span>
+<span class="err">$</span><span class="mi">28</span> <span class="o">=</span> <span class="mi">255</span> <span class="sc">'\377'</span></code></pre>
+</div>
+</div>
 </li>
 </ol>
 </div>
