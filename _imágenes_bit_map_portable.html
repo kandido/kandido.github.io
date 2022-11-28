@@ -106,6 +106,16 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 </ul>
 </li>
+<li><a href="_imágenes_bit_map_portable.html#_ejercicios_4">18.5. Ejercicios</a>
+<ul class="sectlevel3">
+<li><a href="_imágenes_bit_map_portable.html#_programación_en_c_2">18.5.1. Programación en C</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_programación_en_asm">18.5.2. Programación en ASM</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_gdb_2">18.5.3. GDB</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -249,7 +259,7 @@ Práctica introductoria al examen final por lo que se aconseja realizarla de for
 <div class="ulist">
 <ul>
 <li>
-<p>La pantalla de la computadora está formada por una matriz bidimensional de pixeles, donde cada pixel está ubicado en un punto discreto de la pantalla programable. Físicamente el monitor de la computadora puede ser de diferentes tipos: CRT, LCD, LED, OLED, Plasma, etc. Desde el punto de vista funcional supongamos un monitor tipo LED donde cada pixel esta formado por 3 diodos Leds: un led azul, otro led verde y el tercer led rojo. La combinación de los 3 colores básicos da lugar a todos los colores posibles. Las dimensiones de un pixel, es decir 3 leds, es de unas pocas centenas de micrómetros. Un portátil con una pantalla de 15.6" tiene 15" de anchura por 12" de altura. El comando <code>xdpyinfo | grep <em>dimensions:</em></code> informa de : 1366x768 pixels (361x203 millimeters=73283 mm<sup>2</sup>) &#8594;73283mm<sup>2</sup>/(1366x768 pixels)=0,07mm<sup>2</sup>/pixel=70000um<sup>2</sup>/pixel,es decir, un cuadrado de 265um de lado.</p>
+<p>La pantalla de la computadora está formada por una matriz bidimensional de pixeles, donde cada pixel está ubicado en un punto discreto de la pantalla programable. Físicamente el monitor de la computadora puede ser de diferentes tipos: CRT, LCD, LED, OLED, Plasma, etc. Desde el punto de vista funcional supongamos un monitor tipo LED donde cada pixel esta formado por 3 diodos Leds: un led azul, otro led verde y el tercer led rojo. La combinación de los 3 colores básicos da lugar a todos los colores posibles. Las dimensiones de un pixel, es decir 3 leds, es de unas pocas centenas de micrómetros. Un portátil con una pantalla de 15.6" tiene 15" de anchura por 12" de altura. El comando <code>xdpyinfo | grep <em>dimensions:</em></code> informa de : 1366x768 pixels (361x203 millimeters=73283 mm<sup>2</sup>) &#8594;73283mm<sup>2</sup>/(1366x768 pixels)=0,07mm<sup>2</sup>/pixel=70000&#181;m<sup>2</sup>/pixel,es decir, un cuadrado de 265&#181;m de lado.</p>
 </li>
 </ul>
 </div>
@@ -473,6 +483,105 @@ Tipo de variable RGB_data:  3 bytes consecutivos donde el primero es la intensid
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicios_4">18.5. Ejercicios</h3>
+<div class="sect3">
+<h4 id="_programación_en_c_2">18.5.1. Programación en C</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Leer el procedimiento de programación en el fichero <strong>LEEME.txt</strong></p>
+</li>
+<li>
+<p>El objetivo es modificar la función principal <strong>main()</strong> del programa original <strong>bitmap_gen_test.c</strong> dando lugar a distintos programas independientes entre sí.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>- Compilar y ejecutar el program <em>bitmap_gen_test.c</em></p>
+</li>
+<li>
+<p>-  visualizar la imagen del fichero test.bmp: <strong>$display test.bmp</strong></p>
+</li>
+<li>
+<p>- Módulo <strong>cuadrado_128x128.c</strong> :Cambiar las dimensiones de la imagen a 128 pixeles x 128 pixeles editando la macro DIMENSION=128 un gris con una intensidad del 50% de su valor máximo.</p>
+</li>
+<li>
+<p>- Módulo <strong>cuadrados_4.c</strong>: Generar 4 cuadrados, uno dentro de otro simétricamente, donde el cuadrado mayor negro es 512x512 y el resto se reduce 1/8 cada uno. No utilizar ctes en las sentencias de C, utilizar las macros x_coor, y_coor, top para indicar el valor inicial del <strong>for</strong> y la posición máxima (top) de las filas y columnas. Colores de los cuadrados: background (00-00-00)/(FF-00-FF)/(00-FF-FF)/(FF-FF-00)/</p>
+</li>
+<li>
+<p>- Módulo <strong>bmp_funcion.c</strong>: Dentro de la función main(), sustituir el bloque de código que realiza el bucle para inicializar los pixeles del cuadrado convertirlo por una función con las siguientes características:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>prototipo: <em>void pixels_generator(unsigned int x, unsigned int y, unsigned int maximo, RGB_data reg_mem[][top])</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>x e y son el origen de coordenadas del cuadrado.</p>
+</li>
+<li>
+<p>maximo es la coordenada mayor del cuadrado.</p>
+</li>
+<li>
+<p>llamada a la función: pixels_generator(xcoor,ycoor,top,buffer);</p>
+<div class="ulist">
+<ul>
+<li>
+<p>los argumentos xcoor=top/8, ycoor=top/8 y top=512 definirlos mediante macros</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_programación_en_asm">18.5.2. Programación en ASM</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>- Módulo <strong>bmp_as.c</strong>: Implementar la función <em>void pixels_generator(unsigned int maximo, RGB_data reg_mem[][top])</em> desarrollando en lenguaje ensamblador la subrutina  <em>pixels_generator</em> en el nuevo fichero <strong>array_pixel.s</strong>. El fichero en lenguaje ensamblador únicamente contendrá la subrutina.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La subrutina implementa el doble bucle.</p>
+</li>
+<li>
+<p>De forma implicita en la propia subrutina consideraremos los argumentos x=y=0.</p>
+</li>
+<li>
+<p>Azul, rojo y verde son las intensidades de todos los pixeles del cuadrado.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gdb_2">18.5.3. GDB</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>En el programa en <strong>bmp_funcion.c</strong> indicar la posición de la pila donde se salva la dirección de retorno de la subrutina <strong>pixels_generator</strong>, así como el contenido del frame pointer y del stack pointer.</p>
+</li>
+<li>
+<p>Lo mismo que en el apartado anterior con el programa <strong>bmp_as.c</strong> para la subrutina <em>pixels_generator</em></p>
+</li>
+</ol>
 </div>
 </div>
 </div>
