@@ -41,7 +41,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
              .nav-footer{text-align: center; margin-top: auto;}
              .nav-footer > p > a {white-space: nowrap;}</style>
 </head>
-<body id="_fpu_x87" class="book">
+<body id="_programas_en_lenguaje_ensamblador_propuestas" class="book">
 <div id="header">
 <h1>Estructura de Computadores  (240306)</h1>
 <div class="details">
@@ -88,7 +88,15 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 <li><a href="_pila.html">30. Pila</a>
 </li>
-<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html">31. Programas en Lenguaje Ensamblador: Propuestas</a>
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html"><span class="toc-current">31. Programas en Lenguaje Ensamblador: Propuestas</span></a>
+<ul class="sectlevel2">
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html#asm_propu">31.1. Nivel Medio</a>
+<ul class="sectlevel3">
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html#_formato_bmp_2">31.1.1. Formato BMP</a>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 <li><a href="_apéndice_unidad_cpu.html">32. Apéndice: Unidad CPU</a>
 </li>
@@ -98,17 +106,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 <li><a href="_lenguaje_de_programación_c_2.html">35. Lenguaje de Programación C</a>
 </li>
-<li><a href="_fpu_x87.html"><span class="toc-current">36. FPU x87</span></a>
-<ul class="sectlevel2">
-<li><a href="_fpu_x87.html#fpu_x87">36.1. FPU x87</a>
-<ul class="sectlevel3">
-<li><a href="_fpu_x87.html#_resumen">36.1.1. Resumen</a>
-</li>
-<li><a href="_fpu_x87.html#_refs_3">36.1.2. Refs</a>
-</li>
-</ul>
-</li>
-</ul>
+<li><a href="_fpu_x87.html">36. FPU x87</a>
 </li>
 <li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">37. Estructura de Computadores 2022: Primer Parcial Teoría</a>
 </li>
@@ -135,132 +133,104 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_fpu_x87">36. FPU x87</h2>
+<h2 id="_programas_en_lenguaje_ensamblador_propuestas">31. Programas en Lenguaje Ensamblador: Propuestas</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="fpu_x87">36.1. FPU x87</h3>
+<h3 id="asm_propu">31.1. Nivel Medio</h3>
 <div class="sect3">
-<h4 id="_resumen">36.1.1. Resumen</h4>
+<h4 id="_formato_bmp_2">31.1.1. Formato BMP</h4>
+<div class="sect4">
+<h5 id="_circulo">Circulo</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Arquitectura x87:</p>
+<p><a href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm">Algoritmo del Punto Medio</a></p>
+<div class="listingblock">
+<div class="content">
+<pre>x: eje abcisa -&gt; positivo hacia dcha
+y: eje ordenada -&gt; positivo hacia arriba
+ecuación circulo: centro (0,0) y primer octante ( y&lt;x)
+ecuación discreta yn,xn:
+  primer punto : x1=r y1=0
+  segundo punto: y2 se incrementa en 1 -&gt; y2=y1+1
+               : obtener x2 según la ecuación del círculo -&gt; x^2^~n+1~ = x^2^~n~ -2*y~n~-1</pre>
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>1980</em></p>
+<p>x<sup>2</sup><sub>n+1</sub> = x<sup>2</sup><sub>n</sub> -2*y<sub>n</sub>-1</p>
 </li>
 <li>
-<p>es un repertorio de instrucciones que realiza operaciones matemáticas complejas con números reales como calcular la tangente,etc .</p>
+<p>Variant with <strong>integer-based</strong> arithmetic &#8594;  Bresenham&#8217;s line algorithm</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>x87 coprocessor o x87 FPU(Float Point Unit):</p>
+<p>Bresenham circle: primer octante</p>
+<div class="listingblock">
+<div class="content">
+<pre>x_inicio=r
+y_inicio=0
+E_inicio=3-2r
+
+en cada interacción:
+	E_actual &lt;0 -&gt; E_next=   y (x_next=x_actual , y_next=y_actual+1)
+	E_actual &gt;0 -&gt; E_next=   y (x_next=x_actual-1 , y_next=y_actual+1)
+siguiente interacción:
+        E_actual=E_next , y_actual=y_next , x_actual=x_next</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_línea">Línea</h5>
 <div class="ulist">
 <ul>
 <li>
-<p>es un procesador independiente de la CPU x86 para ejecutar instrucciones de la arquitectura x87.</p>
+<p><a href="https://en.wikipedia.org/wiki/Bresenham&#8217;s_line_algorithm">Bresenham&#8217;s_line_algorithm</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>x: eje abcisa &#8594; positivo hacia dcha</p>
+</li>
+<li>
+<p>y: eje ordenada &#8594; positivo hacia abajo</p>
+</li>
+<li>
+<p>(0,0) : esquina arriba,izda</p>
+</li>
+<li>
+<p>(x0,y0) e (x1,y1) son los extremos de la recta</p>
+</li>
+<li>
+<p>la recta tiene pendiente &lt; 1</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>The x87 registers:</p>
+<p>Ecuación de la línea &#8594; f(x,y)=0</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Son registros internos a la FPU. 8-level deep non-strict <em>stack structure</em> ranging from ST(0) to ST(7). No son directamente accesibles, sino que se acceden con push, pop o desplazamiento relativo al top de la pila.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>FPU : es un componente de la unidad central de procesamiento especializado en el cálculo de operaciones en coma flotante de la misma manera que la ALU lo es con números enteros almacenados en los registros RPG.</p>
-</li>
-<li>
-<p>Formato de datos:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>single precision, double precision and 80-bit double-extended precision binary floating-point arithmetic as per the IEEE 754</p>
-</li>
-<li>
-<p>ó múltiples enteros en el mismo registro de 8,16 o 32 bits.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>FP: Float Point : Registros de la pila de la FPU, nueva denominación de los registros ST.</p>
-</li>
-<li>
-<p>MMX:  Conjunto de instrucciones SIMD (Single Instruction Multiple Data) diseñado por Intel e introducido en <em>1997</em> en sus microprocesadores Pentium MMX.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>MMX reutiliza los ocho registros FPR existentes de la FPU por lo que no se puede utilizar simultáneamente con instrucciones mms e instruccioes fpu. Los registros MMX de 64 bits son directamente accesibles a diferencia de los FPR con arquitectura de pila.</p>
-</li>
-<li>
-<p>Still, x87 instructions  are the default for GCC when generating IA32 floating-point code.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>SSE: Streaming SIMD Extensions (SSE) es un conjunto de instrucciones SIMD extension del subconjunto MMX para la arquitectura x86 , no la x87,  designed by Intel for  digital signal processing and graphics processing applications.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Comenzó con el Pentium III en 1999.</p>
-</li>
-<li>
-<p>Añade 16 nuevos registros de 128 bits XMM0-XMM15</p>
-</li>
-<li>
-<p>XMM:  SSE floating point instructions operate on a new independent register set (the XMM registers), and it adds a few integer instructions that work on MMX registers.</p>
-</li>
-<li>
-<p>SSE2 in the Pentium 4 (<em>2000</em>).</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>AVX: extensiones vectoriales avanzadas</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Añade 16 registros de 256 bits: YMM0-YMM15</p>
-</li>
-<li>
-<p>Las instrucciones que antes operaban con XMM de 128 bits ahora operan con los 128 bits de menor peso de los YMM.</p>
+<p>f(x,y) = A*X+B*y+C = 0</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_refs_3">36.1.2. Refs</h4>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="http://home.agh.edu.pl/~amrozek/x87.pdf">Programming With the x87 Floating-Point Unit</a>: Intel Vol. 1 8-1</p>
-</li>
-<li>
-<p><a href="http://csapp.cs.cmu.edu/2e/waside.html">Computer Systems: A Programmer&#8217;s Perspective, 2/E (CS:APP2e) Randal E. Bryant and David R. O&#8217;Hallaron, Carnegie Mellon University</a></p>
-</li>
-</ul>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="paragraph nav-footer">
-<p>← Previous: <a href="_lenguaje_de_programación_c_2.html">Lenguaje de Programación C</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">Estructura de Computadores 2022: Primer Parcial Teoría</a> →</p>
+<p>← Previous: <a href="_pila.html">Pila</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_apéndice_unidad_cpu.html">Apéndice: Unidad CPU</a> →</p>
 </div>
 </div>
 <div id="footer">
