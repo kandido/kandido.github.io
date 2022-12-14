@@ -110,7 +110,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 <li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html#_metodología_del_examen_2">39.2. Metodología del examen</a>
 </li>
-<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html#_módulo_fuente_pixel_linea_s">39.3. Módulo fuente pixel_linea.s</a>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html#_examen_líneas">39.3. Examen "líneas"</a>
 </li>
 </ul>
 </li>
@@ -160,9 +160,6 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <li>
 <p>Lugar:</p>
 </li>
-<li>
-<p>El examen consistirá en</p>
-</li>
 </ul>
 </div>
 </div>
@@ -210,7 +207,10 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </div>
 </li>
 <li>
-<p>Habrá abiertas dos tareas (una para cada opción) desde el comienzo del examen con limitación de tiempo para entregar el resultado del examen en formato digital en un <strong>único</strong> archivo en formato ZIP. Una tarea será <strong>examen_subrutina</strong> y la otra <strong>examen_linea</strong>. En cada tarea el archivo a entregar tendrá <strong>EL MISMO NOMBRE</strong>. Se avisará cuando falten 10 y 5 minutos para el cierre de cada una de las tareas</p>
+<p>Habrá abiertas dos tareas (una para cada opción) desde el comienzo del examen con limitación de tiempo para entregar el resultado del examen en formato digital en un <strong>único</strong> archivo en formato ZIP. Una tarea será <strong>examen_subrutina</strong> y la otra <strong>examen_linea</strong>. En cada tarea el archivo a entregar tendrá <strong>EL MISMO NOMBRE</strong>. Se avisará cuando falten 10 y 5 minutos para el cierre de cada una de las tareas.</p>
+</li>
+<li>
+<p>Los apartados anterioreos emulan la opción "líneas" con un enunciado en caso de que los módulos fuente fuesen: bmp_linea.c y pixel_linea.s. En el examen los módulos serán otros diferentes: bmp_circulo.c y pixel_circulo.c. Por lo que la segunda opción consistirá en dibujar un círculo en lugar de una recta.</p>
 </li>
 <li>
 <p>El archivo <strong>s</strong>  contendrá el módulo fuente en código asm dependiendo de la opción elegida:</p>
@@ -274,9 +274,19 @@ el nombre del fichero con el código fuente ha de ser <strong>obligatoriamente</
 </div>
 </div>
 <div class="sect2">
-<h3 id="_módulo_fuente_pixel_linea_s">39.3. Módulo fuente pixel_linea.s</h3>
+<h3 id="_examen_líneas">39.3. Examen "líneas"</h3>
 <div class="ulist">
 <ul>
+<li>
+<p>Para los alumnos que elijan hacer la segunda opción del examen, "líneas" sobre gráficas bmp se ha subido a miaulario/recursos/prácticas dos módulos fuente: bmp_linea.c y pixel_linea.c.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>bmp_linea.c llama a la función pixel_generator_linea() definida en pixel_linea.c.</p>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>El módulo ensamblador pixel_linea.s ha de ser fiel reflejo del módulo pixel_linea.c. En los comentarios del módulo ensamblador deben de aparecer las sentencias del lenguaje C. por ejemplo:</p>
 <div class="listingblock">
