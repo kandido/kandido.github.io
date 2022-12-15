@@ -592,8 +592,8 @@ El segundo octante y hasta el octavo se calcula haciendo simetria directa y tras
 <span class="kt">void</span> <span class="nf">pixels_generator_linea</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">dimension</span><span class="p">,</span>  <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">])</span> <span class="p">{</span>
 
 <span class="kt">int</span> <span class="n">i1</span><span class="p">,</span><span class="n">i2</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">xmax</span><span class="p">;</span>
-<span class="c1">// las ecuaciones matemáticas está desarrolladas para una recta de pendiente menor que 1</span>
-<span class="c1">// (x1,y1) y (x2,y2) son los extremos de la recta</span>
+<span class="c1">// las ecuaciones matemáticas está desarrolladas para una recta de pendiente MENOR que 1</span>
+<span class="c1">// (x1,y1) y (x2,y2) son los extremos de la recta en el PRIMER CUADRANTE</span>
 
 <span class="n">dx</span><span class="o">=</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">;</span>
 <span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">;</span>
@@ -642,9 +642,118 @@ El segundo octante y hasta el octavo se calcula haciendo simetria directa y tras
 </div>
 </li>
 <li>
-<p>¿ y para pendientes &gt; 1?</p>
+<p>Código para pedientes menor y mayor que 1</p>
 </li>
 </ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="cm">/*
+
+Programa: pixel_linea.c
+Descripción: algoritmo de  Bresenham: https://en.wikipedia.org/wiki/Bresenham's_line_algorithm -&gt; concepto
+                                    : https://www.javatpoint.com/computer-graphics-bresenhams-line-algorithm -&gt; algoritmo
+                                    :https://iq.opengenus.org/bresenham-line-drawining-algorithm/ -&gt; pendiente &gt;1
+             ejes: x abcisa ( positivo de izda a derecha) e y ordenada (positivo de arriba abajo)
+             origen coordenadas : (esquina izda arriba)
+             algoritmo matemático para rectas con pendiente inferior a la unidad
+             pixels_generator(): Función externa para la definición de los colores RGB en una imagen de formato BMP
+             Programa principal main(): bmp_funcion_arguDimension.c
+
+gcc -m32 -g -c  -o pixel_linea.o pixel_linea.c
+ con la opción -c se genera el módulo objeto sin generar el módulo ejecutable
+
+ATENCION: la DIMENSION DEL ARRAY se declara tanto en el fichero con la llamada a la funcion_mod como en el fichero con la definición de la función.He probado a poner diferentes valores a DIMENSION en los dos ficheros (llamada y definición ) y no hay error de compilación ni de ejecución pero el resultado de la ejecución si que cambia.
+
+*/</span>
+
+
+
+<span class="cp">#define DIMENSION  1024 // OJO: es obligatorio que los array multidimensionales tengan definido por lo menos TODAS las dimensiones menos una
+</span>
+<span class="c1">//</span>
+<span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">BYTE</span><span class="p">;</span>
+
+<span class="c1">// definición del tipo de cada pixel. Cada pixel son tres bytes . Cada byte es tipo BYTE.</span>
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+        <span class="n">BYTE</span>    <span class="n">b</span><span class="p">;</span>
+        <span class="n">BYTE</span>    <span class="n">g</span><span class="p">;</span>
+        <span class="n">BYTE</span>    <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">RGB_data</span><span class="p">;</span>
+
+<span class="kt">void</span>  <span class="nf">pintar</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">,</span><span class="n">BYTE</span> <span class="n">blue</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">green</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">red</span><span class="p">,</span> <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">]);</span>
+
+<span class="kt">void</span> <span class="nf">pixels_generator_linea</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">dimension</span><span class="p">,</span>  <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">])</span> <span class="p">{</span>
+
+<span class="kt">int</span> <span class="n">i1</span><span class="p">,</span><span class="n">i2</span><span class="p">,</span><span class="n">i3</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">xmax</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">p</span><span class="p">;</span>
+<span class="c1">// // (x1,y1) y (x2,y2) son los extremos de la recta en el PRIMER CUADRANTE</span>
+
+<span class="n">dx</span><span class="o">=</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">;</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">;</span>
+<span class="n">i1</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">dy</span><span class="p">;</span>
+<span class="n">i2</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">dy</span><span class="o">-</span><span class="n">dx</span><span class="p">);</span>
+<span class="n">i3</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">dx</span><span class="p">;</span>
+<span class="n">p</span><span class="o">=</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">dy</span><span class="o">/</span><span class="n">dx</span><span class="p">;</span><span class="c1">//pediente</span>
+
+
+  <span class="c1">// el extremo inicial (izda) puede ser (x1,y1) ó (x2,y2)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">dx</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x2</span><span class="p">;</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y2</span><span class="p">;</span>
+    <span class="n">xmax</span><span class="o">=</span><span class="n">x1</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x1</span><span class="p">;</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y1</span><span class="p">;</span>
+    <span class="n">xmax</span><span class="o">=</span><span class="n">x2</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// pendiente menor que 1</span>
+      <span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">dy</span><span class="o">-</span><span class="n">dx</span><span class="p">;</span>
+      <span class="k">while</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">xmax</span><span class="p">){</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="o">+</span><span class="n">i1</span><span class="p">;</span>
+      <span class="k">else</span> <span class="p">{</span> <span class="c1">// pendiente mayor que 1</span>
+        <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="o">+</span><span class="n">i2</span><span class="p">;</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+      <span class="n">pintar</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+   <span class="c1">// p&gt;1</span>
+     <span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">dx</span><span class="o">-</span><span class="n">dy</span><span class="p">;</span>
+     <span class="k">while</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">xmax</span><span class="p">){</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+       <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="o">+</span><span class="n">i3</span><span class="p">;</span>
+     <span class="k">else</span> <span class="p">{</span>
+       <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="o">-</span><span class="n">i2</span><span class="p">;</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+       <span class="p">}</span>
+     <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+     <span class="n">pintar</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+     <span class="p">}</span>
+     <span class="p">}</span>
+<span class="c1">// x columnas -&gt; j</span>
+<span class="c1">// y filas -&gt; i</span>
+
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="nf">pintar</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">,</span><span class="n">BYTE</span> <span class="n">blue</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">green</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">red</span><span class="p">,</span> <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">]){</span>
+
+ <span class="c1">// intensidad de rojo</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">red</span><span class="p">;</span>
+  <span class="c1">// intensidad de verde</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">g</span> <span class="o">=</span> <span class="n">green</span><span class="p">;</span>
+  <span class="c1">// intensidad de azul</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">b</span> <span class="o">=</span> <span class="n">blue</span><span class="p">;</span>
+
+<span class="p">}</span></code></pre>
+</div>
 </div>
 </div>
 </div>
