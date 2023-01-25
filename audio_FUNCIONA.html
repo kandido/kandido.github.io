@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Audio slideshows with Reveal.js</title>
+
+        <meta name="description" content="A plugin for reveal.js">
+        <meta name="author" content="Asvin Goel">
+
+        <link rel="stylesheet" href="dist/reveal.css">
+        <link rel="stylesheet" href="dist/theme/black.css">
+        <link rel="stylesheet" href="/plugin/highlight/zenburn.css">
+
+        <script src="/dist/reveal.js"></script>
+        <script src="/plugin/markdown/markdown.js"></script>
+        <script src="/plugin/highlight/highlight.js"></script>
+        <script src="/plugin/notes/notes.js"></script>
+        <script src="node_modules/reveal.js-plugins/menu/menu.js"></script>
+        <script src="node_modules/reveal.js-plugins/audio-slideshow/plugin.js"></script>
+        <script src="node_modules/reveal.js-plugins/audio-slideshow/RecordRTC.js"></script>
+        <script src="node_modules/reveal.js-plugins/audio-slideshow/recorder.js"></script>
+
+
+
+        <!-- Font awesome -->
+        <link rel="stylesheet" href="node-modules/reveal.js-plugins/menu/font-awesome/css/fontawesome.css">
+
+    </head>
+
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section
+                    data-audio-text="Reveal js is an HTML presentation framework with which you can easily create and share beautiful presentations">
+                    Slide 1</section>
+                <section>Slide 2</section>
+                <section data-background="audio-slideshow/jungle.jpg">
+                    <p>
+                        With audio slideshows you can add recorded audio to whatever you want to deliver to your
+                        audience.
+                    </p>
+                    <p class="fragment" data-audio-src='audio-slideshow/birds.ogg'>
+                        Listen to the birds.
+                    </p>
+                </section>
+            </div>
+        </div>
+        <script>
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+                mouseWheel: true,
+                audio: {
+                    prefix: 'audio-slideshow/',
+                    suffix: '.ogg',
+                    defaultDuration: 5,
+                    textToSpeechURL: "https://api.voicerss.org/?key=f140f2f194f845c6bf7ab272de8298ee&hl=en-gb&c=ogg&src=",
+                    advance: 500,
+                    autoplay: false,
+                    defaultNotes: true,
+                    defaultText: false,
+                    playerOpacity: 0.2,
+                },
+                menu: { // Menu works best with font-awesome installed: sudo apt-get install fonts-font-awesome
+                    themes: false,
+                    transitions: false,
+                    markers: true,
+                    hideMissingTitles: true,
+                    custom: [
+                        { title: 'Plugins', icon: '<i class="fa fa-external-link-alt"></i>', src: 'toc.html' },
+                        { title: 'About', icon: '<i class="fa fa-info"></i>', src: 'about.html' }
+                    ]
+                },
+
+                plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMenu, RevealAudioSlideshow, RevealAudioRecorder]
+            });
+        </script>
+    </body>
+
+</html>
