@@ -1,0 +1,358 @@
+= Title Slide
+candido@unavarra.es
+#elije uno de: beige, black, league, night, serif, simple, sky, solarized, white
+:revealjs_theme: black
+:customcss: presentation.css
+:stem:
+:imagesdir: imagenes
+:icons: font
+:source-highlighter: highlight.js
+:highlightjs-languages: x86asm
+
+:revealjs_slidenumber: true
+
+
+:revealjs_plugins_configuration: revealjs-plugins-conf.js
+:revealjs_plugins: revealjs-plugins.js
+
+
+
+== Slide One: REFERENCIAS
+
+* https://docs.asciidoctor.org/reveal.js-converter/latest/converter/features/
+* ~/Dropbox/tutoriales/asciidoctor_reveal_slides/primer_rb
+* https://github.com/asciidoctor/asciidoctor/issues/1877
+
+
+
+
+== Navigation Commands
+
+* S	: Instructor Notes
+* ESC	: All Slides
+* arrows :
+* start/end	:
+* space	:
+* ctrl+button1	: zoom
+* ctrl+button2	: context menu -> idiom, etc
+* p -> preview (contrario de next); l -> forward horizontal ; n -> next ; h -> preview horizontal
+* ctrl+a : select all -> ctrl+g -> deselect
+
+
+
+=== Menu Plugin Commands
+
+* Ctrl+m :despliegue menu
+* b    : switch slide/blackboard -> escribo en una pizarra -> *PROBAR CON UNA TABLETA* _> REMARKABLE
+* del  : delete pencil marks on the slide ... if not move from that slide
+* backspace : delete pencil marks on the slide
+* c : change mouse -> cursor/pencil -> SOBRESCRIBE EN UNA SLIDE
+* d : download chalkboard json
+* v : interrumpe la presentación y oculta el slide
+
+
+== Plugins
+
+Menu	: https://www.npmjs.com/package/reveal.js-menu
+
+
+
+== Slide Two
+
+A Great Story
+(pulsar "s" para que se habrá la ventana con Notas)
+
+[.notes]
+--
+* tell anecdote
+* make a point
+--
+
+== Slide Three
+
+Lo explicamos en subslides
+
+=== Primera parte
+
+Primera parte de concepto 1
+
+- planificar
+- definir
+- revisar
+- morir de inanicción
+
+=== Segunda parte
+
+Segunda parte de concepto 1: Matemáticas
+
+stem:[x^2=y^2]
+
+estilo stem
+instalar la gema asciimath
+especificar en la cabecera el atributo :stem:
+
+
+== Slide Forth
+
+
+.Una tabla
+|===
+|Column heading 1 |Column heading 2
+
+| Un texto
+a|latexmath:[a^2+b^2=c^2].
+
+| Otro texto
+a|latexmath:[k_{n+1} = n^2 + k_n^2 - k_{n-1}].
+|===
+
+[.red.background]
+== Slide Fifth
+
+Fondo Rojo. Declarar en CSS
+
+[.columns]
+== 3 columns
+
+[.column]
+* Java
+* **Kotlin**
+
+[.column]
+* Node
+* **Deno**
+
+[.column]
+* Ruby
+* **Crystal**
+
+[transition=zoom, %notitle]
+== Zoom zoom
+
+This slide will override the presentation transition and zoom!
+
+[transition-speed=fast, %notitle]
+== Speed
+
+Choose from three transition speeds: default, fast or slow!
+
+[state=topic]
+== Epic Topic
+
+That state can be queried from JavaScript or used in CSS to apply further *customization* to your slide deck. For example, by combining this feature with the CSS override one, you can alter fonts for specific pages with this CSS. Utilizo CSS.
+
+== Topic
+
+[%step]
+* this
+* is
+* revealed
+* gradually
+
+== Topic
+
+[.highlight-blue%step]
+blue
+
+[%step]
+white
+
+[.highlight-red%step]
+red
+
+
+== Topic step STYLES
+
+[%step]
+default style -> fade-in -> start out invisible and fade in
+
+[.fade-up%step]
+fade-up -> Start visible, fade out
+
+[.fade-in-then-out%step]
+fade-in -> Fades in, then out on the next step
+
+[.grow%step]
+grow -> Scale up
+
+[.highlight-red%step]
+highlight-red -> Turn text red
+
+The [.step.highlight-blue]#greatest glory in living# lies not in never falling, but in [.step.highlight-blue]#rising every time we fall#. Style inline step.highlight-blue
+
+
+== Syntax Highlighting
+
+activate Highlight.js syntax highlighting
+
+[source,python]
+----
+print "Hello World" //python
+----
+
+[source,cpp]
+----
+#include <stdio.h>
+
+int main(void)
+{
+  int i, n;
+
+  printf("This program prints a table of squares.\n");
+  printf("Enter number of entries in table: ");
+  scanf("%d", &n);
+
+  for (i = 1; i <= n; i++)
+    printf("%10d%10d\n", i, i * i);
+
+  return 0;
+}
+----
+
+
+
+== Programming Languages
+
+[source,x86asm]
+----
+# x86asm
+	.section .data
+string: .byte8 "Hola"  
+
+	.section .text
+	mov $string,EBX
+	call puts
+	mov $0xFFFF,EBP
+	mov EAX,[ESP]
+	inc ESP
+	mov $0x1,EAX
+	mov ESP,EBX
+	int $0x80
+----
+
+=== PRog Lang
+
+[source,bash]
+----
+# If the text to highlight starts with bash prompt ($), choose shell class. Otherwise, choose bash.
+find . -iname bash //bash
+pwd
+ls
+mkdir
+cd
+type pwd
+type mkdir
+----
+
+=== Prog Lang
+
+[source,shell]
+----
+# If the text to highlight starts with bash prompt ($), choose shell class. Otherwise, choose bash.
+$ find . -iname shell //shell
+$ pwd
+$ ls
+$mkdir
+$cd
+$type pwd
+$type mkdir
+----
+
+== Line Nums
+
+[source,java]
+----
+public class TestClass {
+    public TestClass() {
+
+    }
+
+    public void testMethod() {
+
+    }
+}
+----
+
+[source,java,linenums,highlight=6..8]
+----
+public class TestClass {
+    public TestClass() {
+
+    }
+
+    public void testMethod() {
+
+    }
+}
+----
+== Audio-Video
+
+.Take a zen moment
+audio::ocean-wave.ogg[opts=autoplay]
+
+video::F4NP9xdyqoA[youtube,start=34,data-video-id=F4NP9xdyqoA]
+
+
+== Video screen
+
+video::out.mp4[]
+
+== Topic
+
+[TIP,step=3]
+Finally, a pro tip...
+
+[WARNING,step=1]
+First, watch out for...
+
+[IMPORTANT.fade-up,step=2]
+Second, don't forget...
+
+[TIP,step=3]
+Finally, a pro tip AGAIN...
+
+
+== But first
+
+WARNING: This presentation is dangerous!
+
+[TIP]
+It's possible to use Unicode glyphs (https://unicode-table.com/en/1F4A1/) as admonition icons. attribute xxx-caption must be define
+
+== icons
+
+https://docs.asciidoctor.org/asciidoc/latest/macros/icon-macro/
+
+[role="important-text"]
+== Roles ?¿
+
+
+* Some
+* Information
+
+
+== Data Attributes
+
+Data attributes can be combined with custom JavaScript code to create more dynamic presentations. -> DOM
+
+[source,kotlin,data-lang-family=compiled]
+----
+println("Hello world")
+----
+
+[%interactive,data-state=in-progress]
+- [ ] Dig
+- [x] Plant
+- [ ] Hose
+
+[data-context=civil-rights,data-event=speech,data-date=28/08/1963]
+> I have a dream that my four little children will one day live in a nation where they will not be judged by the color of their skin, but by the content of their character. I have a dream today!
+> -- Martin Luther King Jr. delivering the speech at the 1963 Washington D.C. Civil Rights March.
+
+== Data Attributes: Maths
+
+[stem,data-algebra-concept=square-root]
+++++
+\sqrt{37} = \sqrt{\frac{73^2-1}{12^2}} \approx \frac{73}{12} (1 - \frac{1}{2\cdot73^2})
+++++
+
