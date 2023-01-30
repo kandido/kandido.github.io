@@ -1,4 +1,4 @@
-= Sistemas Digitales -UPNA-
+= Sistemas Digitales 
 // classic AsciiDoctor attributes
 :stem:
 :background-color="#ff0000":
@@ -158,6 +158,7 @@ image:tecnico_electronica.jpeg[Mountain,400,300,float="left]
 
 === ¿?
 
+[state="txiki"]
 == La Electrónica en la Carrera Universitaria
 
 * Conocimientos de Electrónica
@@ -174,7 +175,7 @@ image:tecnico_electronica.jpeg[Mountain,400,300,float="left]
 
 === Señales: Muestreo y Cuantificación
 
-image:muestreo_cuantificacion.jpg[Mountain,900,400,float="left]
+image:muestreo_cuantificacion.jpg[Mountain,900,400,float="left"]
 
 [state=txiki]
 === Codificación
@@ -192,8 +193,25 @@ Calcular para las resoluciones de 8 bit y 16 bits cual es el mínimo incremento 
 * GPU
 * Sistemas de Microcontrolador Empotrados
 
-=== Señales Binarias 
+=== Señales Binarias : Abstractas
 
-image:clock-signals.png[Mountain,400,300,float="left]
-image:Digital-signal-noise.svg[Mountain,400,300,float="right"]
+image:clock-signals.png[Mountain,400,300,float="left"]
 
+[.text-left]
+Eje ordenada: valores abstractos (0/1, High/Low, ON/OFF, etc ...)
+
+=== Señales Binarias : Abstractas
+
+image:Digital-signal-noise.svg.png[Mountain,400,300,float="left"]
+
+[.text-left]
+Eje ordenada: magnitudes físicas (mV ó mA)
+
+== Digitalización de las Señales
+
+* Ventajas
+** Calidad: Fácil de recuperar a pesar de la distorsión
+** Almacenamiento: Fiabilidad, Formatos
+** Compatibilidad: Diversidad de Equipos
+** Procesamiento: Sencillo
+** Coste: Barato
