@@ -44,16 +44,18 @@
 ** Procesamiento de señales eléctricas
 
 
-[%notitle]
-== About me
+// [%notitle]
+[state="txiki"]
+== Profesorado
 
 * Prof. Cándido Aramburu Mayoz.
+** Doctor Ingeniero Telecomunicación (UPNA-Universidad Politécnica de Madrid) 
+** Empresa Ikusi S.A. (Sistemas de Telemedida 1989)
+** Profesor Titular UPNA (Dpto Ingeniería Electrónica y Comunicaciones 2000)
+* Profesor Prácticas: Aitor Urrutia
+* Profesor Euskera: Marko Galarza
+* Profesor Inglés: Ignacio del Villar
 
-* Doctor Ingeniero Telecomunicación (UPNA-Universidad Politécnica de Madrid) 
-
-* Empresa Ikusi S.A. (Sistemas de Telemedida 1989)
-
-* Profesor Titular UPNA (Dpto Ingeniería Electrónica y Comunicaciones 2000)
 
 [.notes]
 --
@@ -64,6 +66,7 @@
 
 == Contacto
 
+* Despacho: Edificio Los Tejos 2 Planta: Despacho 2028 (Prof. Candido Aramburu)
 * Miaulario -> correo interno
 * Clase
 ** G1: A112 : Lunes (12-14) y Jueves (10-12) 
@@ -71,6 +74,11 @@
 * Tutorías
 ** Lunes (14-17)
 ** Miércoles (14-17)
+** Cita Previ
+
+
+	
+	Profesor Teoría: Cándido Aramburu
 
 
 == Calendario
@@ -139,6 +147,7 @@ image:esquema_electrico.png[Mountain,600,400,float="left]
 === Componentes de una tarjeta de circuito impreso
 
 image:pcb_componentes.png[Mountain,400,300,float="left]
+Componentes: Discretos, Integrados (semiconductor,"chips",microelectrónica)
 
 === Printed Circuit Board
 
@@ -209,9 +218,92 @@ Eje ordenada: magnitudes físicas (mV ó mA)
 
 == Digitalización de las Señales
 
-* Ventajas
-** Calidad: Fácil de recuperar a pesar de la distorsión
-** Almacenamiento: Fiabilidad, Formatos
-** Compatibilidad: Diversidad de Equipos
-** Procesamiento: Sencillo
-** Coste: Barato
+=== Ventajas
+* Calidad: Fácil de recuperar a pesar de la distorsión
+* Almacenamiento: Fiabilidad, Diversidad Formatos
+* Compatibilidad: Diversidad de Equipos (PC, móvil, coche, etc
+* Procesamiento: Sencillo, Flexible
+* Coste: Barato (componentes)
+
+=== Abstracción
+
+* Niveles: el 0 y el 1
+* Lógica binaria 
+** Matemáticas: Algebra de Boole
+
+=== Fases de Diseño de Circuitos Electrónicos Binarios
+
+
+. Funcional (manual): abstracción matemática
+. Automatización del proceso matemático
+.. Herramientas de Diseño con ayuda del Computador (EDA)
+.. Simulación del Diseño del Circuito Electrónico antes de fabricar el prototipo: Depuración
+. Fabricación del prototipo
+.. Instrumentación
+.. Verificación del funcionamiento en el Laboratorio
+.. Verificación del funcionamiento en Campo
+. Comercialización
+. Producción
+
+== Organización de la Asignatura
+
+=== Evaluación
+
+* Sistema de Evaluación:
+** 75% teoría y 25% prácticas
+** Evaluación continua Teoría: dos parciales (30% 1º parcial y 45% 2º parcial). Nota mínima en el 2º parcial: 5. El Primer parcial se realizará el sábado 27 de Marzo a las 9:00, el segundo parcial el 26 de Mayo a las 16:00 y la recuperación el 9 de Junio a las 8:00
+** Recuperación Teoría: Entra todo. Nota mínima: 5.
+** Evaluación Prácticas: Un único exámen el sábado 14 de Mayo, no recuperable.
+
+=== Prácticas
+* Tipo de prácticas:
+** Diseño manual
+** Simulación con la herramienta software Quartus de Intel.
+** Captura gráfica de Esquemas Electrónicos
+** Descripción del Circuito mediante el Lenguaje VHDL. Fabricación del Circuito en tecnología FPGA
+
+[state=txiki]
+=== Ejercicios
+
+* Tipo de problemas: Libro Verde -> Ejercicios tipo examen -> Sin calculadora y sin libros
++
+
+-----
+El libro verde se adquiere en el edificio de rectorado, en la sección de comunicacion,
+que se encuentra en planta baja del edificio.
+El horario: 8 a 14:30. Precio 8.5$. 
+-----
++
+
+----
+* Capítulo 1: 1.1, 1.2, 1.4, 1.5, 1.6, 1.8, 1.9
+* Capítulo 2: 2.1
+* Capítulo 3: 3.2 3.3 -> 2º parcial
+* Capítulo 4: 4.2, 4.4, 4.6
+* Capítulo 5: 5.2, 5.3, 5.4
+* Capítulo 6: 6.1, 6.2 -> 2º parcial
+* Capítulo 7: 7.2, 7.3 y 7.4 -> 2º parcial
+* Capítulo 8: 8.1, 8.3 y 8.5 -> 2º parcial
+----
+* Los ejercicios del tema 2 (Representación de la Información) no están en el libro verde
+** Miaulario -> Recursos -> Ejercicios
+
+=== Programa de la Asignatura
+
+* http://www.unavarra.es/ficha-asignaturaDOA/?languageId=100000&codPlan=246&codAsig=246110&anio=2022[Ficha Web Upna]
+** Programa en 3 partes 
+... *_Circuitos Combinacionales_*
+... *_Circuitos Secuenciales_*
+... Otros: Números, Lógica Programable (VHDL), Teoría Tecnología
+* Bibliografía
+
+=== Metodología
+
+* Trabajo en clase: principalmente Ejercicios con su teoría asociada
+* Trabajo en casa
+** Teoría desarrollada en los apuntes PDF en mi aulario
+** Prácticas
+*** En casa: Ejercicios de diseño manual
+*** En casa: Utilización de Quartus y Memorias
+* Tutorías
+** Resolución de dudas
