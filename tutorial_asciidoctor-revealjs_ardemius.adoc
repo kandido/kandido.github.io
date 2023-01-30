@@ -1,23 +1,44 @@
 = Sistemas Digitales
 // classic AsciiDoctor attributes
+:stem:
+:background-color="#ff0000":
 :icons: font
 :imagesdir: images
 :customcss: styles/myCustomCSS.css
 // Despite the warning of the documentation, https://github.com/asciidoctor/asciidoctor-reveal.js, highlight.js syntax highlighting WORKS, BUT, you need to explicitly set the highlighter using the below attribute
 // see http://discuss.asciidoctor.org/Highlighting-source-code-for-reveal-js-backend-td2750.html
-:source-highlighter: highlightjs
+:source-highlighter: highlight.js
+:highlightjs-languages: vhdl
+//:source-highlighter: rouge
+//:source-highlighter: pygments
 // revealjs attributes
 :revealjs_theme: white
 :revealjs_slideNumber: true
+// Al actualizar el slide no cambia de transpa y no se va al inicio
+:revealjs_hash: true   
+:revealjs_history: true
+
+:revealjs_center: true
+:revealjs_width: "100%"
+:revealjs_height: "100%"
+:revealjs_margin: 0
+
+//:revealjs_minScale: 1,
+//:revealjs_maxScale: 1
 
 // plugins copiados de tutoriales/asciidoctor-revealjs/../primer.js
 :revealjs_plugins_configuration: revealjs-plugins-conf.js
 :revealjs_plugins: revealjs-plugins.js
 
+//:scrollable: no pirula
+
+//:revealjs_history: true para go to file no pirula
+
+
 [%notitle]
 == About me
 
-* Prof. Cándido Aramburu Mayoz
+* Prof. Cándido Aramburu Mayoz.
 
 * Doctor Ingeniero Telecomunicación (UPNA-Universidad Politécnica de Madrid) 
 
@@ -42,9 +63,74 @@
 ** Lunes (14-17)
 ** Miércoles (14-17)
 
+
+== Calendario
+
+[state=taula]
+=== Febrero
+
+[%header, format=csv]
+|===
+Lunes,Martes,Miércoles,Jueves,Viernes,Sábado ,Domingo
+6,7,8,9,10,11,12
+13,14,15,16,17,18,19
+20,21,22,23,24,25,26
+27,28,,,,,
+|===
+
+[state=taula]
+=== Marzo
+
+
+[%header, format=csv]
+|===
+Lunes,Martes,Miércoles,Jueves,Viernes,Sábado ,Domingo
+,,1,2,3,4,5
+6,7,8,9,10,11,12
+13,14,15,16,17,18,19
+20,21,22,23,24,25,26
+27,28,29,30,31,,
+|===
+
+// Custom slide
+[background-color="#ff0000"]
+== Custom Slide
+
+[.columns.is-vcentered]
+== Columnas
+[.column]
+
+* *hola*
+* caracola
+
+[.column]
+* hola
+* caracola
+
+[state=topico]
+== State ==
+
+[state=topico]
+=== este es h3 ===
+
+* El estado puede ser consultado desde JavaScript or used in CSS to apply further customization to your slide deck. For example, by combining this feature with the CSS override one, you can alter fonts for specific pages with this *CSS*:
+
+
+[source,css]
+----
+@import 'https://fonts.googleapis.com/css?family=Baloo+Bhai';
+
+section[data-state="topico"] h2 {
+    font-family: 'Baloo Bhai', cursive;
+    font-size: 3em;
+}
+----
+
+
+
 // First slide has a CSS customization of its title, using a Slide State (see https://github.com/asciidoctor/asciidoctor-reveal.js/tree/master#slide-state)
-[state=topic]
-== Slide One
+[state=topicooooo]
+== Colores en la lista
 
 Some list using colors:
 
@@ -54,7 +140,81 @@ Some list using colors:
 
 Be careful, styles loaded through `:customcss:` attribute will only be available in reveal.js slides (not in Asciidoctor HTML5 rendering)
 
-== Slide Two
+== Por pasos
+
+
+=== El listado por pasos no funciona
+* Currently, the %step option and the step attribute are not supported on description lists
+
+[%step]
+Hard drive:: Permanent storage for operating system and/or user files.
+RAM:: Temporarily stores information the CPU uses during operation.
+
+
+=== El lisado por pasos si funciona
+
+[%step]
+--
+.Second
+[%step]
+* d
+* e
+* f
+--
+
+
+
+[.columns]
+=== Por pasos en Columnas
+
+[.column]
+--
+[.step]
+* this
+* is
+* revealed
+* gradually
+--
+
+[.column]
+--
+[.step]
+* 1
+* blue
+--
+
+
+[.column]
+--
+[%step]
+* white
+* red
+--
+
+=== Por pasos en colores
+
+
+[.highlight-blue%step]
+blue
+
+[%step]
+white
+
+[.highlight-red%step]
+red
+
+=== Por pasos en un orden determinado
+
+[TIP,step=3]
+Finally, a pro tip...
+
+[WARNING,step=1]
+First, watch out for...
+
+[IMPORTANT.fade-up,step=2]
+Second, don't forget...
+
+== Note Speaker 
 
 Hello World - Good Bye VERY Cruel World
 
@@ -62,6 +222,20 @@ Hello World - Good Bye VERY Cruel World
 --
 Actually things aren't that bad
 --
+
+[state=topleft]
+== Matemáticas
+
+http://asciimath.org/
+ 
+stem:[x^2=y^2]
+
+stem:[x_1=y_2]
+
+stem:[x_1*y_2+bar x+ bar x_1]
+
+stem:[x_1 oplus x_2]
+
 
 // Background colors
 [background-color="yellow"]
@@ -73,20 +247,20 @@ Is very yellow
 [%notitle]
 == Grand Announcement
 
-image::mountain-cover.jpg[background, size=cover]
+image::mountain-cover.jpg[background ,size=cover]
 
-And here is some text!
+[CYAN]#And here is some text!#
 
 [%notitle]
 == The Great Goat
 
-image::https://upload.wikimedia.org/wikipedia/commons/b/b2/Hausziege_04.jpg[canvas,size=contain]
+image::https://upload.wikimedia.org/wikipedia/commons/b/b2/Hausziege_04.jpg[ canvas,size=contain]
 
 // Background videos
-[background-video="https://my.video/file.mp4",background-video-loop=true,background-video-muted=true]
+[background-video="http://techslides.com/demos/sample-videos/small.mp4",background-video-loop=true,background-video-muted=true]
 == Nice background!
 
-[background-video="https://my.video/file.mp4",options="loop,muted"]
+[background-video="http://techslides.com/demos/sample-videos/small.mp4",options="loop,muted"]
 == Nice background!
 
 // Background iframes
@@ -103,6 +277,60 @@ This slide will override the presentation transition and zoom!
 == Speed
 
 Choose from three transition speeds: default, fast or slow!
+
+
+== Highlight
+
+
+
+Uses highlighted code
+
+[source, python]
+----
+print "Hello World"
+----
+
+[source, VHDL]
+----
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity light is 
+  port(
+    x1,x2 : in  std_logic;
+    y1    : out std logic
+  );
+end;
+
+architecture rtl of light is
+begin
+  y1 = x1*x2+x1*x2
+end ;
+----
+
+== Parcial Highlight & numbers
+
+
+
+
+
+[source, VHDL, linenums, highlight=1..2|4..9|11..14]
+----
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity light is 
+  port(
+    x1,x2 : in  std_logic;
+    y1    : out std logic
+  );
+end;
+
+architecture rtl of light is
+begin
+  y1 = x1*x2+x1*x2
+end ;
+----
 
 // Fragments
 == Slide Four
@@ -215,11 +443,16 @@ icon:eye[] / icon:keyboard-o[] / icon:git[]
 
 == Images positioning
 
+[font-size=small]
 === Inline image float left
 
-Just some text before the image +
-image:mountain-cover.jpg[Mountain,150,150,float="left"]
-And here is some text after the image
+[.text-left]
+FPGA stands for Field-Programmable Gate Array. It is a type of integrated circuit that can be programmed in the field to perform a specific function. Unlike microprocessors, which are hard-wired to perform a set of tasks, FPGAs can be reconfigured to perform different functions, making them highly flexible and adaptable for a wide range of applications. FPGAs consist of an array of configurable logic blocks and programmable interconnects, which can be programmed by the end-user to implement custom digital logic circuits. +
+
+image:/home/candido/Irudiak/robot_cara.jpeg[Robot,300,300,float="left"]
+
+[.text-left]
+DE1-SOC is a development board that features a Cyclone V System-on-Chip (SoC) from Altera (now Intel). The DE1-SOC board combines the capabilities of an FPGA and a microprocessor, providing a platform for creating custom digital systems. It includes various peripheral components such as memory, audio and video interfaces, and USB connectivity. The DE1-SOC board is commonly used in education, research, and hobbyist projects for learning and exploring digital design, computer architecture, and embedded systems.
 
 === Inline image float right
 
@@ -237,7 +470,7 @@ And here is some text after the image
 
 Just some text before the image
 
-image::mountain-cover.jpg[Tiger,400,200,float="left",align="center"]
+image::mountain-cover.jpg[Mountain,400,200,float="left",align="center"]
 
 And here is some text after the image
 

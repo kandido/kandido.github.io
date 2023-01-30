@@ -7,6 +7,9 @@
 /* Use Google Neuton font for the text of all slides */
 .reveal {
 	font-family: 'Neuton', sans-serif;
+        border: 5px solid black;
+        
+         
 }
 
 /* Use Google Neuton font for the titles of all slides */
@@ -19,10 +22,13 @@
 	text-align: left; 
 }*/
 
+
+
 /* Customization of the code elements on the model of DZSlides */
 .reveal section *:not(pre) > code {
     font-family: Consolas, 'Liberation Mono', Courier, monospace;
     color: #6D180B;
+    color: #FF0000;
     border: 1px solid #CCC;
     background-color: #F2F2F2;
     white-space: nowrap;
@@ -52,10 +58,33 @@
 
 @import 'https://fonts.googleapis.com/css?family=Baloo+Bhai';
 
-/* CSS customization using tag "[state=topic]" on slides title */
-section[data-state="topic"] h2 {
+/* CSS customization using tag "[state=topico]" on slides title */
+section[data-state="txiki"] p {
+    font-size: 0.8em;
+}
+section[data-state="topico"] h2,h3 {
     font-family: 'Baloo Bhai', cursive;
-    font-size: 3em;
+    font-size: 2em;
+}
+
+section[data-state="taula"]  {
+    font-family: 'Neuton', sans-serif;
+    font-size: 0.5em;
+    margin-top: 0.5em;
+}
+
+section[data-state="topleft"]  {
+  margin-left: 3.0em;
+  Position : absolute;
+  right: 10px;
+  /*margin-right: 6.0em;*/
+  border: 10px solid red;
+  outline: 1px solid blue;
+  
+}
+section[data-state="topleft"] p {
+  margin-left: 3.0em;
+  text-align:left;
 }
 
 .reveal section.title h1 {
