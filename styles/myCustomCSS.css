@@ -13,14 +13,17 @@
 }
 
 /* Use Google Neuton font for the titles of all slides */
-.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+.reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
     font-family: 'Neuton', sans-serif;
+    font-size: 0.8em;
 }
 
-/* if we want all slides to be left-aligned */
-/*.reveal p { 
-	text-align: left; 
-}*/
+/* EL CONTENIDO A LA IZDA: imagenes incluidas*/
+/* if we want all slides to be left-aligned */ 
+.reveal p { 
+	text-align: left;
+	font-size: 0.8em; 
+}
 
 
 
@@ -59,15 +62,18 @@
 @import 'https://fonts.googleapis.com/css?family=Baloo+Bhai';
 
 /* CSS customization using tag "[state=topico]" on slides title */
-section[data-state="txiki"] p {
-    font-size: 0.8em;
+section[data-state="txiki"]  {
+    font-size: 0.7em;
+}
+section[data-state="txikiago"]  {
+    font-size: 0.5em;
 }
 section[data-state="topico"] h2,h3 {
     font-family: 'Baloo Bhai', cursive;
     font-size: 2em;
 }
 
-section[data-state="taula"]  {
+section[data-state="taula"] table {
     font-family: 'Neuton', sans-serif;
     font-size: 0.5em;
     margin-top: 0.5em;
@@ -78,8 +84,8 @@ section[data-state="topleft"]  {
   Position : absolute;
   right: 10px;
   /*margin-right: 6.0em;*/
-  border: 10px solid red;
-  outline: 1px solid blue;
+  //border: 10px solid red;
+  //outline: 1px solid blue;
   
 }
 section[data-state="topleft"] p {
@@ -91,8 +97,13 @@ section[data-state="topleft"] p {
     margin-top: 2.3em;
 }
 
+.reveal section.title h2,h3,h4 {
+    font-size: 0.2em;
+}
+
+
 .reveal section.title small {
     margin-top: 15.3em;
     font-weight: bold;
-    color: white;
+    color: red;
 }
