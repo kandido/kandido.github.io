@@ -39,7 +39,7 @@
 [%hardbreaks]
 Tema 1: Introducción a los Sistemas Digitales Electrónicos <<Tema1_Intro>>.
 Tema 2: Representación Digital de la Información <<Tema2_RepInf>>.
-Tema 3: Algebra de Boole. Puertas Lógicas.
+Tema 3: Algebra de Boole. Puertas Lógicas.<<Tema3_BoolePuertas>>
 Tema 4: Lenguaje de Descripción Hardware VHDL.
 Tema 5: Circuitos Aritméticos.
 Tema 6: Otros Circuitos Combinacionales.
@@ -367,6 +367,9 @@ El horario: 8 a 14:30. Precio 8.5$.
 [#Tema2_RepInf]
 == Tema 2 : Representación Digital de la Información
 
+
+== Indice
+
 * Información: números, caracteres, imagen, sonido, etc ..
 * Números
 ** Sistemas posicionales: base 10 (decimales), base 2 (binaria)
@@ -434,7 +437,6 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 === Representación de los Valores Enteros en Código Binario
 
 * ¿Cómo se representa en binario el valor 123.125? b1111011.001
-** python >>> bin(123)
 * ¿Cómo se calcula el valor del número binario b1111011.001?
 * Parte Entera: divisiones sucesivas por la base 2
 * Parte Fracción: multiplicaciones sucesivas por la base 2
@@ -457,6 +459,18 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 * Parte Entera: divisiones sucesivas por la base 16
 * Parte Fracción: multiplicaciones sucesivas por la base 16
 
+=== Calculadora de Python
+
+[source,python]
+----
+bin(123)
+oct(123)
+hex(123)
+int(0b1111011)
+int(0o173)
+int(0x7B)
+----
+
 [.columns]
 === Conversiones entre el sistema binario y sistemas con base potencia de 2
 
@@ -476,7 +490,7 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 * Conversión Octal-Binaria
 ** grupos de 3 bits
 
-=== Representación gráfica de las combinaciones binarias
+=== Aritmética Modular: la rueda
 
 
 image::rueda_unsigned.png[Rueda,500,500,float="left"]
@@ -487,8 +501,8 @@ Representación binaria de números con 3 digitos.
 Ejemplo: cuentakilómetros del coche.
 Ejemplo: registro de 3 celdas -> limitado a 8 combinaciones posibles.
 ¿Cual es la siguiente combinación a 111?, 111+1 = ¿ ?.
-Valor 33 en módulo 8 -> Resto(37/8)=5 -> en binario 101
-33 pasos en la rueda equivale al número 101
+Calcular la representación del valor 33 en módulo 8 -> Resto(37/8)=5 -> en binario 101
+33 pasos en la rueda equivale al número 101 -> aritmética modular en módulo 8
 
 === Representación de Números con Valores Enteros
 
@@ -511,10 +525,11 @@ Valor 33 en módulo 8 -> Resto(37/8)=5 -> en binario 101
 ** valores positivos: el signo el bit 0 en la posición MSB (More Significant Bit) y resto de bits representa el mód
 ** valores negativos: el signo el bit 1 (base-1) en la posición MSB (More Significant Bit) y resto de bits representa el módulo
 ** Ejemplo '+123' -> 0b01111011 y -123 -> 0b11111011
-** Dibujar la tabla y la rueda. ¿Es simétrico?¿Cuantas representaciones tiene el cero?
-** Extensión del signo
+** Dibujar la tabla y la rueda con todos los valores con sus representaciones.
+** ¿Cuantas representaciones son posibles?¿Es simétrico el rango de valores representado?¿Cuantas representaciones tiene el cero?
+** Extender el número de bits del número sin cambiar su valor
 
-=== Representación en complemento a la base menos 1
+=== Representación en complemento a la base menos 1. C9
 
 * Base 10: Complemento a 9 -> C9
 * Signo -> un dígito
@@ -524,7 +539,7 @@ Valor 33 en módulo 8 -> Resto(37/8)=5 -> en binario 101
 * El C9 de un número positivo es el código de su valor en negativo
 * El C9 de un número negativo es el código de su valor en positivo
 
-=== Representación en complemento a la base menos 1
+=== Representación en complemento a la base menos 1. C1
 
 * Base 2: Complemento a 1 -> C1
 * Signo -> un dígito
@@ -532,12 +547,13 @@ Valor 33 en módulo 8 -> Resto(37/8)=5 -> en binario 101
 * Valores negativos: Hay que restar el código del valor en positivo del  minuendo 11111111 (base-1)
 ** Ejemplo '+123' -> 0b01111011 y -123 -> 11111111-01111011 = 10000100
 ** El código del valor negativo se puede calcular invirtiendo los bits del código del valor positivo
-* El C1 de un número positivo es el código de su valor en negativo
-* El C1 de un número negativo es el código de su valor en positivo
-* Dibujar la tabla y la rueda. ¿Es simétrico?¿Cuantas representaciones tiene el cero?
-* Extensión del signo
+* El C1 de un número positivo es el código C1 de su valor en negativo
+* El C1 de un número negativo es el código C1 de su valor en positivo
+** Dibujar la tabla y la rueda con todos los valores con sus representaciones.
+** ¿Cuantas representaciones son posibles?¿Es simétrico el rango de valores representado?¿Cuantas representaciones tiene el cero?
+** Extender el número de bits del número sin cambiar su valor
 
-=== Representación en complemento a la base 
+=== Representación en complemento a la base 10 : C10
 
 * Signo -> un dígito
 * Base 10: Complemento a 10 -> C10
@@ -547,52 +563,132 @@ Valor 33 en módulo 8 -> Resto(37/8)=5 -> en binario 101
 * El C10 de un número positivo es el código de su valor en negativo
 * El C10 de un número negativo es el código de su valor en positivo
 
-=== Representación en complemento a la base 
+=== Representación en complemento a la base 2 : C2
 
 * Signo -> un dígito
 * Base 2: Complemento a 2 -> C2
 * Valores positivos: igual que los valores positivos en código Signo-Magnitud
 * Valores negativos: Hay que restar el código del valor en positivo del  minuendo 0000000 (base)
-** Ejemplo '+123' -> 0b01111011 y -123 -> 00000000-01111011 = 100000101
+** Ejemplo *+123* -> 0b01111011 y *-123* -> 00000000-01111011 = 0b100000101
 ** El código del valor negativo se puede calcular invirtiendo los bits del código del valor positivo y después sumarle 1
+*** Equivale a calcular el C1 y sumarle 1
 ** El código del valor negativo se puede calcular a partir del código del valor positivo
 *** empezando por la dcha repetir los bits hasta el primer uno e invertir el resto de bits
 
-* El C1 de un número positivo es el código de su valor en negativo
-* El C1 de un número negativo es el código de su valor en positivo
-* Dibujar la tabla y la rueda. ¿Es simétrico?¿Cuantas representaciones tiene el cero?
+* El C2 de un número positivo es el código C2 de su valor en negativo
+* El C2 de un número negativo es el código C2 de su valor en positivo
+** Dibujar la tabla y la rueda con todos los valores con sus representaciones.
+** ¿Cuantas representaciones son posibles?¿Es simétrico el rango de valores representado?¿Cuantas representaciones tiene el cero?
+** Extender el número de bits del número sin cambiar su valor -> Extensión del bit de SIGNO
 
-=== Representación gráfica del Complemento a 2
+=== Complemento a 2 : Ejemplos
+
+* 0b101010101 está en C2 -> ¿Cual es su valor?
+** como es negativo no es un sistema posicional
+** tenemos que calcular el valor negativo a través del valor positivo
+** La representación del valor positivo es el C2 del valor negativo
+*** C2(0b101010101) = 0b010101011 cuyo valor es 2^7^+2^5^+2^3^+2^1^+2^0^=128+32+8+2+1=+171
+*** El valor de 0b101010101 es -171
+
+* Si la representación de -123 es 0b100000101 ¿cual es la de '+123' ?
+** C2(0b100000101)=0b011111011 representa el valor '+123'
+
+=== Aritmética Modular de valores representados en Complemento a 2
 
 image::rueda_signed.png[Rueda,500,500,float="left"]
 
+[.text-left%hardbreaks]
+Representación de números binarios de 3 bits en C2
+Operaciones de suma y resta modular -> método gráfico
 
 [columns]
-=== Operaciones aritméticas: sumas y restas
+=== Operaciones aritméticas: sumas y restas : naturales y C2
 
 [column]
 * Números naturales
 ** Suma (decimal y binaria) 
 *** Llevada a la siguiente posición
-*** módulo de un número -> la rueda
 ** Resta (decimal y binaria)
-*** Crédito de la siguiente posición y Devolver en la siguiente posición
-*** módulo de un número
+*** Si el dígito minuendo es menor que el sustraendo: Crédito de la siguiente posición y Devolver en la siguiente posición
+
 
 [column]
 * Números enteros en complemento a 2
 ** Suma binaria: 
 *** Llevada a la siguiente posición
-*** módulo de un número -> la rueda
 ** Resta binaria:
-*** Crédito de la siguiente posición y Devolver en la siguiente posición
-*** módulo de un número
+*** Si el dígito minuendo es menor que el sustraendo: Crédito de la siguiente posición y Devolver en la siguiente posición
 
-=== Operaciones aritméticas: sumas y restas
 
-* Base Octal
+=== Operaciones aritméticas C2: Overflow y Extensión del signo
+
+* Overflow: la operación requiere operandos con mayor número de bits manteniendo el valor para que el resultado sea correcto.
+* Si dos operandos a sumar tienen diferente signo nunca hay overflow
+* Si dos operandos a sumar tienen el mismo signo y resultado tiene signo contrario : *Error* de Overflow.
+* Ejemplo:
+** Operandos de 1 byte :  01111111+01111111=11111110 -> sumandos positivos y resultado negativo
+*** Solución: *Extensión* del signo : Operandos  9 bits -> 001111111+001111111=011111110
+
+=== Operaciones aritméticas: Otras Bases.
+
+* Suma y resta
+* Base Octal 
+** 0o675+0o304
+** 0o632-0o374
 * Base hexadecimal
+** 0xD1B+0xAFF
+** 0xE53-0xBAA
 
 === Número en complemento a 2 y base hexadecimal
 
 CAUTION: Un número binario se puede representar en hexadecimal y hacer la interpretación en complento a 2. Hay que tener cuidado con las extensiones del signo
+
+* Calcular el valor del número 0xAAA si dicho número tiene formato en complemento a 2
+** si lo convertimos a binario el número empieza por 1, luego es negativo
+** para saber su valor calculo su complementario C2 y tendré la representación del positivo
+*** 0x000-0xAAA =0x556 -> 5*16^2^+5*16^1^+5*16^0^ = 5*256+5*16+5 = 1280+80+5 = '+213' -> 0xAAA tiene de valor -213
+
+* Realizar la suma de los números en formato complemento a 2: 0x80+0x80
+** sumar sin extender el signo de los operandos ¿Hay overflow?
+
+CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
+
+* sumar extendiendo un dígito el signo de los operandos
+
+
+=== Números Reales Binarios
+
+* Coma Fija
+** 123.125 -> b1111011.001
+* Coma flotante
+** Notación científica: potencias en la base del sistema (decimal,binario,etc)
+** En decimal -> 1.23125*10^2^
+** En binario ->1.111011001*2^6^
+*** el número que no es potencia se denomina mantisa
+*** Se dice que el número real en binario y en notación científica está normalizado si la parte entera vale 1.
+
+=== Números Reales Binarios: Norma IEEE-754
+
+** Campos del formato en notación científica : Signo, parte entera de la mantisa, parte fracción de la mantisa, base , exponente (módulo y signo)
+* ¿Es necesario representar los *seis* campos del formato de la notación científica?
+** Si esta normalizado la parte entera de la mantisa siempre vale 1
+** La base siempre vale 2
+** Por lo tanto la parte entera y la base no es necesario representar. Son ímplicitos a la representación.
+** Hay una forma de no tener que representar el signo del exponente
+*** es sumarle una cantidad para que al representarlo en EXCESO siempre sea positivo
+* Resumiendo, sólo es necesario representar: el signo del número , la fracción de la mantisa y el exponente en exceso.
+
+=== Formatos IEEE-754
+
+* Formato simple: 
+** representación de 32 bits: 1 bit para el signo / 8 bits para el exponente en exceso a 127 / 23 bits para la fracción
+** bit de signo: 0 si es positivo y 1 si es negativo
+* Formato doble:
+** representación de 64 bits: 1 bit para el signo / 11 bits para el exponente en exceso a 1023 / 52 bits para la fracción
+** bit de signo: 0 si es positivo y 1 si es negativo
+* Ejemplo: representar -5.5/1024 en los dos formatos
+
+[#Tema3_BoolePuertas]
+== Tema 3 : Algebra de Boole. Puertas Lógicas
+
+
