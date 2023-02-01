@@ -37,8 +37,8 @@
 == Indice
 
 [%hardbreaks]
-Tema 1: Introducción <<Tema1_Intro>>.
-Tema 2: Representación de la Información <<Tema2_RepInf>>.
+Tema 1: Introducción a los Sistemas Digitales Electrónicos <<Tema1_Intro>>.
+Tema 2: Representación Digital de la Información <<Tema2_RepInf>>.
 Tema 3: Algebra de Boole. Puertas Lógicas.
 Tema 4: Lenguaje de Descripción Hardware VHDL.
 Tema 5: Circuitos Aritméticos.
@@ -47,7 +47,7 @@ Tema 6: Otros Circuitos Combinacionales.
 
 [#Tema1_Intro]
 [.columns]
-== Tema 1 : Introducción
+== Tema 1 : Introducción a los Sistemas Digitales Electrónicos
 
 [column]
 * Presentación
@@ -365,7 +365,23 @@ El horario: 8 a 14:30. Precio 8.5$.
 ** Resolución de dudas
 
 [#Tema2_RepInf]
-== Tema 2 : Representación de la Información
+== Tema 2 : Representación Digital de la Información
+
+* Información: números, caracteres, imagen, sonido, etc ..
+* Números
+** Sistemas posicionales: base 10 (decimales), base 2 (binaria)
+** Naturales: bases 10,2,8,16 . Conversión entre bases
+** Enteros: Signo Magnitud, Complemento a la base-1, Complemento a la base
+** Operaciones aritméticas: Suma,Resta
+** Reales: coma fija y coma flotante
+* Caracteres
+** Alfanuméricos y Signos de Puntuación
+** ASCII standard y extendido
+** Unicode: UTF-8 
+ 
+
+
+== Representación de los Números 
 
 [state="taula"]
 === Representación de los Números Decimales
@@ -391,4 +407,192 @@ a|5*1000=cinco mil|4*100=cuatrocientos|5*10=cincuenta|1*1=uno
 | Valor: 4+| 5*1000+4*100+5*10+1= cinco mil cuatrocientos cincuenta y uno
 |===
 
+[state="txikiago"]
+=== Representación de los Valores Enteros en Código Binario
 
+* ¿Número?¿Valor?¿Código?¿Representación?
+** 2 dígitos : 0,1
+** Pesos con base 2 : 2^n^ donde n es la posición del dígito dentro del número: ....-1024-512-256-128-64-32-16-8-4-2-1...
+* Ejemplo: número 0b1011
+
+.Número 0b110011
+[width=60%,cols="<3s,4*^1"]
+|===
+|Representación: 4+| los símbolos 1011
+|Posiciones: | 3 | 2 | 1 | 0
+| Pesos:
+a|2^3^ -> 8|2^2^ -> 4|2^1^->2|2^0^->1
+| Dígitos:
+a|1|0|1|1
+| Valores : ponderación
+a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
+| Valor: 4+| ocho+cero+dos+uno= once
+|===
+
+
+
+=== Representación de los Valores Enteros en Código Binario
+
+* ¿Cómo se representa en binario el valor 123.125? b1111011.001
+** python >>> bin(123)
+* ¿Cómo se calcula el valor del número binario b1111011.001?
+* Parte Entera: divisiones sucesivas por la base 2
+* Parte Fracción: multiplicaciones sucesivas por la base 2
+
+=== Representación de los Valores Enteros en Código Octal
+
+* Dígitos: 0,1,2,3,4,5,6,7
+* Posiciones y Pesos
+* ¿Cómo se representa en octal el valor 123.125? 0o173.1
+* ¿Cómo se calcula el valor del número octal 0o173.1?
+* Parte Entera: divisiones sucesivas por la base 8
+* Parte Fracción: multiplicaciones sucesivas por la base 8
+
+=== Representación de los Números en Hexadecimal
+
+* Dígitos: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F ___ el valor de A es 10, B->11, C->12, D->13, E-14, F->15
+* Posiciones y Pesos
+* ¿Cómo se representa en hexadecimal el valor 123.125? 0x7B.2
+* ¿Cómo se calcula el valor del número octal 0x7B.2?
+* Parte Entera: divisiones sucesivas por la base 16
+* Parte Fracción: multiplicaciones sucesivas por la base 16
+
+[.columns]
+=== Conversiones entre el sistema binario y sistemas con base potencia de 2
+
+[.column]
+* Conversión Binaria-Hexadecimal
+** base 16=2^4^
+** grupos de 4 bits empezando por la dcha
+** b1111011 ->  111 - 1011  -> 0x7B 
+* Conversión Hexadecimal-Binaria
+** grupos de 4 bits
+
+[.column]
+* Conversión Binaria-Octal
+** base 8=2^3^
+** grupos de 3 bits empezando por la dcha
+** b1111011 -> 1 - 111 - 011  -> 0o173
+* Conversión Octal-Binaria
+** grupos de 3 bits
+
+=== Representación gráfica de las combinaciones binarias
+
+
+image::rueda_unsigned.png[Rueda,500,500,float="left"]
+
+[.text-left%hardbreaks]
+Representación binaria de números con 3 digitos.
+2^3^ : 8 combinaciones posibles,
+Ejemplo: cuentakilómetros del coche.
+Ejemplo: registro de 3 celdas -> limitado a 8 combinaciones posibles.
+¿Cual es la siguiente combinación a 111?, 111+1 = ¿ ?.
+Valor 33 en módulo 8 -> Resto(37/8)=5 -> en binario 101
+33 pasos en la rueda equivale al número 101
+
+=== Representación de Números con Valores Enteros
+
+* Signo-Magnitud
+* Complemento a la base menos 1
+* Complemento a la base
+
+=== Representación en Signo-Magnitud
+
+* Signo -> un dígito
+* Base 10: 
+** valores positivos: el signo el dígito 0 en la posición MSD (More Significant Digit) y resto de dígitos representa el módulo 
+** valores negativos: el signo el dígito 9 (base-1) en la posición MSD (More Significant Dit) y resto de dígitos representa el módulo 
+** Ejemplo '+123' -> 0123 y -123 -> 9123
+
+=== Representación en Signo-Magnitud
+
+* Signo -> un bit (Binary digIT)
+* Base 2 : 
+** valores positivos: el signo el bit 0 en la posición MSB (More Significant Bit) y resto de bits representa el mód
+** valores negativos: el signo el bit 1 (base-1) en la posición MSB (More Significant Bit) y resto de bits representa el módulo
+** Ejemplo '+123' -> 0b01111011 y -123 -> 0b11111011
+** Dibujar la tabla y la rueda. ¿Es simétrico?¿Cuantas representaciones tiene el cero?
+** Extensión del signo
+
+=== Representación en complemento a la base menos 1
+
+* Base 10: Complemento a 9 -> C9
+* Signo -> un dígito
+* Valores positivos: igual que los valores positivos en código Signo-Magnitud
+* Valores negativos: Hay que restar el código del valor en positivo del minuendo 99999999 (base-1)
+** Ejemplo '+123' -> 0123 y -123 -> 9999-0123 = 9876
+* El C9 de un número positivo es el código de su valor en negativo
+* El C9 de un número negativo es el código de su valor en positivo
+
+=== Representación en complemento a la base menos 1
+
+* Base 2: Complemento a 1 -> C1
+* Signo -> un dígito
+* Valores positivos: igual que los valores positivos en código Signo-Magnitud
+* Valores negativos: Hay que restar el código del valor en positivo del  minuendo 11111111 (base-1)
+** Ejemplo '+123' -> 0b01111011 y -123 -> 11111111-01111011 = 10000100
+** El código del valor negativo se puede calcular invirtiendo los bits del código del valor positivo
+* El C1 de un número positivo es el código de su valor en negativo
+* El C1 de un número negativo es el código de su valor en positivo
+* Dibujar la tabla y la rueda. ¿Es simétrico?¿Cuantas representaciones tiene el cero?
+* Extensión del signo
+
+=== Representación en complemento a la base 
+
+* Signo -> un dígito
+* Base 10: Complemento a 10 -> C10
+* Valores positivos: igual que los valores positivos en código Signo-Magnitud
+* Valores negativos: Hay que restar el código del valor en positivo del minuendo 0000000 (base)
+** Ejemplo '+123' -> 0123 y -123 -> 0000-0123 = 9877
+* El C10 de un número positivo es el código de su valor en negativo
+* El C10 de un número negativo es el código de su valor en positivo
+
+=== Representación en complemento a la base 
+
+* Signo -> un dígito
+* Base 2: Complemento a 2 -> C2
+* Valores positivos: igual que los valores positivos en código Signo-Magnitud
+* Valores negativos: Hay que restar el código del valor en positivo del  minuendo 0000000 (base)
+** Ejemplo '+123' -> 0b01111011 y -123 -> 00000000-01111011 = 100000101
+** El código del valor negativo se puede calcular invirtiendo los bits del código del valor positivo y después sumarle 1
+** El código del valor negativo se puede calcular a partir del código del valor positivo
+*** empezando por la dcha repetir los bits hasta el primer uno e invertir el resto de bits
+
+* El C1 de un número positivo es el código de su valor en negativo
+* El C1 de un número negativo es el código de su valor en positivo
+* Dibujar la tabla y la rueda. ¿Es simétrico?¿Cuantas representaciones tiene el cero?
+
+=== Representación gráfica del Complemento a 2
+
+image::rueda_signed.png[Rueda,500,500,float="left"]
+
+
+[columns]
+=== Operaciones aritméticas: sumas y restas
+
+[column]
+* Números naturales
+** Suma (decimal y binaria) 
+*** Llevada a la siguiente posición
+*** módulo de un número -> la rueda
+** Resta (decimal y binaria)
+*** Crédito de la siguiente posición y Devolver en la siguiente posición
+*** módulo de un número
+
+[column]
+* Números enteros en complemento a 2
+** Suma binaria: 
+*** Llevada a la siguiente posición
+*** módulo de un número -> la rueda
+** Resta binaria:
+*** Crédito de la siguiente posición y Devolver en la siguiente posición
+*** módulo de un número
+
+=== Operaciones aritméticas: sumas y restas
+
+* Base Octal
+* Base hexadecimal
+
+=== Número en complemento a 2 y base hexadecimal
+
+CAUTION: Un número binario se puede representar en hexadecimal y hacer la interpretación en complento a 2. Hay que tener cuidado con las extensiones del signo
