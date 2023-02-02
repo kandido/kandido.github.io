@@ -65,15 +65,15 @@
 section[data-state="txiki"]  {
     font-size: 0.7em;
 }
-section[data-state="txikiago"]  {
-    font-size: 0.5em;
+section[data-state="txikiago"] p {
+    font-size: 0.6em;
 }
 section[data-state="topico"] h2,h3 {
     font-family: 'Baloo Bhai', cursive;
     font-size: 2em;
 }
 
-section[data-state="taula"] table {
+section[data-state="taula"]  {
     font-family: 'Neuton', sans-serif;
     font-size: 0.5em;
     margin-top: 0.5em;
