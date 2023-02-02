@@ -49,7 +49,7 @@ Tema 6: Otros Circuitos Combinacionales.
 [.columns]
 == Tema 1 : Introducción a los Sistemas Digitales Electrónicos
 
-[column]
+[.column]
 * Presentación
 ** Profesor
 ** Calendario
@@ -57,7 +57,7 @@ Tema 6: Otros Circuitos Combinacionales.
 ** Electrónica
 ** Procesamiento de señales eléctricas
 
-[column]
+[.column]
 * Organización Académica
 ** Programa
 ** Prácticas
@@ -367,8 +367,8 @@ El horario: 8 a 14:30. Precio 8.5$.
 [#Tema2_RepInf]
 == Tema 2 : Representación Digital de la Información
 
-
-== Indice
+[state=txiki]
+=== Indice
 
 * Información: números, caracteres, imagen, sonido, etc ..
 * Números
@@ -384,7 +384,7 @@ El horario: 8 a 14:30. Precio 8.5$.
  
 
 
-== Representación de los Números 
+=== Representación de los Números 
 
 [state="taula"]
 === Representación de los Números Decimales
@@ -410,7 +410,7 @@ a|5*1000=cinco mil|4*100=cuatrocientos|5*10=cincuenta|1*1=uno
 | Valor: 4+| 5*1000+4*100+5*10+1= cinco mil cuatrocientos cincuenta y uno
 |===
 
-[state="txikiago"]
+[state="taula"]
 === Representación de los Valores Enteros en Código Binario
 
 * ¿Número?¿Valor?¿Código?¿Representación?
@@ -461,6 +461,7 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 
 === Calculadora de Python
 
+
 [source,python]
 ----
 bin(123)
@@ -470,6 +471,7 @@ int(0b1111011)
 int(0o173)
 int(0x7B)
 ----
+
 
 [.columns]
 === Conversiones entre el sistema binario y sistemas con base potencia de 2
@@ -518,6 +520,7 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(37/8)=5 -> en bin
 ** valores negativos: el signo el dígito 9 (base-1) en la posición MSD (More Significant Dit) y resto de dígitos representa el módulo 
 ** Ejemplo '+123' -> 0123 y -123 -> 9123
 
+[state=txikiago]
 === Representación en Signo-Magnitud
 
 * Signo -> un bit (Binary digIT)
@@ -563,6 +566,7 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(37/8)=5 -> en bin
 * El C10 de un número positivo es el código de su valor en negativo
 * El C10 de un número negativo es el código de su valor en positivo
 
+[state=txikiago]
 === Representación en complemento a la base 2 : C2
 
 * Signo -> un dígito
@@ -574,6 +578,8 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(37/8)=5 -> en bin
 *** Equivale a calcular el C1 y sumarle 1
 ** El código del valor negativo se puede calcular a partir del código del valor positivo
 *** empezando por la dcha repetir los bits hasta el primer uno e invertir el resto de bits
+
+=== Representación en complemento a la base 2 : C2
 
 * El C2 de un número positivo es el código C2 de su valor en negativo
 * El C2 de un número negativo es el código C2 de su valor en positivo
@@ -601,10 +607,11 @@ image::rueda_signed.png[Rueda,500,500,float="left"]
 Representación de números binarios de 3 bits en C2
 Operaciones de suma y resta modular -> método gráfico
 
-[columns]
+
+[.columns]
 === Operaciones aritméticas: sumas y restas : naturales y C2
 
-[column]
+[.column]
 * Números naturales
 ** Suma (decimal y binaria) 
 *** Llevada a la siguiente posición
@@ -612,7 +619,7 @@ Operaciones de suma y resta modular -> método gráfico
 *** Si el dígito minuendo es menor que el sustraendo: Crédito de la siguiente posición y Devolver en la siguiente posición
 
 
-[column]
+[.column]
 * Números enteros en complemento a 2
 ** Suma binaria: 
 *** Llevada a la siguiente posición
@@ -648,10 +655,14 @@ CAUTION: Un número binario se puede representar en hexadecimal y hacer la inter
 ** para saber su valor calculo su complementario C2 y tendré la representación del positivo
 *** 0x000-0xAAA =0x556 -> 5*16^2^+5*16^1^+5*16^0^ = 5*256+5*16+5 = 1280+80+5 = '+213' -> 0xAAA tiene de valor -213
 
+=== Número en complemento a 2 y base hexadecimal
+
 * Realizar la suma de los números en formato complemento a 2: 0x80+0x80
 ** sumar sin extender el signo de los operandos ¿Hay overflow?
++
 
 CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
++
 
 * sumar extendiendo un dígito el signo de los operandos
 
@@ -667,9 +678,10 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 *** el número que no es potencia se denomina mantisa
 *** Se dice que el número real en binario y en notación científica está normalizado si la parte entera vale 1.
 
+
 === Números Reales Binarios: Norma IEEE-754
 
-** Campos del formato en notación científica : Signo, parte entera de la mantisa, parte fracción de la mantisa, base , exponente (módulo y signo)
+* Campos del formato en notación científica : Signo, parte entera de la mantisa, parte fracción de la mantisa, base , exponente (módulo y signo)
 * ¿Es necesario representar los *seis* campos del formato de la notación científica?
 ** Si esta normalizado la parte entera de la mantisa siempre vale 1
 ** La base siempre vale 2
@@ -687,6 +699,18 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 ** representación de 64 bits: 1 bit para el signo / 11 bits para el exponente en exceso a 1023 / 52 bits para la fracción
 ** bit de signo: 0 si es positivo y 1 si es negativo
 * Ejemplo: representar -5.5/1024 en los dos formatos
+
+=== Representación de los Caracteres
+
+=== Representación de los Caracteres
+
+* Tipos de Caracteres:
+** Alfanuméricos
+** Signos de Puntuación
+** de Control
+* Formatos
+** ASCII: standard y extendido
+** Unicode: UTF-8
 
 [#Tema3_BoolePuertas]
 == Tema 3 : Algebra de Boole. Puertas Lógicas
