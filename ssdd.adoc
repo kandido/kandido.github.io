@@ -99,31 +99,31 @@ Tema 6: Otros Circuitos Combinacionales.
 
 == Calendario
 
-[state=taula]
+[.state=topleft]
 === Febrero
 
 [%header, format=csv]
 |===
 Lunes,Martes,Miércoles,Jueves,Viernes
 30-Presentación,31,1-Repre_Info,2,3
-6,7,8,9,10
+6-Repre_Info,7,8-Alg_Boole,9,10
 13,14,15,16,17
 20,21,22,23,24
 27,28,,,,,
 |===
 
-[state=taula]
+[.state=topleft]
 === Marzo
 
 
 [%header, format=csv]
 |===
-Lunes,Martes,Miércoles,Jueves,Viernes,Sábado ,Domingo
-,,1,2,3,4,5
-6,7,8,9,10,11,12
-13,14,15,16,17,18,19
-20,21,22,23,24,25,26
-27,28,29,30,31,,
+Lunes,Martes,Miércoles,Jueves,Viernes
+,,1,2,3,
+6,7,8,9,10,
+13,14,15,16,17,
+20,21,22,23,24,
+27,28,29,30,31,
 |===
 
 == Tomografía axial computarizada
@@ -503,8 +503,8 @@ Representación binaria de números con 3 digitos.
 Ejemplo: cuentakilómetros del coche.
 Ejemplo: registro de 3 celdas -> limitado a 8 combinaciones posibles.
 ¿Cual es la siguiente combinación a 111?, 111+1 = ¿ ?.
-Calcular la representación del valor 33 en módulo 8 -> Resto(37/8)=5 -> en binario 101
-33 pasos en la rueda equivale al número 101 -> aritmética modular en módulo 8
+Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en binario 001
+33 pasos en la rueda equivale al número 001 -> aritmética modular en módulo 8
 
 === Representación de Números con Valores Enteros
 
@@ -518,7 +518,7 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(37/8)=5 -> en bin
 * Base 10: 
 ** valores positivos: el signo el dígito 0 en la posición MSD (More Significant Digit) y resto de dígitos representa el módulo 
 ** valores negativos: el signo el dígito 9 (base-1) en la posición MSD (More Significant Dit) y resto de dígitos representa el módulo 
-** Ejemplo '+123' -> 0123 y -123 -> 9123
+** Ejemplo +123 -> 0123 y -123 -> 9123
 
 [state=txikiago]
 === Representación en Signo-Magnitud
@@ -527,7 +527,7 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(37/8)=5 -> en bin
 * Base 2 : 
 ** valores positivos: el signo el bit 0 en la posición MSB (More Significant Bit) y resto de bits representa el mód
 ** valores negativos: el signo el bit 1 (base-1) en la posición MSB (More Significant Bit) y resto de bits representa el módulo
-** Ejemplo '+123' -> 0b01111011 y -123 -> 0b11111011
+** Ejemplo +123 -> 0b01111011 y -123 -> 0b11111011
 ** Dibujar la tabla y la rueda con todos los valores con sus representaciones.
 ** ¿Cuantas representaciones son posibles?¿Es simétrico el rango de valores representado?¿Cuantas representaciones tiene el cero?
 ** Extender el número de bits del número sin cambiar su valor
@@ -538,10 +538,11 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(37/8)=5 -> en bin
 * Signo -> un dígito
 * Valores positivos: igual que los valores positivos en código Signo-Magnitud
 * Valores negativos: Hay que restar el código del valor en positivo del minuendo 99999999 (base-1)
-** Ejemplo '+123' -> 0123 y -123 -> 9999-0123 = 9876
+** Ejemplo +123 -> 0123 y -123 -> 9999-0123 = 9876
 * El C9 de un número positivo es el código de su valor en negativo
 * El C9 de un número negativo es el código de su valor en positivo
 
+[state=txikiago]
 === Representación en complemento a la base menos 1. C1
 
 * Base 2: Complemento a 1 -> C1
@@ -550,8 +551,7 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(37/8)=5 -> en bin
 * Valores negativos: Hay que restar el código del valor en positivo del  minuendo 11111111 (base-1)
 ** Ejemplo '+123' -> 0b01111011 y -123 -> 11111111-01111011 = 10000100
 ** El código del valor negativo se puede calcular invirtiendo los bits del código del valor positivo
-* El C1 de un número positivo es el código C1 de su valor en negativo
-* El C1 de un número negativo es el código C1 de su valor en positivo
+* El C1 de un número positivo es el código C1 de su valor en negativo y del de un número negativo es el código C1 de su valor en positivo
 ** Dibujar la tabla y la rueda con todos los valores con sus representaciones.
 ** ¿Cuantas representaciones son posibles?¿Es simétrico el rango de valores representado?¿Cuantas representaciones tiene el cero?
 ** Extender el número de bits del número sin cambiar su valor
@@ -585,7 +585,56 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(37/8)=5 -> en bin
 * El C2 de un número negativo es el código C2 de su valor en positivo
 ** Dibujar la tabla y la rueda con todos los valores con sus representaciones.
 ** ¿Cuantas representaciones son posibles?¿Es simétrico el rango de valores representado?¿Cuantas representaciones tiene el cero?
-** Extender el número de bits del número sin cambiar su valor -> Extensión del bit de SIGNO
+** Extender el número de bits del número sin cambiar su valor -> Extensión del bit de SIGNO 
+
+//[state=taula]
+=== Extensión del signo en C2
+
+.Razonamiento de la extensión de signo de un número negativo: números de 3 bits
+[width=60%,<1,2*<2]
+|===
+|Valor| C2 sin extensión | C2 con extensión
+|  +33 |  0100001    | 00100001
+.4+|  -33  l| 
+ 0000000  
+-0100001 
+ -------  
+ 1011111 l|
+
+  00000000 
+ -00100001 
+  --------
+  11011111  
+|===
+
+
+Se observa que en el C2 con extensión, al hacer al resta y extender con un 0 más el minuendo y el substraendo, provoca la extensión con un bit más en la resta de valor 1 en el digito más significante. Según añado ceros al minuendo y sustraendo, aparecen unos en al resta sin alterar su valor.
+
+=== Operaciones aritméticas C2: Overflow 
+
+* Overflow: la operación requiere operandos con mayor número de bits manteniendo el valor para que el resultado sea correcto.
+* Si dos operandos a sumar tienen diferente signo nunca hay overflow
+* Si dos operandos a sumar tienen el mismo signo y resultado tiene signo contrario : *Error* de Overflow.
+* Ejemplo:
+** Operandos de 1 byte :  01111111+01111111=11111110 -> sumandos positivos y resultado negativo
+*** Solución: *Extensión del signo* : Operandos  9 bits -> 001111111+001111111=011111110
+*** la repetición del bit más significativo no altera el valor de la representación
+*** el bit más significativo es 0 si es positivo y 1 si es negativo. Por lo tanto, 01010 equivale a 01010 ó 001010 ó 0....0001010. Por lo tanto, 1010 equivale a 11010 ó 111010 ó 1....1111010
+
+=== Representación gráfica del Overflow
+
+image::rueda_signed.png[Rueda,500,500,float="left"]
+
+[.text-left%hardbreaks]
+Si a partir de la posición 010 nos movemos dos posiciones en sentido  horario llegamos a la posición 100.
+Si a 010 le sumamos el valor 2 nos da como resultado 100
+Por lo tanto 010+010=100, es decir, 2+2=-4 -> *overflow* ya que el _+4_ necesita 4 bits y estamos trabajando con 3 bits únicamente.
+
+
+=== Asimetría del rango en C2: -4 con 3 bits
+
+* Con números de 3 bits los formatos S-M y C1 son simétricos con valores en el rango (+3,-3), en cambio el formato C2 tiene el rango (+3,-4)
+* En C2 el valor +4 se representa como 0b0100 y necesita por lo tanto 4 bits, no se puede representar con 3 bits, y el valor -4 se reprenta con el C2(0100), es decir, 1100 también con 4 bits. El 1100 se puede comprimir ya que tiene el signo extendido con la repetición de 1 de bit más significativo, por lo que la representación 100 es la representación del -4
 
 === Complemento a 2 : Ejemplos
 
@@ -606,6 +655,29 @@ image::rueda_signed.png[Rueda,500,500,float="left"]
 [.text-left%hardbreaks]
 Representación de números binarios de 3 bits en C2
 Operaciones de suma y resta modular -> método gráfico
+A partir de la posición 001 si nos movemos en sentido horario (SUMA modular) 2 posiciones obtenemos la posición 011, es decir, 1+2=3
+A partir de la posición 110 si nos movemos en sentido horario (SUMA modular) 9 posiciones obtenemos la posición 111, es decir, -2+9=-1
+A partir de la posición 110 si nos movemos en sentido antihorario (RESTA modular) 4 posiciones obtenemos la posición 010, es decir, -2-4=+2
+Los errores de *overflow* se resuelven aumentando el número de bits de la representación, pero siempre existira un rango que si lo traspasamos dará overflow.
+
+[state=taula]
+=== Comparación S-M, C1 y C2
+
+.Números de 3 bits
+[width=80%,cols="4*^"]
+|===
+|Valor|S-M| C1 | C2
+
+|+3| 011 |011|011
+|+2| 010 |010|010
+|+1| 001 |001|001
+.2+|0 | 000 |000|000
+| 100 |011| ---
+|-1 | 101 |110|111
+|-2 | 101 |101|110
+|-3 | 101 |100|101
+|-4 | - | - | 111
+|===
 
 
 [.columns]
@@ -627,16 +699,7 @@ Operaciones de suma y resta modular -> método gráfico
 *** Si el dígito minuendo es menor que el sustraendo: Crédito de la siguiente posición y Devolver en la siguiente posición
 
 
-=== Operaciones aritméticas C2: Overflow y Extensión del signo
-
-* Overflow: la operación requiere operandos con mayor número de bits manteniendo el valor para que el resultado sea correcto.
-* Si dos operandos a sumar tienen diferente signo nunca hay overflow
-* Si dos operandos a sumar tienen el mismo signo y resultado tiene signo contrario : *Error* de Overflow.
-* Ejemplo:
-** Operandos de 1 byte :  01111111+01111111=11111110 -> sumandos positivos y resultado negativo
-*** Solución: *Extensión* del signo : Operandos  9 bits -> 001111111+001111111=011111110
-
-=== Operaciones aritméticas: Otras Bases.
+=== Operaciones aritméticas: Otras Bases
 
 * Suma y resta
 * Base Octal 
@@ -648,7 +711,8 @@ Operaciones de suma y resta modular -> método gráfico
 
 === Número en complemento a 2 y base hexadecimal
 
-CAUTION: Un número binario se puede representar en hexadecimal y hacer la interpretación en complento a 2. Hay que tener cuidado con las extensiones del signo
+CAUTION: Un número
+ binario se puede representar en hexadecimal y hacer la interpretación en complento a 2. Hay que tener cuidado con las extensiones del signo
 
 * Calcular el valor del número 0xAAA si dicho número tiene formato en complemento a 2
 ** si lo convertimos a binario el número empieza por 1, luego es negativo
@@ -664,7 +728,28 @@ CAUTION: Un número binario se puede representar en hexadecimal y hacer la inter
 CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 +
 
-* sumar extendiendo un dígito el signo de los operandos
+* sumar extendiendo un dígito el signo de los operandos 0x80
+
+
+[state=taula_ta]
+=== Extensión del signo en C2: problema de la BASE
+
+
+
+.Extensión del Signo del Nº 0x80 en C2 en binario, hexadecimal y octal
+
+[width=80%,cols="^1,3*<3"]
+|===
+|  NºBits | Binario | Hexadecimal | Octal
+
+|  8 |     10000000 |           1000_0000 ->   0x80 |         110_000_000 ->  0o600
+|  9 |    110000000 |      1111_1000_0000 ->  0xF80 |         110_000_000 ->  0o600
+| 10 |   1110000000 |      1111_1000_0000 ->  0xF80 |     111_110_000_000 -> 0o7600
+| 11 |  11110000000 |      1111_1000_0000 ->  0xF80 |     111_110_000_000 -> 0x7600
+| 12 | 111110000000 |      1111_1000_0000 ->  0xF80 |     111_110_000_000 -> 0x77600
+| 13 |1111110000000 | 1111_1111_1000_0000 -> 0xFF80 | 111_111_110_000_000 -> 0x77200
+|===
+
 
 
 === Números Reales Binarios
@@ -675,42 +760,177 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 ** Notación científica: potencias en la base del sistema (decimal,binario,etc)
 ** En decimal -> 1.23125*10^2^
 ** En binario ->1.111011001*2^6^
-*** el número que no es potencia se denomina mantisa
-*** Se dice que el número real en binario y en notación científica está normalizado si la parte entera vale 1.
+*** el factor que no es potencia se denomina mantisa
+*** Se dice que el número real en binario y en notación científica está normalizado si la parte entera de la mantisa vale 1.
 
-
+[state="txiki"]
 === Números Reales Binarios: Norma IEEE-754
 
 * Campos del formato en notación científica : Signo, parte entera de la mantisa, parte fracción de la mantisa, base , exponente (módulo y signo)
 * ¿Es necesario representar los *seis* campos del formato de la notación científica?
 ** Si esta normalizado la parte entera de la mantisa siempre vale 1
-** La base siempre vale 2
-** Por lo tanto la parte entera y la base no es necesario representar. Son ímplicitos a la representación.
-** Hay una forma de no tener que representar el signo del exponente
+** La base del factor potencia siempre vale 2
+** Por lo tanto la parte entera y la base no son necesario representarlas. Son ímplicitas a la representación.
+** Hay una forma de no tener que representar el signo del exponente del factor potencia
 *** es sumarle una cantidad para que al representarlo en EXCESO siempre sea positivo
-* Resumiendo, sólo es necesario representar: el signo del número , la fracción de la mantisa y el exponente en exceso.
+* Resumiendo, sólo es necesario representar: el signo del número , la fracción de la mantisa y el exponente en exceso. Por lo tanto el formato IEEE-754 tiene 3 campos.
 
-=== Formatos IEEE-754
 
-* Formato simple: 
-** representación de 32 bits: 1 bit para el signo / 8 bits para el exponente en exceso a 127 / 23 bits para la fracción
-** bit de signo: 0 si es positivo y 1 si es negativo
-* Formato doble:
-** representación de 64 bits: 1 bit para el signo / 11 bits para el exponente en exceso a 1023 / 52 bits para la fracción
-** bit de signo: 0 si es positivo y 1 si es negativo
-* Ejemplo: representar -5.5/1024 en los dos formatos
+=== Formato IEEE-754 simple
+
+* representación de 32 bits: 1 bit para el signo / 8 bits para el exponente en exceso a 127 / 23 bits para la fracción
+* bit de signo: 0 si es positivo y 1 si es negativo
++
+
+["ditaa"]
+----------------------------------------------------------------------
+  1      8bits              23bits                       <-- tamaño en bits
+ +-+-------------+------------------------------------+
+ |S|  Exp + 127  | Fracción de la Mantisa  Normalizada|
+ +-+-------------+------------------------------------+
+ 31 30         23 22                                 0   <--  bit pos 0 a la dcha      
+----------------------------------------------------------------------
+
+=== Formato IEEE-754 doble
+
+
+* representación de 64 bits: 1 bit para el signo / 11 bits para el exponente en exceso a 1023 / 52 bits para la fracción
+* bit de signo: 0 si es positivo y 1 si es negativo
++
+
+["ditaa"]
+----------------------------------------------------------------------
+  1      11bits              52bits            <-- tamaño en bits
+ +-+-------------+-----------------------+
+ |S|  Exp + 1023 | Fracción Mantisa  Norm|
+ +-+-------------+-----------------------+
+ 63 62         52 51                     0   <-- bit pos 0 a la dcha      
+----------------------------------------------------------------------
+
+[.columns, state=txiki]
+=== El Nº -5.5/1024 en los dos Formatos IEEE-754
+
+[.column]
+* Conversión binaria del módulo
+** 5.5/1024 = 5.5*2^-10^ = 101.1*2^-10^ 
+** Normalización de la mantisa -> 1.011*2^-8^
+
+[.column]
+* Formato Simple de 32 bits
+** Signo negativo: bit 1
+** Exponente en exeso 127=-8+127=119=01110111
+** Fracción de la mantisa=011
+*** 1_01110111_01100000000000000000000  
+*** 0b10111011101100000000000000000000 
+*** *0xBBB00000* 
+    
+[.column]
+* Formato Doble de 64 bits
+** Signo negativo:  bit 1
+** Exponente en exeso 1023=-8+1023=1015=01111110111
+** Fracción de la mantisa=011
+*** 1_01111110111_0110...0  
+*** 0b1011111101110110...0
+*** *0xBF76000000000000*
+
 
 === Representación de los Caracteres
 
 === Representación de los Caracteres
 
 * Tipos de Caracteres:
-** Alfanuméricos
-** Signos de Puntuación
-** de Control
+** Alfanuméricos: a,b,...z.0,1,...9,A,B...Z
+** Signos de Puntuación: !"$%&/()=
+** de Control: Salto de Línea (\n), Find de Fichero (EOF), Fin de String (\00, ...)
 * Formatos
 ** ASCII: standard y extendido
 ** Unicode: UTF-8
+
+[.columns]
+=== ASCII Standard
+
+[.column.zutabe]
+----
+          2 3 4 5 6 7       30 40 50 60 70 80 90 100 110 120
+        -------------      ---------------------------------
+       0:   0 @ P ` p     0:    (  2  <  F  P  Z  d   n   x
+       1: ! 1 A Q a q     1:    )  3  =  G  Q  [  e   o   y
+       2: " 2 B R b r     2:    *  4  >  H  R  \  f   p   z
+       3: # 3 C S c s     3: !  +  5  ?  I  S  ]  g   q   {
+       4: $ 4 D T d t     4: "  ,  6  @  J  T  ^  h   r   |
+       5: % 5 E U e u     5: #  -  7  A  K  U  _  i   s   }
+       6: & 6 F V f v     6: $  .  8  B  L  V  `  j   t   ~
+       7: ' 7 G W g w     7: %  /  9  C  M  W  a  k   u  DEL
+       8: ( 8 H X h x     8: &  0  :  D  N  X  b  l   v
+       9: ) 9 I Y i y     9: '  1  ;  E  O  Y  c  m   w
+       A: * : J Z j z
+       B: + ; K [ k {
+       C: , < L \ l |
+       D: - = M ] m }
+       E: . > N ^ n ~
+       F: / ? O _ o DEL
+
+----
+
+[.column.zutabe_gehi]
+[%hardbreaks]
+American Standard Code for Information Interchange
+Alfabeto anglosajón
+7 bits -> 2^7^=128 caracteres : 0x00 hasta 0x1F son 32 caracteres de control y el resto alfanuméricos
+En hexadecimal rango [0x00-0x7F]
+En decimal rango [0-127]
+Upna : 0x55706E61
+año 2023: 0x61--6F2032303233
+
+=== ASCII Extendido
+
+* Para poder representar caracteres de otras culturas Europeas es necesrio expandir el standard con 1 bit más
+* ASCII 8 bits -> 2^8^ = 256 caracteres
++
+
+[source,python]
+---------
+ord('A')
+hex(ord('A'))
+hex(ord('\n'))
+chr(65)
+chr(0x41)
+[hex(ord(c)) for c in "Hola"]
+[chr(c) for c in [0x48, 0x6f, 0x6c, 0x61, 0x20, 0x4d, 0x75, 0x6e, 0x64, 0x6f]]
+[hex(ord(c)) for c in "ñ"]
+[hex(ord(c)) for c in "\n \t"]
+---------
+** La ñ es el código ASCII 0xF1
+
+[.state=txikiago]
+=== UTF-8
+
+* https://unicode-table.com/es/[Tablas]
+* Unicode Transformation Format (UTF)
+* UTF-8: Esta orientado a la transmisión de palabras de 1 byte
+* Los caracteres pueden tener entre 1 y 4 bytes -> 2^21^ code points  &#x2243; 2 millones;
+* The dominant encoding on the World Wide Web and on most Unix-like operating systems
+* En linux comando *localectl status* : informa sobre el sistema del teclado
+* ñ: 
+** hex code 0xC3B1 
+** unicode point U+00F1  -> los primeros 256 caracteres equivalen al ascii extendido
+
+[.columns]
+=== Unicode Points
+
+[.column]
+* U+2228: &#x2228;
+* U+22bc: &#x22bc;
+* U+22bd: &#x22bd;
+* U+22a6:  &#x22a6;
+* U+1f60b:  &#x1f60b;
+
+[.column]
+* U+00f1: &#x00f1;
+* OrduU+00F1a: Ordu&#x00F1;a
+* U+2190: &#x2190;
+* U+2192: &#x2192;
+
 
 [#Tema3_BoolePuertas]
 == Tema 3 : Algebra de Boole. Puertas Lógicas

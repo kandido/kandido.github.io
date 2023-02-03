@@ -20,9 +20,9 @@
 
 /* EL CONTENIDO A LA IZDA: imagenes incluidas*/
 /* if we want all slides to be left-aligned */ 
-.reveal p { 
-	text-align: left;
-	font-size: 0.8em; 
+.reveal p  { 
+	font-size: 0.8em;
+	text-align: left; 
 }
 
 
@@ -62,11 +62,13 @@
 @import 'https://fonts.googleapis.com/css?family=Baloo+Bhai';
 
 /* CSS customization using tag "[state=topico]" on slides title */
-section[data-state="txiki"]  {
+section[data-state="txiki"] p  {
     font-size: 0.7em;
+    line-height: 1;
 }
 section[data-state="txikiago"] p {
     font-size: 0.6em;
+    line-height: 1;
 }
 section[data-state="topico"] h2,h3 {
     font-family: 'Baloo Bhai', cursive;
@@ -79,6 +81,11 @@ section[data-state="taula"]  {
     margin-top: 0.5em;
 }
 
+section[data-state="taula_ta"] table  {
+    font-family: 'Neuton', sans-serif;
+    font-size: 0.5em;
+    margin-top: 0.5em;
+}
 section[data-state="topleft"]  {
   margin-left: 3.0em;
   Position : absolute;
@@ -106,4 +113,18 @@ section[data-state="topleft"] p {
     margin-top: 15.3em;
     font-weight: bold;
     color: red;
+}
+
+.reveal .zutabe {
+  position: relative;
+  font-size: 0.8em;
+  top: 1px;
+  left: 0.5em;
+}
+
+.reveal .zutabe_gehi {
+  position: relative;
+  font-size: 0.8em;
+  top: 1px;
+  left: 2em;
 }
