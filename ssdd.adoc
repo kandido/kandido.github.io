@@ -492,6 +492,44 @@ int(0x7B)
 * Conversión Octal-Binaria
 ** grupos de 3 bits
 
+
+=== Suma binaria
+
+* Suma 10011011+00011011 = 10110110
++  
+
+....
+  Llevadas -->          1 1   1 1 
+  	                         
+                    1 0 0 1 1 0 1 1  <--sumando
+                  + 0 0 0 1 1 0 1 1  <--sumando
+  	                         
+  Valor suma          1 3 2 1 3 2        
+                  *****************
+  Resultado -->     1 0 1 1 0 1 1 0  <--suma
+....
+
+* Cuando la suma en una posición específica tiene un valor es mayor o igual a la base hay que restar *n* veces la base y el valor *n* será la llevada a sumar en la posición siguiente.
+
+=== Resta binaria
+
+* Resta 10110110 - 10011011 = 00011011
++
+
+----
+Sumar crédito al minuendo            2  2     2  2
+
+                            1  0  1  1  0  1  1  0  <--minuendo
+      	                  - 1  0  0  1  1  0  1  1  <--sustraendo
+ 
+               
+Sumar llevada al sustraendo       1  1     1  1 
+                          *************************
+Resta                       0  0  0  1  1  0  1  1
+----
+
+* Cuando en una posición específica el minuendo es menor que el sustraendo se suma la base al minuendo antes de realizar la resta y se suma la llevada al sustraendo de la posición siguiente.
+ 
 === Aritmética Modular: la rueda
 
 
@@ -505,6 +543,18 @@ Ejemplo: registro de 3 celdas -> limitado a 8 combinaciones posibles.
 ¿Cual es la siguiente combinación a 111?, 111+1 = ¿ ?.
 Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en binario 001
 33 pasos en la rueda equivale al número 001 -> aritmética modular en módulo 8
+
+
+=== Operaciones aritméticas: Octal y Hexadecimal
+
+* Base Octal 
+** 0o675+0o304 = 0o1201
+** 0o632-0o374 = 0o236
+* Base hexadecimal
+** 0xD1B+0xAFF = 0x181A
+** 0xE53-0xBAA = 0x2A9
+
+
 
 === Representación de Números con Valores Enteros
 
@@ -610,6 +660,75 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 
 Se observa que en el C2 con extensión, al hacer al resta y extender con un 0 más el minuendo y el substraendo, provoca la extensión con un bit más en la resta de valor 1 en el digito más significante. Según añado ceros al minuendo y sustraendo, aparecen unos en la resta sin alterar su valor.
 
+[.columns]
+=== Operaciones aritméticas en C2
+
+[.column]
+* Suma
+** Se realiza como se ha visto para números naturales. 
+** Si hay llevada en el MSBit, no se tiene en cuenta, se elimina.
+** A=0b11011011. Suma A+A
++
+
+....
+Llevadas -> 1 1   1 1   1 1 
+  	                         
+              1 1 0 1 1 0 1 1 (Valor -37)
+            + 1 1 0 1 1 0 1 1 (Valor -37)
+  	                         
+Valor suma      2 1 3 2 1 3 2        
+            *****************
+Resultado --> 1 0 1 1 0 1 1 0<--(Valor -74)
+....
+
+[.column]
+* Resta
+** La resta de números con signo se puede realizar de dos formas: A-B ó A-B = A+(-B)
+** A = 0b00110110 y B = 0b10011011 
+** Si hay llevada en el MSBit, no se tiene en cuenta, se elimina.
++
+
+----
+Crédito   2 2   2 2   2 2
+
+          1 0 1 1 0 1 1 0<--(Valor -74)
+        - 1 1 0 1 1 0 1 1<--(Valor -37)
+ 
+               
+LLevada 1 1 1   1 1   1 1 
+         ****************
+Resta     1 1 0 1 1 0 1 1 (Valor -101)
+----
+
+
+
+=== Operaciones ariméticas C2: Overflow
+
+* A = 0b00110110 y B = 0b10011011 -> Calcular A-B
+* Con 8 bits el máximo valor es 01111111 de valor 2^7^-1=128-1=127
+* La resta A-(B)=A+(-B)=54+103=157>127 -> *Overflow*
++
+
+----
+Crédito  2     2 2   2 2
+
+         0 0 1 1 0 1 1 0<--(Valor = 54)
+       - 1 0 0 1 1 0 1 1<--(Valor = -103)
+ 
+               
+LLevada      1 1   1 1 
+        ****************
+Resta    1 0 0 1 1 0 1 1 (Valor -101)
+----
+** El valor -101 es debido al overflow.
+** Observarmos que hemos hecho la SUMA de dos números POSITIVOS y el resultado ha sido NEGATIVO
+
+=== Operaciones ariméticas C2: Overflow
+
+IMPORTANT:: Al realizar la suma de dos valores con el mismo signo si el resultado es de signo contrario hay overflow
+
+
+
 [state=txiki]
 === Operaciones aritméticas C2: Overflow 
 
@@ -681,34 +800,6 @@ Los errores de *overflow* se resuelven aumentando el número de bits de la repre
 |===
 
 
-[.columns]
-=== Operaciones aritméticas: sumas y restas : naturales y C2
-
-[.column]
-* Números naturales
-** Suma (decimal y binaria) 
-*** Llevada a la siguiente posición
-** Resta (decimal y binaria)
-*** Si el dígito minuendo es menor que el sustraendo: Crédito de la siguiente posición y Devolver en la siguiente posición
-
-
-[.column]
-* Números enteros en complemento a 2
-** Suma binaria: 
-*** Llevada a la siguiente posición
-** Resta binaria:
-*** Si el dígito minuendo es menor que el sustraendo: Crédito de la siguiente posición y Devolver en la siguiente posición
-
-
-=== Operaciones aritméticas: Otras Bases
-
-* Suma y resta
-* Base Octal 
-** 0o675+0o304
-** 0o632-0o374
-* Base hexadecimal
-** 0xD1B+0xAFF
-** 0xE53-0xBAA
 
 === Número en complemento a 2 y base hexadecimal
 
