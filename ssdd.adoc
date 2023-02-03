@@ -820,6 +820,7 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 ** Signo negativo: bit 1
 ** Exponente en exeso 127=-8+127=119=01110111
 ** Fracción de la mantisa=011
+** Solución:
 *** 1_01110111_01100000000000000000000  
 *** 0b10111011101100000000000000000000 
 *** *0xBBB00000* 
@@ -829,6 +830,7 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 ** Signo negativo:  bit 1
 ** Exponente en exeso 1023=-8+1023=1015=01111110111
 ** Fracción de la mantisa=011
+** Solución:
 *** 1_01111110111_0110...0  
 *** 0b1011111101110110...0
 *** *0xBF76000000000000*
@@ -879,8 +881,8 @@ Alfabeto anglosajón
 7 bits -> 2^7^=128 caracteres : 0x00 hasta 0x1F son 32 caracteres de control y el resto alfanuméricos
 En hexadecimal rango [0x00-0x7F]
 En decimal rango [0-127]
-Upna : 0x55706E61
-año 2023: 0x61--6F2032303233
+*Upna* : 0x55706E61
+*año 2023*: 0x61--6F2032303233
 
 === ASCII Extendido
 
@@ -900,7 +902,7 @@ chr(0x41)
 [hex(ord(c)) for c in "ñ"]
 [hex(ord(c)) for c in "\n \t"]
 ---------
-** La ñ es el código ASCII 0xF1
+** La ñ tiene el código ASCII 0xF1
 
 [.state=txikiago]
 === UTF-8
