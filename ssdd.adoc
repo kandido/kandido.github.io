@@ -725,7 +725,7 @@ Resta    1 0 0 1 1 0 1 1 (Valor -101)
 
 === Operaciones ariméticas C2: Overflow
 
-IMPORTANT:: Al realizar la suma de dos valores con el mismo signo si el resultado es de signo contrario hay overflow
+IMPORTANT: Al realizar la suma de dos valores con el mismo signo si el resultado es de signo contrario hay overflow
 
 
 
@@ -741,7 +741,7 @@ IMPORTANT:: Al realizar la suma de dos valores con el mismo signo si el resultad
 *** la repetición del bit más significativo no altera el valor de la representación
 *** el bit más significativo es 0 si es positivo y 1 si es negativo. Por lo tanto, 01010 equivale a 01010 ó 001010 ó 0....0001010. Por lo tanto, 1010 equivale a 11010 ó 111010 ó 1....1111010
 
-=== Representación gráfica del Overflow
+=== C2: Representación gráfica del Overflow
 
 image::rueda_signed.png[Rueda,500,500,float="left"]
 
