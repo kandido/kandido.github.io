@@ -702,11 +702,11 @@ Resta     1 1 0 1 1 0 1 1 (Valor -101)
 
 
 
-=== Operaciones ariméticas C2: Overflow
+=== Operaciones ariméticas C2: Overflow o Desbordamiento
 
 * A = 0b00110110 y B = 0b10011011 -> Calcular A-B
 * Con 8 bits el máximo valor es 01111111 de valor 2^7^-1=128-1=127
-* La resta A-(B)=A+(-B)=54+103=157>127 -> *Overflow*
+* La resta A-(B)=A+(-B)=54+103=157>127 -> *Overflow* o *Desbordamiento*
 +
 
 ----
@@ -720,7 +720,7 @@ LLevada      1 1   1 1
         ****************
 Resta    1 0 0 1 1 0 1 1 (Valor -101)
 ----
-** El valor -101 es debido al overflow.
+** El valor -101 en lugar de la resta correcta +157 es debido a que el resultado esta fuera de rango -> 
 ** Observarmos que hemos hecho la SUMA de dos números POSITIVOS y el resultado ha sido NEGATIVO
 
 === Operaciones ariméticas C2: Overflow
