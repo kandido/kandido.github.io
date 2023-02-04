@@ -34,6 +34,10 @@
 
 //:revealjs_history: true para go to file no pirula
 
+:ruta-transpas: home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/apuntes_repositorio/transpas_ssdd
+
+:ruta-apuntes: home/candido/Dropbox/apuntes
+
 == Indice
 
 [%hardbreaks]
@@ -460,6 +464,8 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 * Parte Fracción: multiplicaciones sucesivas por la base 16
 
 === Calculadora de Python
+
+https://www.programiz.com/python-programming/online-compiler/[Python Intepreter Shell]
 
 
 [source,python]
@@ -980,6 +986,7 @@ En decimal rango [0-127]
 
 * Para poder representar caracteres de otras culturas Europeas es necesrio expandir el standard con 1 bit más
 * ASCII 8 bits -> 2^8^ = 256 caracteres
+* https://www.programiz.com/python-programming/online-compiler/[Python Intepreter Shell]
 +
 
 [source,python]
@@ -999,7 +1006,7 @@ chr(0x41)
 [.state=txikiago]
 === UTF-8
 
-* https://unicode-table.com/es/[Tablas]
+* https://www.charset.org/utf-8[Character Set, HTML Converter, etc ...]
 * Unicode Transformation Format (UTF)
 * UTF-8: Esta orientado a la transmisión de palabras de 1 byte
 * Los caracteres pueden tener entre 1 y 4 bytes -> 2^21^ code points  &#x2243; 2 millones;
@@ -1013,6 +1020,7 @@ chr(0x41)
 === Unicode Points
 
 [.column]
+* https://html-css-js.com/[html css js online]: \&#x00f1;
 * U+2228: &#x2228;
 * U+22bc: &#x22bc;
 * U+22bd: &#x22bd;
@@ -1176,6 +1184,12 @@ image::circuito_logic.png[]
 * Simplificación de funciones mediante Teoremas
 ** Extender los terminos como minitérminos
 ** Dibujar DK y agrupar celdas equivale a sacar factor común
+
+=== Link: algebra de conmutación funciones.pdf
+
+
+
+* link:./PDF/03_algebra_de_conmutacion_funciones_logicas.pdf[Algebra de Boole. Funciones Lógicas]
 
 === Cuaderno de Ejercicios: Capítulo 1
 
