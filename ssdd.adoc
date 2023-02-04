@@ -1006,7 +1006,7 @@ chr(0x41)
 * The dominant encoding on the World Wide Web and on most Unix-like operating systems
 * En linux comando *localectl status* : informa sobre el sistema del teclado
 * ñ: 
-** hex code 0xC3B1 
+** hex code 0xC3B1  
 ** unicode point U+00F1  -> los primeros 256 caracteres equivalen al ascii extendido
 
 [.columns]
@@ -1025,8 +1025,164 @@ chr(0x41)
 * U+2190: &#x2190;
 * U+2192: &#x2192;
 
+=== Tema 2: Ejercicios
+
+*  Miaulario/Recursos/Ejercicios
+*  Fundamentos de sistemas digitales Thomas Floyd
 
 [#Tema3_BoolePuertas]
-== Tema 3 : Algebra de Boole. Puertas Lógicas
+== Tema 3 : Algebra de Conmutación ó Boole. Funciones Lógicas.
+
+[state=txiki]
+=== Matemática Lógica Binaria
+
+* Valores Lógicos Binarios : "0" , "1"
+** representa dos estados: los estados de una señal binaria (High/Low), los estados de una bombilla (encendido/apagado), de un conmutador (on/off), de una condición (verdadero/falso), etc, cualquier situación que se pueda modelar mediante dos estados.
+* Variables lógicas: ...u,  x1, x2, y, v1, u2, ...
+** Una variable independiente que puede tomar los valores "0" y "1"
+* Función lógica:  z1, z2, z3, F, ....
+** Una función lógica expresa una relación lógica o/y aritmética o/y comparativa o/y etc entre las variables independientes a través de unos operadores matemáticos.
+
+* Operadores
+** Operadores aritméticos: suma, resta, multiplicación, ...
+** Operadores lógicos: or (suma), and (producto), negación, or exclusiva, etc...
+** Operadores comparadores: > , >, ==, etc
+
+[.columns, state=taula_ta]
+=== Tablas de la Verdad de los operadores NOT, OR, AND, XOR
+
+[.column]
+.NOT
+|===
+|x|z=x&#773;
+|0|1
+|1|0
+|===
 
 
+[.column]
+.OR
+[width=10%,cols="2*^1,^2"]
+|===
+|x|y|z = x + y
+|0|0|0
+|0|1|1
+|1|0|1
+|1|1|1
+|===
+
+[.column]
+.AND
+[width=10%,cols="2*^1,^2"]
+|===
+|x|y|z = x &#8729; y
+|0|0|0
+|0|1|0
+|1|0|0
+|1|1|1
+|===
+
+[.column]
+.XOR
+[width=10%,cols="2*^1,^2"]
+|===
+|x|y|z = x &#8853; y
+|0|0|0
+|0|1|1
+|1|0|1
+|1|1|0
+|===
+
+
+
+
+[.columns, state=taula_ta]
+=== Tablas de la Verdad de los operadores NOR, NAND, XNOR
+
+
+
+[.column]
+.NOR
+[width=10%,cols="2*^1,^2"]
+|===
+|x|y|z = x + y
+|0|0|1
+|0|1|0
+|1|0|0
+|1|1|0
+|===
+
+[.column]
+.NAND
+[width=10%,cols="2*^1,^2"]
+|===
+|x|y|z = x &#8729; y
+|0|0|1
+|0|1|1
+|1|0|1
+|1|1|0
+|===
+
+[.column]
+.XNOR
+[width=10%,cols="2*^1,^2"]
+|===
+|x|y|z = x &#8853; y
+|0|0|1
+|0|1|0
+|1|0|0
+|1|1|1
+|===
+
+
+=== Puertas Lógicas
+
+
+image::puertas_logicas.png[]
+
+
+[.columns]
+=== Circuitos Digitales : Expresiones Lógicas
+
+[.column]
+[%hardbreaks]
+F(x,y)= x&#773;y+xy&#773;.
+F(x,y,z)= x&#773;y&#773;z&#773; + xyz&#773; + x&#773;yz + xyz&#773;.
+Circuito digital en 3 niveles: not-and-or.
+
+[.column]
+image::circuito_logic.png[]
+
+[.columns, state=txiki]
+=== Transparencias PDF: Miaulario/Recursos
+
+[.column]
+* Postulados del Algebra de Boole
+* Teoremas del Algebra de Boole (*Leyes de Morgan*)
+* (a*b)+(c*d); a+a*b
+* Generación de funciones con puertas lógicas: Ejemplo 1 a)yb)
+* Simplificación de funciones mediante Teoremas: Al final
+* Formas canónicas: Sum Of Products (SOP) y Product of Sums (POS)
+** miniterminos y maxitérminos
+** Ejemplos básicos
+
+[.column]
+* Diagramas de Karnaugh (DK)
+** Agrupar celdas adyacentes en potencias de 2^n^
+** Ejemplos básicos
+* Relación SOP-POS
+** ejemplo1: a+ab
+** ejemplo2: general 3 variables x,y,z
+* Simplificación de funciones mediante Teoremas
+** Extender los terminos como minitérminos
+** Dibujar DK y agrupar celdas equivale a sacar factor común
+
+=== Cuaderno de Ejercicios: Capítulo 1
+
+* 1.1, 1.2, 1.4, 1.5, 1.6, 1.8, 1.9
+* Metodología
+
+== Tema 4: Lenguaje de Descripción Hardware VHDL
+== Tema 5: Circuitos Aritméticos
+== Tema 6: Otros Circuitos Combinacionales
+== Fin del Primer Parcial
