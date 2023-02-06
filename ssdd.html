@@ -540,7 +540,7 @@ Los errores de <strong>overflow</strong> se resuelven aumentando el número de b
  +-+-------------+-----------------------+
  |S|  Exp + 1023 | Fracción Mantisa  Norm|
  +-+-------------+-----------------------+
- 63 62         52 51                     0   &lt;-- bit pos 0 a la dcha</pre></div></div></li></ul></div></div></section><section id="_el_nº_5_51024_en_los_dos_formatos_ieee_754" class="columns" data-state="txikiago"><h2>El Nº -5.5/1024 en los dos Formatos IEEE-754</h2><div class="slide-content"><div class="ulist column"><ul><li><p>Conversión binaria del módulo</p><div class="ulist"><ul><li><p>5.5/1024 = 5.5*2<sup>-10</sup> = 101.1*2<sup>-10</sup></p></li><li><p>Normalización de la mantisa &#8594; 1.011*2<sup>-8</sup></p></li></ul></div></li></ul></div>
+ 63 62         52 51                     0   &lt;-- bit pos 0 a la dcha</pre></div></div></li></ul></div></div></section><section id="_el_nº_5_51024_en_los_dos_formatos_ieee_754" class="columns" data-state="txikiago"><h2>El Nº -5.5/1024 en los dos Formatos IEEE-754</h2><div class="slide-content"><div class="ulist column"><ul><li><p>Signo negativo</p></li><li><p>Conversión binaria del módulo</p><div class="ulist"><ul><li><p>módulo: 5.5/1024 = 5.5*2<sup>-10</sup> = 101.1*2<sup>-10</sup></p></li><li><p>Normalización de la mantisa &#8594; 1.011*2<sup>-8</sup></p></li></ul></div></li></ul></div>
 <div class="ulist column"><ul><li><p>Formato Simple de 32 bits</p><div class="ulist"><ul><li><p>Signo negativo: bit 1</p></li><li><p>Exponente en exeso 127=-8+127=119=01110111</p></li><li><p>Fracción de la mantisa=011</p></li><li><p>Solución:</p><div class="ulist"><ul><li><p>1_01110111_01100000000000000000000</p></li><li><p>0b10111011101100000000000000000000</p></li><li><p><strong>0xBBB00000</strong></p></li><li><p><a href="http://weitz.de/ieee/">calculador ieee</a></p></li></ul></div></li></ul></div></li></ul></div>
 <div class="ulist column"><ul><li><p>Formato Doble de 64 bits</p><div class="ulist"><ul><li><p>Signo negativo:  bit 1</p></li><li><p>Exponente en exeso 1023=-8+1023=1015=01111110111</p></li><li><p>Fracción de la mantisa=011</p></li><li><p>Solución:</p><div class="ulist"><ul><li><p>1_01111110111_0110&#8230;&#8203;0</p></li><li><p>0b1011111101110110&#8230;&#8203;0</p></li><li><p><strong>0xBF76000000000000</strong></p></li></ul></div></li></ul></div></li></ul></div></div></section><section id="_representación_de_los_caracteres"><h2>Representación de los Caracteres</h2></section><section id="_representación_de_los_caracteres_2"><h2>Representación de los Caracteres</h2><div class="slide-content"><div class="ulist"><ul><li><p>Tipos de Caracteres:</p><div class="ulist"><ul><li><p>Alfanuméricos: a,b,&#8230;&#8203;z.0,1,&#8230;&#8203;9,A,B&#8230;&#8203;Z</p></li><li><p>Signos de Puntuación: !"$%&amp;/()=</p></li><li><p>de Control: Salto de Línea (\n), Find de Fichero (EOF), Fin de String (\00, &#8230;&#8203;)</p></li></ul></div></li><li><p>Formatos</p><div class="ulist"><ul><li><p>ASCII: standard y extendido</p></li><li><p>Unicode: UTF-8</p></li></ul></div></li></ul></div></div></section><section id="_ascii_standard" class="columns"><h2>ASCII Standard</h2><div class="slide-content"><div class="listingblock column zutabe"><div class="content"><pre>          2 3 4 5 6 7       30 40 50 60 70 80 90 100 110 120
         -------------      ---------------------------------
@@ -590,7 +590,19 @@ Circuito digital en 3 niveles: not-and-or.</p></div>
 <section id="_tema_4_lenguaje_de_descripción_hardware_vhdl"><h2>Tema 4: Lenguaje de Descripción Hardware VHDL</h2></section>
 <section id="_tema_5_circuitos_aritméticos"><h2>Tema 5: Circuitos Aritméticos</h2></section>
 <section id="_tema_6_otros_circuitos_combinacionales"><h2>Tema 6: Otros Circuitos Combinacionales</h2></section>
-<section id="_fin_del_primer_parcial"><h2>Fin del Primer Parcial</h2></section></div></div><script src="reveal.js/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
+<section id="_fin_del_primer_parcial"><h2>Fin del Primer Parcial</h2><div class="slide-content"><div class="paragraph"><p><span class="red">Obvious</span> and <strong class="big red yellow-background">very obvious</strong>.
+<span class="underline">Underline text</span>, <span class="overline">overline text</span> and
+<strong class="blue line-through">bold blue and line-through</strong>.
+<span class="small">letra small</span>
+<span class="larger">letra larger</span>
+<span class="50%">letra 50%</span></p></div></div></section>
+<section id="_pruebas" class="columns"><h2>Pruebas</h2><div class="slide-content"><div class="paragraph column"><p>no se lo que dice<br>
+Mark my words, automation is essential.<br>
+Markup refers to text that contains formatting marks.<br>
+Where did all the <span class="underline">cores</span> go?<br>
+We need <span class="line-through">ten</span> twenty VMs.<br>
+A <span class="myrole">custom role</span> must be fulfilled by the theme.</p></div>
+<div class="ulist column"><ul><li><p>x&#773;y&#773;</p></li><li><p>x&#x0305;y&#x0305;</p></li><li><p>&#x262F;</p></li><li><p><strong>xyz</strong></p></li><li><p>The text <span class="_">highlight me</span></p></li></ul></div></div></section></div></div><script src="reveal.js/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
   if (slide.getAttribute('data-background-color')) return;
   // user needs to explicitly say he wants CSS color to override otherwise we might break custom css or theme (#226)
   if (!(slide.classList.contains('canvas') || slide.classList.contains('background'))) return;

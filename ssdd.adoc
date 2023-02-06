@@ -34,6 +34,14 @@
 
 //:revealjs_history: true para go to file no pirula
 
+:doctype: book
+:lang: es
+:encode: ISO-8859-1
+:ascii-ids:
+:show-link-uri:
+:asciidoctor-fetch-kroki:
+:experimental:
+
 :ruta-transpas: home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/apuntes_repositorio/transpas_ssdd
 
 :ruta-apuntes: home/candido/Dropbox/apuntes
@@ -909,8 +917,9 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 === El Nº -5.5/1024 en los dos Formatos IEEE-754
 
 [.column]
+* Signo negativo
 * Conversión binaria del módulo
-** 5.5/1024 = 5.5*2^-10^ = 101.1*2^-10^ 
+** módulo: 5.5/1024 = 5.5*2^-10^ = 101.1*2^-10^ 
 ** Normalización de la mantisa -> 1.011*2^-8^
 
 [.column]
@@ -1201,3 +1210,29 @@ image::circuito_logic.png[]
 == Tema 5: Circuitos Aritméticos
 == Tema 6: Otros Circuitos Combinacionales
 == Fin del Primer Parcial
+
+[red]#Obvious# and [big red yellow-background]*very obvious*.
+[underline]#Underline text#, [overline]#overline text# and
+[blue line-through]*bold blue and line-through*.
+[small]#letra small#
+[larger]#letra larger#
+[50%]#letra 50%#
+
+[.columns]
+== Pruebas
+
+[.column%hardbreaks]
+no se lo que dice
+Mark my words, #automation is essential#.
+##Mark##up refers to text that contains formatting ##mark##s.
+Where did all the [.underline]#cores# go?
+We need [.line-through]#ten# twenty VMs.
+A [.myrole]#custom role# must be fulfilled by the theme.
+
+
+[.column]
+* x&#773;y&#773;
+* x&#x0305;y&#x0305;
+* &#x262F;
+* *xyz*
+* The text [_]##highlight me##
