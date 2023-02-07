@@ -1123,7 +1123,7 @@ chr(0x41)
 .NOR
 [width=10%,cols="2*^1,^2"]
 |===
-|x|y|z = x + y
+|x|y|z = [ovlin]#x + y#
 |0|0|1
 |0|1|0
 |1|0|0
@@ -1134,7 +1134,7 @@ chr(0x41)
 .NAND
 [width=10%,cols="2*^1,^2"]
 |===
-|x|y|z = x &#8729; y
+|x|y|z = [ovlin]#x &#8729; y#
 |0|0|1
 |0|1|1
 |1|0|1
@@ -1145,7 +1145,7 @@ chr(0x41)
 .XNOR
 [width=10%,cols="2*^1,^2"]
 |===
-|x|y|z = x &#8853; y
+|x|y|z = [ovlin]#x &#8853; y#
 |0|0|1
 |0|1|0
 |1|0|0
@@ -1176,12 +1176,12 @@ image::circuito_logic.png[]
 
 [.column]
 * Postulados del Algebra de Boole
-* Teoremas del Algebra de Boole (*Leyes de Morgan*)
+* Teoremas del Algebra de Boole ([.step.highlight-red]#Leyes de Morgan#)
 * (a*b)+(c*d); a+a*b
 * Generación de funciones con puertas lógicas: Ejemplo 1 a)yb)
 * Simplificación de funciones mediante Teoremas: Al final
-* Formas canónicas: Sum Of Products (SOP) y Product of Sums (POS)
-** miniterminos y maxitérminos
+* Formas canónicas: Sum of Products (SOP) y Product of Sums (POS)
+** minitérminos y maxitérminos
 ** Ejemplos básicos
 
 [.column]
@@ -1192,7 +1192,7 @@ image::circuito_logic.png[]
 ** ejemplo1: a+ab
 ** ejemplo2: general 3 variables x,y,z
 * Simplificación de funciones mediante Teoremas
-** Extender los terminos como minitérminos
+** Extender los términos como minitérminos
 ** Dibujar DK y agrupar celdas equivale a sacar factor común
 
 === Link: algebra de conmutación funciones.pdf
@@ -1209,6 +1209,50 @@ image::circuito_logic.png[]
 == Tema 4: Lenguaje de Descripción Hardware VHDL
 == Tema 5: Circuitos Aritméticos
 == Tema 6: Otros Circuitos Combinacionales
+
+
+
 == Fin del Primer Parcial
 
 
+[.visibilidad]
+== Text Formatting
+
+[.underline]*text with id and role* +
+[CYAN]#some text# +
+[ovlin]#some text#
+
+[source,c,data-lang-family=compiled]
+----
+printf("Hello world %d\n", x)
+----
+
+[.visibilidad]
+== step 1
+
+[TIP,step=3]
+Finally, a pro tip...
+
+[WARNING,step=1]
+First, watch out for...
+
+[IMPORTANT.fade-up,step=2]
+Second, don't forget...
+
+[.visibilidad]
+== step 2
+
+The [.step.highlight-red]#greatest glory in living# lies not in never falling, but in [.step.highlight-red]#rising every time we fall#. +
+The [.step.underline]#greatest glory in living# lies not in never falling, but in [.step.highlight-red]#rising every time we fall#. +
+
+[.visibilidad]
+== step 3
+
+[.highlight-blue%step]
+blue
+
+[%step]
+white
+
+[.highlight-red%step]
+red

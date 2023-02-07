@@ -49,6 +49,14 @@
     color: #FF6A00;
 }
 
+.ovlin {
+    text-decoration: overline solid blue 20%;
+}
+
+section.visibilidad {
+  visibility: hidden;
+}
+
 .reveal strong,
 .reveal b {
  	color: #BA3925; 
