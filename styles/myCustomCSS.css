@@ -7,7 +7,7 @@
 /* Use Google Neuton font for the text of all slides */
 .reveal {
 	font-family: 'Neuton', sans-serif;
-        border: 5px solid black;
+        border: 2px solid blue;
         
          
 }
@@ -23,6 +23,7 @@
 .reveal p  { 
 	font-size: 0.8em;
 	text-align: left; 
+        padding: 1px;
 }
 
 
@@ -49,8 +50,29 @@
     color: #FF6A00;
 }
 
+.espacio-linea p {
+  line-height: 2.0
+}
+
 .ovlin {
-    text-decoration: overline solid blue 20%;
+    text-decoration: overline solid blue 2px;
+}
+
+.doble-ovlin {
+    padding-top: 5px;
+    border-top: 2px solid blue;
+    text-decoration: overline blue 2px;
+}
+
+.double-overline {
+    padding-top: 7px;
+    border-top: 1px solid;
+    text-decoration: overline;
+}
+
+.double-underline {
+     border-bottom: 1px solid;
+     text-decoration: underline;
 }
 
 section.visibilidad {
@@ -87,6 +109,14 @@ section[data-state="taula"]  {
     font-family: 'Neuton', sans-serif;
     font-size: 0.5em;
     margin-top: 0.5em;
+}
+
+section[data-state="taula_txi"] table {
+    font-family: 'Neuton', sans-serif;
+    font-size: 0.4em;
+    margin-top: 0.4em;
+    padding: 0.1em;
+    background: #f8f8f7;
 }
 
 section[data-state="taula_ta"] table  {

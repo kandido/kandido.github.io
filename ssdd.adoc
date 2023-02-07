@@ -1198,8 +1198,117 @@ image::circuito_logic.png[]
 === Link: algebra de conmutación funciones.pdf
 
 
-
 * link:./PDF/03_algebra_de_conmutacion_funciones_logicas.pdf[Algebra de Boole. Funciones Lógicas]
+
+=== Generación de Funciones mediante puertas Lógicas NAND 
+
+image::tema3_genfun_nand.png[]
+
+
+=== Formas Canónicas de una Función: Síntesis por minitérminos y maxitérminos
+
+
+* Hay dos formas canónicas (standard) de expresar una función
+** suma de productos (SOP) de variables
+** producto de sumas (POS) de variables
+
+
+[.columns, state=taula_ta]
+=== Forma Canónica SOP: Suma de Minitérminos
+
+[.column]
+.Tabla de la Verdad de la Función F(x1,x2,x3)
+|===
+| x1 | x2 | x3 | F | minitérminos
+
+| 0  | 0  | 0  | 0 | m0 : x&#773;1x&#773;2x&#773;3
+| 0  | 0  | 1  | 0 | m1 : x&#773;1x&#773;2x3
+| 0  | 1  | 0  | 0 | m2 : x&#773;1x2x&#773;3
+| 0  | 1  | 1  | 1 | m3 : x&#773;1x2x3
+| 1  | 0  | 0  | 1 | m4 : x1x&#773;2x&#773;3
+| 1  | 0  | 1  | 1 | m5 : x1x&#773;2x3
+| 1  | 1  | 0  | 0 | m6 : x1x2x&#773;3
+| 1  | 1  | 1  | 0 | m7 : x1x2x3
+|===
+
+
+[.column%hardbreaks]
+Lenguaje natural -> F vale 1 si m3 ó m4 ó m5 vale 1.
+Lenguaje lógico -> F = SOP = m3+m4+m5. 
+F(x1,x2,x3) = x&#773;1x2x3 + x1x&#773;2x&#773;3 + x1x&#773;2x3.
+Cada minitermino se sintetiza mediante una puerta AND.
+La síntesis de la función F tendría un nivel de puertas AND de 3 entradas y un nivel con una puerta OR con tantas entradas como minitérminos hacen 1 a la función.
+
+[.columns, state=taula_ta]
+=== Forma Canónica POS: Producto de Maxiterminos
+
+
+[.column]
+.Tabla de la Verdad de la Función F(x1,x2,x3)
+|===
+| x1 | x2 | x3 | F | maxitérminos
+
+| 0  | 0  | 0  | 0 | M0 : x1+x2+x3
+| 0  | 0  | 1  | 0 | M1 : x1+x2+x&#773;3
+| 0  | 1  | 0  | 0 | M2 : x1+x&#773;2+x3
+| 0  | 1  | 1  | 1 | M3 : x1+x&#773;2+x&#773;3 
+| 1  | 0  | 0  | 1 | M4 : x&#773;1+x2+x3
+| 1  | 0  | 1  | 1 | M5 : x&#773;1+x2+x&#773;3
+| 1  | 1  | 0  | 0 | M6 : x&#773;1+x&#773;2+x3
+| 1  | 1  | 1  | 0 | M7 : x&#773;1+x&#773;2+x&#773;3
+|===
+
+
+[.column%hardbreaks]
+Lenguaje natural -> F vale 0 si M0 ó M1 ó M2 ó M6 ó M7 vale 0.
+Lenguaje lógico -> F = POS = M0M1M2M6M7.
+F(x1,x2,x3) = (x1+x2+x3)(x1+x2+x&#773;3)(x1+x&#773;2+x3)(x&#773;1+x&#773;2+x3)(x&#773;1+x&#773;2+x&#773;3).
+Cada maxitérmino se sintetiza mediante una puerta OR.
+La síntesis función F tendría un nivel de puertas OR de 3 entradas y un nivel con una puerta AND con tantas entradas como maxitérminos hacen 0 a la función.
+
+
+=== Relación entre la forma canónica SOP y POS
+
+* Ejemplo F= F(x1,x2,x3) = m3+m4+m5
+* F&#773;= m0+m1+m2+m6+m7
+* [doble-ovlin]#F# = [ovlin]#m0+m1+m2+m6+m7# =
+* [doble-ovlin]#F# = m&#773;0 &#8729; m&#773;1 &#8729; m&#773;2 &#8729; m&#773;6 &#8729; m&#773;7
+* [doble-ovlin]#F# = M7&#8729; M6&#8729; M5&#8729; M1&#8729; M0 = F
+
+=== Simplificación de las funciones mediante los Diagramas de Karnaugh (DK)
+
+* El Diagrama de Karnaugh es una representación gráfica multidimensional (2D, 3D, etc) mediante celdas de los minitérminos y maxitérminos de la tabla de la verdad unidimensional 1D
+* Ejemplo F(x1,x2,x3) = x&#773;1x2x3 + x1x&#773;2x&#773;3 + x1x&#773;2x3.
+** los minitérminos y maxitérminos siguen la secuencia unidimensional 000-001-010-011-100-101-110-111
+** Los reorganizamos en una matriz de celdas *adyacentes*, donde dos celdas adyacentes tienen todas las variables *comunes* excepto una
+
+
+[.columns]
+=== Diagrama de Karnaugh de la funcion F(x1,x2,x3)
+
+[.column]
+image::tema3_DK_1.png[]
+
+[.column]
+
+* Son adyacentes las celdas de la misma columna o de la misma fila con variables comunes
+* Observar que cada celda equivale a un minitérmino y un maxitérmino de la Tabla de la verdad
+* Por lo tanto, el diagrama DK representa las formas canónicas SOP y POS.
+
+
+
+=== Simplificación de funciones mediante axiomas y teoremas del Algebra de Boole
+
+IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que pueden ser agrupados y simplificados.
+
+* Ejemplo 1: Y=f(x1,x2,x3)= x&#773;1x&#773;2x&#773;3 +  x&#773;1x&#773;2x3 +  x1x&#773;2x&#773;3 +  x1x&#773;2x3 +  x1x2x&#773;3 +  x1x2x3 
+* Dibujar  la TV y el DK.
+* Partiendo del agrupamiento DK razonar la simplificación mediante los axiomas y teoremas del algebra de Boole. 
+
+=== Simplificación de funciones mediante el Diagrama de Karnaugh
+
+* Agrupar celdas adyacentes en grupos de un número de celdas 2^n^ : 2, 4, 8, etc ...
+* Cuanto mayor sea el número de celdas agrupadas mayor será el número de variables y términos simplificados.
 
 === Cuaderno de Ejercicios: Capítulo 1
 
@@ -1213,6 +1322,15 @@ image::circuito_logic.png[]
 
 
 == Fin del Primer Parcial
+
+[.visibilidad]
+=== Generación de Funciones mediante puertas Lógicas NAND 
+
+[.espacio-linea]
+Y=f(x1,x2,x3)=x1+x&#773;1x2x3= transformar suma en producto con morgan +
+=[doble-ovlin]#x1+x&#773;1x2x3#=aplico morgan=x&#773;1*[ovlin]#x&#773;1x2x3# +
+
+[.ovlin]#x#
 
 
 [.visibilidad]
@@ -1256,3 +1374,13 @@ white
 
 [.highlight-red%step]
 red
+
+[.visibilidad]
+== overline
+
+z = [doble-ovlin]#x# +
+
+z = [double-overline]#x# +
+
+z = [double-underline]#x# +
+
