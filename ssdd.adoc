@@ -1283,8 +1283,10 @@ La síntesis función F tendría un nivel de puertas OR de 3 entradas y un nivel
 * El Diagrama de Karnaugh es una representación gráfica multidimensional (2D, 3D, etc) mediante celdas de los minitérminos y maxitérminos de la tabla de la verdad unidimensional 1D
 * Ejemplo F(x1,x2,x3) = x&#773;1x2x3 + x1x&#773;2x&#773;3 + x1x&#773;2x3.
 ** los minitérminos y maxitérminos siguen la secuencia unidimensional 000-001-010-011-100-101-110-111
-** Los reorganizamos en una matriz de celdas *adyacentes*, donde dos celdas adyacentes tienen todas las variables *comunes* excepto una
-
+** Los reorganizamos en una matriz de celdas *adyacentes*, donde dos celdas adyacentes tienen todas las variables comunes *excepto una*
+* *Simplificación:* 
+** Agrupar celdas adyacentes en grupos de un número de celdas potencia de dos -> 2^n^ : 2, 4, 8, etc ...
+** Cuanto mayor sea el número de celdas agrupadas mayor será el número de variables y términos simplificados.
 
 [.columns]
 === Diagrama de Karnaugh de la funcion F(x1,x2,x3)
@@ -1294,10 +1296,16 @@ image::tema3_DK_1.png[]
 
 [.column]
 
-* Son adyacentes las celdas de la misma columna o de la misma fila con variables comunes
+* Son adyacentes las celdas de la misma columna o de la misma fila con todas las variables comunes *menos una*. Por eso la tercera columna ha de ser 11
 * Observar que cada celda equivale a un minitérmino y un maxitérmino de la Tabla de la verdad
 * Por lo tanto, el diagrama DK representa las formas canónicas SOP y POS.
 
+=== Simplificación de la Función mediante DK
+
+image::tema3_DK_2.png[]
+
+Si sumamos los miniterminos de la 4ª columna  latexmath:[Y=f(x_1,x_2,x_3)=m_4+m_5=x_1\overline x_2\overline x_3+ x_1\overline x_2x_3 = x_1\overline x_2 (\overline x_3+x_3) = x_1\overline x_2], se ha simplificado el número de variables de 3 a dos. La función simplificada es latexmath:[Y= \overline x_1 x_2x_3+x_1\overline x_2] +
+Sumar dos miniterminos adyacentes equivale a agrupar dos celdas adyacentes y reducir una variable.
 
 
 === Simplificación de funciones mediante axiomas y teoremas del Algebra de Boole
@@ -1305,8 +1313,9 @@ image::tema3_DK_1.png[]
 IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que pueden ser agrupados y simplificados.
 
 * Ejemplo 1: Y=f(x1,x2,x3)= x&#773;1x&#773;2x&#773;3 +  x&#773;1x&#773;2x3 +  x1x&#773;2x&#773;3 +  x1x&#773;2x3 +  x1x2x&#773;3 +  x1x2x3 
-* Dibujar  la TV y el DK.
-* Partiendo del agrupamiento DK razonar la simplificación mediante los axiomas y teoremas del algebra de Boole. 
+* Dibujar  la TV y el DK de la función Y
+* Simplificar la función Y mediante el agrupamiento de celdas en el DK
+* Partiendo del agrupamiento DK razonar la simplificación de la función Y mediante los axiomas y teoremas del algebra de Boole. 
 
 [state=txiki]
 === Simplificación de funciones mediante el Diagrama de Karnaugh
