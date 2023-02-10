@@ -1350,8 +1350,9 @@ Sumar dos miniterminos adyacentes equivale a agrupar dos celdas adyacentes y red
 
 === Ejercicios básicos matemáticos en el dominio del Algebra de Boole
 
-* latexmath:[x*0=0; x*1=x ; x*\overline x=0 ; x+\overline x=1]
-* latexmath:[x=x*1=x*(y+\overline y) ; x=x+0=x+y*\overline y]
+* latexmath:[x*0=0; x*1=x \:\: ; \:\: x*\overline x=0 \:\: ; \:\: x+\overline x=1]
+* latexmath:[x=x*1=x*(y+\overline y) \:\: ; \:\: x=x+0=x+y*\overline y]
+* latexmath:[x\cdot(x+u+v+ ...)=x \:\: ; \:\: x+(x\cdot u\cdot v \cdot ...)=x]
 
 * Transformar una suma de productos de variables lógicas en producto de sumas de variables lógicas
 
