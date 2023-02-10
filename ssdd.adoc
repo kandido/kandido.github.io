@@ -1203,49 +1203,6 @@ image::circuito_logic.png[]
 
 * link:./PDF/03_algebra_de_conmutacion_funciones_logicas.pdf[Algebra de Boole. Funciones Lógicas]
 
-=== Ejercicios básicos matemáticos en el dominio del Algebra de Boole
-
-* latexmath:[x*0=0; x*1=x ; x*\overline x=0 ; x+\overline x=1]
-* latexmath:[x=x*1=x*(y+\overline y) ; x=x+0=x+y*\overline y]
-
-* Transformar una suma de productos de variables lógicas en producto de sumas de variables lógicas
-
-** latexmath:[F=y\overline z + x\overline y + x\overline yz ] 
-** cambio de nomenclatura para facilitar la explicación latexmath:[F=a_1a_2 + b_1b_2 + c_1c_2c_3] 
-
-[state="txikiago"]
-=== Ejercicios básicos matemáticos en el dominio del Algebra de Boole
-
-image::tema3_distributiva.png[]
-latexmath:[F=a_1a_2 + b_1b_2 + c_1c_2c_3 = (a_1+b_1+c_1)(a_1+b_1+c_2)(a_1+b_1+c_3)\cdot\\   
- \cdot (a_1+b_2+c_1)(a_1+b_2+c_2)(a_1+b_2+c_3)\cdot\\
- \cdot (a_2+b_1+c_1)(a_2+b_1+c_2)(a_2+b_1+c_3)\cdot\\
- \cdot (a_2+b_2+c_1)(a_2+b_2+c_2)(a_2+b_2+c_3)] 
-
-latexmath:[F=y\overline z + x\overline y + x\overline yz = (y+x+x)(y+x+\overline y)(y+x+z)\cdot\\
-\cdot (y+\overline y+x)(y+\overline y+\overline y)(y+\overline y+z)\cdot\\
-\cdot (\overline z+x+x)(\overline z+x+\overline y)(\overline z+x+z)\cdot\\
-\cdot (\overline z+\overline y+x)(\overline z+\overline y+\overline y)(\overline z+\overline y+z)] 
-
-=== Ejercicios básicos matemáticos en el dominio del Algebra de Boole
-
-Simplificación
-
-latexmath:[F=(y+x)(1)(y+x+z)(1)(1)(1)(\overline z+x)(\overline z+x+\overline y)(1)(\overline z+\overline y+x)(\overline z+\overline y)(1)=\\
-=(y+x)(y+x+z)(\overline z+x)(\overline z+x+\overline y)(\overline z+\overline y+x)(\overline z+\overline y) ] 
-
-POS -> Expansión para que tenga cada término las 3 variables 
-
-latexmath:[F=(y+x+z\overline z)(y+x+z)(\overline z+x+y\overline y)(\overline z+x+\overline y)(\overline z+\overline y+x)(\overline z+\overline y+x\overline x)]
-
-Aplico la propiedad Distributiva a cada término
-
-latexmath:[F=(y+x+z)(y+x+\overline z)(y+x+z)(\overline z+x+y)(\overline z+x+\overline y)(\overline z+x+\overline y)\cdot\\
-(\overline z+\overline y+x)(\overline z+\overline y+x)(\overline z+\overline y+\overline x) =  (y+x+z)(y+x+\overline z)(\overline z+x+\overline y)(\overline z+\overline y+\overline x)= \\
-= (x+y+z)(x+y+\overline z)(x+\overline y+\overline z)(\overline x+\overline y+\overline z)=M_7M_6M_4M0
-]
-
-
 
 === Generación de Funciones mediante puertas Lógicas NAND 
 
@@ -1259,7 +1216,44 @@ image::tema3_genfun_nand.png[]
 ** suma de productos (SOP) de variables
 ** producto de sumas (POS) de variables
 
+[.columns, state=taula]
+=== Lógica Positiva/Negativa: Relación y/o con */+
 
+[.column]
+* Lógica positiva -> ¿Cuando vale *1* una función, una expresión, una variable, etc ?
+* Lógica negativa -> ¿Cuando vale *0* una función, una expresión,  una variable, etc ?
+
+[.column.is-two-third]
+
+.OR
+[width=10%,cols="2*^1,^2"]
+|===
+|x|y|z = x + y
+|0|0|0
+|0|1|1
+|1|0|1
+|1|1|1
+|===
+
+[.column.is-two-third]
+Z= *0* si "X" *e* "Y"  valen *0* -> z=(x+y) +
+Z= *1* si "X" *o* "Y"  valen *1* -> z=(x+y)
+
+
+[.column.is-two-third]
+.AND
+[width=10%,cols="2*^1,^2"]
+|===
+|x|y|z = x &#8729; y
+|0|0|0
+|0|1|0
+|1|0|0
+|1|1|1
+|===
+
+[.column.is-two-third]
+Z= *0* si "X" *o* "Y"  valen *0* -> (z=x &#8729; y) +
+Z= *1* si "X" *e* "Y"  valen *1* -> (z=x &#8729; y)
 [.columns, state=taula_ta]
 === Forma Canónica SOP: Suma de Minitérminos
 
@@ -1280,7 +1274,8 @@ image::tema3_genfun_nand.png[]
 
 
 [.column%hardbreaks]
-Lenguaje natural -> F vale 1 si m3 ó m4 ó m5 vale 1.
+Lenguaje natural -> F vale *1* (lógica positiva) si m3 *o* m4 *o* m5 vale *1* ->  *suma*
+Lenguaje natural -> m3 vale *1* (lógica positiva) si x&#773;1 *y* x2 *y* x3 valen *1* ->  *multiplicación*
 Lenguaje lógico -> F = SOP = m3+m4+m5. 
 F(x1,x2,x3) = x&#773;1x2x3 + x1x&#773;2x&#773;3 + x1x&#773;2x3.
 Cada minitermino se sintetiza mediante una puerta AND.
@@ -1307,11 +1302,13 @@ La síntesis de la función F tendría un nivel de puertas AND de 3 entradas y u
 
 
 [.column%hardbreaks]
-Lenguaje natural -> F vale 0 si M0 ó M1 ó M2 ó M6 ó M7 vale 0.
+Lenguaje natural -> F vale *0* (lógica negativa) si M0 *ó* M1 *ó* M2 *ó* M6 *ó* M7 vale *0* -> *multiplicación*
+Lenguaje natural -> M1 vale *0* (lógica negativa) si x1 *y* x2 *y* x&#773;3 valen *0* -> *suma*
 Lenguaje lógico -> F = POS = M0M1M2M6M7.
 F(x1,x2,x3) = (x1+x2+x3)(x1+x2+x&#773;3)(x1+x&#773;2+x3)(x&#773;1+x&#773;2+x3)(x&#773;1+x&#773;2+x&#773;3).
 Cada maxitérmino se sintetiza mediante una puerta OR.
 La síntesis función F tendría un nivel de puertas OR de 3 entradas y un nivel con una puerta AND con tantas entradas como maxitérminos hacen 0 a la función.
+
 
 
 === Relación entre la forma canónica SOP y POS
@@ -1351,6 +1348,50 @@ image::tema3_DK_2.png[]
 Si sumamos los miniterminos de la 4ª columna  latexmath:[Y=f(x_1,x_2,x_3)=m_4+m_5=x_1\overline x_2\overline x_3+ x_1\overline x_2x_3 = x_1\overline x_2 (\overline x_3+x_3) = x_1\overline x_2], se ha simplificado el número de variables de 3 a dos. La función simplificada es latexmath:[Y= \overline x_1 x_2x_3+x_1\overline x_2] +
 Sumar dos miniterminos adyacentes equivale a agrupar dos celdas adyacentes y reducir una variable.
 
+=== Ejercicios básicos matemáticos en el dominio del Algebra de Boole
+
+* latexmath:[x*0=0; x*1=x ; x*\overline x=0 ; x+\overline x=1]
+* latexmath:[x=x*1=x*(y+\overline y) ; x=x+0=x+y*\overline y]
+
+* Transformar una suma de productos de variables lógicas en producto de sumas de variables lógicas
+
+** latexmath:[F=y\overline z + x\overline y + x\overline yz ] 
+** cambio de nomenclatura para facilitar la explicación latexmath:[F=a_1a_2 + b_1b_2 + c_1c_2c_3] 
+
+[state="txikiago"]
+=== Ejercicios básicos matemáticos en el dominio del Algebra de Boole
+
+image::tema3_distributiva.png[]
+latexmath:[F=a_1a_2 + b_1b_2 + c_1c_2c_3 = (a_1+b_1+c_1)(a_1+b_1+c_2)(a_1+b_1+c_3)\cdot\\   
+ \cdot (a_1+b_2+c_1)(a_1+b_2+c_2)(a_1+b_2+c_3)\cdot\\
+ \cdot (a_2+b_1+c_1)(a_2+b_1+c_2)(a_2+b_1+c_3)\cdot\\
+ \cdot (a_2+b_2+c_1)(a_2+b_2+c_2)(a_2+b_2+c_3)] 
+
+latexmath:[F=y\overline z + x\overline y + x\overline yz = (y+x+x)(y+x+\overline y)(y+x+z)\cdot\\
+\cdot (y+\overline y+x)(y+\overline y+\overline y)(y+\overline y+z)\cdot\\
+\cdot (\overline z+x+x)(\overline z+x+\overline y)(\overline z+x+z)\cdot\\
+\cdot (\overline z+\overline y+x)(\overline z+\overline y+\overline y)(\overline z+\overline y+z)] 
+
+=== Ejercicios básicos matemáticos en el dominio del Algebra de Boole
+
+Simplificación
+
+latexmath:[F=(y+x)(1)(y+x+z)(1)(1)(1)(\overline z+x)(\overline z+x+\overline y)(1)(\overline z+\overline y+x)(\overline z+\overline y)(1)=\\
+=(y+x)(y+x+z)(\overline z+x)(\overline z+x+\overline y)(\overline z+\overline y+x)(\overline z+\overline y) ] 
+
+POS -> Expansión para que tenga cada término las 3 variables 
+
+latexmath:[F=(y+x+z\overline z)(y+x+z)(\overline z+x+y\overline y)(\overline z+x+\overline y)(\overline z+\overline y+x)(\overline z+\overline y+x\overline x)]
+
+Aplico la propiedad Distributiva a cada término
+
+latexmath:[F=(y+x+z)(y+x+\overline z)(y+x+z)(\overline z+x+y)(\overline z+x+\overline y)(\overline z+x+\overline y)\cdot\\
+(\overline z+\overline y+x)(\overline z+\overline y+x)(\overline z+\overline y+\overline x) =  (y+x+z)(y+x+\overline z)(\overline z+x+\overline y)(\overline z+\overline y+\overline x)= \\
+= (x+y+z)(x+y+\overline z)(x+\overline y+\overline z)(\overline x+\overline y+\overline z)=M_7M_6M_4M_0
+]
+
+
+
 
 === Simplificación de funciones mediante axiomas y teoremas del Algebra de Boole
 
@@ -1359,7 +1400,7 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 * Ejemplo 1: Y=f(x1,x2,x3)= x&#773;1x&#773;2x&#773;3 +  x&#773;1x&#773;2x3 +  x1x&#773;2x&#773;3 +  x1x&#773;2x3 +  x1x2x&#773;3 +  x1x2x3 
 * Dibujar  la TV y el DK de la función Y
 * Simplificar la función Y mediante el agrupamiento de celdas en el DK
-* Partiendo del agrupamiento DK razonar la simplificación de la función Y mediante los axiomas y teoremas del algebra de Boole. 
+* Partiendo del agrupamiento DK razonar la simplificación de la función Y mediante los *axiomas y teoremas del algebra de Boole*. 
 
 [state=txiki]
 === Simplificación de funciones mediante el Diagrama de Karnaugh
@@ -1373,9 +1414,10 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 
 
 
+[.columns, state="txikiago"]
+=== Ejercicios matemáticos en dos dominios Gráfico/Algebra de Boole
 
-=== Ejercicios matemáticos en el dominio del Algebra de Boole
-
+[.column]
 * latexmath:[F=f(x_1,x_2)=x_1=x_1 + x_2\overline x_2]
 ** obtener la forma canónica SOP y POS mediante TV y DK
 ** obtener la forma canónica SOP analíticamente: propiedad identidad
@@ -1383,6 +1425,7 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 ** convertir la forma canónica POS a SOP mediante la equivalencia entre minitérminos y máxitérminos
 ** convertir la forma canónica POS a SOP analíticamente
 
+[.column]
 * latexmath:[F=f(x_1,x_2,x_3)=x_1\overline x_2x_3+x_1x_2\overline x_3+x_2x_3]
 ** obtener analíticamente la forma canónica SOP
 *** primero expandir por la propiedad distributiva
@@ -1500,3 +1543,11 @@ z = [double-overline]#x# +
 
 z = [double-underline]#x# +
 
+[.visibilidad]
+== tablas
+
+|==
+
+
+
+|==
