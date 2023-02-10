@@ -21,6 +21,7 @@
 /* EL CONTENIDO A LA IZDA: imagenes incluidas*/
 /* if we want all slides to be left-aligned */ 
 .reveal p  { 
+        margin-left: 1.0em;
 	font-size: 0.8em;
 	text-align: left; 
         padding: 1px;
@@ -126,7 +127,7 @@ section[data-state="taula_ta"] table  {
     padding: 0.1em;
     background: #f8f8f7;
 }
-section[data-state="topleft"]  {
+section[data-state="topleftg"]  {
   margin-left: 3.0em;
   Position : absolute;
   right: 10px;
