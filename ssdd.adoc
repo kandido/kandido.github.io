@@ -1391,8 +1391,16 @@ latexmath:[F=(y+x+z)(y+x+\overline z)(y+x+z)(\overline z+x+y)(\overline z+x+\ove
 = (x+y+z)(x+y+\overline z)(x+\overline y+\overline z)(\overline x+\overline y+\overline z)=M_7M_6M_4M_0
 ]
 
+=== Nominación Teoremas
 
-
+* conmutativa latexmath:[a\cdot b =] 
+* idempotencia latexmath:[a+a=]
+* identidad latexmath:[a\cdot 1=]
+* complementario latexmath:[a+\overline a =]
+* absorción latexmath:[a+ab =]
+* distributiva  latexmath:[ab+cd =]
+* a+1
+* a*0
 
 === Simplificación de funciones mediante axiomas y teoremas del Algebra de Boole
 
@@ -1440,33 +1448,57 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 * 1.1, 1.2, 1.4, 1.5, 1.6, 1.8, 1.9
 * Metodología: antes de comenzar a resolver el ejercicio hay que describir el método a seguir para resolver el ejercicio.
 
-[.columns]
-=== Planteamiento de los Ejercicios
+[.columns, state=txikiago]
+=== Planteamiento de los Ejercicios Capítulo 1
 
 [.column]
 * Ejercicio 1.1
 ** Resolverlo primero por DK
 ** asociar DK con algebra de Boole
+** SOP,POS,factor común,ordenar,simplificar
 * Ejercicio 1.2
-** xx
-* Ejercicio 1.3
-** xx
+** Análisis,TV(combinaciones repeticiones)
+** variable indiferente -> valor X
+** variable nula -> TV y DK reducidas
+
 
 [.column]
+* Ejercicio 1.3
+** lenguaje natural -> lenguaje lógico
+** lógica positiva - lógica negativa
+*** o/y -> */+
+** Función: valor no definido: X
+*** DK : definición libre para simplificar
 * Ejercicio 1.4
-** Resolverlo primero por DK
-** asociar DK con algebra de Boole
+** Resolverlo por DK
+*** Formato ajedrez -> Factor Común -> XOR
+
+
+[.columns, state=txikiago]
+=== Planteamiento de los Ejercicios Capítulo 1
+
+[.column]
 * Ejercicio 1.5
-** xx
+** lenguaje natural -> lenguaje lógico
+** lógica positiva - lógica negativa
+*** o/y -> */+
+** Condiciones -> miniterminos o maxiterminos
 * Ejercicio 1.6
-** xx
+** lenguaje natural -> lenguaje lógico
+** lógica positiva - lógica negativa
+*** o/y -> */+
+** Condiciones -> miniterminos o maxiterminos
 
 [.column]
 * Ejercicio 1.8
-** Resolverlo primero por DK
-** asociar DK con algebra de Boole
+** Escenificación -> Diferentes Casos
+*** Entro al pasillo por la izda y salgo por la dcha
+*** Entro al pasillo por la izda y salgo por la izda
 * Ejercicio 1.9
-** xx
+** Señal binaria: Relación de aspecto
+*** Período: Duración nivel alto respecto nivel bajo
+** Módulos o subcircuitos:
+*** Anidamiento de funciones -> subfunciones
 
 
 == Tema 4: Lenguaje de Descripción Hardware VHDL
@@ -1480,7 +1512,7 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 
 
 
-
+[.visibilidad]
 === Generación de Funciones mediante puertas Lógicas NAND 
 
 [.espacio-linea]
