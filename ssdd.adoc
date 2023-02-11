@@ -1508,7 +1508,10 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 * Ejemplos
 ** 23 -> [myOrange]#0010# [CYAN]#0011#
 ** 87045 -> [CYAN]#1000# [myOrange]#0111# [CYAN]#0000# [myOrange]#0100# [CYAN]#0101#
-* Se codifican cada uno de los diez dígitos: 0,1,...,9
+* Diseñar un circuito digital simplificado que decodifique el codigo binario BCD en uno de los diez dígitos: 0,1,...,9
++
+
+image::tema3_BCD.png[]
 
 [.column]
 * códigos y dígitos
