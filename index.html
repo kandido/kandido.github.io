@@ -57,6 +57,42 @@ button {
             <button type="button" class="cancelbtn"> Cancel</button>   
             Forgot <a href="#"> password? </a>   
         </div>   
-    </form>     
+    </form>
+<button id="myBtn">Try it</button>
+
+<script>
+
+const element = document.getElementById("myBtn");
+element.addEventListener("click", function);
+
+function login(password) {
+            var hash = sha1(password)
+            var url = hash + "/index.html"
+            var alert = document.querySelectorAll('[data-id="alert"]')
+
+            var request = new XMLHttpRequest()
+            request.open('GET', url, true)
+
+            request.onload = function () {
+                if (request.status >= 200 && request.status < 400) {
+                    window.location = url
+                } else {
+                    parent.location.hash = hash
+                    alert[0].style.display = 'block'
+                    password[0].setAttribute('placeholder', 'Incorrect password')
+                    password[0].value = ''
+                }
+            }
+            request.onerror = function () {
+                parent.location.hash = hash
+                alert[0].style.display = 'block'
+                password[0].setAttribute('placeholder', 'Incorrect password')
+                password[0].value = ''
+            }
+            request.send()
+        }
+
+</script>
+     
 </body>     
 </html>  
