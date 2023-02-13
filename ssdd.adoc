@@ -1388,8 +1388,14 @@ Aplico la propiedad Distributiva a cada término
 
 latexmath:[F=(y+x+z)(y+x+\overline z)(y+x+z)(\overline z+x+y)(\overline z+x+\overline y)(\overline z+x+\overline y)\cdot\\
 (\overline z+\overline y+x)(\overline z+\overline y+x)(\overline z+\overline y+\overline x) =  (y+x+z)(y+x+\overline z)(\overline z+x+\overline y)(\overline z+\overline y+\overline x)= \\
-= (x+y+z)(x+y+\overline z)(x+\overline y+\overline z)(\overline x+\overline y+\overline z)=M_7M_6M_4M_0
+= (x+y+z)(x+y+\overline z)(x+\overline y+\overline z)(\overline x+\overline y+\overline z)=M_0M_1M_3M_7
 ]
+
+=== Ejercicios básicos matemáticos en el dominio del Algebra de Boole
+
+* F en la 1ª forma canónica
+* latexmath:[F=y\overline z + x\overline y + x\overline yz = y\overline z\cdot (x+\overline x) + x\overline y\cdot (z+\overline z) + x\overline yz = y\overline zx+ y\overline z\cdot\overline x+ x\overline yz +\\
+x\overline y\overline z + x\overline yz = xy\overline z + \overline x y\overline z + x\overline yz + x\overline y\overline z = m_6+m_2+m_5+m_4 ]
 
 === Nominación Teoremas
 
@@ -1465,17 +1471,24 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 [.column]
 * Ejercicio 1.3
 ** lenguaje natural -> lenguaje lógico
-** lógica positiva - lógica negativa
-*** o/y -> */+
-** Función: valor no definido: X
-*** DK : definición libre para simplificar
-* Ejercicio 1.4
-** Resolverlo por DK
-*** Formato ajedrez -> Factor Común -> XOR
+** F=SOP
+** lógica positiva (o/y -> */+)-> F=1 si ... 
+** lógica negativa (o/y -> */+)-> F=0 si ...
+*** deducir máxiterminos y miniterminos
+** F=X si ...
+*** Función: valor no definido: X
+*** DK : definición libre para simplificar: 0 ó 1 
+
 
 
 [.columns, state=txikiago]
 === Planteamiento de los Ejercicios Capítulo 1
+
+[.column]
+* Ejercicio 1.4
+** Resolverlo por DK
+*** Formato ajedrez -> Factor Común -> XOR
+
 
 [.column]
 * Ejercicio 1.5
@@ -1483,17 +1496,23 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 ** lógica positiva - lógica negativa
 *** o/y -> */+
 ** Condiciones -> miniterminos o maxiterminos
+
+
+[.columns, state=txikiago]
+=== Planteamiento de los Ejercicios Capítulo 1
+
+[.column]
 * Ejercicio 1.6
 ** lenguaje natural -> lenguaje lógico
 ** lógica positiva - lógica negativa
 *** o/y -> */+
 ** Condiciones -> miniterminos o maxiterminos
-
-[.column]
 * Ejercicio 1.8
 ** Escenificación -> Diferentes Casos
 *** Entro al pasillo por la izda y salgo por la dcha
 *** Entro al pasillo por la izda y salgo por la izda
+
+[.column]
 * Ejercicio 1.9
 ** Señal binaria: Relación de aspecto
 *** Período: Duración nivel alto respecto nivel bajo
@@ -1688,6 +1707,25 @@ v <= y and s;
 
 === Arquitectura ===
 
+[.columns]
+=== Síntesis: Herramienta Quartus ===
+
+[.column]
+image::quartus_front-end.png[]
+
+[.column]
+image::quartus_compilation.png[]
+
+[.columns]
+=== Simulación: Herramienta Modelsim/Questa
+
+[.column]
+image::questa_front-end.png[]
+
+[.column]
+image::light_xor.bmp[]
+
+=== Fabricación: FPGA Cyclone V de Intel
 
 
 == Tema 5: Circuitos Aritméticos
