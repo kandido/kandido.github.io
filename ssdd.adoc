@@ -1559,6 +1559,137 @@ image::tema3_BCD.png[]
 
 
 == Tema 4: Lenguaje de Descripción Hardware VHDL
+
+=== Very high speed integrated circuits Hardware Description Language (VHDL)
+
+* HDL: Hardware Description Languages
+* NO son lenguajes de programación sino de *descripción de Hardware*. Es una lenguaje que está pensado para describir circuitos de la misma forma que otras formas de describir un circuito digital: mediante un esquema eléctrico, mediante una tabla de la verdad, mediante diagramas de secuencias de estados, etc ...
+* También sirve para describir las formas de onda cuadradas de las señales binarias de entrada de un circuito digital
+* ... y por supuesto también tiene sentencias y estructuras de programación que no describen circuitos digitales, por ejemplo imprimir en la pantalla una frase como "Hello World".
+
+[.columns]
+=== Descripción del Hardware de un circuito digital.
+
+[.column]
+[source,vhdl]
+--
+-- Sistemas Digitales : Descripción VHDL Curso 2023
+-- Circuito light: Puerta lógica XOR
+entity of light is
+  port (
+    x,y : in bit;
+    z   : out bit
+)
+end entity;
+
+architecture rtl of light is
+signal s,t,u,v;
+begin
+  s <= not x;
+  t <= not y;
+  u <= x and t;
+  v <= y and s;
+  z <= u or v;
+end architecture;
+--
+
+[.column]
+--
+.Circuito Light
+image::tema4_xor.png[xor]
+--
+
+=== Cronogramas 
+  
+
+=== Señales VHDL :tipos
+
+* Hay dos *tipos de señales* en el lenguaje vhdl:
+** [naranja]#PORT# : x,y,z
+*** son señales de acceso al circuito: su *modo* puede ser de entrada ([naranja]#IN#) ó de salida ([naranja]#OUT#)
+*** una señal de entrada tipo IN no puede conectarse a la salida de una puerta lógica
+*** una señal de salida tipo OUT no puede conectarse a la entrada de una puerta lógica
+** [naranja]#SIGNAL# : s,t,u,v
+*** son señales internas al circuito y son bidireccionales: pueden conectarse tanto a la entrada como a la salida de una puerta lógica
+
+=== Señales VHDL : tipos de datos
+
+* hay diferentes *tipos de datos* para las señales
+* tipo de dato bit único : [naranja]#BIT# : admite únicamente dos valores: el ++'0' y el '1'++
+* en VHDL los valores de los bits hay que entrecomillarlos para diferenciarlos de los datos de tipo [naranja]#INTEGER#
+* tipo de dato secuencia de bits: "010001010101" -> entrecomillado.
+
+
+=== Sentencias VHDL : Asignación Concurrente
+
+* CAS : Concurrent Assignement Sentence
+* La sentencia CAS se representa mediante el símbolo [naranja]#<=#
+* El valor resultante de evaluar la expresión a la derecha del símbolo [naranja]#<=# se asigna a la señal a la izquierda del símbolo [naranja]#<=#
+* Ejemplo:
++
+
+[source,vhdl]
+--
+s <= not x;
+t <= not y;
+u <= x and t;
+v <= y and s;
+z <= u or v;
+--
+
+[.columns, state="txikiago"]
+=== Sentencias Concurrentes
+
+[.column]
+* Las sentencias concurrentes NO se ejecutan secuencialmente, sino *simultáneamente*, de la misma forma que en el circuito *"light"* la puerta lógica OR procesa sus dos entradas al mismo tiempo que las puertas NOT y AND del mismo circuito
+
+[.column]
+[source,vhdl]
+--
+s <= not x;
+t <= not y;
+u <= x and t;
+v <= y and s;
+z <= u or v;
+--
+
+[.column]
+[source,vhdl]
+--
+z <= u or v;
+v <= y and s;
+u <= x and t;
+t <= not y;
+s <= not x;
+--
+
+[.column]
+[source,vhdl]
+--
+u <= x and t;
+v <= y and s;
+z <= u or v;
+s <= not x;
+t <= not y;
+--
+
+[.column]
+[source,vhdl]
+--
+u <= x and t;
+t <= not y;
+s <= not x;
+z <= u or v;
+v <= y and s;
+--
+
+=== Entidad ===
+
+
+=== Arquitectura ===
+
+
+
 == Tema 5: Circuitos Aritméticos
 == Tema 6: Otros Circuitos Combinacionales
 
@@ -1586,6 +1717,7 @@ image::tema3_BCD.png[]
 ** caracola
 ** caracola
 ** caracola
+
 
 
 [.visibilidad]
