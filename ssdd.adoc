@@ -34,10 +34,10 @@
 
 //:revealjs_history: true para go to file no pirula
 
-:doctype: book
-:lang: es
-:encode: ISO-8859-1
-:ascii-ids:
+//:doctype: book
+//:lang: es
+//:encode: ISO-8859-1
+//:ascii-ids:
 :show-link-uri:
 :asciidoctor-fetch-kroki:
 :experimental:
@@ -1592,24 +1592,24 @@ image::tema3_BCD.png[]
 [.column]
 [source,vhdl]
 --
--- Sistemas Digitales : Descripción VHDL Curso 2023
--- Circuito light: Puerta lógica XOR
-entity of light is
+-- Sistemas Digitales : Descripción VHDL Curso Primavera 2023
+-- Circuito light.vhd: Puerta lógica XOR extendida
+entity of light_bit is
   port (
     x,y : in bit;
     z   : out bit
-)
+);
 end entity;
 
-architecture rtl of light is
-signal s,t,u,v;
+architecture rtl of light_bit is
+ signal s,t,u,v : bit;
 begin
   s <= not x;
   t <= not y;
   u <= x and t;
   v <= y and s;
   z <= u or v;
-end architecture;
+end rtl;
 --
 
 [.column]
@@ -1619,6 +1619,8 @@ image::tema4_xor.png[xor]
 --
 
 === Cronogramas 
+
+image::light_bit.bmp[]
   
 
 === Señales VHDL :tipos
@@ -1626,8 +1628,8 @@ image::tema4_xor.png[xor]
 * Hay dos *tipos de señales* en el lenguaje vhdl:
 ** [naranja]#PORT# : x,y,z
 *** son señales de acceso al circuito: su *modo* puede ser de entrada ([naranja]#IN#) ó de salida ([naranja]#OUT#)
-*** una señal de entrada tipo IN no puede conectarse a la salida de una puerta lógica
-*** una señal de salida tipo OUT no puede conectarse a la entrada de una puerta lógica
+*** una señal de entrada tipo [naranja]#IN# no puede conectarse a la salida de una puerta lógica
+*** una señal de salida tipo [naranja]#OUT# no puede conectarse a la entrada de una puerta lógica
 ** [naranja]#SIGNAL# : s,t,u,v
 *** son señales internas al circuito y son bidireccionales: pueden conectarse tanto a la entrada como a la salida de una puerta lógica
 
@@ -1636,45 +1638,87 @@ image::tema4_xor.png[xor]
 * hay diferentes *tipos de datos* para las señales
 * tipo de dato bit único : [naranja]#BIT# : admite únicamente dos valores: el ++'0' y el '1'++
 * en VHDL los valores de los bits hay que entrecomillarlos para diferenciarlos de los datos de tipo [naranja]#INTEGER#
-* tipo de dato secuencia de bits: "010001010101" -> entrecomillado.
+* tipo de dato secuencia de bits: "010001010101" -> doble entrecomillado si el dato se representa con más de un bit.
 
+=== Señales VHDL : Buses
 
+* Físicamente un Bus es un conjunto de pistas metálicas que sirven para transportar señales conectandos dos unidades
+* Por ejemplo el "bus de direcciones" de 32 hilos ó pistas de la memoria RAM sirve para seleccionar una dirección de 32 bits de la memoria. La dirección *01100110011001100110011001100110* se transporta desde la CPU hasta la memoria RAM a través de un bus de 32 pistas. Al bus de direcciones de memoria (address bus) se le podría llamar *A* y a cada hilo del bus *asciimath:[A_31]*,*asciimath:[A_30]*,...,*asciimath:[A_1]*,*asciimath:[A_0]*.
+* Desde el punto de vista lógico un bus es un vector o un array de dimensión "n", por ejemplo n=32.  
+* El tipo de datos de la señal *A* se podrían declarar como:
+** [naranja]#bit_vector(31 downto 0)#: el bit MSB(más a la izquierda) sería el hilo asciimath:[A_31] y el bit LSB(más a la derecha) el bit asciimath:[A_0]
+** [naranja]#bit_vector(0 to 31)#: el bit MSB(más a la izquierda) sería el hilo asciimath:[A_0]y el bit LSB(más a la derecha) el bit asciimath:[A_31]
+
+[.columns]
 === Sentencias VHDL : Asignación Concurrente
 
+[.column]
+--
 * CAS : Concurrent Assignement Sentence
 * La sentencia CAS se representa mediante el símbolo [naranja]#<=#
 * El valor resultante de evaluar la expresión a la derecha del símbolo [naranja]#<=# se asigna a la señal a la izquierda del símbolo [naranja]#<=#
-* Ejemplo:
-+
-
-[source,vhdl]
 --
+
+[.column]
+--
+[source,vhdl]
+
 s <= not x;
 t <= not y;
 u <= x and t;
 v <= y and s;
 z <= u or v;
 --
+
+[.columns, state=txikiago]
+=== Sentencias Concurrentes
+
+[.column]
+--
+Concepto de concurrencia: ¿ CUANDO se ejecuta una sentencia concurrente? cuando hay un *evento* en una de las *señales sensibles* de la sentencia. En el caso de la sentencia CAS la señales sensibles son las señales a la derecha del símbolo [naranja]#<=#. +
+Ejemplo: +
+
+[source,vhdl,numbers]
+
+s <= not x;
+t <= not y;
+u <= x and t;
+v <= y and s;
+z <= u or v;
+--
+[.column]
+Ejemplo: Ver cronograma +
+0- "x" = "y" = *0* => s = t = *1* => u = v = *0* => z = *0* +
+1- Se produce un EVENTO (*0->1*) en la señal puerto "x" +
+2- "x" es una señal sensible en la línea 1 del código +
+y en la línea 3 del código +
+3- Se ejecutan las líneas 1 y 3 del código +
+4- Ejecución de la línea 1: "s" (*1->0*) +
+5- Ejecución de la línea 3: "u" (*0->1*) +
+6- Hay un evento en "s": se ejecuta la línea 4 : "v" no cambia -> no evento +
+7- Hay un evento en "u": se ejecuta la línea 5 : "z" cambia (*0->1*) +
+8- La señal z no es una señal sensible en ninguna de las sentencias [naranja]#<=# : FIN +
+9- FIN de la actualización de todas las señales hasta el próximo evento en "x" o/y "y" +
 
 [.columns, state="txikiago"]
 === Sentencias Concurrentes
 
 [.column]
-* Las sentencias concurrentes NO se ejecutan secuencialmente, sino *simultáneamente*, de la misma forma que en el circuito *"light"* la puerta lógica OR procesa sus dos entradas al mismo tiempo que las puertas NOT y AND del mismo circuito
+Las sentencias concurrentes NO se ejecutan secuencialmente, sino *simultáneamente*, de la misma forma que en el circuito *"light"* la puerta lógica OR procesa sus dos entradas al mismo tiempo que las puertas NOT y AND del mismo circuito. +
+En los 4 ejemplos siguientes la actualización de los valores de todas las señales, ante el evento de una de ellas, da el MISMO resultado, ya que la ejecución no es secuencial, sino que se ejecutan UNICAMENTE las sentencias concurrentes cuyas señales sensibles varían; y las sentencias que se ejecutan lo hacen SIMULTANEAMENTE.
 
 [.column]
-[source,vhdl]
 --
+[source,vhdl]
+
 s <= not x;
 t <= not y;
 u <= x and t;
 v <= y and s;
 z <= u or v;
---
 
-[.column]
 [source,vhdl]
---
+
 z <= u or v;
 v <= y and s;
 u <= x and t;
@@ -1683,18 +1727,18 @@ s <= not x;
 --
 
 [.column]
-[source,vhdl]
 --
+[source,vhdl]
+
 u <= x and t;
 v <= y and s;
 z <= u or v;
 s <= not x;
 t <= not y;
---
 
 [.column]
 [source,vhdl]
---
+
 u <= x and t;
 t <= not y;
 s <= not x;
@@ -1702,10 +1746,92 @@ z <= u or v;
 v <= y and s;
 --
 
+[.columns, state=txiki]
 === Entidad ===
 
+[.column]
+--
+La *entidad* describe el comportamiento del circuito digital visto desde fuera, es decir, describe únicamente los accesos de entrada y salida del circuito. Los accesos de entrada y salida se realizan a través de señales digitales binarias denominadas *puertos*. +
 
+La entidad se define con el keyword [naranja]#ENTITY# +
+
+La entidad que hay nominarla con un nombre. Este nombre condiciona el nombre del fichero donde se almacena, que ha de tener el mismo nombre con y la extensión *.vhd* +
+
+Las señales tipo [naranja]#PORT# pueden ser de entrada ([naranja]#IN#) ó salida ([naranja]#OUT#) ó salida_y_entrada ([naranja]#BUFFER#). +
+
+Además del *modo* de la señal (IN-OUT-BUFFER) es necesario declarar el tipo de los datos ([naranja]#BIT#)
+--
+
+[.column.is-vcentered]
+--
+image::tema4_entity_light.png[] 
+
+Las señales cuyos datos son de tipo [naranja]#BIT# admiten los valores [naranja]#'0'# y [naranja]#'1'#
+
+.Sintaxis
+[source,vhdl]
+entity of light_bit is
+  port (
+    x,y : in bit;
+    z   : out bit
+);
+end entity;
+--
+
+[.columns]
 === Arquitectura ===
+
+[.column]
+image::tema4_architecture.png[]
+
+[.column]
+--
+3 Tipos de arquitecturas: +
+
+RTL: Expresiones lógicas +
+
+Behavioral o comportamental: funcionalidad +
+
+Structural: conectar subcircuitos
+
+La descripción más sencilla es la *behavioral* ... pero también es la que exige un mayor esfuerzo al sintetizador.
+--
+
+[.columns]
+=== Arquitectura ===
+
+[.column]
+.Sintaxis
+[source,vhdl]
+--
+architecture rtl of light_bit is
+ signal s,t,u,v : bit;
+begin
+  s <= not x;
+  t <= not y;
+  u <= x and t;
+  v <= y and s;
+  z <= u or v;
+end rtl;
+--
+
+[.column]
+--
+La arquitectura del circuito se declara con el keyword [naranja]#architecture# +
+
+La arquitectura del circuito hay que nominarla con cualquier nombre: rtl, fun, etc... y relacionarla con una entidad +
+
+Las señales internas hay que declararlas con el keyword [naranja]#signal# y definir el tipo de datos: pej [naranja]#bit# +
+
+La relación entre las señales (puertos e internas) se define mediante "sentencias vhdl" entre los keywords [naranja]#begin# y [naranja]#end# +
+
+--
+
+=== Hojas de Referencia
+
+link:./PDF/VHDL_Cheat_Sheet.pdf[Hoja de referencia simple]
+
+link:./PDF/VHDL_QRC__01.pdf[Hoja de referencia completa]
 
 [.columns]
 === Síntesis: Herramienta Quartus ===
