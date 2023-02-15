@@ -1636,27 +1636,27 @@ image::light_bit.bmp[]
 === Señales VHDL : tipos de datos
 
 * hay diferentes *tipos de datos* para las señales
-* tipo de dato bit único : [naranja]#BIT# : admite únicamente dos valores: el ++'0' y el '1'++
+* tipo de dato bit único : [naranja]#BIT# : admite únicamente dos valores: el *'* 0 *'* y el *'* 1 *'* 
 * en VHDL los valores de los bits hay que entrecomillarlos para diferenciarlos de los datos de tipo [naranja]#INTEGER#
-* tipo de dato secuencia de bits: "010001010101" -> doble entrecomillado si el dato se representa con más de un bit.
+* tipo de dato secuencia de bits: *"* 010001010101 *"* -> doble entrecomillado si el dato se representa con más de un bit.
 
 === Señales VHDL : Buses
 
 * Físicamente un Bus es un conjunto de pistas metálicas que sirven para transportar señales conectandos dos unidades
 * Por ejemplo el "bus de direcciones" de 32 hilos ó pistas de la memoria RAM sirve para seleccionar una dirección de 32 bits de la memoria. La dirección *01100110011001100110011001100110* se transporta desde la CPU hasta la memoria RAM a través de un bus de 32 pistas. Al bus de direcciones de memoria (address bus) se le podría llamar *A* y a cada hilo del bus *asciimath:[A_31]*,*asciimath:[A_30]*,...,*asciimath:[A_1]*,*asciimath:[A_0]*.
 * Desde el punto de vista lógico un bus es un vector o un array de dimensión "n", por ejemplo n=32.  
-* El tipo de datos de la señal *A* se podrían declarar como:
-** [naranja]#bit_vector(31 downto 0)#: el bit MSB(más a la izquierda) sería el hilo asciimath:[A_31] y el bit LSB(más a la derecha) el bit asciimath:[A_0]
-** [naranja]#bit_vector(0 to 31)#: el bit MSB(más a la izquierda) sería el hilo asciimath:[A_0]y el bit LSB(más a la derecha) el bit asciimath:[A_31]
+* El tipo de datos de los buses *A* y *B* de 32 bits se podrían declarar como:
+** [naranja]#signal A,B :bit_vector(31 downto 0);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_31] y el bit LSB(más a la derecha) el bit asciimath:[A_0] y lo mismo con el bus B
+** [naranja]#signal A,B :bit_vector(0 to 31);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_0]y el bit LSB(más a la derecha) el bit asciimath:[A_31] y lo mismo con el bus B
 
 [.columns]
 === Sentencias VHDL : Asignación Concurrente
 
 [.column]
 --
-* CAS : Concurrent Assignement Sentence
+* CAS : Concurrent Assignment Sentence
 * La sentencia CAS se representa mediante el símbolo [naranja]#<=#
-* El valor resultante de evaluar la expresión a la derecha del símbolo [naranja]#<=# se asigna a la señal a la izquierda del símbolo [naranja]#<=#
+* El valor resultante de *evaluar* la expresión a la derecha del símbolo [naranja]#<=# se asigna a la señal a la izquierda del símbolo [naranja]#<=#
 --
 
 [.column]
@@ -1704,7 +1704,7 @@ y en la línea 3 del código +
 === Sentencias Concurrentes
 
 [.column]
-Las sentencias concurrentes NO se ejecutan secuencialmente, sino *simultáneamente*, de la misma forma que en el circuito *"light"* la puerta lógica OR procesa sus dos entradas al mismo tiempo que las puertas NOT y AND del mismo circuito. +
+Las sentencias concurrentes NO se ejecutan secuencialmente, sino *simultáneamente*, de la misma forma que en el circuito *"light_bit.vhd"* la puerta lógica OR procesa sus dos entradas al mismo tiempo que las puertas NOT y AND del mismo circuito. +
 En los 4 ejemplos siguientes la actualización de los valores de todas las señales, ante el evento de una de ellas, da el MISMO resultado, ya que la ejecución no es secuencial, sino que se ejecutan UNICAMENTE las sentencias concurrentes cuyas señales sensibles varían; y las sentencias que se ejecutan lo hacen SIMULTANEAMENTE.
 
 [.column]
@@ -1837,10 +1837,17 @@ link:./PDF/VHDL_QRC__01.pdf[Hoja de referencia completa]
 === Síntesis: Herramienta Quartus ===
 
 [.column]
-image::quartus_front-end.png[]
+--
+image::quartus_front-end.png[] 
 
+Entrada: código VHDL "light_bit.vhd"
+--
 [.column]
+--
 image::quartus_compilation.png[]
+
+Salida: simulación y síntesis : bitstream "quartus_light.sof"
+--
 
 [.columns]
 === Simulación: Herramienta Modelsim/Questa
@@ -1849,10 +1856,16 @@ image::quartus_compilation.png[]
 image::questa_front-end.png[]
 
 [.column]
+--
 image::light_xor.bmp[]
 
+Verificar el correcto funcionamiento del circuito antes de su Fabricación
+--
 === Fabricación: FPGA Cyclone V de Intel
 
+* Tarjeta de prototipado de Terasic *DE1 SoC*
+* La tarjeta contiene la *FPGA Cyclone V* y sus periféricos
+* El diseño "light_bit" se implementa en el chip FPGA (*Field Programmable Gate Array*)
 
 == Tema 5: Circuitos Aritméticos
 == Tema 6: Otros Circuitos Combinacionales
