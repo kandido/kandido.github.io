@@ -51,6 +51,10 @@
     color: #FF6A00;
 }
 
+.naranja {
+    color: #FF6A00;
+}
+
 .espacio-linea p {
   line-height: 2.0
 }
@@ -74,6 +78,13 @@
 .double-underline {
      border-bottom: 1px solid;
      text-decoration: underline;
+}
+
+.zerrenda li {
+     height: 18px;
+    width: 18px;
+    margin: 6px;
+    float: left;
 }
 
 section.visibilidad {
@@ -169,3 +180,26 @@ section[data-state="topleft"] p {
   top: 1px;
   left: 2em;
 }
+
+
+/* AFECTA A TODAS LAS LISTAS: NO LO PUEDO UTILIZAR
+section[data-state="zerrenda"] p,li {
+    height: 18px;
+    width: 18px;
+    margin: 6px;
+    float: left;
+}
+*/
+
+
+
+/*
+.reveal li {
+  background: silver;
+  display: inline-block;
+  flex-direction: column;
+  padding: 0.1em;
+  line-height: 0.1em;
+}
+*/
+
