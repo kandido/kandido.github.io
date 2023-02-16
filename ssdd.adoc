@@ -1867,8 +1867,6 @@ Verificar el correcto funcionamiento del circuito antes de su Fabricación
 * La tarjeta contiene la *FPGA Cyclone V* y sus periféricos
 * El diseño "light_bit" se implementa en el chip FPGA (*Field Programmable Gate Array*)
 
-=== Primer Diseño
-
 
 [.columns]
 === Librerías y Paquetes
@@ -1881,7 +1879,7 @@ Verificar el correcto funcionamiento del circuito antes de su Fabricación
 [.column]
 
 --
-La librería std no es obligado declararla
+La librería std *NO* es obligado declararla
 
 [source,vhdl]
 library std;
@@ -1903,14 +1901,34 @@ begin
 end rtl;
 --
 
-=== Ejercicio Practico
+=== Primer Diseño
 
-link:PDF/vhdl_lab_remoto.pdf[]
-
-
-=== Librerías y Paquetes
+Descripción del circuito minimalista *z=x* +
 
 
+[source,vhdl]
+----
+entity of light_bit is
+  port (
+    x   : in bit;
+    z   : out bit
+);
+end entity;
+architecture minima of light_bit is
+begin
+  z <= x;
+end rtl;
+----
+* El objetivo de este código es ser lo suficientemente simple para no dificultar su comprensión y centrarse en poner a punto la herramienta de desarrollo *Intel Quartus Prime Lite* desde cualquier computadora utilizando los recursos remotos de la UPNA.
+
+=== Ejercicios Prácticos de Diseño de Circuitos
+
+// * link:./PDF/vhdl_lab_remoto.pdf[VHDL mediante recursos Remotos]:PDF 
+
+* link:vhdl_lab_remoto.html[VHDL mediante recursos Remotos]
+
+* La única forma de aprender un lenguaje de descripción de HW o de programación es practicando.
+* La Upna brinda la posibilidad de utilizar los recursos EDA de diseño automático de circuitos integrados de forma remota, bien desde dentro del Campus Universitario o desde fuera de él, sin la necesidad de realiza ningún tipo de instalación en el portátil personal ni de acceder a ningún laboratorio.
 
 == Tema 5: Circuitos Aritméticos
 == Tema 6: Otros Circuitos Combinacionales
