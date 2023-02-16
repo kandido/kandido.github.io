@@ -4491,27 +4491,16 @@ Desde un PC personal para conectarse al servidor hacer click en la hamburguesa d
 <p>Editar el fichero <em>light_bit.vhd</em></p>
 <div class="listingblock">
 <div class="content">
-<pre>-- Sistemas Digitales I curso 2022-23
--- Practica 2 : Circuito combinacional de 3 puertas logicas
--- Objetivo   : Compilar, Simular, Fabricar y ¡¡COMENTAR !! el codigo
---				  : Utilizar los apuntes y personalizarlos.
-library ieee;
-use ieee.std_logic_1164.all;
-
-entity light is
-	port
-	(
-		SW 	:  in   std_logic_vector (1 downto 0);
-		LEDR    :  out  std_logic_vector (2 downto 0)
-	);
-end light;
-
-architecture rtl of light is
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">entity of light_bit is
+  port (
+    x   : in bit;
+    z   : out bit
+);
+end entity;
+architecture minima of light_bit is
 begin
-	LEDR(0) &lt;= NOT(SW(1) AND SW(0));
-	LEDR(1) &lt;= NOT(SW(1) OR SW(0));
-	LEDR(2) &lt;= SW(0) XOR SW(1);
-end rtl;</pre>
+  z &lt;= x;
+end rtl;</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -5518,7 +5507,7 @@ end mux4t1_2;</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-16 17:03:58 +0100
+Last updated 2023-02-16 17:11:22 +0100
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
