@@ -1593,7 +1593,7 @@ image::tema3_BCD.png[]
 [source,vhdl]
 --
 -- Sistemas Digitales : Descripción VHDL Curso Primavera 2023
--- Circuito light.vhd: Puerta lógica XOR extendida
+-- Circuito light_bit.vhd: Puerta lógica XOR extendida
 entity of light_bit is
   port (
     x,y : in bit;
@@ -1866,6 +1866,51 @@ Verificar el correcto funcionamiento del circuito antes de su Fabricación
 * Tarjeta de prototipado de Terasic *DE1 SoC*
 * La tarjeta contiene la *FPGA Cyclone V* y sus periféricos
 * El diseño "light_bit" se implementa en el chip FPGA (*Field Programmable Gate Array*)
+
+=== Primer Diseño
+
+
+[.columns]
+=== Librerías y Paquetes
+
+[.column]
+* Las definiciones de las sentencias, tipos de señales, tipos de datos, etc se encuentran definidas en las librerías.
+* Por ejemplo el tipo de dato [naranja]#bit# y [naranja]#bit_vector# se encuentran definidos en la librería  [naranja]#std# y en el paquete [naranja]#standard#
+* Las librerías y los paquetes hay que declararlos al principio, antes de las entidades y de las arquitecturas
+
+[.column]
+
+--
+La librería std no es obligado declararla
+
+[source,vhdl]
+library std;
+use std.standard.all;
+entity of light_bit is
+  port (
+    x,y : in bit;
+    z   : out bit
+);
+end entity;
+architecture rtl of light_bit is
+ signal s,t,u,v : bit;
+begin
+  s <= not x;
+  t <= not y;
+  u <= x and t;
+  v <= y and s;
+  z <= u or v;
+end rtl;
+--
+
+=== Ejercicio Practico
+
+link:PDF/vhdl_lab_remoto.pdf[]
+
+
+=== Librerías y Paquetes
+
+
 
 == Tema 5: Circuitos Aritméticos
 == Tema 6: Otros Circuitos Combinacionales
