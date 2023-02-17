@@ -446,7 +446,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2023-02-16</span>
+<span id="revdate">2023-02-17</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -479,7 +479,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_ejercicios_2">11.3. Ejercicios</a></li>
 </ul>
 </li>
-<li><a href="#_tutorial_quartus_light_vhd_iv_simulación_modelsim_altera">12. Tutorial quartus &#8594; light.vhd (IV) : Simulación Modelsim-Altera</a>
+<li><a href="#_tutorial_quartus_light_vhd_iv_simulación_questa_intel">12. Tutorial quartus &#8594; light.vhd (IV) : Simulación Questa Intel</a>
 <ul class="sectlevel2">
 <li><a href="#_simulación">12.1. Simulación</a></li>
 </ul>
@@ -562,12 +562,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_documentación">27.1. Documentación</a></li>
 <li><a href="#_introducción_3">27.2. Introducción</a></li>
-<li><a href="#_circuito_digital_gate_and_vhdl">27.3. Circuito Digital  "gate_and.vhdl"</a></li>
-<li><a href="#_estructura_del_programa_librería_entidad_arquitectura">27.4. Estructura del Programa: Librería-Entidad-Arquitectura</a></li>
-<li><a href="#_señal_digital_binaria">27.5. señal digital binaria</a></li>
-<li><a href="#_standard_logic_std_logic_std_logic_1164">27.6. standard logic (std_logic): std_logic_1164</a></li>
-<li><a href="#_std_logic_vector_downto_to">27.7. std_logic_vector : downto , to</a></li>
-<li><a href="#_librería_standard_paquetes_standard_textio">27.8. Librería standard:  paquetes STANDARD, TEXTIO</a></li>
+<li><a href="#_señal_digital_binaria_tipo_bit">27.3. Señal Digital Binaria tipo BIT</a></li>
+<li><a href="#_buses">27.4. Buses</a></li>
+<li><a href="#_circuito_digital_light_bit_vhdl">27.5. Circuito Digital  "light_bit.vhdl"</a></li>
+<li><a href="#_estructura_del_programa_librería_entidad_arquitectura">27.6. Estructura del Programa: Librería-Entidad-Arquitectura</a></li>
+<li><a href="#_librería_standard_paquete_standard">27.7. Librería standard:  paquete STANDARD</a></li>
+<li><a href="#_paquete_standard_logic_std_logic_std_logic_1164">27.8. Paquete standard logic (std_logic): std_logic_1164</a></li>
+<li><a href="#_std_logic_vector_downto_to">27.9. std_logic_vector : downto , to</a></li>
+<li><a href="#_librería_standard_textio">27.10. Librería standard: TEXTIO</a></li>
 </ul>
 </li>
 <li><a href="#_sentencias_concurrentes">28. Sentencias Concurrentes</a>
@@ -580,6 +582,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_procesoprocess">29.1. Proceso/Process()</a></li>
 <li><a href="#_ejemplo_1_matricula_vhd">29.2. Ejemplo_1: matricula.vhd</a></li>
+<li><a href="#_ejemplo_2_matricula_vhd">29.3. Ejemplo_2: matricula.vhd</a></li>
 </ul>
 </li>
 <li><a href="#Quartus">Appendix A: Herramienta Quartus</a>
@@ -616,9 +619,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#QAnalysis">A.8. Análisis</a></li>
 <li><a href="#QCompilation">A.9. Compilación</a></li>
-<li><a href="#QSimulation">A.10. Simulación</a></li>
-<li><a href="#QArchive">A.11. Archivar el Proyecto</a></li>
-<li><a href="#QRestore">A.12. Restaurar el Proyecto</a></li>
+<li><a href="#_archivos_del_proyecto">A.10. Archivos del Proyecto</a></li>
+<li><a href="#QSimulation">A.11. Simulación</a></li>
+<li><a href="#QArchive">A.12. Archivar el Proyecto</a></li>
+<li><a href="#QRestore">A.13. Restaurar el Proyecto</a></li>
 </ul>
 </li>
 <li><a href="#KitDe1soc">Appendix B: Kit DE1-SoC</a></li>
@@ -632,6 +636,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_síntesis_en_el_laboratorio_remoto">C.6. Síntesis en el laboratorio remoto</a></li>
 <li><a href="#_fabricación_del_circuito_digital">C.7. Fabricación del Circuito Digital</a></li>
 <li><a href="#_interfaz_web_de_visualización_de_la_tarjeta_y_manejo_de_switches_y_botones">C.8. Interfaz Web de Visualización de la Tarjeta y Manejo de Switches y Botones</a></li>
+<li><a href="#_circuito_digital_gate_and_vhdl">C.9. Circuito Digital  "gate_and.vhdl"</a></li>
 </ul>
 </li>
 <li><a href="#IdenPuerto">Appendix D: Identificación de los puertos</a></li>
@@ -667,34 +672,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_agradecimientos">1. Agradecimientos</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>El <strong>Laboratorio Remoto de Sistemas FPGA</strong> ha sido posible gracias a la colaboración de la Universidad Pública de Navarra, el Instituto Tecnológico de la Universidad Federa de Sao Paulo, a la empresa LabsLand y a la empresa Intel.
-<br>
-<br>
-<br></p>
+<p>El <strong>Laboratorio Remoto de Sistemas FPGA</strong> ha sido posible gracias a la colaboración de la Universidad Pública de Navarra, el Instituto Tecnológico de la Universidad Federa de Sao Paulo, a la empresa LabsLand y a la empresa Intel.</p>
 </div>
-<div class="paragraph text-center">
-<p><span class="image"><img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/logo/ROJO_UPNA_300ppp.jpg" alt="ROJO UPNA 300ppp" width="50%" height="10%"></span>
-<br>
-<br>
-<br></p>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/ROJO_UPNA_300ppp.jpg" alt="ROJO UPNA 300ppp" width="50%" height="10%">
 </div>
-<div class="paragraph text-center">
-<p><span class="image"><img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/logo/Unifesp_completa_policromia_RGB.png" alt="Unifesp completa policromia RGB" width="50%" height="10%"></span>
-<br>
-<br></p>
 </div>
-<div class="paragraph text-center">
-<p><span class="image"><img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/panel/panel_upna.png" alt="panel upna" width="50%" height="15%"></span>
-<br>
-<br></p>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/Unifesp_completa_policromia_RGB.png" alt="Unifesp completa policromia RGB" width="50%" height="10%">
 </div>
-<div class="paragraph text-center">
-<p><span class="image"><img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/unifesp/panel_unifesp.png" alt="panel unifesp" width="50%" height="10%"></span>
-<br>
-<br></p>
 </div>
-<div class="paragraph text-center">
-<p><span class="image"><img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/logo/intel_fpga_logo.png" alt="intel fpga logo" width="50%" height="60%"></span></p>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/panel_upna.png" alt="panel upna" width="50%" height="15%">
+</div>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/panel_unifesp.png" alt="panel unifesp" width="50%" height="10%">
+</div>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/intel_fpga_logo.png" alt="intel fpga logo" width="50%" height="60%">
+</div>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -919,7 +922,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Descripción del circuito light_bit.vhd mediante un esquema eléctrico o diagrama de bloques</p>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/tutorial_upna/images/light_block-diagram.png" alt="Diagrama de Bloques">
+<img src="images/light_block-diagram.png" alt="Diagrama de Bloques">
 </div>
 </div>
 <div class="ulist">
@@ -962,7 +965,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>board &#8594; DE1-SoC Board</p>
 </li>
 <li>
-<p>simulation &#8594; modelsim-altera &#8594; format: vhdl</p>
+<p>simulation &#8594; Questa Intel &#8594; format: vhdl</p>
 </li>
 <li>
 <p>Salvar proyecto</p>
@@ -1187,7 +1190,7 @@ END LogicFunction ;</code></pre>
 <p>board &#8594; DE1-SoC Board</p>
 </li>
 <li>
-<p>simulation &#8594; modelsim-altera &#8594; format: vhdl</p>
+<p>simulation &#8594; Questa Intel&#8594; format: vhdl</p>
 </li>
 </ul>
 </div>
@@ -1383,7 +1386,7 @@ END LogicFunction ;</code></pre>
 <p>board &#8594; DE1-SoC Board</p>
 </li>
 <li>
-<p>simulation &#8594; modelsim-altera &#8594; format: vhdl</p>
+<p>simulation &#8594; Questa Intel &#8594; format: vhdl</p>
 </li>
 </ul>
 </div>
@@ -1409,7 +1412,7 @@ END LogicFunction ;</code></pre>
 <p>Se visualiza un esquema eléctrico que no es literalmente la descripción del módulo fuente sino una descripción equivalente.</p>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/tutorial_upna/images/light_signal.png" alt="light signal">
+<img src="images/light_signal.png" alt="light signal">
 </div>
 </div>
 </li>
@@ -1448,7 +1451,7 @@ END LogicFunction ;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tutorial_quartus_light_vhd_iv_simulación_modelsim_altera">12. Tutorial quartus &#8594; light.vhd (IV) : Simulación Modelsim-Altera</h2>
+<h2 id="_tutorial_quartus_light_vhd_iv_simulación_questa_intel">12. Tutorial quartus &#8594; light.vhd (IV) : Simulación Questa Intel</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_simulación">12.1. Simulación</h3>
@@ -1465,17 +1468,17 @@ END LogicFunction ;</code></pre>
 <p>Abrir el proyecto <em>light_de1soc.qpf</em> ubicado en la carpeta ../ssdd/light_de1soc donde previamente he sintentizado el diseño <em>light_de1soc.vhd</em></p>
 </li>
 <li>
-<p>Configurar simulador Modelsim</p>
+<p>Configurar simulador Questa</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Ha de estar instalado el simulador Modelsim</p>
+<p>Ha de estar instalado el simulador Questa</p>
 </li>
 <li>
-<p>Quartus &#8594; Settings &#8594; Eda Tool Settings &#8594; Simulation&#8594; Tool Name: Modelsim-Altera</p>
+<p>Quartus &#8594; Settings &#8594; Eda Tool Settings &#8594; Simulation&#8594; Tool Name: Questa Intel</p>
 </li>
 <li>
-<p>Quartus &#8594; Tools &#8594; options &#8594; general &#8594; eda tool options &#8594; modelsim-altera : seleccionar la carpeta donde esté instalado, por ejemplo &#8594; C:/intel_quartus/20.1/modelsim_ase/bin</p>
+<p>Quartus &#8594; Tools &#8594; options &#8594; general &#8594; eda tool options &#8594; Questa Intel : seleccionar la carpeta donde esté instalado, por ejemplo &#8594; C:/intel_quartus/21.1/questa_fse/bin</p>
 </li>
 </ul>
 </div>
@@ -1491,11 +1494,11 @@ END LogicFunction ;</code></pre>
 </div>
 </li>
 <li>
-<p>Abrir el simulador Modelsim-Altera</p>
+<p>Abrir el simulador Questa Intel</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Tools &#8594; Run Simulator Tool &#8594; RTL simulation &#8594; Abre el simulador Modelsim-Altera</p>
+<p>Tools &#8594; Run Simulator Tool &#8594; RTL simulation &#8594; Abre el simulador Questa Intel</p>
 </li>
 </ul>
 </div>
@@ -1504,7 +1507,7 @@ END LogicFunction ;</code></pre>
 </div>
 </li>
 <li>
-<p>Modelsim Simulator</p>
+<p>Questa Intel Simulator</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1514,13 +1517,13 @@ END LogicFunction ;</code></pre>
 <p>Ventana Library (View Library) &#8594; Work &#8594; Doble click en light &#8594; se carga el diseño que se va simular en la ventana Objects</p>
 </li>
 <li>
-<p>Ventana Objects &#8594; seleccionar con el ratón la señal bus SW &#8594; click dcha, Modify &#8594; Apply Wave &#8594;   Pattern: counter, start at 00, end at 80 ns, time unit ns,  from 00 to 11, Period: 10ns, counter type binary, Direction: up , Repeat:  Forever &#8594;Se añaden en la ventana Wave las señales seleccionadas</p>
+<p>Ventana Objects &#8594; seleccionar con el ratón la señal bus SW &#8594; click dcha, <strong>Modify &#8594; Apply Wave</strong> &#8594;   Pattern: counter, start at 00, end at 80 ns, time unit ns,  from 00 to 11, Period: 10ns, counter type binary, Direction: up , Repeat:  Forever &#8594;Se añaden en la ventana Wave las señales seleccionadas</p>
 </li>
 <li>
 <p>Ventana Wave &#8594; click dcha en el area del cronograma de las señales binarias &#8594; Zoom Range: 80ns</p>
 </li>
 <li>
-<p>Ventana Objects &#8594; seleccionar con el ratón las señales de entrada salida LEDR(0) &#8594; Click dcha &#8594; Add Wave &#8594; se añade la señal de salida a la ventana Wave.</p>
+<p>Ventana Objects &#8594; seleccionar con el ratón las señales de entrada salida LEDR(0) &#8594; Click dcha &#8594; <strong>Add Wave</strong> &#8594; se añade la señal de salida a la ventana Wave.</p>
 </li>
 <li>
 <p>Ventana Wave:  botones de la barra de herramientas &#8594; simular 80 ns, run , restart simulation, run.</p>
@@ -1542,7 +1545,7 @@ END LogicFunction ;</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/tutorial_upna/images/light_de1soc_wave.png" alt="light de1soc wave">
+<img src="images/light_de1soc_wave.png" alt="light de1soc wave">
 </div>
 </div>
 </div>
@@ -1679,7 +1682,7 @@ END TablaVerdad ;</pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/tutorial_upna/images/light_csa.png" alt="light csa">
+<img src="images/light_csa.png" alt="light csa">
 </div>
 </div>
 <div class="ulist">
@@ -1885,7 +1888,7 @@ END TablaVerdad;</pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/tutorial_upna/images/light_if.png" alt="light if">
+<img src="images/light_if.png" alt="light if">
 </div>
 </div>
 </div>
@@ -2103,7 +2106,7 @@ END behavioral ;</pre>
 <p>VISUALIZACION: Tools&#8594; Netlist Viewer &#8594; RTL viewer</p>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/tutorial_upna/images/light_case.png" alt="light case">
+<img src="images/light_case.png" alt="light case">
 </div>
 </div>
 </li>
@@ -2217,7 +2220,7 @@ end rtl;</pre>
 <p>VISUALIZACION: Tools&#8594; Netlist Viewer &#8594; RTL viewer</p>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/tutorial_upna/images/mux2x1_rtl.png" alt="mux2x1 rtl">
+<img src="images/mux2x1_rtl.png" alt="mux2x1 rtl">
 </div>
 </div>
 </li>
@@ -2315,7 +2318,7 @@ Si se escribe LEDR en lugar de LEDR(0) da error.
 <p>VISUALIZACION: Tools&#8594; Netlist Viewer &#8594; RTL viewer</p>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/tutorial_upna/images/mux4x1_beh.png" alt="mux4x1 beh">
+<img src="images/mux4x1_beh.png" alt="mux4x1 beh">
 </div>
 </div>
 </li>
@@ -2339,7 +2342,7 @@ lo cual  se describe en VHDL mediante una arquitectura estructural.</p>
 <p>Un multiplexor 4x1 se puede diseñar como la combinación de 3 multiplexores 2x1. En la entrada del circuito se utilizan 2 multiplexores 2x1 en paralelo y a la salida de estos dos multiplexores 2x1 se conecta el multiplexor 2x1 de salida. Es decir, 2 multiplexores de entrada y un multiplexor de salida.</p>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/tutorial_upna/images/mux4x1_str.png" alt="mux4x1 str">
+<img src="images/mux4x1_str.png" alt="mux4x1 str">
 </div>
 </div>
 </li>
@@ -2347,7 +2350,7 @@ lo cual  se describe en VHDL mediante una arquitectura estructural.</p>
 <p>Esquema del componente <em>mux2x1</em></p>
 <div class="imageblock">
 <div class="content">
-<img src="/mux2x1_str.png" alt="mux2x1 str">
+<img src="images/mux2x1_str.png" alt="mux2x1 str">
 </div>
 </div>
 </li>
@@ -2531,7 +2534,7 @@ end estructural;</pre>
 <p>Circuito de visualización de dígitos hexadecimales en el display de 7 segmentos</p>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/practicas_altera/DE1/PROY_VHDL/2021/decodificador_bin-hexadecimal/decoder_hex7seg.png" alt="decodificador 7 segmentos">
+<img src="images/decoder_hex7seg.png" alt="decodificador 7 segmentos">
 </div>
 </div>
 <div class="ulist">
@@ -2941,7 +2944,7 @@ end architecture;</pre>
 <p>Esquema</p>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/practicas_altera/DE1/PROY_VHDL/2021/ffd/ffd.png" alt="ffd">
+<img src="images/ffd.png" alt="ffd">
 </div>
 </div>
 </li>
@@ -3327,7 +3330,7 @@ begin
 <div class="ulist">
 <ul>
 <li>
-<p>la relación entre la salida y la entrada del circuito se denomina <strong>arquitectura</strong>: Hay 3 tipos de  arquitectura: <strong>RTL</strong>, Behavioral y Structural.</p>
+<p>la relación entre la salida y la entrada del circuito se denomina <strong>arquitectura</strong>: Hay 3 tipos de  arquitectura: <strong>RTL</strong>, <strong>Behavioral</strong> y <strong>Structural</strong>.</p>
 </li>
 <li>
 <p>Arquitectura a nivel <strong>funcional</strong> (describir la relación entre la salida y la entrada del circuito mediante la función del circuito, ej describir literalmente la <strong>tabla de la verdad</strong> de un circuito). Los nombres behavioral y comportamental equivalen a funcional</p>
@@ -3352,80 +3355,132 @@ begin
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_circuito_digital_gate_and_vhdl">27.3. Circuito Digital  "gate_and.vhdl"</h3>
-<div class="imageblock">
-<div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/rtl_scheme.png" alt="Circuito Digital gate_and">
-</div>
-</div>
+<h3 id="_señal_digital_binaria_tipo_bit">27.3. Señal Digital Binaria tipo BIT</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>La primera fase del diseño es la de EDICIÓN del circuito.</p>
+<p>El paquete "standard" de la librería "std" incorporado en el propio lenguaje VHDL, define un tipo de señal <strong>bit</strong> que únicamente admite 2 valores lógicos: el "0" y el "1",que se corresponden con los valores lógicos del algebra de Boole. Físicamente una señal electrónica es una magnitud como la tensión o la corriente. El valor lógico abstracto 0 se puede corresponder con un nivel de tensión como los cero voltios y el valor lógico abstracto 1 con el nivel de tensión 5 voltios, es decir, con el par (0v,5v) ó también podría ser con el par (-5v,5v) ó cualquier otro par de niveles. Con la corriente ocurre lo mismo el par abstracto (0,1) se corresponde con cualquier par de niveles (0mA,10mA) ó (-3mA,3mA) ó &#8230;&#8203; etc.</p>
 </li>
 <li>
-<p>módulo fuente <em>gate_and.vhdl</em> descriptor del hardware en lenguaje VHDL:</p>
-</li>
-</ul>
-</div>
+<p>En los circuitos electrónicos digitales las señales físicas "idealmente" tienen únicamente un par de valores en tensión o corriente, pero ocurre que una señal puede <strong>distorsionarse</strong> o se le puede sumar una señal de <strong>ruido</strong> externo, por ejemplo en la transmisión a través de una línea de comunicaciones o una pista de un circuito impreso, por lo que sería imposible mantener dos niveles de tensión o corriente. Para que los circuitos digitales sean operativos es necesario asociar a cada valor abstracto "0" ó "1" un rango de valores. Por ejemplo, al "0" un rango entre cero voltios y 100mv y al "1" un rango de valores entre 800mv y 1 voltio, cuyos niveles y umbrales permitidos se representa a continuación.</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- Sistemas Digitales I año 2020			<i class="conum" data-value="1"></i><b>(1)</b>
--- Upna 7 de Febrero 2020
--- Laboratorio Remoto de la Upna
--- FICHERO gate_and.vhdl : OBLIGATORIAMENTE debe ser el MISMO nombre que el utilizado en ENTITY.
--- tutorial: primera práctica en aula
--- SSDDI 2020 Febrero 7
+<pre>_____________________  5 voltios
 
--- Librerías donde se definen los tipos de señales std_logic
-library ieee;				 		<i class="conum" data-value="2"></i><b>(2)</b>
-use ieee.std_logic_1164.all;
+	1
+_____________________ 0,8 voltios
 
--- Entidad						<i class="conum" data-value="3"></i><b>(3)</b>
-entity gate_and is
-    port (
-        SW: in std_logic_vector(9 downto 0);
-        LEDR: out std_logic_vector(9 downto 0)
-    );
-end gate_and;
+	X
+_____________________ 0,1 voltios
 
---ARQUITECTURA						<i class="conum" data-value="4"></i><b>(4)</b>
-architecture rtl of gate_and is
-begin
-    LEDR(0) &lt;= SW(0) and SW(1);                         <i class="conum" data-value="5"></i><b>(5)</b>
-end rtl;</pre>
+	0
+_____________________ 0 voltios</pre>
 </div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Los nombre de los puertos han de ser obligatoriamente los utilizados por el laboratorio remoto (Ver <a href="#IdenPuerto">Apéndice</a> )</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
+<p>X: Un nivel de tensión entre 100mv y 800mv quedaría indeterminado y no podría asociarse ni al bit "0" ni al bit "1".</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-para poder fabricar el circuito en los dispositivos FPGA del laboratorio remoto, los nombre de los puertos han de ser obligatoriamente los utilizados por el laboratorio remoto (Ver apéndice)
-</td>
-</tr>
-</table>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_estructura_del_programa_librería_entidad_arquitectura">27.4. Estructura del Programa: Librería-Entidad-Arquitectura</h3>
+<h3 id="_buses">27.4. Buses</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Físicamente un Bus es un conjunto de pistas metálicas que sirven para transportar señales conectandos dos unidades</p>
+</li>
+<li>
+<p>Por ejemplo el "bus de direcciones" de 32 hilos ó pistas de la memoria RAM sirve para seleccionar una dirección de 32 bits de la memoria. La dirección <strong>01100110011001100110011001100110</strong> se transporta desde la CPU hasta la memoria RAM a través de un bus de 32 pistas. Al bus de direcciones de memoria (address bus) se le podría llamar <strong>A</strong> y a cada hilo del bus <strong>\$A_31\$</strong>,<strong>\$A_30\$</strong>,&#8230;&#8203;,<strong>\$A_1\$</strong>,<strong>\$A_0\$</strong>.</p>
+</li>
+<li>
+<p>Desde el punto de vista lógico un bus es un vector o un array de dimensión "n", por ejemplo n=32.</p>
+</li>
+<li>
+<p>El tipo de datos de los buses <strong>A</strong> y <strong>B</strong> de 32 bits se podrían declarar como:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="naranja">signal A,B :bit_vector(31 downto 0);</span> donde el bit MSB(más a la izquierda) sería el hilo \$A_31\$ y el bit LSB(más a la derecha) el bit \$A_0\$ y lo mismo con el bus B</p>
+</li>
+<li>
+<p><span class="naranja">signal A,B :bit_vector(0 to 31);</span> donde el bit MSB(más a la izquierda) sería el hilo \$A_0\$y el bit LSB(más a la derecha) el bit \$A_31\$ y lo mismo con el bus B</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_circuito_digital_light_bit_vhdl">27.5. Circuito Digital  "light_bit.vhdl"</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción del circuito minimalista <strong>z=x</strong></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">entity of light_bit is
+  port (
+    x   : in bit;
+    z   : out bit
+);
+end entity;
+architecture minima of light_bit is
+begin
+  z &lt;= x;
+end minima;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>El objetivo de este código es ser lo suficientemente simple para no dificultar su comprensión y centrarse en poner a punto la herramienta de desarrollo <strong>Intel Quartus Prime Lite</strong> desde cualquier computadora utilizando los recursos remotos de la UPNA.</p>
+</li>
+<li>
+<p>Descripción del circuito <strong>z = x<sub>0</sub> XOR x<sub>1</sub></strong></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Universidad Pública de Navarra  <i class="conum" data-value="1"></i><b>(1)</b>
+-- Sistemas Digitales
+-- Primavera 2023
+
+library std; <i class="conum" data-value="2"></i><b>(2)</b>
+use std.standard.all;
+
+entity of light_bit is  <i class="conum" data-value="3"></i><b>(3)</b>
+  port (
+    x   : in bit_vector(1 downto 0);
+    z   : out bit
+);
+end entity;
+
+architecture rtl of light_bit is  <i class="conum" data-value="4"></i><b>(4)</b>
+begin
+ s &lt;= NOT x(0); <i class="conum" data-value="5"></i><b>(5)</b>
+ t &lt;= NOT x(1);
+ u &lt;= x(0) AND t;
+ v &lt;= x(1) AND s;
+ z &lt;= u OR v;
+end rtl;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Se ha utilizado para los buses de señales el tipo bit_vector.</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_estructura_del_programa_librería_entidad_arquitectura">27.6. Estructura del Programa: Librería-Entidad-Arquitectura</h3>
 <div class="paragraph">
 <p>El Programa VHDL está estructurado en 4 partes:</p>
 </div>
@@ -3446,7 +3501,7 @@ para poder fabricar el circuito en los dispositivos FPGA del laboratorio remoto,
 </ul>
 </div>
 <div class="paragraph">
-<p>La secciones más importantes son la <strong>entidad</strong> de un circuito y la <strong>arquitectura</strong> de ese circuito. La entidad del circuito define únicamente las señales de entrada y salida del circuito, señales denomidas puertos. La arquitectura del circuito define la relación entre los puertos de entrada y salida del circuito.</p>
+<p>La secciones más importantes son la <strong>entidad</strong> de un circuito y la <strong>arquitectura</strong> de ese circuito. La entidad del circuito define únicamente las señales de entrada y salida del circuito, señales denomidas puertos. La arquitectura del circuito define la relación entre los puertos de entrada y salida del circuito.<br></p>
 </div>
 <div class="colist arabic">
 <table>
@@ -3492,47 +3547,105 @@ para poder fabricar el circuito en los dispositivos FPGA del laboratorio remoto,
 </tr>
 </table>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_señal_digital_binaria">27.5. señal digital binaria</h3>
+<h3 id="_librería_standard_paquete_standard">27.7. Librería standard:  paquete STANDARD</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>El paquete "standard" de la librería "std" incorporado en el propio lenguaje VHDL, define un tipo de señal <strong>bit</strong> que únicamente admite 2 valores lógicos: el "0" y el "1",que se corresponden con los valores lógicos del algebra de Boole. Físicamente una señal electrónica es una magnitud como la tensión o la corriente. El valor lógico abstracto 0 se puede corresponder con un nivel de tensión como los cero voltios y el valor lógico abstracto 1 con el nivel de tensión 5 voltios, es decir, con el par (0v,5v) ó también podría ser con el par (-5v,5v) ó cualquier otro par de niveles. Con la corriente ocurre lo mismo el par abstracto (0,1) se corresponde con cualquier par de niveles (0mA,10mA) ó (-3mA,3mA) ó &#8230;&#8203; etc.</p>
+<p>light_bit.vhdl:</p>
 </li>
-<li>
-<p>En los circuitos electrónicos digitales las señales físicas "idealmente" tienen únicamente un par de valores en tensión o corriente, pero ocurre que una señal puede <strong>distorsionarse</strong> o se le puede sumar una señal de <strong>ruido</strong> externo, por ejemplo en la transmisión a través de una línea de comunicaciones o una pista de un circuito impreso, por lo que sería imposible mantener dos niveles de tensión o corriente. Para que los circuitos digitales sean operativos es necesario asociar a cada valor abstracto "0" ó "1" un rango de valores. Por ejemplo, al "0" un rango entre cero voltios y 100mv y al "1" un rango de valores entre 800mv y 1 voltio, cuyos niveles y umbrales permitidos se representa a continuación.</p>
+</ul>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre>_____________________  5 voltios
+<pre>-- Sistemas Digitales I año 2020
+-- Upna 7 de Febrero 2020
+-- Laboratorio Remoto de la Upna
+-- FICHERO light_bit.vhdl : OBLIGATORIAMENTE debe ser el MISMO nombre que el utilizado en ENTITY.
+-- tutorial: primera práctica en aula
+-- SSDDI 2020 Febrero 7
 
-	1
-_____________________ 0,8 voltios
+-- El tipo de señal "bit" se define en el paquete standard.vhdl
 
-	X
-_____________________ 0,1 voltios
+library std;  -- La librería std no es necesario declararla
+use std.standard.all; -- Si no se declara la librería std, tampoco el paquete standard
 
-	0
-_____________________ 0 voltios</pre>
+-- Entidad
+entity light_bit is
+    port (
+      x   : in bit_vector(1 downto 0);
+      z   : out bit
+    );
+end gate_and;
+
+--ARQUITECTURA
+architecture rtl of light_bit is
+begin
+ s &lt;= NOT x(0);
+ t &lt;= NOT x(1);
+ u &lt;= x(0) AND t;
+ v &lt;= x(1) AND s;
+ z &lt;= u OR v;
+end rtl;</pre>
 </div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>X: Un nivel de tensión entre 100mv y 800mv quedaría indeterminado y no podría asociarse ni al bit "0" ni al bit "1".</p>
+<p>No es necesario declarar el paquete "STANDARD" de la librería "std" porque el COMPILADOR dispone de él internamente.</p>
+</li>
+<li>
+<p>Los paquetes de las librerías son ficheros VHDL, como por ejemplo el fichero "standard.vhdl". A continuación tenemos una descripción parcial del paquete STANDARD en el fichero "standard.vhdl"</p>
+<div class="listingblock">
+<div class="content">
+<pre>-- The sven STANDARD package.
+-- This design unit contains some special tokens, which are only
+-- recognized by the analyzer when it is in special "bootstrap" mode.
+
+package STANDARD is
+
+  -- predefined enumeration types:
+
+  type BIT is ('0', '1');
+
+  -- Unicamente  se pone la definición del tipo de señal BIT para no extender este documento, pero el paquete contiene más definiciones de tipos de señales etc.
+
+end STANDARD;</pre>
+</div>
+</div>
+</li>
+<li>
+<p>La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Questa Intel</p>
+<div class="ulist">
+<ul>
+<li>
+<p>..vhdl_src/std/standard.vhdl</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Modelsim-Altera</p>
+<div class="ulist">
+<ul>
+<li>
+<p>../modelsim_ase/vhdl_src/std/standard.vhdl</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_standard_logic_std_logic_std_logic_1164">27.6. standard logic (std_logic): std_logic_1164</h3>
+<h3 id="_paquete_standard_logic_std_logic_std_logic_1164">27.8. Paquete standard logic (std_logic): std_logic_1164</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>El paquete "standard" de la librería "std" incorporado en el propio lenguaje VHDL, define un tipo de señal <strong>bit</strong> que únicamente admite 2 valores lógicos: el "0" y el "1",que se corresponden con los valores lógicos del algebra de Boole. Para definir señales con más valores lógicos que se correspondan con valores físicos se desarrolló el paquete <strong>std_logic_1164</strong></p>
+<p>El paquete "standard" de la librería "std" incorporado en el propio lenguaje VHDL, define un tipo de señal <strong>bit</strong> que únicamente admite 2 valores lógicos: el "0" y el "1",que se corresponden con los valores lógicos del algebra de Boole. Para definir señales con más valores lógicos que se correspondan con valores físicos reales típicos en los circuitos digitales se desarrolló el paquete <strong>std_logic_1164</strong></p>
 </li>
 <li>
 <p>La librería IEEE desarrollada por la asociación "IEEE Computer Society" ha definido una serie de paquetes standard dentro de los cuales está el paquete std_logic_1164.</p>
@@ -3609,12 +3722,12 @@ Z: alta impedancia : circuito abierto -&gt; desconexión -&gt;
   si pongo el osciloscopio observo que el valor puede ser cualquiera-&gt; se ve ruido
   concepto de driver -&gt; la salida de dos inversores INV-1 e INV-2 conectada a un bus y la entrada de un inversor INV-3 conectada al mismo bus
 
-			  INV-1
+                          INV-1
                         --|&gt;o---|
-				|   INV-3
-				|---|&gt;o--
-			  INV-2	|
-			--|&gt;o---|
+                                |   INV-3
+                                |---|&gt;o--
+                          INV-2 |
+                        --|&gt;o---|
 
    Las salidas de los inversores INV-1 e INV-2 si están en estado Z se desconectan del bus</pre>
 </div>
@@ -3627,7 +3740,7 @@ Z: alta impedancia : circuito abierto -&gt; desconexión -&gt;
 </div>
 </div>
 <div class="sect2">
-<h3 id="_std_logic_vector_downto_to">27.7. std_logic_vector : downto , to</h3>
+<h3 id="_std_logic_vector_downto_to">27.9. std_logic_vector : downto , to</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3671,127 +3784,12 @@ Z: alta impedancia : circuito abierto -&gt; desconexión -&gt;
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_librería_standard_paquetes_standard_textio">27.8. Librería standard:  paquetes STANDARD, TEXTIO</h3>
+<h3 id="_librería_standard_textio">27.10. Librería standard: TEXTIO</h3>
 <div class="ulist">
 <ul>
-<li>
-<p>Ejemplo de circuito que utiliza el tipo de señal BIT del paquete STANDARD que NO SE DECLARA.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>módulo fuente <em>gate_and_bit.vhdl</em> descriptor del hardware en lenguaje VHDL:</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>-- Sistemas Digitales I año 2020
--- Upna 7 de Febrero 2020
--- Laboratorio Remoto de la Upna
--- FICHERO gate_and.vhdl : OBLIGATORIAMENTE debe ser el MISMO nombre que el utilizado en ENTITY.
--- tutorial: primera práctica en aula
--- SSDDI 2020 Febrero 7
-
--- El tipo de señal "bit" se define en el paquete Standard.vhdl
-
-
--- Entidad
-entity gate_and is
-    port (
-        SW: in std_logic_vector(9 downto 0);
-        LEDR: out std_logic_vector(9 downto 0)
-    );
-end gate_and;
-
---ARQUITECTURA
-architecture rtl of gate_and is
-begin
-    LEDR(0) &lt;= SW(0) and SW(1);
-end rtl;</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>No es necesario declarar el paquete "STANDARD" de la librería "std" porque el COMPILADOR dispone de él internamente</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Ejemplo de circuito que utiliza el tipo de señal BIT del paquete STANDARD y se declara explicitamente</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>módulo fuente <em>gate_and_bit.vhdl</em> descriptor del hardware en lenguaje VHDL:</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>-- Sistemas Digitales I año 2020
--- Upna 7 de Febrero 2020
--- Laboratorio Remoto de la Upna
--- FICHERO gate_and.vhdl : OBLIGATORIAMENTE debe ser el MISMO nombre que el utilizado en ENTITY.
--- tutorial: primera práctica en aula
--- SSDDI 2020 Febrero 7
-
--- El tipo de señal "bit" se define en el paquete Standard.vhdl
-
-library std;
-use std.standard.all;
-
--- Entidad
-entity gate_and is
-    port (
-        SW: in std_logic_vector(9 downto 0);
-        LEDR: out std_logic_vector(9 downto 0)
-    );
-end gate_and;
-
---ARQUITECTURA
-architecture rtl of gate_and is
-begin
-    LEDR(0) &lt;= SW(0) and SW(1);
-end rtl;</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>No es necesario declarar el paquete "STANDARD" de la librería "std" porque el COMPILADOR dispone de él internamente, pero se podría declarar en el módulo fuente de la  forma:</p>
-<div class="listingblock">
-<div class="content">
-<pre>library std;
-use std.standard.all;</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Los paquetes de las librerías son ficheros VHDL, como por ejemplo el fichero "standard.vhdl". A continuación tenemos una descripción parcial del paquete STANDARD en el fichero "standard.vhdl"</p>
-<div class="listingblock">
-<div class="content">
-<pre>-- The sven STANDARD package.
--- This design unit contains some special tokens, which are only
--- recognized by the analyzer when it is in special "bootstrap" mode.
-
-package STANDARD is
-
-  -- predefined enumeration types:
-
-  type BIT is ('0', '1');
-
-  -- Unicamente  se pone la definición del tipo de señal BIT para no extender este documento, pero el paquete contiene más definiciones de tipos de señales etc.
-
-end STANDARD;</pre>
-</div>
-</div>
-</li>
 <li>
 <p>Fichero textio.vhdl donde se define el paquete TEXTIO de la librería "std".</p>
 <div class="listingblock">
@@ -3849,12 +3847,19 @@ end architecture;</pre>
 </div>
 </li>
 <li>
-<p>La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Modelsim-Altera</p>
+<p>La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Questa Intel</p>
 <div class="ulist">
 <ul>
 <li>
-<p>../modelsim_ase/vhdl_src/std/standard.vhdl</p>
+<p>..vhdl_src/std/textio.vhdl</p>
 </li>
+</ul>
+</div>
+</li>
+<li>
+<p>La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Modelsim-Altera</p>
+<div class="ulist">
+<ul>
 <li>
 <p>../modelsim_ase/vhdl_src/std/textio.vhdl</p>
 </li>
@@ -3863,7 +3868,6 @@ end architecture;</pre>
 </li>
 </ul>
 </div>
-<div style="page-break-after: always;"></div>
 </div>
 </div>
 </div>
@@ -3874,7 +3878,7 @@ end architecture;</pre>
 <h3 id="_ejemplo_unidad_de_diseño_matricula_vhd">28.1. Ejemplo: Unidad de diseño "matricula.vhd"</h3>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/practicas_altera/DE1/PROY_VHDL/2021/ejercicio_1.5/matricula_RTL.png" alt="Circuito Digital matricula">
+<img src="images/matricula_RTL.png" alt="Circuito Digital matricula">
 </div>
 </div>
 <div class="ulist">
@@ -3916,7 +3920,7 @@ end puertas;</pre>
 </div>
 </li>
 <li>
-<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
+<p>Verificar el buen funcionamiento del circuito con su simulación.</p>
 </li>
 </ul>
 </div>
@@ -4057,10 +4061,9 @@ end rtl_seq;</pre>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Ejemplo_2: matricula.vhd
-<sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub>~</p>
 </div>
+<div class="sect2">
+<h3 id="_ejemplo_2_matricula_vhd">29.3. Ejemplo_2: matricula.vhd</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4195,10 +4198,10 @@ La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia 
 
  Es necesario *registrarse*
  Se puede descargar todo el paquete o ficheros individuales (Quartus Prime Lite y Devices Cyclone V ) :
- Ir a Web Download Center-&gt; elegir la versión 20.1 ó 22.1 -&gt; Lite -&gt; Windows -&gt; Ficheros individuales:
+ Ir a Web Download Center-&gt; elegir la versión 20.1 ó 21.1 ó 22.1 -&gt; Lite -&gt; Windows -&gt; Ficheros individuales:
 
     QuartusLiteSetup-20.1.0.711-windows.exe
-    ModelSimSetup-20.1.0.711-windows.exe
+    QuestaSetup-20.1.0.711-windows.exe
     cyclonev-20.1.0.711.qdz</pre>
 </div>
 </div>
@@ -4213,7 +4216,7 @@ La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia 
 <p>Una vez descargados los <strong>3 ficheros</strong> en el ordenador personal proceder al proceso de instalación:</p>
 <div class="listingblock">
 <div class="content">
-<pre>Tanto QuartusLiteSetup como ModelSimSetup son ficheros ejectutables de instalación: Instalar Quartus y Modelsim ejecutando el Setup.
+<pre>Tanto QuartusLiteSetup como QuestaSetup son ficheros ejectutables de instalación: Instalar Quartus y Questa ejecutando el Setup.
 
 Instalar el software asociado al dispositivo FPGA de la familia Cyclone V después de haber instalado Quartus Lite: El fichero qdz ha de instalarse utilizando la aplicación de instalación "Device Installer" que se encuentra en: Windows 10 -&gt; Programas de Aplicación -&gt; Intel Fpga Quartus -&gt; Device Installer</pre>
 </div>
@@ -4411,7 +4414,7 @@ Desde un PC personal para conectarse al servidor hacer click en la hamburguesa d
 <p>BOARD: DE1 SoC</p>
 </li>
 <li>
-<p>EDA simultion tool: Intel Questa (herramienta externa a Quartus como alternativa para la simulación)</p>
+<p>EDA simulation tool: Intel Questa (herramienta externa a Quartus como alternativa para la simulación)</p>
 </li>
 <li>
 <p>Finish</p>
@@ -4420,11 +4423,11 @@ Desde un PC personal para conectarse al servidor hacer click en la hamburguesa d
 </div>
 </li>
 <li>
-<p>Si queremos realizar algún cambio en el Settings</p>
+<p>Si queremos realizar algún cambio en la Configuración:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Assignments &#8594; Settings</p>
+<p><strong>Assignments</strong> &#8594; <strong>Settings</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -4439,27 +4442,28 @@ Desde un PC personal para conectarse al servidor hacer click en la hamburguesa d
 </ul>
 </div>
 </li>
-<li>
-<p>Botón Start Compilation ó Processing &#8594; <strong>Start Compilation</strong></p>
-</li>
-<li>
-<p>View &#8594; Utility Windows &#8594; Panel Project Navigator</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Navegar entre &#8230;&#8203; Hierarchy - Files - Unit Designs</p>
-</li>
-</ul>
-</div>
-</li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="QConfiguration">A.6. Configurar</h3>
-<div class="paragraph">
-<p>X</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Configurar la herramienta de simulación</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Assigments</strong> &#8594; <strong>Settings</strong> &#8594; <strong>EDA Tool Settings</strong> &#8594; <strong>Simulation</strong>: Questa Intel FPGA</p>
+</li>
+<li>
+<p><strong>Tools</strong> &#8594; <strong>Options</strong> &#8594; General &#8594; <strong>EDA Tool Options</strong> &#8594; EDA Tool: Questa Intel FPGA : carpeta donde se localiza la aplicación Questa</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
@@ -4571,6 +4575,9 @@ El nombre de la entidad ha de ser el MISMO que el nombe del fichero vhd.
 </ul>
 </div>
 </li>
+<li>
+<p>Las plantillas sirven como recordatorio de las sintaxis de las sentencias VHDL y también como ayuda de edición.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -4580,7 +4587,10 @@ El nombre de la entidad ha de ser el MISMO que el nombe del fichero vhd.
 <div class="ulist">
 <ul>
 <li>
-<p>X</p>
+<p><strong>Processing &#8594; Analyzing Current File</strong> ó en la ventana de Edición uno de los botones de la barra de herramientas.</p>
+</li>
+<li>
+<p>Analiza la sintaxis del código VHDL y en caso de encontrar errores proporciona información sobre la línea donde se produce el error y posibles causas.</p>
 </li>
 </ul>
 </div>
@@ -4590,37 +4600,115 @@ El nombre de la entidad ha de ser el MISMO que el nombe del fichero vhd.
 <div class="ulist">
 <ul>
 <li>
-<p>X</p>
+<p><strong>Processing &#8594; Start Compilation</strong></p>
+</li>
+<li>
+<p>La compilación se compone de las fases:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Analysis: analiza la sintaxis del código fuente</p>
+</li>
+<li>
+<p>Synthesis: interpreta el código y obtiene el circuito digital (netlist) como combinación de componentes lógicos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El netlist es utilizado por las herramientas de Simulación.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Fitter:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Place: selecciona qué recursos lógicos del chip FPGA van a ser utilizados</p>
+</li>
+<li>
+<p>Route: selecciona qué pistas del chip FPGA van a interconectar los recursos lógicos seleccionados.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Assembler: vuelca en el fichero de extensión SOF el código binario de la "programación" del chip FPGA.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La compilación puede tardar un par de minutos y durante la operación se puede ver en tiempo real sus distintas fases</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>View</strong> &#8594; <strong>Utility Windows</strong> &#8594; <strong>Tasks</strong></p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="QSimulation">A.10. Simulación</h3>
+<h3 id="_archivos_del_proyecto">A.10. Archivos del Proyecto</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>X</p>
+<p><strong>View</strong> &#8594; <strong>Utility Windows</strong> &#8594; Panel Project Navigator</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Navegar entre &#8230;&#8203; Hierarchy - Files - Unit Designs</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Según se van realizando operaciones con la herramienta Quartus van apareciendo nuevos ficheros como parte del Proyecto.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="QArchive">A.11. Archivar el Proyecto</h3>
+<h3 id="QSimulation">A.11. Simulación</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>X</p>
+<p><strong>Tools &#8594; Run Simulation Tool &#8594; RTL Simulation</strong></p>
+</li>
+<li>
+<p>Lanza el simulador seleccionado en la configuración (<a href="#QConfiguration">Configurar</a>) de Quartus Prime Lite.</p>
+</li>
+<li>
+<p>Permite simular el comportamiento del circuito digital y al especificar las señales binarias de entrada obtiene las señales declaradas en la descripción del circuito.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="QRestore">A.12. Restaurar el Proyecto</h3>
+<h3 id="QArchive">A.12. Archivar el Proyecto</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>X</p>
+<p><strong>Project</strong> &#8594; <strong>Archive Project</strong></p>
+</li>
+<li>
+<p>El proyecto puede ser archivado para guardar el proyecto y poder llevarlo a otras computadoras.para continuar con el diseño.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="QRestore">A.13. Restaurar el Proyecto</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Project</strong> &#8594; <strong>Restore Archived Project</strong></p>
+</li>
+<li>
+<p>El proyecto previamente archivado puede ser restaurado en cualquier computadora que tenga instalado Quartu Prime Lite.</p>
 </li>
 </ul>
 </div>
@@ -4671,7 +4759,7 @@ FPGA: Field Programmable Gate Array: Dispositivo PROGRAMABLE para fabricar el ci
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/web_interface/sakai.png" alt="Miaulario">
+<img src="images/web_interface/sakai.png" alt="Miaulario">
 </div>
 </div>
 </div>
@@ -4681,8 +4769,8 @@ FPGA: Field Programmable Gate Array: Dispositivo PROGRAMABLE para fabricar el ci
 <p>El objetivo del Laboratorio Remoto de FPGAs es  motivar a l@s alumn@s de Circuitos Digiales al aprendizaje mediante la práctica desde cualquier lugar y en cualquier momento: Learn by Doing</p>
 </div>
 <div class="paragraph">
-<p><span class="image"><img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/tutorial_upna/images/brain.png" alt="brain" height="100%"></span>
-<span class="image"><img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/tutorial_upna/images/fpga_icon.png" alt="fpga icon"></span></p>
+<p><span class="image"><img src="images/brain.png" alt="brain" height="100%"></span>
+<span class="image"><img src="images/fpga_icon.png" alt="fpga icon"></span></p>
 </div>
 </div>
 <div class="sect2">
@@ -4771,7 +4859,7 @@ FPGA: Field Programmable Gate Array: Dispositivo PROGRAMABLE para fabricar el ci
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/web_interface/web_labsland_ide_2022.png" alt="VHDL IDE">
+<img src="images/web_labsland_ide_2022.png" alt="VHDL IDE">
 </div>
 </div>
 </div>
@@ -4872,17 +4960,17 @@ El Laboratorio Remoto se encuentra en fase de verificación. Si durante la progr
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/web_interface/ide_consola1.png" alt="Consola parte superior">
+<img src="images/ide_consola1.png" alt="Consola parte superior">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/web_interface/ide_consola2.png" alt="Consola parte inferior">
+<img src="images/ide_consola2.png" alt="Consola parte inferior">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/web_interface/ide_consola3.png" alt="Sintesis finalizada sin errores">
+<img src="images/ide_consola3.png" alt="Sintesis finalizada sin errores">
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -4895,7 +4983,7 @@ El Laboratorio Remoto se encuentra en fase de verificación. Si durante la progr
 <p>En esta fase se va a proceder a fabricar el circuito digital, diseñado con el IDE, programando la FPGA con el fichero bitstream para lo cual pulsamos el <strong>botón ENVIAR AL DISPOSITIVO</strong> del IDE para abrirse una nueva ventana:</p>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/web_interface/upload_device.png" alt="Transferir el Diseño al Servidor de Tarjetas">
+<img src="images/upload_device.png" alt="Transferir el Diseño al Servidor de Tarjetas">
 </div>
 </div>
 </li>
@@ -4903,7 +4991,7 @@ El Laboratorio Remoto se encuentra en fase de verificación. Si durante la progr
 <p>Pulsar el <strong>Botón Upload Now</strong> para transferir Diseño al Servidor de Tarjetas FPGA y abrirse una nueva ventana:</p>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/web_interface/unifesp_1.png" alt="Tarjeta con la FPGA">
+<img src="/unifesp_1.png" alt="Tarjeta con la FPGA">
 </div>
 </div>
 </li>
@@ -4927,12 +5015,86 @@ El Laboratorio Remoto se encuentra en fase de verificación. Si durante la progr
 <p>Pulsar los switches y/o botones virtuales para verificar el funcionamiento del circuito digital fabricado.</p>
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_weblabupna/conferencia_REV20/presentation/images/web_interface/unifesp_4.png" alt="Swithes y Botones Virtuales">
+<img src="images/unifesp_4.png" alt="Swithes y Botones Virtuales">
 </div>
 </div>
 </li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_circuito_digital_gate_and_vhdl">C.9. Circuito Digital  "gate_and.vhdl"</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/rtl_scheme.png" alt="Circuito Digital gate_and">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>La primera fase del diseño es la de EDICIÓN del circuito.</p>
+</li>
+<li>
+<p>módulo fuente <em>gate_and.vhdl</em> descriptor del hardware en lenguaje VHDL:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>-- Sistemas Digitales I año 2020			<i class="conum" data-value="1"></i><b>(1)</b>
+-- Upna 7 de Febrero 2020
+-- Laboratorio Remoto de la Upna
+-- FICHERO gate_and.vhdl : OBLIGATORIAMENTE debe ser el MISMO nombre que el utilizado en ENTITY.
+-- tutorial: primera práctica en aula
+-- SSDDI 2020 Febrero 7
+
+-- Librerías donde se definen los tipos de señales std_logic
+library ieee;				 		<i class="conum" data-value="2"></i><b>(2)</b>
+use ieee.std_logic_1164.all;
+
+-- Entidad						<i class="conum" data-value="3"></i><b>(3)</b>
+entity gate_and is
+    port (
+        SW: in std_logic_vector(9 downto 0);
+        LEDR: out std_logic_vector(9 downto 0)
+    );
+end gate_and;
+
+--ARQUITECTURA						<i class="conum" data-value="4"></i><b>(4)</b>
+architecture rtl of gate_and is
+begin
+    LEDR(0) &lt;= SW(0) and SW(1);                         <i class="conum" data-value="5"></i><b>(5)</b>
+end rtl;</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Los nombre de los puertos han de ser obligatoriamente los utilizados por el laboratorio remoto (Ver <a href="#IdenPuerto">Apéndice</a> )</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+para poder fabricar el circuito en los dispositivos FPGA del laboratorio remoto, los nombre de los puertos han de ser obligatoriamente los utilizados por el laboratorio remoto (Ver apéndice)
+</td>
+</tr>
+</table>
+</div>
+<div style="page-break-after: always;"></div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -4972,7 +5134,7 @@ HEX5: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 5.</pre>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="/home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/vhdl/documentacion/refcard/VHDL_Cheat_Sheet.png" alt="Hoja de Referencia Rapida">
+<img src="images/VHDL_Cheat_Sheet.png" alt="Hoja de Referencia Rapida">
 </div>
 </div>
 <div class="paragraph">
@@ -5507,7 +5669,7 @@ end mux4t1_2;</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-16 17:11:22 +0100
+Last updated 2023-02-17 19:09:42 +0100
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

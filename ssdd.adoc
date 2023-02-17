@@ -1917,7 +1917,7 @@ end entity;
 architecture minima of light_bit is
 begin
   z <= x;
-end rtl;
+end minima;
 ----
 * El objetivo de este código es ser lo suficientemente simple para no dificultar su comprensión y centrarse en poner a punto la herramienta de desarrollo *Intel Quartus Prime Lite* desde cualquier computadora utilizando los recursos remotos de la UPNA.
 
