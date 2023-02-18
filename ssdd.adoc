@@ -9,6 +9,7 @@
 // see http://discuss.asciidoctor.org/Highlighting-source-code-for-reveal-js-backend-td2750.html
 :source-highlighter: highlight.js
 :highlightjs-languages: vhdl
+:source-language: vhdl 
 //:source-highlighter: rouge
 //:source-highlighter: pygments
 // revealjs attributes
@@ -49,12 +50,12 @@
 == Indice
 
 [%hardbreaks]
-Tema 1: Introducción a los Sistemas Digitales Electrónicos <<Tema1_Intro>>.
-Tema 2: Representación Digital de la Información <<Tema2_RepInf>>.
-Tema 3: Algebra de Boole. Puertas Lógicas.<<Tema3_BoolePuertas>>
-Tema 4: Lenguaje de Descripción Hardware VHDL.
-Tema 5: Circuitos Aritméticos.
-Tema 6: Otros Circuitos Combinacionales.
+Tema 1: <<Tema1_Intro, Introducción a los Sistemas Digitales Electrónicos.>>
+Tema 2: <<Tema2_RepInf, Representación Digital de la Información.>>
+Tema 3: <<Tema3_BoolePuertas, Algebra de Boole. Puertas Lógicas.>>
+Tema 4: <<Tema4_VHDL, Lenguaje de Descripción Hardware VHDL.>>
+Tema 5: <<Tema5_CircAri, Circuitos Aritméticos.>>
+Tema 6: <<Tema6_OtrosCirc, Otros Circuitos Combinacionales.>>
 
 
 [#Tema1_Intro]
@@ -118,11 +119,11 @@ Tema 6: Otros Circuitos Combinacionales.
 |===
 Lunes,Miércoles
 
-30-Presentación.-Repre_info: bases,1-Repre_Info:Enteros.C2:Expansion Signo
-6-C2:overflow.Boole:Morgan,8-Boole:Morgan.DK:examples
-13,15
-20,22
-27,
+30-Presentación..Repre_info:Numeros bases, 1-Repre_Info:Enteros..C2:Expansion Signo
+6-C2:Overflow..Tema3:Morgan,8-Tema3:Morgan..DK:examples
+13-BCD..Tema3:Repaso y Ejercicios,15-Tema4_VHDL:Intro..Archit y Tema3:Dudas y Ejercicios
+20-Tema5_Aritmética:Intro..Tema5:Sumador/Restador y Tema4:Paquetes;STD y Standard_Logic
+27-Tema5:Semirestador..ALU y Tema4:Process(),
 |===
 
 [.state=topleft]
@@ -131,12 +132,10 @@ Lunes,Miércoles
 
 [%header, format=csv]
 |===
-Lunes,Miércoles
-,1
-6,8
-13,15
-20,22
-27,29
+Lunes,Lunes
+
+6,13
+20,27
 |===
 
 === Sistemas Digitales
@@ -1254,6 +1253,7 @@ Z= *1* si "X" *o* "Y"  valen *1* -> z=(x+y)
 [.column.is-two-third]
 Z= *0* si "X" *o* "Y"  valen *0* -> (z=x &#8729; y) +
 Z= *1* si "X" *e* "Y"  valen *1* -> (z=x &#8729; y)
+
 [.columns, state=taula_ta]
 === Forma Canónica SOP: Suma de Minitérminos
 
@@ -1576,7 +1576,7 @@ image::tema3_BCD.png[]
 |1111| X
 |===
 
-
+[#Tema4_VHDL]
 == Tema 4: Lenguaje de Descripción Hardware VHDL
 
 === Very high speed integrated circuits Hardware Description Language (VHDL)
@@ -1592,8 +1592,9 @@ image::tema3_BCD.png[]
 [.column]
 [source,vhdl]
 --
--- Sistemas Digitales : Descripción VHDL Curso Primavera 2023
--- Circuito light_bit.vhd: Puerta lógica XOR extendida
+-- Descripción VHDL Primavera 2023
+-- Circuito light_bit.vhd:
+-- Puerta lógica XOR extendida
 entity of light_bit is
   port (
     x,y : in bit;
@@ -1649,6 +1650,7 @@ image::light_bit.bmp[]
 ** [naranja]#signal A,B :bit_vector(31 downto 0);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_31] y el bit LSB(más a la derecha) el bit asciimath:[A_0] y lo mismo con el bus B
 ** [naranja]#signal A,B :bit_vector(0 to 31);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_0]y el bit LSB(más a la derecha) el bit asciimath:[A_31] y lo mismo con el bus B
 
+
 [.columns]
 === Sentencias VHDL : Asignación Concurrente
 
@@ -1659,7 +1661,7 @@ image::light_bit.bmp[]
 * El valor resultante de *evaluar* la expresión a la derecha del símbolo [naranja]#<=# se asigna a la señal a la izquierda del símbolo [naranja]#<=#
 --
 
-[.column]
+[.column.is-one-fifth]
 --
 [source,vhdl]
 
@@ -1670,6 +1672,8 @@ v <= y and s;
 z <= u or v;
 --
 
+
+
 [.columns, state=txikiago]
 === Sentencias Concurrentes
 
@@ -1678,7 +1682,8 @@ z <= u or v;
 Concepto de concurrencia: ¿ CUANDO se ejecuta una sentencia concurrente? cuando hay un *evento* en una de las *señales sensibles* de la sentencia. En el caso de la sentencia CAS la señales sensibles son las señales a la derecha del símbolo [naranja]#<=#. +
 Ejemplo: +
 
-[source,vhdl,numbers]
+
+[source,vhdl,%linenums]
 
 s <= not x;
 t <= not y;
@@ -1705,9 +1710,10 @@ y en la línea 3 del código +
 
 [.column]
 Las sentencias concurrentes NO se ejecutan secuencialmente, sino *simultáneamente*, de la misma forma que en el circuito *"light_bit.vhd"* la puerta lógica OR procesa sus dos entradas al mismo tiempo que las puertas NOT y AND del mismo circuito. +
+ +
 En los 4 ejemplos siguientes la actualización de los valores de todas las señales, ante el evento de una de ellas, da el MISMO resultado, ya que la ejecución no es secuencial, sino que se ejecutan UNICAMENTE las sentencias concurrentes cuyas señales sensibles varían; y las sentencias que se ejecutan lo hacen SIMULTANEAMENTE.
 
-[.column]
+[.column.is-one-fifth]
 --
 [source,vhdl]
 
@@ -1726,7 +1732,7 @@ t <= not y;
 s <= not x;
 --
 
-[.column]
+[.column.is-one-fifth]
 --
 [source,vhdl]
 
@@ -1762,7 +1768,7 @@ Las señales tipo [naranja]#PORT# pueden ser de entrada ([naranja]#IN#) ó salid
 Además del *modo* de la señal (IN-OUT-BUFFER) es necesario declarar el tipo de los datos ([naranja]#BIT#)
 --
 
-[.column.is-vcentered]
+[.column.is-vcentered.iturri]
 --
 image::tema4_entity_light.png[] 
 
@@ -1906,7 +1912,7 @@ end rtl;
 Descripción del circuito minimalista *z=x* +
 
 
-[source,vhdl]
+[#mini]
 ----
 entity of light_bit is
   port (
@@ -1930,8 +1936,185 @@ end minima;
 * La única forma de aprender un lenguaje de descripción de HW o de programación es practicando.
 * La Upna brinda la posibilidad de utilizar los recursos EDA de diseño automático de circuitos integrados de forma remota, bien desde dentro del Campus Universitario o desde fuera de él, sin la necesidad de realiza ningún tipo de instalación en el portátil personal ni de acceder a ningún laboratorio.
 
+[#Tema5_CircArit]
 == Tema 5: Circuitos Aritméticos
+
+=== Índice
+
+* link:PDF/04_circuitos_aritmeticos.pdf[Tema4 Circuitos Aritméticos]: PDF
+* Operaciones Aritméticas: Suma, Resta, Complemento C1-C2, Multiplicación
+* Circuitos sumadores
+* Circuitos restadores
+* Ciruitos sumador/restador
+* Circuito Multiplicador
+* Unidad Aritmetico-Lógica (ALU) 
+
+=== Operaciones Aritméticas
+
+* Suma y Resta : binario, hexadecimal y números enteros C1-C2
+* Multiplicación
++
+
+----
+
+
+                         1 0 1 1 0 1   -> 45
+                       x 1 0 1 1 0 1   -> 45
+                        ------------
+                         1 0 1 1 0 1
+                       0 0 0 0 0 0
+                     1 0 1 1 0 1
+                   1 0 1 1 0 1
+                 0 0 0 0 0 0
+               1 0 1 1 0 1 
+                                          
+Llevadas       - 1 1 1 2 1 1 1 - - 
+               ----------------------
+               1 1 1 1 1 1 0 1 0 0 1     -> 2025                 
+                                  
+
+----
+
+=== Semisumador
+
+
+* Función: Suma de dos bits -> resultado suma y carry (llevada,acarreo) 
+* Suma aritmética -> latexmath:[Suma=A_i+B_i]
+* Resultado: 2 funciones : latexmath:[S_i] y el acarreo de la posición i a la posición i+1-> latexmath:[C_i] 
+* Diseño: dibujar diagrama de bloques del circuito
+** Dos funciones y dos variables ->  TV, DK -> expresión lógica positiva
+* latexmath:[S_i=\overline A_i\cdot B_i+A_i\cdot \overline B_i = A_i \oplus B_i] 
+* latexmath:[C_i=A_i\cdot B_i]
+
+
+=== Sumador Completo
+
+* Función: Suma de dos bits y acarreo anterior -> resultado suma y acarreo posterior
+* Suma aritmética -> latexmath:[S_i=A_i+B_i+C_{i-1}]
+* Resultado: 2 funciones : latexmath:[S_i] y el acarreo -> latexmath:[C_i]
+* Diseño: dibujar diagrama de bloques del circuito 
+** Dos funciones y tres variables ->  TV, DK -> expresión lógica positiva
+* latexmath:[S_i=\overline A_i\cdot \overline B_i\cdot C_{i-1} + \overline A_i\cdot B_i\cdot \overline C_{i-1} + A_i\cdot B_i\cdot C_{i-1} +  A_i\cdot \overline B_i\cdot \overline C_{i-1}= \\ 
+\overline A_i\cdot (\overline B_i\cdot C_{i-1} + B_i\cdot \overline C_{i-1}) + A_i\cdot ( B_i\cdot C_{i-1} + \overline B_i\cdot \overline C_{i-1}) = \\
+\overline A_i\cdot (B_i \oplus C_{i-1} ) + A_i\cdot \overline {(B_i \oplus C_{i-1} )} = A_i \oplus B_i \oplus C_{i-1}] 
+* latexmath:[C_i=A_i\cdot B_i + A_i\cdot C_{i-1}+ B_i\cdot C_{i-1}]
+
+[.columns, state="txikiago"]
+=== Sumador Completo usando semisumadores
+
+[.column]
+--
+Particionamiento: utilizar señales intermedias -> A_i+B_i puede ser sustituido por un Half Adder +
+Razonar la suma de 3 bits con sumas parciales de 2 bits+
+
+-----
+         1            1
+         1          + 1
+       + 1     ->   ---
+         ---     C_aS_a
+                    + 1
+                 C_b
+                    ---
+                 C_tS_t 
+-----
+  
+latexmath:[S_a= ¿xor? ; S_t = ¿xor? ; C_a = ¿and? ; C_b= ¿and?] +
+¿Puede latexmath:[C_a=C_b=1]? -> tabla de la verdad latexmath:[C_a,C_b,C_t] +
+¿indefiniciones?
+ 
+--
+
+[.column]
+--
+latexmath:[Suma=(A_1+B_1)+C_0=(S_a,C_a)+C_0=\\
+ C_1, (S_a+C_0) = C_1, (S_b,C_b)=(S_T,C_T)]
+
+HA_a -> (S_a,C_a) +
+
+HA_b -> (S_b,C_b)
+
+latexmath:[S_T=S_b] +
+latexmath:[C_T=C_a\ \ OR\ \ C_b]
+
+--
+
+[columns, state=taula]
+=== Sumador Completo usando semisumadores
+
+[.column]
+Tabla de la verdad con 3 variables y 6 funciones +
+latexmath:[A_1, B_1, C_0, S_a, C_a, S_b, C_b, C_T, S_T] +
+*¿ Es necesario ?*
+
+
+[.column]
+--
+
+.Full Adder
+[width=10%,cols="9*^1"]
+|===
+|A1|B1|C0|Sa|Ca|Sb|Cb|CT|ST
+| 0| 0| 0| 0| 0| 0| 0| 0| 0 
+| 0| 0| 1| .| .| .| .| .| . 
+| 0| 1| 0| .| .| .| .| .| .
+| 0| 1| 1| .| .| .| .| .| .
+| 1| 0| 0| .| .| .| .| .| .
+| 1| 0| 1| .| .| .| .| .| .
+| 1| 1| 0| .| .| .| .| .| .
+| 1| 1| 1| .| .| .| .| .| .
+|===
+
+--
+=== Sumador Paralelo Acarreo Serie
+
+=== Sumador Paralelo Acarreo Paralelo
+
+* Carry Look Ahead
+* Full Adder: Tabla de la verdad :
+** segmentar la tabla de la verdad:
+*** fijarse en la relación entre los dos acarreos , el anterior y el posterior, cada dos filas.
+*** 3 casos: no hay, se propaga, se genera 
+* Particionamiento: Variables ó Funciones Intermedias -> generación y propagación
+** 2 variables intermedias para codificar 3 casos ... y podría codificar hasta 4 casos si lo hubiera.
+* Diseñar el circuito
+** Más rápido pero más complejo
+
+=== Sumador Serie
+
+* sumadores en paralelo : los vistos hasta ahora
+* sumador serie:
+** necesita de 3 registros de desplazamiento para memorizar los operandos y la suma. Cuando el reloj genera un disparo positivo, el contenido de las celdas del registro se desplazan una posición hacia la derecha
+** necesita de una celda de memoria para recordar el acarreo previo
+** puerta de bloqueo: mientras el reloj está a cero los sumandos valen cero
+
+
+=== Sumador/Restador de 4 bits
+
+* Operandos: números con signo en formato C1 ó C2
+* Diagrama de bloques del circuito:
+** Señal de control para sumar o restar -> la resta equivale a sumar cambiando de signo al sustraendo
+** bloque complementador para generar el complemento a 1
+** bloque sumador para generar el complemento a 2
+** bloque sumador completo de 4 bits
+
+=== Semirestador
+
+
+=== Semirestador Completo
+
+
+=== Acumulador
+
+
+=== Multiplicador
+
+
+=== Unidad Aritmético Lógica (ALU)
+
+[#Tema6_OtrosCirc]
 == Tema 6: Otros Circuitos Combinacionales
+
+
 
 
 
