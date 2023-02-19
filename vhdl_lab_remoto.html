@@ -371,7 +371,7 @@
 <p>Repositorio de Intel:</p>
 <div class="listingblock">
 <div class="content">
-<pre> Google Search: Intel Download Center for FPGAs Quartus Prime
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl"> Google Search: Intel Download Center for FPGAs Quartus Prime
  https://www.intel.com/content/www/us/en/programmable/downloads/download-center.html -&gt; Intel® Quartus® Prime Lite Edition Design Software Version 22.1 for Windows
 
  Es necesario *registrarse*
@@ -380,7 +380,7 @@
 
     QuartusLiteSetup-20.1.0.711-windows.exe
     QuestaSetup-20.1.0.711-windows.exe
-    cyclonev-20.1.0.711.qdz</pre>
+    cyclonev-20.1.0.711.qdz</code></pre>
 </div>
 </div>
 </li>
@@ -394,9 +394,9 @@
 <p>Una vez descargados los <strong>3 ficheros</strong> en el ordenador personal proceder al proceso de instalación:</p>
 <div class="listingblock">
 <div class="content">
-<pre>Tanto QuartusLiteSetup como QuestaSetup son ficheros ejectutables de instalación: Instalar Quartus y Questa ejecutando el Setup.
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">Tanto QuartusLiteSetup como QuestaSetup son ficheros ejectutables de instalación: Instalar Quartus y Questa ejecutando el Setup.
 
-Instalar el software asociado al dispositivo FPGA de la familia Cyclone V después de haber instalado Quartus Lite: El fichero qdz ha de instalarse utilizando la aplicación de instalación "Device Installer" que se encuentra en: Windows 10 -&gt; Programas de Aplicación -&gt; Intel Fpga Quartus -&gt; Device Installer</pre>
+Instalar el software asociado al dispositivo FPGA de la familia Cyclone V después de haber instalado Quartus Lite: El fichero qdz ha de instalarse utilizando la aplicación de instalación "Device Installer" que se encuentra en: Windows 10 -&gt; Programas de Aplicación -&gt; Intel Fpga Quartus -&gt; Device Installer</code></pre>
 </div>
 </div>
 </li>
@@ -1472,7 +1472,7 @@ end rtl;</code></pre>
 <p>Los paquetes de las librerías son ficheros VHDL, como por ejemplo el fichero "standard.vhdl". A continuación tenemos una descripción parcial del paquete STANDARD en el fichero "standard.vhdl"</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- The sven STANDARD package.
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- The sven STANDARD package.
 -- This design unit contains some special tokens, which are only
 -- recognized by the analyzer when it is in special "bootstrap" mode.
 
@@ -1484,7 +1484,7 @@ package STANDARD is
 
   -- Unicamente  se pone la definición del tipo de señal BIT para no extender este documento, pero el paquete contiene más definiciones de tipos de señales etc.
 
-end STANDARD;</pre>
+end STANDARD;</code></pre>
 </div>
 </div>
 </li>
@@ -1748,7 +1748,7 @@ end rtl;</code></pre>
 <p>Las señales del tipo <strong>std_logic</strong> pueden tener no solo los valores binarios <em>0</em> y <em>1</em> como son las de tipo <strong>bit</strong> sino hasta 9 valores diferentes, con el objetivo de emular los valores de las señales electrónicas reales. Los valores posibles de una señal std_logic son:</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- valores lógicos de las señales std_logic para emular valores físicos reales:
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- valores lógicos de las señales std_logic para emular valores físicos reales:
 --    '0': logic 0
 --    '1': logic 1
 --    '-': Don't care.
@@ -1757,7 +1757,7 @@ end rtl;</code></pre>
 --    'Z': High Impedance
 --    'W': Weak signal, can't tell if it should be 0 or 1.
 --    'L': Weak signal that should probably go to 0
---    'H': Weak signal that should probably go to 1</pre>
+--    'H': Weak signal that should probably go to 1</code></pre>
 </div>
 </div>
 </li>
@@ -1819,7 +1819,7 @@ _____________________</pre>
 <p>3 Valores son indefinidos, "unmesurable".</p>
 <div class="listingblock">
 <div class="content">
-<pre>- : don't care  -&gt; puede tomar cualquiera de los valores definidos "mesurables" y no afecta al funcionamiento del circuito.
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">- : don't care  -&gt; puede tomar cualquiera de los valores definidos "mesurables" y no afecta al funcionamiento del circuito.
 U : indefinido  -&gt; representa el estado de un circuito secuencial al encenderse y sin estado de reset de reset. Puede ser cualquiera de los 6 valores definidos pero al no tener estado inicial, no puede determinarse su estado.
 Z: alta impedancia : circuito abierto -&gt; desconexión -&gt;
   si pongo el osciloscopio observo que el valor puede ser cualquiera-&gt; se ve ruido
@@ -1832,7 +1832,7 @@ Z: alta impedancia : circuito abierto -&gt; desconexión -&gt;
                           INV-2 |
                         --|&gt;o---|
 
-   Las salidas de los inversores INV-1 e INV-2 si están en estado Z se desconectan del bus</pre>
+   Las salidas de los inversores INV-1 e INV-2 si están en estado Z se desconectan del bus</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -1890,6 +1890,17 @@ Z: alta impedancia : circuito abierto -&gt; desconexión -&gt;
 </div>
 </li>
 </ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library ieee;
+use ieee.std_logic_1164.all;
+
+ENTITY light_de1soc IS
+PORT(SW : IN std_logic_vector (1 downto 0) ;
+     LEDR : OUT std_logic_vector (0 downto 0));
+END light_de1soc ;</code></pre>
+</div>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -2023,13 +2034,13 @@ hello_world.vhd no produce ningún circuito lógicamente, no se sintetiza. Pero 
 <p>File &#8594; Open &#8594; ssdd/light_de1soc/light_de1soc.vhd</p>
 <div class="listingblock">
 <div class="content">
-<pre>Cambiar los nombres de los puertos para que sean los mismos que los del Kit DE1-SoC
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">Cambiar los nombres de los puertos para que sean los mismos que los del Kit DE1-SoC
  puertos de entrada: bus de 2 switches con nombre SW
  puerto  de salida: bus de leds rojos con nombre LEDR
  puertos de entrada: señal tipo "std_logic_vector (1 download 0)" y el de salida tipo "std_logic_vector (0 download 0)"
  entradas: señales con nombres lógicos  SW(0) y SW(1) asociadas al cableado físico que conecta los switches 0 y 1 del Kit DE1-SoC a la entrada de la FPGA.
  salidas: señal con el nombre lógico LEDR(0) asociado al cableado físico que conecta el led rojo del Kit DE1-SoC a una salida de la FPGA
- arquitectura: relacionar lógicamente la señal digital de salida LEDR(0) con la señales digitales de entrada SW(0), SW(1)</pre>
+ arquitectura: relacionar lógicamente la señal digital de salida LEDR(0) con la señales digitales de entrada SW(0), SW(1)</code></pre>
 </div>
 </div>
 </li>
@@ -2150,12 +2161,12 @@ END LogicFunction ;</code></pre>
 <p>crear el fichero con el código fuente light_de1soc.vhd</p>
 <div class="listingblock">
 <div class="content">
-<pre>Eliminar todos los archivos del panel de archivos
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">Eliminar todos los archivos del panel de archivos
 Crear el archivo vhd nuevo con el nombre light_de1soc
 
 Editar o copiar el código fuente VHDL en área de edición.
 
-En el panel de archivos seleccionar el fichero de diseño TOP de la jerarquía de ficheros: light_de1soc.vhd</pre>
+En el panel de archivos seleccionar el fichero de diseño TOP de la jerarquía de ficheros: light_de1soc.vhd</code></pre>
 </div>
 </div>
 </li>
@@ -3890,13 +3901,13 @@ end RTL;</code></pre>
 <p>El objetivo es describir en vhdl una tabla de la verdad con variables cuyo valor es "NO IMPORTA" tanto a la entrada como a la salida.</p>
 <div class="listingblock">
 <div class="content">
-<pre>I(3) I(2) I(1) I(0) | B(1) B(0)
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">I(3) I(2) I(1) I(0) | B(1) B(0)
 
  1     X     X    X |    1    1
  0     1     X    X |    1    0
  0     0     1    X |    0    1
  0     0     0    1 |    0    0
- resto casos        |    X    X</pre>
+ resto casos        |    X    X</code></pre>
 </div>
 </div>
 </li>
@@ -4058,8 +4069,8 @@ end architecture;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre> Flip Flop con las señales de entrada/salida: d,clk,set,preset,q
- Conexión entre el Flip Flop y los puertos de la entidad: clk al botón KEY(0), resto de entradas con SW y salida q al LEDR(0)</pre>
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl"> Flip Flop con las señales de entrada/salida: d,clk,set,preset,q
+ Conexión entre el Flip Flop y los puertos de la entidad: clk al botón KEY(0), resto de entradas con SW y salida q al LEDR(0)</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -4068,11 +4079,11 @@ end architecture;</code></pre>
 <p>Arquitectura mediante la sentencia IF</p>
 <div class="listingblock">
 <div class="content">
-<pre>process (cp,clk)
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">process (cp,clk)
   if
    {cuerpo}
   end if;
-end process;</pre>
+end process;</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -4521,10 +4532,10 @@ begin
 <p><a href="https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&amp;No=836">Kit de Terasic : DE1-SoC</a></p>
 <div class="listingblock">
 <div class="content">
-<pre>La pastilla o circuito integrado programable del Kit es una SoC: System On Chip
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">La pastilla o circuito integrado programable del Kit es una SoC: System On Chip
 SoC: integra 2 componentes: un procesador ARM Cortex-A9 más una FPGA Cyclone V (5CSEMA5F31C6)
 Al procesador ARM,  Intel le llama "Hard Processor System"
-FPGA: Field Programmable Gate Array: Dispositivo PROGRAMABLE para fabricar el circuito digital diseñado. El Circuito queda integrado en el Silicio de la FPGA -&gt; ADIOS A LAS SOLDADURAS DE CIRCUITOS INTEGRADOS EN UNA PLACA BASE !!!!</pre>
+FPGA: Field Programmable Gate Array: Dispositivo PROGRAMABLE para fabricar el circuito digital diseñado. El Circuito queda integrado en el Silicio de la FPGA -&gt; ADIOS A LAS SOLDADURAS DE CIRCUITOS INTEGRADOS EN UNA PLACA BASE !!!!</code></pre>
 </div>
 </div>
 </li>
@@ -4595,9 +4606,9 @@ FPGA: Field Programmable Gate Array: Dispositivo PROGRAMABLE para fabricar el ci
 <p>Seleccionar el fichero top dentro de la jerarquía de ficheros que componen el diseño.</p>
 <div class="listingblock">
 <div class="content">
-<pre>* Pulsar el *botón PAPELERA* si se desea  eliminar diseños previos
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">* Pulsar el *botón PAPELERA* si se desea  eliminar diseños previos
 * Pulsar el *botón SUBIR* si se desea  insertar un diseño ya existente y  almacenado previamente en nuestra computadora personal.
-* Pulsar el *botón NUEVO* si se desea generar un nuevo fichero VHDL.</pre>
+* Pulsar el *botón NUEVO* si se desea generar un nuevo fichero VHDL.</code></pre>
 </div>
 </div>
 </li>
@@ -4836,7 +4847,7 @@ El Laboratorio Remoto se encuentra en fase de verificación. Si durante la progr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>-- Sistemas Digitales I año 2020			<i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Sistemas Digitales I año 2020			<i class="conum" data-value="1"></i><b>(1)</b>
 -- Upna 7 de Febrero 2020
 -- Laboratorio Remoto de la Upna
 -- FICHERO gate_and.vhdl : OBLIGATORIAMENTE debe ser el MISMO nombre que el utilizado en ENTITY.
@@ -4859,7 +4870,7 @@ end gate_and;
 architecture rtl of gate_and is
 begin
     LEDR(0) &lt;= SW(0) and SW(1);                         <i class="conum" data-value="5"></i><b>(5)</b>
-end rtl;</pre>
+end rtl;</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -5451,11 +5462,11 @@ end mux4t1_2;</code></pre>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre>* IDE: Integrated Development Environment
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">* IDE: Integrated Development Environment
 * EDA: Electronic Design Automation
 * HDL: Hadware Description Language
 * VHDL: Very High Speed Integraged Circuits Hadware Description Language
-* FPGA: Field Programmable Gate Array</pre>
+* FPGA: Field Programmable Gate Array</code></pre>
 </div>
 </div>
 </div>
@@ -5463,7 +5474,7 @@ end mux4t1_2;</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-19 10:44:54 +0100
+Last updated 2023-02-19 19:35:18 +0100
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

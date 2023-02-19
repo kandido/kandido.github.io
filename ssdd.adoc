@@ -1936,6 +1936,91 @@ end minima;
 * La única forma de aprender un lenguaje de descripción de HW o de programación es practicando.
 * La Upna brinda la posibilidad de utilizar los recursos EDA de diseño automático de circuitos integrados de forma remota, bien desde dentro del Campus Universitario o desde fuera de él, sin la necesidad de realiza ningún tipo de instalación en el portátil personal ni de acceder a ningún laboratorio.
 
+[state="txikiago"]
+=== Ejercicios Prácticos de Diseño de Circuitos
+
+. light_bit: inicio 
+. light_de1soc: señales [naranja]#std_logic# y fabricación del diseño
+. light_signal: ver el esquema del circuito sintetizado
+. light_de1soc: simulación Questa
+. light_csa: sentencia concurrente, Tabla de la Verdad
+. light_process: sentencias secuenciales
+. light_if: sentencia secuencial
+. light_with: sentencia concurrente
+. light_case: sentencia secuencial
+. light_sum: librería [naranja]#ieee# paquete [naranja]#numeric_std#
+
+
+=== Librerías y Paquetes
+
+* Librerías: contienen paquetes que definen tipos de señales, tipos de datos, operadores, etc
+* Librería std
+** Paquete standard -> definición del tipo [naranja]#BIT#, [naranja]#BIT_VECTOR#, etc
+** Paquete textio
+** no es necesario declararla
+** declaración
++
+
+----
+library std;  
+use std.standard.all; 
+
+----
+** El paquete está descrito en el propio lenguaje VHDL ->  C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/std/standard.vhdl
+
+
+=== Señales std_logic
+
+.Señales binarias distorsionadas
+image::tema4_signal_stdlogic.png[]
+
+* 8 Umbrales para definir el valor de la señal binaria
+* 6 tipos medibles: 1,H,W,X,L,0
+
+[.columns]
+=== Señales std_logic
+[.column]
+--
+
+.Valores Medibles
+image::tema4_umbral_stdlogic.png[]
+
+8 umbrales
+
+--
+
+[.column]
+Valores No medibles: +
+*-* : don't care  -> puede tomar cualquiera de los valores definidos "mesurables" y no afecta al funcionamiento del circuito. +
+*U* : indefinido  -> representa el estado de un circuito secuencial al encenderse y sin estado de reset de reset. Puede ser cualquiera de los 6 valores definidos pero al no tener estado inicial, no puede determinarse su estado. +
+*Z*: alta impedancia : salida en circuito abierto
+
+
+=== Librería IEEE: Paquete std_logic_1164
+
+* tipos de señales: [naranja]#std_logic# y [naranja]#std_logic_vector#
++
+
+----
+library ieee;
+use ieee.std_logic_1164.all;
+
+ENTITY light_de1soc IS
+PORT(SW : IN std_logic_vector (1 downto 0) ;
+     LEDR : OUT std_logic);
+END light_de1soc ;
+----
+
+* El paquete [naranja]#std_logic_1164# está localizado en: C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/ieee/stdlogic.vhdl
+
+=== Simulación y Fabricación
+
+* Simulación
+** Simulador Questa 
+** Simulador Waveform
+
+* Fabricación: acceso a través de Miaulario : Pestaña *DE1-SoC->>>Remoto*
+
 [#Tema5_CircArit]
 == Tema 5: Circuitos Aritméticos
 
