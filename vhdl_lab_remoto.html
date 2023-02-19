@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
 </head>
-<body class="book">
+<body class="book doc">
 <div id="header">
 <h1>Introducción al Lenguaje VHDL y al Laboratorio Remoto de Sistemas FPGA</h1>
 <div class="details">
@@ -1361,7 +1361,7 @@ entity of light_bit is  <i class="conum" data-value="3"></i><b>(3)</b>
 );
 end entity;
 
-architecture rtl of light_bit is  &lt;4&gt;ç
+architecture rtl of light_bit is  <i class="conum" data-value="4"></i><b>(4)</b>
  signal s,t,u,v : bit;
 begin
  s &lt;= NOT x(0); <i class="conum" data-value="5"></i><b>(5)</b>
@@ -5463,7 +5463,7 @@ end mux4t1_2;</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-19 10:29:27 +0100
+Last updated 2023-02-19 10:44:54 +0100
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
@@ -5498,5 +5498,99 @@ MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
 })
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+<style>
+.doc .listingblock > .content {
+  position: relative;
+}
+
+.doc .listingblock code[data-lang]::before {
+  content: none;
+}
+
+.doc .source-toolbox {
+  display: flex;
+  position: absolute;
+  visibility: hidden;
+  top: 0.25rem;
+  right: 0.5rem;
+  color: #808080;
+  white-space: nowrap;
+  font-size: 0.85em;
+}
+
+.doc .listingblock:hover .source-toolbox {
+  visibility: visible;
+}
+
+.doc .source-toolbox .source-lang {
+  font-family: "Droid Sans Mono", "DejaVu Sans Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+}
+
+.doc .source-toolbox > :not(:last-child)::after {
+  content: "|";
+  letter-spacing: 0;
+  padding: 0 1ch;
+}
+
+.doc .source-toolbox .copy-button {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  width: 1em;
+  height: 1em;
+}
+
+.doc .source-toolbox .copy-icon {
+  flex: none;
+  width: inherit;
+  height: inherit;
+  filter: invert(50.2%);
+  margin-top: 0.05em;
+}
+
+.doc .source-toolbox .copy-toast {
+  flex: none;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 1em;
+  border-radius: 0.25em;
+  padding: 0.5em;
+  cursor: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.75s;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
+.doc .source-toolbox .copy-toast::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 1em;
+  height: 1em;
+  border: 0.55em solid transparent;
+  border-left-color: rgba(0, 0, 0, 0.8);
+  transform: rotate(-90deg) translateX(50%) translateY(50%);
+  transform-origin: left;
+}
+
+.doc .source-toolbox .copy-button.clicked .copy-toast {
+  opacity: 1;
+  transition: none;
+}
+</style>
+<script src="copy-to-clipboard.js"></script>
 </body>
 </html>

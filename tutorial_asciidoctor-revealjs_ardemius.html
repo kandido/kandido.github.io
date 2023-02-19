@@ -431,17 +431,17 @@ section[data-state="topico"] h2 {
 <section id="_note_speaker"><h2>Note Speaker</h2><div class="slide-content"><div class="paragraph"><p>Hello World - Good Bye VERY Cruel World</p></div>
 <aside class="notes"><div class="paragraph"><p>Actually things aren&#8217;t that bad</p></div></aside></div></section>
 <section id="_matemáticas" data-state="topleft"><h2>Matemáticas</h2><div class="slide-content"><div class="paragraph"><p><a href="http://asciimath.org/" class="bare">http://asciimath.org/</a></p></div>
-<div class="paragraph"><p>\$x^2=y^2\$</p></div>
-<div class="paragraph"><p>\$x_1=y_2\$</p></div>
-<div class="paragraph"><p>\$x_1*y_2+bar x+ bar x_1\$</p></div>
-<div class="paragraph"><p>\$x_1 oplus x_2\$</p></div></div></section>
-<section id="_slide_three" data-background-color="yellow"><h2>Slide Three</h2><div class="slide-content"><div class="paragraph"><p>Is very yellow</p></div></div></section>
+<div class="paragraph"><p>\$x^2=y^2\$
+d
+Is very yellow</p></div></div></section>
 <section id="_grand_announcement" data-background-image="images/mountain-cover.jpg" data-background-size="cover"><div class="slide-content">
 <div class="paragraph"><p><span class="CYAN">And here is some text!</span></p></div></div></section>
 <section id="_the_great_goat" data-background-image="https://upload.wikimedia.org/wikipedia/commons/b/b2/Hausziege_04.jpg" data-background-size="contain"></section>
-<section id="_nice_background" data-background-video="http://techslides.com/demos/sample-videos/small.mp4" data-background-video-loop data-background-video-muted><h2>Nice background!</h2></section>
-<section id="_nice_background_2" data-background-video="http://techslides.com/demos/sample-videos/small.mp4" data-background-video-loop data-background-video-muted><h2>Nice background!</h2></section>
-<section id="_zoom_zoom" data-transition="zoom"><h2>Zoom zoom</h2><div class="slide-content"><div class="paragraph"><p>This slide will override the presentation transition and zoom!</p></div></div></section>
+<section id="_embedded_video"><h2>Embedded Video</h2><div class="slide-content"><div class="paragraph"><p>En la siguiente transparencia</p></div></div></section>
+<section id="_nice_background_1" data-background-iframe="https://www.youtube.com/embed/U09ID0wNdyw?rel=0&start=3&enablejsapi=1&autoplay=1&loop=1&controls=0&modestbranding=1"><h2>Nice background 1!</h2></section>
+<section id="_nice_background_2" data-background-video="http://techslides.com/demos/sample-videos/small.mp4" data-background-opacity="0.4"><h2>Nice background 2!</h2></section>
+<section id="_nice_background_3" data-background-video="http://techslides.com/demos/sample-videos/small.mp4" data-background-video-loop data-background-video-muted><h2>Nice background 3!</h2></section>
+<section id="_zoom_zoom" data-transition="zoom" data-background-iframe="https://www.youtube.com/embed/LaApqL4QjH8?rel=0&start=3&enablejsapi=1&autoplay=1&loop=1&controls=0&modestbranding=1"><div class="slide-content"><div class="paragraph"><p>This slide will override the presentation transition and zoom!</p></div></div></section>
 <section id="_speed" data-transition-speed="fast"><h2>Speed</h2><div class="slide-content"><div class="paragraph"><p>Choose from three transition speeds: default, fast or slow!</p></div></div></section>
 <section id="_highlight"><h2>Highlight</h2><div class="slide-content"><div class="paragraph"><p>Uses highlighted code</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-python hljs" data-noescape="true" data-lang="python">print "Hello World"</code></pre></div></div>
@@ -510,7 +510,7 @@ A breaking point <code>=== !</code> was used to display it in a single slide.</p
 <section id="_slide_using_icons"><h2>Slide using icons</h2><div class="slide-content"><div class="paragraph"><p>As usual with Asciidoctor:
 <span class="icon"><i class="fa fa-eye"></i></span> / <span class="icon"><i class="fa fa-keyboard-o"></i></span> / <span class="icon"><i class="fa fa-git"></i></span></p></div></div></section>
 <section><section id="_images_positioning"><h2>Images positioning</h2></section><section id="_inline_image_float_left"><h2>Inline image float left</h2><div class="slide-content"><div class="paragraph text-left"><p>FPGA stands for Field-Programmable Gate Array. It is a type of integrated circuit that can be programmed in the field to perform a specific function. Unlike microprocessors, which are hard-wired to perform a set of tasks, FPGAs can be reconfigured to perform different functions, making them highly flexible and adaptable for a wide range of applications. FPGAs consist of an array of configurable logic blocks and programmable interconnects, which can be programmed by the end-user to implement custom digital logic circuits.<br></p></div>
-<div class="paragraph"><p><span class="image" style="float: left"><img src="/home/candido/Irudiak/robot_cara.jpeg" alt="Mountain" width="300" height="300"></span></p></div>
+<div class="paragraph"><p><span class="image" style="float: left"><img src="/home/candido/Irudiak/robot_cara.jpeg" alt="Robot" width="300" height="300"></span></p></div>
 <div class="paragraph text-left"><p>DE1-SOC is a development board that features a Cyclone V System-on-Chip (SoC) from Altera (now Intel). The DE1-SOC board combines the capabilities of an FPGA and a microprocessor, providing a platform for creating custom digital systems. It includes various peripheral components such as memory, audio and video interfaces, and USB connectivity. The DE1-SOC board is commonly used in education, research, and hobbyist projects for learning and exploring digital design, computer architecture, and embedded systems.</p></div></div></section><section id="_inline_image_float_right"><h2>Inline image float right</h2><div class="slide-content"><div class="paragraph"><p>Just some text before the image<br>
 <span class="image" style="float: right"><img src="images/mountain-cover.jpg" alt="Mountain" width="150" height="150"></span>
 And here is some text after the image</p></div></div></section><section id="_inline_image_float_center"><h2>Inline image float center</h2><div class="slide-content"><div class="paragraph"><p>Just some text before the image<br>
@@ -519,7 +519,11 @@ And here is some text after the image</p></div></div></section><section id="_blo
 <div class="imageblock" style="text-align: center; float: left"><img src="images/mountain-cover.jpg" alt="Mountain" width="400" height="200"></div>
 <div class="paragraph"><p>And here is some text after the image</p></div></div></section></section>
 <section id="_slides_using_some_admonition_blocks"><h2>Slides using some admonition blocks</h2><div class="slide-content"><div class="admonitionblock tip"><table><tr><td class="icon"><i class="fa fa-lightbulb-o" title="Tip"></i></td><td class="content">Here is a TIP block with a <strong>bold element</strong> !</td></tr></table></div>
-<div class="paragraph"><p>And here is some <code>code text</code> !</p></div></div></section></div></div><script src="reveal.js/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
+<div class="paragraph"><p>And here is some <code>code text</code> !</p></div></div></section>
+<section id="_stack_apilar_elementos_horizontalvertical_top"><h2>Stack: Apilar elementos (horizontal,vertical, top)</h2><div class="slide-content"><div class="paragraph"><p><span class="image" style="float: center"><img src="images/mountain-cover.jpg" alt="Mountain" width="150" height="150"></span>
+<span class="image" style="float: center"><img src="images/mountain-cover.jpg" alt="Mountain" width="150" height="150"></span>
+<span class="image" style="float: center"><img src="images/mountain-cover.jpg" alt="Mountain" width="150" height="150"></span>
+<span class="image" style="float: center"><img src="images/mountain-cover.jpg" alt="Mountain" width="150" height="150"></span></p></div></div></section></div></div><script src="reveal.js/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
   if (slide.getAttribute('data-background-color')) return;
   // user needs to explicitly say he wants CSS color to override otherwise we might break custom css or theme (#226)
   if (!(slide.classList.contains('canvas') || slide.classList.contains('background'))) return;
@@ -590,7 +594,7 @@ Reveal.initialize({
   // - null: Media will only autoplay if data-autoplay is present
   // - true: All media will autoplay, regardless of individual setting
   // - false: No media will autoplay, regardless of individual setting
-  autoPlayMedia: null,
+  autoPlayMedia: true,
   // Global override for preloading lazy-loaded iframes
   // - null: Iframes with data-src AND data-preload will be loaded when within
   //   the viewDistance, iframes with only data-src will be loaded when visible
