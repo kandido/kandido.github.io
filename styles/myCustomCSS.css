@@ -87,6 +87,13 @@
     float: left;
 }
 
+/*.iturri source {
+    padding-left: 20px;
+}
+
+NO FUNCIONA: leer el forum en bookmarks de asciidoctor -> css source block
+*/
+
 section.visibilidad {
   visibility: hidden;
 }
@@ -120,7 +127,7 @@ section[data-state="topico"] h2,h3 {
 section[data-state="taula"]  {
     font-family: 'Neuton', sans-serif;
     font-size: 0.5em;
-    margin-top: 0.5em;
+    margin-top: 0em;
 }
 
 section[data-state="taula_txi"] table {

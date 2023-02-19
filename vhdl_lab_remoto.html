@@ -8,435 +8,7 @@
 <meta name="keywords" content="computer, architecture">
 <meta name="author" content="Cándido Aramburu">
 <title>Introducción al Lenguaje VHDL y al Laboratorio Remoto de Sistemas FPGA</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
-<style>
-/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
-/* Uncomment the following line when using as a custom stylesheet */
-/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
-html{font-family:sans-serif;-webkit-text-size-adjust:100%}
-a{background:none}
-a:focus{outline:thin dotted}
-a:active,a:hover{outline:0}
-h1{font-size:2em;margin:.67em 0}
-b,strong{font-weight:bold}
-abbr{font-size:.9em}
-abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
-dfn{font-style:italic}
-hr{height:0}
-mark{background:#ff0;color:#000}
-code,kbd,pre,samp{font-family:monospace;font-size:1em}
-pre{white-space:pre-wrap}
-q{quotes:"\201C" "\201D" "\2018" "\2019"}
-small{font-size:80%}
-sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
-sup{top:-.5em}
-sub{bottom:-.25em}
-img{border:0}
-svg:not(:root){overflow:hidden}
-figure{margin:0}
-audio,video{display:inline-block}
-audio:not([controls]){display:none;height:0}
-fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
-legend{border:0;padding:0}
-button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
-button,input{line-height:normal}
-button,select{text-transform:none}
-button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
-button[disabled],html input[disabled]{cursor:default}
-input[type=checkbox],input[type=radio]{padding:0}
-button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
-textarea{overflow:auto;vertical-align:top}
-table{border-collapse:collapse;border-spacing:0}
-*,::before,::after{box-sizing:border-box}
-html,body{font-size:100%}
-body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
-a:hover{cursor:pointer}
-img,object,embed{max-width:100%;height:auto}
-object,embed{height:100%}
-img{-ms-interpolation-mode:bicubic}
-.left{float:left!important}
-.right{float:right!important}
-.text-left{text-align:left!important}
-.text-right{text-align:right!important}
-.text-center{text-align:center!important}
-.text-justify{text-align:justify!important}
-.hide{display:none}
-img,object,svg{display:inline-block;vertical-align:middle}
-textarea{height:auto;min-height:50px}
-select{width:100%}
-.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
-div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
-a{color:#2156a5;text-decoration:underline;line-height:inherit}
-a:hover,a:focus{color:#1d4b8f}
-a img{border:0}
-p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
-p aside{font-size:.875em;line-height:1.35;font-style:italic}
-h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
-h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
-h1{font-size:2.125em}
-h2{font-size:1.6875em}
-h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
-h4,h5{font-size:1.125em}
-h6{font-size:1em}
-hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
-em,i{font-style:italic;line-height:inherit}
-strong,b{font-weight:bold;line-height:inherit}
-small{font-size:60%;line-height:inherit}
-code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
-ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
-ul,ol{margin-left:1.5em}
-ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
-ul.circle{list-style-type:circle}
-ul.disc{list-style-type:disc}
-ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
-dl dt{margin-bottom:.3125em;font-weight:bold}
-dl dd{margin-bottom:1.25em}
-blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
-blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
-@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
-h1{font-size:2.75em}
-h2{font-size:2.3125em}
-h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
-h4{font-size:1.4375em}}
-table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
-table thead,table tfoot{background:#f7f8f7}
-table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
-table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
-table tr.even,table tr.alt{background:#f8f8f7}
-table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
-h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
-h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
-.center{margin-left:auto;margin-right:auto}
-.stretch{width:100%}
-.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
-.clearfix::after,.float-group::after{clear:both}
-:not(pre).nobreak{word-wrap:normal}
-:not(pre).nowrap{white-space:nowrap}
-:not(pre).pre-wrap{white-space:pre-wrap}
-:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
-pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
-pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
-pre>code{display:block}
-pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
-em em{font-style:normal}
-strong strong{font-weight:400}
-.keyseq{color:rgba(51,51,51,.8)}
-kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
-.keyseq kbd:first-child{margin-left:0}
-.keyseq kbd:last-child{margin-right:0}
-.menuseq,.menuref{color:#000}
-.menuseq b:not(.caret),.menuref{font-weight:inherit}
-.menuseq{word-spacing:-.02em}
-.menuseq b.caret{font-size:1.25em;line-height:.8}
-.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
-b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
-b.button::before{content:"[";padding:0 3px 0 2px}
-b.button::after{content:"]";padding:0 2px 0 3px}
-p a>code:hover{color:rgba(0,0,0,.9)}
-#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
-#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
-#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
-#content{margin-top:1.25em}
-#content::before{content:none}
-#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
-#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
-#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
-#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
-#header .details span:first-child{margin-left:-.125em}
-#header .details span.email a{color:rgba(0,0,0,.85)}
-#header .details br{display:none}
-#header .details br+span::before{content:"\00a0\2013\00a0"}
-#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
-#header .details br+span#revremark::before{content:"\00a0|\00a0"}
-#header #revnumber{text-transform:capitalize}
-#header #revnumber::after{content:"\00a0"}
-#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
-#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
-#toc>ul{margin-left:.125em}
-#toc ul.sectlevel0>li>a{font-style:italic}
-#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
-#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
-#toc li{line-height:1.3334;margin-top:.3334em}
-#toc a{text-decoration:none}
-#toc a:active{text-decoration:underline}
-#toctitle{color:#7a2518;font-size:1.2em}
-@media screen and (min-width:768px){#toctitle{font-size:1.375em}
-body.toc2{padding-left:15em;padding-right:0}
-#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
-#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
-#toc.toc2>ul{font-size:.9em;margin-bottom:0}
-#toc.toc2 ul ul{margin-left:0;padding-left:1em}
-#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
-body.toc2.toc-right{padding-left:0;padding-right:15em}
-body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
-@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
-#toc.toc2{width:20em}
-#toc.toc2 #toctitle{font-size:1.375em}
-#toc.toc2>ul{font-size:.95em}
-#toc.toc2 ul ul{padding-left:1.25em}
-body.toc2.toc-right{padding-left:0;padding-right:20em}}
-#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
-#content #toc>:first-child{margin-top:0}
-#content #toc>:last-child{margin-bottom:0}
-#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
-#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
-#content{margin-bottom:.625em}
-.sect1{padding-bottom:.625em}
-@media screen and (min-width:768px){#content{margin-bottom:1.25em}
-.sect1{padding-bottom:1.25em}}
-.sect1:last-child{padding-bottom:0}
-.sect1+.sect1{border-top:1px solid #e7e7e9}
-#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
-#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
-#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
-#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
-#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
-details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
-details{margin-left:1.25rem}
-details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
-details>summary::-webkit-details-marker{display:none}
-details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
-details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
-details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
-.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
-table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
-.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
-.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
-.admonitionblock>table td.icon{text-align:center;width:80px}
-.admonitionblock>table td.icon img{max-width:none}
-.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
-.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
-.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
-.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
-.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
-.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
-.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
-@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
-@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
-.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
-.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
-.listingblock>.content{position:relative}
-.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
-.listingblock:hover code[data-lang]::before{display:block}
-.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
-.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
-.listingblock pre.highlightjs{padding:0}
-.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
-.listingblock pre.prettyprint{border-width:0}
-.prettyprint{background:#f7f7f8}
-pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
-pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
-pre.prettyprint li code[data-lang]::before{opacity:1}
-pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
-table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
-table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
-table.linenotable td.code{padding-left:.75em}
-table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
-pre.pygments span.linenos{display:inline-block;margin-right:.75em}
-.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
-.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
-.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
-.quoteblock blockquote{margin:0;padding:0;border:0}
-.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
-.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
-.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
-.verseblock{margin:0 1em 1.25em}
-.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
-.verseblock pre strong{font-weight:400}
-.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
-.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
-.quoteblock .attribution br,.verseblock .attribution br{display:none}
-.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
-.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
-.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
-.quoteblock.abstract{margin:0 1em 1.25em;display:block}
-.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
-.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
-.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
-.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
-.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
-p.tableblock:last-child{margin-bottom:0}
-td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
-td.tableblock>.content>:last-child{margin-bottom:-1.25em}
-table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
-table.grid-all>*>tr>*{border-width:1px}
-table.grid-cols>*>tr>*{border-width:0 1px}
-table.grid-rows>*>tr>*{border-width:1px 0}
-table.frame-all{border-width:1px}
-table.frame-ends{border-width:1px 0}
-table.frame-sides{border-width:0 1px}
-table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
-table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
-table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
-table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
-table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
-th.halign-left,td.halign-left{text-align:left}
-th.halign-right,td.halign-right{text-align:right}
-th.halign-center,td.halign-center{text-align:center}
-th.valign-top,td.valign-top{vertical-align:top}
-th.valign-bottom,td.valign-bottom{vertical-align:bottom}
-th.valign-middle,td.valign-middle{vertical-align:middle}
-table thead th,table tfoot th{font-weight:bold}
-tbody tr th{background:#f7f8f7}
-tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
-p.tableblock>code:only-child{background:none;padding:0}
-p.tableblock{font-size:1em}
-ol{margin-left:1.75em}
-ul li ol{margin-left:1.5em}
-dl dd{margin-left:1.125em}
-dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
-li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
-ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
-ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
-ul.unstyled,ol.unstyled{margin-left:0}
-li>p:empty:only-child::before{content:"";display:inline-block}
-ul.checklist>li>p:first-child{margin-left:-1em}
-ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
-ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
-ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
-ul.inline>li{margin-left:1.25em}
-.unstyled dl dt{font-weight:400;font-style:normal}
-ol.arabic{list-style-type:decimal}
-ol.decimal{list-style-type:decimal-leading-zero}
-ol.loweralpha{list-style-type:lower-alpha}
-ol.upperalpha{list-style-type:upper-alpha}
-ol.lowerroman{list-style-type:lower-roman}
-ol.upperroman{list-style-type:upper-roman}
-ol.lowergreek{list-style-type:lower-greek}
-.hdlist>table,.colist>table{border:0;background:none}
-.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
-td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
-td.hdlist1{font-weight:bold;padding-bottom:1.25em}
-td.hdlist2{word-wrap:anywhere}
-.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
-.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
-.colist td:not([class]):first-child img{max-width:none}
-.colist td:not([class]):last-child{padding:.25em 0}
-.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
-.imageblock.left{margin:.25em .625em 1.25em 0}
-.imageblock.right{margin:.25em 0 1.25em .625em}
-.imageblock>.title{margin-bottom:0}
-.imageblock.thumb,.imageblock.th{border-width:6px}
-.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
-.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
-.image.left{margin-right:.625em}
-.image.right{margin-left:.625em}
-a.image{text-decoration:none;display:inline-block}
-a.image object{pointer-events:none}
-sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
-sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
-#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
-#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
-#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
-#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
-#footnotes .footnote:last-of-type{margin-bottom:0}
-#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
-div.unbreakable{page-break-inside:avoid}
-.big{font-size:larger}
-.small{font-size:smaller}
-.underline{text-decoration:underline}
-.overline{text-decoration:overline}
-.line-through{text-decoration:line-through}
-.aqua{color:#00bfbf}
-.aqua-background{background:#00fafa}
-.black{color:#000}
-.black-background{background:#000}
-.blue{color:#0000bf}
-.blue-background{background:#0000fa}
-.fuchsia{color:#bf00bf}
-.fuchsia-background{background:#fa00fa}
-.gray{color:#606060}
-.gray-background{background:#7d7d7d}
-.green{color:#006000}
-.green-background{background:#007d00}
-.lime{color:#00bf00}
-.lime-background{background:#00fa00}
-.maroon{color:#600000}
-.maroon-background{background:#7d0000}
-.navy{color:#000060}
-.navy-background{background:#00007d}
-.olive{color:#606000}
-.olive-background{background:#7d7d00}
-.purple{color:#600060}
-.purple-background{background:#7d007d}
-.red{color:#bf0000}
-.red-background{background:#fa0000}
-.silver{color:#909090}
-.silver-background{background:#bcbcbc}
-.teal{color:#006060}
-.teal-background{background:#007d7d}
-.white{color:#bfbfbf}
-.white-background{background:#fafafa}
-.yellow{color:#bfbf00}
-.yellow-background{background:#fafa00}
-span.icon>.fa{cursor:default}
-a span.icon>.fa{cursor:inherit}
-.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
-.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
-.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
-.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
-.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
-.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
-.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
-.conum[data-value] *{color:#fff!important}
-.conum[data-value]+b{display:none}
-.conum[data-value]::after{content:attr(data-value)}
-pre .conum[data-value]{position:relative;top:-.125em}
-b.conum *{color:inherit!important}
-.conum:not([data-value]):empty{display:none}
-dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
-h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
-p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
-p{margin-bottom:1.25rem}
-.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
-.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
-.print-only{display:none!important}
-@page{margin:1.25cm .75cm}
-@media print{*{box-shadow:none!important;text-shadow:none!important}
-html{font-size:80%}
-a{color:inherit!important;text-decoration:underline!important}
-a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
-a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
-abbr[title]{border-bottom:1px dotted}
-abbr[title]::after{content:" (" attr(title) ")"}
-pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
-thead{display:table-header-group}
-svg{max-width:100%}
-p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
-h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
-#header,#content,#footnotes,#footer{max-width:none}
-#toc,.sidebarblock,.exampleblock>.content{background:none!important}
-#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
-body.book #header{text-align:center}
-body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
-body.book #header .details{border:0!important;display:block;padding:0!important}
-body.book #header .details span:first-child{margin-left:0!important}
-body.book #header .details br{display:block}
-body.book #header .details br+span::before{content:none!important}
-body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
-body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
-.listingblock code[data-lang]::before{display:block}
-#footer{padding:0 .9375em}
-.hide-on-print{display:none!important}
-.print-only{display:block!important}
-.hide-for-print{display:none!important}
-.show-for-print{display:inherit!important}}
-@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
-.sect1{padding:0!important}
-.sect1+.sect1{border:0}
-#footer{background:none}
-#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
-@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
-</style>
+<link rel="stylesheet" href="styles/my-asciidoctor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
 </head>
@@ -446,7 +18,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2023-02-18</span>
+<span id="revdate">2023-02-19</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -513,134 +85,146 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_vhdl_conceptos_teóricos_básicos">8. VHDL: Conceptos teóricos básicos</a>
 <ul class="sectlevel2">
 <li><a href="#_introducción_3">8.1. Introducción</a></li>
-<li><a href="#_señal_digital_binaria_tipo_bit">8.2. Señal Digital Binaria tipo BIT</a></li>
-<li><a href="#_buses">8.3. Buses</a></li>
-<li><a href="#_circuito_digital_light_bit_vhdl">8.4. Circuito Digital  "light_bit.vhdl"</a></li>
-<li><a href="#_estructura_del_programa_librería_entidad_arquitectura">8.5. Estructura del Programa: Librería-Entidad-Arquitectura</a></li>
-</ul>
-</li>
-<li><a href="#_sentencias_concurrentes">9. Sentencias Concurrentes</a>
-<ul class="sectlevel2">
-<li><a href="#_concepto_de_concurrencia">9.1. Concepto de concurrencia</a></li>
-<li><a href="#_ejemplo_unidad_de_diseño_matricula_vhd">9.2. Ejemplo: Unidad de diseño "matricula.vhd"</a></li>
-<li><a href="#_significado">9.3. Significado</a></li>
-</ul>
-</li>
-<li><a href="#_librería_standard_paquete_standard">10. Librería standard:  paquete STANDARD</a></li>
-<li><a href="#_tutorial_quartus_light_bit_vhd_i">11. Tutorial quartus &#8594; light_bit.vhd (I)</a>
-<ul class="sectlevel2">
-<li><a href="#_diseño">11.1. Diseño</a></li>
-<li><a href="#_errores_en_el_proceso_de_compilación">11.2. Errores en el Proceso de Compilación</a></li>
-<li><a href="#_archivar_el_proyecto_para_conservarlo">11.3. Archivar el proyecto para conservarlo</a></li>
-</ul>
-</li>
-<li><a href="#_vhdl_paquetes_std_logic_1164_y_textio">12. VHDL: Paquetes std_logic_1164 y textio</a>
-<ul class="sectlevel2">
-<li><a href="#_paquete_standard_logic_std_logic_std_logic_1164">12.1. Paquete Standard Logic (std_logic): std_logic_1164</a></li>
-<li><a href="#_std_logic_vector_downto_to">12.2. std_logic_vector : downto , to</a></li>
-<li><a href="#_librería_standard_paquete_textio">12.3. Librería standard: paquete TEXTIO</a></li>
-</ul>
-</li>
-<li><a href="#_tutorial_quartus_light_de1soc_vhd_ii">13. Tutorial quartus &#8594; light_de1soc.vhd (II)</a>
-<ul class="sectlevel2">
-<li><a href="#_diseño_2">13.1. Diseño</a></li>
-<li><a href="#_fabricación_en_el_laboratorio_remoto">13.2. Fabricación en el laboratorio remoto</a></li>
-<li><a href="#_ejercicios">13.3. Ejercicios</a></li>
-</ul>
-</li>
-<li><a href="#_tutorial_quartus_light_signal_vhd_iii">14. Tutorial quartus &#8594; light_signal.vhd (III)</a>
-<ul class="sectlevel2">
-<li><a href="#_diseño_3">14.1. Diseño</a></li>
-<li><a href="#_análisis_herramienta_rtl_viewer">14.2. Análisis: Herramienta RTL Viewer</a></li>
-<li><a href="#_ejercicios_2">14.3. Ejercicios</a></li>
-</ul>
-</li>
-<li><a href="#_tutorial_quartus_light_vhd_iv_simulación_questa_intel">15. Tutorial quartus &#8594; light.vhd (IV) : Simulación Questa Intel</a>
-<ul class="sectlevel2">
-<li><a href="#_simulación">15.1. Simulación</a></li>
-</ul>
-</li>
-<li><a href="#_edición_vhdl_mediante_quartus_utilizando_plantillas_de_ayuda">16. Edición VHDL mediante Quartus utilizando plantillas de ayuda</a></li>
-<li><a href="#_tutorial_quartus_light_csa_vhd_v">17. Tutorial quartus &#8594; light_csa.vhd (V)</a>
-<ul class="sectlevel2">
-<li><a href="#_diseño_4">17.1. Diseño</a></li>
-<li><a href="#_análisis">17.2. Análisis</a></li>
-<li><a href="#_ejercicios_3">17.3. Ejercicios</a></li>
-</ul>
-</li>
-<li><a href="#_sentencias_secuenciales">18. Sentencias Secuenciales</a>
-<ul class="sectlevel2">
-<li><a href="#_procesoprocess">18.1. Proceso/Process()</a></li>
-<li><a href="#_ejemplo_1_matricula_vhd">18.2. Ejemplo_1: matricula.vhd</a></li>
-<li><a href="#_ejemplo_2_matricula_vhd">18.3. Ejemplo_2: matricula.vhd</a></li>
-</ul>
-</li>
-<li><a href="#_tutorial_quartus_light_if_vhd_vi">19. Tutorial quartus &#8594; light_if.vhd (VI)</a>
-<ul class="sectlevel2">
-<li><a href="#_diseño_5">19.1. Diseño</a></li>
-<li><a href="#_análisis_2">19.2. Análisis</a></li>
-<li><a href="#_ejercicios_4">19.3. Ejercicios</a></li>
-</ul>
-</li>
-<li><a href="#_tutorial_quartus_light_with_vhd_vii">20. Tutorial quartus &#8594; light_with.vhd (VII)</a>
-<ul class="sectlevel2">
-<li><a href="#_diseño_6">20.1. Diseño</a></li>
-<li><a href="#_análisis_3">20.2. Análisis</a></li>
-<li><a href="#_ejercicios_5">20.3. Ejercicios</a></li>
-</ul>
-</li>
-<li><a href="#_tutorial_quartus_light_case_vhd_viii">21. Tutorial quartus &#8594; light_case.vhd (VIII)</a>
-<ul class="sectlevel2">
-<li><a href="#_diseño_7">21.1. Diseño</a></li>
-<li><a href="#_análisis_4">21.2. Análisis</a></li>
-<li><a href="#_ejercicios_6">21.3. Ejercicios</a></li>
-</ul>
-</li>
-<li><a href="#_multiplexor">22. Multiplexor</a>
-<ul class="sectlevel2">
-<li><a href="#_mux2x1_arquitectura_rtl">22.1. mux2x1: arquitectura RTL</a></li>
-<li><a href="#_análisis_5">22.2. Análisis</a></li>
-<li><a href="#_mux4x1_arquitectura_behavioral">22.3. mux4x1: arquitectura Behavioral</a></li>
-<li><a href="#_análisis_6">22.4. Análisis</a></li>
-<li><a href="#_mux4x1_arquitectura_estructural">22.5. mux4x1: arquitectura Estructural</a>
+<li><a href="#_señales_digitales_binarias">8.2. Señales digitales binarias</a></li>
+<li><a href="#_señales_vhdl_tipos_de_datos">8.3. Señales VHDL : tipos de datos</a></li>
+<li><a href="#_señal_digital_binaria_tipo_bit">8.4. Señal Digital Binaria tipo BIT</a></li>
+<li><a href="#_buses">8.5. Buses</a></li>
+<li><a href="#_circuito_light_xor">8.6. Circuito light_xor</a>
 <ul class="sectlevel3">
-<li><a href="#_compilación_en_quartus">22.5.1. Compilación en Quartus</a></li>
+<li><a href="#_descripciones_hw_esquema_eléctrico_tabla_de_la_verdad_expresión_lógica">8.6.1. Descripciones HW: Esquema eléctrico, Tabla de la Verdad, Expresión Lógica</a></li>
+<li><a href="#_descripción_hw_vhdl">8.6.2. Descripción HW: VHDL</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#_decodificador">23. Decodificador</a>
-<ul class="sectlevel2">
-<li><a href="#_decoder_hexdisplay_7_segmentos">23.1. Decoder Hex/Display_7_segmentos</a></li>
-</ul>
-</li>
-<li><a href="#_valores_indeterminados_x_en_la_entrada_y_en_la_salida">24. Valores INDETERMINADOS X en la entrada y en la salida</a>
-<ul class="sectlevel2">
-<li><a href="#_codificador_con_prioridad">24.1. Codificador con Prioridad</a></li>
-</ul>
-</li>
-<li><a href="#_diseños_vhdl_no_sintetizables_en_circuitos_electrónicos">25. Diseños VHDL NO sintetizables en circuitos electrónicos</a>
-<ul class="sectlevel2">
-<li><a href="#_introducción_4">25.1. Introducción</a></li>
-<li><a href="#_hello_world">25.2. Hello World</a></li>
-</ul>
-</li>
-<li><a href="#_flip_flop">26. Flip-Flop</a>
-<ul class="sectlevel2">
-<li><a href="#_memorias">26.1. Memorias</a></li>
-<li><a href="#_vhdl_flip_flop_d_con_entradas_asíncronas_en_lógica_negativa">26.2. VHDL: Flip Flop D con entradas asíncronas en lógica negativa</a>
+<li><a href="#_lenguaje_vhdl_sentencias_concurrentes">8.7. Lenguaje VHDL: Sentencias Concurrentes</a>
 <ul class="sectlevel3">
-<li><a href="#_diseño_8">26.2.1. diseño</a></li>
-<li><a href="#_implementación_de_unidades_de_memoria">26.2.2. Implementación de unidades de MEMORIA</a></li>
+<li><a href="#_concepto_de_concurrencia">8.7.1. Concepto de concurrencia</a></li>
 </ul>
 </li>
-<li><a href="#_ff_d">26.3. FF-D</a></li>
+<li><a href="#_circuito_digital_light_bit_vhdl">8.8. Circuito Digital  "light_bit.vhdl"</a></li>
+<li><a href="#_estructura_del_programa_librería_entidad_arquitectura">8.9. Estructura del Programa: Librería-Entidad-Arquitectura</a></li>
+<li><a href="#_librería_standard_paquete_standard">8.10. Librería standard:  paquete STANDARD</a></li>
 </ul>
 </li>
-<li><a href="#_operación_suma_y_multiplicación">27. Operación suma y multiplicación</a></li>
-<li><a href="#_contador_síncrono">28. Contador Síncrono</a></li>
-<li><a href="#_cerradura_electrónica">29. Cerradura Electrónica</a></li>
-<li><a href="#_registros">30. Registros</a></li>
+<li><a href="#_tutorial_quartus_light_bit_vhd_i">9. Tutorial quartus &#8594; light_bit.vhd (I)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño">9.1. Diseño</a></li>
+<li><a href="#_errores_en_el_proceso_de_compilación">9.2. Errores en el Proceso de Compilación</a></li>
+<li><a href="#_archivar_el_proyecto_para_conservarlo">9.3. Archivar el proyecto para conservarlo</a></li>
+</ul>
+</li>
+<li><a href="#_vhdl_paquetes_std_logic_1164_y_textio">10. VHDL: Paquetes std_logic_1164 y textio</a>
+<ul class="sectlevel2">
+<li><a href="#_paquete_standard_logic_std_logic_std_logic_1164">10.1. Paquete Standard Logic (std_logic): std_logic_1164</a></li>
+<li><a href="#_std_logic_vector_downto_to">10.2. std_logic_vector : downto , to</a></li>
+<li><a href="#_librería_standard_paquete_textio">10.3. Librería standard: paquete TEXTIO</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_de1soc_vhd_ii">11. Tutorial quartus &#8594; light_de1soc.vhd (II)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_2">11.1. Diseño</a></li>
+<li><a href="#_fabricación_en_el_laboratorio_remoto">11.2. Fabricación en el laboratorio remoto</a></li>
+<li><a href="#_ejercicios">11.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_signal_vhd_iii">12. Tutorial quartus &#8594; light_signal.vhd (III)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_3">12.1. Diseño</a></li>
+<li><a href="#_análisis_herramienta_rtl_viewer">12.2. Análisis: Herramienta RTL Viewer</a></li>
+<li><a href="#_ejercicios_2">12.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_de1soc_vhd_iv_simulación_questa_intel">13. Tutorial quartus &#8594; light_de1soc.vhd (IV) : Simulación Questa Intel</a>
+<ul class="sectlevel2">
+<li><a href="#_simulación">13.1. Simulación</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_csa_vhd_v">14. Tutorial quartus &#8594; light_csa.vhd (V)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_4">14.1. Diseño</a></li>
+<li><a href="#_análisis">14.2. Análisis</a></li>
+<li><a href="#_ejercicios_3">14.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_sentencias_secuenciales">15. Sentencias Secuenciales</a>
+<ul class="sectlevel2">
+<li><a href="#_procesoprocess">15.1. Proceso/Process()</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_process_vhd_vi">16. Tutorial quartus &#8594; light_process.vhd (VI)</a></li>
+<li><a href="#_tutorial_quartus_light_if_vhd_vii">17. Tutorial quartus &#8594; light_if.vhd (VII)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_5">17.1. Diseño</a></li>
+<li><a href="#_análisis_2">17.2. Análisis</a></li>
+<li><a href="#_ejercicios_4">17.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_with_vhd_viii">18. Tutorial quartus &#8594; light_with.vhd (VIII)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_6">18.1. Diseño</a></li>
+<li><a href="#_análisis_3">18.2. Análisis</a></li>
+<li><a href="#_ejercicios_5">18.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_case_vhd_ix">19. Tutorial quartus &#8594; light_case.vhd (IX)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_7">19.1. Diseño</a></li>
+<li><a href="#_análisis_4">19.2. Análisis</a></li>
+<li><a href="#_ejercicios_6">19.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_ejercicio_1_5_matricula">20. Ejercicio 1.5: Matricula</a>
+<ul class="sectlevel2">
+<li><a href="#_arquitectura_rtl">20.1. Arquitectura rtl</a></li>
+<li><a href="#_netlist_view">20.2. netlist view</a></li>
+<li><a href="#_tutorial_quartus_matricula_case_vhd">20.3. Tutorial quartus &#8594; matricula_case.vhd</a></li>
+<li><a href="#_ejemplo_1_matricula_vhd">20.4. Ejemplo_1: matricula.vhd</a></li>
+</ul>
+</li>
+<li><a href="#_multiplexor">21. Multiplexor</a>
+<ul class="sectlevel2">
+<li><a href="#_mux2x1_arquitectura_rtl">21.1. mux2x1: arquitectura RTL</a></li>
+<li><a href="#_análisis_5">21.2. Análisis</a></li>
+<li><a href="#_mux4x1_arquitectura_behavioral">21.3. mux4x1: arquitectura Behavioral</a></li>
+<li><a href="#_análisis_6">21.4. Análisis</a></li>
+<li><a href="#_mux4x1_arquitectura_estructural">21.5. mux4x1: arquitectura Estructural</a>
+<ul class="sectlevel3">
+<li><a href="#_compilación_en_quartus">21.5.1. Compilación en Quartus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_decodificador">22. Decodificador</a>
+<ul class="sectlevel2">
+<li><a href="#_decoder_hexdisplay_7_segmentos">22.1. Decoder Hex/Display_7_segmentos</a></li>
+</ul>
+</li>
+<li><a href="#_valores_indeterminados_x_en_la_entrada_y_en_la_salida">23. Valores INDETERMINADOS X en la entrada y en la salida</a>
+<ul class="sectlevel2">
+<li><a href="#_codificador_con_prioridad">23.1. Codificador con Prioridad</a></li>
+</ul>
+</li>
+<li><a href="#_diseños_vhdl_no_sintetizables_en_circuitos_electrónicos">24. Diseños VHDL NO sintetizables en circuitos electrónicos</a>
+<ul class="sectlevel2">
+<li><a href="#_introducción_4">24.1. Introducción</a></li>
+<li><a href="#_hello_world">24.2. Hello World</a></li>
+</ul>
+</li>
+<li><a href="#_flip_flop">25. Flip-Flop</a>
+<ul class="sectlevel2">
+<li><a href="#_memorias">25.1. Memorias</a></li>
+<li><a href="#_vhdl_flip_flop_d_con_entradas_asíncronas_en_lógica_negativa">25.2. VHDL: Flip Flop D con entradas asíncronas en lógica negativa</a>
+<ul class="sectlevel3">
+<li><a href="#_diseño_8">25.2.1. diseño</a></li>
+<li><a href="#_implementación_de_unidades_de_memoria">25.2.2. Implementación de unidades de MEMORIA</a></li>
+</ul>
+</li>
+<li><a href="#_ff_d">25.3. FF-D</a></li>
+</ul>
+</li>
+<li><a href="#_operación_suma_y_multiplicación">26. Operación suma y multiplicación</a></li>
+<li><a href="#_contador_síncrono">27. Contador Síncrono</a></li>
+<li><a href="#_cerradura_electrónica">28. Cerradura Electrónica</a></li>
+<li><a href="#_registros">29. Registros</a></li>
 <li><a href="#KitDe1soc">Appendix A: Kit DE1-SoC</a></li>
 <li><a href="#LabRemoto">Appendix B: Laboratorio Remoto de Sistemas FPGA</a>
 <ul class="sectlevel2">
@@ -1057,7 +641,7 @@ Desde un PC personal para conectarse al servidor hacer click en la hamburguesa d
 <p><strong>Assigments</strong> &#8594; <strong>Settings</strong> &#8594; <strong>EDA Tool Settings</strong> &#8594; <strong>Simulation</strong>: Questa Intel FPGA</p>
 </li>
 <li>
-<p><strong>Tools</strong> &#8594; <strong>Options</strong> &#8594; General &#8594; <strong>EDA Tool Options</strong> &#8594; EDA Tool: Questa Intel FPGA : carpeta donde se localiza la aplicación Questa</p>
+<p><strong>Tools</strong> &#8594; <strong>Options</strong> &#8594; General &#8594; <strong>EDA Tool Options</strong> &#8594; EDA Tool: Questa Intel FPGA : carpeta donde se localiza el simulador Questa: C:/intelFPGA_lite/21.1/questa_fse/win64/questasim.exe</p>
 </li>
 </ul>
 </div>
@@ -1091,7 +675,7 @@ Desde un PC personal para conectarse al servidor hacer click en la hamburguesa d
 </div>
 </li>
 <li>
-<p>Editar el fichero <em>light_bit.vhd</em></p>
+<p>Editar el fichero <em>light_bit.vhd</em>: Descripción del circuito minimalista <strong>z=x</strong> : El objetivo de este código es ser lo suficientemente simple para no dificultar su comprensión y centrarse en poner a punto la herramienta de desarrollo <strong>Intel Quartus Prime Lite</strong> desde cualquier computadora utilizando los recursos remotos de la UPNA.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">entity of light_bit is
@@ -1103,7 +687,7 @@ end entity;
 architecture minima of light_bit is
 begin
   z &lt;= x;
-end rtl;</code></pre>
+end minima;</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -1331,6 +915,22 @@ El nombre de la entidad ha de ser el MISMO que el nombe del fichero vhd.
 </ul>
 </div>
 </li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Imprimirlo y LEERLO!!
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Se van a realizar los siguientes diseños basados todos en el mismo circuito digital. La descripción del circuito se realizará mediante el lenguaje VHDL y se utilizará "Quartus Prime Lite" al igual que en el tutorial de intel "tutorial_quartusii_intro_vhdl.pdf". La principal diferencia entre los distintos diseños será la arquitectura, donde se emplearán diferentes sentencias del lenguaje VHDL.<br></p>
 <div class="olist arabic">
@@ -1418,8 +1018,9 @@ El nombre de la entidad ha de ser el MISMO que el nombe del fichero vhd.
 <div class="content">
 <pre>..Descargas/ssdd/
 	├── light_bit
-	├── light_csa
 	├── light_de1soc
+        ├── light_csa
+        ├── light_process
 	├── light_if
 	├── light_signal
 	├── light_with
@@ -1499,7 +1100,70 @@ El nombre de la entidad ha de ser el MISMO que el nombe del fichero vhd.
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_señal_digital_binaria_tipo_bit">8.2. Señal Digital Binaria tipo BIT</h3>
+<h3 id="_señales_digitales_binarias">8.2. Señales digitales binarias</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Hay dos <strong>tipos de señales</strong> en el lenguaje VHDL:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="naranja">PORT</span> : x,y,z</p>
+<div class="ulist">
+<ul>
+<li>
+<p>son señales de acceso al circuito: su <strong>modo</strong> puede ser de entrada (<span class="naranja">IN</span>) ó de salida (<span class="naranja">OUT</span>)</p>
+</li>
+<li>
+<p>una señal de entrada tipo <span class="naranja">IN</span> no puede conectarse a la salida de una puerta lógica</p>
+</li>
+<li>
+<p>una señal de salida tipo <span class="naranja">OUT</span> no puede conectarse a la entrada de una puerta lógica</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><span class="naranja">SIGNAL</span> : s,t,u,v</p>
+<div class="ulist">
+<ul>
+<li>
+<p>son señales internas al circuito y son bidireccionales: pueden conectarse tanto a la entrada como a la salida de una puerta lógica</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_señales_vhdl_tipos_de_datos">8.3. Señales VHDL : tipos de datos</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Las señales electrónicas representan  DATOS.</p>
+</li>
+<li>
+<p>Hay diferentes <strong>tipos de datos</strong> para las señales.</p>
+</li>
+<li>
+<p>tipo de dato bit único : <span class="naranja">BIT</span> : admite únicamente dos valores: el <strong><em></strong> 0 <strong></em></strong> y el <strong><em></strong> 1 <strong></em></strong></p>
+</li>
+<li>
+<p>en VHDL los valores de los bits hay que entrecomillarlos para diferenciarlos de los datos de tipo <span class="naranja">INTEGER</span></p>
+</li>
+<li>
+<p>tipo de dato secuencia de bits: <strong>"</strong> 010001010101 <strong>"</strong> &#8594; doble entrecomillado si el dato se representa con más de un bit.</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_señal_digital_binaria_tipo_bit">8.4. Señal Digital Binaria tipo BIT</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1534,7 +1198,7 @@ _____________________ 0 voltios</pre>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_buses">8.3. Buses</h3>
+<h3 id="_buses">8.5. Buses</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1564,31 +1228,123 @@ _____________________ 0 voltios</pre>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_circuito_digital_light_bit_vhdl">8.4. Circuito Digital  "light_bit.vhdl"</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Descripción del circuito minimalista <strong>z=x</strong></p>
+<h3 id="_circuito_light_xor">8.6. Circuito light_xor</h3>
+<div class="sect3">
+<h4 id="_descripciones_hw_esquema_eléctrico_tabla_de_la_verdad_expresión_lógica">8.6.1. Descripciones HW: Esquema eléctrico, Tabla de la Verdad, Expresión Lógica</h4>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/tema4_xor.png" alt="circuito light xor">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_descripción_hw_vhdl">8.6.2. Descripción HW: VHDL</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">entity of light_bit is
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">--
+-- Descripción VHDL Primavera 2023
+-- Circuito light_bit.vhd:
+-- Puerta lógica XOR extendida
+entity of light_bit is
   port (
-    x   : in bit;
+    x,y : in bit;
     z   : out bit
 );
 end entity;
-architecture minima of light_bit is
+
+architecture rtl of light_bit is
+ signal s,t,u,v : bit;
 begin
-  z &lt;= x;
-end minima;</code></pre>
+  s &lt;= not x;
+  t &lt;= not y;
+  u &lt;= x and t;
+  v &lt;= y and s;
+  z &lt;= u or v;
+end rtl;
+--</code></pre>
 </div>
 </div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lenguaje_vhdl_sentencias_concurrentes">8.7. Lenguaje VHDL: Sentencias Concurrentes</h3>
+<div class="sect3">
+<h4 id="_concepto_de_concurrencia">8.7.1. Concepto de concurrencia</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>CAS : Concurrent Assignment Sentence</p>
 </li>
 <li>
-<p>El objetivo de este código es ser lo suficientemente simple para no dificultar su comprensión y centrarse en poner a punto la herramienta de desarrollo <strong>Intel Quartus Prime Lite</strong> desde cualquier computadora utilizando los recursos remotos de la UPNA.</p>
+<p>La instrucción o sentencia CAS se representa mediante el símbolo <span class="naranja">&#8656;</span></p>
 </li>
 <li>
-<p>Descripción del circuito <strong>z = x<sub>0</sub> XOR x<sub>1</sub></strong></p>
+<p>¿Cómo se ejecuta la sentencia asignación concurrente <span class="naranja">&#8656;</span> ?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A las señales de la derecha del símbolo <span class="naranja">&#8656;</span> se les denomina <strong>señales sensibles</strong></p>
+</li>
+<li>
+<p>Cuando una de la señales sensibles cambia (<strong>evento</strong>) es cuando se ejecuta la sentencia asignación.</p>
+</li>
+<li>
+<p>El valor resultante de <strong>evaluar</strong> la expresión a la derecha del símbolo <span class="naranja">&#8656;</span> se asigna a la señal a la izquierda del símbolo <span class="naranja">&#8656;</span></p>
+</li>
+<li>
+<p>se ve mejor el concepto de concurrencia si en la arquitectura hay dos o más sentencias concurrentes.</p>
+</li>
+<li>
+<p>concurrencia es sinónimo de simultaneidad</p>
+</li>
+<li>
+<p>El orden de ejecución lo dictan los eventos de las señales sensibles y <strong>NO</strong> por el orden de escritura de la secuencia de sententencias.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">s &lt;= not x;
+t &lt;= not y;
+u &lt;= x and t;
+v &lt;= y and s;
+z &lt;= u or v;</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>0- "x" = "y" = *0* =&gt; s = t = *1* =&gt; u = v = *0* =&gt; z = *0*
+1- Se produce un EVENTO (*0-&gt;1*) en la señal puerto "x"
+2- "x" es una señal sensible en la línea 1 del código
+y en la línea 3 del código
+3- Se ejecutan las líneas 1 y 3 del código
+4- Ejecución de la línea 1: "s" (*1-&gt;0*)
+5- Ejecución de la línea 3: "u" (*0-&gt;1*)
+6- Hay un evento en "s": se ejecuta la línea 4 : "v" no cambia -&gt; no evento
+7- Hay un evento en "u": se ejecuta la línea 5 : "z" cambia (*0-&gt;1*)
+8- La señal z no es una señal sensible en ninguna de las sentencias [naranja]#&lt;=# : FIN
+9- FIN de la actualización de todas las señales hasta el próximo evento en "x" o/y "y"</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Por lo tanto el orden en que se ejecutan las sentencias dentro de la arquitectura NO ES SECUENCIAL. Son los eventos de las señales sensibles los que indican el orden en que se ejecutan las sentencias, pudiendo ocurrir que dos o más sentencias se ejecuten simultáneamente, CONCURRENTEMENTE. Esta concurrencia es necesaria ya que en los circuitos digitales reales formados por puertas lógicas u otro tipo de bloques, dichas puertas y bloques funcionan concurrentemente, pudiendo cambiar la salida de distintas puertas o bloques al mismo tiempo.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_circuito_digital_light_bit_vhdl">8.8. Circuito Digital  "light_bit.vhdl"</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción del circuito <strong>z = x<sub>0</sub> XOR x<sub>1</sub></strong> : El objetivo de este código es seguir el tutorial de Intel.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Universidad Pública de Navarra  <i class="conum" data-value="1"></i><b>(1)</b>
@@ -1605,7 +1361,8 @@ entity of light_bit is  <i class="conum" data-value="3"></i><b>(3)</b>
 );
 end entity;
 
-architecture rtl of light_bit is  <i class="conum" data-value="4"></i><b>(4)</b>
+architecture rtl of light_bit is  &lt;4&gt;ç
+ signal s,t,u,v : bit;
 begin
  s &lt;= NOT x(0); <i class="conum" data-value="5"></i><b>(5)</b>
  t &lt;= NOT x(1);
@@ -1616,15 +1373,12 @@ end rtl;</code></pre>
 </div>
 </div>
 </li>
-<li>
-<p>Se ha utilizado para los buses de señales el tipo bit_vector.</p>
-</li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_estructura_del_programa_librería_entidad_arquitectura">8.5. Estructura del Programa: Librería-Entidad-Arquitectura</h3>
+<h3 id="_estructura_del_programa_librería_entidad_arquitectura">8.9. Estructura del Programa: Librería-Entidad-Arquitectura</h3>
 <div class="paragraph">
 <p>El Programa VHDL está estructurado en 4 partes:</p>
 </div>
@@ -1671,135 +1425,20 @@ end rtl;</code></pre>
 </tr>
 </table>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_sentencias_concurrentes">9. Sentencias Concurrentes</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_concepto_de_concurrencia">9.1. Concepto de concurrencia</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Cómo se ejecuta la sentencia asignación concurrente <em>&#8656;</em></p>
-<div class="ulist">
-<ul>
-<li>
-<p>A las señales de la derecha del símbolo <em>&#8656;</em> se les denomina <strong>señales sensibles</strong></p>
-</li>
-<li>
-<p>Cuando una de la señales sensibles cambia (<strong>evento</strong>) en ese mismo instante se ejecuta la sentencia asignación.</p>
-</li>
-<li>
-<p>se ve mejor el concepto de concurrencia si en la arquitectura hay dos o más sentencias concurrentes.</p>
-</li>
-<li>
-<p>concurrencia es sinónimo de simultaneidad</p>
-</li>
-<li>
-<p>El orden de ejecución lo dictan los eventos de las señales sensibles y <strong>NO</strong> por el orden de escritura de la secuencia de sententencias.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejemplo_unidad_de_diseño_matricula_vhd">9.2. Ejemplo: Unidad de diseño "matricula.vhd"</h3>
-<div class="imageblock">
-<div class="content">
-<img src="images/matricula_RTL.png" alt="Circuito Digital matricula">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Unidad <em>matricula.vhdl</em></p>
-<div class="listingblock">
-<div class="content">
-<pre>-- SSDD I
--- Ejercicio 1.5
--- matricula.vhdl
-
-library ieee;
-use ieee.std_logic_1164.all;
-
-entity matricula is
-    port (
-        SW: in std_logic_vector(9 downto 0);
-        LEDR: out std_logic_vector(9 downto 0)
-    );
-end matricula;
-
-architecture puertas of matricula is
-    signal a, b, c: std_logic;         		<i class="conum" data-value="1"></i><b>(1)</b>
-begin
-    a 		&lt;= SW(0) and SW(1);		<i class="conum" data-value="2"></i><b>(2)</b>
-    b 		&lt;= SW(1) and SW(2);		<i class="conum" data-value="2"></i><b>(2)</b>
-    c 		&lt;= SW(3);			<i class="conum" data-value="2"></i><b>(2)</b>
-    LEDR(0) 	&lt;= a or b or c;			<i class="conum" data-value="2"></i><b>(2)</b>
-end puertas;</pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Verificar el buen funcionamiento del circuito con su simulación.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_significado">9.3. Significado</h3>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>la declaración <strong>signal</strong> se utiliza para declarar señales internas a la arquitectura, a diferencia de los puertos de la entidad que son señales externas al circuito. Las señales <em>a</em>, <em>b</em> y <em>c</em> son internas.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Las sentencias <strong>&#8656;</strong> se ejecutan en el instante en que alguna de las señales a la derecha de <strong>&#8656;</strong> cambia su valor. Por lo tanto las 4 sentencias no se ejecutan secuencialmente, sino CONCURRENTEMENTE. Por ejemplo, si el valor de la señal externa <em>SW(1)</em> cambia en un momento dado de "0" a "1" , entonces, las asignaciones &lt;3&gt; y &lt;4&gt; se ejecutan en paralelo, concurrentemente, al mismo tiempo, por lo que el valor de las señales <em>a</em> y <em>b</em> también cambia y por lo tanto <em>LEDR(0)</em> también cambiará; en resumen, el cambio en <em>SW(1)</em> puede provocar un cambio simultáneo en <em>a</em>,<em>b</em>,<em>LEDR(0)</em>&#8230;&#8203;lo mismo que ocurriría en un circuito digital electrónico de puertas lógicas donde todas las puertas lógicas cambian sus salidas en el instante en el que lo hacen sus entradas.
-<div class="ulist">
-<ul>
-<li>
-<p>Por lo tanto el orden en que se ejecutan las sentencias dentro de la arquitectura NO ES SECUENCIAL. Son los eventos de las señales sensibles los que indican el orden en que se ejecutan las sentencias, pudiendo ocurrir que dos o más sentencias se ejecuten simultáneamente, CONCURRENTEMENTE. Esta concurrencia es necesaria ya que en los circuitos digitales reales formados por puertas lógicas u otro tipo de bloques, dichas puertas y bloques funcionan concurrentemente, pudiendo cambiar la salida de distintas puertas o bloques al mismo tiempo.</p>
-</li>
-</ul>
-</div></td>
-</tr>
-</table>
-</div>
 <div style="page-break-after: always;"></div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_librería_standard_paquete_standard">10. Librería standard:  paquete STANDARD</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_librería_standard_paquete_standard">8.10. Librería standard:  paquete STANDARD</h3>
 <div class="ulist">
 <ul>
 <li>
 <p>light_bit.vhdl:</p>
-</li>
-</ul>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre>-- Sistemas Digitales I año 2020
--- Upna 7 de Febrero 2020
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Sistemas Digitales I año 2022
 -- Laboratorio Remoto de la Upna
 -- FICHERO light_bit.vhdl : OBLIGATORIAMENTE debe ser el MISMO nombre que el utilizado en ENTITY.
 -- tutorial: primera práctica en aula
--- SSDDI 2020 Febrero 7
 
 -- El tipo de señal "bit" se define en el paquete standard.vhdl
 
@@ -1822,11 +1461,10 @@ begin
  u &lt;= x(0) AND t;
  v &lt;= x(1) AND s;
  z &lt;= u OR v;
-end rtl;</pre>
+end rtl;</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>No es necesario declarar el paquete "STANDARD" de la librería "std" porque el COMPILADOR dispone de él internamente.</p>
 </li>
@@ -1855,17 +1493,7 @@ end STANDARD;</pre>
 <div class="ulist">
 <ul>
 <li>
-<p>..vhdl_src/std/standard.vhdl</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Modelsim-Altera</p>
-<div class="ulist">
-<ul>
-<li>
-<p>../modelsim_ase/vhdl_src/std/standard.vhdl</p>
+<p>** C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/std/standard.vhdl</p>
 </li>
 </ul>
 </div>
@@ -1875,11 +1503,12 @@ end STANDARD;</pre>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="_tutorial_quartus_light_bit_vhd_i">11. Tutorial quartus &#8594; light_bit.vhd (I)</h2>
+<h2 id="_tutorial_quartus_light_bit_vhd_i">9. Tutorial quartus &#8594; light_bit.vhd (I)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_diseño">11.1. Diseño</h3>
+<h3 id="_diseño">9.1. Diseño</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2055,7 +1684,7 @@ end rtl;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_errores_en_el_proceso_de_compilación">11.2. Errores en el Proceso de Compilación</h3>
+<h3 id="_errores_en_el_proceso_de_compilación">9.2. Errores en el Proceso de Compilación</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2078,7 +1707,7 @@ end rtl;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_archivar_el_proyecto_para_conservarlo">11.3. Archivar el proyecto para conservarlo</h3>
+<h3 id="_archivar_el_proyecto_para_conservarlo">9.3. Archivar el proyecto para conservarlo</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2100,10 +1729,10 @@ end rtl;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_vhdl_paquetes_std_logic_1164_y_textio">12. VHDL: Paquetes std_logic_1164 y textio</h2>
+<h2 id="_vhdl_paquetes_std_logic_1164_y_textio">10. VHDL: Paquetes std_logic_1164 y textio</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_paquete_standard_logic_std_logic_std_logic_1164">12.1. Paquete Standard Logic (std_logic): std_logic_1164</h3>
+<h3 id="_paquete_standard_logic_std_logic_std_logic_1164">10.1. Paquete Standard Logic (std_logic): std_logic_1164</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2169,11 +1798,23 @@ _____________________</pre>
 <p>los niveles 0 y 1 se dividen cada uno de ellos en forzoso y débil</p>
 </li>
 <li>
-<p>el nivel desconocido se divide en forzoso, débil tirando a 1 y débil tirando a 0.</p>
+<p>el nivel desconocido se divide en forzoso y débil tirando a 1 o a 0.</p>
 </li>
 <li>
 <p>una forma de interpretar esos estados es DIBUJANDO la FORMA una señal digital generada por un transmisor y observada a la salida de una línea serie y a la entrada del receptor: se genera un 1 forzoso y se recibe un 1 débil ó un valor desconocido</p>
 </li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/tema4_signal_stdlogic.png" alt="tema4 signal stdlogic">
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>3 Valores son indefinidos, "unmesurable".</p>
 <div class="listingblock">
@@ -2194,6 +1835,10 @@ Z: alta impedancia : circuito abierto -&gt; desconexión -&gt;
    Las salidas de los inversores INV-1 e INV-2 si están en estado Z se desconectan del bus</pre>
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>El paquete <strong>std_logic_1164</strong> está localizado en: C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/ieee/stdlogic.vhdl</p>
 </li>
 </ul>
 </div>
@@ -2202,7 +1847,7 @@ Z: alta impedancia : circuito abierto -&gt; desconexión -&gt;
 </div>
 </div>
 <div class="sect2">
-<h3 id="_std_logic_vector_downto_to">12.2. std_logic_vector : downto , to</h3>
+<h3 id="_std_logic_vector_downto_to">10.2. std_logic_vector : downto , to</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2249,14 +1894,14 @@ Z: alta impedancia : circuito abierto -&gt; desconexión -&gt;
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_librería_standard_paquete_textio">12.3. Librería standard: paquete TEXTIO</h3>
+<h3 id="_librería_standard_paquete_textio">10.3. Librería standard: paquete TEXTIO</h3>
 <div class="ulist">
 <ul>
 <li>
 <p>Fichero textio.vhdl donde se define el paquete TEXTIO de la librería "std".</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- textio.vhdl
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- textio.vhdl
 
 library std; use std.standard.all;	-- needed for bootstrap mode
 
@@ -2264,30 +1909,28 @@ package TEXTIO is
 
   -- Type Definitions for Text I/O
 
-
-
   type TEXT is file of STRING;	-- a file of variable-length ASCII records
   procedure WRITE (L: inout LINE; VALUE: in BIT;
 			JUSTIFIED: in SIDE := RIGHT; FIELD: in WIDTH := 0);
 
- -- CUIDADO: no están todas las definiciones de tipos, procedimientos, etc</pre>
+ -- CUIDADO: no están todas las definiciones de tipos, procedimientos, etc</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>No es necesario declarar el paquete "TEXTIO" de la librería "std", pero se podría declarar de la  forma</p>
+<p>No es necesario declarar el paquete "TEXTIO" de la librería "std", pero se podría declarar de la  forma :</p>
 <div class="listingblock">
 <div class="content">
-<pre>library std;
-use std.textio.all;</pre>
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library std;
+use std.textio.all;</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Ejemplo de uso del paquete TEXTIO en el módulo fuente hello_world.vhdl</p>
+<p>Ejemplo de uso del paquete TEXTIO en el módulo fuente "hello_world.vhdl"</p>
 <div class="listingblock">
 <div class="content">
-<pre>library std;
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library std;
 use std.textio.all;
 
 entity HelloWorld is
@@ -2304,26 +1947,32 @@ begin
 
     end process;
 
-end architecture;</pre>
+end architecture;</code></pre>
 </div>
 </div>
 </li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+hello_world.vhd no produce ningún circuito lógicamente, no se sintetiza. Pero la sentencia <span class="naranja">report</span> se puede utilizar para depurar código como en cualquier lenguaje de programación.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Questa Intel</p>
 <div class="ulist">
 <ul>
 <li>
-<p>..vhdl_src/std/textio.vhdl</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Modelsim-Altera</p>
-<div class="ulist">
-<ul>
-<li>
-<p>../modelsim_ase/vhdl_src/std/textio.vhdl</p>
+<p>C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/std/textio.vhdl</p>
 </li>
 </ul>
 </div>
@@ -2334,12 +1983,25 @@ end architecture;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tutorial_quartus_light_de1soc_vhd_ii">13. Tutorial quartus &#8594; light_de1soc.vhd (II)</h2>
+<h2 id="_tutorial_quartus_light_de1soc_vhd_ii">11. Tutorial quartus &#8594; light_de1soc.vhd (II)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_diseño_2">13.1. Diseño</h3>
+<h3 id="_diseño_2">11.1. Diseño</h3>
 <div class="ulist">
 <ul>
+<li>
+<p>En este ejercicio:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se va a utilizar el tipo de señal <strong>std_logic</strong> y <strong>std_logic_vector</strong></p>
+</li>
+<li>
+<p>se va a fabricar el circuito digital en la <strong>FPGA Cyclone V</strong> de la tarjeta <strong>DE1-SoC</strong> accesible de forma remota.</p>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>Se va a crear el nuevo proyecto light_de1soc con un nuevo módulo fuente  light_de1soc.vhd</p>
 <div class="ulist">
@@ -2464,7 +2126,7 @@ END LogicFunction ;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_fabricación_en_el_laboratorio_remoto">13.2. Fabricación en el laboratorio remoto</h3>
+<h3 id="_fabricación_en_el_laboratorio_remoto">11.2. Fabricación en el laboratorio remoto</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2537,7 +2199,7 @@ En el panel de archivos seleccionar el fichero de diseño TOP de la jerarquía d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejercicios">13.3. Ejercicios</h3>
+<h3 id="_ejercicios">11.3. Ejercicios</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2549,12 +2211,22 @@ En el panel de archivos seleccionar el fichero de diseño TOP de la jerarquía d
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tutorial_quartus_light_signal_vhd_iii">14. Tutorial quartus &#8594; light_signal.vhd (III)</h2>
+<h2 id="_tutorial_quartus_light_signal_vhd_iii">12. Tutorial quartus &#8594; light_signal.vhd (III)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_diseño_3">14.1. Diseño</h3>
+<h3 id="_diseño_3">12.1. Diseño</h3>
 <div class="ulist">
 <ul>
+<li>
+<p>En este ejercicio se va a:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>visualizar el esquema eléctrico resultante de la síntesis del circuito.</p>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>A partir del proyecto light_de1soc creamos el proyecto light_signal</p>
 <div class="ulist">
@@ -2647,7 +2319,7 @@ END LogicFunction ;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_análisis_herramienta_rtl_viewer">14.2. Análisis: Herramienta RTL Viewer</h3>
+<h3 id="_análisis_herramienta_rtl_viewer">12.2. Análisis: Herramienta RTL Viewer</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2685,7 +2357,7 @@ END LogicFunction ;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejercicios_2">14.3. Ejercicios</h3>
+<h3 id="_ejercicios_2">12.3. Ejercicios</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2697,12 +2369,22 @@ END LogicFunction ;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tutorial_quartus_light_vhd_iv_simulación_questa_intel">15. Tutorial quartus &#8594; light.vhd (IV) : Simulación Questa Intel</h2>
+<h2 id="_tutorial_quartus_light_de1soc_vhd_iv_simulación_questa_intel">13. Tutorial quartus &#8594; light_de1soc.vhd (IV) : Simulación Questa Intel</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_simulación">15.1. Simulación</h3>
+<h3 id="_simulación">13.1. Simulación</h3>
 <div class="ulist">
 <ul>
+<li>
+<p>En este ejercicio se va a:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>simular el procesado de señales que realiza el circuito para la obtención de un cronograma que visualice las señales digitales binarias del circuito y poder verificar así su funcionamiento.</p>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>Simulación del diseño light_de1soc.</p>
 <div class="ulist">
@@ -2724,13 +2406,13 @@ END LogicFunction ;</code></pre>
 <p>Quartus &#8594; Settings &#8594; Eda Tool Settings &#8594; Simulation&#8594; Tool Name: Questa Intel</p>
 </li>
 <li>
-<p>Quartus &#8594; Tools &#8594; options &#8594; general &#8594; eda tool options &#8594; Questa Intel : seleccionar la carpeta donde esté instalado, por ejemplo &#8594; C:/intel_quartus/21.1/questa_fse/bin</p>
+<p>Quartus &#8594; Tools &#8594; options &#8594; general &#8594; eda tool options &#8594; Questa Intel : seleccionar la carpeta donde esté instalado <strong>questasim</strong> &#8594; C:/intelFPGA_lite/21.1/questa_fse/win64/questasim.exe</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>generar fuentes del simulador</p>
+<p>generar los ficheros fuente que utilizará el simulador Questa.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2744,7 +2426,7 @@ END LogicFunction ;</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Tools &#8594; Run Simulator Tool &#8594; RTL simulation &#8594; Abre el simulador Questa Intel</p>
+<p>Tools &#8594; Run Simulator Tool &#8594; RTL simulation &#8594; Abre una nueva ventana con el simulador Questa Intel</p>
 </li>
 </ul>
 </div>
@@ -2753,7 +2435,7 @@ END LogicFunction ;</code></pre>
 </div>
 </li>
 <li>
-<p>Questa Intel Simulator</p>
+<p>Questa Intel Simulator:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2798,22 +2480,10 @@ END LogicFunction ;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_edición_vhdl_mediante_quartus_utilizando_plantillas_de_ayuda">16. Edición VHDL mediante Quartus utilizando plantillas de ayuda</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Información en el apéndice</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tutorial_quartus_light_csa_vhd_v">17. Tutorial quartus &#8594; light_csa.vhd (V)</h2>
+<h2 id="_tutorial_quartus_light_csa_vhd_v">14. Tutorial quartus &#8594; light_csa.vhd (V)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_diseño_4">17.1. Diseño</h3>
+<h3 id="_diseño_4">14.1. Diseño</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2824,7 +2494,7 @@ END LogicFunction ;</code></pre>
 <p>El objetivo es describir literalmente la "Tabla de la Verdad" de la función del circuito.</p>
 </li>
 <li>
-<p>Utilizamos la sentencia concurrente "Conditional Signal Assignment" (csa).</p>
+<p>Utilizamos la <strong>sentencia concurrente</strong> "Conditional Signal Assignment" (csa).</p>
 </li>
 <li>
 <p>creo la carpeta ../light_csa</p>
@@ -2889,7 +2559,7 @@ END TablaVerdad ;</code></pre>
 <p>Una vez insertada la plantilla la particularizo con las señales de mi diseño:</p>
 <div class="listingblock">
 <div class="content">
-<pre>library ieee;
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library ieee;
 use ieee.std_logic_1164.all;
 
 ENTITY light_csa IS
@@ -2904,7 +2574,7 @@ BEGIN
 	'1' when SW(0)='1' AND SW(1)='0' else
 	'0'; -- CASO DEFAULT :  NO es obligatorio
 
-END TablaVerdad ;</pre>
+END TablaVerdad ;</code></pre>
 </div>
 </div>
 </li>
@@ -2918,7 +2588,7 @@ END TablaVerdad ;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_análisis">17.2. Análisis</h3>
+<h3 id="_análisis">14.2. Análisis</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2964,7 +2634,7 @@ END TablaVerdad ;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejercicios_3">17.3. Ejercicios</h3>
+<h3 id="_ejercicios_3">14.3. Ejercicios</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2979,10 +2649,10 @@ END TablaVerdad ;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_sentencias_secuenciales">18. Sentencias Secuenciales</h2>
+<h2 id="_sentencias_secuenciales">15. Sentencias Secuenciales</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_procesoprocess">18.1. Proceso/Process()</h3>
+<h3 id="_procesoprocess">15.1. Proceso/Process()</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -2998,212 +2668,88 @@ END TablaVerdad ;</pre>
 <p>Un proceso se ejecuta cuando hay un evento en una de las señales sensibles al proceso. Las señales sensibles al proceso se declaran entre paréntesis junto a la sentencia <strong>PROCESS(sensivity signals)</strong>. Por lo tanto la sentencia process es una sentencias <strong>concurrente</strong> y las sentencias de su cuerpo son <strong>secuenciales</strong>.</p>
 <div class="listingblock">
 <div class="content">
-<pre>&lt;optional_label&gt;:  process(sensivity signals) is
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">&lt;optional_label&gt;:  process(sensivity signals) is
         { Declaration(s) }
         begin
         { Sequential Statement(s) }
-        end process;</pre>
+        end process;</code></pre>
 </div>
 </div>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_ejemplo_1_matricula_vhd">18.2. Ejemplo_1: matricula.vhd</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_quartus_light_process_vhd_vi">16. Tutorial quartus &#8594; light_process.vhd (VI)</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Arquitectura mediante la sentencia concurrente <strong>process</strong></p>
+<p>Arquitectura mediante la sentencia concurrente [.naranja]#process3</p>
 <div class="ulist">
 <ul>
 <li>
-<p>En el cuerpo del proceso se utilizarán la sentencia de asignación secuencial "&#8656;".</p>
+<p>En el cuerpo del proceso se utilizarán la sentencia de asignación secuencial <span class="naranja">&#8656;</span>.</p>
 </li>
 </ul>
 </div>
 </li>
-<li>
-<p>Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Unidad <em>matricula.vhdl</em></p>
+</ul>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre>-- Ejercicio 1.5
--- matricula.vhdl
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">--
+-- Descripción VHDL Primavera 2023
+-- Circuito light_bit.vhd:
+-- Puerta lógica XOR extendida
+entity of light_bit is
+  port (
+    SW : in std_logic_vector(1 downto 0);
+    LEDR   : out std_logic_vector(0 downto 0)
+);
+end entity;
 
-library ieee;
-use ieee.std_logic_1164.all;
-
-entity matricula is
-    port (
-        SW: in std_logic_vector(9 downto 0);
-        LEDR: out std_logic_vector(9 downto 0)
-    );
-end matricula;
-
-architecture rtl_seq of matricula is
-    signal a, b, c: std_logic;
+architecture rtl of light_bit is
+ signal s,t,u,v : bit;
 begin
-  process (SW(0), SW(1), SW(2), SW(3))
-  begin
-      a 		&lt;= SW(0) and SW(1);
-      b 		&lt;= SW(1) and SW(2);
-      c 		&lt;= SW(3);
-      LEDR(0) 	&lt;= a or b or c;
-  end process;
-end rtl_seq;</pre>
-</div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
-</li>
-<li>
-<p>La lista de señales sensibles para la ejecución del proceso es: SW(0), SW(1), SW(2), SW(3)</p>
-</li>
-<li>
-<p>Un evento en alguna de las señales SW(0), SW(1), SW(2), SW(3), provoca la ejecución de todas las sentencias del cuerpo del process de forma secuencial.</p>
-<div class="listingblock">
-<div class="content">
-<pre>process (SW(0), SW(1), SW(2), SW(3))
-  begin
-      LEDR(0) 	&lt;= a or b or c;
-      a 		&lt;= SW(0) and SW(1);
-      b 		&lt;= SW(1) and SW(2);
-      c 		&lt;= SW(3);
-  end process;</pre>
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>¿Qué ocurriría si el cuerpo del process tuviese otro orden como el siguiente?</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_ejemplo_2_matricula_vhd">18.3. Ejemplo_2: matricula.vhd</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos</p>
-</li>
-<li>
-<p>La tabla de la verdad</p>
-<div class="ulist">
-<ul>
-<li>
-<p>4 entradas : SW(0), SW(1), SW(2), SW(3)</p>
-</li>
-<li>
-<p>1 salida : LEDR(0)</p>
-</li>
-<li>
-<p>Nº de filas = 2<sup>4</sup> = 16</p>
-</li>
-<li>
-<p>los minitérminos SW(0)*SW(1)*SW(2)*SW(3) que hacen 0 a la función son: m<sub>0</sub>, m<sub>1</sub>, m<sub>4</sub>, m<sub>8</sub> y m<sub>9</sub></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Arquitectura mediante la sentencia concurrente <strong>process</strong> y la sentencia secuencial <strong>case</strong></p>
-<div class="ulist">
-<ul>
-<li>
-<p>La arquitectura describe literalmente la Tabla de la Verdad</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Unidad <em>matricula_case.vhdl</em></p>
-<div class="listingblock">
-<div class="content">
-<pre>-- SSDD I
--- Ejercicio 1.5
--- matricula_case.vhdl
-
-library ieee;
-use ieee.std_logic_1164.all;
-
-entity matricula_case is
-    port (
-        SW: in std_logic_vector(3 downto 0);
-        LEDR: out std_logic_vector(0 downto 0)
-    );
-end matricula_case;
-
-architecture behavioral_seq of matricula_case is
- begin
   process (SW)
   begin
-   case SW  is
-    when "0000" =&gt; LEDR &lt;= "0";
-    when "0001" =&gt; LEDR &lt;= "0";
-    when "0100" =&gt; LEDR &lt;= "0";
-    when "1000" =&gt; LEDR &lt;= "0";
-    when "1001" =&gt; LEDR &lt;= "0";
-    when others =&gt; LEDR &lt;= "1";
-   end case;
+  s &lt;= not SW(0);
+  t &lt;= not SW(1);
+  u &lt;= SW(0) and t;
+  v &lt;= SW(1) and s;
+  LEDR(0) &lt;= u or v;
   end process;
-end behavioral_seq;</pre>
+end rtl;
+--</code></pre>
 </div>
-</div>
-</li>
-</ul>
-</div>
-<div class="admonitionblock caution">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-caution" title="Caution"></i>
-</td>
-<td class="content">
-la constante 0 en  la asignación LEDR &#8656; "0" da error si se pone '0' ya que LEDR es un bus, no un hilo.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia secuencial <em>case</em> describimos la tabla de la verdad. No es necesario saber la función lógica que relaciona la entrada y la salida.
-</td>
-</tr>
-</table>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
+<p>Verificar el buen funcionamiento del circuito mediante la simulación o/y en el laboratorio remoto.</p>
+</li>
+<li>
+<p>La lista de señales sensibles para la ejecución del proceso es el bus SW</p>
+</li>
+<li>
+<p>Un evento en alguna de las señales SW(0) o SW(1), provoca la ejecución de todas las sentencias del cuerpo del process de forma secuencial.</p>
+</li>
+<li>
+<p>Cambiar el código VHDL cambiando el orden de las sentencias <span class="naranja">&#8658;</span> y observar si hay algún cambio en la síntesis del circuito.</p>
 </li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
-</div>
 <div class="sect1">
-<h2 id="_tutorial_quartus_light_if_vhd_vi">19. Tutorial quartus &#8594; light_if.vhd (VI)</h2>
+<h2 id="_tutorial_quartus_light_if_vhd_vii">17. Tutorial quartus &#8594; light_if.vhd (VII)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_diseño_5">19.1. Diseño</h3>
+<h3 id="_diseño_5">17.1. Diseño</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3230,7 +2776,7 @@ La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia 
 <p>Insert Template &#8594; VHDL &#8594; Constructs &#8594; Concurrent Statements &#8594; PROCESS</p>
 <div class="listingblock">
 <div class="content">
-<pre>&lt;optional_label&gt;:
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">&lt;optional_label&gt;:
 	process(reset, clk) is
 		-- Declaration(s)
 	begin
@@ -3239,7 +2785,7 @@ La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia 
 		elsif(rising_edge(clk)) then
 			-- Synchronous Sequential Statement(s) -&gt; SOLO sentencias SECUENCIALES !!
 		end if;
-	end process;</pre>
+	end process;</code></pre>
 </div>
 </div>
 </li>
@@ -3263,7 +2809,7 @@ La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia 
 <p>Particularizo las dos sentencias con las señales de mi diseño.</p>
 <div class="listingblock">
 <div class="content">
-<pre>	-- El proceso se ejecuta SI hay alguna variacion en las señales ARGUMENTO ( señales SENSIBLES del proceso)
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">	-- El proceso se ejecuta SI hay alguna variacion en las señales ARGUMENTO ( señales SENSIBLES del proceso)
 	process(SW) is
 		-- Declaration(s)
 	begin
@@ -3272,7 +2818,7 @@ La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia 
 		else
 			LEDR(0) &lt;= '1';
 		end if;
-	end process;</pre>
+	end process;</code></pre>
 </div>
 </div>
 </li>
@@ -3284,13 +2830,13 @@ La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia 
 <p>NO es necesario volver a insertar la sentencia IF dentro del PROCESS.</p>
 <div class="listingblock">
 <div class="content">
-<pre>if &lt;expression&gt; then
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">if &lt;expression&gt; then
 	-- Sequential Statement(s)
 elsif &lt;expression&gt; then
 	-- Sequential Statement(s)
 else
 	-- Sequential Statement(s);
-end if;</pre>
+end if;</code></pre>
 </div>
 </div>
 </li>
@@ -3304,7 +2850,7 @@ end if;</pre>
 <p>light_if.vhd:</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- SSDDI-2022
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDDI-2022
 -- Intel tutorial reference: light.pdf
 -- Diseño: Si uno de los switches SW(0) o SW(1) esta activo -&gt; led rojo LEDR(0) encendido
 -- Arquitectura: tipo funcional (Behavioral) -&gt; Describe literalmente la tabla de la verdad, no describe una expresión matematica.
@@ -3331,7 +2877,7 @@ BEGIN
 			LEDR(0) &lt;= '1';
 		end if;
 	end process;
-END TablaVerdad;</pre>
+END TablaVerdad;</code></pre>
 </div>
 </div>
 </li>
@@ -3345,7 +2891,7 @@ END TablaVerdad;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_análisis_2">19.2. Análisis</h3>
+<h3 id="_análisis_2">17.2. Análisis</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3360,7 +2906,7 @@ END TablaVerdad;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejercicios_4">19.3. Ejercicios</h3>
+<h3 id="_ejercicios_4">17.3. Ejercicios</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3378,10 +2924,10 @@ END TablaVerdad;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tutorial_quartus_light_with_vhd_vii">20. Tutorial quartus &#8594; light_with.vhd (VII)</h2>
+<h2 id="_tutorial_quartus_light_with_vhd_viii">18. Tutorial quartus &#8594; light_with.vhd (VIII)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_diseño_6">20.1. Diseño</h3>
+<h3 id="_diseño_6">18.1. Diseño</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3417,7 +2963,7 @@ END TablaVerdad;</pre>
 <p>Módulo fuente: light_with.vhd</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- SSDD
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDD
 -- Intel tutorial reference: light
 -- Behavioral architecture : Truth table function
 -- concurrent sentence : with
@@ -3437,7 +2983,7 @@ BEGIN
 	LEDR(0) &lt;= '1' when "00",
 		   '1' when "11",
 		   '0' when others; -- caso Default : SÍ ES OBLIGATORIO
-END LogicFunction ;</pre>
+END LogicFunction ;</code></pre>
 </div>
 </div>
 </li>
@@ -3451,7 +2997,7 @@ END LogicFunction ;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_análisis_3">20.2. Análisis</h3>
+<h3 id="_análisis_3">18.2. Análisis</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3461,7 +3007,7 @@ END LogicFunction ;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejercicios_5">20.3. Ejercicios</h3>
+<h3 id="_ejercicios_5">18.3. Ejercicios</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3479,10 +3025,10 @@ END LogicFunction ;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_tutorial_quartus_light_case_vhd_viii">21. Tutorial quartus &#8594; light_case.vhd (VIII)</h2>
+<h2 id="_tutorial_quartus_light_case_vhd_ix">19. Tutorial quartus &#8594; light_case.vhd (IX)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_diseño_7">21.1. Diseño</h3>
+<h3 id="_diseño_7">19.1. Diseño</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3521,7 +3067,7 @@ END LogicFunction ;</pre>
 <p>Módulo fuente: light_case.vhd</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- SSDDI-2022
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDDI-2022
 -- Intel tutorial reference: light
 -- Behavioral architecture : Truth table function
 -- sequential sentence : case
@@ -3552,7 +3098,7 @@ process (SW)
    end case;
   end process;
 
-END behavioral ;</pre>
+END behavioral ;</code></pre>
 </div>
 </div>
 </li>
@@ -3566,7 +3112,7 @@ END behavioral ;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_análisis_4">21.2. Análisis</h3>
+<h3 id="_análisis_4">19.2. Análisis</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3603,7 +3149,7 @@ END behavioral ;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejercicios_6">21.3. Ejercicios</h3>
+<h3 id="_ejercicios_6">19.3. Ejercicios</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3628,10 +3174,237 @@ END behavioral ;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_multiplexor">22. Multiplexor</h2>
+<h2 id="_ejercicio_1_5_matricula">20. Ejercicio 1.5: Matricula</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_mux2x1_arquitectura_rtl">22.1. mux2x1: arquitectura RTL</h3>
+<h3 id="_arquitectura_rtl">20.1. Arquitectura rtl</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad <em>matricula.vhdl</em></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDD I
+-- Ejercicio 1.5
+-- matricula.vhdl
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity matricula is
+    port (
+        SW: in std_logic_vector(9 downto 0);
+        LEDR: out std_logic_vector(9 downto 0)
+    );
+end matricula;
+
+architecture puertas of matricula is
+    signal a, b, c: std_logic;
+begin
+    a 		&lt;= SW(0) and SW(1);
+    b 		&lt;= SW(1) and SW(2);
+    c 		&lt;= SW(3);
+    LEDR(0) 	&lt;= a or b or c;
+end puertas;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_netlist_view">20.2. netlist view</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/matricula_RTL.png" alt="Circuito Digital matricula">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tutorial_quartus_matricula_case_vhd">20.3. Tutorial quartus &#8594; matricula_case.vhd</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejercicio 1.5 (matricula) del libro de problemas resueltos de circuitos electrónicos</p>
+</li>
+<li>
+<p>La tabla de la verdad</p>
+<div class="ulist">
+<ul>
+<li>
+<p>4 entradas : SW(0), SW(1), SW(2), SW(3)</p>
+</li>
+<li>
+<p>1 salida : LEDR(0)</p>
+</li>
+<li>
+<p>Nº de filas = 2<sup>4</sup> = 16</p>
+</li>
+<li>
+<p>los minitérminos SW(0)*SW(1)*SW(2)*SW(3) que hacen 0 a la función son: m<sub>0</sub>, m<sub>1</sub>, m<sub>4</sub>, m<sub>8</sub> y m<sub>9</sub></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Arquitectura mediante la sentencia concurrente <strong>process</strong> y la sentencia secuencial <strong>case</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>La arquitectura describe literalmente la Tabla de la Verdad</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Unidad <em>matricula_case.vhdl</em></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDD I
+-- Ejercicio 1.5
+-- matricula_case.vhdl
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity matricula_case is
+    port (
+        SW: in std_logic_vector(3 downto 0);
+        LEDR: out std_logic_vector(0 downto 0)
+    );
+end matricula_case;
+
+architecture behavioral_seq of matricula_case is
+ begin
+  process (SW)
+  begin
+   case SW  is
+    when "0000" =&gt; LEDR &lt;= "0";
+    when "0001" =&gt; LEDR &lt;= "0";
+    when "0100" =&gt; LEDR &lt;= "0";
+    when "1000" =&gt; LEDR &lt;= "0";
+    when "1001" =&gt; LEDR &lt;= "0";
+    when others =&gt; LEDR &lt;= "1";
+   end case;
+  end process;
+end behavioral_seq;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+la constante 0 en  la asignación LEDR &#8656; "0" da error si se pone '0' ya que LEDR es un bus, no un hilo.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia secuencial <em>case</em> describimos la tabla de la verdad. No es necesario saber la función lógica que relaciona la entrada y la salida.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejemplo_1_matricula_vhd">20.4. Ejemplo_1: matricula.vhd</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad <em>matricula.vhdl</em></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Ejercicio 1.5
+-- matricula.vhdl
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity matricula is
+    port (
+        SW: in std_logic_vector(9 downto 0);
+        LEDR: out std_logic_vector(9 downto 0)
+    );
+end matricula;
+
+architecture rtl_seq of matricula is
+    signal a, b, c: std_logic;
+begin
+  process (SW(0), SW(1), SW(2), SW(3))
+  begin
+      a 		&lt;= SW(0) and SW(1);
+      b 		&lt;= SW(1) and SW(2);
+      c 		&lt;= SW(3);
+      LEDR(0) 	&lt;= a or b or c;
+  end process;
+end rtl_seq;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
+</li>
+<li>
+<p>La lista de señales sensibles para la ejecución del proceso es: SW(0), SW(1), SW(2), SW(3)</p>
+</li>
+<li>
+<p>Un evento en alguna de las señales SW(0), SW(1), SW(2), SW(3), provoca la ejecución de todas las sentencias del cuerpo del process de forma secuencial.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">process (SW(0), SW(1), SW(2), SW(3))
+  begin
+      LEDR(0) 	&lt;= a or b or c;
+      a 		&lt;= SW(0) and SW(1);
+      b 		&lt;= SW(1) and SW(2);
+      c 		&lt;= SW(3);
+  end process;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_multiplexor">21. Multiplexor</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_mux2x1_arquitectura_rtl">21.1. mux2x1: arquitectura RTL</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3642,7 +3415,7 @@ END behavioral ;</pre>
 <p>Unidad <em>mux2x1_rtl.vhd</em></p>
 <div class="listingblock">
 <div class="content">
-<pre>-- UPNA
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- UPNA
 -- SSDD I
 -- mux2x1_rtl.vhdl
 -- Multiplexor 2x1
@@ -3666,7 +3439,7 @@ end mux2x1_rtl;
 architecture rtl of  mux2x1_rtl is
  begin
     LEDR(0) &lt;= (KEY(0) and (not SW(0))) or (KEY(1) and SW(0)) ;
-end rtl;</pre>
+end rtl;</code></pre>
 </div>
 </div>
 </li>
@@ -3680,7 +3453,7 @@ end rtl;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_análisis_5">22.2. Análisis</h3>
+<h3 id="_análisis_5">21.2. Análisis</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3696,7 +3469,7 @@ end rtl;</pre>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_mux4x1_arquitectura_behavioral">22.3. mux4x1: arquitectura Behavioral</h3>
+<h3 id="_mux4x1_arquitectura_behavioral">21.3. mux4x1: arquitectura Behavioral</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3707,7 +3480,7 @@ end rtl;</pre>
 <p>Unidad <em>mux4x1_beh.vhdl</em></p>
 <div class="listingblock">
 <div class="content">
-<pre>-- UPNA
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- UPNA
 -- SSDD I
 -- mux4x1_beh.vhdl
 -- Multiplexor 4x1
@@ -3745,7 +3518,7 @@ architecture behavioral of  mux4x1_beh is
                    LEDR &lt;= "0";
                end if;
               end process multi4x1;
-end behavioral;</pre>
+end behavioral;</code></pre>
 </div>
 </div>
 </li>
@@ -3778,7 +3551,7 @@ Si se escribe LEDR en lugar de LEDR(0) da error.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_análisis_6">22.4. Análisis</h3>
+<h3 id="_análisis_6">21.4. Análisis</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3794,7 +3567,7 @@ Si se escribe LEDR en lugar de LEDR(0) da error.
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_mux4x1_arquitectura_estructural">22.5. mux4x1: arquitectura Estructural</h3>
+<h3 id="_mux4x1_arquitectura_estructural">21.5. mux4x1: arquitectura Estructural</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3831,7 +3604,7 @@ lo cual  se describe en VHDL mediante una arquitectura estructural.</p>
 <p>unidad <em>mux2x1.vhd</em> en el nivel bajo de la jerarquía.</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- UPNA
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- UPNA
 -- SSDD I
 -- mux2x1.vhd
 -- Multiplexor 2x1
@@ -3855,7 +3628,7 @@ end mux2x1;
 architecture rtl of  mux2x1 is
  begin
  S &lt;= (D(0) and (not C)) or (D(1) and C) ;
-end rtl;</pre>
+end rtl;</code></pre>
 </div>
 </div>
 </li>
@@ -3867,7 +3640,7 @@ end rtl;</pre>
 <p>Unidad <em>mux4x1_str.vhd</em> en el nivel top de la jerarquía.</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- UPNA
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- UPNA
 -- SSDD I
 -- mux4x1_beh.vhdl
 -- Multiplexor 4x1
@@ -3915,7 +3688,7 @@ architecture estructural of  mux4x1_str is
          D(1) =&gt; OUT2,
          C =&gt; SW(1),
          S =&gt; LEDR(0));
-end estructural;</pre>
+end estructural;</code></pre>
 </div>
 </div>
 </li>
@@ -3925,7 +3698,7 @@ end estructural;</pre>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="_compilación_en_quartus">22.5.1. Compilación en Quartus</h4>
+<h4 id="_compilación_en_quartus">21.5.1. Compilación en Quartus</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -3991,10 +3764,10 @@ end estructural;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_decodificador">23. Decodificador</h2>
+<h2 id="_decodificador">22. Decodificador</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_decoder_hexdisplay_7_segmentos">23.1. Decoder Hex/Display_7_segmentos</h3>
+<h3 id="_decoder_hexdisplay_7_segmentos">22.1. Decoder Hex/Display_7_segmentos</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4013,7 +3786,7 @@ end estructural;</pre>
 <p>unidad de diseño en el nivel bajo (bottom) de la jerarquía : <em>dec7seg.vhdl</em></p>
 <div class="listingblock">
 <div class="content">
-<pre>-- decodificador hex -&gt; 7 segmentos
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- decodificador hex -&gt; 7 segmentos
 -- lógica positiva
 library ieee;
 use ieee.std_logic_1164.all; --STANDARD
@@ -4050,7 +3823,7 @@ architecture arch_dec of dec7seg is
 			end case;
 		end process;
 		segment_7dis &lt;= not segment_data; -- El display 7 segmentos de la tarjeta DE1-SoC funciona con lógica negativa
-end arch_dec;</pre>
+end arch_dec;</code></pre>
 </div>
 </div>
 </li>
@@ -4062,7 +3835,7 @@ end arch_dec;</pre>
 <p>Conecta el decodificador <em>dec7seg</em> a los periféricos de la tarjeta DE1-SoC: las 4 entradas del decodificador a 4 switches SW y las 7 salidas del decodificador a los 7 leds del display 0,  HEX0.</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- Laboratorio Remoto
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Laboratorio Remoto
 -- Decodificador Hexadecimal
 -- Entrada de 4 bits conectada a los switches
 -- Salida conectada al display de 7 segmentos
@@ -4091,7 +3864,7 @@ display0: dec7seg port map (
     hex_digit =&gt; SW (3 downto 0),
     segment_7dis =&gt; HEX0
     );
-end RTL;</pre>
+end RTL;</code></pre>
 </div>
 </div>
 </li>
@@ -4107,10 +3880,10 @@ end RTL;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_valores_indeterminados_x_en_la_entrada_y_en_la_salida">24. Valores INDETERMINADOS X en la entrada y en la salida</h2>
+<h2 id="_valores_indeterminados_x_en_la_entrada_y_en_la_salida">23. Valores INDETERMINADOS X en la entrada y en la salida</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_codificador_con_prioridad">24.1. Codificador con Prioridad</h3>
+<h3 id="_codificador_con_prioridad">23.1. Codificador con Prioridad</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4134,11 +3907,11 @@ end RTL;</pre>
 <p>para que las entradas I con valor X se sintetizasen como todos los casos posibles con X=0 y X=1 y la salida B con valor X como UN UNICO caso a elegir.</p>
 <div class="listingblock">
 <div class="content">
-<pre>if (I(3)='1')                then B &lt;="11";
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">if (I(3)='1')                then B &lt;="11";
 elsif (I(3 downto 2)="01")   then B &lt;="10";
 elsif (I(3 downto 1)="001")  then B &lt;="01";
 elsif (I(3 downto 0)="0001") then B &lt;="00";
-else B &lt;= "--"</pre>
+else B &lt;= "--"</code></pre>
 </div>
 </div>
 <div class="ulist">
@@ -4151,7 +3924,7 @@ else B &lt;= "--"</pre>
 <p>source code con 2 arquitecturas diferentes: WHEN e IF</p>
 <div class="listingblock">
 <div class="content">
-<pre>LIBRARY ieee;
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 
 ENTITY cod4x2 IS
@@ -4183,7 +3956,7 @@ BEGIN
 		END IF;
 
   END PROCESS;
-END ARCHITECTURE;</pre>
+END ARCHITECTURE;</code></pre>
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -4200,10 +3973,10 @@ END ARCHITECTURE;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_diseños_vhdl_no_sintetizables_en_circuitos_electrónicos">25. Diseños VHDL NO sintetizables en circuitos electrónicos</h2>
+<h2 id="_diseños_vhdl_no_sintetizables_en_circuitos_electrónicos">24. Diseños VHDL NO sintetizables en circuitos electrónicos</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_introducción_4">25.1. Introducción</h3>
+<h3 id="_introducción_4">24.1. Introducción</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4213,14 +3986,14 @@ END ARCHITECTURE;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_hello_world">25.2. Hello World</h3>
+<h3 id="_hello_world">24.2. Hello World</h3>
 <div class="ulist">
 <ul>
 <li>
 <p>Código fuente de HelloWorld.vhdl:</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- Programa para imprimir el mensaje 'Hello World'
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Programa para imprimir el mensaje 'Hello World'
 -- Declaración de la librería std y del paquete textio aunque no es necesario.
 
 library std;
@@ -4240,7 +4013,7 @@ begin
 
     end process;
 
-end architecture;</pre>
+end architecture;</code></pre>
 </div>
 </div>
 </li>
@@ -4254,10 +4027,10 @@ end architecture;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_flip_flop">26. Flip-Flop</h2>
+<h2 id="_flip_flop">25. Flip-Flop</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_memorias">26.1. Memorias</h3>
+<h3 id="_memorias">25.1. Memorias</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4267,9 +4040,9 @@ end architecture;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vhdl_flip_flop_d_con_entradas_asíncronas_en_lógica_negativa">26.2. VHDL: Flip Flop D con entradas asíncronas en lógica negativa</h3>
+<h3 id="_vhdl_flip_flop_d_con_entradas_asíncronas_en_lógica_negativa">25.2. VHDL: Flip Flop D con entradas asíncronas en lógica negativa</h3>
 <div class="sect3">
-<h4 id="_diseño_8">26.2.1. diseño</h4>
+<h4 id="_diseño_8">25.2.1. diseño</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -4321,7 +4094,7 @@ end process;</pre>
 <p>la condición flanco de subida &#8594;  clk&#8217;event and clk=<em>1</em> ó mediante la función rising_edge(clk)</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- Flip Flop tipo D con entradas asíncronas
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Flip Flop tipo D con entradas asíncronas
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -4363,7 +4136,7 @@ elsif ( cp="11") then
 end if;
 end process;
 
-end architecture;</pre>
+end architecture;</code></pre>
 </div>
 </div>
 </li>
@@ -4377,7 +4150,7 @@ end architecture;</pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_implementación_de_unidades_de_memoria">26.2.2. Implementación de unidades de MEMORIA</h4>
+<h4 id="_implementación_de_unidades_de_memoria">25.2.2. Implementación de unidades de MEMORIA</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -4398,7 +4171,7 @@ end architecture;</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ff_d">26.3. FF-D</h3>
+<h3 id="_ff_d">25.3. FF-D</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4419,7 +4192,7 @@ end architecture;</pre>
 <p>Descripción vhdl</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- Sistemas Digitales I
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Sistemas Digitales I
 -- Sistemas Secuenciales: Biestables
 -- ffd.vhdl
 --
@@ -4457,7 +4230,7 @@ begin
     -- no esta definido q para clk NO flanco positivo = MEMORIA
   end if;
 end process;
-end behavioral;</pre>
+end behavioral;</code></pre>
 </div>
 </div>
 </li>
@@ -4468,7 +4241,7 @@ end behavioral;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_operación_suma_y_multiplicación">27. Operación suma y multiplicación</h2>
+<h2 id="_operación_suma_y_multiplicación">26. Operación suma y multiplicación</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -4483,7 +4256,7 @@ end behavioral;</pre>
 <p>Operaciones suma y multiplicación con números sin signo, con signo, etc</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- Diseño ligth_sum
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Diseño ligth_sum
 -- Quartus Prime Lite 21.1
 -- Descripcion del circuito: operaciones suma y multiplicación de operandos de 1 bit.
 -- Arquitetura: operacione suma y multiplicación
@@ -4511,7 +4284,7 @@ begin
 	 mul &lt;= op1 * op2;
 	 LEDR(1 downto 0) &lt;= std_logic_vector(suma); --casting : convertir el tipo del objeto
 	 LEDR(9 downto 6) &lt;= std_logic_vector(mul);
-end ;</pre>
+end ;</code></pre>
 </div>
 </div>
 </li>
@@ -4524,7 +4297,7 @@ end ;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_contador_síncrono">28. Contador Síncrono</h2>
+<h2 id="_contador_síncrono">27. Contador Síncrono</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -4535,7 +4308,7 @@ end ;</pre>
 <p>Código Fuente</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- Contador Sincrono Ascendene Modulo 16
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Contador Sincrono Ascendene Modulo 16
 -- Reset con logica negativa
 -- Perifericos
 ---- KEY(0): clk
@@ -4580,7 +4353,7 @@ begin
         end if;
     end if;
     end process;
-end behavioral;</pre>
+end behavioral;</code></pre>
 </div>
 </div>
 </li>
@@ -4589,7 +4362,7 @@ end behavioral;</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_cerradura_electrónica">29. Cerradura Electrónica</h2>
+<h2 id="_cerradura_electrónica">28. Cerradura Electrónica</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -4600,7 +4373,7 @@ end behavioral;</pre>
 <p>Código Fuente</p>
 <div class="listingblock">
 <div class="content">
-<pre>-- Libro Problemas Upna Capítulo 8: Sistemas Secuenciales
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Libro Problemas Upna Capítulo 8: Sistemas Secuenciales
 -- Ejercicio 8.1
 -- Cerradura con controlador digital
 -- entada serie: la clave 11011 abre la puerta
@@ -4716,7 +4489,7 @@ begin
 
 
 
-  end arch_cerradura;</pre>
+  end arch_cerradura;</code></pre>
 </div>
 </div>
 </li>
@@ -4725,7 +4498,7 @@ begin
 </div>
 </div>
 <div class="sect1">
-<h2 id="_registros">30. Registros</h2>
+<h2 id="_registros">29. Registros</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -5125,7 +4898,7 @@ para poder fabricar el circuito en los dispositivos FPGA del laboratorio remoto,
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre>Documentación - Asignación de señales
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">Documentación - Asignación de señales
 
 LabsLand proporciona este conjunto de entradas virtuales que podrás ver cuando accedas al laboratorio:
 
@@ -5144,7 +4917,7 @@ HEX1: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 1.
 HEX2: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 2.
 HEX3: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 3.
 HEX4: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 4.
-HEX5: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 5.</pre>
+HEX5: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 5.</code></pre>
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -5530,7 +5303,7 @@ structure</code></p></td>
 <h4 id="_my_nand3">F.1.1. my_nand3</h4>
 <div class="listingblock">
 <div class="content">
-<pre>library IEEE;
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity my_nand3 is
@@ -5544,7 +5317,7 @@ begin
 -- An alternative approach for this statement:
 -- F &lt;= A NAND B NAND C;
 --
-end ex_nand3;</pre>
+end ex_nand3;</code></pre>
 </div>
 </div>
 </div>
@@ -5552,7 +5325,7 @@ end ex_nand3;</pre>
 <h4 id="_my_ckt_f3">F.1.2. my_ckt_f3</h4>
 <div class="listingblock">
 <div class="content">
-<pre>library IEEE;
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity my_ckt_f3 is
@@ -5566,7 +5339,7 @@ begin
   A1 &lt;= ((NOT L) AND (NOT M) AND N);
   A2 &lt;= L AND M;
   F3 &lt;= A1 OR A2;
-end f3_1;</pre>
+end f3_1;</code></pre>
 </div>
 </div>
 </div>
@@ -5574,7 +5347,7 @@ end f3_1;</pre>
 <h4 id="_my_ckt_f3_2">F.1.3. my_ckt_f3</h4>
 <div class="listingblock">
 <div class="content">
-<pre>library IEEE;
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity my_ckt_f3 is
@@ -5587,7 +5360,7 @@ begin
 F3 &lt;= ‘1’ when (L = ‘0’ AND M = ‘0’ AND N = ‘1’)
       ‘1’ when (L = ‘1’ AND M = ‘1’) else
       ‘0’;
-end f3_3;</pre>
+end f3_3;</code></pre>
 </div>
 </div>
 </div>
@@ -5595,7 +5368,7 @@ end f3_3;</pre>
 <h4 id="_mux4_t1">F.1.4. mux4_t1</h4>
 <div class="listingblock">
 <div class="content">
-<pre>library IEEE;
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 ---
 -- entity and architecture of 4:1 Multiplexor implemented using
@@ -5614,7 +5387,7 @@ begin
   D1 when (SEL = “01”)
   D0 when (SEL = “00”)
   ‘0’;
-end mux4t1;</pre>
+end mux4t1;</code></pre>
 </div>
 </div>
 </div>
@@ -5622,7 +5395,7 @@ end mux4t1;</pre>
 <h4 id="_my_ckt_f3_3">F.1.5. my_ckt_f3</h4>
 <div class="listingblock">
 <div class="content">
-<pre>library IEEE;
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity my_ckt_f3 is
@@ -5636,7 +5409,7 @@ begin
     F3 &lt;= ‘1’ when ‘1’,
     ‘0’ when ‘0’,
     ‘0’ when others;
-end f3_4;</pre>
+end f3_4;</code></pre>
 </div>
 </div>
 </div>
@@ -5644,7 +5417,7 @@ end f3_4;</pre>
 <h4 id="_my_4t1_mux">F.1.6. my_4t1_mux</h4>
 <div class="listingblock">
 <div class="content">
-<pre>library IEEE;
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 ---
@@ -5666,7 +5439,7 @@ begin
                  D1 when
                  D0 when
                  ‘0’ when
-end mux4t1_2;</pre>
+end mux4t1_2;</code></pre>
 </div>
 </div>
 </div>
@@ -5690,7 +5463,7 @@ end mux4t1_2;</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-18 16:09:42 +0100
+Last updated 2023-02-19 10:22:59 +0100
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

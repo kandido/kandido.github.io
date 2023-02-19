@@ -12,6 +12,9 @@ Introducción al Lenguaje VHDL y al Laboratorio Remoto de Sistemas FPGA
 :toc:
 :toclevels: 3
 :numbered:
+:stylesdir: styles
+:stylesheet: my-asciidoctor.css
+:linkcss:
 :imagesdir: images
 :lang: es
 :encode: ISO-8859-1
@@ -23,6 +26,8 @@ Introducción al Lenguaje VHDL y al Laboratorio Remoto de Sistemas FPGA
 :source-highlighter: highlight.js
 :highlightjs-languages: vhdl
 :docinfo1:
+ 
+
 
 
 :experimental:
@@ -225,7 +230,7 @@ Configurar
 
 * Configurar la herramienta de simulación
 ** *Assigments* -> *Settings* -> *EDA Tool Settings* -> *Simulation*: Questa Intel FPGA
-** *Tools* -> *Options* -> General -> *EDA Tool Options* -> EDA Tool: Questa Intel FPGA : carpeta donde se localiza la aplicación Questa
+** *Tools* -> *Options* -> General -> *EDA Tool Options* -> EDA Tool: Questa Intel FPGA : carpeta donde se localiza el simulador Questa: C:/intelFPGA_lite/21.1/questa_fse/win64/questasim.exe
 
 [[QEdition]]
 Editar un fichero VHDL
@@ -238,7 +243,7 @@ Operación básica
 * Barra de herramientas del editor VHDL
 ** En el Area de Edición -> Barra de Herramientas de Edición Click Dcha -> Customize -> Toobars:Feedback -> Customize -> Seleccionar *Autocomplet Text* -> mover a la dcha con el bóton ">" ->  OK : El nuevo botón Autocomplet Text debe de aparecer en la barra de herramientas.
 ** Seleccionar el botón *Autocomplet Text*
-* Editar el fichero 'light_bit.vhd'
+* Editar el fichero 'light_bit.vhd': Descripción del circuito minimalista *z=x* : El objetivo de este código es ser lo suficientemente simple para no dificultar su comprensión y centrarse en poner a punto la herramienta de desarrollo *Intel Quartus Prime Lite* desde cualquier computadora utilizando los recursos remotos de la UPNA.
 +
 
 [source,vhdl]
@@ -252,7 +257,7 @@ end entity;
 architecture minima of light_bit is
 begin
   z <= x;
-end rtl;
+end minima;
 ----
 
 ** según vamos tecleando sentencias VHDL se *autocompletan* 
@@ -341,6 +346,8 @@ Introducción
 * Se va a utilizar el tutorial propio de Quartus como referencia para la práctica de la descripción VHDL como la utilización de "Quartus Prime Lite" y el "Laboratorio Remoto".
 ** Quartus Prime Lite -> Help -> PDF tutorial -> Users VHDL-> "tutorial_quartusii_intro_vhdl.pdf" -> imprimirlo y tomar notas sobre él mismo.
 
+IMPORTANT: Imprimirlo y LEERLO!!
+
 * Se van a realizar los siguientes diseños basados todos en el mismo circuito digital. La descripción del circuito se realizará mediante el lenguaje VHDL y se utilizará "Quartus Prime Lite" al igual que en el tutorial de intel "tutorial_quartusii_intro_vhdl.pdf". La principal diferencia entre los distintos diseños será la arquitectura, donde se emplearán diferentes sentencias del lenguaje VHDL. +
 
 . light_bit
@@ -379,8 +386,9 @@ Carpeta de Trabajo
 ----
 ..Descargas/ssdd/
 	├── light_bit
-	├── light_csa
 	├── light_de1soc
+        ├── light_csa
+        ├── light_process
 	├── light_if
 	├── light_signal
 	├── light_with
@@ -410,6 +418,29 @@ Introducción
 **** Arquitectura a nivel de *flujo de datos* o también denominada lógica de transferencia entre registros ( Register Transfer Logic *RTL*, la salida del sistema se relaciona con la entrada mediante una *función matemática lógica* -> F(x,y,z)=xy+xz)
 **** Arquitectura a nivel *estructural* ( la relación entre la salida y la entrada es la *conexión* entre distintas unidades lógicas, pej salida del sistema digital = salida de un "multiplexor" cuya entrada está conectada a la salida de un "decodificador" cuya entrada está conectada a la salida de un puerta "OR" cuya entrada es la entrada del sistema digital)
 
+
+
+<<<<
+
+Señales digitales binarias
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Hay dos *tipos de señales* en el lenguaje VHDL:
+** [.naranja]#PORT# : x,y,z
+*** son señales de acceso al circuito: su *modo* puede ser de entrada ([.naranja]#IN#) ó de salida ([.naranja]#OUT#)
+*** una señal de entrada tipo [.naranja]#IN# no puede conectarse a la salida de una puerta lógica
+*** una señal de salida tipo [.naranja]#OUT# no puede conectarse a la entrada de una puerta lógica
+** [.naranja]#SIGNAL# : s,t,u,v
+*** son señales internas al circuito y son bidireccionales: pueden conectarse tanto a la entrada como a la salida de una puerta lógica
+
+Señales VHDL : tipos de datos
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Las señales electrónicas representan  DATOS.
+* Hay diferentes *tipos de datos* para las señales.
+* tipo de dato bit único : [naranja]#BIT# : admite únicamente dos valores: el *'* 0 *'* y el *'* 1 *'* 
+* en VHDL los valores de los bits hay que entrecomillarlos para diferenciarlos de los datos de tipo [naranja]#INTEGER#
+* tipo de dato secuencia de bits: *"* 010001010101 *"* -> doble entrecomillado si el dato se representa con más de un bit.
 
 
 <<<<
@@ -453,28 +484,94 @@ Buses
 
 <<<<
 
-Circuito Digital  "light_bit.vhdl"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Circuito light_xor
+~~~~~~~~~~~~~~~~~~
 
-* Descripción del circuito minimalista *z=x* 
-+
+Descripciones HW: Esquema eléctrico, Tabla de la Verdad, Expresión Lógica
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+image::tema4_xor.png[circuito light xor, align=center]
+
+
+Descripción HW: VHDL
+^^^^^^^^^^^^^^^^^^^^
 
 [source,vhdl]
 ----
+--
+-- Descripción VHDL Primavera 2023
+-- Circuito light_bit.vhd:
+-- Puerta lógica XOR extendida
 entity of light_bit is
   port (
-    x   : in bit;
+    x,y : in bit;
     z   : out bit
 );
 end entity;
-architecture minima of light_bit is
-begin
-  z <= x;
-end minima;
-----
-* El objetivo de este código es ser lo suficientemente simple para no dificultar su comprensión y centrarse en poner a punto la herramienta de desarrollo *Intel Quartus Prime Lite* desde cualquier computadora utilizando los recursos remotos de la UPNA.
 
-* Descripción del circuito *z = x~0~ XOR x~1~* 
+architecture rtl of light_bit is
+ signal s,t,u,v : bit;
+begin
+  s <= not x;
+  t <= not y;
+  u <= x and t;
+  v <= y and s;
+  z <= u or v;
+end rtl;
+--
+----
+
+<<<<
+
+Lenguaje VHDL: Sentencias Concurrentes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Concepto de concurrencia
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* CAS : Concurrent Assignment Sentence
+* La instrucción o sentencia CAS se representa mediante el símbolo [naranja]#<=#
+* ¿Cómo se ejecuta la sentencia asignación concurrente [naranja]#<=# ?
+** A las señales de la derecha del símbolo [naranja]#<=# se les denomina *señales sensibles*
+** Cuando una de la señales sensibles cambia (*evento*) es cuando se ejecuta la sentencia asignación.
+** El valor resultante de *evaluar* la expresión a la derecha del símbolo [naranja]#<=# se asigna a la señal a la izquierda del símbolo [naranja]#<=#
+** se ve mejor el concepto de concurrencia si en la arquitectura hay dos o más sentencias concurrentes.
+** concurrencia es sinónimo de simultaneidad 
+** El orden de ejecución lo dictan los eventos de las señales sensibles y *NO* por el orden de escritura de la secuencia de sententencias.
+
+[source,vhdl,%linenums]
+----
+s <= not x;
+t <= not y;
+u <= x and t;
+v <= y and s;
+z <= u or v;
+----
+
+
+....
+0- "x" = "y" = *0* => s = t = *1* => u = v = *0* => z = *0* 
+1- Se produce un EVENTO (*0->1*) en la señal puerto "x" 
+2- "x" es una señal sensible en la línea 1 del código 
+y en la línea 3 del código 
+3- Se ejecutan las líneas 1 y 3 del código 
+4- Ejecución de la línea 1: "s" (*1->0*) 
+5- Ejecución de la línea 3: "u" (*0->1*) 
+6- Hay un evento en "s": se ejecuta la línea 4 : "v" no cambia -> no evento 
+7- Hay un evento en "u": se ejecuta la línea 5 : "z" cambia (*0->1*) 
+8- La señal z no es una señal sensible en ninguna de las sentencias [naranja]#<=# : FIN 
+9- FIN de la actualización de todas las señales hasta el próximo evento en "x" o/y "y" 
+....
+
+* Por lo tanto el orden en que se ejecutan las sentencias dentro de la arquitectura NO ES SECUENCIAL. Son los eventos de las señales sensibles los que indican el orden en que se ejecutan las sentencias, pudiendo ocurrir que dos o más sentencias se ejecuten simultáneamente, CONCURRENTEMENTE. Esta concurrencia es necesaria ya que en los circuitos digitales reales formados por puertas lógicas u otro tipo de bloques, dichas puertas y bloques funcionan concurrentemente, pudiendo cambiar la salida de distintas puertas o bloques al mismo tiempo.
+
+
+Circuito Digital  "light_bit.vhdl"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+* Descripción del circuito *z = x~0~ XOR x~1~* : El objetivo de este código es seguir el tutorial de Intel.
 +
 
 [source,vhdl]
@@ -493,7 +590,8 @@ entity of light_bit is  <3>
 );
 end entity;
 
-architecture rtl of light_bit is  <4>
+architecture rtl of light_bit is  <4>ç
+ signal s,t,u,v : bit;
 begin
  s <= NOT x(0); <5>
  t <= NOT x(1);
@@ -502,7 +600,6 @@ begin
  z <= u OR v;
 end rtl;
 ----
-* Se ha utilizado para los buses de señales el tipo bit_vector.
 
 
 <<<<
@@ -530,85 +627,20 @@ La secciones más importantes son la *entidad* de un circuito y la *arquitectura
 
 
 
-Sentencias Concurrentes
------------------------
-
-Concepto de concurrencia
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-* Cómo se ejecuta la sentencia asignación concurrente '<='
-** A las señales de la derecha del símbolo '<=' se les denomina *señales sensibles*
-** Cuando una de la señales sensibles cambia (*evento*) en ese mismo instante se ejecuta la sentencia asignación.
-** se ve mejor el concepto de concurrencia si en la arquitectura hay dos o más sentencias concurrentes.
-** concurrencia es sinónimo de simultaneidad 
-** El orden de ejecución lo dictan los eventos de las señales sensibles y *NO* por el orden de escritura de la secuencia de sententencias.
-
-
-
-Ejemplo: Unidad de diseño "matricula.vhd"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-image::matricula_RTL.png[Circuito Digital matricula] 
-
-
-* Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos.
-** Unidad 'matricula.vhdl'
-+
-
-----
--- SSDD I
--- Ejercicio 1.5
--- matricula.vhdl
-
-library ieee;
-use ieee.std_logic_1164.all;
-
-entity matricula is
-    port (
-        SW: in std_logic_vector(9 downto 0);
-        LEDR: out std_logic_vector(9 downto 0)
-    );
-end matricula;
-
-architecture puertas of matricula is
-    signal a, b, c: std_logic;         		<1>
-begin
-    a 		<= SW(0) and SW(1);		<2>
-    b 		<= SW(1) and SW(2);		<2>
-    c 		<= SW(3);			<2>
-    LEDR(0) 	<= a or b or c;			<2>
-end puertas;
-----
-
-* Verificar el buen funcionamiento del circuito con su simulación.
-
-
-Significado
-~~~~~~~~~~~
-
-<1>  la declaración *signal* se utiliza para declarar señales internas a la arquitectura, a diferencia de los puertos de la entidad que son señales externas al circuito. Las señales 'a', 'b' y 'c' son internas.
-<2>  Las sentencias *<=* se ejecutan en el instante en que alguna de las señales a la derecha de *<=* cambia su valor. Por lo tanto las 4 sentencias no se ejecutan secuencialmente, sino CONCURRENTEMENTE. Por ejemplo, si el valor de la señal externa 'SW(1)' cambia en un momento dado de "0" a "1" , entonces, las asignaciones <3> y <4> se ejecutan en paralelo, concurrentemente, al mismo tiempo, por lo que el valor de las señales 'a' y 'b' también cambia y por lo tanto 'LEDR(0)' también cambiará; en resumen, el cambio en 'SW(1)' puede provocar un cambio simultáneo en 'a','b','LEDR(0)'...lo mismo que ocurriría en un circuito digital electrónico de puertas lógicas donde todas las puertas lógicas cambian sus salidas en el instante en el que lo hacen sus entradas.
-
-* Por lo tanto el orden en que se ejecutan las sentencias dentro de la arquitectura NO ES SECUENCIAL. Son los eventos de las señales sensibles los que indican el orden en que se ejecutan las sentencias, pudiendo ocurrir que dos o más sentencias se ejecuten simultáneamente, CONCURRENTEMENTE. Esta concurrencia es necesaria ya que en los circuitos digitales reales formados por puertas lógicas u otro tipo de bloques, dichas puertas y bloques funcionan concurrentemente, pudiendo cambiar la salida de distintas puertas o bloques al mismo tiempo.
-
-
-
 <<<<
 
 Librería standard:  paquete STANDARD
-------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * light_bit.vhdl:
 +
 
-
+[source,vhdl]
 ----
--- Sistemas Digitales I año 2020			
--- Upna 7 de Febrero 2020
+-- Sistemas Digitales I año 2022			
 -- Laboratorio Remoto de la Upna
 -- FICHERO light_bit.vhdl : OBLIGATORIAMENTE debe ser el MISMO nombre que el utilizado en ENTITY.
 -- tutorial: primera práctica en aula
--- SSDDI 2020 Febrero 7
 
 -- El tipo de señal "bit" se define en el paquete standard.vhdl
 
@@ -655,10 +687,7 @@ end STANDARD;
 ----
 
 * La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Questa Intel
-** ..vhdl_src/std/standard.vhdl
-
-* La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Modelsim-Altera
-** ../modelsim_ase/vhdl_src/std/standard.vhdl
+** ** C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/std/standard.vhdl
 
 
 <<<<
@@ -821,8 +850,13 @@ _____________________
 
 ----
 ** los niveles 0 y 1 se dividen cada uno de ellos en forzoso y débil
-** el nivel desconocido se divide en forzoso, débil tirando a 1 y débil tirando a 0.
+** el nivel desconocido se divide en forzoso y débil tirando a 1 o a 0.
 ** una forma de interpretar esos estados es DIBUJANDO la FORMA una señal digital generada por un transmisor y observada a la salida de una línea serie y a la entrada del receptor: se genera un 1 forzoso y se recibe un 1 débil ó un valor desconocido 
+
+
+image::tema4_signal_stdlogic.png[]
+
+
 ** 3 Valores son indefinidos, "unmesurable".
 +
 
@@ -844,6 +878,8 @@ Z: alta impedancia : circuito abierto -> desconexión ->
    Las salidas de los inversores INV-1 e INV-2 si están en estado Z se desconectan del bus
 
 ----
+
+* El paquete *std_logic_1164* está localizado en: C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/ieee/stdlogic.vhdl
 
 std_logic_vector : downto , to
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -871,6 +907,7 @@ Librería standard: paquete TEXTIO
 * Fichero textio.vhdl donde se define el paquete TEXTIO de la librería "std".
 +
 
+[source,vhdl]
 ----
 -- textio.vhdl
 
@@ -880,28 +917,26 @@ package TEXTIO is
 
   -- Type Definitions for Text I/O
 
-  
-
   type TEXT is file of STRING;	-- a file of variable-length ASCII records
   procedure WRITE (L: inout LINE; VALUE: in BIT;
 			JUSTIFIED: in SIDE := RIGHT; FIELD: in WIDTH := 0);
 
  -- CUIDADO: no están todas las definiciones de tipos, procedimientos, etc
-
 ----
 
-* No es necesario declarar el paquete "TEXTIO" de la librería "std", pero se podría declarar de la  forma 
+* No es necesario declarar el paquete "TEXTIO" de la librería "std", pero se podría declarar de la  forma :
 +
 
+[source,vhdl]
 ----
 library std;
 use std.textio.all;
 ----
 
-
-* Ejemplo de uso del paquete TEXTIO en el módulo fuente hello_world.vhdl
+* Ejemplo de uso del paquete TEXTIO en el módulo fuente "hello_world.vhdl"
 +
 
+[source,vhdl]
 ----
 
 library std;
@@ -924,16 +959,10 @@ begin
 end architecture;
 ----
 
+CAUTION: hello_world.vhd no produce ningún circuito lógicamente, no se sintetiza. Pero la sentencia [.naranja]#report# se puede utilizar para depurar código como en cualquier lenguaje de programación.
+
 * La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Questa Intel
-** ..vhdl_src/std/textio.vhdl
-
-* La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Modelsim-Altera
-** ../modelsim_ase/vhdl_src/std/textio.vhdl
-
-
-
-
-
+** C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/std/textio.vhdl
 
 
 
@@ -944,6 +973,9 @@ Tutorial quartus -> light_de1soc.vhd (II)
 Diseño
 ~~~~~~
 
+* En este ejercicio:
+** se va a utilizar el tipo de señal *std_logic* y *std_logic_vector*
+** se va a fabricar el circuito digital en la *FPGA Cyclone V* de la tarjeta *DE1-SoC* accesible de forma remota.
 * Se va a crear el nuevo proyecto light_de1soc con un nuevo módulo fuente  light_de1soc.vhd 
 ** crear la carpeta nueva ../ssdd/light_de1soc.
 ** copiar en la carpeta ../ssdd/light_de1soc el módulo fuente ../ssdd/light_bit/light_bit.vhd y cambiar el nombre del fichero por light_de1soc.vhd 
@@ -1047,6 +1079,8 @@ Tutorial quartus -> light_signal.vhd (III)
 Diseño
 ~~~~~~
 
+* En este ejercicio se va a:
+** visualizar el esquema eléctrico resultante de la síntesis del circuito.
 * A partir del proyecto light_de1soc creamos el proyecto light_signal
 ** crear la carpeta light_signal
 ** copiar el módulo fuente light_de1soc.vhd en la carpeta ../ssdd/light_signal/
@@ -1112,24 +1146,25 @@ Ejercicios
 
 * ¿ Qué señales son sensibles a que se ejecute cada sentencia de asignación concurrente ?
 
-Tutorial quartus -> light.vhd (IV) : Simulación Questa Intel
-------------------------------------------------------------
+Tutorial quartus -> light_de1soc.vhd (IV) : Simulación Questa Intel
+-------------------------------------------------------------------
 
 Simulación
 ~~~~~~~~~~
-
+* En este ejercicio se va a:
+** simular el procesado de señales que realiza el circuito para la obtención de un cronograma que visualice las señales digitales binarias del circuito y poder verificar así su funcionamiento.
 * Simulación del diseño light_de1soc.
 ** Abrir Quartus
 ** Abrir el proyecto 'light_de1soc.qpf' ubicado en la carpeta ../ssdd/light_de1soc donde previamente he sintentizado el diseño 'light_de1soc.vhd'
 ** Configurar simulador Questa
 *** Ha de estar instalado el simulador Questa
 *** Quartus -> Settings -> Eda Tool Settings -> Simulation-> Tool Name: Questa Intel
-*** Quartus -> Tools -> options -> general -> eda tool options -> Questa Intel : seleccionar la carpeta donde esté instalado, por ejemplo -> C:/intel_quartus/21.1/questa_fse/bin
-** generar fuentes del simulador
+*** Quartus -> Tools -> options -> general -> eda tool options -> Questa Intel : seleccionar la carpeta donde esté instalado *questasim* -> C:/intelFPGA_lite/21.1/questa_fse/win64/questasim.exe
+** generar los ficheros fuente que utilizará el simulador Questa.
 *** Processing -> Start Compilation
 ** Abrir el simulador Questa Intel
-*** Tools -> Run Simulator Tool -> RTL simulation -> Abre el simulador Questa Intel
-* Questa Intel Simulator
+*** Tools -> Run Simulator Tool -> RTL simulation -> Abre una nueva ventana con el simulador Questa Intel
+* Questa Intel Simulator:
 *** Ventana Transcript -> mensajes del simulador y comandos del usuario. Interpretar lo realizado por el Simulador.
 *** Ventana Library (View Library) -> Work -> Doble click en light -> se carga el diseño que se va simular en la ventana Objects
 *** Ventana Objects -> seleccionar con el ratón la señal bus SW -> click dcha, *Modify -> Apply Wave* ->   Pattern: counter, start at 00, end at 80 ns, time unit ns,  from 00 to 11, Period: 10ns, counter type binary, Direction: up , Repeat:  Forever ->Se añaden en la ventana Wave las señales seleccionadas
@@ -1142,10 +1177,6 @@ Simulación
 
 image::light_de1soc_wave.png[]
 
-Edición VHDL mediante Quartus utilizando plantillas de ayuda
-------------------------------------------------------------
-
-* Información en el apéndice 
 
 
 
@@ -1157,7 +1188,7 @@ Diseño
 
 * Proyecto "light_csa"
 ** El objetivo es describir literalmente la "Tabla de la Verdad" de la función del circuito.
-** Utilizamos la sentencia concurrente "Conditional Signal Assignment" (csa).
+** Utilizamos la *sentencia concurrente* "Conditional Signal Assignment" (csa).
 ** creo la carpeta ../light_csa
 ** copio el módulo fuente light_de1soc/light_de1soc.vhd en la carpeta ../light_csa/light_csa.vhd con el nombre light_csa.vhd
 
@@ -1195,6 +1226,7 @@ END TablaVerdad ;
 * Una vez insertada la plantilla la particularizo con las señales de mi diseño:
 +
 
+[source,vhdl]
 ----
 library ieee;
 use ieee.std_logic_1164.all;
@@ -1252,6 +1284,7 @@ Proceso/Process()
 * Un proceso se ejecuta cuando hay un evento en una de las señales sensibles al proceso. Las señales sensibles al proceso se declaran entre paréntesis junto a la sentencia *PROCESS(sensivity signals)*. Por lo tanto la sentencia process es una sentencias *concurrente* y las sentencias de su cuerpo son *secuenciales*.
 +
 
+[source,vhdl]
 ----
 <optional_label>:  process(sensivity signals) is
         { Declaration(s) }
@@ -1260,118 +1293,51 @@ Proceso/Process()
         end process;
 ----
 
+Tutorial quartus -> light_process.vhd (VI)
+------------------------------------------
 
+* Arquitectura mediante la sentencia concurrente [.naranja]#process3
+** En el cuerpo del proceso se utilizarán la sentencia de asignación secuencial [.naranja]#<=#.
 
-Ejemplo_1: matricula.vhd
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-* Arquitectura mediante la sentencia concurrente *process*
-** En el cuerpo del proceso se utilizarán la sentencia de asignación secuencial "<=".
-* Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos
-** Unidad 'matricula.vhdl'
-+
-
+[source,vhdl]
 ----
+--
+-- Descripción VHDL Primavera 2023
+-- Circuito light_bit.vhd:
+-- Puerta lógica XOR extendida
+entity of light_bit is
+  port (
+    SW : in std_logic_vector(1 downto 0);
+    LEDR   : out std_logic_vector(0 downto 0)
+);
+end entity;
 
--- Ejercicio 1.5
--- matricula.vhdl
-
-library ieee;
-use ieee.std_logic_1164.all;
-
-entity matricula is
-    port (
-        SW: in std_logic_vector(9 downto 0);
-        LEDR: out std_logic_vector(9 downto 0)
-    );
-end matricula;
-
-architecture rtl_seq of matricula is
-    signal a, b, c: std_logic;         		        
+architecture rtl of light_bit is
+ signal s,t,u,v : bit;
 begin
-  process (SW(0), SW(1), SW(2), SW(3))
-  begin
-      a 		<= SW(0) and SW(1);		
-      b 		<= SW(1) and SW(2);		
-      c 		<= SW(3);			
-      LEDR(0) 	<= a or b or c;			
-  end process;
-end rtl_seq;
-----
-* Verificar el buen funcionamiento del circuito en el laboratorio remoto.
-* La lista de señales sensibles para la ejecución del proceso es: SW(0), SW(1), SW(2), SW(3)
-* Un evento en alguna de las señales SW(0), SW(1), SW(2), SW(3), provoca la ejecución de todas las sentencias del cuerpo del process de forma secuencial.
-+
-
-----
-process (SW(0), SW(1), SW(2), SW(3))
-  begin
-      LEDR(0) 	<= a or b or c;	
-      a 		<= SW(0) and SW(1);		
-      b 		<= SW(1) and SW(2);		
-      c 		<= SW(3);					
-  end process;
-----
-** ¿Qué ocurriría si el cuerpo del process tuviese otro orden como el siguiente?
-
-
-Ejemplo_2: matricula.vhd
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-* Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos
-* La tabla de la verdad
-** 4 entradas : SW(0), SW(1), SW(2), SW(3)
-** 1 salida : LEDR(0)
-** Nº de filas = 2^4^ = 16
-** los minitérminos SW(0)*SW(1)*SW(2)*SW(3) que hacen 0 a la función son: m~0~, m~1~, m~4~, m~8~ y m~9~  
-
-* Arquitectura mediante la sentencia concurrente *process* y la sentencia secuencial *case* 
-** La arquitectura describe literalmente la Tabla de la Verdad
-* Unidad 'matricula_case.vhdl'
-+
-
-----
--- SSDD I
--- Ejercicio 1.5
--- matricula_case.vhdl
-
-library ieee;
-use ieee.std_logic_1164.all;
-
-entity matricula_case is
-    port (
-        SW: in std_logic_vector(3 downto 0);
-        LEDR: out std_logic_vector(0 downto 0)
-    );
-end matricula_case;
-
-architecture behavioral_seq of matricula_case is
- begin
   process (SW)
   begin
-   case SW  is
-    when "0000" => LEDR <= "0";
-    when "0001" => LEDR <= "0";
-    when "0100" => LEDR <= "0";
-    when "1000" => LEDR <= "0";
-    when "1001" => LEDR <= "0";
-    when others => LEDR <= "1";
-   end case;   
+  s <= not SW(0);
+  t <= not SW(1);
+  u <= SW(0) and t;
+  v <= SW(1) and s;
+  LEDR(0) <= u or v;
   end process;
-end behavioral_seq;
+end rtl;
+--
 ----
 
-CAUTION: la constante 0 en  la asignación LEDR <= "0" da error si se pone \'0' ya que LEDR es un bus, no un hilo.
+* Verificar el buen funcionamiento del circuito mediante la simulación o/y en el laboratorio remoto.
+* La lista de señales sensibles para la ejecución del proceso es el bus SW
+* Un evento en alguna de las señales SW(0) o SW(1), provoca la ejecución de todas las sentencias del cuerpo del process de forma secuencial.
 
-IMPORTANT: La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia secuencial 'case' describimos la tabla de la verdad. No es necesario saber la función lógica que relaciona la entrada y la salida.
-
-* Verificar el buen funcionamiento del circuito en el laboratorio remoto.
+* Cambiar el código VHDL cambiando el orden de las sentencias [.naranja]#=># y observar si hay algún cambio en la síntesis del circuito.
 
 <<<
 
 
-Tutorial quartus -> light_if.vhd (VI)
--------------------------------------
+Tutorial quartus -> light_if.vhd (VII)
+--------------------------------------
 
 Diseño
 ~~~~~~
@@ -1385,6 +1351,7 @@ Diseño
 *** Insert Template -> VHDL -> Constructs -> Concurrent Statements -> PROCESS
 +
 
+[source,vhdl]
 ----
 <optional_label>:
 	process(reset, clk) is 
@@ -1403,6 +1370,7 @@ Diseño
 ** Particularizo las dos sentencias con las señales de mi diseño.
 +
 
+[source,vhdl]
 ----
 	-- El proceso se ejecuta SI hay alguna variacion en las señales ARGUMENTO ( señales SENSIBLES del proceso) 
 	process(SW) is 
@@ -1421,6 +1389,7 @@ Diseño
 *** NO es necesario volver a insertar la sentencia IF dentro del PROCESS.
 +
 
+[source,vhdl]
 ----
 if <expression> then
 	-- Sequential Statement(s)
@@ -1433,6 +1402,7 @@ end if;
 * light_if.vhd:
 +
 
+[source,vhdl]
 ----
 -- SSDDI-2022
 -- Intel tutorial reference: light.pdf
@@ -1483,8 +1453,8 @@ Ejercicios
 * ¿ Qué tipos de valores de señal tienen como consecuencia que se cumpla condición ELSE?
 
 
-Tutorial quartus -> light_with.vhd (VII)
-----------------------------------------
+Tutorial quartus -> light_with.vhd (VIII)
+-----------------------------------------
 
 Diseño
 ~~~~~~
@@ -1500,6 +1470,7 @@ Diseño
 * Módulo fuente: light_with.vhd
 +
 
+[source,vhdl]
 ----
 -- SSDD
 -- Intel tutorial reference: light
@@ -1541,8 +1512,8 @@ Ejercicios
 * ¿ Qué ocurre si eliminamos el caso default? ¿Hay error de compilación? ¿Cómo ha cambiado el circuito netlist?¿ Por qué?
 
 
-Tutorial quartus -> light_case.vhd (VIII)
------------------------------------------
+Tutorial quartus -> light_case.vhd (IX)
+---------------------------------------
 
 Diseño
 ~~~~~~
@@ -1559,6 +1530,7 @@ Diseño
 * Módulo fuente: light_case.vhd
 +
 
+[source,vhdl]
 ----
 -- SSDDI-2022
 -- Intel tutorial reference: light
@@ -1625,6 +1597,157 @@ Ejercicios
 
 <<<<
 
+Ejercicio 1.5: Matricula
+------------------------
+
+Arquitectura rtl
+~~~~~~~~~~~~~~~~
+
+* Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos.
+** Unidad 'matricula.vhdl'
++
+
+[source,vhdl]
+----
+-- SSDD I
+-- Ejercicio 1.5
+-- matricula.vhdl
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity matricula is
+    port (
+        SW: in std_logic_vector(9 downto 0);
+        LEDR: out std_logic_vector(9 downto 0)
+    );
+end matricula;
+
+architecture puertas of matricula is
+    signal a, b, c: std_logic;         		
+begin
+    a 		<= SW(0) and SW(1);		
+    b 		<= SW(1) and SW(2);		
+    c 		<= SW(3);			
+    LEDR(0) 	<= a or b or c;			
+end puertas;
+----
+
+netlist view
+~~~~~~~~~~~~
+
+image::matricula_RTL.png[Circuito Digital matricula] 
+
+
+
+Tutorial quartus -> matricula_case.vhd
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Ejercicio 1.5 (matricula) del libro de problemas resueltos de circuitos electrónicos
+* La tabla de la verdad
+** 4 entradas : SW(0), SW(1), SW(2), SW(3)
+** 1 salida : LEDR(0)
+** Nº de filas = 2^4^ = 16
+** los minitérminos SW(0)*SW(1)*SW(2)*SW(3) que hacen 0 a la función son: m~0~, m~1~, m~4~, m~8~ y m~9~  
+
+* Arquitectura mediante la sentencia concurrente *process* y la sentencia secuencial *case* 
+** La arquitectura describe literalmente la Tabla de la Verdad
+* Unidad 'matricula_case.vhdl'
++
+
+[source,vhdl]
+----
+-- SSDD I
+-- Ejercicio 1.5
+-- matricula_case.vhdl
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity matricula_case is
+    port (
+        SW: in std_logic_vector(3 downto 0);
+        LEDR: out std_logic_vector(0 downto 0)
+    );
+end matricula_case;
+
+architecture behavioral_seq of matricula_case is
+ begin
+  process (SW)
+  begin
+   case SW  is
+    when "0000" => LEDR <= "0";
+    when "0001" => LEDR <= "0";
+    when "0100" => LEDR <= "0";
+    when "1000" => LEDR <= "0";
+    when "1001" => LEDR <= "0";
+    when others => LEDR <= "1";
+   end case;   
+  end process;
+end behavioral_seq;
+----
+
+CAUTION: la constante 0 en  la asignación LEDR <= "0" da error si se pone \'0' ya que LEDR es un bus, no un hilo.
+
+IMPORTANT: La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia secuencial 'case' describimos la tabla de la verdad. No es necesario saber la función lógica que relaciona la entrada y la salida.
+
+* Verificar el buen funcionamiento del circuito en el laboratorio remoto.
+
+Ejemplo_1: matricula.vhd
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+* Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos
+** Unidad 'matricula.vhdl'
++
+
+[source,vhdl]
+----
+
+-- Ejercicio 1.5
+-- matricula.vhdl
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity matricula is
+    port (
+        SW: in std_logic_vector(9 downto 0);
+        LEDR: out std_logic_vector(9 downto 0)
+    );
+end matricula;
+
+architecture rtl_seq of matricula is
+    signal a, b, c: std_logic;         		        
+begin
+  process (SW(0), SW(1), SW(2), SW(3))
+  begin
+      a 		<= SW(0) and SW(1);		
+      b 		<= SW(1) and SW(2);		
+      c 		<= SW(3);			
+      LEDR(0) 	<= a or b or c;			
+  end process;
+end rtl_seq;
+----
+* Verificar el buen funcionamiento del circuito en el laboratorio remoto.
+* La lista de señales sensibles para la ejecución del proceso es: SW(0), SW(1), SW(2), SW(3)
+* Un evento en alguna de las señales SW(0), SW(1), SW(2), SW(3), provoca la ejecución de todas las sentencias del cuerpo del process de forma secuencial.
++
+
+[source,vhdl]
+----
+process (SW(0), SW(1), SW(2), SW(3))
+  begin
+      LEDR(0) 	<= a or b or c;	
+      a 		<= SW(0) and SW(1);		
+      b 		<= SW(1) and SW(2);		
+      c 		<= SW(3);					
+  end process;
+----
+
+
+
+<<<<
 Multiplexor
 -----------
 
@@ -1635,6 +1758,7 @@ mux2x1: arquitectura RTL
 ** Unidad 'mux2x1_rtl.vhd'
 +
 
+[source,vhdl]
 ----
 -- UPNA
 -- SSDD I
@@ -1683,6 +1807,7 @@ mux4x1: arquitectura Behavioral
 ** Unidad 'mux4x1_beh.vhdl'
 +
 
+[source,vhdl]
 ----
 -- UPNA
 -- SSDD I
@@ -1764,6 +1889,7 @@ image::mux2x1_str.png[]
 * unidad 'mux2x1.vhd' en el nivel bajo de la jerarquía.
 +
 
+[source,vhdl]
 ----
 -- UPNA
 -- SSDD I
@@ -1796,6 +1922,7 @@ end rtl;
 ** Unidad 'mux4x1_str.vhd' en el nivel top de la jerarquía.
 +
 
+[source,vhdl]
 ----
 -- UPNA
 -- SSDD I
@@ -1883,6 +2010,7 @@ image::decoder_hex7seg.png[decodificador 7 segmentos]
 ** unidad de diseño en el nivel bajo (bottom) de la jerarquía : 'dec7seg.vhdl'
 +
 
+[source,vhdl]
 ----
 -- decodificador hex -> 7 segmentos
 -- lógica positiva
@@ -1928,6 +2056,7 @@ end arch_dec;
 *** Conecta el decodificador 'dec7seg' a los periféricos de la tarjeta DE1-SoC: las 4 entradas del decodificador a 4 switches SW y las 7 salidas del decodificador a los 7 leds del display 0,  HEX0.
 +
 
+[source,vhdl]
 ----
 -- Laboratorio Remoto
 -- Decodificador Hexadecimal
@@ -1984,6 +2113,7 @@ I(3) I(2) I(1) I(0) | B(1) B(0)
 ** para que las entradas I con valor X se sintetizasen como todos los casos posibles con X=0 y X=1 y la salida B con valor X como UN UNICO caso a elegir.
 +
 
+[source,vhdl]
 ----
 if (I(3)='1')                then B <="11";
 elsif (I(3 downto 2)="01")   then B <="10";
@@ -1997,6 +2127,7 @@ else B <= "--"
 * source code con 2 arquitecturas diferentes: WHEN e IF
 +
 
+[source,vhdl]
 ----
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
@@ -2050,6 +2181,7 @@ Hello World
 * Código fuente de HelloWorld.vhdl:
 +
 
+[source,vhdl]
 ----
 -- Programa para imprimir el mensaje 'Hello World'
 -- Declaración de la librería std y del paquete textio aunque no es necesario.
@@ -2117,6 +2249,7 @@ end process;
 *** la condición flanco de subida ->  clk'event and clk='1' ó mediante la función rising_edge(clk)
 +
 
+[source,vhdl]
 ----
 -- Flip Flop tipo D con entradas asíncronas
 
@@ -2184,6 +2317,7 @@ image::ffd.png[]
 * Descripción vhdl
 +
 
+[source,vhdl]
 ----
 -- Sistemas Digitales I 
 -- Sistemas Secuenciales: Biestables
@@ -2238,6 +2372,7 @@ Operación suma y multiplicación
 ** Operaciones suma y multiplicación con números sin signo, con signo, etc 
 +
 
+[source,vhdl]
 ----
 -- Diseño ligth_sum
 -- Quartus Prime Lite 21.1
@@ -2278,6 +2413,7 @@ Contador Síncrono
 * Código Fuente
 +
 
+[source,vhdl]
 ----
 -- Contador Sincrono Ascendene Modulo 16
 -- Reset con logica negativa
@@ -2335,6 +2471,7 @@ Cerradura Electrónica
 * Código Fuente
 +
 
+[source,vhdl]
 ----
 -- Libro Problemas Upna Capítulo 8: Sistemas Secuenciales
 -- Ejercicio 8.1
@@ -2672,6 +2809,7 @@ CAUTION: para poder fabricar el circuito en los dispositivos FPGA del laboratori
 Identificación de los puertos
 -----------------------------
 
+[source,vhdl]
 ----
 Documentación - Asignación de señales
 
@@ -2909,7 +3047,7 @@ Examples Code
 
 my_nand3
 ^^^^^^^^
-
+[source,vhdl]
 ----
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -2931,6 +3069,7 @@ end ex_nand3;
 my_ckt_f3
 ^^^^^^^^^
 
+[source,vhdl]
 ----
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -2951,7 +3090,7 @@ end f3_1;
 
 my_ckt_f3
 ^^^^^^^^^
-
+[source,vhdl]
 ----
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -2971,6 +3110,8 @@ end f3_3;
 
 mux4_t1
 ^^^^^^^
+
+[source,vhdl]
 ----
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -2997,6 +3138,7 @@ end mux4t1;
 my_ckt_f3
 ^^^^^^^^^
 
+[source,vhdl]
 ----
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
@@ -3018,6 +3160,7 @@ end f3_4;
 my_4t1_mux
 ^^^^^^^^^^
 
+[source,vhdl]
 ----
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
