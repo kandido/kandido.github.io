@@ -19,6 +19,7 @@
 :revealjs_hash: true   
 :revealjs_history: true
 
+
 :revealjs_center: true
 :revealjs_width: "100%"
 :revealjs_height: "100%"
@@ -2060,7 +2061,8 @@ Llevadas       - 1 1 1 2 1 1 1 - -
 
 ----
 
-=== Semisumador
+[state=txikiago]
+=== Semi-Sumador (Half Adder)
 
 
 * Función: Suma de dos bits -> resultado suma y carry (llevada,acarreo) 
@@ -2071,8 +2073,10 @@ Llevadas       - 1 1 1 2 1 1 1 - -
 * latexmath:[S_i=\overline A_i\cdot B_i+A_i\cdot \overline B_i = A_i \oplus B_i] 
 * latexmath:[C_i=A_i\cdot B_i]
 
+image::tema5_HA.png[]
 
-=== Sumador Completo
+
+=== Sumador Completo (Full Adder)
 
 * Función: Suma de dos bits y acarreo anterior -> resultado suma y acarreo posterior
 * Suma aritmética -> latexmath:[S_i=A_i+B_i+C_{i-1}]
@@ -2084,8 +2088,13 @@ Llevadas       - 1 1 1 2 1 1 1 - -
 \overline A_i\cdot (B_i \oplus C_{i-1} ) + A_i\cdot \overline {(B_i \oplus C_{i-1} )} = A_i \oplus B_i \oplus C_{i-1}] 
 * latexmath:[C_i=A_i\cdot B_i + A_i\cdot C_{i-1}+ B_i\cdot C_{i-1}]
 
+=== Sumador Completo
+
+.Full Adder
+image::tema5_FA_symbol.png[]
+
 [.columns, state="txikiago"]
-=== Sumador Completo usando semisumadores
+=== Sumador Completo usando semi-sumadores
 
 [.column]
 --
@@ -2112,23 +2121,24 @@ latexmath:[S_a= ¿xor? ; S_t = ¿xor? ; C_a = ¿and? ; C_b= ¿and?] +
 [.column]
 --
 latexmath:[Suma=(A_1+B_1)+C_0=(S_a,C_a)+C_0=\\
- C_1, (S_a+C_0) = C_1, (S_b,C_b)=(S_T,C_T)]
+ C_1, (S_a+C_0) = C_1, (S_b,C_b)=(S_1,C_1)]
 
 HA_a -> (S_a,C_a) +
 
 HA_b -> (S_b,C_b)
 
-latexmath:[S_T=S_b] +
-latexmath:[C_T=C_a\ \ OR\ \ C_b]
+latexmath:[S_1=S_b] +
+latexmath:[C_1=C_a\ \ OR\ \ C_b]
 
 --
+
 
 [columns, state=taula]
 === Sumador Completo usando semisumadores
 
 [.column]
 Tabla de la verdad con 3 variables y 6 funciones +
-latexmath:[A_1, B_1, C_0, S_a, C_a, S_b, C_b, C_T, S_T] +
+latexmath:[A_1, B_1, C_0, S_a, C_a, S_b, C_b, C_1, S_1] +
 *¿ Es necesario ?*
 
 
@@ -2138,7 +2148,7 @@ latexmath:[A_1, B_1, C_0, S_a, C_a, S_b, C_b, C_T, S_T] +
 .Full Adder
 [width=10%,cols="9*^1"]
 |===
-|A1|B1|C0|Sa|Ca|Sb|Cb|CT|ST
+|A1|B1|C0|Sa|Ca|Sb|Cb|C1|S1
 | 0| 0| 0| 0| 0| 0| 0| 0| 0 
 | 0| 0| 1| .| .| .| .| .| . 
 | 0| 1| 0| .| .| .| .| .| .
@@ -2150,7 +2160,19 @@ latexmath:[A_1, B_1, C_0, S_a, C_a, S_b, C_b, C_T, S_T] +
 |===
 
 --
+
+=== Sumador Completo usando semisumadores
+
+
+image::tema5_FA.png[]
+
+
 === Sumador Paralelo Acarreo Serie
+
+
+.Full Adders en Cadena
+image::tema5_sumpaacse.png[]
+
 
 === Sumador Paralelo Acarreo Paralelo
 
@@ -2164,37 +2186,68 @@ latexmath:[A_1, B_1, C_0, S_a, C_a, S_b, C_b, C_T, S_T] +
 * Diseñar el circuito
 ** Más rápido pero más complejo
 
+[state=txikiago]
 === Sumador Serie
 
-* sumadores en paralelo : los vistos hasta ahora
-* sumador serie:
-** necesita de 3 registros de desplazamiento para memorizar los operandos y la suma. Cuando el reloj genera un disparo positivo, el contenido de las celdas del registro se desplazan una posición hacia la derecha
-** necesita de una celda de memoria para recordar el acarreo previo
-** puerta de bloqueo: mientras el reloj está a cero los sumandos valen cero
+Sumador serie: +
+
+-Un Full Adder con 3 entradas (sumandos y acarreo anterior) y dos salidas (suma y acarreo) +
+-Necesita de 3 "registros de desplazamiento" para memorizar los operandos y la suma. Cuando el *reloj* genera un disparo positivo, el contenido de las celdas del registro se desplazan una posición hacia la derecha. +
+-Celda de memoria para recordar el acarreo previo. La escritura de la memoria es síncrona con el *reloj*. +
+-Puerta de bloqueo: mientras el *reloj* está a cero los sumandos valen cero +
+-Dispositivo de *sincronismo*: el reloj
+
+image::tema5_sum-serie.png[]
 
 
+[.columns]
 === Sumador/Restador de 4 bits
 
+[.column]
 * Operandos: números con signo en formato C1 ó C2
 * Diagrama de bloques del circuito:
 ** Señal de control para sumar o restar -> la resta equivale a sumar cambiando de signo al sustraendo
-** bloque complementador para generar el complemento a 1
-** bloque sumador para generar el complemento a 2
+** Resta: cambiar el signo para sólo sumar
+*** bloque complementador para generar el complementario
 ** bloque sumador completo de 4 bits
 
-=== Semirestador
+[.column]
+* Diseño C1 :
+** C1 : complementario
+** suma: la última llevada se suma 
+* Diseño C2 :
+** C2 : complemenario más 1
+** suma: la última llevada no se tiene en cuenta
 
+=== Sumador/Restador de 4 bits
 
-=== Semirestador Completo
+image::tema5_sumador-restador.png[]
 
+=== Semi-Restador
+
+* Mismos conceptos de diseño que para el Semi-Sumador
+** TV -> lógica positiva o negativa -> Obtener Expresión lógica
+* La llevada (L) en lugar de acarreo recibe el nombre de Borrow
+
+=== Restador Completo
+
+* Mismos conceptos de diseño que para el Sumador Completo
+** TV -> lógica positiva o negativa -> Obtener Expresión lógica
 
 === Acumulador
+
+* Almacenar resultados parciales y reutilizarlos como operandos
 
 
 === Multiplicador
 
+* Concepto de diseño: utilizar Full Adders
 
 === Unidad Aritmético Lógica (ALU)
+
+* Puede realizar diferentes operaciones: aritméticas , lógicas, etc
+* El circuito tiene como entrada señales de control para seleccionar la operación a realizar
+* ALUs comerciales -> Interpretación de las Hoja de Características
 
 [#Tema6_OtrosCirc]
 == Tema 6: Otros Circuitos Combinacionales

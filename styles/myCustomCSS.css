@@ -18,6 +18,12 @@
     font-size: 0.8em;
 }
 
+/* Anulo los bordes de las imagens que crea el THEME importado */
+.reveal section img {
+    border: none;
+    box-shadow: none;
+}
+
 /* EL CONTENIDO A LA IZDA: imagenes incluidas*/
 /* if we want all slides to be left-aligned */ 
 .reveal p  { 
