@@ -183,7 +183,10 @@ Carpeta de Trabajo
 * Antes de crear el proyecto es necesario tener una carpeta de trabajo donde guardar todos los ficheros del proyecto.
 * Windows 10
 * Files Explorer -> Por ej: ir a la carpeta Descargas
-* Crear una subcarpeta con el nombre del proyecto: Pej ssdd/light_bit
+* Crear una subcarpeta con el nombre del proyecto: Pej ssdd\light_bit
+
+CAUTION: En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar la carpeta de Descargas como ubicación del proyecto de diseño. Si se utiliza la carpeta Descargas es necesario utilizar un SUBDIRECTORIO como por ejemplo "Descargas\ssdd\light_bit"
+
 
 [[QOpen]]
 Cómo Abrir Quartus Prime Lite
@@ -208,6 +211,7 @@ Proyecto Vacío
 * Project Name: light_bit
 * Top File: light_bit
 
+CAUTION: En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar la carpeta de Descargas como ubicación del proyecto de diseño. Si se utiliza la carpeta Descargas es necesario utilizar un SUBDIRECTORIO como por ejemplo "Descargas\ssdd\light_bit"
 
 Proyecto a partir de un fichero vhd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -721,6 +725,8 @@ latexmath:[f(x_1,x_2)=\overline {x_1} \cdot x_2 + x_1\cdot\overline {x_2}]
 +
 
 image::light_block-diagram.png[Diagrama de Bloques]
+
+CAUTION: En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar la carpeta de Descargas como ubicación del proyecto de diseño. Si se utiliza la carpeta Descargas es necesario utilizar un SUBDIRECTORIO como por ejemplo "Descargas\ssdd\light_bit"
 
 * CREAR EL PROYECTO "light_bit" de Quartus Prime Lite:
 ** crear la CARPETA DEL USUARIO (no del sistema ni de las aplicaciones) *Descargas/ssdd/light_bit/* donde se guardará nuestro diseño quartus.

@@ -18,7 +18,7 @@
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2023-02-19</span>
+<span id="revdate">2023-02-20</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -527,9 +527,21 @@ Desde un PC personal para conectarse al servidor hacer click en la hamburguesa d
 <p>Files Explorer &#8594; Por ej: ir a la carpeta Descargas</p>
 </li>
 <li>
-<p>Crear una subcarpeta con el nombre del proyecto: Pej ssdd/light_bit</p>
+<p>Crear una subcarpeta con el nombre del proyecto: Pej ssdd\light_bit</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar la carpeta de Descargas como ubicación del proyecto de diseño. Si se utiliza la carpeta Descargas es necesario utilizar un SUBDIRECTORIO como por ejemplo "Descargas\ssdd\light_bit"
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -575,6 +587,18 @@ Desde un PC personal para conectarse al servidor hacer click en la hamburguesa d
 <p>Top File: light_bit</p>
 </li>
 </ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar la carpeta de Descargas como ubicación del proyecto de diseño. Si se utiliza la carpeta Descargas es necesario utilizar un SUBDIRECTORIO como por ejemplo "Descargas\ssdd\light_bit"
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -1575,14 +1599,27 @@ end STANDARD;</code></pre>
 <img src="images/light_block-diagram.png" alt="Diagrama de Bloques">
 </div>
 </div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar la carpeta de Descargas como ubicación del proyecto de diseño. Si se utiliza la carpeta Descargas es necesario utilizar un SUBDIRECTORIO como por ejemplo "Descargas\ssdd\light_bit"
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <ul>
 <li>
 <p>CREAR EL PROYECTO "light_bit" de Quartus Prime Lite:</p>
-</li>
-</ul>
-</div>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>crear la CARPETA DEL USUARIO (no del sistema ni de las aplicaciones) <strong>Descargas/ssdd/light_bit/</strong> donde se guardará nuestro diseño quartus.</p>
 </li>
@@ -1619,17 +1656,17 @@ end STANDARD;</code></pre>
 </li>
 <li>
 <p>Salvar proyecto</p>
-<div class="ulist">
-<ul>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
 <li>
 <p>EDITAR el fichero vhd: File&#8594; New &#8594; VHDL File &#8594; save as &#8594; nombre: light.vhd : <strong>el mismo</strong> que el de la entidad vhdl: light</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>edición vhdl : copiar el código fuente del tutorial PDF "tutorial_quartusii_intro_vhdl.pdf" y pegarlo &#8594; corregir la edición ya que las copias desde un PDF no son literales &#8594; salvar</p>
 </li>
@@ -1667,14 +1704,14 @@ end rtl;</code></pre>
 </li>
 <li>
 <p>cerrar quartus</p>
-<div class="ulist">
-<ul>
-<li>
-<p>SINTESIS</p>
 </li>
 </ul>
 </div>
 </li>
+<li>
+<p>SINTESIS</p>
+<div class="ulist">
+<ul>
 <li>
 <p>abrir quartus</p>
 </li>
@@ -1683,6 +1720,9 @@ end rtl;</code></pre>
 </li>
 <li>
 <p>síntesis: Processing &#8594; Start Compilation</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -5481,7 +5521,7 @@ end mux4t1_2;</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-19 20:42:00 +0100
+Last updated 2023-02-20 14:16:06 +0100
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
