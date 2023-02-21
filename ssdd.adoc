@@ -284,7 +284,7 @@ Representación de los números en código binario : <<Tema2_RepInf>>
 image:clock-signals.png[Mountain,400,300,float="left"]
 
 [.text-left%hardbreaks]
-Eje ordenada: valores abstractos (0/1, High/Low, ON/OFF, etc ...)
+Eje ordenada: valores abstractos (0/1, High/Low, ON/OFF, etc ...).
 Cronograma: Representación temporal de las señales digitales binarias.
 Esa representación típica de los libros de texto, pizarra de clase, etc ... es ideal ya que físicamente siempre habrá distorsión.
 
@@ -859,6 +859,62 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 | 13 |1111110000000 | 1111_1111_1000_0000 -> 0xFF80 | 111_111_110_000_000 -> 0x77600
 |===
 
+
+[#C1_suma-resta]
+[state=txikiago]
+=== Suma y Resta aritmética en C1
+
+[%hardbreaks]
+-Ejemplos con datos de 4 bits -> Rango (-7,+7). +
+-¿Qué ocurre si *sumamos* dos números sin que haya overflow?.
+- Primer caso: dos operandos positivos 0011+0011=0110 -> correcto.
+- Segundo caso: dos operandos negativos donde todas ellas tienen acarreo en el MSB
+--- 1111+1111=1110 -> 0+0=-1  ; 1100+1100=1000 -> -3-3=-7. ; 1100+1011=0111 -> -3-3=+7.
+--- el valor del resultado siempre da una *unidad menor* y siempre hay acarreo en el MSB.
+--- Solución: la suma en C1 es la suma de los sumandos *más el acarreo MSB*.
+--- 1111+1111=1110+1 -> 0  ; 1100+1100=1000+1 -> -6 ; 1100+1011=0111+1=1000 -> -7.
+-¿Qué ocurre si *restamos* dos números?.
+--- El resultado es correcto si no hay acarreo MSB.
+--- Si hay acarreo la resta da una *unidad mayor*, por lo tanto el resultado es la resta *menos uno*.
+--- El resultado es la resta *menos el acarreo MSB*.
+
+
+
+-Caso de overflow: el resultado es incorrecto por limitación del tamaño de los datos
+
+
+=== Suma aritmética en C1
+
+
+.Razonamiento
+
+image::tema2_c1_suma.png[]
+
+[%hardbreaks]
+Si nos fijamos en los números negativos su valor esta [verde]#desplazado una unidad# de la rueda hacia la izda: el valor cero está en la marca [verde]#1# de la rueda, el valor -1 está en la marca [verde]#2# de la rueda, etc. El valor representado por el segmento perimetral de la circunferencia tiene una unidad inferior: el valor -1 tiene un segmento de [verde]#2# marcas del [verde]#0# hacia la izda.
+El segmento o distancia del cero (1111) es [verde]#UNO#, el del -1 es DOS, el del -2 es TRES.....
+
+
+
+=== Suma aritmética en C1
+
+
+.Ejemplos a completar para A=2 y B=5
+
+image::tema2_c1_suma-resta.png[]
+
+
+[state=txikiago]
+=== Suma y Resta aritmética en C1
+
+* Ej_1: suma: no hay conflicto
+* Ej_2: suma: sí hay conflicto : el segmento B por ser negativo tiene un segmento superior en una unidad, por lo que a la suma hay que *sumarle 1*
+* Ej_3: suma
+** si la flecha B cruza el cero (1111), el segmento B, por ser negativa tiene un segmento mayor en 1, compensa el desplazamiento entre ceros y la suma es correcta.
+** si la flecha B no cruza el cero (1111), a la suma hay que *sumarle 1*
+* Ej_4: resta
+** si la flecha B cruza el cero (1111), B por ser positivo no compensa el desplazamiento entre ceros. A la resta hay que *restarle 1*
+* Ej_5: resta: no cruza el cero (1111), B por ser negativo tiene un segmento mayor en 1. A la resta hay que *restarle 1*
 
 
 === Números Reales Binarios
@@ -2095,6 +2151,14 @@ image::tema5_HA.png[]
 .Full Adder
 image::tema5_FA_symbol.png[]
 
+
+=== Sumador Completo usando semi-sumadores
+
+IMPORTANT: Concepto nuevo: Diseñar un circuito no como combinación de puertas lógicas sino como combinación de otros circuitos o bloques
+
+IMPORTANT: Concepto nuevo: introducir en la tabla de la verdad variables-funcion nuevas como Sa,Ca,Sb,Cb para obtener las funciones C1 y S1 en función de ellas. 
+
+
 [.columns, state="txikiago"]
 === Sumador Completo usando semi-sumadores
 
@@ -2113,12 +2177,13 @@ Razonar la suma de 3 bits con sumas parciales de 2 bits+
                     ---
                  C_tS_t 
 -----
-  
-latexmath:[S_a= ¿xor? ; S_t = ¿xor? ; C_a = ¿and? ; C_b= ¿and?] +
-¿Puede latexmath:[C_a=C_b=1]? -> tabla de la verdad latexmath:[C_a,C_b,C_t] +
-¿indefiniciones?
- 
+
+latexmath:[S_a= ¿xor? ; S_1 = ¿xor? ; C_a = ¿and? ; C_b= ¿and?] +
+¿Puede latexmath:[C_a=C_b=1]? Probar distintos casos de las entradas A1 y B1 -> tabla de la verdad latexmath:[C_a,C_b,C_1] +
+¿indefiniciones si latexmath:[C_a=C_b=1] no está definida?
 --
+
+
 
 [.column]
 --
@@ -2135,13 +2200,14 @@ latexmath:[C_1=C_a\ \ OR\ \ C_b]
 --
 
 
+
 [columns, state=taula]
 === Sumador Completo usando semisumadores
 
 [.column]
 Tabla de la verdad con 3 variables y 6 funciones +
 latexmath:[A_1, B_1, C_0, S_a, C_a, S_b, C_b, C_1, S_1] +
-*¿ Es necesario ?*
+*¿ Es necesario describir la tabla de la verdad ?*
 
 
 [.column]
@@ -2178,15 +2244,34 @@ image::tema5_sumpaacse.png[]
 
 === Sumador Paralelo Acarreo Paralelo
 
-* Carry Look Ahead
+
+* El acarreo serie ralentiza la obtención de la suma -> ¿solución? -> Carry Look Ahead
 * Full Adder: Tabla de la verdad :
-** segmentar la tabla de la verdad:
-*** fijarse en la relación entre los dos acarreos , el anterior y el posterior, cada dos filas.
-*** 3 casos: no hay, se propaga, se genera 
+** segmentar la tabla de la verdad
+*** fijarse en la relación entre los dos acarreos , el anterior y el posterior, cada dos filas, ya que son el problema.
+*** 3 casos: no hay acarreo, se propaga el acarreo, se genera el acarreo -> lo expresamos lógicamente mediante las funciones *G* y *P*
 * Particionamiento: Variables ó Funciones Intermedias -> generación y propagación
-** 2 variables intermedias para codificar 3 casos ... y podría codificar hasta 4 casos si lo hubiera.
+** 2 funciones-variables intermedias para codificar 3 casos -> *G* y *P* se pueden calcular en paralelo en función de los sumandos ya que NO DEPENDEN de los acarreos -> Los acarreos de salida se pueden calcular en función de G y P, que no dependen de los acarreos de entrada
 * Diseñar el circuito
 ** Más rápido pero más complejo
+
+[state=taula_ta]
+=== Sumador Paralelo Acarreo Paralelo
+
+
+.Funciones de Generación y Propagación del Acarreo
+[width=70%,cols="4*^1,1*^3,2*^1"]
+|===
+|A_i|B_i|C_i-1|C_i| Descripción | *G*|*P*
+| 0| 0| 0 | *0* .2+|  Ni se Genera Ni se Propaga |0| 0 
+| 0| 0| 1| *0* | 0| 0 
+| 0| 1| *0* | *0* .4+| Se Propaga| 0| 1 
+| 0| 1| *1* | *1* | 0| 1
+| 1| 0| *0* | *0* | 0| 1
+| 1| 0| *1* | *1* | 0| 1
+| 1| 1| 0 | *1* .2+| Se Genera| 1| 0 
+| 1| 1| 1 | *1* | 1| 0
+|===
 
 [state=txikiago]
 === Sumador Serie
@@ -2216,11 +2301,35 @@ image::tema5_sum-serie.png[]
 [.column]
 * Diseño C1 :
 ** C1 : complementario
-** suma: la última llevada se suma 
+** suma: la última llevada (MSB) se suma. Ver <<C1_suma-resta, Suma-Resta C1>>
 * Diseño C2 :
 ** C2 : complemenario más 1
 ** suma: la última llevada no se tiene en cuenta
 
+[.columns, state="taula"]
+=== Complementador
+
+[.column.is-one-fifth]
+[width=40%]
+|===
+| Control | Entrada | Salida
+.2+|    1    | 0  | 0
+             | 1  | 1
+.2+|    0    | 0  | 1
+             | 1  | 0  
+|===
+
+[.column]
+
+--
+latexmath:[Salida_i=\overline {Control \oplus Entrada_i}]
+
+image::tema5_complementador.png[]
+
+latexmath:[Control=1  \:\:  O_i=B_i]
+
+latexmath:[Control=0  \:\:   O_i=\overline B_i]
+--
 === Sumador/Restador de 4 bits
 
 image::tema5_sumador-restador.png[]
