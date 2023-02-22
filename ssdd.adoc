@@ -2352,19 +2352,95 @@ image::tema5_sumador-restador.png[]
 
 === Multiplicador
 
-* Concepto de diseño: utilizar Full Adders
+* Concepto de diseño: 
+** Estructura matricial: el bus A en "m" Filas y el bus B en "n" columnas
+** En cada punto de la matriz *(i,j)* se dispone de un sumador Full-Adder para realizar las sumas de dos en dos verticalmente y teniendo en cuenta el acarreo de la columna anterior, al igual que se realiza manualmente.
+** Tener en cuenta que el número de bits del resultado es m+n.
 
 === Unidad Aritmético Lógica (ALU)
 
 * Puede realizar diferentes operaciones: aritméticas , lógicas, etc
 * El circuito tiene como entrada señales de control para seleccionar la operación a realizar
-* ALUs comerciales -> Interpretación de las Hoja de Características
+* ALUs comercial 714181 -> Interpretación de las Hoja de Características
+** la entrada M: selecciona la categoría de la operaciones: Aritmética o Lógica.
+** la entrada Cn: selecciona la subcategoría de las operaciones dentro de la categoría Aritmética: 
+** En total hay 3x2^4^ operaciones = 48 operaciones
+** las entradas S3S2S1S0 seleccionan el tipo de operación dentro de las 2 categorías.
+** Los datos de entrada A y B y el de salida F son de 4 bits
+** Los datos de entrada y salida siguen la lógica  negativa : son activas las señales de valor 0.
+** Lógica negativa -> el dato 1000 representa al valor 7.
 
 [#Tema6_OtrosCirc]
 == Tema 6: Otros Circuitos Combinacionales
 
 
+=== Tema 6: Indice
 
+*  link:PDF/05_otros_circuitos_combinacionales.pdf[Tema5 Otros Circuitos Combinacionales]: PDF
+. <<circ_combi, Circuitos Combinacionales.>>
+. <<mux,Multiplexor>>
+. <<codi,Codificador (Encoder)>>
+. <<decodi,Decodificador / Demux>>
+. <<conver,Convertidores de Código>>
+. <<gen_par,Generador-Comprobador de Paridad>>
+. <<compa,Comparador Binario>>
+
+[#circ_combi]
+=== Circuitos Combinacionales
+
+* Concepto: Circuitos cuya salida un instante es resultado de la entrada en ese mismo instante sin tener cuenta la historia pasada
+* No tienen MEMORIA
+
+[#mux]
+=== Multiplexor
+
+. Concepto
+. Símbolo
+. Diseño
+. Hoja de características comercial
+. Extensión
+. Aplicaciones: Generador de Funciones
+
+[#codi]
+=== Codificador (Encoder)
+
+. Concepto
+. Símbolo
+. Ejemplo de Diseño: BCD sin prioridad, 4x2 con prioridad
+
+[#decodi]
+=== Decodificador / Demux
+
+. Concepto
+. Diseño: Salidas mutuamente excluyentes
+. Ejemplo de Diseño: Decodificador BCD
+. Excitador de un Display de 7 segmentos
+. Aplicaciones:
+.. Generador de Funciones
+.. Conversor Serie Paralelo
+.. Generador de Funciones: Decodificador y Multiplexor
+
+[#conver]
+=== Convertidores de Código
+
+. BCD
+
+[#gen_par]
+=== Generador-Comprobador de Paridad
+
+. Concepto de Paridad
+. Detección de Errores
+. Hoja de Datos Comercial
+
+
+[#compa]
+=== Comparador Binario
+
+. Concepto
+. Diseño comparador de 4 bits
+. Extensión con Entradas de Expansión
+. Extensión sin Entradas de Expansión
+. Hoja de Datos Comercial
 
 
 == Fin del Primer Parcial
