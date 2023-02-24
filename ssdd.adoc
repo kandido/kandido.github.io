@@ -2509,7 +2509,7 @@ image::tema6_mux-comercial.png[]
 
 === Extensión de Multiplexores
 
-image::tema6_mux-extension.svg[[width=440,heigth=380]]
+image::tema6_mux-extension.svg[[width=440,heigth=340]
 
 
 
@@ -2529,6 +2529,7 @@ image::tema6_mux-extension.svg[[width=440,heigth=380]]
 . Ejemplo de Diseño: BCD sin prioridad, 4x2 con prioridad
 
 
+[state=txikiago]
 === Concepto
 
 * Un codificador realiza la conversión de un número con cualquier tipo de código no binario a código binario.
@@ -2554,6 +2555,7 @@ image::tema6_codificador-hex.png[]
 
 * El resto de combinaciones "no van a ocurrir" por lo que salida queda "X" en DK ó "dont't care" en VHDL , es decir, no importa que la salida valga cero ó uno para dichas entradas y las tenemos que definir 0 ó 1 en función de su optimización.
 
+[state=txikiago]
 === Codificador Hexadecimal : Diseño
 
 * No se puede recurrir directamente a un DK ya que el número de celdas es muy elevado
