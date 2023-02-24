@@ -1,6 +1,7 @@
 = Sistemas Digitales 
 // classic AsciiDoctor attributes
-:stem: latexmath
+//:stem: latexmath
+:stem:
 :background-color="#ff0000":
 :icons: font
 :imagesdir: images
@@ -1984,6 +1985,25 @@ end minima;
 ----
 * El objetivo de este código es ser lo suficientemente simple para no dificultar su comprensión y centrarse en poner a punto la herramienta de desarrollo *Intel Quartus Prime Lite* desde cualquier computadora utilizando los recursos remotos de la UPNA.
 
+=== Primer Diseño
+
+Para poder ser fabricado en el laboratorio Remoto, es necesario que los puertos tenga los mismos nombres que se utilizan en el servidor del laboratorio Remoto. En este ejemplo la entrada serán los switches [naranja]#SW# y la salida los leds rojos [naranja]#LEDR#.
+
+----
+entity of light_bit is
+  port (
+    SW   : in bit_vector (0 downto 0);
+    LEDR   : out bit_vector (0 downto 0);
+);
+end entity;
+architecture minima of light_bit is
+begin
+  LEDR(0) <= SW(0);
+end minima;
+----
+
+
+
 === Ejercicios Prácticos de Diseño de Circuitos
 
 // * link:./PDF/vhdl_lab_remoto.pdf[VHDL mediante recursos Remotos]:PDF 
@@ -2119,6 +2139,8 @@ Llevadas       - 1 1 1 2 1 1 1 - -
 
 ----
 
+El resultado de la multiplicación tiene un tamaño de bits suma del número de bits de los factores.
+
 [state=txikiago]
 === Semi-Sumador (Half Adder)
 
@@ -2162,10 +2184,11 @@ IMPORTANT: Concepto nuevo: introducir en la tabla de la verdad variables-funcion
 [.columns, state="txikiago"]
 === Sumador Completo usando semi-sumadores
 
-[.column]
+[.column.is-two-fifths]
 --
-Particionamiento: utilizar señales intermedias -> A_i+B_i puede ser sustituido por un Half Adder +
-Razonar la suma de 3 bits con sumas parciales de 2 bits+
+Particionamiento: utilizar señales intermedias +
+A_i+B_i puede ser sustituido por un Half Adder +
+Razonar la suma de 3 bits con sumas parciales de 2 bits +
 
 -----
          1            1
@@ -2175,12 +2198,13 @@ Razonar la suma de 3 bits con sumas parciales de 2 bits+
                     + 1
                  C_b
                     ---
-                 C_tS_t 
+                 C_1S_b 
 -----
 
-latexmath:[S_a= ¿xor? ; S_1 = ¿xor? ; C_a = ¿and? ; C_b= ¿and?] +
-¿Puede latexmath:[C_a=C_b=1]? Probar distintos casos de las entradas A1 y B1 -> tabla de la verdad latexmath:[C_a,C_b,C_1] +
-¿indefiniciones si latexmath:[C_a=C_b=1] no está definida?
+S_1=S_b +
+¿ C1 ?
+
+
 --
 
 
@@ -2188,44 +2212,57 @@ latexmath:[S_a= ¿xor? ; S_1 = ¿xor? ; C_a = ¿and? ; C_b= ¿and?] +
 [.column]
 --
 latexmath:[Suma=(A_1+B_1)+C_0=(S_a,C_a)+C_0=\\
- C_1, (S_a+C_0) = C_1, (S_b,C_b)=(S_1,C_1)]
+ C_a, (S_a+C_0) = C_a, (S_b,C_b)=(S_1,C_1)]
 
-HA_a -> (S_a,C_a) +
+HA_a -> (S_a,C_a) 
 
 HA_b -> (S_b,C_b)
 
-latexmath:[S_1=S_b] +
-latexmath:[C_1=C_a\ \ OR\ \ C_b]
+¿ C1 ?
+
+
 
 --
 
 
 
-[columns, state=taula]
+[.columns, state=taula]
 === Sumador Completo usando semisumadores
 
 [.column]
+--
 Tabla de la verdad con 3 variables y 6 funciones +
 latexmath:[A_1, B_1, C_0, S_a, C_a, S_b, C_b, C_1, S_1] +
-*¿ Es necesario describir la tabla de la verdad ?*
+latexmath:[S_1=S_b] +
+latexmath:[C1=\overline C_a \cdot Cb + C_a \cdot \overline  Cb = C_a \oplus C_b] +
 
+image:tema5_FA_HA_c1.png[]
+
+latexmath:[C1=C_a + C_b]
+--
 
 [.column]
 --
-
 .Full Adder
 [width=10%,cols="9*^1"]
 |===
 |A1|B1|C0|Sa|Ca|Sb|Cb|C1|S1
 | 0| 0| 0| 0| 0| 0| 0| 0| 0 
-| 0| 0| 1| .| .| .| .| .| . 
-| 0| 1| 0| .| .| .| .| .| .
-| 0| 1| 1| .| .| .| .| .| .
-| 1| 0| 0| .| .| .| .| .| .
-| 1| 0| 1| .| .| .| .| .| .
-| 1| 1| 0| .| .| .| .| .| .
-| 1| 1| 1| .| .| .| .| .| .
+| 0| 0| 1| 0| 0| 1| 0| 0| 1 
+| 0| 1| 0| 1| 0| 1| 0| 0| 1
+| 0| 1| 1| 1| 0| 0| 1| 1| 0
+| 1| 0| 0| 1| 0| 1| 0| 0| 1
+| 1| 0| 1| 1| 0| 0| 1| 1| 0
+| 1| 1| 0| 0| 1| 0| 0| 1| 0
+| 1| 1| 1| 0| 1| 1| 0| 1| 1
 |===
+
+
+
+
+
+
+
 
 --
 
@@ -2272,6 +2309,22 @@ image::tema5_sumpaacse.png[]
 | 1| 1| 0 | *1* .2+| Se Genera| 1| 0 
 | 1| 1| 1 | *1* | 1| 0
 |===
+
+=== Sumador Paralelo Acarreo Paralelo
+
+
+
+latexmath:[C_i=\overline A_i B_i C_{i-1} + A_i \overline B_i C_{i-1} +  A_i B_i \overline C_{i-1} +  A_i B_i C_{i-1}=\\
+=(A_i \oplus B_i) \cdot C_{i-1} + A_i B_i = P_i \cdot C_{i-1} + G_i ]
+
+image:tema5_sumpaacpaprop.png[]   image:tema5_sumpaacpagen.png[]
+
+Conclusión: P_i y G_i permiten expresar el acarreo de forma más clara. 
+
+latexmath:[C_1=G_1 + P_1 \cdot C_0] +
+latexmath:[C_2=G_2 + P_2 \cdot C_1 = G_2 + P_2G_1 + P_2P_1C_0 ] +
+latexmath:[C_3=G_3 + P_3 \cdot C_2 = ... = G_3 + P_3P_2 + P_3P_2G_1 + P_3P_2P_1C_0 ] 
+
 
 [state=txikiago]
 === Sumador Serie
@@ -2334,6 +2387,11 @@ latexmath:[Control=0  \:\:   O_i=\overline B_i]
 
 image::tema5_sumador-restador.png[]
 
+
+=== Sumador/Restador de 4 bits
+
+image::tema5_sumarestac1c2.png[]
+
 === Semi-Restador
 
 * Mismos conceptos de diseño que para el Semi-Sumador
@@ -2363,9 +2421,9 @@ image::tema5_sumador-restador.png[]
 * El circuito tiene como entrada señales de control para seleccionar la operación a realizar
 * ALUs comercial 714181 -> Interpretación de las Hoja de Características
 ** la entrada M: selecciona la categoría de la operaciones: Aritmética o Lógica.
-** la entrada Cn: selecciona la subcategoría de las operaciones dentro de la categoría Aritmética: 
+** la entrada stem:[C_n] : selecciona la subcategoría de las operaciones dentro de la categoría Aritmética: 
 ** En total hay 3x2^4^ operaciones = 48 operaciones
-** las entradas S3S2S1S0 seleccionan el tipo de operación dentro de las 2 categorías.
+** las entradas latexmath:[S_3S_2S_1S_0]  seleccionan el tipo de operación dentro de las 2 categorías.
 ** Los datos de entrada A y B y el de salida F son de 4 bits
 ** Los datos de entrada y salida siguen la lógica  negativa : son activas las señales de valor 0.
 ** Lógica negativa -> el dato 1000 representa al valor 7.
@@ -2397,9 +2455,69 @@ image::tema5_sumador-restador.png[]
 . Concepto
 . Símbolo
 . Diseño
+. Esquema Eléctrico
 . Hoja de características comercial
 . Extensión
 . Aplicaciones: Generador de Funciones
+
+=== Concepto - Símbolo
+
+* El circuito multiplexor de N entradas de datos y 1 salida de datos tiene la función de seleccionar una de las entradas y conectarla a la salida. Para ello se sirve de M entradas de control donde 2^M^=N
+
+.Multiplexor 4x1
+image::tema6_multiplexor.png[]
+
+=== Diseño
+
+lenguaje natural: función del multiplexor ->  F=I0 si S1=0 y S0=0 ó F=I1 si S1=0 y S0=1 ó ...... +
+
+latexmath:[F=lógica \: positiva=\overline S_1 \overline S_0 I_0 + \overline S_1  S_0 I_1 +  S_1 \overline S_0 I_2 +  S_1  S_0 I_3]
+
+.TV
+[width=50%]
+|===
+| I3 | I2 | I1 | I0 | S2 | S1 | F
+
+| X  | X  | X  | X  | 0  |  0 | I0
+| X  | X  | X  | X  | 0  |  1 | I1
+| X  | X  | X  | X  | 1  |  0 | I2
+| X  | X  | X  | X  | 1  |  1 | I3
+|===
+
+=== Esquema Eléctrico
+
+* Señal Strobe : señal de validación, habilitación. Es necesario que este activa para que el circuito procese los datos de entrada y la salida sea válida. 
+** Se implementa mediante la función  ( Z= Strobe AND F ) donde es necesario activar Strobe para que la salida Z tenga el valor de F, en caso contrario Z=0. Si la señal strobe se activa con lógica negativa -> latexmath:[Z=\overline {Strobe} \cdot F]
+
+image::tema6_mux-esqelec.svg[] 
+
+=== Hoja de Características Comercial
+
+image::tema6_mux-comercial.png[]
+
+
+=== Extensión de Multiplexores
+
+* El número de entradas de los multiplexores es limitado. No hay multiplexores con 64 entradas. Para diseñar un multiplexor de 64 entradas es necesario utilizar multiplexores con un número de entradas inferior : 16,8,4,2 entradas. 
+
+* Pej cómo diseñar un mux de 64 entradas con mux de 16 entradas de datos
+** Un mux de 64 entradas necesita 6 señales de selección o control ->  2^6^
+** Un mux de 64 entradas es la combinación de 4 mux de 16 entradas de datos y 4 entradas de selección . Las 4 salidas de los 4 mux se multiplexan con un segundo mux de 4 entradas.
+** Las señales de selección del 1º nivel de mux están interconectadas dando lugar a 4 entradas de control y el 2º nivel de mux tendría 2 entradas de control. Los dos niveles suman 6 entradas de control.
+
+=== Extensión de Multiplexores
+
+image::tema6_mux-extension.svg[scale=80%]
+
+
+
+=== Aplicaciones: Generador de Funciones
+
+
+* Las salida del multiplexor tiene el formato de una función canónica SOP donde las entradas de control son las variables independientes de la función. Las entradas de datos tomar valores "0" ó "1" o ser también variables.
+* Por lo tanto un multiplexor con 3 entradas de control puede implementar una función lógica de 3 o más variables independientes.
+* Ejemplos.
+
 
 [#codi]
 === Codificador (Encoder)
@@ -2407,6 +2525,60 @@ image::tema5_sumador-restador.png[]
 . Concepto
 . Símbolo
 . Ejemplo de Diseño: BCD sin prioridad, 4x2 con prioridad
+
+
+=== Concepto
+
+* Un codificador realiza la conversión de un número con cualquier tipo de código no binario a código binario.
+* Pej: un codificador de código hexadecimal a código binario se implementa mediante un circuito con un bus de datos de entrada de 16 hilos donde únicamente se activa el hilo asociado a uno de los 16 dígitos hexadecimales. Para codificar en binario los 16 dígitos son necesarios 4 bits (2^4^ combinaciones), por lo que el bus de datos de entrada tiene un tamaño de 16 pistas y el de salida tiene un tamaño de 4 pistas.
+
+image::tema6_codificador-hex.png[]
+
+[state=taula]
+=== Codificador Hexadecimal : Diseño
+
+.TV del Codificador Hexadecimal
+[width=60%]
+|===
+|stem:[E_15]|stem:[E_14]|stem:[E_13]|..|stem:[E_1]|stem:[E_0]|stem:[S_3]|stem:[S_2]|stem:[S_1]|stem:[S_0]| Fila
+|  0 |  0 |  0 |..|  0 |  *1* |  0 |  0 |  0 |  0 | 0ª
+|  0 |  0 |  0 |..|  *1* |  0 |  0 |  0 |  0 |  1 | 1ª
+| .. | .. | .. |..| .. | .. | .. | .. | .. |  ..  |
+|  0 |  0 |  *1* |..|  0 |  0 |  1 |  1 |  0 |  1 | 13ª
+|  0 |  *1* |  0 |..|  0 |  0 |  1 |  1 |  1 |  0 | 14ª
+|  *1* |  0 |  0 |..|  0 |  0 |  1 |  1 |  1 |  1 | 15ª
+6+| RESTO de COMBINACIONES POSIBLES | X | X | X | X |
+|===
+
+* El resto de combinaciones "no van a ocurrir" por lo que salida queda "X" en DK ó "dont't care" en VHDL , es decir, no importa que la salida valga cero ó uno para dichas entradas y las tenemos que definir 0 ó 1 en función de su optimización.
+
+=== Codificador Hexadecimal : Diseño
+
+* No se puede recurrir directamente a un DK ya que el número de celdas es muy elevado
+* Es necesario recurrir al lenguaje natural para obtener las 4 salidas y optimizarlas mediante la matemática booleana.
+* Función stem:[S_0] -> lógica positiva
+** vale 1 si: filas 1ª,3ª,5ª...15ª
+*** fila 1ª: 0000000000000010 -> es el minitérmino stem:[m_2] de 16 variables -> optimización: ¿se puede reducir el Nº de variables?
+*** Si de las filas RESTO capturo todas las filas stem:[m_i] donde stem:[E_1] valga 1 y las sumo a la fila 1ª -> puedo sacar factor común stem:[E_1]
+*** stem:[E_1*sum(m_i)=E_1 cdot 1] y así con las filas 3ª,5ª, etc
+** stem:[S_0=E_1+E_3+E_5+E_7+E_9+E_11+E_13+E_15]
+
+=== Codificador Hexadecimal : Diseño
+
+* Aplicamos el mismo método a las 4 salidas
+** stem:[S_0=E_1+E_3+E_5+E_7+E_9+E_11+E_13+E_15]
+** stem:[S_1=E_2+E_3+E_6+E_7+E_10+E_11]
+** stem:[S_2=E_4+E_5+E_6+E_7+E_12+E_13+E_14+E_15]
+** stem:[S_3=E_8+E_9+E_10+E_11+E_12+E_13+E_14+E_15]
+
+* ¿ Hubiesemos llegado al mismo resultado mediante el lenguaje natural?
+** La salida stem:[S_k] igual a 1 si la entrada stem:[E_i=1] ó la entrada stem:[E_j=1] ó etc ...
+
+=== Ejemplo de Diseño: BCD sin prioridad, 4x2 con prioridad
+
+
+
+=== Ejemplo de Diseño: Codificador 4x2 con prioridad
 
 [#decodi]
 === Decodificador / Demux
