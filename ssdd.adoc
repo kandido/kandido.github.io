@@ -2467,6 +2467,7 @@ image::tema5_sumarestac1c2.png[]
 .Multiplexor 4x1
 image::tema6_multiplexor.png[]
 
+[state=taula]
 === Diseño
 
 lenguaje natural: función del multiplexor ->  F=I0 si S1=0 y S0=0 ó F=I1 si S1=0 y S0=1 ó ...... +
@@ -2489,6 +2490,7 @@ latexmath:[F=lógica \: positiva=\overline S_1 \overline S_0 I_0 + \overline S_1
 * Señal Strobe : señal de validación, habilitación. Es necesario que este activa para que el circuito procese los datos de entrada y la salida sea válida. 
 ** Se implementa mediante la función  ( Z= Strobe AND F ) donde es necesario activar Strobe para que la salida Z tenga el valor de F, en caso contrario Z=0. Si la señal strobe se activa con lógica negativa -> latexmath:[Z=\overline {Strobe} \cdot F]
 
+[width=340,heigth=280]
 image::tema6_mux-esqelec.svg[] 
 
 === Hoja de Características Comercial
@@ -2507,7 +2509,7 @@ image::tema6_mux-comercial.png[]
 
 === Extensión de Multiplexores
 
-image::tema6_mux-extension.svg[scale=80%]
+image::tema6_mux-extension.svg[[width=440,heigth=380]]
 
 
 
