@@ -884,6 +884,7 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 -Caso de overflow: el resultado es incorrecto por limitación del tamaño de los datos
 
 
+[state=txikiago]
 === Suma aritmética en C1
 
 
@@ -908,14 +909,14 @@ image::tema2_c1_suma-resta.png[]
 [state=txikiago]
 === Suma y Resta aritmética en C1
 
-* Ej_1: suma: no hay conflicto
-* Ej_2: suma: sí hay conflicto : el segmento B por ser negativo tiene un segmento superior en una unidad, por lo que a la suma hay que *sumarle 1*
+* Ej_1: suma: no hay conflicto -> 2+5=7 -> 0010+0101=0111
+* Ej_2: suma: sí hay conflicto : el segmento B por ser negativo tiene un segmento superior en una unidad, por lo que a la suma hay que *sumarle 1* -> -2+(-5)=-7 -> 1101+1010=0111 y acarreo_MSB -> 0111+1=1000 -> -7
 * Ej_3: suma
-** si la flecha B cruza el cero (1111), el segmento B, por ser negativa tiene un segmento mayor en 1, compensa el desplazamiento entre ceros y la suma es correcta.
+** si la flecha B cruza el cero (1111), el segmento B, por ser negativa tiene un segmento mayor en 1, compensa el desplazamiento entre ceros y la suma es correcta. -> 2+(-5)=-3 -> 0010+1010=1100 -> -3
 ** si la flecha B no cruza el cero (1111), a la suma hay que *sumarle 1*
 * Ej_4: resta
-** si la flecha B cruza el cero (1111), B por ser positivo no compensa el desplazamiento entre ceros. A la resta hay que *restarle 1*
-* Ej_5: resta: no cruza el cero (1111), B por ser negativo tiene un segmento mayor en 1. A la resta hay que *restarle 1*
+** si la flecha B cruza el cero (1111), B por ser positivo no compensa el desplazamiento entre ceros. A la resta hay que *restarle 1* -> 2-(+5)=-3 -> 0010-0101=1101 y acarreo_MSB -> 1101-1=1100 -> -3
+* Ej_5: resta: no cruza el cero (1111), B por ser negativo tiene un segmento mayor en 1. A la resta hay que *restarle 1* -> 2-(-5)=+7 -> 0010-1010=1000 y acarreo_MSB -> 1000-1=0111 ->+7
 
 
 === Números Reales Binarios
