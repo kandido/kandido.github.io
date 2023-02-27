@@ -1,0 +1,5654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Introducción al Lenguaje VHDL y al Laboratorio Remoto de Sistemas FPGA</title>
+<link rel="stylesheet" href="styles/my-asciidoctor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
+</head>
+<body class="book doc">
+<div id="header">
+<h1>Introducción al Lenguaje VHDL y al Laboratorio Remoto de Sistemas FPGA</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-02-20</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_agradecimientos">1. Agradecimientos</a></li>
+<li><a href="#_introducción">2. Introducción</a></li>
+<li><a href="#ref_apuntes_VHDL">3. VHDL: Lenguaje para la Descripción de Hardware (Circuitos Digitales)</a>
+<ul class="sectlevel2">
+<li><a href="#_documentación">3.1. Documentación</a></li>
+</ul>
+</li>
+<li><a href="#Quartus">4. Herramienta Quartus</a>
+<ul class="sectlevel2">
+<li><a href="#QuartusInstall">4.1. Instalación del software: SUITE Quartus Prime Lite</a>
+<ul class="sectlevel3">
+<li><a href="#_en_el_pc_personal">4.1.1. En el PC personal</a></li>
+<li><a href="#_mac_os_x">4.1.2. Mac OS X</a></li>
+</ul>
+</li>
+<li><a href="#QRemote">4.2. Quartus Prime Preinstalado en el Escritorio Virtual UPNA</a></li>
+</ul>
+</li>
+<li><a href="#_crear_un_proyecto_quartus_con_un_diseño_mínimo_mediante_vhdl">5. Crear un Proyecto Quartus con un diseño mínimo mediante VHDL</a>
+<ul class="sectlevel2">
+<li><a href="#QWork">5.1. Crear una Carpeta de Trabajo</a>
+<ul class="sectlevel3">
+<li><a href="#_carpeta_de_trabajo">5.1.1. Carpeta de Trabajo</a></li>
+</ul>
+</li>
+<li><a href="#QOpen">5.2. Cómo Abrir Quartus Prime Lite</a>
+<ul class="sectlevel3">
+<li><a href="#_abrir_la_aplicación_de_quartus_prime_lite">5.2.1. Abrir la Aplicación de Quartus Prime Lite</a></li>
+</ul>
+</li>
+<li><a href="#QProject">5.3. Crear un Proyecto</a>
+<ul class="sectlevel3">
+<li><a href="#_proyecto_vacío">5.3.1. Proyecto Vacío</a></li>
+<li><a href="#_proyecto_a_partir_de_un_fichero_vhd">5.3.2. Proyecto a partir de un fichero vhd</a></li>
+</ul>
+</li>
+<li><a href="#QConfiguration">5.4. Configurar</a></li>
+<li><a href="#QEdition">5.5. Editar un fichero VHDL</a>
+<ul class="sectlevel3">
+<li><a href="#_operación_básica">5.5.1. Operación básica</a></li>
+<li><a href="#_insertar_plantillas_de_sentencias_vhdl">5.5.2. Insertar Plantillas de Sentencias VHDL</a></li>
+</ul>
+</li>
+<li><a href="#QAnalysis">5.6. Análisis</a></li>
+<li><a href="#QCompilation">5.7. Compilación</a></li>
+<li><a href="#_archivos_del_proyecto">5.8. Archivos del Proyecto</a></li>
+<li><a href="#QSimulation">5.9. Simulación</a></li>
+<li><a href="#QArchive">5.10. Archivar el Proyecto</a></li>
+<li><a href="#QRestore">5.11. Restaurar el Proyecto</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_light_de_quartus_prime_lite">6. Tutorial light de Quartus Prime Lite</a>
+<ul class="sectlevel2">
+<li><a href="#_introducción_2">6.1. Introducción</a></li>
+<li><a href="#_ejercicio_preliminar_antes_de_empezar_este_tutorial">6.2. Ejercicio PRELIMINAR antes de empezar este Tutorial</a></li>
+<li><a href="#_carpeta_de_trabajo_2">6.3. Carpeta de Trabajo</a></li>
+</ul>
+</li>
+<li><a href="#_ayuda_rápida">7. Ayuda rápida</a></li>
+<li><a href="#_vhdl_conceptos_teóricos_básicos">8. VHDL: Conceptos teóricos básicos</a>
+<ul class="sectlevel2">
+<li><a href="#_introducción_3">8.1. Introducción</a></li>
+<li><a href="#_señales_digitales_binarias">8.2. Señales digitales binarias</a></li>
+<li><a href="#_señales_vhdl_tipos_de_datos">8.3. Señales VHDL : tipos de datos</a></li>
+<li><a href="#_señal_digital_binaria_tipo_bit">8.4. Señal Digital Binaria tipo BIT</a></li>
+<li><a href="#_buses">8.5. Buses</a></li>
+<li><a href="#_circuito_light_xor">8.6. Circuito light_xor</a>
+<ul class="sectlevel3">
+<li><a href="#_descripciones_hw_esquema_eléctrico_tabla_de_la_verdad_expresión_lógica">8.6.1. Descripciones HW: Esquema eléctrico, Tabla de la Verdad, Expresión Lógica</a></li>
+<li><a href="#_descripción_hw_vhdl">8.6.2. Descripción HW: VHDL</a></li>
+</ul>
+</li>
+<li><a href="#_lenguaje_vhdl_sentencias_concurrentes">8.7. Lenguaje VHDL: Sentencias Concurrentes</a>
+<ul class="sectlevel3">
+<li><a href="#_concepto_de_concurrencia">8.7.1. Concepto de concurrencia</a></li>
+</ul>
+</li>
+<li><a href="#_circuito_digital_light_bit_vhdl">8.8. Circuito Digital  "light_bit.vhdl"</a></li>
+<li><a href="#_estructura_del_programa_librería_entidad_arquitectura">8.9. Estructura del Programa: Librería-Entidad-Arquitectura</a></li>
+<li><a href="#_librería_standard_paquete_standard">8.10. Librería standard:  paquete STANDARD</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_bit_vhd_i">9. Tutorial quartus &#8594; light_bit.vhd (I)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño">9.1. Diseño</a></li>
+<li><a href="#_errores_en_el_proceso_de_compilación">9.2. Errores en el Proceso de Compilación</a></li>
+<li><a href="#_archivar_el_proyecto_para_conservarlo">9.3. Archivar el proyecto para conservarlo</a></li>
+</ul>
+</li>
+<li><a href="#_vhdl_paquetes_std_logic_1164_y_textio">10. VHDL: Paquetes std_logic_1164 y textio</a>
+<ul class="sectlevel2">
+<li><a href="#_paquete_standard_logic_std_logic_std_logic_1164">10.1. Paquete Standard Logic (std_logic): std_logic_1164</a></li>
+<li><a href="#_std_logic_vector_downto_to">10.2. std_logic_vector : downto , to</a></li>
+<li><a href="#_librería_standard_paquete_textio">10.3. Librería standard: paquete TEXTIO</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_de1soc_vhd_ii">11. Tutorial quartus &#8594; light_de1soc.vhd (II)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_2">11.1. Diseño</a></li>
+<li><a href="#_fabricación_en_el_laboratorio_remoto">11.2. Fabricación en el laboratorio remoto</a></li>
+<li><a href="#_ejercicios">11.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_signal_vhd_iii">12. Tutorial quartus &#8594; light_signal.vhd (III)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_3">12.1. Diseño</a></li>
+<li><a href="#_análisis_herramienta_rtl_viewer">12.2. Análisis: Herramienta RTL Viewer</a></li>
+<li><a href="#_ejercicios_2">12.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_de1soc_vhd_iv_simulación_questa_intel">13. Tutorial quartus &#8594; light_de1soc.vhd (IV) : Simulación Questa Intel</a>
+<ul class="sectlevel2">
+<li><a href="#_simulación">13.1. Simulación</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_csa_vhd_v">14. Tutorial quartus &#8594; light_csa.vhd (V)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_4">14.1. Diseño</a></li>
+<li><a href="#_análisis">14.2. Análisis</a></li>
+<li><a href="#_ejercicios_3">14.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_sentencias_secuenciales">15. Sentencias Secuenciales</a>
+<ul class="sectlevel2">
+<li><a href="#_procesoprocess">15.1. Proceso/Process()</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_process_vhd_vi">16. Tutorial quartus &#8594; light_process.vhd (VI)</a></li>
+<li><a href="#_tutorial_quartus_light_if_vhd_vii">17. Tutorial quartus &#8594; light_if.vhd (VII)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_5">17.1. Diseño</a></li>
+<li><a href="#_análisis_2">17.2. Análisis</a></li>
+<li><a href="#_ejercicios_4">17.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_with_vhd_viii">18. Tutorial quartus &#8594; light_with.vhd (VIII)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_6">18.1. Diseño</a></li>
+<li><a href="#_análisis_3">18.2. Análisis</a></li>
+<li><a href="#_ejercicios_5">18.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_case_vhd_ix">19. Tutorial quartus &#8594; light_case.vhd (IX)</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño_7">19.1. Diseño</a></li>
+<li><a href="#_análisis_4">19.2. Análisis</a></li>
+<li><a href="#_ejercicios_6">19.3. Ejercicios</a></li>
+</ul>
+</li>
+<li><a href="#_tutorial_quartus_light_sum_vhd_x">20. Tutorial quartus &#8594; light_sum.vhd (X)</a>
+<ul class="sectlevel2">
+<li><a href="#_operación_suma_y_multiplicación">20.1. Operación suma y multiplicación</a></li>
+</ul>
+</li>
+<li><a href="#_ejercicio_1_5_matricula">21. Ejercicio 1.5: Matricula</a>
+<ul class="sectlevel2">
+<li><a href="#_arquitectura_rtl">21.1. Arquitectura rtl</a></li>
+<li><a href="#_netlist_view">21.2. netlist view</a></li>
+<li><a href="#_tutorial_quartus_matricula_case_vhd">21.3. Tutorial quartus &#8594; matricula_case.vhd</a></li>
+<li><a href="#_ejemplo_1_matricula_vhd">21.4. Ejemplo_1: matricula.vhd</a></li>
+</ul>
+</li>
+<li><a href="#_multiplexor">22. Multiplexor</a>
+<ul class="sectlevel2">
+<li><a href="#_mux2x1_arquitectura_rtl">22.1. mux2x1: arquitectura RTL</a></li>
+<li><a href="#_análisis_5">22.2. Análisis</a></li>
+<li><a href="#_mux4x1_arquitectura_behavioral">22.3. mux4x1: arquitectura Behavioral</a></li>
+<li><a href="#_análisis_6">22.4. Análisis</a></li>
+<li><a href="#_mux4x1_arquitectura_estructural">22.5. mux4x1: arquitectura Estructural</a>
+<ul class="sectlevel3">
+<li><a href="#_compilación_en_quartus">22.5.1. Compilación en Quartus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_decodificador">23. Decodificador</a>
+<ul class="sectlevel2">
+<li><a href="#_decoder_hexdisplay_7_segmentos">23.1. Decoder Hex/Display_7_segmentos</a></li>
+</ul>
+</li>
+<li><a href="#_valores_indeterminados_x_en_la_entrada_y_en_la_salida">24. Valores INDETERMINADOS X en la entrada y en la salida</a>
+<ul class="sectlevel2">
+<li><a href="#_codificador_con_prioridad">24.1. Codificador con Prioridad</a></li>
+</ul>
+</li>
+<li><a href="#_diseños_vhdl_no_sintetizables_en_circuitos_electrónicos">25. Diseños VHDL NO sintetizables en circuitos electrónicos</a>
+<ul class="sectlevel2">
+<li><a href="#_introducción_4">25.1. Introducción</a></li>
+<li><a href="#_hello_world">25.2. Hello World</a></li>
+</ul>
+</li>
+<li><a href="#_flip_flop">26. Flip-Flop</a>
+<ul class="sectlevel2">
+<li><a href="#_memorias">26.1. Memorias</a></li>
+<li><a href="#_vhdl_flip_flop_d_con_entradas_asíncronas_en_lógica_negativa">26.2. VHDL: Flip Flop D con entradas asíncronas en lógica negativa</a>
+<ul class="sectlevel3">
+<li><a href="#_diseño_8">26.2.1. diseño</a></li>
+<li><a href="#_implementación_de_unidades_de_memoria">26.2.2. Implementación de unidades de MEMORIA</a></li>
+</ul>
+</li>
+<li><a href="#_ff_d">26.3. FF-D</a></li>
+</ul>
+</li>
+<li><a href="#_contador_síncrono">27. Contador Síncrono</a></li>
+<li><a href="#_cerradura_electrónica">28. Cerradura Electrónica</a></li>
+<li><a href="#_registros">29. Registros</a></li>
+<li><a href="#KitDe1soc">Appendix A: Kit DE1-SoC</a></li>
+<li><a href="#LabRemoto">Appendix B: Laboratorio Remoto de Sistemas FPGA</a>
+<ul class="sectlevel2">
+<li><a href="#_acceso">B.1. Acceso</a></li>
+<li><a href="#_objetivos">B.2. Objetivos</a></li>
+<li><a href="#_paciencia">B.3. Paciencia</a></li>
+<li><a href="#_ide_vhdl_web_del_laboratorio_remoto">B.4. IDE VHDL Web del Laboratorio Remoto</a></li>
+<li><a href="#_errores_con_el_compilador_del_laboratorio_remoto">B.5. Errores con el compilador del laboratorio remoto</a></li>
+<li><a href="#_síntesis_en_el_laboratorio_remoto">B.6. Síntesis en el laboratorio remoto</a></li>
+<li><a href="#_fabricación_del_circuito_digital">B.7. Fabricación del Circuito Digital</a></li>
+<li><a href="#_interfaz_web_de_visualización_de_la_tarjeta_y_manejo_de_switches_y_botones">B.8. Interfaz Web de Visualización de la Tarjeta y Manejo de Switches y Botones</a></li>
+<li><a href="#_circuito_digital_gate_and_vhdl">B.9. Circuito Digital  "gate_and.vhdl"</a></li>
+</ul>
+</li>
+<li><a href="#IdenPuerto">Appendix C: Identificación de los puertos</a></li>
+<li><a href="#ref_sheet_min">Appendix D: Listado incompleto de sentencias concurrentes y secuenciales</a></li>
+<li><a href="#ref_sheet_basic">Appendix E: VHDL: Hoja de Referencia Básica</a></li>
+<li><a href="#ref_low_carb">Appendix F: Low-Carb VHDL Tutorial: Bryan Mealy</a>
+<ul class="sectlevel2">
+<li><a href="#_examples_code">F.1. Examples Code</a>
+<ul class="sectlevel3">
+<li><a href="#_my_nand3">F.1.1. my_nand3</a></li>
+<li><a href="#_my_ckt_f3">F.1.2. my_ckt_f3</a></li>
+<li><a href="#_my_ckt_f3_2">F.1.3. my_ckt_f3</a></li>
+<li><a href="#_mux4_t1">F.1.4. mux4_t1</a></li>
+<li><a href="#_my_ckt_f3_3">F.1.5. my_ckt_f3</a></li>
+<li><a href="#_my_4t1_mux">F.1.6. my_4t1_mux</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Glosario">Appendix G: Glosario</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Cándido Aramburu &lt;<a href="mailto:candido@unavarra.es">candido@unavarra.es</a>&gt;</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_agradecimientos">1. Agradecimientos</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>El <strong>Laboratorio Remoto de Sistemas FPGA</strong> ha sido posible gracias a la colaboración de la Universidad Pública de Navarra, el Instituto Tecnológico de la Universidad Federa de Sao Paulo, a la empresa LabsLand y a la empresa Intel.</p>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/ROJO_UPNA_300ppp.jpg" alt="ROJO UPNA 300ppp" width="50%" height="10%">
+</div>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/Unifesp_completa_policromia_RGB.png" alt="Unifesp completa policromia RGB" width="50%" height="10%">
+</div>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/panel_upna.png" alt="panel upna" width="50%" height="15%">
+</div>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/panel_unifesp.png" alt="panel unifesp" width="50%" height="10%">
+</div>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/intel_fpga_logo.png" alt="intel fpga logo" width="50%" height="60%">
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introducción">2. Introducción</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Estos apuntes sirven para iniciarse en el diseño y fabricación de circuitos electrónicos digitales mediante la descripción de los circuitos en el lenguaje de descripción del Hardware VHDL (Very high-speed integrated circuit Hardware Description) y mediante la síntesis del código fuente con la herramienta de diseño electrónico digital Quartus Prime Lite de Intel". La síntesis del código fuente compilado se utiliza para programar los <a href="#KitDe1soc">dispositivos FPGA de Intel</a> disponibles tanto remotamente como localmente en los laboratorios de la UPNA.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ref_apuntes_VHDL">3. VHDL: Lenguaje para la Descripción de Hardware (Circuitos Digitales)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_documentación">3.1. Documentación</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>En miaulario está disponible en la carpeta <em>Recursos/apuntes/VHDL/</em>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>./documentación/</em>: <a href="#ref_low_carb">The Low-Carb VHDL Tutorial</a> ©Copyright: 2004 by Bryan Mealy (08-27-2004)</p>
+</li>
+<li>
+<p><em>./documentación/</em>: <a href="#ref_sheet_min">Hoja de Referencia con sentencias secuenciales y recurrentes BASICAS</a> : VHDL Cheat-Sheet, Copyright: 2007 Bryan J. Mealy</p>
+</li>
+<li>
+<p><em>./2020</em>: Ejemplos de código VHDL del año 2020</p>
+</li>
+<li>
+<p><em>./2021</em>: Ejemplos de código VHDL del año 2021</p>
+</li>
+<li>
+<p><em>./2022</em>: Ejemplos de código VHDL del año 2022</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Quartus">4. Herramienta Quartus</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="QuartusInstall">4.1. Instalación del software: SUITE Quartus Prime Lite</h3>
+<div class="sect3">
+<h4 id="_en_el_pc_personal">4.1.1. En el PC personal</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Sistema Operativo Windows 10 (año 2021) nativo o sobre una máquina virtual.</p>
+</li>
+<li>
+<p>Herramienta EDA de Intel: Quartus Prime Lite 22.1 correspondiente al año 2022. Cada año se publica una versión nueva. La versión de Quartus Prime Lite instalada en el laboratorio de la UPNA es la "20.1.0.711"</p>
+</li>
+<li>
+<p>El instalador se puede descargar desde distintos enlaces:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Repositorio de Intel:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl"> Google Search: Intel Download Center for FPGAs Quartus Prime
+ https://www.intel.com/content/www/us/en/programmable/downloads/download-center.html -&gt; Intel® Quartus® Prime Lite Edition Design Software Version 22.1 for Windows
+
+ Es necesario *registrarse*
+ Se puede descargar todo la SUITE o ficheros individuales (Quartus Prime Lite, Devices Cyclone V, Questa Intel ) :
+ Ir a Web Download Center-&gt; elegir la versión 20.1 ó 21.1 ó 22.1 -&gt; Lite -&gt; Windows -&gt; Ficheros individuales:
+
+    QuartusLiteSetup-20.1.0.711-windows.exe
+    QuestaSetup-20.1.0.711-windows.exe
+    cyclonev-20.1.0.711.qdz</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>UPNA &#8594;  Miaulario: Herramientas &#8594; SOFTWARE QÚARTUS &#8594; instrucciones de cómo realizar la instalación</p>
+</li>
+<li>
+<p>UPNA &#8594;  Miaulario: Recursos/Prácticas/Software Quartus/instrucciones de cómo realizar la instalación</p>
+</li>
+<li>
+<p>Una vez descargados los <strong>3 ficheros</strong> en el ordenador personal proceder al proceso de instalación:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">Tanto QuartusLiteSetup como QuestaSetup son ficheros ejectutables de instalación: Instalar Quartus y Questa ejecutando el Setup.
+
+Instalar el software asociado al dispositivo FPGA de la familia Cyclone V después de haber instalado Quartus Lite: El fichero qdz ha de instalarse utilizando la aplicación de instalación "Device Installer" que se encuentra en: Windows 10 -&gt; Programas de Aplicación -&gt; Intel Fpga Quartus -&gt; Device Installer</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mac_os_x">4.1.2. Mac OS X</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Virtual Box : Quartus no está disponible para las computadoras Mac por lo que es necesario instalarse una máquina virtual como <em>VirtualBox</em> y en la máquina virtual instalarse Windows 10 y posteriormente Quartus.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Descarga e instalación</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.oracle.com/virtualization/technologies/vm/downloads/virtualbox-downloads.html">Descargas</a>: para cualquier plataforma</p>
+</li>
+<li>
+<p><a href="https://docs.oracle.com/cd/E26217_01/E26796/html/qs-create-vm.html">Instalación de VirtualBox</a></p>
+</li>
+<li>
+<p><a href="https://www.virtualbox.org/manual/ch01.html#idm374">Manual de VirtualBox</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Windows 10:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.microsoft.com/en-us/software-download/windows10ISO">Windows 10</a>: Imagen ISO del instalador.</p>
+</li>
+<li>
+<p><a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/">VirtualBox + Windows + App</a> : 20GB</p>
+</li>
+<li>
+<p>Para instalar Windows : <a href="https://docs.oracle.com/cd/E26217_01/E26796/html/qs-create-vm.html" class="bare">https://docs.oracle.com/cd/E26217_01/E26796/html/qs-create-vm.html</a> : Since you want to install an operating system in the virtual machine, you need to make sure the virtual machine can access the installation media. To do this, you edit the virtual machine settings. In Oracle VM VirtualBox Manager, select the virtual machine and then in the toolbar click the Settings button. The Settings window is displayed. In the navigation on the left, select Storage as shown in Figure 6.9.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Compartir Carpeta entre la máquina virtual Windows y la máquina física Mac</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="QRemote">4.2. Quartus Prime Preinstalado en el Escritorio Virtual UPNA</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Se puede ejecutar Quartus Prime Lite en modo remoto conectándose desde el navegador al Escritorio Virtual de la Upna</p>
+</li>
+<li>
+<p>Quartus Accesible Remotamente: Aulario Virtual, UDS Connection &#8594; UDS web: <a href="https://vdibroker.unavarra.es/uds/page/services">Upna Escritorio Virtual</a> &#8594; Descargar e Instalar <strong>UDS cliente en Windows</strong>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>UDS web:  Click Menú en  Windows 10 Teleco.&#8594; Conexiones: desde PC Upna o desde un PC personal.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Desde un PC personal para conectarse al servidor hacer click en la hamburguesa del icono Windows 10
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Windows 10 &#8594; Programas &#8594; Intel &#8594; Quartus Prime Lite 21.1 ( de las 7 aplicaciones del entorno Quartus, click en Quartus Prime (quartus)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Para transferir ficheros entre la ventan del ordenador servidor y la ventan del ordenador personal local no  hay más que arrastrar entre los exploradores de archivos o copiar/pegar entre los exploradores de archivos.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_crear_un_proyecto_quartus_con_un_diseño_mínimo_mediante_vhdl">5. Crear un Proyecto Quartus con un diseño mínimo mediante VHDL</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="QWork">5.1. Crear una Carpeta de Trabajo</h3>
+<div class="sect3">
+<h4 id="_carpeta_de_trabajo">5.1.1. Carpeta de Trabajo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Antes de crear el proyecto es necesario tener una carpeta de trabajo donde guardar todos los ficheros del proyecto.</p>
+</li>
+<li>
+<p>Windows 10</p>
+</li>
+<li>
+<p>Files Explorer &#8594; Por ej: ir a la carpeta Descargas</p>
+</li>
+<li>
+<p>Crear una subcarpeta con el nombre del proyecto: Pej ssdd\light_bit</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar la carpeta de Descargas como ubicación del proyecto de diseño. Si se utiliza la carpeta Descargas es necesario utilizar un SUBDIRECTORIO como por ejemplo "Descargas\ssdd\light_bit"
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="QOpen">5.2. Cómo Abrir Quartus Prime Lite</h3>
+<div class="sect3">
+<h4 id="_abrir_la_aplicación_de_quartus_prime_lite">5.2.1. Abrir la Aplicación de Quartus Prime Lite</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Windows 10</p>
+</li>
+<li>
+<p>Aplications Explorer</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Intel FPGA 21.1 Lite Edition &#8594; Quartus Prime Lite</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="QProject">5.3. Crear un Proyecto</h3>
+<div class="sect3">
+<h4 id="_proyecto_vacío">5.3.1. Proyecto Vacío</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>File &#8594; Project Wizard</p>
+</li>
+<li>
+<p>Project Location: Ir a la carpeta de trabajo creada previamente &#8594; Pej light_bit</p>
+</li>
+<li>
+<p>Project Name: light_bit</p>
+</li>
+<li>
+<p>Top File: light_bit</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar la carpeta de Descargas como ubicación del proyecto de diseño. Si se utiliza la carpeta Descargas es necesario utilizar un SUBDIRECTORIO como por ejemplo "Descargas\ssdd\light_bit"
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_proyecto_a_partir_de_un_fichero_vhd">5.3.2. Proyecto a partir de un fichero vhd</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Abrir el fichero con Quartus  : light_bit.vhd</p>
+</li>
+<li>
+<p>Save As&#8594; Create new project with this file</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project name: light_bit</p>
+</li>
+<li>
+<p>Top level entity: light_bit</p>
+</li>
+<li>
+<p>File design: light_bit.vhd</p>
+</li>
+<li>
+<p>BOARD: DE1 SoC</p>
+</li>
+<li>
+<p>EDA simulation tool: Intel Questa (herramienta externa a Quartus como alternativa para la simulación)</p>
+</li>
+<li>
+<p>Finish</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Si queremos realizar algún cambio en la Configuración:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Assignments</strong> &#8594; <strong>Settings</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>General &#8594; <strong>Top level entity</strong>: Selecciono el diseño que será la raíz en la jerarquía de múltiples diseños anidados</p>
+</li>
+<li>
+<p>File &#8594; Selecciono los múltiples ficheros de unidades de diseño que forman el proyecto. Se puede añadir o eliminar del proyecto.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="QConfiguration">5.4. Configurar</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Configurar la herramienta de simulación</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Assigments</strong> &#8594; <strong>Settings</strong> &#8594; <strong>EDA Tool Settings</strong> &#8594; <strong>Simulation</strong>: Questa Intel FPGA</p>
+</li>
+<li>
+<p><strong>Tools</strong> &#8594; <strong>Options</strong> &#8594; General &#8594; <strong>EDA Tool Options</strong> &#8594; EDA Tool: Questa Intel FPGA : carpeta donde se localiza el simulador Questa: C:/intelFPGA_lite/21.1/questa_fse/win64/questasim.exe</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="QEdition">5.5. Editar un fichero VHDL</h3>
+<div class="sect3">
+<h4 id="_operación_básica">5.5.1. Operación básica</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Abrir Quartus Prime Lite</p>
+</li>
+<li>
+<p>File &#8594; New &#8594; VHDL File</p>
+</li>
+<li>
+<p>Barra de herramientas del editor VHDL</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En el Area de Edición &#8594; Barra de Herramientas de Edición Click Dcha &#8594; Customize &#8594; Toobars:Feedback &#8594; Customize &#8594; Seleccionar <strong>Autocomplet Text</strong> &#8594; mover a la dcha con el bóton "&gt;" &#8594;  OK : El nuevo botón Autocomplet Text debe de aparecer en la barra de herramientas.</p>
+</li>
+<li>
+<p>Seleccionar el botón <strong>Autocomplet Text</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Editar el fichero <em>light_bit.vhd</em>: Descripción del circuito minimalista <strong>z=x</strong> : El objetivo de este código es ser lo suficientemente simple para no dificultar su comprensión y centrarse en poner a punto la herramienta de desarrollo <strong>Intel Quartus Prime Lite</strong> desde cualquier computadora utilizando los recursos remotos de la UPNA.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">entity of light_bit is
+  port (
+    x   : in bit;
+    z   : out bit
+);
+end entity;
+architecture minima of light_bit is
+begin
+  z &lt;= x;
+end minima;</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>según vamos tecleando sentencias VHDL se <strong>autocompletan</strong></p>
+</li>
+<li>
+<p>Observar los botones de la barra de herramientas colocando encima el cursor</p>
+<div class="ulist">
+<ul>
+<li>
+<p>botón ANALISIS : Analiza la sintaxis del código VHDL informando de los errores.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Un proyecto nuevo equivale a una carpeta de trabajo nueva</p>
+</li>
+<li>
+<p>La carpeta de trabajo no puede ser una carpeta cualquiera. Ha de ser una carpeta de USUARIO, no de aplicaciones o del sistema.</p>
+</li>
+<li>
+<p>El nombre del proyecto ha de ser el mismo que el del fichero vhdl top</p>
+</li>
+<li>
+<p>El nombre del fichero vhdl ha de ser el mismo que el de la entidad</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+El nombre de la entidad ha de ser el MISMO que el nombe del fichero vhd.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_insertar_plantillas_de_sentencias_vhdl">5.5.2. Insertar Plantillas de Sentencias VHDL</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El editor VHDL de Quartus permite insertar plantillas de bloques de sentencias VHDL, facilitando no tener que memorizarlas</p>
+</li>
+<li>
+<p>Desde el área de edición &#8594; botón "insert template" ó ir a  Edit &#8594; Insert Template</p>
+<div class="ulist">
+<ul>
+<li>
+<p>VHDL &#8594; Constructs &#8594; Entity</p>
+</li>
+<li>
+<p>sentencia Selected Signal Assignment : <strong>with</strong> : VHDL &#8594; Constructs &#8594; Concurrent Statement &#8594; Selected Signal Assignment</p>
+</li>
+<li>
+<p>sentencia <strong>case</strong> : VHDL &#8594; Constructs &#8594; Sequence Statement &#8594; case</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Las plantillas sirven como recordatorio de las sintaxis de las sentencias VHDL y también como ayuda de edición.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="QAnalysis">5.6. Análisis</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Processing &#8594; Analyzing Current File</strong> ó en la ventana de Edición uno de los botones de la barra de herramientas.</p>
+</li>
+<li>
+<p>Analiza la sintaxis del código VHDL y en caso de encontrar errores proporciona información sobre la línea donde se produce el error y posibles causas.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="QCompilation">5.7. Compilación</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Processing &#8594; Start Compilation</strong></p>
+</li>
+<li>
+<p>La compilación se compone de las fases:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Analysis: analiza la sintaxis del código fuente</p>
+</li>
+<li>
+<p>Synthesis: interpreta el código y obtiene el circuito digital (netlist) como combinación de componentes lógicos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El netlist es utilizado por las herramientas de Simulación.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Fitter:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Place: selecciona qué recursos lógicos del chip FPGA van a ser utilizados</p>
+</li>
+<li>
+<p>Route: selecciona qué pistas del chip FPGA van a interconectar los recursos lógicos seleccionados.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Assembler: vuelca en el fichero de extensión SOF el código binario de la "programación" del chip FPGA.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La compilación puede tardar un par de minutos y durante la operación se puede ver en tiempo real sus distintas fases</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>View</strong> &#8594; <strong>Utility Windows</strong> &#8594; <strong>Tasks</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_archivos_del_proyecto">5.8. Archivos del Proyecto</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>View</strong> &#8594; <strong>Utility Windows</strong> &#8594; Panel Project Navigator</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Navegar entre &#8230;&#8203; Hierarchy - Files - Unit Designs</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Según se van realizando operaciones con la herramienta Quartus van apareciendo nuevos ficheros como parte del Proyecto.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="QSimulation">5.9. Simulación</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Tools &#8594; Run Simulation Tool &#8594; RTL Simulation</strong></p>
+</li>
+<li>
+<p>Lanza el simulador seleccionado en la configuración (<a href="#QConfiguration">Configurar</a>) de Quartus Prime Lite.</p>
+</li>
+<li>
+<p>Permite simular el comportamiento del circuito digital y al especificar las señales binarias de entrada obtiene las señales declaradas en la descripción del circuito.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="QArchive">5.10. Archivar el Proyecto</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Project</strong> &#8594; <strong>Archive Project</strong></p>
+</li>
+<li>
+<p>El proyecto puede ser archivado para guardar el proyecto y poder llevarlo a otras computadoras.para continuar con el diseño.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="QRestore">5.11. Restaurar el Proyecto</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Project</strong> &#8594; <strong>Restore Archived Project</strong></p>
+</li>
+<li>
+<p>El proyecto previamente archivado puede ser restaurado en cualquier computadora que tenga instalado Quartu Prime Lite.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_light_de_quartus_prime_lite">6. Tutorial light de Quartus Prime Lite</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_introducción_2">6.1. Introducción</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Se va a utilizar el tutorial propio de Quartus como referencia para la práctica de la descripción VHDL como la utilización de "Quartus Prime Lite" y el "Laboratorio Remoto".</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Quartus Prime Lite &#8594; Help &#8594; PDF tutorial &#8594; Users VHDL&#8594; "tutorial_quartusii_intro_vhdl.pdf" &#8594; imprimirlo y tomar notas sobre él mismo.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Imprimirlo y LEERLO!!
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Se van a realizar los siguientes diseños basados todos en el mismo circuito digital. La descripción del circuito se realizará mediante el lenguaje VHDL y se utilizará "Quartus Prime Lite" al igual que en el tutorial de intel "tutorial_quartusii_intro_vhdl.pdf". La principal diferencia entre los distintos diseños será la arquitectura, donde se emplearán diferentes sentencias del lenguaje VHDL.<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>light_bit</p>
+</li>
+<li>
+<p>light_de1soc</p>
+</li>
+<li>
+<p>light_signal</p>
+</li>
+<li>
+<p>light_csa</p>
+</li>
+<li>
+<p>light_if</p>
+</li>
+<li>
+<p>light_with</p>
+</li>
+<li>
+<p>light_case</p>
+</li>
+<li>
+<p>light_sum</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicio_preliminar_antes_de_empezar_este_tutorial">6.2. Ejercicio PRELIMINAR antes de empezar este Tutorial</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>En este tutorial no es necesario instalar ningún tipo de software en el PC portátil.</p>
+</li>
+<li>
+<p><a href="https://vdibroker.unavarra.es">VDI</a>: Acceder al Escritorio Virtual de la Upna:</p>
+</li>
+<li>
+<p><a href="#QWork">Crear una carpeta de trabajo</a></p>
+</li>
+<li>
+<p><a href="#QOpen">Abrir Quartus</a></p>
+</li>
+<li>
+<p><a href="#QProject">Crear Proyecto</a></p>
+</li>
+<li>
+<p><a href="#QConfiguration">Configurar Quartus</a></p>
+</li>
+<li>
+<p><a href="#QEdition">Editar Diseño minimalista con VHDL</a></p>
+</li>
+<li>
+<p><a href="#QAnalysis">Análisis del código fuente VHDL</a></p>
+</li>
+<li>
+<p><a href="#QCompilation">Compilación y Síntesis</a></p>
+</li>
+<li>
+<p><a href="#QSimulation">Simulación</a></p>
+</li>
+<li>
+<p><a href="#QArchive">Archivar el Proyecto</a></p>
+</li>
+<li>
+<p><a href="#QRestore">Restaurar el Proyecto</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_carpeta_de_trabajo_2">6.3. Carpeta de Trabajo</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>En el disco del PC es necesario crear manualmente el árbol de carpetas y subcarpetas donde se guardará cada proyecto de diseño realizado:</p>
+<div class="listingblock">
+<div class="content">
+<pre>..Descargas/ssdd/
+	├── light_bit
+	├── light_de1soc
+        ├── light_csa
+        ├── light_process
+	├── light_if
+	├── light_signal
+	├── light_with
+	├── light_case
+	├── etc ...</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ayuda_rápida">7. Ayuda rápida</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Es de gran ayuda disponer de una hoja de referencia con las principales sentencias del lenguaje VHDL como en el <a href="#ref_sheet_min">Apéndice VHDL Sheet</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vhdl_conceptos_teóricos_básicos">8. VHDL: Conceptos teóricos básicos</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_introducción_3">8.1. Introducción</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Los circuitos digitales se pueden describir de las siguientes formas:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Lenguaje natural hablador por los humanos: fácil de entender pero díficil para describir con precisión.</p>
+</li>
+<li>
+<p>Descripción gráfica: Esquema eléctrico formado por los dispositivos (fuentes de alimentación, puertas lógicas, multiplexores, decodificadores, procesadores, memorias, &#8230;&#8203;) que componen el circuito digital y sus interconexiones mediante cables, hilos, pistas, buses, etc ..</p>
+</li>
+<li>
+<p>Descripción mediante un lenguaje de sentencias en modo texto: Hardware Description Language (<strong>HDL</strong>). Dos lenguajes básicos: <strong>VHDL</strong> ( Very high speed integrated circuits Hardware Description Language) y Verilog</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Su cometido principal es ser un lenguaje para la descripción del hardware de un sistema digital y también para programar las señales de prueba con que verificar el funcionamiento del sistema digital mediante su simulación utilizando conceptos clásicos de programación como  variables, módulos, sentencias condicionales, bucles, sentencias de selección, etc</p>
+</li>
+<li>
+<p>Estos lenguages tienen como objetivo emular el comportamiento de los circuitos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la relación entre la salida y la entrada del circuito se denomina <strong>arquitectura</strong>: Hay 3 tipos de  arquitectura: <strong>RTL</strong>, <strong>Behavioral</strong> y <strong>Structural</strong>.</p>
+</li>
+<li>
+<p>Arquitectura a nivel <strong>funcional</strong> (describir la relación entre la salida y la entrada del circuito mediante la función del circuito, ej describir literalmente la <strong>tabla de la verdad</strong> de un circuito). Los nombres behavioral y comportamental equivalen a funcional</p>
+</li>
+<li>
+<p>Arquitectura a nivel de <strong>flujo de datos</strong> o también denominada lógica de transferencia entre registros ( Register Transfer Logic <strong>RTL</strong>, la salida del sistema se relaciona con la entrada mediante una <strong>función matemática lógica</strong> &#8594; F(x,y,z)=xy+xz)</p>
+</li>
+<li>
+<p>Arquitectura a nivel <strong>estructural</strong> ( la relación entre la salida y la entrada es la <strong>conexión</strong> entre distintas unidades lógicas, pej salida del sistema digital = salida de un "multiplexor" cuya entrada está conectada a la salida de un "decodificador" cuya entrada está conectada a la salida de un puerta "OR" cuya entrada es la entrada del sistema digital)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_señales_digitales_binarias">8.2. Señales digitales binarias</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Hay dos <strong>tipos de señales</strong> en el lenguaje VHDL:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="naranja">PORT</span> : x,y,z</p>
+<div class="ulist">
+<ul>
+<li>
+<p>son señales de acceso al circuito: su <strong>modo</strong> puede ser de entrada (<span class="naranja">IN</span>) ó de salida (<span class="naranja">OUT</span>)</p>
+</li>
+<li>
+<p>una señal de entrada tipo <span class="naranja">IN</span> no puede conectarse a la salida de una puerta lógica</p>
+</li>
+<li>
+<p>una señal de salida tipo <span class="naranja">OUT</span> no puede conectarse a la entrada de una puerta lógica</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><span class="naranja">SIGNAL</span> : s,t,u,v</p>
+<div class="ulist">
+<ul>
+<li>
+<p>son señales internas al circuito y son bidireccionales: pueden conectarse tanto a la entrada como a la salida de una puerta lógica</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_señales_vhdl_tipos_de_datos">8.3. Señales VHDL : tipos de datos</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Las señales electrónicas representan  DATOS.</p>
+</li>
+<li>
+<p>Hay diferentes <strong>tipos de datos</strong> para las señales.</p>
+</li>
+<li>
+<p>tipo de dato bit único : <span class="naranja">BIT</span> : admite únicamente dos valores: el <strong><em></strong> 0 <strong></em></strong> y el <strong><em></strong> 1 <strong></em></strong></p>
+</li>
+<li>
+<p>en VHDL los valores de los bits hay que entrecomillarlos para diferenciarlos de los datos de tipo <span class="naranja">INTEGER</span></p>
+</li>
+<li>
+<p>tipo de dato secuencia de bits: <strong>"</strong> 010001010101 <strong>"</strong> &#8594; doble entrecomillado si el dato se representa con más de un bit.</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_señal_digital_binaria_tipo_bit">8.4. Señal Digital Binaria tipo BIT</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>El paquete "standard" de la librería "std" incorporado en el propio lenguaje VHDL, define un tipo de señal <strong>bit</strong> que únicamente admite 2 valores lógicos: el "0" y el "1",que se corresponden con los valores lógicos del algebra de Boole. Físicamente una señal electrónica es una magnitud como la tensión o la corriente. El valor lógico abstracto 0 se puede corresponder con un nivel de tensión como los cero voltios y el valor lógico abstracto 1 con el nivel de tensión 5 voltios, es decir, con el par (0v,5v) ó también podría ser con el par (-5v,5v) ó cualquier otro par de niveles. Con la corriente ocurre lo mismo el par abstracto (0,1) se corresponde con cualquier par de niveles (0mA,10mA) ó (-3mA,3mA) ó &#8230;&#8203; etc.</p>
+</li>
+<li>
+<p>En los circuitos electrónicos digitales las señales físicas "idealmente" tienen únicamente un par de valores en tensión o corriente, pero ocurre que una señal puede <strong>distorsionarse</strong> o se le puede sumar una señal de <strong>ruido</strong> externo, por ejemplo en la transmisión a través de una línea de comunicaciones o una pista de un circuito impreso, por lo que sería imposible mantener dos niveles de tensión o corriente. Para que los circuitos digitales sean operativos es necesario asociar a cada valor abstracto "0" ó "1" un rango de valores. Por ejemplo, al "0" un rango entre cero voltios y 100mv y al "1" un rango de valores entre 800mv y 1 voltio, cuyos niveles y umbrales permitidos se representa a continuación.</p>
+<div class="listingblock">
+<div class="content">
+<pre>_____________________  5 voltios
+
+	1
+_____________________ 0,8 voltios
+
+	X
+_____________________ 0,1 voltios
+
+	0
+_____________________ 0 voltios</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>X: Un nivel de tensión entre 100mv y 800mv quedaría indeterminado y no podría asociarse ni al bit "0" ni al bit "1".</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_buses">8.5. Buses</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Físicamente un Bus es un conjunto de pistas metálicas que sirven para transportar señales conectandos dos unidades</p>
+</li>
+<li>
+<p>Por ejemplo el "bus de direcciones" de 32 hilos ó pistas de la memoria RAM sirve para seleccionar una dirección de 32 bits de la memoria. La dirección <strong>01100110011001100110011001100110</strong> se transporta desde la CPU hasta la memoria RAM a través de un bus de 32 pistas. Al bus de direcciones de memoria (address bus) se le podría llamar <strong>A</strong> y a cada hilo del bus <strong>\$A_31\$</strong>,<strong>\$A_30\$</strong>,&#8230;&#8203;,<strong>\$A_1\$</strong>,<strong>\$A_0\$</strong>.</p>
+</li>
+<li>
+<p>Desde el punto de vista lógico un bus es un vector o un array de dimensión "n", por ejemplo n=32.</p>
+</li>
+<li>
+<p>El tipo de datos de los buses <strong>A</strong> y <strong>B</strong> de 32 bits se podrían declarar como:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="naranja">signal A,B :bit_vector(31 downto 0);</span> donde el bit MSB(más a la izquierda) sería el hilo \$A_31\$ y el bit LSB(más a la derecha) el bit \$A_0\$ y lo mismo con el bus B</p>
+</li>
+<li>
+<p><span class="naranja">signal A,B :bit_vector(0 to 31);</span> donde el bit MSB(más a la izquierda) sería el hilo \$A_0\$y el bit LSB(más a la derecha) el bit \$A_31\$ y lo mismo con el bus B</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_circuito_light_xor">8.6. Circuito light_xor</h3>
+<div class="sect3">
+<h4 id="_descripciones_hw_esquema_eléctrico_tabla_de_la_verdad_expresión_lógica">8.6.1. Descripciones HW: Esquema eléctrico, Tabla de la Verdad, Expresión Lógica</h4>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/tema4_xor.png" alt="circuito light xor">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_descripción_hw_vhdl">8.6.2. Descripción HW: VHDL</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">--
+-- Descripción VHDL Primavera 2023
+-- Circuito light_bit.vhd:
+-- Puerta lógica XOR extendida
+entity of light_bit is
+  port (
+    x,y : in bit;
+    z   : out bit
+);
+end entity;
+
+architecture rtl of light_bit is
+ signal s,t,u,v : bit;
+begin
+  s &lt;= not x;
+  t &lt;= not y;
+  u &lt;= x and t;
+  v &lt;= y and s;
+  z &lt;= u or v;
+end rtl;
+--</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lenguaje_vhdl_sentencias_concurrentes">8.7. Lenguaje VHDL: Sentencias Concurrentes</h3>
+<div class="sect3">
+<h4 id="_concepto_de_concurrencia">8.7.1. Concepto de concurrencia</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>CAS : Concurrent Assignment Sentence</p>
+</li>
+<li>
+<p>La instrucción o sentencia CAS se representa mediante el símbolo <span class="naranja">&#8656;</span></p>
+</li>
+<li>
+<p>¿Cómo se ejecuta la sentencia asignación concurrente <span class="naranja">&#8656;</span> ?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A las señales de la derecha del símbolo <span class="naranja">&#8656;</span> se les denomina <strong>señales sensibles</strong></p>
+</li>
+<li>
+<p>Cuando una de la señales sensibles cambia (<strong>evento</strong>) es cuando se ejecuta la sentencia asignación.</p>
+</li>
+<li>
+<p>El valor resultante de <strong>evaluar</strong> la expresión a la derecha del símbolo <span class="naranja">&#8656;</span> se asigna a la señal a la izquierda del símbolo <span class="naranja">&#8656;</span></p>
+</li>
+<li>
+<p>se ve mejor el concepto de concurrencia si en la arquitectura hay dos o más sentencias concurrentes.</p>
+</li>
+<li>
+<p>concurrencia es sinónimo de simultaneidad</p>
+</li>
+<li>
+<p>El orden de ejecución lo dictan los eventos de las señales sensibles y <strong>NO</strong> por el orden de escritura de la secuencia de sententencias.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">s &lt;= not x;
+t &lt;= not y;
+u &lt;= x and t;
+v &lt;= y and s;
+z &lt;= u or v;</code></pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>0- "x" = "y" = *0* =&gt; s = t = *1* =&gt; u = v = *0* =&gt; z = *0*
+1- Se produce un EVENTO (*0-&gt;1*) en la señal puerto "x"
+2- "x" es una señal sensible en la línea 1 del código
+y en la línea 3 del código
+3- Se ejecutan las líneas 1 y 3 del código
+4- Ejecución de la línea 1: "s" (*1-&gt;0*)
+5- Ejecución de la línea 3: "u" (*0-&gt;1*)
+6- Hay un evento en "s": se ejecuta la línea 4 : "v" no cambia -&gt; no evento
+7- Hay un evento en "u": se ejecuta la línea 5 : "z" cambia (*0-&gt;1*)
+8- La señal z no es una señal sensible en ninguna de las sentencias [naranja]#&lt;=# : FIN
+9- FIN de la actualización de todas las señales hasta el próximo evento en "x" o/y "y"</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Por lo tanto el orden en que se ejecutan las sentencias dentro de la arquitectura NO ES SECUENCIAL. Son los eventos de las señales sensibles los que indican el orden en que se ejecutan las sentencias, pudiendo ocurrir que dos o más sentencias se ejecuten simultáneamente, CONCURRENTEMENTE. Esta concurrencia es necesaria ya que en los circuitos digitales reales formados por puertas lógicas u otro tipo de bloques, dichas puertas y bloques funcionan concurrentemente, pudiendo cambiar la salida de distintas puertas o bloques al mismo tiempo.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_circuito_digital_light_bit_vhdl">8.8. Circuito Digital  "light_bit.vhdl"</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción del circuito <strong>z = x<sub>0</sub> XOR x<sub>1</sub></strong> : El objetivo de este código es seguir el tutorial de Intel.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Universidad Pública de Navarra  <i class="conum" data-value="1"></i><b>(1)</b>
+-- Sistemas Digitales
+-- Primavera 2023
+
+library std; <i class="conum" data-value="2"></i><b>(2)</b>
+use std.standard.all;
+
+entity of light_bit is  <i class="conum" data-value="3"></i><b>(3)</b>
+  port (
+    x   : in bit_vector(1 downto 0);
+    z   : out bit
+);
+end entity;
+
+architecture rtl of light_bit is  <i class="conum" data-value="4"></i><b>(4)</b>
+ signal s,t,u,v : bit;
+begin
+ s &lt;= NOT x(0); <i class="conum" data-value="5"></i><b>(5)</b>
+ t &lt;= NOT x(1);
+ u &lt;= x(0) AND t;
+ v &lt;= x(1) AND s;
+ z &lt;= u OR v;
+end rtl;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_estructura_del_programa_librería_entidad_arquitectura">8.9. Estructura del Programa: Librería-Entidad-Arquitectura</h3>
+<div class="paragraph">
+<p>El Programa VHDL está estructurado en 4 partes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>COMENTARIOS</p>
+</li>
+<li>
+<p>LIBRERIAS</p>
+</li>
+<li>
+<p>ENTIDADES</p>
+</li>
+<li>
+<p>ARQUITECTURAS</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>La secciones más importantes son la <strong>entidad</strong> de un circuito y la <strong>arquitectura</strong> de ese circuito. La entidad del circuito define únicamente las señales de entrada y salida del circuito, señales denomidas puertos. La arquitectura del circuito define la relación entre los puertos de entrada y salida del circuito.<br></p>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Comentarios: Añadir Comentarios en la cabecera : informar sobre la funcionalidad del circuito, función de los puertos, etc&#8230;&#8203; Añadir Comentarios en las líneas propensas a errores.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Librería: declara donde se encuentran elementos del lenguaje VHDL como: tipos de señales, subcircuitos digitales, constantes etc. En el apéndice se explica el concepto de bus, vector, std_logic_vector.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Entidad : El circuito digital visto desde fuera: entradas y salidas del circuito conectadas a los switches, botones, leds, etc .. de la tarjeta.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Arquitectura: Define la relación lógica entre las señales de entrada y salida del circuito.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Para la asignación de "señales" se utiliza la sentencia <strong>&#8656;</strong> equivalente al símbolo = en algunos lenguajes de programación. El resultado de la evaluación de la expresión lógica de señales a la derecha de <strong>&#8656;</strong> se asigna a la señal de la izda. La sentencia <strong>&#8656;</strong> se ejecuta en el instante en que alguna de las señales a la derecha de <strong>&#8656;</strong> cambia.</td>
+</tr>
+</table>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_librería_standard_paquete_standard">8.10. Librería standard:  paquete STANDARD</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>light_bit.vhdl:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Sistemas Digitales I año 2022
+-- Laboratorio Remoto de la Upna
+-- FICHERO light_bit.vhdl : OBLIGATORIAMENTE debe ser el MISMO nombre que el utilizado en ENTITY.
+-- tutorial: primera práctica en aula
+
+-- El tipo de señal "bit" se define en el paquete standard.vhdl
+
+library std;  -- La librería std no es necesario declararla
+use std.standard.all; -- Si no se declara la librería std, tampoco el paquete standard
+
+-- Entidad
+entity light_bit is
+    port (
+      x   : in bit_vector(1 downto 0);
+      z   : out bit
+    );
+end gate_and;
+
+--ARQUITECTURA
+architecture rtl of light_bit is
+begin
+ s &lt;= NOT x(0);
+ t &lt;= NOT x(1);
+ u &lt;= x(0) AND t;
+ v &lt;= x(1) AND s;
+ z &lt;= u OR v;
+end rtl;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>No es necesario declarar el paquete "STANDARD" de la librería "std" porque el COMPILADOR dispone de él internamente.</p>
+</li>
+<li>
+<p>Los paquetes de las librerías son ficheros VHDL, como por ejemplo el fichero "standard.vhdl". A continuación tenemos una descripción parcial del paquete STANDARD en el fichero "standard.vhdl"</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- The sven STANDARD package.
+-- This design unit contains some special tokens, which are only
+-- recognized by the analyzer when it is in special "bootstrap" mode.
+
+package STANDARD is
+
+  -- predefined enumeration types:
+
+  type BIT is ('0', '1');
+
+  -- Unicamente  se pone la definición del tipo de señal BIT para no extender este documento, pero el paquete contiene más definiciones de tipos de señales etc.
+
+end STANDARD;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Questa Intel</p>
+<div class="ulist">
+<ul>
+<li>
+<p>C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/std/standard.vhdl</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_quartus_light_bit_vhd_i">9. Tutorial quartus &#8594; light_bit.vhd (I)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_diseño">9.1. Diseño</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción del circuito "light_bit.vhd" mediante la Tabla de la Verdad: función <strong>XOR</strong></p>
+<table class="tableblock frame-all grid-all" style="width: 40%;">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">x1</th>
+<th class="tableblock halign-center valign-top">x2</th>
+<th class="tableblock halign-center valign-top">f=x1 &#8853; x2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción del circuito "light_bit.vhd" mediante una expresión matemática lógica</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>\(f(x_1,x_2)=\overline {x_1} \cdot x_2 + x_1\cdot\overline {x_2}\)</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción del circuito light_bit.vhd mediante un esquema eléctrico o diagrama de bloques</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/light_block-diagram.png" alt="Diagrama de Bloques">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar la carpeta de Descargas como ubicación del proyecto de diseño. Si se utiliza la carpeta Descargas es necesario utilizar un SUBDIRECTORIO como por ejemplo "Descargas\ssdd\light_bit"
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>CREAR EL PROYECTO "light_bit" de Quartus Prime Lite:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>crear la CARPETA DEL USUARIO (no del sistema ni de las aplicaciones) <strong>Descargas/ssdd/light_bit/</strong> donde se guardará nuestro diseño quartus.</p>
+</li>
+<li>
+<p>abrir la herramienta de diseño Quartus Prime Lite</p>
+</li>
+<li>
+<p>crear proyecto: File &#8594; New project Wizard (creación y configuración guiada)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>introduction &#8594; next</p>
+</li>
+<li>
+<p>nombre proyecto: el mismo que el de la ENTIDAD vhdl: light_bit</p>
+</li>
+<li>
+<p>ubicación proyecto:  ../ssdd/light_bit/</p>
+</li>
+<li>
+<p>nombre de la entidad top: light_bit</p>
+</li>
+<li>
+<p>empty project</p>
+</li>
+<li>
+<p>add file &#8594; ninguno</p>
+</li>
+<li>
+<p>board &#8594; DE1-SoC Board</p>
+</li>
+<li>
+<p>simulation &#8594; Questa Intel &#8594; format: vhdl</p>
+</li>
+<li>
+<p>Salvar proyecto</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>EDITAR el fichero vhd: File&#8594; New &#8594; VHDL File &#8594; save as &#8594; nombre: light.vhd : <strong>el mismo</strong> que el de la entidad vhdl: light</p>
+<div class="ulist">
+<ul>
+<li>
+<p>edición vhdl : copiar el código fuente del tutorial PDF "tutorial_quartusii_intro_vhdl.pdf" y pegarlo &#8594; corregir la edición ya que las copias desde un PDF no son literales &#8594; salvar</p>
+</li>
+<li>
+<p>Descripción del circuito light mediante el lenguaje VHDL</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Sistemas Digitales : Descripción VHDL Curso Primavera 2023
+-- Circuito light_bit.vhd: Puerta lógica XOR extendida
+
+entity of light_bit is
+  port (
+    x,y : in bit;
+    z   : out bit
+);
+end entity;
+
+architecture rtl of light_bit is
+ signal s,t,u,v : bit;
+begin
+  s &lt;= not x;
+  t &lt;= not y;
+  u &lt;= x and t;
+  v &lt;= y and s;
+  z &lt;= u or v;
+end rtl;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>añadir el módulo fuente light_bit.vhd al proyecto light_bit.</p>
+</li>
+<li>
+<p>Project Navigator &#8594; Hierarchy &#8594; doble click en light_bit.vhd &#8594; se abre el código fuente en el editor</p>
+</li>
+<li>
+<p>cerrar quartus</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>SINTESIS</p>
+<div class="ulist">
+<ul>
+<li>
+<p>abrir quartus</p>
+</li>
+<li>
+<p>abrir el proyecto light_bit.qpf : File &#8594; Open Project &#8594; light_bit.qpf</p>
+</li>
+<li>
+<p>síntesis: Processing &#8594; Start Compilation</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_errores_en_el_proceso_de_compilación">9.2. Errores en el Proceso de Compilación</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Errores al finalizar la compilación?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ventana de Errores: View &#8594; Utility Windows &#8594; Messages &#8594; Pestaña processing (errores durante el procesado de compilación)</p>
+</li>
+<li>
+<p>ir a la ventana Messages y buscar la línea ERROR para identificar el tipo de ERROR.</p>
+</li>
+<li>
+<p>corregir el error y  compilar &#8230;&#8203; repetir la depuración del código hasta que no haya errores de compilación.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_archivar_el_proyecto_para_conservarlo">9.3. Archivar el proyecto para conservarlo</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ir al enlace:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#QArchive">Archivar el Proyecto</a></p>
+</li>
+<li>
+<p><a href="#QRestore">Restaurar el Proyecto</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vhdl_paquetes_std_logic_1164_y_textio">10. VHDL: Paquetes std_logic_1164 y textio</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_paquete_standard_logic_std_logic_std_logic_1164">10.1. Paquete Standard Logic (std_logic): std_logic_1164</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>El paquete "standard" de la librería "std" incorporado en el propio lenguaje VHDL, define un tipo de señal <strong>bit</strong> que únicamente admite 2 valores lógicos: el "0" y el "1",que se corresponden con los valores lógicos del algebra de Boole. Para definir señales con más valores lógicos que se correspondan con valores físicos reales típicos en los circuitos digitales se desarrolló el paquete <strong>std_logic_1164</strong></p>
+</li>
+<li>
+<p>La librería IEEE desarrollada por la asociación "IEEE Computer Society" ha definido una serie de paquetes standard dentro de los cuales está el paquete std_logic_1164.</p>
+</li>
+<li>
+<p>El paquete std_logic_1164 define entre otras cosas tipos de señales digitales entre las que se encuentran los tipos <strong>std_logic</strong> y <strong>std_logic_vector</strong></p>
+</li>
+<li>
+<p>Las señales del tipo <strong>std_logic</strong> pueden tener no solo los valores binarios <em>0</em> y <em>1</em> como son las de tipo <strong>bit</strong> sino hasta 9 valores diferentes, con el objetivo de emular los valores de las señales electrónicas reales. Los valores posibles de una señal std_logic son:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- valores lógicos de las señales std_logic para emular valores físicos reales:
+--    '0': logic 0
+--    '1': logic 1
+--    '-': Don't care.
+--    'X': unknown. Impossible to determine this value/result.
+--    'U': uninitialized. This signal hasn't been set yet.
+--    'Z': High Impedance
+--    'W': Weak signal, can't tell if it should be 0 or 1.
+--    'L': Weak signal that should probably go to 0
+--    'H': Weak signal that should probably go to 1</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Valores  de las señales 0,1,H,L,W,Z,X,-,U</p>
+<div class="ulist">
+<ul>
+<li>
+<p>6 tipos tienen un valor definido,"mesurable": (Representación de los NIVELES LOGICOS(0,1,desconocido) con sus UMBRALES)</p>
+<div class="listingblock">
+<div class="content">
+<pre>_____________________
+
+	1  : forzosamente un 1
+_____________________
+
+	H  : débilmente un 1
+_____________________   --------------&gt; UMBRAL DEL 1
+
+	W  : débilmente desconocido
+_____________________
+
+	X  : forzosamente desconocido
+_____________________
+
+	W
+_____________________   --------------&gt; UMBRAL DEL 0
+
+	L  : débilmente un 0
+_____________________
+
+	0  : forzosamente un 0
+_____________________</pre>
+</div>
+</div>
+</li>
+<li>
+<p>los niveles 0 y 1 se dividen cada uno de ellos en forzoso y débil</p>
+</li>
+<li>
+<p>el nivel desconocido se divide en forzoso y débil tirando a 1 o a 0.</p>
+</li>
+<li>
+<p>una forma de interpretar esos estados es DIBUJANDO la FORMA una señal digital generada por un transmisor y observada a la salida de una línea serie y a la entrada del receptor: se genera un 1 forzoso y se recibe un 1 débil ó un valor desconocido</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/tema4_signal_stdlogic.png" alt="tema4 signal stdlogic">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3 Valores son indefinidos, "unmesurable".</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">- : don't care  -&gt; puede tomar cualquiera de los valores definidos "mesurables" y no afecta al funcionamiento del circuito.
+U : indefinido  -&gt; representa el estado de un circuito secuencial al encenderse y sin estado de reset de reset. Puede ser cualquiera de los 6 valores definidos pero al no tener estado inicial, no puede determinarse su estado.
+Z: alta impedancia : circuito abierto -&gt; desconexión -&gt;
+  si pongo el osciloscopio observo que el valor puede ser cualquiera-&gt; se ve ruido
+  concepto de driver -&gt; la salida de dos inversores INV-1 e INV-2 conectada a un bus y la entrada de un inversor INV-3 conectada al mismo bus
+
+                          INV-1
+                        --|&gt;o---|
+                                |   INV-3
+                                |---|&gt;o--
+                          INV-2 |
+                        --|&gt;o---|
+
+   Las salidas de los inversores INV-1 e INV-2 si están en estado Z se desconectan del bus</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>El paquete <strong>std_logic_1164</strong> está localizado en: C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/ieee/stdlogic.vhdl</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_std_logic_vector_downto_to">10.2. std_logic_vector : downto , to</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>El tipo std_logic_vector es un bus o conjunto de señales o matriz o vector formado por señales del tipo std_logic.</p>
+</li>
+<li>
+<p>BUS: es un agrupamiento hilos o pistas físicas por donde se transportan (autobus) las señales digitales en tensión o corriente y  que conectan dos dispositivos (origen y destino): Pej el bus de datos de 10 hilos o el bus de los hilos de 10 switches o el bus de los leds, etc. Un bus es necesario para conectar 10 switches con 10 pines de la FPGA.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Desde el punto de vista de vhdl un bus de 10 hilos es un VECTOR de 10 componentes o 10 bits.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>std_logic_vector SW (9 DOWNTO 0) :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>es un vector de 10 componentes equivalente a un bus de 10 hilos que hemos bautizado con el nombre de SW</p>
+</li>
+<li>
+<p>SW(5): es el bit de la posición 5.</p>
+</li>
+<li>
+<p>DOWNTO significa el orden descendente de los bits:  SW(9)-SW(8)&#8230;&#8203;. SW(1)-SW(0). SW(9) posicionado a la IZDA es el bit más significativo (MSB) y SW(0) posicionado a la DCHA el bit menos significatio (LSB).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>std_logic_vector SW (9 TO 0) :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>TO significa el orden ascendente de los bits:  SW(0)-SW(1)&#8230;&#8203;. SW(8)-SW(9). SW(9) posicionado a la DCHA es el bit menos significativo (LSB) y SW(0) posicionado a la IZDA es el bit más significatio (MSB).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library ieee;
+use ieee.std_logic_1164.all;
+
+ENTITY light_de1soc IS
+PORT(SW : IN std_logic_vector (1 downto 0) ;
+     LEDR : OUT std_logic_vector (0 downto 0));
+END light_de1soc ;</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_librería_standard_paquete_textio">10.3. Librería standard: paquete TEXTIO</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Fichero textio.vhdl donde se define el paquete TEXTIO de la librería "std".</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- textio.vhdl
+
+library std; use std.standard.all;	-- needed for bootstrap mode
+
+package TEXTIO is
+
+  -- Type Definitions for Text I/O
+
+  type TEXT is file of STRING;	-- a file of variable-length ASCII records
+  procedure WRITE (L: inout LINE; VALUE: in BIT;
+			JUSTIFIED: in SIDE := RIGHT; FIELD: in WIDTH := 0);
+
+ -- CUIDADO: no están todas las definiciones de tipos, procedimientos, etc</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>No es necesario declarar el paquete "TEXTIO" de la librería "std", pero se podría declarar de la  forma :</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library std;
+use std.textio.all;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Ejemplo de uso del paquete TEXTIO en el módulo fuente "hello_world.vhdl"</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library std;
+use std.textio.all;
+
+entity HelloWorld is
+end entity;
+
+architecture sim of HelloWorld is
+begin
+
+    process is
+    begin
+
+        report "Hello World!";
+        wait;
+
+    end process;
+
+end architecture;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+hello_world.vhd no produce ningún circuito lógicamente, no se sintetiza. Pero la sentencia <span class="naranja">report</span> se puede utilizar para depurar código como en cualquier lenguaje de programación.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>La librería std y sus paquetes están disponibles en la carpeta donde se ha instalado el simulador Questa Intel</p>
+<div class="ulist">
+<ul>
+<li>
+<p>C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/std/textio.vhdl</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_quartus_light_de1soc_vhd_ii">11. Tutorial quartus &#8594; light_de1soc.vhd (II)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_diseño_2">11.1. Diseño</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>En este ejercicio:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se va a utilizar el tipo de señal <strong>std_logic</strong> y <strong>std_logic_vector</strong></p>
+</li>
+<li>
+<p>se va a fabricar el circuito digital en la <strong>FPGA Cyclone V</strong> de la tarjeta <strong>DE1-SoC</strong> accesible de forma remota.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Se va a crear el nuevo proyecto light_de1soc con un nuevo módulo fuente  light_de1soc.vhd</p>
+<div class="ulist">
+<ul>
+<li>
+<p>crear la carpeta nueva ../ssdd/light_de1soc.</p>
+</li>
+<li>
+<p>copiar en la carpeta ../ssdd/light_de1soc el módulo fuente ../ssdd/light_bit/light_bit.vhd y cambiar el nombre del fichero por light_de1soc.vhd</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir Quartus Prime Lite.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>File &#8594; Open &#8594; ssdd/light_de1soc/light_de1soc.vhd</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">Cambiar los nombres de los puertos para que sean los mismos que los del Kit DE1-SoC
+ puertos de entrada: bus de 2 switches con nombre SW
+ puerto  de salida: bus de leds rojos con nombre LEDR
+ puertos de entrada: señal tipo "std_logic_vector (1 download 0)" y el de salida tipo "std_logic_vector (0 download 0)"
+ entradas: señales con nombres lógicos  SW(0) y SW(1) asociadas al cableado físico que conecta los switches 0 y 1 del Kit DE1-SoC a la entrada de la FPGA.
+ salidas: señal con el nombre lógico LEDR(0) asociado al cableado físico que conecta el led rojo del Kit DE1-SoC a una salida de la FPGA
+ arquitectura: relacionar lógicamente la señal digital de salida LEDR(0) con la señales digitales de entrada SW(0), SW(1)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>light_de1soc.vhd:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDD
+-- Intel tutorial reference: light.pdf
+-- Entity: ports
+--- El puerto lógico SW(0) se conecta al switch 0 de la tarjeta DE1-SoC
+--- El puerto lógico SW(1) se conecta al switch 1 de la tarjeta DE1-SoC
+--- El puerto lógico LEDR(0) se conecta al led rojo 0 de la tarjeta DE1-SoC
+-- Función: el led se enciende sólo si uno de los switches de entrada está activo
+-- RTL architecture : signals, logic math expresion between ports :XOR
+-- Candido Aramburu
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+ENTITY light_de1soc IS
+PORT(SW : IN std_logic_vector (1 downto 0) ;
+     LEDR : OUT std_logic_vector (0 downto 0));
+END light_de1soc ;
+
+ARCHITECTURE LogicFunction OF light_de1soc IS
+BEGIN
+ LEDR(0) &lt;= (SW(0) AND NOT SW(1)) OR (NOT SW(0) AND SW(1)) ;
+END LogicFunction ;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>File &#8594; save &#8594; light_de1soc.vhd</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>CREAR un nuevo PROYECTO</p>
+<div class="ulist">
+<ul>
+<li>
+<p>File &#8594; New &#8594; Project &#8594; Wizard</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Introduction &#8594; Next</p>
+</li>
+<li>
+<p>Project Directory: ../ssdd/light_de1soc/</p>
+</li>
+<li>
+<p>Project Name: light_de1soc</p>
+</li>
+<li>
+<p>top-level design entity  name: light_de1soc</p>
+</li>
+<li>
+<p>empty project</p>
+</li>
+<li>
+<p>add file &#8594; ../ssdd/light_de1soc/light_de1soc.vhd</p>
+</li>
+<li>
+<p>board &#8594; DE1-SoC Board</p>
+</li>
+<li>
+<p>simulation &#8594; Questa Intel&#8594; format: vhdl</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Project Navigator &#8594; Hierarchy &#8594; doble click en light_de1soc &#8594; se abre el código fuente en el editor</p>
+</li>
+<li>
+<p>Project Navigator &#8594; Hierarchy &#8594; seleccionar fichero light.vhd &#8594; click dcha &#8594; eliminar el fichero light_primer.vhd del proyecto de quartus. No se elimina del disco.</p>
+</li>
+<li>
+<p>SINTESIS</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Processing &#8594; Start Compilation</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fabricación_en_el_laboratorio_remoto">11.2. Fabricación en el laboratorio remoto</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Leer la información sobre la interfaz con el laboratorio remoto en el <a href="#LabRemoto">Apéndice: Laboratorio Remoto</a></p>
+</li>
+<li>
+<p>Conectarse al laboratorio remoto de FPGAs de la UPNA desde Miaulario.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>UPNA &#8594; Miaulario &#8594; Herramientas &#8594; Laboratorio Remoto</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Una vez abierta la interfaz en el navegador:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>crear el fichero con el código fuente light_de1soc.vhd</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">Eliminar todos los archivos del panel de archivos
+Crear el archivo vhd nuevo con el nombre light_de1soc
+
+Editar o copiar el código fuente VHDL en área de edición.
+
+En el panel de archivos seleccionar el fichero de diseño TOP de la jerarquía de ficheros: light_de1soc.vhd</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>SINTESIS</p>
+<div class="ulist">
+<ul>
+<li>
+<p>botón "Síntesis"</p>
+</li>
+<li>
+<p>si ha habido errores, ir abajo, al final de los mensajes y buscar el mensaje del ERROR.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>PROGRAMAR la FPGA</p>
+<div class="ulist">
+<ul>
+<li>
+<p>botón "Enviar a la FPGA"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>VERIFICAR EL DISEÑO</p>
+<div class="ulist">
+<ul>
+<li>
+<p>utilizar los switches y botones  virtuales para verificar el circuito digital fabricado en la fpga observando los leds y displays del KIT DE1-SoC.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicios">11.3. Ejercicios</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>¿ Qué señales son sensibles a que se ejecute la sentencia de asignación concurrente ?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_quartus_light_signal_vhd_iii">12. Tutorial quartus &#8594; light_signal.vhd (III)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_diseño_3">12.1. Diseño</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>En este ejercicio se va a:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>visualizar el esquema eléctrico resultante de la síntesis del circuito.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A partir del proyecto light_de1soc creamos el proyecto light_signal</p>
+<div class="ulist">
+<ul>
+<li>
+<p>crear la carpeta light_signal</p>
+</li>
+<li>
+<p>copiar el módulo fuente light_de1soc.vhd en la carpeta ../ssdd/light_signal/</p>
+</li>
+<li>
+<p>cambiar el nombre del fichero light_de1soc.vhd por light_signal.vhd</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir Quartus Prime Lite.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>File &#8594; open &#8594; VHDL &#8594; light_signal.vhd</p>
+</li>
+<li>
+<p>Código fuente: light_signal.vhd</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDD
+-- Intel tutorial reference: light
+-- RTL architecture : logic math expresion
+-- concurrent sentence : &lt;=
+-- Candido Aramburu
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+ENTITY light_signal IS
+PORT(SW : IN std_logic_vector (1 downto 0) ;
+     LEDR : OUT std_logic_vector (0 downto 0));
+END light_signal ;
+
+ARCHITECTURE LogicFunction OF light_signal IS
+ signal u, v : std_logic ;
+BEGIN
+ LEDR(0) &lt;= u OR v ;
+ u &lt;= SW(0) AND NOT SW(1);
+ v &lt;= NOT SW(0) AND SW(1);
+END LogicFunction ;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>File &#8594; New &#8594; Project &#8594; Wizard</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Introduction &#8594; Next</p>
+</li>
+<li>
+<p>Project Directory: ../light_signal/</p>
+</li>
+<li>
+<p>Project Name: light_signal</p>
+</li>
+<li>
+<p>top-level design entity  name: light_signal</p>
+</li>
+<li>
+<p>empty project</p>
+</li>
+<li>
+<p>add file &#8594; ../light_signal/light_signal.vhd</p>
+</li>
+<li>
+<p>board &#8594; DE1-SoC Board</p>
+</li>
+<li>
+<p>simulation &#8594; Questa Intel &#8594; format: vhdl</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Project Navigator &#8594; Hierarchy &#8594; doble click en light_de1soc &#8594; se abre el código fuente en el editor</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_análisis_herramienta_rtl_viewer">12.2. Análisis: Herramienta RTL Viewer</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Utilizar en cualquier proyecto el visor del circuito sintetizado: Quartus &#8594;Tools&#8594; Netlist Viewer &#8594; RTL viewer</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Se visualiza un esquema eléctrico que no es literalmente la descripción del módulo fuente sino una descripción equivalente.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/light_signal.png" alt="light signal">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>interpretar los nombres lógicos del esquema netlist</p>
+<div class="ulist">
+<ul>
+<li>
+<p>interpretar los nombres de las señales internas</p>
+</li>
+<li>
+<p>interpretar el símbolo que se utiliza para los puertos (señales externas)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>interpretar el símbolo de un bus de señales.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicios_2">12.3. Ejercicios</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>¿ Qué señales son sensibles a que se ejecute cada sentencia de asignación concurrente ?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_quartus_light_de1soc_vhd_iv_simulación_questa_intel">13. Tutorial quartus &#8594; light_de1soc.vhd (IV) : Simulación Questa Intel</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_simulación">13.1. Simulación</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>En este ejercicio se va a:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>simular el procesado de señales que realiza el circuito para la obtención de un cronograma que visualice las señales digitales binarias del circuito y poder verificar así su funcionamiento.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Simulación del diseño light_de1soc.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Abrir Quartus</p>
+</li>
+<li>
+<p>Abrir el proyecto <em>light_de1soc.qpf</em> ubicado en la carpeta ../ssdd/light_de1soc donde previamente he sintentizado el diseño <em>light_de1soc.vhd</em></p>
+</li>
+<li>
+<p>Configurar simulador Questa</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ha de estar instalado el simulador Questa</p>
+</li>
+<li>
+<p>Quartus &#8594; Settings &#8594; Eda Tool Settings &#8594; Simulation&#8594; Tool Name: Questa Intel</p>
+</li>
+<li>
+<p>Quartus &#8594; Tools &#8594; options &#8594; general &#8594; eda tool options &#8594; Questa Intel : seleccionar la carpeta donde esté instalado <strong>questasim</strong> &#8594; C:/intelFPGA_lite/21.1/questa_fse/win64/questasim.exe</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>generar los ficheros fuente que utilizará el simulador Questa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Processing &#8594; Start Compilation</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir el simulador Questa Intel</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Tools &#8594; Run Simulator Tool &#8594; RTL simulation &#8594; Abre una nueva ventana con el simulador Questa Intel</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Questa Intel Simulator:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ventana Transcript &#8594; mensajes del simulador y comandos del usuario. Interpretar lo realizado por el Simulador.</p>
+</li>
+<li>
+<p>Ventana Library (View Library) &#8594; Work &#8594; Doble click en light &#8594; se carga el diseño que se va simular en la ventana Objects</p>
+</li>
+<li>
+<p>Ventana Objects &#8594; seleccionar con el ratón la señal bus SW &#8594; click dcha, <strong>Modify &#8594; Apply Wave</strong> &#8594;   Pattern: counter, start at 00, end at 80 ns, time unit ns,  from 00 to 11, Period: 10ns, counter type binary, Direction: up , Repeat:  Forever &#8594;Se añaden en la ventana Wave las señales seleccionadas</p>
+</li>
+<li>
+<p>Ventana Wave &#8594; click dcha en el area del cronograma de las señales binarias &#8594; Zoom Range: 80ns</p>
+</li>
+<li>
+<p>Ventana Objects &#8594; seleccionar con el ratón las señales de entrada salida LEDR(0) &#8594; Click dcha &#8594; <strong>Add Wave</strong> &#8594; se añade la señal de salida a la ventana Wave.</p>
+</li>
+<li>
+<p>Ventana Wave:  botones de la barra de herramientas &#8594; simular 80 ns, run , restart simulation, run.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Verificar que la señal de salida LEDR(0) es la esperada para los diferentes estímulos de entrada SW(0) y SW(1)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ventana Transcript &#8594; mensajes del simulador y comandos del usuario. Interpretar lo realizado por el Simulador.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/light_de1soc_wave.png" alt="light de1soc wave">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_quartus_light_csa_vhd_v">14. Tutorial quartus &#8594; light_csa.vhd (V)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_diseño_4">14.1. Diseño</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Proyecto "light_csa"</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El objetivo es describir literalmente la "Tabla de la Verdad" de la función del circuito.</p>
+</li>
+<li>
+<p>Utilizamos la <strong>sentencia concurrente</strong> "Conditional Signal Assignment" (csa).</p>
+</li>
+<li>
+<p>creo la carpeta ../light_csa</p>
+</li>
+<li>
+<p>copio el módulo fuente light_de1soc/light_de1soc.vhd en la carpeta ../light_csa/light_csa.vhd con el nombre light_csa.vhd</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>EDITO el módulo fuente ../light_csa/light_csa.vhd</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Abrir Quartus Prime Lite.</p>
+</li>
+<li>
+<p>File &#8594; open &#8594; VHDL &#8594; light_csa.vhd</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cambiamos el nombre de la entidad &#8594; light_csa</p>
+</li>
+<li>
+<p>Borramos el contenido de la arquitectura.</p>
+</li>
+<li>
+<p>En la arquitectura la asignación a la señal LEDR(0) se edita mediante la herramienta <em>Insertar Plantilla</em> de la barra de herramientas del Editor.</p>
+</li>
+<li>
+<p>Insert Template &#8594; VHDL &#8594; Constructs &#8594; Concurrent Statements &#8594; Conditional Signal Assignment (CSA)</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library ieee;
+use ieee.std_logic_1164.all;
+
+ENTITY light_csa IS
+PORT(SW : IN std_logic_vector (1 downto 0) ;
+     LEDR : OUT std_logic_vector (0 downto 0));
+END light_csa ;
+ARCHITECTURE TablaVerdad OF light_csa IS
+BEGIN
+ &lt;optional_label&gt;: &lt;target&gt; &lt;=
+	&lt;value&gt; when &lt;condition&gt; else
+	&lt;value&gt; when &lt;condition&gt; else
+	&lt;value&gt; when &lt;condition&gt; else
+	...
+	&lt;value&gt;;
+
+END TablaVerdad ;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Una vez insertada la plantilla la particularizo con las señales de mi diseño:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library ieee;
+use ieee.std_logic_1164.all;
+
+ENTITY light_csa IS
+PORT(SW : IN std_logic_vector (1 downto 0) ;
+     LEDR : OUT std_logic_vector (0 downto 0));
+END light_csa ;
+
+ARCHITECTURE TablaVerdad OF light_csa IS
+BEGIN
+ LEDR(0) &lt;=
+	'1' when SW(0)='0' AND SW(1)='1' else
+	'1' when SW(0)='1' AND SW(1)='0' else
+	'0'; -- CASO DEFAULT :  NO es obligatorio
+
+END TablaVerdad ;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>CREO el proyecto light_csa y le añado el fichero light_csa.vhd</p>
+</li>
+<li>
+<p>SINTETIZO : Processing &#8594; start compilation</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_análisis">14.2. Análisis</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>VISUALIZACION: Tools&#8594; Netlist Viewer &#8594; RTL viewer</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/light_csa.png" alt="light csa">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>interpretar los nombres lógicos:</p>
+<div class="literalblock">
+<div class="content">
+<pre>LEDR~0, LEDR~1, LEDR~2</pre>
+</div>
+</div>
+</li>
+<li>
+<p>son los nombres de las señales a la salida de las tres puertas. Son señales internas del circuito que ha sido definidas por el propia aplicación Quartus.</p>
+</li>
+<li>
+<p>1h1 &#8594; el primer dígito es el número bits y el último digito es el valor en hexadecimal</p>
+</li>
+<li>
+<p>observamos que en el diagrama eléctrico utiliza un "multiplexor" digital. El esquema eléctrico es una descripción mediante componentes básicos digitales interconectados a diferencia de la descripción mediante la Tabla de la Verdad en el código VHDL.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La tabla de la verdad es una descripción funcional</p>
+</li>
+<li>
+<p>Las puertas lógicas y otros bloques digitales interconectados es una descrición RTL (Register Transfer Level).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicios_3">14.3. Ejercicios</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>¿ Qué señales son sensibles a que se ejecute la sentencia de asignación condicional CAS ?</p>
+</li>
+<li>
+<p>¿ Qué ocurre si eliminamos el caso default? ¿Hay error de compilación? ¿Cómo ha cambiado el circuito netlist?¿Por qué?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_sentencias_secuenciales">15. Sentencias Secuenciales</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_procesoprocess">15.1. Proceso/Process()</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Un proceso es un bloque de sentencias secuenciales, es decir, ejecutar un proceso significa ejecutar <strong>todas</strong> las sentencias de su cuerpo de forma secuencial empezando por la primera y siguiendo el orden hasta ejecutar la última sentencia del cuerpo.</p>
+</li>
+<li>
+<p>Unicamente las sentencias definidas como sentencias secuenciales pueden formar parte del cuerpo del proceso.</p>
+</li>
+<li>
+<p>¿Cuando se ejecuta un proceso?</p>
+</li>
+<li>
+<p>Un proceso se ejecuta cuando hay un evento en una de las señales sensibles al proceso. Las señales sensibles al proceso se declaran entre paréntesis junto a la sentencia <strong>PROCESS(sensivity signals)</strong>. Por lo tanto la sentencia process es una sentencias <strong>concurrente</strong> y las sentencias de su cuerpo son <strong>secuenciales</strong>.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">&lt;optional_label&gt;:  process(sensivity signals) is
+        { Declaration(s) }
+        begin
+        { Sequential Statement(s) }
+        end process;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_quartus_light_process_vhd_vi">16. Tutorial quartus &#8594; light_process.vhd (VI)</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitectura mediante la sentencia concurrente [.naranja]#process3</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En el cuerpo del proceso se utilizarán la sentencia de asignación secuencial <span class="naranja">&#8656;</span>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">--
+-- Descripción VHDL Primavera 2023
+-- Circuito light_bit.vhd:
+-- Puerta lógica XOR extendida
+entity of light_bit is
+  port (
+    SW : in std_logic_vector(1 downto 0);
+    LEDR   : out std_logic_vector(0 downto 0)
+);
+end entity;
+
+architecture rtl of light_bit is
+ signal s,t,u,v : bit;
+begin
+  process (SW)
+  begin
+  s &lt;= not SW(0);
+  t &lt;= not SW(1);
+  u &lt;= SW(0) and t;
+  v &lt;= SW(1) and s;
+  LEDR(0) &lt;= u or v;
+  end process;
+end rtl;
+--</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Verificar el buen funcionamiento del circuito mediante la simulación o/y en el laboratorio remoto.</p>
+</li>
+<li>
+<p>La lista de señales sensibles para la ejecución del proceso es el bus SW</p>
+</li>
+<li>
+<p>Un evento en alguna de las señales SW(0) o SW(1), provoca la ejecución de todas las sentencias del cuerpo del process de forma secuencial.</p>
+</li>
+<li>
+<p>Cambiar el código VHDL cambiando el orden de las sentencias <span class="naranja">&#8658;</span> y observar si hay algún cambio en la síntesis del circuito.</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_quartus_light_if_vhd_vii">17. Tutorial quartus &#8594; light_if.vhd (VII)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_diseño_5">17.1. Diseño</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Diseño "light_if"</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El objetivo es describir literalmente la "Tabla de la Verdad" de la función del circuito.</p>
+</li>
+<li>
+<p>Utilizamos la sentencia secuencial "if elseif else endif" .</p>
+</li>
+<li>
+<p>creo la carpeta ../light_if</p>
+</li>
+<li>
+<p>EDITO el módulo fuente ../light_if/light_if.vhd</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En la arquitectura la asignación a la señal LEDR(0) se edita mediante la herramienta <em>Insertar Plantilla</em> de la barra de herramientas del Editor.</p>
+</li>
+<li>
+<p>Insert Template &#8594; VHDL &#8594; Constructs &#8594; Concurrent Statements &#8594; PROCESS</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">&lt;optional_label&gt;:
+	process(reset, clk) is
+		-- Declaration(s)
+	begin
+		if(reset = '1') then
+			-- Asynchronous Sequential Statement(s) -&gt;  SOLO sentencias SECUENCIALES !!
+		elsif(rising_edge(clk)) then
+			-- Synchronous Sequential Statement(s) -&gt; SOLO sentencias SECUENCIALES !!
+		end if;
+	end process;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La plantilla ha insertado dos sentencias:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la sentencia concurrente PROCESS</p>
+</li>
+<li>
+<p>la sentencia secuencial IF-ELSEIF-ELSE-END IF</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Particularizo las dos sentencias con las señales de mi diseño.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">	-- El proceso se ejecuta SI hay alguna variacion en las señales ARGUMENTO ( señales SENSIBLES del proceso)
+	process(SW) is
+		-- Declaration(s)
+	begin
+		if(SW(0) == SW(1)) then
+			LEDR(0) &lt;= '0';
+		else
+			LEDR(0) &lt;= '1';
+		end if;
+	end process;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Insert Template &#8594; VHDL &#8594; Constructs &#8594; Sequential Statements &#8594; if</p>
+<div class="ulist">
+<ul>
+<li>
+<p>NO es necesario volver a insertar la sentencia IF dentro del PROCESS.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">if &lt;expression&gt; then
+	-- Sequential Statement(s)
+elsif &lt;expression&gt; then
+	-- Sequential Statement(s)
+else
+	-- Sequential Statement(s);
+end if;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>light_if.vhd:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDDI-2022
+-- Intel tutorial reference: light.pdf
+-- Diseño: Si uno de los switches SW(0) o SW(1) esta activo -&gt; led rojo LEDR(0) encendido
+-- Arquitectura: tipo funcional (Behavioral) -&gt; Describe literalmente la tabla de la verdad, no describe una expresión matematica.
+-- Descripción del circuito mediante la sentencia secuencial IF.
+-- Candido Aramburu
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+ENTITY light_if IS
+PORT(SW : IN std_logic_vector (1 downto 0) ;
+     LEDR : OUT std_logic_vector (0 downto 0));
+END light_if ;
+
+ARCHITECTURE TablaVerdad OF light_if IS
+BEGIN
+	-- El proceso se ejecuta SI hay alguna variacion en las señales ARGUMENTO ( señales SENSIBLES del proceso)
+	process(SW) is
+		-- Declaration(s)
+	begin
+		if(SW(0) = SW(1)) then
+			LEDR(0) &lt;= '0';
+		else
+			LEDR(0) &lt;= '1';
+		end if;
+	end process;
+END TablaVerdad;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>CREO el proyecto light_if y le añado el fichero light_if.vhd</p>
+</li>
+<li>
+<p>SINTETIZO : Processing &#8594; start compilation</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_análisis_2">17.2. Análisis</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>VISUALIZACION: Tools&#8594; Netlist Viewer &#8594; RTL viewer</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/light_if.png" alt="light if">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicios_4">17.3. Ejercicios</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>¿ Qué señales son sensibles a que se ejecute la sentencia PROCESS ?</p>
+</li>
+<li>
+<p>¿ Qué señales son sensibles a que se ejecute la sentencia IF-ELSEIF-ELSE ?</p>
+</li>
+<li>
+<p>¿ Qué tipos de valores de señal tienen como consecuencia que se cumpla condición ELSE?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_quartus_light_with_vhd_viii">18. Tutorial quartus &#8594; light_with.vhd (VIII)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_diseño_6">18.1. Diseño</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Diseño "light_with"</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El objetivo es describir literalmente la "Tabla de la Verdad" de la función del circuito.</p>
+</li>
+<li>
+<p>Utilizamos la sentencia concurrente "Conditional Signal Assignment" (csa).</p>
+</li>
+<li>
+<p>creo la carpeta ../light_with</p>
+</li>
+<li>
+<p>EDITO el módulo fuente ../light_with/light_with.vhd</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En la arquitectura la asignación a la señal LEDR(0) se edita mediante la herramienta <em>Insertar Plantilla</em></p>
+</li>
+<li>
+<p>Template &#8594; VHDL &#8594; Constructs &#8594; Concurrent Statements - Selected Signal Assignments (ssa) &#8594; WITH</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Módulo fuente: light_with.vhd</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDD
+-- Intel tutorial reference: light
+-- Behavioral architecture : Truth table function
+-- concurrent sentence : with
+-- Candido Aramburu
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+ENTITY light_with IS
+PORT(SW : IN std_logic_vector (1 downto 0) ;
+     LEDR : OUT std_logic_vector (0 downto 0));
+END light_with ;
+
+ARCHITECTURE LogicFunction OF light_with IS
+BEGIN
+	Truth_Table: with SW select
+	LEDR(0) &lt;= '1' when "00",
+		   '1' when "11",
+		   '0' when others; -- caso Default : SÍ ES OBLIGATORIO
+END LogicFunction ;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>CREO el proyecto light_if y le añado el fichero light_if.vhd</p>
+</li>
+<li>
+<p>SINTETIZO : Processing &#8594; start compilation</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_análisis_3">18.2. Análisis</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>VISUALIZACION: Tools&#8594; Netlist Viewer &#8594; RTL viewer</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicios_5">18.3. Ejercicios</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>¿ Qué señales son sensibles a que se ejecute la sentencia de asignación WITH-ELSE ?</p>
+</li>
+<li>
+<p>¿ Qué tipos de valores de señal tienen como consecuencia que se cumpla la condición DEFAULT?</p>
+</li>
+<li>
+<p>¿ Qué ocurre si eliminamos el caso default? ¿Hay error de compilación? ¿Cómo ha cambiado el circuito netlist?¿ Por qué?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_quartus_light_case_vhd_ix">19. Tutorial quartus &#8594; light_case.vhd (IX)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_diseño_7">19.1. Diseño</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Diseño "light_case"</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El objetivo es describir literalmente la "Tabla de la Verdad" de la función del circuito.</p>
+</li>
+<li>
+<p>Utilizamos la sentencia secuencial case.</p>
+</li>
+<li>
+<p>creo la carpeta ../light_case</p>
+</li>
+<li>
+<p>EDITO el módulo fuente ../light_case/light_case.vhd</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En la arquitectura la asignación a la señal LEDR(0) se edita mediante la herramienta <em>Insertar Plantilla</em></p>
+</li>
+<li>
+<p>Insert Template &#8594; VHDL &#8594; Constructs &#8594; Concurrent Statements &#8594; PROCESS</p>
+</li>
+<li>
+<p>Insert Template &#8594; VHDL &#8594; Constructs &#8594; Sequential Statements &#8594; CASE</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Módulo fuente: light_case.vhd</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDDI-2022
+-- Intel tutorial reference: light
+-- Behavioral architecture : Truth table function
+-- sequential sentence : case
+-- Candido Aramburu
+
+library std;
+use std.standard.all;
+use std.textio.all;
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+ENTITY light_case IS
+PORT(SW : IN std_logic_vector (1 downto 0) ;
+     LEDR : OUT std_logic_vector (0 downto 0));
+END light_case;
+
+ARCHITECTURE behavioral OF light_case IS
+BEGIN
+process (SW)
+  begin
+   case SW  is
+    when "00" =&gt; LEDR &lt;= "0";
+    when "01" =&gt; LEDR &lt;= "1";
+    when "10" =&gt; LEDR &lt;= "1";
+    when "11" =&gt; LEDR &lt;= "0";
+    when others =&gt; LEDR &lt;= "1"; -- caso DEFAULT: NO es obligatorio
+   end case;
+  end process;
+
+END behavioral ;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>CREO el proyecto light_case y le añado el fichero light_case.vhd</p>
+</li>
+<li>
+<p>SINTETIZO : Processing &#8594; start compilation</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_análisis_4">19.2. Análisis</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>VISUALIZACION: Tools&#8594; Netlist Viewer &#8594; RTL viewer</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/light_case.png" alt="light case">
+</div>
+</div>
+</li>
+<li>
+<p>interpretar los nombres lógicos</p>
+</li>
+<li>
+<p>interpretar el multiplexor</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SEL[1,0] : el bit más significativo es SEL(1)</p>
+</li>
+<li>
+<p>DATA[3..0]: el bit más significativo es DATA(3)</p>
+</li>
+<li>
+<p>4h6 &#8594; el primer dígito es el número bits (4) y el último digito es el valor en hexadecimal (6) &#8594; 0110</p>
+</li>
+<li>
+<p>¿qué implementa el multiplexor?</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicios_6">19.3. Ejercicios</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Describe un tipo de señal que está definido en el paquete "standard" de la librería "std"</p>
+</li>
+<li>
+<p>¿ Qué ocurre si quitamos la declaración de la librería y del paquete standard y std?</p>
+</li>
+<li>
+<p>¿ Qué diferencia hay entre la librería "std" y la librería "ieee"?</p>
+</li>
+<li>
+<p>¿ Qué tipos de valores de señal tienen como consecuencia que se cumpla la condición DEFAULT?</p>
+</li>
+<li>
+<p>¿ Qué ocurre si eliminamos el caso default? ¿Hay error de compilación? ¿Cómo ha cambiado el circuito netlist?¿ Por qué?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tutorial_quartus_light_sum_vhd_x">20. Tutorial quartus &#8594; light_sum.vhd (X)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_operación_suma_y_multiplicación">20.1. Operación suma y multiplicación</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ni la librería <span class="naranja">std</span> ni el paquete <span class="naranja">std_logic_1164</span> no define operaciones aritméticas para operar con señales std_logic.</p>
+</li>
+<li>
+<p>Las operaciones suma y multiplicación están definidos en  el paquete "numeric_std" de la librería "ieee"</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Operaciones suma y multiplicación con números sin signo, con signo, etc</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Diseño ligth_sum
+-- Quartus Prime Lite 21.1
+-- Descripcion del circuito: operaciones suma y multiplicación de operandos de 1 bit.
+-- Arquitetura: operacione suma y multiplicación
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity light_sum is
+ port(
+	SW : in std_logic_vector ( 1 downto 0);
+	LEDR : out std_logic_vector (9 downto 0)
+	);
+end ;
+
+architecture math of light_sum is
+signal swu,suma,op1,op2: unsigned (1 downto 0);
+signal mul: unsigned (3 downto 0);
+
+begin
+	 swu &lt;= unsigned (SW); --casting : convertir el tipo del objeto
+	 op1 &lt;= '0' &amp; swu(0); -- extiendo el signo
+	 op2 &lt;= '0' &amp; swu(1); -- extiendo el signo
+         suma &lt;= op1 + op2 ;
+	 mul &lt;= op1 * op2;
+	 LEDR(1 downto 0) &lt;= std_logic_vector(suma); --casting : convertir el tipo del objeto
+	 LEDR(9 downto 6) &lt;= std_logic_vector(mul);
+end ;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ejercicio_1_5_matricula">21. Ejercicio 1.5: Matricula</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_arquitectura_rtl">21.1. Arquitectura rtl</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad <em>matricula.vhdl</em></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDD I
+-- Ejercicio 1.5
+-- matricula.vhdl
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity matricula is
+    port (
+        SW: in std_logic_vector(9 downto 0);
+        LEDR: out std_logic_vector(9 downto 0)
+    );
+end matricula;
+
+architecture puertas of matricula is
+    signal a, b, c: std_logic;
+begin
+    a 		&lt;= SW(0) and SW(1);
+    b 		&lt;= SW(1) and SW(2);
+    c 		&lt;= SW(3);
+    LEDR(0) 	&lt;= a or b or c;
+end puertas;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_netlist_view">21.2. netlist view</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/matricula_RTL.png" alt="Circuito Digital matricula">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tutorial_quartus_matricula_case_vhd">21.3. Tutorial quartus &#8594; matricula_case.vhd</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejercicio 1.5 (matricula) del libro de problemas resueltos de circuitos electrónicos</p>
+</li>
+<li>
+<p>La tabla de la verdad</p>
+<div class="ulist">
+<ul>
+<li>
+<p>4 entradas : SW(0), SW(1), SW(2), SW(3)</p>
+</li>
+<li>
+<p>1 salida : LEDR(0)</p>
+</li>
+<li>
+<p>Nº de filas = 2<sup>4</sup> = 16</p>
+</li>
+<li>
+<p>los minitérminos SW(0)*SW(1)*SW(2)*SW(3) que hacen 0 a la función son: m<sub>0</sub>, m<sub>1</sub>, m<sub>4</sub>, m<sub>8</sub> y m<sub>9</sub></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Arquitectura mediante la sentencia concurrente <strong>process</strong> y la sentencia secuencial <strong>case</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>La arquitectura describe literalmente la Tabla de la Verdad</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Unidad <em>matricula_case.vhdl</em></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- SSDD I
+-- Ejercicio 1.5
+-- matricula_case.vhdl
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity matricula_case is
+    port (
+        SW: in std_logic_vector(3 downto 0);
+        LEDR: out std_logic_vector(0 downto 0)
+    );
+end matricula_case;
+
+architecture behavioral_seq of matricula_case is
+ begin
+  process (SW)
+  begin
+   case SW  is
+    when "0000" =&gt; LEDR &lt;= "0";
+    when "0001" =&gt; LEDR &lt;= "0";
+    when "0100" =&gt; LEDR &lt;= "0";
+    when "1000" =&gt; LEDR &lt;= "0";
+    when "1001" =&gt; LEDR &lt;= "0";
+    when others =&gt; LEDR &lt;= "1";
+   end case;
+  end process;
+end behavioral_seq;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+la constante 0 en  la asignación LEDR &#8656; "0" da error si se pone '0' ya que LEDR es un bus, no un hilo.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia secuencial <em>case</em> describimos la tabla de la verdad. No es necesario saber la función lógica que relaciona la entrada y la salida.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejemplo_1_matricula_vhd">21.4. Ejemplo_1: matricula.vhd</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejercicio 1.5 del libro de problemas resueltos de circuitos electrónicos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad <em>matricula.vhdl</em></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Ejercicio 1.5
+-- matricula.vhdl
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity matricula is
+    port (
+        SW: in std_logic_vector(9 downto 0);
+        LEDR: out std_logic_vector(9 downto 0)
+    );
+end matricula;
+
+architecture rtl_seq of matricula is
+    signal a, b, c: std_logic;
+begin
+  process (SW(0), SW(1), SW(2), SW(3))
+  begin
+      a 		&lt;= SW(0) and SW(1);
+      b 		&lt;= SW(1) and SW(2);
+      c 		&lt;= SW(3);
+      LEDR(0) 	&lt;= a or b or c;
+  end process;
+end rtl_seq;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
+</li>
+<li>
+<p>La lista de señales sensibles para la ejecución del proceso es: SW(0), SW(1), SW(2), SW(3)</p>
+</li>
+<li>
+<p>Un evento en alguna de las señales SW(0), SW(1), SW(2), SW(3), provoca la ejecución de todas las sentencias del cuerpo del process de forma secuencial.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">process (SW(0), SW(1), SW(2), SW(3))
+  begin
+      LEDR(0) 	&lt;= a or b or c;
+      a 		&lt;= SW(0) and SW(1);
+      b 		&lt;= SW(1) and SW(2);
+      c 		&lt;= SW(3);
+  end process;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_multiplexor">22. Multiplexor</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_mux2x1_arquitectura_rtl">22.1. mux2x1: arquitectura RTL</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Multiplexor 2x1 con arquitectura RTL</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad <em>mux2x1_rtl.vhd</em></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- UPNA
+-- SSDD I
+-- mux2x1_rtl.vhdl
+-- Multiplexor 2x1
+-- identidad:
+--            entrada de datos: Botones KEY(0), KEY(1)
+--            entrada de control: Switches SW(0)
+--            salida : Led Red LEDR(0)
+-- arquitectura RTL : ecuación lógica del mux 2x1
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity  mux2x1_rtl is
+    port (
+        KEY: in std_logic_vector(1 downto 0);
+        SW: in std_logic_vector(0 downto 0);
+        LEDR: out std_logic_vector(0 downto 0)
+    );
+end mux2x1_rtl;
+
+architecture rtl of  mux2x1_rtl is
+ begin
+    LEDR(0) &lt;= (KEY(0) and (not SW(0))) or (KEY(1) and SW(0)) ;
+end rtl;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_análisis_5">22.2. Análisis</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>VISUALIZACION: Tools&#8594; Netlist Viewer &#8594; RTL viewer</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/mux2x1_rtl.png" alt="mux2x1 rtl">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_mux4x1_arquitectura_behavioral">22.3. mux4x1: arquitectura Behavioral</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Multiplexor 4x1 con arquitectura funcional o comportamental (behavioral)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad <em>mux4x1_beh.vhdl</em></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- UPNA
+-- SSDD I
+-- mux4x1_beh.vhdl
+-- Multiplexor 4x1
+-- identidad:
+--            entradas de datos: KEY(0), KEY(1), KEY(1), KEY(2)
+--            entradas de control: SW(0), SW(1)
+--            salida : LEDR(0)
+-- arquitectura Funcional :
+--            sentencia concurrente PROCESS y sentencia secuencial IF
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity  mux4x1_beh is
+    port (
+        KEY: in std_logic_vector(3 downto 0);
+        SW: in std_logic_vector(1 downto 0);
+        LEDR: out std_logic_vector(0 downto 0)
+    );
+end mux4x1_beh;
+
+architecture behavioral of  mux4x1_beh is
+ begin
+  multi4x1: process (KEY)
+              begin
+               if    (SW="00") then
+                   LEDR(0) &lt;= KEY(0);
+               elsif (SW="01") then
+                   LEDR(0) &lt;= KEY(1);
+               elsif (SW="10") then
+                   LEDR(0) &lt;= KEY(2);
+               elsif (SW="11") then
+                   LEDR(0) &lt;= KEY(3);
+               else
+                   LEDR &lt;= "0";
+               end if;
+              end process multi4x1;
+end behavioral;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Si se escribe LEDR en lugar de LEDR(0) da error.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>La selección "else" es necesaria ya que las señales std_logic pueden tener hasta 9 valores diferentes por lo que el bus de 2 hilos como SW admite 512 combinaciones, no sólamente las cuatro combinaciones 00,01,10,11.</p>
+</li>
+<li>
+<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_análisis_6">22.4. Análisis</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>VISUALIZACION: Tools&#8594; Netlist Viewer &#8594; RTL viewer</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/mux4x1_beh.png" alt="mux4x1 beh">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_mux4x1_arquitectura_estructural">22.5. mux4x1: arquitectura Estructural</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>En teoría se ha visto como extender multiplexores de un número elevado de entradas en función de multiplexores de menos entradas,
+lo cual  se describe en VHDL mediante una arquitectura estructural.</p>
+</li>
+<li>
+<p>Diseñar un Multiplexor 4x1 en función de Multiplexores 2x1</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Un multiplexor 4x1 se puede diseñar como la combinación de 3 multiplexores 2x1. En la entrada del circuito se utilizan 2 multiplexores 2x1 en paralelo y a la salida de estos dos multiplexores 2x1 se conecta el multiplexor 2x1 de salida. Es decir, 2 multiplexores de entrada y un multiplexor de salida.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/mux4x1_str.png" alt="mux4x1 str">
+</div>
+</div>
+</li>
+<li>
+<p>Esquema del componente <em>mux2x1</em></p>
+<div class="imageblock">
+<div class="content">
+<img src="images/mux2x1_str.png" alt="mux2x1 str">
+</div>
+</div>
+</li>
+<li>
+<p>Son necesarios dos ficheros o programas VHDL relacionados jerárquicamente. La entidad mux4x1_str recurre a la entidad mux2x1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>unidad <em>mux2x1.vhd</em> en el nivel bajo de la jerarquía.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- UPNA
+-- SSDD I
+-- mux2x1.vhd
+-- Multiplexor 2x1
+-- identidad:
+--            entrada de datos: D(0), D(1)
+--            entrada de control: C
+--            salida : S
+-- arquitectura RTL : ecuación lógica del mux 2x1
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity  mux2x1 is
+    port (
+        D: in std_logic_vector(1 downto 0);
+        C: in std_logic;
+        S: out std_logic
+    );
+end mux2x1;
+
+architecture rtl of  mux2x1 is
+ begin
+ S &lt;= (D(0) and (not C)) or (D(1) and C) ;
+end rtl;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Descripción estructural:  describe cómo se conectan con hilos o buseslos tres multiplexores mux2x1 , es decir, se va a describir la estructura del circuito mux4x2_str en función de los 3 componentes mux2x1.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad <em>mux4x1_str.vhd</em> en el nivel top de la jerarquía.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- UPNA
+-- SSDD I
+-- mux4x1_beh.vhdl
+-- Multiplexor 4x1
+-- identidad:
+--            entradas de datos: KEY(0), KEY(1), KEY(1), KEY(2)
+--            entradas de control: SW(0), SW(1)
+--            salida : LEDR(0)
+-- arquitectura Funcional :
+--            sentencia concurrente PROCESS y sentencia secuencial IF
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity  mux4x1_str is
+    port (
+        KEY: in std_logic_vector(3 downto 0);
+        SW: in std_logic_vector(1 downto 0);
+        LEDR: out std_logic_vector(0 downto 0)
+    );
+end mux4x1_str;
+
+architecture estructural of  mux4x1_str is
+    component mux2x1 is
+        port (
+            D: in std_logic_vector(1 downto 0);
+            C: in std_logic;
+            S: out std_logic
+            );
+    end component;
+
+      signal OUT1,OUT2,OUT3: std_logic;
+
+ begin
+   mux1: mux2x1 port map ( D(0) =&gt; KEY(0),
+         D(1) =&gt; KEY(1),
+         C =&gt; SW(0),
+         S =&gt; OUT1);
+   mux2: mux2x1 port map (
+         D(0) =&gt; KEY(2),
+         D(1) =&gt; KEY(3),
+         C =&gt; SW(0),
+         S =&gt; OUT2);
+   mux3: mux2x1 port map (
+         D(0) =&gt; OUT1,
+         D(1) =&gt; OUT2,
+         C =&gt; SW(1),
+         S =&gt; LEDR(0));
+end estructural;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_compilación_en_quartus">22.5.1. Compilación en Quartus</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Posibilidad de realizar la compilación con Quartus</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Crear el proyecto mux4x1_str</p>
+</li>
+<li>
+<p>File &#8594; New &#8594; VHDL file</p>
+<div class="ulist">
+<ul>
+<li>
+<p>copiar el código de la unidad <strong>mux4x1_str</strong> en el área de Edición VHDL</p>
+</li>
+<li>
+<p>salvar el fichero con el nombre mux4x1_str y seleccionar "Add this file to project"</p>
+</li>
+<li>
+<p>En la ventana de herramientas de la ventana de Edición click en el icono "Analyze current file" : no debe de haber errores de sintaxis</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>File &#8594; New &#8594; VHDL file</p>
+<div class="ulist">
+<ul>
+<li>
+<p>copiar el código de la unidad <strong>mux2x1</strong> en el área de Edición VHDL</p>
+</li>
+<li>
+<p>salvar el fichero con el nombre mux2x1 y seleccionar "Add this file to project"</p>
+</li>
+<li>
+<p>En la ventana de herramientas de la ventana de Edición click en el icono "Analyze current file" : no debe de haber errores de sintaxis</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>De las dos unidades que forman parte del diseño mux4x1_str es el <strong>top</strong> de la jerarquía ya que contiene a la otra unidad mux2x1.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El panel del navegador  del proyecto "Project Navigator" lo ponemos en modo "Files". Seleccionamos el fichero top, click dcha, <strong>Set as top-level entity</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>En el panel de navegación seleccionar la FPGA Cyclone, click derecha, Settings &#8594; Files : se tienen que listar los dos ficheros del proyecto, si falta alguno hay que añadirlo desde esa misma ventana. Los ficheros deben de estar listados en orden de jerarquía.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_decodificador">23. Decodificador</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_decoder_hexdisplay_7_segmentos">23.1. Decoder Hex/Display_7_segmentos</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Circuito de visualización de dígitos hexadecimales en el display de 7 segmentos</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/decoder_hex7seg.png" alt="decodificador 7 segmentos">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Diseño jerárquico formado por la unidad top <em>decodificador_hexadecimal.vhdl</em> con arquitectura estructural que recurre a la unidad <em>dec7seg</em> con arquitectura funcional para conectarla a los periféricos, los switches <strong>SW</strong> y el display 0 de 7 segmentos <strong>HEX0</strong>.</p>
+</li>
+<li>
+<p>unidad de diseño en el nivel bajo (bottom) de la jerarquía : <em>dec7seg.vhdl</em></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- decodificador hex -&gt; 7 segmentos
+-- lógica positiva
+library ieee;
+use ieee.std_logic_1164.all; --STANDARD
+
+entity dec7seg is port(
+	hex_digit : in std_logic_vector(3 downto 0);
+	segment_7dis : out std_logic_vector(6 downto 0)
+	);
+end dec7seg;
+
+architecture arch_dec of dec7seg is
+	signal segment_data : std_logic_vector(6 downto 0); -- 7 segmentos ó leds : g-f-e-d-c-b-a
+	begin
+		process (hex_digit)
+			begin
+			case hex_digit is
+				when "0000"=&gt; segment_data &lt;="0111111"; -- display 7 segmentos con lógica positiva
+				when "0001"=&gt; segment_data &lt;="0000110";
+				when "0010"=&gt; segment_data &lt;="1011011";
+				when "0011"=&gt; segment_data &lt;="1001111";
+				when "0100"=&gt; segment_data &lt;="1100110";
+				when "0101"=&gt; segment_data &lt;="1101101";
+				when "0110"=&gt; segment_data &lt;="1111101";
+				when "0111"=&gt; segment_data &lt;="0000111";
+				when "1000"=&gt; segment_data &lt;="1111111";
+				when "1001"=&gt; segment_data &lt;="1101111";
+				when "1010"=&gt; segment_data &lt;="1110111";
+				when "1011"=&gt; segment_data &lt;="1111100";
+				when "1100"=&gt; segment_data &lt;="0111001";
+				when "1101"=&gt; segment_data &lt;="1011110";
+				when "1110"=&gt; segment_data &lt;="1111001";
+				when "1111"=&gt; segment_data &lt;="1110001";
+				when others=&gt; segment_data &lt;="0000000";
+			end case;
+		end process;
+		segment_7dis &lt;= not segment_data; -- El display 7 segmentos de la tarjeta DE1-SoC funciona con lógica negativa
+end arch_dec;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>unidad de diseño  <em>decodificador_hexadecimal.vhdl</em> en el nivel alto (top) de la jerarquía.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Conecta el decodificador <em>dec7seg</em> a los periféricos de la tarjeta DE1-SoC: las 4 entradas del decodificador a 4 switches SW y las 7 salidas del decodificador a los 7 leds del display 0,  HEX0.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Laboratorio Remoto
+-- Decodificador Hexadecimal
+-- Entrada de 4 bits conectada a los switches
+-- Salida conectada al display de 7 segmentos
+-- Nombres de los puertos: Asignación de Señales según documentación del laboratorio remoto
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity decodificador_hexadecimal is
+port (
+    SW : in std_logic_vector ( 9 downto 0);
+    HEX0: out std_logic_vector( 6 downto 0)
+);
+end decodificador_hexadecimal ;
+
+architecture RTL of decodificador_hexadecimal is
+    component dec7seg is
+        port (
+        hex_digit : in std_logic_vector(3 downto 0);
+    	segment_7dis : out std_logic_vector(6 downto 0 )
+    	);
+    end component;
+
+begin
+display0: dec7seg port map (
+    hex_digit =&gt; SW (3 downto 0),
+    segment_7dis =&gt; HEX0
+    );
+end RTL;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_valores_indeterminados_x_en_la_entrada_y_en_la_salida">24. Valores INDETERMINADOS X en la entrada y en la salida</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_codificador_con_prioridad">24.1. Codificador con Prioridad</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>El objetivo es describir en vhdl una tabla de la verdad con variables cuyo valor es "NO IMPORTA" tanto a la entrada como a la salida.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">I(3) I(2) I(1) I(0) | B(1) B(0)
+
+ 1     X     X    X |    1    1
+ 0     1     X    X |    1    0
+ 0     0     1    X |    0    1
+ 0     0     0    1 |    0    0
+ resto casos        |    X    X</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Si en VHDL la fila 1XXX la pusiese con valores dont care &#8594; 1---, la síntesis NO serían todos los 8 casos que implica 1XXX, es decir: 1000,1001,1010,1011,1100,1101,1110,1111 sino que eligiría UN UNICO caso, pej 1010.</p>
+</li>
+<li>
+<p>para que las entradas I con valor X se sintetizasen como todos los casos posibles con X=0 y X=1 y la salida B con valor X como UN UNICO caso a elegir.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">if (I(3)='1')                then B &lt;="11";
+elsif (I(3 downto 2)="01")   then B &lt;="10";
+elsif (I(3 downto 1)="001")  then B &lt;="01";
+elsif (I(3 downto 0)="0001") then B &lt;="00";
+else B &lt;= "--"</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>con la sentencia IF si puedo implementar entradas con valor indeterminado X al ser entradas que no aparencen en la condición. En la condición I(3)=<em>1</em> no aparecen los valores de I(2), I(1) e I(0).</p>
+<div class="ulist">
+<ul>
+<li>
+<p>source code con 2 arquitecturas diferentes: WHEN e IF</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY cod4x2 IS
+	PORT (
+		SW : IN STD_LOGIC_VECTOR (3 DOWNTO 0);
+		LEDR : OUT STD_LOGIC_VECTOR (1 DOWNTO 0));
+END cod4x2;
+
+ARCHITECTURE examen OF cod4x2 IS
+BEGIN
+
+	LEDR &lt;= "11" WHEN SW(3) = '1' ELSE
+		"10" WHEN SW(3 DOWNTO 2) = "01" ELSE
+		"01" WHEN SW(3 DOWNTO 1) = "001" ELSE
+		"00" WHEN SW = "0001" ELSE
+		"--";
+
+END ARCHITECTURE;
+
+ARCHITECTURE exa OF cod4x2 IS
+BEGIN
+  PROCESS(SW)
+	IF (SW(3) = '1') THEN
+		LEDR &lt;= "11";
+	ELSIF (SW (3 DOWNTO 2) = "01" THEN
+		LEDR &lt;= "10"
+			ELSE
+			LEDR &lt;= "--";
+		END IF;
+
+  END PROCESS;
+END ARCHITECTURE;</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_diseños_vhdl_no_sintetizables_en_circuitos_electrónicos">25. Diseños VHDL NO sintetizables en circuitos electrónicos</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_introducción_4">25.1. Introducción</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>El lenguaje VHDL se puede utilizar comoc lenguaje de programación software en lugar de un lenguaje para describir el  hardware de los circuitos electrónicos digitales. En estos casos el compilador genera ficheros binarios que se pueden ejecutar produciendo salidas como mensajes en el monitor, ficheros con formas de onda, sonidos, ficheros con imágenes, etc&#8230;&#8203; pero no genera el fichero binario para programar una FPGA.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hello_world">25.2. Hello World</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Código fuente de HelloWorld.vhdl:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Programa para imprimir el mensaje 'Hello World'
+-- Declaración de la librería std y del paquete textio aunque no es necesario.
+
+library std;
+use std.textio.all;
+
+entity HelloWorld is
+end entity;
+
+architecture sim of HelloWorld is
+begin
+
+    process is
+    begin
+
+        report "Hello World!";
+        wait;
+
+    end process;
+
+end architecture;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Al compilar el módulo  VHDL con el compilador de la heramientas "Quartus Prime Lite"</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_flip_flop">26. Flip-Flop</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_memorias">26.1. Memorias</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Los circuitos con memoria también denominados circuitos secuenciales ó maquimas de estados finitos corresponden al segundo parcial.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_vhdl_flip_flop_d_con_entradas_asíncronas_en_lógica_negativa">26.2. VHDL: Flip Flop D con entradas asíncronas en lógica negativa</h3>
+<div class="sect3">
+<h4 id="_diseño_8">26.2.1. diseño</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Editamos directamente en el Laboratorio Remoto para verificar su funcionamiento.</p>
+</li>
+<li>
+<p>¿Cómo sintetiza  Quartus unidades de memoria descritas en VHDL?</p>
+</li>
+<li>
+<p>Entidad: Descripción gráfica mediante un esquema</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl"> Flip Flop con las señales de entrada/salida: d,clk,set,preset,q
+ Conexión entre el Flip Flop y los puertos de la entidad: clk al botón KEY(0), resto de entradas con SW y salida q al LEDR(0)</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitectura mediante la sentencia IF</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">process (cp,clk)
+  if
+   {cuerpo}
+  end if;
+end process;</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>sentencia IF:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>condiciones descritas con pseudocódigo</p>
+</li>
+<li>
+<p>cortocircuito &#8594; en cuanto se cumple una condición del IF se SALE del IF</p>
+</li>
+<li>
+<p>las entradas asíncronas del Flip-Flop tienen prioridad luego serán las primeras condiciones del IF en evaluar</p>
+</li>
+<li>
+<p>la condición flanco de subida &#8594;  clk&#8217;event and clk=<em>1</em> ó mediante la función rising_edge(clk)</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Flip Flop tipo D con entradas asíncronas
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity ffd is
+port(
+        SW: in std_logic_vector ( 9 downto 0);
+        KEY: in std_logic_vector ( 0 downto 0);
+        LEDR: out std_logic_vector ( 9 downto 0)
+    );
+end entity;
+
+architecture behavioral of ffd is
+
+signal clear,preset,d,clk,q : std_logic ;
+signal cp : std_logic_vector ( 1 downto 0);
+
+begin
+
+d &lt;= SW(0);
+clk &lt;= KEY(0);
+preset &lt;= SW(9);
+clear &lt;= SW(8) ;
+LEDR(0) &lt;= q ;
+cp &lt;= preset &amp; clear ; -- concatenamos los hilos preset y clear para crear un BUS de dos hilos.
+
+process (cp,clk)
+begin
+if ( cp="01") then
+    q &lt;= '0';
+elsif ( cp="10") then
+    q &lt;= '1';
+elsif ( cp="11") then
+    if ( clk'event and clk='1') then
+        q &lt;= d;
+    -- NO ESTAN DEFINIDOS TODOS LOS CASOS POSIBLES DE clK tipo std_logic
+    end if;
+-- NO ESTAN DEFINIDOS TODOS LOS CASOS POSIBLES DE cp tipo std_logic
+end if;
+end process;
+
+end architecture;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_implementación_de_unidades_de_memoria">26.2.2. Implementación de unidades de MEMORIA</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>NO ESTAN DEFINIDOS TODOS LOS CASOS posibles de valores de una variable en una relación función(variable)</strong> donde tanto la variable como la función son señales o buses digitales.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>en el ejemplo anterior el valor de q está definido únicamente para clk flanco de subida. Si clk no está en un flanco de subida el valor de q NO está definido y por lo tanto no se hace nada con q para esos casos indefinidos de clk. No hacer nada es memorizar. Hay que implementar q como memoria &#8594; q será la salida de una celda de memoria.</p>
+</li>
+<li>
+<p>ocurre lo mismo con la relación q(cp) &#8594; q depende de cp pero no está definidad esa relación para todos los valores posibles del bus cp . Es decir, hay que memorizar el valor de q.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ff_d">26.3. FF-D</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Flip-Flop Data o Muestreo-Retención</p>
+</li>
+<li>
+<p>Función: La salida Q sigue a la entrada Data en sincronía con el reloj.</p>
+</li>
+<li>
+<p>Esquema</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/ffd.png" alt="ffd">
+</div>
+</div>
+</li>
+<li>
+<p>Descripción vhdl</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Sistemas Digitales I
+-- Sistemas Secuenciales: Biestables
+-- ffd.vhdl
+--
+-- Dispositivo: Flip Flop tipo D con entrada síncrona únicamente.
+-- Señales estímulo:
+--      El switch (0) como entrada de datos
+--      El botón (0) de la tarjeta como reloj de sincronismo
+-- Visualización
+--      El led rojo (0) como lectura del ffd
+
+entity ffd is
+  port (
+    SW : in std_logic_vector (0 downto 0);
+    KEY : in std_logic_vector (0 to 0);
+    LEDR : out std_logic_vector (1 downto 0)
+  );
+end ffd;
+
+architecture behavioral of ffd is
+ signal d,q,clk : std_logic;
+begin
+-- conexiones de los periféricos al flip-flop
+d 	  &lt;= SW(0); -- entrada de datos del FF
+clk 	  &lt;= KEY(0); -- el reloj es el dedo al pulsar el botón
+LEDR(0) &lt;= q      ; -- visualiza la lectura del FF
+LEDR(1) &lt;= KEY(0); -- visualiza el nivel del reloj
+-- flip-flop tipo D : d,clk,q
+process (clk) -- se ejecuta si evento en la señales sensibles clk
+begin
+  -- un if solo se puede utilizar dentro de un process
+  if ( clk'event and clk = '1') then -- evento (flanco) y positivo
+   -- if (rising_edge(clk))  -- otra forma de describir un flanco positivo
+    q &lt;= d;
+    -- en el if no se definen todas las situaciones = NO HACER NADA = MEMORIZAR
+    -- no esta definido q para clk NO flanco positivo = MEMORIA
+  end if;
+end process;
+end behavioral;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_contador_síncrono">27. Contador Síncrono</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Contador Síncrono Ascendente Módulo 16 con entrada reset asíncrona</p>
+</li>
+<li>
+<p>Código Fuente</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Contador Sincrono Ascendene Modulo 16
+-- Reset con logica negativa
+-- Perifericos
+---- KEY(0): clk
+---- SW(0): resetn
+---- LEDR (3 downto 0): count value
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity counter_4 is
+    port (
+        SW: in std_logic_vector ( 9 downto 0);
+        KEY: in std_logic_vector ( 3 downto 0);
+        LEDR: out std_logic_vector ( 9 downto 0)
+    );
+end counter_4;
+
+architecture behavioral of counter_4 is
+    signal clk,resetn: std_logic;
+    signal q : std_logic_vector (3 downto 0);
+    signal count : unsigned (3 downto 0); -- operador suma
+begin
+    -- Conexiones con los periféricos
+    clk &lt;= KEY(0);
+    resetn &lt;= SW(0);
+    q &lt;= std_logic_vector (count);
+    LEDR (3 downto 0) &lt;= q;
+    -- contador de 4 bits
+    process (clk,resetn)
+    begin
+     if (resetn = '0') then
+        count  &lt;= "0000" ;
+    elsif resetn = '1' then
+        if rising_edge (clk) then
+            if count = "1111" then
+                count &lt;= "0000"  ;
+            else
+                count &lt;= count + 1;
+            end if;
+        end if;
+    end if;
+    end process;
+end behavioral;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cerradura_electrónica">28. Cerradura Electrónica</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Ejercicio 8.1 del libro de ejercicios</p>
+</li>
+<li>
+<p>Código Fuente</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Libro Problemas Upna Capítulo 8: Sistemas Secuenciales
+-- Ejercicio 8.1
+-- Cerradura con controlador digital
+-- entada serie: la clave 11011 abre la puerta
+---- Casos posibles:
+-----------11111111011
+-----------00000011011
+-----------01010011011
+-- entrada serie: SW(0)
+-- salida: accionador de la cerradura
+-- salida: LEDR(7)
+-- sistema secuencial síncrono Mealy
+-- El reloj ha de ser lento para poder leer las entradas despues de que hayan cambiado
+-- El reloj es el boton manual KEY(0) -&gt; sync con flanco negativo
+-- El reloj se visualiza con LEDR(9)
+-- El contenido de la memoria se visualiza con LEDR(4 downto 0)
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity cerradura is port(
+  SW  : in std_logic_vector (9 downto 0) ;
+  LEDR: out std_logic_vector (9 downto 0) ;
+  KEY : in std_logic_vector (3 downto 0) -- KEY(0) : clock
+   );
+end cerradura;
+
+architecture arch_cerradura of cerradura is
+  type tipo_estado is (q0,q1,q2,q3,q4);  -- tipo enumeración : ESTADOS
+  signal estado_actual : tipo_estado := q0; -- estado inicial
+  signal estado_siguiente: tipo_estado; -- hilos internos
+
+begin
+
+  -- Mealy : la entrada provoca un cambio en la salida y en el estado
+  -- Circuito Combinacional:Dos salidas: la salida del sistema y la entrada de la memoria
+  --                        La salida del sistema: función de la entrada y del estado de la memoria
+  --                        La entrada de la memoria: función de la entrada y del estado de la memoria.
+  -- Descripción de las transiciones de estados y descripción de la salida
+  -- Process: lista de señales sensibles: activan el proceso si evento en dichas señales
+  -- Para sintetizar un circuito combinacional todas las señales de entrada del circuito combinacional
+  --  (SW(0) y estado actual) deben de estar en la lista de señales sensibles.
+
+ LEDR(9) &lt;= KEY(0); -- visualiza el estado del boton
+
+ process (SW(0), estado_actual)
+  begin
+    case estado_actual is
+      when q0 =&gt; -- esperando al primer uno de la clave
+        if SW(0)= '0' then
+          LEDR(7) &lt;= '0';
+          estado_siguiente &lt;= q0;
+        else -- caso ideal: SW(0) unicamente toma los valores '0' y '1'
+			 LEDR(7) &lt;= '0';
+          estado_siguiente &lt;= q1; -- primer digito de la clave
+        end if;
+      when q1 =&gt;
+        if SW(0)= '0' then
+		    LEDR(7) &lt;= '0';
+          estado_siguiente &lt;= q0;
+        else
+		    LEDR(7) &lt;= '0';
+          estado_siguiente &lt;= q2; -- segundo digito de la clave (dos o mas unos consecutivos)
+        end if;
+      when q2 =&gt;
+        if SW(0)= '0' then
+          LEDR(7) &lt;= '0';
+          estado_siguiente &lt;= q3; -- tercer digito de la clave
+        else
+		    LEDR(7) &lt;= '0';
+          estado_siguiente &lt;= q2; -- segundo digito de la clave (dos o mas unos consecutivos)
+        end if;
+      when q3 =&gt;
+        if SW(0)= '0' then
+		    LEDR(7) &lt;= '0';
+          estado_siguiente &lt;= q0; -- reiniciar
+        else
+		    LEDR(7) &lt;= '0';
+          estado_siguiente &lt;= q4; -- cuarto digito de la clave
+        end if;
+      when q4 =&gt;
+        if SW(0)= '0' then
+		    LEDR(7) &lt;= '0'; -- reiniciar
+          estado_siguiente &lt;= q0;
+        else
+		    LEDR(7) &lt;= '1';
+          estado_siguiente &lt;= q0; -- ultimo digito de la clave, abrir y reinicio
+        end if;
+    end case;
+  end process;
+
+  -- MEMORIA: memorizar ESTADOS. Sincronismo de escritura de la memoria.
+  process  (estado_siguiente, KEY(0))
+  begin
+    if ( KEY(0)'event and KEY(0) = '0') then -- sensible a eventos en KEY(0) sin rebotes
+                         -- evento: cambio al nivel 0 -&gt; flanco negativo
+    estado_actual &lt;= estado_siguiente;      -- actualización del nuevo estado de forma sincronizada
+    -- En cambio la salida LEDR(7) no está sincronizada
+    end if;
+  end process;
+
+  --Circuito Combinacional: Lee los 5 bits de memoria y visualiza la lectura.
+  process (estado_actual)
+  begin
+  case estado_actual is
+    when q0 =&gt; LEDR (4 downto 0)  &lt;= "00001"; -- estado 0
+    when q1 =&gt; LEDR (4 downto 0)  &lt;= "00010"; -- estado 1
+    when q2 =&gt; LEDR (4 downto 0)  &lt;= "00100"; -- estado 2
+	when q3 =&gt; LEDR (4 downto 0)  &lt;= "01000"; -- estado 3
+	when q4 =&gt; LEDR (4 downto 0)  &lt;= "10000"; -- estado 4
+  end case;
+  end process;
+
+
+
+  end arch_cerradura;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_registros">29. Registros</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>x</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="KitDe1soc">Appendix A: Kit DE1-SoC</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Kit DE1-SoC de la empresa Terasic disponibles en el laboratorio de la UPNA y que contienen la FPGA de Intel.</p>
+</li>
+<li>
+<p><a href="https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&amp;No=836">Kit de Terasic : DE1-SoC</a></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">La pastilla o circuito integrado programable del Kit es una SoC: System On Chip
+SoC: integra 2 componentes: un procesador ARM Cortex-A9 más una FPGA Cyclone V (5CSEMA5F31C6)
+Al procesador ARM,  Intel le llama "Hard Processor System"
+FPGA: Field Programmable Gate Array: Dispositivo PROGRAMABLE para fabricar el circuito digital diseñado. El Circuito queda integrado en el Silicio de la FPGA -&gt; ADIOS A LAS SOLDADURAS DE CIRCUITOS INTEGRADOS EN UNA PLACA BASE !!!!</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Aunque posiblemente no conectéis una tarjeta FPGA a vuestra computadora mediante el cable USB-Blaster, en caso de hacerlo es necesario tener instalados los drivers del adaptador siguiendo las instrucciones: <a href="http://www.terasic.com.tw/wiki/Altera_USB_Blaster_Driver_Installation_Instructions" class="bare">http://www.terasic.com.tw/wiki/Altera_USB_Blaster_Driver_Installation_Instructions</a></p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="LabRemoto">Appendix B: Laboratorio Remoto de Sistemas FPGA</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_acceso">B.1. Acceso</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Miaulario &#8594; Herramientas &#8594; Digital Circuits Design with VHDL &#8594; Ir a la herramienta Externa</p>
+</li>
+<li>
+<p>DE1-SoC IDE VHDL &#8594; Program Altera DE1-SoC DE1 in VHDL &#8594; Accede</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/sakai.png" alt="Miaulario">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_objetivos">B.2. Objetivos</h3>
+<div class="paragraph">
+<p>El objetivo del Laboratorio Remoto de FPGAs es  motivar a l@s alumn@s de Circuitos Digiales al aprendizaje mediante la práctica desde cualquier lugar y en cualquier momento: Learn by Doing</p>
+</div>
+<div class="paragraph">
+<p><span class="image"><img src="images/brain.png" alt="brain" height="100%"></span>
+<span class="image"><img src="images/fpga_icon.png" alt="fpga icon"></span></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_paciencia">B.3. Paciencia</h3>
+<div class="paragraph">
+<p>La herramienta de diseño automatizado Quartus necesita tiempo en la fase de compilación de los diseños de los usuarios, del orden de un minuto&#8230;&#8203;no un segundo, tener un poco de paciencia por favor.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ide_vhdl_web_del_laboratorio_remoto">B.4. IDE VHDL Web del Laboratorio Remoto</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Herramientas de Diseño del Circuito Digital</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Navegador de Ficheros: Eliminar fichero vhdl, Crear Nuevo Fichero vhdl , Añadir (subir fichero vhdl)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Antes de Editar es necesario crear o subir un fichero vhdl.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Seleccionar el fichero top dentro de la jerarquía de ficheros que componen el diseño.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">* Pulsar el *botón PAPELERA* si se desea  eliminar diseños previos
+* Pulsar el *botón SUBIR* si se desea  insertar un diseño ya existente y  almacenado previamente en nuestra computadora personal.
+* Pulsar el *botón NUEVO* si se desea generar un nuevo fichero VHDL.</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Editor del circuito:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Edición del texto de la unidad de diseño en lenguaje VHDL</p>
+</li>
+<li>
+<p>Autocompletar comandos VHDL</p>
+</li>
+<li>
+<p>Notificación de Errores de Síntesis</p>
+</li>
+<li>
+<p>La edición del circuito tiene que estar limpia de errores de sintaxis para poder pasar a la fase de SÍNTESIS.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Síntesis del circuito: Ejecuta las herramientas de diseño de Intel Quartus Prime: compilar (analizar, elaborar, mapear, fitter &#8230;&#8203;)</p>
+</li>
+<li>
+<p>Consola: mensajes del sintetizador Quartus Prime según va realizando las distintas fases de compilación.</p>
+</li>
+<li>
+<p>Interfaz de Usuario: Standard</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentación</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Asignación de señales: Nombres obligatorios de los puertos de los circuitos a diseñar</p>
+<div class="ulist">
+<ul>
+<li>
+<p>P.ej: SW( 9 downto 0) : son  los nombres lógicos de las señales que generan los 10 switches de la tarjeta DE1-SoC donde se encuentra la FPGA. : no se puede utilizar otro nombre ni dimensión para esas 10 señales. No sirve definir SW(9 downto 0) ni SW (0 up 1), etc &#8230;&#8203; en la ENTITY de la descripción del diseño de mi circuito.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/web_labsland_ide_2022.png" alt="VHDL IDE">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_errores_con_el_compilador_del_laboratorio_remoto">B.5. Errores con el compilador del laboratorio remoto</h3>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+La edición en el lab_remoto da error de sintaxis si la primera sentencia "port map" tiene después del paréntesis un salto de línea, aunque la compilación la realiza de manera correcta.
+</td>
+</tr>
+</table>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+En la ventana de ficheros <em>*.vhdl</em> del circuito digital diseñado únicamente deben de estar únicamente los ficheros asociados al diseño, ya que el sintetizador compilará "todos" los ficheros de la ventana y generará el fichero bitstream-fpga con "todos" los ficheros y el fichero TOP LEVEL ENTITY ha de ser uno de ellos, el top de la jerarquía.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+El nombre de los ficheros <em>*.vhdl</em> y el de las <em>entity</em> ha de ser el mismo. En caso de que un fichero tenga una jerarquía de  <em>entity</em> (muñeca rusa) el nombre del fichero ha de ser el de la entity "top" o de mayor rango en la jerarquía.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+El nombre y tipos de los puertos de la entidad no son arbitrarios. Han de ser los nombres y tipos especificados en el documento "Asignación de señales" que aparece en el apartado DOCUMENTACIÓN del IDE y que también se incluye en el apéndice de este documento.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Si el sintetizador imprime en la pantalla el aviso "Waiting to start compilation(170.1). 6/6 compilers busy. 25 compilations before yours" es porque todos los procesos de compilación lanzados estén ocupados
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+El Laboratorio Remoto se encuentra en fase de verificación. Si durante la programación de la FPGA el usuario recibe el aviso "No fue posible programar la FPGA. Por favor, prueba de nuevo, o contacta con un administrador. ", es necesario pulsar el botón  "Salir Ahora" y volver a pulsar "Enviar diseño al Dispositivo". Gracias por la colaboración.
+</td>
+</tr>
+</table>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_síntesis_en_el_laboratorio_remoto">B.6. Síntesis en el laboratorio remoto</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>La fase de SINTESIS consiste en la generación por parte de QUARTUS del fichero BITSTREAM que generará el circuito digital en el Silicio de la FPGA.</p>
+</li>
+<li>
+<p>Quartus Prime Lite Edition está instalado en el servidor del laboratorio remoto, el cual no es accesible por el usuario.</p>
+</li>
+<li>
+<p>Pulsar el <strong>botón SINTESIS</strong> para generar el BITSTREAM : Quartus tarda un tiempo en realizar toda la compilación del fichero VHDL editado, y es necesario esperar un par de minutos a que se genere el bitstream: Durante este tiempo Quartus informa al usuario del proceso de compilación a través de la consola.</p>
+</li>
+<li>
+<p>Si hay errores en el proceso de compilación es necesario volver a la fase de Edición y corregirlos.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ide_consola1.png" alt="Consola parte superior">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ide_consola2.png" alt="Consola parte inferior">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ide_consola3.png" alt="Sintesis finalizada sin errores">
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_fabricación_del_circuito_digital">B.7. Fabricación del Circuito Digital</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>En esta fase se va a proceder a fabricar el circuito digital, diseñado con el IDE, programando la FPGA con el fichero bitstream para lo cual pulsamos el <strong>botón ENVIAR AL DISPOSITIVO</strong> del IDE para abrirse una nueva ventana:</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/upload_device.png" alt="Transferir el Diseño al Servidor de Tarjetas">
+</div>
+</div>
+</li>
+<li>
+<p>Pulsar el <strong>Botón Upload Now</strong> para transferir Diseño al Servidor de Tarjetas FPGA y abrirse una nueva ventana:</p>
+<div class="imageblock">
+<div class="content">
+<img src="/unifesp_1.png" alt="Tarjeta con la FPGA">
+</div>
+</div>
+</li>
+<li>
+<p>En este caso el sistema ha seleccionado la tarjeta DE2-115 del laboratorio remoto de la Universidad UNIFESP en Sao Paulo, Brasil. El Laboratorio remoto de la Upna y de Unifesp dispone de 10 tarjetas DE1-SoC y 4 DE2-115.</p>
+</li>
+<li>
+<p>Pulsar el <strong>Botón Programar FPGA</strong>  para fabricar el circuito diseñado en el Silicio de la FPGA y abrirse una nueva ventana con los switches y botones virtuales de la tarjeta</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_interfaz_web_de_visualización_de_la_tarjeta_y_manejo_de_switches_y_botones">B.8. Interfaz Web de Visualización de la Tarjeta y Manejo de Switches y Botones</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Una vez programada la FPGA de la tarjeta DE1-SoC con el circuito digital diseñado se procede a su verificación mediante la  activación de los SWITCHES y BOTONES y la visualiación de los  LEDS y DISPLAYS 7-SEG.</p>
+</li>
+<li>
+<p>Pulsar los switches y/o botones virtuales para verificar el funcionamiento del circuito digital fabricado.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/unifesp_4.png" alt="Swithes y Botones Virtuales">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect2">
+<h3 id="_circuito_digital_gate_and_vhdl">B.9. Circuito Digital  "gate_and.vhdl"</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/rtl_scheme.png" alt="Circuito Digital gate_and">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>La primera fase del diseño es la de EDICIÓN del circuito.</p>
+</li>
+<li>
+<p>módulo fuente <em>gate_and.vhdl</em> descriptor del hardware en lenguaje VHDL:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Sistemas Digitales I año 2020			<i class="conum" data-value="1"></i><b>(1)</b>
+-- Upna 7 de Febrero 2020
+-- Laboratorio Remoto de la Upna
+-- FICHERO gate_and.vhdl : OBLIGATORIAMENTE debe ser el MISMO nombre que el utilizado en ENTITY.
+-- tutorial: primera práctica en aula
+-- SSDDI 2020 Febrero 7
+
+-- Librerías donde se definen los tipos de señales std_logic
+library ieee;				 		<i class="conum" data-value="2"></i><b>(2)</b>
+use ieee.std_logic_1164.all;
+
+-- Entidad						<i class="conum" data-value="3"></i><b>(3)</b>
+entity gate_and is
+    port (
+        SW: in std_logic_vector(9 downto 0);
+        LEDR: out std_logic_vector(9 downto 0)
+    );
+end gate_and;
+
+--ARQUITECTURA						<i class="conum" data-value="4"></i><b>(4)</b>
+architecture rtl of gate_and is
+begin
+    LEDR(0) &lt;= SW(0) and SW(1);                         <i class="conum" data-value="5"></i><b>(5)</b>
+end rtl;</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Los nombre de los puertos han de ser obligatoriamente los utilizados por el laboratorio remoto (Ver <a href="#IdenPuerto">Apéndice</a> )</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Verificar el buen funcionamiento del circuito en el laboratorio remoto.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+para poder fabricar el circuito en los dispositivos FPGA del laboratorio remoto, los nombre de los puertos han de ser obligatoriamente los utilizados por el laboratorio remoto (Ver apéndice)
+</td>
+</tr>
+</table>
+</div>
+<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="IdenPuerto">Appendix C: Identificación de los puertos</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">Documentación - Asignación de señales
+
+LabsLand proporciona este conjunto de entradas virtuales que podrás ver cuando accedas al laboratorio:
+
+Nombre 	Descripción
+SW: in std_logic_vector(9 downto 0) 	10 switches virtuales, numerados de 0 a 9. Podrás ponerlos a 1 o 0 hasta que vuelvas a cambiar el valor.
+KEY: in std_logic_vector(3 downto 0) 	4 botones virtuales, numerados 0 a 3. Por defecto, valdrán '0', y cuando haces click valdrán '1' por un periodo de tiempo breve, volviendo a '0' enseguida. Puedes mantenerlo pulsado para que valga '1' más tiempo.
+
+Además, podrás referirte a los periféricos de la tarjeta con los siguientes nombres abstractos (que serán los mismos en todas las placas):
+
+Nombre 	Descripción
+CLOCK_50: in std_logic 	Reloj que trabaja a 50 MHz.
+LEDR: in std_logic_vector(9 downto 0) 	10 LEDs rojos, numerados de 0 a 9. Está garantizado que serán rojos.
+LED: in std_logic_vector(9 downto 0) 	10 LEDs, numerados de 0 a 9. Dependiendo de la placa, serán los mismos que los verdes o rojos.
+HEX0: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 0.
+HEX1: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 1.
+HEX2: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 2.
+HEX3: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 3.
+HEX4: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 4.
+HEX5: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 5.</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ref_sheet_min">Appendix D: Listado incompleto de sentencias concurrentes y secuenciales</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/VHDL_Cheat_Sheet.png" alt="Hoja de Referencia Rapida">
+</div>
+</div>
+<div class="paragraph">
+<p>La sintaxis de tipos de valores, señales, sentencias, etc en <a href="#ref_sheet_basic">VHDL:Hoja de Referencias Básica</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ref_sheet_basic">Appendix E: VHDL: Hoja de Referencia Básica</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. An example table</caption>
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Category</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Definition</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Example</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Identifer Names</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Can contain any letter, digit, or<br>
+                        underscore <em>_</em><br>
+                        Must start with alphabetic letter<br>
+                        Can not end with underscore or be a<br>
+                        keyword<br>
+                        Case insensitive</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>q0<br>
+                                            Prime_number<br>
+                                            lteflg<br></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Signal Values</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>‘0’ = logic value 0<br>
+                       ‘1’ = logic value 1<br>
+                       ‘Z’ = high impedance<br>
+                       ‘X’ = unknown value</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Numbers and
+Bit Strings</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;base&gt;#xxx#<br>
+                      B = binary<br>
+                      X = hexadecimal<br>
+                      O = octal</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>35 (default decimal)<br>
+                                 16#C# = “1100”<br>
+                                 X”3C” = B”00111100”<br>
+                                 O”234” = B”010011100”</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Generic
+statement</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Associates an identifer name with a
+                   value that can be overridden with the
+                   <strong>generic map</strong> statement</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>generic</strong> ( N:integer := 8);</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Generic map</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Assigns a value to a generic parameter</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>generic map</strong> (N &#8658; 16)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Signals and
+Variables Types</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>signal</strong> (used to connect one logic<br>
+                element to another)<br>
+                <strong>variable</strong> (variables assigned values in<br>
+                process)<br>
+                <strong>integer</strong> (useful for loop control<br>
+                variables)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>signal</strong> d : std_logic_vector(0 to 3);<br>
+                           <strong>signal</strong> led: std_logic;<br>
+                           <strong>variable</strong> q: std_logic_vector(7 downto 0);<br>
+			   <strong>variable</strong> k: integer;<br></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Program
+structure</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>library</strong>  IEEE;<br>
+           <strong>use</strong> IEEE.STD_LOGIC_1164.<strong>all</strong>;<br>
+           <strong>entity</strong> &lt;identifier&gt; <strong>is</strong><br>
+           .&#160;&#160;&#160;&#160; <strong>port</strong> (<br>
+           .&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;port interface list );<br>
+          <strong>end</strong> &lt;identifier&gt;;<br>
+          <strong>architecture</strong> &lt;identifier&gt; <strong>of</strong><br>
+          .&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; &lt;entity_name&gt; <strong>is</strong><br>
+          <strong>begin</strong><br>
+          .&#160;&#160;&#160;&#160; <strong>process</strong> (clk, clr)<br>
+          .&#160;&#160;&#160;&#160; <strong>begin</strong><br>
+          .&#160;&#160;&#160;&#160;&#160;&#160; {concurrent_statement}<br>
+          .&#160;&#160;&#160;&#160; <strong>end</strong> &lt;identifier&gt;;<br>
+          <strong>end</strong></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>library</strong> IEEE;<br>
+                  <strong>use</strong> IEEE.STD_LOGIC_1164.<strong>all</strong>;<br>
+                 <br>
+                  <strong>entity</strong> Dff<br>
+                  <strong>port</strong>(<br>
+                  .&#160;&#160;&#160; clk : <strong>in</strong> STD_LOGIC;<br>
+                  .&#160;&#160;&#160; clr : <strong>in</strong> STD_LOGIC;<br>
+                  .&#160;&#160;&#160; D : <strong>in</strong> STD_LOGIC;<br>
+                  .&#160;&#160;&#160; q : <strong>out</strong> STD_LOGIC );<br>
+                  <strong>end</strong> Dff;<br>
+                 <br>
+                  <strong>architecture</strong> Dff <strong>of</strong> Dff <strong>is</strong><br>
+                  <strong>begin</strong><br>
+                  .&#160;*process* (clk, clr)<br>
+                  .&#160; <strong>begin</strong><br>
+                  .&#160;&#160; <strong>if</strong>(clr = <em>1</em>) <strong>then</strong><br>
+                  .&#160;&#160;&#160; q &#8656; <em>0</em>;<br>
+                  .&#160;&#160; <strong>elsif</strong>  (<strong>rising_edge</strong>(clk)) <strong>then</strong><br>
+                  .&#160;&#160;&#160; q &#8656; D;<br>
+                  .&#160;&#160; <strong>end if</strong>;<br>
+                  .&#160; <strong>end process</strong>;<br>
+                  <strong>end</strong> Dff;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Logic operators</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>not</strong><br>
+                 <strong>and</strong><br>
+                 <strong>or</strong><br>
+                 <strong>nand</strong><br>
+                 <strong>nor</strong><br>
+                 <strong>xor</strong><br>
+                 <strong>xnor</strong></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>z &#8656; <strong>not</strong> y;<br>
+                       c &#8656; a <strong>and</strong> b;<br>
+                       z &#8656; x <strong>or</strong> y;<br>
+                       w &#8656; u <strong>nand</strong> v;<br>
+                       r &#8656; s <strong>nor</strong> t;<br>
+                       z &#8656; x <strong>xor</strong> y;<br>
+                       d &#8656; a <strong>xnor</strong> b;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Arithmetic operators</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>+ (addition)<br>
+                      - (subtraction)<br>
+                      <em>*</em> (multiplication)<br>
+                      / (division) (not synthesizable<br>
+                      rem (remainder)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>count &#8656; count + 1;<br>
+                                      q &#8656; q – 1;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Relational operators</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>=, /=, &gt;, &lt;, &gt;=, &#8656;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>if</strong> a &#8656; b <strong>then</strong><br>
+                                           <strong>if</strong> clr = ‘1’ <strong>then</strong></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Shift operators</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>shl</strong> (arg,count)<br>
+                  <strong>shr</strong> (arg,count)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>c = <strong>shl</strong>(a,3);<br>
+                                    c = <strong>shr</strong>(a,4);</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Assignment operator</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>:=</strong> (variable)<br>
+                      <strong>&#8656;</strong>  (signal)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>z <strong>:=</strong> z + x(i);<br>
+                                 count <strong>&#8656;</strong> count <em>+</em> 1;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Conditional Signal Assig.</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>signal &#8656; expression <strong>when</strong> (condition)<br>
+                                 .&#160;&#160; {expression <strong>when</strong> (condition) <strong>else</strong>}<br>
+                                 expression ;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>F3 &#8656; ‘1’ <strong>when</strong> (L = ‘0’ AND M = ‘0’ AND N = ‘1’)<br>
+                                 .&#160;&#160;‘1’ <strong>when</strong> (L = ‘1’ AND M = ‘1’) <strong>else</strong><br>
+                                 ‘0’;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Selective Signal Assig.</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>with</strong> ( (select expression) <strong>select</strong><br>
+                                     .&#160; {{assign expresion} <strong>when</strong> {select value},}<br>
+                                     .&#160; {assign expresion} <strong>when others</strong> (REQUIRED);</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>with</strong> ( (L = ’0’ <strong>and</strong> M = ’0’ <strong>and</strong> N = ’1’)<br>
+                                     .&#160; <strong>or</strong> (L = ’1’ <strong>and</strong> M = ’1’) ) <strong>select</strong><br>
+                                     .&#160;&#160; F3 &#8656; ‘1’ <strong>when</strong> ‘1’,<br>
+                                     .&#160;&#160; ‘0’ <strong>when</strong> ‘0’,<br>
+                                     .&#160;&#160; ‘0’ <strong>when others</strong> (REQUIRED);</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>process</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[&lt;id&gt;] <strong>process</strong>(&lt;sensitivity list&gt;)<br>
+                  {{process declaration}}<br>
+                <strong>begin</strong><br>
+                  {{sequential statement}}<br>
+                <strong>end process</strong> [&lt;id&gt;]</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>process</strong> (a)<br>
+                                       variable j: integer;<br>
+                                       <strong>begin</strong><br>
+                                       .&#160;&#160;&#160; j := conv_integer(a);<br>
+                                          .&#160;&#160;&#160;&#160;{nsbp} <strong>for</strong> i <strong>in</strong> 0 <strong>to</strong> 7 <strong>loop</strong><br>
+                                            .&#160;&#160;&#160;&#160;&#160;&#160;&#160; <strong>if</strong> (i = j) then<br>
+                                              .&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; y(i) &#8656; <em>1</em>;<br>
+                                            .&#160;&#160;&#160;&#160;&#160;&#160;&#160; <strong>else</strong><br>
+                                              .&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; y(i) &#8656; <em>0</em>;<br>
+                                            .&#160;&#160;&#160;&#160;&#160;&#160;&#160; <strong>end if</strong>;<br>
+                                          .&#160;&#160;&#160;&#160;{nsbp} <strong>end loop</strong>;<br>
+                                        <strong>end process</strong>;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>if statement</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>if</strong> (expression1) <strong>then</strong><br>
+               .&#160; {{statement;}}<br>
+               {{ <strong>elsif</strong> (expression2) <strong>then</strong><br>
+               .&#160; {{statement;}} }}<br>
+             [[<strong>else</strong> (OPTIONAL)<br>
+               .&#160; {{statement;}} ]]<br>
+              <strong>end if</strong> ;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>if</strong> (clr = <em>1</em>) <strong>then</strong><br>
+                        .&#160;&#160; q &#8656; <em>0</em>;<br>
+                      <strong>elsif</strong>(clk&#8217;event and clk = <em>1</em>) <strong>then</strong><br>
+                        .&#160;&#160; q &#8656; D;<br>
+                      <strong>end if</strong> ;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>case statement</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>case</strong> expression <strong>is</strong><br>
+                .&#160;<strong>when</strong> choices &#8658; {sequential +                  .&#160;&#160; statement;}}<br>
+                {{ … }}<br>
+                .&#160; <strong>when others</strong> (OPTIONAL) &#8658; {sequential<br>
+                 .&#160;&#160; statement;}}<br>
+                <strong>end case</strong>;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>case</strong> s <strong>is</strong><br>
+                             .&#160;&#160;&#160;&#160; <strong>when</strong> "00" &#8658; z &#8656; c(0);<br>
+                             .&#160;&#160;&#160;&#160; <strong>when</strong> "01" &#8658; z &#8656; c(1);<br>
+                             .&#160;&#160;&#160;&#160; <strong>when</strong> "10" &#8658; z &#8656; c(2);<br>
+                             .&#160;&#160;&#160;&#160; <strong>when</strong> "11" &#8658; z &#8656; c(3);<br>
+                             .&#160;&#160;&#160;&#160; <strong>when others</strong> ) &#8658; z &#8656; c(0);<br>
+                          <strong>end case</strong>;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>for loop</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>for</strong> identifier <strong>in</strong> range <strong>loop</strong><br>
+            \{sequential statement}<br>
+          <strong>end loop;</strong></code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zv := x(1);<br>
+                      <strong>for</strong> i <strong>in</strong> 2 to 4 <strong>loop</strong><br>
+                         .&#160;&#160;&#160;&#160; zv := zv <strong>and</strong> x(i);<br>
+                      <strong>end loop;</strong><br>
+                       z <strong>&#8656;</strong> zv;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Component</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>component</strong> entity_name <strong>is</strong><br>
+                 .&#160; <strong>port</strong> (<br>
+                    .&#160;&#160;(port_association_list);<br>
+                 .&#160; );<br>
+            <strong>end component</strong>;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>component</strong> mux2x1 <strong>is</strong><br>
+                                      .&#160; <strong>port</strong> (<br>
+                                      .&#160;&#160; D: <strong>in</strong> std_logic_vector(1 <strong>downto</strong> 0);<br>
+                                      .&#160;&#160; C: <strong>in</strong> std_logic;<br>
+                                      .&#160;&#160; S: <strong>out</strong> std_logic<br>
+                                      .&#160;);<br>
+                 <strong>end component</strong>;</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Port map</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>instance_name <strong>:</strong> component_name
+          <strong>port</strong><br>
+           <strong>map</strong> (port_association_list);</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>M1 : mux21a <strong>port map</strong>( a &#8658; c(0),<br>
+                                            b &#8658; c(1),
+                                            s &#8658; s(0), y &#8658; v);</code></p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="ref_low_carb">Appendix F: Low-Carb VHDL Tutorial: Bryan Mealy</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_examples_code">F.1. Examples Code</h3>
+<div class="sect3">
+<h4 id="_my_nand3">F.1.1. my_nand3</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity my_nand3 is
+port ( A,B,C : in std_logic;
+  F : out std_logic);
+end my_nand3;
+architecture ex_nand3 of my_nand3 is
+begin
+  F &lt;= NOT (A AND B AND C);
+--
+-- An alternative approach for this statement:
+-- F &lt;= A NAND B NAND C;
+--
+end ex_nand3;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_my_ckt_f3">F.1.2. my_ckt_f3</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity my_ckt_f3 is
+port ( L,M,N : in std_logic;
+  F3 : out std_logic);
+end my_ckt_f3;
+
+architecture f3_1 of my_ckt_f3 is
+  signal A1, A2 : std_logic; -- intermediate signals
+begin
+  A1 &lt;= ((NOT L) AND (NOT M) AND N);
+  A2 &lt;= L AND M;
+  F3 &lt;= A1 OR A2;
+end f3_1;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_my_ckt_f3_2">F.1.3. my_ckt_f3</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity my_ckt_f3 is
+port ( L,M,N : in std_logic;
+  F3 : out std_logic);
+end my_ckt_f3;
+
+architecture f3_3 of my_ckt_f3 is
+begin
+F3 &lt;= ‘1’ when (L = ‘0’ AND M = ‘0’ AND N = ‘1’)
+      ‘1’ when (L = ‘1’ AND M = ‘1’) else
+      ‘0’;
+end f3_3;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mux4_t1">F.1.4. mux4_t1</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+---
+-- entity and architecture of 4:1 Multiplexor implemented using
+-- conditional signal assignment.
+---
+entity my_4t1_mux is
+port ( D3,D2,D1,D0 : in std_logic;
+  SEL : in std_logic_vector(1 downto 0);
+  MX_OUT : out std_logic);
+end my_4t1_mux;
+
+architecture mux4t1 of my_4t1_mux
+begin
+  MX_OUT &lt;= D3 when (SEL = “11”)
+  D2 when (SEL = “10”)
+  D1 when (SEL = “01”)
+  D0 when (SEL = “00”)
+  ‘0’;
+end mux4t1;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_my_ckt_f3_3">F.1.5. my_ckt_f3</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity my_ckt_f3 is
+port ( L,M,N : in std_logic;
+  F3 : out std_logic);
+end my_ckt_f3;
+
+architecture f3_4 of my_ckt_f3 is
+begin
+  with ( (L = ’0’ AND M = ’0’ and N = ’1’) or (L = ’1’ AND M = ’1’) ) select
+    F3 &lt;= ‘1’ when ‘1’,
+    ‘0’ when ‘0’,
+    ‘0’ when others;
+end f3_4;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_my_4t1_mux">F.1.6. my_4t1_mux</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+---
+-- entity and architecture of 4:1 Multiplexor using selective
+-- signal assignment.
+---
+
+entity my_4t1_mux is
+port ( D3,D2,D1,D0 : in std_logic;
+  SEL : in std_logic_vector(1 downto 0);
+  MX_OUT : out std_logic);
+end my_4t1_mux;
+
+architecture mux4t1_2
+begin
+  with SEL select
+       MX_OUT &lt;= D3 when
+                 D2 when
+                 D1 when
+                 D0 when
+                 ‘0’ when
+end mux4t1_2;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Glosario">Appendix G: Glosario</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">* IDE: Integrated Development Environment
+* EDA: Electronic Design Automation
+* HDL: Hadware Description Language
+* VHDL: Very High Speed Integraged Circuits Hadware Description Language
+* FPGA: Field Programmable Gate Array</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-02-20 14:16:06 +0100
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/languages/vhdl.min.js"></script>
+<script>
+if (!hljs.initHighlighting.called) {
+  hljs.initHighlighting.called = true
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code')).forEach(function (el) { hljs.highlightBlock(el) })
+}
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+<style>
+.doc .listingblock > .content {
+  position: relative;
+}
+
+.doc .listingblock code[data-lang]::before {
+  content: none;
+}
+
+.doc .source-toolbox {
+  display: flex;
+  position: absolute;
+  visibility: hidden;
+  top: 0.25rem;
+  right: 0.5rem;
+  color: #808080;
+  white-space: nowrap;
+  font-size: 0.85em;
+}
+
+.doc .listingblock:hover .source-toolbox {
+  visibility: visible;
+}
+
+.doc .source-toolbox .source-lang {
+  font-family: "Droid Sans Mono", "DejaVu Sans Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+}
+
+.doc .source-toolbox > :not(:last-child)::after {
+  content: "|";
+  letter-spacing: 0;
+  padding: 0 1ch;
+}
+
+.doc .source-toolbox .copy-button {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  width: 1em;
+  height: 1em;
+}
+
+.doc .source-toolbox .copy-icon {
+  flex: none;
+  width: inherit;
+  height: inherit;
+  filter: invert(50.2%);
+  margin-top: 0.05em;
+}
+
+.doc .source-toolbox .copy-toast {
+  flex: none;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 1em;
+  border-radius: 0.25em;
+  padding: 0.5em;
+  cursor: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.75s;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
+.doc .source-toolbox .copy-toast::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 1em;
+  height: 1em;
+  border: 0.55em solid transparent;
+  border-left-color: rgba(0, 0, 0, 0.8);
+  transform: rotate(-90deg) translateX(50%) translateY(50%);
+  transform-origin: left;
+}
+
+.doc .source-toolbox .copy-button.clicked .copy-toast {
+  opacity: 1;
+  transition: none;
+}
+</style>
+<script src="copy-to-clipboard.js"></script>
+</body>
+</html>
