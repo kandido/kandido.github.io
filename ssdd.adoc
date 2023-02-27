@@ -2460,12 +2460,19 @@ image::tema5_sumarestac1c2.png[]
 . Extensión
 . Aplicaciones: Generador de Funciones
 
+[.columns]
 === Concepto - Símbolo
 
-* El circuito multiplexor de N entradas de datos y 1 salida de datos tiene la función de seleccionar una de las entradas y conectarla a la salida. Para ello se sirve de M entradas de control donde 2^M^=N
+[.column]
+--
+El circuito multiplexor de N entradas de datos y 1 salida de datos tiene la función de seleccionar una de las entradas y conectarla a la salida. Para ello se sirve de M entradas de control donde 2^M^=N +
 
 .Multiplexor 4x1
 image::tema6_multiplexor.png[]
+--
+
+[.column]
+image::tema6_multiplexor-mov.gif[width=540,heigth=480]
 
 [state=taula]
 === Diseño
@@ -2490,8 +2497,8 @@ latexmath:[F=lógica \: positiva=\overline S_1 \overline S_0 I_0 + \overline S_1
 * Señal Strobe : señal de validación, habilitación. Es necesario que este activa para que el circuito procese los datos de entrada y la salida sea válida. 
 ** Se implementa mediante la función  ( Z= Strobe AND F ) donde es necesario activar Strobe para que la salida Z tenga el valor de F, en caso contrario Z=0. Si la señal strobe se activa con lógica negativa -> latexmath:[Z=\overline {Strobe} \cdot F]
 
-[width=340,heigth=280]
-image::tema6_mux-esqelec.svg[] 
+
+image::tema6_mux-esqelec.svg[width=340,heigth=280]
 
 === Hoja de Características Comercial
 
@@ -2509,7 +2516,7 @@ image::tema6_mux-comercial.png[]
 
 === Extensión de Multiplexores
 
-image::tema6_mux-extension.svg[[width=440,heigth=340]
+image::tema6_mux-extension.svg[width=440,heigth=340]
 
 
 
@@ -2520,9 +2527,18 @@ image::tema6_mux-extension.svg[[width=440,heigth=340]
 * Por lo tanto un multiplexor con 3 entradas de control puede implementar una función lógica de 3 o más variables independientes.
 * Ejemplos.
 
+=== Ejemplos: Generador de Funciones
+
+. Generar con un MUX 8x1 la función latexmath:[F=\overline BCD +A\overline BD + \overline A \overline BC]
+** Para hacer la equivalencia con la función de un MUX la función F tiene que tener formato SOP
+** Variables independientes: las 3 entradas de selección del MUX 8x1 -> Pej las variables A,B y C
+** La variable independiente D se implemente mediante las entradas de datos del MUX.
+. Implementar mediante un MUX Nx1 la función latexmath:[F=\overline A \cdot \overline B \cdot C \cdot D+\overline A \cdot B \cdot C \cdot E+A \cdot \overline B  \cdot \overline C \cdot F+A \cdot B \cdot C \cdot G]
+** Se observan variables comunes en todos los sumandos -> SOP
+
 
 [#codi]
-=== Codificador (Encoder)
+=== Codificador (Encoder) 
 
 . Concepto
 . Símbolo
@@ -2533,12 +2549,12 @@ image::tema6_mux-extension.svg[[width=440,heigth=340]
 === Concepto
 
 * Un codificador realiza la conversión de un número con cualquier tipo de código no binario a código binario.
-* Pej: un codificador de código hexadecimal a código binario se implementa mediante un circuito con un bus de datos de entrada de 16 hilos donde únicamente se activa el hilo asociado a uno de los 16 dígitos hexadecimales. Para codificar en binario los 16 dígitos son necesarios 4 bits (2^4^ combinaciones), por lo que el bus de datos de entrada tiene un tamaño de 16 pistas y el de salida tiene un tamaño de 4 pistas.
+* Pej: un codificador de código hexadecimal a código binario se implementa mediante un circuito con un bus de datos de entrada de 16 hilos donde únicamente (codificador sin prioridad) se activa el hilo asociado a uno de los 16 dígitos hexadecimales. Para codificar en binario los 16 dígitos son necesarios 4 bits (2^4^ combinaciones), por lo que el bus de datos de entrada tiene un tamaño de 16 pistas y el de salida tiene un tamaño de 4 pistas.
 
 image::tema6_codificador-hex.png[]
 
 [state=taula]
-=== Codificador Hexadecimal : Diseño
+=== Codificador Hexadecimal sin Prioridad : Diseño
 
 .TV del Codificador Hexadecimal
 [width=60%]
@@ -2580,9 +2596,35 @@ image::tema6_codificador-hex.png[]
 
 === Ejemplo de Diseño: BCD sin prioridad
 
+* Mismo procedimiento que el codificador Hexadecimal sin prioridad.
 
-
+[.columns,state="taula"]
 === Ejemplo de Diseño: Codificador 4x2 con prioridad
+
+[.column]
+--
+Se puede activar más de una entrada...pero se selecciona únicamente UNA -> la de mayor prioridad +
+Ejemplo 1 : Codificador 4x2 con prioridad stem:[E_3 > E_2 > E_1 > E_0] +
+
+.Tabla de la verdad
+[width=50%]
+|===
+|stem:[E_3] |stem:[E_2] |stem:[E_1] |stem:[E_0] |stem:[S_1] |stem:[S_0] 
+| 1 | X | X | X | 1 | 1
+| 0 | 1 | X | X | 1 | 0
+| 0 | 0 | 1 | X | 0 | 1
+| 0 | 0 | 0 | 1 | 0 | 0
+| 0 | 0 | 0 | 0 | 0 | 0
+|===
+
+--
+
+[.column]
+* lógica positiva
+** stem:[S_0=E_3+\overline {E_3}\overline {E_2} E_1 ] = optimizar = stem:[E_3+E_3 \overline {E_2} E_1+\overline {E_3}\overline {E_2} E_1 = E_3+\overline {E_2} E_1] 
+
+** stem:[S_1=E_3+\overline E_3 E_2]= optimizar = stem:[E_3+E_3E_2+ \overline E_3 E_2=E_3+E_2]
+
 
 [#decodi]
 === Decodificador / Demux
@@ -2627,7 +2669,36 @@ image:tema6_linealogicanegativa.svg[]
 
 === Extensión de los Decodificadores
 
-* https://www.ti.com/lit/ds/symlink/cd54act138.pdf[3-LINE TO 8-LINE DECODERS/DEMULTIPLEXERS]:Decodificador CD54ACT138 de 32 Salidas mediante decodificadores de 8 salidas
+* https://www.ti.com/lit/ds/symlink/cd54act138.pdf[3-LINE TO 8-LINE DECODERS/DEMULTIPLEXERS]: Diseñar un Decodificador de 32 Salidas mediante decodificadores CD54ACT138 3x8
+** Hacen falta 4 decodificadores CD54ACT138 cuyas características son:
+** 2 tipos de entradas: de selección y de datos
+** La función *enable* (habilitación) se obtiene mediante el operador *&* (and) de las 3 señales: latexmath:[\overline G2A ,\overline G2B \:y\: G1] correspondientes a los pines 4,5 y 6 del circuito integrado CD54ACT138.
+** Las 8 salidas de datos operan en lógica *negativa* : se activan con un *0*
+
+=== Extensión de los Decodificadores mediante CD54ACT138.
+
+* El decodificador resultante de 32 salidas tendría una entrada binaria de 5 bits -> 2^5^ , stem:[A_4, A_3, A_2, A_1, A_0] y el decodificador CD54ACT138 3x8  solo tiene 3  entradas de datos, por lo que es necesario utilizar las señales "Enable".
+* Las entradas stem:[A_2, A_1, A_0] se asignan al bus de datos del decodificador 3x8 
+** Una combinación stem:[A_2, A_1, A_0] seleccionará la misma salida de los 4 decodificadores 3x8 : tendremos seleccionadas 4 salidas del decodificador 5x32, por lo que es necesaria una segunda selección para seleccionar únicamente uno se los 4 decodificadores 3x8.
+* Para realizar la segunda selección las entradas stem:[A_4, A_3] se asignan al bus de control Enable de los 4 decodificadores 3x8
+
+[.columns, state="taula"]
+=== Extensión de los Decodificadores mediante CD54ACT138.
+
+[.column]
+.Tabla de la Verdad
+[width=60%,cols="1*<4,5*^1"]
+|===
+| Decodificador Seleccionado |stem:[A_4] | stem:[A_3] | stem:[\overline G2B] | stem:[\overline G2A] | stem:[G1] 
+
+| Primero| 0 | 0 | | | 
+| Segundo| 0 | 1 | | | 
+| Tercero| 1 | 0 | | | 
+| Cuarto | 1 | 1 | | | 
+|===
+
+[.column]
+* Hay que conectar las 3 señales de control con las 2 entradas de datos stem:[A_4, A_3]
 
 === Diodo L.E.D.
 
@@ -2724,6 +2795,8 @@ Si el Display es de Cátodo Común, se puede controlar el Anodo de cada LED libr
 
 === Aplicaciones: Conversor Serie Paralelo
 
+* Aplicación como *Demultiplexor*: 1 entrada ENABLE que se conecta a una de la salidas seleccionada mediante las entradas de selección.
+** en realidad la entrada enable no se conecta físicamente sino que *inhibe* (todas las salidas desactivadas) o *habilita* (salida seleccionada activa) el dispositivo.
 * Mediante un Decodificador con entrada ENABLE como bus  de datos serie se puede enviar cada bit de dicha entrada a una salida diferente del decodificador si hacemos un barrido de las combinaciones de entrada mediante la secuencia binaria de un contador.
 * El contador
 ** El tamaño del contador binaria ha de ser igual al número de entradas binarias del decodificador.
