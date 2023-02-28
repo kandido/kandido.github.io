@@ -49,6 +49,13 @@
 
 :ruta-apuntes: home/candido/Dropbox/apuntes
 
+== Transparencias en Formato PDF
+
+* link:./PDF/ssdd_slides.pdf[Transparencias PDF]
+* Las transparencias en formato PDF presentan irregularidades como:
+** ecucaciones latex con caracteres diminutos
+** alguna tabla con caracteres grandes
+
 == Indice
 
 [%hardbreaks]
@@ -434,7 +441,7 @@ a|5*1000=cinco mil|4*100=cuatrocientos|5*10=cincuenta|1*1=uno
 ** Pesos con base 2 : 2^n^ donde n es la posición del dígito dentro del número: ....-1024-512-256-128-64-32-16-8-4-2-1...
 * Ejemplo: número 0b1011
 
-.Número 0b110011
+.Número 0b1011
 [width=60%,cols="<3s,4*^1"]
 |===
 |Representación: 4+| los símbolos 1011
@@ -1141,7 +1148,7 @@ chr(0x41)
 
 [.column]
 .OR
-[width=10%,cols="2*^1,^2"]
+[cols="2*^1,^2"]
 |===
 |x|y|z = x + y
 |0|0|0
@@ -1152,7 +1159,7 @@ chr(0x41)
 
 [.column]
 .AND
-[width=10%,cols="2*^1,^2"]
+[cols="2*^1,^2"]
 |===
 |x|y|z = x &#8729; y
 |0|0|0
@@ -1163,7 +1170,7 @@ chr(0x41)
 
 [.column]
 .XOR
-[width=10%,cols="2*^1,^2"]
+[cols="2*^1,^2"]
 |===
 |x|y|z = x &#8853; y
 |0|0|0
@@ -1182,7 +1189,7 @@ chr(0x41)
 
 [.column]
 .NOR
-[width=10%,cols="2*^1,^2"]
+[cols="2*^1,^2"]
 |===
 |x|y|z = [ovlin]#x + y#
 |0|0|1
@@ -1193,7 +1200,7 @@ chr(0x41)
 
 [.column]
 .NAND
-[width=10%,cols="2*^1,^2"]
+[cols="2*^1,^2"]
 |===
 |x|y|z = [ovlin]#x &#8729; y#
 |0|0|1
@@ -1204,7 +1211,7 @@ chr(0x41)
 
 [.column]
 .XNOR
-[width=10%,cols="2*^1,^2"]
+[cols="2*^1,^2"]
 |===
 |x|y|z = [ovlin]#x &#8853; y#
 |0|0|1
@@ -2560,7 +2567,7 @@ image::tema6_codificador-hex.png[]
 .TV del Codificador Hexadecimal
 [width=60%]
 |===
-|stem:[E_15]|stem:[E_14]|stem:[E_13]|..|stem:[E_1]|stem:[E_0]|stem:[S_3]|stem:[S_2]|stem:[S_1]|stem:[S_0]| Fila
+|latexmath:[E_15]|latexmath:[E_14]|latexmath:[E_13]|..|latexmath:[E_1]|latexmath:[E_0]|latexmath:[S_3]|latexmath:[S_2]|latexmath:[S_1]|latexmath:[S_0]| Fila
 |  0 |  0 |  0 |..|  0 |  *1* |  0 |  0 |  0 |  0 | 0ª
 |  0 |  0 |  0 |..|  *1* |  0 |  0 |  0 |  0 |  1 | 1ª
 | .. | .. | .. |..| .. | .. | .. | .. | .. |  ..  |
@@ -2577,23 +2584,23 @@ image::tema6_codificador-hex.png[]
 
 * No se puede recurrir directamente a un DK ya que el número de celdas es muy elevado
 * Es necesario recurrir al lenguaje natural para obtener las 4 salidas y optimizarlas mediante la matemática booleana.
-* Función stem:[S_0] -> lógica positiva
+* Función latexmath:[S_0] -> lógica positiva
 ** vale 1 si: filas 1ª,3ª,5ª...15ª
-*** fila 1ª: 0000000000000010 -> es el minitérmino stem:[m_2] de 16 variables -> optimización: ¿se puede reducir el Nº de variables?
-*** Si de las filas RESTO capturo todas las filas stem:[m_i] donde stem:[E_1] valga 1 y las sumo a la fila 1ª -> puedo sacar factor común stem:[E_1]
-*** stem:[E_1*sum(m_i)=E_1 cdot 1] y así con las filas 3ª,5ª, etc
-** stem:[S_0=E_1+E_3+E_5+E_7+E_9+E_11+E_13+E_15]
+*** fila 1ª: 0000000000000010 -> es el minitérmino latexmath:[m_2] de 16 variables -> optimización: ¿se puede reducir el Nº de variables?
+*** Si de las filas RESTO capturo todas las filas latexmath:[m_i] donde latexmath:[E_1] valga 1 y las sumo a la fila 1ª -> puedo sacar factor común latexmath:[E_1]
+*** latexmath:[E_1*sum(m_i)=E_1 cdot 1] y así con las filas 3ª,5ª, etc
+** latexmath:[S_0=E_1+E_3+E_5+E_7+E_9+E_11+E_13+E_15]
 
 === Codificador Hexadecimal : Diseño
 
 * Aplicamos el mismo método a las 4 salidas
-** stem:[S_0=E_1+E_3+E_5+E_7+E_9+E_11+E_13+E_15]
-** stem:[S_1=E_2+E_3+E_6+E_7+E_10+E_11]
-** stem:[S_2=E_4+E_5+E_6+E_7+E_12+E_13+E_14+E_15]
-** stem:[S_3=E_8+E_9+E_10+E_11+E_12+E_13+E_14+E_15]
+** latexmath:[S_0=E_1+E_3+E_5+E_7+E_9+E_11+E_13+E_15]
+** latexmath:[S_1=E_2+E_3+E_6+E_7+E_10+E_11]
+** latexmath:[S_2=E_4+E_5+E_6+E_7+E_12+E_13+E_14+E_15]
+** latexmath:[S_3=E_8+E_9+E_10+E_11+E_12+E_13+E_14+E_15]
 
 * ¿ Hubiesemos llegado al mismo resultado mediante el lenguaje natural?
-** La salida stem:[S_k] igual a 1 si la entrada stem:[E_i=1] ó la entrada stem:[E_j=1] ó etc ...
+** La salida latexmath:[S_k] igual a 1 si la entrada latexmath:[E_i=1] ó la entrada latexmath:[E_j=1] ó etc ...
 
 === Ejemplo de Diseño: BCD sin prioridad
 
@@ -2605,12 +2612,12 @@ image::tema6_codificador-hex.png[]
 [.column]
 --
 Se puede activar más de una entrada...pero se selecciona únicamente UNA -> la de mayor prioridad +
-Ejemplo 1 : Codificador 4x2 con prioridad stem:[E_3 > E_2 > E_1 > E_0] +
+Ejemplo 1 : Codificador 4x2 con prioridad latexmath:[E_3 > E_2 > E_1 > E_0] +
 
 .Tabla de la verdad
 [width=50%]
 |===
-|stem:[E_3] |stem:[E_2] |stem:[E_1] |stem:[E_0] |stem:[S_1] |stem:[S_0] 
+|latexmath:[E_3] |latexmath:[E_2] |latexmath:[E_1] |latexmath:[E_0] |latexmath:[S_1] |latexmath:[S_0] 
 | 1 | X | X | X | 1 | 1
 | 0 | 1 | X | X | 1 | 0
 | 0 | 0 | 1 | X | 0 | 1
@@ -2622,9 +2629,9 @@ Ejemplo 1 : Codificador 4x2 con prioridad stem:[E_3 > E_2 > E_1 > E_0] +
 
 [.column]
 * lógica positiva
-** stem:[S_0=E_3+\overline {E_3}\overline {E_2} E_1 ] = optimizar = stem:[E_3+E_3 \overline {E_2} E_1+\overline {E_3}\overline {E_2} E_1 = E_3+\overline {E_2} E_1] 
+** latexmath:[S_0=E_3+\overline {E_3}\overline {E_2} E_1 ] = optimizar = latexmath:[E_3+E_3 \overline {E_2} E_1+\overline {E_3}\overline {E_2} E_1 = E_3+\overline {E_2} E_1] 
 
-** stem:[S_1=E_3+\overline E_3 E_2]= optimizar = stem:[E_3+E_3E_2+ \overline E_3 E_2=E_3+E_2]
+** latexmath:[S_1=E_3+\overline E_3 E_2]= optimizar = latexmath:[E_3+E_3E_2+ \overline E_3 E_2=E_3+E_2]
 
 
 [#decodi]
@@ -2655,12 +2662,12 @@ image::tema6_decoder.png[]
 === Diseño: Salidas mutuamente excluyentes
 
 * Lenguaje Natural
-** La salida stem:[S_0] vale 1 si la entrada stem:[E_3E_2E_1E_0] vale 0000 -> minitérmino stem:[m_0]
-*** stem:[S_0= \overline E_3 \overline E_2 \overline E_1 \overline E_0] 
-** La salida stem:[S_1] vale 1 si la entrada stem:[E_3E_2E_1E_0] vale 0001 -> minitérmino stem:[m_1]
-*** stem:[S_1= \overline E_3 \overline E_2 \overline E_1 E_0] 
-** La salida stem:[S_15] vale 1 si la entrada stem:[E_3E_2E_1E_0] vale 1111 -> minitérmino stem:[m_15]
-*** stem:[S_15= E_3 E_2  E_1 E_0] 
+** La salida latexmath:[S_0] vale 1 si la entrada latexmath:[E_3E_2E_1E_0] vale 0000 -> minitérmino latexmath:[m_0]
+*** latexmath:[S_0= \overline E_3 \overline E_2 \overline E_1 \overline E_0] 
+** La salida latexmath:[S_1] vale 1 si la entrada latexmath:[E_3E_2E_1E_0] vale 0001 -> minitérmino latexmath:[m_1]
+*** latexmath:[S_1= \overline E_3 \overline E_2 \overline E_1 E_0] 
+** La salida latexmath:[S_15] vale 1 si la entrada latexmath:[E_3E_2E_1E_0] vale 1111 -> minitérmino latexmath:[m_15]
+*** latexmath:[S_15= E_3 E_2  E_1 E_0] 
 
 === Ejemplo de Diseño: Decodificador BCD
 
@@ -2678,10 +2685,10 @@ image:tema6_linealogicanegativa.svg[]
 
 === Extensión de los Decodificadores mediante CD54ACT138.
 
-* El decodificador resultante de 32 salidas tendría una entrada binaria de 5 bits -> 2^5^ , stem:[A_4, A_3, A_2, A_1, A_0] y el decodificador CD54ACT138 3x8  solo tiene 3  entradas de datos, por lo que es necesario utilizar las señales "Enable".
-* Las entradas stem:[A_2, A_1, A_0] se asignan al bus de datos del decodificador 3x8 
-** Una combinación stem:[A_2, A_1, A_0] seleccionará la misma salida de los 4 decodificadores 3x8 : tendremos seleccionadas 4 salidas del decodificador 5x32, por lo que es necesaria una segunda selección para seleccionar únicamente uno se los 4 decodificadores 3x8.
-* Para realizar la segunda selección las entradas stem:[A_4, A_3] se asignan al bus de control Enable de los 4 decodificadores 3x8
+* El decodificador resultante de 32 salidas tendría una entrada binaria de 5 bits -> 2^5^ , latexmath:[A_4, A_3, A_2, A_1, A_0] y el decodificador CD54ACT138 3x8  solo tiene 3  entradas de datos, por lo que es necesario utilizar las señales "Enable".
+* Las entradas latexmath:[A_2, A_1, A_0] se asignan al bus de datos del decodificador 3x8 
+** Una combinación latexmath:[A_2, A_1, A_0] seleccionará la misma salida de los 4 decodificadores 3x8 : tendremos seleccionadas 4 salidas del decodificador 5x32, por lo que es necesaria una segunda selección para seleccionar únicamente uno se los 4 decodificadores 3x8.
+* Para realizar la segunda selección las entradas latexmath:[A_4, A_3] se asignan al bus de control Enable de los 4 decodificadores 3x8
 
 [.columns, state="taula"]
 === Extensión de los Decodificadores mediante CD54ACT138.
@@ -2690,7 +2697,7 @@ image:tema6_linealogicanegativa.svg[]
 .Tabla de la Verdad
 [width=60%,cols="1*<4,5*^1"]
 |===
-| Decodificador Seleccionado |stem:[A_4] | stem:[A_3] | stem:[\overline G2B] | stem:[\overline G2A] | stem:[G1] 
+| Decodificador Seleccionado |latexmath:[A_4] | latexmath:[A_3] | latexmath:[\overline G2B] | latexmath:[\overline G2A] | latexmath:[G1] 
 
 | Primero| 0 | 0 | | | 
 | Segundo| 0 | 1 | | | 
@@ -2699,7 +2706,7 @@ image:tema6_linealogicanegativa.svg[]
 |===
 
 [.column]
-* Hay que conectar las 3 señales de control con las 2 entradas de datos stem:[A_4, A_3]
+* Hay que conectar las 3 señales de control con las 2 entradas de datos latexmath:[A_4, A_3]
 
 === Diodo L.E.D.
 
@@ -2834,93 +2841,4 @@ Si el Display es de Cátodo Común, se puede controlar el Anodo de cada LED libr
 
 == Fin del Primer Parcial
 
-
-[.visibilidad.lista]
-=== listas
-
-* hola
-** caracola
-** caracola
-** caracola
-** caracola
-** caracola
-** caracola
-** caracola
-** caracola
-** caracola
-** caracola
-** caracola
-** caracola
-** caracola
-** caracola
-** caracola
-
-
-
-[.visibilidad]
-=== matematicas
-
-[.espacio-linea]
-Y=f(x1,x2,x3)=x1+x&#773;1x2x3= transformar suma en producto con morgan +
-=[doble-ovlin]#x1+x&#773;1x2x3#=aplico morgan=x&#773;1*[ovlin]#x&#773;1x2x3# +
-
-[.ovlin]#x# +
-
-latexmath:[\overline {x_1x_2x_3}] +
-latexmath:[\overline {\overline {x_1x_2x_3}}]
-
-
-[.visibilidad]
-=== Text Formatting
-
-[.underline]*text with id and role* +
-[CYAN]#some text# +
-[ovlin]#some text#
-
-[source,c,data-lang-family=compiled]
-----
-printf("Hello world %d\n", x)
-----
-
-[.visibilidad]
-=== step 1
-
-[TIP,step=3]
-Finally, a pro tip...
-
-[WARNING,step=1]
-First, watch out for...
-
-[IMPORTANT.fade-up,step=2]
-Second, don't forget...
-
-[.visibilidad]
-=== step 2
-
-The [.step.highlight-red]#greatest glory in living# lies not in never falling, but in [.step.highlight-red]#rising every time we fall#. +
-The [.step.underline]#greatest glory in living# lies not in never falling, but in [.step.highlight-red]#rising every time we fall#. +
-
-[.visibilidad]
-=== step 3
-
-[.highlight-blue%step]
-blue
-
-[%step]
-white
-
-[.highlight-red%step]
-red
-
-[.visibilidad]
-=== overline
-
-z = [doble-ovlin]#x# +
-
-z = [double-overline]#x# +
-
-z = [double-underline]#x# +
-
-[.visibilidad]
-=== tablas
 
