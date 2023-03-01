@@ -2499,6 +2499,13 @@ latexmath:[F=lógica \: positiva=\overline S_1 \overline S_0 I_0 + \overline S_1
 | X  | X  | X  | X  | 1  |  1 | I3
 |===
 
+DK para una función de 6 variables +
+Gráfica de 2^6^=64 celdas +
+4 matrices de 16 celdas cada una, representadas en 3 dimensiones +
+1 matriz de variables I~3~, I~2~, I~1~, I~0~ para cada combinación S~2~S~1~
+
+
+
 === Esquema Eléctrico
 
 * Señal Strobe : señal de validación, habilitación. Es necesario que este activa para que el circuito procese los datos de entrada y la salida sea válida. 
@@ -2566,7 +2573,7 @@ image::tema6_codificador-hex.png[]
 .TV del Codificador Hexadecimal
 [width=60%]
 |===
-|latexmath:[E_15]|latexmath:[E_14]|latexmath:[E_13]|..|latexmath:[E_1]|latexmath:[E_0]|latexmath:[S_3]|latexmath:[S_2]|latexmath:[S_1]|latexmath:[S_0]| Fila
+|latexmath:[E_{15}]|latexmath:[E_{14}]|latexmath:[E_{13}]|..|latexmath:[E_1]|latexmath:[E_0]|latexmath:[S_3]|latexmath:[S_2]|latexmath:[S_1]|latexmath:[S_0]| Fila
 |  0 |  0 |  0 |..|  0 |  *1* |  0 |  0 |  0 |  0 | 0ª
 |  0 |  0 |  0 |..|  *1* |  0 |  0 |  0 |  0 |  1 | 1ª
 | .. | .. | .. |..| .. | .. | .. | .. | .. |  ..  |
@@ -2593,10 +2600,10 @@ image::tema6_codificador-hex.png[]
 === Codificador Hexadecimal : Diseño
 
 * Aplicamos el mismo método a las 4 salidas
-** latexmath:[S_0=E_1+E_3+E_5+E_7+E_9+E_11+E_13+E_15]
-** latexmath:[S_1=E_2+E_3+E_6+E_7+E_10+E_11]
-** latexmath:[S_2=E_4+E_5+E_6+E_7+E_12+E_13+E_14+E_15]
-** latexmath:[S_3=E_8+E_9+E_10+E_11+E_12+E_13+E_14+E_15]
+** latexmath:[S_0=E_1+E_3+E_5+E_7+E_9+E_{11}+E_{13}+E_{15}]
+** latexmath:[S_1=E_2+E_3+E_6+E_7+E_{10}+E_{11}]
+** latexmath:[S_2=E_4+E_5+E_6+E_7+E_{12}+E_{13}+E_{14}+E_{15}]
+** latexmath:[S_3=E_8+E_9+E_{10}+E_{11}+E_{12}+E_{13}+E_{14}+E_{15}]
 
 * ¿ Hubiesemos llegado al mismo resultado mediante el lenguaje natural?
 ** La salida latexmath:[S_k] igual a 1 si la entrada latexmath:[E_i=1] ó la entrada latexmath:[E_j=1] ó etc ...
@@ -2665,8 +2672,8 @@ image::tema6_decoder.png[]
 *** latexmath:[S_0= \overline E_3 \overline E_2 \overline E_1 \overline E_0] 
 ** La salida latexmath:[S_1] vale 1 si la entrada latexmath:[E_3E_2E_1E_0] vale 0001 -> minitérmino latexmath:[m_1]
 *** latexmath:[S_1= \overline E_3 \overline E_2 \overline E_1 E_0] 
-** La salida latexmath:[S_15] vale 1 si la entrada latexmath:[E_3E_2E_1E_0] vale 1111 -> minitérmino latexmath:[m_15]
-*** latexmath:[S_15= E_3 E_2  E_1 E_0] 
+** La salida latexmath:[S_{15}] vale 1 si la entrada latexmath:[E_3E_2E_1E_0] vale 1111 -> minitérmino latexmath:[m_{15}]
+*** latexmath:[S_{15}= E_3 E_2  E_1 E_0] 
 
 === Ejemplo de Diseño: Decodificador BCD
 
@@ -2698,7 +2705,7 @@ image:tema6_linealogicanegativa.svg[]
 |===
 | Decodificador Seleccionado |latexmath:[A_4] | latexmath:[A_3] | latexmath:[\overline G2B] | latexmath:[\overline G2A] | latexmath:[G1] 
 
-| Primero| 0 | 0 | | | 
+| Primero| 0 | 0 | latexmath:[A_4]| latexmath:[A_3]| 1 
 | Segundo| 0 | 1 | | | 
 | Tercero| 1 | 0 | | | 
 | Cuarto | 1 | 1 | | | 
