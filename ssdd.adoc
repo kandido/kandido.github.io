@@ -2499,10 +2499,14 @@ latexmath:[F=lógica \: positiva=\overline S_1 \overline S_0 I_0 + \overline S_1
 | X  | X  | X  | X  | 1  |  1 | I3
 |===
 
+=== Diseño
+
 DK para una función de 6 variables +
 Gráfica de 2^6^=64 celdas +
 4 matrices de 16 celdas cada una, representadas en 3 dimensiones +
-1 matriz de variables I~3~, I~2~, I~1~, I~0~ para cada combinación S~2~S~1~
+1 matriz de variables latexmath:[I_3, I_2, I_1, I_0] para cada combinación latexmath:[S_2S_1] +
+
+image::tema6_mux_dk.png[]
 
 
 
