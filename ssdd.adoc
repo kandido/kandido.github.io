@@ -2972,6 +2972,25 @@ image::tema6_paridad_comunicacion.png[]
 
 Si el generador de paridad del Receptor no coincide con el bit de paridad del Transmisor: Error en la línea de comunicaciones y hay que retransmitir el dato del bus de 4 bits.
 
+
+[.columns, state=taula]
+=== Generador-Comprobador de Paridad CY74FCT480T: Hoja de Características 
+
+[.column]
+--
+link:https://www.digchip.com/datasheets/parts/datasheet/477/CY74FCT480ATPC.php[] +
+Dos entradas de datos de 1 byte cada uno: latexmath:[(AB...H)_1 \:y \:(AB...H)_2] +
+Funciona como generador CHK/GEN=0 o como detector CHK/GEN=1 +
+Como generador: genera 2 bits de paridad impar (ODD), uno para cada *dato a transmitir*: latexmath:[ODD_1] y latexmath:[ODD_2] +
+Como detector: recibe los 2 datos de 8 bits  y los 2 bits de paridad latexmath:[PAR_1] y latexmath:[PAR_2] +
+-Como detector genera el bit de paridad impar del *dato recibido* y lo compara con el *bit recibido PAR* +
+-En caso de error, no distingue si el error es en la línea de datos 1 o en la línea de datos 2.
+--
+
+[.column]
+
+image::tema6_paridad_comercial.png[]
+
 [#compa]
 === Comparador Binario
 
