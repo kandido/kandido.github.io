@@ -2886,18 +2886,45 @@ image::tema6_demultiplexor.png[]
 El contador cuenta pulsos del reloj +
 Contador en módulo 16: 0000-0001-...-1111-0000-0001-...
 --
+
+[.columns, state=txikiago]
 === Aplicaciones: Generador de Funciones: Decodificador y Multiplexor
 
+[.column.is-half]
+--
 Se puede generar una función mediante un Decodificador y/o un Multiplexor. +
-latexmath:[F=SUV\overline XYZ+ S\overline UVXYZ+ \overline S\overline UV\overline XY\overline Z] +
+latexmath:[F=SUV\overline XYZ+ S\overline UVXY+ \overline S\overline UV\overline XY\overline Z] +
 Una función con 6 variables puede distribuir las variables entre el decodificador (3x8) y el multiplexor (8x1) : 3 variables cada  uno. +
+latexmath:[F=SOP=SUV\overline XYZ+ S\overline UVXYZ+ S\overline UVXY\overline Z+ \\
+\overline S\overline UV\overline XY\overline Z] 
 
 image::tema6_decoder_multiplexor.png[]
+--
 
-[#conver]
+[.column]
+--
+
+
+F=1 Si SUV=111, entonces latexmath:[O_7=1],  XYZ=011 e latexmath:[I_3] y latexmath:[O_7] están conectados +
+ó Si SUV=101, entonces latexmath:[O_5=1],  XYZ=111 e latexmath:[I_7] y latexmath:[O_5] están conectados +
+ó Si SUV=101, entonces latexmath:[O_5=1],  XYZ=110 e latexmath:[I_6] y latexmath:[O_5] están conectados +
+ó Si SUV=001, entonces latexmath:[O_1=1],  XYZ=010 e latexmath:[I_2] y latexmath:[O_1] están conectados 
+
+image::tema6_decoder_multiplexor_ej.png[]
+--
+
+[#conver, state=txikiago]
 === Convertidores de Código
 
-. BCD
+* link:https://www.digchip.com/datasheets/parts/datasheet/477/SN74184.php[Convertidor BCD a Binario , 74184] 
+** Entrada de 6 bits para dos digitos BCD : 2bits MSD y 4 bits MSD -> rango 00 hasta 39
+** Atención: el chip únicamente tiene 5 bits de entrada (A,B,C,D,E) ya que la posición 0 es directamente la salida latexmath:[Y_0], por eso en la tabla para cada par de valores los 5 bits de entrada, del chip, son idénticos
+** Para el rango de entrada hacen falta 6 bits del código BINARIO de salida. El chip proporciona las salidas latexmath:[Y_5,Y_4,Y_3,Y_2,Y_1]
+* link:https://www.digchip.com/datasheets/parts/datasheet/477/SN74184.php[Convertidor Binario a BCD , 74185] 
+** Entrada de 6 bits del código BINARIO: Rango 00-63 
+** Atención: el chip únicamente tiene como entradas 5 bits (A,B,C,D,E) ya que la posición 0 es directamente la salida latexmath:[Y_0], por eso en la tabla para cada par de valores los 5 bits de entrada, del chip, son idénticos.
+** Para el rango de entrada hacen falta 7 bits BCD y sólo hay 6 bits BCD, por lo que el rango queda limitado a los valores 00-39
+
 
 [#gen_par]
 === Generador-Comprobador de Paridad
@@ -2906,6 +2933,44 @@ image::tema6_decoder_multiplexor.png[]
 . Detección de Errores
 . Hoja de Datos Comercial
 
+
+[.columns, state=taula]
+=== Generador-Comprobador de Paridad
+
+[.column]
+--
+Bit de paridad Par: Al dato hay que añadir un bit (el bit de paridad Par) para que el número total de *1* sea Par + 
+- Ejemplo: el dato de 8 bits 01101101 tiene un número impar de 1, luego hay que añadirle un 1, quedando  los 9 bits -> *1* 01101101 +
+Bit de paridad Impar: Al dato hay que añadir un bit (el bit de paridad Impar) para que el número total de *1* sea Impar + 
+- Ejemplo: el dato de 8 bits 01101101 tiene un número impar de 1, luego hay que añadirle un 0, quedando  los 9 bits ->  *0* 01101101 +
+
+.Dato de 2 bits: Tabla de la Verdad Paridad Par
+[width=60%]
+|===
+|stem:[X_1]|stem:[Y_1]| Bit de Paridad Par | Nº total de *1*
+| 0 | 0 | 0 | 0
+| 0 | 1 | 1 | 2
+| 1 | 0 | 1 | 2
+| 1 | 1 | 0 | 2
+|===
+
+La síntesis es la puerta XNOR de dos entradas
+--
+
+[.column]
+--
+Si el dato tiene más de dos bits la evaluación se realiza de dos en dos bits y en distintos niveles de evaluación. +
+Ejemplo: Bit de paridad par del dato 01101101 +
+
+image::tema6_paridad_par_ej.png[]
+--
+
+=== Generador-Comprobador de Paridad: Comunicaciones
+
+
+image::tema6_paridad_comunicacion.png[]
+
+Si el generador de paridad del Receptor no coincide con el bit de paridad del Transmisor: Error en la línea de comunicaciones y hay que retransmitir el dato del bus de 4 bits.
 
 [#compa]
 === Comparador Binario
