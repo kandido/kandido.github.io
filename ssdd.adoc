@@ -3001,6 +3001,109 @@ image::tema6_paridad_comercial.png[]
 . Hoja de Datos Comercial
 
 
+[state=txikiago]
+=== Concepto
+
+Comparador Binario: compara 2 datos A y B de entrada y expresa la relación entre ellos: A>B, A<B, A=B  +
+
+.Tabla de la Verdad: 2 datos de 1 bit
+[width=60%]
+|===
+| A | B | G | E | L
+
+| 0 | 0 | 0 | 1 | 0
+| 0 | 1 | 0 | 0 | 1 
+| 1 | 0 | 1 | 0 | 0
+| 1 | 1 | 0 | 1 | 0
+|===
+
+latexmath:[L=\overline A B] +
+latexmath:[G=A \overline B] +
+latexmath:[E=\overline A \overline B + AB = \overline {A \oplus B} = \overline { L \oplus G }] +
+
+[.columns, state="taula"]
+=== Diseño comparador de 4 bits
+
+[.column]
+--
+Para comparar 2 datos de varios bits se realiza la comparación bit a bit (wise) comenzando por el bit MSB +
+Síntesis de un comparador de 4 bits latexmath:[A_1,A_2,A_3,A_4 \:y\: B_1,B_2,B_3,B_4]. +
+- Lenguaje natural: G=1 si latexmath:[ A_4 > B_4] ó latexmath:[A_4=B_4=0] y latexmath:[A_3 > B_3] ó ... +
+- latexmath:[G=A_4\overline B_4 + \overline A_4 \overline B_4 A_3 \overline B_3 + ...] +
+Síntesis por extensión de comparadores de 1 bit +
+- Lenguaje natural: G=1 si latexmath:[G_4=1] ó latexmath:[E_4G_3=1] ó latexmath:[E_4E_3G_2=1] ó latexmath:[E_4E_3E_2G_1=1] +
+- L=1 si latexmath:[L_4=1] ó latexmath:[E_4L_3=1] ó latexmath:[E_4E_3L_2=1] ó latexmath:[E_4E_3E_2L_1=1] +
+- E=1 si latexmath:[E_4E_3E_2E_1=1]
+--
+
+[.column]
+--
+[width=60%]
+.Tabla de la Verdad. 2 datos de 1 bit
+|===
+| A | B | G | E | L
+| 0 | 0 | 0 | 1 | 0
+| 0 | 1 | 0 | 0 | 1 
+| 1 | 0 | 1 | 0 | 0
+| 1 | 1 | 0 | 1 | 0
+|===
+--
+
+[.columns, state=txikiago]
+=== Comparadores de 4 bits con entradas de Expasión
+
+[.column.is-one-third]
+--
+image::tema6_comparador_expa1.png[]
+
+latexmath:[G=G_4+E_4G_3+E_4E_3G_2+ \\
+E_4E_3E_2G_1+E_4E_3E_2E_1G_C] +
+latexmath:[L=L_4+E_4L_3+E_4E_3L_2+ \\
+E_4E_3E_2L_1+E_4E_3E_2E_1L_C] +
+latexmath:[E=E_4E_3E_2E_1E_C]
+--
+
+[.column]
+--
+image::tema6_comparador_expa2.png[align:left]
+
+
+latexmath:[G_C=0 \: L_C=0 \: E_C=1] +
+latexmath:[G_L=G_4+E_4G_3+E_4E_3G_2+E_4E_3E_2G_1+E_4E_3E_2E_1G_C] +
+latexmath:[L_L=L_4+E_4L_3+E_4E_3L_2+E_4E_3E_2L_1+E_4E_3E_2E_1L_C] +
+latexmath:[E_L=E_4E_3E_2E_1E_C] +
+latexmath:[G_H=G_8+E_8G_7+E_8E_7G_6+E_8E_7E_6G_5+E_8E_7E_6E_5G_L] +
+latexmath:[L_H=L_4+E_4L_3+E_4E_3L_2+E_4E_3E_2L_1+E_4E_3E_2E_1L_C] +
+latexmath:[E_H=E_8E_7E_6E_5E_L]
+--
+
+=== Extensión de Comparadores sin Entradas de Expansión
+
+* Diseñar un Comparador de datos de 7 bits mediante 2 comparadores de 4 bits.
+* Método ascendente : primero se compara los 4 bits LSB y a continuación los 4 bits MSB
+** La salida del comparador (G,E,L) es la del comparador MSB
+** El bit latexmath:[A_5] del comparador MSB se conecta a la salida G del comparador LSB
+** El bit latexmath:[B_5] del comparador MSB se conecta a la salida L del comparador LSB
+* Método descendente : primero se compara los 4 bits MSB y a continuación los 4 bits LSB
+** La salida del comparador  (G,E,L) es la del comparador LSB
+** El bit latexmath:[A_3] del comparador LSB se conecta a la salida G del comparador MSB
+** El bit latexmath:[B_3] del comparador LSB se conecta a la salida L del comparador MSB
+
+=== Comparador Comercial
+
+* https://www.digchip.com/datasheets/parts/datasheet/321/7485.php[Comparador CD74HC85]
+
+
+=== Comparador CD74HC85: conexión mediante entradas de expansión en paralelo ===
+
+* Diseñar un comparador de 24 bits mediante 6 comparadores : 5 comparadores (latexmath:[C_0,C_1,C_2,C_3,C_4 \: y \: C_5]) en el primer nivel de comparación y 1 comparador (latexmath:[C_6]) en el segundo nivel.
+* El comparador latexmath:[C_0] tiene las entradas GEL=010
+* Los comparadores del primer nivel (latexmath:[C_1,C_2,C_3 \: y  \:C_4]) tienen 4 entradas de datos y las entradas GEL con los *bits dato* (latexmath:[C_1 -> A_4,B_4]), (latexmath:[C_2 ->A_9,B_9]), (latexmath:[C_3 ->A_{14},B_{14}]) y (latexmath:[C_4 ->A_{19},B_{19}]) 
+* El comparador de segundo nivel tiene como entradas de datos las salidas GEL de los 4 comparadores del primer nivel (latexmath:[C_1,C_2,C_3 \: y \: C_4]) y como entrada GEL la salida GEL del comparador  latexmath:[C_0].
+
+
+== Ejercicios ==
+
 == Fin del Primer Parcial
 
 
