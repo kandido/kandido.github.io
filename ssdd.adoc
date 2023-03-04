@@ -240,6 +240,8 @@ image:tecnico_electronica.jpeg[Mountain,400,300,float="left"]
 *** Comercialización
 *** Usuario: Equipos, Plataformas
 
+
+
 [state=taula]
 === Representación Científica y Prefijos de las Unidades
 
@@ -343,15 +345,13 @@ La distancia considerable entre los dos niveles (binario) a la entrada del recep
 
 === Ejercicios
 
-* Tipo de problemas: Libro Verde -> Ejercicios tipo examen -> Sin calculadora y sin libros
-+
+* Tipo de problemas: Libro Verde -> Ejercicios tipo examen -> Sin calculadora y sin libros +
 
 -----
 El libro verde se adquiere en el edificio de rectorado, en la sección de comunicacion,
 que se encuentra en planta baja del edificio.
 El horario: 8 a 14:30. Precio 8.5$. 
 -----
-+
 
 ----
 * Capítulo 1: 1.1, 1.2, 1.4, 1.5, 1.6, 1.8, 1.9
@@ -365,6 +365,8 @@ El horario: 8 a 14:30. Precio 8.5$.
 ----
 * Los ejercicios del tema 2 (Representación de la Información) no están en el libro verde
 ** Miaulario -> Recursos -> Ejercicios
+
+
 
 === Evaluación
 
@@ -389,7 +391,7 @@ El horario: 8 a 14:30. Precio 8.5$.
 [#Tema2_RepInf]
 == Tema 2 : Representación Digital de la Información
 
-[state=txiki]
+[state=txikiago]
 === Indice
 
 * Información: números, caracteres, imagen, sonido, etc ..
@@ -1110,6 +1112,70 @@ chr(0x41)
 * U+2190: &#x2190;
 * U+2192: &#x2192;
 
+=== Otros Códigos Binarios
+
+* Binary Coded Decimal (BCD) natural
+* BCD Aiken
+* BCD exceso 3
+* Gray
+* Johnson
+
+===  Binary Coded Decimal : BCD
+
+Codificación de números Naturales +
+
+BCD natural: Para un número decimal representar en binario con 4 bits los valores de *cada digito decimal*. +
+- Pesos de cada uno de los 4 bits: 8-4-2-1 +
+- 347 ->0011-0100-0111 -> 001101000111 +
+- Codificación sencilla pero códigos de mayor tamaño que el binario natural +
+
+BCD Aiken 2421: Mismo concepto que el natural pero los 4 bits tienen pesos 2-4-2-1 +
+- En los digitos 5,6,7,8 y 9 el bit de peso 2 de la posición 3ª tiene prioridad sobre el bit de la posición 1ª +
+- 2 -> 0010, 4 -> 0100, 5 -> *1* 011, 347 -> 01101001101 +
+
+BCD Aiken 5421: Mismo concepto que el Aiken 2421 pero con los pesos 5421 +
+- 5 -> 1000, 347 -> 01101001010 +
+
+BCD en exceso a 3 : Al valor a representar se le suma 3 antes de la codificación binaria
+- 0 -> 0011, 7-> 1010, 347 -> 011001111010
+
+
+=== Código Gray
+
+Codificación de números Naturales +
+Es un  código reflejado -> Espejo +
+
+image::tema2_gray.svg[]
+
+El valor 4 en código Gray: 110, 0110, 00110, etc +
+La secuencia de los números es adyacente: únicamente cambia un bit
+
+[.columns]
+=== Codificador Gray Binario
+
+[.column]
+image::tema2_gray-bin.svg[]
+
+[.column]
+--
+Codificador binario -> gray: +
+- Herramienta DK -> 4 funciones y 4 variables +
+- latexmath:[g_i = b_i \oplus b_{i+1}] +
+- latexmath:[g_{MSB} = b_{MSB}] +
+
+Codificador gray -> binario: +
+- Herramienta DK -> 4 funciones y 4 variables +
+- latexmath:[b_i = g_i \oplus g_{i+1} ... \oplus g_{n-1}] +
+- latexmath:[b_{MSB} = g_{MSB}] 
+--
+
+=== Johnson
+
+* Números Naturales
+* A partir del número 0000 desplazar 1 bit a la izda y entra el bit 1
+* A partir del número 1111 desplazar 1 bit a la izda y entra el bit 0
+* Johnson (4 bits) : 0000-0001-0011-0111-1111-1110-1100-1000
+
 === Tema 2: Ejercicios
 
 *  Miaulario/Recursos/Ejercicios
@@ -1730,12 +1796,12 @@ image::light_bit.bmp[]
 
 === Señales VHDL : Buses
 
-* Físicamente un Bus es un conjunto de pistas metálicas que sirven para transportar señales conectandos dos unidades
-* Por ejemplo el "bus de direcciones" de 32 hilos ó pistas de la memoria RAM sirve para seleccionar una dirección de 32 bits de la memoria. La dirección *01100110011001100110011001100110* se transporta desde la CPU hasta la memoria RAM a través de un bus de 32 pistas. Al bus de direcciones de memoria (address bus) se le podría llamar *A* y a cada hilo del bus *asciimath:[A_31]*,*asciimath:[A_30]*,...,*asciimath:[A_1]*,*asciimath:[A_0]*.
-* Desde el punto de vista lógico un bus es un vector o un array de dimensión "n", por ejemplo n=32.  
-* El tipo de datos de los buses *A* y *B* de 32 bits se podrían declarar como:
-** [naranja]#signal A,B :bit_vector(31 downto 0);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_31] y el bit LSB(más a la derecha) el bit asciimath:[A_0] y lo mismo con el bus B
-** [naranja]#signal A,B :bit_vector(0 to 31);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_0]y el bit LSB(más a la derecha) el bit asciimath:[A_31] y lo mismo con el bus B
+Físicamente un Bus es un conjunto de pistas metálicas que sirven para transportar señales conectandos dos unidades +
+Por ejemplo el "bus de direcciones" de 32 hilos ó pistas de la memoria RAM sirve para seleccionar una dirección de 32 bits de la memoria. La dirección *01100110011001100110011001100110* se transporta desde la CPU hasta la memoria RAM a través de un bus de 32 pistas. Al bus de direcciones de memoria (address bus) se le podría llamar *A* y a cada hilo del bus *asciimath:[A_31]*,*asciimath:[A_30]*,...,*asciimath:[A_1]*,*asciimath:[A_0]*. +
+Desde el punto de vista lógico un bus es un vector o un array de dimensión "n", por ejemplo n=32. + 
+El tipo de datos de los buses *A* y *B* de 32 bits se podrían declarar como: +
+-[naranja]#signal A,B :bit_vector(31 downto 0);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_31] y el bit LSB(más a la derecha) el bit asciimath:[A_0] y lo mismo con el bus B +
+- [naranja]#signal A,B :bit_vector(0 to 31);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_0]y el bit LSB(más a la derecha) el bit asciimath:[A_31] y lo mismo con el bus B
 
 
 [.columns]
@@ -2197,7 +2263,7 @@ image::tema5_HA.png[]
 \overline A_i\cdot (B_i \oplus C_{i-1} ) + A_i\cdot \overline {(B_i \oplus C_{i-1} )} = A_i \oplus B_i \oplus C_{i-1}] 
 * latexmath:[C_i=A_i\cdot B_i + A_i\cdot C_{i-1}+ B_i\cdot C_{i-1}]
 
-=== Sumador Completo
+=== Full Adder
 
 .Full Adder
 image::tema5_FA_symbol.png[]
@@ -2322,7 +2388,7 @@ image::tema5_sumpaacse.png[]
 ** Más rápido pero más complejo
 
 [state=taula_ta]
-=== Sumador Paralelo Acarreo Paralelo
+=== Sumador Paralelo A. Paralelo
 
 
 .Funciones de Generación y Propagación del Acarreo
@@ -2460,6 +2526,7 @@ image::tema5_sumarestac1c2.png[]
 [#Tema6_OtrosCirc]
 == Tema 6: Otros Circuitos Combinacionales
 
+.
 
 === Tema 6: Indice
 
