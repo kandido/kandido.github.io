@@ -1,0 +1,216 @@
+= Sistemas Digitales (2ª Parte)
+// classic AsciiDoctor attributes
+//:stem: latexmath
+:stem:
+:background-color="#ff0000":
+:icons: font
+:imagesdir: images
+:customcss: styles/myCustomCSS.css
+// Despite the warning of the documentation, https://github.com/asciidoctor/asciidoctor-reveal.js, highlight.js syntax highlighting WORKS, BUT, you need to explicitly set the highlighter using the below attribute
+// see http://discuss.asciidoctor.org/Highlighting-source-code-for-reveal-js-backend-td2750.html
+:source-highlighter: highlight.js
+:highlightjs-languages: vhdl
+:source-language: vhdl 
+//:source-highlighter: rouge
+//:source-highlighter: pygments
+// revealjs attributes
+:revealjs_theme: white
+:revealjs_slideNumber: true
+// Al actualizar el slide no cambia de transpa y no se va al inicio
+:revealjs_hash: true   
+:revealjs_history: true
+
+
+:revealjs_center: true
+:revealjs_width: "100%"
+:revealjs_height: "100%"
+:revealjs_margin: 0
+
+//:revealjs_minScale: 1,
+//:revealjs_maxScale: 1
+
+// plugins copiados de tutoriales/asciidoctor-revealjs/../primer.js
+:revealjs_plugins_configuration: revealjs-plugins-conf.js
+:revealjs_plugins: revealjs-plugins.js
+
+//:scrollable: no pirula
+
+//:revealjs_history: true para go to file no pirula
+
+//:doctype: book
+//:lang: es
+//:encode: ISO-8859-1
+//:ascii-ids:
+:show-link-uri:
+:asciidoctor-fetch-kroki:
+:experimental:
+
+:ruta-transpas: home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/apuntes_repositorio/transpas_ssdd
+
+:ruta-apuntes: home/candido/Dropbox/apuntes
+
+== Transparencias en Formato PDF
+
+* link:./PDF/ssdd2_slides.pdf[Transparencias PDF]
+* Si hay algún error de forma en el documento PDF que dificulte su interpretación, por favor, enviar un mensaje para su correción. Gracias.
+
+
+== Indice
+
+[%hardbreaks]
+Tema 7: <<Tema7_Seq, Circuitos Secuenciales.>>
+Tema 8: <<Tema8_Fam, Circuitos Digitales Integrados. Familias Lógicas.>>
+Tema 9: <<Tema9_Mem, Memorias.>>
+Tema 10: <<Tema10_PLD, Dispositivos de Lógica Programable (PLD).>>
+Tema 11: <<Tema11_Dac, Convertidores Analógico/Digiales DAC/ADC.>>
+
+
+
+[#Tema7_Seq]
+[.columns, state=txikiago]
+== Tema 7 : Circuitos Secuenciales
+
+[.column]
+Introducción a los Sistemas Secuenciales: +
+- - Ejemplo +
+- - Celdas de Memoria: R S, J K, T y D +
+Análisis y diseño de circuitos secuenciales síncronos: +
+- - Análisis de circuitos secuenciales síncronos. +
+- - Tablas de transiciones y diagramas de estados: Máquina de Mealy y Máquina de Moore. +
+- - Síntesis de sistemas secuenciales síncronos. +
+Circuitos biestables: +
+- - Definición de sistema secuencial. +
+- -Tipos y características: Asíncronos y síncronos. +
+- - Biestables: R S, J K, T y D +
+- - Tiempos característicos en biestables.
+
+
+[.column]
+Registros de desplazamiento: +
+- - Concepto de registro. +
+- - Registros de desplazamiento. Entrada serie, salida serie. Entrada serie, salida paralelo. Entrada
+paralelo, salida serie. Entrada paralelo, salida paralelo. Bidireccional. +
+- - Aplicaciones de los registros. Generador de secuencia.
+Contadores: +
+- - Contadores digitales y sus aplicaciones. +
+- - Contadores asíncronos. Contador de décadas. +
+- - Contadores síncronos. Acarreo en serie y paralelo. +
+- - Contador reversible. +
+- - Contadores basados en registros de desplazamiento: en anillo, Johnson, con protección.
+
+=== Introducción a los Sistemas Digitales Secuenciales
+
+* Diseñar el controlador digital de un ascensor para un edificio de 3 plantas
+** Motor del ascensor: El eje del motor eléctrico tiene un engranaje sobre el que se acopla una cadena unida al ascensor.
+** Si el motor gira a la izda el ascensor sube y si gira a la derecha el ascensor baja.
+** En cada planta hay botón para solicitar el servicio del ascensor.
+** Dentro del ascensor hay 3 botones para solicitar el destino del ascensor.
+** En cada planta hay un sensor para detectar la llegada del ascensor.
+
+=== Controlador Digital de un Ascensor
+
+* Dibujar un esquema con los componentes del sistema: plantas del edificio, motor, cadena, ascensor, botones.
+* Definir las entradas lógicas del controlador digital.
+* Definir las salidas lógicas del controlador digital.
+* Definir los estados del sistema.
+* Dibujar el diagrama de estados del sistema (estados, transiciones, entradas, salidas).
+
+[state=txikiago]
+=== Unidades de Memoria: Biestables
+
+* Una celda de memoria es un dispositivo capaz de almacenar un bit (estados lógicos 0 y 1) y sobre el que se pueden realizar distintas operaciones como:
+** escribir el estado cero, escribir el estado uno, invertir su estado, no cambiar el estado, etc ..
+** leer el estado
+* Las celdas de memoria tienen 2 terminales de entrada para las operaciones de escritura y 2 terminales de salida para las operaciones de lectura. Además si son síncronas tienen 1 terminal para la señal de reloj.
+* Las celdas de memoria que admiten dos estados estables reciben el nombre de Biestables.
+* Sincronismo:
+** Los biestables que realizan la operación de escritura de forma síncrona, respondiendo a la entrada en el instante de pendiente positiva o negativa de una señal reloj, reciben el nombre de *Flip-Flop*.
+* Los biestables que realizan la operación de escritura inmediatamente después de un cambio en la entrada reciben el nombre de *Latch*.
+
+[.columns,state=taula]
+=== Tipos de Biestables
+
+[.column]
+--
+.Flip-Flop S-R
+[width=50%]
+|===
+| Clk | S | R | latexmath:[Q_{n+1}] | latexmath:[\overline Q_{n+1}] | Operación
+| &#x2191; | 0 | 0 | latexmath:[Q_n] | latexmath:[\overline Q_n] | No cambia
+| &#x2191; | 0 | 1 | 0 | 1 | RESET
+| &#x2191; | 1 | 0 | 1 | 0 | SET
+| &#x2191; | 1 |1 | *X* | *X* | Indeterminado
+| Resto | X | X | latexmath:[Q_n] | latexmath:[\overline Q_n] | No cambia
+|===
+--
+
+[.column]
+--
+.Flip-Flop J-K
+[width=50%]
+|===
+| Clk | J | K | latexmath:[Q_{n+1}] | latexmath:[\overline Q_{n+1}] | Operación
+| &#x2191; | 0 | 0 | latexmath:[Q_n] | latexmath:[\overline Q_n] | No cambia
+| &#x2191; | 0 | 1 | 0 | 1 | RESET
+| &#x2191; | 1 | 0 | 1 | 0 | SET
+| &#x2191; | 1 |1 | latexmath:[\overline Q_n] | latexmath:[ Q_n] | Inversión
+| Resto | X | X | latexmath:[Q_n] | latexmath:[\overline Q_n] | No cambia
+|===
+--
+
+
+
+[.columns,state=taula]
+=== Tipos de Biestables
+
+[.column]
+--
+.Flip-Flop D (Data)
+[width=50%]
+|===
+| Clk | D | latexmath:[Q_{n+1}] | latexmath:[\overline Q_{n+1}] | Operación
+| &#x2191; | 0 | 0 | 1 | RESET
+| &#x2191; | 1 | 1 | 0 | SET
+| Resto | X | latexmath:[Q_n] | latexmath:[\overline Q_n] | No cambia
+|===
+--
+
+[.column]
+--
+.Flip-Flop T (Toogle)
+[width=50%]
+|===
+| Clk | T | latexmath:[Q_{n+1}] | latexmath:[\overline Q_{n+1}] | Operación
+| &#x2191; | 0 | latexmath:[Q_n] | latexmath:[\overline Q_n] | No cambia
+| &#x2191; | 1 | latexmath:[\overline Q_n] | latexmath:[ Q_n] | Inversión
+| Resto | X | latexmath:[Q_n] | latexmath:[\overline Q_n] | No cambia
+|===
+--
+
+=== Símbolos de los biestables
+
+* S-R, J-K, D, T.
+** Sincronismo con la pendiente + ó - del reloj.
+
+image::flip-flop_tipos.svg[]
+
+=== Cronogramas: Señales binarias de escritura y lectura de biestables
+
+
+image::tema7_flip-flop_crono.svg[]
+
+
+
+
+[#Tema8_Fam]
+== Tema 8: Circuitos Digitales Integrados. Familias Lógicas.
+
+[#Tema9_Mem]
+== Tema 9: Memorias.
+
+[#Tema10_PLD]
+== Tema 10: Dispositivos de Lógica Programable (PLD).
+
+[#Tema11_Dac]
+== Tema 11: Convertidores Analógico/Digiales DAC/ADC.
+
