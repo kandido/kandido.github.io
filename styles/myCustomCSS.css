@@ -89,12 +89,7 @@
      text-decoration: underline;
 }
 
-.zerrenda li {
-     height: 18px;
-    width: 18px;
-    margin: 6px;
-    float: left;
-}
+
 
 /*.iturri source {
     padding-left: 20px;
@@ -124,6 +119,22 @@ section[data-state="txiki"] p  {
     font-size: 0.7em;
     line-height: 1;
 }
+
+/*
+section[data-state="zerrenda"] ul,li  {
+    height: 15px;
+}
+*/
+
+/*
+.zerrenda li {
+     height: 18px;
+    width: 18px;
+    margin: 6px;
+    float: left;
+}
+*/
+
 section[data-state="txikiago"] p {
     font-size: 0.6em;
     line-height: 1;

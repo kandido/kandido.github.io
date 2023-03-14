@@ -3101,12 +3101,15 @@ latexmath:[E=\overline A \overline B + AB = \overline {A \oplus B} = \overline {
 --
 Para comparar 2 datos de varios bits se realiza la comparación bit a bit (wise) comenzando por el bit MSB +
 Síntesis de un comparador de 4 bits latexmath:[A_1,A_2,A_3,A_4 \:y\: B_1,B_2,B_3,B_4]. +
-- Lenguaje natural: G=1 si latexmath:[ A_4 > B_4] ó latexmath:[A_4=B_4=0] y latexmath:[A_3 > B_3] ó ... +
+- Lenguaje natural: G=1 si latexmath:[ A_4 > B_4] ó latexmath:[A_4=B_4=0] y latexmath:[A_3 > B_3] ó latexmath:[A_4=B_4=1] y latexmath:[A_3 > B_3] ó ... +
 - latexmath:[G=A_4\overline B_4 + \overline A_4 \overline B_4 A_3 \overline B_3 + ...] +
 Síntesis por extensión de comparadores de 1 bit +
-- Lenguaje natural: G=1 si latexmath:[G_4=1] ó latexmath:[E_4G_3=1] ó latexmath:[E_4E_3G_2=1] ó latexmath:[E_4E_3E_2G_1=1] +
+- Lenguaje natural: G=1 si latexmath:[G_4=1] ó latexmath:[E_4G_3=1] ó latexmath:[E_4E_3G_2=1] ó latexmath:[E_4E_3E_2G_1=1]: +
+- - latexmath:[G=G_4 + E_4G_3 + E_4E_3G_2 + E_4E_3E_2G_1 ] +
 - L=1 si latexmath:[L_4=1] ó latexmath:[E_4L_3=1] ó latexmath:[E_4E_3L_2=1] ó latexmath:[E_4E_3E_2L_1=1] +
-- E=1 si latexmath:[E_4E_3E_2E_1=1]
+- - latexmath:[L=L_4 + E_4L_3 + E_4E_3L_2 + E_4E_3E_2L_1 ] +
+- E=1 si latexmath:[E_4E_3E_2E_1=1] +
+- - latexmath:[E=E_4E_3E_2E_1 ] 
 --
 
 [.column]
@@ -3123,7 +3126,7 @@ Síntesis por extensión de comparadores de 1 bit +
 --
 
 [.columns, state=txikiago]
-=== Comparadores de 4 bits con entradas de Expasión
+=== Comparadores de 4 bits con entradas de Expansión
 
 [.column.is-one-third]
 --
@@ -3153,6 +3156,13 @@ latexmath:[E_H=E_8E_7E_6E_5E_L]
 === Extensión de Comparadores sin Entradas de Expansión
 
 * Diseñar un Comparador de datos de 7 bits mediante 2 comparadores de 4 bits.
+** Métodos ascencente y descencente.
+
+image::tema6_comparador_ascen-descen.svg[]
+
+=== Extensión de Comparadores sin Entradas de Expansión
+
+
 * Método ascendente : primero se compara los 4 bits LSB y a continuación los 4 bits MSB
 ** La salida del comparador (G,E,L) es la del comparador MSB
 ** El bit latexmath:[A_5] del comparador MSB se conecta a la salida G del comparador LSB
@@ -3162,21 +3172,40 @@ latexmath:[E_H=E_8E_7E_6E_5E_L]
 ** El bit latexmath:[A_3] del comparador LSB se conecta a la salida G del comparador MSB
 ** El bit latexmath:[B_3] del comparador LSB se conecta a la salida L del comparador MSB
 
+
+
 === Comparador Comercial
 
 * https://www.digchip.com/datasheets/parts/datasheet/321/7485.php[Comparador CD74HC85]
+** comparador de 2 datos de 4 bits cada uno.
 
-
+[.columns, state="txikiago"]
 === Comparador CD74HC85: conexión mediante entradas de expansión en paralelo ===
 
-* Diseñar un comparador de 24 bits mediante 6 comparadores : 5 comparadores (latexmath:[C_0,C_1,C_2,C_3,C_4 \: y \: C_5]) en el primer nivel de comparación y 1 comparador (latexmath:[C_6]) en el segundo nivel.
-* El comparador latexmath:[C_0] tiene las entradas GEL=010
-* Los comparadores del primer nivel (latexmath:[C_1,C_2,C_3 \: y  \:C_4]) tienen 4 entradas de datos y las entradas GEL con los *bits dato* (latexmath:[C_1 -> A_4,B_4]), (latexmath:[C_2 ->A_9,B_9]), (latexmath:[C_3 ->A_{14},B_{14}]) y (latexmath:[C_4 ->A_{19},B_{19}]) 
-* El comparador de segundo nivel tiene como entradas de datos las salidas GEL de los 4 comparadores del primer nivel (latexmath:[C_1,C_2,C_3 \: y \: C_4]) y como entrada GEL la salida GEL del comparador  latexmath:[C_0].
+[.column]
+
+* Diseñar un comparador de 24 bits mediante 6 comparadores : 5 comparadores (latexmath:[C_A,C_B,C_C,C_D \: y \: C_E]) en el primer nivel de comparación y 1 comparador (latexmath:[C_F]) en el segundo nivel.
+* El comparador latexmath:[C_A] tiene las entradas GEL=010
+* Los comparadores del primer nivel (latexmath:[C_A,C_B,C_C,C_D \: y  \:C_E]) tienen 4 entradas de datos y las entradas GEL con los *bits dato* (latexmath:[C_A -> 0,1,0]), (latexmath:[C_B ->A_5,0,B_5]), (latexmath:[C_C ->A_{10},0,B_{10}]), (latexmath:[C_D ->A_{15},0,B_{15}]) y latexmath:[C_E -> A_{20},0,B_{20}]),
+* El comparador de segundo nivel tiene como entradas de datos las salidas GEL de los 4 comparadores del primer nivel (latexmath:[C_B,C_C,C_D \: y \: C_E]) y como entrada GEL la salida GEL del comparador  latexmath:[C_A].
+
+[.column]
+image::tema6_comparador_24.svg[]
+
+
+
+
+
+
+ 
+
+
 
 
 == Ejercicios ==
 
 == Fin del Primer Parcial
+
+Parte 2ª : link:ssdd2.html[Sistemas Digitales: Segunda Parte]
 
 
