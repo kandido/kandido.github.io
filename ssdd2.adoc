@@ -107,15 +107,29 @@ Contadores: +
 ** Dentro del ascensor hay 3 botones para solicitar el destino del ascensor.
 ** En cada planta hay un sensor para detectar la llegada del ascensor.
 
+
 === Controlador Digital de un Ascensor
 
 * Dibujar un esquema con los componentes del sistema: plantas del edificio, motor, cadena, ascensor, botones.
-* Definir las entradas lógicas del controlador digital.
-* Definir las salidas lógicas del controlador digital.
-* Definir los estados del sistema.
+* Definir y codificar las entradas lógicas del controlador digital.
+* Definir y codificar las salidas lógicas del controlador digital.
+* Definir y codificar los estados del sistema.
 * Dibujar el diagrama de estados del sistema (estados, transiciones, entradas, salidas).
+* Desarrollar las 3 tablas: 
+** transición de estados , excitación de biestables (pej JK) y funciones de salida.
 
-[state=txikiago]
+
+[.notes]
+--
+S2S1S0 : entradas lógicas: sensores que detectan la llegada del ascensor a la planta "i"
+L2L1L0 : entradas lógicas: botón "i" en la planta "i" para solicitar el ascensor desde la planta "i"
+P2P1P0 : entradas lógicas: botón "i" en el ascensor para solicitar como destino la planta "i"
+GiGdGn : salidas lógicas: actuador  girar izda ó girar dcha o no girar.
+Estados del ascensor: estacionado en planta 1, ... en planta 2, ... en planta 3, ... subiendo, ...bajando.
+--
+
+
+
 === Unidades de Memoria: Biestables
 
 * Una celda de memoria es un dispositivo capaz de almacenar un bit (estados lógicos 0 y 1) y sobre el que se pueden realizar distintas operaciones como:
