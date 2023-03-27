@@ -62,7 +62,7 @@ Tema 7: <<Tema7_Seq, Circuitos Secuenciales.>>
 Tema 8: <<Tema8_Fam, Circuitos Digitales Integrados. Familias Lógicas.>>
 Tema 9: <<Tema9_Mem, Memorias.>>
 Tema 10: <<Tema10_PLD, Dispositivos de Lógica Programable (PLD).>>
-Tema 11: <<Tema11_Dac, Convertidores Analógico/Digiales DAC/ADC.>>
+Tema 11: <<Tema11_Dac, Convertidores Analógico/Digitales DAC/ADC.>>
 
 
 
@@ -100,11 +100,11 @@ Contadores: +
 
 === Introducción a los Sistemas Digitales Secuenciales
 
-* Diseñar el controlador digital de un ascensor para un edificio de 3 plantas
+* Diseñar el controlador digital de un ascensor para un edificio de 2 plantas
 ** Motor del ascensor: El eje del motor eléctrico tiene un engranaje sobre el que se acopla una cadena unida al ascensor.
 ** Si el motor gira a la izda el ascensor sube y si gira a la derecha el ascensor baja.
 ** En cada planta hay botón para solicitar el servicio del ascensor.
-** Dentro del ascensor hay 3 botones para solicitar el destino del ascensor.
+** Dentro del ascensor hay un botón por planta para solicitar el destino del ascensor.
 ** En cada planta hay un sensor para detectar la llegada del ascensor.
 
 
@@ -120,6 +120,8 @@ Contadores: +
 
 
 [.notes]
+
+Ascensor con 3 plantas
 --
 S2S1S0 : entradas lógicas: sensores que detectan la llegada del ascensor a la planta "i"
 L2L1L0 : entradas lógicas: botón "i" en la planta "i" para solicitar el ascensor desde la planta "i"
@@ -206,7 +208,7 @@ Estados del ascensor: estacionado en planta 1, ... en planta 2, ... en planta 3,
 * S-R, J-K, D, T.
 ** Sincronismo con la pendiente + ó - del reloj.
 
-image::flip-flop_tipos.svg[]
+image::tema7_flip-flop_tipos.svg[]
 
 === Cronogramas: Señales binarias de escritura y lectura de biestables
 
@@ -214,7 +216,61 @@ image::flip-flop_tipos.svg[]
 image::tema7_flip-flop_crono.svg[]
 
 
+[state="txikiago"]
+=== Controlador del Ascensor para 2 plantas
 
+. Definir estados
+** Estados: Ascensor en planta baja PB, en planta alta PA , subiendo SUB, bajando BAJ
+. Definir entradas
+** botón destino planta baja (BDB), botón destino  planta alta (BDA)
+** botón llamada desde planta baja (BLB), botón llamada desde planta baja (BLB)
+** sensores: planta baja SB y planta alta SA
+. Definir salidas
+** motor subiendo: MS
+** motor bajando: MB
+** motor parador: MP
+
+[.columns, state=txikiago]
+=== C. Ascensor: Codificación
+
+[.column]
+. Estados del sistema
+** Memoria
+** Número de biestables ->4 estados -> 2 bits -> 2 biestables -> variables Q1-Q0
+** Códigos Q1Q0-> 00 (PB), 01 (SUB), 10 (BAJ) y  11 (PA)
+. Salidas del sistema
+** Número de bits -> 3 salidas -> 2 bits -> variables Z1-Z0
+** Códigos Z1Z0 -> 00 (MP), 01 (MS) y 10 (MB)
+
+[.column]
+. Entradas del sistema
+** Cada entrada 1 bit : sa,sb,bdb,blb,bda y bla
+. Excitación de los biestables
+** Para 2 biestables JK -> Para el biestable Q1 -> J1K1 y para el biestable Q0 -> J0K0
+
+=== C. Ascensor: Diagrama de estados
+
+* El diagrama es una representación gráfica de las transiciones entre estados y las entradas y salidas del sistema.
+* Diagrama tipo MOORE: las salidas únicamente dependen del estado de la máquina digital.
+* Representar los estados con círculos y la salida del sistema correspondiente.
+* Representar las transiciones entre estados con Flechas y la entrada de sistema asociada.
+
+=== C. Ascensor: Tablas de Estados, Excitación de Biestables y Salidas
+
+* Convertir el diagrama de estados en 3 tablas
+* MEMORIA: Es necesario escribir el estado SIGUIENTE [verde]#q1q0# en los 2 biestables JK en función de:
+** El estado actual : [naranja]#q1q0#
+** Las entradas del sistema: [naranja]#sa,sb,bdb,blb,bda y bla#
+* Las señales de escritura de los biestables son J1 y K1 para el biestable Q1 y J0 y K0 para el biestable Q0. Por lo tanto es necesario diseñar un CIRCUITO COMBINACIONAL para cada señal de escritura de la memoria:
+** J1(q1,q0,sa,sb,bdb,blb,bda,bla) ; K1(q1,q0,sa,sb,bdb,blb,bda,bla)
+** J0(q1,q0,sa,sb,bdb,blb,bda,bla) ; K0(q1,q0,sa,sb,bdb,blb,bda,bla)
+
+
+=== C. Ascensor: Tablas de Estados, Excitación de Biestables y Salidas
+
+
+
+image::tema7_ascen_dia-est.svg[]
 
 [#Tema8_Fam]
 == Tema 8: Circuitos Digitales Integrados. Familias Lógicas.
