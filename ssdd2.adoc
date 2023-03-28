@@ -58,6 +58,7 @@
 == Indice
 
 [%hardbreaks]
+Parte 1ª : link:ssdd.html[Sistemas Digitales: Primera Parte]
 Tema 7: <<Tema7_Seq, Circuitos Secuenciales.>>
 Tema 8: <<Tema8_Fam, Circuitos Digitales Integrados. Familias Lógicas.>>
 Tema 9: <<Tema9_Mem, Memorias.>>
@@ -119,19 +120,8 @@ Contadores: +
 ** transición de estados , excitación de biestables (pej JK) y funciones de salida.
 
 
-[.notes]
 
-Ascensor con 3 plantas
---
-S2S1S0 : entradas lógicas: sensores que detectan la llegada del ascensor a la planta "i"
-L2L1L0 : entradas lógicas: botón "i" en la planta "i" para solicitar el ascensor desde la planta "i"
-P2P1P0 : entradas lógicas: botón "i" en el ascensor para solicitar como destino la planta "i"
-GiGdGn : salidas lógicas: actuador  girar izda ó girar dcha o no girar.
-Estados del ascensor: estacionado en planta 1, ... en planta 2, ... en planta 3, ... subiendo, ...bajando.
---
-
-
-
+[state=txikiago]
 === Unidades de Memoria: Biestables
 
 * Una celda de memoria es un dispositivo capaz de almacenar un bit (estados lógicos 0 y 1) y sobre el que se pueden realizar distintas operaciones como:
@@ -230,30 +220,72 @@ image::tema7_flip-flop_crono.svg[]
 ** motor bajando: MB
 ** motor parador: MP
 
+[state="txikiago"]
+=== C. Ascensor: Diagrama de estados
+
+* El diagrama es una representación gráfica de las transiciones entre estados y las entradas y salidas del sistema.
+* Máquina tipo *MOORE*: las salidas únicamente dependen del estado de la máquina digital -> salidas síncronas
+** Representar los estados con círculos: dentro del círculo el estado y la salida del sistema correspondiente.
+** Representar las transiciones entre estados mediante: Flecha entre dos estados y sobre la flecha el valor de las entradas.
+* Máquina tipo *MEALY*: las salidas en un instante dependen del estado de la máquina digital y de la entrada en ese mismo instánte
+** Representar los estados con círculos: dentro del círculo el estado.
+** Representar las transiciones entre estados mediante: Flecha entre dos estados y sobre la flecha el valor de las entradas y su salida correspondiente
+
+[.columns, state=txikiago]
+=== C. Ascensor: Diagrama de estados
+
+[.column]
+image::tema7_ascen2_diag_seq.svg[]
+
+[.column]
+[.text-left%hardbreaks]
+Cuando el motor se para en una planta:
+--el sensor de dicha planta se resetea.
+Transición PB-PB:.
+--si se pulsa un botón para bajar: bdb ó blb.
+--las entradas sa y sb no afectan.
+Transición SUB-SUB:.
+--mientras sa esté desactivado.
+--no afectan ni los botones ni sb.
+Transición PA-PA:
+--si se pulsa un botón para subir: bda ó bla.
+--las entradas sa y sb no afectan.
+Transición BAJ-BAJ:.
+--mientras sb esté desactivado.
+--no afectan ni los botones ni sa
+
 [.columns, state=txikiago]
 === C. Ascensor: Codificación
 
 [.column]
-. Estados del sistema
-** Memoria
-** Número de biestables ->4 estados -> 2 bits -> 2 biestables -> variables Q1-Q0
-** Códigos Q1Q0-> 00 (PB), 01 (SUB), 10 (BAJ) y  11 (PA)
-. Salidas del sistema
-** Número de bits -> 3 salidas -> 2 bits -> variables Z1-Z0
-** Códigos Z1Z0 -> 00 (MP), 01 (MS) y 10 (MB)
+--
+Entradas del sistema: +
+--Cada entrada 1 bit : sa,sb,bdb,blb,bda y bla +
+Salidas del sistema: +
+--Para codificar las 3 salidas (MS,MB y MP) hacen falta 2 bits -> Z1,Z0 +
+--Código de salida *Z1Z0* -> 00 (MP), 01 (MS), 10 (MB)
+Estados del Sistema: +
+--Memoria -> celdas biestables flip-flop JK +
+--Para 4 estados son necesarias 2 celdas Q1 y Q0 -> señales de excitación J1,K1,J0,K0 +
+--Códigos de los estados -> *Q1Q0* -> 00(PB), 01(SUB), 10(BAJ), 11(PA) +
+Excitación de los biestables: +
+--Para 2 biestables JK -> Para el biestable Q1 -> J1K1 y para el biestable Q0 -> J0K0
+--
 
 [.column]
-. Entradas del sistema
-** Cada entrada 1 bit : sa,sb,bdb,blb,bda y bla
-. Excitación de los biestables
-** Para 2 biestables JK -> Para el biestable Q1 -> J1K1 y para el biestable Q0 -> J0K0
+--
+.Tabla transición JK
+[width=50%]
+|===
+|latexmath:[Q_n->Q_{n+1}] | *J* | *K*
+|0 -> 0 | 0 | x
+|0 -> 1 | 1 | x
+|1 -> 0 | x | 1
+|1 -> 1 | x | 0
+|===
+--
 
-=== C. Ascensor: Diagrama de estados
 
-* El diagrama es una representación gráfica de las transiciones entre estados y las entradas y salidas del sistema.
-* Diagrama tipo MOORE: las salidas únicamente dependen del estado de la máquina digital.
-* Representar los estados con círculos y la salida del sistema correspondiente.
-* Representar las transiciones entre estados con Flechas y la entrada de sistema asociada.
 
 === C. Ascensor: Tablas de Estados, Excitación de Biestables y Salidas
 
@@ -269,8 +301,21 @@ image::tema7_flip-flop_crono.svg[]
 === C. Ascensor: Tablas de Estados, Excitación de Biestables y Salidas
 
 
+image::tema7_ascen2_tablas_plantilla.svg[]
 
-image::tema7_ascen_dia-est.svg[]
+=== C. Ascensor: Tablas de Estados, Excitación de Biestables y Salidas
+
+image::tema7_ascen2_tablas.svg[]
+
+=== C. Ascensor: Ecuaciones Lógicas
+
+
+* latexmath:[J_1= sa \cdot \overline q_1 \cdot q_0]
+* latexmath:[K_1= sb \cdot q_1 \cdot \overline q_0]
+* latexmath:[J_0 = \overline q_1 \cdot \overline q_0 \cdot (bda \cdot \overline {bla} + \overline {bda} \cdot bla + bda \cdot bla)]
+* latexmath:[K_0 = q_1 \cdot q_0 \cdot (\overline {bdb} \cdot  blb +  bdb \cdot \overline {blb} + bdb \cdot blb)]
+* latexmath:[Z_1 = q_1 \cdot \overline q_0]
+* latexmath:[Z_0 = \overline q_1 \cdot q_0]
 
 [#Tema8_Fam]
 == Tema 8: Circuitos Digitales Integrados. Familias Lógicas.
