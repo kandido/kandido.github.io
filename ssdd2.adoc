@@ -232,27 +232,49 @@ image::tema7_flip-flop_crono.svg[]
 ** Representar las transiciones entre estados mediante: Flecha entre dos estados y sobre la flecha el valor de las entradas y su salida correspondiente
 
 [.columns, state=txikiago]
-=== C. Ascensor: Diagrama de estados
-
-[.column]
-image::tema7_ascen2_diag_seq.svg[]
+=== C. Ascensor: Transición entre estados
 
 [.column]
 [.text-left%hardbreaks]
 Cuando el motor se para en una planta:
---el sensor de dicha planta se resetea.
-Transición PB-PB:.
---si se pulsa un botón para bajar: bdb ó blb.
---las entradas sa y sb no afectan.
-Transición SUB-SUB:.
---mientras sa esté desactivado.
---no afectan ni los botones ni sb.
-Transición PA-PA:
---si se pulsa un botón para subir: bda ó bla.
---las entradas sa y sb no afectan.
-Transición BAJ-BAJ:.
---mientras sb esté desactivado.
---no afectan ni los botones ni sa
+--el sensor de dicha planta se resetea, se desactiva.
+Transición *PB->PB*:.
+--si se pulsa un botón para bajar([naranja]#bdb# y/ó [naranja]#blb#) ó no se pulsa ningún botón.
+--las entradas [naranja]#sa# y [naranja]#sb# no afectan.
+Transición *PA->PA*:.
+--si se pulsa un botón para subir([naranja]#bda# y/ó [naranja]#bla#) ó no se pulsa ningún botón.
+--las entradas [naranja]#sa# y [naranja]#sb# no afectan.
+
+[.column]
+[.text-left%hardbreaks]
+Transición *PB->SUB*:.
+--si se pulsa un botón para subir([naranja]#bda# y/ó [naranja]#bla#) y no se pulsa simultáneamente algún botón de bajar([naranja]#bdb# ó [naranja]#blb#).
+--las entradas [naranja]#sa# y [naranja]#sb# no afectan.
+Transición *SUB->SUB*:.
+--mientras [naranja]#sa# esté desactivado.
+--no afectan ni los botones ni [naranja]#sb#.
+Transición *SUB->PA*:.
+--si se activa [naranja]#sa#
+--el resto de entradas no afecta
+
+[.column]
+[.text-left%hardbreaks]
+Transición *PA->BAJ*:.
+--si se pulsa un botón para bajar([naranja]#bdb# y/ó [naranja]#blb#)y no se pulsa simultáneamente algún botón de subir([naranja]#bda# ó [naranja]#bla#).
+--las entradas [naranja]#sa# y [naranja]#sb# no afectan.
+Transición *BAJ->BAJ*:.
+--mientras [naranja]#sb# esté desactivado.
+--no afectan ni los botones ni [naranja]#sa#
+Transición *BAJ->PB*:.
+--si se activa [naranja]#sb#
+--el resto de entradas no afecta
+
+=== C. Ascensor: Diagrama de estados
+
+
+image::tema7_ascen2_diag_seq.svg[]
+
+
 
 [.columns, state=txikiago]
 === C. Ascensor: Codificación
@@ -304,6 +326,71 @@ image::tema7_ascen2_diag_block.svg[]
 
 
 image::tema7_ascen2_tablas_plantilla.svg[]
+
+[.columns,state=taula]
+=== C. Ascensor: Tablas de Estados, Excitación de Biestables y Salidas
+
+[.column]
+--
+.Transición *PB->PB*
+[width=10%]
+|===
+|sa|sb|bdb|blb|bda|bla|PB->PB
+| X | X | X | 1 | X | X | 1
+| X | X | 1 | X | X | X | 1
+| X | X | 0 | 0 | 0 | 0 | 1
+|===
+
+--si se pulsa un botón para bajar([naranja]#bdb# y/ó [naranja]#blb#) ó no se pulsa ningún botón. +
+--las entradas [naranja]#sa# y [naranja]#sb# no afectan.
+--
+
+
+[.column]
+--
+.Transición *PB->SUB*
+[width=10%]
+|===
+|sa|sb|bdb|blb|bda|bla|PB->SUB
+| X | X | 0 | 0 | 1 | X | 1
+| X | X | 0 | 0 | X | 1 | 1
+|===
+
+--si se pulsa un botón para subir([naranja]#bda# y/ó [naranja]#bla#) y no se pulsa simultáneamente algún botón de bajar([naranja]#bdb# ó [naranja]#blb#). +
+--las entradas [naranja]#sa# y [naranja]#sb# no afectan.
+--
+
+[.columns,state=taula]
+=== C. Ascensor: Tablas de Estados, Excitación de Biestables y Salidas
+
+[.column]
+--
+.Transición *SUB->SUB*
+[width=10%]
+|===
+|sa|sb|bdb|blb|bda|bla|SUB->SUB
+| 0 | X | X | X | X | X | 1
+|===
+
+--mientras [naranja]#sa# esté desactivado. +
+--no afectan ni los botones ni [naranja]#sb#.
+--
+
+
+[.column]
+--
+.Transición *SUB->PA*
+[width=10%]
+|===
+|sa|sb|bdb|blb|bda|bdl|SUB->PA
+| 1 | X | X | X | X | X | 1
+|===
+
+--si se activa [naranja]#sa# +
+--el resto de entradas no afecta
+--
+
+
 
 === C. Ascensor: Tablas de Estados, Excitación de Biestables y Salidas
 

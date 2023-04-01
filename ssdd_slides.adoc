@@ -1192,6 +1192,76 @@ chr(0x41)
 * U+2192: &#x2192;
 
 <<<
+=== Otros Códigos Binarios
+
+* Binary Coded Decimal (BCD) natural
+* BCD Aiken
+* BCD exceso 3
+* Gray
+* Johnson
+
+<<<
+===  Binary Coded Decimal : BCD
+
+Codificación de números Naturales +
+
+BCD natural: Para un número decimal representar en binario con 4 bits los valores de *cada digito decimal*. +
+- Pesos de cada uno de los 4 bits: 8-4-2-1 +
+- 347 ->0011-0100-0111 -> 001101000111 +
+- Codificación sencilla pero códigos de mayor tamaño que el binario natural +
+
+BCD Aiken 2421: Mismo concepto que el natural pero los 4 bits tienen pesos 2-4-2-1 +
+- En los digitos 5,6,7,8 y 9 el bit de peso 2 de la posición 3ª tiene prioridad sobre el bit de la posición 1ª +
+- 2 -> 0010, 4 -> 0100, 5 -> *1* 011, 347 -> 01101001101 +
+
+BCD Aiken 5421: Mismo concepto que el Aiken 2421 pero con los pesos 5421 +
+- 5 -> 1000, 347 -> 01101001010 +
+
+BCD en exceso a 3 : Al valor a representar se le suma 3 antes de la codificación binaria
+- 0 -> 0011, 7-> 1010, 347 -> 011001111010
+
+<<<
+=== Código Gray
+
+Codificación de números Naturales +
+Es un  código reflejado -> Espejo +
+
+image::tema2_gray.svg[]
+
+El valor 4 en código Gray: 110, 0110, 00110, etc +
+La secuencia de los números es adyacente: únicamente cambia un bit
+
+[.columns]
+<<<
+=== Codificador Gray Binario
+
+[.column]
+image::tema2_gray-bin.svg[]
+
+[.column]
+--
+Codificador binario -> gray: +
+- Herramienta DK -> 4 funciones y 4 variables +
+- latexmath:[g_i = b_i \oplus b_{i+1}] +
+- latexmath:[g_{MSB} = b_{MSB}] +
+
+Codificador gray -> binario: +
+- Herramienta DK -> 4 funciones y 4 variables +
+- latexmath:[b_i = g_i \oplus g_{i+1} ... \oplus g_{n-1}] +
+- latexmath:[b_{MSB} = g_{MSB}] 
+--
+
+<<<
+=== Johnson
+
+* Números Naturales
+* A partir del número 0000 desplazar 1 bit a la izda y entra el bit 1
+* A partir del número 1111 desplazar 1 bit a la izda y entra el bit 0
+* Johnson (4 bits) : 0000-0001-0011-0111-1111-1110-1100-1000
+
+
+
+<<<
 === Tema 2: Ejercicios
 
 *  Miaulario/Recursos/Ejercicios

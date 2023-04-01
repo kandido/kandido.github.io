@@ -2902,12 +2902,12 @@ Los 7 LEDs del Display se nombran con 7 letras según su posición.
 Los 7 LEDs del Display tienen el Anodo ó el Cátodo común.
 
 Si el Display es de *Anodo Común*, se puede controlar el Cátodo de cada LED libremente con un *0* : lógica negativa. +
--Iluminar el 0 : activar los segmentos a-b-c-d-e-f -> 0000001. +
--Iluminar el 5: activar los segmentos a-c-d-f-g -> 0100100.
+-Iluminar el 0 : activar los segmentos f-e-d-c-b-a -> 1000000. +
+-Iluminar el 5: activar los segmentos  g-f-d-c-a -> 0010010.
 
 Si el Display es de *Cátodo Común*, se puede controlar el Anodo de cada LED libremente con un *1* : lógica positiva. +
--Iluminar el 0 : activar los segmentos a-b-c-d-e-f -> 1111110. +
--Iluminar el 5: activar los segmentos a-c-d-f-g -> 1011011.
+-Iluminar el 0 : activar los segmentos f-e-d-c-b-a -> 0111111. +
+-Iluminar el 5: activar los segmentos g-f-d-c-a -> 1101101.
 
 --
 
@@ -2915,9 +2915,71 @@ Si el Display es de *Cátodo Común*, se puede controlar el Anodo de cada LED li
 
 * Mediante un decodificador 4x7 Binario/7seg_code podemos visualizar en el display un dígito hexadecimal codificado en binario.
 * Diseñar un Decodificador BIN_HEX a Display_7_segmentos de Anódo Común en código VHDL. Verificar su funcionamiento mediante la tarjeta DE1-SoC
-** Utilizar como puerto de entrada las señales de los switches SW(3 downto 0)
-** Utilizar como puerto de salida las señales del Display de 7 segmentos HEX0(6 downto 0)
+** Utilizar como puerto de entrada las señales de los switches SW(3 downto 0) -> el hexadecimal x"F" equivale al binario "1111"
+** Utilizar como puerto de salida las señales del Display de 7 segmentos HEX0(6 downto 0) -> g-f-e-d-c-b-a
 ** Cada digito hexadecimal de entrada estará codificado en binario con 4 bits y la salida será un bus de 7 líneas donde cada línea irá a uno de los LEDs 
+
+[.notes]
+--
+-- Universidad Pública de Navarra
+-- Sistemas Digitales
+-- Primavera 2023
+-- HEX0 -> gfedcba
+
+library std;
+use std.standard.all;
+
+entity decod7seg is
+  port (
+    SW   : in bit_vector(3 downto 0);
+    HEX0   : out bit_vector(6 downto 0)
+);
+end entity;
+
+architecture beha of decod7seg is
+begin
+ process (SW)
+ begin
+    case SW is
+        when x"0" =>
+            HEX0 <= "1000000";
+        when x"1" =>
+            HEX0 <= "1111001";
+        when x"2" =>
+            HEX0 <= "0100100";
+        when x"3" =>
+            HEX0 <= "0110000";
+        when x"4" =>
+            HEX0 <= "0011001";
+        when x"5" =>
+            HEX0 <= "0010010";
+        when x"6" =>
+            HEX0 <= "0000010";
+        when x"7" =>
+            HEX0 <= "1111000";
+        when x"8" =>
+            HEX0 <= "0000000";
+        when x"9" =>
+            HEX0 <= "0010000";
+        when x"A" =>
+            HEX0 <= "0001000";
+        when x"B" =>
+            HEX0 <= "0000011";
+        when x"C" =>
+            HEX0 <= "1000110";
+        when x"D" =>
+            HEX0 <= "0100001";
+        when x"E" =>
+            HEX0 <= "0000110";
+        when x"F" =>
+            HEX0 <= "0001110";
+        when others =>
+            HEX0 <= "0111111";
+        end case;
+ end process;
+end beha;
+   
+--
 
 [.columns]
 === Decodificador Display 7 Segmentos

@@ -921,11 +921,62 @@ La solución no es única: existen otras opciones para la síntesis de \(A_4, A_
 <div class="paragraph"><p>Los 7 LEDs del Display se nombran con 7 letras según su posición.</p></div></div></div>
 <div class="openblock column"><div class="content"><div class="paragraph"><p>Los 7 LEDs del Display tienen el Anodo ó el Cátodo común.</p></div>
 <div class="paragraph"><p>Si el Display es de <strong>Anodo Común</strong>, se puede controlar el Cátodo de cada LED libremente con un <strong>0</strong> : lógica negativa.<br>
--Iluminar el 0 : activar los segmentos a-b-c-d-e-f &#8594; 0000001.<br>
--Iluminar el 5: activar los segmentos a-c-d-f-g &#8594; 0100100.</p></div>
+-Iluminar el 0 : activar los segmentos f-e-d-c-b-a &#8594; 1000000.<br>
+-Iluminar el 5: activar los segmentos  g-f-d-c-a &#8594; 0010010.</p></div>
 <div class="paragraph"><p>Si el Display es de <strong>Cátodo Común</strong>, se puede controlar el Anodo de cada LED libremente con un <strong>1</strong> : lógica positiva.<br>
--Iluminar el 0 : activar los segmentos a-b-c-d-e-f &#8594; 1111110.<br>
--Iluminar el 5: activar los segmentos a-c-d-f-g &#8594; 1011011.</p></div></div></div></div></section><section id="_decodificador_display_7_segmentos"><h2>Decodificador Display 7 Segmentos</h2><div class="slide-content"><div class="ulist"><ul><li><p>Mediante un decodificador 4x7 Binario/7seg_code podemos visualizar en el display un dígito hexadecimal codificado en binario.</p></li><li><p>Diseñar un Decodificador BIN_HEX a Display_7_segmentos de Anódo Común en código VHDL. Verificar su funcionamiento mediante la tarjeta DE1-SoC</p><div class="ulist"><ul><li><p>Utilizar como puerto de entrada las señales de los switches SW(3 downto 0)</p></li><li><p>Utilizar como puerto de salida las señales del Display de 7 segmentos HEX0(6 downto 0)</p></li><li><p>Cada digito hexadecimal de entrada estará codificado en binario con 4 bits y la salida será un bus de 7 líneas donde cada línea irá a uno de los LEDs</p></li></ul></div></li></ul></div></div></section><section id="_decodificador_display_7_segmentos_2" class="columns"><h2>Decodificador Display 7 Segmentos</h2><div class="slide-content"><div class="imageblock column"><img src="images/tema6_LED_decod.png" alt="tema6 LED decod"></div>
+-Iluminar el 0 : activar los segmentos f-e-d-c-b-a &#8594; 0111111.<br>
+-Iluminar el 5: activar los segmentos g-f-d-c-a &#8594; 1101101.</p></div></div></div></div></section><section id="_decodificador_display_7_segmentos"><h2>Decodificador Display 7 Segmentos</h2><div class="slide-content"><div class="ulist"><ul><li><p>Mediante un decodificador 4x7 Binario/7seg_code podemos visualizar en el display un dígito hexadecimal codificado en binario.</p></li><li><p>Diseñar un Decodificador BIN_HEX a Display_7_segmentos de Anódo Común en código VHDL. Verificar su funcionamiento mediante la tarjeta DE1-SoC</p><div class="ulist"><ul><li><p>Utilizar como puerto de entrada las señales de los switches SW(3 downto 0) &#8594; el hexadecimal x"F" equivale al binario "1111"</p></li><li><p>Utilizar como puerto de salida las señales del Display de 7 segmentos HEX0(6 downto 0) &#8594; g-f-e-d-c-b-a</p></li><li><p>Cada digito hexadecimal de entrada estará codificado en binario con 4 bits y la salida será un bus de 7 líneas donde cada línea irá a uno de los LEDs</p></li></ul></div></li></ul></div>
+<aside class="notes"><div class="paragraph"><p>&#8201;&#8212;&#8201;Universidad Pública de Navarra&#8201;&#8212;&#8201;Sistemas Digitales&#8201;&#8212;&#8201;Primavera 2023&#8201;&#8212;&#8201;HEX0 &#8594; gfedcba</p></div>
+<div class="paragraph"><p>library std;
+use std.standard.all;</p></div>
+<div class="paragraph"><p>entity decod7seg is
+  port (
+    SW   : in bit_vector(3 downto 0);
+    HEX0   : out bit_vector(6 downto 0)
+);
+end entity;</p></div>
+<div class="paragraph"><p>architecture beha of decod7seg is
+begin
+ process (SW)
+ begin
+    case SW is
+        when x"0" &#8658;
+            HEX0 &#8656; "1000000";
+        when x"1" &#8658;
+            HEX0 &#8656; "1111001";
+        when x"2" &#8658;
+            HEX0 &#8656; "0100100";
+        when x"3" &#8658;
+            HEX0 &#8656; "0110000";
+        when x"4" &#8658;
+            HEX0 &#8656; "0001001";
+        when x"5" &#8658;
+            HEX0 &#8656; "0010010";
+        when x"6" &#8658;
+            HEX0 &#8656; "0000010";
+        when x"7" &#8658;
+            HEX0 &#8656; "1111000";
+        when x"8" &#8658;
+            HEX0 &#8656; "0000000";
+        when x"9" &#8658;
+            HEX0 &#8656; "0010000";
+        when x"A" &#8658;
+            HEX0 &#8656; "0001000";
+        when x"B" &#8658;
+            HEX0 &#8656; "0000011";
+        when x"C" &#8658;
+            HEX0 &#8656; "1000110";
+        when x"D" &#8658;
+            HEX0 &#8656; "0100000";
+        when x"E" &#8658;
+            HEX0 &#8656; "0000110";
+        when x"F" &#8658;
+            HEX0 &#8656; "0001110";
+        when others &#8658;
+            HEX0 &#8656; "0111111";
+        end case;
+ end process;
+end beha;</p></div></aside></div></section><section id="_decodificador_display_7_segmentos_2" class="columns"><h2>Decodificador Display 7 Segmentos</h2><div class="slide-content"><div class="imageblock column"><img src="images/tema6_LED_decod.png" alt="tema6 LED decod"></div>
 <div class="imageblock column"><img src="images/tema6_LED_decod_5.png" alt="tema6 LED decod 5"></div></div></section><section id="_aplicaciones_generador_de_funciones_2"><h2>Aplicaciones: Generador de Funciones</h2><div class="slide-content"><div class="ulist"><ul><li><p>El Decodificador de salidas mutuamente excluyentes activa una salida para cada combinación de la entrada por lo que cada salida responde a un minitérmino.</p></li><li><p>Las entradas del Decodificador representan las variables independientes.</p></li><li><p>Se puede generar una función mediante la primera forma canónica SOP realizando la suma lógica, <strong>exclusivamente</strong> de las salidas correspondientes a los minitérminos que hacen uno a la función, mediante una puerta OR cuya salida representa a la Función.</p></li></ul></div>
 <div class="imageblock"><img src="images/tema6_decoder_func.png" alt="tema6 decoder func"></div>
 <div class="ulist"><ul><li><p>Si la función se expresa según la 2ª forma canónica sustituiríamos la puerta OR de salida por una puerta AND.</p></li></ul></div></div></section><section id="_aplicaciones_conversor_serie_paralelo" class="columns" data-state="txikiago"><h2>Aplicaciones: Conversor Serie Paralelo</h2><div class="slide-content"><div class="paragraph column"><p>Aplicación como <strong>Demultiplexor</strong>: 1 entrada ENABLE que se conecta a una de la salidas seleccionada mediante las entradas de selección.

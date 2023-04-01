@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.18">
 <meta name="keywords" content="computer, architecture">
 <meta name="author" content="Cándido Aramburu">
 <title>Introducción al Lenguaje VHDL y al Laboratorio Remoto de Sistemas FPGA</title>
@@ -18,7 +18,7 @@
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2023-02-20</span>
+<span id="revdate">2023-04-01</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -177,58 +177,60 @@
 <li><a href="#_operación_suma_y_multiplicación">20.1. Operación suma y multiplicación</a></li>
 </ul>
 </li>
-<li><a href="#_ejercicio_1_5_matricula">21. Ejercicio 1.5: Matricula</a>
+<li><a href="#_ascensor_2_plantas">21. Ascensor 2 plantas</a></li>
+<li><a href="#_ejercicio_1_5_matricula">22. Ejercicio 1.5: Matricula</a>
 <ul class="sectlevel2">
-<li><a href="#_arquitectura_rtl">21.1. Arquitectura rtl</a></li>
-<li><a href="#_netlist_view">21.2. netlist view</a></li>
-<li><a href="#_tutorial_quartus_matricula_case_vhd">21.3. Tutorial quartus &#8594; matricula_case.vhd</a></li>
-<li><a href="#_ejemplo_1_matricula_vhd">21.4. Ejemplo_1: matricula.vhd</a></li>
+<li><a href="#_arquitectura_rtl">22.1. Arquitectura rtl</a></li>
+<li><a href="#_netlist_view">22.2. netlist view</a></li>
+<li><a href="#_tutorial_quartus_matricula_case_vhd">22.3. Tutorial quartus &#8594; matricula_case.vhd</a></li>
+<li><a href="#_ejemplo_1_matricula_vhd">22.4. Ejemplo_1: matricula.vhd</a></li>
 </ul>
 </li>
-<li><a href="#_multiplexor">22. Multiplexor</a>
+<li><a href="#_multiplexor">23. Multiplexor</a>
 <ul class="sectlevel2">
-<li><a href="#_mux2x1_arquitectura_rtl">22.1. mux2x1: arquitectura RTL</a></li>
-<li><a href="#_análisis_5">22.2. Análisis</a></li>
-<li><a href="#_mux4x1_arquitectura_behavioral">22.3. mux4x1: arquitectura Behavioral</a></li>
-<li><a href="#_análisis_6">22.4. Análisis</a></li>
-<li><a href="#_mux4x1_arquitectura_estructural">22.5. mux4x1: arquitectura Estructural</a>
+<li><a href="#_mux2x1_arquitectura_rtl">23.1. mux2x1: arquitectura RTL</a></li>
+<li><a href="#_análisis_5">23.2. Análisis</a></li>
+<li><a href="#_mux4x1_arquitectura_behavioral">23.3. mux4x1: arquitectura Behavioral</a></li>
+<li><a href="#_análisis_6">23.4. Análisis</a></li>
+<li><a href="#_mux4x1_arquitectura_estructural">23.5. mux4x1: arquitectura Estructural</a>
 <ul class="sectlevel3">
-<li><a href="#_compilación_en_quartus">22.5.1. Compilación en Quartus</a></li>
+<li><a href="#_compilación_en_quartus">23.5.1. Compilación en Quartus</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_decodificador">23. Decodificador</a>
+<li><a href="#_decodificador">24. Decodificador</a>
 <ul class="sectlevel2">
-<li><a href="#_decoder_hexdisplay_7_segmentos">23.1. Decoder Hex/Display_7_segmentos</a></li>
+<li><a href="#_decoder_hexdisplay_7_segmentos_1_bloque">24.1. Decoder Hex/Display_7_segmentos: 1 bloque</a></li>
+<li><a href="#_decoder_hexdisplay_7_segmentos_2_bloques">24.2. Decoder Hex/Display_7_segmentos: 2 bloques</a></li>
 </ul>
 </li>
-<li><a href="#_valores_indeterminados_x_en_la_entrada_y_en_la_salida">24. Valores INDETERMINADOS X en la entrada y en la salida</a>
+<li><a href="#_valores_indeterminados_x_en_la_entrada_y_en_la_salida">25. Valores INDETERMINADOS X en la entrada y en la salida</a>
 <ul class="sectlevel2">
-<li><a href="#_codificador_con_prioridad">24.1. Codificador con Prioridad</a></li>
+<li><a href="#_codificador_con_prioridad">25.1. Codificador con Prioridad</a></li>
 </ul>
 </li>
-<li><a href="#_diseños_vhdl_no_sintetizables_en_circuitos_electrónicos">25. Diseños VHDL NO sintetizables en circuitos electrónicos</a>
+<li><a href="#_diseños_vhdl_no_sintetizables_en_circuitos_electrónicos">26. Diseños VHDL NO sintetizables en circuitos electrónicos</a>
 <ul class="sectlevel2">
-<li><a href="#_introducción_4">25.1. Introducción</a></li>
-<li><a href="#_hello_world">25.2. Hello World</a></li>
+<li><a href="#_introducción_4">26.1. Introducción</a></li>
+<li><a href="#_hello_world">26.2. Hello World</a></li>
 </ul>
 </li>
-<li><a href="#_flip_flop">26. Flip-Flop</a>
+<li><a href="#_flip_flop">27. Flip-Flop</a>
 <ul class="sectlevel2">
-<li><a href="#_memorias">26.1. Memorias</a></li>
-<li><a href="#_vhdl_flip_flop_d_con_entradas_asíncronas_en_lógica_negativa">26.2. VHDL: Flip Flop D con entradas asíncronas en lógica negativa</a>
+<li><a href="#_memorias">27.1. Memorias</a></li>
+<li><a href="#_vhdl_flip_flop_d_con_entradas_asíncronas_en_lógica_negativa">27.2. VHDL: Flip Flop D con entradas asíncronas en lógica negativa</a>
 <ul class="sectlevel3">
-<li><a href="#_diseño_8">26.2.1. diseño</a></li>
-<li><a href="#_implementación_de_unidades_de_memoria">26.2.2. Implementación de unidades de MEMORIA</a></li>
+<li><a href="#_diseño_8">27.2.1. diseño</a></li>
+<li><a href="#_implementación_de_unidades_de_memoria">27.2.2. Implementación de unidades de MEMORIA</a></li>
 </ul>
 </li>
-<li><a href="#_ff_d">26.3. FF-D</a></li>
+<li><a href="#_ff_d">27.3. FF-D</a></li>
 </ul>
 </li>
-<li><a href="#_contador_síncrono">27. Contador Síncrono</a></li>
-<li><a href="#_cerradura_electrónica">28. Cerradura Electrónica</a></li>
-<li><a href="#_registros">29. Registros</a></li>
+<li><a href="#_contador_síncrono">28. Contador Síncrono</a></li>
+<li><a href="#_cerradura_electrónica">29. Cerradura Electrónica</a></li>
+<li><a href="#_registros">30. Registros</a></li>
 <li><a href="#KitDe1soc">Appendix A: Kit DE1-SoC</a></li>
 <li><a href="#LabRemoto">Appendix B: Laboratorio Remoto de Sistemas FPGA</a>
 <ul class="sectlevel2">
@@ -2901,6 +2903,22 @@ end if;</code></pre>
 </ul>
 </div>
 </li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+"else" permite añadir TODOS los casos posibles que no han sido definidos previamente en las líneas "elsif" o/y "if"
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>light_if.vhd:</p>
 <div class="listingblock">
@@ -3042,6 +3060,22 @@ END LogicFunction ;</code></pre>
 </div>
 </div>
 </li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+"when others" permite añadir TODOS los casos posibles que no han sido definidos previamente en las líneas "when"
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>CREO el proyecto light_if y le añado el fichero light_if.vhd</p>
 </li>
@@ -3157,6 +3191,22 @@ END behavioral ;</code></pre>
 </div>
 </div>
 </li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+"when others" permite añadir TODOS los casos posibles que no han sido definidos previamente en las líneas "when"
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>CREO el proyecto light_case y le añado el fichero light_case.vhd</p>
 </li>
@@ -3288,10 +3338,129 @@ end ;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ejercicio_1_5_matricula">21. Ejercicio 1.5: Matricula</h2>
+<h2 id="_ascensor_2_plantas">21. Ascensor 2 plantas</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>ascen2.vhd</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Ascensor de 2 plantas: Planta Baja y Planta Alta
+-- Entradas: Switches SW 0-5 -&gt; sensores sa, sb y botones bdb, blb, bda, bla
+-- Salidas: Leds LEDR 0-1 -&gt; código z0z1
+-- Estados: Leds LEDR 8-9 -&gt; código q0q1
+-- Reloj : botón KEY(0)
+--  falling_edge (signal) : función que devuelve TRUE si hay un evento en signal de '1' a '0'
+--                          definida en la librería ieee para señales std_logic
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity ascen2 is
+    port (
+        SW: in std_logic_vector(5 downto 0);
+        KEY: in std_logic_vector(1 downto 0);
+        LEDR: out std_logic_vector(9 downto 0)
+    );
+end ascen2;
+
+architecture rtl of ascen2 is
+-- cc salida z1z0=q1q0
+-- cc excitacion biestables:
+-- j1=~q1q0sa  k1=q1~q0sb
+-- j0=~q1~q0~bdb~blb(bda+bla)
+-- k0=q1q0~bda~bla(bdb+blb)
+signal j0,k0,j1,k1,q0,q1,z0,z1,clk,reset: std_logic;
+signal j0k0,j1k1,q1q0,z1z0: std_logic_vector(1 downto 0);
+signal sa,sb,bdb,blb,bda,bla: std_logic;
+
+begin
+
+
+-- buses
+    j0k0 &lt;= j0 &amp; k0;
+    j1k1 &lt;= j1 &amp; k1;
+    q1q0 &lt;= q1 &amp; q0;
+    z1z0 &lt;= z1 &amp; z0;
+
+--  señales externas
+    clk &lt;= KEY(0);
+    reset &lt;= not KEY(1);
+    LEDR(0) &lt;= z1z0(0);
+    LEDR(1) &lt;= z1z0(1);
+    sa &lt;= SW(5);sb &lt;= SW(4);bdb &lt;= SW(3);blb &lt;= SW(2);bda &lt;= SW(1);bla &lt;= SW(0);
+
+-- cc de excitación de biestables
+    j0 &lt;= (not q1) and (not q0) and (not bdb) and (not blb) and (bda or bla);
+--    k0 &lt;= q1 and q0 and (not bda) and (not bla) and (bdb or blb);
+    k0 &lt;= q1 and q0 and (not bda);
+    j1 &lt;= (not q1) and q0 and sa;
+    k1 &lt;= q1 and (not q0) and sb;
+
+-- cc de salida
+    z1 &lt;= q1;
+    z0 &lt;= q0;
+
+-- test
+   LEDR(2) &lt;= j0;
+   LEDR(3) &lt;= k0;
+   LEDR(4) &lt;= j1;
+   LEDR(5) &lt;= k1;
+
+   LEDR(6) &lt;= q1q0(0);
+   LEDR(7) &lt;= q1q0(1);
+
+   LEDR(8) &lt;= bda;
+   LEDR(9) &lt;= clk;
+
+
+-- Memoria
+    biestable0:process (clk,reset)
+    begin
+        if ( reset = '1') then
+            q0 &lt;= '1';
+        else
+            if (falling_edge(clk)) then
+                if j0k0 = "10" then
+                    q0 &lt;= '1';
+                elsif j0k0 = "01" then
+                    q0 &lt;= '0';
+                elsif j0k0 = "11" then
+                    q0 &lt;= not q0;
+                end if;
+            end if;
+        end if;
+    end process biestable0;
+    biestable1:process (clk,reset)
+    begin
+     if ( reset = '1') then
+            q1 &lt;= '1';
+        else
+            if (falling_edge(clk)) then
+                if j1k1 = "10" then
+                    q1 &lt;= '1';
+                elsif j1k1 = "01" then
+                    q1 &lt;= '0';
+                elsif j1k1 = "11" then
+                    q1 &lt;= not q1;
+                end if;
+            end if;
+        end if;
+    end process biestable1;
+end rtl;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ejercicio_1_5_matricula">22. Ejercicio 1.5: Matricula</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_arquitectura_rtl">21.1. Arquitectura rtl</h3>
+<h3 id="_arquitectura_rtl">22.1. Arquitectura rtl</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3334,7 +3503,7 @@ end puertas;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_netlist_view">21.2. netlist view</h3>
+<h3 id="_netlist_view">22.2. netlist view</h3>
 <div class="imageblock">
 <div class="content">
 <img src="images/matricula_RTL.png" alt="Circuito Digital matricula">
@@ -3342,7 +3511,7 @@ end puertas;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_tutorial_quartus_matricula_case_vhd">21.3. Tutorial quartus &#8594; matricula_case.vhd</h3>
+<h3 id="_tutorial_quartus_matricula_case_vhd">22.3. Tutorial quartus &#8594; matricula_case.vhd</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3447,7 +3616,7 @@ La idea fundamental de este ejercicio es la arquitectura. Mediante la sentencia 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ejemplo_1_matricula_vhd">21.4. Ejemplo_1: matricula.vhd</h3>
+<h3 id="_ejemplo_1_matricula_vhd">22.4. Ejemplo_1: matricula.vhd</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3515,10 +3684,10 @@ end rtl_seq;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_multiplexor">22. Multiplexor</h2>
+<h2 id="_multiplexor">23. Multiplexor</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_mux2x1_arquitectura_rtl">22.1. mux2x1: arquitectura RTL</h3>
+<h3 id="_mux2x1_arquitectura_rtl">23.1. mux2x1: arquitectura RTL</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3567,7 +3736,7 @@ end rtl;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_análisis_5">22.2. Análisis</h3>
+<h3 id="_análisis_5">23.2. Análisis</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3583,7 +3752,7 @@ end rtl;</code></pre>
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_mux4x1_arquitectura_behavioral">22.3. mux4x1: arquitectura Behavioral</h3>
+<h3 id="_mux4x1_arquitectura_behavioral">23.3. mux4x1: arquitectura Behavioral</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3665,7 +3834,7 @@ Si se escribe LEDR en lugar de LEDR(0) da error.
 </div>
 </div>
 <div class="sect2">
-<h3 id="_análisis_6">22.4. Análisis</h3>
+<h3 id="_análisis_6">23.4. Análisis</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3681,7 +3850,7 @@ Si se escribe LEDR en lugar de LEDR(0) da error.
 <div style="page-break-after: always;"></div>
 </div>
 <div class="sect2">
-<h3 id="_mux4x1_arquitectura_estructural">22.5. mux4x1: arquitectura Estructural</h3>
+<h3 id="_mux4x1_arquitectura_estructural">23.5. mux4x1: arquitectura Estructural</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3812,7 +3981,7 @@ end estructural;</code></pre>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="_compilación_en_quartus">22.5.1. Compilación en Quartus</h4>
+<h4 id="_compilación_en_quartus">23.5.1. Compilación en Quartus</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -3878,10 +4047,62 @@ end estructural;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_decodificador">23. Decodificador</h2>
+<h2 id="_decodificador">24. Decodificador</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_decoder_hexdisplay_7_segmentos">23.1. Decoder Hex/Display_7_segmentos</h3>
+<h3 id="_decoder_hexdisplay_7_segmentos_1_bloque">24.1. Decoder Hex/Display_7_segmentos: 1 bloque</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitectura funcional con sentencia CASE</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Puertos de la tarjeta DE1-SoC: SW y HEX0</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Decodificador hexadecimal display 7 segmentos
+-- Entradas: Switches 0-3 -&gt; Código hexadecimal 4 bits
+-- Salidas: Display HEX0 -&gt; Anodo Común -&gt; Apagado="1111111"
+--      SW: 0001 Salida='1' -&gt;  gfedcba -&gt; "1111001"
+
+entity dec7seg is
+    port (
+        SW: in bit_vector(3 downto 0);
+        HEX0: out bit_vector(6 downto 0)
+    );
+end dec7seg;
+
+architecture behavioral of dec7seg is
+--    signal signals: std_logic;
+-- Arquitectura funcional con sentencias secuenciales
+-- Sentencia secuencial : CASE
+begin
+    process (SW)
+    begin
+      case SW is
+          when "0000" =&gt;
+             HEX0 &lt;= "1000000";
+          when "0001" =&gt;
+             HEX0 &lt;= "1111001";
+          when "1010" =&gt;
+              HEX0 &lt;= "0001000";
+          when others =&gt;
+              HEX0 &lt;= "0111111";
+      end case;
+    end process;
+end behavioral;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_decoder_hexdisplay_7_segmentos_2_bloques">24.2. Decoder Hex/Display_7_segmentos: 2 bloques</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -3994,10 +4215,10 @@ end RTL;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_valores_indeterminados_x_en_la_entrada_y_en_la_salida">24. Valores INDETERMINADOS X en la entrada y en la salida</h2>
+<h2 id="_valores_indeterminados_x_en_la_entrada_y_en_la_salida">25. Valores INDETERMINADOS X en la entrada y en la salida</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_codificador_con_prioridad">24.1. Codificador con Prioridad</h3>
+<h3 id="_codificador_con_prioridad">25.1. Codificador con Prioridad</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4087,10 +4308,10 @@ END ARCHITECTURE;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_diseños_vhdl_no_sintetizables_en_circuitos_electrónicos">25. Diseños VHDL NO sintetizables en circuitos electrónicos</h2>
+<h2 id="_diseños_vhdl_no_sintetizables_en_circuitos_electrónicos">26. Diseños VHDL NO sintetizables en circuitos electrónicos</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_introducción_4">25.1. Introducción</h3>
+<h3 id="_introducción_4">26.1. Introducción</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4100,7 +4321,7 @@ END ARCHITECTURE;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_hello_world">25.2. Hello World</h3>
+<h3 id="_hello_world">26.2. Hello World</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4141,10 +4362,10 @@ end architecture;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_flip_flop">26. Flip-Flop</h2>
+<h2 id="_flip_flop">27. Flip-Flop</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_memorias">26.1. Memorias</h3>
+<h3 id="_memorias">27.1. Memorias</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4154,9 +4375,9 @@ end architecture;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_vhdl_flip_flop_d_con_entradas_asíncronas_en_lógica_negativa">26.2. VHDL: Flip Flop D con entradas asíncronas en lógica negativa</h3>
+<h3 id="_vhdl_flip_flop_d_con_entradas_asíncronas_en_lógica_negativa">27.2. VHDL: Flip Flop D con entradas asíncronas en lógica negativa</h3>
 <div class="sect3">
-<h4 id="_diseño_8">26.2.1. diseño</h4>
+<h4 id="_diseño_8">27.2.1. diseño</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -4264,7 +4485,7 @@ end architecture;</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_implementación_de_unidades_de_memoria">26.2.2. Implementación de unidades de MEMORIA</h4>
+<h4 id="_implementación_de_unidades_de_memoria">27.2.2. Implementación de unidades de MEMORIA</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -4285,7 +4506,7 @@ end architecture;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ff_d">26.3. FF-D</h3>
+<h3 id="_ff_d">27.3. FF-D</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -4355,7 +4576,7 @@ end behavioral;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_contador_síncrono">27. Contador Síncrono</h2>
+<h2 id="_contador_síncrono">28. Contador Síncrono</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -4420,7 +4641,7 @@ end behavioral;</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_cerradura_electrónica">28. Cerradura Electrónica</h2>
+<h2 id="_cerradura_electrónica">29. Cerradura Electrónica</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -4556,7 +4777,7 @@ begin
 </div>
 </div>
 <div class="sect1">
-<h2 id="_registros">29. Registros</h2>
+<h2 id="_registros">30. Registros</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -5521,7 +5742,7 @@ end mux4t1_2;</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-02-20 14:16:06 +0100
+Last updated 2023-04-01 09:37:52 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
@@ -5529,7 +5750,7 @@ Last updated 2023-02-20 14:16:06 +0100
 <script>
 if (!hljs.initHighlighting.called) {
   hljs.initHighlighting.called = true
-  ;[].slice.call(document.querySelectorAll('pre.highlight > code')).forEach(function (el) { hljs.highlightBlock(el) })
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
 }
 </script>
 <script type="text/x-mathjax-config">
