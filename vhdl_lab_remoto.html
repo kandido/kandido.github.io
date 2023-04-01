@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.17">
 <meta name="keywords" content="computer, architecture">
 <meta name="author" content="Cándido Aramburu">
 <title>Introducción al Lenguaje VHDL y al Laboratorio Remoto de Sistemas FPGA</title>
@@ -177,10 +177,15 @@
 <li><a href="#_operación_suma_y_multiplicación">20.1. Operación suma y multiplicación</a></li>
 </ul>
 </li>
-<li><a href="#_ascensor_2_plantas">21. Ascensor 2 plantas</a></li>
+<li><a href="#_ascensor_2_plantas">21. Ascensor 2 plantas</a>
+<ul class="sectlevel2">
+<li><a href="#_arquitectura_rtl">21.1. Arquitectura RTL</a></li>
+<li><a href="#_arquitectura_behavioral">21.2. Arquitectura behavioral</a></li>
+</ul>
+</li>
 <li><a href="#_ejercicio_1_5_matricula">22. Ejercicio 1.5: Matricula</a>
 <ul class="sectlevel2">
-<li><a href="#_arquitectura_rtl">22.1. Arquitectura rtl</a></li>
+<li><a href="#_arquitectura_rtl_2">22.1. Arquitectura rtl</a></li>
 <li><a href="#_netlist_view">22.2. netlist view</a></li>
 <li><a href="#_tutorial_quartus_matricula_case_vhd">22.3. Tutorial quartus &#8594; matricula_case.vhd</a></li>
 <li><a href="#_ejemplo_1_matricula_vhd">22.4. Ejemplo_1: matricula.vhd</a></li>
@@ -3340,8 +3345,13 @@ end ;</code></pre>
 <div class="sect1">
 <h2 id="_ascensor_2_plantas">21. Ascensor 2 plantas</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_arquitectura_rtl">21.1. Arquitectura RTL</h3>
 <div class="ulist">
 <ul>
+<li>
+<p>El diseño se ha realizado manualmente y se va a realizar la descripción VHDL de dicho diseño.</p>
+</li>
 <li>
 <p>ascen2.vhd</p>
 <div class="listingblock">
@@ -3369,6 +3379,8 @@ entity ascen2 is
 end ascen2;
 
 architecture rtl of ascen2 is
+
+-- Circuitos diseñados manualmente
 -- cc salida z1z0=q1q0
 -- cc excitacion biestables:
 -- j1=~q1q0sa  k1=q1~q0sb
@@ -3379,19 +3391,15 @@ signal j0k0,j1k1,q1q0,z1z0: std_logic_vector(1 downto 0);
 signal sa,sb,bdb,blb,bda,bla: std_logic;
 
 begin
-
-
--- buses
+--  Componentes de los buses
     j0k0 &lt;= j0 &amp; k0;
     j1k1 &lt;= j1 &amp; k1;
     q1q0 &lt;= q1 &amp; q0;
     z1z0 &lt;= z1 &amp; z0;
 
---  señales externas
+--  Señales externas de entrada
     clk &lt;= KEY(0);
     reset &lt;= not KEY(1);
-    LEDR(0) &lt;= z1z0(0);
-    LEDR(1) &lt;= z1z0(1);
     sa &lt;= SW(5);sb &lt;= SW(4);bdb &lt;= SW(3);blb &lt;= SW(2);bda &lt;= SW(1);bla &lt;= SW(0);
 
 -- cc de excitación de biestables
@@ -3404,20 +3412,7 @@ begin
     z1 &lt;= q1;
     z0 &lt;= q0;
 
--- test
-   LEDR(2) &lt;= j0;
-   LEDR(3) &lt;= k0;
-   LEDR(4) &lt;= j1;
-   LEDR(5) &lt;= k1;
-
-   LEDR(6) &lt;= q1q0(0);
-   LEDR(7) &lt;= q1q0(1);
-
-   LEDR(8) &lt;= bda;
-   LEDR(9) &lt;= clk;
-
-
--- Memoria
+-- Memoria : 2 biestables JK
     biestable0:process (clk,reset)
     begin
         if ( reset = '1') then
@@ -3452,9 +3447,18 @@ begin
         end if;
     end process biestable1;
 
-    decod7seg:process (z1z0)
+
+-- Visualización de la salida
+    LEDR(0) &lt;= z1z0(0);
+    LEDR(1) &lt;= z1z0(1);
+
+-- Visualización de la entrada: reloj
+   LEDR(9) &lt;= clk;
+
+-- Visualización de los estados
+    decod7seg:process (q1q0)
     begin
-       case z1z0 is
+       case q1q0 is
             when "00" =&gt;
                 HEX1 &lt;= "0001100";
                 HEX0 &lt;= "0000011";
@@ -3477,12 +3481,152 @@ end rtl;</code></pre>
 </ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_arquitectura_behavioral">21.2. Arquitectura behavioral</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>La arquitectura es una descripción fiel del diagrama de estados mediante el lenguaje VHDL.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Ascensor de 2 plantas: Planta Baja y Planta Alta
+-- Entradas: Switches SW 0-5 -&gt; sensores sa, sb y botones bdb, blb, bda, bla
+-- Salidas: Leds LEDR 0-1 -&gt; código z0z1
+-- Estados: Leds LEDR 8-9 -&gt; código q0q1
+-- Reloj : botón KEY(0)
+--  falling_edge (signal) : función que devuelve TRUE si hay un evento en signal de '1' a '0'
+--                          definida en la librería ieee para señales std_logic
+
+-- FSM Moore
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity ascen2 is
+    port (
+        SW: in std_logic_vector(5 downto 0);
+        KEY: in std_logic_vector(1 downto 0);
+        LEDR: out std_logic_vector(9 downto 0);
+        HEX0:  out std_logic_vector(6 downto 0);
+        HEX1:  out std_logic_vector(6 downto 0)
+
+    );
+end ascen2;
+
+architecture behavioral of ascen2 is
+
+signal clk,reset,z0,z1: std_logic;
+signal sa,sb,bdb,blb,bda,bla: std_logic;
+
+type tipo_estado is (pb,sub,baj,pa);  -- tipo enumeración : ESTADOS
+signal estado_actual : tipo_estado := pb; -- estado inicial
+signal estado_siguiente: tipo_estado ;
+
+begin
+--  Señales externas de entrada
+    clk &lt;= KEY(0);
+    reset &lt;= not KEY(1);
+    sa &lt;= SW(5);sb &lt;= SW(4);bdb &lt;= SW(3);blb &lt;= SW(2);bda &lt;= SW(1);bla &lt;= SW(0);
+
+-- Diagrama de Transiciones Moore
+    process (SW,clk)
+    begin
+       case estado_actual is
+            when pb =&gt;
+                if (bdb='1' or blb='1' ) then
+                    estado_siguiente &lt;= pb;
+                elsif ( bdb='0' and blb='0' and bda='0' and bla='0') then
+                    estado_siguiente &lt;= pb;
+                elsif (bda='1' or bla='1' ) then
+                   estado_siguiente &lt;= sub;
+                end if;
+                z0 &lt;= '0';
+                z1 &lt;= '0';
+            when sub =&gt;
+                if (sa='1') then
+                    estado_siguiente &lt;= pa;
+                else
+                   estado_siguiente &lt;= sub;
+                end if;
+                z0 &lt;= '1';
+                z1 &lt;= '0';
+           when pa =&gt;
+                if (bda='1' or bla='1' ) then
+                   estado_siguiente &lt;= pa;
+                elsif ( bdb='0' and blb='0' and bda='0' and bla='0') then
+                    estado_siguiente &lt;= pa;
+                elsif (bdb='1' or blb='1' ) then
+                   estado_siguiente &lt;= baj;
+                end if;
+                z0 &lt;= '1';
+                z1 &lt;= '1';
+           when baj =&gt;
+                if (sb='1') then
+                    estado_siguiente &lt;= pb;
+                else
+                   estado_siguiente &lt;= baj;
+                end if;
+                z0 &lt;= '0';
+                z1 &lt;= '1';
+       end case;
+    end process;
+
+-- Memoria : 2 celdas de memoria síncrona
+    memoria:process (clk,reset)
+    begin
+        if ( reset = '1') then
+            -- actualizar el estado asíncronamente
+            estado_actual&lt;= pb;
+        else
+            -- actualizar el estado sincronamente
+            if (falling_edge(clk)) then
+                estado_actual &lt;= estado_siguiente;
+            end if;
+        end if;
+    end process memoria;
+
+
+
+-- Visualización de la salida
+    LEDR(0) &lt;= z0;
+    LEDR(1) &lt;= z1;
+
+-- Visualización de la entrada: reloj
+   LEDR(9) &lt;= clk;
+
+-- Visualización de los estados
+    decod7seg:process (estado_actual)
+    begin
+       case estado_actual is
+            when pb =&gt;
+                HEX1 &lt;= "0001100";
+                HEX0 &lt;= "0000011";
+            when sub =&gt;
+                HEX1 &lt;= "0010010";
+                HEX0 &lt;= "1000001";
+            when baj =&gt;
+                HEX1 &lt;= "0000011";
+                HEX0 &lt;= "0001000";
+             when pa =&gt;
+                HEX1 &lt;= "0001100";
+                HEX0 &lt;= "0001000";
+       end case;
+    end process decod7seg;
+
+end behavioral;</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div class="sect1">
 <h2 id="_ejercicio_1_5_matricula">22. Ejercicio 1.5: Matricula</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_arquitectura_rtl">22.1. Arquitectura rtl</h3>
+<h3 id="_arquitectura_rtl_2">22.1. Arquitectura rtl</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -5764,7 +5908,7 @@ end mux4t1_2;</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-01 11:14:33 +0200
+Last updated 2023-04-01 17:40:22 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
@@ -5772,7 +5916,7 @@ Last updated 2023-04-01 11:14:33 +0200
 <script>
 if (!hljs.initHighlighting.called) {
   hljs.initHighlighting.called = true
-  ;[].slice.call(document.querySelectorAll('pre.highlight > code[data-lang]')).forEach(function (el) { hljs.highlightBlock(el) })
+  ;[].slice.call(document.querySelectorAll('pre.highlight > code')).forEach(function (el) { hljs.highlightBlock(el) })
 }
 </script>
 <script type="text/x-mathjax-config">

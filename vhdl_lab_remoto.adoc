@@ -1666,6 +1666,10 @@ end ;
 Ascensor 2 plantas
 ------------------
 
+Arquitectura RTL
+~~~~~~~~~~~~~~~~
+
+* El diseño se ha realizado manualmente y se va a realizar la descripción VHDL de dicho diseño.
 * ascen2.vhd
 +
 
@@ -1792,6 +1796,145 @@ begin
 end rtl;
 
 ----
+
+Arquitectura behavioral
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* La arquitectura es una descripción fiel del diagrama de estados mediante el lenguaje VHDL.
++
+
+[source,vhdl]
+----
+-- Ascensor de 2 plantas: Planta Baja y Planta Alta
+-- Entradas: Switches SW 0-5 -> sensores sa, sb y botones bdb, blb, bda, bla
+-- Salidas: Leds LEDR 0-1 -> código z0z1
+-- Estados: Leds LEDR 8-9 -> código q0q1
+-- Reloj : botón KEY(0)
+--  falling_edge (signal) : función que devuelve TRUE si hay un evento en signal de '1' a '0'
+--                          definida en la librería ieee para señales std_logic
+
+-- FSM Moore
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity ascen2 is
+    port (
+        SW: in std_logic_vector(5 downto 0);
+        KEY: in std_logic_vector(1 downto 0);
+        LEDR: out std_logic_vector(9 downto 0);
+        HEX0:  out std_logic_vector(6 downto 0);
+        HEX1:  out std_logic_vector(6 downto 0)
+
+    );
+end ascen2; 
+
+architecture behavioral of ascen2 is
+
+signal clk,reset,z0,z1: std_logic;
+signal sa,sb,bdb,blb,bda,bla: std_logic;
+
+type tipo_estado is (pb,sub,baj,pa);  -- tipo enumeración : ESTADOS
+signal estado_actual : tipo_estado := pb; -- estado inicial
+signal estado_siguiente: tipo_estado ; 
+
+begin
+--  Señales externas de entrada
+    clk <= KEY(0);
+    reset <= not KEY(1);
+    sa <= SW(5);sb <= SW(4);bdb <= SW(3);blb <= SW(2);bda <= SW(1);bla <= SW(0);
+    
+-- Diagrama de Transiciones Moore
+    process (SW,clk)
+    begin
+       case estado_actual is
+            when pb =>
+                if (bdb='1' or blb='1' ) then
+                    estado_siguiente <= pb;
+                elsif ( bdb='0' and blb='0' and bda='0' and bla='0') then
+                    estado_siguiente <= pb;
+                elsif (bda='1' or bla='1' ) then
+                   estado_siguiente <= sub;
+                end if;
+                z0 <= '0';
+                z1 <= '0';
+            when sub =>
+                if (sa='1') then
+                    estado_siguiente <= pa;
+                else 
+                   estado_siguiente <= sub;
+                end if;
+                z0 <= '1';
+                z1 <= '0';
+           when pa =>
+                if (bda='1' or bla='1' ) then
+                   estado_siguiente <= pa;
+                elsif ( bdb='0' and blb='0' and bda='0' and bla='0') then
+                    estado_siguiente <= pa;
+                elsif (bdb='1' or blb='1' ) then
+                   estado_siguiente <= baj;
+                end if;
+                z0 <= '1';
+                z1 <= '1';
+           when baj =>
+                if (sb='1') then
+                    estado_siguiente <= pb;
+                else 
+                   estado_siguiente <= baj;
+                end if;
+                z0 <= '0';
+                z1 <= '1';
+       end case;
+    end process;
+    
+-- Memoria : 2 celdas de memoria síncrona
+    memoria:process (clk,reset)
+    begin
+        if ( reset = '1') then
+            -- actualizar el estado asíncronamente
+            estado_actual<= pb;
+        else
+            -- actualizar el estado sincronamente
+            if (falling_edge(clk)) then
+                estado_actual <= estado_siguiente;
+            end if;
+        end if;
+    end process memoria;
+    
+    
+    
+-- Visualización de la salida
+    LEDR(0) <= z0;
+    LEDR(1) <= z1;
+    
+-- Visualización de la entrada: reloj
+   LEDR(9) <= clk;
+    
+-- Visualización de los estados
+    decod7seg:process (estado_actual)
+    begin
+       case estado_actual is
+            when pb =>
+                HEX1 <= "0001100";
+                HEX0 <= "0000011";
+            when sub =>
+                HEX1 <= "0010010";
+                HEX0 <= "1000001";
+            when baj =>
+                HEX1 <= "0000011";
+                HEX0 <= "0001000";
+             when pa =>
+                HEX1 <= "0001100";
+                HEX0 <= "0001000";
+       end case;
+    end process decod7seg;
+    
+end behavioral;
+
+
+----
+
+
 
 Ejercicio 1.5: Matricula
 ------------------------
