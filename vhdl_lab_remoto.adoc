@@ -1691,9 +1691,11 @@ entity ascen2 is
         HEX1:  out std_logic_vector(6 downto 0)
 
     );
-end ascen2;
+end ascen2; 
 
 architecture rtl of ascen2 is
+
+-- Circuitos diseñados manualmente
 -- cc salida z1z0=q1q0
 -- cc excitacion biestables: 
 -- j1=~q1q0sa  k1=q1~q0sb
@@ -1704,25 +1706,20 @@ signal j0k0,j1k1,q1q0,z1z0: std_logic_vector(1 downto 0);
 signal sa,sb,bdb,blb,bda,bla: std_logic;
 
 begin
-
-
--- buses
+--  Componentes de los buses
     j0k0 <= j0 & k0;
     j1k1 <= j1 & k1;
     q1q0 <= q1 & q0;
     z1z0 <= z1 & z0;
     
---  señales externas    
+--  Señales externas de entrada
     clk <= KEY(0);
     reset <= not KEY(1);
-    LEDR(0) <= z1z0(0);
-    LEDR(1) <= z1z0(1);
     sa <= SW(5);sb <= SW(4);bdb <= SW(3);blb <= SW(2);bda <= SW(1);bla <= SW(0);
     
 -- cc de excitación de biestables
     j0 <= (not q1) and (not q0) and (not bdb) and (not blb) and (bda or bla);
---    k0 <= q1 and q0 and (not bda) and (not bla) and (bdb or blb);
-    k0 <= q1 and q0 and (not bda);
+    k0 <= q1 and q0 and (not bda) and (not bla) and (bdb or blb);
     j1 <= (not q1) and q0 and sa;
     k1 <= q1 and (not q0) and sb;
 
@@ -1730,24 +1727,11 @@ begin
     z1 <= q1;
     z0 <= q0;
     
--- test
-   LEDR(2) <= j0;
-   LEDR(3) <= k0;
-   LEDR(4) <= j1;
-   LEDR(5) <= k1;
-   
-   LEDR(6) <= q1q0(0);
-   LEDR(7) <= q1q0(1);
-   
-   LEDR(8) <= bda;
-   LEDR(9) <= clk;
-    
-
--- Memoria    
+-- Memoria : 2 biestables JK    
     biestable0:process (clk,reset)
     begin
         if ( reset = '1') then
-            q0 <= '1';
+            q0 <= '0';
         else
             if (falling_edge(clk)) then
                 if j0k0 = "10" then
@@ -1764,7 +1748,7 @@ begin
     biestable1:process (clk,reset)
     begin
      if ( reset = '1') then
-            q1 <= '1';
+            q1 <= '0';
         else
             if (falling_edge(clk)) then
                 if j1k1 = "10" then
@@ -1778,9 +1762,18 @@ begin
         end if;
     end process biestable1;
     
-    decod7seg:process (z1z0)
+    
+-- Visualización de la salida
+    LEDR(0) <= z1z0(0);
+    LEDR(1) <= z1z0(1);
+    
+-- Visualización de la entrada: reloj
+   LEDR(9) <= clk;
+    
+-- Visualización de los estados
+    decod7seg:process (q1q0)
     begin
-       case z1z0 is
+       case q1q0 is
             when "00" =>
                 HEX1 <= "0001100";
                 HEX0 <= "0000011";
@@ -1788,7 +1781,7 @@ begin
                 HEX1 <= "0010010";
                 HEX0 <= "1000001";
             when "10" =>
-                HEX1 <= "0001100";
+                HEX1 <= "0000011";
                 HEX0 <= "0001000";
              when "11" =>
                 HEX1 <= "0001100";

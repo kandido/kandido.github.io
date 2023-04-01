@@ -3396,8 +3396,7 @@ begin
 
 -- cc de excitación de biestables
     j0 &lt;= (not q1) and (not q0) and (not bdb) and (not blb) and (bda or bla);
---    k0 &lt;= q1 and q0 and (not bda) and (not bla) and (bdb or blb);
-    k0 &lt;= q1 and q0 and (not bda);
+    k0 &lt;= q1 and q0 and (not bda) and (not bla) and (bdb or blb);
     j1 &lt;= (not q1) and q0 and sa;
     k1 &lt;= q1 and (not q0) and sb;
 
@@ -3422,7 +3421,7 @@ begin
     biestable0:process (clk,reset)
     begin
         if ( reset = '1') then
-            q0 &lt;= '1';
+            q0 &lt;= '0';
         else
             if (falling_edge(clk)) then
                 if j0k0 = "10" then
@@ -3439,7 +3438,7 @@ begin
     biestable1:process (clk,reset)
     begin
      if ( reset = '1') then
-            q1 &lt;= '1';
+            q1 &lt;= '0';
         else
             if (falling_edge(clk)) then
                 if j1k1 = "10" then
@@ -3463,7 +3462,7 @@ begin
                 HEX1 &lt;= "0010010";
                 HEX0 &lt;= "1000001";
             when "10" =&gt;
-                HEX1 &lt;= "0001100";
+                HEX1 &lt;= "0000011";
                 HEX0 &lt;= "0001000";
              when "11" =&gt;
                 HEX1 &lt;= "0001100";
@@ -5765,7 +5764,7 @@ end mux4t1_2;</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-01 10:00:06 +0200
+Last updated 2023-04-01 11:14:33 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
