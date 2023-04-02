@@ -480,7 +480,186 @@ Excitación de los biestables:<br>
 --no afectan ni los botones ni <span class="naranja">sb</span>.</p></div></div></div>
 <div class="openblock column"><div class="content"><table class="tableblock frame-all grid-all" style="width:10%"><caption class="title">Table 9. Transición <strong>SUB&#8594;PA</strong></caption><colgroup><col style="width:14.2857%"><col style="width:14.2857%"><col style="width:14.2857%"><col style="width:14.2857%"><col style="width:14.2857%"><col style="width:14.2857%"><col style="width:14.2858%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><p class="tableblock">sa</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">sb</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">bdb</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">blb</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">bda</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">bdl</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">SUB&#8594;PA</p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">X</p></td><td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td></tr></table>
 <div class="paragraph"><p>--si se activa <span class="naranja">sa</span><br>
---el resto de entradas no afecta</p></div></div></div></div></section><section id="_c_ascensor_tablas_de_estados_excitación_de_biestables_y_salidas_5"><h2>C. Ascensor: Tablas de Estados, Excitación de Biestables y Salidas</h2><div class="slide-content"><div class="imageblock"><img src="images/tema7_ascen2_tablas.svg" alt="tema7 ascen2 tablas"></div></div></section><section id="_c_ascensor_ecuaciones_lógicas"><h2>C. Ascensor: Ecuaciones Lógicas</h2><div class="slide-content"><div class="ulist"><ul><li><p>\(J_1= sa \cdot \overline q_1 \cdot q_0\)</p></li><li><p>\(K_1= sb \cdot q_1 \cdot \overline q_0\)</p></li><li><p>\(J_0 = \overline q_1 \cdot \overline q_0 \cdot (bda \cdot \overline {bla} + \overline {bda} \cdot bla + bda \cdot bla)\)</p></li><li><p>\(K_0 = q_1 \cdot q_0 \cdot (\overline {bdb} \cdot  blb +  bdb \cdot \overline {blb} + bdb \cdot blb)\)</p></li><li><p>\(Z_1 = q_1 \cdot \overline q_0\)</p></li><li><p>\(Z_0 = \overline q_1 \cdot q_0\)</p></li></ul></div></div></section></section>
+--el resto de entradas no afecta</p></div></div></div></div></section><section id="_c_ascensor_tablas_de_estados_excitación_de_biestables_y_salidas_5"><h2>C. Ascensor: Tablas de Estados, Excitación de Biestables y Salidas</h2><div class="slide-content"><div class="imageblock"><img src="images/tema7_ascen2_tablas.svg" alt="tema7 ascen2 tablas"></div></div></section><section id="_c_ascensor_ecuaciones_lógicas"><h2>C. Ascensor: Ecuaciones Lógicas</h2><div class="slide-content"><div class="ulist"><ul><li><p>\(J_1= \overline q_1 \cdot q_0 \cdot sa\)</p></li><li><p>\(K_1= q_1 \cdot \overline q_0 \cdot sb \)</p></li><li><p>\(J_0 = \overline q_1 \cdot \overline q_0 \cdot \overline {bdb} \cdot \overline {blb} \cdot (bda  + bla)\)</p></li><li><p>\(K_0 = q_1 \cdot q_0 \cdot \overline {bda} \cdot \overline {bla} \cdot (bdb  + blb)\)</p></li><li><p>\(Z_1 = q_1\)</p></li><li><p>\(Z_0 = q_0\)</p></li></ul></div></div></section><section id="_c_ascensor_esquema_eléctrico"><h2>C. Ascensor: Esquema Eléctrico</h2><div class="slide-content"><div class="imageblock"><img src="images/tema7_ascen2_esquema_elect.svg" alt="tema7 ascen2 esquema elect"></div></div></section><section id="_c_ascensor_descripción_vhdl" class="columns" data-state="txikiago"><h2>C. Ascensor: Descripción VHDL</h2><div class="slide-content"><div class="paragraph column"><p>Alternativas de la descripción.<br>
+--Arquitectura abstracta: describir el Diagrama de la secuencia de estados ó.<br>
+--Arquitectura física: describir el Esquema Eléctrico resultado del diseño manual.<br>
+Caso 1: Descripción del Diagrama de la secuencia de estados.<br>
+--Consiste en describir literalmente cada estado, las transiciones entre estados en función de las entradas y describir las salidas en función únicamente del estado (FSM Moore) o en función del estado y de las entradas (FSM Mealy).<br>
+--Hay que describir que los estados se sinteticen en un bloque de memoria.<br>
+--Hay que describir el sincronismo de las transiciones entre estados.</p></div>
+<div class="paragraph column"><p>Caso 2: Descripción del Esquema Eléctrico resultado del diseño manual.<br>
+--descripción de dos circuitos combinacionales : el de salida y el de excitación de los biestables.<br>
+--descripción de los biestables:.<br>
+---se tienen que sintetizar como dispositivos con memoria.<br>
+---describir las transiciones entre estados del biestable.<br>
+---describir el sincronismo de las transiciones</p></div></div></section><section id="_descripción_vhdl_síntesis_de_circuitos_con_memoria" class="columns" data-state="txikiago"><h2>Descripción VHDL: Síntesis de Circuitos con Memoria.</h2><div class="slide-content"><div class="openblock column"><div class="content"><div class="paragraph"><p>Para conseguir que la descripción VHDL de un circuito se sintetice con memoria es necesario que la descripción de la relación entre la salida y la entrada del circuito <strong>NO</strong> contemple todas las situaciones posibles. De esta forma cuando la entrada no este contemplada en la descripción la salida no cambiará y será necesario haberla tenido <strong>MEMORIZADA</strong> para que continue igual que antes de dicha entrada.</p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-vhdl hljs" data-noescape="true" data-lang="vhdl">entity  ej_mem is
+  port(
+    SW: in bit_vector(0 downto 0);
+    LEDR: out bit_vector(0 downto 0)
+  );
+end entity;
+
+architecture beh of ej_mem is
+begin
+  process (SW(0))
+  begin
+    if (SW(0) = '0') then
+      LEDR(0) &lt;= '1';
+    end if;
+  end process;
+end architecture;</code></pre></div></div></div></div>
+<div class="openblock column"><div class="content"><div class="paragraph"><p>La sentencia secuencial <strong>IF</strong> no contempla los casos SW(0) distintos de cero y habrá que memorizarlos. Si asignamos al interruptor SW(0) el valor '1' el estado (encendido/apagado) del led LEDR(0) no debe de cambiar.<br>
+El compilador del sintetizador Quartus informa que sintetizará memoria (inferring latch(es)):<br></p></div>
+<div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-vhdl hljs" data-noescape="true" data-lang="vhdl">Warning (10631): VHDL Process Statement
+inferring latch(es) for signal or variable "LEDR",
+which holds its previous value
+Info (10041): Inferred latch for "LEDR[0]"</code></pre></div></div></div></div></div></section><section id="_c_ascensor_descripción_vhdl_del_esquema_electrico"><h2>C. Ascensor: Descripción VHDL del Esquema Electrico</h2><div class="slide-content"><div class="ulist"><ul><li><p>Descripción de la entidad</p><div class="ulist"><ul><li><p>8 entradas : los 4 botones, los 2 sensores, el reloj y la señal de reset de la memoria.</p></li><li><p>Los 4 botones y los 2 sensores los simulamos con los conmutadores SW &#8594; SW(5 downto 0)</p></li><li><p>El reloj lo simulamos con un botón KEY &#8594; KEY(0)</p></li><li><p>La señal de reset se activa con un botón KEY &#8594; KEY(1)</p></li></ul></div></li></ul></div>
+<div class="admonitionblock caution"><table><tr><td class="icon"><i class="fa fa-fire" title="Caution"></i></td><td class="content">los botones si <strong>NO</strong> se pulsan dan un <strong>1</strong> a su salida &#8594; lógica negativa</td></tr></table></div>
+<div class="ulist"><ul><li><p>Salida:</p><div class="ulist"><ul><li><p>para visualizar el estado del ascensor utilizamos dos display de 7 segmentos HEX1 y HEX0.</p></li><li><p>para visualizar el estado del reloj utilizamos el led rojo LEDR(9)</p></li></ul></div></li></ul></div></div></section><section id="_c_ascensor_descripción_vhdl_del_esquema_electrico_2" data-state="txikiago"><h2>C. Ascensor: Descripción VHDL del Esquema Electrico</h2><div class="slide-content"><div class="paragraph"><p>Descripción de los biestables Q1 y Q0<br>
+--Utilizaremos biestables JK disparados por el flanco negativo de un reloj y con señal asíncrona de reset.<br>
+--Sincronismo<br>
+--La salida Q se asignará con el valor determinado por la entrada JK cuando llegue un flanco negativo de la señal de reloj.<br>
+---Para detectar el flanco negativo utilizaremos la función "falling_edge(signal)" definida en la librería ieee.<br>
+--Describimos la tabla funcional del biestable mediante las sentencias: <span class="naranja">process()</span> , <span class="naranja">if-then-elsif-end if</span><br>
+--El proceso será sensible a la señal de reset y a la señal de reloj CLK. Si no hay eventos en CLK (flancos) no se ejecuta el proceso y la salida del biestable no cambia &#8594; <strong>MEMORIA</strong><br>
+--Un primer <span class="naranja">IF-ELSE</span>: para describir la entrada asíncrona de "reset"<br>
+--Si no reset: Un segundo <span class="naranja">IF</span> se activa solo si llega un flanco negativo, por lo que si flanco positivo <strong>MEMORIA</strong><br>
+--Si flanco negativo: Un tercer <span class="naranja">IF-ELSIF</span> contempla los casos de entrada jk (01,10,11) pero no contempla el resto de casos como 00 por lo que se sintetizará como <strong>MEMORIA</strong> para esos casos no contemplados.</p></div></div></section><section id="_descripción_vhdl_de_los_biestables_jk_con_entrada_asíncrona_de_reset"><h2>Descripción VHDL de los biestables JK con entrada asíncrona de reset.</h2><div class="slide-content"><div class="ulist"><ul><li><p>Código VHDL</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-VHDL hljs" data-noescape="true" data-lang="VHDL">-- Biestable JK por flanco negativo con entrada asíncrona de reset
+biestable0:process (clk,reset)
+  begin
+    if ( reset = '1') then
+        q0 &lt;= '0';
+    else
+      if (falling_edge(clk)) then
+         if j0k0 = "10" then
+              q0 &lt;= '1';
+         elsif j0k0 = "01" then
+              q0 &lt;= '0';
+         elsif j0k0 = "11" then
+              q0 &lt;= not q0;
+         end if;
+     end if;
+  end if;
+end process biestable0;</code></pre></div></div></li></ul></div></div></section><section id="_c_ascensor_descripción_vhdl_completa" class="columns"><h2>C. Ascensor: Descripción VHDL Completa</h2><div class="slide-content"><div class="listingblock column"><div class="content"><pre class="highlightjs highlight"><code class="language-vhdl hljs" data-noescape="true" data-lang="vhdl">-- Ascensor de 2 plantas: Planta Baja y Planta Alta
+-- Entradas: Switches SW 0-5 -&gt; sensores sa, sb y botones bdb, blb, bda, bla
+-- Salidas: Leds LEDR 0-1 -&gt; código z0z1
+-- Reloj: botón KEY(0)
+-- Reset: botón KEY(1)
+--  falling_edge (signal) : función que devuelve TRUE si hay un evento en signal de '1' a '0'
+--                          definida en la librería ieee para señales std_logic
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity ascen2 is
+    port (
+        SW: in std_logic_vector(5 downto 0);
+        KEY: in std_logic_vector(1 downto 0);
+        LEDR: out std_logic_vector(9 downto 0);
+        HEX0:  out std_logic_vector(6 downto 0);
+        HEX1:  out std_logic_vector(6 downto 0)
+
+    );
+end ascen2;
+
+architecture rtl of ascen2 is
+
+-- Circuitos diseñados manualmente
+-- cc salida z1z0=q1q0
+-- cc excitacion biestables:
+-- j1=~q1q0sa  k1=q1~q0sb
+-- j0=~q1~q0~bdb~blb(bda+bla)
+-- k0=q1q0~bda~bla(bdb+blb)
+signal j0,k0,j1,k1,q0,q1,z0,z1,clk,reset: std_logic;
+signal j0k0,j1k1,q1q0,z1z0: std_logic_vector(1 downto 0);
+signal sa,sb,bdb,blb,bda,bla: std_logic;
+
+begin
+--  Componentes de los buses
+    j0k0 &lt;= j0 &amp; k0;
+    j1k1 &lt;= j1 &amp; k1;
+    q1q0 &lt;= q1 &amp; q0;
+    z1z0 &lt;= z1 &amp; z0;
+
+--  Señales externas de entrada
+    clk &lt;= KEY(0);
+    reset &lt;= not KEY(1);
+    sa &lt;= SW(5);sb &lt;= SW(4);bdb &lt;= SW(3);blb &lt;= SW(2);bda &lt;= SW(1);bla &lt;= SW(0);
+
+-- cc de excitación de biestables
+    j0 &lt;= (not q1) and (not q0) and (not bdb) and (not blb) and (bda or bla);
+    k0 &lt;= q1 and q0 and (not bda) and (not bla) and (bdb or blb);
+    j1 &lt;= (not q1) and q0 and sa;
+    k1 &lt;= q1 and (not q0) and sb;
+
+-- cc de salida
+    z1 &lt;= q1;
+    z0 &lt;= q0;
+
+-- Memoria : 2 biestables JK
+    biestable0:process (clk,reset)
+    begin
+        if ( reset = '1') then
+            q0 &lt;= '0';
+        else
+            if (falling_edge(clk)) then
+                if j0k0 = "10" then
+                    q0 &lt;= '1';
+                elsif j0k0 = "01" then
+                    q0 &lt;= '0';
+                elsif j0k0 = "11" then
+                    q0 &lt;= not q0;
+                end if;
+            end if;
+        end if;
+    end process biestable0;
+
+    biestable1:process (clk,reset)
+    begin
+     if ( reset = '1') then
+            q1 &lt;= '0';
+        else
+            if (falling_edge(clk)) then
+                if j1k1 = "10" then
+                    q1 &lt;= '1';
+                elsif j1k1 = "01" then
+                    q1 &lt;= '0';
+                elsif j1k1 = "11" then
+                    q1 &lt;= not q1;
+                end if;
+            end if;
+        end if;
+    end process biestable1;
+
+
+-- Visualización de la salida
+    LEDR(0) &lt;= z1z0(0);
+    LEDR(1) &lt;= z1z0(1);
+
+-- Visualización de la entrada: reloj
+   LEDR(9) &lt;= clk;
+
+-- Visualización de los estados
+    decod7seg:process (q1q0)
+    begin
+       case q1q0 is
+            when "00" =&gt;
+                HEX1 &lt;= "0001100";
+                HEX0 &lt;= "0000011";
+            when "01" =&gt;
+                HEX1 &lt;= "0010010";
+                HEX0 &lt;= "1000001";
+            when "10" =&gt;
+                HEX1 &lt;= "0000011";
+                HEX0 &lt;= "0001000";
+             when "11" =&gt;
+                HEX1 &lt;= "0001100";
+                HEX0 &lt;= "0001000";
+       end case;
+    end process decod7seg;
+
+end rtl;</code></pre></div></div></div></section></section>
 <section id="Tema8_Fam"><h2>Tema 8: Circuitos Digitales Integrados. Familias Lógicas.</h2></section>
 <section id="Tema9_Mem"><h2>Tema 9: Memorias.</h2></section>
 <section id="Tema10_PLD"><h2>Tema 10: Dispositivos de Lógica Programable (PLD).</h2></section>
