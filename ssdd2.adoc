@@ -406,6 +406,18 @@ image::tema7_ascen2_tablas.svg[]
 * latexmath:[Z_1 = q_1 \cdot \overline q_0]
 * latexmath:[Z_0 = q_0 \cdot \overline q_1]
 
+=== C. Ascensor: Biestables con entradas asíncronas
+
+* A los biestables se les puede añadir dos entradas más para realizar el PRESET (escribir un 1) y el RESET (escribir un 0) en cualquier momento (asíncrona).
+
+image::tema7_flip-flop_async.svg[]
+
+=== C. Ascensor: Reset
+
+* Añadimos al controlador digital (driver) del ascensor una señal de Reset
+* Al activar la señal de Reset con un *1* (lógica positiva) el controlador digital se reinicia en el *estado* Planta Baja (PB) denominado *estado de inicio* (start)
+* Utilizaremos flip-flops JK con entradas asíncronas.
+
 === C. Ascensor: Esquema Eléctrico
 
 image::tema7_ascen2_esquema_elect.svg[]
@@ -414,21 +426,25 @@ image::tema7_ascen2_esquema_elect.svg[]
 === C. Ascensor: Descripción VHDL
 
 [.column%hardbreaks]
-Alternativas de la descripción.
+Alternativas de la descripción de la arquitectura.
 --Arquitectura abstracta: describir el Diagrama de la secuencia de estados ó.
 --Arquitectura física: describir el Esquema Eléctrico resultado del diseño manual.
-Caso 1: Descripción del Diagrama de la secuencia de estados.
+*Caso 1*: Descripción del Diagrama de la secuencia de estados.
 --Consiste en describir literalmente cada estado, las transiciones entre estados en función de las entradas y describir las salidas en función únicamente del estado (FSM Moore) o en función del estado y de las entradas (FSM Mealy).
 --Hay que describir que los estados se sinteticen en un bloque de memoria.
 --Hay que describir el sincronismo de las transiciones entre estados.
 
-[.column%hardbreaks]
-Caso 2: Descripción del Esquema Eléctrico resultado del diseño manual.
---descripción de dos circuitos combinacionales : el de salida y el de excitación de los biestables.
---descripción de los biestables:.
----se tienen que sintetizar como dispositivos con memoria.
----describir las transiciones entre estados del biestable.
----describir el sincronismo de las transiciones
+[.column]
+--
+*Caso 2*: Descripción del Esquema Eléctrico resultado del diseño manual. +
+--descripción de dos circuitos combinacionales : el de salida y el de excitación de los biestables. +
+--descripción de los biestables: +
+---se tienen que sintetizar como dispositivos con memoria. +
+---describir las transiciones entre estados del biestable. +
+---describir el sincronismo de las transiciones +
+
+NOTE:  Los dos casos se corresponden a la misma ENTIDAD.
+--
 
 [.columns,state=txikiago]
 === Descripción VHDL: Síntesis de Circuitos con Memoria.
@@ -473,34 +489,38 @@ Info (10041): Inferred latch for "LEDR[0]"
 ----
 --
 
-=== C. Ascensor: Descripción VHDL del Esquema Electrico
+=== C. Ascensor: Descripción VHDL del Esquema Electrico (Entidad)
 
 * Descripción de la entidad
 ** 8 entradas : los 4 botones, los 2 sensores, el reloj y la señal de reset de la memoria.
-** Los 4 botones y los 2 sensores los simulamos con los conmutadores SW -> SW(5 downto 0)
-** El reloj lo simulamos con un botón KEY -> KEY(0)
-** La señal de reset se activa con un botón KEY -> KEY(1)
+** Los 4 *botones* y los 2 *sensores* los simulamos con los conmutadores SW -> SW(5 downto 0)
+** El *reloj* lo simulamos con un botón KEY -> KEY(0)
+** La señal de *reset* se activa con un botón KEY -> KEY(1)
 
 CAUTION: los botones si *NO* se pulsan dan un *1* a su salida -> lógica negativa
 
-** Salida: 
-*** para visualizar el estado del ascensor utilizamos dos display de 7 segmentos HEX1 y HEX0.
-*** para visualizar el estado del reloj utilizamos el led rojo LEDR(9)
+** SalidaS: 
+*** para visualizar el estado del ascensor utilizamos dos *display* de 7 segmentos HEX1 y HEX0.
+*** para visualizar el estado del reloj utilizamos el *led* rojo LEDR(9)
 
 [state=txikiago]
-=== C. Ascensor: Descripción VHDL del Esquema Electrico
+=== C. Ascensor: Descripción VHDL del Esquema Electrico (Memoria y Sincronismo)
 
 
 Descripción de los biestables Q1 y Q0 +
 --Utilizaremos biestables JK disparados por el flanco negativo de un reloj y con señal asíncrona de reset. +
---Sincronismo +
---La salida Q se asignará con el valor determinado por la entrada JK cuando llegue un flanco negativo de la señal de reloj. +
----Para detectar el flanco negativo utilizaremos la función "falling_edge(signal)" definida en la librería ieee. +
---Describimos la tabla funcional del biestable mediante las sentencias: [naranja]#process()# , [naranja]#if-then-elsif-end if# +
---El proceso será sensible a la señal de reset y a la señal de reloj CLK. Si no hay eventos en CLK (flancos) no se ejecuta el proceso y la salida del biestable no cambia -> *MEMORIA* +
---Un primer [naranja]#IF-ELSE#: para describir la entrada asíncrona de "reset" +
---Si no reset: Un segundo [naranja]#IF# se activa solo si llega un flanco negativo, por lo que si flanco positivo *MEMORIA* +
---Si flanco negativo: Un tercer [naranja]#IF-ELSIF# contempla los casos de entrada jk (01,10,11) pero no contempla el resto de casos como 00 por lo que se sintetizará como *MEMORIA* para esos casos no contemplados.
+ +
+Sincronismo: +
+--Entrada asíncrona: Reset .Se activa independientemente de cualquier otra señal.
+--Entrada síncrona JK: A la salida Q se le asignará un valor determinado por la entrada JK cuando llegue un flanco negativo de la señal de reloj. +
+--Para detectar el flanco negativo utilizaremos la función *falling_edge(signal)* definida en la librería ieee. +
+ +
+Describimos la tabla funcional del biestable mediante las sentencias: [naranja]#IF-THEN-ELSIF-END IF# -> [naranja]#PROCESS()# +
+--En la sentencia [naranja]#IF# es opcional el [naranja]#ELSE# y el [naranja]#ELSIF#: esto permite NO describir todos los casos -> *MEMORIA* + 
+--El proceso será sensible a la señal asíncrona de reset y a la señal de reloj CLK. Si no hay eventos en la señal RESET ni eventos en CLK(flancos positivos o negativos) -> no se ejecuta el proceso y la salida del biestable no cambia -> *MEMORIA* +
+--La señal de RESET tiene prioridad sobre JK: Si se activa la señal de reset el estado siguiente es el estado de inicio (PB) y si no se activa entonces actua la señal JK -> Un primer [naranja]#IF-ELSE#:  +
+--Si no Reset: JK escribe en la celda de memoria con el disparo de un flanco negativo del reloj CLK ->  Un segundo [naranja]#IF#  -> por lo que si flanco positivo *MEMORIA*: +
+--Si flanco negativo de CLK: Escritura mediante la entrada jk (01,10,11). El caso JK(00) no se describe y se sintetizará como *MEMORIA* -> Un tercer [naranja]#IF-ELSIF# 
 
 
 === Descripción VHDL de los biestables JK con entrada asíncrona de reset.
