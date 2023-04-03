@@ -427,8 +427,8 @@ image::tema7_ascen2_esquema_elect.svg[]
 
 [.column%hardbreaks]
 Alternativas de la descripción de la arquitectura.
---Arquitectura abstracta: describir el Diagrama de la secuencia de estados ó.
---Arquitectura física: describir el Esquema Eléctrico resultado del diseño manual.
+--Arquitectura abstracta: describir el Diagrama de la secuencia de estados -> Arquitectura tipo BEHAVIORAL
+--Arquitectura física: describir el Esquema Eléctrico resultado del diseño manual -> Arquitectura tipo RTL
 *Caso 1*: Descripción del Diagrama de la secuencia de estados.
 --Consiste en describir literalmente cada estado, las transiciones entre estados en función de las entradas y describir las salidas en función únicamente del estado (FSM Moore) o en función del estado y de las entradas (FSM Mealy).
 --Hay que describir que los estados se sinteticen en un bloque de memoria.
@@ -436,7 +436,7 @@ Alternativas de la descripción de la arquitectura.
 
 [.column]
 --
-*Caso 2*: Descripción del Esquema Eléctrico resultado del diseño manual. +
+*Caso 2*: Descripción del Esquema Eléctrico resultado del diseño manual +
 --descripción de dos circuitos combinacionales : el de salida y el de excitación de los biestables. +
 --descripción de los biestables: +
 ---se tienen que sintetizar como dispositivos con memoria. +
@@ -489,7 +489,7 @@ Info (10041): Inferred latch for "LEDR[0]"
 ----
 --
 
-=== C. Ascensor: Descripción VHDL del Esquema Electrico (Entidad)
+=== C. Ascensor: Descripción VHDL de la Entidad
 
 * Descripción de la entidad
 ** 8 entradas : los 4 botones, los 2 sensores, el reloj y la señal de reset de la memoria.
@@ -504,7 +504,7 @@ CAUTION: los botones si *NO* se pulsan dan un *1* a su salida -> lógica negativ
 *** para visualizar el estado del reloj utilizamos el *led* rojo LEDR(9)
 
 [state=txikiago]
-=== C. Ascensor: Descripción VHDL del Esquema Electrico (Memoria y Sincronismo)
+=== C. Ascensor: Descripción VHDL de la Arquitectura tipo RTL: Descripción del Esquema Electrico (Memoria y Sincronismo)
 
 
 Descripción de los biestables Q1 y Q0 +
@@ -551,10 +551,8 @@ end process biestable0;
 ----
 
 
-[.columns]
 === C. Ascensor: Descripción VHDL Completa
  
-[.column]
 [source,vhdl]
 ----
 -- Ascensor de 2 plantas: Planta Baja y Planta Alta
@@ -678,6 +676,228 @@ begin
 end rtl;
 ----
 
+[state=txikiago]
+=== C. Ascensor: Descripción VHDL de la Arquitectura tipo BEHAVIORAL
+
+* En este caso no es necesario realizar ningún diseño previo manual
+* Se describe literalmente el *Diagrama de Secuencia de Estados*
+* Es necesario definir un nuevo tipo de señal: el de los estados. Para la declaración de un tipo de señales definido por el DISEÑADOR se utiliza la palabra clave *TYPE*
++
+
+[source,vhdl]
+----
+type tipo_estado is (pb,sub,baj,pa);  -- tipo enumeración : ESTADOS
+signal estado_actual : tipo_estado := pb; -- estado inicial
+signal estado_siguiente: tipo_estado ;
+----
+
+=== C. Ascensor: Descripción VHDL de las Transiciones y de la Salida
+
+Para describir "Estando en el *estado_actual* ..." -> sentencia [naranja]#CASE# +
+Para describir "Si entradas ..." -> sentencia [naranja]#IF-ELSIF#  +
+Las transiciones terminan en el *estado_siguiente* +
+Las salidas MOORE solo dependen del estado_actual. +
+ 
+[source,vhdl]
+----
+-- Diagrama de Transiciones Moore
+    process (SW,clk)
+    begin
+       case estado_actual is
+            when pb =>
+                if (bdb='1' or blb='1' ) then
+                    estado_siguiente <= pb;
+                elsif ( bdb='0' and blb='0' and bda='0' and bla='0') then
+                    estado_siguiente <= pb;
+                elsif (bda='1' or bla='1' ) then
+                   estado_siguiente <= sub;
+                end if;
+                z0 <= '0';
+                z1 <= '0';
+            when sub =>
+                if (sa='1') then
+                    estado_siguiente <= pa;
+                else
+                   estado_siguiente <= sub;
+                end if;
+                z0 <= '1';
+                z1 <= '0';
+           when pa =>
+                if (bda='1' or bla='1' ) then
+                   estado_siguiente <= pa;
+                elsif ( bdb='0' and blb='0' and bda='0' and bla='0') then
+                    estado_siguiente <= pa;
+                elsif (bdb='1' or blb='1' ) then
+                   estado_siguiente <= baj;
+                end if;
+                z0 <= '1';
+                z1 <= '1';
+           when baj =>
+                if (sb='1') then
+                    estado_siguiente <= pb;
+                else
+                   estado_siguiente <= baj;
+                end if;
+                z0 <= '0';
+                z1 <= '1';
+       end case;
+    end process;
+----
+
+=== C. Ascensor: Descripción VHDL de la Memoria
+
+* La memoria es síncrona -> se actualiza el estado, es decir, el estado siguiente procesado por el controlador pasa a ser el estado_actual.
+* Hay cambio de estado dependiendo tanto de las entradas asíncronas como síncronas.
+ 
+[source,vhdl]
+----
+-- Memoria : 2 celdas de memoria síncrona
+    memoria:process (clk,reset)
+    begin
+        if ( reset = '1') then
+            -- actualizar el estado asíncronamente
+            estado_actual<= pb;
+        else
+            -- actualizar el estado sincronamente
+            if (falling_edge(clk)) then
+                estado_actual <= estado_siguiente;
+            end if;
+        end if;
+    end process memoria;
+----
+
+
+=== C. Ascensor: Descripción VHDL Completa
+ 
+[source,vhdl]
+----
+-- Ascensor de 2 plantas: Planta Baja y Planta Alta
+-- Entradas: Switches SW 0-5 -> sensores sa, sb y botones bdb, blb, bda, bla
+-- Salidas: Leds LEDR 0-1 -> código z0z1
+-- Estados: Leds LEDR 8-9 -> código q0q1
+-- Reloj : botón KEY(0)
+--  falling_edge (signal) : función que devuelve TRUE si hay un evento en signal de '1' a '0'
+--                          definida en la librería ieee para señales std_logic
+
+-- FSM Moore
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity ascen2 is
+    port (
+        SW: in std_logic_vector(5 downto 0);
+        KEY: in std_logic_vector(1 downto 0);
+        LEDR: out std_logic_vector(9 downto 0);
+        HEX0:  out std_logic_vector(6 downto 0);
+        HEX1:  out std_logic_vector(6 downto 0)
+
+    );
+end ascen2;
+
+architecture behavioral of ascen2 is
+
+signal clk,reset,z0,z1: std_logic;
+signal sa,sb,bdb,blb,bda,bla: std_logic;
+
+type tipo_estado is (pb,sub,baj,pa);  -- tipo enumeración : ESTADOS
+signal estado_actual : tipo_estado := pb; -- estado inicial
+signal estado_siguiente: tipo_estado ;
+
+begin
+--  Señales externas de entrada
+    clk <= KEY(0);
+    reset <= not KEY(1);
+    sa <= SW(5);sb <= SW(4);bdb <= SW(3);blb <= SW(2);bda <= SW(1);bla <= SW(0);
+
+-- Diagrama de Transiciones Moore
+    process (SW,clk)
+    begin
+       case estado_actual is
+            when pb =>
+                if (bdb='1' or blb='1' ) then
+                    estado_siguiente <= pb;
+                elsif ( bdb='0' and blb='0' and bda='0' and bla='0') then
+                    estado_siguiente <= pb;
+                elsif (bda='1' or bla='1' ) then
+                   estado_siguiente <= sub;
+                end if;
+                z0 <= '0';
+                z1 <= '0';
+            when sub =>
+                if (sa='1') then
+                    estado_siguiente <= pa;
+                else
+                   estado_siguiente <= sub;
+                end if;
+                z0 <= '1';
+                z1 <= '0';
+           when pa =>
+                if (bda='1' or bla='1' ) then
+                   estado_siguiente <= pa;
+                elsif ( bdb='0' and blb='0' and bda='0' and bla='0') then
+                    estado_siguiente <= pa;
+                elsif (bdb='1' or blb='1' ) then
+                   estado_siguiente <= baj;
+                end if;
+                z0 <= '1';
+                z1 <= '1';
+           when baj =>
+                if (sb='1') then
+                    estado_siguiente <= pb;
+                else
+                   estado_siguiente <= baj;
+                end if;
+                z0 <= '0';
+                z1 <= '1';
+       end case;
+    end process;
+
+-- Memoria : 2 celdas de memoria síncrona
+    memoria:process (clk,reset)
+    begin
+        if ( reset = '1') then
+            -- actualizar el estado asíncronamente
+            estado_actual<= pb;
+        else
+            -- actualizar el estado sincronamente
+            if (falling_edge(clk)) then
+                estado_actual <= estado_siguiente;
+            end if;
+        end if;
+    end process memoria;
+
+
+
+-- Visualización de la salida
+    LEDR(0) <= z0;
+    LEDR(1) <= z1;
+
+-- Visualización de la entrada: reloj
+   LEDR(9) <= clk;
+
+-- Visualización de los estados
+    decod7seg:process (estado_actual)
+    begin
+       case estado_actual is
+            when pb =>
+                HEX1 <= "0001100";
+                HEX0 <= "0000011";
+            when sub =>
+                HEX1 <= "0010010";
+                HEX0 <= "1000001";
+            when baj =>
+                HEX1 <= "0000011";
+                HEX0 <= "0001000";
+             when pa =>
+                HEX1 <= "0001100";
+                HEX0 <= "0001000";
+       end case;
+    end process decod7seg;
+
+end behavioral;
+
+----
 
 [#Tema8_Fam]
 == Tema 8: Circuitos Digitales Integrados. Familias Lógicas.
