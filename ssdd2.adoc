@@ -839,7 +839,7 @@ signal sa,sb,bdb,blb,bda,bla: std_logic;
 
 type tipo_estado is (pb,sub,baj,pa);  -- tipo enumeración : ESTADOS
 signal estado_actual : tipo_estado := pb; -- estado inicial
-signal estado_siguiente: tipo_estado ;
+signal estado_siguiente: tipo_estado := pb; -- estado inicial
 
 begin
 --  Señales externas de entrada
@@ -848,7 +848,7 @@ begin
     sa <= SW(5);sb <= SW(4);bdb <= SW(3);blb <= SW(2);bda <= SW(1);bla <= SW(0);
 
 -- Diagrama de Transiciones Moore
-    process (SW,clk)
+    process (SW)
     begin
        case estado_actual is
             when pb =>
