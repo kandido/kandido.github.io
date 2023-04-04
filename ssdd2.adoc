@@ -231,6 +231,16 @@ image::tema7_flip-flop_crono.svg[]
 ** Representar los estados con círculos: dentro del círculo el estado.
 ** Representar las transiciones entre estados mediante: Flecha entre dos estados y sobre la flecha el valor de las entradas y su salida correspondiente
 
+
+=== C. Ascensor: Diagrama de Bloques Mealy
+
+image::tema7_ascen2_diag_block_mealy.svg[]
+
+=== C. Ascensor: Diagrama de Bloques Moore
+
+image::tema7_ascen2_diag_block.svg[]
+
+
 [.columns, state=txikiago]
 === C. Ascensor: Transición entre estados
 
@@ -269,10 +279,15 @@ Transición *BAJ->PB*:.
 --si se activa [naranja]#sb#
 --el resto de entradas no afecta
 
-=== C. Ascensor: Diagrama de estados
+=== C. Ascensor: Diagrama de estados Moore
 
 
 image::tema7_ascen2_diag_seq.svg[]
+
+=== C. Ascensor: Diagrama de estados Mealy
+
+
+image::tema7_ascen2_diag_seq_mealy.svg[]
 
 
 
@@ -306,10 +321,6 @@ Excitación de los biestables: +
 |1 -> 1 | x | 0
 |===
 --
-
-=== C. Ascensor: Diagrama de Bloques
-
-image::tema7_ascen2_diag_block.svg[]
 
 === C. Ascensor: Tablas de Estados, Excitación de Biestables y Salidas
 
