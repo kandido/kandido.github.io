@@ -522,7 +522,7 @@ Info (10041): Inferred latch for "LEDR[0]"</code></pre></div></div></div></div><
 --Utilizaremos biestables JK disparados por el flanco negativo de un reloj y con señal asíncrona de reset.<br>
 <br>
 Sincronismo:<br>
---Entrada asíncrona: Reset .Se activa independientemente de cualquier otra señal.
+--Entrada asíncrona: Reset .Se activa independientemente de cualquier otra señal.<br>
 --Entrada síncrona JK: A la salida Q se le asignará un valor determinado por la entrada JK cuando llegue un flanco negativo de la señal de reloj.<br>
 --Para detectar el flanco negativo utilizaremos la función <strong>falling_edge(signal)</strong> definida en la librería ieee.<br>
 <br>
@@ -667,10 +667,11 @@ begin
 
 end rtl;</code></pre></div></div></div></section><section id="_c_ascensor_descripción_vhdl_de_la_arquitectura_tipo_behavioral" data-state="txikiago"><h2>C. Ascensor: Descripción VHDL de la Arquitectura tipo BEHAVIORAL</h2><div class="slide-content"><div class="ulist"><ul><li><p>En este caso no es necesario realizar ningún diseño previo manual</p></li><li><p>Se describe literalmente el <strong>Diagrama de Secuencia de Estados</strong></p></li><li><p>Es necesario definir un nuevo tipo de señal: el de los estados. Para la declaración de un tipo de señales definido por el DISEÑADOR se utiliza la palabra clave <strong>TYPE</strong></p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-vhdl hljs" data-noescape="true" data-lang="vhdl">type tipo_estado is (pb,sub,baj,pa);  -- tipo enumeración : ESTADOS
 signal estado_actual : tipo_estado := pb; -- estado inicial
-signal estado_siguiente: tipo_estado ;</code></pre></div></div></li></ul></div></div></section><section id="_c_ascensor_descripción_vhdl_de_las_transiciones_y_de_la_salida"><h2>C. Ascensor: Descripción VHDL de las Transiciones y de la Salida</h2><div class="slide-content"><div class="paragraph"><p>Para describir "Estando en el <strong>estado_actual</strong> &#8230;&#8203;" &#8594; sentencia <span class="naranja">CASE</span><br>
-Para describir "Si entradas &#8230;&#8203;" &#8594; sentencia <span class="naranja">IF-ELSIF</span> <br>
-Las transiciones terminan en el <strong>estado_siguiente</strong><br>
-Las salidas MOORE solo dependen del estado_actual.<br></p></div>
+signal estado_siguiente: tipo_estado := pb ; -- estado inicial</code></pre></div></div>
+<div class="ulist"><ul><li><p>Mediante la asignación <span class="naranja">:= pb</span> inicializamos el valor de las señales <span class="naranja">estado_actual</span> y <span class="naranja">estado_siguiente</span>. De esta manera queda definido el estado inicial nada más encender el controlador del ascensor.</p></li></ul></div></li></ul></div></div></section><section id="_c_ascensor_descripción_vhdl_de_la_arquitectura_tipo_behavioral_2" data-state="txikiago"><h2>C. Ascensor: Descripción VHDL de la Arquitectura tipo BEHAVIORAL</h2><div class="slide-content"><div class="ulist"><ul><li><p>Es necesario describir la TABLA de TRANSICIONES:</p><div class="ulist"><ul><li><p>Estando en el <strong>estado_actual=XX * si se activan las *entradas=YY</strong> entonces se <strong>transita</strong> al <strong>estado_siguiente=ZZ</strong></p></li><li><p>La transición se ejecuta solo si se da algún <strong>evento en las entradas</strong></p></li></ul></div></li><li><p>Es necesario describir la escritura en la MEMORIA del <strong>estado_actual</strong>: actualización del nuevo estado</p><div class="ulist"><ul><li><p>después de la transición es necesario que : <strong>estado_actual &#8592; estado_siguiente</strong></p></li><li><p>la actualización del estado se da <strong>síncronamente</strong> con el flanco del reloj (<strong>negativo</strong> en este caso)</p></li></ul></div></li></ul></div></div></section><section id="_c_ascensor_descripción_vhdl_de_las_transiciones_y_de_la_salida"><h2>C. Ascensor: Descripción VHDL de las Transiciones y de la Salida</h2><div class="slide-content"><div class="paragraph"><p>Para describir "Estando en el <strong>estado_actual=XX</strong> &#8230;&#8203;" &#8594; sentencia <span class="naranja">CASE</span><br>
+Para describir "Si se activan las <strong>entradas=YY</strong> entonces <strong>estado_siguiente=ZZ</strong> " &#8594; sentencia <span class="naranja">IF-ELSIF</span> <br>
+Para describir las salidas MOORE solo hay que tener en cuenta el estado_actual.  &#8594; sentencia concurrente <span class="naranja">&#8656;</span><br>
+Para describir que la transición se da solo si hay algún <strong>evento en las entradas</strong> &#8594; el <span class="naranja">process(SW)</span> depende de las entradas SW</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-vhdl hljs" data-noescape="true" data-lang="vhdl">-- Diagrama de Transiciones Moore
     process (SW,clk)
     begin
@@ -712,7 +713,12 @@ Las salidas MOORE solo dependen del estado_actual.<br></p></div>
                 z0 &lt;= '0';
                 z1 &lt;= '1';
        end case;
-    end process;</code></pre></div></div></div></section><section id="_c_ascensor_descripción_vhdl_de_la_memoria"><h2>C. Ascensor: Descripción VHDL de la Memoria</h2><div class="slide-content"><div class="ulist"><ul><li><p>La memoria es síncrona &#8594; se actualiza el estado, es decir, el estado siguiente procesado por el controlador pasa a ser el estado_actual.</p></li><li><p>Hay cambio de estado dependiendo tanto de las entradas asíncronas como síncronas.</p></li></ul></div>
+    end process;</code></pre></div></div>
+<div class="paragraph"><p>Si la transición sólo depende de las entradas ¿por qué ponemos que el proceso depende de la señal CLK?: la respuesta en la descripción de la memoria.</p></div></div></section><section id="_c_ascensor_descripción_vhdl_de_la_memoria"><h2>C. Ascensor: Descripción VHDL de la Memoria</h2><div class="slide-content"><div class="paragraph"><p>Para describir <strong>estado_actual &#8592; estado_siguiente</strong> sincronamente: <span class="naranja">IF(falling_edge(CLK))</span><br>
+Hay cambio de estado dependiendo tanto de las entradas síncronas como asíncronas:<br>
+--Para describir <strong>estado_actual &#8592; estado_inicial</strong> si <strong>entrada=reset</strong> : <span class="naranja">IF(reset='1')</span><br>
+Los <span class="naranja">IF</span> al ser secuenciales van en el cuerpo de un <span class="naranja">process</span><br>
+--El <span class="naranja">process()</span> será sensible a la entrada asíncrona <strong>reset</strong> y  al reloj <strong>clk</strong><br></p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-vhdl hljs" data-noescape="true" data-lang="vhdl">-- Memoria : 2 celdas de memoria síncrona
     memoria:process (clk,reset)
     begin
@@ -725,7 +731,8 @@ Las salidas MOORE solo dependen del estado_actual.<br></p></div>
                 estado_actual &lt;= estado_siguiente;
             end if;
         end if;
-    end process memoria;</code></pre></div></div></div></section><section id="_c_ascensor_descripción_vhdl_completa_2"><h2>C. Ascensor: Descripción VHDL Completa</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-vhdl hljs" data-noescape="true" data-lang="vhdl">-- Ascensor de 2 plantas: Planta Baja y Planta Alta
+    end process memoria;</code></pre></div></div>
+<div class="ulist"><ul><li><p>Observar que el process se ejecutará si hay un evento en clk, es decir, tanto si hay flanco positivo o negativo&#8230;&#8203;en cambio el IF del process solo se ejecuta en el flanco negativo del reloj clk.</p></li></ul></div></div></section><section id="_c_ascensor_descripción_vhdl_de_la_memoria_2"><h2>C. Ascensor: Descripción VHDL de la Memoria</h2><div class="slide-content"><div class="ulist"><ul><li><p>¿Puede darse el caso de que el estado_siguiente no esté definido? Sí. Al arrancar el sistema mediante el encendido del controlador el estado del sistema será el estado de inicio. Si no cambiamos las entradas no se ejecutará <span class="naranja">process(SW)</span> por lo que estado_siguiente <strong>NO</strong> estará definido y al producirse el disparo del reloj clk se ejecutará <span class="naranja">process(clk,reset)</span> con la señal estado_siguiente sin definir.</p><div class="ulist"><ul><li><p>Dos soluciones posibles:</p><div class="olist lowerroman"><ol class="lowerroman" type="i"><li><p>Inicializar el estado_siguiente al arrancar el sistema con la declaración <span class="naranja">signal estado_siguiente: tipo_estado := <strong>pb</strong>;</span> que asigna el valor <strong>pb</strong> a la señal estado_siguiente.</p></li><li><p>Definir el estado_siguiente al producirse el disparo de reloj activando el <span class="naranja">process(SW,<strong>clk</strong>)</span> añadiendo la señal clk a la lista de señales sensibles del process.</p></li></ol></div></li></ul></div></li></ul></div></div></section><section id="_c_ascensor_descripción_vhdl_completa_2"><h2>C. Ascensor: Descripción VHDL Completa</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-vhdl hljs" data-noescape="true" data-lang="vhdl">-- Ascensor de 2 plantas: Planta Baja y Planta Alta
 -- Entradas: Switches SW 0-5 -&gt; sensores sa, sb y botones bdb, blb, bda, bla
 -- Salidas: Leds LEDR 0-1 -&gt; código z0z1
 -- Estados: Leds LEDR 8-9 -&gt; código q0q1

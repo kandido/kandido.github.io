@@ -522,7 +522,7 @@ Descripción de los biestables Q1 y Q0 +
 --Utilizaremos biestables JK disparados por el flanco negativo de un reloj y con señal asíncrona de reset. +
  +
 Sincronismo: +
---Entrada asíncrona: Reset .Se activa independientemente de cualquier otra señal.
+--Entrada asíncrona: Reset .Se activa independientemente de cualquier otra señal. +
 --Entrada síncrona JK: A la salida Q se le asignará un valor determinado por la entrada JK cuando llegue un flanco negativo de la señal de reloj. +
 --Para detectar el flanco negativo utilizaremos la función *falling_edge(signal)* definida en la librería ieee. +
  +
@@ -699,15 +699,28 @@ end rtl;
 ----
 type tipo_estado is (pb,sub,baj,pa);  -- tipo enumeración : ESTADOS
 signal estado_actual : tipo_estado := pb; -- estado inicial
-signal estado_siguiente: tipo_estado ;
+signal estado_siguiente: tipo_estado := pb ; -- estado inicial
 ----
+
+** Mediante la asignación [naranja]#:= pb# inicializamos el valor de las señales [naranja]#estado_actual# y [naranja]#estado_siguiente#. De esta manera queda definido el estado inicial nada más encender el controlador del ascensor.
+
+[state=txikiago]
+=== C. Ascensor: Descripción VHDL de la Arquitectura tipo BEHAVIORAL
+
+* Es necesario describir la TABLA de TRANSICIONES:
+** Estando en el *estado_actual=XX * si se activan las *entradas=YY* entonces se *transita* al *estado_siguiente=ZZ*
+** La transición se ejecuta solo si se da algún *evento en las entradas*
+
+* Es necesario describir la escritura en la MEMORIA del *estado_actual*: actualización del nuevo estado
+** después de la transición es necesario que : *estado_actual <- estado_siguiente*
+** la actualización del estado se da *síncronamente* con el flanco del reloj (*negativo* en este caso)
 
 === C. Ascensor: Descripción VHDL de las Transiciones y de la Salida
 
-Para describir "Estando en el *estado_actual* ..." -> sentencia [naranja]#CASE# +
-Para describir "Si entradas ..." -> sentencia [naranja]#IF-ELSIF#  +
-Las transiciones terminan en el *estado_siguiente* +
-Las salidas MOORE solo dependen del estado_actual. +
+Para describir "Estando en el *estado_actual=XX* ..." -> sentencia [naranja]#CASE# +
+Para describir "Si se activan las *entradas=YY* entonces *estado_siguiente=ZZ* " -> sentencia [naranja]#IF-ELSIF#  +
+Para describir las salidas MOORE solo hay que tener en cuenta el estado_actual.  -> sentencia concurrente [naranja]#<=# +
+Para describir que la transición se da solo si hay algún *evento en las entradas* -> el [naranja]#process(SW)# depende de las entradas SW
  
 [source,vhdl]
 ----
@@ -755,10 +768,15 @@ Las salidas MOORE solo dependen del estado_actual. +
     end process;
 ----
 
+Si la transición sólo depende de las entradas ¿por qué ponemos que el proceso depende de la señal CLK?: la respuesta en la descripción de la memoria.
+
 === C. Ascensor: Descripción VHDL de la Memoria
 
-* La memoria es síncrona -> se actualiza el estado, es decir, el estado siguiente procesado por el controlador pasa a ser el estado_actual.
-* Hay cambio de estado dependiendo tanto de las entradas asíncronas como síncronas.
+Para describir *estado_actual <- estado_siguiente* sincronamente: [naranja]#IF(falling_edge(CLK))# +
+Hay cambio de estado dependiendo tanto de las entradas síncronas como asíncronas: +
+--Para describir *estado_actual <- estado_inicial* si *entrada=reset* : [naranja]#IF(reset='1')# +
+Los [naranja]#IF# al ser secuenciales van en el cuerpo de un [naranja]#process# +
+--El [naranja]#process()# será sensible a la entrada asíncrona *reset* y  al reloj *clk* +
  
 [source,vhdl]
 ----
@@ -776,6 +794,14 @@ Las salidas MOORE solo dependen del estado_actual. +
         end if;
     end process memoria;
 ----
+** Observar que el process se ejecutará si hay un evento en clk, es decir, tanto si hay flanco positivo o negativo...en cambio el IF del process solo se ejecuta en el flanco negativo del reloj clk.
+
+=== C. Ascensor: Descripción VHDL de la Memoria
+
+* ¿Puede darse el caso de que el estado_siguiente no esté definido? Sí. Al arrancar el sistema mediante el encendido del controlador el estado del sistema será el estado de inicio. Si no cambiamos las entradas no se ejecutará [naranja]#process(SW)# por lo que estado_siguiente *NO* estará definido y al producirse el disparo del reloj clk se ejecutará [naranja]#process(clk,reset)# con la señal estado_siguiente sin definir.
+** Dos soluciones posibles: 
+... Inicializar el estado_siguiente al arrancar el sistema con la declaración [naranja]#signal estado_siguiente: tipo_estado := *pb*;# que asigna el valor *pb* a la señal estado_siguiente.
+... Definir el estado_siguiente al producirse el disparo de reloj activando el [naranja]#process(SW,*clk*)# añadiendo la señal clk a la lista de señales sensibles del process.
 
 
 === C. Ascensor: Descripción VHDL Completa
