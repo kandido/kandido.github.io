@@ -725,7 +725,7 @@ Para describir que la transición se da solo si hay algún *evento en las entrad
 [source,vhdl]
 ----
 -- Diagrama de Transiciones Moore
-    process (SW,clk)
+    process (SW)
     begin
        case estado_actual is
             when pb =>

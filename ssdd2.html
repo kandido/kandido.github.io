@@ -673,7 +673,7 @@ Para describir "Si se activan las <strong>entradas=YY</strong> entonces <strong>
 Para describir las salidas MOORE solo hay que tener en cuenta el estado_actual.  &#8594; sentencia concurrente <span class="naranja">&#8656;</span><br>
 Para describir que la transición se da solo si hay algún <strong>evento en las entradas</strong> &#8594; el <span class="naranja">process(SW)</span> depende de las entradas SW</p></div>
 <div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-vhdl hljs" data-noescape="true" data-lang="vhdl">-- Diagrama de Transiciones Moore
-    process (SW,clk)
+    process (SW)
     begin
        case estado_actual is
             when pb =&gt;
