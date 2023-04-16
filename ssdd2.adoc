@@ -200,6 +200,14 @@ Contadores: +
 
 image::tema7_flip-flop_tipos.svg[]
 
+=== Características Temporales de los Biestables Flip-flops
+
+* Tiempo de Retardo ó Propagación(Delay) : Desde que se activa el flanco del reloj para la escritura hasta que se estabiliza la nueva *salida Q* de la celda.
+* Tiempo de Mantenimiento (Hold): El tiempo que debe de permanecer estable la *entrada* desde que se activa el flanco del reloj.
+* Tiempo de Establecimiento(Set-Up) : El tiempo que debe de permanecer estable la *entrada* antes de que se active el flanco del reloj.
+
+image::tema7_flip-flop_delay.svg[]
+
 === Cronogramas: Señales binarias de escritura y lectura de biestables
 
 
@@ -942,10 +950,313 @@ end behavioral;
 
 * Se recomienda realizar los ejercicios recomendados del libro de problemas y especialmente la obtención del *Diagrama de Estados* partiendo de cero.
 
-=== Contadores
+
+=== Ejemplo 2b Transparencias: Diagrama Secuencia de Estados MEALY
+
+image::tema7_eje2b_diag_seq_mealy.svg[]
+
+=== Ejemplo 2b Transparencias: Codificación Entradas, Salidas, Estados
+
+* Entrada: Un bit -> X
+* Salida: Un bit -> Z
+* Biestables: 
+** elección libre -> JK
+** 4 estados -> 2 bits -> Q1Q0
+** Codificación  Q1Q0 = 00 para el estado q0, 01 si q1, 10 si q2 y 11 si q3.
+
+=== Ejemplo 2b Transparencias: Tablas de Transiciones, Salidas, Excitación
+
+image::tema7_eje2b_tablas.svg[]
 
 
-=== Registros
+=== Ejemplo 2b Transparencias: Diseño Circuitos de Excitación y de Salidas
+
+image::tema7_eje2b_CC.svg[]
+
+
+
+=== Ejemplo 2b Transparencias: Diseño Circuitos de Excitación y de Salidas
+
+
+
+* latexmath:[Z=Q_1 \cdot \overline Q_0 \cdot X] +
+* latexmath:[J1 = X + \overline Q1 \cdot Q0] +
+* latexmath:[K1 = \overline X] +
+* latexmath:[J0 = X] +
+* latexmath:[K0 = 1]
+
+
+[.columns,state=txikiago]
+=== Registros: Introducción
+
+[.column]
+* Funcionalidad
+** Registrar o Almacenar o *Memorizar* un dato, una instrucción, un código, etc
+* Estructura
+** Secuencia de celdas de memoria de 1 bit
+* Tamaño
+** Normalmente 1,2,4,8,..., bytes
+** Por lo tanto es una unidad de memoria de muy pequeña capacidad pero de alta velocidad.
+
+[.column]
+* Aplicaciones:
+** Bancos de Registros: conjunto de registros con una funcionalidad común. Por ejemplo el banco de registros de números enteros de un microprocesador de Intel.
+** Controladores de entrada/salida de un computadora: controlador de video, controlador del disco externo, controlador ethernet... todos necesitan memoria para almacenar un pocos datos, comandos, etc...
+* Tecnología
+** Cada celda de memoria puede implementarse con un biestable Flip-Flop. Operaciones de Lectura y de Escritura. La escritura es síncrona con una señal de reloj.
+
+=== Registros: Esquema
+
+
+image::tema7_reg_esquema.svg[]
+
+* D: Dato a registrar (Escritura) , Q: Dato registrado (Lectura)
+* Clock: Sincronismo por flanco (para el instante de la escritura)
+* Load: Cargar el dato de entrada -> Orden de escritura
+* Reset: Iniciar el registro con el dato cero -> 00000000
+
+=== Registros de Desplazamiento: Introducción
+
+* *Desplazar* bits de un dato hacia la izda o hacia la dcha.
+* En el lenguaje de programación ensamblador hay instrucciones como "SHL x,n" (shift-left n bits el dato x) ó "SHR n" (shift-right n bits el dato x)
++
+
+----
+  x=00001111
+  shl x,4  -> x=11110000
+  shr x,2  -> x=00111100
+----
+** Matemáticamente, desplazar "n" bits de un número binario hacia la derecha equivale a dividir por latexmath:[2^n] y desplazar "n" bits hacia la izquierda equivale a multiplicar por latexmath:[2^n]
+
+
+=== Registros de Desplazamiento: Introducción
+
+image::tema7_reg_desplaza.svg[]
+
+[.columns]
+=== Registros de Desplazamiento: Estructura con Flip-flops
+
+[.column]
+--
+* Conexión de los Flip-Flops en cascada o anillo: conectar salidas Q con entradas del flip-flop contiguo
+
+image::tema7_reg_estru.svg[]
+--
+[.column]
+* Inicializar Registro: bus datos -> load asíncrono
+* Borrado -> entradas clear asíncronas
+* *Desplazamiento síncrono*-> cada flanco de reloj
+* Circuito Escritura: set-reset del primer flip-flop
+* Lectura: bus de salida Q
+
+
+=== Registros de Desplazamiento: Tipos
+
+* Entrada Serie - Salida Serie/Paralelo
+
+* Entrada Serie/Paralelo - Salida Serie/Paralelo
+
+* 74166: Comercial 
+
+[state=taula]
+=== Registros de Desplazamiento: Entrada Serie/Paralelo - Salida Serie/Paralelo
+
+[.Load/Clear]
+[width=60%]
+|====
+| Borrado | Inhibición | Función
+| 0 | 0 | LOAD 
+| 0 | 1 | Desplaza
+| 1 | 0 | Prohibido
+| 1 | 1 | Borrado
+|====
+
+[.text-left]
+* La señal Inhibición del desplazamiento realiza la función LOAD con lógica negativa
+** Durante la carga del dato inicial el desplazamiento queda anulado al inhibir al reloj
+* No se puede Cargar y Borrar al mismo tiempo.
+
+[.columns,state=txikiago]
+=== Registros de Desplazamiento: 74166
+
+[.column]
+* Estructura Interna:
+** 8 biestables tipo D *sin entrada asíncrona* -> en cascada
+** Control entrada Serie/Paralelo -> solo escritura síncrona
+*** *LD+CLK* : Carga paralela síncrona
+
+* latexmath:[SH/ \overline LD] : Shift-LoaD : desplaza o carga
+* SER: Entrada de datos SERie
+* CLK: flancos de sincronismo del desplazamiento
+* CLK INH: inhibición del desplazamiento
+
+[.column]
+* PARALLEL: Entrada de Datos a través del bus 
+* Qi: Salida del bit "i"
+* latexmath:[Q_H]: Salida de datos serie
+* CLR: clear
+
+[.columns,state=txikiago]
+=== Registros de Desplazamiento: hacia la IZDA
+
+[.column]
+* Cómo diseñar un registro de desplazamiento hacia la izda utilizando un Reg. Desp. hacia la derecha.
+* Ejemplo: Registro de 4 bits D3-D2-D1-D0 que para cada flanco *negativo* desplaza 1 bit hacia la derecha
+** Conectamos, externamente al registro, la salida Q0 a la entrada D1: Q0 -> D1 
+** Conectamos externamente cada salida a la entrada del bit anterior: Q0->D1, Q1->D2, Q2->D3, Q3 sin conectar
+
+[.column]
+* Entrada [naranja]#S# hift/[naranja]#L# oad a *0* -> se inhibe la conexión en anillo de los flip-flops
+* Ahora la escritura síncrona es siempre a través del bus paralelo.
+
+
+=== Registros de Desplazamiento: Ejercicio
+
+* Diseñar un circuito externo que realice una carga de la entrada paralela cada flanco *positivo* (flanco contrario al de los flip-flops). ¿El circuito debe ser secuencial?
+
+[.TV]
+[width=90%,cols="1,1,3"]
+|===
+|latexmath:[CLK] | latexmath:[\overline {LOAD}] | Función
+|latexmath:[\downarrow] | 1 | Escritura Síncrona a través de la entrada serie
+|latexmath:[\uparrow] | 0 | Escritura Síncrona a través de la entrada paralelo
+|===
+
+=== Registros de Desplazamiento: Registro Universal (bidireccional) de 4 bits : 74194
+
+* Entrada Ser/Par y Salida Ser/Par
+* 4 canales: A,B,C,D y Qa,Qb,Qc,Qd
+* Estructura interna: SR-FF
+* Entradas Serie: Shift Right Serial (SR SER) y Shift Left Serial (SL SER) 
+* CLK: sync
+* Control S1-S0: LOAD, SER Right, SER Left, HOLD
+* latexmath:[\overline {CLR}]: clear
+
+=== Registros de Desplazamiento: Registro Universal (bidireccional) de 8 bits : 74299
+
+* SR: shift right
+* SL: shift left
+* latexmath:[\overline {CLR}]: clear
+* output: latexmath:[Q_A^{'}, Q_B^{'}, Q_C^{'},..., Q_H^{'}] 
+* input/output latexmath:[A/Q_A, B/Q_B, C/Q_C,..., H/Q_H]
+* OE: output enable
+* MODE -> (Clear,Hold,Shift Right, Shift Left, Load)
+
+=== Registros de Desplazamiento Rotacional
+
+* El anillo es completo: se conecta la salida de la última celda a la primera celda.
+
+[.columns,state=txikiago]
+=== Contadores: Introducción
+
+[.column]
+* Función
+** Registrar, Almacenar, Memorizar el valor de la cuenta de los pulsos de un reloj.
+* Contador de Módulo N
+** puede contar N valores diferentes: Pej: 0,1,2,...N-1
+* Tipos:
+** Síncronos: todas las celdas del contador se escriben síncronamente con el mismo reloj
+** Asíncronos: las celdas del contador son escritas de forma no síncrona
+
+[.column]
+* Aplicaciones
+** Divisor de la frecuencia: de una señal digital binaria
+** Temporizador: reloj digital en tiempo real (Real Time Clock)
+* Diseño:
+** Contadores Síncronos: Método general de diseño de los sistemas secuenciales tipo Moore.
+** Contadores Asíncronos.
+
+=== Contadores: Ejemplo Contador Ascendente Módulo 8
+
+* Secuencia: 0,1,2...7,0,...7,0,...
+* 8 valores -> 3 bits -> 000,001,...,111,000,...
+* Estructura: 3 celdas biestables y una señal de reloj -> Valor de la cuenta: Salida Q2Q1Q0
+* Cronograma
+
+image::tema7_cont_crono.svg[]
+
+* Observar: el valor de la cuenta, el sincronismo, la relación de frecuencias entre las salidas
+
+=== Contadores: Asíncronos
+
+* Estructura Interna:
+** El bit LSB latexmath:[Q_0] es el de la celda de la IZDA 
+** La salida latexmath:[Q_i] se conecta al reloj latexmath:[CLK_{i+1}]
+** Tipo de biestable: *JK* con las dos entradas  *11*
+
+=== Contadores: Asíncronos -> Cronograma
+
+* Cronograma real teniendo en cuenta los retardos latexmath:[t_{pb}] -> Propagation Biestable delay
+
+image::tema7_cont_crono_fmax.svg[]
+
+* La limitación viene determinada por los casos críticos: la acumulación de los retardos es mayor si en la transición o secuencia deben de conmutar todas las celdas, por ejemplo en la transición 1111 -> 0000 ó en la transición 0111 -> 1000
+** Tmin -> latexmath:[3t_{pb}+t_x]   ->  ¿latexmath:[t_x]?
+
+=== Contadores: Asíncronos -> Frecuencia Máxima
+
+* fmax=1/Tmin
+* ¿ De qué depende tx? ¿tx es el retardo de SET-UP?
+* ¿ Ĺa salida Q3 está conectada a ...?
+* ¿ Quien va a leer Q3? ¿Cuando va a cambiar proximamente Q3?¿Por qué tx viene limitado por el siguiente flanco de reloj?
+
+[.columns,state=taula]
+=== Contadores: Asíncrono Ascendente Módulo 10
+
+[.column]
+--
+* Estructura: 4 celdas -> Cuenta 0000-0001-...-1111
+** Un contador con 4 celdas es de Módulo 16, por lo que es necesario detectar el valor de cuenta "9" y que el valor siguiente no sea "diez" sino "cero".
+* Una solución posible es que en el flanco positivo siguiente a la transición 8->9 (flanco negativo) se realice la transición 9->15, por lo que en el siguiente flanco negativo la transición será 15->0.
+** Al llegar a 9 ("1001") ponemos el contador a 15 ("1111) seteando los dos biestables que están a cero -> Q1 y Q2
+
+image::tema7_cont_crono_mod10.svg[]
+
+* latexmath:[G=Q_3 \cdot Q_0] -> sincronismo con clk=1 -> latexmath:[G=Q_3 \cdot Q_0 \cdot CLK]
+* lógica negativa -> latexmath:[G= \overline {Q_3 \cdot Q_0 \cdot CLK}]
+--
+
+[.column]
+[.DK G=Detector del 9 -> 1001]
+|===
+|Q3Q2 +
+... +
+Q1Q0|00|01|11|*10*
+|00|0|0|X|0
+|*01*|0|0|*X*|*1*
+|11|0|0|*X*|*X*
+|10|0|0|X|X
+|===
+
+
+
+=== Contador Síncrono: Introducción
+
+* Diseño
+** Método General Sistemas Secuencias Tipo Moore
+** Los estados Q son el valor de la cuenta (salida Z) -> Z=Q
+* Tipos
+** Ascendente ó Descendente
+** Reversible (Ascendente y Descendente)
+** La cuenta no tiene porque ser números consecutivos -> pares, impares, johnson, etc
+
+[.columns]
+=== Contador Síncrono: Ejemplos
+
+[.column]
+. Ascendente, Módulo 16
+** FF-JK, flanco positivo
+** Calcular la fmax
+** Circuito combinacional (acarreo paralelo)
+. Ascendente, Módulo 10
+** FF-JK, flanco positivo
+** Acarreo paralelo
+
+[.column]
+. Reversible Módulo 6 
+** FF-JK, flanco positivo
+. 74191 (Reversible Módulo 16) y 74190 (Reversible Módulo 10)
+** D/U -> Down/Up ; latexmath:[\overline {CTEN}] Counter Enable, CLK, latexmath:[\overline {LOAD}]
 
 
 [#Tema8_Fam]
