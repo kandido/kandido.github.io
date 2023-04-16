@@ -1184,6 +1184,8 @@ image::tema7_cont_crono.svg[]
 ** La salida latexmath:[Q_i] se conecta al reloj latexmath:[CLK_{i+1}]
 ** Tipo de biestable: *JK* con las dos entradas  *11*
 
+image::tema7_cont_asincrono.svg[]
+
 === Contadores: Asíncronos -> Cronograma
 
 * Cronograma real teniendo en cuenta los retardos latexmath:[t_{pb}] -> Propagation Biestable delay
@@ -1258,6 +1260,150 @@ Q1Q0|00|01|11|*10*
 . 74191 (Reversible Módulo 16) y 74190 (Reversible Módulo 10)
 ** D/U -> Down/Up ; latexmath:[\overline {CTEN}] Counter Enable, CLK, latexmath:[\overline {LOAD}]
 
+[.columns,state=taula]
+=== Contador Johnson 4 bits
+
+[.column]
+* Cuenta con 4 bits -> Módulo 8
++
+
+----
+0000
+1000
+1100
+1110
+1111
+0111
+0011
+0001
+0000
+----
+
+* Observamos que inicialmente entran 1 por la izquierda y se desplazan hacia la derecha 
+* Después de completar los 1 entran 0 por la izquierda y se desplazan hacia la derecha
+* Se puede intuir que la solución es un *registro con desplazamiento* hacia la derecha
+** Estructura en Anillo
+
+
+[.column]
+--
+[.Tabla de Transiciones y Tabla de Excitación]
+|===
+2+| Estados 4.2+| Excitación
+| Actual | Próximo 
+|Q3Q2Q1Q0 | Q3Q2Q1Q0 | J3K3 | J2K2 | J1K1 | K0K0
+|0000|1000|1X|0X|0X|0X
+|1000|1100|X0|1X|0X|0X
+|1100|1110|X0|X0|1X|0X
+|1110|1111|X0|X0|X0|1X
+|1111|0111|X1|X0|X0|X0
+|0111|0011|0X|X1|X0|X0
+|0011|0001|0X|0X|X1|X0
+|0001|0000|0X|0X|0X|X1
+|===
+--
+
+[.columns,state=taula]
+=== Contador Johnson 4 bits
+
+[.column]
+--
+.latexmath:[J_0]
+|===
+|Q3Q2 +
+... +
+Q1Q0|00|01|11|10
+|00|0| |0|0
+|01| | | |
+|11|[verde]###  |[verde]###  |[verde]###  |[verde]### 
+|10|[verde]### |[verde]### |*1*|[verde]### 
+|===
+
+* latexmath:[J_0=Q_1]
+* latexmath:[K_0= \overline{J_0} = \overline{Q_1}]
+--
+
+[.column]
+--
+.latexmath:[J_3]
+|===
+|Q3Q2 +
+... +
+Q1Q0|00|01|11|10
+|00|*1*| [verde]### |[verde]###  |[verde]### 
+|01|0| | |
+|11|0|0| |
+|10|[verde]###  | [verde]### | [verde]### |[verde]### 
+|===
+
+* latexmath:[J_3=\overline Q_0]
+* latexmath:[K_3= \overline{J_3} = Q_0]
+--
+
+[.columns]
+=== Contador Johnson 4 bits
+
+[.column]
+* latexmath:[J_0=Q_1]
+* latexmath:[K_0= \overline{J_0} = \overline{Q_1}]
+* latexmath:[J_1=Q_2]
+* latexmath:[K_1= \overline{J_1} = \overline{Q_2}]
+* latexmath:[J_2=Q_1]
+* latexmath:[K_2= \overline{J_3} = \overline{Q_3}]
+* latexmath:[J_3=\overline Q_0]
+* latexmath:[K_3= \overline{J_3} = Q_0]
+
+[.column]
+--
+* Las celdas 0,1 y 2 están en anillo y la celda 3 en anillo cruzado o invertido
+
+image::tema7_cont_anillo_inv.svg[]
+--
+
+=== Contador en anillo Módulo 2
+
+* Cuenta Q1Q0: 10 -> 01
+* Se observa que si desplazamos hacia la derecha y la última celda rota da como resultado el contador -> contador en anillo
+
+image::tema7_cont_anillo.svg[]
+
+* Qué ocurriría si debido a interferencias el contador entra en el estado 00 ó 11 que NO forman parte contador -> bloqueo!!
+* Solución anti-bloqueo: detectar un estado de bloqueo y provocar una transición al estado inicial escribiendo mediante las entradas asíncronas.
+
+
+[.columns,state=taula]
+=== Contador en anillo Módulo 2
+
+[.column]
+--
+* Contador con antibloqueo
+** Señal de control latexmath:[P: Desplaza/ \overline {Inicializa}]
+** Estado inicial "10"
++
+
+.Tabla de Transiciones y Excitación
+|===
+| | E.Actual | E.Próximo | |
+|P|Q1Q0 | Q1Q0 | latexmath:[\overline {CLR1}] | latexmath:[\overline {PR0}]  
+|0|00|10| 0 | 0
+|0|01|10| 0 | 0
+|0|10|10| 0 | 0
+|0|11|10| 0 | 0
+|===
+--
+
+[.column]
+--
+.Tabla de Transiciones y Excitación
+|===
+| | E.Actual | E.Próximo | |
+|P|Q1Q0 | Q1Q0 | latexmath:[\overline {CLR1}] | latexmath:[\overline {PR0}]  
+|1|00|10| 0 | 0
+|*1*|*01*|*10*| *1* | *1*
+|*1*|*10*|*01*| *1* | *1*
+|1|11|10| 0 | 0
+|===
+--
 
 [#Tema8_Fam]
 == Tema 8: Circuitos Digitales Integrados. Familias Lógicas.
