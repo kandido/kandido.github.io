@@ -1405,8 +1405,78 @@ image::tema7_cont_anillo.svg[]
 |===
 --
 
-[#Tema8_Fam]
+[#Tema8_Fam,state=txikiago]
 == Tema 8: Circuitos Digitales Integrados. Familias Lógicas.
+
+* Introducción
+** Los circuitos digitales integrados de semiconductor son circuitos formados por transistores de efecto de campo MOSFET ó/y transistores bipolares de unión BJT. Según la tecnología de fabricación de los transistores de Silicio, los circuitos digitales se clasifican en distintas familias lógicas.
+** Ejemplo de Familias Lógicas:
+*** 2 grandes grupos : Bipolares (alto consumo y alta velocidad) y CMOS (bajo consumo y velocidad media)
+*** Familia Transistor Transistor Logic (TTL) : Familia Bipolar
+*** Familia Complementary Metal Oxide Semiconductor (CMOS)
+** Es necesario conocer los niveles de tensión (voltios) y corrientes (miliamperios) en las entradas y salidas de los circuitos digitales integrados correspondientes digitos binarios '0' y '1' para poder analizar la compatibilidad entre las distintas familias lógicas.
+
+[state=taula]
+=== Familias Lógicas: Hoja de características eléctricas
+
+.Hoja de Características Eléctricas
+[width=80%]
+|===
+|Familia Lógica| latexmath:[V_{OHmin}] | latexmath:[V_{OLmax}] | latexmath:[V_{IHmin}] | latexmath:[V_{ILmax}]  
+|F1|4,99V|0,001V|3,5V|1,5V
+|F2|2,4V|0,4V|2V|0,8V
+|===
+
+.Hoja de Características Eléctricas
+[width=80%]
+|===
+|Familia Lógica| latexmath:[I_{OHmax}] | latexmath:[I_{OLmax}] | latexmath:[V_{IHmax}] | latexmath:[V_{ILmax}]  
+|F1|-0,5mA|0,4mA|10pA|-10pA
+|F2|-800mA|16mA|40pA|-1,6mA
+|===
+
+* El ejercicio 3.3 del libro de problemas analiza la compatibilidad eléctrica entre dos familias lógicas
+
+[.columns]
+=== Familias Lógicas: Función de transferencia
+
+[.column]
+--
+* Puerta Lógica Inversora -> función de transferencia Vo(Vi)
+
+
+image::tema8_func_trans.svg[]
+--
+
+[.column]
+* Determinar los Niveles Lógicos '0' (Low) y '1' (High) a la entrada y a la salida del circuito.
+* La zona lineal: La salida Vo varía linealmente con la entrada Vi: amplifica K=Vo/Vi
+* La zona no lineal, la salida Vo no varía con la entrada Vi -> Niveles de salida y entrada para el '1' (Nivel *Hight*) y el '0' (Nivel *Low*)
+* Los niveles H y L tienen un rango entre los umbrales MAX y MIN.
+
+=== Familias Lógicas: Compatibilidad de los niveles de Tensión.
+
+image::tema8_inv_comp.svg[]
+
+image::tema8_inv_comp_curva.svg[]
+
+=== Familias Lógicas: Fan-out
+
+* Puerta excitadora o driver
+* Puertas de carga
+* Corrientes de entrada y de salida correspondientes a los bits '0' y '1'
+
+
+=== Familias Lógicas: Ruido y Márgenes de Ruido.
+
+
+
+=== Familias Lógicas: Retardo de Propagación
+
+
+=== Familias Lógicas: Compatibilidad
+
+
 
 [#Tema9_Mem]
 == Tema 9: Memorias.
