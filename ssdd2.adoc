@@ -1033,21 +1033,23 @@ image::tema7_reg_esquema.svg[]
 
 image::tema7_reg_desplaza.svg[]
 
-[.columns]
+[.columns,state=txikiago]
 === Registros de Desplazamiento: Estructura con Flip-flops
 
 [.column]
 --
 * Conexión de los Flip-Flops en cascada o anillo: conectar salidas Q con entradas del flip-flop contiguo
 
-image::tema7_reg_estru.svg[]
+image::tema7_reg_estru_in_serie.svg[]
 --
 [.column]
-* Inicializar Registro: bus datos -> load asíncrono
 * Borrado -> entradas clear asíncronas
-* *Desplazamiento síncrono*-> cada flanco de reloj
-* Circuito Escritura: set-reset del primer flip-flop
-* Lectura: bus de salida Q
+* SHIFT: *Desplazamiento síncrono*-> cada flanco de reloj
+* Circuito Escritura: 
+** serie: shift :set-reset del primer flip-flop 
+* Lectura:
+** línea salida serie 
+** bus de salida Q
 
 
 === Registros de Desplazamiento: Tipos
@@ -1057,6 +1059,17 @@ image::tema7_reg_estru.svg[]
 * Entrada Serie/Paralelo - Salida Serie/Paralelo
 
 * 74166: Comercial 
+
+
+=== Registros de Desplazamiento: Entrada Serie/Paralelo - Salida Serie/Paralelo
+
+image::tema7_reg_estru_in_paral.svg[]
+
+* Inicializar Registro: bus datos -> LOAD asíncrono
+* SHIFT: *Desplazamiento síncrono*-> cada flanco de reloj
+* Circuito Escritura: 
+** serie: shift :set-reset del primer flip-flop 
+** paralelo: load : escritura asíncrona de todos los flip-flops
 
 [state=taula]
 === Registros de Desplazamiento: Entrada Serie/Paralelo - Salida Serie/Paralelo
@@ -1072,9 +1085,43 @@ image::tema7_reg_estru.svg[]
 |====
 
 [.text-left]
-* La señal Inhibición del desplazamiento realiza la función LOAD con lógica negativa
-** Durante la carga del dato inicial el desplazamiento queda anulado al inhibir al reloj
+* La señal Inhibición (lógica negativa) realiza la función LOAD si su valor es cero
+** Durante la *carga* (LOAD) del dato inicial el desplazamiento queda anulado al *inhibir al reloj*
+** Si inhibición vale 1 entonces no inhibe el reloj y se produce el desplazamiento.
+* No se puede Cargar y Desplazar al mismo tiempo
 * No se puede Cargar y Borrar al mismo tiempo.
+
+
+=== Registros de Desplazamiento: Diseño Entrada S/P y Salida S/P
+
+* Herramienta LOGICA: Tablas de la Verdad -> Fundamental para Razonar
+
+image::tema7_reg_desp_dise.svg[]
+
+
+[.columns,state=txikiago]
+=== Registros de Desplazamiento: Diseño Entrada S/P y Salida S/P
+
+[.column]
+--
+* Diseño del circuito: RAZONAMIENTO
+** Si latexmath:[S/ \overline L = 0] entonces : latexmath:[PR_i = \overline {d_i}] e inhibir el reloj (clock=0) y latexmath:[S_3=X \hspace{3mm} y \hspace{3mm} R_3=X]
+** Si latexmath:[S/ \overline L = 1] entonces : latexmath:[PR_i = 1] y el reloj (clock=CLK) y latexmath:[S_3=b_i \hspace{3mm} y \hspace{3mm} R_3=\overline {S_3}]
+* Herramienta LOGICA: Diagramas de Karnaugh
+
+image::tema7_reg_dis_dk.svg[]
+--
+
+[.column]
+
+* Solución:
+** latexmath:[PR_i = S/ \overline L +\overline {d_i}]
+** latexmath:[clock = S/ \overline L \cdot CLK]
+** latexmath:[S_3 = b_i] y latexmath:[R_3 = \overline {S_3}]
+
+=== Registros de Desplazamiento: Diseño Entrada S/P y Salida S/P
+
+image::tema7_reg_dis_puertas.svg[]
 
 [.columns,state=txikiago]
 === Registros de Desplazamiento: 74166
@@ -1184,7 +1231,7 @@ image::tema7_cont_crono.svg[]
 ** La salida latexmath:[Q_i] se conecta al reloj latexmath:[CLK_{i+1}]
 ** Tipo de biestable: *JK* con las dos entradas  *11*
 
-image::tema7_cont_asincrono.svg[]
+
 
 === Contadores: Asíncronos -> Cronograma
 
@@ -1194,6 +1241,25 @@ image::tema7_cont_crono_fmax.svg[]
 
 * La limitación viene determinada por los casos críticos: la acumulación de los retardos es mayor si en la transición o secuencia deben de conmutar todas las celdas, por ejemplo en la transición 1111 -> 0000 ó en la transición 0111 -> 1000
 ** Tmin -> latexmath:[3t_{pb}+t_x]   ->  ¿latexmath:[t_x]?
+
+[.columns]
+=== Contadores: Asíncronos -> Diseño
+
+[.column]
+* El diseño se basa en el CRONOGRAMA
+** Q0 conmuta en el flanco de subida de CLK
+** Q1 conmuta en el flanco de bajada de Q0
+** Q2 conmuta en el flanco de bajada de Q1
+* Conclusión
+** conmuta en el flanco -> JK=11
+** flip-flops por flanco positivo
+*** flanco negativo de latexmath:[Q_0] -> flanco positivo de latexmath:[\overline Q_0]
+
+[.column]
+
+
+image::tema7_cont_asincrono.svg[align=center]
+
 
 === Contadores: Asíncronos -> Frecuencia Máxima
 
@@ -1291,7 +1357,7 @@ Q1Q0|00|01|11|*10*
 |===
 2+| Estados 4.2+| Excitación
 | Actual | Próximo 
-|Q3Q2Q1Q0 | Q3Q2Q1Q0 | J3K3 | J2K2 | J1K1 | K0K0
+|Q3Q2Q1Q0 | Q3Q2Q1Q0 | J3K3 | J2K2 | J1K1 | J0K0
 |0000|1000|1X|0X|0X|0X
 |1000|1100|X0|1X|0X|0X
 |1100|1110|X0|X0|1X|0X
@@ -1357,13 +1423,13 @@ Q1Q0|00|01|11|10
 --
 * Las celdas 0,1 y 2 están en anillo y la celda 3 en anillo cruzado o invertido
 
-image::tema7_cont_anillo_inv.svg[]
+image::tema7_cont_johnson.svg[]
 --
 
 === Contador en anillo Módulo 2
 
 * Cuenta Q1Q0: 10 -> 01
-* Se observa que si desplazamos hacia la derecha y la última celda rota da como resultado el contador -> contador en anillo
+* Se observa que si desplazamos hacia la derecha y la última celda *rota* da como resultado el contador -> contador en anillo rotacional
 
 image::tema7_cont_anillo.svg[]
 
@@ -1454,22 +1520,40 @@ image::tema8_func_trans.svg[]
 * La zona no lineal, la salida Vo no varía con la entrada Vi -> Niveles de salida y entrada para el '1' (Nivel *Hight*) y el '0' (Nivel *Low*)
 * Los niveles H y L tienen un rango entre los umbrales MAX y MIN.
 
+[.columns]
 === Familias Lógicas: Compatibilidad de los niveles de Tensión.
 
+[.column]
 image::tema8_inv_comp.svg[]
 
 image::tema8_inv_comp_curva.svg[]
 
+[.column]
+
+* X>0 -> latexmath:[V_{ILmax_1} > V_{OLmax_2}]
+* Y>0 -> latexmath:[V_{OHmin_1} > V_{IHmin_2} ]
+
+[.columns]
 === Familias Lógicas: Fan-out
 
+[.column]
 * Puerta excitadora o driver
 * Puertas de carga
 * Corrientes de entrada y de salida correspondientes a los bits '0' y '1'
 
+image::tema8_fan-out.svg[]
+
+[.column]
+
+* latexmath:[|I_{OLmax}| > \sum |I_{ILmax}| ]
+* latexmath:[|I_{OHmax}| > \sum |I_{IHmax}| ]
+* Fan-Out nivel alto -> latexmath:[FO(H) = I_{OHmax} /  I_{IHmax}]
+* Fan-Out nivel bajo -> latexmath:[FO(H) = I_{OLmax} /  I_{ILmax}]
+* Fan-Out -> Min{FO(H),FO(L)}
 
 === Familias Lógicas: Ruido y Márgenes de Ruido.
 
-
+image::tema8_ruido_margen.svg[]
 
 === Familias Lógicas: Retardo de Propagación
 
