@@ -1159,6 +1159,7 @@ image::tema7_reg_dis_puertas.svg[]
 
 === Registros de Desplazamiento: Ejercicio
 
+
 * Diseñar un circuito externo que realice una carga de la entrada paralela cada flanco *positivo* (flanco contrario al de los flip-flops). ¿El circuito debe ser secuencial?
 
 [.TV]
@@ -1168,6 +1169,15 @@ image::tema7_reg_dis_puertas.svg[]
 |latexmath:[\downarrow] | 1 | Escritura Síncrona a través de la entrada serie
 |latexmath:[\uparrow] | 0 | Escritura Síncrona a través de la entrada paralelo
 |===
+
+=== Registros de Desplazamiento: Carga de la entrada de datos paralela de forma SINCRONA: Ejercicio
+* Hasta ahora hemos visto que la carga (LOAD) del dato del bus de entrada paralelo se realiza asíncronamente a través de las entradas asíncronas, preset y reset, de los flip-flops. Una alternativa sería no utilizar las entradas asíncronas preset y reset de los flip-flops y utilizar sus entradas SÍNCRONAS.
+
+* Ejercicio: Diseño del circuito excitador con FF tipo D: 
+** Entradas del circuito excitador: LOAD, dato paralelo D3D2D1D0, dato serie ..b4b3b2b1b0 y el reloj CLK
+** Salidas del circuito excitador: entrada D del FF
+* Herramientas del RAZONAMIENTO -> Tabla de la verdad y Diagrama de Karnaugh
+* Síntesis: Expresiones lógicas obtenidas y su implimentación con puertas lógicas
 
 === Registros de Desplazamiento: Registro Universal (bidireccional) de 4 bits : 74194
 
@@ -1301,12 +1311,26 @@ Q1Q0|00|01|11|*10*
 === Contador Síncrono: Introducción
 
 * Diseño
-** Método General Sistemas Secuencias Tipo Moore
+** Método General Sistemas Secuencias de una máquina de estados finitos (FSM) Tipo Moore
 ** Los estados Q son el valor de la cuenta (salida Z) -> Z=Q
 * Tipos
 ** Ascendente ó Descendente
 ** Reversible (Ascendente y Descendente)
 ** La cuenta no tiene porque ser números consecutivos -> pares, impares, johnson, etc
+
+[state='txikiago']
+=== Contador Síncrono: Contador Ascendete Módulo 8
+
+* 8 estados -> Codificación con 3 bits  -> Estados latexmath:[Q_2Q_1Q_0=000,001,010,...,111]
+** Memoria: 3 Flips-Flops FF por flanco positivo
+* Diagrama de Secuencia de Estados tipo Moore
+** La única entrada es la del reloj CLK. Las transiciones se dan con el sincronismo de los FF (flanco positivo del reloj)
+
+
+image::tema7_cont_sincrono_diag.svg[]
+
+
+* Habría que incluir la salida Z en los circulos, pero como ya está solucionada la salida con Z=latexmath:[Q_2Q_1Q_0], no hace falta incluir la salida. Tampoco haría falta poner los flancos positivos de reloj, los pongo  para tener en cuenta el instante de la transición.
 
 [.columns]
 === Contador Síncrono: Ejemplos
@@ -1330,6 +1354,8 @@ Q1Q0|00|01|11|*10*
 === Contador Johnson 4 bits
 
 [.column]
+
+--
 * Cuenta con 4 bits -> Módulo 8
 +
 
@@ -1347,8 +1373,11 @@ Q1Q0|00|01|11|*10*
 
 * Observamos que inicialmente entran 1 por la izquierda y se desplazan hacia la derecha 
 * Después de completar los 1 entran 0 por la izquierda y se desplazan hacia la derecha
-* Se puede intuir que la solución es un *registro con desplazamiento* hacia la derecha
-** Estructura en Anillo
+* Se puede intuir que la solución es un *registro con desplazamiento* hacia la derecha: Estructura FFs en Anillo
+* Diagrama secuencia de estados:
+
+image::tema7_cont_johnson_diag.svg[]
+--
 
 
 [.column]
