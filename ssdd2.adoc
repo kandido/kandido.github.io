@@ -1153,7 +1153,7 @@ image::tema7_reg_dis_puertas.svg[]
 ** Conectamos externamente cada salida a la entrada del bit anterior: Q0->D1, Q1->D2, Q2->D3, Q3 sin conectar
 
 [.column]
-* Entrada [naranja]#S# hift/[naranja]#L# oad a *0* -> se inhibe la conexión en anillo de los flip-flops
+* Entrada [naranja]#S# hift/[naranja]#L# oad a *0* -> se inhibe la conexión en anillo de los flip-flops, por lo que NO hay desplazamiento hacia la derecha.
 * Ahora la escritura síncrona es siempre a través del bus paralelo.
 
 
@@ -1178,6 +1178,68 @@ image::tema7_reg_dis_puertas.svg[]
 ** Salidas del circuito excitador: entrada D del FF
 * Herramientas del RAZONAMIENTO -> Tabla de la verdad y Diagrama de Karnaugh
 * Síntesis: Expresiones lógicas obtenidas y su implimentación con puertas lógicas
+
+[.columns,state=txikiago]
+=== Registros de Desplazamiento: Carga de la entrada de datos paralela de forma SINCRONA: Ejercicio
+
+[.column]
+* Método a desarrollar:
+. Descripción funcional:
+.. Dibujo el esquema de bloques -> Entradas y Salidas -> Entidad
+. Descripción funcional lógica
+.. Mediante la Tabla de la Verdad describo la relación entre las salidas y las entradas -> Arquitectura funcional
+. Descripción funcional lógica
+.. Mediante lenguaje Natural describo la relación entre las salidas y las entradas -> Arquitectura funcional
+
+[.column]
+. Descripción lógica matemática 
+.. Directamente o mediante el Diagrama de Karnaugh expreso la relación matemática entre las salidas y las entradas -> Arquitectura RTL
+. Esquema eléctrico
+.. Circuito con puertas lógicas
+
+[.columns,state=txikiago]
+=== Registros de Desplazamiento: Carga de la entrada de datos paralela de forma SINCRONA: Ejercicio
+
+[.column]
+--
+* Esquema de Bloques
+
+image::tema7_reg_ejer_load-sync_bloque.svg[]
+--
+
+[.column]
+* SH/LOAD : desplazamiento/carga
+* CLK : reloj externo
+* P : entrada de datos paralelo latexmath:[P_3P_2P_1P_0] del registro
+* D : entrada de datos Síncrona latexmath:[D_3D_2D_1D_0] de los 4 Flip-Flops
+* clock : entrada de sincronismo de los 4 Flip-Flops
+* Q : salida latexmath:[Q_3Q_2Q_1Q_0] de los 4 flip-flops 
+
+[.columns, state=txikiago]
+=== Registros de Desplazamiento: Carga de la entrada de datos paralela de forma SINCRONA: Ejercicio
+
+[.column]
+--
+* Tabla de la Verdad : Descripción Funcional Lógica
+
+image::tema7_reg_ejer_load-sync_TV.svg[]
+--
+
+[.column]
+* latexmath:[D_i] Descripción Funcional con Lenguaje Natural
+** Si L=0 entonces latexmath:[D_i = d_i] cuando haya un flanco positivo en la señal de sincronismo del FF
+** Si L=1 entonces latexmath:[D_i = Q_{i+1}] cuando haya un flanco positivo en la señal de sincronismo del FF
+* Descripción Lógica Matemática
+** latexmath:[i \neq 3 \rightarrow D_i=d_i \cdot \overline L + Q_{i+1} \cdot S]
+** latexmath:[i=3 \rightarrow D_i=d_i \cdot \overline L + b_{serie} \cdot S]
+
+=== Registros de Desplazamiento: Carga de la entrada de datos paralela de forma SINCRONA: Ejercicio
+
+* Esquema del circuito digital con puertas  lógicas
+
+image::tema7_reg_ejer_load-sync_puertas.svg[]
+
+* Cuando i=3 la entrada es latexmath:[b_{serie}] y para i=2,1,0 la entrada es latexmath:[Q_{i+1}]
 
 === Registros de Desplazamiento: Registro Universal (bidireccional) de 4 bits : 74194
 
@@ -1580,15 +1642,80 @@ image::tema8_fan-out.svg[]
 * Fan-Out nivel bajo -> latexmath:[FO(H) = I_{OLmax} /  I_{ILmax}]
 * Fan-Out -> Min{FO(H),FO(L)}
 
+[.columns,state=txikiago]
 === Familias Lógicas: Ruido y Márgenes de Ruido.
 
+[.column]
+
+* Debido a interferencias se puede acoplar ruido (señal no deseada) en la línea de conexión entre dos puertas lógicas que modifique el valor de tensión a la salida de la unidad U1 y a la entrada de la unidad U2. 
+* Debido a ello, en los sistemas electrónicos *reales*, para que la salida a nivel alto ('1') de la unidad U1 se interprete a la entrada de la unidad U2 como un '1' debe haber un intervalo o margen que permita dicha interpretación en presencia del ruido. Lo mismo con un '0'.
+* Ejemplo: Si tenemos a la salida de U1 un '0' y ruido. Es caso peor sería una tensión de salida latexmath:[V_{OLmax}], justo en el limite del cero, más el ruido; para que ese '0' más ruido lo interprete U2 como un '0', la tensión total a la entrada de U2 debe de ser inferior a latexmath:[V_{ILmax}].
+
+
+
+
+[.column]
+--
 image::tema8_ruido_margen.svg[]
+
+
+* Margen de Ruido a nivel Alto : latexmath:[NM_H=V_{OHmin} - V_{IHmin}]
+* Margen de Ruido a nivel Bajo : latexmath:[NM_L=V_{ILmax} - V_{OLmax}]
+--
 
 === Familias Lógicas: Retardo de Propagación
 
 
-=== Familias Lógicas: Compatibilidad
+* señal binaria -> latexmath:[t_{rise}=t_{subida}] y latexmath:[t_{fall}=t_{bajada}]
+* retardo de propagación de la salida respecto de la entrada -> propagation -> latexmath:[t_p=(t_{pLH}+t_{pHL})/2]
 
+image::tema8_retardo_prop.svg[]
+
+[.columns,state=txikiago]
+=== Familias Lógicas: Compatibilidad -> Ejerciciio 3.3
+
+[.column]
+* F1 como excitadora:
+** latexmath:[V_{ILmax_1} > V_{OLmax_2}]: 1,5V > 1mV
+** latexmath:[V_{OHmin_1} > V_{IHmin_2} ]: 4,99V > 2V
+** latexmath:[|I_{OLmax_1}| > \sum |I_{ILmax_2}| ]: *0,4mA < 1,6mA* 
+** latexmath:[|I_{OHmax_1}| > \sum |I_{IHmax_2}| ]: 0,5mA > 10pA
+
+[.column]
+* F2 como excitadora:
+** latexmath:[V_{ILmax_2} > V_{OLmax_1}]: 0,8V > 0,4V
+** latexmath:[V_{OHmin_2} > V_{IHmin_1} ]: *2,4V < 3,5V*
+** latexmath:[|I_{OLmax_2}| > \sum |I_{ILmax_1}| ]: 16mA > 10pA
+** latexmath:[|I_{OHmax_2}| > \sum |I_{IHmax_1}| ]: 800mA > 40pA
+
+[.columns,state=txikiago]
+=== Familias Lógicas: Compatibilidad -> Ejerciciio 3.3
+
+[.column]
+* F1 como excitadora:
+** latexmath:[FO(H) = I_{OHmax1} /  I_{IHmax2} = 0,5mA/40pA = 12,5 millones]
+** latexmath:[FO(H) = I_{OLmax1} /  I_{ILmax2} = 0,4mA/1,6mA = 0] -> *no compatible*
+** FO=Min{FO(H),FO(L)} = 0 puertas
+
+
+[.column]
+* F2 como excitadora:
+** latexmath:[FO(H) = I_{OHmax2} /  I_{IHmax1} = 800mA/10pA = 80 millones]
+** latexmath:[FO(H) = I_{OLmax2} /  I_{ILmax1} = 16mA/10pA = 1600 millones] 
+** FO=Min{FO(H),FO(L)} = 80 millones de puertas
+
+[.columns,state=txikiago]
+=== Familias Lógicas: Compatibilidad -> Ejerciciio 3.3
+
+[.column]
+* F1 como excitadora:
+** latexmath:[NM_H=V_{OHmin1} - V_{IHmin2}]=4,99V-2V=2,99V
+** latexmath:[NM_L=V_{ILmax2} - V_{OLmax1}]=0,8V-0,001V=0,799V
+
+[.column]
+* F2 como excitadora:
+** latexmath:[NM_H=V_{OHmin2} - V_{IHmin1}]=2,4V-3,5V ->*no compatible*
+** latexmath:[NM_L=V_{ILmax1} - V_{OLmax2}]=1,5V-0,4V=1,1V
 
 
 [#Tema9_Mem]
