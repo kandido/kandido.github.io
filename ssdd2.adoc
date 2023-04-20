@@ -1666,13 +1666,13 @@ image::tema8_ruido_margen.svg[]
 === Familias Lógicas: Retardo de Propagación
 
 
-* señal binaria -> latexmath:[t_{rise}=t_{subida}] y latexmath:[t_{fall}=t_{bajada}]
+* señal binaria real-> latexmath:[t_{rise}=t_{subida}] y latexmath:[t_{fall}=t_{bajada}]
 * retardo de propagación de la salida respecto de la entrada -> propagation -> latexmath:[t_p=(t_{pLH}+t_{pHL})/2]
 
 image::tema8_retardo_prop.svg[]
 
 [.columns,state=txikiago]
-=== Familias Lógicas: Compatibilidad -> Ejerciciio 3.3
+=== Familias Lógicas:  Ejerciciio 3.3, Compatibilidad 
 
 [.column]
 * F1 como excitadora:
@@ -1689,7 +1689,7 @@ image::tema8_retardo_prop.svg[]
 ** latexmath:[|I_{OHmax_2}| > \sum |I_{IHmax_1}| ]: 800mA > 40pA
 
 [.columns,state=txikiago]
-=== Familias Lógicas: Compatibilidad -> Ejerciciio 3.3
+=== Familias Lógicas:  Ejercicio 3.3, Fan-Out
 
 [.column]
 * F1 como excitadora:
@@ -1705,7 +1705,7 @@ image::tema8_retardo_prop.svg[]
 ** FO=Min{FO(H),FO(L)} = 80 millones de puertas
 
 [.columns,state=txikiago]
-=== Familias Lógicas: Compatibilidad -> Ejerciciio 3.3
+=== Familias Lógicas: Ejercicio 3.3, Noise Margin
 
 [.column]
 * F1 como excitadora:
@@ -1719,7 +1719,140 @@ image::tema8_retardo_prop.svg[]
 
 
 [#Tema9_Mem]
+[.columns,state=txikiago]
 == Tema 9: Memorias.
+
+[.column]
+* Introducción
+* Tipos de Memorias
+* Registros 
+* Random Acces Memory (RAM)
+* Dinamyc RAM (DRAM)
+* Static RAM  (SRAM)
+* Read Only Memory (ROM)
+* Programable ROM (PROM)
+
+[.column]
+* Erasable PROM (EPROM)
+* Electrically Erasable PROM (EEPROM)
+* FLASH
+* Flash-NOR
+* Flash-NAND
+* Solid-State Drive (SSD)
+* Hard Disk (HD)
+* Compact Disk (CD)
+
+=== Introducción
+
+* Unidades de Memoria de la Computadora Lenovo Thinkpad L560
+** CPU 6th Generation Intel® Core™ i5: i5-6300U 
+*** Banco de Registros de la CPU: *centenares* de registros para almacenar datos enteros, reales, vectoriales (video,game) con los que realizar operaciones aritméticas a alta velocidad. Registros de 64,128 y 256Bytes.
+** BIOS EEPROM: 128KiB
+*** Memoria no volatil: contiene el programa de arranque de la computadora (verifica el estado de la computadora, inicializa la memoria principal con los programas que cargan el sistema operativo)
+** Cache:  Nivel L1 (*2 x 32 KB*), L2 (2 x 256 KB) y L3(3 MB) 
+*** Memoria volátil RAM donde se copia parte de la Memoria Principal a donde tiene acceso la CPU
+*** Velocidad: el acceso a la memoria caché es del orden de 20 nanosegundos -> 10 veces inferior al de la memoria principal.
+** Memoria Principal: Synchronous DDR3 SODIMM *12GB*  con capacidad hasta 32GB
+*** Memoria volátil RAM: almacena los programas a los que puede acceder la CPU
+*** 1600 MT/s -> 1600*Mega*64Bytes/Transferencia/segundo -> *102 mil millones de bytes/segundo*
+** Memoria Secundaria:
+*** SSD: memoria no volatil -> no compatible con Thinkpad L560
+*** HD:  *500GB*, *129.78 MB/sec*
+**** memoria no volatil -> disco duro -> almacen de programas y datos a los cuales no tiene acceso directo la CPU.
+**** Seagate ST500LM021-1KJ152 
+
+=== Tipos de Memorias
+* Clasificación según
+** material: semiconductor, magnético, óptico
+** volatilidad: necesita estar alimentada o no -> portabilidad
+** capacidad
+** velocidad
+** consumo
+
+=== Registros
+
+* memoria volátil de baja capacidad y alta velocidad -> biestables, flip-flops 
+
+=== Random Acces Memory (RAM)
+
+* memoria volátil que permite ser escrite múltiples veces
+
+=== Transistor MOSFET
+
+* Metal Oxide Semiconductor Field Effect Transistor
+* Transistor con 3 terminales: Puerta, Surtidor y Drenador
+**  La puerta controla la corriente entre surtidor y Drenador -> ON/OFF
+* Su principal ventaja es el bajo consumo
+
+=== Dinamyc RAM (DRAM)
+
+* RAM: memoria volátil
+* La celda de memoria es un CONDENSADOR para memorizar un bit y un TRANSISTOR MOSFET para acceder al condensador
+* Es la tecnología que utiliza la *memoria principal*: La celda de memoria ocupa muy poca superficie de Silicio por lo que permite integrar en un chip cientos de miles de celdas.
+
+
+=== Static RAM  (SRAM)
+
+* RAM: memoria volátil
+* La celda de memoria está formada por 4 transistores MOSFET para memorizar un bit y 2 transistores MOSFET de acceso al bit.
+* Es la tecnología que utiliza la *memoria cache*: tiene el inconveniente de que una celda ocupa mucha area de Silicio pero tiene la ventaja de poder escribir/leer a alta velocidad
+
+=== Read Only Memory (ROM)
+
+* Memoria no volátil
+* Se puede escribir una sola vez. El fabricante la vende ya programada y el usuario UNICAMENTE puede leer y NO escribir
+* La utilidad es para almacenar datos y programas que no queremos que cambien -> Ejemplo: el programa de un termómetro digital 
+
+=== Programable ROM (PROM)
+
+* Memoria no volátil
+* Se puede escribir más de una vez, pero muy de vez en cuando y lo puede hacer un administrador -> Ejemplo: el programa del ordenador de abordo de un coche, de un avión, de un tren, etc ...
+
+=== Erasable PROM (EPROM)
+
+* PROM
+* Se puede borrar con rayos UV y volver a programar eléctricamente . Para su borrado y reprogramación es necesario extraerlo del zócalo donde está insertada.
+
+=== Transistor  MOSFET con puerta flotante : FGMOS
+
+* Float Gate MOSFET
+* Es un MOSFET con doble puerta, una de ellas flotante ( rodeada de material aislante) y la otra conectada al terminal de puerta.
+* Se puede CARGAR la puerta flotante de tal forma que el transistor queda siempre en estado OFF -> un cero '0'. Esto permite tener al transistor 
+FGMOS en estado ON u OFF de forma *no volátil*. Se puede PROGRAMAR el estado del FGMOS '0' o '1' -> *CELDA DE MEMORIA*
+
+=== Electrically Erasable PROM (EEPROM)
+
+* Memoria con celdas FGMOS
+* No volátil
+* Se puede reprogramar múltiples veces eléctricamente sin necesidad de sacarla de su zócalo.
+
+=== FLASH
+
+* No volátil
+* Celdas FGMOS
+* Flash-NOR : Conexión de transistores en SERIE
+** Es necesario borrar las celdas antes de reprogramarlas y se puede borrar simultáneamente un bloque de celdas -> velocidad FLASH
+* Flash-NAND : Conexión de transistores en PARALELO
+** Es necesario borrar las celdas antes de reprogramarlas y se puede borrar simultáneamente un bloque de celdas -> velocidad FLASH
+
+=== Semiconductor Solide Device (SSD)
+
+* No volátil
+* Celdas FGMOS
+* Estructura NAND y en 3 dimensiones
+* gran capacidad, rápido...pero caro.
+
+=== Hard Disk (HD)
+
+* No volátil
+* El disco esta hecho de un material magnético
+* Es necesario que gire a unas 7000 rpm para acceder a los bits -> gran capacidad, "muy lento"...pero barato.
+
+=== Compact Disk (CD)
+
+* No volátil
+* El disco se puede "agujerear" o "quemar" con un láser
+* gran capacidad, "muy lento"...pero barato. 
 
 [#Tema10_PLD]
 == Tema 10: Dispositivos de Lógica Programable (PLD).
