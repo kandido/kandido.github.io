@@ -1830,9 +1830,9 @@ FGMOS en estado ON u OFF de forma *no volátil*. Se puede PROGRAMAR el estado de
 
 * No volátil
 * Celdas FGMOS
-* Flash-NOR : Conexión de transistores en SERIE
+* Flash-NOR : Conexión de transistores en PARALELO
 ** Es necesario borrar las celdas antes de reprogramarlas y se puede borrar simultáneamente un bloque de celdas -> velocidad FLASH
-* Flash-NAND : Conexión de transistores en PARALELO
+* Flash-NAND : Conexión de transistores en SERIE
 ** Es necesario borrar las celdas antes de reprogramarlas y se puede borrar simultáneamente un bloque de celdas -> velocidad FLASH
 
 === Semiconductor Solide Device (SSD)
