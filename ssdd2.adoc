@@ -1742,92 +1742,217 @@ image::tema8_retardo_prop.svg[]
 * Hard Disk (HD)
 * Compact Disk (CD)
 
+[.columns,state=txikiago]
 === Introducción
 
+[.column]
 * Unidades de Memoria de la Computadora Lenovo Thinkpad L560
-** CPU 6th Generation Intel® Core™ i5: i5-6300U 
-*** Banco de Registros de la CPU: *centenares* de registros para almacenar datos enteros, reales, vectoriales (video,game) con los que realizar operaciones aritméticas a alta velocidad. Registros de 64,128 y 256Bytes.
-** BIOS EEPROM: 128KiB
-*** Memoria no volatil: contiene el programa de arranque de la computadora (verifica el estado de la computadora, inicializa la memoria principal con los programas que cargan el sistema operativo)
-** Cache:  Nivel L1 (*2 x 32 KB*), L2 (2 x 256 KB) y L3(3 MB) 
-*** Memoria volátil RAM donde se copia parte de la Memoria Principal a donde tiene acceso la CPU
-*** Velocidad: el acceso a la memoria caché es del orden de 20 nanosegundos -> 10 veces inferior al de la memoria principal.
-** Memoria Principal: Synchronous DDR3 SODIMM *12GB*  con capacidad hasta 32GB
-*** Memoria volátil RAM: almacena los programas a los que puede acceder la CPU
-*** 1600 MT/s -> 1600*Mega*64Bytes/Transferencia/segundo -> *102 mil millones de bytes/segundo*
-** Memoria Secundaria:
-*** SSD: memoria no volatil -> no compatible con Thinkpad L560
-*** HD:  *500GB*, *129.78 MB/sec*
-**** memoria no volatil -> disco duro -> almacen de programas y datos a los cuales no tiene acceso directo la CPU.
-**** Seagate ST500LM021-1KJ152 
+* CPU 6th Generation Intel® Core™ i5: i5-6300U 
+** Banco de Registros de la CPU: *centenares* de registros para almacenar datos enteros, reales, vectoriales (video,game) con los que realizar operaciones aritméticas a muy alta velocidad -> un ciclo de reloj -> latexmath:[T=1/f=(2GHz)^{-1}= 0.5ns]
+** Registros de 64,128 y 256Bytes.
+* BIOS EEPROM: 128KiB
+** Memoria no volatil: contiene el programa de arranque de la computadora (verifica el estado de la computadora, inicializa la memoria principal con los programas que cargan el sistema operativo)
+
+
+[.column]
+* Cache:  Nivel L1 (*2 x 32 KB*), L2 (2 x 256 KB) y L3(3 MB) 
+** Memoria volátil RAM donde se copia parte de la Memoria Principal a donde tiene acceso la CPU
+** Velocidad: el acceso a la memoria caché es del orden de *20 nanosegundos* -> 10 veces inferior al de la memoria principal.
+* Memoria Principal: Synchronous DDR3 SODIMM *12GB*  con capacidad hasta 32GB
+** Memoria volátil RAM: almacena los programas a los que puede acceder la CPU
+** 1600 MT/s -> 1600*Mega*64Bytes/Transferencia/segundo -> *102 mil millones de bytes/segundo*
+
+[.columns,state=txikiago]
+=== Introducción
+
+[.column]
+* Memoria Secundaria:
+** SSD: memoria no volatil -> no compatible con Thinkpad L560
+** HD:  *500GB*, *129.78 MB/sec*
+*** memoria no volatil -> disco duro -> almacen de programas y datos a los cuales no tiene acceso directo la CPU.
+*** Seagate ST500LM021-1KJ152 
+* Tecnología
+** Las memorias se implementan principalmente en substratos de Silicio. Aunque hay memorias magnéticas y ópticas.
 
 === Tipos de Memorias
-* Clasificación según
-** material: semiconductor, magnético, óptico
-** volatilidad: necesita estar alimentada o no -> portabilidad
-** capacidad
-** velocidad
-** consumo
+* Clasificación según:
+** Material: semiconductor, magnético, óptico
+** Volatilidad: necesita estar alimentada o no -> portabilidad
+** Capacidad de Almacenamiento: TB, GB, MB, KB.
+** Velocidad: Tiempo de Acceso (ns) ó Ancho de Banda (MB/s)
+*** Contradicción Capacidad-Velocidad
+** Consumo: W, mW  : importante en dispositivos móviles y en "granjas" de servidores
 
 === Registros
 
-* memoria volátil de baja capacidad y alta velocidad -> biestables, flip-flops 
+* Memoria volátil de baja capacidad y alta velocidad -> biestables, flip-flops 
 
-=== Random Acces Memory (RAM)
+=== Random Access Memory (RAM)
 
-* memoria volátil que permite ser escrite múltiples veces
+* Memoria volátil que permite ser escrita múltiples veces
 
+[.columns,state=txikiago]
 === Transistor MOSFET
 
+[.column]
 * Metal Oxide Semiconductor Field Effect Transistor
-* Transistor con 3 terminales: Puerta, Surtidor y Drenador
-**  La puerta controla la corriente entre surtidor y Drenador -> ON/OFF
-* Su principal ventaja es el bajo consumo
+* Transistor con 3 terminales: *Puerta* (GATE), Surtidor y Drenador
+**  La puerta controla la corriente entre surtidor y Drenador -> Estados del transistor: ON/OFF -> cerrado/abierto
+* Su principal ventaja es su bajo consumo
 
+[.column]
+image::tema9_mosfet_symbol.svg[]
+
+[.column]
+image::tema9_mosfet_layer.svg[]
+
+
+[.columns,state=txikiago]
 === Dinamyc RAM (DRAM)
 
+[.column]
 * RAM: memoria volátil
 * La celda de memoria es un CONDENSADOR para memorizar un bit y un TRANSISTOR MOSFET para acceder al condensador
 * Es la tecnología que utiliza la *memoria principal*: La celda de memoria ocupa muy poca superficie de Silicio por lo que permite integrar en un chip cientos de miles de celdas.
+* Se denomina dinámica porque el condensador tiene fugas de carga y es necesario refrescar toda la memoria cada unos pocos milisegundos.
+
+[.column]
+--
+image::tema9_dram_cell.svg[]
+
+* Terminales de acceso:
+** *Word* Line: Línea que al activarse selecciona la celda donde escribir ó de donde leer el bit.
+** *Bit* Line : Línea de acceso al bit leído o del bit a escribir.
+--
+
+[.column]
+--
+image::tema9_dram_stack.svg[]  
+
+* Capas de Silicio del condensador y del transistor de acceso.
+** N: Alta concentración de carga conductora: carga Negativa 
+** P: Alta concentración de carga conductora: carga Positiva
+--
 
 
+[.columns,state=txikiago]
+=== Dinamyc RAM (DRAM)
+
+[.column]
+--
+* Dual In Line Memory Module: tarjeta de memoria DIMM
+
+image::tema9_dram_board.jpg[]
+-- 
+
+[.columns,state=txikiago]
 === Static RAM  (SRAM)
 
+[.column]
 * RAM: memoria volátil
+* WL (Word Line) y BL (Bit Line)
 * La celda de memoria está formada por 4 transistores MOSFET para memorizar un bit y 2 transistores MOSFET de acceso al bit.
-* Es la tecnología que utiliza la *memoria cache*: tiene el inconveniente de que una celda ocupa mucha area de Silicio pero tiene la ventaja de poder escribir/leer a alta velocidad
+* La estructura totem-pole de 2 transistores forman un inversor digital. Luego la celda de memoria son dos inversores realimentándose.
+* Es la tecnología que utiliza la *memoria cache*: tiene el inconveniente de que una celda ocupa mucha área de Silicio pero tiene la ventaja de poder escribir/leer a alta velocidad
 
+
+[.column]
+image::tema9_sram_cell.svg[]
+
+[.columns,state=txikiago]
 === Read Only Memory (ROM)
 
+[.column]
 * Memoria no volátil
-* Se puede escribir una sola vez. El fabricante la vende ya programada y el usuario UNICAMENTE puede leer y NO escribir
-* La utilidad es para almacenar datos y programas que no queremos que cambien -> Ejemplo: el programa de un termómetro digital 
+* El fabricante la vende ya programada y el usuario UNICAMENTE puede leer y NO escribir
+* La utilidad es para almacenar datos y programas que no queremos que cambien -> Ejemplo: el programa de un termómetro digital.
+* La escritura se realiza en el proceso de fabricación del CHIP realizando las conexiones apropiadas entre las celdas y la alimentación. Dichas conexiones se definen mediante máscaras (*MASK*) que afectan al proceso fotolitográfico de fabricación del chip. A este tipo de ROM también se le llama MASK-ROM.
 
+[.column]
+image::tema9_rom_mask.svg[]
+
+
+[.columns,state=txikiago]
 === Programable ROM (PROM)
 
+[.column]
+--
 * Memoria no volátil
+* Los fusibles quemados de las bases de los transistores BJT en abierto dejan el BJT abierto y los fusibles sin quemar dejan el BJT en cortocircuito.
 * Se puede escribir más de una vez, pero muy de vez en cuando y lo puede hacer un administrador -> Ejemplo: el programa del ordenador de abordo de un coche, de un avión, de un tren, etc ...
 
+image::tema9_prom_bjt.jpg[]
+--
+[.column]
+--
+
+image::tema9_prom_cell.png[]
+
+* Proceso de Lectura
+** lanzamos la dirección (Address) A1A0 -> se Decodifica y activa una de las 4 líneas de palabra (WORD LINE)
+** Los transistores seleccionados:
+*** si están ON conectan la línea de datos D o BIT LINE a Vcc -> *1*
+*** si están OFF la línea BIT queda conectada a masa -> *0*
+
+--
+
+[.columns,state=txikiago]
+=== Programable ROM (PROM)
+
+* Conexiones con líneas diodo-fusible
+
+image::tema9_prom.jpg[]
+
+[.columns,state=txikiago]
 === Erasable PROM (EPROM)
 
-* PROM
+[.column]
+* PROM programable múltiples veces
 * Se puede borrar con rayos UV y volver a programar eléctricamente . Para su borrado y reprogramación es necesario extraerlo del zócalo donde está insertada.
 
+[.column]
+image::tema9_eprom_uv.jpg[]
+
+image::tema9_eprom_recorder.jpeg[]
+
+[.columns,state=txikiago]
 === Transistor  MOSFET con puerta flotante : FGMOS
 
+[.column]
+--
 * Float Gate MOSFET
 * Es un MOSFET con doble puerta, una de ellas flotante ( rodeada de material aislante) y la otra conectada al terminal de puerta.
-* Se puede CARGAR la puerta flotante de tal forma que el transistor queda siempre en estado OFF -> un cero '0'. Esto permite tener al transistor 
-FGMOS en estado ON u OFF de forma *no volátil*. Se puede PROGRAMAR el estado del FGMOS '0' o '1' -> *CELDA DE MEMORIA*
+* En un MOSFET de puerta única: una tensión baja en la puerta deja el transistor ABIERTO (sin canal) y una tensión alta de puerta deja el transistor en CORTOCIRCUITO (con canal).
+* Se puede CARGAR la puerta flotante de tal forma que el transistor queda siempre en estado OFF ya que impide a la puerta terminal crear el canal . 
 
+* Esto permite tener al transistor FGMOS en estado ON u OFF de forma *no volátil*. Se puede PROGRAMAR el estado del FGMOS ON/OFF eléctricamente múltiples veces -> *CELDA DE MEMORIA*
+--
+
+[.column]
+--
+image::tema9_mosfet_float_gate.svg[]
+
+image::tema9_mosfet_fg_symbol.svg[]
+--
+
+[.columns,state=txikiago]
 === Electrically Erasable PROM (EEPROM)
 
+[.column]
 * Memoria con celdas FGMOS
 * No volátil
-* Se puede reprogramar múltiples veces eléctricamente sin necesidad de sacarla de su zócalo.
+* Se puede reprogramar múltiples veces sin necesidad de sacar la memoria de su zócalo como en el caso EPROM-UV.
+* La carga/descarga de la puerta flotante desde el terminal Drenador se realiza por el efecto túnel o efecto "Fowler-Nordheim tunneling"
+* Un borrado de la celda significa descargar la puerta flotante dejando al MOSFET bajo el control de la puerta terminal como en el MOSFET de puerta única.
 
+[.column]
+
+image::tema9_mosfet_fg_bias.svg[]
+
+[.columns,state=txikiago]
 === FLASH
 
+[.column]
 * No volátil
 * Celdas FGMOS
 * Flash-NOR : Conexión de transistores en PARALELO
@@ -1835,15 +1960,39 @@ FGMOS en estado ON u OFF de forma *no volátil*. Se puede PROGRAMAR el estado de
 * Flash-NAND : Conexión de transistores en SERIE
 ** Es necesario borrar las celdas antes de reprogramarlas y se puede borrar simultáneamente un bloque de celdas -> velocidad FLASH
 
+[.columns,state=txikiago]
+=== FLASH-NOR
+
+[.column]
+
+image::tema9_flash_NOR.svg[]
+
+[.column]
+* Escritura Lenta pero Lectura muy rápida
+* Aplicación -> BIOS
+
+[.columns,state=txikiago]
+=== FLASH-NAND
+
+* Escritura Rápida y Alta capacidad
+* Aplicación: USB, SSD
+
+[.column]
+image::tema9_flash_NAND.svg[]
+
+[.columns,state=txikiago]
 === Semiconductor Solide Device (SSD)
 
+[.column]
 * No volátil
 * Celdas FGMOS
 * Estructura NAND y en 3 dimensiones
 * gran capacidad, rápido...pero caro.
 
+[.columns,state=txikiago]
 === Hard Disk (HD)
 
+[.column]
 * No volátil
 * El disco esta hecho de un material magnético
 * Es necesario que gire a unas 7000 rpm para acceder a los bits -> gran capacidad, "muy lento"...pero barato.
