@@ -1594,6 +1594,52 @@ image::tema7_cont_anillo.svg[]
 
 * El ejercicio 3.3 del libro de problemas analiza la compatibilidad eléctrica entre dos familias lógicas
 
+[.columns,state=txikiago]
+=== Transistor MOSFET
+
+[.column]
+* *Metal Oxide Semiconductor* Field Effect Transistor (*MOS* FET)
+* Transistor con 3 terminales: *Puerta* (GATE), Surtidor y Drenador
+* Si la tensión de puerta latexmath:[V_G] es inferior a la tensión umbral latexmath:[V_T] NO hay *canal* entre el drenador y el surtidor -> el transistor está en estado *OFF* (no conduce corriente entre los terminales de fuente y drenador).
+* Comportamiento *binario* del transistor *ON/OFF* controlado por el terminal de puerta (gate).
+* Su principal ventaja es su bajo consumo
+
+
+
+[.column]
+--
+image::tema8_mosfet_symbol.svg[]
+
+image::tema8_mosfet_onoff.svg[]
+
+* transistor [naranja]#NMOS#: Canal tipo N
+* transistor PMOS: Canal tipo P
+--
+[.column]
+--
+image::tema8_mosfet_layer.svg[]
+
+* Silicio tipo N: Alta concentración de carga conductora: carga Negativa 
+* Silicio tipo P: Alta concentración de carga conductora: carga Positiva
+--
+
+[.columns,state=txikiago]
+=== Inversor CMOS
+
+[.column]
+--
+* Complementary MOS (CMOS): circuitos con ambos tipos de transistores: NMOS y PMOS
+* Circuito de 2 transistores en estructura Totem-Pole
+
+image::tema8_CMOS_inverter.svg[]
+--
+
+[.column]
+
+image::tema8_func_trans.svg[]
+
+
+
 [.columns]
 === Familias Lógicas: Función de transferencia
 
@@ -1746,24 +1792,30 @@ image::tema8_retardo_prop.svg[]
 === Introducción
 
 [.column]
-* Unidades de Memoria de la Computadora Lenovo Thinkpad L560
+* Unidades de Memoria de la Computadora Lenovo Thinkpad L560 de la UPNA.
 * CPU 6th Generation Intel® Core™ i5: i5-6300U 
-** Banco de Registros de la CPU: *centenares* de registros para almacenar datos enteros, reales, vectoriales (video,game) con los que realizar operaciones aritméticas a muy alta velocidad -> un ciclo de reloj -> latexmath:[T=1/f=(2GHz)^{-1}= 0.5ns]
-** Registros de 64,128 y 256Bytes.
-* BIOS EEPROM: 128KiB
-** Memoria no volatil: contiene el programa de arranque de la computadora (verifica el estado de la computadora, inicializa la memoria principal con los programas que cargan el sistema operativo)
+** frecuencia de reloj: *2GHz* -> *0.5ns*
+** Banco de Registros de la CPU: *centenares* de registros para almacenar datos enteros, reales, vectoriales (video,game) con los que realizar operaciones aritméticas a muy alta velocidad -> tiempo de acceso al registro de *un ciclo de reloj de la CPU* -> latexmath:[T=1/f=(2GHz)^{-1}= 0.5ns]
+** Memoria volálil: necesita estar alimentada para que el contenido permanezca y no se borre.
+** Bancos de Registros de diferentes tamaños: 64,128 y 256Bytes según el tipo de dato.
 
 
 [.column]
+* BIOS: memoria EEPROM de *128KiB*
+** Memoria no volátil (sin alimentación el contenido permanece): contiene el programa de arranque de la computadora (verifica el estado de la computadora, inicializa la memoria principal con los programas que cargan el sistema operativo)
+
 * Cache:  Nivel L1 (*2 x 32 KB*), L2 (2 x 256 KB) y L3(3 MB) 
-** Memoria volátil RAM donde se copia parte de la Memoria Principal a donde tiene acceso la CPU
+** Memoria volátil RAM donde se copian bloques de los programas almacenados en la Memoria Principal a donde tiene acceso directo la CPU.
 ** Velocidad: el acceso a la memoria caché es del orden de *20 nanosegundos* -> 10 veces inferior al de la memoria principal.
-* Memoria Principal: Synchronous DDR3 SODIMM *12GB*  con capacidad hasta 32GB
-** Memoria volátil RAM: almacena los programas a los que puede acceder la CPU
-** 1600 MT/s -> 1600*Mega*64Bytes/Transferencia/segundo -> *102 mil millones de bytes/segundo*
+
 
 [.columns,state=txikiago]
 === Introducción
+
+[.column]
+* Memoria Principal: Synchronous DDR3 SODIMM *12GB*  con capacidad hasta 32GB
+** Memoria volátil RAM: almacena los programas a los que puede acceder directamente la CPU
+** Velocidad en transferencias/seg: 1600 MT/s -> 1600*Mega*64Bytes/Transferencia/segundo -> *102 mil millones de bytes/segundo*
 
 [.column]
 * Memoria Secundaria:
@@ -1771,61 +1823,70 @@ image::tema8_retardo_prop.svg[]
 ** HD:  *500GB*, *129.78 MB/sec*
 *** memoria no volatil -> disco duro -> almacen de programas y datos a los cuales no tiene acceso directo la CPU.
 *** Seagate ST500LM021-1KJ152 
-* Tecnología
-** Las memorias se implementan principalmente en substratos de Silicio. Aunque hay memorias magnéticas y ópticas.
 
+[state=txikiago]
 === Tipos de Memorias
 * Clasificación según:
-** Material: semiconductor, magnético, óptico
+** Material: semiconductor, magnético, óptico . Las memorias se implementan principalmente en substratos de Silicio. Aunque hay memorias magnéticas y ópticas.
 ** Volatilidad: necesita estar alimentada o no -> portabilidad
 ** Capacidad de Almacenamiento: TB, GB, MB, KB.
 ** Velocidad: Tiempo de Acceso (ns) ó Ancho de Banda (MB/s)
-*** Contradicción Capacidad-Velocidad
+*** Contradicción Capacidad-Velocidad-Consumo: A mayor capacidad menor velocidad y mayor consumo.
 ** Consumo: W, mW  : importante en dispositivos móviles y en "granjas" de servidores
 
+===  Tipos de Memorias
+
+image::tema9_MemoryHierarchy.png[]
+
+* Tiempo de acceso en ciclos de reloj de la CPU
+
+[.columns]
 === Registros
 
-* Memoria volátil de baja capacidad y alta velocidad -> biestables, flip-flops 
+[.column]
+--
+* Memoria volátil de baja capacidad y alta velocidad -> biestables, flip-flops
+* Aplicación: Bancos de registros de la CPU y de los Controladores de los periféricos. 
 
+image::tema9_reg_intel.svg[]
+--
+
+[.column]
+image:registers_1200x800.png[]
+
+
+
+
+[.columns,state=txikiago]
 === Random Access Memory (RAM)
 
+[.column]
+--
 * Memoria volátil que permite ser escrita múltiples veces
 
-[.columns,state=txikiago]
-=== Transistor MOSFET
-
-[.column]
-* Metal Oxide Semiconductor Field Effect Transistor
-* Transistor con 3 terminales: *Puerta* (GATE), Surtidor y Drenador
-**  La puerta controla la corriente entre surtidor y Drenador -> Estados del transistor: ON/OFF -> cerrado/abierto
-* Su principal ventaja es su bajo consumo
-
-[.column]
-image::tema9_mosfet_symbol.svg[]
-
-[.column]
-image::tema9_mosfet_layer.svg[]
-
-[.columns,state=txikiago]
-=== Inversor CMOS
+image::tema9_ram_address_data.png[]
 --
-* Complementary MOS (CMOS): circuitos con ambos tipos de transistores: NMOS y PMOS
 
-image::tema9_CMOS_inverter.svg[]
---
+[.column]
+* Celdas de memoria : Estructura en *Array* -> 2D -> Filas y columnas
+* Bus de direcciones (Filas y columnas) -> Selecciona la palabra a leer o escribir -> dos decodificadores 
+* Bus de datos -> ruta del dato a escribir o leído -> Registro Buffer de datos
+
 
 [.columns,state=txikiago]
 === Dinamyc RAM (DRAM)
 
 [.column]
+* DRAM: Dynamic Random Access Memory
 * RAM: memoria volátil
-* La celda de memoria es un CONDENSADOR para memorizar un bit y un TRANSISTOR MOSFET para acceder al condensador
+* La celda de memoria es un CONDENSADOR cuya función es memorizar un bit y un TRANSISTOR MOSFET para acceder al condensador. Estado del Condensador:  cargado -> *1* y descargado -> *0* 
 * Es la tecnología que utiliza la *memoria principal*: La celda de memoria ocupa muy poca superficie de Silicio por lo que permite integrar en un chip cientos de miles de celdas.
-* Se denomina dinámica porque el condensador tiene fugas de carga y es necesario refrescar toda la memoria cada unos pocos milisegundos.
 
 [.column]
 --
 image::tema9_dram_cell.svg[]
+
+
 
 * Terminales de acceso:
 ** *Word* Line: Línea que al activarse selecciona la celda donde escribir ó de donde leer el bit.
@@ -1834,11 +1895,14 @@ image::tema9_dram_cell.svg[]
 
 [.column]
 --
+* Capas de Silicio del condensador y del transistor de acceso.
+
 image::tema9_dram_stack.svg[]  
 
-* Capas de Silicio del condensador y del transistor de acceso.
-** N: Alta concentración de carga conductora: carga Negativa 
-** P: Alta concentración de carga conductora: carga Positiva
+* Condensador: *latexmath:[n^\+]*- ONO - *latexmath:[n^+]*
+* Se denomina *dynamic* (dinámica) porque el condensador tiene fugas de la carga que almacena y es necesario refrescar toda la memoria cada unos pocos milisegundos.
+
+
 --
 
 
@@ -1864,8 +1928,14 @@ image::tema9_dram_board.jpg[]
 
 
 [.column]
+--
+
 image::tema9_sram_cell.svg[]
 
+
+image::tema9_sram_cell_inv.svg[]
+
+--
 [.columns,state=txikiago]
 === Read Only Memory (ROM)
 
@@ -1929,10 +1999,11 @@ image::tema9_eprom_recorder.jpeg[]
 --
 * Float Gate MOSFET
 * Es un MOSFET con doble puerta, una de ellas flotante ( rodeada de material aislante) y la otra conectada al terminal de puerta.
-* En un MOSFET de puerta única: una tensión baja en la puerta deja el transistor ABIERTO (sin canal) y una tensión alta de puerta deja el transistor en CORTOCIRCUITO (con canal).
-* Se puede CARGAR la puerta flotante de tal forma que el transistor queda siempre en estado OFF ya que impide a la puerta terminal crear el canal . 
+* Si se carga el electrodo flotante la tensión umbral latexmath:[V_T] aumenta de latexmath:[V_{T1}] a latexmath:[V_{T2}]
+* Se puede CARGAR la puerta flotante del transistor de tal forma que si la tensión del terminal de puerta latexmath:[V_{T1} < V_G < V_{T2}] el estado del transistor es *OFF* ya que se impide a la puerta terminal crear el canal. -> bit *0*
+* Si se DESCARGA la puerta flotante y latexmath:[ V_G > V_{T1}] -> se crea el canal y el transistor está en *ON* -> bit *1*
 
-* Esto permite tener al transistor FGMOS en estado ON u OFF de forma *no volátil*. Se puede PROGRAMAR el estado del FGMOS ON/OFF eléctricamente múltiples veces -> *CELDA DE MEMORIA*
+* Esto permite tener al transistor FGMOS en estado ON u OFF de forma no volátil. Se puede *PROGRAMAR* el estado del FGMOS ON/OFF eléctricamente múltiples veces -> *CELDA DE MEMORIA*
 --
 
 [.column]
@@ -1940,6 +2011,8 @@ image::tema9_eprom_recorder.jpeg[]
 image::tema9_mosfet_float_gate.svg[]
 
 image::tema9_mosfet_fg_symbol.svg[]
+
+image::tema9_mosfet_fg_cargado.svg[]
 --
 
 [.columns,state=txikiago]
@@ -1954,7 +2027,15 @@ image::tema9_mosfet_fg_symbol.svg[]
 
 [.column]
 
+--
+* *PROGRAMACION* DEL TRANSISTOR
+
 image::tema9_mosfet_fg_bias.svg[]
+
+ 
+* Las celdas programadas (puerta flotante cargada) se se selecciona con latexmath:[V_G < V_{T2}] son circuitos abiertos -> bit *0*
+* Las celdas no programadas equivalen a un mosfet simple. Si se seccionan con latexmath:[V_G > V_{T1}] son cortorcircuitos -> bit *1*
+--
 
 [.columns,state=txikiago]
 === FLASH
@@ -1963,52 +2044,96 @@ image::tema9_mosfet_fg_bias.svg[]
 * No volátil
 * Celdas FGMOS
 * Flash-NOR : Conexión de transistores en PARALELO
-** Es necesario borrar las celdas antes de reprogramarlas y se puede borrar simultáneamente un bloque de celdas -> velocidad FLASH
+** Es necesario borrar las celdas antes de reprogramarlas y se puede borrar simultáneamente un bloque de celdas -> paralelismo FLASH
 * Flash-NAND : Conexión de transistores en SERIE
-** Es necesario borrar las celdas antes de reprogramarlas y se puede borrar simultáneamente un bloque de celdas -> velocidad FLASH
+** Es necesario borrar las celdas antes de reprogramarlas y se puede borrar simultáneamente un bloque de celdas -> paralelismo  FLASH
 
-[.columns,state=txikiago]
+[.columns,state=taula]
 === FLASH-NOR
 
 [.column]
 
+--
 image::tema9_flash_NOR.svg[]
 
-[.column]
-* Escritura Lenta pero Lectura muy rápida
-* Aplicación -> BIOS
+* Todas las celdas están en PARALELO:  un terminal en bit-line y el otro a masa
+** Se puede acceder directamente a cada celda.
+* Programación
+** Antes de escribir los '0' es necesario que estén todas las celdas a '1' -> borrado previo
+** Borrar la memoria significa descargar todas las puertas flotantes. Al borrar las celdas una a una el borrado es lento y por lo tanto esto ralentiza el borrado previo de cada programación.
+** En cambio la posibilidad de acceder directamente a las celdas en paralelo hace que la lectura sea rápida
+--
 
-[.columns,state=txikiago]
+[.column]
+--
+image::tema9_flash_NOR_func.svg[]
+
+* Aplicación -> programa BIOS: se ejecuta nada más arrancar la computadora
+** los programas permanecen aunque la computadora este apagada
+** su actualización no es frecuente : no importa una escritura lenta
+** interesa que el arranque sea rápido: lectura rápida
+--
+
+
+[.columns,state=taula]
 === FLASH-NAND
 
-* Escritura Rápida y Alta capacidad
-* Aplicación: USB, SSD
+[.column]
+--
+image::tema9_flash_NAND.svg[]
+
+* A diferencia de la NOR, las celdas están en SERIE. No hay tantas pistas de masa y de conexiones, por lo que se emplea más superficie para integrar celdas de memoria -> Mayor CAPACIDAD de memoria
+* Al estar en Serie se puede dar la orden de borrado a todas las celdas de la serie simultáneamente -> borrado simultáneo FLASH muy rápido -> Escritura más rápida que las NOR
+--
 
 [.column]
-image::tema9_flash_NAND.svg[]
+
+--
+image::tema9_flash_NAND_func.svg[]
+
+* Aplicación: 
+** Escritura rápida y alta integración -> memorias USB
+** Para incrementar aún más el  nivel de integración se fabrican celdas tanto a lo largo de la superficie como apiladas verticalemente -> 3D-NAND -> memorias *SSD*
+--
 
 [.columns,state=txikiago]
 === Semiconductor Solide Device (SSD)
 
-[.column]
 * No volátil
 * Celdas FGMOS
 * Estructura NAND y en 3 dimensiones
 * gran capacidad, rápido...pero caro.
 
+image::tema9_ssd_module.jpg[]
+
 [.columns,state=txikiago]
 === Hard Disk (HD)
 
-[.column]
 * No volátil
 * El disco esta hecho de un material magnético
 * Es necesario que gire a unas 7000 rpm para acceder a los bits -> gran capacidad, "muy lento"...pero barato.
 
-=== Compact Disk (CD)
+image::tema9_hard-drive.webp[]
+
+[.columns,state=txikiago]
+=== Compact Disc (CD)
+
+[.column]
+--
+
+image::tema9_compact-disc.jpeg[]
 
 * No volátil
 * El disco se puede "agujerear" o "quemar" con un láser
 * gran capacidad, "muy lento"...pero barato. 
+--
+
+[.column]
+--
+
+
+image::tema9_CD-DVD-Blu-ray-disc.jpg[]
+--
 
 [#Tema10_PLD]
 == Tema 10: Dispositivos de Lógica Programable (PLD).
