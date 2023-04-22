@@ -1997,9 +1997,7 @@ image::tema9_eprom_recorder.jpeg[]
 
 [.column]
 --
-* Float Gate MOSFET
-* Es un MOSFET con doble puerta, una de ellas flotante ( rodeada de material aislante) y la otra conectada al terminal de puerta.
-* Si se carga el electrodo flotante la tensión umbral latexmath:[V_T] aumenta de latexmath:[V_{T1}] a latexmath:[V_{T2}]
+* Float Gate MOSFET: Es un MOSFET con doble puerta, una de ellas flotante ( rodeada de material aislante) y la otra conectada al terminal de puerta.  Si se carga el electrodo flotante la tensión umbral latexmath:[V_T] aumenta de latexmath:[V_{T1}] a latexmath:[V_{T2}]
 * Se puede CARGAR la puerta flotante del transistor de tal forma que si la tensión del terminal de puerta latexmath:[V_{T1} < V_G < V_{T2}] el estado del transistor es *OFF* ya que se impide a la puerta terminal crear el canal. -> bit *0*
 * Si se DESCARGA la puerta flotante y latexmath:[ V_G > V_{T1}] -> se crea el canal y el transistor está en *ON* -> bit *1*
 
