@@ -1608,7 +1608,7 @@ image::tema7_cont_anillo.svg[]
 
 [.column]
 --
-image::tema8_mosfet_symbol.svg[]
+image::tema8_Nmosfet_symbol.svg[]
 
 image::tema8_mosfet_onoff.svg[]
 
@@ -1622,6 +1622,14 @@ image::tema8_mosfet_layer.svg[]
 * Silicio tipo N: Alta concentración de carga conductora: carga Negativa 
 * Silicio tipo P: Alta concentración de carga conductora: carga Positiva
 --
+
+=== Transistor MOSFET
+
+
+image::tema8_mosfet_layer_poff.svg[]
+
+image::tema8_Pmosfet_symbol.svg[]
+
 
 [.columns,state=txikiago]
 === Inversor CMOS
@@ -1886,8 +1894,6 @@ image::tema9_ram_address_data.png[]
 --
 image::tema9_dram_cell.svg[]
 
-
-
 * Terminales de acceso:
 ** *Word* Line: Línea que al activarse selecciona la celda donde escribir ó de donde leer el bit.
 ** *Bit* Line : Línea de acceso al bit leído o del bit a escribir.
@@ -1901,7 +1907,6 @@ image::tema9_dram_stack.svg[]
 
 * Condensador: *latexmath:[n^\+]*- ONO - *latexmath:[n^+]*
 * Se denomina *dynamic* (dinámica) porque el condensador tiene fugas de la carga que almacena y es necesario refrescar toda la memoria cada unos pocos milisegundos.
-
 
 --
 
@@ -1997,7 +2002,7 @@ image::tema9_eprom_recorder.jpeg[]
 
 [.column]
 --
-* Float Gate MOSFET: Es un MOSFET con doble puerta, una de ellas flotante ( rodeada de material aislante) y la otra conectada al terminal de puerta.  Si se carga el electrodo flotante la tensión umbral latexmath:[V_T] aumenta de latexmath:[V_{T1}] a latexmath:[V_{T2}]
+* Float Gate MOSFET: Es un MOSFET con doble puerta, una de ellas flotante ( rodeada de material aislante) y la otra conectada al terminal de puerta. Si se carga el electrodo flotante la tensión umbral latexmath:[V_T] aumenta de latexmath:[V_{T1}] a latexmath:[V_{T2}]
 * Se puede CARGAR la puerta flotante del transistor de tal forma que si la tensión del terminal de puerta latexmath:[V_{T1} < V_G < V_{T2}] el estado del transistor es *OFF* ya que se impide a la puerta terminal crear el canal. -> bit *0*
 * Si se DESCARGA la puerta flotante y latexmath:[ V_G > V_{T1}] -> se crea el canal y el transistor está en *ON* -> bit *1*
 
