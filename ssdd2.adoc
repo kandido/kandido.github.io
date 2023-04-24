@@ -2025,7 +2025,7 @@ image::tema9_mosfet_fg_cargado.svg[]
 * Memoria con celdas FGMOS
 * No volátil
 * Se puede reprogramar múltiples veces sin necesidad de sacar la memoria de su zócalo como en el caso EPROM-UV.
-* La carga/descarga de la puerta flotante desde el terminal Drenador se realiza por el efecto túnel o efecto "Fowler-Nordheim tunneling"
+* La carga/descarga de la puerta flotante desde el terminal Drenador se realiza por el efecto túnel o efecto *"Fowler-Nordheim tunneling"*
 * Un borrado de la celda significa descargar la puerta flotante dejando al MOSFET bajo el control de la puerta terminal como en el MOSFET de puerta única.
 
 [.column]
@@ -2155,68 +2155,77 @@ image::tema9_CD-DVD-Blu-ray-disc.jpg[]
 * Herramientas software para el diseño de circuitos con PLDs
 
 
+[.columns,state=txikiago]
 === Introducción
 
-
+[.column]
 * CPU vs (ASIC,PLD,DSP,GPU,FPGA)
 * CPU: procesador de propósito *general*  -> 90% del algoritmo es Software
 ** Ejemplo: Intel, ARM, etc
-* PLD: Programmable Logic Devices : PLA,PAL,GAL -> HW de puertas lógicas -> Formas canónicas -> circuitos muy específicos
+* *PLD*: Programmable Logic Devices : PLA,PAL,GAL -> HW de puertas lógicas -> Formas canónicas -> circuitos muy específicos
 ** Ejemplo: circuito combinacional decodificador  , controlador secuencial de un ascensor, etc
 * DSP: Digital Signal Processing : Circuitos analógicos ( filtros, amplificadores, ecualizadores, etc ...) en el dominio digital -> hw matemático para señales (transformada fourier, transformada Z, ...) -> Ejemplo: procesamiento de audio, video, etc
+
+[.column]
 * GPU: Graphics Processor Unit: procesamiento específico de gráficos ( pixel, vertex, textura, sombras, etc ...)
 ** NVIDIA
 * GPGPU: GPU para procesamiento masivo en paralelo -> minado en criptomonedas, análisis de imágenes médicas, etc
 ** Procesamiento Paralelo por HW
-* FPGA: Field-Programmable Gate Array
+* *FPGA*: Field-Programmable Gate Array
 ** Hardware reconfigurable -> Síntesis de Hardware compilando lenguajes VHDL, Verilog, SystemC, etc
 ** Procesamiento Paralelo por HW
 
+[.columns,state=txikiago]
 === Codificadores ROM Programables: Matrices AND y OR Programables
 
+[.column]
+* PROM
+** Contenido de la memoria no volátil -> programable, es decir, se puede escribir eléctricamente más de una vez.
+
+* Estructura de la memoria PROM
+** acceso externo: bus de direcciones y bus de datos
+** Decodificador de direcciones: la dirección binaria de entrada activa una de las salidas del decodificador
+** Buffer de datos: Al seleccionar una dirección se accede al contenido de ésta volcándolo en el bus de datos.
+
+[.column]
 * Función lógica = Suma de Productos ->  Primer forma canónica -> combinación de minitérminos
-** Matriz AND Fija -> Circuito donde cada salida es un minitérminos -> Todos los minitérminos
-** Matriz OR [naranja]#Programable# -> Seleccionamos los miniterminos que combinados expresen la Función Lógica 
-
-* ROM
-** programar las conexiones de la matriz OR programable equivale a programar una memoria ROM
-
+** Matriz AND Fija -> Circuito donde cada salida representa un minitérmino
+*** La función de la matriz AND fija es la misma que la del decodificador  de direcciones de la PROM
+** Matriz OR [naranja]#Programable# -> Seleccionamos los minitérminos que combinados expresen la Función Lógica 
+*** Los minitérminos que suma la puerta OR equivale a los *1* del contenido de la palabra cuya dirección ha sido seleccionada y los *0* representan el resto de minitérminos que no están a la entrada de la puerta OR.
 
 
+=== Codificadores ROM Programables: Matrices AND y OR Programables
+
+* Conclusión:
+** Una función lógica se puede generar mediante una  matriz AND fija y una matriz OR programable, equivalente a generar la función lógica mediante un decodificador y una puerta OR cuyas entradas están limitadas a determinados minitérminos. Y las dos formas de generar la función lógica son dos formas de sintentizar una PROM
 
 
-=== Codificadores ROM Programables: Dispositivos de Lógica Programable (PLA)
+
+
+
+=== Dispositivos de Lógica Programable (PLA)
 
 * Función lógica = Suma de Productos ->  Forma *no* canónica -> combinación de *términos*
 ** Matriz AND [naranja]#Programable# -> Circuito donde cada salida es un término -> *Todos* los términos
 ** Matriz OR [naranja]#Programable# -> Seleccionamos los términos que expresen la Función Lógica 
-* ROM
-** programar las conexiones de la matriz OR programable y de la matriz AND programable equivale a programar una memoria ROM
 
-=== Codificadores ROM Programables: Look Up Table
-
-* Memoria ROM : bus de direcciones (latexmath:[A_7A_6A_5A_4A_3A_2A_1A_0]) y bus datos (latexmath:[D_3D_2D_1D_0])
-* Equivalencia ROM - Tabla de la Verdad
-** Cada fila de la tabla de la verdad equivale a una dirección de la memoria ROM : 8 variables lógicas (latexmath:[A_7A_6A_5A_4A_3A_2A_1A_0])
-** Cada función de la tabla de la verdad equivale a un BIT latexmath:[D_i] del dato de salida (latexmath:[D_3D_2D_1D_0]) : 4 Funciones lógicas
 
 === Matrices lógicas de puertas AND programables (PAL)
 
 * Función lógica = Suma de Productos ->  Forma *no* canónica -> combinación de *términos*
 ** Matriz AND [naranja]#Programable# -> Circuito donde cada salida es un término -> *Todos* los términos
 ** Matriz OR Fija-> Seleccionamos los términos que expresen la Función Lógica 
-* ROM
-** programar las conexiones de la matriz OR programable y de la matriz AND programable equivale a programar una memoria ROM
 
 
 === Matrices lógicas genéricas (GAL) con macroceldas (OLMC)
 
 * Matriz AND [naranja]#programable# , Matriz OR fija y lógica de salida [naranja]#Programable#
 * OLMC: Output Logic Macro Cell
-** Contiene lógica combinacional, un flip-flop y lógica de enrutamiento (multiplexores) que permiten interconectar el flip-flop y las puertas lógcas para .... fabricar circuitos combinacionales o circuitos secuenciales con lógica positiva o negativa. Se puede seleccionar (programar) el tipo de circuito: combinaciona o secuencial, positivo o negativo. 
+** Contiene lógica combinacional, un flip-flop y lógica de enrutamiento (multiplexores) que permiten interconectar el flip-flop y las puertas lógicas para .... fabricar circuitos combinacionales o circuitos secuenciales con lógica positiva o negativa. Se puede seleccionar (programar) el tipo de circuito: combinaciona o secuencial, positivo o negativo. 
 ** Buffer triestado : 
 *** buffer (no realiza ningún procesamiento lógica) recupera una señal binaria distorsionada
-*** triestado: la salida puede ser el estado *0*, el *1* y el *circuito abierto*
+*** triestado: la salida puede estar en el estado *0*, el estado *1* o el estado *circuito abierto*
 
 === Dispositivos de lógica programable complejos (CPLD)
 
@@ -2224,6 +2233,13 @@ image::tema9_CD-DVD-Blu-ray-disc.jpg[]
 * Bloques lógicos más celdas de interconexión
 * Al evolucionar el nivel de integración de los chips, aumenta la posibilidad de integrar multiples bloques GAL y programar su interconexión.
 * Las celdas de interconexión se programan mediante tecnología no volátil: EPROM,EEPROM,FLASH
+
+===  Look-Up Table
+
+* Memoria RAM o PROM : bus de direcciones (latexmath:[A_7A_6A_5A_4A_3A_2A_1A_0]) y bus datos (latexmath:[D_3D_2D_1D_0])
+* Equivalencia Memoria - Tabla de la Verdad
+** Cada fila de la tabla de la verdad equivale a una dirección de la memoria  : 8 variables lógicas (latexmath:[A_7A_6A_5A_4A_3A_2A_1A_0])
+** Cada función de la tabla de la verdad equivale a un BIT latexmath:[D_i] del dato de salida (latexmath:[D_3D_2D_1D_0]) : 4 Funciones lógicas
 
 
 === Dispositivos de lógica programable FPGA
@@ -2240,10 +2256,10 @@ image::tema9_CD-DVD-Blu-ray-disc.jpg[]
 * Hoy en día un chip programable integra:
 ** bloque FPGA
 ** bloques DSP
-** un micro controlador
+** un microcontrolador
 ** bloques de entrada/salida para conectar periféricos
 * Toda esta variedad hace que se les denomine SoC (System On Chip):
-** Aplicacioń : El SoC del teléfono móvil.
+** Aplicación: El SoC del teléfono móvil.
 
 
 [#Tema11_Dac]
