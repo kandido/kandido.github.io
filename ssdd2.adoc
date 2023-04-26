@@ -1587,7 +1587,7 @@ image::tema7_cont_anillo.svg[]
 .Hoja de Características Eléctricas
 [width=80%]
 |===
-|Familia Lógica| latexmath:[I_{OHmax}] | latexmath:[I_{OLmax}] | latexmath:[V_{IHmax}] | latexmath:[V_{ILmax}]  
+|Familia Lógica| latexmath:[I_{OHmax}] | latexmath:[I_{OLmax}] | latexmath:[I_{IHmax}] | latexmath:[I_{ILmax}]  
 |F1|-0,5mA|0,4mA|10pA|-10pA
 |F2|-800mA|16mA|40pA|-1,6mA
 |===
@@ -1693,7 +1693,7 @@ image::tema8_fan-out.svg[]
 * latexmath:[|I_{OLmax}| > \sum |I_{ILmax}| ]
 * latexmath:[|I_{OHmax}| > \sum |I_{IHmax}| ]
 * Fan-Out nivel alto -> latexmath:[FO(H) = I_{OHmax} /  I_{IHmax}]
-* Fan-Out nivel bajo -> latexmath:[FO(H) = I_{OLmax} /  I_{ILmax}]
+* Fan-Out nivel bajo -> latexmath:[FO(L) = I_{OLmax} /  I_{ILmax}]
 * Fan-Out -> Min{FO(H),FO(L)}
 
 [.columns,state=txikiago]
