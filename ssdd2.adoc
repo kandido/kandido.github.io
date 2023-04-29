@@ -201,13 +201,7 @@ Contadores: +
 
 image::tema7_flip-flop_tipos.svg[]
 
-=== Características Temporales de los Biestables Flip-flops
 
-* Tiempo de Retardo ó Propagación(Delay) : Desde que se activa el flanco del reloj para la escritura hasta que se estabiliza la nueva *salida Q* de la celda.
-* Tiempo de Mantenimiento (Hold): El tiempo que debe de permanecer estable la *entrada* desde que se activa el flanco del reloj.
-* Tiempo de Establecimiento(Set-Up) : El tiempo que debe de permanecer estable la *entrada* antes de que se active el flanco del reloj.
-
-image::tema7_flip-flop_delay.svg[]
 
 === Cronogramas: Señales binarias de escritura y lectura de biestables
 
@@ -1297,6 +1291,30 @@ image::tema7_cont_crono.svg[]
 
 * Observar: el valor de la cuenta, el sincronismo, la relación de frecuencias entre las salidas
 
+
+=== Características Temporales de los Biestables Flip-flops
+
+* Tiempo de Retardo ó Propagación(Delay) : Desde que se activa el flanco del reloj para la escritura hasta que se estabiliza la nueva *salida Q* del biestable. Tiempo de propagación del biestable : latexmath:[t_{pb}] 
+* Tiempo de Mantenimiento (Hold): El tiempo que debe de permanecer estable la *entrada* desde que se activa el flanco del reloj : latexmath:[t_{h}]
+* Tiempo de Establecimiento(Set-Up) : El tiempo que debe de permanecer estable la *entrada* antes de que se active el flanco del reloj : latexmath:[t_{su}]
+
+image::tema7_flip-flop_delay.svg[]
+
+[.columns,state='txikiago']
+=== Circuitos Secuenciales -> Frecuencia Máxima del Reloj
+
+[.column]
+* Los Circuitos Secuenciales combinan puertas lógicas y biestables
+** Análisis de la frecuencia máxima de reloj: tener en cuenta todos los retardos durante un ciclo del reloj 
+** latexmath:[t_{dp}] : Retardo del camino crítico del circuito combinacional
+** latexmath:[t_{pb}] : Retardo de respuesta de la salida del biestable
+** latexmath:[t_{su}] : Retardo de establecimiento de la entrada del biestable
+*  latexmath:[ T_{min}=t_{dp}+t_{pb}+t_{su} \rightarrow f_{max}=\frac {1}{T_{min}}]
+
+[.column]
+
+image::tema7_flip-flop_fmax.svg[]
+
 === Contadores: Asíncronos
 
 * Estructura Interna:
@@ -1305,21 +1323,19 @@ image::tema7_cont_crono.svg[]
 ** Tipo de biestable: *JK* con las dos entradas  *11*
 
 
-
+[.columns,state='txikiago']
 === Contadores: Asíncronos -> Cronograma
 
+[.column]
+
+--
 * Cronograma real teniendo en cuenta los retardos latexmath:[t_{pb}] -> Propagation Biestable delay
 
 image::tema7_cont_crono_fmax.svg[]
-
-* La limitación viene determinada por los casos críticos: la acumulación de los retardos es mayor si en la transición o secuencia deben de conmutar todas las celdas, por ejemplo en la transición 1111 -> 0000 ó en la transición 0111 -> 1000
-** Tmin -> latexmath:[3t_{pb}+t_x]   ->  ¿latexmath:[t_x]?
-
-[.columns]
-=== Contadores: Asíncronos -> Diseño
+--
 
 [.column]
-* El diseño se basa en el CRONOGRAMA
+* El diseño del contador se basa en el CRONOGRAMA
 ** Q0 conmuta en el flanco de subida de CLK
 ** Q1 conmuta en el flanco de bajada de Q0
 ** Q2 conmuta en el flanco de bajada de Q1
@@ -1328,18 +1344,34 @@ image::tema7_cont_crono_fmax.svg[]
 ** flip-flops por flanco positivo
 *** flanco negativo de latexmath:[Q_0] -> flanco positivo de latexmath:[\overline Q_0]
 
-[.column]
+
+[.columns]
+=== Contadores: Asíncronos -> Diseño
+
+[.text-left]
+--
+* Resultado:
 
 
 image::tema7_cont_asincrono.svg[align=center]
 
+--
 
+[.columns,state='txikiago']
 === Contadores: Asíncronos -> Frecuencia Máxima
 
-* fmax=1/Tmin
-* ¿ De qué depende tx? ¿tx es el retardo de SET-UP?
-* ¿ Ĺa salida Q3 está conectada a ...?
-* ¿ Quien va a leer Q3? ¿Cuando va a cambiar proximamente Q3?¿Por qué tx viene limitado por el siguiente flanco de reloj?
+[.column]
+* La limitación en el número de celdas viene determinada por los retardos temporales de los casos de transiciones críticas: la acumulación de los retardos es mayor si en la transición o secuencia deben de conmutar todas las celdas, por ejemplo en la transición 1111 -> 0000 ó en la transición 0111 -> 1000 
+* latexmath:[ T_{min}=3t_{pb}+t_x \rightarrow f_{max}=\frac {1}{T_{min}}] ->  ¿latexmath:[t_x]?
+** ¿ De qué depende latexmath:[t_x]? 
+** ¿ La salida Q3 está conectada a ...?
+** ¿ Quien va a leer Q3? ¿Cuando va a cambiar proximamente Q3?¿Por qué latexmath:[t_x] viene limitado por el siguiente flanco de reloj?
+
+[.column]
+* ¿latexmath:[t_x] mínimo es el retardo de SET-UP? Así es según algunos libros de texto, pero no lo razonan. Si Q3 estuviese conectado a un flip-flop sería cierto. Si Q3 no está conectado a nada, *personalmente* considero que latexmath:[t_x] no tiene límite mínimo por lo que latexmath:[t_x = 0].
+
+
+
 
 [.columns,state=taula]
 === Contadores: Asíncrono Ascendente Módulo 10
@@ -2476,7 +2508,67 @@ image::tema10_fpga_soc.webp[]
 
 === Ejercicio 7.4
 
-* Divisor de Frecuencia
+* Divisor de Frecuencia comercial 7493
+** Fundamental: razonar el chip comercial
+** Chip con dos contadores integrados:
+*** Dos contadores asíncronos: Flip-Flops con JK="11"
+*** El contador con reloj latexmath:[CP_0] es un divisor latexmath:[ \div 2] -> salida latexmath:[Q_0]
+*** El contador con reloj latexmath:[CP_1] es un divisor múltiple latexmath:[\div 8 \div 4 \div 2] -> salidas latexmath:[Q_3,Q_2,Q_1]
+*** Los dos contadores tienen la señal de reset común -> latexmath:[MR_1 MR_2]
+
+=== Ejercicio 7.4
+
+* Segundo contador con reloj latexmath:[CP_1] salidas latexmath:[Q_3,Q_2,Q_1]
+
+image::tema7_cont_ejercicio7-4.svg[]
+
+* Observar las relaciones de frecuencia  *latexmath:[Q1 = \frac {CP_1}{2} , Q2 = \frac {CP_1}{4} , Q3 = \frac {CP_1}{8} ]*
+
+[.columns,state=txikiago]
+=== Ejercicio 7.4
+
+[.column]
+* Divisor de Frecuencia [naranja]#latexmath:[ \div 2]#
+** latexmath:[ \div 2] -> Salida del primer contador 0-1-0-1-0-1-etc -> la señal *Z=bit posición 1* es la señal de reloj con la frecuencia latexmath:[1 \div 2^1 = 1 \div 2].
+** Primer contador ->  *latexmath:[\frac {CP_0}{2}=Q_0]*
+
+* Divisor de Frecuencia [naranja]#latexmath:[ \div 2]#
+** latexmath:[ \div 2] -> Salida del segundo contador 0-1-2-3-4-5-6-7-0-1-etc -> 000-001-010-011-100-101-110-111-000-etc-> la señal *Z=bit posición 0* es la señal de reloj con la frecuencia latexmath:[1 \div 2^1 = 1 \div 2].
+** Segundo contador *latexmath:[\frac {CP_1}{2}=Q_1]*
+
+[.column]
+* Divisor de Frecuencia [naranja]#latexmath:[ \div 4]#
+** latexmath:[ \div 4] -> Salida del segundo contador 0-1-2-3-4-5-6-7-0-1-etc -> 000-001-010-011-100-101-110-111-000-etc-> la señal *Z=bit posición 1* es la señal de reloj con la frecuencia latexmath:[1 \div 2^2 = 1 \div 4].
+** Segundo contador *latexmath:[\frac {CP_1}{4}=Q_2]*
+
+* Divisor de Frecuencia [naranja]#latexmath:[ \div 8]#
+** latexmath:[ \div 8] -> Salida del contador 0-1-2-3-4-5-6-7-0-1-etc -> 000-001-010-011-100-101-110-111-000-etc -> la señal *Z=bit posición 2* es la señal de reloj con la frecuencia latexmath:[1 \div 2^3 = 1 \div 8].
+** Segundo contador *latexmath:[\frac {CP_1}{8}=Q_3]*
+
+[.columns,state=txikiago]
+=== Ejercicio 7.4
+
+[.column]
+* Divisor de Frecuencia [naranja]#latexmath:[ \div 5]#
+** latexmath:[ \div 5] -> Salida del contador 0-1-2-3-4-0-1-2-3-4-etc -> 000-001-010-011-100-000-etc -> *Z=bit posición 2*
+** Alternativa 1ª: El divisor múltiple latexmath:[\div 8] con un circuito combinacional externo transita del estado "100" al "000" en un mismo ciclo de reloj. El estado "000" se consigue mediante un *reset asíncrono*. 
+*** La frecuencia latexmath:[CP_1] es dividida latexmath:[ \div 5] en la señal *latexmath:[\frac {CP_1}{5}=Q_3]*
+** Alternativa 2ª: El divisor múltiple latexmath:[\div 8] con un circuito combinacional externo transita del estado "101" al "111" en un mismo ciclo de reloj. No es posible reiniciar el contador al estado "111" ya que no tiene entrada asíncrona de preset.
+
+[.column]
+* Divisor de Frecuencia [naranja]#latexmath:[ \div 10]#
+** Dividir por 10 equivale a realizar dos divisiones consecutivas: primero latexmath:[ \div 2] y luego latexmath:[ \div 5]. Se conecta la salida latexmath:[ Q_0] del divisor latexmath:[ \div 2] al reloj latexmath:[CP_1] del divisor latexmath:[ \div 5].
+** El divisor latexmath:[ \div 2] es el contador con reloj latexmath:[CP_0] y salida latexmath:[Q_0]. El divisor latexmath:[ \div 5] es el contador del apartado anterior con reloj latexmath:[CP_1] y salida latexmath:[Q_3]. 
+** El resultado de la conexión entre los dos contadores es *latexmath:[ \frac {CP_0}{10} = Q_3]*
+
+[state=txikiago]
+=== Ejercicio 7.4
+
+* Divisor de Frecuencia [naranja]#latexmath:[ \div 50]#
+** Dividir latexmath:[ \div 50] equivale a realizar 2 divisiones consecutivas : primero latexmath:[ \div 10] y luego latexmath:[ \div 5]
+** Dividir latexmath:[ \div 50] equivale a realizar 3 divisiones consecutivas : primero latexmath:[ \div 2] , a continuación latexmath:[ \div 5] y luego latexmath:[ \div 5]. Para los 3 contadores se necesitan 2 chips  comerciales 7493.
+** En el primer chip latexmath:[ \div 10] utilizaremos la entrada latexmath:[CP_0^1] y la salida latexmath:[Q_3^1]. En el segundo chip latexmath:[ \div 5] utilizaremos la entrada latexmath:[CP_1^2] y salida latexmath:[Q_3^2] 
+** El primer chip obtiene conecta la salidaa latexmath:[Q_3^1] a la entrada de reloj latexmath:[CP_1^2] del segundo chip y obtenemos *latexmath:[Q_3^2 = \frac {CP_1^2}{5} = \frac {Q_3^1}{5} = \frac {\frac {CP_0^1} {10}}{5} =\frac {CP_0^1}{50}]*
 
 === Ejercicio 8.1
 
