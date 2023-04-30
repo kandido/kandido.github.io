@@ -2399,10 +2399,12 @@ image::tema10_fpga_soc.webp[]
 === Ejercicio 3.2
  
 * Apartado d) -> Analizar el circuito con el sistema de ecuaciones de redes eléctricas.
-** representar gráficamente los umbrales de los niveles lógicos para nivel *H*
+** Representar gráficamente los umbrales de los niveles lógicos para nivel *H*
 ** La carga se comporta como una red en paralelo. Según aumenta el número de puertas de carga, la corriente de carga aumenta y esta corriente tiene que ser suministrada por el driver.
-** El driver da un nivel alto a la salida si el transistor bjt de salida está abierto por lo tanto la ecuación de malla de salida es latexmath:[V_{cc}=I_{OH}*R+V_{OH}] con latexmath:[V_{NH}=V_{OH}-V_{IH}] y el nudo latexmath:[I_{OH}=N * I_{IH}] donde N es el número de puertas Fan-Out.
-** Se despeja latexmath:[I_{OH} = \frac {V_{cc}-V_{OH}}{R} = \frac {5-1.4}{1K} = 3.6mA] y latexmath:[N=Ent{ \frac {3.6}{0.25}}=14]
+** Representar el circuito equivalente del driver y la carga si la salida está a nivel alto.
+*** El driver da un nivel alto a la salida si el transistor bjt de salida está abierto
+** La ecuación de malla de salida es latexmath:[V_{cc}=I_{OH}*R+V_{OH}] con latexmath:[V_{NH}=V_{OH}-V_{IH}] y el nudo latexmath:[I_{OH}=N * I_{IH}] donde N es el número de puertas Fan-Out.
+*** Se despeja latexmath:[I_{OH} = \frac {V_{cc}-V_{OH}}{R} = \frac {5-1.4}{1K} = 3.6mA] y latexmath:[N=Ent{ \frac {3.6}{0.25}}=14]
 
 === Ejercicio 3.3
 
@@ -2570,11 +2572,32 @@ image::tema7_cont_ejercicio7-4.svg[]
 ** En el primer chip latexmath:[ \div 10] utilizaremos la entrada latexmath:[CP_0^1] y la salida latexmath:[Q_3^1]. En el segundo chip latexmath:[ \div 5] utilizaremos la entrada latexmath:[CP_1^2] y salida latexmath:[Q_3^2] 
 ** El primer chip obtiene conecta la salidaa latexmath:[Q_3^1] a la entrada de reloj latexmath:[CP_1^2] del segundo chip y obtenemos *latexmath:[Q_3^2 = \frac {CP_1^2}{5} = \frac {Q_3^1}{5} = \frac {\frac {CP_0^1} {10}}{5} =\frac {CP_0^1}{50}]*
 
-=== Ejercicio 8.1
+[.columns,state=txikiago]
+=== Ejercicio 8.1 : Diseñar el controlador secuencial de la cerradura electrónica
 
-=== Ejercicio 8.3
+[.column]
+* El método de diseño es el visto en la teoría en el desarrollo del controlador del ascensor: Recordarlo.
+* Razonamiento para la *Definición de los Estados*.
+** La clave 11011 es una secuencia de 5 bits donde se pueden repetir los valores '1' o '0'.
+** Hay que distinguir un bit de otro aún teniendo el mismo valor y esto se consigue por la posición que ocupan. El secuenciador tiene que controlar qué posición de la clave está analizando. Por lo tanto los estados del secuenciador tendrán en cuenta la posición de cada bit.
+* En todos casos la salida Z=0 excepto si se indica lo contrario.
+* Estado A (inicial): el controlador espera el *primer bit*
+** Transiciones: si es '1' se pasa al siguiente estado B y si es cero seguimos en el estado inicial A.
 
-=== Ejercicio 8.5
+[.column]
+* Estado B: el controlador espera el *segundo bit*
+** Transiciones: si es '1' se pasa al estado C y si es cero se transita al estado inicial A.
+* Estado C: el controlador espera el *tercer bit*
+** Transiciones: si es '0' se pasa al estado D y si es '1' se continua en el estado C.
+** *¿* Hubiese sido incorrecto definir el estado B como: el controlador espera el segundo 1 *?*
+* Estado D: el controlador espera el *cuarto bit*
+** Transiciones: si es '1' se pasa al estado E y si es '0' se transita al estado inicial A.
+* Estado E: el controlador espera el *cuarto bit*
+** Transiciones: si es '1' se ha detectado la clave (Z='1') y se transita al estado inicial. Si es '0' se transita al estado inicial A.
+
+=== Ejercicio 8.3: Carretilla con 2 Motores y dos Mandos A y B.
+
+=== Ejercicio 8.5: Máquina Expendedora de Latas de Cerveza
 
 
 
