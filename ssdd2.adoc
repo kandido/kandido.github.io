@@ -2219,6 +2219,86 @@ image::tema9_CD-DVD-Blu-ray-disc.jpg[]
 [.column]
 * Nos vamos a centrar en los dispositivos de lógica programable PLD y FPGA.
 
+
+[.columns]
+=== Prototyping
+
+
+[.column]
+--
+image::tema10_proto_schematic.png[]
+
+image::tema10_chip_packaging.jpeg[]
+--
+
+
+
+[.column]
+--
+image::tema10_proto_breadboard.jpeg[]
+
+image::tema10_pcb_via.jpeg[]
+--
+
+[.column]
+--
+image::tema10_pcb_up.webp[]
+
+image::tema10_pcb_back.jpg[]
+--
+
+=== Prototyping : Captura del Esquema para generar el PCB
+
+image::tema10_routing_pcb.avif[]
+
+
+[.columns]
+=== Prototyping : Cableado Spaghetti 
+
+[.column]
+
+
+image::tema10_pcb_pizza_1.jpeg[]
+
+
+[.column]
+--
+image::tema10_pcb_pizza.jpeg[]
+
+image::tema10_pizza_bob.jpeg[]
+--
+
+[.columns]
+=== Fabricación de Circuitos Integrados
+
+[.column]
+--
+
+image::tema10_ic_chip.jpg[]
+image::tema10_ic_into_packaging.jpg[]
+--
+
+[.column]
+--
+image::tema10_ic_microscope.jpg[]
+
+image::tema10_ic_interconnection_3d.png[]
+
+--
+
+[.columns]
+=== Circuitos Integrados Semi-Custom
+
+[.column]
+
+* Comercial -> Prefabricados -> Silicio + Máscaras -> Muy Barato
+* Custom -> Traje a la media como en el taller del Sastre -> Carísimo
+* Semi-Custom -> ¿Cómo?
+
+[.column]
+image::tema10_chip_packaging.jpeg[]
+
+
 [.columns,state=txikiago]
 === Codificadores ROM Programables: Matrices AND y OR Programables
 
@@ -2349,9 +2429,25 @@ image::tema10_fpga_cell.png[]
 === Dispositivos de lógica programable FPGA
 
 [.column]
+
+image::tema10_fpga_interconnection_1.png[]
+
+[.column]
+* LB: Logic Block
+* SB: Switch Block
+* CB: Connection Block
+
+
+
+[.columns,state=txikiago]
+=== Dispositivos de lógica programable FPGA
+
+[.column]
 * Al simplificar el bloque lógico y disminuir el tamaño de los transistores tiene como consecuencia que el número de bloques lógico se cuenta por miles.
 * Este alto nivel en el número de bloques lógicos hace que aumente el número de líneas de interconexión.
 * Las FPGA tienen un grado muy alto de flexibilidad  para sintetizar circuitos digitales
+** *HW Programmable* -> El bloque lógico -> *Funcionalidad* programable
+** *HW Programmable* -> El bloque de interconexiones -> *Enrutamiento* programable
 
 [.column]
 image::tema10_fpga_hierarchy.jpg[]
