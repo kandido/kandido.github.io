@@ -2693,6 +2693,17 @@ image::tema7_cont_ejercicio7-4.svg[]
 
 === Ejercicio 8.3: Carretilla con 2 Motores y dos Mandos A y B.
 
+* Estados de objetos en Movimiento: 
+** ascensor: ¿está en el segundo piso? ¿Está subiendo?
+** robot: ¿en dirección a ...?¿ Sigue la marca ...?
+** avión: ¿despegando,  aterrizando, crucero, ...? 
+** medio de transporte: ... 
+
+* Preguntas para razonar:
+** ¿el estado es su localización (*estático*) o su movimiento (*dinámico*) o .... etc?
+** ¿qué es lo que sigue una secuencia?
+** etc ¿? ...
+
 === Ejercicio 8.5: Máquina Expendedora de Latas de Cerveza
 
 
