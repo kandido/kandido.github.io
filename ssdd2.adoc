@@ -2669,6 +2669,36 @@ image::tema7_cont_ejercicio7-4.svg[]
 ** El primer chip obtiene conecta la salidaa latexmath:[Q_3^1] a la entrada de reloj latexmath:[CP_1^2] del segundo chip y obtenemos *latexmath:[Q_3^2 = \frac {CP_1^2}{5} = \frac {Q_3^1}{5} = \frac {\frac {CP_0^1} {10}}{5} =\frac {CP_0^1}{50}]*
 
 [.columns,state=txikiago]
+=== Ejercicios 8 : Método General de Síntesis de Circuitos Digitales Secuencia de Estados. Máquinas de Estados Finitos (FSM)
+
+[.column]
+* Dibujar un esquema con los componentes del sistema real: 
+** plantas del edificio, motor, cadena, ascensor, botones.
+** dibujar el dinamismo: gira, sube, baja, entra, sale, parado, etc..
+* Cambiar el lenguaje del enunciado por uno propio, desarrollando posibles situaciones que pueden darse y *escribirlas* para ayudar al razonamiento propio.
+* Definir y codificar las entradas lógicas del controlador digital.
+* Definir y codificar las salidas lógicas del controlador digital.
+* Definir y codificar los estados del sistema.
+
+
+[.column]
+* Dibujar el diagrama de estados del sistema (estados, transiciones, entradas, salidas).
+** Tipo Moore o Mealy
+** Tipo de Biestables
+** Número de Biestables
+* Desarrollar las 3 tablas: 
+** transición de estados , excitación de biestables (pej JK) y funciones de salida.
+
+
+=== Ejercicios 8 : Método General de Síntesis de Circuitos Digitales Secuencia de Estados. Máquinas de Estados Finitos (FSM)
+
+* Síntesis de Dos Circuitos Combinacionales:
+** Circuito para la Excitación de Biestables
+** Circuito de Salida
+** Herramientas de diseño: lenguaje natural lógico, expresiones lógicas matemáticas, teoremas matemáticos, la  Tabla de la Verdad y los Diagramas de Karnaugh. 
+
+
+[.columns,state=txikiago]
 === Ejercicio 8.1 : Diseñar el controlador secuencial de la cerradura electrónica
 
 [.column]
@@ -2678,6 +2708,7 @@ image::tema7_cont_ejercicio7-4.svg[]
 ** Hay que distinguir un bit de otro aún teniendo el mismo valor y esto se consigue por la posición que ocupan. El secuenciador tiene que controlar qué posición de la clave está analizando. Por lo tanto los estados del secuenciador tendrán en cuenta la posición de cada bit.
 * En todos casos la salida Z=0 excepto si se indica lo contrario.
 * Estado A (inicial): el controlador espera el *primer bit*
+** Espera significa que todavía no ha llegado.
 ** Transiciones: si es '1' se pasa al siguiente estado B y si es cero seguimos en el estado inicial A.
 
 [.column]
@@ -2688,8 +2719,14 @@ image::tema7_cont_ejercicio7-4.svg[]
 ** *¿* Hubiese sido incorrecto definir el estado B como: el controlador espera el segundo 1 *?*
 * Estado D: el controlador espera el *cuarto bit*
 ** Transiciones: si es '1' se pasa al estado E y si es '0' se transita al estado inicial A.
-* Estado E: el controlador espera el *cuarto bit*
-** Transiciones: si es '1' se ha detectado la clave (Z='1') y se transita al estado inicial. Si es '0' se transita al estado inicial A.
+* Estado E: el controlador espera el *quinto bit*
+** Transiciones: si es '1' se ha detectado la clave (Z='1') y se transita al estado inicial A. Si es '0' se transita también al estado inicial A.
+
+=== Ejercicio 8.1 : Diseñar el controlador secuencial de la cerradura electrónica
+
+* Discusión:
+** ¿Cómo cambiaría el ejercicio si se hubiesen definido los estado como "..ha llegado el primer bit ..." en lugar de " ...espera al primer bit ..."?
+** ¿Cómo cambiaría el ejercicio si se hubiese definido un estado más : Ha llegado la secuencia clave : 11011 ? -> minimización de estados.
 
 === Ejercicio 8.3: Carretilla con 2 Motores y dos Mandos A y B.
 
@@ -2704,9 +2741,33 @@ image::tema7_cont_ejercicio7-4.svg[]
 ** ¿qué es lo que sigue una secuencia?
 ** etc ¿? ...
 
+
+=== Ejercicio 8.3: Carretilla con 2 Motores y dos Mandos A y B.
+
+* Estados posibles
+** Hacia adelante
+** Hacia atrás
+** Parado
+
 === Ejercicio 8.5: Máquina Expendedora de Latas de Cerveza
 
+* Estados posibles:
+** Dos tipos de monedas
+** ¿Qué es lo que hay que controlar? la suma parcial del dinero introducido
+** Sumas parciales posibles: 0,25,50,75,100,125,150, más de 150.
+** Se podría diseñar el controlador FSM con 8 estados, pero ...¿ se podría minimizar el número de estados aglutinando dos o más estados en uno solo?
+*** Por ejemplo el estado único: suma parcial 150 o más de 150. -> 7 Estados
+*** Por ejemplo : Estando en el estado 125, reciba la moneda que reciba, transito al estado 0. -> 6 Estados.
 
+=== Ejercicio 8.5: Sistema de Transimisión Serie : detector de errores en la línea
 
+* Errores:
+** Dos ceros consecutivos *o más* 
+** Cuatro unos consecutivos *o más*
 
+* Solución: 
+** contar el número de ceros consecutivos y el número de unos consecutivos.
+** contar el número de ceros consecutivos que dan error (2,3,4,...) y el número de unos consecutivos (4,5,6,7...).
+* Estados posibles:
+** 
 
