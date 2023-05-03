@@ -2759,7 +2759,7 @@ image::tema7_cont_ejercicio7-4.svg[]
 *** Por ejemplo el estado único: suma parcial 150 o más de 150. -> 7 Estados
 *** Por ejemplo : Estando en el estado 125, reciba la moneda que reciba, transito al estado 0. -> 6 Estados.
 
-=== Ejercicio 8.5: Sistema de Transimisión Serie : detector de errores en la línea
+=== Ejercicio 8.2: Sistema de Transimisión Serie : detector de errores en la línea
 
 * Errores:
 ** Dos ceros consecutivos *o más* 
@@ -2768,6 +2768,43 @@ image::tema7_cont_ejercicio7-4.svg[]
 * Solución: 
 ** contar el número de ceros consecutivos y el número de unos consecutivos.
 ** contar el número de ceros consecutivos que dan error (2,3,4,...) y el número de unos consecutivos (4,5,6,7...).
-* Estados posibles:
-** 
 
+[.columns]
+=== Ejercicio 8.2: Sistema de Transimisión Serie : detector de errores en la línea
+
+[.column]
+--
+image::ejercicio_8-2_diag_1.svg[]
+
+* ¿Cumple más de 2 ceros o más de 4 unos consecutivos?
+* ¿Mealy o Moore?
+--
+
+[.column]
+--
+image::ejercicio_8-2_diag_2.svg[]
+
+* ¿Cumple más de 2 ceros o más de 4 unos consecutivos?
+* ¿Mealy o Moore?
+--
+
+[.columns,state=txikiago]
+=== Ejercicio 8.2: Sistema de Transimisión Serie : detector de errores en la línea
+
+[.column]
+* El estado Error tendría sentido en una FSM tipo Moore... pero en una FSM tipo Mealy ... ¿?
+* ¿La situación de Error es un *Estado* y/o una *Salida*?
+* En el estado "1º cero"
+** si llegan uno o más ceros -> SALIDA error y sigo en el mismo estado: habrá que cambiar la definición del estado por "Uno o más ceros consecutivos"
+** si llega un "1" transita al estado "1º uno".
+* En el estado "3º uno" 
+** si llegan más unos-> SALIDA error y sigo en el mismo estado: habrá que cambiar la definición del estado por "3 o más unos consecutivos"
+** si llega un "0" transita al estado "Uno o más ceros"
+
+[.column]
+* FSM Mealy.
+* Estados:
+** Uno o más ceros consecutivos.
+** 1º uno
+** 2º uno
+** 3 o más unos consecutivos 
