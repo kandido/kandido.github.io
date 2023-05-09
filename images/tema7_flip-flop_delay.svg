@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="60.0154mm"
+   width="82.706039mm"
    height="40.716553mm"
-   viewBox="0 0 60.0154 40.716554"
+   viewBox="0 0 82.70604 40.716554"
    version="1.1"
    id="svg5"
    inkscape:version="1.2.2 (1:1.2.2+202212051550+b0a8486541)"
@@ -25,8 +25,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="1.4690675"
-     inkscape:cx="295.4255"
-     inkscape:cy="119.46354"
+     inkscape:cx="100.40383"
+     inkscape:cy="120.14424"
      inkscape:window-width="1320"
      inkscape:window-height="704"
      inkscape:window-x="46"
@@ -58,7 +58,7 @@
      inkscape:label="Geruza 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-27.071423,-114.74173)">
+     transform="translate(-4.3807835,-114.74173)">
     <path
        style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="M 27.071423,131.98799 H 55.218978 V 114.87402 H 82.701502"
@@ -96,7 +96,7 @@
          x="38.979843"
          y="141.63734">t<tspan
    style="font-size:65%;baseline-shift:sub;fill:#ff0000"
-   id="tspan1114">set-up</tspan></tspan></text>
+   id="tspan1114">su</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#fe0000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -109,7 +109,7 @@
          x="63.562187"
          y="135.23674">t<tspan
    style="font-size:65%;baseline-shift:sub;fill:#fe0000;fill-opacity:1"
-   id="tspan1120">hold</tspan></tspan></text>
+   id="tspan1120">h</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-opacity:1"
@@ -122,7 +122,7 @@
          x="63.383701"
          y="152.84612">t<tspan
    style="font-size:65%;baseline-shift:sub;fill:#0000ff;stroke:none;stroke-opacity:1"
-   id="tspan1126">propagation</tspan></tspan></text>
+   id="tspan1126">pb</tspan></tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,27.071423,114.74173)"
@@ -130,7 +130,7 @@
        style="font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect1469);display:inline;fill:#fc0000;fill-opacity:1;stroke:none"><tspan
          x="3.5722656"
          y="119.23633"
-         id="tspan1735">IN</tspan></text>
+         id="tspan1360">IN</tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,77.112754,108.72029)"
@@ -138,7 +138,7 @@
        style="font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect1527);display:inline;fill:#fc0000;fill-opacity:1;stroke:none"><tspan
          x="3.5722656"
          y="119.23633"
-         id="tspan1737">IN</tspan></text>
+         id="tspan1362">IN</tspan></text>
     <text
        xml:space="preserve"
        transform="matrix(0.26458333,0,0,0.26458333,77.112754,114.54116)"
@@ -146,6 +146,28 @@
        style="font-style:normal;font-weight:normal;font-size:16px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;white-space:pre;shape-inside:url(#rect1533);display:inline;fill:#0000fe;fill-opacity:1;stroke:none"><tspan
          x="3.5722656"
          y="119.23633"
-         id="tspan1739">OUT</tspan></text>
+         id="tspan1364">OUT</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="4.1430721"
+       y="131.97984"
+       id="text1322"><tspan
+         sodipodi:role="line"
+         id="tspan1320"
+         style="stroke-width:0.264583"
+         x="4.1430721"
+         y="131.97984">CLOCK</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="3.9670577"
+       y="146.17947"
+       id="text1326"><tspan
+         sodipodi:role="line"
+         id="tspan1324"
+         style="stroke-width:0.264583"
+         x="3.9670577"
+         y="146.17947">BIESTABLE</tspan></text>
   </g>
 </svg>

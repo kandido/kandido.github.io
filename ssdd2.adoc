@@ -1294,9 +1294,9 @@ image::tema7_cont_crono.svg[]
 
 === Características Temporales de los Biestables Flip-flops
 
-* Tiempo de Retardo ó Propagación(Delay) : Desde que se activa el flanco del reloj para la escritura hasta que se estabiliza la nueva *salida Q* del biestable. Tiempo de propagación del biestable : latexmath:[t_{pb}] 
-* Tiempo de Mantenimiento (Hold): El tiempo que debe de permanecer estable la *entrada* desde que se activa el flanco del reloj : latexmath:[t_{h}]
-* Tiempo de Establecimiento(Set-Up) : El tiempo que debe de permanecer estable la *entrada* antes de que se active el flanco del reloj : latexmath:[t_{su}]
+* Tiempo de Retardo ó Propagación(Delay) : Desde que se activa el flanco del reloj para la escritura hasta que se estabiliza la nueva [naranja]#salida# Q del biestable. Tiempo de propagación del biestable : [azul]#latexmath:[t_{pb}]# 
+* Tiempo de Mantenimiento (Hold): El tiempo que debe de permanecer estable la [naranja]#entrada# del biestable desde que se activa el flanco del reloj : *latexmath:[t_{h}]*
+* Tiempo de Establecimiento(Set-Up) : El tiempo que debe de permanecer estable la [naranja]#entrada# del biestable antes de que se active el flanco del reloj : *latexmath:[t_{su}]*
 
 image::tema7_flip-flop_delay.svg[]
 
@@ -1305,15 +1305,35 @@ image::tema7_flip-flop_delay.svg[]
 
 [.column]
 * Los Circuitos Secuenciales combinan puertas lógicas y biestables
-** Análisis de la frecuencia máxima de reloj: tener en cuenta todos los retardos durante un ciclo del reloj 
-** latexmath:[t_{dp}] : Retardo del camino crítico del circuito combinacional
+* Tener en cuenta los retardos tanto de los biestables como de las puertas lógicas
+* Análisis de la frecuencia máxima de reloj:
+** El objetivo es analizar como los retardos de biestables y puertas limitan el período de un ciclo de reloj.
+* Ejemplo: En el circuito de la figura la señal D1 ha sido dibujada libremente. Obtenemos el resto de señales según el circuito pero teniendo en cuenta los retardos de los biestables latexmath:[t_{pb}] y el de las puertas latexmath:[t_{dp}]
+** latexmath:[t_{dp}] : Retardo del circuito combinacional
 ** latexmath:[t_{pb}] : Retardo de respuesta de la salida del biestable
+
+[.column]
+--
+image::tema7_flip-flop_fmax_funcional.svg[]
+--
+
+
+[.columns,state='txikiago']
+=== Circuitos Secuenciales -> Frecuencia Máxima del Reloj
+
+[.column]
+
+* ¿Qué retardos se incluyen en un ciclo de reloj además del retardo del primer biestable y del circuito combinacional?
 ** latexmath:[t_{su}] : Retardo de establecimiento de la entrada del biestable
+** la entrada D2 debe permanecer estable, constante, durante el tiempo de establecimiento o tiempo set-up.
+* Observar que en el primer flanco de reloj el segundo biestable no cambia su salida Q2 ya que su entrada D2 tiene el retardo del biestable Q1 y del circuito combinacional y por lo tanto no cambia D2 antes del primer flanco.
 *  latexmath:[ T_{min}=t_{dp}+t_{pb}+t_{su} \rightarrow f_{max}=\frac {1}{T_{min}}]
+* En este ejemplo el circuito es muy sencillo. Por ejemplo el circuito combinacional podrían ser múltiples puertas y habría que tener en cuenta la ruta por la que la señal se propaga con mayor retardo, la ruta crítica.
 
 [.column]
 
 image::tema7_flip-flop_fmax.svg[]
+
 
 === Contadores: Asíncronos
 
