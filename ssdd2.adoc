@@ -2779,7 +2779,13 @@ image::tema7_cont_ejercicio7-4.svg[]
 *** Por ejemplo el estado único: suma parcial 150 o más de 150. -> 7 Estados
 *** Por ejemplo : Estando en el estado 125, reciba la moneda que reciba, transito al estado 0. -> 6 Estados.
 
-=== Ejercicio 8.2: Sistema de Transimisión Serie : detector de errores en la línea
+=== Ejercicio 8.5: Máquina Expendedora de Latas de Cerveza
+
+* Realizar el mismo ejercicio pero tipo Moore
+** Debido a que la salida depende únicamente del estado: ¿Cuantos estados serían necesarios?
+** Cuál de las dos FSM, Mealy o Moore, tiene menos estados.
+
+=== Ejercicio 8.2: Sistema de Transimisión Serie : Detector de errores en la línea
 
 * Errores:
 ** Dos ceros consecutivos *o más* 
@@ -2809,7 +2815,7 @@ image::ejercicio_8-2_diag_2.svg[]
 --
 
 [.columns,state=txikiago]
-=== Ejercicio 8.2: Sistema de Transimisión Serie : detector de errores en la línea
+=== Ejercicio 8.2: Sistema de Transimisión Serie : Detector de errores en la línea
 
 [.column]
 * El estado Error tendría sentido en una FSM tipo Moore... pero en una FSM tipo Mealy ... ¿?
@@ -2829,6 +2835,13 @@ image::ejercicio_8-2_diag_2.svg[]
 ** 2º uno
 ** 3 o más unos consecutivos 
 
+=== Ejercicio 8.2: Sistema de Transimisión Serie : detector de errores en la línea
+
+* Realizar el circuito mediante un Registro de Desplazamiento de 3 bits
+** Las variables de entrada serán 4: 1 Bit Serie y 3 bits del registro de desplazamiento
+** Es necesario visualizar el dinamismo de la entrada de bits y los desplazamientos
+
+image::ejercicio_8-2_desp.svg[]
 
 
 === Ejercicio Divisor de Frecuencia
