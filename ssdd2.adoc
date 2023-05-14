@@ -2217,11 +2217,13 @@ image::tema9_CD-DVD-Blu-ray-disc.jpg[]
 ** Ejemplo: Intel, ARM, etc
 * Application Sistem Integrated Circuit (*ASIC*) : Circuito integrado "Custom", es decir, hecho a medida según las indicaciones del cliente...como un traje hecho a medida por el sastre, en lugar de comprarlo ya hecho en una tienda. La ventaja es que la calidad (velocidad, consumo, etc) del chip puede ser inmejorable y el inconveniente es el precio (sobre todo si el número de unidades fabricadas no es alto)
 
-
 [.column]
+
 * *PLD*: Programmable Logic Devices : PLA,PAL,GAL -> HW de puertas lógicas -> Formas canónicas -> circuitos muy específicos
 ** Ejemplo: circuito combinacional decodificador  , controlador secuencial de un ascensor, etc
 * *DSP*: Digital Signal Processing : Circuitos analógicos ( filtros, amplificadores, ecualizadores, etc ...) en el dominio digital -> hw matemático para señales (transformada fourier, transformada Z, ...) -> Ejemplo: procesamiento de audio, video, etc
+
+
 
 
 [.columns,state=txikiago]
@@ -2496,6 +2498,34 @@ image::tema10_fpga_modules.jpg[]
 [.column]
 
 image::tema10_fpga_soc.webp[]
+
+[.columns,state=txikiago]
+=== FPGA evolución y ratio
+
+[.column]
+--
+image::tema10_fpga_density_evolution.jpg[]  
+
+image::tema10_fpga_power_ratio.png[]
+--
+
+[.column]
+
+* KLE: Kilo Logic Elements
+* Mb: Mega bit
+* % de potencia consumida
+
+[.columns,state=txikiago]
+=== FPGA vs ASIC
+
+[.column]
+image::tema10_FPGA-vs-ASIC.jpg[]
+
+[.column]
+
+* NRE: Non Recurring Engineering
+** El coste de la investigación, diseño, ... : coste se paga una sola vez independientemente de la producción
+* Cost Unit: El coste de la FPGA aumenta al aumentar la producción superando a los ASIC
 
 
 [#Tema11_Dac]
