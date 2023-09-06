@@ -44,22 +44,28 @@
 :show-link-uri:
 :asciidoctor-fetch-kroki:
 :experimental:
+:notitle:
+
 
 :ruta-transpas: /home/candido/Dropbox/apuntes/apuntes_Estr_Computadores/upna/apuntes_repositorio/transpas_eecc
 
 :ruta-apuntes: home/candido/Dropbox/apuntes
 
+////
+[data-visibility="hidden"]
 == Transparencias en Formato PDF
+
 
 * link:./PDF/eecc/eecc_slides.pdf[Transparencias PDF]
 * Si hay algún error de forma en el documento PDF que dificulte su interpretación, por favor, enviar un mensaje para su correción. Gracias.
-
+////
 
 == Indice
 
 [%hardbreaks]
-Tema 1: <<Tema1_Intro, Introducción a la asignatura Estructura de Computadores .>>
-Tema 2: <<Tema2_RepInf, Representación Digital de la Información.>>
+Tema 1: <<Tema1_Intro, Introducción a la Asignatura Estructura de Computadores.>>
+Tema 2: <<Tema2_VonNeum, Arquitectura de Von Neumann.>>
+Tema 3: <<Tema3_RepInf, Representación Digital de la Información.>>
 
 
 [#Tema1_Intro]
@@ -82,7 +88,7 @@ Tema 2: <<Tema2_RepInf, Representación Digital de la Información.>>
 // [%notitle]
 === Profesorado
 
-* Profesor Responsable Cándido Aramburu Mayoz.
+* Profesor Cándido Aramburu Mayoz.
 ** Doctor Ingeniero Telecomunicación (UPNA-Universidad Politécnica de Madrid) 
 ** Empresa Ikusi S.A. (Sistemas de Telemedida 1989)
 ** Profesor Titular UPNA (Dpto Ingeniería Electrónica y Comunicaciones 2000)
@@ -125,71 +131,53 @@ Tema 2: <<Tema2_RepInf, Representación Digital de la Información.>>
 
 * https://www.unavarra.es/ficha-asignaturaDOA?languageId=100000&codPlan=240&codAsig=240306&anio=2023[Ficha Web Upna]
 ** Programa en 3 partes 
-... *_Circuitos Combinacionales_*
-... *_Circuitos Secuenciales_*
-... Otros: Números, Lógica Programable (VHDL), Teoría Tecnología
+... *_C_*
+... *_C_*
+... Otros: 
 
 === Bibliografía
 * Fundamentos de Electrónica Digital. Cecilio Blanco
-* Circuitos Electrónicos Digitales. Manuel Mazo
-* Fundamentos de Sistemas digitales. Thomas Floyd
+
+
 
 
 === Metodología
 
 * Trabajo en clase: principalmente Ejercicios con su teoría asociada
-* Trabajo en casa
-** Teoría desarrollada en los apuntes PDF en mi aulario
-** Prácticas
-*** En casa: Ejercicios de diseño manual
-*** En casa: Utilización de Quartus y Memorias
-* Tutorías
-** Resolución de dudas
+
 
 === Prácticas
 * Tipo de prácticas:
-** Diseño manual
-** Simulación con la herramienta software Quartus de Intel.
-** Captura gráfica de Esquemas Electrónicos
-** Descripción del Circuito mediante el Lenguaje VHDL. Fabricación del Circuito en tecnología FPGA
 
 
 === Ejercicios
 
-* Tipo de problemas: Libro Verde -> Ejercicios tipo examen -> Sin calculadora y sin libros +
-
------
-El libro verde se adquiere en el edificio de rectorado, en la sección de comunicacion,
-que se encuentra en planta baja del edificio.
-El horario: 8 a 14:30. Precio 8.5$. 
------
-
-----
-* Capítulo 1: 1.1, 1.2, 1.4, 1.5, 1.6, 1.8, 1.9
-* Capítulo 2: 2.1
-* Capítulo 3: 3.2 3.3 -> 2º parcial
-* Capítulo 4: 4.2, 4.4, 4.6
-* Capítulo 5: 5.2, 5.3, 5.4
-* Capítulo 6: 6.1, 6.2 -> 2º parcial
-* Capítulo 7: 7.2, 7.3 y 7.4 -> 2º parcial
-* Capítulo 8: 8.1, 8.3 y 8.5 -> 2º parcial
-----
-* Los ejercicios del tema 2 (Representación de la Información) no están en el libro verde
-** Miaulario -> Recursos -> Ejercicios
+* x
 
 
 
 === Evaluación
 
 * Sistema de Evaluación:
-** 75% teoría y 25% prácticas
-** Evaluación continua Teoría: dos parciales (30% 1º parcial y 45% 2º parcial). Nota mínima en el 2º parcial: 4. El Primer parcial se realizará el sábado 1 de Abril a las 9:00, el segundo parcial el 24 de Mayo a las 8:00 y la recuperación el 12 de Junio a las 8:00
-** Recuperación Teoría: Entra todo. Nota mínima: 5.
-** Evaluación Prácticas: Un único exámen el sábado XX de Mayo, no recuperable.
+** 35% teoría , 35% prácticas, 15% programación en papel, 15% otros
 
 
 
-[#Tema2_RepInf]
+[#Tema2_VonNeum]
+[.columns]
+== Tema 2 : Arquitectura de Von Neumann
+
+[.column]
+* P
+
+
+[.column]
+* O
+
+
+
+
+[#Tema3_RepInf]
 == Tema 3 : Representación Digital de la Información
 
 [state=txikiago]
