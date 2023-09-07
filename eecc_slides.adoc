@@ -167,12 +167,95 @@ Tema 3: <<Tema3_RepInf, Representación Digital de la Información.>>
 [.columns]
 == Tema 2 : Arquitectura de Von Neumann
 
+=== Indice
+
 [.column]
 * P
 
 
 [.column]
 * O
+
+=== Qué conocemos de una computadora
+
+* CPU? 3GHz? RAM? Memoria? 12GB? Disco Duro? Tarjeta gráfica? Pantalla? Ethernet? Placa base?
+* Hardware, Software, Firmware? BIOS? Windows? Linux?
+* Cuál es su arquitectura? Qué se entiende por arquitectura?
+
+=== Organización de una computadora: niveles
+
+* Los elementos básicos de una computadora desde el punto de vista del programador se pueden organizar por NIVELES: 
+** del nivel más bajo y cercano a la máquina al nivel más alto y cercano al programador.
+
+image::eecc_tema2_niveles.svg[]
+
+
+=== Organización de una computadora: llamadas
+
+* Cada nivel llama a un nivel inferior
+
+image::eecc_tema2_niveles_call.svg[]
+
+=== Organización de un automóvil: concepto de Abstracción
+
+* Un símil sería la relación entre un conductor y el coche. El coche físico (motor,ventilador,ejes,inyector,válvulas,caja de cambios,etc...) se *ABSTRAE* y para el conductor un coche son unos pedales, una palanca de cambios y un volante. La Arquitectura del coche también se podría describir por niveles, del nivel más bajo al nivel más alto, al más abstracto.
+
+* El conductor conduce (programa) una máquina ABSTRACTA: acelera,frena,cambia y gira. No tiene por qué saber que la máquina real, la física, lleva aceite, ni siquiera tiene que saber que son necesarias unas ruedas.
+
+* Gracias a la abstracción las máquinas se acercan en su uso a los humanos.
+
+* Es necesario saber el QUE hace una máquina y no el COMO lo hace.
+
+[.columns, state=txikiago]
+=== Organización de una computadora: ISA
+
+
+
+[.column]
+--
+* El Hardware de la computadora tiene como función interpretar y ejecutar un conjunto de instrucciones con el objeto de procesar datos para obtener algún tipo de resultado.
+** lenguaje de la máquina : lenguaje binario
+** las instrucciones y los datos de la máquina están en lenguaje binario: 0,1
+** instrucciones máquina: P.ej sumar dos datos (números enteros) -> 
+*** instrucción suma de 2 más 5 en código máquina: 0101010001000010101010101
+*** misma instrucción máquina pero en lenguaje ensamblador (texto): add 2,5 
+*** La CPU mediante sus circuitos electrónicos digitales realiza la suma binaria de los dos datos binarios
+
+--
+
+[.column]
+--
+* *I.S.A* : Instruction Set Architecture
+** Arquitectura del Conjunto de Instrucciones máquina de una computadora 
+** Conjunto: sumar, restar, mover un dato, saltar a una instrucción de memoria 
+** Arquitectura: 
+*** instrucciones: qué operaciones? ¿cuál es el tamaño de una instrucción?¿cuantos operandos tiene?¿cuál es su código binario? ¿cómo se hace referencia a un operando?
+*** datos: tipo de datos: enteros?reales? su tamaño? su codificación?
+--
+
+=== Organización de una computadora: ISA
+
+* El Hardware de la computadora tiene como nivel superior las instrucciones máquina que es capaz de ejecutar y los datos máquina que es capaz de ejecutar
+
+image::eecc_tema2_isa.svg[align:left]
+
+image::eecc_tema2_niveles_isa.svg[]
+
+[.columns,state=txikiago]
+=== Organización de una computadora: ISA
+
+
+* Un programador de bajo nivel , pej los creadores de sistemas operativos, de compiladores, etc..., necesitan conocer la ISA de la máquina. 
+* La programación de un sistema operativo como Windows  y Linux, en los lenguajes C y el lenguaje ensamblador, requiere conocer la arquitectura ISA.
+* Los manuales ISA de un microprocesador tienen toda la información que necesita el programador, por lo tanto el programador de bajo nivel no necesita conocer todo el hardware interno de la CPU, de la memoria y de los controladores de entrada salida, sino únicamente la información disponible en el manual ISA.
+* Para el programador la máquina es la ISA, el programador ve una máquina ABSTRACTA, ve la FUNCION de la máquina, QUÉ hace la máquina...y no COMO lo hace.
+* En el laboratorio programaremos en lenguaje del nivel más bajo, es decir, en el lenguaje de la máquina pero no en binario sino en modo texto mediante el lenguaje ensamblador. Las operaciones de las instrucciones de la máquina en lenguaje ensamblador se expresan mediante mnemónicos como ADD, SUB, LOAD, MOV ... que son reducciones de palabras inglesas.  
+* Buscar en google los manuales isa de intel x86 de 64 bits que son ejecutados por los microprocesadores de intel: core i3, core i5, core i7, etc...
+
+=== Una máquina abstracta y muchas reales: compatibilidad
+
+* De la misma forma que cuando aprendemos a conducir (pedales+cambio+volante) nos sirve para cualquier coche, la *arquitectura del conjunto de instrucciones* es la misma para múltiples procesadores.
+* La ISA amd64 ó x86-64 es la misma para todos los procesadores de Intel (core,xeon,etc...) o de AMD (Ryzen, etc). De esta forma un programa binario que se ejecute en un core-i7 también lo puede hacer en un Ryzen 9.
 
 
 
