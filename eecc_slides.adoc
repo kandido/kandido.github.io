@@ -254,11 +254,249 @@ image::eecc_tema2_niveles_isa.svg[]
 
 === Una máquina abstracta y muchas reales: compatibilidad
 
-* De la misma forma que cuando aprendemos a conducir (pedales+cambio+volante) nos sirve para cualquier coche, la *arquitectura del conjunto de instrucciones* es la misma para múltiples procesadores.
+* De la misma forma que cuan do aprendemos a conducir (pedales+cambio+volante) nos sirve para cualquier coche, la *arquitectura del conjunto de instrucciones* es la misma para múltiples procesadores.
 * La ISA amd64 ó x86-64 es la misma para todos los procesadores de Intel (core,xeon,etc...) o de AMD (Ryzen, etc). De esta forma un programa binario que se ejecute en un core-i7 también lo puede hacer en un Ryzen 9.
 
 
+=== Programa en lenguaje texto: suma de los 5 primeros números enteros 
 
+* Algoritmo latexmath:[$\sum_{i=1}^{5}i$]
+* Lenguaje de texto Python 
+
++
+[source,phyton]
+----
+sum(range(5,0,-1))
+----
+
+
+
+
+[.columns, state=txikiago]
+=== Programa en lenguaje texto: suma de los 5 primeros números enteros 
+
+[.column]
+--
+Lenguaje C +
+
+[source,C]
+
+/*
+ Programa: sum1toN.c
+ Descripción: realiza la suma de la serie 1,2,3,...N
+*/
+#include <stdlib.h>
+int main ()
+{
+  short N=5,y;
+  while(N>=0)
+    y+=N--;
+  exit(y);
+}
+--
+
+[.column]
+--
+Lenguaje Java +
+
+[source,java]
+
+/* Programa Fuente: sum1toN.java
+ compilación: javac sum1toN.java -> genera el BYTECODE sum1toN.class 
+ ejecución   -> java -cp . sum1toN  ; necesita el bytecode *.class y ejecutará el main de class
+*/ 
+public class sum1toN {
+// método main encapsulado en la clase class, static para que main no pueda cambiar los atributos, publico para ser accesible.
+    public static void main(String[] args) { 
+        System.out.println("Suma de Números enteros"); 
+	int x=5, suma=0;
+      while (x >= 0 ) {
+         System.out.print( x );
+         System.out.print(",");
+	 suma=suma+x;
+	 x--;
+      }
+      System.out.print("\n");
+      System.out.print("suma="+suma);
+      System.out.print("\n");
+    }
+}
+-- 
+
+[state=txikiago]
+=== Módulo binario: en código binario
+
+[source,shell]
+----
+gcc -o sum1toN sum1toN.c    
+    -> genera el módulo ejecutable sum1toN para la arquitectura x86-64 +
+ls -l sum1toN -> 16696 bytes 
+file sum1toN 
+   sum1toN: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), 
+   dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2,
+   BuildID[sha1]=8df3de7b9ba05ceb7861b39d703c8ef11161284a, for GNU/Linux 3.2.0,
+   not   stripped
+----
+
+----
+gcc -m32 sum1toM sum1toN.c  
+  -> genera el módulo ejecutable sum1toN para la arquitectura x86-32
+hexdump sum1toN
+  0000000 457f 464c 0102 0001 0000 0000 0000 0000
+  0000010 0003 003e 0001 0000 1060 0000 0000 0000
+  0000020 0040 0000 0000 0000 3978 0000 0000 0000
+  0000030 0000 0000 0040 0038
+----
+programa ejecutable en código *hexadecimal*, más compacto que el binario +
+1ª columna: direcciones, apuntan o hacen referencia a un byte +
+2ª columna: +
+---  4 dígitos hexadecimales del contenido. Si cada dígito hexadecimal equivale a 4 bits, dos dígitos hex. equivalen a 1 byte. +
+---  457f: 2 bytes de código ejecutable +
+---  No podemos interpretar el código binario, pero el procesador x86-64 sí.
+
+[.columns, state=txikiago]
+=== Interpretación del código binario (del programa sum1toN)
+
+[.column]
+* Desensamblador: convierte el código binario en código texto ENSAMBLADOR
+* +objdump -d sum1toN+
++
+
+----
+Disassembly of section .text:
+
+0000000000001060 <_start>:
+    1060:	f3 0f 1e fa          	endbr64 
+    1064:	31 ed                	xor    %ebp,%ebp
+    1066:	49 89 d1             	mov    %rdx,%r9
+    1069:	5e                   	pop    %rsi
+    106a:	48 89 e2             	mov    %rsp,%rdx
+    106d:	48 83 e4 f0          	and    $0xfffffffffffffff0,%rsp
+    1071:	50                   	push   %rax
+    1072:	54                   	push   %rsp
+    1073:	4c 8d 05 86 01 00 00 	lea    0x186(%rip),%r8        
+    107a:	48 8d 0d 0f 01 00 00 	lea    0x10f(%rip),%rcx        
+    1081:	48 8d 3d c1 00 00 00 	lea    0xc1(%rip),%rdi         
+    1088:	ff 15 52 2f 00 00    	callq  *0x2f52(%rip)        
+    108e:	f4                   	hlt    
+    108f:	90                   	nop
+
+    .....       ....................    .........................
+
+0000000000001149 <main>:
+    1149:	f3 0f 1e fa          	endbr64 
+    114d:	55                   	push   %rbp
+    114e:	48 89 e5             	mov    %rsp,%rbp
+    1151:	48 83 ec 10          	sub    $0x10,%rsp
+    1155:	66 c7 45 fc 05 00    	movw   $0x5,-0x4(%rbp)
+    115b:	eb 19                	jmp    1176 <main+0x2d>
+    115d:	0f b7 45 fc          	movzwl -0x4(%rbp),%eax
+    1161:	89 c2                	mov    %eax,%edx
+    1163:	83 ea 01             	sub    $0x1,%edx
+    1166:	66 89 55 fc          	mov    %dx,-0x4(%rbp)
+    116a:	89 c2                	mov    %eax,%edx
+    116c:	0f b7 45 fe          	movzwl -0x2(%rbp),%eax
+    1170:	01 d0                	add    %edx,%eax
+    1172:	66 89 45 fe          	mov    %ax,-0x2(%rbp)
+    1176:	66 83 7d fc 00       	cmpw   $0x0,-0x4(%rbp)
+    117b:	79 e0                	jns    115d <main+0x14>
+    117d:	0f bf 45 fe          	movswl -0x2(%rbp),%eax
+    1181:	89 c7                	mov    %eax,%edi
+    1183:	e8 c8 fe ff ff       	callq  1050 <exit@plt>
+    1188:	0f 1f 84 00 00 00 00 	nopl   0x0(%rax,%rax,1)
+    118f:	00 
+
+
+----
+
+[.column]
+
+1ª columna: dirección de referencia a la instrucción +
+ +
+2ª columna:  código máquina en hexadecimal +
+ +
+3ª columna:  código de operación de la instrucción en *lenguaje ensamblador* +
+ +
+4ª columna:  operandos de la instrucción en *lenguaje ensamblador*.
+
+=== Lenguaje Ensamblador
+
+* Es el lenguaje máquina traducido del binario a TEXTO para poder programar módulos fuente los programadores
+* El formato de la instrucción ensamblador se compone principalmente de 2 campos:
+** campo del código de operación mediante MNEMONICOS como push(insertar),mov(mover),add(sumar),jmp(saltar),jne(saltar si not equal), etv
+** campo de los operandos de la operación: son referencias a memoria donde está el operando ó se pone el propio operando
+
+
+[.columns]
+=== Institute Advanced Machine (IAS)
+
+[.column]
+* https://es.wikipedia.org/wiki/M%C3%A1quina_de_von_Neumann[John von Neumann]
+** Matemático húngaro 1903
+** Proyecto Manhattan -> Bomba atómica
+** Concepto de Arquitectura von Neumann de un Computador 
+
+[.column]
+* https://es.wikipedia.org/wiki/Arquitectura_de_Von_Neumann[Arquitectura de von Neumann]
+** https://es.wikipedia.org/wiki/ENIAC[máquina ENIAC]: programa cableado
+** https://es.wikipedia.org/wiki/EDVAC[máquina EDVAC]: programa almacenado -> *unidad de memoria
+*** arquitectura von neumann: unidad de procesamiento + unidad de memoria + unidad de entrada salida
+*** https://www.youtube.com/watch?v=jhlSEIbxO0E[youtube EDVAC]
+
+
+
+[state=taula]
+=== Repertorio de la máquina IAS: tabla
+
+.Instruction Set
+[width="100%",cols="1,2,^1,6,2",options="header"]
+|============================================================================
+|Instruction name| Instruction name 	|Op Code 	|Description				| Register Transfer Language (RTL)
+|S(x)->Ac+ 	|LOAD M(X)	|1 	|copy the number in Selectron location x into AC	| AC <- M[x]
+|S(x)->Ac- 	|LOAD -M(X)	|2 	|same as #1 but copy the negative of the number		| AC <- ~M[x]+1
+|S(x)->AcM 	|LOAD \|M(X)\| 	|3 	|same as #1 but copy the absolute value			| AC <- \|M[x]\|
+|S(x)->Ac-M 	|LOAD -\|M(X)\| |4 	|same as #1 but subtract the absolute value		| AC <- AC-\|M[x]\|
+|S(x)->Ah+ 	|ADD M(X)	|5 	|add the number in Selectron location x into AC		|
+|S(x)->Ah- 	|SUB M(X)	|6 	|subtract the number in Selectron location x from AC	|
+|S(X)->AhM 	|ADD \|M(X)\| 	|7 	|same as #5, but add the absolute value			|
+|S(X)->Ah-M 	|SUB \|M(X)\| 	|8 	|same as #7, but subtract the absolute value		|
+|S(x)->R 	|LOAD MQ,M(X)	|9 	|copy the number in Selectron location x into AR	|
+|R->A 	        |LOAD MQ	|A 	|copy the number in AR to AC				|
+|S(x)*R->A 	|MUL M(X)	|B 	|Multiply the number in Selectron location x by the number in AR. Place the left half of the result in AC and the right half in AR.|
+|A/S(x)->R 	|DIV M(X) 	|C 	|Divide the number in AC by the number in Selectron location x. Place the quotient in AR and the remainder in AC.|
+|Cu->S(x) 	|JUMP M(X,0:19)	|D 	|Continue execution at the left-hand instruction of the pair at Selectron location x	|
+|Cu`->S(x) 	|JUMP M(X,20:39)|E 	|Continue execution at the right-hand instruction of the pair at Selectron location x	|
+|Cc->S(x) 	|JUMP+ M(X,0:19)|F 	|If the number in AC is >= 0, continue as in #D. Otherwise, continue normally. 		|
+|Cc`->S(x) 	|JUMP+ M(X,20:39)|10 	|If the number in AC is >= 0, continue as in #E. Otherwise, continue normally. 		|
+|At->S(x) 	|STOR M(X) 	|11 	|Copy the number in AC to Selectron location x						|
+|Ap->S(x) 	| 	|12 	|Replace the right-hand 12 bits of the left-hand instruction at Selectron location x by the right-hand 12 bits of the AC|
+|Ap`->S(x) 	| 	|13 	|Same as #12 but modifies the right-hand instruction			|
+|L 	        |LSH	|14 	|Shift the number in AC to the left 1 bit (new bit on the right is 0)	|
+|R 	        |RSH	|15 	|Shift the number in AC to the right 1 bit (leftmost bit is copied)	|
+|halt 	        | 	|0 	|Halt the program (see paragraph 6.8.5 of the IAS r
+|============================================================================
+
+
+
+=== Repertorio de la máquina IAS: explicación
+
+
+* En la versión original no había código ensamblador, se programaba directamente en lenguaje máquina.
+** La 1ª columna: MNEMÓNICOS del lenguaje ensamblador del simulador académico IASSIM
+** En la 2ª columna, los *MNEMONICOS* (LOAD,ADD,SUB,etc) de las operaciones de las instrucciones se corresponden con los diseñados por el libro de texto de William Stalling. 
+** La 3ª columna describe la instrucción mediante el lenguaje de texto convencional
+** La última columna describe la instrucción mediante un lenguaje de transferencia entre registros RTL
+
+=== IAS de la máquina ISA
+
+* Analizamos la Arquitectura del Repertorio de Instrucciones de la máquina "Institute Advanced Studies"
+* Sólo tiene 16 instrucciones por lo que el procesador es muy sencillo.
+* Formato de las instrucciones
+** Tamaño fijo de 20 bit
+** la instrucción esta organizada en 2 campos: el campo de operaciones y el campo de operando
+** campo de operación: longitud de 8 bits -> operaciones del tipo sumar,mover,saltar
+** campo de operando: longitud de 12 bits
+ 
 
 [#Tema3_RepInf]
 == Tema 3 : Representación Digital de la Información

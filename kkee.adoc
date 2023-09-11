@@ -1,0 +1,395 @@
+=  Estructura de Computadores
+// classic AsciiDoctor attributes
+//:stem: latexmath
+:stem:
+:background-color="#ff0000":
+:icons: font
+:imagesdir: images
+:customcss: styles/myCustomCSS.css
+// Despite the warning of the documentation, https://github.com/asciidoctor/asciidoctor-reveal.js, highlight.js syntax highlighting WORKS, BUT, you need to explicitly set the highlighter using the below attribute= ==	
+// see http://discuss.asciidoctor.org/Highlighting-source-code-for-reveal-js-backend-td2750.html
+:source-highlighter: highlight.js
+:highlightjs-languages: vhdl
+:source-language: vhdl 
+//:source-highlighter: rouge
+//:source-highlighter: pygments
+// revealjs attributes
+:revealjs_theme: white
+:revealjs_slideNumber: true
+// Al actualizar el slide no cambia de transpa y no se va al inicio
+:revealjs_hash: true   
+:revealjs_history: true
+
+
+:revealjs_center: true
+:revealjs_width: "100%"
+:revealjs_height: "100%"
+:revealjs_margin: 0
+
+//:revealjs_minScale: 1,
+//:revealjs_maxScale: 1
+
+// plugins copiados de tutoriales/asciidoctor-revealjs/../primer.js
+:revealjs_plugins_configuration: revealjs-plugins-conf.js
+:revealjs_plugins: revealjs-plugins.js
+
+//:scrollable: no pirula
+
+//:revealjs_history: true para go to file no pirula
+
+//:doctype: book
+//:lang: es
+//:encode: ISO-8859-1
+//:ascii-ids:
+:show-link-uri:
+:asciidoctor-fetch-kroki:
+:experimental:
+:notitle:
+
+
+:ruta-transpas: /home/candido/Dropbox/apuntes/apuntes_Estr_Computadores/upna/apuntes_repositorio/transpas_eecc
+
+:ruta-apuntes: home/candido/Dropbox/apuntes
+
+////
+[data-visibility="hidden"]
+== Transparencias en Formato PDF
+
+
+* link:./PDF/eecc/eecc_slides.pdf[Transparencias PDF]
+* Si hay algún error de forma en el documento PDF que dificulte su interpretación, por favor, enviar un mensaje para su correción. Gracias.
+////
+
+
+== Indizea
+
+[ % hardbreaks]
+1. gaia: < < Gaia1_Sarrera, Ordenagailuen egitura ikasgaiaren hastapena.>>
+2. gaia: < < Tema2_VonNeum, Von Neuman-en arkitektura.>>
+3. gaia: < Gaia3_ErrepInf, Informazioaren Irudikapen Digitala. >>
+
+
+[# 1. gaia_Sartu]
+[.zutabeak]
+== 1. gaia: Sistema digital elektronikoetarako sarrera
+
+[.column]
+* Irakasleak
+
+
+[.column]
+* Antolaketa akademikoa
+** Programa
+** Praktikak
+** Ariketak
+** Ebaluazioa
+** Metodologia
+
+
+// [ % notitle]
+=== Irakasleak
+
+* Candido Aramburu Mayoz irakaslea.
+** Telekomunikazioetako Ingeniaria (UPNA-Madrilgo Unibertsitate Politeknikoa)
+** Ikusi S.A. enpresa (1989ko Telemedida Sistemak)
+** NUPeko irakasle titularra (Ingeniaritza Elektronikoa eta Komunikazioak Saila 2000)
+* Teoria irakaslea: Carlos Juan de Dios
+* Praktiketako irakaslea: Andrés Garde
+
+
+
+[.notes]
+---
+* https://www.etsit.upm.es /
+
+---
+
+=== Erakunde akademikoa
+
+=== Ikasgelak eta ordutegiak
+
+* Ikasgelak
+** Teoria: G91 -> A019, G1 ->A113, G2->A122
+** Praktikak: P91->A015, P1->A305, P2->E-ISM, P3->E-ISM
+** E-ISM: "Las Encinas" eraikina, Liburutegiaren eta Errektoretzaren arteko eskuineko aldea) sotoan, "ISM" Informatika Laborategia
+
+
+* Ordutegia
+** Teoria: G91 (L-15: 00), G1 (X-17: 00), G2 (L-17: 00)
+** Praktikak: P91 (X-19: 00), P1 (J-17: 00), P2 (M-19: 00), P3 (M-17: 00)
+
+
+=== Tutoretzak
+
+* Bulegoa: Los Tejos eraikina 2. Solairua: 2028. bulegoa (Candido Aramburu irakaslea)
+* Ikasgelategia -> barruko posta
+* [Tutoretzak]
+** Astelehena (10-13) eta asteazkena (10-13)
+
+
+
+[# 2. gaia_VonNeum]
+[.zutabeak]
+== 2. gaia: Von Neumannen arkitektura
+
+=== Indizea
+
+[.column]
+* P
+
+
+[.column]
+* O
+
+=== Ordenagailu bati buruz zer dakigun
+
+* PUZ? 3GHz? RAM? Memoria? 12GB? Disko gogorra? Txartel grafikoa? Pantaila? Ethernet? Plaka nagusia?
+* Hardware, Software, Firmware? BIOS? Windows? Linux?
+* Zein da bere arkitektura? Zer da arkitektura?
+
+=== Ordenagailu baten antolaketa: mailak
+
+* Konputagailu baten oinarrizko elementuak, programatzailearen ikuspuntutik, MAILAKA antola daitezke:
+** mailarik baxuena eta makinatik gertuen dagoena, mailarik altuenean eta programatzailearengandik gertu.
+
+image:: eecc_tema2_niveles.svg []
+
+
+=== Konputagailu baten antolaketa: deiak
+
+* Maila bakoitzak beheragoko maila batera deitzen du
+
+image:: eecc_tema2_niveles_call.svg []
+
+=== Automobil baten antolaketa: abstrakzioaren kontzeptua
+
+* Antzekoa litzateke gidariaren eta autoaren arteko harremana. Auto fisikoa (motorra, haizagailua, ardatzak, injektorea, balbulak, aldaketa-kutxa, etab.)* ABSTRAE* da, eta gidariarentzat auto bat pedalak, aldaketa-palanka bat eta bolante bat dira. Autoaren arkitektura ere mailaka deskriba daiteke, mailarik baxuenetik gorenera, abstraktuenera.
+
+* Gidariak makina ABSTRAKTU bat gidatzen du (programa): bizkortu, frenatu, aldatu eta biratu egiten du. Ez du zertan jakin benetako makinak, fisikak, olioa daramanik, ezta gurpilak beharrezkoak direnik ere.
+
+* Abstrakzioari esker, makinak gizakiengana hurbiltzen dira.
+
+* Beharrezkoa da jakitea zer egiten duen makina batek, eta ez NOLA egiten duen.
+
+[.zutabeak, state = txikiago]
+=== Konputagailu baten antolaketa: ISA
+
+
+
+[.column]
+---
+* Ordenagailuaren hardwarearen funtzioa jarraibide multzo bat interpretatzea eta exekutatzea da, emaitzaren bat lortzeko datuak prozesatzeko.
+** Makinaren hizkuntza: hizkuntza bitarra
+** Makinaren jarraibideak eta datuak hizkuntza bitarrean daude: 0,1
+** makina-jarraibideak: Adibidez, bi datu batzea (zenbaki osoak) ->
+*** instrukzioa, 2 gehi 5 makina-kodean: 01010100010000101010101
+*** Makina-instrukzio bera, baina mihiztatze-lengoaian (testua): add 2,5
+*** PUZak, bere zirkuitu elektroniko digitalen bidez, bi datu bitarren batura bitarra egiten du
+
+---
+
+[.column]
+---
+** I.S.A*: Instruction Set Architecture
+** Ordenagailu baten makina-jarraibideen multzoaren arkitektura
+** Multzoa: datu bat batu, kendu, mugitu, memoria-instrukzio batera salto egin
+** Arkitektura:
+*** jarraibideak: zer eragiketa? Zein da instrukzio baten tamaina? Zenbat operando ditu? Zein da bere kode bitarra? Nola egiten zaio erreferentzia operando bati?
+*** datuak: datu motak: osoak? benetakoak? tamaina? kodifikazioa?
+---
+
+=== Konputagailu baten antolaketa: ISA
+
+* Ordenagailuaren hardwareak exekutatzeko gai den makinaren jarraibideak eta exekutatzeko gai den makinaren datuak ditu goiko mailatzat.
+
+image:: eecc_tema2_isa.svg [align: left]
+
+image:: eecc_tema2_niveles_isa.svg []
+
+[.zutabeak, state = txikiago]
+=== Konputagailu baten antolaketa: ISA
+
+
+* Maila txikiko programatzaile batek, pej sistema eragileen, konpiladoreen eta abarren sortzaileek, makinaren ISA ezagutu behar dute.
+* Windows eta Linux bezalako sistema eragile baten programazioak, C lengoaietan eta mihiztatze-hizkuntzan, ISA arkitektura ezagutzea eskatzen du.
+* Mikroprozesadore baten ISA eskuliburuek programatzaileak behar duen informazio guztia dute; beraz, maila txikiko programatzaileak ez du PUZaren, memoriaren eta irteera-kontrolagailuen barneko hardware guztia ezagutu behar, ISA eskuliburuan eskuragarri dagoen informazioa baizik.
+* Programatzailearentzat makina ISA da, programatzaileak makina ABSTRAKTU bat ikusten du, makinaren FUNTZIOA ikusten du, makinak ZER egiten du... eta ez NOLA egiten duen.
+
+
+* Laborategian maila baxueneko hizkuntzan programatuko dugu, hau da, makinaren hizkuntzan, baina ez binarioan, mihiztatze-lengoaiaren bidez testu moduan baizik. Makinaren jarraibideetako eragiketak mihiztatze-lengoaian mnemonikoen bidez adierazten dira (ADD, SUB, LOAD, MOV...), hitz ingelesak murriztuz.
+* Bilatu googlen 64 biteko isa de intel x86 eskuliburuak, intel mikroprozesadoreek exekutatzen dituztenak: core i3, core i5, core i7, etab.
+
+=== Makina abstraktu bat eta erreal asko: bateragarritasuna
+
+* Gidatzen ikasten dugun bezala (pedalak+aldaketa+bolantea) edozein autorako balio digu,* jarraibide multzoaren arkitektura* bera da prozesadore anitzetarako.
+* ISA amd64 edo x86-64 bera da Intelen (core, xeon, eta abar) edo AMDren (Ryzen, eta abar) prozesadore guztientzat. Horrela, kore-i7 batean exekutatzen den programa bitar batek Ryzen 9 batean ere egin dezake.
+
+
+=== Programa testu-hizkuntzan: lehenengo 5 zenbaki osoen batura
+
+* Latexmath algoritmoa: [$\sum_ {i = 1} windo{ 5} i $]
+* Python testu-hizkuntza
+
++
+[source, phyton]
+- ---
+sum (range (5,0, -1))
+- ---
+
+
+
+
+[.zutabeak, state = txikiago]
+=== Programa testu-hizkuntzan: lehenengo 5 zenbaki osoen batura
+
+[.column]
+---
+C + lengoaia
+
+[source, C]
+
+/*
+Egitaraua: sum1toN.c
+Deskribapena: 1,2,3 seriearen batuketa egiten du,... N
+* /
+#include < stdlib.h>
+int main ()
+{
+short N = 5, eta;
+while (N> = 0)
+y+ = N--;
+exit (y);
+}
+---
+
+[.column]
+---
+Java + hizkuntza
+
+[source, java]
+
+Iturria: sum1toN.java
+konpilazioa: javac sum1toN.java -> BYTECODE sum1toN.class sortzen du
+exekuzioa -> java -cp. sum1toN; bytecode* .class behar du eta class main exekutatuko du
+* /
+public class sum1toN {
+// class klasean kapsulatutako main metodoa, static, main atributuak aldatu ezin izateko, publikoa, irisgarria izateko.
+public static void main (String [] args) {
+System.out.println (zenbaki osoen batura);
+int x = 5, batura = 0;
+while (x > = 0) {
+System.out.print (x);
+System.out.print (",");
+batuketa = suma+x;
+x--;
+}
+System.out.print ("\n");
+System.out.print ("batura =" +batura);
+System.out.print ("\n");
+}
+}
+---
+
+[state = txikiago]
+=== Modulu bitarra: kode bitarrean
+
+[source, shell]
+----
+gcc -sum1toN sum1toN.c
+- > Arkitekturarako sum1toN modulu exekutagarria sortzen du x86-64 +
+ls -l sum1toN -> 16696 byte
+file sum1toN
+sum1toN: ELF 64-bit LSB shared object, x86-64, 1. bertsioa (SYSV),
+dynamically linked, interpreter/lib64/ld-linux-x86-64.so.2,
+BuildID [sha1] = 8df3de7b9ba05ceb7861b39d703cef811161284a, for GNU/Linux 3.2.0,
+not stripped
+----
+
+----
+gcc -m32 sum1toM sum1toN.c
+- > sum1toN modulu exekutagarria sortzen du x86-32 arkitekturarako
+hexdump sum1toN
+0000000 457f 464c 0102 0001 0000 0000 0000 0000
+0000010 0003 003e 0001 0000 1060 0000 0000 0000
+0000020 0040 0000 0000 0000 3978 0000 0000 0000 0000
+0000030 0000 0000 0040 0038
+----
+* hexadezial* kodean exekutatu daitekeen programa, bitarra baino trinkoagoa +
+1. zutabea: byte bati buruzko helbideak, apunteak edo aipamenak +
+2. zutabea: +
+--- Edukiaren 4 digitu hexadezimal. Digitu hamaseitar bakoitza 4 bitekoa bada, bi digitu byte baten baliokideak dira. +
+--- 457f: Kode exekutagarriko 2 byte +
+--- Ezin dugu kode bitarra interpretatu, baina x86-64 prozesadorea bai.
+
+[.zutabeak, state = txikiago]
+=== Kode bitarraren interpretazioa (sum1toN programarena)
+
+[.column]
+* Desmihiztatzailea: kode bitarra MIHIZTATZAILE testu-kode bihurtzen du
+* +objdump -d sum1toN+
++
+
+----
+Disassembly of section .text:
+
+0000000000001060 < _start>:
+1060: f3 0f 1e fa endbr64
+1064:31 ed xor %ebp, %ebp
+1066:49 89 d1 mov % rdx, % r9
+1069: % 5e pop rsi
+106a: 48 89 e2 mov % rsp, % rdx
+106d: 48 83 e4 f0 and $0xfffffffffffffffff0, % rsp
+1071: 50% push % rax
+1072:54 push % rsp
+1073: 4c 8d 05 86 01 00 00 lea 0x186 ( % rip), % r8
+107a: 48 8d 0d 0f 01 00 00 lea 0x10f ( % rip), % rcx
+1081:48 8d 3d c1 00 00 00 lea 0xc1 ( % rip), % rdi
+1088: ff 15 52 2f 00 00 callq* 0x2f52 ( % rip)
+108e: f4 hlt
+108f: 90 nop
+
+..................................................
+
+00000000001149 < main>:
+1149: f3 0f 1e fa endbr64
+114d: 55 push % rbp
+114e: 48 89 e5 mov % rsp, % rbp
+1151:48 83 ec 10 sub $0x10, % rsp
+1155:66 c7 45 fc 05 00 movw $0x5, -0x4 ( % rbp)
+115b: eb 19 jmp 1176 < main+0x2d>
+115d: 0f b7 45 fc movzwl -0x4 ( % rbp), % eax
+1161:89 c2 mov % eax, % edx
+1163:83 ea 01 sub $0x1, % edx
+1166:66 89 55 fc mov % dx, -0x4 ( % rbp)
+116a: % 89 c2 mov % eax, % edx
+116c: 0f b7 45 fe movzwl -0x2 ( % rbp), % eax
+1170:01 d0 add % edx, % eax
+1172:66 89 45 fe mov % ax, -0x2 ( % rbp)
+1176:66 83 7d fc 00 cmpw $0x0, -0x4 ( % rbp)
+117b: 79 e0 jns 115d < main+0x14>
+117d: 0f bf 45 fe movswl -0x2 ( % rbp), % eax
+1181:89 c7 mov % eax, %edi
+1183: e8 c8 fe ff callq 1050 < exit@plt>
+1188: 0f 1f 84 00 00 00 00 nopl 0x0 ( % rax, % rax, 1)
+118f: 00
+
+
+----
+
+[.column]
+
+1. zutabea: jarraibidearen erreferentzia-helbidea +
++
+2. zutabea: makina-kodea hamaseitarrean +
++
+3. zutabea: instrukzioaren eragiketa-kodea mihiztatze-hizkuntzan* +
++
+4. zutabea:* mihiztatzeko hizkuntzan* egindako instrukzio-eragiketak.
+
+=== Mihiztatze-lengoaia
+
+* Bitarretik TESTURA itzulitako makina-lengoaia da, programatzaileek iturburu-moduluak programatu ahal izateko
+* Mihiztatzeko jarraibidearen formatuak bi eremu ditu nagusiki:
+** MNEMONIKOEN bidezko eragiketa-kodearen eremua, hala nola push (txertatu), mov (mugitu), add (batu), jmp (salto egin), jne (salto si not equal), etv
+** Eragiketako operatuen eremua: memoriari buruzko erreferentziak dira, eta bertan operatzen da edo
+
