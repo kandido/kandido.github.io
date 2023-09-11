@@ -487,16 +487,49 @@ Disassembly of section .text:
 ** La 3ª columna describe la instrucción mediante el lenguaje de texto convencional
 ** La última columna describe la instrucción mediante un lenguaje de transferencia entre registros RTL
 
+[.columns,state=txikiago]
 === IAS de la máquina ISA
+[.column]
+--
+image::eecc_tema2_instr_formato.svg[]
 
-* Analizamos la Arquitectura del Repertorio de Instrucciones de la máquina "Institute Advanced Studies"
-* Sólo tiene 16 instrucciones por lo que el procesador es muy sencillo.
+image::eecc_tema2_data_format.svg[]
+
+* Formato de datos
+** longitud de 40 bits
+** números enteros con signo: código complemento a 2
+--
+
+
+[.column]
+--
+* Instrucciones: Sólo tiene 16 instrucciones por lo que el procesador es muy sencillo.
 * Formato de las instrucciones
 ** Tamaño fijo de 20 bit
 ** la instrucción esta organizada en 2 campos: el campo de operaciones y el campo de operando
 ** campo de operación: longitud de 8 bits -> operaciones del tipo sumar,mover,saltar
 ** campo de operando: longitud de 12 bits
- 
+-- 
+
+
+=== Memoria de la máquina IAS
+
+
+image::eecc_tema2_memoria.svg[]
+
+=== ALU de la máquina IAS
+
+
+=== Unidad de Control de la máquina IAS
+
+
+=== Ciclo de instrucción
+
+
+* https://www.youtube.com/watch?v=04UGopESS6A[Animación del ciclo instrucción]
+
+
+=== Programa de la máquina IAS: sum1toN
 
 [#Tema3_RepInf]
 == Tema 3 : Representación Digital de la Información
