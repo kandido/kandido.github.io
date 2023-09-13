@@ -283,7 +283,8 @@ Lenguaje C +
 
 /*
  Programa: sum1toN.c
- Descripción: realiza la suma de la serie 1,2,3,...N
+ Descripción: 
+   1+2+3+4+...+N
 */
 #include <stdlib.h>
 int main ()
@@ -302,24 +303,24 @@ Lenguaje Java +
 [source,java]
 
 /* Programa Fuente: sum1toN.java
- compilación: javac sum1toN.java -> genera el BYTECODE sum1toN.class 
- ejecución   -> java -cp . sum1toN  ; necesita el bytecode *.class y ejecutará el main de class
+ compilación: javac sum1toN.java -> sum1toN.class 
+ ejecución   -> java -cp . sum1toN 
 */ 
 public class sum1toN {
-// método main encapsulado en la clase class, static para que main no pueda cambiar los atributos, publico para ser accesible.
-    public static void main(String[] args) { 
-        System.out.println("Suma de Números enteros"); 
-	int x=5, suma=0;
-      while (x >= 0 ) {
-         System.out.print( x );
-         System.out.print(",");
-	 suma=suma+x;
-	 x--;
+// método main encapsulado en la clase class
+  public static void main(String[] args) { 
+    System.out.println("Suma de Números enteros"); 
+      int x=5, suma=0;
+    while (x >= 0 ) {
+      System.out.print( x );
+      System.out.print(",");
+      suma=suma+x;
+      x--;
       }
-      System.out.print("\n");
-      System.out.print("suma="+suma);
-      System.out.print("\n");
-    }
+    System.out.print("\n");
+    System.out.print("suma="+suma);
+    System.out.print("\n");
+  }
 }
 -- 
 
@@ -511,26 +512,70 @@ image::eecc_tema2_data_format.svg[]
 ** campo de operando: longitud de 12 bits
 -- 
 
-
+[state=txikiago]
 === Memoria de la máquina IAS
 
-
+--
 image::eecc_tema2_memoria.svg[]
+
+La memoria almacena el programa que ha de ejecutar la CPU +
+El programa se encuentra codificado en lenguaje binario +
+El programa es una secuencia de instrucciones y datos +
+Los puertos de la memoria son MAR y MBR +
+La dirección de memoria en código binario es la entrada del circuito decodificador que activa una de sus salidas
+--
 
 === ALU de la máquina IAS
 
+image::eecc_tema2_ALU.svg[]
 
+[state=txikiago]
 === Unidad de Control de la máquina IAS
 
+--
+image::eecc_tema2_control-unit.svg[]
 
+La unidad de control es el circuito digital microelectrónico que lleva a efecto el ciclo de instrucción de cada instrucción
+ciclo de instrucción: cada instrucción pasa por 3 fases +
+- captura de la instrucción por la unidad de control +
+- intepretación de la instrucción por la unidad de control +
+- ejecución de la instrucción por la unidad de control +
+circuito secuenciador: electrónica para la secuencia de fases del ciclo de instrucción +
+IR: almacena la instrucción a interpretar +
+PC: apunta a la siguiente instrucción que tiene que comenzar su ciclo de instrucción
+--
+
+[state=txikiago]
+=== Unidad de Control de la máquina IAS
+
+--
+image::eecc_tema2_mem-uc-alu-bus.svg[]
+
+
+bus de datos: 40 hilos +
+bus de direcciones: 12 hilos + 
+bus de control (memoria): micro-órdenes de lectura y escritura +
+bus de control (ALU): micro-órdenes de operaciones de suma,resta,and,or,etc..
+--
+
+[.columns]
 === Ciclo de instrucción
 
+[.column]
 
+image::eecc_tema2_ciclo-instruccion.svg[]
+
+[.column]
+* Ejecución de un programa en la máquina IAS de von Neumann
+** Las instrucciones se ejecutan una detrás de otra, secuencialmente
+** Todas las instrucciones pasan por las distintas fases del ciclo de instrucción.
 * https://www.youtube.com/watch?v=04UGopESS6A[Animación del ciclo instrucción]
 
 
-=== Programa de la máquina IAS: sum1toN
 
+
+=== Programa de la máquina IAS: sum1toN
+ 
 [#Tema3_RepInf]
 == Tema 3 : Representación Digital de la Información
 
