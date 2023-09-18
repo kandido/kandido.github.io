@@ -65,8 +65,9 @@
 [%hardbreaks]
 Tema 1: <<Tema1_Intro, Introducción a la Asignatura Estructura de Computadores.>>
 Tema 2: <<Tema2_VonNeum, Arquitectura de Von Neumann.>>
-Tema 3: <<Tema3_RepInf, Representación Digital de la Información.>>
-
+Tema 3: Representación Digital de la Información: los Datos: <<ascii,ASCII >>, <<num_nat, Nº Naturales>>, <<num_ent, Nº Enteros>>
+Tema 4: Operaciones Aritméticas y Lógicas: <<op_nat, Nº Naturales>>, <<op_ent, Nº Enteros>>, <<op_log, Operaciones Lógicas>>   
+Tema 5: <<Tema5_RepInstrucciones, Representación Digital de la Información: las Instrucciones.>>
 
 [#Tema1_Intro]
 [.columns]
@@ -568,31 +569,44 @@ image::eecc_tema2_ciclo-instruccion.svg[]
 [.column]
 * Ejecución de un programa en la máquina IAS de von Neumann
 ** Las instrucciones se ejecutan una detrás de otra, secuencialmente
-** Todas las instrucciones pasan por las distintas fases del ciclo de instrucción.
+** Todas las instrucciones pasan por las distintas fases del ciclo de instrucción. 
+
+
+=== Ciclo de instrucción: Animación
+
+* Programa en lenguaje máquina
+* 3 instrucciones
+* Ruta de datos: transferencia de instrucciones y de datos a través de los registros y los buses
+* Buses externos al procesador: buses de conexión entre el chip procesador y la tarjeta de  memoria -> buses de direcciones, datos y lectura/escritura
+* Buses internos al procesador: microbuses entre registros, ALU y unidad de control
+* Se va a visualizar la transferencia de información entre registros a través de la ruta de datos de la computadora
 * https://www.youtube.com/watch?v=04UGopESS6A[Animación del ciclo instrucción]
 
 
 
 
-=== Programa de la máquina IAS: sum1toN
- 
-[#Tema3_RepInf]
-== Tema 3 : Representación Digital de la Información
+[#Tema3_RepDatos]
+== Tema 3 : Representación Digital de la Información: los DATOS
 
-[state=txikiago]
+[.columns,state=txikiago]
 === Indice
 
+[.column]
 * Información: números, caracteres, imagen, sonido, etc ..
+* Prefijos
+* Digitalización de las señales
 * Números
-** Sistemas posicionales: base 10 (decimales), base 2 (binaria)
+** Sistemas posicionales: base 10 (decimales), base 2 (binaria), base 16 (hexadecimal)
 ** Naturales: bases 10,2,8,16 . Conversión entre bases
-** Enteros: Signo Magnitud, Complemento a la base-1, Complemento a la base
+** Enteros: Signo Magnitud,  Complemento a la base
 ** Operaciones aritméticas: Suma,Resta
-** Reales: coma fija y coma flotante
+** Operaciones lógicas: not,and,or,xor,desplazamiento de bits.
+
+[.column]
 * Caracteres
 ** Alfanuméricos y Signos de Puntuación
 ** ASCII standard y extendido
-** Unicode: UTF-8 
+
  
 
 [state=taula]
@@ -677,7 +691,79 @@ La distancia considerable entre los dos niveles (binario) a la entrada del recep
 ** Matemáticas: Algebra de Boole
 
 
-=== Representación de los Números 
+[#ascii]
+=== Representación de los Caracteres
+
+=== Representación de los Caracteres
+
+* Tipos de Caracteres:
+** Alfanuméricos: a,b,...z.0,1,...9,A,B...Z
+** Signos de Puntuación: !"$%&/()=
+** de Control: Salto de Línea (\n), Find de Fichero (EOF), Fin de String (\00, ...)
+* Formatos
+** ASCII: standard y extendido
+** Unicode: UTF-8
+
+[.columns]
+=== ASCII Standard
+
+[.column.zutabe]
+----
+          2 3 4 5 6 7       30 40 50 60 70 80 90 100 110 120
+        -------------      ---------------------------------
+       0:   0 @ P ` p     0:    (  2  <  F  P  Z  d   n   x
+       1: ! 1 A Q a q     1:    )  3  =  G  Q  [  e   o   y
+       2: " 2 B R b r     2:    *  4  >  H  R  \  f   p   z
+       3: # 3 C S c s     3: !  +  5  ?  I  S  ]  g   q   {
+       4: $ 4 D T d t     4: "  ,  6  @  J  T  ^  h   r   |
+       5: % 5 E U e u     5: #  -  7  A  K  U  _  i   s   }
+       6: & 6 F V f v     6: $  .  8  B  L  V  `  j   t   ~
+       7: ' 7 G W g w     7: %  /  9  C  M  W  a  k   u  DEL
+       8: ( 8 H X h x     8: &  0  :  D  N  X  b  l   v
+       9: ) 9 I Y i y     9: '  1  ;  E  O  Y  c  m   w
+       A: * : J Z j z
+       B: + ; K [ k {
+       C: , < L \ l |
+       D: - = M ] m }
+       E: . > N ^ n ~
+       F: / ? O _ o DEL
+
+----
+
+[.column.zutabe_gehi]
+[%hardbreaks]
+American Standard Code for Information Interchange
+Alfabeto anglosajón
+7 bits -> 2^7^=128 caracteres : 0x00 hasta 0x1F son 32 caracteres de control y el resto alfanuméricos
+En hexadecimal rango [0x00-0x7F]
+En decimal rango [0-127]
+*Upna* : 0x55706E61
+*año 2023*: 0x61--6F2032303233
+
+=== ASCII Extendido
+
+* Para poder representar caracteres de otras culturas Europeas es necesrio expandir el standard con 1 bit más
+* ASCII 8 bits -> 2^8^ = 256 caracteres
+* https://www.programiz.com/python-programming/online-compiler/[Python Intepreter Shell]
++
+
+[source,python]
+---------
+ord('A')
+hex(ord('A'))
+hex(ord('\n'))
+chr(65)
+chr(0x41)
+[hex(ord(c)) for c in "Hola"]
+[chr(c) for c in [0x48, 0x6f, 0x6c, 0x61, 0x20, 0x4d, 0x75, 0x6e, 0x64, 0x6f]]
+[hex(ord(c)) for c in "ñ"]
+[hex(ord(c)) for c in "\n \t"]
+---------
+** La ñ tiene el código ASCII 0xF1
+
+
+[#num_nat]
+=== Representación de los Números NATURALES
 
 [state="taula"]
 === Representación de los Números Decimales
@@ -788,6 +874,8 @@ int(0x7B)
 * Conversión Octal-Binaria
 ** grupos de 3 bits
 
+[#op_nat]
+=== Operaciones Aritméticas con los Números NATURALES
 
 === Suma binaria
 
@@ -801,7 +889,7 @@ int(0x7B)
                   + 0 0 0 1 1 0 1 1  <--sumando
   	                         
   Valor suma        1 0 1 3 2 1 3 2  <- ¿cómo se representan los valores de cada posición?      
-                  *****************ase
+                  *****************
   Resultado -->     1 0 1 1 0 1 1 0  <--suma
 ....
 
@@ -845,30 +933,20 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 33 pasos en la rueda equivale al número 001 -> aritmética modular en módulo 8
 
 
-=== Operaciones aritméticas: Octal y Hexadecimal
+=== Operaciones aritméticas: Hexadecimal
 
-* Base Octal 
-** 0o675+0o304 = 0o1201
-** 0o632-0o374 = 0o236
+
 * Base hexadecimal
 ** 0xD1B+0xAFF = 0x181A
 ** 0xE53-0xBAA = 0x2A9
 
-
+[#num_ent]
+=== Representación de los Números ENTEROS
 
 === Representación de Números con Valores Enteros
 
 * Signo-Magnitud
-* Complemento a la base menos 1
 * Complemento a la base
-
-=== Representación en Signo-Magnitud
-
-* Signo -> un dígito
-* Base 10: 
-** valores positivos: el signo es el *dígito 0* en la posición MSD (More Significant Digit) y resto de dígitos representa el módulo 
-** valores negativos: el signo es el *dígito 9* (base-1) en la posición MSD (More Significant Dit) y resto de dígitos representa el módulo 
-** Ejemplo +123 -> 0123 y -123 -> 9123
 
 [state=txikiago]
 === Representación en Signo-Magnitud
@@ -883,7 +961,7 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 ** ¿Cuál es la relación entre los números positivos y negativos?
 ** Extender el número de bits del número sin cambiar su valor
 
-=== Extensión del signo
+=== Extensión del signo en Signo-Magnitud
 
 * Números positivos
 ** ¿Cuánto vale un cero a la izda?
@@ -893,66 +971,6 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 ** Extender el valor -123 a 12 bits -> Convertimos el valor positivo en negativo
 *** 100001111011
 
-
-=== Representación en complemento a la base menos 1. C9
-
-* Base 10: Complemento a 9 -> C9
-* Signo -> un dígito
-* Valores positivos: igual que los valores positivos en código Signo-Magnitud
-* Valores negativos: Hay que restar el código del valor en positivo del minuendo 99999999 (base-1)
-** Ejemplo '+123' -> 0123 y -123 -> 9999-0123 = 9876
-* El C9 de un número positivo es el código de su valor en negativo
-* El C9 de un número negativo es el código de su valor en positivo
-
-[state=txikiago]
-=== Representación en complemento a la base menos 1. C1
-
-* Base 2 : base-1=1 -> Complemento a 1 -> *C1*
-* Signo -> un dígito
-* Valores positivos: Definición: igual que los valores positivos en código Signo-Magnitud
-* Valores negativos: Definición: Hay que restar el código del valor en positivo del  minuendo 11111111 (base-1)
-** Ejemplo '+123' -> 0b01111011 y -123 -> *11111111-01111011* = 10000100
-** *Alternativa* a la definición: El código del valor negativo se puede calcular invirtiendo los bits del código del valor positivo
-* ¿Cuál es la relación entre los números positivos y negativos?
-** El C1 de un número positivo es el código C1 de su valor en negativo y del de un número negativo es el código C1 de su valor en positivo
-** Dibujar la tabla y la rueda con todos los valores con sus representaciones.
-** ¿Cuantas representaciones son posibles?¿Es simétrico el rango de valores representado?¿Cuantas representaciones tiene el cero?
-** Extender el número de bits del número sin cambiar su valor
-
-
-[state=txiki]
-=== Extensión del signo en C1
-
-.Razonamiento de la extensión de signo de un número negativo: números de 3 bits
-[width=60%,<1,2*<2]
-|===
-|Valor| C1 sin extensión | C1 con extensión
-|  +33 |  0100001    | 00100001
-.4+|  -33  l| 
- 1111111  
--0100001 
---------  
- 1011110 l|
-
- 11111111 
--00100001 
----------
- 11011110  
-|===
-
-* Aplicamos la definición:
-** Se observa que en el C1 con extensión, al hacer la resta y extender con un 0 más el minuendo y el substraendo, provoca la extensión con un bit más en la resta de valor 1 en el digito más significante. Según añado ceros al minuendo y sustraendo, aparecen unos en la resta sin alterar su valor.
-
-
-=== Representación en complemento a la base 10 : C10
-
-* Signo -> un dígito
-* Base 10: Complemento a 10 -> C10
-* Valores positivos: igual que los valores positivos en código Signo-Magnitud
-* Valores negativos: Hay que restar el código del valor en positivo del minuendo 0000000 (base)
-** Ejemplo '+123' -> 0123 y -123 -> 0000-0123 = 9877
-* El C10 de un número positivo es el código de su valor en negativo
-* El C10 de un número negativo es el código de su valor en positivo
 
 [state=txikiago]
 === Representación en complemento a la base 2 : C2
@@ -996,16 +1014,85 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
  11011111  
 |===
 
-* Aplicamos la definición:
+* Aplicamos la definición para los dos ejemplos, el segundo caso es una extensión del primero ya que hemos añadido un digito más al minuendo y al sustraendo:
 ** Se observa que en el C2 con extensión, al hacer la resta y extender con un 0 más el minuendo y el substraendo, provoca la extensión con un bit más en la resta de valor 1 en el digito más significante. Según añado ceros al minuendo y sustraendo, aparecen unos en la resta sin alterar su valor.
+
+
+=== Asimetría del rango en C2: -4 con 3 bits
+
+* Con números de 3 bits el formato S-M es simétrico con valores en el rango (+3,-3), en cambio el formato C2 tiene el rango (+3,-4)
+* En C2 el valor +4 se representa como 0b0100 y necesita por lo tanto 4 bits, no se puede representar con 3 bits, y el valor -4 se reprenta con el C2(0100), es decir, 1100 también con 4 bits. El 1100 se puede comprimir ya que tiene el signo extendido con la repetición de 1 de bit más significativo, por lo que la representación 100 es la representación del -4
+
+=== Complemento a 2 : Ejemplos
+
+* 0b101010101 está en C2 -> ¿Cual es su valor?
+** como es negativo no es un sistema posicional
+** tenemos que calcular el valor negativo a través del valor positivo
+** La representación del valor positivo es el C2 del valor negativo
+*** C2(0b101010101) = 0b010101011 cuyo valor es 2^7^+2^5^+2^3^+2^1^+2^0^=128+32+8+2+1=+171
+*** El valor de 0b101010101 es -171
+
+* Si la representación de -123 es 0b100000101 ¿cual es la de '+123' ?
+** C2(0b100000101)=0b011111011 representa el valor '+123'
+
+
+=== Número en complemento a 2 y base hexadecimal
+
+CAUTION: Un número
+ binario se puede representar en hexadecimal y hacer la interpretación en complento a 2. Hay que tener cuidado con las extensiones del signo
+
+* Calcular el valor del número 0xAAA si dicho número tiene formato en complemento a 2
+** si lo convertimos a binario el número empieza por 1, luego es negativo
+** para saber su valor calculo su complementario C2 y tendré la representación del positivo
+*** 0x000-0xAAA =0x556 -> 5*16^2^+5*16^1^+5*16^0^ = 5*256+5*16+5 = 1280+80+5 = '+213' -> 0xAAA tiene de valor -213
+
+=== Número en complemento a 2 y base hexadecimal
+
+* Realizar la suma de los números en formato complemento a 2: 0x80+0x80
+** sumar sin extender el signo de los operandos ¿Hay overflow?
++
+
+CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
++
+
+* sumar extendiendo un dígito el signo de los operandos 0x80
+
+
+[state=taula_ta]
+=== Extensión del signo en C2: problema de la BASE
+
+
+
+.Extensión del Signo del Nº 0x80 en C2 en binario, hexadecimal y octal
+
+[width=80%,cols="^1,2*<3"]
+|===
+|  NºBits | Binario | Hexadecimal 
+|  8 |     10000000 |           1000_0000 ->   0x80 
+|  9 |    110000000 |      1111_1000_0000 ->  0xF80 
+| 10 |   1110000000 |      1111_1000_0000 ->  0xF80
+| 11 |  11110000000 |      1111_1000_0000 ->  0xF80 
+| 12 | 111110000000 |      1111_1000_0000 ->  0xF80 
+| 13 |1111110000000 | 1111_1111_1000_0000 -> 0xFF80 
+|===
+
+
+
+
+[#op_ent]
+=== Operaciones Aritméticas con los números ENTEROS
+
+
+=== Operaciones Aritméticas: Suma y Resta
+
 
 [.columns, state=txiki]
 === Operaciones aritméticas en C2
 
 [.column]
 * Suma
-** Se realiza como se ha visto para números naturales. 
-** Si hay llevada en el MSBit, no se tiene en cuenta, se elimina.
+** Se realiza de la misma manera como se ha visto para números naturales. 
+** Si hay llevada en el MSBit, NO se tiene en cuenta, se elimina.
 ** A=0b11011011. Suma A+A
 +
 
@@ -1090,22 +1177,6 @@ Si a 010 le sumamos el valor 2 nos da como resultado 100
 Por lo tanto 010+010=100, es decir, 2+2=-4 -> *overflow* ya que el _+4_ necesita 4 bits y estamos trabajando con 3 bits únicamente.
 
 
-=== Asimetría del rango en C2: -4 con 3 bits
-
-* Con números de 3 bits los formatos S-M y C1 son simétricos con valores en el rango (+3,-3), en cambio el formato C2 tiene el rango (+3,-4)
-* En C2 el valor +4 se representa como 0b0100 y necesita por lo tanto 4 bits, no se puede representar con 3 bits, y el valor -4 se reprenta con el C2(0100), es decir, 1100 también con 4 bits. El 1100 se puede comprimir ya que tiene el signo extendido con la repetición de 1 de bit más significativo, por lo que la representación 100 es la representación del -4
-
-=== Complemento a 2 : Ejemplos
-
-* 0b101010101 está en C2 -> ¿Cual es su valor?
-** como es negativo no es un sistema posicional
-** tenemos que calcular el valor negativo a través del valor positivo
-** La representación del valor positivo es el C2 del valor negativo
-*** C2(0b101010101) = 0b010101011 cuyo valor es 2^7^+2^5^+2^3^+2^1^+2^0^=128+32+8+2+1=+171
-*** El valor de 0b101010101 es -171
-
-* Si la representación de -123 es 0b100000101 ¿cual es la de '+123' ?
-** C2(0b100000101)=0b011111011 representa el valor '+123'
 
 === Aritmética Modular de valores representados en Complemento a 2
 
@@ -1120,123 +1191,435 @@ A partir de la posición 110 si nos movemos en sentido antihorario (RESTA modula
 Los errores de *overflow* se resuelven aumentando el número de bits de la representación, pero siempre existira un rango que si lo traspasamos dará overflow.
 
 [state=taula]
-=== Comparación S-M, C1 y C2
+=== Comparación S-M, y C2
 
 .Números de 3 bits
-[width=80%,cols="4*^"]
+[width=80%,cols="3*^"]
 |===
-|Valor|S-M| C1 | C2
+|Valor|S-M| C2
 
-|+3| 011 |011|011
-|+2| 010 |010|010
-|+1| 001 |001|001
-.2+|0 | 000 |000|000
-| 100 |011| ---
-|-1 | 101 |110|111
-|-2 | 110 |101|110
-|-3 | 111 |100|101
-|-4 | - | - | 100
+|+3| 011 |011
+|+2| 010 |010
+|+1| 001 |001
+.2+|0 | 000| 000
+| 100 |---
+|-1 | 101 |111
+|-2 | 110 |110
+|-3 | 111 |101
+|-4 | - | 100
+|===
+
+
+[#op_log]
+=== Operaciones Lógicas
+
+* Operadores
+** Operadores aritméticos: suma, resta, multiplicación, ...
+** Operadores lógicos: or (suma), and (producto), negación, or exclusiva, etc...
+** Operadores comparadores: > (..mayor que..), > (..menor que..), == (..igual a..), etc
+** Operadores de desplazamiento: >> (desplazar hacia la derecha), << (desplazar hacia la izquierda)
+
+[.columns, state=taula_ta]
+=== Tablas de la Verdad de los operadores NOT, OR, AND, XOR
+
+[.column]
+.NOT
+|===
+|x|z=x&#773;
+|0|1
+|1|0
+|===
+
+
+[.column]
+.OR
+[cols="2*^1,^2"]
+|===
+|x|y|z = x + y
+|0|0|0
+|0|1|1
+|1|0|1
+|1|1|1
+|===
+
+[.column]
+.AND
+[cols="2*^1,^2"]
+|===
+|x|y|z = x &#8729; y
+|0|0|0
+|0|1|0
+|1|0|0
+|1|1|1
+|===
+
+[.column]
+.XOR
+[cols="2*^1,^2"]
+|===
+|x|y|z = x &#8853; y
+|0|0|0
+|0|1|1
+|1|0|1
+|1|1|0
 |===
 
 
 
-=== Número en complemento a 2 y base hexadecimal
 
-CAUTION: Un número
- binario se puede representar en hexadecimal y hacer la interpretación en complento a 2. Hay que tener cuidado con las extensiones del signo
 
-* Calcular el valor del número 0xAAA si dicho número tiene formato en complemento a 2
-** si lo convertimos a binario el número empieza por 1, luego es negativo
-** para saber su valor calculo su complementario C2 y tendré la representación del positivo
-*** 0x000-0xAAA =0x556 -> 5*16^2^+5*16^1^+5*16^0^ = 5*256+5*16+5 = 1280+80+5 = '+213' -> 0xAAA tiene de valor -213
+[#Tema5_RepInstrucciones]
+== Representación Digital de la Información: las INSTRUCCIONES
 
-=== Número en complemento a 2 y base hexadecimal
+[.columns,state=txikiago]
+=== Registro
 
-* Realizar la suma de los números en formato complemento a 2: 0x80+0x80
-** sumar sin extender el signo de los operandos ¿Hay overflow?
+[.column]
+* Un registro es un circuito que funciona como una unidad de memoria y que almacena un único dato o una instrucción máquina.
+* Los registros:
+** 'almacenan' una palabra formada por una secuencia de bits.
+** son una array de celdas en una dimensión, donde cada celda almacena un bit.
+* Su tamaño normalmente es un múltiplo de 8 bytes y recibe un nombre para poder ser referencia, por ej RAX
+** 8 bits: 1 Byte
+** 16 bits: Word. Por razones históricas.(recordad que el tamaño de una palabra en otro contexto depende de la máquina de que se trate)
+
+
+
+[.column]
+* .
+** 32 bits: double word
+** 64 bits: quad word
+* Las celdas se enumeran empezando por cero. 
+* LSB: Least Significant Bit es el bit de menor peso  
+* MSB: Most Significant Bit es el bit de mayor peso
 +
 
-CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
+image::eecc_tema5_register.svg[]
+
+
+=== Lenguaje RTL: operador transferencia
+
+* El lenguaje RTL es un Lenguaje para la descripción de INSTRUCCIONES MAQUINA: Register Transfer Language (RTL)
+
+* El lenguaje RTL tiene como objetivo poder expresar las instrucciones máquina que ejecuta la CPU como sumar(ADD),restar(SUB),mover(MOV), etc. La descripción se realiza a nivel de transferencia de datos entre 'registros' internos de la CPU o entre registros internos y la memoria externa. 
+
+* La operación de *transferencia* se representa con una flecha de derecha a izquierda
+** Operador transferencia <-
+** Sentencia transferencia: R2<-R1
+** A R1 se le llama registro fuente y a R2 registro destino
+** Interpretación: Copiamos o Transferimos el contenido del registro R1 en el registro R2
+
+=== Lenguaje RTL: otras sentencias
+
+--
+Sentencia Condicional: +
+If (K1=1) then R2<-R1 +
+  K1:R2<-R1 +
+  La transferencia o copia se realiza únicamente si K1 es verdad, es decir, si K1 vale el valor lógico 1 (TRUE).
+ +
+ +
+Sentencia Concurrente: +
+Operador coma +
+ K3:R2<-R1,R3<-R1 +
+ Si K3 es verdad el contenido de R1 se copia en R2 y R3
+--
+
+
+[state=txikiago]
+=== Sintaxis de las instrucciones en el lenguaje INTEL 
+
+
+* El formato de las instrucciones en lenguaje ensamblador se conoce como 'sintaxis' de las instrucciones.
+* SINTAXIS ASM: Etiqueta-Código de Operación- Operando1- Operando2- Comentario
+* Arquitecturas x86-64 y x86 
 +
 
-* sumar extendiendo un dígito el signo de los operandos 0x80
+.Sintaxis Intel: Estructura
+[width="100%", cols="<2m,<4m,<6m,<1m,<5m,<3m"]
+|=====================================================
+|label: |op_mnemonic |operand_destination |, | operand_source |#comment
+|=====================================================
 
 
-[state=taula_ta]
-=== Extensión del signo en C2: problema de la BASE
+[state=txikia]
+=== Sintaxis de las instrucciones en el lenguaje INTEL : Ejemplo
+
+* Ejemplo:
++
+
+----
+bucle:  sub     rsp,16                ;RSP <- RSP-16. Resta
+        je      bucle                 ;je: jump equal: 
+                                      ;salto si la última operación dió resultado cero
+suma:   add     eax,esi               ;EAX <- EAX+M[ESI] . Sumar
+        mov     ax,[resultado]        ;AX <- M[resultado]. 
+                                      ;Copiar en el registro AX el contenido de la posición de memoria resultado       
 
 
+resultado: "reserva de memoria"
+----
 
-.Extensión del Signo del Nº 0x80 en C2 en binario, hexadecimal y octal
-
-[width=80%,cols="^1,3*<3"]
-|===
-|  NºBits | Binario | Hexadecimal | Octal
-
-|  8 |     10000000 |           1000_0000 ->   0x80 |         110_000_000 ->  0o600
-|  9 |    110000000 |      1111_1000_0000 ->  0xF80 |         110_000_000 ->  0o600
-| 10 |   1110000000 |      1111_1000_0000 ->  0xF80 |     111_110_000_000 -> 0o7600
-| 11 |  11110000000 |      1111_1000_0000 ->  0xF80 |     111_110_000_000 -> 0x7600
-| 12 | 111110000000 |      1111_1000_0000 ->  0xF80 |     111_110_000_000 -> 0x77600
-| 13 |1111110000000 | 1111_1111_1000_0000 -> 0xFF80 | 111_111_110_000_000 -> 0x77600
-|===
-
-
-[#C1_suma-resta]
-[state=txikiago]
-=== Suma y Resta aritmética en C1
-
-[%hardbreaks]
--Ejemplos con datos de 4 bits -> Rango (-7,+7). +
--¿Qué ocurre si *sumamos* dos números sin que haya overflow?.
-- Primer caso: dos operandos positivos 0011+0011=0110 -> correcto.
-- Segundo caso: dos operandos negativos donde todas ellas tienen acarreo en el MSB
---- 1111+1111=1110 -> 0+0=-1  ; 1100+1100=1000 -> -3-3=-7. ; 1100+1011=0111 -> -3-3=+7.
---- el valor del resultado siempre da una *unidad menor* y siempre hay acarreo en el MSB.
---- Solución: la suma en C1 es la suma de los sumandos *más el acarreo MSB*.
---- 1111+1111=1110+1 -> 0  ; 1100+1100=1000+1 -> -6 ; 1100+1011=0111+1=1000 -> -7.
--¿Qué ocurre si *restamos* dos números?.
---- El resultado es correcto si no hay acarreo MSB.
---- Si hay acarreo la resta da una *unidad mayor*, por lo tanto el resultado es la resta *menos uno*.
---- El resultado es la resta *menos el acarreo MSB*.
-
-
-
--Caso de overflow: el resultado es incorrecto por limitación del tamaño de los datos
 
 
 [state=txikiago]
-=== Suma aritmética en C1
+=== Sintaxis de las instrucciones en el lenguaje de la compañía telefónica AT&T
 
 
-.Razonamiento
+* SINTAXIS ASM: Etiqueta-Código de Operación- Operando1- Operando2- Comentario
+* Arquitecturas x86-64 y x86 
++
 
-image::tema2_c1_suma.png[]
+.Sintaxis AT&T: Estructura
+[width="100%", cols="<2m,<4m,<6m,<1m,<5m,<3m"]
+|=====================================================
+|label: |op_mnemonic |operand_source |, | operand_destination |#comment
+|=====================================================
 
-[%hardbreaks]
-Si nos fijamos en los números negativos su valor esta [verde]#desplazado una unidad# de la rueda hacia la izda: el valor cero está en la marca [verde]#1# de la rueda, el valor -1 está en la marca [verde]#2# de la rueda, etc. El valor representado por el segmento perimetral de la circunferencia tiene una unidad inferior: el valor -1 tiene un segmento de [verde]#2# marcas del [verde]#0# hacia la izda.
-El segmento o distancia del cero (1111) es [verde]#UNO#, el del -1 es DOS, el del -2 es TRES.....
+* La gran diferencia con el lenguaje de Intel son el orden de los dos operandos
+* Otra pequeña diferencia son los prefijos de los operandos para indicar el modo de direccionar el operando
+
+[state=txikia]
+=== Sintaxis de las instrucciones en el lenguaje AT&T : Ejemplo
+
+* Ejemplo:
++
+
+----
+bucle:  sub     $16,%rsp              ;RSP <- RSP-16. Resta
+        je      bucle                 ;je: jump equal: 
+                                      ;salto si la última operación dió resultado cero
+suma:   add     %esi,%eax             ;EAX <- EAX+M[ESI] . Sumar
+        mov     resultado,%ax         ;AX <- M[resultado]. 
+                                      ;Copiar en el registro AX el contenido de la posición de memoria resultado       
+
+resultado: "reserva de memoria"
+----
 
 
 
-=== Suma aritmética en C1
+=== Sintaxis AT&T
+
+La sintaxis del lenguaje ensamblador depende del "traductor" del proceso de ensamblaje (*assembler*) utilizado, en este caso, se utiliza el assembler GAS.
+
+....
+ETIQUETA: Se especifica en la primera columna. Tiene el sufijo ":" 
+CODIGO DE OPERACION: Se utilizan símbolos mnemónicos que ayudan a interpretar intuitivamente la operación.
+		 Pej: ADD sumar, MOV mover, SUB restar, …​ 
+OPERANDO FUENTE Y/O DESTINO: 
+  dato alfanumérico: representación alfanumérica → 16 
+    direccionamiento inmediato: prefijo $ 
+  dirección de memoria externa: etiqueta → resultado 
+    direccionamiento directo 
+  registros internos de la CPU: %rax,%rbx,%rsp,%esi,.. 
+    El prefijo "%" significa que el nombre hace referencia a un registro 
+  tamaño del dato operando: sufijos de los mnemónicos: 
+		q(quad):8 bytes, l(long):4 bytes, w(word):2 bytes, b(byte):1 byte. 
+    Sin sufijo se toma la limitación del tamaño del registro referenciado
+    y si no hay limitación el traductor avisa del error 
+....
+
+[state=txikiago]
+=== Operandos: Modo de Direccionamiento
 
 
-.Ejemplos a completar para A=2 y B=5
+* Direccionamientos:
++
 
-image::tema2_c1_suma-resta.png[]
+[.text-left%hardbreaks]
+INMEDIATO: El valor del operando está ubicado inmediatamente después del código de operación de la instruccion. Unicamente se especifica el operando fuente.
+    sintaxis: el valor del operando se indica con el prefijo *$* .
+        ejemplo: *movl $0xabcd1234, %ebx*. El operando fuente es el valor 0xABCD1234
+ +
+ REGISTRO: El valor del operando está localizado en un registro de la CPU.
+    sintaxis: Nombre del registro con el prefijo *%*.
+        ejemplo: *movl %eax, %ebx*. El operando fuente es el REGISTRO EAX y el destino es el REGISTRO EBX
+ +
+DIRECTO:  La dirección efectiva apuntando al operando almacenado en la Memoria Principal es la dirección absoluta referenciada por la etiqueta especificada en el campo de operando. El programador utiliza el direccionamiento directo pero el compilador lo transforma en un direccionamiento relativo al contador de programa. Ver direccionamiento con desplazamiento.
+    sintaxis: una etiqueta definida por el programador 
+	ejemplo: *je somePlace*   . Salto a la dirección marcada por la etiqueta somePlace si el resultado de la operación anterior activa el flag ZF=1 del registro RFLAG.
+ +
+INDEXADO: El valor del operando está localizado en memoria. La dirección efectiva apuntando a Memoria es la SUMA del valor del registro_base MAS scale POR el valor en el registro_índice, MAS el offset. 'EA=Offset+R_Base+R_índice*Scale'
+    sintaxis: lista de valores separados por coma y entre paréntesis (base_register, index_register, scale) y precedido por un offset.
+        ejemplo: *movl $0x6789cdef, -16(%edx, %eax, 4)* . La dirección efectiva del destino es  *EDX + EAX*4 - 16*.
 
 
 [state=txikiago]
-=== Suma y Resta aritmética en C1
+=== Operandos: Modo de Direccionamiento
 
-* Ej_1: suma: no hay conflicto -> 2+5=7 -> 0010+0101=0111
-* Ej_2: suma: sí hay conflicto : el segmento B por ser negativo tiene un segmento superior en una unidad, por lo que a la suma hay que *sumarle 1* -> -2+(-5)=-7 -> 1101+1010=0111 y acarreo_MSB -> 0111+1=1000 -> -7
-* Ej_3: suma
-** si la flecha B cruza el cero (1111), el segmento B, por ser negativa tiene un segmento mayor en 1, compensa el desplazamiento entre ceros y la suma es correcta. -> 2+(-5)=-3 -> 0010+1010=1100 -> -3
-** si la flecha B no cruza el cero (1111), a la suma hay que *sumarle 1*
-* Ej_4: resta
-** si la flecha B cruza el cero (1111), B por ser positivo no compensa el desplazamiento entre ceros. A la resta hay que *restarle 1* -> 2-(+5)=-3 -> 0010-0101=1101 y acarreo_MSB -> 1101-1=1100 -> -3
-* Ej_5: resta: no cruza el cero (1111), B por ser negativo tiene un segmento mayor en 1. A la resta hay que *restarle 1* -> 2-(-5)=+7 -> 0010-1010=1000 y acarreo_MSB -> 1000-1=0111 ->+7
+
+* Direccionamientos:
++
+
+[.text-left%hardbreaks]
+INDIRECTO: Si  el modo general de indexación  lo particularizamos en +(base_register)+ entonces la dirección del operando no se obtiene mediante una indexación sino que la dirección efectiva es el contenido de rdx y por lo tanto se accede al operando indirectamente.
+    sintaxis:  (base_register)
+        ejemplo: *movl $0x6789cdef, (%edx)* . La dirección efectiva del destino es  EDX. EDX es un puntero.
+ +
+RELATIVO: registro base más un offset:  El valor del operando está ubicado en memoria. La dirección efectiva del operando es la suma del valor contenido en un registro base más un valor de offset.
+  	sintaxis: registro entre paréntesis y el offset inmediatamente antes del paréntesis.
+      	ejemplo: *movl $0xaabbccdd, -12(%eax)*  . La dirección efectiva del operando destino es  EAX-12 
+
+
+[state=taula]
+=== Modos de direccionar los operandos: Ejemplos
+
+.Modos de Direccionamiento de los Operandos
+[width="100%",cols="<1m,<1m,<1m",options="header"]
+|====
+|Direccionamiento Operando | Valor Operando | Nombre del Modo
+|$0   | Valor Cero   | Inmediato
+|%rax | RAX | Registro
+|loop_exit | M[loop_exit] | Directo
+|data_items(,%rdi,4) | M[data_item + 4*RDI] | Indexado
+|(%rbx) | M[RBX] | Indirecto
+|(%rbx,%rdi,4) | M[RBX + 4*RDI] | Indirecto Indexado
+|====
+
+* M[loop_exit]: directo ya que loop_exit es una dirección de memoria externa y M indica la memoria externa.
+* M[RBX]: indirecto ya que RBX es una dirección de memoria interna y M indica memoria externa: A la mem. externa se accede a través de la mem. interna.
+
+=== Programa sum1toN: Organigrama
+
+* Calcular la suma de los 5 primeros números naturales
+
+
+image::sum1toN_organigrama.png[]
+
+=== Programa sum1toN en lenguaje C
+
+[source,c]
+---------
+/*
+  Programa:       sum1toN.c
+  Descripción:    realiza la suma de la serie 1,2,3,...N
+                  
+  Arquitectura del Procesador: La programación de este algoritmo en lenguaje C NO DEPENDE de la arquitectura del pocesador ¿Por qué y Cómo es posible?
+  Lenguaje:       C99
+  Descripción:    Suma de los primeros 5 números naturales
+  Entrada:        Definida en una variable
+  Salida:         Sin salida
+  Compilación:    gcc -m32 -g -o sum1toN sum1toN.c -> -g: módulo binario depurable
+                                                   -> -m: módulo binario arquitectura x86-32 bits
+  S.O:            GNU/linux 4.10 ubuntu 17.04 x86-64
+  Librería:       /usr/lib/x86_64-linux-gnu/libc.so
+  CPU:            Intel(R) Core(TM) i5-6300U CPU @ 3.0GHz
+  Compilador:     gcc version 6.3 
+  Ensamblador:    GNU assembler version 2.28
+  Linker/Loader:  GNU ld (GNU Binutils for Ubuntu) 2.28
+  Asignatura:     Estructura de Computadores
+  Fecha:          20/09/2017
+  Autor:          Cándido Aramburu
+*/
+
+#include <stdio.h>  // cabecera de la librería de la función printf()
+
+// función de entrada al programa
+void  main (void)
+{
+  // Declaración de variables locales
+  char suma=0;
+  char n=0b101;	
+  // bucle
+  while(n>0){
+    suma+=n;
+    n--;
+  }
+ printf("\n La suma es = %d \n",suma);
+}
+---------
+
+
+
+
+=== Programa sum1toN para la máquina x86 en lenguaje AT&T  
+ 
+
+* Lenguaje ensamblador ATT para la arquitectura x86-32
++
+
+[source,asm]
+----
+### Programa: sum1toN.s
+### Descripción: realiza la suma de la serie 1,2,3,...N
+### Arquitectura del Procesador: x86 32 bits
+### gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
+### Ensamblaje as --32 --gstabs fuente.s -o objeto.o
+### linker -> ld -melf_i386 -I/lib/i386-linux-gnu/ld-linux.so.2   -o ejecutable objeto.o -lc
+
+        ##  Declaración de variables
+        .section .data
+
+n:	.int 5
+       
+        .global _start
+
+        ##  Comienzo del código
+        .section .text
+_start:
+        mov $0,%ecx # ECX implementa la variable suma
+        mov n,%edx
+bucle:
+        add %edx,%ecx
+        sub $1,%edx
+        jnz bucle
+       
+        mov %ecx, %ebx # el argumento de salida al S.O. a través de EBX según convenio
+                
+        ## salida
+        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
+        int $0x80     # llamada al sistema operativo
+
+        
+        .end
+----
+
+
+
+=== Programa sum1toN para la máquina x86 en lenguaje Intel 
+ 
+
+* Lenguaje ensamblador INTEL y assembler nasm
++
+
+[source,nasm]
+----
+;;; Programa: sum1toN.asm
+;;; Descripción: realiza la suma de la serie 1,2,3,...N
+;;; Arquitectura del Procesador: x86 32 bits
+;;; Lenguaje INTEL
+;;; Assembler NASM
+
+;;; nasm -hf -> ayuda de la opción f 
+;;; Ensamblaje nasm -g -f elf  sum1toN.asm -o sum1toN.o
+;;; linker -> ld -m elf_i386    -o sum1toN sum1toN.o 
+
+	BITS 32	; cpu MODE
+        ;;  Declaración de variables
+        section .data
+
+n:	dd 5	; 4 bytes
+       
+        global _start
+
+        ;;  Comienzo del código
+        section .text
+_start:
+        mov ecx,0 ; ECX implementa la variable suma
+        mov edx,[n]  ; EDX implementa es un alias de la variable n
+bucle:
+        add ecx,edx
+        sub edx,1
+        jnz bucle
+       
+        mov ebx, ecx ; el argumento de salida al S.O. a través de EBX según convenio
+                
+        ;; salida
+        mov eax,1  ; código de la llamada al sistema operativo: subrutina exit
+        int 0x80     ; llamada al sistema operativo
+----
+
+
+
+
 
 
