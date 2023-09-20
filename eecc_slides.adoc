@@ -1499,7 +1499,7 @@ image::sum1toN_organigrama.png[]
   Entrada:        Definida en una variable
   Salida:         Sin salida
   Compilación:    gcc -m32 -g -o sum1toN sum1toN.c -> -g: módulo binario depurable
-                                                   -> -m: módulo binario arquitectura x86-32 bits
+                                                   -> -m32: módulo binario arquitectura x86-32 bits
   S.O:            GNU/linux 4.10 ubuntu 17.04 x86-64
   Librería:       /usr/lib/x86_64-linux-gnu/libc.so
   CPU:            Intel(R) Core(TM) i5-6300U CPU @ 3.0GHz
@@ -1542,9 +1542,11 @@ void  main (void)
 ### Programa: sum1toN.s
 ### Descripción: realiza la suma de la serie 1,2,3,...N
 ### Arquitectura del Procesador: x86 32 bits
-### gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
-### Ensamblaje as --32 --gstabs fuente.s -o objeto.o
-### linker -> ld -melf_i386 -I/lib/i386-linux-gnu/ld-linux.so.2   -o ejecutable objeto.o -lc
+### Compilación
+###     gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
+### o como alternativa
+###     Ensamblaje as --32 --gstabs sum1toN.s -o sum1toN.o
+###     linker -> ld -melf_i386 -I/lib/i386-linux-gnu/ld-linux.so.2   -o sum1toN sum1toN.o -lc
 
         ##  Declaración de variables
         .section .data
@@ -1620,6 +1622,12 @@ bucle:
 
 
 
+==  Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.
 
 
+=== Ejercicios
 
+*  link:./as_code/sum1toN.s[sum1toN.s]
+*  link:./as_code/sum1toN_v2.s[sum1toN_v2.s]
+*  link:./as_code/sum1toN_v3.s[sum1toN_v3.s]
+*  link:./as_code/sum1toN_v4.s[sum1toN_v4.s]
