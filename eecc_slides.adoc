@@ -1653,12 +1653,12 @@ bucle:
 ** Registro de estado o registro de flags
 ** Direccionamiento de la memoria principal
 ** Diferencia entre la memoria interna (registros) y la memoria externa (memoria principal)
-** Tipos de datos y su formato
-** Tamaño de los operandos
-** Alineamiento de los datos en la memoria
-** Modos de direccionamiento
-** Sintaxis del lenguaje
-** Directivas del traductor assembler
+** Tipos de datos y su formato: enteros complemento a 2
+** Tamaño de los operandos: sufijos b,w,l,q de los mnemónicos
+** Alineamiento de los datos en la memoria: little endian
+** Modos de direccionamiento: inmediato, directo, etc
+** Sintaxis del lenguaje "AT&T"
+** Directivas del traductor assembler "as"
 
 [status=txikia]
 === Ejercicios
