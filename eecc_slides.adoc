@@ -68,6 +68,7 @@ Tema 2: <<Tema2_VonNeum, Arquitectura de Von Neumann.>>
 Tema 3: Representación Digital de la Información: los Datos: <<ascii,ASCII >>, <<num_nat, Nº Naturales>>, <<num_ent, Nº Enteros>>
 Tema 4: Operaciones Aritméticas y Lógicas: <<op_nat, Nº Naturales>>, <<op_ent, Nº Enteros>>, <<op_log, Operaciones Lógicas>>   
 Tema 5: <<Tema5_RepInstrucciones, Representación Digital de la Información: las Instrucciones.>>
+Tema 6: <<Tema5_RepInstrucciones, Representación Digital de la Información: las Instrucciones.>>
 
 [#Tema1_Intro]
 [.columns]
@@ -1460,6 +1461,17 @@ RELATIVO: registro base más un offset:  El valor del operando está ubicado en 
       	ejemplo: *movl $0xaabbccdd, -12(%eax)*  . La dirección efectiva del operando destino es  EAX-12 
 
 
+[state=txikiago]
+=== Operandos: Modo de Direccionamiento
+
+
+* Direccionamientos *prohibidos*
+** En la misma instrucción los campos operando fuente y el operando destino no pueden hacer referencia a direcciones de memoria
+* Ejemplos de direccionamientos prohibidos ó erróneos:
+** mov dato,suma -> siendo dato y suma dos direcciones de la memoria
+** mov (%edx),suma -> siendo EDX un puntero a memoria y suma una dirección de memoria
+
+
 [state=taula]
 === Modos de direccionar los operandos: Ejemplos
 
@@ -1624,10 +1636,39 @@ bucle:
 
 ==  Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.
 
+=== Arquitecturas x86 i386 x86-64 amd64 
+
+*  La arquitectura de Intel x86 de 32 bits  comenzó en el año 1985 con el microprocessador 80386 qué más adelante fue renuraombrado como "i386"
+* x86-64 (también conocido como x64, x86_64, AMD64 e Intel 64) es la versión de 64 bits del conjunto de instrucciones x86. La especificación fue creada por AMD
+* Linux denomina a la arquitectura x86 como i386 y a la arquitectura x86-64 como amd64.
+* En esta asignatura se va a trabajar principalmente con la arquitectura x86 ya que las prácticas se realizan en esta arquitectura de 32 bits.
+
+=== ISA x86
+
+* El objetivo de este capítulo es tener las conocimientos necesarios para la programación de bajo de nivel (lenguaje ensamblador) de la arquitectura de 32 bits de Intel: x86
+* El programador de bajo de nivel necesita el conocimiento de la ISA, es decir:
+** Registros de propósito general internos de la CPU
+** Registro de estado o registro de flags
+** Direccionamiento de la memoria principal
+** Diferencia entre la memoria interna (registros) y la memoria externa (memoria principal)
+** Tipos de datos y su formato
+** Tamaño de los operandos
+** Alineamiento de los datos en la memoria
+** Modos de direccionamiento
+** Sintaxis del lenguaje
+** Directivas del traductor assembler
+
 
 === Ejercicios
 
 *  link:./as_code/sum1toN.s[sum1toN.s]
+** Programa inicial de referencia
+** sección de datos y sección de instrucciones: directivas .section  .data y .section .text
+** direccionamientos: inmediato, a registro y directo
+** estructura de un bloque: saltos incondicionales y condicionales
+** llamada a funciones del sistema operativo y paso del argumento por registro
 *  link:./as_code/sum1toN_v2.s[sum1toN_v2.s]
+** Declaración de variables: En la sección de datos reservar memoria para el dato e inicializarlo. Directivas .byte, 2byte, 4byte
+** instrucción de salto condicional: jnz ó jne
 *  link:./as_code/sum1toN_v3.s[sum1toN_v3.s]
 *  link:./as_code/sum1toN_v4.s[sum1toN_v4.s]
