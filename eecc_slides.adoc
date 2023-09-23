@@ -1643,6 +1643,7 @@ bucle:
 * Linux denomina a la arquitectura x86 como i386 y a la arquitectura x86-64 como amd64.
 * En esta asignatura se va a trabajar principalmente con la arquitectura x86 ya que las prácticas se realizan en esta arquitectura de 32 bits.
 
+[status=txikia]
 === ISA x86
 
 * El objetivo de este capítulo es tener las conocimientos necesarios para la programación de bajo de nivel (lenguaje ensamblador) de la arquitectura de 32 bits de Intel: x86
@@ -1659,7 +1660,7 @@ bucle:
 ** Sintaxis del lenguaje
 ** Directivas del traductor assembler
 
-
+[status=txikia]
 === Ejercicios
 
 *  link:./as_code/sum1toN.s[sum1toN.s]
@@ -1669,8 +1670,17 @@ bucle:
 ** estructura de un bloque: saltos incondicionales y condicionales
 ** etiqueta global
 ** llamada a funciones del sistema operativo y paso del argumento por registro
+** comentarios en lenguaje C y pseudocódigo
+
+
+[status=txikia]
+=== Ejercicios
 *  link:./as_code/sum1toN_v2.s[sum1toN_v2.s]
 ** Declaración de variables: En la sección de datos reservar memoria para el dato e inicializarlo. Directivas .byte, 2byte, 4byte
 ** instrucción de salto condicional: jnz ó jne
 *  link:./as_code/sum1toN_v3.s[sum1toN_v3.s]
+** Directiva .string: reserva de memoria e inicialización con caracteres ASCII
+** llamada a funciones de C como "puts()" y pase de argumentos a través de la pila
 *  link:./as_code/sum1toN_v4.s[sum1toN_v4.s]
+** llamada a la función de C "exit()"
+
