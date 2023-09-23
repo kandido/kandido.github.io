@@ -1,3 +1,5 @@
+<meta charset="UTF-8">
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
 ### Programa: sum1toN.s
 ### Descripción: realiza la suma de la serie 1,2,3,...5
 ### gcc -m32 -nostartfiles -o sum1toN sum1toN.s
