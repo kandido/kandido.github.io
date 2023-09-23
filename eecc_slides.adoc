@@ -1680,7 +1680,24 @@ bucle:
 ** instrucción de salto condicional: jnz ó jne
 *  link:./as_code/sum1toN_v3.s[sum1toN_v3.s]
 ** Directiva .string: reserva de memoria e inicialización con caracteres ASCII
-** llamada a funciones de C como "puts()" y pase de argumentos a través de la pila
+** llamada a funciones de la librería standard de C como "puts()" y pase de argumentos a través de la pila
 *  link:./as_code/sum1toN_v4.s[sum1toN_v4.s]
-** llamada a la función de C "exit()"
+** llamada a la función "exit()" de la librería standard de C 
+
+
+
+[status=txikia]
+=== Ejercicio
+*  link:./as_code/sum1toN_v5.s[sum1toN_v5.s]
+** Macros con la directiva .equ
+** Inicializar una array de datos con los diez primeros números enteros impares y sumarlos
+*  link:./as_code/sum1toN_v6.s[sum1toN_v6.s]
+** Macros con la directiva .equ
+** Inicializar una array de datos con los diez primeros números enteros impares y sumarlos
+** Bucle con la instrucción "cmp"
+** https://www.felixcloutier.com/x86[x86]: https://www.felixcloutier.com/x86/cmp[cmp] , https://www.felixcloutier.com/x86/jcc[jcc]
+** Visualizar el resultado con la función printf() de la librería standard de C
+** Pasar los dos argumentos a través de la pila insertando primero el último argumento printf(1º arg,2º arg) 
+*  link:./as_code/sum1toN_v7.s[sum1toN_v7.s]
+** Convertir el programa principal main en una función main() o subrutina
 
