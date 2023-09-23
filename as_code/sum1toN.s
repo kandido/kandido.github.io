@@ -1,5 +1,11 @@
-<meta charset="UTF-8">
-<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+</head>
+<body>
 ### Programa: sum1toN.s
 ### Descripción: realiza la suma de la serie 1,2,3,...5
 ### gcc -m32 -nostartfiles -o sum1toN sum1toN.s
@@ -33,5 +39,6 @@ fin:
                       # El argumento de la función exit se pasa a través de EBX
         int $0x80     # INTerrupción del programa sum1toN y llamada al Sistema Operativo
         .end
-
+</body>
+</html>
         
