@@ -68,7 +68,7 @@ Tema 2: <<Tema2_VonNeum, Arquitectura de Von Neumann.>>
 Tema 3: Representación Digital de la Información: los Datos: <<ascii,ASCII >>, <<num_nat, Nº Naturales>>, <<num_ent, Nº Enteros>>
 Tema 4: Operaciones Aritméticas y Lógicas: <<op_nat, Nº Naturales>>, <<op_ent, Nº Enteros>>, <<op_log, Operaciones Lógicas>>   
 Tema 5: <<Tema5_RepInstrucciones, Representación Digital de la Información: las Instrucciones.>>
-Tema 6: <<Tema5_RepInstrucciones, Representación Digital de la Información: las Instrucciones.>>
+Tema 6: <<Tema6_ProgAsm, Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel..>>
 
 [#Tema1_Intro]
 [.columns]
@@ -1633,7 +1633,7 @@ bucle:
 ----
 
 
-
+[#Tema6_ProgAsm]
 ==  Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.
 
 === Arquitecturas x86 i386 x86-64 amd64 
@@ -1646,6 +1646,7 @@ bucle:
 === ISA x86
 
 * El objetivo de este capítulo es tener las conocimientos necesarios para la programación de bajo de nivel (lenguaje ensamblador) de la arquitectura de 32 bits de Intel: x86
+* Fases en el proceso de traducción (compilación,ensamblaje, módulos fuente, módulo objeto, módulo ejecutable, enlazado,resolución de referencias, librerías, sistema operativo ,etc) del módulo fuente y carga en memoria del módulo ejecutable.  
 * El programador de bajo de nivel necesita el conocimiento de la ISA, es decir:
 ** Registros de propósito general internos de la CPU
 ** Registro de estado o registro de flags
@@ -1666,6 +1667,7 @@ bucle:
 ** sección de datos y sección de instrucciones: directivas .section  .data y .section .text
 ** direccionamientos: inmediato, a registro y directo
 ** estructura de un bloque: saltos incondicionales y condicionales
+** etiqueta global
 ** llamada a funciones del sistema operativo y paso del argumento por registro
 *  link:./as_code/sum1toN_v2.s[sum1toN_v2.s]
 ** Declaración de variables: En la sección de datos reservar memoria para el dato e inicializarlo. Directivas .byte, 2byte, 4byte
