@@ -407,7 +407,8 @@ document.getElementsByTagName( 'head' )[0].appendChild( link );</script><link re
 2 gaia: <a href="#Gaia2_VonNeum">Von Neuman-en arkitektura.</a><br>
 3 gaia: Informazioaren irudikapen digitala: datuak: <a href="#ascii">ASCII </a>, <a href="#num_nat">natural-zenbakia</a>, <a href="#num_ent">enteros-zenbakia</a><br>
 4 gaia: Eragiketa aritmetikoak eta logikoak: <a href="#op_nat">natura-zenbakia</a>, <a href="#op_ent">enteros-zenbakia</a>, <a href="#op_log">eragiketa logikoak</a><br>
-5 gaia: <a href="#Gaia5_RepArgibideak">Informazioaren irudikapen digitala: Instrukzioak.</a></p></div></div></section>
+5 gaia: <a href="#Gaia5_RepArgibideak">Informazioaren irudikapen digitala: Instrukzioak.</a><br>
+6 gaia: <a href="#Gaia6_AsmProg">Ensanbladore-lengoaiako programazioa (x86): Maila handiko lengoaietako oinarrizko eraikuntzak.</a></p></div></div></section>
 <section><section id="Gaia5_RepArgibideak"><h2>Informazioaren irudikapen digitala: JARRAIBIDEAK</h2></section><section id="_erregistroa" class="columns" data-state="txikiago"><h2>Erregistroa</h2><div class="slide-content"><div class="ulist column"><ul><li><p>Erregistro bat zirkuitu bat da, memoria-unitate bat bezala funtzionatzen duena eta datu bakar bat edo makina-instrukzio bat gordetzen duena.</p></li><li><p>Erregistroak:</p><div class="ulist"><ul><li><p>bit-sekuentzia batez osatutako hitz bat 'gordetzen' dute.</p></li><li><p>dimentsio bateko gelaxkak dira, eta gelaxka bakoitzak bit bat gordetzen du.</p></li></ul></div></li><li><p>Bere tamaina, normalean, 8 byteko multiplo bat da, eta izen bat jasotzen du erreferentzia izan ahal izateko, adibidez, RAX</p><div class="ulist"><ul><li><p>8 bit: 1 Byte</p></li><li><p>16 bit: Word. Arrazoi historikoengatik. (gogoratu hitz baten tamaina beste testuinguru batean dagokion makinaren araberakoa dela)</p></li></ul></div></li></ul></div>
 <div class="paragraph column"><p>*.
 <strong> 32 bit: double word
@@ -430,16 +431,16 @@ K3 egia bada, R1 edukia R2 eta R3 kopietan kopiatuko da
 ---</p></div></div></section><section id="_jarraibideen_sintaxia_intel_lengoaian" data-state="txikiago"><h2>Jarraibideen sintaxia INTEL lengoaian</h2><div class="slide-content"><div class="ulist"><ul><li><p>Jarraibideen formatuari, mihiztatze-lengoaian, jarraibideen "sintaxi" esaten zaio.</p></li><li><p>ASM SINTAXIA: Lan-Eragiketaren Kodea-Eragiketa-Eragiketa-Eragiketa-Iruzkina-</p></li><li><p>Arkitekturak x86-64 eta x86</p><table class="tableblock frame-all grid-all" style="width:100%"><caption class="title">Table 1. Sintel Axia: Egitura</caption><colgroup><col style="width:9.5238%"><col style="width:19.0476%"><col style="width:28.5714%"><col style="width:4.7619%"><col style="width:23.8095%"><col style="width:14.2858%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>label:</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>op_mnemonic</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>operand_destination</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>,</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>operand_source</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>#comment</code></p></td></tr></table></li></ul></div></div></section><section id="_jarraibideen_sintaxia_intel_lengoaian_adibidea" data-state="txikia"><h2>Jarraibideen sintaxia INTEL lengoaian: Adibidea</h2><div class="slide-content"><div class="ulist"><ul><li><p>Adibidea:</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-vhdl hljs" data-noescape="true" data-lang="vhdl">begizta: sub rsp, 16; RSP &lt; - RSP-16. Kenketa
          je bucle; je: jump equal:
                  ; jauzia, azken eragiketak zero emaitza izan bazuen
-batura: add eax, esi; EAX &lt; - EAX+M [ESI]. Batu
-        mov ax, [emaitza]; AX &lt; - M [emaitza].
+batura: add eax, esi; EAX &lt; - EAX+M[ESI]. Batu
+        mov ax,[emaitza]; AX &lt; - M[emaitza].
         ; AX erregistroan kopiatu emaitzaren memoria-posizioaren edukia
 
 
 emaitza: "memoria-erreserba"</code></pre></div></div></li></ul></div></div></section><section id="_jarraibideen_sintaxia_att_telefono_konpainiaren_hizkuntzan" data-state="txikiago"><h2>Jarraibideen sintaxia AT&amp;T telefono-konpainiaren hizkuntzan</h2><div class="slide-content"><div class="ulist"><ul><li><p>ASM SINTAXIA: Lan-Eragiketaren Kodea-Eragiketa-Eragiketa-Eragiketa-Iruzkina-</p></li><li><p>Arkitekturak x86-64 eta x86</p><table class="tableblock frame-all grid-all" style="width:100%"><caption class="title">Table 2. AT&amp;T sintaxia: Egitura</caption><colgroup><col style="width:9.5238%"><col style="width:19.0476%"><col style="width:28.5714%"><col style="width:4.7619%"><col style="width:23.8095%"><col style="width:14.2858%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>label:</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>op_mnemonic</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>operand_source</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>,</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>operand_destination</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>#comment</code></p></td></tr></table></li><li><p>Intelen lengoaiarekiko alde handia bi operandoen ordena da</p></li><li><p>Beste alde txiki bat operatuen aurrizkiak dira, eragiketa bideratzeko modua adierazteko</p></li></ul></div></div></section><section id="_jarraibideen_sintaxia_at_t_lengoaian_adibidea" data-state="txikia"><h2>Jarraibideen sintaxia AT &amp; T lengoaian: Adibidea</h2><div class="slide-content"><div class="ulist"><ul><li><p>Adibidea:</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-vhdl hljs" data-noescape="true" data-lang="vhdl">begizta: sub $16, %rsp; RSP &lt; - RSP-16. Kenketa
          je begizta ; je: jump equal:
                     ; jauzia, azken eragiketak zero emaitza izan bazuen
-batura:  add %esi, %eax; EAX &lt; - EAX+M [ESI]. Batu
-         mov emaitza, %ax; AX &lt; - M [emaitza] ; AX erregistroan kopiatu emaitzaren memoria-posizioaren edukia
+batura:  add %esi, %eax; EAX &lt; - EAX+M[ESI]. Batu
+         mov emaitza, %ax; AX &lt; - M[emaitza] ; AX erregistroan kopiatu emaitzaren memoria-posizioaren edukia
 
 emaitza: "memoria-erreserba"</code></pre></div></div></li></ul></div></div></section><section id="_att_sintaxia"><h2>AT&amp;T sintaxia</h2><div class="slide-content"><div class="paragraph"><p>Mihiztatze-lengoaiaren sintaxia mihiztatze-prozesuaren (<strong>assembler</strong>) "itzultzailearen" araberakoa da; kasu honetan, GAS assemblerra erabiltzen da.</p></div>
 <div class="literalblock"><div class="content"><pre>ETIKETA: Lehenengo zutabean zehazten da. Atzizkia du ":"
@@ -475,8 +476,8 @@ adibidez: <strong>mov $0x6789cdef, (%edx)</strong>. Helmugaren benetako helbidea
 <br>
 ERLATIBOA: oinarrizko erregistroa gehi offset bat: Eragingaiaren balioa memorian dago. Eragiketaren benetako helbidea oinarrizko erregistro batean jasotako balioaren eta offset balio baten arteko batura da.<br>
 sintaxia: parentesi eta offset arteko erregistroa parentesia baino lehen.<br>
-adibidez: <strong>mov $0xaabbccdd, -12(%eax)</strong>. Helmugako operazioaren benetako helbidea EAX-12 da.</p></div></li></ul></div></div></section><section id="_eragiketak_bideratzeko_moduak_adibideak" data-state="taula"><h2>Eragiketak bideratzeko moduak: Adibideak</h2><div class="slide-content"><table class="tableblock frame-all grid-all" style="width:100%"><caption class="title">Table 3. Eragingaiak helbideratzeko moduak</caption><colgroup><col style="width:33.3333%"><col style="width:33.3333%"><col style="width:33.3334%"></colgroup><thead><tr><th class="tableblock halign-left valign-top">Eragingai helbideratzea</th><th class="tableblock halign-left valign-top">Eragingai balioa</th><th class="tableblock halign-left valign-top">Motako izena</th></tr><tbody><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>$0</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Zero Balioa</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Berehalakoa</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>%rax</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>RAX</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Erregistroa</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>loop_exit</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>M [loop_exit]</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Zuzena</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>data_items (, %rdi, 4)</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>M [data_item + 4*RDI]</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Indexatua</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>( %rbx)</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>M [RBX]</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Zeharkakoa</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>( %rbx, %rdi, 4)</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>M [RBX + 4*RDI]</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Zeharkakoa Indexatua</code></p></td></tr></table>
-<div class="ulist"><ul><li><p>M [loop_exit]: zuzena, loop_exit kanpo-memoriaren helbidea baita, eta M-k kanpo-memoria adierazten baitu.</p></li><li><p>M [RBX]: zeharkakoa; izan ere, RBX barne-memoriaren helbide bat da, eta M-k kanpo-memoria adierazten du: Kanpo-memoriara barne-memoriatik sartzen da.</p></li></ul></div></div></section><section id="_sum1ton_programa_organigrama"><h2>Sum1toN programa: Organigrama</h2><div class="slide-content"><div class="ulist"><ul><li><p>Kalkulatu lehenengo 5 zenbaki arrunten batura</p></li></ul></div>
+adibidez: <strong>mov $0xaabbccdd, -12(%eax)</strong>. Helmugako operazioaren benetako helbidea EAX-12 da.</p></div></li></ul></div></div></section><section id="_eragiketak_bideratzeko_moduak_adibideak" data-state="taula"><h2>Eragiketak bideratzeko moduak: Adibideak</h2><div class="slide-content"><table class="tableblock frame-all grid-all" style="width:100%"><caption class="title">Table 3. Eragingaiak helbideratzeko moduak</caption><colgroup><col style="width:33.3333%"><col style="width:33.3333%"><col style="width:33.3334%"></colgroup><thead><tr><th class="tableblock halign-left valign-top">Eragingai helbideratzea</th><th class="tableblock halign-left valign-top">Eragingai balioa</th><th class="tableblock halign-left valign-top">Motako izena</th></tr><tbody><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>$0</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Zero Balioa</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Berehalakoa</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>%rax</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>RAX</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Erregistroa</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>loop_exit</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>M[loop_exit]</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Zuzena</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>data_items (, %rdi, 4)</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>M[data_item + 4*RDI]</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Indexatua</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>( %rbx)</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>M[RBX]</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Zeharkakoa</code></p></td></tr><tr><td class="tableblock halign-left valign-top"><p class="tableblock"><code>( %rbx, %rdi, 4)</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>M[RBX + 4*RDI]</code></p></td><td class="tableblock halign-left valign-top"><p class="tableblock"><code>Zeharkakoa Indexatua</code></p></td></tr></table>
+<div class="ulist"><ul><li><p>M[loop_exit]: zuzena, loop_exit kanpo-memoriaren helbidea baita, eta M-k kanpo-memoria adierazten baitu.</p></li><li><p>M[RBX]: zeharkakoa; izan ere, RBX barne-memoriaren helbide bat da, eta M-k kanpo-memoria adierazten du: Kanpo-memoriara barne-memoriatik sartzen da.</p></li></ul></div></div></section><section id="_sum1ton_programa_organigrama"><h2>Sum1toN programa: Organigrama</h2><div class="slide-content"><div class="ulist"><ul><li><p>Kalkulatu lehenengo 5 zenbaki arrunten batura</p></li></ul></div>
 <div class="imageblock"><img src="images/sum1toN_organigrama.png" alt="sum1toN organigrama"></div></div></section><section id="_sum1ton_programa_c_hizkuntzan"><h2>Sum1toN programa C hizkuntzan</h2><div class="slide-content"><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-c hljs" data-noescape="true" data-lang="c">/*
 Egitaraua: sum1toN.c
 Deskribapena: 1,2,3 seriearen batuketa egiten du,... N
@@ -487,7 +488,7 @@ Deskribapena: Lehenengo 5 zenbaki arrunten batura
 Sarrera: Aldagai batean zehaztuta
 Irteera: Irteerarik gabe
 Konpilazioa: gcc -m32 -g -o sum1toN sum1toN.c -&gt; -g: modulu bitar araztua
-- &gt; -m32: arkitektura modulu bitarra x86-32 bit
+                                              -&gt; -m32: arkitektura modulu bitarra x86-32 bit
 S.O: GNU/LINUX 4.10 ubuntu 17.04 x86-64
 Liburutegia:/usr/lib/x86_64-linux-gnu/libc.so
 PUZ: Intel (R) Core (TM) i5-6300U CPU @ 3.0GHz
@@ -505,27 +506,29 @@ Egilea: Candido Aramburu
 void main (void)
 {
 // Tokiko aldagaien deklarazioa
-  char suma = 0;
-  char n = 0b101;
+  char suma=0;
+  char n=0b101;
 // begizta
   while (n&gt;0) {
-    suma+ = n;
+    suma+= n;
    n--;
 }
   printf ("\n Batura da = %d\n", batura);
-}</code></pre></div></div></div></section><section id="_sum1ton_programa_x86_makinarako_at_t_lengoaian"><h2>Sum1toN programa x86 makinarako, AT &amp; T lengoaian</h2><div class="slide-content"><div class="ulist"><ul><li><p>ATT lengoaia mihiztatzailea arkitekturarako x86-32</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-asm hljs" data-noescape="true" data-lang="asm"># # #Programa: sum1toN.s
-# # #Deskribapena: 1,2,3 serie,... N
-# #Prozesadorearen arkitektura: x86 32 bit
-# #gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
-# # #Mihiztatzea --32 --gstabs fuente.s o objeto.o
-# # #linker -&gt; ld -melf_i386 -I/lib/i386-linux-gnu/ld-linux.so.2 edo objektua-lc exekutagarria
+}</code></pre></div></div></div></section><section id="_sum1ton_programa_x86_makinarako_at_t_lengoaian"><h2>Sum1toN programa x86 makinarako, AT &amp; T lengoaian</h2><div class="slide-content"><div class="ulist"><ul><li><p>ATT lengoaia mihiztatzailea arkitekturarako x86-32</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-asm hljs" data-noescape="true" data-lang="asm">###Programa: sum1toN.s
+###Deskribapena: 1,2,3 serie,... N
+##Prozesadorearen arkitektura: x86 32 bit
+##Konpilazioa:
+###      gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
+##edo alternatiba
+###      Mihiztatzea --32 --gstabs sum1toN.s o sum1toN.o
+###      Estekaketa-&gt; ld -melf_i386 -I/lib/i386-linux-gnu/ld-linux.so.2   -o sum1toN sum1toN.o -lc
 
 # #Aldagaien aitorpena
 	.section .data
 
-n: .int 5
+n: 	.int 5
 
-.globala _start
+.global _start
 
 ##Kodearen hasiera
 	.section .text
@@ -537,12 +540,12 @@ begizta:
 	$1, %edx
 	jnz begizta
 
-	mov %ecx,%ebx #el argumento de salida al S.O. a través de EBX según convenio
+	#Sistema Eragileara EBXren bidez irteteko argudioa hitzarmenaren arabera
+	mov %ecx,%ebx
 
-# #irteera
-	mov $1, %eax #sistema eragilerako deiaren kodea:
+##irteera
+	mov $1,%eax #sistema eragilerako deiaren kodea:
 	int $0x80 #sistema eragilerako deia
-
 
 .end</code></pre></div></div></li></ul></div></div></section><section id="_sum1ton_programa_x86_makinarako_intel_lengoaian"><h2>Sum1toN programa x86 makinarako, Intel lengoaian</h2><div class="slide-content"><div class="ulist"><ul><li><p>INTEL eta assembler nasm mihiztatzeko lengoaia</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-nasm hljs" data-noescape="true" data-lang="nasm">;;; Programa: sum1toN.asm
 ;;; Deskribapena: 1,2,3 seriearen batura egiten du,... N
@@ -558,25 +561,27 @@ BITS 32; CPU MODE
 ;;; Aldagaien aitorpena
 	section .data
 
-n: dd 5; 4 byte
+n: 	dd 5	; 4 byte
 
-globala _start
+global	_start
 
 ;; Kodearen hasiera
 	section .text
 _start:
-  mov ecx, 0; ECXk batura aldagaia inplementatzen du
-  mov edx, [n]; n aldagaiaren ezizena da EDX
-  begizta:
-  add ecx, edx
-  sub edx, 1
-  jnz begizta
+	mov ecx,0; ECXk batura aldagaia inplementatzen du
+  	mov edx,[n]; n aldagaiaren ezizena da EDX
+begizta:
+  	add ecx,edx
+  	sub edx,1
+  	jnz begizta
 
-  mov ebx, ecx ; S.O.ra EBXren bidez irteteko argudioa hitzarmenaren arabera
+	;Sistema Eragileara EBXren bidez irteteko argudioa hitzarmenaren arabera
+  	mov ebx,ecx
 
-;; irteera
-  mov eax, 1 ; sistema eragilerako deiaren kodea:
-  int 0x80 ; sistema eragilerako deia</code></pre></div></div></li></ul></div></div></section></section></div></div><script src="reveal.js/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
+	;; irteera
+  	mov eax,1 ; sistema eragilerako deiaren kodea
+  	int 0x80 ; sistema eragilerako deia</code></pre></div></div></li></ul></div></div></section></section>
+<section><section id="Gaia6_AsmProg"><h2>Ensanbladore-lengoaiako programazioa (x86): Maila handiko lengoaietako oinarrizko eraikuntzak.</h2></section><section id="_arkitekturak_x86_i386_x86_64_amd64"><h2>Arkitekturak x86 i386 x86-64 amd64</h2><div class="slide-content"><div class="ulist"><ul><li><p>32 biteko Intel x86ren arkitektura 1985. urtean hasi zen 80386 mikroprozesagailuarekin; geroago, "i386" izena jarri zioten.</p></li><li><p>x86-64, x86_64, AMD64 eta Intel 64 ere esaten zaio) x86 jarraibide-multzoaren 64 biteko bertsioa da. Espezifikazioa AMDk sortu zuen</p></li><li><p>Linuxek x86 arkitektura i386 gisa izendatzen du, eta x86-64 arkitektura, berriz, babes gisa.</p></li><li><p>Ikasgai honetan x86 arkitekturarekin lan egingo da batez ere, praktikak 32 biteko arkitektura honetan egiten baitira.</p></li></ul></div></div></section><section id="_isa_x86"><h2>ISA x86</h2><div class="slide-content"><div class="ulist"><ul><li><p>Kapitulu honen helburua da Intelen 32 biteko arkitekturaren maila baxuko (mihiztatze-lengoaia) programaziorako beharrezkoak diren ezagutzak izatea: x86</p></li><li><p>Iturri-moduluko itzulpen-prozesuko faseak (konpilazioa, mihiztatzea, iturri-moduluak, objektu-modulua, modulu exekutagarria, estekatzea, erreferentziak ebaztea, liburutegiak, sistema eragilea, etab.) eta modulu exekutagarria memorian kargatzea.</p></li><li><p>Maila baxuko programatzaileak IITaren ezagutza behar du, hau da:</p><div class="ulist"><ul><li><p>PUZren helburu orokorreko barne-erregistroak</p></li><li><p>Flagen egoera-erregistroa edo erregistroa</p></li><li><p>Memoria nagusiaren helbideratzea</p></li><li><p>Barne-memoriaren (erregistroak) eta kanpo-memoriaren (memoria nagusia) arteko aldea</p></li><li><p>Datu motak eta formatua: 2ren osagarri osoak</p></li><li><p>Operandoen tamaina: mnemonikoen b, w, l, q atzizkiak</p></li><li><p>Datuak memorian lerrokatzea: little endian</p></li><li><p>Helbideratzeko moduak: berehalakoa, zuzenekoa, etab.</p></li><li><p>"AT&amp;T" lengoaiaren sintaxia</p></li><li><p>Assembler "as" itzultzailearen zuzentarauak</p></li></ul></div></li></ul></div></div></section><section id="_ariketak"><h2>Ariketak</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="./as_code/sum1toN.s">sum1toN.s</a></p><div class="ulist"><ul><li><p>Erreferentziako hasierako programa</p></li><li><p>Datuen atala eta jarraibideen atala: .section .data eta .section .text zuzentarauak edo direktibak</p></li><li><p>helbideak: berehala, erregistrora eta zuzenean</p></li><li><p>Bloke baten egitura: baldintzarik eta baldintzarik gabeko jauziak</p></li><li><p>etiketa orokorra</p></li><li><p>sistema eragilearen funtzioetarako deia eta argudioa erregistrotik pasatzea</p></li><li><p>C hizkuntzako eta sasikodeko iruzkinak</p></li></ul></div></li></ul></div></div></section><section id="_ariketak_2"><h2>Ariketak</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="./as_code/sum1toN_v2.s">sum1toN_v2.s</a></p><div class="ulist"><ul><li><p>Aldagaien aitorpena: Datuen atalean daturako memoria gorde eta hasi. Direktibak. byte, 2byte, 4byte</p></li><li><p>baldintzapeko jauziaren instrukzioa: "jnz" edo "jne"</p></li></ul></div></li><li><p><a href="./as_code/sum1toN_v3.s">sum1toN_v3.s</a></p><div class="ulist"><ul><li><p>.string zuzentaraua: memoria-erreserba eta ASCII karakteredun hastapena</p></li><li><p>C liburu-denda estandarraren funtzioetarako deia, "puts()" gisa, eta pasa argumentuak pilaren bidez</p></li></ul></div></li><li><p><a href="./as_code/sum1toN_v4.s">sum1toN_v4.s</a></p><div class="ulist"><ul><li><p>C-ren liburutegi estandarraren "exit()" funtziorako deia</p></li></ul></div></li></ul></div></div></section><section id="_ariketa"><h2>Ariketa</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="./as_code/sum1toN_v5.s">sum1toN_v5.s</a></p><div class="ulist"><ul><li><p>Makroak .equ zuzentarauarekin</p></li><li><p>Lehen hamar zenbaki oso bakoitiekin datu-multzo bat abiaraztea eta horiek batzea</p></li></ul></div></li><li><p><a href="./as_code/sum1toN_v6.s">sum1toN_v6.s</a></p><div class="ulist"><ul><li><p>Makroak .equ zuzentarauarekin</p></li><li><p>Lehen hamar zenbaki oso bakoitiekin datu-multzo bat abiaraztea eta horiek batzea</p></li><li><p>Begizta "cmp" jarraibidearekin</p></li><li><p><a href="https://www.felixcloutier.com/x86">x86</a>: <a href="https://www.felixcloutier.com/x86/cmp">cmp</a>, <a href="https://www.felixcloutier.com/x86/jcc">jcc</a></p></li><li><p>Emaitza bistaratu C-ren liburutegi estandarraren printf() funtzioarekin</p></li><li><p>Bi argudioak pilaren bidez pasatu eta printf azken argudioa txertatu lehenik(1.a arg, 2.a arg)</p></li></ul></div></li><li><p><a href="./as_code/sum1toN_v7.s">sum1toN_v7.s</a></p><div class="ulist"><ul><li><p>Main programa nagusia funtzio main() edo</p></li></ul></div></li></ul></div></div></section></section></div></div><script src="reveal.js/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
   if (slide.getAttribute('data-background-color')) return;
   // user needs to explicitly say he wants CSS color to override otherwise we might break custom css or theme (#226)
   if (!(slide.classList.contains('canvas') || slide.classList.contains('background'))) return;

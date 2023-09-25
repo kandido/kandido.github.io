@@ -69,6 +69,8 @@
 3 gaia: Informazioaren irudikapen digitala: datuak: <<ascii, ASCII >>, <<num_nat, natural-zenbakia>>, <<num_ent, enteros-zenbakia>>
 4 gaia: Eragiketa aritmetikoak eta logikoak: <<op_nat, natura-zenbakia>>, <<op_ent, enteros-zenbakia>>, <<op_log, eragiketa logikoak>>
 5 gaia: <<Gaia5_RepArgibideak, Informazioaren irudikapen digitala: Instrukzioak.>>
+6 gaia: <<Gaia6_AsmProg, Ensanbladore-lengoaiako programazioa (x86): Maila handiko lengoaietako oinarrizko eraikuntzak.>>
+
 
 
 
@@ -160,8 +162,8 @@ K3 egia bada, R1 edukia R2 eta R3 kopietan kopiatuko da
 begizta: sub rsp, 16; RSP < - RSP-16. Kenketa
          je bucle; je: jump equal:
                  ; jauzia, azken eragiketak zero emaitza izan bazuen
-batura: add eax, esi; EAX < - EAX+M [ESI]. Batu
-        mov ax, [emaitza]; AX < - M [emaitza].
+batura: add eax, esi; EAX < - EAX+M[ESI]. Batu
+        mov ax,[emaitza]; AX < - M[emaitza].
         ; AX erregistroan kopiatu emaitzaren memoria-posizioaren edukia
 
 
@@ -198,8 +200,8 @@ emaitza: "memoria-erreserba"
 begizta: sub $16, %rsp; RSP < - RSP-16. Kenketa
          je begizta ; je: jump equal:
                     ; jauzia, azken eragiketak zero emaitza izan bazuen
-batura:  add %esi, %eax; EAX < - EAX+M [ESI]. Batu
-         mov emaitza, %ax; AX < - M [emaitza] ; AX erregistroan kopiatu emaitzaren memoria-posizioaren edukia
+batura:  add %esi, %eax; EAX < - EAX+M[ESI]. Batu
+         mov emaitza, %ax; AX < - M[emaitza] ; AX erregistroan kopiatu emaitzaren memoria-posizioaren edukia
 
 emaitza: "memoria-erreserba"
 ----
@@ -282,14 +284,14 @@ adibidez: *mov $0xaabbccdd, -12(%eax)*. Helmugako operazioaren benetako helbidea
 | Eragingai helbideratzea | Eragingai balioa | Motako izena
 | $0 | Zero Balioa | Berehalakoa
 | %rax | RAX | Erregistroa
-| loop_exit | M [loop_exit] | Zuzena
-| data_items (, %rdi, 4) | M [data_item + 4*RDI] | Indexatua
-| ( %rbx) | M [RBX] | Zeharkakoa
-| ( %rbx, %rdi, 4) | M [RBX + 4*RDI] | Zeharkakoa Indexatua
+| loop_exit | M[loop_exit] | Zuzena
+| data_items (, %rdi, 4) | M[data_item + 4*RDI] | Indexatua
+| ( %rbx) | M[RBX] | Zeharkakoa
+| ( %rbx, %rdi, 4) | M[RBX + 4*RDI] | Zeharkakoa Indexatua
 |=====
 
-* M [loop_exit]: zuzena, loop_exit kanpo-memoriaren helbidea baita, eta M-k kanpo-memoria adierazten baitu.
-* M [RBX]: zeharkakoa; izan ere, RBX barne-memoriaren helbide bat da, eta M-k kanpo-memoria adierazten du: Kanpo-memoriara barne-memoriatik sartzen da.
+* M[loop_exit]: zuzena, loop_exit kanpo-memoriaren helbidea baita, eta M-k kanpo-memoria adierazten baitu.
+* M[RBX]: zeharkakoa; izan ere, RBX barne-memoriaren helbide bat da, eta M-k kanpo-memoria adierazten du: Kanpo-memoriara barne-memoriatik sartzen da.
 
 === Sum1toN programa: Organigrama
 
@@ -313,7 +315,7 @@ Deskribapena: Lehenengo 5 zenbaki arrunten batura
 Sarrera: Aldagai batean zehaztuta
 Irteera: Irteerarik gabe
 Konpilazioa: gcc -m32 -g -o sum1toN sum1toN.c -> -g: modulu bitar araztua
-- > -m32: arkitektura modulu bitarra x86-32 bit
+                                              -> -m32: arkitektura modulu bitarra x86-32 bit
 S.O: GNU/LINUX 4.10 ubuntu 17.04 x86-64
 Liburutegia:/usr/lib/x86_64-linux-gnu/libc.so
 PUZ: Intel (R) Core (TM) i5-6300U CPU @ 3.0GHz
@@ -331,11 +333,11 @@ Egilea: Candido Aramburu
 void main (void)
 {
 // Tokiko aldagaien deklarazioa
-  char suma = 0;
-  char n = 0b101;
+  char suma=0;
+  char n=0b101;
 // begizta
   while (n>0) {
-    suma+ = n;
+    suma+= n;
    n--;
 }
   printf ("\n Batura da = %d\n", batura);
@@ -353,19 +355,21 @@ void main (void)
 
 [source, asm]
 ----
-# # #Programa: sum1toN.s
-# # #Deskribapena: 1,2,3 serie,... N
-# #Prozesadorearen arkitektura: x86 32 bit
-# #gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
-# # #Mihiztatzea --32 --gstabs fuente.s o objeto.o
-# # #linker -> ld -melf_i386 -I/lib/i386-linux-gnu/ld-linux.so.2 edo objektua-lc exekutagarria
+###Programa: sum1toN.s
+###Deskribapena: 1,2,3 serie,... N
+##Prozesadorearen arkitektura: x86 32 bit
+##Konpilazioa:
+###      gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
+##edo alternatiba
+###      Mihiztatzea --32 --gstabs sum1toN.s o sum1toN.o
+###      Estekaketa-> ld -melf_i386 -I/lib/i386-linux-gnu/ld-linux.so.2   -o sum1toN sum1toN.o -lc
 
 # #Aldagaien aitorpena
 	.section .data
 
-n: .int 5
+n: 	.int 5
 
-.globala _start
+.global _start
 
 ##Kodearen hasiera
 	.section .text 
@@ -377,12 +381,12 @@ begizta:
 	$1, %edx
 	jnz begizta
 
-	mov %ecx,%ebx #el argumento de salida al S.O. a través de EBX según convenio
+	#Sistema Eragileara EBXren bidez irteteko argudioa hitzarmenaren arabera
+	mov %ecx,%ebx 
 
-# #irteera
-	mov $1, %eax #sistema eragilerako deiaren kodea:
+##irteera
+	mov $1,%eax #sistema eragilerako deiaren kodea:
 	int $0x80 #sistema eragilerako deia
-
 
 .end
 ----
@@ -411,26 +415,95 @@ BITS 32; CPU MODE
 ;;; Aldagaien aitorpena
 	section .data
 
-n: dd 5; 4 byte
+n: 	dd 5	; 4 byte
 
-globala _start
+global	_start
 
 ;; Kodearen hasiera
 	section .text
 _start:
-  mov ecx, 0; ECXk batura aldagaia inplementatzen du
-  mov edx, [n]; n aldagaiaren ezizena da EDX
-  begizta:
-  add ecx, edx
-  sub edx, 1
-  jnz begizta
+	mov ecx,0; ECXk batura aldagaia inplementatzen du
+  	mov edx,[n]; n aldagaiaren ezizena da EDX
+begizta:
+  	add ecx,edx
+  	sub edx,1
+  	jnz begizta
 
-  mov ebx, ecx ; S.O.ra EBXren bidez irteteko argudioa hitzarmenaren arabera
+	;Sistema Eragileara EBXren bidez irteteko argudioa hitzarmenaren arabera
+  	mov ebx,ecx 
 
-;; irteera
-  mov eax, 1 ; sistema eragilerako deiaren kodea:
-  int 0x80 ; sistema eragilerako deia
+	;; irteera
+  	mov eax,1 ; sistema eragilerako deiaren kodea
+  	int 0x80 ; sistema eragilerako deia
 ----
 
+[#Gaia6_AsmProg]
+== Ensanbladore-lengoaiako programazioa (x86): Maila handiko lengoaietako oinarrizko eraikuntzak.
 
+
+=== Arkitekturak x86 i386 x86-64 amd64
+
+* 32 biteko Intel x86ren arkitektura 1985. urtean hasi zen 80386 mikroprozesagailuarekin; geroago, "i386" izena jarri zioten.
+* x86-64, x86_64, AMD64 eta Intel 64 ere esaten zaio) x86 jarraibide-multzoaren 64 biteko bertsioa da. Espezifikazioa AMDk sortu zuen
+* Linuxek x86 arkitektura i386 gisa izendatzen du, eta x86-64 arkitektura, berriz, babes gisa.
+* Ikasgai honetan x86 arkitekturarekin lan egingo da batez ere, praktikak 32 biteko arkitektura honetan egiten baitira.
+
+[status=txikia]
+=== ISA x86
+
+* Kapitulu honen helburua da Intelen 32 biteko arkitekturaren maila baxuko (mihiztatze-lengoaia) programaziorako beharrezkoak diren ezagutzak izatea: x86
+* Iturri-moduluko itzulpen-prozesuko faseak (konpilazioa, mihiztatzea, iturri-moduluak, objektu-modulua, modulu exekutagarria, estekatzea, erreferentziak ebaztea, liburutegiak, sistema eragilea, etab.) eta modulu exekutagarria memorian kargatzea.
+* Maila baxuko programatzaileak IITaren ezagutza behar du, hau da:
+** PUZren helburu orokorreko barne-erregistroak
+** Flagen egoera-erregistroa edo erregistroa
+** Memoria nagusiaren helbideratzea
+** Barne-memoriaren (erregistroak) eta kanpo-memoriaren (memoria nagusia) arteko aldea
+** Datu motak eta formatua: 2ren osagarri osoak
+** Operandoen tamaina: mnemonikoen b, w, l, q atzizkiak
+** Datuak memorian lerrokatzea: little endian
+** Helbideratzeko moduak: berehalakoa, zuzenekoa, etab.
+** "AT&T" lengoaiaren sintaxia
+** Assembler "as" itzultzailearen zuzentarauak
+
+[status=txikia]
+=== Ariketak
+
+* link:./as_code/sum1toN.s[sum1toN.s]
+** Erreferentziako hasierako programa
+** Datuen atala eta jarraibideen atala: .section .data eta .section .text zuzentarauak edo direktibak
+** helbideak: berehala, erregistrora eta zuzenean
+** Bloke baten egitura: baldintzarik eta baldintzarik gabeko jauziak
+** etiketa orokorra
+** sistema eragilearen funtzioetarako deia eta argudioa erregistrotik pasatzea
+** C hizkuntzako eta sasikodeko iruzkinak
+
+
+
+[status=txikia]
+=== Ariketak
+* link:./as_code/sum1toN_v2.s[sum1toN_v2.s]
+** Aldagaien aitorpena: Datuen atalean daturako memoria gorde eta hasi. Direktibak. byte, 2byte, 4byte
+** baldintzapeko jauziaren instrukzioa: "jnz" edo "jne"
+* link:./as_code/sum1toN_v3.s[sum1toN_v3.s]
+** .string zuzentaraua: memoria-erreserba eta ASCII karakteredun hastapena
+** C liburu-denda estandarraren funtzioetarako deia, "puts()" gisa, eta pasa argumentuak pilaren bidez
+* link:./as_code/sum1toN_v4.s[sum1toN_v4.s]
+** C-ren liburutegi estandarraren "exit()" funtziorako deia
+
+
+
+[status=txikia]
+=== Ariketa
+* link:./as_code/sum1toN_v5.s[sum1toN_v5.s]
+** Makroak .equ zuzentarauarekin
+** Lehen hamar zenbaki oso bakoitiekin datu-multzo bat abiaraztea eta horiek batzea
+* link:./as_code/sum1toN_v6.s[sum1toN_v6.s]
+** Makroak .equ zuzentarauarekin
+** Lehen hamar zenbaki oso bakoitiekin datu-multzo bat abiaraztea eta horiek batzea
+** Begizta "cmp" jarraibidearekin
+** https://www.felixcloutier.com/x86[x86]: https://www.felixcloutier.com/x86/cmp[cmp], https://www.felixcloutier.com/x86/jcc[jcc]
+** Emaitza bistaratu C-ren liburutegi estandarraren printf() funtzioarekin
+** Bi argudioak pilaren bidez pasatu eta printf azken argudioa txertatu lehenik(1.a arg, 2.a arg)
+* link:./as_code/sum1toN_v7.s[sum1toN_v7.s]
+** Main programa nagusia funtzio main() edo
 
