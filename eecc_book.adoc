@@ -1,0 +1,160 @@
+Estructura de Computadores  (240306)
+====================================
+:stem: latexmath 
+:doctype: book
+:doctitle: Estructura de Computadores  (240306)
+:Author:          Cándido Aramburu
+:Email:           candido@unavarra.es
+:Author Initials: C.
+:Revision:	  0.6.0
+:Key words:	  computer, architecture
+:revdate: {localdate}
+:toc:
+:toclevels: 3
+:numbered:
+:lang: es
+:encode: ISO-8859-1
+:ascii-ids:
+:pdf-version: 1.7
+//:show-link-uri:
+:icons: font
+:source-highlighter: rouge
+:asciidoctor-fetch-kroki:
+:docinfo1:
+
+
+
+//// 
+
+include::./instructor/instructor.asciidoc[Instructor]
+
+////
+
+
+
+= I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.
+
+// Push titles down one level.
+:leveloffset: 1
+
+include::./introduccion/introduccion.adoc[Introducción]
+include::./arquitectura_vonneumann/arquitectura_vonneumann.adoc[Arquitectura von Neumann]
+include::./datos_representacion/datos_representacion.adoc[Representación Datos]
+include::./aritmetica_logica/aritmetica_logica.adoc[Aritmética Lógica]
+include::./instrucciones_representacion/instrucciones_representacion.adoc[Instrucciones Representacion]
+include::./programacion_asm/programacion_asm.adoc[Programación Ensamblador x86]
+
+// Return to normal title levels.
+:leveloffset: 0
+= II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.
+
+// Push titles down one level.
+:leveloffset: 1
+
+include::./cpu/cpu.adoc[Procesador Central]
+include::./entrada_salida/entrada_salida.adoc[Mecanismos de Entrada/Salida]
+include::./memoria/memoria.adoc[Unidad de Memoria]
+
+// Return to normal title levels.
+:leveloffset: 0
+= III Ejercicios de Teoría
+
+// Push titles down one level.
+:leveloffset: 1
+
+include::./ejercicios/ejercicios.adoc[Ejercicios]
+
+// Return to normal title levels.
+:leveloffset: 0
+= IV Autoevaluación Teoría
+
+// Push titles down one level.
+:leveloffset: 1
+
+include::./autoevaluacion/autoevaluacion_teoria.adoc[Autoevaluación Teoría]
+
+// Return to normal title levels.
+:leveloffset: 0
+= V Guiones de Prácticas: Programación Ensamblador x86
+
+// Push titles down one level.
+:leveloffset: 1
+
+include::./guiones/sum1toN.adoc[Introducción a la Programación en Lenguaje Ensamblador AT&T x86-32]
+include::./guiones/datos.adoc[Codificación de Datos]
+include::./guiones/operaciones_arit_log.adoc[Operaciones Aritmético Lógicas]
+include::./guiones/instrucciones_asm.adoc[Instrucciones Saltos]
+include::./guiones/llamadas_sistema_32bits.adoc[LLamadas Sistema 32]
+include::./guiones/sumMtoN.adoc[Subrutinas]
+include::./guiones/practica_BMP_6.adoc[Procesamiento de Imágenes BitMaP ]
+
+// Return to normal title levels.
+:leveloffset: 0
+= VI Hojas de Referencia Rápida
+
+// Push titles down one level.
+:leveloffset: 1
+
+include::./hojas_ref_rap/hojas_ref_rap.adoc[Hojas de Referencia Rápida]
+
+
+// Return to normal title levels.
+:leveloffset: 0
+= VII Autoevaluación Prácticas
+// Push titles down one level.
+:leveloffset: 1
+
+include::./autoevaluacion/autoevaluacion_practicas.adoc[Autoevaluación Prácticas]
+
+
+
+
+
+// Return to normal title levels.
+:leveloffset: 0
+//[appendix]
+= VIII Apéndices
+// Push titles down one level.
+:leveloffset: 1
+
+include::./apendice/apendice.adoc[Apéndices]
+
+
+
+
+// Return to normal title levels.
+:leveloffset: 0
+:numbered!:
+[bibliography]
+= IX Bibliografía
+
+////
+ no hace falta poner downlevel porque la bibliografía no tiene niveles
+////
+
+include::./bibliografia/bibliografia.adoc[Bibliografía]
+
+////
+ no hace falta poner top level porque ya está
+////
+[glossary]
+= X Glosario
+
+
+
+[glossary]
+Primer término::
+  The corresponding (indented) definition.
+
+Segundo término::
+  The corresponding (indented) definition.
+
+
+[colophon]
+= XI Colofón
+
+Text at the end of a book describing facts about its production.
+
+
+[index]
+== Index
