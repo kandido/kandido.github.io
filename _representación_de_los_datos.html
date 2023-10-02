@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-12-15</span>
+<span id="revdate">2023-10-02</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -557,7 +557,7 @@ La representación uno-cero-uno-cero tiene el valor diez</pre>
 <div class="content">
 <img src="./images/datos_representacion/rueda_unsigned.png" alt="rueda unsigned">
 </div>
-<div class="title">Figure 28. Representación Números sin Signo</div>
+<div class="title">Figure 29. Representación Números sin Signo</div>
 </div>
 </li>
 </ul>
@@ -585,7 +585,7 @@ La representación uno-cero-uno-cero tiene el valor diez</pre>
 <li>
 <p>Ejemplo: Valor 1197 &#8594; Calcular su representación en código binario &#8594; Solución: 10010101101</p>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. Conversión decimal binario</caption>
+<caption class="title">Table 4. Conversión decimal binario</caption>
 <colgroup>
 <col style="width: 7.6923%;">
 <col style="width: 7.6923%;">
@@ -897,7 +897,7 @@ La representación uno-cero-uno-cero tiene el valor diez</pre>
 <div class="content">
 <img src="./images/datos_representacion/rueda_signed.png" alt="rueda signed">
 </div>
-<div class="title">Figure 29. Representación Complemento a 2</div>
+<div class="title">Figure 30. Representación Complemento a 2</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1332,7 +1332,7 @@ La representación uno-cero-uno-cero tiene el valor diez</pre>
 <li>
 <p>Cuando el campo del exponente son todo ceros o unos, no se sigue la regla general de un número normalizado</p>
 <table class="tableblock frame-all grid-all" style="width: 80%;">
-<caption class="title">Table 6. Single precision</caption>
+<caption class="title">Table 5. Single precision</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1673,10 +1673,13 @@ oating-point computations</a></p>
 <div class="content">
 <pre class="rouge highlight"><code data-lang="python"><span class="nb">ord</span><span class="p">(</span><span class="s">'A'</span><span class="p">)</span>
 <span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s">'A'</span><span class="p">))</span>
+<span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">))</span>
 <span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span>
 <span class="nb">chr</span><span class="p">(</span><span class="mh">0x41</span><span class="p">)</span>
 <span class="p">[</span><span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"Hola"</span><span class="p">]</span>
-<span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x6f</span><span class="p">,</span> <span class="mh">0x6c</span><span class="p">,</span> <span class="mh">0x61</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x4d</span><span class="p">,</span> <span class="mh">0x75</span><span class="p">,</span> <span class="mh">0x6e</span><span class="p">,</span> <span class="mh">0x64</span><span class="p">,</span> <span class="mh">0x6f</span><span class="p">]]</span></code></pre>
+<span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x6f</span><span class="p">,</span> <span class="mh">0x6c</span><span class="p">,</span> <span class="mh">0x61</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x4d</span><span class="p">,</span> <span class="mh">0x75</span><span class="p">,</span> <span class="mh">0x6e</span><span class="p">,</span> <span class="mh">0x64</span><span class="p">,</span> <span class="mh">0x6f</span><span class="p">]]</span>
+<span class="p">[</span><span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"ñ"</span><span class="p">]</span>
+<span class="p">[</span><span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"</span><span class="se">\n</span><span class="s"> </span><span class="se">\t</span><span class="s">"</span><span class="p">]</span></code></pre>
 </div>
 </div>
 </li>
@@ -1692,6 +1695,9 @@ oating-point computations</a></p>
 <ul>
 <li>
 <p><a href="https://www.unicode.org/main.html">Unicode Main</a></p>
+</li>
+<li>
+<p>Unicode Transformation Format (UTF)</p>
 </li>
 <li>
 <p>Unicode: Unicode can be implemented by different character encodings. The Unicode standard defines Unicode Transformation Formats (UTF): UTF-8, UTF-16, and UTF-32, and several other encodings. The most commonly used encodings are UTF-8, UTF-16, and the obsolete UCS-2 (a precursor of UTF-16 without full support for Unicode)</p>
@@ -1723,7 +1729,7 @@ oating-point computations</a></p>
 </div>
 </li>
 <li>
-<p><code>localectl --status</code> &#8594; codificación de entrada del teclado</p>
+<p><code>localectl status</code> &#8594; codificación de entrada del teclado</p>
 <div class="listingblock">
 <div class="content">
 <pre>  System Locale: LANG=eu_ES.UTF-8
@@ -1880,16 +1886,16 @@ oating-point computations</a></p>
 <p><a href="http://www.unicode.org/charts/PDF/U2200.pdf">U2200</a>: Mathematical Operators Range: 2200–22FF</p>
 </li>
 <li>
-<p>hexadecimal x2228 &#8594; &#x2228; ó en decimal 8744 &#8744;</p>
+<p>U+2228 &#8594; hexadecimal x2228 &#8594; &#x2228; ó en decimal 8744 &#8744;</p>
 </li>
 <li>
-<p>x22bc &#8594; &#x22bc;</p>
+<p>U+22BC &#8594; x22bc &#8594; &#x22bc;</p>
 </li>
 <li>
-<p>x22bd &#8594; &#x22bd;</p>
+<p>U+22BD &#8594; x22bd &#8594; &#x22bd;</p>
 </li>
 <li>
-<p>x22a6 &#8594; &#x22a6;</p>
+<p>U+22A6 &#8594; x22a6 &#8594; &#x22a6;</p>
 </li>
 </ul>
 </div>
@@ -1905,7 +1911,7 @@ oating-point computations</a></p>
 <p>x1f60b &#8594; &#x1f60b;</p>
 </li>
 <li>
-<p>x00f1  &#8594; &#x00f1;</p>
+<p>U+00F1 &#8594; x00f1  &#8594; &#x00f1;</p>
 </li>
 <li>
 <p>241    &#8594; &#241;</p>

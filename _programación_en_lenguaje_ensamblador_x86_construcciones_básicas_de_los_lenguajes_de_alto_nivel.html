@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2022-12-15</span>
+<span id="revdate">2023-10-02</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -817,7 +817,7 @@ pre.rouge {
 <li>
 <p>Unicamente nos fijamos en los flags OSZAPC.</p>
 <table class="tableblock frame-all grid-all" style="width: 50%;">
-<caption class="title">Table 11. RFLAG Register</caption>
+<caption class="title">Table 10. RFLAG Register</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1011,7 +1011,7 @@ Ejemplos de errores matemáticos por overflow: <a href="_operaciones_aritmeticas
 </ul>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. Directivas básicas</caption>
+<caption class="title">Table 11. Directivas básicas</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2227,9 +2227,10 @@ sumMtoN:
 <h4 id="_registros_a_preservar">6.8.10. Registros a Preservar</h4>
 <div class="sect4">
 <h5 id="_rutina_llamante_arquitectura_i386">Rutina llamante: arquitectura i386</h5>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
 <p>La rutina que realiza la llamada (caller routine) está obligada a preservar los siguientes registros si los está utilizando:</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
@@ -2237,8 +2238,56 @@ sumMtoN:
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Es decir, dichos registros pueden ser utilizados libremente por la subrutina llamada. En caso de no ser utilizados por la subrutina no sería necesario preservarlos. En caso de ser utilizados se copiarían en la pila antes de realizar la llamada a la subrutina y serían recuperados al finalizar la subrutina.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Es decir, dichos registros pueden ser utilizados libremente por la subrutina llamada. En caso de no ser utilizados por la subrutina no sería necesario preservarlos. En caso de ser utilizados por la rutina principal se copiarían en la pila <strong>antes de realizar la llamada</strong> a la subrutina y serían recuperados al finalizar la subrutina.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo:</p>
+<div class="listingblock">
+<div class="content">
+<pre>mov $0,%edx     # asigno el valor cero al registro EDX
+call subrutina
+# AL VOLVER DE LA SUBRUTINA EDX no tiene porque valor CERO
+add %edx,%edx # la operación no tiene porque ser 0+0</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>solución:</p>
+<div class="listingblock">
+<div class="content">
+<pre>mov $0,%edx     # asigno el valor cero al registro EDX
+push %edx	# salvo el valor de EDX en la pila
+
+call subrutina
+
+pop %edx	# recupero el valor de EDX desde la pila
+add %edx,%edx   # realiza la operación 0+0</pre>
+</div>
+</div>
+</li>
+<li>
+<p>lo mismo para los registros EAX y ECX</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect4">
@@ -3144,7 +3193,7 @@ sumMtoN:
 <li>
 <p>Stack Initialization</p>
 <table class="tableblock frame-all grid-all" style="width: 50%;">
-<caption class="title">Table 13. Convenio ABI: Stack</caption>
+<caption class="title">Table 12. Convenio ABI: Stack</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
