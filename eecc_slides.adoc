@@ -451,7 +451,7 @@ Disassembly of section .text:
 [state=taula]
 === Repertorio de la máquina IAS: tabla
 
-.Instruction Set
+.Instruction Set I
 [width="100%",cols="1,2,^1,6,2",options="header"]
 |============================================================================
 |Instruction name| Instruction name 	|Op Code 	|Description				| Register Transfer Language (RTL)
@@ -463,6 +463,16 @@ Disassembly of section .text:
 |S(x)->Ah- 	|SUB M(X)	|6 	|subtract the number in Selectron location x from AC	|
 |S(X)->AhM 	|ADD \|M(X)\| 	|7 	|same as #5, but add the absolute value			|
 |S(X)->Ah-M 	|SUB \|M(X)\| 	|8 	|same as #7, but subtract the absolute value		|
+|============================================================================
+
+
+[state=taula]
+=== Repertorio de la máquina IAS: tabla
+
+.Instruction Set II
+[width="100%",cols="1,2,^1,6,2",options="header"]
+|============================================================================
+|Instruction name| Instruction name 	|Op Code 	|Description				| Register Transfer Language (RTL)
 |S(x)->R 	|LOAD MQ,M(X)	|9 	|copy the number in Selectron location x into AR	|
 |R->A 	        |LOAD MQ	|A 	|copy the number in AR to AC				|
 |S(x)*R->A 	|MUL M(X)	|B 	|Multiply the number in Selectron location x by the number in AR. Place the left half of the result in AC and the right half in AR.|
@@ -471,15 +481,22 @@ Disassembly of section .text:
 |Cu`->S(x) 	|JUMP M(X,20:39)|E 	|Continue execution at the right-hand instruction of the pair at Selectron location x	|
 |Cc->S(x) 	|JUMP+ M(X,0:19)|F 	|If the number in AC is >= 0, continue as in #D. Otherwise, continue normally. 		|
 |Cc`->S(x) 	|JUMP+ M(X,20:39)|10 	|If the number in AC is >= 0, continue as in #E. Otherwise, continue normally. 		|
+|============================================================================
+
+[state=taula]
+=== Repertorio de la máquina IAS: tabla
+
+.Instruction Set III
+[width="100%",cols="1,2,^1,6,2",options="header"]
+|============================================================================
+|Instruction name| Instruction name 	|Op Code 	|Description				| Register Transfer Language (RTL)
 |At->S(x) 	|STOR M(X) 	|11 	|Copy the number in AC to Selectron location x						|
 |Ap->S(x) 	| 	|12 	|Replace the right-hand 12 bits of the left-hand instruction at Selectron location x by the right-hand 12 bits of the AC|
 |Ap`->S(x) 	| 	|13 	|Same as #12 but modifies the right-hand instruction			|
 |L 	        |LSH	|14 	|Shift the number in AC to the left 1 bit (new bit on the right is 0)	|
 |R 	        |RSH	|15 	|Shift the number in AC to the right 1 bit (leftmost bit is copied)	|
-|halt 	        | 	|0 	|Halt the program (see paragraph 6.8.5 of the IAS r
+|halt 	        | 	|0 	|Halt the program (see paragraph 6.8.5 of the IAS r)|
 |============================================================================
-
-
 
 === Repertorio de la máquina IAS: explicación
 
@@ -1700,4 +1717,236 @@ bucle:
 ** Pasar los dos argumentos a través de la pila insertando primero el último argumento printf(1º arg,2º arg) 
 *  link:./as_code/sum1toN_v7.s[sum1toN_v7.s]
 ** Convertir el programa principal main en una función main() o subrutina
+
+=== Subrutinas
+
+=== Introducción
+
+* A las funciones de los lenguajes de alto nivel en el nivel máquina se les llama subrutinas
+* Las subrutinas son bloques de código que pueden ser llamadas desde otro bloque para su ejecución y posterior retorno a la sentencia siguiente al punto de llamada.
+* A las subrutinas se les pueden pasar parámetros o argumentos a través de unidades de memoria de diferentes formas:
+** En la arquitectura x86 los parámetros se pasan a través de la pila
+
+=== La pila a nivel máquina x86
+
+* Es una estructura de datos  que se construye en la *memoria principal* y constituye una sección diferente (stack section) de la sección de datos y sección de texto.
+* La pila es una 'sección' del programa en ejecución en la memoria principal. A diferencia de la sección de datos y la sección de instrucciones la pila se crea en tiempo de ejecución ,no durante la carga en memoria.
+* En la pila los datos se van insertando (apilando) secuencialmente y también se van extrayendo (desapilando)
+* Es una estructura de datos tipo LIFO (last input first output): El último elemento apilado es el primero que se puede extraer.
+* La instrucción para insertar un dato el *PUSH* y para extraer es *POP*.
++
+
+----
+push %eax  # se inserta en la pila y se apila el contenido de EAX
+pop %ebx   # se extrae de la pila el último dato apilado y se guarda en EBX
+push etiqueta # ¿Da error?¿Por qué?
+----
+
+
+=== La pila a nivel máquina x86
+
+* IMAGEN
+* La anchura de la pila son 32 bits
+* Se apila en el sentido decreciente de las direcciones de memoria 
+
+=== Anidamiento de llamadas a funciones: FRAME
+
+* Cada rutina o subrutina tiene que generar por programa su propio segmento dentro de la sección stack.
+
+=== Punteros del Frame Activo
+
+* fp: frame pointer y sp: stack pointer
+* el puntero fp apunta a la parte baja del frame activo y el sp apunta a la parte alta (último dato apilado) del frame activo
+* En la arquitectura x86 el la función fp la realiza el registro *EBP* (Bottom Pointer) y la función sp la realiza el registro *ESP*
+* IMAGEN
+
+=== Pase de los argumentos y LLamada a la Subrutina
+
+* función en lenguaje C: sumMtoN(M,N)
+* Primero se pasa el último argumento de la subrutina y el último argumento en pasar es el primer argumento de la subrutina
+* A continuación se llama a la subrutina
+* Código de pase de argumentos y llamada a la subrutina
++
+
+[source,nasm]
+----
+main:
+        xxxx xxx
+        xxxx xxx
+	push N
+	push M
+	call sumMtoN
+        xxxx xxx
+        xxxx xxx
+----
+* Estado de la pila después de insertar los argumentos y antes de ejecutarse la instrucción "call"
+
+=== Conservación de la dirección de retorno
+
+* El procesador durante el ciclo de instrucción de "call" inserta la dirección de retorno en la pila y salta a la dirección de comienzo de la subrutina introducción la dirección de la subrutina en el contador de programa.
+* Estado de la pila después de ejecutarse el *call*
+
+=== Comienzo de la Subrutina: Prólogo
+
+* Es necesario conservar el fp de la rutina que realiza la llamada para una vez finaliza la subrutina volver a activar el frame de la rutina que llama.
++
+
+----
+sumMtoN:
+        push %ebp
+----
+* El epílogo consisten activar un nuevo frame apuntando los dos punteros sp y fp al primer dato insertado.
+* Instrucciones del Prólogo
++
+
+[source,nasm]
+----
+sumMtoN:
+	push %ebp
+	mov %esp,%ebp
+        xxx xxx
+----
+*  Estado de la pila:
+
+=== Variables locales
+
+* Las variables locales se definen en la pila después del prólogo reservando la memoria necesaria. Esto se realiza moviendo el stack pointer tantos bytes como ocupen las variables locales
+
+=== Recuperación de los Argumentos
+
+* Pasar los argumentos de la pila a un registro para poder ser utilizados. Por ejemplo a los registros ECX y EDX en el caso de tener sólo 2 argumentos. 
+
+=== Fin de la subrutina: Epílogo
+
+* El epílogo consiste en desactivar el frame de la subrutina, activar el frame de la rutina que realizó la llamada y saltar a la dirección de retorno.
+* Desactivar el frame de la subrutina: Que el sp apunte a la misma dirección que el bp.
+* Activar el Frame de la rutina: Actualizar el bp con el valor anterior al de la subrutina.
+* Saltar a la dirección de retorno: El sp ha de estar apuntando a donde se encuentra la dirección de retorno antes de ejecutar la instrucción *ret*
+* Código del epílogo:
++
+
+[source,nasm]
+----
+----
+* Estado de la pila:
+
+
+=== Valor de retorno
+
+* El valor de retorno no se pasa a través de la pila, se pasa a través del registro EAX
+
+=== Preservación de los registros
+
+* Es necesario preservar los registros EAX, ECX y EDX antes de llamar a la subrutina: la subrutina podrá utilizarlos libremente
+* Es necesario preservar los registros EBX,ESI,EDI,ESP,EBP  en caso de ser utilizados por la subrutina. Su valor ha de ser el mismo antes y después de la llamada a la subrutina.
+
+=== Ejemplo: Subrutina sumMtoN.s
+
+* Código:
++
+
+[source,nasm]
+----
+## Subrutina sumMtoN.s
+
+	.section .data
+M:	.byte 3
+N:	.byte 10
+resultado: .byte 0
+
+	.global main
+	.section .text
+main:
+	## pasar los argumentos
+	mov N,%ecx
+        push %ecx
+	mov M,%edx
+        push %edx
+
+	## preservar los registros por convenio
+	push %eax
+	push %ecx
+	push %edx
+        
+        call suma
+
+	## Guardar el resultado
+	mov %eax,resultado
+
+	## recuperar los registros por convenio
+	pop %edx
+	pop %ecx
+	pop %eax
+
+	## salida
+        movl resultado,%ebx
+	movl  $1, %eax	    #1 is the exit() syscall
+	int   $0x80
+
+
+### Función que calcula la suma de números de enteros en la secuencia entre dos límites dados
+	.type suma, @function
+	.section .text
+suma:
+	## prologo
+	push %ebp
+	movl %esp,%ebp
+        
+        # una variable local de 4 bytes
+	subl $4,%esp            
+	## preserva los registros por el convenio
+	push %ebx
+	push %edi
+	push %esi
+	
+        ## captura de argumentos
+	movl 8(%ebp),%eax      #1º argumento 
+	movl 12(%ebp),%ecx     #2º argumento
+	## algoritmo de la subrutina
+	## bucle
+           xxxx xxxx
+           xxxx xxxx
+	## el resultado está en EAX  
+	## recupera los  registros por el convenio
+	pop %esi
+	pop %edi
+	pop %ebx
+
+	## epilogo
+	mov %ebp,%esp           # frame anterior
+	pop %ebp
+	ret                     # recuperar dirección de retorno
+----
+
+=== LLamadas al Sistema
+
+=== Funciones del sistema
+
+* Privilegios del sistema, no del usuario: acceso al hardware (por ejemplo racceder a la pantalla para imprimir una imagen , acceder al disco para escribir un fichero, arrancar o finalizar un proceso, etc ...)   
+* Volcar el contenido de la cabecera "/usr/include/asm/instd_32.h"
++
+
+----
+exit 1
+fork 2
+read 3
+write 4
+open 5
+close 6
+----
+
+=== LLamada y pase de los argumentos
+
+* El código de identificación de la función se pasa a través del registro EAX
+* Los argumentos de la función se pasan a través de los registros EBX,ECX,EDX,ESI,EDI,EBP y en ese orden.
+* La llamada se realiza con la instrucción *int $0x80*
+* Ejemplo:
++
+
+[source,nasm]
+----
+	mov $1,%eax
+	mov $0,%ebx
+	int $0x80
+----
 
