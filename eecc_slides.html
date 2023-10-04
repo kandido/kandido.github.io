@@ -927,9 +927,9 @@ fork 2
 read 3
 write 4
 open 5
-close 6</code></pre></div></div></li></ul></div></div></section><section id="_llamada_y_pase_de_los_argumentos"><h2>LLamada y pase de los argumentos</h2><div class="slide-content"><div class="ulist"><ul><li><p>El código de identificación de la función se pasa a través del registro EAX</p></li><li><p>Los argumentos de la función se pasan a través de los registros EBX,ECX,EDX,ESI,EDI,EBP y en ese orden.</p></li><li><p>La llamada se realiza con la instrucción <strong>int $0x80</strong></p></li><li><p>Ejemplo:</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-nasm hljs" data-noescape="true" data-lang="nasm">	mov $1,%eax
+close 6</code></pre></div></div></li></ul></div></div></section><section id="_llamada_y_pase_de_los_argumentos"><h2>LLamada y pase de los argumentos</h2><div class="slide-content"><div class="ulist"><ul><li><p>El código de identificación de la función se pasa a través del registro EAX</p></li><li><p>Los argumentos de la función se pasan a través de los registros EBX,ECX,EDX,ESI,EDI,EBP y en ese orden.</p></li><li><p>La llamada se realiza con la instrucción <strong>int $0x80</strong></p></li><li><p>Ejemplo con el servicio "exit":</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-nasm hljs" data-noescape="true" data-lang="nasm">	mov $1,%eax
 	mov $0,%ebx
-	int $0x80</code></pre></div></div></li></ul></div></div></section></section></div></div><script src="reveal.js/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
+	int $0x80</code></pre></div></div></li><li><p>Ejercicio: código ensamblador con servicio "write" según el prototipo del manual "man 2 write"</p></li></ul></div></div></section></section></div></div><script src="reveal.js/js/reveal.js"></script><script>Array.prototype.slice.call(document.querySelectorAll('.slides section')).forEach(function(slide) {
   if (slide.getAttribute('data-background-color')) return;
   // user needs to explicitly say he wants CSS color to override otherwise we might break custom css or theme (#226)
   if (!(slide.classList.contains('canvas') || slide.classList.contains('background'))) return;

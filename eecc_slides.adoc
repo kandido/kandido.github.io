@@ -1757,14 +1757,14 @@ push etiqueta # ¿Da error?¿Por qué?
 
 === La pila a nivel máquina x86
 
-* link:./_pila.html[pila]
+* link:./pila.html[pila]
 * La anchura de la pila son 32 bits
 * Se apila en el sentido decreciente de las direcciones de memoria 
 
 === Anidamiento de llamadas a funciones: FRAME
 
 * Cada rutina o subrutina tiene que generar por programa su propio segmento dentro de la sección stack.
-* link:./_pila.html[pila] 
+* link:./pila.html[pila] 
 * Un ejemplo típico de anidamiento de funciones son las subrutinas recurrentes
 ** link:https://diveintosystems.org/book/C8-IA32/recursion.html[Animación recursión]
 
@@ -1773,7 +1773,7 @@ push etiqueta # ¿Da error?¿Por qué?
 * fp: frame pointer y sp: stack pointer
 * el puntero fp apunta a la parte baja del frame activo y el sp apunta a la parte alta (último dato apilado) del frame activo
 * En la arquitectura x86 el la función fp la realiza el registro *EBP* (Bottom Pointer) y la función sp la realiza el registro *ESP*
-* link:./_pila.html[pila] 
+* link:./pila.html[pila] 
 
 === Pase de los argumentos y LLamada a la Subrutina
 
