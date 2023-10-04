@@ -1757,20 +1757,23 @@ push etiqueta # ¿Da error?¿Por qué?
 
 === La pila a nivel máquina x86
 
-* IMAGEN
+* link:./pila.html[pila]
 * La anchura de la pila son 32 bits
 * Se apila en el sentido decreciente de las direcciones de memoria 
 
 === Anidamiento de llamadas a funciones: FRAME
 
 * Cada rutina o subrutina tiene que generar por programa su propio segmento dentro de la sección stack.
+* link:./pila.html[pila] 
+* Un ejemplo típico de anidamiento de funciones son las subrutinas recurrentes
+** link:https://diveintosystems.org/book/C8-IA32/recursion.html[Animación recursión]
 
 === Punteros del Frame Activo
 
 * fp: frame pointer y sp: stack pointer
 * el puntero fp apunta a la parte baja del frame activo y el sp apunta a la parte alta (último dato apilado) del frame activo
 * En la arquitectura x86 el la función fp la realiza el registro *EBP* (Bottom Pointer) y la función sp la realiza el registro *ESP*
-* IMAGEN
+* link:./pila.html[pila] 
 
 === Pase de los argumentos y LLamada a la Subrutina
 
@@ -1791,12 +1794,12 @@ main:
         xxxx xxx
         xxxx xxx
 ----
-* Estado de la pila después de insertar los argumentos y antes de ejecutarse la instrucción "call"
+* Estado de la pila después de insertar los argumentos y antes de ejecutarse la instrucción "call" -> ¿?
 
 === Conservación de la dirección de retorno
 
 * El procesador durante el ciclo de instrucción de "call" inserta la dirección de retorno en la pila y salta a la dirección de comienzo de la subrutina introducción la dirección de la subrutina en el contador de programa.
-* Estado de la pila después de ejecutarse el *call*
+* Estado de la pila después de ejecutarse el *call* -> ¿?
 
 === Comienzo de la Subrutina: Prólogo
 
@@ -1818,7 +1821,7 @@ sumMtoN:
 	mov %esp,%ebp
         xxx xxx
 ----
-*  Estado de la pila:
+*  Estado de la pila: -> ¿?
 
 === Variables locales
 
@@ -1839,8 +1842,14 @@ sumMtoN:
 
 [source,nasm]
 ----
+
+        xxx xxx
+	mov %ebp,%esp
+	push %ebp
+        ret
 ----
-* Estado de la pila:
+* las instrucciones del epílogo son el proceso inverso del prólogo
+* Estado de la pila: -> ¿?
 
 
 === Valor de retorno
@@ -1869,17 +1878,23 @@ resultado: .byte 0
 	.global main
 	.section .text
 main:
+	## prologo de main
+	push %ebp
+	mov %esp,%ebp
+
+	## preservar los registros por convenio
+	push %eax
+	push %ecx
+	push %edx
+	
 	## pasar los argumentos
 	mov N,%ecx
         push %ecx
 	mov M,%edx
         push %edx
 
-	## preservar los registros por convenio
-	push %eax
-	push %ecx
-	push %edx
-        
+	
+	## Llamar a la subrutina        
         call suma
 
 	## Guardar el resultado
@@ -1890,10 +1905,15 @@ main:
 	pop %ecx
 	pop %eax
 
+	## epilogo de main
+	mov %ebp,%esp           # frame anterior
+	pop %ebp
+
 	## salida
         movl resultado,%ebx
 	movl  $1, %eax	    #1 is the exit() syscall
 	int   $0x80
+
 
 
 ### Función que calcula la suma de números de enteros en la secuencia entre dos límites dados
@@ -1916,8 +1936,8 @@ suma:
 	movl 12(%ebp),%ecx     #2º argumento
 	## algoritmo de la subrutina
 	## bucle
-           xxxx xxxx
-           xxxx xxxx
+        ##   xxxx xxxx
+        ##   xxxx xxxx
 	## el resultado está en EAX  
 	## recupera los  registros por el convenio
 	pop %esi
