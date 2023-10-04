@@ -71,13 +71,12 @@ Tema 5: <<Tema5_RepInstrucciones, Representación Digital de la Información: la
 Tema 6: <<Tema6_ProgAsm, Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.>>
 
 [#Tema1_Intro]
-[.columns]
 == Tema 1 : Introducción a la Asignatura Estructura de Computadores.
-[.column]
+
+
+=== Indice
+
 * Profesorado
-
-
-[.column]
 * Organización Académica
 ** Programa
 ** Prácticas
@@ -805,7 +804,7 @@ a|5*1000=cinco mil|4*100=cuatrocientos|5*10=cincuenta|1*1=uno
 |===
 
 [state="taula"]
-=== Representación de los Valores Enteros en Código Binario
+=== Representación de los Valores Naturales en Código Binario
 
 * ¿Número?¿Valor?¿Código?¿Representación?
 ** 2 dígitos : 0,1
@@ -829,14 +828,14 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 
 
 
-=== Representación de los Valores Enteros en Código Binario
+=== Representación de los Valores Naturales en Código Binario
 
 * ¿Cómo se representa en binario el valor 123.125? b1111011.001
 * ¿Cómo se calcula el valor del número binario b1111011.001?
 * Parte Entera: divisiones sucesivas por la base 2
 * Parte Fracción: multiplicaciones sucesivas por la base 2
 
-=== Representación de los Valores Enteros en Código Octal
+=== Representación de los Valores Naturales en Código Octal
 
 * Dígitos: 0,1,2,3,4,5,6,7
 * Posiciones y Pesos
@@ -845,7 +844,7 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 * Parte Entera: divisiones sucesivas por la base 8
 * Parte Fracción: multiplicaciones sucesivas por la base 8
 
-=== Representación de los Números en Hexadecimal
+=== Representación de los Valores Naturales en Hexadecimal
 
 * Dígitos: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F ___ el valor de A es 10, B->11, C->12, D->13, E-14, F->15
 * Posiciones y Pesos
