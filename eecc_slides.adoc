@@ -1,6 +1,7 @@
 =  Estructura de Computadores
 // classic AsciiDoctor attributes
 //:stem: latexmath
+//  asciidoctor-revealjs -r asciidoctor-kroki   eecc_slides.adoc
 :stem:
 :background-color="#ff0000":
 :icons: font
@@ -9,42 +10,37 @@
 // Despite the warning of the documentation, https://github.com/asciidoctor/asciidoctor-reveal.js, highlight.js syntax highlighting WORKS, BUT, you need to explicitly set the highlighter using the below attribute
 // see http://discuss.asciidoctor.org/Highlighting-source-code-for-reveal-js-backend-td2750.html
 :source-highlighter: highlight.js
-:highlightjs-languages: vhdl
-:source-language: vhdl 
+:highlightjs-languages: vhdl, x86asm
+:source-language: vhdl, x86asm
 //:source-highlighter: rouge
 //:source-highlighter: pygments
 // revealjs attributes
+// NO DEJAR LINEAS EN BLANCO ANTES DEL WHITE
 :revealjs_theme: white
 :revealjs_slideNumber: true
 // Al actualizar el slide no cambia de transpa y no se va al inicio
 :revealjs_hash: true   
 :revealjs_history: true
-
-
 :revealjs_center: true
 :revealjs_width: "100%"
 :revealjs_height: "100%"
 :revealjs_margin: 0
-
 //:revealjs_minScale: 1,
 //:revealjs_maxScale: 1
-
 // plugins copiados de tutoriales/asciidoctor-revealjs/../primer.js
 :revealjs_plugins_configuration: revealjs-plugins-conf.js
 :revealjs_plugins: revealjs-plugins.js
-
 //:scrollable: no pirula
-
 //:revealjs_history: true para go to file no pirula
-
 //:doctype: book
 //:lang: es
 //:encode: ISO-8859-1
 //:ascii-ids:
 :show-link-uri:
-:asciidoctor-fetch-kroki:
+:asciidoctor-fetch-kroki: 
 :experimental:
 :notitle:
+
 
 
 :ruta-transpas: /home/candido/Dropbox/apuntes/apuntes_Estr_Computadores/upna/apuntes_repositorio/transpas_eecc
@@ -1608,7 +1604,7 @@ bucle:
 * Lenguaje ensamblador INTEL y assembler nasm
 +
 
-[source,nasm]
+[source,x86asm]
 ----
 ;;; Programa: sum1toN.asm
 ;;; Descripción: realiza la suma de la serie 1,2,3,...N
@@ -1724,7 +1720,17 @@ bucle:
 *  link:./as_code/sum1toN_v6.s[sum1toN_v6.s]
 ** Pasar los dos argumentos a través de la pila insertando primero el último argumento printf(1º arg,2º arg) 
 *  link:./as_code/sum1toN_v7.s[sum1toN_v7.s]
-** Convertir el programa principal main en una función main() o subrutina
++
+
+....
+### Descripción: Macros con la directiva .equ
+###              Inicializar una array de datos con los diez primeros números enteros impares y sumarlos
+###		 bucle con la instrucción "cmp"
+###              Visualizar el resultado con la función printf() de la librería standard de C
+###              Pasar los dos argumentos a través de la pila insertando primero el último argumento printf(1º arg,2º arg) 
+....
+
+
 
 === Subrutinas
 
@@ -1751,25 +1757,128 @@ push etiqueta # ¿Da error?¿Por qué?
 ----
 
 
+[.columns]
 === La pila a nivel máquina x86
 
+[.column]
+[ditaa]
+----
+                                                                                                          
+ 0x00000000+---------+      
+           | cBLU    |       
+           |         |       
+           +---------+       
+           |         |       
+           | Segmento|
+           | Datos   |
+           |         |       
+           +---------+       
+           |         |       
+           | Segmento|
+           | Instruc.|
+           |         |                    
+           +---------+        
+           |         |       
+           | Segmento|
+           | Pila    |
+           |         |                    
+           +---------+                                
+           |         |       
+           | cBLU    |       
+           |         |       
+ 0xFFFFFFFF+---------+    
+           <-4Bytes--> 
+
+----
+
+[.column]
 * link:./pila.html[pila]
 * La anchura de la pila son 32 bits
 * Se apila en el sentido decreciente de las direcciones de memoria 
 
+[.column]
+[ditaa]
+----------------------------------------------------------------------
+                                                                                                          
+ 0x00000000+---------+      
+           | cBLU    |       
+           |         |       
+           +---------+       
+ 0xA0000000|  cDDD   |       
+           +---------+       
+ 0xA0000004|  cBBB   |       
+           +---------+       
+ 0xA0000008|  cBBB   |       
+           +---------+       
+ 0xA000000C|  c999   |       
+           +---------+       
+ 0xA0000010|  c999   |       
+           +---------+       
+ 0xA0000014|  c999   |       
+           +---------+       
+ 0xA0000018|  c999   |       
+           +---------+       
+ 0xB000001C|         |       
+           | cBLU    |       
+           |         |       
+ 0xFFFFFFFF+---------+    
+           <-4Bytes-->                         
+   	                
+	 
+----------------------------------------------------------------------
+
+
 === Anidamiento de llamadas a funciones: FRAME
 
+
+[ditaa]
+----------------------------------------------------------------------
+ Address   ---DRAM----                                                                                    
+ 0x00000000+---------+    0x00000000+---------+      0x00000000+---------+      0x00000000+---------+     
+           |         |              |         |                |         |                |         |     
+           +         |              +         |                +         |                +         |     
+           | cBLU    |              | cBLU    |                | cBLU    |                | cBLU    |     
+           |         |              |         |                |         |                |         |     
+           +---------+              +         +                +         +                +         +     
+ 0xA0000000|  cDDD   |              |         |                |         |                |         | 
+           +---------+              +         +                +         +                +---------+     
+ 0xAFFFFFF9|  cBBB   |              |         |                |         |           sp-> |         |         
+           +---------+              +         +                +         +                +  printf +     
+           |  cBBB   |              |         |                |         |                |         |<-fp     
+           +---------+              +         +                +---------+                +---------+     
+ 0xAFFFFFFD|  c999   |              |         |                |         | <-sp           |         |     
+           +---------+              +         +                + sumMtoN +                + sumMtoN +     
+           |  c999   |              |         |           fp-> |         |                |         |     
+           +---------+              +---------+                +---------+                +---------+     
+           |  c999   |              |         | <-sp           |         |                |         |     
+           +---------+              +   main  +                +  main   +                +  main   +     
+           |  c999   |         fp-> |         |                |         |                |         |     
+           +---------+              +---------+                +---------+                +---------+     
+ 0xB0000000|         |              |         |                |         |                |         |     
+           | cBLU    |              | cBLU    |                |  cBLU   |                |  cBLU   |     
+           |         |              |         |                |         |                |         |        
+ 0xFFFFFFFF+---------+    0xFFFFFFFF+---------+      0xFFFFFFFF+---------+      0xFFFFFFFF+---------+     	 
+           <--Word---> 	                           
+   	        (a)                    (b)                        (c)                         (d) 
+	 
+----------------------------------------------------------------------
+
 * Cada rutina o subrutina tiene que generar por programa su propio segmento dentro de la sección stack.
-* link:./pila.html[pila] 
-* Un ejemplo típico de anidamiento de funciones son las subrutinas recurrentes
-** link:https://diveintosystems.org/book/C8-IA32/recursion.html[Animación recursión]
+
+
 
 === Punteros del Frame Activo
 
 * fp: frame pointer y sp: stack pointer
 * el puntero fp apunta a la parte baja del frame activo y el sp apunta a la parte alta (último dato apilado) del frame activo
 * En la arquitectura x86 el la función fp la realiza el registro *EBP* (Bottom Pointer) y la función sp la realiza el registro *ESP*
-* link:./pila.html[pila] 
+
+
+=== Anidamiento de llamadas a funciones: FRAME
+
+* Un ejemplo típico de anidamiento de funciones son las subrutinas recurrentes o recursivas.
+* De aquí en adelante según se van aprendiendo los diferentes conceptos, ponerlos en práctica con link:https://diveintosystems.org/book/C8-IA32/recursion.html[La Animación de Recursión]: Analizar la función sumr en C y en ASM. Bajar al apartado 8.6.1. Animation: Observing How the Call Stack Changes. 
+* Ejercicio propuesto al final del capítulo: sum1toN.s como subrutina recursiva 
 
 === Pase de los argumentos y LLamada a la Subrutina
 
@@ -1779,7 +1888,7 @@ push etiqueta # ¿Da error?¿Por qué?
 * Código de pase de argumentos y llamada a la subrutina
 +
 
-[source,nasm]
+[source,x86asm]
 ----
 main:
         xxxx xxx
@@ -1802,6 +1911,7 @@ main:
 * Es necesario conservar el fp de la rutina que realiza la llamada para una vez finaliza la subrutina volver a activar el frame de la rutina que llama.
 +
 
+[source,x86asm]
 ----
 sumMtoN:
         push %ebp
@@ -1810,7 +1920,7 @@ sumMtoN:
 * Instrucciones del Prólogo
 +
 
-[source,nasm]
+[source,x86asm]
 ----
 sumMtoN:
 	push %ebp
@@ -1836,7 +1946,7 @@ sumMtoN:
 * Código del epílogo:
 +
 
-[source,nasm]
+[source,x86asm]
 ----
 
         xxx xxx
@@ -1857,12 +1967,20 @@ sumMtoN:
 * Es necesario preservar los registros EAX, ECX y EDX antes de llamar a la subrutina: la subrutina podrá utilizarlos libremente
 * Es necesario preservar los registros EBX,ESI,EDI,ESP,EBP  en caso de ser utilizados por la subrutina. Su valor ha de ser el mismo antes y después de la llamada a la subrutina.
 
+
+
+=== Anidamiento de llamadas a funciones: FRAME RECURRENTE
+
+* Comprender completamente link:https://diveintosystems.org/book/C8-IA32/recursion.html[La Animación de Recursión]: Analizar la función sumr en C y en ASM. Bajar al apartado 8.6.1. Animation: Observing How the Call Stack Changes. 
+* Ejercicio: Desarrollar el código "sum1toN.s" como subrutina recursiva 
+
+
 === Ejemplo: Subrutina sumMtoN.s
 
 * Código:
 +
 
-[source,nasm]
+[source,x86asm]
 ----
 ## Subrutina sumMtoN.s
 
@@ -1946,6 +2064,14 @@ suma:
 	ret                     # recuperar dirección de retorno
 ----
 
+
+
+=== Ejercicio
+*  link:./as_code/sum1toN_v8.s[sum1toN_v8.s]
+** Convertir el bloque sum1toN en una subrutina
+*  link:./as_code/sum1toN_v9.s[sum1toN_v9.s]
+** Convertir el bloque sum1toN en una subrutina recursiva
+
 === LLamadas al Sistema
 
 === Funciones del sistema
@@ -1954,6 +2080,7 @@ suma:
 * Volcar el contenido de la cabecera "/usr/include/asm/instd_32.h"
 +
 
+[C,source]
 ----
 exit 1
 fork 2
@@ -1971,7 +2098,7 @@ close 6
 * Ejemplo con el servicio "exit":
 +
 
-[source,nasm]
+[source,x86asm]
 ----
 	mov $1,%eax
 	mov $0,%ebx
