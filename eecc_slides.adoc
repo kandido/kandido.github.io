@@ -68,12 +68,11 @@ Tema 2: <<Tema2_VonNeum, Arquitectura de Von Neumann.>>
 Tema 3: Representación Digital de la Información: los Datos: <<ascii,ASCII >>, <<num_nat, Nº Naturales>>, <<num_ent, Nº Enteros>>
 Tema 4: Operaciones Aritméticas y Lógicas: <<op_nat, Nº Naturales>>, <<op_ent, Nº Enteros>>, <<op_log, Operaciones Lógicas>>   
 Tema 5: <<Tema5_RepInstrucciones, Representación Digital de la Información: las Instrucciones.>>
-Tema 6: <<Tema6_ProgAsm, Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel..>>
+Tema 6: <<Tema6_ProgAsm, Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.>>
 
 [#Tema1_Intro]
 [.columns]
-== Tema 1 : Introducción a los Sistemas Digitales Electrónicos
-
+== Tema 1 : Introducción a la Asignatura Estructura de Computadores.
 [.column]
 * Profesorado
 
@@ -278,11 +277,10 @@ sum(range(5,0,-1))
 === Programa en lenguaje texto: suma de los 5 primeros números enteros 
 
 [.column]
---
-Lenguaje C +
+Lenguaje C
 
 [source,C]
-
+----
 /*
  Programa: sum1toN.c
  Descripción: 
@@ -296,14 +294,13 @@ int main ()
     y+=N--;
   exit(y);
 }
---
+----
 
 [.column]
---
 Lenguaje Java +
 
 [source,java]
-
+----
 /* Programa Fuente: sum1toN.java
  compilación: javac sum1toN.java -> sum1toN.class 
  ejecución   -> java -cp . sum1toN 
@@ -324,7 +321,7 @@ public class sum1toN {
     System.out.print("\n");
   }
 }
--- 
+---- 
 
 [state=txikiago]
 === Módulo binario: en código binario
@@ -710,7 +707,7 @@ La distancia considerable entre los dos niveles (binario) a la entrada del recep
 
 
 [#ascii]
-=== Representación de los Caracteres
+=== Tema 3 :Representación de los Caracteres
 
 === Representación de los Caracteres
 
@@ -781,7 +778,7 @@ chr(0x41)
 
 
 [#num_nat]
-=== Representación de los Números NATURALES
+=== Tema 3: Representación de los Números NATURALES
 
 [state="taula"]
 === Representación de los Números Decimales
@@ -893,7 +890,7 @@ int(0x7B)
 ** grupos de 3 bits
 
 [#op_nat]
-=== Operaciones Aritméticas con los Números NATURALES
+=== Tema 4 : Operaciones Aritméticas con los Números NATURALES
 
 === Suma binaria
 
@@ -959,7 +956,7 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 ** 0xE53-0xBAA = 0x2A9
 
 [#num_ent]
-=== Representación de los Números ENTEROS
+=== Tema 4 :Representación de los Números ENTEROS
 
 === Representación de Números con Valores Enteros
 
@@ -1098,7 +1095,7 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 
 
 [#op_ent]
-=== Operaciones Aritméticas con los números ENTEROS
+=== Tema 4 :Operaciones Aritméticas con los números ENTEROS
 
 
 === Operaciones Aritméticas: Suma y Resta
@@ -1229,7 +1226,7 @@ Los errores de *overflow* se resuelven aumentando el número de bits de la repre
 
 
 [#op_log]
-=== Operaciones Lógicas
+=== Tema 4 :Operaciones Lógicas
 
 * Operadores
 ** Operadores aritméticos: suma, resta, multiplicación, ...
@@ -1287,7 +1284,7 @@ Los errores de *overflow* se resuelven aumentando el número de bits de la repre
 
 
 [#Tema5_RepInstrucciones]
-== Representación Digital de la Información: las INSTRUCCIONES
+== Tema 5: Representación Digital de la Información: las INSTRUCCIONES
 
 [.columns,state=txikiago]
 === Registro
@@ -1651,7 +1648,7 @@ bucle:
 
 
 [#Tema6_ProgAsm]
-==  Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.
+== Tema 6: Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.
 
 === Arquitecturas x86 i386 x86-64 amd64 
 
