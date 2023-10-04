@@ -1660,7 +1660,7 @@ bucle:
 * Linux denomina a la arquitectura x86 como i386 y a la arquitectura x86-64 como amd64.
 * En esta asignatura se va a trabajar principalmente con la arquitectura x86 ya que las prácticas se realizan en esta arquitectura de 32 bits.
 
-[status=txikia]
+[status=txikiago]
 === ISA x86
 
 * El objetivo de este capítulo es tener las conocimientos necesarios para la programación de bajo de nivel (lenguaje ensamblador) de la arquitectura de 32 bits de Intel: x86
@@ -1670,6 +1670,12 @@ bucle:
 ** Registro de estado o registro de flags
 ** Direccionamiento de la memoria principal
 ** Diferencia entre la memoria interna (registros) y la memoria externa (memoria principal)
+
+
+[status=txikiago]
+=== ISA x86
+
+* El programador de bajo de nivel necesita el conocimiento de la ISA, es decir:
 ** Tipos de datos y su formato: enteros complemento a 2
 ** Tamaño de los operandos: sufijos b,w,l,q de los mnemónicos
 ** Alineamiento de los datos en la memoria: little endian
@@ -1703,7 +1709,7 @@ bucle:
 
 
 
-[status=txikia]
+[status=txikiago]
 === Ejercicio
 *  link:./as_code/sum1toN_v5.s[sum1toN_v5.s]
 ** Macros con la directiva .equ
@@ -1714,6 +1720,12 @@ bucle:
 ** Bucle con la instrucción "cmp"
 ** https://www.felixcloutier.com/x86[x86]: https://www.felixcloutier.com/x86/cmp[cmp] , https://www.felixcloutier.com/x86/jcc[jcc]
 ** Visualizar el resultado con la función printf() de la librería standard de C
+
+
+[status=txikiago]
+=== Ejercicio
+
+*  link:./as_code/sum1toN_v6.s[sum1toN_v6.s]
 ** Pasar los dos argumentos a través de la pila insertando primero el último argumento printf(1º arg,2º arg) 
 *  link:./as_code/sum1toN_v7.s[sum1toN_v7.s]
 ** Convertir el programa principal main en una función main() o subrutina
