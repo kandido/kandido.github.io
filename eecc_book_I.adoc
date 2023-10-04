@@ -1,0 +1,107 @@
+Estructura de Computadores  (240306)
+====================================
+:stem: latexmath 
+:doctype: book
+:doctitle: Estructura de Computadores  (240306)
+:Author:          Cándido Aramburu
+:Email:           candido@unavarra.es
+:Author Initials: C.
+:Revision:	  0.6.0
+:Key words:	  computer, architecture
+:revdate: {localdate}
+:toc:
+:toclevels: 3
+:numbered:
+:lang: es
+:encode: ISO-8859-1
+:ascii-ids:
+:show-link-uri:
+:icons: font
+:source-highlighter: rouge
+:asciidoctor-fetch-kroki:
+:docinfo1:
+
+
+
+//// 
+
+include::./instructor/instructor.asciidoc[Instructor]
+
+////
+
+
+
+= I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.
+
+// Push titles down one level.
+:leveloffset: 1
+
+include::./introduccion/introduccion.adoc[Introducción]
+include::./arquitectura_vonneumann/arquitectura_vonneumann.adoc[Arquitectura von Neumann]
+include::./datos_representacion/datos_representacion.adoc[Representación Datos]
+include::./aritmetica_logica/aritmetica_logica.adoc[Aritmética Lógica]
+include::./instrucciones_representacion/instrucciones_representacion.adoc[Instrucciones Representacion]
+include::./programacion_asm/programacion_asm.adoc[Programación Ensamblador x86]
+
+
+// Return to normal title levels.
+:leveloffset: 0
+//[appendix]
+= VIII Apéndices
+// Push titles down one level.
+:leveloffset: 1
+
+//include::./apendice/apendice.adoc[Apéndices]
+include::./apendice/programas_iassim.adoc[Programas ensamblador iassim]
+include::./apendice/sim_iassim.adoc[Simulador IASSim]
+include::./apendice/prog_asm.adoc[Programación Ensamblador]
+include::./apendice/sum1toN_lang.adoc[sum1toN Lenguajes]
+include::./apendice/rtl.adoc[Lenguaje de Transferencia entre Registros RTL]
+include::./apendice/instruccion_representacion.adoc[Representación de la Instrucción]
+include::./apendice/fpu_x87.adoc[Float Point Unit x87]
+include::./apendice/pila.adoc[La Pila]
+include::./apendice/llamadas_so.adoc[Llamadas al Sistema Operativo]
+include::./apendice/prog_C.adoc[Programación en C]
+include::./apendice/practicas_apendice.adoc[Prácticas Apéndice]
+include::./modulo_fuente/mod_fuente_amd64.adoc[Módulos Fuente en Ensamblador amd64]
+include::./apendice/examenes.adoc[Exámenes Anteriores]
+include::./apendice/videoconferencia.adoc[Videoconferencia]
+
+
+
+// Return to normal title levels.
+:leveloffset: 0
+:numbered!:
+[bibliography]
+= IX Bibliografía
+
+////
+ no hace falta poner downlevel porque la bibliografía no tiene niveles
+////
+
+include::./bibliografia/bibliografia.adoc[Bibliografía]
+
+////
+ no hace falta poner top level porque ya está
+////
+[glossary]
+= X Glosario
+
+
+
+[glossary]
+Primer término::
+  The corresponding (indented) definition.
+
+Segundo término::
+  The corresponding (indented) definition.
+
+
+[colophon]
+= XI Colofón
+
+Text at the end of a book describing facts about its production.
+
+
+[index]
+== Index
