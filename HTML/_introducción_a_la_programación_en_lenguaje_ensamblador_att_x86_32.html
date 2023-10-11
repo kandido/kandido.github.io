@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+<ul class="sectlevel1">
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html"><span class="toc-current">12. Introducción a la Programación en Lenguaje Ensamblador AT&amp;T x86-32</span></a>
+<ul class="sectlevel2">
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_introducción_16">12.1. Introducción</a>
+<ul class="sectlevel3">
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_objetivos_3">12.1.1. Objetivos</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_requisitos_3">12.1.2. Requisitos</a>
+</li>
+</ul>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_leeme">12.2. LEEME</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_cuestiones_2">12.3. Cuestiones</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_estación_de_trabajo">12.4. Estación de Trabajo</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_programación_sum1ton_c">12.5. Programación sum1toN.c</a>
+<ul class="sectlevel3">
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_algoritmo">12.5.1. Algoritmo</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_edición_del_módulo_fuente_sum1ton_c">12.5.2. Edición del Módulo fuente: sum1toN.c</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_compilación">12.5.3. Compilación</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_análisis_de_los_módulos">12.5.4. Análisis de los módulos</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_ejecución">12.5.5. Ejecución</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_depuración">12.5.6. Depuración</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_recordatorio_documento_memoria">12.5.7. Recordatorio: Documento Memoria</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_continuamos_con_más_ejercicios">12.5.8. Continuamos con más ejercicios</a>
+</li>
+</ul>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_programación_sum1ton_s">12.6. Programación sum1toN.s</a>
+<ul class="sectlevel3">
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_algoritmo_2">12.6.1. Algoritmo</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_edición_del_módulo_fuente_sum1ton_s">12.6.2. Edición del Módulo fuente: sum1toN.s</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_compilación_2">12.6.3. Compilación</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_ejecución_2">12.6.4. Ejecución</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_análisis_del_módulo_fuente">12.6.5. Análisis del módulo Fuente</a>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_depuración_2">12.6.6. Depuración</a>
+</li>
+</ul>
+</li>
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html#_arquitectura_amd64_4">12.7. Arquitectura amd64</a>
+</li>
+</ul>
+</li>
+<li><a href="_representación_de_los_datos_2.html">13. Representación de los Datos</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html">14. Operaciones Aritméticas y Lógicas</a>
+</li>
+<li><a href="_instrucciones_de_saltos_condicionales.html">15. Instrucciones de Saltos Condicionales</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html">16. LLamadas al Sistema Operativo (Kernel)</a>
+</li>
+<li><a href="_subrutinas_2.html">17. Subrutinas</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html">18. Imágenes: Bit Map Portable</a>
+</li>
+</ul>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32">12. Introducción a la Programación en Lenguaje Ensamblador AT&amp;T x86-32</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_introducción_16">12.1. Introducción</h3>
+<div class="sect3">
+<h4 id="_objetivos_3">12.1.1. Objetivos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Introducción a la <strong>programación de bajo nivel</strong> mediante los lenguajes <em>C</em> y <em>ensamblador AT&amp;T</em> para la arquitectura <strong>x86 de 32 bits</strong> de Intel.</p>
+</li>
+<li>
+<p>Utilización de herramientas de desarrollo de sw de bajo nivel como el toolchain (compilador, ensamblador, linker) y el depurador GDB, libres de la fundación GNU.</p>
+</li>
+<li>
+<p>Desarrollo de una workstation mediante la instalación de herramientas de desarrollo en un entorno GNU/linux/x86 en una computadora personal.</p>
+</li>
+<li>
+<p>Comprender el funcionamiento de la computadora desde el punto de vista de un programador de bajo nivel.</p>
+</li>
+<li>
+<p>Relacionar las propiedades de un lenguaje de alto nivel con un lenguaje de bajo nivel.</p>
+</li>
+<li>
+<p>El lenguaje ensamblador puede ser utilizado como una herramienta para analizar la arquitectura y el funcionamiento de la computadora. No es el objetivo central de esta asignatura ser un experto en lenguajes de programación de bajo nivel ni en el desarrollo de algoritmos, aunque sí un nivel muy básico.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_requisitos_3">12.1.2. Requisitos</h4>
+<div class="sect4">
+<h5 id="_teóricos">Teóricos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Conocimientos muy básicos de una arquitectura ISA: Arquitectura modelo Von Neumann( Microarquitectura CPU, arquitectura Memoria Principal, ciclo de instrucción), representación de datos y operaciones aritméticas, formato de  instrucciones y programación básica en lenguaje ensamblador y lenguaje máquina con la máquina IAS de John von Neumann, la sintaxis del lenguaje ensamblador AT&amp;T x86 y la arquitectura básicA del procesador x86-64 y x86-32 de intel.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_prácticos">Prácticos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Tener configurada la "Plataforma de Desarrollo" GNU/linux(AMD64)/x86_64(Intel ó AMD) con las herramientas apropiadas.</p>
+</li>
+<li>
+<p>Conocimientos de programación imperativa en lenguaje C y del "Lenguaje de Transferencia entre Registros" RTL, manejo básico del entorno GNU/linux y una herramienta de edición.</p>
+</li>
+<li>
+<p>Estar dado de alta en el sitio de la asignatura en servidor miaulario.</p>
+</li>
+<li>
+<p>Haber realizado la simulación de ejecución de un programa en lenguaje ensamblador y lenguaje máquina.  Por ejemplo en la máquina IAS de John von Neumann mediante el emulador Web IASSim</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Haber analizado la sintaxis y estructura de un programa sencillo en lenguaje ensamblador AT&amp;T x86, compilado, ejecutado  y analizada la ejecución del programa paso a paso mediante el depurador GDB mediante la información de <a href="_practicando_la_programación_desde_el_principio.html#prac_apu">Apéndice:Practicando la Programación desde el principio</a> y el pequeño tutorial <a href="_practicando_la_programación_desde_el_principio.html#empezando_asm">Apéndice: empezando ASM</a> y <a href="_practicando_la_programación_desde_el_principio.html#empezando_c">Apéndice: Empezando C</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_leeme">12.2. LEEME</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Lectura del guión de prácticas  y de los capítulos 1 y 2 del Libro Programming from the Ground-Up.</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_apu">Apuntes y Libro de Texto</a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+La memoria se realiza en tiempo real durante la realización de la práctica y es la única documentación impresa que se utilizará el día del examen, por lo que debe de estar bien documentada. La memoria se entrega unos días después de la realización de la memoria a través de MiAulario/TAREAS siguiendo las indicaciones especificadas en <a href="_practicando_la_programación_desde_el_principio.html#prac_doc_mem">Apéndice: Contenido y Formato de la Memoria</a> y en la fecha indicada en MiAulario/TAREAS.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Abrir en el Escritorio de la computadora un documento texto que será la MEMORIA donde se irá añadiendo toda la información obtenida durante toda la sesión de prácticas</strong></p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_eval">Evaluación</a>: sistema de evaluación</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_prog">Programación</a> : metodología</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cuestiones_2">12.3. Cuestiones</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_eval">"Autoevaluación de Prácticas"</a> opcional: <a href="_prácticas_cuestionario.html#prac_cues">Prácticas: Cuestionario</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_estación_de_trabajo">12.4. Estación de Trabajo</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Anotar las características de la <a href="_practicando_la_programación_desde_el_principio.html#prac_plat_des">Plataforma de Desarrollo</a>  en el Documento Memoria.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_programación_sum1ton_c">12.5. Programación sum1toN.c</h3>
+<div class="sect3">
+<h4 id="_algoritmo">12.5.1. Algoritmo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Desarrollar un programa en lenguaje C que realice la suma \(\sum_{i=1}^{N}i\) cuyo resultado es \(N(N+1)/2\) con la arquitectura <em>i386</em> utilizando el <a href="_practicando_la_programación_desde_el_principio.html#prac_prog">método de programación</a> de descripción inicial en lenguaje pseudocódigo y organigrama.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_edición_del_módulo_fuente_sum1ton_c">12.5.2. Edición del Módulo fuente: sum1toN.c</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Editar el programa descargando el módulo fuente "sum1toN.c" de miaulario y añadiendo los comentarios apropiados.</p>
+</li>
+<li>
+<p>Cabecera con información complementaria:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="C">/*
+ Programa: sum1toN.c
+ Descripción: realiza la suma de la serie 1,2,3,...N
+ Es el programa en lenguaje C equivalente a sum1toN.ias de la máquina IAS de von Neumann
+ y equivalente al programa sum1toN.s en lenguaje ensamblador AT&amp;T
+Lenguaje:       C99
+Descripción:    Suma de los primeros 5 números naturales
+Entrada:        Definida en una variable
+Salida:         Sin salida periférica&lt;&lt;&lt;&lt;s
+Compilación:    gcc -m32 -g -o sum1toN sum1toN.c
+S.O:            GNU/linux 5.4.0-128-generic ubuntu 20.04 x86-64
+Librería:       /usr/lib/x86_64-linux-gnu/libc.so
+PC:		ThinkPad L560 product: 20F1S0H400 serial: MP15YSW7
+CPU:            Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz width:64 bits
+Compilador:     gcc version 9.4.0
+Ensamblador:    GNU assembler version 2.34
+Linker/Loader:  GNU ld (GNU Binutils for Ubuntu) 2.34
+Asignatura:     Estructura de Computadores
+Fecha:          25/09/2022
+Autor:          Cándido Aramburu
+*/</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Programa:</p>
+<div class="listingblock">
+<div class="content">
+<pre>// Módulo Principal
+void  main (void) {
+  //Declaración de variables locales e inicialización de los parámetros del bucle
+  int sum=0,n=5;
+  //Bucle que genera los sumandos y realiza la suma
+  while(n&gt;0){ 	//Condición de salida del bucle cuando el sumando es negativo
+    sum+=n;
+    n--;     	//Actualización del sumando
+  }
+}	   	//Si las instrucciones se han ejecutado sin interrupción ni fallo main() devuelve el valor cero al sistema operativo.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compilación">12.5.3. Compilación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Seguir los pasos del proceso de <a href="_practicando_la_programación_desde_el_principio.html#compilacion">compilación</a> común a todas las sesiones.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -m32 -g -o sum1toN sum1toN.c</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>listar los ficheros: <code>ls -l sum1toN*</code>. ¿Qué representa cada uno de ellos?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>gcc --save-temps -m32 -g -o sum1toN sum1toN.c</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>listar los ficheros: <code>ls -l sum1toN*</code>. ¿Qué representan los nuevos ficheros?</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_análisis_de_los_módulos">12.5.4. Análisis de los módulos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Análisis para comprobar los distintos módulos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>file sum1toN.c</code></p>
+</li>
+<li>
+<p><code>file sum1toN.i</code></p>
+</li>
+<li>
+<p><code>file sum1toN.s</code></p>
+</li>
+<li>
+<p><code>file sum1toN.o</code></p>
+</li>
+<li>
+<p><code>file sum1toN</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución">12.5.5. Ejecución</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>./sum1toN</code> : llamada al módulo binario ejecutable</p>
+</li>
+<li>
+<p><code>echo $?</code>   : visualización del valor devuelto por el programa <em>sum1toN</em> al sistema operativo linux.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El valor cero se utiliza como indicador de que el programa se ha ejecutado sin ningún tipo de contratiempo.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_depuración">12.5.6. Depuración</h4>
+<div class="sect4">
+<h5 id="_introducción_17">introducción</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La ejecución del programa paso a paso, instrucción a instrucción, permite un análisis minucioso de bajo nivel de la ejecución del programa pudiendo detener el programa y volcar el valor de las variables en la memoria principal, estado de los registros de la cpu, etc.</p>
+</li>
+<li>
+<p>El Depurador GDB (GNU DeBugger) permite la ejecución a paso a paso y análisis de la memoria mediante un repertorio de comandos propios del depurador.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_generación_de_la_tabla_de_símbolos">Generación de la tabla de símbolos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -m32 -g -o sum1toN sum1toN.c</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>opción <strong>-g</strong>: Inserta la "Tabla de Símbolos" en el módulo binario ejecutable.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>En la línea de comandos emplear el TABULADOR TAB para Completar los nombres: <code>gcc -m32 -g -o sum1TAB suTAB</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_gdb">gdb</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Abrir el depurador: <code>gdb</code> para comenzar la sesión de depuración.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ventana con el prompt <strong>(gdb)</strong>: línea de comandos propios del debugger que serán interpretados por el GDB.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_abrir_una_nueva_ventana">abrir una nueva ventana</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>(gdb) <code>layout src</code> ó <code>Control-x Control-a</code></p>
+</li>
+<li>
+<p>navegar entre las dos ventanas: <code>Control-x o</code> y sino también <code>focus src</code> y <code>focus cmd</code></p>
+</li>
+<li>
+<p><code>help focus</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_logging">Logging</h5>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+El logging hay que configurarlo con las dos ventanas abiertas: la ventana de comandos y la ventana del código source. Si se hace teniendo solamente la ventana de comandos, luego al abrir más ventanas deja de loggear.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Salvar toda la sesión de depuración en el fichero <em>sum1toN_gdb_c.txt</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Entradas &#8594;  (gdb) <code>set trace-commands on</code>,</p>
+</li>
+<li>
+<p>Salidas &#8594;   (gdb) <code>set logging file sum1toN_gdb_c.txt</code></p>
+</li>
+<li>
+<p>Activación &#8594;  <code>set logging on</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>Copying output to sum1toN_gdb_c.txt.
+Copying debug output to sum1toN_gdb_c.txt.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cada vez que salga y entre en el debugger en la misma sesión de prácticas y utilice el mismo fichero histórico <em>sum1toN_gdb_c.txt</em> hay que realizar la configuración anterior con las dos ventanas abiertas.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_comandos_linux_desde_la_línea_de_comandos_gdb">Comandos linux desde la línea de comandos gdb</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>shell ls -l sum1toN_gdb_c.txt</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>shell date</code></p>
+</li>
+<li>
+<p><code>shell pwd</code></p>
+</li>
+<li>
+<p><code>shell ls</code></p>
+</li>
+<li>
+<p><code>shTAB</code> : Emplear el TABULADOR TAB para Completar los nombres.</p>
+</li>
+<li>
+<p><code>shell daTAB</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_comprobar_el_histórico_de_la_sesión_de_depuración">COMPROBAR el histórico de la sesión de depuración</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Abrir una consola y en la carpeta de trabajo comprobar que existe el fichero <em>sum1toN_gdb_c.txt</em> y que contiene los comandos gdb ejecutados anteriormente.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Es muy frustante darse cuenta después de dos horas de trabajo que no se ha guardado todo el trabajo
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ventanas">Ventanas</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Layout: <code>C-x a</code> &#8594; por defecto dos ventanas: módulo fuente y línea de comandos.</p>
+</li>
+<li>
+<p>Navegador ventanas: <code>C-x o</code></p>
+</li>
+<li>
+<p>Navegar por el histórico de comandos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Logging histórico de comandos: Activar la ventana de comandos del GDB. Navegar con las teclas flecha arriba/abajo.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ayuda">Ayuda</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>help shell</code> ó <code>h shell</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_cargar_módulo_objeto_ejecutable">Cargar módulo objeto ejecutable</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Cargar el módulo objeto binario que contiene la Tabla de Símbolos: <code>file sum1toN</code></p>
+</li>
+<li>
+<p>módulo fuente con los símbolos asociados a la Tabla de Símbolos: <code>info sources</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Observar que el depurador confirma la existencia de la tabla de símbolos, imprescindible para la depuración.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejecución_paso_a_paso">Ejecución paso a paso</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>punto ruptura en la entrada al programa: <code>break main</code></p>
+</li>
+<li>
+<p>Ejecución: <code>run</code> hasta el punto de ruptura cuya línea NO se ejecuta &#8594; Aparece el código fuente.</p>
+</li>
+<li>
+<p>Next source line: <code>next</code>, <code>n</code></p>
+</li>
+<li>
+<p>Next 5 source lines: <code>n 5</code>, <code>print sum</code>, <code>p sum</code></p>
+</li>
+<li>
+<p>Comenzar desde el principio nuevamente: <code>run</code> ó <code>start</code></p>
+</li>
+<li>
+<p>Continuar hasta el próximo punto de ruptura: <code>continue</code>, <code>c</code></p>
+</li>
+<li>
+<p><code>run</code>, <code>n</code>, RETURN, RET, RET, <code>p sum</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_bucle">Bucle</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>¿cómo salir de un bucle de cientos o miles de iteracciones hasta la siguiente instrucción fuera del bucle?</p>
+</li>
+<li>
+<p><code>run</code>, <code>until</code>, RET,RET,RET..hasta salir del bucle.., <code>p sum</code>, <code>c</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_análisis_de_la_memoria_principal_dram">Análisis de la memoria principal DRAM</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>imprimir el contenido de variables y sus direcciones en la memoria principal</p>
+</li>
+<li>
+<p><code>print n</code>, <code>p n</code>, <code>p /t n</code>, <code>p /x n</code>, <code>ptype n</code>, <code>whatis n</code>,<code>p &amp;n</code></p>
+</li>
+<li>
+<p><code>print symbol</code> : symbol es el nombre de la variable, no su dirección.</p>
+</li>
+<li>
+<p><code>p $eax</code></p>
+</li>
+<li>
+<p><code>p $ebx</code></p>
+</li>
+<li>
+<p><code>p $ecx</code></p>
+</li>
+<li>
+<p><code>info registers</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_desensamblar">Desensamblar</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Desensamblar: ingeniería inversa . Convierte el código binario en código ensamblador</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>layout split</code></p>
+</li>
+<li>
+<p>Next machine instruction: <code>ni</code>, RET, RET, RET, RET, <code>until</code>, RET,..hasta salir del bucle</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejecuta instrucciones máquina (observar ventana con el código ensamblador)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_salir">Salir</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>exit</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Comprobar que el contenido del fichero <em>sum1toN_gdb_C.txt</em> es correcto.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_recordatorio_documento_memoria">12.5.7. Recordatorio: Documento Memoria</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ir salvando el trabajo y comentándolo según se va realizando.</p>
+</li>
+<li>
+<p>En la consola abrimos el fichero <code>sum1toN_gdb_C.txt</code> que contiene todos los comandos utilizados con sus volcados.</p>
+</li>
+<li>
+<p>Guardar el contenido de <em>sum1toN_gdb_C.txt</em> en el Documento Memoria añadiendo los comentarios necesarios.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_continuamos_con_más_ejercicios">12.5.8. Continuamos con más ejercicios</h4>
+<div class="sect4">
+<h5 id="_jugar_con_el_módulo_fuente">Jugar con el módulo fuente</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Cambios en el Módulo fuente en lenguaje C.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cambiar el tamaño de los datos con alguno de los siguientes tipos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>char,short,int,long</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cambiar el formato de los números con alguno de los siguientes bases:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>decimal, hexadecimal, octal, binario &#8594; prefijos 0x, 0, 0b &#8594; 0x5, 05, 0b5</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Compilar y ejecutarlos. Indicar en la memoria si da o no algún error</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_jugar_con_el_depurador">Jugar con el depurador</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>GDB</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cambiar en el módulo fuente el tamaño de las variables a <em>char</em> y la sentencia sum+=n por la sentencia sum-=n .</p>
+</li>
+<li>
+<p>Compilar el módulo fuente con la opción de inserción de la tabla de símbolos</p>
+</li>
+<li>
+<p>Abrir el depurador y cargar el módulo binario</p>
+</li>
+<li>
+<p>Ejecutar en modo paso a paso observando las sumas parciales con lo siguientes comandos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>x /1db &amp;sum</code>, <code>x /1tb &amp;sum</code>, <code>x /1ob &amp;sum</code>, <code>x /1xb &amp;sum</code></p>
+</li>
+<li>
+<p>indicar para comando el resultado</p>
+</li>
+<li>
+<p>Con la ayuda de <code>help x</code> explica el significado de <code>1db</code>, <code>1tb</code>, <code>1ob</code>, <code>1xb</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_programación_sum1ton_s">12.6. Programación sum1toN.s</h3>
+<div class="sect3">
+<h4 id="_algoritmo_2">12.6.1. Algoritmo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Desarrollar un programa en lenguaje ensamblador AT&amp;T con la arquitectura <em>i386</em> que realice la suma \(\sum_{i=1}^{N}i\) cuyo resultado es \(N(N+1)/2\) utilizando el <a href="_practicando_la_programación_desde_el_principio.html#prac_prog">método de programación</a> de descripción inicial en lenguaje pseudocódigo y organigrama.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_edición_del_módulo_fuente_sum1ton_s">12.6.2. Edición del Módulo fuente: sum1toN.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Descargar el módulo fuente "sum1toN.s" de miaulario y añadir los comentarios apropiados.</p>
+</li>
+<li>
+<p>x86 es la arquitectura de Intel de 32 bits</p>
+</li>
+<li>
+<p>i386 significa en linux: arquitectura x86-32</p>
+</li>
+<li>
+<p>Lenguaje ensamblador AT&amp;T de GNU para la arquitectura i386 &#8594; lenguaje GNU as &#8594; lenguaje gas</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">###</span> <span class="nl">Programa:</span> <span class="nf">sum1toN.s</span>
+<span class="err">###</span> <span class="nf">Descripci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">realiza</span> <span class="nv">la</span> <span class="nv">suma</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">serie</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="nv">...N.</span> <span class="nv">La</span> <span class="nv">entrada</span> <span class="nv">se</span> <span class="nv">define</span> <span class="nv">en</span> <span class="nv">el</span> <span class="nv">propio</span> <span class="nv">programa</span> <span class="nv">y</span> <span class="nv">la</span> <span class="nv">salida</span> <span class="nv">se</span> <span class="nv">pasa</span> <span class="nb">al</span> <span class="nv">S.O.</span>
+<span class="err">###</span> <span class="nl">Lenguaje:</span> <span class="nf">Lenguaje</span> <span class="nv">ensamblador</span> <span class="nv">de</span> <span class="nv">GNU</span> <span class="nv">para</span> <span class="nv">la</span> <span class="nv">arquitectura</span> <span class="nv">i386</span> <span class="o">-&gt;</span> <span class="nv">GNU</span> <span class="nv">as</span> <span class="o">-&gt;</span> <span class="nv">gas</span> <span class="o">-&gt;</span> <span class="nv">AT</span><span class="o">&amp;</span><span class="nv">T</span>
+<span class="err">###</span> <span class="nf">Es</span> <span class="nv">el</span> <span class="nv">programa</span> <span class="nv">en</span> <span class="nv">lenguaje</span> <span class="nv">AT</span><span class="o">&amp;</span><span class="nv">T</span> <span class="nv">i386</span> <span class="nv">equivalente</span> <span class="nv">a</span> <span class="nv">sum.ias</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">m</span><span class="err">á</span><span class="nv">quina</span> <span class="nv">IAS</span> <span class="nv">de</span> <span class="nv">von</span> <span class="nv">Neumann</span>
+<span class="err">###</span> <span class="nf">gcc</span> <span class="o">-</span><span class="nv">m32</span> <span class="o">-</span><span class="nv">g</span> <span class="o">-</span><span class="nv">nostartfiles</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span>  <span class="nv">sum1toN.s</span>
+<span class="err">###</span> <span class="nf">Ensamblaje</span> <span class="nv">as</span> <span class="o">--</span><span class="mi">32</span> <span class="o">--</span><span class="nb">gs</span><span class="nv">tabs</span> <span class="nv">sum1toN.s</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN.o</span>
+<span class="err">###</span> <span class="nf">linker</span> <span class="o">-&gt;</span> <span class="nv">ld</span> <span class="o">-</span><span class="nv">melf_i386</span>   <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span> <span class="nv">sum1toN.o</span>
+
+        <span class="err">##</span>  <span class="nf">Declaraci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">de</span> <span class="nv">variables</span>
+	<span class="err">##</span>  <span class="nf">SECCION</span> <span class="nv">DE</span> <span class="nv">DATOS</span>
+        <span class="nf">.section</span> <span class="nv">.data</span>
+
+<span class="nl">n:</span>      <span class="nf">.int</span> <span class="mi">5</span>
+
+        <span class="nf">.global</span> <span class="nv">_start</span>
+
+        <span class="err">##</span>  <span class="nf">Comienzo</span> <span class="nv">del</span> <span class="nv">c</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span>
+	<span class="err">##</span>  <span class="nf">SECCION</span> <span class="nv">DE</span> <span class="nv">INSTRUCCIONES</span>
+        <span class="nf">.section</span> <span class="nv">.text</span>
+<span class="nl">_start:</span>
+        <span class="nf">mov</span> <span class="kc">$</span><span class="mi">0</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span> <span class="err">#</span> <span class="nb">ECX</span> <span class="nv">implementa</span> <span class="nv">la</span> <span class="nv">variable</span> <span class="nv">suma</span>
+        <span class="nf">mov</span> <span class="nv">n</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+<span class="nl">bucle:</span>
+        <span class="nf">add</span> <span class="o">%</span><span class="nb">edx</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>
+        <span class="nf">sub</span> <span class="kc">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+        <span class="nf">jnz</span> <span class="nv">bucle</span>
+
+        <span class="nf">mov</span> <span class="o">%</span><span class="nb">ecx</span><span class="p">,</span> <span class="o">%</span><span class="nb">ebx</span> <span class="err">#</span> <span class="nv">el</span> <span class="nv">argumento</span> <span class="nv">de</span> <span class="nv">salida</span> <span class="nb">al</span> <span class="nv">S.O.</span> <span class="nv">a</span> <span class="nv">trav</span><span class="err">é</span><span class="nv">s</span> <span class="nv">de</span> <span class="nb">EBX</span> <span class="ow">seg</span><span class="err">ú</span><span class="nv">n</span> <span class="nv">convenio</span> <span class="nv">ABI</span> <span class="nv">i386</span>
+
+        <span class="err">##</span> <span class="nf">salida</span>
+        <span class="nf">mov</span> <span class="kc">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="nb">eax</span>  <span class="err">#</span> <span class="nv">c</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">llamada</span> <span class="nb">al</span> <span class="nb">si</span><span class="nv">stema</span> <span class="nv">operativo</span><span class="p">:</span> <span class="nv">subrutina</span> <span class="nv">exit</span>
+        <span class="nf">int</span> <span class="kc">$</span><span class="mh">0x80</span>     <span class="err">#</span> <span class="nv">llamada</span> <span class="nb">al</span> <span class="nb">si</span><span class="nv">stema</span> <span class="nv">operativo</span> <span class="nv">para</span> <span class="nv">que</span> <span class="nv">ejecute</span> <span class="nv">la</span> <span class="nv">subrutina</span> <span class="ow">seg</span><span class="err">ú</span><span class="nv">n</span> <span class="nv">el</span> <span class="nv">valor</span> <span class="nv">de</span> <span class="nb">EAX</span>
+
+
+        <span class="nf">.end</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compilación_2">12.6.3. Compilación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Seguir los pasos de la <a href="_practicando_la_programación_desde_el_principio.html#compilacion_asm">compilación </a> de un módulo en lenguaje ensamblador.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -m32 -g -o sum1toN sum1toN.s</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_2">12.6.4. Ejecución</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>./sum1toN</code></p>
+</li>
+<li>
+<p><code>echo $?</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_análisis_del_módulo_fuente">12.6.5. Análisis del módulo Fuente</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Leer en las hojas de referencia rápida el <a href="_programación_ensamblador_att_x86.html#programa_minimalista">Programa Ejemplo Minimalista</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_depuración_2">12.6.6. Depuración</h4>
+<div class="sect4">
+<h5 id="_inicio">Inicio</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Depurador GDB: GNU DeBugger.</p>
+</li>
+<li>
+<p><code>gcc -m32 -g -o sum1toN sum1toN.s</code></p>
+</li>
+<li>
+<p><code>gdb</code></p>
+</li>
+<li>
+<p><code>C-x a</code></p>
+</li>
+<li>
+<p><code>C-x o</code></p>
+</li>
+<li>
+<p><code>set trace-commands on</code></p>
+</li>
+<li>
+<p><code>set logging file sum1toN_gdb_asm.txt</code></p>
+</li>
+<li>
+<p><code>set logging on</code></p>
+</li>
+<li>
+<p><code>shell ls -l sum1toN_gdb_asm.txt</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_arrancar_el_programa">Arrancar el programa</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>file sum1toN</code></p>
+</li>
+<li>
+<p><code>info sources</code></p>
+</li>
+<li>
+<p><code>b _start</code></p>
+</li>
+<li>
+<p><code>run</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_analizar_símbolos_en_memoria">Analizar símbolos en memoria</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ptype n</code></p>
+</li>
+<li>
+<p><code>p n</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>x address</code> : examine main memory address . Devuelve el contenido de la dirección de memoria address &#8594; <em>&amp;symbol</em> donde symbol es el nombre de la variable.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>x &amp;n</code>, <code>x n</code>, <code>x /1bw &amp;n</code>, <code>x /1xw &amp;n</code>, <code>x /4xw &amp;n</code></p>
+</li>
+<li>
+<p><code>b bucle</code></p>
+</li>
+<li>
+<p><code>c</code></p>
+</li>
+<li>
+<p><code>start</code></p>
+</li>
+<li>
+<p><code>c</code></p>
+</li>
+<li>
+<p><code>n</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_registros_3">Registros</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>p $ecx</code></p>
+</li>
+<li>
+<p><code>p $edx</code></p>
+</li>
+<li>
+<p><code>until</code></p>
+</li>
+<li>
+<p><code>p $ecx</code></p>
+</li>
+<li>
+<p><code>p $edx</code></p>
+</li>
+<li>
+<p><code>info registers</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_instrucciones_máquina">Instrucciones máquina</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>layout split</code></p>
+</li>
+<li>
+<p><code>start</code></p>
+</li>
+<li>
+<p><code>c</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_fin">Fin</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>exit</code></p>
+</li>
+<li>
+<p>En la consola abrimos el fichero <code>gedit  sum1toN_gdb_asm.txt</code> que contiene todos los comandos utilizados con sus volcados.</p>
+</li>
+<li>
+<p>Guardar el contenido de <em>sum1toN_gdb_asm.txt</em> en el Documento Memoria añadiendo los comentarios necesarios.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_arquitectura_amd64_4">12.7. Arquitectura amd64</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo en el apéndice : <a href="_lenguajes_de_programación_en_ensamblador.html#sum1toN_att_64">sum1toN.s</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Analizar el código, compilarlo, ejecutarlo y comprobar mediante el debugger que efectivamente los registros son de 64 bits.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>↑ Up: <a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_representación_de_los_datos_2.html">Representación de los Datos</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

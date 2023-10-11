@@ -1,0 +1,9 @@
+Nombre ;Comentario                    ;Código             ;Operación                                       ;O D I T S Z A P C
+NEG    ;Negación (complemento a 2)    ;NEG Op             ;Op:=0-Op si Op=0 entonces CF:=0 sino CF:=1      ;±       ± ± ± ± ±
+NOT    ;Invertir cada bit             ;NOT Op             ;Op:=Ø~Op (invierte cada bit)			   ;
+AND    ;'Y' (And) lógico              ;AND Fuente,Dest    ;Dest:=Dest ^ Fuente                             ;0       ± ± ? ± 0
+OR     ;'O' (Or) lógico               ;OR  Fuente,Dest    ;Dest:=Dest v Fuente                             ;0       ± ± ? ± 0
+XOR    ;'O' (Or) exclusivo            ;XOR Fuente,Dest    ;Dest:=Dest (xor) Fuente                         ;0       ± ± ? ± 0
+SHL    ;Desplazam. lógico a la izq.   ;SHL Op,Cantidad    ;                                                ;i       ± ± ? ± ±
+SHR    ;Desplazam. lógico a la der.   ;SHR Op,Cantidad    ;                                                ;i       ± ± ? ± ± 
+                                                 

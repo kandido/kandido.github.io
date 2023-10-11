@@ -1,0 +1,187 @@
+Apéndice: Unidad de Memoria DRAM
+================================
+
+:doctitle: Apéndice: Unidad de Memoria
+
+Memoria Principal: DRAM
+-----------------------
+
+[[apendice_temporizacion_dram]]
+Temporización de la operación de lectura/escritura
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+.Asignación de terminales de la SDRAM
+[width="50%",cols="<2m,<4m",options="header"]
+|====
+|Señales	|Descripción
+|A0-A29		|Entrada de dirección de celda
+|CLK		|Entrada del reloj del bus de memoria
+|/CS		|Selección del chip
+|/RAS		|Selección de dirección de fila
+|/CAS		|Selección de dirección de columna
+|/WE		|Habilitación de escritura
+|DQ0-DQ7	|Entrada/Salida de datos
+|====
+
+La barra inclinada / significa señal negada: lógica negativa : se activa a nivel Low ('L').
+
+
+Ejemplo extraido de http://en.wikipedia.org/wiki/Dynamic_random-access_memory#Memory_timing[wikipedia]:
+
+.DRAM Asíncrona: Temporización
+[width="100%",cols="3*^1m,<6m",frame="topbot",options="header"]
+|====
+| 	|"50 ns"|"60 ns"|Description
+|tRC 	|84 ns 	|104 ns |Random read or write cycle time (from one full /RAS cycle to another)
+|tRAC 	|50 ns 	|60 ns 	|Access time: /RAS low to valid data out
+|tRCD 	|11 ns 	|14 ns 	|/RAS low to /CAS low time
+|tRAS 	|50 ns 	|60 ns 	|/RAS pulse width (minimum /RAS low time)
+|tRP 	|30 ns 	|40 ns 	|/RAS precharge time (minimum /RAS high time)
+|tPC 	|20 ns 	|25 ns 	|Page-mode read or write cycle time (/CAS to /CAS)
+|tAA 	|25 ns 	|30 ns 	|Access time: Column address valid to valid data out (includes address setup time before /CAS low)
+|tCAC 	|13 ns 	|15 ns 	|Access time: /CAS low to valid data out
+|tCAS 	|8 ns 	|10 ns 	|/CAS low pulse width minimum
+|====
+
+
+* Sincronismo
+** DRAM : asíncrona: responds as quickly as possible to changes
+** SDRAM significantly revises the asynchronous memory interface, adding a *clock* (and a clock enable) line. All other signals are received on the 'rising edge' of the clock. No responde tan rápido como es posible, sino que espera al flanco de subida.
+
+* NO vemos la memoria DRAM asíncrona, únicamente el concepto.
+
+.DRAM Síncrona: Temporización
+[width="100%",cols="13*^1m,<4m",frame="topbot",options="header"]
+|====
+|  4+|PC-3200 (DDR-400)            4+|PC2-6400 (DDR2-800) 	      4+|PC3-12800 (DDR3-1600) 	.3+|Description
+|      2+|Typical      2+|Fast 	      2+|Typical      2+|Fast 	      2+|Typical      2+|Fast           
+|	|cycles	|time 	|cycles |time 	|cycles |time 	|cycles |time 	|cycles	|time 	|cycles	|time   
+|tCL 	|3 	|15ns 	|2 	|10ns 	|5 	|12.5ns |4 	|10ns 	|9 	|11.25ns|8 	|10 ns 	|/CAS low to valid data out (equivalent to tCAC)
+|tRCD 	|4 	|20ns 	|2 	|10ns 	|5 	|12.5ns	|4 	|10ns 	|9 	|11.25ns|8 	|10ns 	|/RAS low to /CAS low time
+|tRP 	|4 	|20ns 	|2 	|10ns 	|5 	|12.5ns |4 	|10ns 	|9 	|11.25ns|8 	|10ns 	|/RAS precharge time (minimum precharge to active time)
+|tRAS 	|8 	|40ns 	|5 	|25ns 	|16 	|40ns 	|12 	|30ns 	|27 	|33.75ns|24 	|30ns 	|Row active time (minimum active to precharge time)
+|====
+
+* When describing synchronous memory, timing is described by *memory bus clock cycle counts* separated by hyphens. These numbers represent tCL‐tRCD‐tRP‐tRAS in multiples of the DRAM 'clock cycle time'
+
+latency times
+~~~~~~~~~~~~~
+
+* En este contexto latency es sinónimo de *retardo*. Distinto concepto de Memory Latency que es el tiempo de acceso.
+* tCL  :Cas Latency . Retardo desde la señal CAS hasta la obtención del dato en el buffer i/o
+* tRCD :Ras Cas Delay. Retardo de la señasl RAS hasta la señal CAS
+* tRP  :Ras Precharge. Mínimo retardo entre la precarga y la activación
+* tRAS :Row Active Time. Mínimo tiempo que tiene que transcurrir la activación de la fila y el inicio de la precarga.
+
+* *Tacceso*: tCL+tRCD : desde que se valida la dirección del bus hasta la obtención en el buffer i/o del dato referenciado.
+* *Tciclo*(lectura o escritura) del bus: tCL+tRCD+tRP+tBURST ó tCL+tRCD+tRAS(si hemos transferido un comando a la MP):
+** Tacceso más el retardo en ser transferido a la CPU. Tiempo entre dos lecturas o dos escrituras consecutivas,
+* tBURST: tiempo necesario para transferir un bloque de palabras:RAFAGAS: no se realizan transferencias de 1 byte: 2,4,8,16, ..
+* El módulo MP es programable por lo que podemos alterar los tiempos tCL-tRCD-tRP-tRAS y también la longitud de la ráfaga(burst o bloque)
+* El módulo MP suele indicar la secuencia tCL-tRCD-tRP-tRAS con valores típicos de ciclos reloj
+
+Ejemplo PC2-6400 (DDR2-800) 5-5-5-16
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Módulo PC2-6400 (DDR2-800) 5-5-5-16
+
+* PC2 : SDRAM de segunda generación -> Double_Data_Rate x2
+* 6400 MB/s de *ancho de banda* ó *througput*
+* 800MHz de ciclo efectivo de reloj del bus del sistema
+** Cada palabra se transfiere en un ciclo de 800MHz.
+** Ciclo de Reloj del Bus de memoria 400MHz 
+** Clock cycle time = 1/400Mhz = 2.5ns
+* 5-5-5-16 son los *ciclos de reloj* (400MHz<-->2.5ns) de los tiempos tCL-tRCD-tRP-tRAS -> 12.5ns-12.5ns-12.5ns-40ns
+
+.Glosario
+[width="100%",cols="<1m,<4m,1m,4m",frame="topbot",options="header"]
+|====
+|tiempo 	|Descripción			|tiempo	|Descripción
+|tCL 	|CAS latency				|tRRD	|RAS to RAS delay
+|tCR 	|Command rate				|tRTP	|Read to precharge delay
+|tPTP 	|precharge to precharge delay		|tRTR	| Read to read delay
+|tRAS 	|RAS active time			|tRTW	|Read to write delay
+|tRCD 	|RAS to CAS delay			|tWR	|Write recovery time
+|tREF 	|Refresh period				|tWTP	|Write to precharge delay
+|tRFC 	|Row refresh cycle time			|tWTR	|Write to read delay
+|tRP 	|RAS precharge				|tWTW – Write to write delay
+|====
+
+
+* http://en.wikipedia.org/wiki/Dynamic_random-access_memory#Memory_timing[memory timing]
+
+
+* Fig 5.13 del libro de texto: Lectura de SDRAM (longitud de ráfaga=4, CL=2)
+
+[[apendice_organizacion_dram]]
+Organización avanzada de memorias DRAM
+--------------------------------------
+
+DRAM asincrona
+~~~~~~~~~~~~~~
+
+* En la memoria asíncrona las acciones realizadas dependen del diálogo entre el controlador y la memoria.
+* La memoria síncrona comienza y finaliza las acciones en el flanco de subida o bajada del reloj facilitando el diseño del circuito digital electrónico y permitiendo mayores velocidades en el bus.
+* Although the RAM is asynchronous, the signals are typically generated by a clocked memory controller, which limits their timing to multiples of the controller's clock cycle.
+
+* http://en.wikipedia.org/wiki/Dynamic_random-access_memory[DRAM]
+
+SDRAM (Synchronous DRAM)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Referencias
+^^^^^^^^^^^
+
+* http://es.wikipedia.org/wiki/SDRAM[SDRAM]
+* http://en.wikipedia.org/wiki/Synchronous_dynamic_random-access_memory[SDRAM]
+* http://en.wikipedia.org/wiki/DDR_SDRAM[DDR_SDRAM]
+* http://en.wikipedia.org/wiki/DDR2_SDRAM[DDR2_SDRAM]
+* http://en.wikipedia.org/wiki/DDR3_SDRAM[DDR3_SDRAM]
+* http://www.jedec.org/standards-documents/docs/jesd-79-3d[jedec standard]
+* http://www.freescale.com/webapp/sps/site/overview.jsp?code=784_LPBB_DDR
+* http://en.wikipedia.org/wiki/Dynamic_random-access_memory#Memory_timing[memory timing]
+* http://en.wikipedia.org/wiki/Memory_timings
+* http://en.wikipedia.org/wiki/SDRAM_latency
+* http://en.wikipedia.org/wiki/CAS_latency
+
+
+Introducción
+^^^^^^^^^^^^
+* El flanco del reloj es el patrón de comienzo y fin de las operaciones
+* *DDR (Double Data Rate)*
+** Permite transferir el bit tanto en el flanco de bajada como de subida del reloj (*doble bombeo*)
+* frecuencia del buffer i/o
+** El buffer i/o de la memoria pude ir a frecuencias x2, x4 y x8 respecto de la frecuencia de acceso a la celda.
+** *Supercelda*:Ahora una selección (fila,columna) de un array supone no la seleccion de 1 celda sino la de 2, 4 u 8 CELDAS del array.
+** DDR1: una macrocelda de 2^1^ celdas -> 2 celdas
+** DDR2: una macrocelda de 2^2^ celdas -> 4 celdas
+** DDR1: una macrocelda de 2^3^ celdas -> 8 celdas
+** DDR1: una macrocelda de 2^4^ celdas -> 16 celdas
+** DDR1: una macrocelda de 2^5^ celdas -> 32 celdas
+
+* Fabricantes: Samsung, Hitachi, NEC, IBM, Siemens.
+
+.Módulos DDR para PC  : características
+[width="60%",cols="<3m,3*^1m",options="header"]
+|=================
+|  				|DDR1 	|DDR2 	|DDR3
+|bit i/o: celdas/ciclo_bus	|x2	|x4	|x8
+|frecuencia bus 		|f	|2f	|4f
+|burst mínimo			|2	|4	|8
+|pines DIMM			|184	|240	|240
+|pines SO-DIMM			|200	|200	|144/200/204
+|alimentación(v)		|2.5	|1.8	|1.5
+|=================
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,274 @@
+2022ko Konputagailuen Egitura: Lehen Partzial Teoria
+====================================================
+:stem: latexmath
+:doctype: book
+:doctitle: 2022ko Konputagailuen Egitura: Lehen Partzial Teoria
+:Revision:	  0.6.0
+:Key words:	  computer, architecture
+:revdate: {localdate}
+:numbered:
+:lang: es
+:encode: ISO-8859-1
+:ascii-ids:
+:pdf-version: 1.7
+//:show-link-uri:
+:icons: font
+:source-highlighter: rouge
+:asciidoctor-fetch-kroki:
+:docinfo1:
+:chapter-signifier:  
+ 
+
+// sin el prefijo Chapter n
+ 
+
+
+** Abizenak:
+** Izena:
+** Taldea:
+
+
+1-6 gaien ariketak
+------------------
+
+. Von Neumann arkitektura duen ordenagailu bat, 8 hariko datuen bus bat eta 4 hariko helbideen bus bat.
+.. Marraztu ordenagailuaren arkitekturaren eskema bat, ikasgelan ikusitako elementu nagusiak agertzen dituena (0.5 puntu)
++
+
+----
+.
+.
+.
+.
+.
+.
+.
+.
+.
+----
+.. Definitu erregistro hauetako bakoitzak (0.4 puntu) izan behar dituen bitak kopurua:
+... PC ->
+... IR ->
+... MAR ->
+... MBR ->
+.. Kalkulatu memoria biltegiratzeko gaitasuna (0.5 pt)
++
+
+----
+.
+.
+----
++
+
+.. Helbideen busa 8 hariraino zabaltzen da eta honako memoria-taula honekin:
++
+
+.Memoria
+[width="30%",cols="2*^"]
+|===================================================
+|…|…
+|0x0A|LOAD 0x27
+|…|…
+|0x26|0x16
+|0x27|0x4A
+|0x28|0xF3
+|…|…
+|===================================================
++
+<<<
+
+** Aurreko ataletako erregistroak erabiliz, gehi sistemaren busa eta akumuladorea, *IAS* makinako instrukzio-ziklo baten funtzionamendu-faseak deskribatu ezazu, PC=0x0A izanez eta erregistroen eta busen edukiarekin. Horretarako, bete taula hau behar duzun beste zutabe erabiliz: (1.6 pt)
++
+
+.Instrukzio-zikloa
+[width="100%",cols="<2e,4*<3",options="header"]
+|===================================================
+||1|2|3|4
+|Faseen Deskribapena||||
+|PC||||
+|IR||||
+|MAR||||
+|MBR||||
+|Datuen busa||||
+|Kontrolaren busa||||
+|Helbideen busa||||
+|Akumuladorea||||
+|===================================================
++
+
+.Instrukzio-zikloa
+[width="100%",cols="<2e,4*<3",options="header"]
+|===================================================
+||5|6|7|8
+|Faseen Deskribapena||||
+|PC||||
+|IR||||
+|MAR||||
+|MBR||||
+|Datuen busa||||
+|Kontrolaren busa||||
+|Helbideen busa||||
+|Akumuladorea||||
+|===================================================
+
+<<<
+
+. Egin ezazu hiru digituko hamaseitar bidezko batuketa, bururakoak erakutsiz, honako osorik zeinu gabe, eta erakutsi emaitza hamaseitarrean eta bitarrean: 0xF7+0x2A (0.5 puntu)
++
+
+----
+Bururakoa ->
+
+Batugaia ->
+
+Batugaia ->
+
+Batura ->
+
+----
+
+
+. Egin hurrengo kenketa: 1010010 – 110110 zeinurik gabeko zenbakiak (0.5 puntu)
++
+
+----
+
+Kenkizun ->
+
+Kentzaile ->
+
+Bururakoa ->
+
+Kenketa ->
+
+----
+
+
+. *Gutxieneko* digitu-kopuruarekin, emaitza matematikoa zuzena izan dadin, hurrengo eragiketak egin, ondoren zenbakiak emanda: A: 0101011 y B: 11011
+.. Osorik, zeinurik gabe: (puntu 1)
+... C = A '+' B batura egin ezazu
++
+
+----
+.
+.
+.
+.
+.
+.
+----
+
+... A, B eta C adierazi ezazu hamaseitarrean eta hamartarrean
++
+
+----
+.
+.
+.
+.
+----
+<<<
+
+.. zenbaki bitar osagarriak izanik: (puntu 1)
+... C = A '+' B batura egin ezazu
++
+
+----
+.
+.
+.
+.
+.
+.
+----
+... A, B eta C adierazi ezazu hamaseitarrean eta hamartarrean
++
+
+----
+.
+.
+.
+.
+----
+.. Signo-Magnitudean osoak izanik (puntu 1)
+... Arrazoitu C = A '+' B baturaren emaitza lortzeko
++
+
+----
+.
+.
+.
+.
+.
+.
+----
+... A, B eta C adierazi ezazu hamaseitarrean eta hamartarrean
++
+
+----
+.
+.
+.
+.
+----
+. 0x26 eta 0x3C zenbaki naturalak bitarrean biderkatu ezazu (0.4 puntu)
++
+
+----
+.
+.
+.
+.
+.
+.
+.
+.
+---- 
+. Konputagailu batek honako balio hauek ditu biltegiratuta:
++
+
+.Memoria
+[width="100%",cols="4*<",options="header"]
+|===================================================
+2+|ERREGISTROAK 2+|MEMORIA
+| Erregistroa | Edukia | Helbidea | Edukia
+|EAX|87|87|01
+|EBX|02|88|07
+|ECX|8C|89|03
+|   |  |8A|02
+|   |  |8B|08
+|   |  |8C|0F
+|   |  |8D|24
+|   |  |… |…
+|   |  |94|32
+|   |  |95|00
+|===================================================
++
+
+** Adierazi instrukzio bakoitza bideratzeko modua, eta zehaztu horietako baterako EDXn sartutako eragiketaren balioa, helbideratzeko modu hauekin: (0.3 pta bakoitzak)
++
+
+[width="100%",cols="<2, <3, <1",options="header"]
+|===================================================
+| | Modua | Eragingaien Balioa
+| movb $0x89, %edx | |
+| movb %eax, %edx | |
+| movb (%ecx,%ebx,4), %edx | |
+| movb (%eax), %edx | |
+| movb 0x88, %edx | |
+| movb -3(%ecx), %edx | |
+|===================================================
+
+
+. Intel konputagailu batean egindako azken eragiketa 8 biteko zenbaki osagarrien 10001011 eta 10101101 artean batura  bada,*hausnartu* zein den hurrengo banderatxoen balioa (0.2 puntu bakoitza)
+.. Overflow Flag :
+.. Carry Flag :
+.. Zero Flag :
+.. Sign Flag :
+
+ASM-lengoaiaren programazioa
+----------------------------
+
+. *main* programa oso bat garatu ezazu AT&T  x86 arkitektura ensambladore hizkuntzan, hasieran n=5 balioarekin definitutako *n* aldagai bati (2 byte tamaina) 4 gehitzen diona eta emaitza *sum* aldagaian biltegiratzen duena (4 byte tamaina) eta emaitza sistema eragilera itzultzen duena. Gehitu programari oinarrizkotzat jotzen dituzun 5 iruzkinak.
+
+

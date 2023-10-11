@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_operaciones_aritméticas_y_lógicas" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+<ul class="sectlevel1">
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html">12. Introducción a la Programación en Lenguaje Ensamblador AT&amp;T x86-32</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html">13. Representación de los Datos</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html"><span class="toc-current">14. Operaciones Aritméticas y Lógicas</span></a>
+<ul class="sectlevel2">
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_introducción_19">14.1. Introducción</a>
+<ul class="sectlevel3">
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_objetivos_5">14.1.1. Objetivos</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_conceptos_de_arquitectura">14.1.2. Conceptos de Arquitectura</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_módulos_fuente">14.1.3. Módulos fuente</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_requisitos_5">14.1.4. Requisitos</a>
+</li>
+</ul>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_leeme_3">14.2. LEEME</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_cuestiones_3">14.3. Cuestiones</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_registros_internos_de_la_cpu_2">14.4. Registros internos de la CPU</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_operaciones_aritméticas_y_lógicas_con_números_enteros_con_signo">14.5. Operaciones Aritméticas y Lógicas con Números Enteros con Signo</a>
+<ul class="sectlevel3">
+<li><a href="_operaciones_aritméticas_y_lógicas.html#practica3:op_arit_log">14.5.1. Edición del Módulo fuente: op_arit_log.s</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_compilación_6">14.5.2. Compilación</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_ejecución_6">14.5.3. Ejecución</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_análisis_del_módulo_fuente_3">14.5.4. Análisis del módulo fuente</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html#_ejecución_paso_a_paso_2">14.5.5. Ejecución paso a paso</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_instrucciones_de_saltos_condicionales.html">15. Instrucciones de Saltos Condicionales</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html">16. LLamadas al Sistema Operativo (Kernel)</a>
+</li>
+<li><a href="_subrutinas_2.html">17. Subrutinas</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html">18. Imágenes: Bit Map Portable</a>
+</li>
+</ul>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_operaciones_aritméticas_y_lógicas">14. Operaciones Aritméticas y Lógicas</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_introducción_19">14.1. Introducción</h3>
+<div class="sect3">
+<h4 id="_objetivos_5">14.1.1. Objetivos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Programación:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Realizar operaciones aritméticas (suma,resta,multiplicación y división) con números enteros.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Análisis:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Comprobar cómo afectan las operaciones lógicas y aritméticas a los flags del registro de estado EFLAGS</p>
+</li>
+<li>
+<p>Analizar el contenido de la memoria como números con signo, caracteres, arrays y strings: tipos y tamaños de los operandos numéricos y de los operandos alfanuméricos</p>
+</li>
+<li>
+<p>Realizar la operación de desensamblaje para comprobar el lenguaje máquina del módulo ejecutable cargado en la memoria principal</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_conceptos_de_arquitectura">14.1.2. Conceptos de Arquitectura</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>La Unidad Aritmético-Lógica ALU sólo opera con números enteros almacenados en los registros de propósito general. Para operar con números reales es necesaria la unidad Float Process Unit FPU con los operandos almacenados en los registros específicos para números en coma flotante.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_módulos_fuente">14.1.3. Módulos fuente</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>op_arit_log.s</strong></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_requisitos_5">14.1.4. Requisitos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Teoría: representación de datos, operaciones aritméticas y lógicas, formato de instrucciones y repertorio  ISA de la arquitectura X86.</p>
+</li>
+<li>
+<p>Prácticas previas:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Introducción a la programación en lenguaje ensamblador AT&amp;T x86-32</p>
+</li>
+<li>
+<p>Representación de los Datos</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_leeme_3">14.2. LEEME</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Lectura del guión de prácticas  y del capítulo 3 del Libro Programming from the Ground-Up.</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_apu">Apuntes y Libro de Texto</a></p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_doc_mem">Documentación Memoria</a>: Contenido y Formato de la Memoria</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_eval">Evaluación</a>: sistema de evaluación</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_plat_des">Plataforma de Desarrollo</a> : configuración de la computadora personal</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_prog">Programación</a> : metodología</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cuestiones_3">14.3. Cuestiones</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_eval">"Autoevaluación de Prácticas"</a> opcional: <a href="_prácticas_cuestionario.html#prac_cues">Prácticas: Cuestionario</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_registros_internos_de_la_cpu_2">14.4. Registros internos de la CPU</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>La arquitecura amd64 dispone de:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>16 registros de propósito general (RPG) de 64 bits cada uno: rax,rbx,rcx,rdx,rsi,rdi,rsp, etc</p>
+</li>
+<li>
+<p>1 registros de estado de 64 bits: rflags</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El acceso a los registros de propósito general puede ser <em>parcial</em>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Registro RAX: es un registro de 64 bits</p>
+</li>
+<li>
+<p>Registro EAX: son los 32 bits de menor peso de RAX</p>
+</li>
+<li>
+<p>Registro AX:  son los 16 bits de menor peso de RAX</p>
+</li>
+<li>
+<p>Registro AL:  son los  8 bits de menor peso de RAX</p>
+</li>
+<li>
+<p>Registro AH:  es el byte con los bits de las posiciones 8:15 de RAX</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>En las <a href="_programación_ensamblador_att_x86.html#registros_32">"Hojas de Referencia Rápida"</a> están representados todos los nombres de los difererentes grupos de bits de cada registro de propósito general.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_operaciones_aritméticas_y_lógicas_con_números_enteros_con_signo">14.5. Operaciones Aritméticas y Lógicas con Números Enteros con Signo</h3>
+<div class="sect3">
+<h4 id="practica3:op_arit_log">14.5.1. Edición del Módulo fuente: op_arit_log.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Descargar el módulo fuente "op_arit_log.s" de miaulario y añadir los comentarios apropiados.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>### Programa:     op_arit_log.s
+### Descripción: Emplear estructuras de datos con diferentes operaciones lógicas y aritméticas.
+### Compilación: gcc -m32 -g -o op_arit_log op_arit_log.s
+
+	## MACROS
+	.equ SYS_EXIT,	1
+	.equ SUCCESS,	0
+	.equ N,		5
+
+	## VARIABLES LOCALES
+
+
+	## INSTRUCCIONES
+	.global main
+	.text
+main:
+
+	## RESET
+
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+	xor  %esi,%esi
+        xor  %edi,%edi
+
+
+	## OPERACIONES ARITMETICAS con NUMEROS ENTEROS
+
+	## add: suma
+	mov $5,%eax
+	mov $10,%ebx
+	add %ebx,%eax
+
+	##  sub: resta   <i class="conum" data-value="1"></i><b>(1)</b>
+	mov $5,%eax
+	mov $10,%ebx
+	sub %ebx,%eax
+
+
+	##  imul: multiplicación entera "con signo": AX&lt;- BL*AL  <i class="conum" data-value="2"></i><b>(2)</b>
+        movb $-3,%bl
+	movb $5,%al
+	imulb %bl
+
+        ##  idiv: división "con signo" .   (AL=Cociente, AH=Resto) &lt;- AX/(byte en registro o memoria)	  <i class="conum" data-value="3"></i><b>(3)</b>
+	movw $5,%ax		#dividendo
+	movb $3,%bl		#divisor
+	idivb %bl	    # 5/3 = 1*3 + 2
+
+        ## complemento a 2: equivalente a cambiar de signo negación
+	negb %bl
+
+
+	## Expresión N*(N+1)/2
+	movw $N,%bx
+	movw $(N+1),%ax
+	imulw %bx		#imulw Op ; Op=word ; DX:AX&lt;- AX*Op
+	movw $2,%bx
+	##  El resultado queda en AX y el resto DX=0 <i class="conum" data-value="4"></i><b>(4)</b>
+	idivw %bx		#idivw Op ; Op=word ; AX&lt;-(DX:AX)/Op ; DX:=Resto
+
+
+	## OPERACIONES LOGICAS
+
+	mov $0xFFFF1F, %eax
+        mov $0x0000F1, %ebx
+	not %eax	# inversión
+	and %ebx,%eax	# producto lógico
+	or  %ebx,%eax	# suma lógica
+
+        ## Complemento a 2 mediante operación lógica not()+1
+	mov %ebx,%eax
+	not %eax
+	inc %eax
+
+	## Desplazamiento de bits <i class="conum" data-value="5"></i><b>(5)</b>
+        shr $4,%eax		#desplazamiento lógico: bits a introduccir -&gt; 0..
+	sar $4,%eax		#desplazamiento aritmético: bits a introducir -&gt; extensión del signo
+
+	## SALIDA
+
+	mov $SYS_EXIT, %eax
+	mov $SUCCESS,  %ebx
+	int $0x80
+
+	.end</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Instrucciones referenciadas en las cuestiones de autoevaluación</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>"               "                  "               "</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>"               "                  "               "</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>"               "                  "               "</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>"               "                  "               "</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compilación_6">14.5.2. Compilación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Seguir los pasos de la <a href="_practicando_la_programación_desde_el_principio.html#compilacion_asm">compilación </a> de un módulo en lenguaje ensamblador.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El punto de entrada no es "_start".</p>
+</li>
+<li>
+<p><code>gcc -m32 -g -o op_arit_log op_arit_log.s</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_6">14.5.3. Ejecución</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>./op_arit_log</code></p>
+</li>
+<li>
+<p><code>echo $?</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_análisis_del_módulo_fuente_3">14.5.4. Análisis del módulo fuente</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Para la interpretación de las instrucciones add, sub, imul (integer multiplication), idiv (integer division) , neg, not, and, or, xor, shr, sar, consultar la tabla de operaciones de las <a href="_programación_ensamblador_att_x86.html#rie">hojas de referencia rápida </a></p>
+</li>
+<li>
+<p>Las operaciones únicamente procesan el número de bits que indica el sufijo del mnemónico&#8230;&#8203;aunque los registros "r-x" son de 64 bits.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_paso_a_paso_2">14.5.5. Ejecución paso a paso</h4>
+<div class="sect4">
+<h5 id="_observaciones">Observaciones</h5>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+El depurador al visualizar el contenido de los registros: Unicamente visualiza el número de bytes del tamaño de los operandos..aunque los registros "r-x" son de 64 bits. Con números enteros con signo no visualiza los ceros de mayor peso, es decir, ni el signo ni la extensión de signo de los números positivos.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_operaciones">Operaciones</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Compilar el programa con la opción de generación de la tabla de símbolos requerida por el depurador y generar el módulo binario ejecutable:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc  -m32 -g  -o op_arit_log op_arit_log.s</code> donde modulo_fuente se sustituye por el nombre del archivo que se desea compilar.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir el depurador GDB, cargar el módulo binario ejecutable y comprobar que se carga la tabla de símbolos junto al módulo binario ejecutable.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gdb</code></p>
+</li>
+<li>
+<p><code>file op_arit_log</code></p>
+</li>
+<li>
+<p><code>info sources</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Configurar el fichero para el logging histórico de los comandos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>set trace-commands on</code></p>
+</li>
+<li>
+<p><code>set logging file op_arit_log_gdb_asm.txt</code></p>
+</li>
+<li>
+<p><code>set logging on</code></p>
+</li>
+<li>
+<p><code>shell ls -l op_arit_log_gdb_asm.txt</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Activar un punto de ruptura en la instrucción de entrada al programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>b _start</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejecutar el programa deteniéndolo en la primera instrucción del programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>run</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_operaciones_aritméticas_3">Operaciones aritméticas</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Comprobar los resultados de las operaciones aritméticas de suma, resta, multiplicación, división y negación de números enteros con signo</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_operaciones_lógicas_2">Operaciones lógicas</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Comprobar los resultados de las operaciones lógicas bitwise de negación, multiplicación, suma, or-exclusiva y desplazamiento.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_representación_de_los_datos_2.html">Representación de los Datos</a> | ↑ Up: <a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_instrucciones_de_saltos_condicionales.html">Instrucciones de Saltos Condicionales</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,677 @@
+Memoria Principal (RAM Dinámica DRAM)
+=====================================
+
+:doctitle: Memoria Principal (RAM Dinámica DRAM)
+
+
+Tipos de Memoria de Semicoductor
+--------------------------------
+
+[width="90%",cols="5*<m",frame="topbot",options="header"]
+|============================================================================
+|Memory Type 	|Category	| Erasure	|Write Mechanism |Volatility
+|Random-access memory (RAM) |Read-write memory |Electrically, byte-level |Electrically |Volatile
+|Read-only memory (ROM) .2+|Read-only memory .2+|Not possible |Masks .5+|Nonvolatile
+|Programmable ROM (PROM) .4+|Electrically
+|Erasable PROM (EPROM) .3+| Read-mostly memory |UV light,chip-level 
+|Electrically Erasable PROM (EEPROM) | Electrically, byte-level
+|Flash memory |Electrically,block-level
+|============================================================================
+
+* Random Access: se puede acceder a cualquier dirección de memoria de forma ALEATORIA, no secuencial (para acceder a la posición 3ª no es necesario acceder antes a la 1ª y 2ª)
+* Volátil: si se quita la alimentación, el contenido de la memoria se borra.
+* ROM: Read Only Memory -> El contenido de la memoria se escribe en la fábrica y el usuario únicamente puede leerla.
+* PROM: ROM Programable -> Los programas de usuario sólo pueden leer la memoria pero el administrador la puede actualizar. Por ejemplo la BIOS.
+* Erasable: la memoria ROM programable se debe de borrar antes de escribir -> se borra con luz ultravioleta
+* EE: electrycaly erasable . La PROM se borra eléctricamente en lugar de con luz UV
+* Flash: la memoria en lugar de borrarse secuencialmente, de palabra en palabra, lo cual es lento, se borra por grandes bloques. Un gran bloque se borrar en un instánte (efecto flash)
+* SSD: Solide State Drive : Memoria flash de alta capacidad
+** SLC, TLC y MLC (Single-, Triple- y Multi- level cell)
+
+Memoria PRINCIPAL semiconductora
+--------------------------------
+
+* Un programa almacenado en una memoria secundaria (disco externo) ha de ser cargado por el sistema operativo en la Memoria Principal para poder ser ejecutado por la CPU. La Unidad de Control captura instrucciones/datos que están en la memoria principal.
+* Las operaciones que realiza la CPU con la memoria principal son la *LECTURA* y la *ESCRITURA* (Read/Write) de datos e instrucciones binarias.
+* RAM: 
+** Semiconductor Silicio: transistores.
+** Random Acces Memory
+** Operaciones de lectura y escritura
+** Volátil
+** Tipos
+*** SRAM: *Static* RAM.
+**** Mientras está alimentada la información no se pierde. No tiene fugas, no es necesaria refrescar la información cada unos pocos milisegundos.
+**** Estructura de la Celda 6T: seis transistores. Tamaño y consumo elevados. Latencia y capacidad reducidas.
+***** Memoria caché.
+*** DRAM: *Dynamic* RAM .
+**** Estructura de la celda: 1C1T: un condensador y un transistor. Tamaño y consumo reducidos.Latencia y capacidad elevadas.
+**** Memoria principal: Los programas se cargan en dicha memoria para ser ejecutados por la CPU.
+**** Las celdas bit (condensadores) tienen fugas por lo que necesita periódicamente una reescritura (DINAMISMO). 
+**** Asíncrona DRAM:
+**** *Síncrona SDRAM*: Las operaciones R/W se realizan en instantes de tiempo marcados por un
+
+[.text-center]
+image::images/dram/tarjeta_micron_1.png[align="center",title="Dual Inline Memory Module (DIMM)"]
+
+Cada módulo se inserta en un slot de la placa base de la computadora.
+
+[.text-center]
+image::images/dram/tarjeta_micron_2.png[align="center",title="Dual Inline Memory Module (DIMM)"]
+
+
+Una tarjeta ó Módulo es un agrupamiento por chips. Los chips suelen estar soldados por ambas caras del módulo DIMM.
+
+[.text-center]
+image::images/dram/tarjeta_esquema.png[align="center",title="Dual Inline Memory Module (DIMM)"]
+
+Organización
+~~~~~~~~~~~~
+
+* Celda de memoria:
+** es la unidad básica de almacenamiento de un bit (Binary digIT). El bit es un valor lógico 'High' o 'Low', '1' o '0' 
+** acceso a la celda: 
+*** la línea de direcciones selecciona la celda a leer o escribir
+*** la línea de bit es la línea de entrada/salida del bit a leer o escribir.
+* Matriz: las celdas de memoria se organizan en una estructura 2D matricial formadas por filas y columnas
+* Bus del Sistema: bus de interconexión entre el *controlador MC* (Memory Controller) y la CPU.
+** La unidad de control de la CPU no se comunica directamente con la Memoria Principal. La Unidad de Control de la CPU da ordenes de lectura y escritura, pero se desentiende de acciones más primitivas y específicas de la organización y tecnología de la Memoria Principal. Para dichas tareas específicas de las memorias DRAM está el *controlador MC*
+* Bus de Memoria: bus de interconexión entre el controlador MC y la MP
+** Bus Direcciones:
+*** El bus de direcciones transfiere el código de la palabra a seleccionar
+*** La dirección se almacena temporalmente en el buffer de direcciones de la memoria
+*** El bus de direcciones se conecta al buffer de direcciones de la memoria
+*** El buffer de direcciones se conecta a la entrada del decodificador de  direcciones de la memoria
+*** La dirección se decodifica. La salida del decodificador activa la dirección de memoria del dato/instrucción a leer o escribir 
+** Bus Datos:
+*** El dato de salida o entrada se almacena temporalmente en el buffer de datos i/o de la memoria
+*** Las celdas no se conectan directamente al buffer de datos i/o de la memoria
+**** las salidas de las celdas seleccionadas son amplificadas para detectar si almacenan '0' o '1'
+*** El bus de datos esta conectado al buffer de datos de la memoria
+** Bus Control:
+*** Es necesario alimentar la memoria con una tensión continua de unos pocos voltios (1v)
+*** Señal de lectura y escritura que activa la CPU o el controlador E/S
+*** Señal de reloj de sincronismo. Sincroniza las tareas a realizar entre la MP y el controlador de memoria (MC)
+** Bus chip select:
+*** Señal 'Chip Select' (CS) de selección del módulo de memoria que lo conecta a los buses de direcciones y de datos . Si la señal CS no está activa el módulo de memoria está desconectado de los buses.
+
+
+[.text-center]
+image::images/dram/system.png[align="center",title="Computer System"]
+
+
+* Controlador de Memoria (MC)
+** La MP no se conecta directamente a la CPU. El controlador MC hace de intermediario.
+** El controlador MC se conecta por un lado a la CPU y por otro lado a la memoria MP.
+** La CPU envía comandos al controlador MC para que actue sobre la MP.
+** El controlador MC es un secuenciador que sabe cómo actuar sobre la estructura interna de la memoria para:
+*** qué módulo seleccionar, qué chip selececcionar, que palabra seleccionar.
+*** leer y escribir un dato
+*** otras acciones sobre la memoria como mantenimiento, chequeo, detección de errores, etc
+
+
+[.text-center]
+image::images/dram/System_Bus_Structure_RAM_Controller.gif[align="center",title="Memory Controller"]
+
+
+* Memory Management Unit (MMU)
+** Las direcciones con que opera la Unidad de Control de la CPU en sus registros de próposito general, contador de programa, etc, no son físicas -> son *direcciones virtuales*
+** Cuando programamos, el programador, el compilador, el linker, el desensamblador, el depurador, etc trabajan en el espacio virtual. El módulo ejecutable ELF y los procesos hacen referencia al espacio virtual.
+** Los procesos (programas que están siendo ejecutados por la CPU) operan con direcciones del espacio virtual -> memoria virtual del proceso
+** MMU: circuito electrónico HW que *traduce direcciones* del espacio virtual (CPU) en direcciones físicas de la MP y que serán las que se transfieran al bus del controlador de la caché y al controlador de memoria MC para poder acceder a la memoria física.
+
+
+
+DRAM (Dynamic Random Access Memory) 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+* Celda
+** Estructura física: 
+*** Es un condensador Metal-Dielectrico-Metal(Polysilicio) fabricado en un substrato de Silicio.
+*** Su capacidad es del orden de femto-faradios: C=10~(-15)F 
+*** Si le aplicamos una tensión de 1mv la carga almacenada  Q=CV= 1mv*1fF =1*10(-18) culombios que equivale a una decena de electrones.
+*** Su forma es la de un cilindro empotrado en el substrato.
+*** La sección transversal del condensador es del orden de 30 nm en el año 2010
+**** https://en.wikipedia.org/wiki/3_nm_process[evolución proceso tecnológico]: 3nm node en el año 2023
+*** La densidad de condensadores es del orden del giga -> 10~9 condensadores.
+*** Es necesario conectar el condensador a las líneas de direcciones y de bit para acceder a él. Se conecta a través de UN transistor CMOS que hace de interruptor.
+
+
+
+[.text-center]
+image::images/dram/cell_1t1c.png[align="center",title="cell_1t1c"]
+
+
+[.text-center]
+image::images/dram/cell_capacitor.png[align="center",title="cell_capacitor"]
+
+
+
+
+DRAM (Operaciones de lectura-escritura-refresco)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Almacenamiento:
+** el condensador inicialmente no está conectado a ninguna línea ya que su interruptor está abierto
+*** en circuito abierto el condensador almacena la carga mientras está alimentado -> volátil
+*** el condensador tiene FUGAS y se descarga a través del substrato. Es necesario reescribir el bit cada 64 ms: DYNAMIC (la información que almacena no puede ser estática, hay que REFRESCARLA PERIODICAMENTE)
+** Escritura: 
+*** Cerramos el interruptor (línea de dirección) para conectar el condensador a la línea de bit ( línea de dato)
+*** A través de  la línea de bit cargamos ('H' ) o descargamos ('L') el condesador
+** Lectura:
+*** Una vez seleccionada la celda a leer, está se conecta al Sensor de Carga (amplificador) que detecta su estado y lo escribe en el buffer i/o
+*** Esta *lectura es DESTRUCTIVA*, dejando el condensador descargado. Es necesario que el amplificador realimente el condensador a su estado original. La escritura del buffer i/o y la RE-escritura del condensador se dan simultáneamente.
+** Refresco
+*** Es necesario leer y reescribir todos los condensadores. Esta operación la realiza el sensor de carga.
+*** Es necesario reescribir todas las celdas en un tiempo inferior a los 64ms.
+
+Ejemplo de Estructura
+~~~~~~~~~~~~~~~~~~~~~
+
+
+* https://www.anandtech.com/print/3851/everything-you-always-wanted-to-know-about-sdram-memory-but-were-afraid-to-ask
+
+
+
+DRAM Matriz(Array 2D)
+~~~~~~~~~~~~~~~~~~~~~
+
+* Ejemplo: un bus de direcciones de 30 líneas puede direccionar una de las 2^30^ CELDAS, a seleccionar UNA de ellas.
+* Mediante un DEMULTIPLEXOR de 30 entradas binario (Bus de direcciones) y 2^30^ salidas (se activa sólo una salida) podemos seleccionar 1 fila que contine una celda o bit de memoria.
+
+
+image::images/dram/demux.png[align="center",title="Demultiplexor/Decoder"]
+
+* Un demultiplexor de 2^30^ salidas (1.073.741.824 de salidas) es imposible de fabricar
+* Solución: 
+** organizar las CELDAS en un array 2D : Filas y columnas: 1 DEMUX o DECODIFICADOR para filas y 1 DEMUX/MUX o DECODIFICADOR para las columnas
+** 2^30^ = 2^15^*2^15^ = Ahora el número de salidas de cada demux se ha reducido de 2^30^ a 2^15^, es decir, se ha reducido a 32.768 salidas, un factor raíz cuadrada. Un multiplexor con 32.768 salidas es posible de fabricarse.
+** word line selecciona todas las columnas de una fila (ROW) de celdas 
+** bit line selecciona una de las columnas (COL) de la fila seleccionada
+** el resultado es seleccionar una CELDA del ARRAY y cargar (LECTURA) el BUFFER I/O
+* Bus de direcciones muy denso: ejemplo de 30 líneas
+** Podemos diseñar un bus con la mitad de líneas y multiplexar en dos tiempos el código de direcciones(parte que selecciona la fila y parte que selecciona la columna).
+** Multiplexación temporal de la dirección de filas y la dirección de columnas: REDUCIMOS EL NUMERO DE LINEAS EN LA PLACA BASE
+** RAS: Row Address Strobe : Señal que válida el bus de direcciones indicando que es el código que selecciona la FILA del array.
+** CAS: Row Address Strobe : Señal que válida el bus de direcciones indicando que es el código que selecciona la COLUMNA del array.
+* Burst (ráfaga)
+** Una vez seleccionada una fila de celdas (OPEN ROW) si queremos celdas consecutivas de la misma columna podemos leer o escribirlas consecutivamente en cada ciclo de reloj . Bloque de palabras a transferir a/desde la memoria Caché. El controlador de memoria ha tenido que enviar un comando a la memoria para configurar el número de palabras de la ráfaga.
+
+[.text-center]
+image::images/dram/array1.png[align="center",title="Array de celdas"]
+
+
+* Organización de celdas en una dimensión: 1D:  Filas. 
+* Un circuito decodificador de filas
+* 1024 filas y cada fila son 16 celdas. 
+* El *buffer i/o* es de 16 bits.
+* Al direccionar una fila se conectan las 16 celdas al buffer i/o ó gating i/o
+
+IMPORTANT: Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tanto no se pueden conectar directamente al bus de direcciones, es necesario un amplificador o sensor de CARGA. A la salida de dicho amplificador está el registro ó registros (BUFFER) de entrad/salida i/o. Es decir, el contenido binario de las celdas se vuelca en el BUFFER I/O. El buffer i/o está hecho en una tecnología capaz de conducir las líneas del bus de DATOS de la placa base. 
+
+
+[.text-center]
+image::images/dram/array2.png[align="center",title="Array de celdas 2D"]
+
+* Organización de celdas en dos dimensiones: 2D: matriz de filas y columnas
+* Dos decodificadores: un decodificador de filas y un decodificador de columnas.
+* Cada par (fila, columna) accede a una celda.
+
+
+
+
+Logica del Chip (Figura 5.3 del libro)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Componentes:
+** buffers: direcciones y columnas
+** decodificadores: decodifican el código de direccion de fila y de columna y seleccionan (fila,columna) una celda.
+** sensor de carga (amplificador): detecta si la celda está cargada o descargada y da como salida un 'H' o 'L' en el buffer i/o.
+** 4 señales de control: RAS, CAS, WE, OE
+*** la combinación de señales de control (2^4^) se utiliza también para codificar los http://en.wikipedia.org/wiki/Synchronous_dynamic_random-access_memory[comandos] del controlador de memoria.
+*** COMANDOS: son ordenes a los módulos de memoria donde las características de la memoria como el timing (tiempos de latencia, ciclo, etc) y el burst length (número de palabras por bloque, longitud de la ráfaga) son programables y por lo tanto la CPU puede configurar estos parámetros.
+** circuitería de refresco: 
+*** contador de direcciones y temporizador
+*** la asociación JEDEC recomienda un refresco completo cada 64 ms.
+
+Encapsulado
+~~~~~~~~~~~
+
+* La memoria de semiconductor ocupa unos pocos mm^2^ que debe de ser protegido (térmica y mecánica) y permitir que la conexiones sean robustas para permitir su soldadura a las líneas externas por lo que require un encapsulado de plástico.
+* Los terminales del encapsulado se denominan PIN y son soldados a la tarjeta de memorias.
+** pines o terminales:
+*** address bus (A0-A29)
+*** data bus (DQ0-DQ7) : los chips no tienen 64 pines de datos : 1,2,4,8.
+*** alimentación Vcc
+*** masa Vss
+*** chip select /CS
+*** write enable (/WE): 'L'(escritura) 'H' (lectura) 
+*** output enable (/OE): 'L'(los pines de datos se conectan al bus de datos)
+
+Temporización de la operación de lectura/escritura
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* En el <<apendice_temporizacion_dram, Apéndice>> hay información detallada sobre las distintas señales que controla la temporización de las operaciones del controlador de memoria MC con la tarjeta de memoria.
+* Los tiempos o latencias tRAS, tCAS, etc son retardos que se deben de respetar entre todas la señales que controlan los intervalos de tiempo en que se activa las distintas señales de *control temporal* para seleccionar direcciones de la memoria y esperar el tiempo necesario para que finalice el ciclo de lectura o de escritura en la memoria.
+* Sincronismo
+** El bus de control de la memoria tiene un hilo que es el *reloj* de las operaciones de lectura y escritura de la memoria principal. No confundir con el reloj de la Unidad de Control de la CPU.
+** SDRAM : Synchronous Dynamic RAM, adding a *clock* (and a clock enable) line. All other signals are received on the 'rising edge' of the clock. No responde tan rápido como es posible, sino que espera al flanco de subida.
+* El módulo de memoria MP es programable por lo que podemos alterar los tiempos tCL-tRCD-tRP-tRAS y también la longitud de la ráfaga(burst o bloque)
+* El módulo de memoria MP suele indicar la secuencia tCL-tRCD-tRP-tRAS con valores típicos de ciclos del reloj de memoria.
+
+
+Agrupamientos: Módulos-Rank-Chips-Bank
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Jerarquía: Estructura de la memoria DRAM en agrupamientos de direcciones
+
+Channel
+^^^^^^^
+
+
+* Channel : 
+** interfaces del controlador de memoria con el bus del sistema.
+** Cada canal tiene su propio bus de memoria físico.
+** El controlador tiene acceso al bus del sistema y a más de un bus de memoria.
+** Todos lo canales de un mismo controlador de memoria conforman todo el espacio de memoria física, por lo tanto un controlador tiene asignado un canal lógico (todo el espacio de memoria) formado por varios físicos ( distintos espacios de memoria)
+
+Module DIMM
+^^^^^^^^^^^
+* Dual Inline Memory Module (DIMM):
+** Dual Inline significa que la tarjeta o módulo tiene conectores en ambas caras de la tarjeta.
+** Proporciona la conexión física al bus de datos ( palabra de 64 bits), al bus de direcciones, al bus de control y al bus de chip-select (CS)  del BUS de MEMORIA.
+** Es la tarjeta de memoria encapsulada que se inserta en el socket de la placa base conectándose al bus de memoria del controlador de memoria (MC)
+** Para los PC la conexión de los módulos de memoria es http://en.wikipedia.org/wiki/DIMM[DIMM] y para los portátiles http://en.wikipedia.org/wiki/SO-DIMM[SO-DIMM]. El encapsulamiento DIMM permite disponer de conectores y de chips en ambos lados de la tarjeta (front-side y back-side)
+** En el módulo están interconectados todos los  chips de memoria de la tarjeta.
+** Un canal del controlador puede contectarse a más de un módulo de memoria: P.ej dos módulos de 4GB cada uno.Si un canal tiene más de un modulo, todos los modulos comparten el mismo BUS DE MEMORIA. Cada módulo implementa direcciones de memoria diferentes.
+
+Rank
+^^^^
+
+* Rank	: 
+** Es un conjunto o 'agrupamiento de bancos' dentro de todo el sistema de memoria (todos los módulos DIMM ,no cada módulo DIMM). Donde los bancos están implementados en Chips. Para seleccionar los bancos de un rank hay contectar los chips de dichos bancos de tal forma que la señal chip select (CS) sea común a todos ellos, compartiendo así el mismo espacio de direcciones.
+** Así organizados, todos los bancos de los chips del mismo rank pueden responder AL UNISONO al mismo bus de direcciones (filas,columnas). Al activar la señal CS y seleccionar una Fila , se consigue activar todas las columnas de todas las filas de todos los arrays de todos los bancos de los chips del mismo rank. Este es el objetivo del agrupamiento.
+** Un rank es independiente del resto, con direcciones de memoria 'diferentes', compartiendo el mismo bus de direcciones y bus de chip select. Un rank al ser INDEPENDIENTE puede ser precargado, refrescado, activado, etc al mismo que el resto de ranks.
+
+[.text-center]
+image::images/dram/rank1.png[align="center",title="Rank: agrupamiento de chips en el módulo de memoria DIMM"]
+
+*RANK*: 
+
+* 4 módulos DIMM con 4 chips cada uno.
+* Agrupamiento de los bancos de los chips en el SISTEMA de memoria ( todos los módulo de memoria DIMM). 
+* En este caso cada Rank agrupa todos los chips del mismo módulo y por lo tanto todos los bancos de cada chip.
+* Cada chip select selecciona un rank diferente.
+
+[.text-center]
+image::images/dram/rank2.png[align="center",title="Rank"]
+
+Chip 
+^^^^
+* Chip	: 
+** Es el circuito integrado que contiene el 'die' de semiconductor  donde están implemetadas las celdas de memoria (condensadores) y los interrruptores (transistores).  
+** El número de pins del chip dependerá del tamaño del dato proporcionado y de la capacidad de almacenamiento de datos.
+** El número de bits '"N"' del dato proporcionado por el chip a través del buffer i/o, se indica diciendo que el chip es 'xN': x2,x4,x8,x16,x32
+** Esta formado por 'MULTIPLES bancos', un 'buffer i/o', un 'demux' de filas, un 'demux' de columnas y la lógica de control.
+
+
+[.text-center]
+image::images/dram/bank2.png[align="center",title="Chipx16"]
+
+
+
+* Chipx16 formado por 4 bancos y 1 buffer i/o de 16 bits.
+* Cada banco son 16 arrays 2D -> el 16 es la 3D, y 8196x512 es cada array 2D
+* Cada array tiene 8192 filas y 512 columnas. 2^13^ filas x  2^9^ columnas = 2^22^ celdas
+* Capacidad de cada banco 3D: 2^22^ celdas x 16 bits = 4*2^20^*2Bytes=8MBytes
+* Cada banco 3D es un espacio de direcciones de 8MB independiente.
+* Chipx16 : 4 Bancos : 32 MB -> 16M x2Bytes DRAM -> 16M x16bits DRAM
+** bus de datos: 16 bits -> 2 bytes
+** bus de direcciones: para una capacidad de 32 MB : 2^25^ -> 25 hilos
+
+
+Bank
+^^^^
+
+* Este término es confuso ya que depende del contexto e incluso hay diversas interpretaciones.
+** En el caso de la cpu de intel 4004 es ... (ver Tema CPU apartado i4004)
+** En el entorno linux si ejecutamos el comando "lshw -C memory" aparece información de los distintos bancos, donde en este entorno banco esta asociado a slot de memoria de la placa base.
+* Bank:
+** Un chip se estructura en bancos.
+** Los bancos se agrupan de forma lógica en Ranks conectando el mismo orden o número de banco de distintos chips.
+** Un banco es un conjunto, 'agrupamiento de arrays 2D',al agrupar arrays 2D tenemos una estructura 3D.
+
+IMPORTANT: Al dibujar la estructura 3D observar que para dirección (fila-columna) tenemos un dato de tamaño el número de arrays del banco.
+
+
+** Si cada array contribuye con un bit al buffer i/o, entonces, el número de arrays del banco será el mismo que el número de bits del buffer i/o.
+** Así organizados, todos los arrays del mismo orden de banco de distintos chips pueden responder AL UNISONO al mismo bus de direcciones (filas,columnas). Cada array del banco proporciona el bit de la celda seleccionada por lo que el número de bits del dato proporcionado por el banco será el número de arrays del banco.
+** *Todos* los bancos del chip forman parte del *mismo* buffer i/o del chip.
+** El número de bits '"n"' , del dato proporcionado por el banco a través del buffer i/o, se indica diciendo que el chip es 'xn': x2,x4,x8,x16,x32
+** Bancos de distintos chips son independientes unos de otros, con direcciones de memoria 'diferentes', compartiendo el mismo bus de direcciones y bus de chip select. Un banco al ser INDEPENDIENTE del resto puede ser precargado, refrescado, activado, etc al mismo tiempo que el resto de bancos del mismo rank: PARALELISMO a nivel de Bancos, con el objetivo de reducir los tiempos de acceso a la memoria DRAM.
+
+
+[.text-center]
+image::images/dram/bank1.png[align="center",title="Bank: Array en el chip de memoria DIMM"]
+
+Tres chips. Cada Chip esta formado por un *BANCO*. Un banco es un agrupamiento de Arrays.
+
+Chip x2 DRAM: 
+
+* x2 significa un chip con un buffer i/o de 2 bits -> bus de datos de 2 bits 
+* Un banco con 2 arrays. Cada array proporciona 1 bit.
+
+Chip x4 DRAM: 
+
+* x4 significa un chip con un buffer i/o de 4 bits -> bus de datos de 4 bits
+* Un banco con 4 arrays. Cada array proporciona 1 bit.
+
+Chip x8 DRAM:
+
+* x8 significa un chip buffer i/o de 8 bits -> bus de datos de 8 bits
+* Un banco con 8 arrays. Cada array proporciona 1 bit.
+
+Página / Row-Buffer 
+^^^^^^^^^^^^^^^^^^^
+
+[.text-center]
+image::images/dram/page.png[align="center",title="Page"]
+
+* No confundir con las páginas virtuales del Sistema Operativo
+* Cada conjunto de Bancos del mismo orden (pej Banco número 3) de diferentes chips del mismo Rank, tienen asocidado un "registro virtual" denominado ROW-BUFFER. Es virtual o lógico ya que abarca distintos chips físicos.
+* Una página abarca los datos (misma fila, misma columna de los distintos arrays del banco) de la misma dirección de fila (Pej número 2) de diferentes bancos con el mismo orden o número de banco (Pej número 3). Al conjunto de filas de todos los  banco se denomina *página* (una página está formada por filas). Por lo tanto el contenido del ROW-BUFFER es el de una página. Al row-buffer se descargan más columnas que la requerida, de esta forma el row-buffer hace de CACHE (copia) guardando datos adyacentes al solicitado, pero que no son requeridos inicialmente. Posteriormente se seleccionan todas las columnas del mismo orden (pej columna 2) de cada fila del row-buffer y se cargan en el buffer i/o.  En el siguiente acceso a memoria puede que el dato requerido ya esté en el buffer, por lo que NO es necesaria descargar el dato de las celdas del array y por lo tanto se reduce la latencia y la lectura del dato es mucho más rápida. Por ejemplo en el caso de querer leer un array si el array ha sido almacenado en un página se podría leer toda la página con un solo acceso a las celdas y posteriormente transferir el contenido del buffer por ráfagas.
+
+
+Array
+^^^^^
+
+* Array:
+** Son agrupamientos o conjuntos de celdas organizados en filas y columnas.
+** Una dirección de memoria (fila,columna) selecciona una celda del array. 
+
+Celda
+^^^^^
+* Celdas:
+** Una celda de memoria almacena la información de 1 o más (2,4,8,16) bits. Inicialmente, mientras no se especifique lo contrario, almacenará un único bit.
+
+
+LECTURA de una palabra de la memoria MP 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Selección de Chip/Banco/Filas/Columna
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+* Ejemplo de Lectura: Memoria de 4 chipsx4 con 8 bancos por chip y bancos con 4 arrays 1024x512 cada uno. La memoria está organizada en 1 rank de 32 bancos.
+.. El controlador de Memoria recibe una dirección física en el espacio lineal y lo mapea al espacio Rank/Bank/Row/Column
+.. Se selecciona un número de rank:  (pej 1)
+.. Se selecciona un número de banco entre 1 y 8: (pej 3)
+.. Se selecciona una fila entre 1 y 1024: (pej 2)
+.. Quedan seleccionadas todas las filas (pej fila 2) de todos los bancos (pej banco número 3) del mismo rank (pej rank número 1)
+.. los datos (4 bits: b~3~b~2~b~1~b~0~) de todas las columnas (512 columnas)  de las filas seleccionadas (la *fila 2*)  del banco seleccionado (el *banco 3*) de cada chip ( chips) se descargan en el *ROW-BUFFER*.
+.. Se selecciona un número de columna (pej 2)
+.. Todas las columnas de orden 2 se descargan en los 4 bufferes i/o (uno de cada chip). Dato de 4bits/columna x 4chips = 16 bits 
+.. La salida de los 4 bufferes i/o (16bits) activan las líneas del bus de datos (16 hilos).
+
+
+image::images/dram/row-buffer.png[align="center",title="Page on Row-Buffer: Rank Nº1/Banco Nº3/Fila Nº2"]
+
+
+
+Precarga/OpenRow
+^^^^^^^^^^^^^^^^
+
+* Fases:
+** la dirección de memoria proporcionada por la CPU es convertida en dirección física por el circuito MMU
+** El circuito MP debe de descomponer la dirección física de memoria en los códigos:
+*** RANK-BANK-ROW-COLUMN
+*** Los códigos están asociados a: dentro del módulo de memoria un rank específico, dentro del rank un bank específico, dentro del bank una fila específica y dentro de la fila una columna específica.
+** Una vez que han sido identificados el rank-bank-row, se PRECARGAN los bit_lines del banco (se polarizan con la tensión media que hay entre un cero lógico y un uno lógico).
+** Una vez precargado el banco se ACTIVA (OPEN) la fila: la fila queda abierta cuando los miles de amplificadores sensores de carga detectan los contenidos de los miles de celdas de  las filas seleccionadas de todos los arrays del banco. La página esta abierta cuando las salidas de los amplificadores recuperan los valores sensados y activan las line_bit con los datos almacenados.
+*** Esta acción comienza con la activación de la señal /RAS y la espera del tiempo tRCD
+** Una vez transcurrido el tRCD se selecciona las columnas específicas de todos los arrays del banco (x4,x8,..) y se carga el buffer i/o con el dato seleccionado.
+*** Esta acción comienza con la activación de la señal /CAS.
+
+
+Ejemplo
+~~~~~~~
+
+* Si un sistema tiene una capacidad de memoria principal de 16GB y la estructuramos en 4 módulos cuyos chipsx16 se organizan en 4 ranks con 16 chips/rank, 8 bancos/chip, 16 arrays/banco. Calcular el número de bits/array.
+** 2^4^ x 2^30^ x 2^3^ bits/byte = 2^2^ (ranks/canal) x 2^4^ (chips/rank) x 2^3^ (bancos/chip) x 2^4^ (array/banco)x N (bits/array) -> N = 2^(4+30+3-2-4-3-4)^ = 2^24 bits organizados en un array 2D
+
+NOTE: Los 4 módulos al completo se organizan en 4 ranks
+
+** Una posible solución sería 2^12^ filas x 2^12^ columnas.
+** El buffer i/o de transferencia de datos al bus de memoria tiene el tamaño x16, es decir, 16 bits.
+
+
+
+
+Organización avanzada de memorias DRAM
+--------------------------------------
+
+* Información detallada en el <<apendice_organizacion_dram, Apéndice>>
+
+SDRAM (Synchronous DRAM)
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Introducción
+^^^^^^^^^^^^
+* El flanco del reloj es el patrón de comienzo y fin de las operaciones
+* *DDR (Double Data Rate)*
+** Permite transferir el bit tanto en el flanco de *bajada* como de *subida* del reloj (*doble bombeo*)
+* frecuencia del buffer i/o
+** El buffer i/o de la memoria pude ir a frecuencias x2, x4 y x8 respecto de la frecuencia de acceso a la celda.
+** *Supercelda* ó *Macrocelda*:Ahora una selección (fila,columna) de un array supone no la seleccion de 1 celda sino la de 2, 4 u 8 CELDAS del array.
+** DDR1: una macrocelda de 2^1^ celdas -> 2 celdas
+*** 1ª Generación:  año 2000
+** DDR2: una macrocelda de 2^2^ celdas -> 4 celdas
+*** 2ª Generación:  año 2006
+** DDR3: una macrocelda de 2^3^ celdas -> 8 celdas
+*** 3ª Generación:  año 2011
+** DDR4: una macrocelda de 2^4^ celdas -> 16 celdas
+*** 4ª Generación:  año 2014
+** DDR5: una macrocelda de 2^5^ celdas -> 32 celdas
+*** 5ª Generación:  año 2020
+
+image::./images/dram/ddr1_frequency.png[align="center",title="Velocidad de transferencia DDR"]
+
+Macroceldas -> Buffer i/o
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tanto no se pueden conectar directamente al bus de direcciones, es necesario un amplificador o sensor de CARGA. A la salida de dicho amplificador está el registro ó registros (BUFFER) de entrad/salida i/o. Es decir, el contenido binario de las celdas se vuelca en el BUFFER I/O. El buffer i/o está hecho en una tecnología capaz de conducir las líneas del bus de DATOS de la placa base.
+
+* Cada bit de un registro i/o almacenaría el contenido de una única celda.  Por lo que para leer macroceldas son necesarios un registro por cada celda de la macrocelda. Se llama BUFFER al conjunto de registros. Una memoria DDR3 tendrá por lo tanto un buffer i/o de 8 Registros y en cada registro se almacena una palabra. Si el chip de la memoria es x16, en cada registros se almacenaran palabras de 16 bits.
+
+IMPORTANT: Cuando programamos una instrucción como "movw sum,%ax", el controlador de memoria MC de una memoria DDR3 no se limita a leer sólo el dato sum de 2 bytes, sino que lee por lo menos 8 palabras consecutivas y las lee simultáneamente en un solo acceso depositándolas en el buffer i/o contectado al bus de datos.
+
+* El buffer i/o puede almacenar hasta una página de datos. El buffering permite que el dato a capturar ya esté en la salida de la memoria sin tener que acceder a las celdas. En definitiva, el buffer es una cache (copia) de las celdas próximas a los datos que están siendo capturados. De esta forma se reducen los tiempos de acceso a la memoria, ya que realmente sólo se está accediendo al buffer i/o.
+
+Velocidad de transferencia
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* BW (bits/s) = BF(ciclos/s)*CW(bits/channel)*TC(transferencias/ciclo)
+** FE: Frecuencia efectiva: Frecuencia de las Transferencias
+** BF: Frecuencia del bus del sistema (próximo a 1GHz en el año 2000)
+** CW: número de bits del data bus del canal. Típicamente 64 bits (año 2000) -> arquitectura x86-64
+** TC: en un ciclo del reloj del bus del sistema el número de transferencias. Típicamente 1 transferencia (flanco de subida) o 2 transferencias(flancos de subida y bajada) por ciclo del reloj del bus BF.
+** BW (bits/s) = frecuencia efectiva*anchura bus datos= 400MHz*2*64 = 51200*10~6 bits/s = 51.2Gbps = 6400 MBps <- sistema decimal (habitual)
+** NC: número de celdas/macrocelda
+** CA: frecuencia de acceso a las celdas = FE/NC
+
+image::./images/dram/clock.png[align="center",title="Velocidad de transferencia"]
+
+Ejemplo de módulo de Memoria:  PC2-6400 (DDR2-800) 5-5-5-16
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Módulo PC2-6400 (DDR2-800) 5-5-5-16
+
+* PC2 : SDRAM de segunda generación -> Double_Data_Rate x2 -> macroceldas de 4 celdas.
+* 6400 MB/s de *ancho de banda* ó *througput* -> BW= 6400 MB/s
+* FE=800MHz de ciclo efectivo de reloj del bus del sistema: doble que la frecuencia de bus BF -> 800MHz=2*BF
+** DDR: en cada ciclo BF se realizan dos transferencias -> TC=2
+** Cada palabra de 64 bits se transfiere en un ciclo de 800MHz -> CW=800MHz
+** Ciclo de Reloj del Bus de memoria BF=800MHz/2 -> BF=400MHz 
+** Clock cycle time = 1/400MHz = 2.5ns
+* 5-5-5-16 son los *ciclos de reloj* (400MHz<-->2.5ns) de los tiempos tCL-tRCD-tRP-tRAS -> 12.5ns-12.5ns-12.5ns-40ns
+* DDR2 -> NC=2^2^ -> 4 celdas por macrocelda
+** CA=FE/NC=800MHz/4=200MHz -> frecuenica de acceso a las macroceldas
+
+image::./images/dram/ddr2_frequency.png[align="center",title="Velocidad de transferencia DDR2"]
+
+
+Ejemplo de módulo de Memoria: DDR3-800 / PC3-6400 5-5-5
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+** módulo de memoria DDR3-800 ó PC3-6400 
+*** timing 5-5-5
+*** 800MHz es la frecuencia efectiva del bus de datos -> 800MT/s
+*** 6400 MB/s es el ancho de banda
+*** DDR -> La frecuencia del bus de memoria es la mita de la frecuencia efectiva = 800/2 = 400MHz. Equivale a un ciclo de reloj  de 1/400MHz = 2.5ns
+*** 5-5-5: son los ciclos de reloj, a la frecuencia real del bus de 400MHz, de los parámetros timing tCL-tRCD-tRP
+
+image::./images/dram/ddr3_frequency.png[align="center",title="Velocidad de transferencia DDR3"]
+
+.DDR3
+[width="100%",cols="9*<m",frame="topbot",options="header"]
+|====
+|Standard name|Memory clock(MHz)|Cycle time(ns)|I/O bus clock(MHz)|Data rate(MT/s)|Module name|Peak transfer rate(MB/s)|Timings(CL-tRCD-tRP)|CAS latency(ns)
+|DDR3-800D  .2+|100 .2+|10 .2+|400 .2+|800 .2+|PC3-6400 .2+|6400|5-5-5 |12½
+|DDR3-800E 	|6-6-6 	|15 
+|====
+
+El 4º dígito es tRAS (mínimo retardo entre la activación y la precarga) no ha sido proporcionado. La cuarta columna proporciona tCL en nanosegundos.
+
+* Parámetros:
+** Memory clock: 100MHz: frecuencia de acceso a las palabras. Transferencia celda -> buffer i/o
+** Cycle time: 10ns: en esta tabla se refiere  al período del memory clock y no tiene el significado de la definición de ciclo de memoria
+** I/O bus clock: 400MHz:reloj del bus de memoria cuyos flancos(positivo,negativo) sincronizan las transferencias de las palabras.
+***  ciclo de bus = 1/400Mhz = 2.5ns = este es el facto de tiempo de los retardos o latencias tCL,tRCD, etc
+** Data rate: 800MT/s -> Las transferencias se realizan a la frecuencia efectiva.
+** Peak transfer rate: ancho de banda BW:6400MB/s
+** timings: número de ciclos del reloj i/o bus clock de duración de los eventos:5-5-5-12½
+*** tCL = 5 ciclos de reloj = 5 x 2.5 = 12.5ns
+*** tRCD = 5 ciclos de reloj = 5 x 2.5 = 12.5ns
+*** tRP = 5 ciclos de reloj = 5 x 2.5 = 12.5ns
+*** tRAS = no se ha proporcionado
+
+Ejemplo PC3-22400 11-14-14-35
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* http://www.corsair.com/es-es/dominator-platinum-with-corsair-link-connector-1-65v-16gb-dual-channel-ddr3-memory-kit-cmd16gx3m4a2800c11[Dominator® Platinum with Corsair Link Connector — 1.65V 16GB Dual Channel DDR3 Memory Kit (CMD16GX3M4A2800C11)]:
+
+* Memory Type: DDR3 
+* Speed Rating: PC3-22400 (2800MHz) 
+* Tested Latency: 11-14-14-35 
+* Our Price:80€ 
+* 16GB Kit (4 x 4GB)
+* Dual Channel
+
+* Características deducidas:
+** Ancho de banda de pico = 22400MB/s
+** Data rate (1data=8Bytes) = 2800MT/s
+** I/O bus effective clock = 2800MHz. I/O hace referencia al bus del buffer i/o de la memoria.
+** I/O bus clock = 2800MHz / 2 = 1400MHz
+** I/O bus cycle time= 1/1400MHz = 710ps 
+** Latencies
+*** tCL  = 11 ciclos = 11 x 710ps = 7.8ns
+*** tRCD = 14 ciclos = 14 x 710ps = 10ns
+*** tRP  = 14 ciclos = 14 x 710ps = 10ns
+*** tRAS = 35 ciclos = 35 x 710ps = 24.8ns
+
+* Mejora PC3-22400 vs PC3-6400
+** Mejora del I/O bus cycle time = 710ps frente a 2.5ns = una reducción de 1.79ns = 1.79/2.5 = 71%
+
+Diferencia entre PC2-6400 y PC3-6400
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* No ha diferencias en cuanto a latencias ya que un 5-5-5 en los dos casos se refiere a una frecuencia del bus de memoria de 400MHz.
+* Hay diferencias en cuanto a pines, tensión de alimentación, etc
+
+Anchos de banda standard
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+** Módulos DDR1 SDRAM: PC-3200/PC-2700/PC-2100/PC-1600
+** Módulos DDR2 SDRAM: PC2-6400/PC2-5300/PC2-4200/PC2-3200 
+** Módulos DDR3 SDRAM: 
+*** PC3-22400/PC3-21300/PC3-19200/PC3-17066/PC3-15000/PC3-12800/PC3-10600/PC3-8500/PC3-6400 
+*** DDR3-2800/DDR3-2666/DDR3-2400/DDR3-2133/DDR3-1866/DDR3-1600/DDR3-1325/DDR3-1065/DDR3-800/
+
+
+Capacidad
+~~~~~~~~~
+
+Registered/Buffered Memory
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* http://en.wikipedia.org/wiki/Registered_memory
+* Registered: RDIMM: Entre el controlador de memoria y el módulo de memoria hay un registro que memoriza la info de las líneas de control. Se manda el comando de control previamente a la transferencia, añadiendo un ciclo extra de bus. De esta forma se eliminan las líneas de control para la transferencia de comandos al controlador y así se disminuye la carga del bus de memoria del controlador de memoria y se consigue conectar más módulos al canal del controlador aumentando la capacidad de memoria.
+* Unbuffered: UDIMM: No se latchea las info de la líneas de control.
+* fully buffered:
+** Se registra tanto la info de las señales de control como de las señales de datos y direcciones con una reducción considerable de la carga de todos los buses del canal del controlador de memoria.
+** Los datos se transfieren en serie en lugar de en paralelo reduciendo el número de líneas y por lo tanto aumentando el número de módulos de memoria conectados al canal.
+
+Bank Switching
+~~~~~~~~~~~~~~
+
+* https://en.wikipedia.org/wiki/Bank_switching[Bank Switching]
+** En arquitecturas limitadas de 8 y 16 bits (Por ejemplo intel 4004) se utiliza la técnica 'memory banking' para aumentar la capacidad de memoria.
+** En lugar de incrementar anchura del bus de direcciones incrementando el tamaño de palabra de la CPU y el bus de la placa base, se añaden más dispositivos de memoria direccionables mediante el mismo bus y un nuevo registro que selecciona uno de los dispositivos de memoria (Bank). *No confundir* con los bancos de los chips de memoria ni con los bancos de registros.
+** Bank switching significa cambiar de banco de memoria.
+
+Info complementaria
+-------------------
+
+* Información complementaria en el <<apendice_organizacion_dram, Apéndice>>.
+
+
+Thinkpad T560
+-------------
+
+comandos
+~~~~~~~~
+
+* listado
++
+
+----
+sudo lshw -short -C memory
+sudo lshw -class memory
+lspci | grep -i mem -> memory controller -> chipset
+sudo inxi -m
+sudo cpu-x
+sudo dmidecode -t memory
+sudo dmidecode -t 16
+lsmem
+free
+cat /proc/meminfo
+ https://access.redhat.com/solutions/406773
+----
+
+análisis
+~~~~~~~~
+
+* +sudo dmidecode -t 17+
++
+
+----
+  DDR3
+  Transfer rate 1600 MT/s
+  channel A
+  channel B
+  bank locator bank0
+  bank locator bank2
+  SODIMM DDR3 Synchronous 1600 MHz (0,6 ns)
+  -bank:0 -> slot: ChannelA-DIMM0
+  -bank:2 -> slot: ChannelB-DIMM0
+----
+** slot: A memory slot is each individual plug for memory
+** bank: A bank, is just a grouping of memory slots
+** channel: A channel is a memory bus that is dedicated for data to travel from the CPU to the RAM modules
+
+* +sudo hwinfo | grep -i mem -A 10+
+
+
+

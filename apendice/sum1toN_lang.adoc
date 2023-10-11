@@ -1,0 +1,251 @@
+Lenguajes de programación de Alto y Bajo Nivel
+==============================================
+
+:doctitle: Lenguajes de programación de Alto y Bajo Nivel
+
+
+[[lang_altovsbajo]]
+Lenguajes de programación de alto nivel vs lenguajes de bajo nivel
+------------------------------------------------------------------
+
+* Aunque en los años 1960 se programaba en el lenguaje máquina y lenguaje ensamblador, esto resultaba muy poco productivo ya que refequería mucho esfuerzo y tiempo.
+* La solución fue abstraer funciones de la computadora mediante lenguajes de alto nivel: 
+** https://www.tiobe.com/tiobe-index/
+
+* El empleo de lenguajes de alto nivel efectivos para los programadores requiere de un traductor al lenguaje máquina de la computadora.
+
+
+
+
+[[sum1toN_lang]]
+Ejemplo sum1toN en distintos lenguajes de Programación
+------------------------------------------------------
+
+* Algoritmo sum1toN -> stem:[\sum_{i=1}^{N}i=N(N+1)/2] 
+* Refs
+** http://wiki.c2.com/?ArraySumInManyProgrammingLanguages
+** https://www.rosettacode.org/wiki/Sum_and_product_of_an_array#With_explicit_conversion
+
+* Desarrollar el algoritmo sum1toN en :  Lisp, Python, Java, C, Pascal,  ...
+* elisp
++
+
+[source,lisp]
+-----------
+(setq array [1 2 3 4 5])
+(apply '+ (append array nil))
+(apply '* (append array nil))
+-----------
+
+* Phyton
++
+
+[source,python]
+--------------------
+>>> sum(range(5,0,-1))
+--------------------
+
+* Java
++
+
+[source,java]
+----------------
+/* Programa Fuente: sum1toN.java
+
+ compilación: javac sum1toN.java -> genera el BYTECODE sum1toN.class 
+ ejecución   -> java -cp . sum1toN  ; necesita el bytecode *.class y ejecutará el main de class
+
+*/ 
+
+public class sum1toN {
+// método main encapsulado en la clase class, static para que main no pueda cambiar los atributos, publico para ser accesible.
+    public static void main(String[] args) { 
+        System.out.println("Suma de Números enteros"); 
+	int x=5, suma=0;
+
+      while (x >= 0 ) {
+         System.out.print( x );
+         System.out.print(",");
+	 suma=suma+x;
+	 x--;
+      }
+      System.out.print("\n");
+      System.out.print("suma="+suma);
+      System.out.print("\n");
+    }
+}
+
+----------------
+
+* C
++
+
+[source,c]
+---------
+/*
+  Programa:       sum1toN.c
+  Descripción:    realiza la suma de la serie 1,2,3,...N
+                  Es el programa en lenguaje C equivalente a sum1toN.ias de la máquina IAS de von Neumann
+  Lenguaje:       C99
+  Descripción:    Suma de los primeros 5 números naturales
+  Entrada:        Definida en una variable
+  Salida:         Sin salida
+  Compilación:    gcc -m32 -g -o sum1toN sum1toN.c -> -g: módulo binario depurable
+                                                   -> -m: módulo binario arquitectura x86-32 bits
+  S.O:            GNU/linux 4.10 ubuntu 17.04 x86-64
+  Librería:       /usr/lib/x86_64-linux-gnu/libc.so
+  CPU:            Intel(R) Core(TM) i5-6300U CPU @ 3.0GHz
+  Compilador:     gcc version 6.3 
+  Ensamblador:    GNU assembler version 2.28
+  Linker/Loader:  GNU ld (GNU Binutils for Ubuntu) 2.28
+  Asignatura:     Estructura de Computadores
+  Fecha:          20/09/2017
+  Autor:          Cándido Aramburu
+*/
+
+#include <stdio.h>  // cabecera de la librería de la función printf()
+
+// función de entrada al programa
+void  main (void)
+{
+  // Declaración de variables locales
+  char suma=0;
+  char n=0b101;	
+  // bucle
+  while(n>0){
+    suma+=n;
+    n--;
+  }
+ printf("\n La suma es = %d \n",suma);
+}
+---------
+
+
+
+
+
+* Lenguaje ensamblador ATT para la arquitectura x86-32
++
+
+[source,nasm]
+----
+### Programa: sum.s
+### Descripción: realiza la suma de la serie 1,2,3,...N
+### gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
+### Ensamblaje as --32 --gstabs fuente.s -o objeto.o
+### linker -> ld -melf_i386 -I/lib/i386-linux-gnu/ld-linux.so.2   -o ejecutable objeto.o -lc
+
+        ##  Declaración de variables
+        .section .data
+
+n:	.int 5
+       
+        .global _start
+
+        ##  Comienzo del código
+        .section .text
+_start:
+        mov $0,%ecx # ECX implementa la variable suma
+        mov n,%edx
+bucle:
+        add %edx,%ecx
+        sub $1,%edx
+        jnz bucle
+       
+        mov %ecx, %ebx # el argumento de salida al S.O. a través de EBX según convenio
+                
+        ## salida
+        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
+        int $0x80     # llamada al sistema operativo
+
+        
+        .end
+----
+
+
+* Lenguaje ensamblador AT&T para la arquitectura x86-64
++
+
+[source,nasm]
+-----------
+	#### Programa: sum1toN.s
+	### Descripción: realiza la suma de la serie 1,2,3,...N. La entrada se define en el propio programa y la salida se pasa al S.O.
+	### Lenguaje: Lenguaje ensamblador de GNU para la arquitectura AMD64
+	### gcc  -no-pie -g -nostartfiles -o sum1toN  sum1toN.s
+	### Ensamblaje as  --gstabs sum1toN.s -o sum1toN.o
+        ### linker -> ld    -o sum1toN sum1toN.o
+	##  Declaración de variables
+	##  SECCION DE DATOS
+	  .section .data
+
+n:      .quad 5
+	       
+	  .global _start  
+
+	  ##  Comienzo del código
+	  ##  SECCION DE INSTRUCCIONES
+
+	  .section .text
+_start:
+        movq $0,%rdi # RDI implementa la variable suma
+        movq n,%rdx
+bucle:
+        add %rdx,%rdi
+        sub $1,%rdx
+        jnz bucle
+       
+        ## el argumento de salida al S.O. a través de RDI según convenio ABI AMD64             
+	## salida
+          mov $60, %rax	# código de la llamada al sistema operativo: subrutina exit
+	  syscall # llamada al sistema operativo para que ejecute la subrutina según el valor de RAX
+
+	        
+	  .end
+-----------
+
+* ARM
++
+
+[source,armasm]
+----
+/*      Programa: sum1toN.s
+        Descripción: realiza la suma de la serie 1,2,3,...N
+        Es el programa en lenguaje ARM equivalente a sum1toN.ias de la máquina IAS de von Neumann
+        gcc  -g -nostartfiles -o sum1toN sum1toN.s
+        Ensamblaje as  --gstabs sum1toN.s -o sum1toN.o
+        linker -> ld     -o sum1toN sum1toN.o
+*/
+        @  Declaración de variables
+        .section .data
+n:      .int 5
+
+        .global _start
+
+        @ Comienzo del código
+        .section .text
+_start:
+        mov r0,#0       @ R0 implementa la variable suma
+        ldr r2,=n       @ R1 implementa la variable n indirectamente
+        ldr r1,[r2]
+/* Direccionamiento directo:
+        mov r1,n da error porque mov no admite direccionamiento a memoria directo.
+                 mov admite direccionamiento inmediato si el literal de  32 bits no tiene repetición de ceros a izda y dcha
+                 para convertirlo en un literal de 8 bits seguido de desplazamientos
+        ldr r1,n Error: reubicación_interna (tipo OFFSET_IMM) no compuesta
+                 Da error al intentar codificar un literal (dirección n) de 32 bits.
+*/
+
+bucle:
+        add r0,r1
+        subs  r1,#1
+        bne bucle
+
+        @r0 es el argumento de salida al S.O. a través de EBX según convenio
+
+        /* exit syscall */
+        mov r7, #1
+        swi #0
+
+        .end
+----
+

@@ -1,0 +1,425 @@
+AT&T x86-32 Mihiztadura Lengoaia: Datuzko Egiturak eta Baldintzapeko Jauziak
+============================================================================
+:author: Cándido Aramburu 
+:email: candido@unavarra.es
+:revnumber: v1.0.0
+:revdate: 2017 Octubre 3
+:doctitle: AT&T x86-32 Mihiztadura Lengoaia: Datuzko Egiturak eta Baldintzapeko Jauziak
+:toclevels: 3
+:numbered:
+:icons:
+:lang: es
+:encode: ISO-8859-1
+:ascii-ids:
+// atributos personales 
+:ruta-apuntes: home/candido/Dropbox/apuntes
+include::/{ruta-apuntes}/include_apuntes.txt[]
+
+
+Ebaluaketa
+----------
+
+* Txostena idatzi erantzunarekin.
+
+Luzapen Desberdineko datuak : 'datuak_size.s'
+---------------------------------------------
+
+* Iturburu modulua: datuak_size.s
++
+
+------------------
+### Programa: datuak_size.s
+### Deskribapena: luzapen desberdineko datuak
+	## MACROS
+	.equ SYS_EXIT,	1
+	.equ SUCCESS,	0
+
+	## ALDAGAI LOKALAK
+	.data
+
+da1:	.byte   0x0A
+da2:	.2byte  0x0A0B
+da4:	.4byte  0x0A0B0C0D
+men1:	.ascii  "kaixo"		
+zerrenda:  .int    1,2,3,4,5
+	
+	## AGINDUAK
+	.global _start
+	.text
+_start:
+	mov $SYS_EXIT, %eax	
+	mov $SUCCESS,  %ebx
+	int $0x80
+	
+	.end
+------------------
+
+
+** GDBren bidez memoria nagusia edukiaren analisia
++
+
+--------
+x /xb &da1
+x /tb &da1
+x /xh &da2
+x /xw &da4
+x /5cb &men1
+x /5xb &men1
+p /s (char *)&men1
+
+x /5xb &da4
+x /5cb &men1
+
+
+x /5xw &zerrenda
+p /a &zerrenda
+p /a &zerrenda+1
+x /xw (&zerrenda+1)
+p zerrenda
+p *(&zerrenda+1)
+p  zerrenda@5
+p *(&zerrenda)@5
+
+
+p &_start
+x /i &_start
+disas /r _start
+
+--------
+
+
+* ¿Zer ordenan gordetzen dira da4 datuaren byteak ?
+* ¿Zer ordenan gordetzen dira "kaixo" stringeren karaktereak ?
+* ¿'o' karakterea ze kodigoa dauka?
+* ¿Zer nagusiko memoriaren helbidea dauka  "kaixo" katea  ?
+* ¿Zein da nagusiko memoriaren helbidea zerrenda bektorea gordetzen direnean?
+* ¿Zein da helbide lehenaren hasieratik leheneko 4 bytearen edukia?
+
+
+
+
+Mnemonikoen atzizkiak: Eragigaiaren luzapena. 'datuk_atzizkiak.s'
+-----------------------------------------------------------------
+
+* Mnemonikoen atzizkiak betetzen du eragigaiaren luzapena
++
+
+--------------------
+### Program: datuk_atzizkiak.s
+### Describapena: erabili mnemonikoen atzizkiak 
+	## MAKROAK
+	.equ SYS_EXIT,	1
+	.equ SUCCESS,	0
+
+	## ALDAGIAGAI LOKALAK
+	.data
+
+da1:	.byte   0x0A
+da2:	.2byte  0x0A0B
+da4:	.4byte  0x0A0B0C0D
+agurra:	.ascii  "kaixo"
+zerrenda:  .int    1,2,3,4,5
+	
+	## AGINDUAK
+	.global _start
+	.text
+_start:
+
+	## Erregistroaren Reseta
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+
+	## Datuaren Karga
+	## mov da1,da4		AKATSA: bi eragingaiaren erreferentziak memorian dira
+	mov  da4,%eax
+	movl da4,%ebx
+	movw da4,%cx
+	movb da4,%dl
+
+	## Erregistroaren Reseta 
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+
+	## Datuaren Karga
+	## movw  da4,%al	AKATSA::  -w eta AL artean desberdintasuna
+	mov  da4,%al		#DLren luzapena nagusia da
+	movb da4,%ebx      	#BLren nagusia da
+
+	mov  da1,%ecx
+	mov  da4,%dx
+
+	## Erregistroaren Reseta 
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+
+	## Datuaren Karga
+	
+        mov  da1,%al
+
+	## inc da1     		AKATSA:  beharrezkoa da inc agindua atziki bat edukitzea da1 memoriaren helbidea delako
+	incb da1
+	incw da2
+	incl da4
+
+	## IRTEERA
+	mov $SYS_EXIT, %eax	
+	mov $SUCCESS,  %ebx
+	int $0x80
+	
+	.end
+--------------------
+
+Helbideratzeko Motak: 'datuk_helbideratze.s'
+--------------------------------------------
+
+Iturburu Programa
+~~~~~~~~~~~~~~~~~
+
+* Daturaren lerrokapena  +.align+: +.align n+  'n' ren memoriaren multiplo helbidea ematen du hurrengo datuari.
+* 'datuk_helbideratze.s'
++
+
+
+-------------------
+
+### Program:     datuk_helbideratze.s
+### Describapena: Erabili datuaren egitarraua  helbideratze desberdinarekin, aritmetikoa eta logikoa eragigaiak eta baldintzapeko jauziak
+### gcc -m32 -g -e main -o datuk_helbideratze  datuk_helbideratze.s
+	
+	## MAKROAK
+	.equ SYS_EXIT,	1
+	.equ SUCCESS,	0
+
+	## ALDAGAI LOKALAK
+	.data
+
+	.align 4				     # lerrokapena 4ko helbide multiploarekin
+da2:	.2byte  0x0A0B,0b0000111101011100,-21,0xFFFF # da2 Array 12 byteko datuarekin
+	.align 4
+zerrenda:  .word    1,2,3,4,5	# lista array 2 byteko elementuarekin
+	.align 8
+buffer:	.space  100		# 100 byteko buffer array
+	.align 2
+agurra:
+	.string "Kaixo"		# agurra array 1 byteko elementuarekin
+	
+	## AGINDUAK
+	.global main
+	.text
+main:
+
+	## RESET	
+
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+	xor  %esi,%esi
+        xor  %edi,%edi
+
+	## ALGORITMO sum1toN
+
+	## Helbideratze berehala
+	mov $4,%si
+	## Helbideratze  indexatua
+begizta:	add lista(,%esi,2),%di
+	## Helbideratze  erregistroa
+	dec %si
+	## Helbideratze  PC erlatiboa
+	jns begizta
+
+
+	## EJERCICIOS SOBRE DIRECCIONAMIENTO
+	
+	## Helbideratze  zeharkakoa
+	lea buffer,%eax		# EAX erakuslearen hasierapena
+	## mov da2,(%eax) AKATS: bi helbideak memori nagusietan
+	mov da2,%bx
+	mov %bx, (%eax)
+	## Helbideratze  zuzena
+	incw da2
+	## Helbideratze  indexatua
+	lea  da2,%ebx
+	## inc 2(%ebx) AKATS: memoriaren helbidea atzizki gabe
+	incw 2(%ebx)
+	
+	mov $3,%esi
+	mov da2(,%esi,2),%ebx
+	
+	## BALDINTZA GABEKO JAUZIA
+	
+	## Helbideratze relatiboa
+	jmp jauzi1		#eip kontadoreari relatiboa
+	xor %esi,%esi
+jauzi1:
+
+	## ERAGIN ARITMETIKOAK
+
+	# imul: multiplicación con signo: AX<- BL*AL
+        movb $-3,%bl
+	movb $5,%al
+	imulb %bl	    
+	movw $5,%ax		#zatikizuen
+	movb $3,%bl		#zatitzaile
+	## idiv: división con signo .   (AL=Zatitura, AH=Hondarra) <- AX/(byte en registro o memoria)
+	idivb %bl	    # 5/3 = 1*3 + 2
+	negb %bl	    # 2tara osagarria -> zeinu aldaketa
+
+	## ERAGIN LOGIKOAK
+	mov $0xFFFF1F, %eax
+        mov $0x0000F1, %ebx
+	not %eax
+	and %ebx,%eax
+	or  %ebx,%eax
+	mov %ebx,%eax		#2 osagarria not()+1
+	not %eax
+	inc %eax
+        shr $4,%eax		#lekualdaketa logikoa: 0 bitak sartzen dira
+	sar $4,%eax		#lekualdaketa aritmetikoa: zeinu edapena
+
+	## EFLAGSen IKURRINAK
+
+### * eraginketak logikoak, aritmetikoak aldatzen dute flagen edukia 
+### * CF: helburu MSB biten bururakoa
+### * OF: luzapena gainezkatzea
+### * ZF: zero emaitza
+### * SF: emaitzaren balioa zeinu negatiboa
+### * PF: emaitzaren LSB byte bitaren kopurua bikoitia dira
+### 
+	xor %eax,%eax	       # zero emaitza -> ZF eta PF on baina CF,OF,SF off
+	inc %eax	       # ZF eta PF off
+	neg %eax	       # SF on
+	shr $1,%eax	       # SF off
+	clc		       # clear CF
+	xor %eax,%eax	       # zero emaitza->  ZF y PF on baina  CF,OF,SF off
+	movw $0xFFFF,%ax       #
+	addw $0xFFFF,%ax	#  CF on baina ez OF
+	clc
+	movw $0x7FFF,%ax
+	addw $1,%ax		# OF on baina ez CF
+	
+	
+	## KONPARAKETA AGINDUAK: TEST,CMP
+
+	## 5. lokatzen dena bita aztertu zero dela  0x0010 maskararekin
+	## test AND eragiketa egiten du EFLAGS ikurrinari ukitzen diate emaitza gorde gabe eragin helburuan
+	movw $0xABFF, %ax
+	movw $0xABCF, %bx
+	test $0x0010, %ax	# ZF on AXen 5. bita zero baldin bada
+	test $0x0010, %bx	# ZF on BXen 5. bita zero baldin bada
+
+	## 0x00FF baino balio handiago, txikiago edo berdin
+	## cmp SUB eragiketa egiten du EFLAGS ikurrinari ukitzen diate emaitza gorde gabe eragin helburuan
+	movw $0x01FF, %ax
+	movw $0x0001, %bx
+	movw $0x00FF, %cx
+	cmp  $0x00FF, %ax	#  AX-0x00FF > 0 izanez ZF eta SF on
+	cmp  $0x00FF, %bx	#  BX-0x00FF < 0 izanez SF on
+	cmp  $0x00FF, %cx	#  CX-0x00FF = 0 izanez ZF  on eta  SF off
+
+	## BALDINTZAPEKO JAUZIAK
+
+	movw $0x01FF, %ax
+	movw $0x0001, %bx
+	movw $0x00FF, %cx
+	cmp  $0x00FF, %ax	#  AX-0x00FF > 0, -> ZF=0 y SF=0
+	jg   jauzi4		# great jump -> zeinuekin zenbakien kenketa
+	nop
+jauzi4:
+	cmp  $0x00FF, %bx	# BX-0x00FF < 0, -> ZF=0 y SF=1
+	jl   jauzi5		# less jump
+	nop
+jauzi5:
+	movw $0x8000, %ax	# 0x8000 -> -32768 zeinuekin eta 32768 zeinu gabe
+	cmp  $0x0001, %ax
+	ja   jauzi6		# above jump -> zeinu gabe zenbakien kenketa -> 32768-1>0
+	nop
+jauzi6:	
+	cmp  $0x00FF, %cx	# CX-0x00FF = 0, -> ZF=1 eta SF=0
+	je   jauzi7		# equal jump
+	nop
+jauzi7:	
+	
+	## IRTEERA
+	
+	mov $SYS_EXIT, %eax	
+	mov $SUCCESS,  %ebx
+	int $0x80
+	
+	.end
+
+
+
+-------------------
+
+GDBren bidez analisia
+~~~~~~~~~~~~~~~~~~~~~
+
+Datuaren Egitaraua
+^^^^^^^^^^^^^^^^^^
+
+* 'da2' ARRAy
+** +ptype da2+: info gabe 
+**  +x /xh &da2+
+**  +x /4xh &da2+
+***  *casting* bat egin behar da: 2 byteko luzapena 4 elementuetan:  +p /x (short[4])da2+
+*** +x /4xh (short *)&da2+
+**** komandoaren argumentua erazagutzen du luzapena: '/4xh'
+** 'little endian' ordena azertu
+**  'da2' en bektorean -21 baliozko elementuaren helbidea aztertu: 
+* Array 'zerrenda'
+** +ptype zerrenda+
+** +p (short[5])zerrenda+ 
+* 'buffer' Array
+** +ptype buffer+
+**  bufferen helbidea eta edukia: +p &buffer+
+* String
+** +ptype agurra+ : no debug info -> ezinda erabili 'agurra[n]'
+** +p /c (char[5])agurra+   :casting array
+** +x /5c (char *)&agurra+  :casting erakusle
+** +p /c *(char *)&agurra+  :casting erakusle eta zeharkapena
+** +p /s (char *)&agurra+   :casting erakusle eta string formatoa
+* Mihiztadura alderantziz
+** +disas jauzi1+
+** +disas /r jauzi1+
+**  +jmp jauzi1+ aginduaren makina hizkuntza aztertu eta eragigaiaren zatia interpretatu
+* Exekutzio ondoren:
+** buffera aldatu baino lehen eta gero  +p buffer@100+
+**  'da2' aldagai aldatu baino lehen eta gero: +x /2xh &da2+
+**  'DI' erregistroa begizta aldatu baino lehen eta gero: +p $di+
+**  'jmp jauzi1' raino exekutzioa egin:
+***   +b 67+ y +continue+
+*** +p $eip+ : Programaren kontadorea 
+*** +x /i $eip+: agindu formatoa
+*** +disas /r $eip+: mihiztadura alderantziz eta gehitu makina hizkuntza
+
+
+
+
+Eragiketa Logikoa
+^^^^^^^^^^^^^^^^^
+
+* Aztertu aginduaren emaitzak
+
+Eragiketa logikoa
+^^^^^^^^^^^^^^^^^
+
+* Aztertu aginduaren emaitzak
+
+EFLAGS
+^^^^^^
+
+* p $eflags -> ikurrinak 1 balioarekin azaltzen dira
+* TEST eta CMP aginduarekun, aritmetiko eta logiko eragiketarekin aztertu EFLAGS ikurrinaren egoera.
+
+
+
+
+
+

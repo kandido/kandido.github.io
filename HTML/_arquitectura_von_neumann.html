@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_arquitectura_von_neumann" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+<ul class="sectlevel1">
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html">1. Introducción a la Estructura de los Computadores</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html"><span class="toc-current">2. Arquitectura Von Neumann</span></a>
+<ul class="sectlevel2">
+<li><a href="_arquitectura_von_neumann.html#_arquitectura_von_neumann_2">2.1. Arquitectura Von Neumann</a>
+<ul class="sectlevel3">
+<li><a href="_arquitectura_von_neumann.html#_temario_2">2.1.1. Temario</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_contexto_histórico">2.1.2. Contexto Histórico</a>
+</li>
+</ul>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_institute_advanced_machine_ias_arquitectura">2.2. Institute Advanced Machine (IAS) : Arquitectura</a>
+<ul class="sectlevel3">
+<li><a href="_arquitectura_von_neumann.html#_referencia">2.2.1. Referencia</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_ejemplo_del_programa_sum1ton">2.2.2. Ejemplo del Programa sum1toN</a>
+</li>
+</ul>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_estructura_de_la_computadora_ias">2.3. Estructura de la computadora IAS</a>
+<ul class="sectlevel3">
+<li><a href="_arquitectura_von_neumann.html#_módulos">2.3.1. Módulos</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_unidad_central_de_proceso_cpu">2.3.2. Unidad Central de Proceso (CPU)</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_memorias_2">2.3.3. Memorias</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_bus">2.3.4. Bus</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_input_output_io">2.3.5. Input Output (I/O)</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_animación_del_ciclo_de_instrucción">2.3.6. Animación del Ciclo de Instrucción</a>
+</li>
+</ul>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_isa_arquitectura_del_repertorio_de_instrucciones_de_la_máquina_ias">2.4. ISA: Arquitectura del Repertorio de Instrucciones de la máquina IAS</a>
+<ul class="sectlevel3">
+<li><a href="_arquitectura_von_neumann.html#_formato_de_los_datos_e_instrucciones_de_la_computadora_ias">2.4.1. Formato de los datos e Instrucciones de la Computadora IAS</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_repertorio_isa">2.4.2. Repertorio ISA</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_interfaz_isa">2.4.3. Interfaz ISA</a>
+</li>
+</ul>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_programación_en_el_lenguaje_ensamblador_ias">2.5. Programación en el Lenguaje Ensamblador IAS</a>
+<ul class="sectlevel3">
+<li><a href="_arquitectura_von_neumann.html#_estrategia_del_desarrollo_de_un_programa_en_lenguaje_ensamblador">2.5.1. Estrategia del Desarrollo de un Programa en Lenguaje Ensamblador</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_codificación_binaria_hexadecimal">2.5.2. Codificación Binaria-Hexadecimal</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_ejemplo_1_sum1ton_ias">2.5.3. Ejemplo 1: sum1toN.ias</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_ejemplos_de_programas_en_lenguaje_iassim">2.5.4. Ejemplos de Programas en Lenguaje IASSim</a>
+</li>
+</ul>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_operación_de_la_máquina_ias_ruta_de_datos">2.6. Operación de la Máquina IAS: Ruta de Datos</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html#_conclusiones">2.7. Conclusiones</a>
+</li>
+</ul>
+</li>
+<li><a href="_representación_de_los_datos.html">3. Representación de los Datos</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html">4. Operaciones Aritmeticas y Logicas</a>
+</li>
+<li><a href="_representación_de_las_instrucciones.html">5. Representación de las Instrucciones</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html">6. Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.</a>
+</li>
+</ul>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_arquitectura_von_neumann">2. Arquitectura Von Neumann</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_arquitectura_von_neumann_2">2.1. Arquitectura Von Neumann</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Calcular la suma \(\sum_{i=1}^{N}i=N(N+1)/2\)</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_temario_2">2.1.1. Temario</h4>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Arquitectura Von Neumann:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>CPU</p>
+</li>
+<li>
+<p>Memoria</p>
+</li>
+<li>
+<p>Entrada / Salida</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_contexto_histórico">2.1.2. Contexto Histórico</h4>
+<div class="sect4">
+<h5 id="_antecedentes">Antecedentes</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>1833: Charles Babbage &#8594; Diseña la 1ª Computadora mecánica</p>
+</li>
+<li>
+<p>1890: Máquina tabuladora de Herman <strong>Hollerith</strong>. Censo en USA. IBM (1925)</p>
+</li>
+<li>
+<p>1936: Alan Turing &#8594; Algoritmia y concepto de máquina de Turing.  Máquina código Enigma.</p>
+</li>
+<li>
+<p><strong>Seguna Guerra Mundial 1939-1945</strong></p>
+</li>
+<li>
+<p>1944: USA, IBM Computadora electromecánica Harvard Mark I</p>
+</li>
+<li>
+<p>1944: Colossus (Colossus Mark I y Colossus Mark 2). Decodificar comunicaciones.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_eniac">ENIAC</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>1947: En la Universidad de Pensilvania (laboratorio de investigación de balística para la artillería) se construye la <strong>ENIAC</strong> (Electronic Numerical Integrator And Calculator)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ecuaciones diferenciales sobre balística (angle = f (location, tail wind, cross wind, air density, temperature, weight of shell, propellant charge, &#8230;&#8203; ) )</p>
+</li>
+<li>
+<p>Computadora electrónica (no mecánica) de <strong>propósito general</strong>.</p>
+</li>
+<li>
+<p>Memoria: Sólo 20 acumuladores &#8594; flip-flops hechos con triodos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>18,000 tubos electrónicos ó válvulas de vacío</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Programación manual de los interruptores</p>
+</li>
+<li>
+<p>100,000 instrucciones por segundo</p>
+</li>
+<li>
+<p>300 multiplicaciones por segundo</p>
+</li>
+<li>
+<p>200 kW</p>
+</li>
+<li>
+<p>13 toneladas y 180 m<sup>2</sup></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_edvac">EDVAC</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>1951: En la Universidad de Pensilvania (J. Presper Eckert y John William Mauchly ) comienza a operar la <strong>EDVAC</strong> (Electronic Discrete Variable Automatic Computer), concebida por <strong>John von Neumann</strong>, que a diferencia de la ENIAC no era decimal, sino binaria, y tuvo el primer <strong>programa</strong> (no solo los datos) diseñado para ser <strong>almacenado</strong>: STORED PROGRAM COMPUTER &#8594; program can be manipulated as data.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>500000$</p>
+</li>
+<li>
+<p>La EDVAC poseía físicamente casi 6000 válvulas termoiónicas y 12 000 diodos de cristal. Consumía 56 kilowatts de potencia. Cubría 45,5 m² de superficie y pesaba 7850 kg.</p>
+</li>
+<li>
+<p>Arquitectura:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>un lector-grabador de cinta magnética</p>
+</li>
+<li>
+<p>una unidad de control con osciloscopio, una unidad para recibir instrucciones del control</p>
+</li>
+<li>
+<p>la memoria : 2000 word storage "mercury delay lines" &#8594; poca fiabilidad</p>
+</li>
+<li>
+<p>una unidad de aritmética de coma flotante en 1958.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ias">IAS</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>1946-1952 : <strong>IAS</strong> (Institute Advanced Studies) mainframe :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Evolución de EDVAC: unidad de memoria principal y secundaria tambor magnético.</p>
+</li>
+<li>
+<p>Memoria Selectron: almacenamiento capacitivo  &#8594; carga electrostática</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_posterior">Posterior</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>1952: <strong>UNIVAC I</strong> (UNIVersal Automatic Computer I) was the first commercial mainframe computer. Evolución de la máquina tabuladora de Hollerith aplicado al procesado del censo en USA.</p>
+</li>
+<li>
+<p>1952: IBM 701, conocido como la "calculadora de Defensa" mientras era desarrollado, fue la primera computadora científica comercial de IBM &#8594; primer lenguaje <strong>ENSAMBLADOR</strong>.</p>
+</li>
+<li>
+<p>1964: mainframe (computadora central) <strong>IBM 360</strong> &#8594; primer computador con ISA (microprogramación) &#8594; compatibilidad</p>
+<div class="ulist">
+<ul>
+<li>
+<p>tecnología híbrida entre componentes integrados discretos de silicio y otros componentes &#8594; no "circuitos" integrados.</p>
+</li>
+<li>
+<p>Basic Operating System/360 (BOS/360),  Disk Operating System/360 (DOS/360)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_tecnología_de_semiconductor">Tecnología de Semiconductor</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>1947: en los Laboratorios Bell, John Bardeen, Walter H. Brattain y William Shockley inventan el <strong>transistor</strong>.</p>
+</li>
+<li>
+<p>1958: Kilby , primer circuito integrado en germanio.</p>
+</li>
+<li>
+<p>1957: Robert Norton Noyce, cofundador de Fairchild Semiconductor, primer circuito integrado planar</p>
+</li>
+<li>
+<p>1968: Robert Norton Noyce y  Gordon Moore fundan Intel.</p>
+</li>
+<li>
+<p>1971: Intel 4004 &#8594; cpu integrada en silicio &#8594; 8 bits</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_institute_advanced_machine_ias_arquitectura">2.2. Institute Advanced Machine (IAS) : Arquitectura</h3>
+<div class="sect3">
+<h4 id="_referencia">2.2.1. Referencia</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://es.wikipedia.org/wiki/M%C3%A1quina_de_von_Neumann">The Von Neumann Machine</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo_del_programa_sum1ton">2.2.2. Ejemplo del Programa sum1toN</h4>
+<div class="sect4">
+<h5 id="_código_binario_para_calcular_sum_i15i">Código binario para calcular \(\sum_{i=1}^{5}i\)</h5>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/von_neumann/ias_code_machine.png" alt="ias code machine">
+</div>
+<div class="title">Figure 15. Código Máquina del programa sum1toN en la máquina IAS</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_programación_imperativa">Programación Imperativa</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Paradigma:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Paradigma imperativo ó estructural : el algoritmo se implementa desarrollando un programa que contiene las ORDENES que ha de ejecutar la máquina</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A diferencia de la programación declarativa: el algoritmo implementa QUÉ queremos que haga la computadora, no el COMO, no directamente las órdenes que ha de ejecutar.</p>
+</li>
+<li>
+<p>Por ejemplo la operación \(\sum_{i=1}^{5}i\) , se puede describir en python como:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="python"><span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_contenido_de_la_memoria_datos_e_instrucciones">Contenido de la Memoria: Datos e Instrucciones</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La computadora IAS se programaba directamente en <em>lenguaje máquina</em>, no tenía un lenguaje simbólico como el lenguaje ensamblador.</p>
+</li>
+<li>
+<p>Lenguaje Máquina: Código Binario</p>
+</li>
+<li>
+<p>Edición del código binario mediante tarjetas perforadas o cintas magnéticas a través de una consola.</p>
+</li>
+<li>
+<p>Tipo de información contenido en la memoria: DATOS e INSTRUCCIONES</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo de datos: números enteros <em>+3278,+5,-1,-6592,&#8230;&#8203;</em></p>
+</li>
+<li>
+<p>Ejemplo de instrucciones:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>LOAD M(8) : cargar en el registro acumulador el contenido de la posición 8 de memoria</p>
+</li>
+<li>
+<p>ADD M(3)  : sumar al registro acumulador el contenido de la posición 3 de la memoria</p>
+</li>
+<li>
+<p>JMP M(100): saltar a la posición 100 de la memoria</p>
+</li>
+<li>
+<p>etc</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Concepto  de programa <strong>almacenado</strong> : Instrucciones binarias y Datos binarios almacenados  en la <strong>Unidad de Memoria</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Fue la gran novedad de la arquitectura Von Neumannns</p>
+</li>
+<li>
+<p>Es necesario CARGAR el módulo binario en la MEMORIA de la computadora para que quede almacenado.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Programación secuencial: Las instrucciones se ejecutan secuencialmente según están almacenadas en la memoria&#8230;&#8203;mientras no se ejecute una instrucción explicita de salto que rompa la secuencia.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_arquitectura_instruction_set_architecture_isa">Arquitectura: Instruction Set Architecture (ISA)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Para poder analizar el programa es necesario no solo conocer el lenguaje binario de la máquina sino conocer su ARQUITECTURA. La arquitectura de una compuradora es el WHAT de la máquina, es decir, QUE instrucciones es capaz  de ejecutar la máquina, para lo cual es necesario conocer
+la ARQUITECTURA DEL REPERTORIO DE INSTRUCCIONES (Instruction Set Architecture <strong>ISA</strong>):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el repertorio de instrucciones: operaciones y modo de acceso a los datos</p>
+</li>
+<li>
+<p>jerarquía de memoria: memoria principal y registros</p>
+</li>
+<li>
+<p>formato de instrucciones y datos</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+la ISA es el primer nivel de <strong>abstracción</strong> del hardware físico de la computadora.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_estructura_de_la_computadora_ias">2.3. Estructura de la computadora IAS</h3>
+<div class="sect3">
+<h4 id="_módulos">2.3.1. Módulos</h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+La Estructura es el HOW de la máquina. De qué hardware disponemos para poder ejecutar las instrucciones máquina definidas por la arquitectura.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Hardware con Estructura <strong>Modular</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CPU-Memoria-I/O-Bus</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Jerarquía de Memoria: 2 niveles : Memoria Principal (externa a la CPU) y Registros (internos a la CPU)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/von_neumann/ias_architecture.png" alt="ias architecture">
+</div>
+<div class="title">Figure 16. Arquitectura de la máquina IAS</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitectura Interna de la CPU : Microarquitectura</p>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/von_neumann/ias_structure.png" alt="ias structure">
+</div>
+<div class="title">Figure 17. Estructura de la máquina IAS</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_unidad_central_de_proceso_cpu">2.3.2. Unidad Central de Proceso (CPU)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>CPU:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El Funcionamiento de la CPU está dividido 3 FASES: Captura, Interpreta y Ejecuta las instrucciones secuencialmente. A la secuencia de las 3 fases se le conoce con el nombre de <strong>Ciclo de Instrucción</strong>.</p>
+<div class="imageblock text-center text-center kroki-format-svg kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNrjUiAWBBQd3lyRmZuo4JlXXFJUmpyceXhzHhe6Km1dCoA2hnE1ChSAmkFuHGpYaQONQxfBFp7aWIJZG-wWbeSQrEFzaZlCDYbbMd1fg8VbNTCEcDmIE1ySWFQCi3M7kKucEwtKSosS4SKeeSWpRQVFqSWJ4LQCcSBQ3DUrNbkUKgQW1Abr90jMKUEYj8-lJLldAc3thMKYpFBXQAt1AI0ylEI=" alt="Ciclo de Instrucción">
+</div>
+<div class="title">Figure 18. Ciclo de Instrucción</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cada instrucción máquina de un programa es capturada, interpretada y ejecutada por la CPU y en ese orden. El circuito electrónico digital encargado de controlar que se realize dicha secuencia es la <strong>Unidad de Control</strong> integrada en la CPU. La Unidad de Control da microordenes mediante señales electrónicas al subcircuito capturador, al subcircuito intérprete y al subcircuito ejecutor para que se lleven a cabo todas las fases del ciclo de instrucción de cada instrucción del programa almacendado en la memoria principal.</p>
+</li>
+<li>
+<p>Tres submódulos principales de la CPU:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad de cálculo: Unidad Aritmético-Lógica (ALU)</p>
+</li>
+<li>
+<p>Unidad de control: Circuito secuencial que implementa el Ciclo de instrucción dando las órdenes eléctricas a los distintos bloques (ALU, memoria principal, registros, buses, etc) en cada fase hasta completar el ciclo de instrucción.</p>
+</li>
+<li>
+<p>Registros de memoria: En un registro se puede escribir o leer un dato o dos instrucciones.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_memorias_2">2.3.3. Memorias</h4>
+<div class="sect4">
+<h5 id="_memoria_principal">Memoria Principal</h5>
+<div class="imageblock text-center text-center kroki-format-svg kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNpzLS5ITM7MV0hJ5XLxDHJ1dvb093MNVoABZ3-_EFc_Txd_Li4FFKCtixVocxlUGEABSFmNgoEhBgQKk2yaIVVNM6KGaajKahSwglHTcMeCJVVNSxyNhUEQp2nUMI2LCwDXb7tX" alt="Direccionamiento del contenido de la Memoria Principal">
+</div>
+<div class="title">Figure 19. Direccionamiento del contenido de la Memoria Principal</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Debe almacenar el programa a ejecutar en código binario.</p>
+</li>
+<li>
+<p>La CPU es el único módulo que tiene acceso a la memoria principal.</p>
+</li>
+<li>
+<p>Las instrucciones y datos del programa se almacenan secuencialmente.</p>
+</li>
+<li>
+<p>Almacena el programa en dos <em>secciones</em>: Sección de Datos y Sección de Instrucciones</p>
+</li>
+<li>
+<p>Organizada en Palabras accesibles aleatoriamente. Random Access Memory.</p>
+</li>
+<li>
+<p>Dinamismo: Lectura/Escritura de datos e instrucciones</p>
+</li>
+<li>
+<p>En la máquina IAS las direcciones de memoria apuntan a palabras de 40 bits que pueden almacenar ó un dato de 40 bits o dos instrucciones de 20 bits cada una.</p>
+</li>
+<li>
+<p>Random Access Memory (RAM): direccionable cada posición de memoria.</p>
+</li>
+<li>
+<p>Shared Memory: memoria compartida entre datos e instrucciones. También comparten el bus de acceso a memoria.</p>
+</li>
+<li>
+<p>Capacidad para 2<sup>12</sup>=4K palabras con 40 bits para cada palabra.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>4K x 40bits = 4K x 5Bytes = 20KBytes</p>
+</li>
+<li>
+<p>En cambio la memoria física disponible en esa época era de : 1024 palabras de 40 bits = 5 KBytes (Libro "The Computer from Pascal to von Neumann", Herdman Godstine, pg314, ISBN 0-691-02367-0). Limitación tecnológica.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_registros_de_la_cpu">Registros de la CPU</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Memoria interna a la CPU: 2 tipos de registros: accesibles por el programador y no accesibles por el programador.</p>
+</li>
+<li>
+<p>AC y AR/MQ: Acumuladores de la ALU. Multiplier/Quotient .Son los únicos registros accesibles por el programador.</p>
+</li>
+<li>
+<p>Registros NO accesibles por el programador: todos los registros de la Unidad de Control: MBR,PC,IR,IBR,MAR</p>
+<div class="ulist">
+<ul>
+<li>
+<p>MBR: Selectron Register ó Memory Buffer Register <em>MBR</em> ó Data Buffer Register <em>DBR</em>. Tamaño de 40 bits. Almacena el dato o par de instrucciones leídas de la memoria resultado de la fase de captura del ciclo de instrucción ó almacena el dato a escribir en la memoria resultado de la última fase del ciclo de instrucción.</p>
+</li>
+<li>
+<p>PC: Control Counter: Program Counter (PC) o Instruction Pointer (IP). Tamaño de 12 bits. Apunta a la siguiente instrucción a capturar</p>
+</li>
+<li>
+<p>IR: Control Register: también denominado Instruction Register <em>IR</em>. Tamaño de 20 bits. Almacena la instrucción capturada durante el ciclo de instrucción</p>
+</li>
+<li>
+<p>IBR: Instruction Buffer Register: Almacena la segunda instrucción capturada durante el ciclo de instrucción. Tamaño de 20 bits. Observar que esto significa que en la fase de captura se capturan dos instrucciones simultáneamente.</p>
+</li>
+<li>
+<p>MAR: Memory Address Register: current Memory Address. Tamaño de 12 bits. Apunta al operando o instrucción a capturar durante la primera fase del ciclo de instrucción.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Su tamaño define lo que se conoce como "word size" de la arquitectura. La máquina IAS tiene una arquitectura de 40bits ó un Word de 40 bits</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_bus">2.3.4. Bus</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Conjunto de hilos o pistas metálicas paralelas para conectar dos dispositivos electrónicos. Todo el mundo ha tenido en sus manos un cable USB el cual contiene un bus USB (Universal Serial Bus).</p>
+</li>
+<li>
+<p>Bus del Sistema:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Interconexión CPU-Memoria Principal: transferencia de datos e instrucciones.</p>
+</li>
+<li>
+<p>Bus de Datos (40 hilos), Bus de Direcciones (12 hilos) y Bus de Control (Lectura/Escritura) (1 hilo). En total 53 hilos o pistas son necesarios para interconectar la CPU y la Memoria Principal.</p>
+<div class="imageblock text-center text-center kroki-format-svg kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNrT1kUG2grIQBtFiqsGRRIPrwZTqaOLS5BrcDBBpUhW6uvaaRMwVUHBqbQYSBoaEXQACW4deKUujiGOuJQ6KwQohEIDywY9sHxdff2DPB2xmwoJKwUTg-EVWEH64cQoRUnMhFMWNLDo5S1t4rMhAEAdmuk=" alt="Conexión CPU-Memoria Principal">
+</div>
+<div class="title">Figure 20. Conexión CPU-Memoria Principal</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_input_output_io">2.3.5. Input Output (I/O)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Las entradas y salidas de una computadora son necesarias spara poder operar con ellas, bien el programador o bien otras máquinas. Para acceder externamente a la computadora son necesarios los periféricos como teclados, pantallas, etc</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En la máquina IAS el programa se escribe en tarjetas perforadas (Punch Cards). Tarjetas para Datos y tarjetas para instrucciones. Es necesario cargar los datos en la memoria antes de la ejecución del programa.</p>
+</li>
+<li>
+<p>tarjetas perforadas, consola, tambores magnéticos, cintas magnéticas, cargador de memoria mediante un lector de tarjetas , display mediante tubos de vacío, etc.. &#8594; tecnología obsoleta.</p>
+</li>
+<li>
+<p>No tendremos en cuenta el módulo I/O y nos centraremos en los módulos CPU-Memoria Principal.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_animación_del_ciclo_de_instrucción">2.3.6. Animación del Ciclo de Instrucción</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.youtube.com/watch?v=04UGopESS6A">Animación del ciclo instrucción</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_isa_arquitectura_del_repertorio_de_instrucciones_de_la_máquina_ias">2.4. ISA: Arquitectura del Repertorio de Instrucciones de la máquina IAS</h3>
+<div class="sect3">
+<h4 id="_formato_de_los_datos_e_instrucciones_de_la_computadora_ias">2.4.1. Formato de los datos e Instrucciones de la Computadora IAS</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitectura de la Memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Word</p>
+<div class="ulist">
+<ul>
+<li>
+<p>40 bits : 1 dato ó  2 instrucciones</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Datos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Números Enteros en formato Complemento a 2.</p>
+</li>
+<li>
+<p><em>Data Format</em></p>
+<div class="imageblock text-center text-center kroki-format-svg kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNpTUFAwUFBQMFQgFxhbcmnrAgGYIBdoc9WAzKpRoADUAM0IpoIZlLuDGuHBBQAINT0F" alt="Formato de los datos">
+</div>
+<div class="title">Figure 21. Formato de los datos</div>
+</div>
+</li>
+<li>
+<p>Observar que el bit con la numeración cero es el de la izda.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Instrucciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Código de Operaciones de 8-bit seguidos de un operando de 12-bit (data address)</p>
+</li>
+<li>
+<p><em>Instruction Format</em></p>
+<div class="imageblock text-center text-center kroki-format-svg kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNrjstFFBT6paSUKnnnFJTABO1QVQZnpGagKdO24uBQMFJCAhQIaMLRUMEJWYYShQsHYkksb2R5tXUxAUIGuNlcNsqE1CpiAoAKFGpAh_gUKzvkpqRA1jikpRanFxSj68CuAGEK5S6gSJlwAMBlXCQ==" alt="Formato de las instrucciones">
+</div>
+<div class="title">Figure 22. Formato de las instrucciones</div>
+</div>
+</li>
+<li>
+<p>Definimos <strong>un sólo operando</strong> o ninguno en cada instrucción</p>
+</li>
+<li>
+<p><em>Accumulator Based Architecture</em></p>
+</li>
+<li>
+<p>Una operación que requiera dos operandos implicitamente hace referencia a un operando almacenado en el <em>acumulador</em></p>
+</li>
+<li>
+<p>Observar que el bit con la numeración cero es el de la izda.</p>
+</li>
+<li>
+<p>La instrucción de la izda (0-19) se carga en los registros, internos de la CPU, el código de operación IR y el campo de operación en MAR .</p>
+</li>
+<li>
+<p>La instrucción de la derecha (20-39) se carga en el registro, interno de la CPU, IBR .</p>
+</li>
+<li>
+<p>Modo de direccionamiento del Operando: Referencia del Operando. Esta arquitectura se diseño con único modo de direccionamiento denominado "Direccionamiento Directo" donde en el campo de operando de la instrucción se especifíca la <strong>dirección de memoria del operando</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Contenido de la Memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Las direcciones de memoria las visualizamos dobles ya que hacen referencia a la primera a los 20 bits LSB y la segunda a los 20 bits MSB de una palabra de memoria de 40 bits.</p>
+</li>
+<li>
+<p>Observar que en la columna data están las dos secciones: sección de instrucciones y sección de datos</p>
+</li>
+<li>
+<p>En la arquitectura von Neumann datos e instrucciones comparten el mismo espacio de direcciones de memoria.</p>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/von_neumann/ias_code_machine.png" alt="ias code machine">
+</div>
+<div class="title">Figure 23. Codigo Maquina sum1toN de la máquina IAS</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_repertorio_isa">2.4.2. Repertorio ISA</h4>
+<div class="sect4">
+<h5 id="_lenguaje_rtl">Lenguaje RTL</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Información sobre el Lenguaje de Transferencia entre Registros (RTL) en el <a href="_rtl_register_transfer_language.html#RTL_lang">Apéndice</a></p>
+</li>
+<li>
+<p>El lenguaje de transferencia entre registros permite describir programas a nivel de microoperaciones al igual que los lenguajes máquina binario y lenguaje ensamblador. La ventaja del lenguaje RTL es que su sintaxis es independiente de la arquitectura de la computadora, es decir, es un lenguaje Universal. Por lo tanto si describimos un programa en el lenguaje RTL su transcripción a un lenguaje ensamblador de arquitectura esapecífica como la arquitectura amd64,ARM, RISC-V,etc resulta mucho más sencilla.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_repertorio_de_la_máquina_ias">Repertorio de la máquina IAS</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Instruction Set Architecture (ISA): Definición y características del conjunto de instrucciones. Arquitectura del Repertorio de Instrucciones.</p>
+</li>
+<li>
+<p>En la versión original no había código ensamblador, se programaba directamente en lenguaje máquina.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En la tabla adjunta, en la segunda columna, los <strong>MNEMONICOS</strong> (LOAD,ADD,SUB,etc) de las operaciones de las instrucciones se corresponden con los diseñados por el libro de texto de William Stalling. En la primera y última columnas las operaciones se simbolizan mediante un lenguaje de transferencia entre registros.</p>
+</li>
+<li>
+<p>Selectron es el nombre de la tecnología utilizada para la Memoria Principal.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La notación S(x) equivale en notación RTL a M[x]</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>R es el registro AR que W.Stalling denomina registro MQ.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Instruction Set</caption>
+<colgroup>
+<col style="width: 8.3333%;">
+<col style="width: 16.6666%;">
+<col style="width: 8.3333%;">
+<col style="width: 50%;">
+<col style="width: 16.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Instruction name</th>
+<th class="tableblock halign-left valign-top">Instruction name</th>
+<th class="tableblock halign-center valign-top">Op</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Register Transfer Language (RTL)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S(x)&#8594;Ac+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOAD M(X)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">copy the number in Selectron location x into AC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AC &#8592; M[x]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S(x)&#8594;Ac-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOAD -M(X)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">same as #1 but copy the negative of the number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AC &#8592; ~M[x]+1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S(x)&#8594;AcM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOAD |M(X)|</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">same as #1 but copy the absolute value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AC &#8592; |M[x]|</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S(x)&#8594;Ac-M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOAD -|M(X)|</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">same as #1 but subtract the absolute value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AC &#8592; AC-|M[x]|</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S(x)&#8594;Ah+</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADD M(X)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add the number in Selectron location x into AC</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S(x)&#8594;Ah-</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SUB M(X)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">subtract the number in Selectron location x from AC</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S(X)&#8594;AhM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADD |M(X)|</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">same as #5, but add the absolute value</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S(X)&#8594;Ah-M</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SUB |M(X)|</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">8</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">same as #7, but subtract the absolute value</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S(x)&#8594;R</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOAD MQ,M(X)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">copy the number in Selectron location x into AR</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R&#8594;A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LOAD MQ</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">copy the number in AR to AC</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">S(x)*R&#8594;A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL M(X)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiply the number in Selectron location x by the number in AR. Place the left half of the result in AC and the right half in AR.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A/S(x)&#8594;R</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV M(X)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Divide the number in AC by the number in Selectron location x. Place the quotient in AR and the remainder in AC.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cu&#8594;S(x)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JUMP M(X,0:19)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Continue execution at the left-hand instruction of the pair at Selectron location x</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cu`&#8594;S(x)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JUMP M(X,20:39)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">E</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Continue execution at the right-hand instruction of the pair at Selectron location x</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cc&#8594;S(x)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JUMP+ M(X,0:19)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">F</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the number in AC is &gt;= 0, continue as in #D. Otherwise, continue normally.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cc`&#8594;S(x)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JUMP+ M(X,20:39)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the number in AC is &gt;= 0, continue as in #E. Otherwise, continue normally.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">At&#8594;S(x)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STOR M(X)</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Copy the number in AC to Selectron location x</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ap&#8594;S(x)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Replace the right-hand 12 bits of the left-hand instruction at Selectron location x by the right-hand 12 bits of the AC</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ap`&#8594;S(x)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Same as #12 but modifies the right-hand instruction</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">L</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LSH</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">14</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shift the number in AC to the left 1 bit (new bit on the right is 0)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RSH</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shift the number in AC to the right 1 bit (leftmost bit is copied)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">halt</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Halt the program (see paragraph 6.8.5 of the IAS report)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Instruction Set (William Stalling)</p>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/von_neumann/ias_instruction.png" alt="ias instruction">
+</div>
+<div class="title">Figure 24. IAS_Instruction_Set</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_interfaz_isa">2.4.3. Interfaz ISA</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>La arquitectura del conjunto de instrucciones (ISA) define la <strong>INTERFAZ</strong> entre el Hardware y el Software de la máquina</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Podemos tener dos CPU totalmente diferentes, p.ej AMD e Intel, pero  si tienen la misma ISA serán máquinas compatibles desde el punto de vista del sistema operativo.</p>
+</li>
+<li>
+<p>Concepto de familia: un mismo repertorio de instrucciones puede ser ejecutado por distintas computadoras</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/List_of_instruction_sets">ISA de distintas máquinas</a></p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center kroki-format-svg kroki">
+<div class="content">
+<img src="https://kroki.io/graphviz/svg/eNqNUktOw0AM3XMKK-tUiC6phJSmFAU1tErhAG7GDSMlmTCZrBAHYsGqR8jF8ORDQ0tLV5nYz8_PfhYy0Vi8wgO8X0Gw9mB0B859aXQVm0ojCIIUwVdZURkUSqMz2ePmSmdoVDmMRVSQNkpLZWtl3lDFUuXUwM5zWwZ_9XIRLqSMu-BFWCe4Xl7WfVqVjOu4beCRNOq3qv5C4MTgz9L2uJWWeSwLTJsmx9FuqwXyImAhc-LYaSBrACE1dWuDmzFspCmdw_YRJZLnUVbxz7th8OKYSrlJudjzXS9yDgFPCvaYW1j5bjCN3CByQ_6ETcHeXVsRDI20Q_4KtLr9eidkomDJF4Bd4m9kRNsWlQsF84pyQ21i1o5d73LwNqVK2ZojKc6sv7n-2a6XSex41tGUMuZUgDBuHDl3lLZ4oNjChwM03M-stNySJrYJR56WJqs_jYxxtKh3if2uMTXKV7mQtq6197-uTqgEC-bcrHcbM2mFt2d0MntyVZOrj29OWkQ_" alt="Instruction Set Architecture (ISA)">
+</div>
+<div class="title">Figure 25. Instruction Set Architecture (ISA)</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_programación_en_el_lenguaje_ensamblador_ias">2.5. Programación en el Lenguaje Ensamblador IAS</h3>
+<div class="sect3">
+<h4 id="_estrategia_del_desarrollo_de_un_programa_en_lenguaje_ensamblador">2.5.1. Estrategia del Desarrollo de un Programa en Lenguaje Ensamblador</h4>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Una vez entendido el problema que ha de resolverse mediante la programación, no se programa directamente el módulo fuente solución del problema sino que se va resolviendo describiendo el problema y el algorimto solución en distintos lenguajes y en las siguiente fases:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción del algoritmo en lenguaje "pseudocódigo".</p>
+</li>
+<li>
+<p>Descripción del algoritmo mediante un organigrama o diagrama de flujo.</p>
+</li>
+<li>
+<p>Descripción del algoritmo en lenguaje de transferencia entre registros RTL.</p>
+</li>
+<li>
+<p>Descripción del algoritmo en lenguaje ensamblador propio de la computadora</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="imageblock text-center text-center kroki-format-svg kroki">
+<div class="content">
+<img src="https://kroki.io/graphviz/svg/eNpLyUwvSizIUHBXqOZSCChOLU3JTz68OSUzPV9B105Byb8oPTEPpCQ3UQkkEBTiA6Jc84oTc5NyElPyi3TtgjNzS3MSkzMPb86z5lKoBQCSdhxn" alt="Fases de la Programación">
+</div>
+<div class="title">Figure 26. Fases de la Programación</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+El paso de una descripción en un lenguaje de alto nivel a bajo nivel se realiza en lenguaje RTL teniendo en cuenta la arquitectura de la computadora donde se ejecutará el lenguaje máquina. Cada instrucción de alto nivel habrá que traducirla en un bloque de instrucciones de bajo nivel
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_codificación_binaria_hexadecimal">2.5.2. Codificación Binaria-Hexadecimal</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejecutar el programa en lenguaje python:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="python"><span class="c1"># Tabla decimal-binario-hexadecimal
+</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">):</span>
+  <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">"  0b"</span><span class="o">+</span><span class="s">'{:b}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">zfill</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+  <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">"  0b"</span><span class="o">+</span><span class="s">'{:9_b}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">"  0x"</span><span class="o">+</span><span class="s">'{:_x}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+  <span class="k">print</span><span class="p">()</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>los dígitos binarios son 2: el 0 y el 1</p>
+</li>
+<li>
+<p>los dígitos hexadecimales son 16: 0-1-2-3-4-5-6-7-8-9-A-B-C-D-E-F. Que se corresponden con los valores 0-1-2-&#8230;&#8203; hasta el valor 15.</p>
+</li>
+<li>
+<p>El valor 9 se representan en binario como 1001 donde el peso de cada dígito viene determinado por su posición: 2<sup>3</sup>, 2<sup>2</sup>, 2<sup>1</sup>, 2<sup>0</sup></p>
+<div class="ulist">
+<ul>
+<li>
+<p>El valor del número 1001 es la suma ponderada del los digitos del número con su peso: 1*2<sup>3</sup>+0*2<sup>2</sup>+0*2<sup>1</sup>+1*2<sup>0</sup></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>En hexadecimal</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el número 0xA tiene el valor 10, el 0xB 11, el 0xC 12</p>
+</li>
+<li>
+<p>el número 0x10 tiene el valor 1*16<sup>1</sup>+0*16<sup>0</sup> = 16</p>
+</li>
+<li>
+<p>el número 0xFD tiene el valor 15*16<sup>1</sup>+13*16<sup>0</sup> = 240+13 = 253</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Relación hexadecimal-binario</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el número 0xF6 se convierte en binario mediante la conversión de cada dígito hexadecimal en un grupo de 4 dígitos binarios. F (valor 15) en binario 1111 y 6 (valor 6) en binario 0110. Por lo que al número hexadecimal 0xF6 le corresponde el binario 0b11110110</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplos de números de 1 byte: decimal-binario-hexadecimal</p>
+<div class="listingblock">
+<div class="content">
+<pre>16 0b0001_0000 0x10 17 0b0001_0001 0x11 18 0b0001_0010 0x12 19 0b0001_0011 0x13 20 0b0001_0100 0x14 21 0b0001_0101 0x15
+22 0b0001_0110 0x16 23 0b0001_0111 0x17 24 0b0001_1000 0x18 25 0b0001_1001 0x19 26 0b0001_1010 0x1a 27 0b0001_1011 0x1b
+28 0b0001_1100 0x1c 29 0b0001_1101 0x1d 30 0b0001_1110 0x1e 31 0b0001_1111 0x1f
+
+
+192 0b1100_0000 0xc0 193 0b1100_0001 0xc1 194 0b1100_0010 0xc2 195 0b1100_0011 0xc3 196 0b1100_0100 0xc4 197 0b1100_0101 0xc5
+198 0b1100_0110 0xc6 199 0b1100_0111 0xc7 200 0b1100_1000 0xc8 201 0b1100_1001 0xc9 202 0b1100_1010 0xca 203 0b1100_1011 0xcb
+204 0b1100_1100 0xcc 205 0b1100_1101 0xcd 206 0b1100_1110 0xce 207 0b1100_1111 0xcf</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo_1_sum1ton_ias">2.5.3. Ejemplo 1: sum1toN.ias</h4>
+<div class="sect4">
+<h5 id="_enunciado">Enunciado</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Calcular la suma \(\sum_{i=1}^{N}i=N(N+1)/2\)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_pseudocódigo">Pseudocódigo</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción del algoritmo mediante expresiones modo texto en lenguaje NATURAL</p>
+</li>
+<li>
+<p>VARIABLES:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>variable suma : almacena los resultados parciales y final</p>
+</li>
+<li>
+<p>variable N    : almacena el dato de entrada</p>
+</li>
+<li>
+<p>variable i    : almacena el sumando que varía en cada iteración</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Estructura del CODIGO imperativo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La construcción de instrucciones básica es un bucle</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El bucle cuenta las iteraciones en sentido descendente</p>
+</li>
+<li>
+<p>En cada iteración se genera un sumando "i" y se realiza la suma=suma+i</p>
+</li>
+<li>
+<p>Se inicializa "i"=N y en cada iteración i=i-1</p>
+</li>
+<li>
+<p>Se sale del bucle cuando i=-1</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_organigrama">Organigrama</h5>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/von_neumann/sum1toN_organigrama.png" alt="Diagrama de Flujo">
+</div>
+<div class="title">Figure 27. Organigrama: Diagrama de Flujo</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_rtl">RTL</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Descripción RTL para la máquina IAS orientada a acumulador</p>
+<div class="listingblock">
+<div class="content">
+<pre>;CABECERA
+;Descripcion en lenguaje RTL del algoritmo sum1toN
+
+;SECCION DATOS	:
+; Declaracion de etiquetas, reserva de memoria externa, inicializacion
+; Variables ordinarias
+n:	M[n] 	&lt;- 5		; variable sumando e inicializacion
+suma:	M[suma] &lt;- 0		; variable suma parcial y final
+
+;SECCION INSTRUCCIONES
+;Arquitectura orientada a Acumulador (AC)
+;Registros accesibles : AC
+	; inicio bucle : suma y generación de sumandos
+bucle:	AC 	&lt;- M[n]		; cargar sumando
+	AC&gt;=0 : PC &lt;- sumar	; si el sumando &lt; 0 fin del bucle y si es &gt;0 salto a sumar
+	; fin del bucle
+	stop
+	; realizar la suma
+sumar:  AC 	&lt;- AC + M[suma]
+	M[suma] &lt;- AC
+	; actualizar sumando
+	AC 	&lt;- M[n]
+	AC 	&lt;- AC - 1
+	M[n]  	&lt;- AC
+	; siguiente iteracion
+	PC 	&lt;- bucle</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_lenguaje_ensamblador_wstalling_de_la_máquina_ias">Lenguaje ensamblador WStalling de la máquina IAS</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo fuente sum1toN.ws</p>
+<div class="listingblock">
+<div class="content">
+<pre>; CABECERA
+; 1ª version : sum1toN_v1.ias
+; Calcula la suma de una secuencia de numeros enteros: suma = 1+2+..+n
+; dato de entrada : n
+; dato de salida  : suma
+; Algoritmo : bucle de n iteraciones
+;             Los sumandos se van generando en sentido descendente de n a 0
+;             Se sale del bucle si el sumando es negativo -&gt; -1
+; Estructuras de datos : variables n y suma . Constante uno.
+; Lenguaje ensamblador: William Stalling
+; Arquitectura de la máquina IAS de Von Neumann
+
+;;;;;;;;;;;;;;;; SECCION DE INSTRUCCIONES
+;Arquitectura orientada a Acumulador (AC)
+;Registros accesibles : AC
+; algoritmo: bucle que genera la secuencia n, n-1, n-2,...0,-1 si n&gt;=0
+bucle:	LOAD 	M(n)       	; AC &lt;- M[n]
+	JMP+    sumar		; Si AC &gt;= 0, salto a sumar
+	; fin del bucle
+	HALT			; stop
+
+	; realizar la suma
+sumar:  ADD	M(suma)         ; AC &lt;- AC+M(suma)
+	STOR 	M(suma)		; M[suma] &lt;- AC
+	; actualizar sumando
+        LOAD 	M(n)       	; AC &lt;- M[n]
+	SUB  	M(uno)     	; AC &lt;- AC-M[uno]
+	STOR 	M(n)		; M[suma] &lt;- AC
+	; comprobar condición bucle
+	JMP    bucle		; salto incondiconal
+
+
+
+
+;;;;;;;;;;;;;;;;;;;SECCION DE DATOS
+; Declaracion de etiquetas, reserva de memoria externa, inicializacion.
+; Variables ordinarias
+n:	.data	5 ; variable sumando
+uno:	.data	1 ; cte
+suma:	.data	0 ; sumas parciales y resultado final</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Se ha desarrollado la sección de datos para la reserva de memoria.</p>
+</li>
+<li>
+<p>Se ha realizado un BUCLE SENCILLO ya que el bucle es la construcción necesaria en el algoritmo final.</p>
+</li>
+<li>
+<p>Se ha realizado la operación RESTA ya que es una operación necesaria en el algoritmo final.</p>
+</li>
+<li>
+<p>Se ha COMENTADO el código</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_lenguaje_ensamblador_iassim">Lenguaje ensamblador iassim</h5>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>El desarrollo del módulo fuente en lenguaje ensamblador NO se realiza de principio a fin sino que se va realizando <strong>POR PASOS</strong>, empezando por un código lo más sencillo posible que será testeado y depurado antes de ir desarrollando hasta llegar al código completo</p>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>módulo fuente  <em>sum1toN_A.ias</em>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La 1ª versión implementa un bucle cuyo cuerpo únicamente almacena un dato en la variable suma. El dato varía en cada iteración.</p>
+</li>
+<li>
+<p>Sintaxis &#8594; etiqueta: operacion operando ;comentario &#8594; 4 Columnas</p>
+</li>
+<li>
+<p>Sólo puede haber etiquetas que apunten a instrucciones ubicadas al <strong>derecha</strong> de una palabra.</p>
+</li>
+<li>
+<p>Los símbolos para indicar la operación (Ej. S(x)&#8594;Ac+) no son mnemónicos</p>
+</li>
+<li>
+<p>No utilizar tildes ni en los comentarios ni en las etiquetas, ya que únicamente se admite código ASCII no extendido.</p>
+</li>
+<li>
+<p>Si el número de instrucciones es impar se ha de rellenar la palabra de 40 bits de la última instrucción con los 20 bits de menor peso a cero para conseguir que el número de instrucciones del programa sea <strong>par</strong>: utilizar la directiva <strong>.empty</strong></p>
+</li>
+<li>
+<p>La sección de instrucciones  debe de ir previamente a la sección de datos</p>
+<div class="listingblock">
+<div class="content">
+<pre>; CABECERA
+; Este código necesita ser DEPURADO
+; 1ª version : sum1toN_A.ias
+; Calcula la suma de una secuencia de numeros enteros: suma = 1+2+..+n
+; dato de entrada : n
+; dato de salida  : suma
+; Algoritmo : bucle de n iteraciones
+;             Los sumandos se van generando en sentido descendente de n a 0
+;             Se sale del bucle si el sumando es negativo -&gt; -1
+; Estructuras de datos : variables n y suma . Constante uno.
+; Lenguaje ensamblador: IASSim
+; Arquitectura de la máquina IAS de Von Neumann
+
+;;;;;;;;;;;;;;;; SECCION DE INSTRUCCIONES
+;Arquitectura orientada a Acumulador (AC)
+;Registros accesibles : AC
+; algoritmo: bucle que genera la secuencia n, n-1, n-2,...0,-1 si n&gt;=0
+bucle:	S(x)-&gt;Ac+  n    	; AC &lt;- M[n]
+	S(x)-&gt;Ah-  uno  	; AC &lt;- AC-M[uno]
+	At-&gt;S(x)   suma		; M[suma] &lt;- AC
+	Cc-&gt;S(x)   bucle	; Si AC &gt;= 0, salto a bucle
+	; fin del bucle
+	halt			; stop
+	.empty
+
+;;;;;;;;;;;;;;;;;;;SECCION DE DATOS
+; Declaracion de etiquetas, reserva de memoria externa, inicializacion.
+; Variables ordinarias
+n:	.data	5 ; variable sumando
+uno:	.data	1 ; cte
+suma:	.data	0 ; sumas parciales y resultado final</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Se ha desarrollado la sección de datos para la reserva de memoria.</p>
+</li>
+<li>
+<p>Se ha realizado un BUCLE SENCILLO ya que el bucle es la construcción necesaria en el algoritmo final.</p>
+</li>
+<li>
+<p>Se ha realizado la operación RESTA ya que es una operación necesaria en el algoritmo final.</p>
+</li>
+<li>
+<p>Se ha COMENTADO el código</p>
+</li>
+<li>
+<p><strong>FALTA</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>añadir las instrucciones para salvar los operandos en la dirección de memoria "n" en cada iteracción del bucle</p>
+</li>
+<li>
+<p>añadir las instrucciones para realizar la suma parcial en cada iteracción del bucle</p>
+</li>
+<li>
+<p>Ver versión del programa en lenguaje RTL ():</p>
+<div class="listingblock">
+<div class="content">
+<pre>SECCION INSTRUCCIONES
+bucle:	AC 	&lt;- M[n]		; cargar sumando
+	AC&gt;=0 : PC &lt;- sumar	; si el sumando &lt; 0 fin del bucle y si no salto a sumar
+	stop
+	; realizar la suma
+sumar:  AC 	&lt;- AC + M[suma]
+	M[suma] &lt;- AC
+	; actualizar sumando
+	AC 	&lt;- M[n]
+	AC 	&lt;- AC - M[uno]
+	M[n]  	&lt;- AC
+	PC 	&lt;- bucle	; salto incondicional
+
+SECCION DATOS
+n:	5		; variable sumando e inicializacion
+uno:	1		; variable sumando e inicializacion
+suma:	0		; variable suma parcial y final</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Versión rectificada</p>
+<div class="listingblock">
+<div class="content">
+<pre>; CABECERA
+; Codigo rectificado
+; Version : sum1toN_A.ias
+; Calcula la suma de una secuencia de numeros enteros: suma = 1+2+..+n
+; dato de entrada : n
+; dato de salida  : suma
+; Algoritmo : bucle de n iteraciones
+;             Los sumandos se van generando en sentido descendente de n a 0
+;             Se sale del bucle si el sumando es negativo -&gt; -1
+; Estructuras de datos : variables n y suma . Constante uno.
+; Lenguaje ensamblador: IASSim
+; Arquitectura de la maquina IAS de Von Neumann
+
+;;;;;;;;;;;;;;;; SECCION DE INSTRUCCIONES
+;Arquitectura orientada a Acumulador (AC)
+;Registros accesibles : AC
+; algoritmo: bucle que genera la secuencia n, n-1, n-2,...0,-1 si n&gt;=0
+bucle:	S(x)-&gt;Ac+  n    	; AC &lt;- M[n]
+	Cc-&gt;S(x)   sumar	; si el sumando &lt; 0 fin del bucle y si no salto a sumar
+	; fin del bucle
+	halt			; stop
+	.empty
+	; realizar la suma
+sumar:  S(x)-&gt;Ah+  suma         ; AC &lt;- AC + M[suma]
+        At-&gt;S(x)   suma         ; suma &lt;- AC
+; actualizar sumando
+        S(x)-&gt;Ac+  n    	; AC &lt;- M[n]
+        S(x)-&gt;Ah-  uno          ; AC &lt;- AC - M[uno]
+        At-&gt;S(x)   n            ; n &lt;- AC
+	Cu-&gt;S(x)   bucle        ; salto incondicional a la instrucción izda de bucle
+
+;;;;;;;;;;;;;;;;;;;SECCION DE DATOS
+; Declaracion de etiquetas, reserva de memoria externa, inicializacion.
+; Variables ordinarias
+n:	.data	5 ; variable sumando
+uno:	.data	1 ; cte
+suma:	.data	0 ; sumas parciales y resultado final</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Versión B</p>
+<div class="listingblock">
+<div class="content">
+<pre>; Version : sum1toN_B.ias
+; Calcula la suma de una secuencia de numeros enteros: suma = 1+2+..+n
+loop:      S(x)-&gt;Ac+  n    ;load n into AC
+           S(x)-&gt;Ah+  sum  ;add n to the sum
+           At-&gt;S(x)   sum  ;put total back at sum
+           S(x)-&gt;Ac+  n    ;load n into AC
+           S(x)-&gt;Ah-  one  ;decrement n
+           At-&gt;S(x)   n    ;store decremented n
+           Cc'-&gt;S(x)  loop ;if AC &gt;= 0, jump to pos right instruction
+           halt            ;otherwise done
+
+
+n:       .data 5  ;will loop 6 times total
+one:     .data 1  ;constant for decrementing n
+sum:     .data 0  ;where the running/final total is kept</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_registros">Registros</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>The IAS machine has 7 registers: Accumulator, Arithmetic Register / Multiplier-Quotient (AR/MQ), Control Counter, Control Register, Function Table Register, Memory Address Register, Selectron Register</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The Accumulator (<em>AC</em>) and Arithmetic registers (<em>AR/MQ</em>) are the only two programmer-visible registers</p>
+</li>
+<li>
+<p>The Control Counter is what we now call the Program Counter <em>PC</em></p>
+</li>
+<li>
+<p>The Control Register holds the currently executing instruction <em>IBR</em>. Unicamente la instrucción de la derecha que se va a ejecutar.</p>
+</li>
+<li>
+<p>The Function Table Register holds the current opcode <em>IR</em></p>
+</li>
+<li>
+<p>The Memory Address Register the current memory address <em>MAR</em></p>
+</li>
+<li>
+<p>Selectron Register the current data value being read from or written to memory &#8594; <em>MBR</em></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_simulador_iassim">Simulador IASSim</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Instrucciones de instalación y de funcionamiento del Simulador IASSim de la máquina IAS de Von Neumann en el <a href="_simulador_iassim_2.html#iassim_install">Apéndice</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_notas">Notas</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Es necesario que el número de instrucciones sea par. Si es impar se añade la directiva <em>.empty</em>.</p>
+</li>
+<li>
+<p>Una etiqueta debe de apuntar a la instrucción izda. Si está en la dcha se puede anteponer una instrucción de salto incondicional a dicha etiqueta.</p>
+</li>
+<li>
+<p>La sección de datos si está a continuación de la sección de código hay que terminar la sección de código con una instrucción en la dcha y si no la rellenamos con la directiva <em>.empty</em>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_error">Error</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Error al visualizar el valor del registro MAR</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Al ejecutar la primera instrucción de sum1toN.ias el contenido de MAR es 28, mayor que el rango de direcciones de la memoria principal donde esta cargado el programa.</p>
+</li>
+<li>
+<p>El error se da tanto en Windows 7 como en Ubuntu 17.04</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplos_de_programas_en_lenguaje_iassim">2.5.4. Ejemplos de Programas en Lenguaje IASSim</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Más ejemplos en el <a href="_programas_ensamblador_iassim.html#iassim_ejemplos">Apéndice</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_operación_de_la_máquina_ias_ruta_de_datos">2.6. Operación de la Máquina IAS: Ruta de Datos</h3>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/von_neumann/ias_operation.png" alt="ias operation">
+</div>
+<div class="title">Figure 28. IAS Operation</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Operación de la máquina IAS:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El ciclo de instrucción tiene dos FASES</p>
+</li>
+<li>
+<p>La primera fase es común a todas las instrucciones.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplos de instrucciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>X: referencia del operando</p>
+</li>
+<li>
+<p>AC &#8592; M(X)</p>
+</li>
+<li>
+<p>GOTO M(X,0:19): salto incondicional a la dirección X. X apunta a dos instrucciones. X,0:19 es la referencia de la Instrucción de la izda.</p>
+</li>
+<li>
+<p>If AC&gt;0 goto M(X,0:19): salto condicional</p>
+</li>
+<li>
+<p>AC &#8592; AC+M(x).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conclusiones">2.7. Conclusiones</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Para la programación de bajo nivel es necesario conocer las principales características de la arquitectura ISA de la computadora: la Estructura de la computadora (memoria,registros,etc) , Formato de datos (formato complemento a 2,etc) e instrucciones y el Repertorio de Instrucciones (operaciones, modos de direccionamiento, etc ..)</p>
+</li>
+<li>
+<p>La programación en lenguaje ensamblador no se realiza directamente en dicho lenguaje sino que se sigue una estrategia top-down comenzando por una descripción en lenguaje de pseudocódigo, organigrama, lenguaje RTL, etc</p>
+</li>
+<li>
+<p>Es el diseño del repertorio de instrucciones ISA de la computadora el que facilita o dificulta la programación de bajo nivel. Un repertorio excesivamente limitado como la máquina IAS de von Neumann dificulta la realización de expresiones matemáticas tan sencillas como una multiplicación seguida de la división. La secuencia de instrucciones RTL deberá tener en cuenta el facilitar el desarrollo del algoritmo.</p>
+</li>
+<li>
+<p>La programación del algoritmo en lenguaje ensamblador sigue una estrategia ascendente comenzando por una versión incompleta y lo más sencilla posible del programa a desarrollar.</p>
+</li>
+<li>
+<p>Cada versión desarrollada del programa en lenguaje ensamblador ha de ser depurada y verificada mediante un simulador y un depurador que permita la ejecución en modo paso a paso para analizar resultados parciales.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_introducción_a_la_estructura_de_los_computadores.html">Introducción a la Estructura de los Computadores</a> | ↑ Up: <a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_representación_de_los_datos.html">Representación de los Datos</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

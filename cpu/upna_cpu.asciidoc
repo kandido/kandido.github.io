@@ -1,0 +1,693 @@
+Unidad Central de Proceso
+=========================
+:author: Cándido Aramburu 
+:email: candido@unavarra.es
+:revnumber: v1.0.0
+:revdate: 2016 Abril
+:doctitle: Unidad Central de Proceso
+:toc:
+:toclevels: 3
+:numbered:
+:icons:
+:lang: es
+:encode: ISO-8859-1
+:ascii-ids:
+
+
+
+Temario
+-------
+
+[start=7]
+. Arquitectura y organización de la CPU
+.. Conjunto de instrucciones ISA
+.. Fases de ejecución de una instrucción
+.. Arquitecturas CISC, RISC y VLIW
+.. Camino de datos
+
+
+Biblio
+------
+
+* Libro de Texto: Estructura y Organización de Computadores .William Stalling. Capítulo 12.
+* Tema 2: Arquitectura von Neumann (unidad de control)
+
+Introduccion
+------------
+
+* El objetivo principal de la CPU es la implementación del 'ciclo de instrucción'. Es el soporte hardware para poder llevar a cabo todas las operaciones que conllevan las intrucciones de un programa.
+* Unidad Central de Proceso (CPU) o Procesador.
+** Nombres: Procesador, microprocesador (El componente electrónico básico es el transistor con un tamaño en sus origenes del orden de la micra ), ..
+** Central porque la computadora tiene varios procesadores: Por ejemplo el controlador de la memoria y  los controladores de los periféricos.
+* Arquitectura Von-Neumann.
+** La CPU es una de las unidades básicas que conforman la arquitectura Von-Neumann (CPU-MP-IO) y Buses.
+* 'Microarquitectura'
+** Las unidades básicas de la CPU son: Unidad de Control (UC), y la Ruta de Datos (ALU,FPU,MMU,etc).
+* El ciclo de instrucción puede ser secuencial o segmentado, permitiendo el solapamiento en el tiempo de la ejecución de más de una instrucción (técnicas de paralelismo a nivel de instrucción, ILP)
+* La CPU se puede  ver desde el punto de vista del programador o desde el punto de vista del diseñador electrónico.
+* Desde el punto de vista del 'programador' interesa:
+** Arquitectura del Repertorio  de Instrucciones (ISA)
+** Registros: registros de propósito general accesibles por el programador (acumulador, registro índice, punteros pila, etc), registro de estado,  registros de coma flotante, registros multimedia, resgistros de segmentación de memoria, registros no accesibles como el contador de programa, tamaño de los registros, etc
+** Modos de Funcionamiento de la CPU: modo superusuario, modo usuario, modo interrupción
+
+* Técnicas HW de optimización de la ejecución de un programa (performance)
+*** https://en.wikipedia.org/wiki/Instruction_pipelining[Segmenación-Pipelining]: organizar el ciclo de instrucción en fases o segmentos y ejecutarlos en paralelo.
+*** https://es.wikipedia.org/wiki/Ejecuci%C3%B3n_fuera_de_orden[Ejecución fuera de Orden OoO]: Run time
+*** https://es.wikipedia.org/wiki/Renombre_de_registros[Renombre de Registros]: Compiler & Run time
+*** https://en.wikipedia.org/wiki/Branch_predictor[Branch Predictor]: Run time
+
+Computadora para el Programador
+-------------------------------
+
+* El programador  se abstrae (en parte) de la implementación del Hardware gracias al Sistema Operativo.
+* Abstracción de la Máquina : instrucciones ISA / especificaciones ABI
+** Desde el punto de vista del programador de aplicaciones de bajo nivel: La interfaz con la máquina son las llamadas al sistema (*ABI*) y el repertorio *user ISA*
++
+
+
+[ditaa]
+----------------------------------------------------------------------
++----------------------------------+              
+|                                  |              
+|                   Applications   |              
+|  System_Calls                    |              
++---------------------+            |              
+|                     |            |       SW 
+|                     |            |              
+|                     |            |              
+|                     |            |              
+|                     |  ISA_user  |              
++                     +------------+-------->  ABI
+|                                  |              
+|                                  |              
+|                                  |              
+|                                  |              
++----------------------------------+      
+----------------------------------------------------------------------
+
+
+
+
+
+** Desde el punto de vista del sistema operativo: La interfaz con la máquina es *ISA (system isa y user isa)*
++
+
+[ditaa]
+----------------------------------------------------------------------
++----------------------------------+              
+|                                  |              
+|                   Applications   |              
+|                                  |              
++---------------------+            |              
+|                     |            |       SW       
+|                     |            |              
+|        S.O.         |            |              
+|                     |            |              
+|   ISA_system&user   |  ISA_user  |              
++---------------------+------------+-------->  ISA
+|                                  |              
+|    Execution HW                  |              
+|                                  |       HW       
+|                                  |              
++----------------------------------+              
+     
+
+----------------------------------------------------------------------
+
+* La programación de bajo nivel requiere tener algunos conocimientos del Hardware de la máquina no siendo posible su completa abstracción. Por lo tanto es necesario estudiar la CPU desde el punto de vista del programador.
+
+Conjunto de Instrucciones
+-------------------------
+
+
+Arquitectura (ISA)
+~~~~~~~~~~~~~~~~~~
+
+* Instruction Set Arquitecture (ISA)
+** La arquitectura del repertorio de instrucciones define: códigos de operación, tipos de operando, modos de direccionamiento, etc
+** Son las instrucciones máquina ejecutables directamente por la CPU en código binario.: 'lenguaje máquina'
+** La instrucción a ejecutar está almacenada en código binario en el registro RI de la Unidad de Control.
+* El repertorio de instrucciones está especificado en el manual del programador de la CPU:
+** Programamos en 'lenguaje Ensamblador' en lugar de en 'lenguaje máquina'
+** El manual contiene la definición de la Arquitectura del Repertorio de Instrucciones.
+*** el listado y descripción de todas las instrucciones ejecutables por el microprocesador
+**** categorías de las instrucciones: transferencia(mov), control(jmpz,loop),aritméticas(add), lógicas(xor), i/o (in/oout) 
+***** Mnemónicos del código de operación
+**** Modos de direccionamiento: inmediato, directo, indirecto, desplazamiento
+**** Tipos de datos: entero, real, alfanumérico
+*** Formatos binarios
+**** De las instrucciones: campos de operación, operando, modo direccionamiento
+**** De los datos: complemento a 2, coma flotante
+
+Ejemplos ISA
+~~~~~~~~~~~~
+
+
+* Manual del programador -> Instruction Set Arquitecture (ISA) -
+* http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html[IA64]
+* http://developer.amd.com/resources/documentation-articles/developer-guides-manuals/[AMD64]
+** http://developer.amd.com/wordpress/media/2008/10/24594_APM_v3.pdf[AMD64 Architecture Programmer’s Manual Volume 3: General Purpose and] System Instructions 
+* http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.subset.architecture.reference/index.html[ARM]
+** http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.subset.architecture.reference/index.html[Developer Guides]
+* Motorola 68k -> http://www.freescale.com/files/archives/doc/ref_manual/M68000PRM.pdf[M68000]
+** m68k hasta 1991
+** ppc (powerpc) desde 1991 con Apple e IBM -> iMac (1996-2006)
+
+
+Hola Mundo x86 vs ARM
+^^^^^^^^^^^^^^^^^^^^^
+
+* Cada  Arquitectura de Computador posee su propio lenguaje ensamblador.
+* Módulo Fuente hola_mundo.s en lenguaje ensamblador.
+** x86-64
++
+
+[source,c]
+----------------------------------------------------------------------
+### ----------------------------------------------------------------
+### 	hola_x86-64_att.s
+### 
+### 	Programa simple de iniciación para el desarrollo de programas en Ensamblador x86-64 AT&T.
+###
+### 	Ficheros complementarios: macros_x86-64_gas.h
+### 		
+###
+### Compilación:
+### 		assemble using: as  hola_intel_gas.s -o hola_intel_gas.o
+### 		link using:   	ld  hola_intel_gas.o -o hola_intel_gas
+###             Driver gcc: 	gcc   -nostartfiles   hola_intel_gas.s  -o hola_intel_gas
+###                                   
+### 	revised on: FEBRERO 2015 -- for Linuxs x86_64 environment
+### 
+### ----------------------------------------------------------------
+	.att_syntax		
+	
+	## Incluir el fichero con las Macros
+	.include "macros_x86-64_gas.h"
+	
+	## Declaración de símbolos externos
+	.global	_start		# visible entry-point
+
+
+	## Reserva de Memoria para datos variables
+	.section	.data
+
+msg0:	.ascii "Hola Mundo\n"
+len0:	.quad	. - msg0 	#tamaño en bytes de la cadena msg0
+
+
+	## Sección para el Código de las Instrucciones en Lenguaje Ensamblador
+	.section .text
+	
+_start:	
+
+	## Prompt del programa: imprimir mensaje
+
+	## Llamada al kernel para que acceda a la pantalla e imprima.
+	mov 	$SYS_WRITE, %rax	# service ID-number 
+	mov 	$STDOUT_ID, %rdi	# device ID-number 
+	mov 	$msg0, %rsi		# message address
+	mov 	len0, %rdx	# message length
+	syscall
+
+		
+
+	## terminate this program
+	mov 	$SYS_EXIT, %eax		# service ID-number
+	mov 	$0, %rdi		# setup exit-code
+	syscall 			# enter the kernel
+	
+	.end				# no more to assemble 
+
+
+----------------------------------------------------------------------
++
+
+[source,c]
+----------------------------------------------------------------------
+## Macros en el fichero macros_x86-64_gas.h
+
+## Llamadas al Sistema
+.equ	STDIN_ID,  0		# input-device (keyboard)
+.equ	STDOUT_ID, 1		# output-device (screen)
+.equ	SYS_READ,  0		# ID-number for 'read'
+.equ	SYS_WRITE, 1		# ID-number for 'write'
+.equ	SYS_OPEN,  2		# ID-number for 'open'
+.equ	SYS_CLOSE, 3		# ID-number for 'close'
+.equ	SYS_EXIT,  60		# ID-number for 'exit'
+----------------------------------------------------------------------
+
+** ARM
++
+
+[source,c]
+----------------------------------------------------------------------
+/*
+
+ Programa en lenguaje ensamblador AT&T para el procesador ARM
+        
+ Programa fuente: hello_world.s
+ Assembler:       arm-linux-gnueabi-as -o hello_world.o hello_world.s
+ Linker:          arm-linux-gnueabi-ld -o hello_world hello_world.o
+        
+*/
+	.data
+
+	msg:
+	.ascii "Hello, ARM World!\n"
+	len = . - msg
+
+
+	.text
+
+	.globl _start
+_start:
+	/* write syscall */
+	mov %r0, $1
+	ldr %r1, =msg
+	ldr %r2, =len
+	mov %r7, $4
+	swi $0
+
+	/* exit syscall */
+	mov %r0, $0
+	mov %r7, $1
+	swi $0
+
+----------------------------------------------------------------------
+
+** Motorola 68k
++
+
+[source,c]
+----------------------------------------------------------------------
+;CISC Sharp X68000 (Human68K): Motorola 68000 
+        pea (string)    ; push string address onto stack
+        dc.w $FF09      ; call DOS "print" by triggering an exception
+        addq.l #4,a7    ; restore the stack pointer
+ 
+        dc.w $FF00      ; call DOS "exit"
+ 
+string:
+        dc.b "Hello, world!",13,10,0
+----------------------------------------------------------------------
+
+Compatibilidad Software
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Compatibilidad
+^^^^^^^^^^^^^^
+
+* Cada procesador tiene su repertorio de instrucciones
+* Si dos procesadores tienen el mismo repertorio de instrucciones, es decir, la misma arquitectura, el módulo fuente en lenguaje ensamblador será compatible para los dos procesadores aunque la estructura interna de la CPU sea diferente: Ejemplo: Intel IA64 y AMD64
+
+Ejemplos
+^^^^^^^^
+
+* Requisitos: Ven en el Tema 6 de la asignatura el apartado "Llamadas al Sistema"
+* El programador necesita conocer el trío ARCH-KERNEL-LIBC 
+** Arch se refiere a la arquitectura de la computadora -> ISA
+** Kernel: núcleo del sistema operativo. Implementa las llamadas del sistema
+** Libc: librería para el programador de aplicaciones. Implementa las llamadas al sistema
+** Tanto el Kernel como la Librería tienen asociados sus interfaces de nivel alto (API) como de nivel bajo (ABI)
+* Ejemplos arch/kernel/libc
+** amd64-linux-gnu
+** arm-linux-gnueabi
+
+
+
+
+
+Fases de Ejecucion de una Instruccion
+-------------------------------------
+
+Fundamentos
+~~~~~~~~~~~
+
+image::../images/cpu/12_4.jpg[title="Ciclo de Instrucción", scaledwidth="100%",align="center" ]
+
+
+* Diagrama de Estados
+
+
+image::../images/cpu/12_5.jpg[title="Diagrama de Estados", scaledwidth="100%",align="center" ]
+
+
+* Fases del ciclo de instrucción
+.  Fetch Instruction : FI 
+** Inicialmente hay que volcar al bus de direcciones de memoria el contenido del Contador de Programa (PC)
+** Captar la instrucción
+** PC <- PC+1
+. Instruction Decode : ID  
+** interpretar la instrucción
+.  Fetch Operand      : OF 
+** captar datos, captar los operandos
+. Execute  Instruction : EI
+**  procesar la instrucción con los datos
+.  Write Operand: WO
+** almacencar el resultado
+. Interruption       : II
+. Next Instruction   : NI
+
+* Ciclo de instrucción
+** Después de la fase de captación de la instrucción (FI) le sigue la fase de Ejecución (EI) ó la Fase de determinación de la Dirección Efectiva del Operando y Obtención del operando (OF)
+** Después de la fase de ejecución puede haber un ciclo de atención a una interrupción.
+
+Ejemplo: máquina IAS de Von-Neumann
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Tema 2: link:../von_neumann/upna_von_neumann.html[Arquitectura Von-Neumann]
+* Cada instrucción de la computadora IAS se ejecuta siguiendo una secuencia de fases. Dicha secuencia se repite para cada instrucción y se conoce como el ciclo de instrucción de la unidad central de proceso (CPU).
+* La unidad de control es la unidad de la CPU que implementa cada fase del ciclo de instrucción.
+* La unidad de control controla la ruta de datos de la CPU mediante microordenes.
+* Internamente está formada por el circuito generador de microordenes y por los registros : contador de programa y registro de instrucción.
+
+Diagrama de Microoperaciones
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Microoperaciones: operaciones realizadas por la CPU internamente, al ejecutar una Instrucción Máquina.
+** Ejemplos: escribir en el registro MAR, orden de lectura a la MPrincipal, leer de MBR, interpretar de IR, incrementar PC, etc
+** Ejecución Síncrona con el reloj de la CPU:
++
+
+[ditaa]
+----------------------------------------------------------------------
+          T = 1/f
+<-------------------->
+
+               +-----+               +-----+               +-----+               +-----+            
+               |     |               |     |               |     |               |     |  
+               |     |               |     |               |     |               |     |         
+               |     |               |     |               |     |               |     |             
+               |     v               |     v               |     v               |     v    
+               |     |               |     |               |     |               |     |               
+               |     |               |     |               |     |               |     |     
+               |     |               |     |               |     |               |     |               
++--------------+     +---------------+     +---------------+     +---------------+     +
+----------------------------------------------------------------------
+
+*** IAS no es síncrona: una microoperación no comienza con ningún patrón de tiempos.
+** Descripción: Register Transfer Language (RTL)
++
+
+image::../images/von_neumann/ias_operation.png[scaledwidth="50%",align="center",title="IAS Operation"]
+
+* Operación de la máquina IAS:
+** El ciclo de instrucción tiene dos FASES
+** La primera fase es común a todas las instrucciones.
+* Ejemplos de instrucciones
+** X: referencia del operando
+** AC <- M(X)
+** GOTO M(X,0:19): salto incondicional a la dirección X. X apunta a dos instrucciones. X,0:19 es la referencia de la Instrucción de la izda.
+** If AC>0 goto M(X,0:19): salto condicional
+** AC <- AC+M(x). 
+
+
+
+Microarquitectura: Unidades Funcionales
+---------------------------------------
+
+Introducción
+~~~~~~~~~~~~
+
+* Se conoce con el nombre microarquitectura a la arquitectura interna del microprocesador.
+** La microarquitectura es el diseño e implementación del ciclo de instrucción del conjunto de instrucciones definido por ISA.
+** Ejemplos
+*** Intel: 8051, x86
+*** AMD: x86
+*** ARM: Cortex
+
+
+* The steps in the *instruction cycle* are performed by a variety of functional components within the CPU.  These components work very closely with the PCs memory and bus systems to carry out their designated tasks. 
+
+Implementación del ciclo de instrucción
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* ¿Cómo implementar el ciclo de instrucción?
+** Mediante un Circuito Electrónico Digital secuencial: Máquina de estados finitos FSM que implementa la secuencia del diagrama de estados y que recibe el nombre de Unidad de Control.
+** La Unidad de Control es una secuencia de estados que van realizando las distintas fases del ciclo de instrucción.
+** Las distintas fases del ciclo de instrucción utilizan distintas unidades funcionales como: registros, ALU, etc
+** La interpretación de distintas instrucciones máquina dará lugar a diferentes secuencias de estados en la Unidad de Control.
+
+Estructura de la CPU
+~~~~~~~~~~~~~~~~~~~~
+
+* Tres recursos básicos: Unidad de Control, Unidad de Ejecución y Registros.
+* Dos Bloques básicos de la CPU
+** Unidad de Control (UC) y  la Ruta de Datos (DataPath). 
+* La unidad de control esta formada por
+** generador de las microoperaciones que implementan el ciclo de instrucción
+** registros: registro de instrucción IR, registro contador de programa PC
+* La Ruta de Datos esta formada por
+** Unidad de Ejecución UE
+*** Unidad Aritmetico Lógica ALU: cálculos números enteros
+*** Unidad de Punto Flotante FPU: cálculos números reales
+*** Unidad Load/Store LSU: cálculos de la dirección efectiva y acceso a la memoria principal 
+**** Memory Management Unit (MMU): cálculo de la dirección efectiva FISICA de la MP. Traduce las direcciones virtuales de memoria utilizadas por la cpu  en direcciones físicas de la memoria principal.
+** los Registros
+*** Registros de propósito general GPR accesibles por el programador
+*** Registros de estado SR
+
+Fase de Captación
+~~~~~~~~~~~~~~~~~
+
+* Ejemplo: Microoperaciones de la Fase de captación del ciclo de instrucción.
+** Se realiza la lectura de una instrucción mediante las siguientes acciones que son activadas por la Unidad de control:
+*** El Contador de Programa (PC) o Instruction Pointer (IP) contiene la dirección de referencia de la instrucción a captar
+*** El Memory Address Register (MAR) se carga con el contenido del (PC)
+*** El bus de direcciones del sistema se carga con el contenido de MAR
+*** Se vuelca  el contenido de la dirección apuntada al Buffer i/o de memoria, de ahí al bus de datos transfiriendose así al Memory Buffer Register (MBR)
+
+image::../images/cpu/12_6.jpg[title="Flujo de Datos. Ciclo de Captación", scaledwidth="100%",align="center" ]
+
+
+
+
+
+Perspectiva de la CPU
+~~~~~~~~~~~~~~~~~~~~~
+
+* Divimos la CPU en 5 unidades:
+** Unidad de Control (UC)
+** Unidad de Ejecución (UE)
+** Registros : de Propósito General, control y status.
+*** Los registros de control no son accesibles por el usuario, son accesibles por el sistema operativo.
+** Memoria Cache L0
+** Memory Management Unit (MMU)
+** Reloj para sincronizar las tareas: facilita el diseño del Hardware.
+
+Unidad de Control
+^^^^^^^^^^^^^^^^^
+
+* The control unit (sometimes called the fetch / decode unit) is responsible for retrieving individual instructions from their location in memory, then translating them into commands that the CPU can understand.   These commands are commonly referred to as machine-language instructions, but are sometimes called *micro-operations*, or UOPs.  When the translation is complete, the control unit sends the UOPs to the execution unit for processing. 
+* Señales de control de la UC
+** Señales digitales binarias
+
+Unidad de Ejecucion (EU)
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+** The execution unit is responsible for performing the third step of the instruction cycle, namely, executing, or performing the operation that was specified by the instruction.
+** Incluye: ALU+FPU+LSU+RPG
+*** Operaciones: Aritméticas, Lógicas, Transferencia,
+
+
+Ruta de Datos
+^^^^^^^^^^^^^
+* Es la ruta  que realizan los datos ( instrucciones, campos del formato de instrucciones, operando, dirección, etc ...) a través del procesador, internamente al procesador, dirigidos por la Unidad de Control.
+* Es necesario interconectar las distintas unidades y subunidades de la CPU para poder transferir y procesar los bits y conjuntos de bits entre ellas.
+* Los microcomandos de la UC en forma de señal transportan y procesan dichos datos. 
+** Ejemplos de microcomandos: abrir puerta, conectar bus, multiplexar datos, etc ...microordenes de control del hardware
+** Dicho transporte y procesamiento  dependerá de la interpretación de la instrucción en ejecución y del diseño de la  microarquitectura.
+* Los componentes básicos de la Ruta de Datos son :
+** Unidades de transporte: BUS, conmutador, multiplexor, etc
+** Unidad de memoria: cálculo de la dirección efectiva, interfaz con la memoria externa
+** Unidades de procesamiento: ALU
+** Unidades de almacenamiento: registros
+* RTL: Register Transfer Language
+** Lenguaje para indicar las acciones de transporte, procesamiento y almacenamiento.
+*** AC <- [PC]+ M[CS:SP]
+
+* Esquema de la Ruta de Datos
++
+
+image::../images/cpu/datapath.jpg[title="Datapath", scaledwidth="100%",align="center"]
+
+** Líneas gruesas: bus de datos
+** Líneas finas:   bus de control -> chip select, microorden sumar, cargar registro, etc ..
+
+* Ver 'applet' de la ruta de datos del apartado Imágenes
+
+* Diseño del datapath
+** determinar que microunidades son necesarias
+** cómo conectarlas
+** Qué microseñales accionar y cuándo en cada microoperación. Paralelismo a nivel de microoperaciones
+** ubicación y temporización de los datos según la secuencia del diagrama de estados de la UC
+*** AC <- [PC]+ M[CS:SP] => microoperaciones asociadas y diagrama de tiempos
+
+Unidad de Control Microprogramada
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Unidad de Control Microprogramada vs Cableada
+* Microcableada: El secuenciados o FSM de la unidad de control ejecuta 'directamente' las instrucciones en código máquina almacenadas en la memoria principal
+
+* Microprogramada:
+** Las instrucciones máquina (ISA) almacenadas en la memoria principal y cuya secuencia consituye el *código máquina* del programa del usuario no son ejecutadas directamente por la UC. En su lugar cada instrucción en código máquina es traducida en una secuencia de *microinstrucciones* y cada microinstrucción genera las microoperaciones o microseñales de la unidad de control que conforman el ciclo de instrucción.
+** La secuencia de microinstrucciones asociadas a una microinstrucción constituye el *microcódigo* que se encuentra almacenada en una memoria de sólo lectura (Read Only Memory ROM) interna de la Unidad de control.
+** Cambiando o añadiendo microcódigo a nuestra Unidad de Control conseguimos nuevas arquitecturas ISA de una manera más flexible que con la unidad de control cableada.
+*** http://en.wikipedia.org/wiki/Microcode[microcode]
+
+
+Arquitecturas CISC/RISC
+-----------------------
+
+Introducción
+~~~~~~~~~~~~
+
+
+* CISC: Complex Instruction Set Computer
+* RISC: Reduced Instruction Set Computer
+* CISC y RISC son dos filosofías de diseño de un computador, dos arquitecturas.
+
+
+CISC
+^^^^
+
+* Características Básicas
+* Complex Instruction Set Computer
+* Motorola 68k, Intel x86.
+* Instrucciones de varios bytes y no uniformes.
+* Necesita un HW complejo que ocupa mucho espacio y necesita muchos ciclos de reloj.
+* La arquitectura del lenguaje ensamblador está próxima a un lenguaje de alto nivel cómo el lenguaje C por lo que facilita la tarea a los compiladores y a los programadores de lenguaje ensamblador.
+* En cambio complica el diseño e implementación de elementos hardware como la CPU.
+
+RISC
+^^^^
+
+* Características Básicas
+* Reduced Instruction Set Computer
+* PowerPC, ARM, MIPS and SPARC
+* Apuesta por un Hardware sencillo por lo que las instrucciones han de ser sencillas, regulares.
+** Un HW sencillo es rápido y ocupa poca área del chip.
+* Inconveniente: Gran número de accesos a memoria para capturar las instrucciones, los operandos y  el resultado.
+** Solución: incrementar la memoria interna: el número de Registros internos y la memoria caché. Para lo cual hay espacio debido al HW sencillo.
+
+SW
+^^^
+
+* Un programa ensamblador de una arquitectura RISC tiene más instrucciones que un CISC
+* Cada instrucción RISC se ejecuta en menor tiempo que una CISC.
+
+Tabla Comparativa
+~~~~~~~~~~~~~~~~~
+
+* http://cs.stanford.edu/people/eroberts/courses/soco/projects/risc/risccisc/[RISC vs CISC]
+
+
+
+Instruction Level Parallelism (ILP)
+-----------------------------------
+
+* http://en.wikipedia.org/wiki/Instruction-level_parallelism[wikipedia]
+** Instruction-level parallelism (ILP) es la medida de cuantas instrucciones de un programa pueden ser ejecutadas simultáneamente. El solapamiento de la ejecución de las instrucciones recibe el nombre de instruction level parallelism (ILP)
+** Son dos los mecanismos para conseguir el ILP
+*** Hardware
+*** Software
+* Técnicas de diseño de microarquitecturas que persiguen un solape ILP
+** VLIW
+** Superscalar
+** Pipelining (Segmentación)
+** Out-of-order execution
+** etc
+
+VLIW vs Superscalar
+~~~~~~~~~~~~~~~~~~~
+
+VLIW
+^^^^
+
+* Very Long Instruction Words
+* La CPU contiene múltiples Unidades de Ejecución
+* Una palabra contiene tantas instrucciones como unidades de ejecución.
+** A la palabra se le denomina Instruction Word, la cual contiene múltiples instrucciones máquina.
+** El 'compilador' crea las Instrucciones Word con las múltiples instrucciones asignando a cada una de ellas una Unidad de Ejecución distinta.
+*** Múltiples Instrucciones en Paralelo
+
+Superscalar
+^^^^^^^^^^^
+
+* La arquitectura superescalar significa que la CPU tiene múltiples Unidades de Ejecución (UE), no confundir con múltiples núcleos (core), y es la 'propia CPU' la que asigna en tiempo de ejecución los recursos de la máquina a las distintas instrucciones .
+* Dicha arquitectura permite la ejecución simultánea de múltiples instrucciones.
+* Una CPU superscalar n-way significa que puede ejecutar simultáneamente n instrucciones.
+* Superscalar no significa multinúcleo. Un único núcleo es superscalar.
+
+Comparativa
+^^^^^^^^^^^
+
+* One of the great debates in computer architecture is static vs. dynamic. *static* typically means "let's make our compiler take care of this", while *dynamic* typically means "let's build some hardware that takes care of this". Each side has its advantages and disadvantages. the compiler approach has the benefit of time: a compiler can spend all day analyzing the heck out of a piece of code. however, the conclusions that a compiler can reach are limited, because it doesn't know what the values of all the variables will be when the program is actually run. As you can imagine, if we go for the hardware approach, we get the other end of the stick. there is a limit on the amount of analysis we can do in hardware, because our resources are much more limited. on the other hand, we can analyze the program when it actually runs, so we have complete knowledge of all the program's variables.
+
+* VLIW approaches typically fall under the "static" category, where the compiler does all the work.
+* Superscalar approaches typically fall under the "dynamic" category, where special hardware on the processor does all the work. consider the following code sequence:
+
+[source,c]
+----------------------------------------------------------------------
+sw $7, 4($2)
+lw $1, 8($5)
+
+$ significa direccionamiento directo
+() direccionamiento indirecto indexado
+----------------------------------------------------------------------
+
+
+** suppose  we can run two memory operations in *parallel* [but only if they have *no dependencies*, of course]. are there dependencies between these two instructions? well, it depends on the values of $5 and $2. if $5 is 0, and $2 is 4, then they depend on each other: we must run the store before the load.
+*** in a VLIW approach, our compiler decides which instructions are safe to run in parallel. there's no way our compiler can tell for sure if there is a dependence here. so we must stay on the safe side, and dictate that the store must always run before the load. if this were a bigger piece of code, we could analyze the code and try to build a proof that shows there is no dependence. [modern parallelizing compilers actually do this!]
+
+*** if we decide on a SUPERSCALAR approach, we have a piece of hardware on our processor that decides whether we can run instructions in parallel. the problem is easier, because this dependence check will happen in a piece of hardware on our processor, as the code is run. so we will know what the values of $2 and $5 are. this means that we will always know if it is safe to run these two instructions in parallel.
+
+* Hopefully you see some of the tradeoffs involved. dynamic approaches have more program information available to them, but the amount of resources available for analysis are very limited. for example, if we want our superscalar processor to search the code for independent instructions, things start to get really hairy. static approaches have less program information available to them, but they can spend lots of resources on analysis. for example, it's relatively easy for a compiler to search the code for independent instructions. 
+
+
+
+Pipeline (Segmentacion)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Pipeline: cauce o tubería.
+* Ejemplo de Lavado de coches
+** Fases: Humedecer - Enjabonar - Cepillar - Aclarar - Secar - Abrillantar 
+* Máquina Secuencial
+** Cola de coches ante la máquina
+** Si un coche está en cualquiera de las fases no entra el siguiente coche.
+** El intervalo de tiempo de salida de coches será la suma de todas las fases. ¿Cada cuanto tiempo sale un coche del lavadero?
+** Througput (Producción): Número de coches de salida por unidad de tiempo
+* Segmentación frente a Secuencial.
+** En lugar de tener una máquina que realice todas la fases tenemos máquinas independientes que realizan cada fase.
+** El intervalo de tiempo de salida de coches será el de la duración de la fase de mayor duración.
+**  
+** El througput aumenta
+
+* Flujo de Instrucciones con segmentación en 2 etapas
+
+image::../images/cpu/12_9.jpg[title="Segmentación en 2 etapas", scaledwidth="100%",align="center" ]
+
+* En caso de que los tiempos de cada etapa sean distintos o halla penalización por saltos en el flujo , se producirán tiempos de espera.
+
+image::../images/cpu/12_10.jpg[title="Diagrama de tiempos con segmentación de 6 etapas", scaledwidth="100%",align="center" ]
+
+image::../images/cpu/12_11.jpg[title="Diagrama de tiempos. Salto incondicional", scaledwidth="100%",align="center" ]
+
+image::../images/cpu/12_12.jpg[title="Flujo de instrucciones con segmentación de 6 etapas", scaledwidth="100%",align="center" ]
+
+
+
+Ejercicios
+----------
+
+* Capítulo 12 del libro de texto William Stalling.
+* Capítulo 13 del libro de texto William Stalling
+
+Imagenes
+--------
+
+* link:../images/cpu/images_cpu.html[Imagenes]
+
+
+

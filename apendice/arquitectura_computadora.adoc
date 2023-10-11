@@ -1,0 +1,300 @@
+Arquitectura de una Computadora
+===============================
+
+:doctitle: Arquitectura de una Computadora
+
+
+[[estr_comp]]
+Estructura de la  Computadora
+-----------------------------
+
+Contexto
+~~~~~~~~
+
+* El significado del término arquitectura en una computadora depende del contexto.
+** La primera gran división sería: Arquitectura Hardware y Arquitectura Software
+** Arquitectura de un computadora: es la organización en grandes bloques como CPU,Memoria,controladores de periféricos,buses, etc
+** Arquitectura de un procesador: Es el repertorio de instrucciones y datos capaz  de interpretar y ejecutar la cpu. Puede haber dos procesadores fabricados con distinta estructura interna pero que procesen las mismas instrucciones y datos ,es decir, que procesen el mismo el lenguaje máquina y por lo tanto tienen la misma arquitectura. En este contexto utilizaremos el termino ISA (Instruction Set Architecture ). La ISA de un procesador AMD64 y un procesador Intel x86-64 es la misma, operan con el mismo lenguaje máquina. Un programa binario en AMD64 es compatible con Intel x86-64.
+** Microarquitectura de un microprocesador: es la organización interna de un procesador.
+
+
+
+Arquitectura HW
+~~~~~~~~~~~~~~~
+
+[ditaa]
+----
++-------------+             +------------+
+|             |             |            |
+|             |  ADDRESS    |            |
+|             +------------>+            |
+|             |    Bus      |            |
+|             |             |            |
+|             |             |            |
+|             |             |            |
+|             |             |            |
+|             |   DATA      |            |
+|  C P U      +<----------->+   MEMORIA  |
+|             |   Bus       |            |
+|             |             |            |
+|             |             |            |
+|             |             |            |
+|             |             |            |
+|             |   R/W       |            |
+|             +------------>+            |
+|             |   Bus       |            |
+|             |             |            |
+|             |             |            |
++-------------+             +------------+
+
+----
+
+CPU
+~~~
+
+* Componentes básicos de la CPU
+** ALU
+** FPU
+** Unidad de Control
+** Registros internos
+* Función de la CPU
+** Llevar a cabo el ciclo de instrucción de las instrucciones almacenadas en la memoria principal
+
+["ditaa"]
+------------------------------
+            Central Processor Unit (CPU)	                                  Memoria Externa RAM
++----------------------------------------------------+		               +----------------------+
+|						     |                         |                      |
+|						     |			       +----------------------+		      
+|                +--------------+		     |			       |		      |
+|                | Resultado    |		     |    BUS Direcciones      +----------------------+
+|                +--------------+		     o------------------------>|		      |
+|                      ^			     |      64 líneas          +----------------------+
+|                      |			     |			       |                      |
+|          /------------------------		     |			       +----------------------+
+|         /                         \		     |			       |		      |
+|        /	      ALU            \		     |			       +----------------------+
+|       /	        X             \		     |			       |		      |
+|      /               / \             \	     |			       +----------------------+
+|     /	              /   \             \	     |			       |                      |
+|    ----------------/     \-------------\	     |			       +----------------------+
+|            ^                    ^		     |			       |		      |
+|            |                    |		     |			       +----------------------+
+|    +--------------+      +--------------+	     |			       |		      |
+|    | Operando_1   |      | Operando_2   |	     |   BUS Read/Write	       +----------------------+
+|    +--------------+      +--------------+	     o------------------------>|                      |
+|						     |                         +----------------------+
+|              +--------------+			     |			       |		      |
+|              | Registro A   |			     |			       +----------------------+
+|              +--------------+			     |			       |		      |
+|              | Registro B   |			     |			       +----------------------+
+|              +--------------+			     |			       |                      |
+|              | Registro     |			     |			       +----------------------+
+|              +--------------+			     |			       |		      |
+|              | Registro     |			     |			       +----------------------+
+|              +--------------+			     |			       |		      |
+|              | Registro     |			     |			       +----------------------+
+|              +--------------+			     |			       |                      |
+|              | Registro Z   |			     |			       +----------------------+
+|              +--------------+			     |			       |<-----  1 Byte ------>|
+|             Banco de Registros		     |			       +----------------------+
+|              Memoria Interna			     |			       |		      |
+|						     |			       +----------------------+
+|						     |			       |                      |
++----------------------------------------------------+                         +----------------------+
+                      ^                                                                   ^
+                      |                          BUS Datos                                |
+                      +-------------------------------------------------------------------+
+                                                 64 líneas                            
+------------------------------
+
+
+image::./images/von_neumann/ias_structure.png[scaledwidth="60%",align="center",title="IAS Structure" ]
+
+
+
+Memoria
+~~~~~~~
+
+* Jerarquía de Memoria: Registros internos a la CPU y Memoria principal (DRAM) externa a la CPU
+
+Memoria Principal
+^^^^^^^^^^^^^^^^^
+* Memoria DRAM: Dynamic Random Access Memory
+* Almacena la secuencia de instrucciones máquina binarias y los datos en formato binario.
+* Espacio de direcciones lineal: Notación hexacecimal
+* Direccionamiento: bytes : notación hexadecimal
+
+
+
+[ditaa]
+----------------------------------------------------------------------
+
+DIRECCIONES         CONTENIDO
+
+              +----------------------+
+0x00000000    |    1 0 1 0 1 0 1 0   |
+              +----------------------+
+0x00000001    |    1 0 1 0 1 0 1 0   |
+              +----------------------+
+0x00000002    |    1 0 1 0 1 0 1 0   |
+              +----------------------+
+              |    1 1 1 1 1 1 1 1   |
+              +----------------------+
+              |                      |
+              +----------------------+
+              |                      |
+              +----------------------+
+              |                      |
+              +----------------------+
+0x00000009    |                      |
+              +----------------------+
+0x0000000a    |                      |
+              +----------------------+
+              |                      |
+              +----------------------+
+              |                      |
+              +----------------------+
+              |                      |
+              +----------------------+
+              |                      |
+              +----------------------+
+0x0000000f    |                      |
+              +----------------------+
+
+
+
+----------------------------------------------------------------------
+
+Registros internos a la CPU
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Registros NO visibles al programador
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Registos NO accesibles por el programador en la arquitectura amd64
+** PC: Contador del Programa : x86 lo denomina RIP: 64 bits
+** IR: Registro de instrucción : 64 bits
+** MBR: Registro buffer de Memoria : 64 bits -> WORD SIZE : 64
+** MAR: Registro de direcciones de Memoria: 40 bits 
+*** Capacidad de Memoria: 2^40^ : 1TB
+* Para el caso de la arquitectura i386 sustituir 64 bits por 32 bits y el registro MAR también es de 32 bits.
+
+Registros visibles al programador
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* El programador utiliza dichos registros para almacenar datos (escribir y leer).
+* Hay operaciones (suma,resta, etc...) donde los operandos pueden estar en los registros.
+* El acceso de la CPU a un registro es mucho más RAPIDO que el acceso a una posición de la memoria principal RAM.
+
+image::./images/von_neumann/ias_architecture.png[scaledwidth="80%",align="center",title="IAS_Architecture"]
+
+
+Instruction Set Architecture (ISA)
+----------------------------------
+
+
+* La arquitectura del repertorio de instrucciones (*ISA*: instruction set architecture) de una computadora comprende definir principalmente:
+** Estructura de la Computadora: CPU-Memoria-Bus-I/O
+** La representación y formato de los datos . 
+** La representación y formato de las instrucciones.
+** Repertorio de instrucciones: Las operaciones y modos de direccionamiento que ha de interpretar y ejecutar la computadora.
+* La arquitectura ISA define la potencialidad de la CPU de la computadora.
+* El diseño de la arquitectura ISA va a afectar al rendimiento de la computadora.
+** Programa binario resultado de la compilación del programa fuente.
+** Ocupación de Memoria
+** Implementación (dificultad) y rendimiento de la CPU.
+
+["graphviz", "isa-ias.png"]
+----------------------------------------------------------------------
+digraph G {
+ ISA -> "Estructura de la Computadora";
+ ISA -> "Formatos";
+ ISA -> "Repertorio de instrucciones";
+ "Estructura de la Computadora" -> CPU;
+ "Estructura de la Computadora" -> Memoria;
+ "Estructura de la Computadora" -> "I/O";
+ "Estructura de la Computadora" -> Bus;
+ Memoria -> Jerarquía ;
+ Jerarquía -> "Memoria Principal";
+ "Memoria Principal" -> "Espacio Lineal"
+ "Memoria Principal" -> "Bus direcciones 12 bits"
+ Jerarquía -> Registros;
+ Registros -> "Accesibles AC,AR"
+ Registros -> "No Accesibles: PC,IBR,IR,MBR,MAR"
+ "Formatos" -> Instrucciones;
+ "Instrucciones" -> "Código Operaciones"
+ "Instrucciones" -> "Ref Operando Fuente" -> "Dirección Absoluta"
+ "Formatos" -> "Datos";
+  "Datos" -> "Enteros Complemento a 2";
+ "Repertorio de instrucciones" -> Operaciones;
+ "Operaciones" -> "Transferencia-Aritmética-Lógica-SaltoCondicional"
+ "Repertorio de instrucciones" -> "Modos de Direccionamiento";
+ "Modos de Direccionamiento" -> "Dirección Absoluta";
+}
+----------------------------------------------------------------------
+
+
+Ejemplos: Intel x86, Motorola 68000, MIPS, ARM
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Ver <<leng_asm, Apéndice Lenguajes Ensamblador>>
+
+Procesadores Intel con arquitectura x86
+---------------------------------------
+
+Nomenclatura
+~~~~~~~~~~~~
+
+General
+^^^^^^^
+* Los procesadores intel reciben nombres por todos conocidos: Pentium II, Pentium III, Corei3, Corei5, Corei7, etc
+* La arquitectura de las computadoras que utilizan dichos procesadores responden a una arquitectura común
+** Arquitectura x86 en el caso de la arquitectura de 32 bits
+** Arquitectura x86-64 en el caso de la arquitectura de 64 bits.
+* Procesadores con arquitectura x86 de 32 bits
++
+
+-----
+*** 1978 y 1979 Intel 8086 y 8088. Primeros microprocesadores de la arquitectura x86.
+    1980 Intel 8087. Primer coprocesador numérico de la arquitectura x86, inicio de la serie x87.
+    1980 NEC V20 y V30. Clones de procesadores 8088 y 8086, respectivamente, fabricados por NEC.
+    1982 Intel 80186 y 80188. Mejoras del 8086 y 8088.
+    1982 Intel 80286. Aparece el modo protegido, tiene capacidad para multitarea.
+*** 1985 Intel 80386. Primer microprocesador x86 de 32 bits.
+    1989 Intel 80486. Incorpora el coprocesador numérico en el propio circuito integrado.
+    1993 Intel Pentium. Mejor desempeño, arquitectura superescalar.
+    1995 Pentium Pro. Ejecución fuera de orden y Ejecución especulativa
+    1996 Amd k5. Rival directo del Intel Pentium.
+    1997 Intel Pentium II. Mejora la velocidad en código de 16 Bits, incorpora MMX
+    1998 AMD K6-2. Competidor directo del Intel Pentium II, introducción de 3DNow!
+    1999 Intel Pentium III. Introducción de las instrucciones SSE
+    2000 Intel Pentium 4. NetBurst. Mejora en las instrucciones SSE
+    2005 Intel Pentium D. EM64T. Bit NX, Intel Viiv
+    
+-----
+
+* Procesadores con arquitectura x86-64 de 64 bits
++
+
+--------
+*** 2003 AMD Opteron. Primer microprocesador x86 de 64 bits, con el conjunto de instrucciones AMD64)
+    2003 AMD Athlon.
+    2006 Intel Core 2. Introducción de microarquitectura Intel P8. Menor consumo, múltiples núcleos, soporte de virtualización en     hardware    incluyendo x86-64 y SSSE3.
+    2008 Core i7
+    2009 Core i5
+    2010 Core i3
+--------
+
+* https://computerhoy.com/noticias/hardware/que-significan-numeros-letras-procesadores-intel-56812[significado del código de los nombres de procesadores intel serie Core]: El primer dígito del código indica la generación (en el 2017 salió la 8ª generación)
+* Intel Serie Core:
+** https://www.intel.com/content/www/us/en/products/processors/core/view-all.html
+* Intel Serie Core X : familias i9, i7 ,i5
+** https://www.intel.com/content/www/us/en/products/processors/core/x-series.html[Intel Serie X]: 
+** https://ark.intel.com/products/series/123588/Intel-Core-X-series-Processors
+* https://es.wikipedia.org/wiki/Anexo:Procesadores_AMD
+* COMPETENCIA INTEL-AMD año 2018 en computadoras de sobremesa.
+** https://www.techradar.com/news/intel-coffee-lake-release-date-news-and-rumors[AMD Ryzen 2nd Generation - INTEL Core i7-8086K]
+
+
+

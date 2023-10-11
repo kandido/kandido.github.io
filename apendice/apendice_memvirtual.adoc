@@ -1,0 +1,734 @@
+Apéndice: Memoria Virtual
+=========================
+
+:doctitle: Apéndice: Memoria Virtual
+
+[[apendice_memvirtual]]
+Bibliografia
+------------
+
+* Computer Organization and Architecture: Designing for Performance. William Stalling, Cap8 Sistemas Operativos: 8.3 Gestión de la Memoria
+** Sistema Operativo:  Gestión de la Memoria
+* Computer Systems A Programmer’s Perspective, Randal E. Bryant. Capítulo 9. Virtual Memory
+
+
+Sistemas Operativos: Gestión de la Memoria
+-------------------------------------------
+
+Sistemas Multiproceso
+~~~~~~~~~~~~~~~~~~~~~
+
+* En un sistema multitarea hay más de un proceso ejecutándose y residente en la memoria principal.
+* La memoria principal es un recurso compartido por todos los procesos. En un entorno multiproceso, es necesario gestionar el recurso compartido para asignar regiones de memoria física a cada proceso, para proteger espacios de memoria entre los distintos procesos, etc
+* Históricamente la memoria principal era muy limitada frente al tamaño de los programas.
+* Técnicas de gestión de la memoria en sistemas operativos: swapping, particionamiento, memoria virtual, segmentación, paginación. .
+
+Gestión de la Memoria Fisica
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Memoria Principal
+^^^^^^^^^^^^^^^^^
+
+* La memoria principal es la memoria física externa a la CPU e implementada en tecnología SDRAM con una capacidad típica en el año 2010 de 4GB.
+
+Swapping
+^^^^^^^^
+
+* Significa intercambio.
+* Los programas se almacenan en el disco duro como módulos objeto ejecutables.
+* Los módulos ejecutables deben cargarse en memoria para ser ejecutados, convirtiéndose en procesos.
+* La memoria es 'limitada' por lo que no puede almacenar todos los procesos requeridos por el usuario.
+* Una solución es que los procesos utilicen tanto la memoria principal como el disco duro. En memoria  residen los procesos  que son ejecutados en un momento dado y cuando uno de dichos procesos  no requiere de la CPU (espera a un evento i/o)(no está en estado 'ready') se intercambia con el disco duro por un proceso que si requiere de la CPU (está en estado ready). La transferencia del proceso hacia la memoira principal se denomina swap-in y la transferencia hacia el disco duro swap-out.
+* Se *intercambia todo* el proceso.
+* Hay un intercambio  de procesos completos entre la memoria  y el disco duro. Este es el concepto de swap para algunos sistemas operativos como Solaris y el que se toma por definición. En Linux tiene otro significado.
+* Al trasladar un proceso de memoria al disco duro se genera un *hueco en la memoria*. La existencia de múltiples huecos dispersados por la memoria se le denomina 'fragmentación externa'.
+* El inconveniente es que el swapping requiere de un operación i/o con el disco duro ralentizando el rendimiento de la computadora.
+
+
+
+
+
+Particionamiento (Fragmentación)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* *La clave*:
+** Sin memoria virtual el código de los procesos en la memoria física ha de ser *contiguo*. 
+** Si no utilizamos memoria virtual el 'particionamiento dinámico' (el proceso ocupa justo la región de memoria que necesita)  produce fragmentación externa al eliminar particiones y el 'particionamiento fijo' (el proceso ocupa menos de la región que tiene reservada) produce fragmentación interna
+* *La Solución* para que un proceso pueda ocupar particiones *NO CONTIGUAS* en la memoria FISICA : memoria VIRTUAL.
+** Al poder asignar particiones pequeñas fijas no contiguas el fraccionamiento externo desaparece y el interno se reduce al máximo (inferior al tamaño de la partición)
+* El *particionamiento* es una técnica para asignar memoria principal a los distintos procesos que están siendo ejecutados concurrentemente en la computadora.
+* La memoria se divide en múltiples regiones o 'particiones' de tamaño no uniforme.
+* A un proceso se le asigna una partición de 'igual o mayor tamaño'.
+* Se utiliza en sistemas multitarea donde la memoria principal es compartida por múltiples procesos. De esta manera se puede 'gestionar el compartir' la memoria entre los diferentes procesos, protección, permisos, superusuario, etc
+* Cuando el proceso no está ready se realiza un swapping con el disco duro.
+* Dos alternativas : la estructura de las particiones puede ser fijo o variable en el tiempo. En los dos casos un proceso requiere una partición, es decir, una región de posiciones de memoria *contiguas*.
+* Particionamiento *FIJO* :
+** La memoria principal se parte en regiones cuyo tamaño no varía durante la ejecución de los procesos.
+** Pariticionamiento fijo con regiones de igual tamaño o particionamiento fijo con regiones de diferente tamaño.
+** A los procesos se les asigna una partición de tamaño mayor que el requerido. Esto produce *fragmentación interna*, ya que una zona de la partición no es aprovechada por ningún proceso.
+* Particionamiento variable o *DINAMICO*:
+** A cada proceso se le asigna justo la memoria que necesita. No hay fragmentación interna.
+** El tamaño de las particiones cambia dinámicamente según se intercambian procesos con el disco duro adaptándose al tamaño de estos.
+** La *fragmentación externa* es considerable. Se podría reducir compactando los huecos dispersos, para lo cual es necesario mover o reubicar los procesos en la memoria principal. La reubicación de procesos significa resolver todas las direcciones físicas nuevamente en tiempo de ejecución -> puede resultar inviable el tiempo requerido.
+** Hay publicidad de programas que defragmentan la memoria principal lo cual no es posible ya que únicamente el S.O. conoce las direcciones físicas de un proceso.
+
+Alternativa
+^^^^^^^^^^^
+
+* La solución a la fragmentación debido a la técnica del particionamiento de la memoria física es la técnica de memoria virtual bien segmentada o bien paginada o ambas.
+
+
+Gestión mediante la Memoria Virtual
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Alternativa
+^^^^^^^^^^^
+
+* Los problemas de gestionar la memoria de los procesos asignando a los procesos 'directamente' un espacio de direcciones físico se resuelven mediante el mecamismo de la 'memoria virtual'.
+
+Espacio de direcciones virtual
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* El programador, el compilador, el linker y los procesos no operan con direcciones físicas. 
+* El programador referencia la memoria en el módulo fuente con símbolos (etiquetas, variables, nombres de funciones, etc)
+* El compilador y el linker traducen los símbolos a direcciones de una memoria imaginaria lineal y contigua denominada memoria virtual.
+* Esta independencia de las direcciones físicas simplifica enormemente la gestión de la memoria.
+
+Ejemplo: programa exit
+^^^^^^^^^^^^^^^^^^^^^^
+
+* Desensamblado del módulo objeto ejecutable residente en el disco
+** +objdump -S exit+
++
+
+[source,c]
+----------------------------------------------------------------------
+exit:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000400078 <.text>:
+  400078:	48 c7 c0 3c 00 00 00 	mov    $0x3c,%rax
+  40007f:	48 c7 c7 ff 00 00 00 	mov    $0xff,%rdi
+  400086:	0f 05                	syscall 
+
+----------------------------------------------------------------------
+
+** Las direcciones 0x400078,.. son direcciones del espacio virtual. El espacio de direcciones virtual es 'lineal', contiguo y único.
+** La dirección virtual '0x0000000000400078' comprende 16 dígitos hexadecimales, es decir, el espacio de direcciones virtual del proceso 'exit' tiene capacidad para 2^64^ Bytes.
+
+Memoria: Recurso compartido
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Cada proceso tiene su propio espacio de direcciones virtual.
+* Todos los procesos han de compartir la misma memoria física.
+* Todos los espacios virtuales han de ser traducidos al mismo espacio físico.
+
+Traducción virtual -> fisico
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Cada vez que la CPU acceda a memoria para capturar instrucciones y datos o escribir resultados, será necesario 'traducir' la dirección lógica en una dirección física. Es decir, las direcciones 
+* Esta traducción la realiza la unidad hardware 'Management Memory Unit (MMU)'.
+
+Direccionamiento lógico
+^^^^^^^^^^^^^^^^^^^^^^^
+
+* En el intercambio de procesos entre la memoria y el disco duro, las direcciones físicas de memoria donde son cargados los datos y las instrucciones pueden cambiar. Debido a ello no es factible un modelo de direccionamiento que utilice direcciones físicas absolutas.
+* Las direcciones del proceso se expresan de forma *relativa* respecto de una *dirección base*. Al par dirección base y offset se le denomina 'dirección lógica'.
+* Esta dirección lógica es una dirección virtual, no física.
+
+
+Dos tipos: Segmentación y Paginación
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* El espacio de memoria virtual se puede gestionar utilizando dos mecanismos o la combinaición de ellos:
+** *Segmentación*
+*** La memoria virtual de un proceso se divide en unidades lógicas indivisibles denominadas segmentos
+** *Paginación*
+*** La memoria virtual de un proceso y la memoria física de la computadora se dividen en unidades denominadas páginas (lógicas en la memoria virtual y físicas en la memoria principal).
+
+
+[[apendice_segmentos_secciones]]
+Memoria Virtual Segmentada
+--------------------------
+
+Interpretación de la segmentación
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* La segmentación se puede aplicar tanto al espacio de direcciones físico como al espacio de direcciones virtual. 
+.. Segmentación del espacio de direcciones virtual
+*** División de un programa (proceso) en unidades lógicas: código,variables inicializados, variables sin inicializar, datos read only, etc. División de la memoria virtual de un proceso en áreas de *memoria contigua* y cuyo tamaño puede variar dinámicamente. Los segmentos lógicos no se pueden dividir.
+*** Facilita el trabajo del compilador,linker,sharing, etc
+*** El espacio total de la memoria virtual formado por todos los procesos estaría formado por la dirección base  segmento y el desplazamiento (offset) del registro contador de programa.
+*** Se ha utilizado memoria virtual segmentada en las CPU: 80286,80386,80486 y Pentium
+.. Segmentación del espacio de direcciones físico.
+*** Se utilizó en la arquitectura intel 8086 para pasar de un bus de direcciones de 16 bits a 20 bits manteniendo el tamaño de los registros con 16 bits.
+*** Incrementar el espacio de direcciones físicas añadiendo un registro de segmento y sin incrementar el tamaño del registro contador de programa. Por ejemplo un microprocesador Intel de 16 bits sin segmentación tiene límitado el espacio físico a 2^16^ = 64KB. Con el mismo micro y un registro adicional de segmento RS de 16 bits podemos concatenar el registro RS con el contador de programa PC formando direcciones físicas de 32 bits con lo que tendríamos un espacio de direcciones físicas de 2^32^ = 4GB 
+
+Secciones
+~~~~~~~~~
+
+* cada módulo objeto reubicable está estructurado en secciones
+* una sección es una división lógica, no física.
+* la estructura en secciones se define en el módulo fuente
+* Secciones principales
+** text : instrucciones
+** data : variables inicializadas
+** rodata: variables readonly
+** bss:    variables sin inicializar
+* +readelf -S maximum+
++
+
+[source,sh]
+----------------------------------------------------------------------
+There are 16 section headers, starting at offset 0x448:
+
+Section Headers:
+  [Nr] Name              Type             Address           Offset
+       Size              EntSize          Flags  Link  Info  Align
+  [ 0]                   NULL             0000000000000000  00000000
+       0000000000000000  0000000000000000           0     0     0
+  [ 1] .interp           PROGBITS         0000000000400158  00000158
+       000000000000001c  0000000000000000   A       0     0     1
+  [ 2] .hash             HASH             0000000000400178  00000178
+       000000000000000c  0000000000000004   A       3     0     8
+  [ 3] .dynsym           DYNSYM           0000000000400188  00000188
+       0000000000000000  0000000000000018   A       4     1     8
+  [ 4] .dynstr           STRTAB           0000000000400188  00000188
+       000000000000000b  0000000000000000   A       0     0     1
+  [ 5] .text             PROGBITS         0000000000400193  00000193
+       0000000000000037  0000000000000000  AX       0     0     1
+  [ 6] .eh_frame         PROGBITS         00000000004001d0  000001d0
+       0000000000000000  0000000000000000   A       0     0     8
+  [ 7] .dynamic          DYNAMIC          00000000006001d0  000001d0
+       00000000000000d0  0000000000000010  WA       4     0     8
+  [ 8] .data             PROGBITS         00000000006002a0  000002a0
+       000000000000000e  0000000000000000  WA       0     0     1
+  [ 9] .debug_aranges    PROGBITS         0000000000000000  000002b0
+       0000000000000030  0000000000000000           0     0     16
+  [10] .debug_info       PROGBITS         0000000000000000  000002e0
+       0000000000000078  0000000000000000           0     0     1
+  [11] .debug_abbrev     PROGBITS         0000000000000000  00000358
+       0000000000000014  0000000000000000           0     0     1
+  [12] .debug_line       PROGBITS         0000000000000000  0000036c
+       000000000000004a  0000000000000000           0     0     1
+  [13] .shstrtab         STRTAB           0000000000000000  000003b6
+       000000000000008d  0000000000000000           0     0     1
+  [14] .symtab           SYMTAB           0000000000000000  00000848
+       0000000000000240  0000000000000018          15    20     8
+  [15] .strtab           STRTAB           0000000000000000  00000a88
+       000000000000006f  0000000000000000           0     0     1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), l (large)
+  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)
+  O (extra OS processing required) o (OS specific), p (processor specific)
+
+----------------------------------------------------------------------
+
+
+
+Enlace de Secciones
+~~~~~~~~~~~~~~~~~~~
+
+* el linker mezcla de forma organizada cada tipo de sección de todos los módulos objeto reubicables generando un único módulo objeto ejecutable
+* Ejemplo de tres módulos objeto reubicables:
+** los tres módulos fuente p1.c, p2.c, p3.c  se compilan dando lugar a p1.o, p2.o y p3.o los cuales se enlazan dando lugar al ejecutable 'p'
+
+image::./images/memvirtual/linksections.png[enlace de secciones] 
+
+
+Segmentos lógicos
+~~~~~~~~~~~~~~~~~
+
+* El módulo ejecutable está estructurado en segmentos
+** text
+*** código de las instrucciones a ejecutar
+** data
+*** código de datos: variables inicializadas, sin inicializar
+** stack
+*** pila
+** heap
+*** montículo
+*** es la asignación de memoria en tiempo de ejecución
+*** en C la función +malloc()+: memory allocation: +void *malloc(size_t size)+
+**** size: tamaño en bytes de la memoria a asignar
+**** devuelve un puntero a la región de memoria asignada
+
+* mapa de memoria del programa en ejecución
++
+
+[ditaa]
+----------------------------------------------------------------------
+Virtual Address	  -----------DRAM--------------   	         
+0xFFFFFFFFFFFFFFFF+----------------------------+	   	 
+                  |                            |	   	 
+                  |                            |	   	  
+                  | ....                       |
+                  | c999                       |
+     0x80000000000| Dynamic Segments  (Heap)   |  
+                  +----------------------------+ 
+     0x7FFFFFFFFFF| Stack    Segment           |
+                  |                            |  
+                  | ...                        |  
+                  +----------------------------+ 
+                  |                            |  
+                  | ...                        |  
+                  | Data    Segments           |
+                  +----------------------------+ 
+                  |                            |  
+                  | ...                        |  
+          0x400000| Text    Segments           |
+                  +----------------------------+ 
+                  |                            |  
+        0x00000000| c999 Unmapped              |
+                  +----------------------------+ 	           	 
+                  <-------------Word----------->         	 		            
+----------------------------------------------------------------------
+
+
+
+image::./images/memvirtual/linux_vm_map.png[alt="MMU",title="linux_vm_map", align="center"]
+
+
+image::./images/memvirtual/linux_vm_map_2.png[alt="MMU",title="linux_vm_map_2", align="center"]
+
+** Cada proceso tiene su propia memoria virtual independiente del resto de los procesos
+** Los segmentos pueden cambiar de tamaño dinámicamente en tiempo de ejecución.
+
+
+* Carga del módulo objeto ejecutable
+** El loader no carga el módulo ejecutable en DRAM, sino que mapea el fichero a memoria virtual, creando la tabla de páginas.
+** La carga efectiva se realiza bajo demanda.
+
+image::./images/memvirtual/load_segments.png[load segments]
+
+Evolución memoria Intel 8086-80286
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+8086
+^^^^
+
+* 80x86 -> (bits bus direcciones, bits bus datos)
+* 8086  -> (20,16) -> 2^20^=1MB de memoria física-> Modo Real
+** Segmentación
+*** La dirección lógica esta formada por un tuple de dos valores: dirección base y offset.
+*** Conversión de dirección lógica a dirección física:
+**** Con un contador de programa de 16 bits se pueden direccionar 64KB. Si añadimos un registro segmento adicional de 16 bits cuyo contenido lo desplazamos 4 bits a la izda (equivale a *multiplicar por 2^4^*) tendríamos una dirección base de 20 bits a la cual añadiríamos el offset del PC de 16 bits obteniendo una dirección  física de 20 bits- > espacio físico de 1MB.
+*** Este modo de memoria se denominó 'modo real': espacio de direcciones memoria segmentada de 20 bits.
+ 
+
+
+80286
+^^^^^
+
+* 80286 -> (24,16) -> 2^24^=16MB de memoria física-> Modos Real y protegido.
+** Concepto de memoria Virtual: memoria generada por el compilador y por los procesos al ejecutarse
+*** En este caso son 4 bytes de memoria virtual -> los 2 bytes más altos son el selector de segmento y los dos bytes más bajos el offset.
+*** Capacidad de memoria virtual -> 2^32^ = 4GB
+** La memoria virtual de los procesos se parte en segmentos.
+** Segmentación
+*** Forming different segments for data, code, and stack, and preventing their overlapping
+*** Cada segmento únicamente puede direccionar 64KB ya que el Contador de Programa es de 16 bits
+*** La conversión memoria lógica a memoria física: 
+**** Se utiliza uno de los 4 registros de segmento CS,DS,ES,SS: son de 64 bits: 16 bits visibles y 6 bytes escondidos
+**** Se utiliza una tabla de descripción del segmento residente en la memoria principal: cada entrada de la tabla son 8 bytes de los cuales 3 bytes son la dirección base física asociada a la dirección virtual segmentada.
+**** En la parte visible del registro de segmento se cargan los 2 bytes más altos de la dirección virtual (selector de segmento)
+**** El selector de segmento apunta a una de las entradas de la tabla de selección de descripción de segmento y carga 6 bytes de la tabla en la zona escondida del registro de segmento el cual contiene: dirección base física (3bytes), tamaño del segmento (2 bytes) y propiedades del segmento (1byte)
+**** dirección física: la dirección base (3bytes) más el offset (2bytes): con 3 bytes -> 2^24^=16MB de espacio físico
+**** El espacio de direcciones de 4GB de memoria virtual de un segmento debiera poder traducirse en el espacio de direcciones físico de 16MB, pero únicamente puede acceder a 64KB.
+**** Espacio físico total: de los 16MB posibles un segmento direcciona solo 64KB y como tenemos 4 segmentos -> 4*64KB=256KB totales.
+** Multitasking, memory management (on chip MMU), protected memory -> 'modo protegido': espacio de direcciones memoria segmentada de 24 bits.
+
+80386
+^^^^^
+
+
+
+* 80386 -> (32,32) -> Espacio Físico: 2^32^ = 4GB
+** Misma arquitectura que el 286 pero incrementa la ruta de datos de 16 bits a 32 bits, añade dos registros de segmento más (FS,GS) y añade la técnica de la paginación. 
+** Memoria Virtual: 6 bytes : 2^48^ = 64TB . Los 2 bytes altos son el selector de registro y los 4 bytes bajos el offset
+*** de los 64TB posibles los 6 segmentos pueden direccionar 'en un momento dado' 4GB cada uno -> 6*4GB=24GB
+**  Segmentación
+*** Selector de Segmento = 2 bytes como en el 286 -> puntero a la entrada de la tabla descriptor de segmento
+*** Descriptor de Segmento = Contiene 4 bytes de la dirección base física
+** Conversión de la dirección lógica a dirección física con sólo segmentación
+*** A la dirección base física (4 bytes) se le añade el offset de la dirección virtual (4bytes) -> dirección física de 32 bits.
+*** En este caso, a diferencia del 80286, el espacio de memoria virtual de 4GB de cada segmento se pueden traducir en el espacio físico de 4GB.
+** instrucciones
+*** +movl $42,%fs:(%eax)+
+*** implícitamente
+**** push, pop -> SS,DS
+** Ver paginación 80386
+
+
+
+amd64
+^^^^^
+
+* amd64 -> (52,64) -> Espacio Físico: 2^52^ = 4PetaBytes y Espacio Virtual 2^48^ = 256TB
+** https://en.wikipedia.org/wiki/X86-64#Physical_address_space_details
+** *No utiliza la segmentación lógica* del espacio de direcciones virtual debido a que el espacio de memoria virtual de 256TB es suficiente para todos los procesos. Los segmentos lógicos (text,data,stack,heap, etc ) de un proceso se almacenan en el mismo espacio virtual asignado a dicho proceso mediante la técnica de paginación.
+** Hay que tener en cuenta la limitación de la tabla de paginas virtual que depende del número de páginas virtuales y la dirección de una página física. El area de memoria principal ocupada crece exponencialmente con el tamaño de la tabla y de forma innecesaria.
+
+
+image::./images/memvirtual/amd64_virtualformat.png[alt="MMU",title="Formato de direcciones amd64",align="center"]
+
+
+Memoria Virtual Paginada
+------------------------
+
+
+Fundamento
+~~~~~~~~~~
+
+* La paginación consiste en dividir tanto la memoria 'física' como la memoria 'virtual' de los procesos en pequeños 'pedazos' denominados páginas.
+* Los pedazos de memoria física se denominan 'marcos de página' y los pedazos de memoria virtual del proceso se denominan 'páginas'
+* En este caso se asigna cada página a un marco de página diferente, quedando los trozos de proceso diseminados en zonas *NO CONTIGUAS* de la memoria.
+* De esta manera se reduce la fragmentación interna ,ya que la memoria infrautilizada siempre será menor al tamaño de una página.
+* El sistema operativo genera para cada proceso la 'tabla de páginas' que mapea páginas con marcos.
+** PTE: Page Table Entry -> (index,PhysPageNumber)
+* Dirección lógica
+** Cada dirección lógica estará formada por la dirección base de la página y el offset dentro de la página. Direccionamiento *no lineal*, (dirección base, desplazamiento)
+* Traducción de dirección lógica a física.
+** El espacio de direcciones físico es único y contiguo, es decir, lineal.
+** La dirección base de la página del proceso se asocia con la dirección base del marco: tabla de páginas.
+** El offset dentro del marco será el mismo que el offset dentro de la página.
+** La gestión de la paginación la realiza la MMU
+
+Concepto de Memoria Virtual Paginada
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Debido a que no es necesario cargar todas las páginas del proceso -> el espacio de memoria del *PROCESO* puede ser *mayor* que la memoria física -> concepto de *memoria virtual*
+* La memoria virtual es única, contigua, es decir, 'LINEAL'. Es una abstracción para no depender de las direcciones físicas.
+* Por el principio de localidad en la memoria física sólo está la copia de las páginas virtuales que son necesarias dinámicamente en un momento dado.
+** *concepto de cache*
+* La memoria principal es la cache de la memoria secundaria (ficheros el disco o pendrive)
+* SDRAM cache
+
+Fragmentación
+~~~~~~~~~~~~~
+
+* En el desalojo de áreas de memoria que no son necesarias se generan huecos que fragmentan la memoria física en una sucesión de áreas de memoria utilizadas y áreas no utilizadas
+* La fragmentación interna será menor cuanto más pequeñas sean las páginas.
+** En la paginación las páginas pueden tener bytes sin utilizar, son huecos internos a las páginas.
+* La fragmentación externa se reduce ya que los marcos de página pueden ser asignados a un proceso independientemente del tamaño del proceso.
+** Un proceso ocupará los huecos dejados por las páginas que no tienen porque ser contiguas. El tamaño del proceso afectará al número de páginas requeridas en caso de que queramos tener todo el proceso residente en memoria principal.
+
+
+MMU
+~~~
+
+* Unidad Hardware interna a la CPU
+* Su entrada es el bus de direcciones virtuales y su salida el bus de direcciones físicas.
+* La MMU accede a la tabla de descripción de segmentos y a la tabla de páginas y realiza la traducción de dirección virtual en dirección física
+* La tabla de páginas de la MMU es la función de correspondencia que mapea el espacio virtual y el físico.
+
+Virtual Memory Cached
+~~~~~~~~~~~~~~~~~~~~~
+
+
+* Tabla de páginas con función de correspondencia fully associative (las VPages se asocian con cualquier Marco de página)
+* Bit de validación
+** 1 -> cached page
+** o -> uncached page: allocated o unallocated
+
+image::./images/memvirtual/vm_concept.png[alt="MMU",title="MMU",align="center"]
+
+
+image::./images/memvirtual/vm_table.png[alt="MMU",title="MMU",align="center"]
+
+
+
+
+Tabla de paginas
+~~~~~~~~~~~~~~~~
+
+* La tabla de páginas reside en la memoria principal SDRAM.
+* Las entradas de la tabla son un puntero a marcos de página física
+* Tantas entradas como páginas virtuales
+* El número de página virtual es el índice de la tabla.
+* La MMU accede a la tabla de páginas y realiza la traducción de dirección virtual en dirección física
+* El kernel actualiza la tabla de páginas y activa las transferencias
+
+image::./images/memvirtual/vm_table_protection.png[alt="MMU",title="Protección",align="center"]
+
+* SUP: SUPervisor: únicamente el kernel tiene acceso
+* Write No: read only.
+
+image::./images/memvirtual/formato_direcciones.png[alt="MMU",title="Formato de Direcciones", align="center"]
+
+Multilevel paging
+~~~~~~~~~~~~~~~~~
+
+* Debido a qué la tabla de páginas puede ser enorme se considera reducir el área de ram que consume la tabla mediante una organización jerárquica de múltiples tablas.
+* La memoria se puede dividir jerárquicamente en agrupamientos de páginas. Superpáginas que agrupan páginas, hiperpáginas que agrupan superpáginas. 
+* Ejemplo: Paginación de 3 niveles: Nivel 1 de pedazos de 16 MB, nivel 2 de pedazos de 2MB, nivel 2 de páginas de 4KB.
+* Cada nivel de agrupamiento lleva asociada una tabla de descripción de dicho nivel. La tabla de páginas se convierte en una jerarquía de múltiples tablas.
+* En el proceso de traducción de la MMU la dirección virtual se descompone en múltiples campos. Cada campo será un índice de cada tabla asociada, enlazando tantas páginas como niveles.
+* Si la tabla de nivel i tiene un contenido NULL no existirá las tablas de niveles superiores i+1,i+2,etc de la cadena de enlaces.
+* El  hecho de acceder a múltiples tablas no ralentiza la traducción de direcciones si las tablas están implementadas en la cache interna de la MMU. Sería distinto si dichas páginas estuviesen en la memoria DRAM.
+
+
+
+image::./images/memvirtual/table_multiple.png[alt="MMU",title="Tabla de dos niveles", height="400",align="center"]
+
+
+image::./images/memvirtual/table_level_k.png[alt="MMU",title="Tabla de K niveles", align="center"]
+
+
+
+
+Intel: Evolución memoria virtual
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+80386
+^^^^^
+
+* Se utiliza por primera vez la paginación.
+* La traducción de memoria virtual en física conlleva dos fases: primero la segmentación y a continuación la paginación (opcional)
+* Ver mecanismo de segmentación.
+* La segmentación traduce el espacio virtual en un espacio  lineal de 32 bits con campos:dir(10 bits)-pag(10)-offset(12)
+* Se implementa dos niveles de tablas de paǵinas: dir es una tabla de punteros de tablas de páginas (directorio de páginas)
+** con 10 bits se consiguen 2^10^ punteros a tablas -> 1K tablas
+* pag es el índice de la tabla de páginas
+** con 10 bits se consiguen 2^10^ entradas de tabla -> 1K páginas virtuales asociadas a 1K páginas físicas
+*** La dirección de página física son 32 bits
+* Con 12 bits de offset el tamaño de página es 2^12^=4KB
+* 1K tablas donde cada tabla contiene 1K páginas son en total 1M de páginas y cada página 4KB da un total de 4GB de direcciones de memoria física.
+* Por lo que de los 64TB de memoria virtual posible podemos traducir en un momento dado a 24GB de memoria segmentada y cada segmento de 4GB lineales a 4GB de memoria física.
+
+amd64
+^^^^^
+* amd64 -> 64 bits -> Espacio Virtual teórico = 2^64^ = 16 ExaBytes
+** Paginación y *no segmentación*.
+** Espacio Virtual = 256 TeraBytes ya que la CPU únicamente utiliza 48 bits para el espacio de direcciones virtual 'porque' es suficiente memoria para las aplicaciones actuales, utilizar los 64 bits provocaría tablas de páginas enormes bajando el rendimiento del sistema sin necesidad. No hay ni memoria secundaria para tanta memoria virtual.
+
+
+
+Glosario
+~~~~~~~~
+
+* Espacios: Logic (segmentation) -> Logic Linear (virtual,pagination) -> Physical Linear
+* VP: Virtual Page
+* VA: Virtual Address
+* PP: Physical Page
+* PA: Physical Address
+* VPO:VP offset
+* VPN:VP number
+* TLB: Translation lookaside Buffer: buffer (cache) de anticipación de la tabla de páginas. Residente en la MMU.
+* PTE: Page Table Entry -> (index/contenido)->(VPN/PPN)
+* PTBR: Registro de control de la CPU: page table base register: pointer to TLB
+* TLBI:TLB index -> campo set de la cache
+* TLBT: TLB tag
+
+* PPO: PP offset
+* PPN: PP number
+* CO: Cache offset en el superbloque
+* CT: Cache tag
+* CI: Cache index ó línea
+
+Traducción: dirección virtual a fisica
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+image::./images/memvirtual/virtualtoframe.png[alt="MMU",title="Traducción Virtual -> Física",align="center"]
+
+image::./images/memvirtual/mmu_hit.png[alt="MMU",title="Resultado con éxito", height="200",align="center"]
+
+. CPU: vuelca la dirección de memoria virtual
+. MMU: apunta a la entrada de la tabla de páginas ubicada en la memoria principal
+. Memoria Principal: devuelve el contenido de la entrada de la tabla. MMU: A partir de la dirección lógica obtiene al dirección física.
+. MMU: vuelca la dirección física en el bus de direcciones del bus del sistema.
+. El dato referenciado puede estar en la memoria caché o en la memoria principal.
+
+
+image::./images/memvirtual/mmu_fault.png[alt="MMU",title="Resultado con fracaso", height="300",align="center"]
+
+
+Translation Lookaside Buffer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* TLB
+* Es una Caché de la tabla de páginas virtuales TPV. Además de residir la tabla de páginas en la memoria principal se tiene una copia parcial de dicha tabla en una unidad de memoria interna de la MMU. Objetivo: aumentar la velocidad de acceso a la tabla ya que la solución de múltiples tablas en niveles jerárquicos requiere múltiples accesos a la memoria principal externa. 
+* Formato de dirección virtual si la TLB es una caché con función de correspondencia asociativa
+** El índice es el campo set o superbloque típico de la cache
+
+
+image::./images/memvirtual/tlb_connection.png[alt="MMU",title="Operación con TLB",align="center"]
+
+image::./images/memvirtual/tlb_entry.png[alt="MMU",title="Formato Virtual con TLB", height="100",align="center"]
+
+* TLBTag
+* TLBIndex
+
+
+Ejercicio
+~~~~~~~~~
+
+
+* La arquitectura de una computadora dispone de TLB y L1 d-Cache. La memoria es direccionable byte a byte y tiene palabras de 1 byte.
+* La MMU tiene una Tabla TLB (Translation Lookup Buffer)   y una memoria d-Cache según las figuras
++
+
+image::./images/memvirtual/tabla_cache_ejercicio.png[alt="MMU",title="TLB y d-cache ", align="center"]
+
+
+** Virtual addresses are 14 bits wide (n = 14).
+** Physical addresses are 12 bits wide (m = 12).
+** The page size is 64 bytes (P = 64).
+** The TLB is four-way set associative with 16 total entries.
+** The L1 d-cache is physically addressed and direct mapped, with a 4-byte line size and 16 total set.
+* Calcular la dirección física de la DIRECCION VIRTUAL *0x03d4*
+.. Formato de Direcciones
+... Dimensión de VPO
+... Dimensión de PPO
+... Dimensión de VPN
+... Dimensión de PPN
+.. Número de entradas de la tabla de páginas en memoria principal y la caché TLB
+.. TLB
+... Líneas por set de TLB
+... Sets de TLB
+... Tamaño TLBI
+... Tamaño TLBT
+... Bits por Word
+... Words por línea de TLB
+... Valores TLBI-TLBT
+.. Está PPN en TLB?
+.. Valor de PPN
+.. Valor de PA
+.. d-Cache
+... Memory Cache: Tipo
+... Sets
+... Líneas/Set
+... Words/Línea
+... Bytes/Word
+.. Formato Dirección Física
+... CO
+... CI
+... CT
+... Valores CT/CI/CO -> PA
+.. Está PA en la caché?
+.. Contenido de la PA
+.. Resumen del resultado final
+
+Desarrollo
+^^^^^^^^^^
+
+* Respuestas
+.. El formato de direcciones es
+... VO y PO -> tamaño de página : 64 bytes -> 2^6^ -> 6 bits de offset tanto virtual como físico
+... bits VPN= VA-VPO=14-6=8 bits -> 2^8^ = 256 páginas virtuales 
+... bits PPN= PA-PPO=12-6=6 bits -> 2^6^ = 64 marcos de página
++
+
+image::./images/memvirtual/formato_direcciones.png[alt="MMU",title="Formato de Direcciones", align="center"]
+
+.. Valores de VPN y VPO
+*** La dirección virtual VA de 14 bits 0x03D4 se codifica en binario como: 00-0011-1101-0100 -> 00001111-010100 -> VPN-VPO
+**** VPO=PPO=010100=01x4
+**** VPN=00001111=0x0F
+.. Tabla de páginas
+*** 256 puntos de entrada. Cada entrada contiene la dirección de uno de los 64 marcos de página. Es decir una tabla de 256 direcciones y palabras de 6 bits más los bits de validación, protección, etc
+*** La tabla en MP son 256 entradas, en cambio la TLB en caché tiene 16 entradas -> direccionables con 4 bits.
+.. TLB
+... Líneas por set de TLB: 4 vías -> 4 líneas/set
+... Sets de TLB: 16 entradas son 16 líneas en total agrupadas por 4 líneas/set = 4 sets
+... Tamaño TLBI : para 4 set son necesarios 2 bits
+... Tamaño TLBT : 
+**** De los 8 bits necesarios para direccionar 256 entradas si 2 son para el índice TLBI, 6 serán para la etiqueta TLBT  
+... Bits por Word: 1 byte por palabra según el enunciado
+... Words por línea de TLB
+**** Si me fijo en el díbujo de la tabla, cada línea contiene únicamente un PPN+tag, es decir, una palabra.
+... Valores TLBI-TLBT
+**** VPN es una dirección de la tabla de páginas en la memoria RAM. El controlador de caché la descompone en TLBT-TLBI
+**** VPN=00001111=000011-11=TLBT-TLBI=0x3-0x3
+.. Está PPN en TLB?
+*** busco en el set 0x3 de TLB si alguno de las líneas tiene un tag TLBT de 0x3 y lo tiene la segunda línea.
+*** La segunda línea del set 3 tiene el bit de validación a 1 por lo que la página virtual está en la memoria principal y/o d-cache.
+.. Valor de PPN
+***  La segunda línea del set 3 tiene el contenido PPN=0x0D
+.. Valor de PA
+*** Son 12 bits
+*** La concatenación PPN(6)-PPO(6): 001101-010100=001101010100=0011-0101-0100= *0x354* =PA
+.. d-Cache
+... Memory Cache: Tipo : mapeo directo
+**** Al ser de mapeo directo los set son de 1 línea por lo que es lo mismo decir set que línea.
+... Sets
+**** 16 líneas
+... Líneas/Set : 1
+... Words/Línea: 4
+... Bytes/Word: 1
+.. Formato dirección física
+... CO: para direccionar 4 palabras son necesarios 2 bits
+... CI: para direccionar 16 líneas son necesarios 4 bits
+... CT: la dirección física PA son 12 bits -> CT=PA-DI-CO=12-4-2=6 bits
+... Valores CT/CI/CO -> PA=001101010100=001101-0101-00
+**** Línea 0005; Palabra 00: Tag 001101=0x0D
+.. Está PA en la d-Cache?
+*** En la línea 5 el tag es 0D -> coíncide con el tag de la dirección física -> acierto -> el dato está en d-cache 
+*** El bit de validación es 1 por lo que su contenido está actualizado y por lo tanto válido.
+.. Contenido de la PA:
+*** El contenido de la palabra 0 de la linea 5 de la d-cache es el byte *0x36*
+.. Resumen del resultado final.
+*** La dirección virtual *0x03d4* se corresponde con la dirección física *0x354* cuyo contenido es *0x36*
+
+
+ 
+Intel Core i7
+~~~~~~~~~~~~~
+
+image::./images/memvirtual/corei7_virtual_memory.png[alt="MMU",title="Memoria Core i7", align="center"]
+
+
+image::./images/memvirtual/corei7_mmu.png[alt="MMU",title="Operación MMU",align="center"]
+
+
+image::./images/memvirtual/corei7_tlb_entry_123.png[alt="MMU",title="Formato para las tablas de los tres primeros niveles",align="center"]
+
+
+image::./images/memvirtual/corei7_tlb_entry_4.png[alt="MMU",title="Formato de la tabla del 4º nivel ",align="center"]
+
+image::./images/memvirtual/corei7_address_translation.png[alt="MMU",title="Linux: 4 niveles",align="center"]
+
+Sistemas Operativos: Gestión de la Memoria
+------------------------------------------
+
+
+Protección
+~~~~~~~~~~
+
+* Page level protection. HW isolation. Las páginas que gestiona la MMU tiene 'bits de control' que indican los permisos de acción, acceso, etc
+* Segmentation fault o Protection Fault
+
+
+Paginación Bajo Demanda
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Paginación bajo demanda
+** Las páginas de un proceso se cargan en memoria únicamente cuando son 'demandadas'.No se cargan todas las páginas de un proceso de una tacada.
+** Cuando una página es requerida y no está en la memoria, se genera un 'page fault' por parte de la MMU y el SO se encargará de cargar la página requerida.
+* Principio de localidad
+** Un proceso en un momento dado tiene en memoria únicamente las páginas que están utilizándose o con las que tienen probabilidad alta de ser utilizadas.
+** Furthermore, time is saved because unused pages *are not swapped* in and out of memory, ya que ese trozo puede ser requerido con inmediatez.
+
+Reemplazo
+~~~~~~~~~
+
+* Reemplazar una página
+** Dilema:¿qué página extraigo de la memoria? Algoritmos de reemplazo  ->  Least Recently Used LRU, First Input Output (FIFO)
+** La política de reemplazo la gestiona el SO.
+
+
+VM Tool
+~~~~~~~
+
+* La Memoria Virtual es una herramienta para:
+** que la M. Principal sea una cache del disco
+** Gestionar la Memoria
+ *** Simplifying linking: mezcla con direcciones independientes de la dirección física final
+*** Simplifying loading: se carga bajo demanda las páginas requeridas
+*** Simplifying sharing: procesos (librerías) que son compartidos.
+*** Simplifying memory allocation:En memoria virtual el SO o compilador distribuye los segmentos de forma contigua y luego está la flexibilidad de ubicarlos arbitrariamente en memoria física.
+*** Proteger los segmentos: control con los bits sup(supervisor),read,write
+

@@ -1,0 +1,598 @@
+Operaciones Aritmeticas y Logicas
+=================================
+
+:doctitle: Tema 4: Operaciones Aritmeticas y Logicas
+
+
+Temario
+-------
+
+
+. Aritmética y lógica
+..  Operaciones aritméticas y lógicas sobre enteros en binario
+..  Redondeo y propagación de error en números reales
+
+
+Objetivo
+--------
+
+* Operaciones aritméticas de suma y resta con números naturales y enteros representados en código binario.
+* Operaciones lógicas de datos representados en código binario.
+* Libro de texto
+** Parte 3ª, Capítulo 10 : Aritmética del Computador
+
+Introduccion
+------------
+
+* La Unidad Aritmetico Lógica (ALU) es la unidad hardware básica encargada de realizar las operaciones de cálculo aritmético como la suma y resta y de realizar operaciones lógicas de tipo booleano como las operaciones NOT, OR, AND, etc
+
+
+
+Aritmetica Binaria
+------------------
+
+
+
+
+Suma en módulo 2 (binaria) en binario puro (Nº NATURALES)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Los  números naturales no tienen la marca de un signo ya que son todos positivos: 0,1,2,3....
+* Suma de datos en código binario puro
+** Concepto de operación *modular*
+*** Ejemplo: módulo 100.000 -> Interpretación modular gráfica  mediante la circunferencia. Qué ocurre en el cuenta-kilómetros parcial del coche cuando llegamos a 99.999.  
+** Ejemplo: Representación de los números binarios en módulo 8. Suma binaria en módulo 8. Representación gráfica para números binarios de 3 bits -> módulo= 2^3^ = 8
++
+
+image::./images/datos_representacion/rueda_unsigned.png[scaledwidth="100%",title="Representación Unsigned Number",align="center",title-align="center"]
+
+*** Suma: Gráficamente se puede ver que 7+1=0. La ALU al realizar la operación suma 111+001 da como resultado 000. 7+1 da como resultado el valor 8 que en módulo 8 es 0.
+*** Suma: ¿Cuánto sería 7+7? -> 14 en módulo 8 es 6. Si el resultado es igual o superior al módulo hay que restarle el módulo tantas veces como sea necesario.
+*** Suma: Cuánto vale 33 en módulo 8 -> 33-8*4=1 . El 1 está en el rango (0 , 7).
+*** Resta: Gráficamente se puede ver que 0-1=7. La ALU al realizar la operación resta 000-001 da como resultado 111
+
+
+
+** El *acarreo* (llevada) se produce al llegar o pasar el valor  '2'.
+*** 1+1=uno más uno = dos >=2 -> al valor dos le resto el módulo 2 (2-2=0) y me llevo una. El valor 2 en binario se representa como 1 0, donde el cero es la representación en la misma posición que el digito sumando y el 1 la llevada a la siguiente posición.
+*** 1+1+1=uno más uno más uno = tres >=2 -> al valor tres le resto el módulo 2 (3-2=1) y me llevo una. El valor 3 en binario se representa como 1 1, donde el uno de la derecha es la representación en la misma posición que el digito sumando y el 1 de la izda es la llevada a la siguiente posición.
+* Ejercicio: calcular la suma de 10011011+00011011 = 10110110
++  
+
+....
+  Llevadas -->          1 1   1 1 
+  	                         
+                    1 0 0 1 1 0 1 1  <--sumando
+                  + 0 0 0 1 1 0 1 1  <--sumando
+  	                         
+  Valor suma          1 3 2 1 3 2        
+                  *****************
+  Resultado -->     1 0 1 1 0 1 1 0  <--suma
+....
+ 
+
+Overflow ó Desbordamiento
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Se dice que la suma o resta se ha desbordado cuando:
+** El valor del resultado a representar está fuera del rango debido a la limitación del número de digitos.
+** El resultado de la operación aritmética tiene un tamaño superior al permitido por la palabra de memoria o registro donde se almacena.
+** La solución sería aumentar el número de digitos que representan al dato, pero no siempre se puede.
+** Lógicamente si se da un desbordamiento el resultado que proporciona la ALU no es correcto. La ALU dispone de un flag o banderín de desbordamiento OF (overflow flag) que almacena un bit. Si el bit OF=1 significa que la  última operación realizada por la ALU ha producido overflow. El programador puede saber si ha habido error de overflow leyendo el banderín OF.
+* Ejemplos:
+** La unidad ALU dispone de dos registros de entrada de "1 byte", AL y BL, cada uno donde almacena dos datos : 10011011 y 10011011. Dispone también de un registro de salida de 1 byte, CL. Calcular el resultado de la suma en formato binario puro: CL <- AL+BL y el valor del banderín OF.
++
+
+----
+Llevadas -->          1 1   1 1 
+
+                  1 0 0 1 1 0 1 1  <--AL
+      	        + 1 0 0 1 1 0 1 1  <--BL
+
+Valor suma        2   1 3 2 1 3 2        
+                *****************
+Resultado -->  1  0 0 1 1 0 1 1 0  <--suma
+
+CL : 0 0 1 1 0 1 1 0
+OF : 1  
+
+----
+** Error de overflow ya que la ALU ha calculado el resultado de la suma: 00110110 
+** El resultado correcto 100110110 está fuera del rango de un registro de 8 bits. El rango permitido serían los números comprendidos entre 0000000 y 11111111, es decir, valores comprendidos entre 0 y 255. El dato 100110110 cuyo valor es 310. La solución sería diseñar una nueva CPU con registros cuyo tamaño de palabra sea mayor que 1 byte, pej 2 bytes. Entonces si a la entrada de la ALU tenemos AX=0000000010011011 BX=0000000010011011 , el resultado de la operación CX <-AX+BX sería 0000000100110110 y OF=0 -> no hay error de overflow.
+
+
+
+
+Resta en módulo 2 (binaria) en binario puro
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Para poder restar dos números naturales (sin signo) es necesario que el valor del minuendo sea superior al del sustraendo.
+** 0-0 = 0
+** 1-1 = 0
+** 1-0 = 0
+** ¿Qué ocurre si a 0 le tengo que restar 1? Al valor 0 NO se el puede resta el valor 1. Cuando un dígito del minuendo en la posición "p" es menor que el dígito en la misma posición "p" del sustraendo, la solución es sumarle al minuendo de la posición p el módulo (2 en binario) y al mismo tiempo también sumarle el mismo valor al sustraendo pero a través de la posición "p+1", con lo cual si sumamos el mismo valor tanto al minuendo como al sustraendo el resultado de la resta no se ve afectado.
+** posición "p": minuendo 0 - sustraendo1 -> En el minuendo 0+módulo-1=0+2-1= 1. El valor 2 en la posición "p" equivale al valor 1 en la posición "p+1". En la posición "p+1" sumaremos 1 al sustraendo.
+** posición "p": minuendo 0 - sustranedo 1 - llevada 1 -> En el minuendo 0+módulo-1-1=0+2-1-1=0 y llevada 1 que sumaremos a la posición siguiente del sustraendo.
+** posición "p": 1-1-1 -> en el sustraendo 1+módulo-1-1=1+2-1-1= 1 y llevada 1 que sumaremos a la posición siguiente del sustraendo.
+** 10110110 - 10011011 = 00011011
++
+
+----
+Sumar crédito al minuendo            2  2     2  2
+
+                            1  0  1  1  0  1  1  0  <--minuendo
+      	                  - 1  0  0  1  1  0  1  1  <--sustraendo
+ 
+               
+Sumar llevada al sustraendo       1  1     1  1 
+                          *************************
+Resta                       0  0  0  1  1  0  1  1
+----
+
+
+
+
+Suma/Resta en módulo 2 (binaria) en complemento a 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Repasar el formato complemento a 2 para números enteros con signo
++
+
+image::./images/datos_representacion/rueda_signed.png[scaledwidth="100%",title="Representación Complemento a 2",align="center",title-align="center"]
+
+suma
+^^^^
+* Realizar la suma de en complemento a 2 de números enteros de 1 byte 00100101 y 0111
+* Los dos datos empiezan por cero, luego son positivos según el formato complemento a 2
+** extiendo los sumandos para tener todos el mismo tamaño. 0111 extendiendo el bit de signo 0 es 00000111
++
+
+----
+Llevadas -->              1 1 1 
+
+                  0 0 1 0 0 1 0 1  <--AL
+      	        + 0 0 0 0 0 1 1 1  <--BL
+
+Valor suma                1 3 2 2        
+                *****************
+Resultado -->     0 0 1 0 1 1 0 0  <--suma
+----
+
+resta
+^^^^^
+
+* La resta X-Y equivale a la suma X+(-Y). La resta -X-Y equivale a la suma '+(-X)+(-Y)'. Por lo que la ALU las restas la realiza mediante la operación suma y cambiando de signo a los operandos.
+** Ejemplo: realizar la resta 27-101 en complemento a 2 utilizando registros de 1 byte
++
+
+----
+primero codifico tanto el minuendo +27 como el sustraendo +101
+  +27 -> 00011011
+ +101 -> 01100101
+
+-101 es el complemento a 2 de +101 -> 10011011
+
+La operación equivale a la suma (-101)+27 -> 10011011+00011011
+
+Llevadas -->          1 1   1 1 
+
+                  1 0 0 1 1 0 1 1  <--AL
+      	        + 0 0 0 1 1 0 1 1  <--BL
+
+Valor suma            1 3 2 1 3 2        
+                *****************
+Resultado -->     1 0 1 1 0 1 1 0  <--suma
+
+---- 
+
+** ¿ Cuál es el valor del resultado?
++
+
+----
+el resultado tiene el bit de la posición más significativa a 1 por lo que su valor es negativo en complemento a 2. Si es negativo no puedo calcular su valor mediante sumas ponderadas ya que no es una representación posicional. Tengo que cambiar lo de signo para hacerlo positivo y así poder calcular su valor por suma ponderada.
+
+Complemento a 2 del resultado 10110110 -> 01001010 cuyo valor es +74 , por lo que el valor de 10110010 es -74.
+----
+
+** repetir la operación cambiando de computadora y utilizando registros de 2 bytes. Basarse en el apartado anterior.
++
+
+----
+Extiendo el bit de signo del número negativo 10011011 hasta completar los 16 bits
+  AX <-- 1111111110011011   (-101)
+Extiendo el bit de signo del número positivo 00011011 hasta completar los 16 bits
+  BX <-- 0000000000011011   (+27)
+Extiendo el bit de signo del resultado negativo 10110110 hasta completar los 16 bits
+  CX <-- 1111111110110110   (-74) 
+----
+
+
+
+
+Overflow en Complemento a 2 (C2)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* El desbordamiento u overflow ocurre en las operaciones aritméticas suma y resta cuando el resultado de la operación es de un tamaño fuera del rango de posibles representaciones, por lo que el valor resultante no es válido y provoca errores.
+** Ejemplo de suma utilizando registros de 2 bytes : 10000000+10000000 = 00000000 => Overflow 
+** Error ya que -128-128 no es cero.
+*** Si los dos sumandos son negativos el resultado no puede ser positivo
++
+
+----
+Para que el resultado fuese correcto deberíamos utilizar registros de un tamaño superior al byte, por ejemplo 9 bits. En este caso realizamos nuevamente la operación extendiendo los datos 1 bit más:
+110000000+110000000 = 100000000 -> no hay overflow -> la suma de dos números negativos ha dado negativo
+
+si realizamos la operación en decimal -> (-128)+(-128) = (-256)
+
+----
+*** Si los dos sumandos son positivos el resultado no puede ser negativo
+* Intelx86 activa el error de overflow cuando en el resultado de una operación aritmética con signo el acarreo del bit MSB afecta al valor del resultado.
+
+NOTE: Observar que al realizar operaciones aritméticas de suma y resta, el código del resultado es idéntico en números sin signo y en complemento a 2. El código es idéntico pero su valor asociado no lo es.
+ 
+Suma en Módulo 16 (Hexadecimal)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+* Suma en módulo 16:
+** el acarreo se produce al llegar o pasar el valor del módulo: 16.
+** 0xF+0x1 = 0x10
+*** F+1=quince más uno = dieciséis >=16 -> al resultado dieciséis le resto 16 (16-16=0) y me llevo una.
+** 0x3AF+0xA = 0x3B9
+*** F+A=quince más 10 = 25>=16 -> al resultado veinticinco le resto 16 (25-16=9) y me llevo una
+** 0x3A1F+0xF4E1=0x12F00
+*** F+1=quince más 1 = 16>=16 -> al resultado dieciséis le resto 16 (16-16=0) y me llevo una.
+
+
+Resta en Módulo 16 (Hexadecimal)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Todo lo visto anteriormente para números binarios se puede realizar en cualquier otra base, por ejemplo en números codificados en hexadecimal.
+* Resta en módulo 16:
+** el acarreo se produce cuando una posición p del minuendo es inferior a la misma posición p del sustraendo, en cuyo caso, es necesario sumar el módulo 16 al minuendo y la llevada a la posición siguiente p+1 del sustraendo:
+** 0x4308 - 0x1ABC = 0x
++
+
+----
+                0x 4 3 0 8 <-- Minuendo
+      	      - 0x 1 A B C <-- Sustraendo
+LLevadas -->       1 1 1
+              *************
+                0x 2 8 4 C
+----
+** 8-C -> 8+módulo_16-12=8+16-12=12=0xC y llevada 1 a la posición siguiente
+** 0-B-LLevada -> 0+módulo_16-11-1=0+16-11-1=4=0x4 y llevada 1 a la posición siguiente
+** 3-A-LLevada -> 3+módulo_16-10-1=3+16-10=8=0x8 y llevada 1 a la posición siguiente
+** 4-1-LLevada -> 4-1-1=2
+
+
+
+Suma en base hexadecimal en formato complemento a 2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* 0xEC+0xAB=0x97
+** En binario el bit MSB es 1 significa que el valor es negativo
+** Los dos sumandos y el resultado son negativos
+** La suma de dos números negativos da overflow si el resultado es positivo, por lo que no hay overflow
+** C2 de 0xEC -> 0xEC negado es 0x13 y sumando 1 ->  0x15
+** C2 de 0xAB -> 0x54+1 -> 0x55
+** C2 de 0x97 -> 0x68+1 -> 0x69
+
+
+
+Suma en base 8 (Octal)
+^^^^^^^^^^^^^^^^^^^^^^
+
+* Suma en módulo '8'. El acarreo se produce al llegar o pasar el valor del dígito '8'.
+** 08+01 = 010
+** 0377+06 = 0305
+
+Tipos de variables en C
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Enteros
+** char
+** short
+** int
+** long
+* Reales
+** float
+** double
+* Operador sizeof()
+* Conversión de tipos
+** casting
+
+ifdef::backend-docbook45[<<<]
+Operaciones Logicas
+-------------------
+
+
+
+
+Operadores BITWISE
+~~~~~~~~~~~~~~~~~~
+
+* Bitwise: operaciones bit a bit
+** not,and,or,xor
+
+
+
+Lenguaje C
+^^^^^^^^^^
+
+* https://www.salesforce.com/us/developer/docs/apexcode/Content/langCon_apex_expressions_operators_understanding.htm
+* http://en.wikipedia.org/wiki/Boolean_algebra[Algebra Boole]
+* http://en.wikipedia.org/wiki/List_of_logic_symbols[algebra symbols]
+** Bitwise operator: and &, or |, xor ^, not ~
+** Shift operator: left <<,right signed >>, right unsigned >>>
+
+
+
+[width="50%",cols=">s,^m,e",frame="topbot",options="header"]
+|==========================
+| Operador     |Algebra | C
+|NOT       |&#xac; &#x02dc;  |~
+|OR     |&#x2228; |\|
+|AND      |&#x2227; |&
+|XOR       |&#x2295;  &#x22bb;|^
+|NOR|&#x22bd;|
+|NAND|&#x22bc;|
+| Left SHIFT| |x << m
+| Right SHIFT signed| |x >> m
+| Right SHIFT unsigned| |x >>> m
+|==========================
+
+Tablas de la Verdad
+^^^^^^^^^^^^^^^^^^^
+
+[width="50%",cols="5*^s",frame="topbot",options="header"]
+|==========================
+| x  |y | z=x&#x2228;y |z=x&#x2227;y|z=x&#x2295;y
+|0|0|0|0|0
+|0|1|1|0|1
+|1|0|1|0|1
+|1|1|1|1|0
+|==========================
+
+
+Expresión Lógica
+^^^^^^^^^^^^^^^^
+
+* z=&#xac;x·y+x·&#xac;y
+** Si desarrollamos la tabla de la verdad comprobamos su equivalencia con el operador XOR
+
+
+
+
+
+Multiplicación
+--------------
+
+* Multiplicación 0xFF x 0x6
+** Realizarla en Binario
+** Observar que al multiplicar por una potencia de 2 hay un desplazamiento del multiplicando hacia la dcha
+** multiplicar = sumar y desplazar
+
+ifdef::backend-docbook45[<<<]
+
+Programación
+------------
+
+
+
+funciones matemáticas
+~~~~~~~~~~~~~~~~~~~~~
+
+* http://bisqwit.iki.fi/story/howto/bitmath/
+** El código fuente está escrito en lenguaje C
+* Librería libm.so del standard de C
+
+
+
+Aplicación
+~~~~~~~~~~
+
+* Desarrollar un programa que multiplique números enteros con signo.
+
+Hardware
+--------
+
+
+
+Circuitos Digitales
+~~~~~~~~~~~~~~~~~~~
+
+
+
+Básicos:Puerta lógicas
+^^^^^^^^^^^^^^^^^^^^^^
+
+* http://en.wikipedia.org/wiki/Logic_gate[Puertas lógicas]
+** not, and, or, xor
+
+
+
+Complejos
+^^^^^^^^^
+
+* http://en.wikipedia.org/wiki/Adder_%28electronics%29#Full_adder[half adder, full adder]
+* http://en.wikipedia.org/wiki/Binary_multiplier[multiplicador]
+** circuito combinacional formado por puertas lógicas
+** acumulador y registro desplazador
+
+Unidad Aritmetico Lógica (ALU)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Arithmetic logic unit (ALU)
+* Circuito Digital
+* Conexión CPU-DRAM
+** Transferencia de Instrucciones y Datos 
+** La ALU es interna a la CPU y procesa datos numéricos enteros almacenaddos en los registros de propósito general.
++
+
+["ditaa",title="Arquitectura Intel x86 de 32 bits"]
+------------------------------
+            Central Processor Unit (CPU)	                                  Memoria Externa RAM
++----------------------------------------------------+		               +----------------------+
+|						     |                         |                      |
+|						     |			       +----------------------+		      
+|                +--------------+		     |			       |		      |
+|                | Resultado    |		     |    BUS Direcciones      +----------------------+
+|                +--------------+		     o----------------------/->|		      |
+|                      ^			     |                     32  +----------------------+
+|                      |			     |			       |                      |
+|          /------------------------		     |			       +----------------------+
+|         /                         \		     |			       |		      |
+|        /	      ALU            \		     |			       +----------------------+
+|       /	        X             \		     |			       |		      |
+|      /               / \             \	     |			       +----------------------+
+|     /	              /   \             \	     |			       |                      |
+|    ----------------/     \-------------\	     |			       +----------------------+
+|            ^                    ^		     |			       |		      |
+|            |                    |		     |			       +----------------------+
+|    +--------------+      +--------------+	     |			       |		      |
+|    | Operando_1   |      | Operando_2   |	     |   BUS Read/Write	       +----------------------+
+|    +--------------+      +--------------+	     o------------------------>|                      |
+|						     |                         +----------------------+
+|              +--------------+			     |			       |		      |
+|              | Registro A   |			     |			       +----------------------+
+|              +--------------+			     |			       |		      |
+|              | Registro B   |			     |			       +----------------------+
+|              +--------------+			     |			       |                      |
+|              | Registro     |			     |			       +----------------------+
+|              +--------------+			     |			       |		      |
+|              | Registro     |			     |			       +----------------------+
+|              +--------------+			     |			       |		      |
+|              | Registro     |			     |			       +----------------------+
+|              +--------------+			     |			       |                      |
+|              | Registro Z   |			     |			       +----------------------+
+|              +--------------+			     |			       |<-----  1 Byte ------>|
+|             Banco de Registros		     |			       +----------------------+
+|              Memoria Interna			     |			       |		      |
+|						     |			       +----------------------+
+|						     |			       |                      |
++----------------------------------------------------+                         +----------------------+
+                      ^                                                                   ^
+                      |                          BUS Datos                                |
+                      +-------------------------------------------/-----------------------+
+                                                                 32           
+------------------------------
+
+
+Registro de flags EFLAG
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* El registro de flags EFLAGS es un registro de memoria interno a la CPU Intel x86
+* Cada bit del registro de 32 bits es un banderín o flag que se activa en función del resultado de la operación realizada por la última instrucción máquina ejecutada.
++
+
+.RFLAG Register
+[width="50%",cols="<,^,<",options="header"]
+|======================
+|Flag |Bit |Name
+|CF |0 |Carry flag
+|PF |2 |Parity flag
+|AF |4 |Adjust flag
+|ZF |6 |Zero flag
+|SF |7 |Sign flag
+|OF |11 |Overflow flag
+|======================
+
+* Carry flag CF:
+** se activa si la llevada afecta a una posición de bit mayor que del ancho de palabra (word size) de la ALU en una operación aritmética de *números enteros sin signo o con signo*
+* Overflow flag OF:
+** se activa si teniendo en cuenta el bit de mayor peso MSB (aunque esté fuera el word size) indicase error en la operación aritmética con *números enteros con signo*. Si no se tiene en cuenta el MSB fuera del word size, la operación es correcta.
+* Parity Even flag:
+** indica si el número de bits del byte LSB del resultado de la última operación ha sido par.
+* Sign flag:
+** se activa si el resultado de la última operación ha sido negativo.
+* Adjust flag:
+** se activa si hay llevada en el nibble LSB del resultado de la última operación
+
+[[of_cf_unsigned_signed]]
+* Ejemplos:
+
+CAUTION: Hay que diferenciar los casos suma CON signo y suma SIN signo. En el primer caso detectamos el error matemático únicamente con el flag OF y en el segundo caso detectamos el error matemático únicamente con el flag CF.
+
+  
+** Números CON signo (complemento a 2): 
+*** para saber si hay overflow siempre se suma...una resta se puede convertir en suma
+*** El carrier flag CF no tiene sentido. Unicamente interpreto OF para saber si hay error en la operación aritmética.
++
+
+----
+  11111111
++ 00000001
+__________
+ 100000000 -> Esta suma NO es correcta, ya que para representar el resultado con 9 bits los operandos tienen que ser de 9 bits y por lo tanto hay que extender el bit de signo de los operandos de 8 bits. La suma con 9 bits sería:
+
+operandos y resultado con 9 bits:
+  111111111
++ 000000001
+___________
+  000000000 -> NO hay Overflow ya que los operandos de la suma son de distinto signo
+
+operandos y resultado con 8 bits:
+  11111111
++ 00000001
+___________
+  00000000 -> NO hay Overflow ya que los operandos de la suma son de distinto signo
+
+
+Nunca va haber overflow si sumamos datos de signo contrario
+
+
+ Resta A-B donde
+ A=11110000
+ B=00010100
+ A-B=A+(-B) -> Convierto la resta en suma
+ 
+ A :    11110000
+-B :   +11101100
+________________
+A–B:    11011100 -> Hay acarreo pero NO overflow. La suman de dos datos negativos da como resultado un número también negativo.CF=1 y OF=0
+
+ A=10000000
+ B=10000000
+ A+B
+
+ Para hacer la suma con 9 dígitos en lugar de 8 bits, extiendo los dos operandos hasta completar los 9 dígitos
+ A :    110000000
+ B :   +110000000
+_________________
+A+B:    100000000 
+
+ Observamos que no hay overflow en el caso de que utilizasemos 9 dígitos. Pero si la ALU está operando con registros de 8 bits SÍ HAY overflow. Los dos sumandos son negativos (bit de signo posición 7ª) y el bit de signo del resultado (bit posición 7ª) es positivo luego el resultado es erróneo. 
+----
+
+** números SIN signo
+*** El overflow flag OF no tiene sentido. Unicamente interpreto CF para saber si hay error en la operación aritmética.
++
+
+----
+  11111111
++ 00000001
+__________
+  00000000 -> Hay acarreo en el bit más significativo luego CF=1. Conceptualmente hay overflow por lo que el resultado que obtiene la ALU aunque electrónicamente es correcto, no lo es matemáticamente (511+1=0). El efecto overflow lo detecto con CF=1.
+
+Extiendo los operandos de la operación anterior con 1 bit.
+  011111111
++ 000000001
+___________
+  100000000 -> No hay acarreo -> CF=0. Esta suma es correcta matemáticamente ya que 511+1=512 y por lo tanto no hay overflow -> CF=0
+
+----
+
+
+* Se ve nuevamente en  el próximo capítulo <<CFR, Programación en Lenguaje Ensamblador (x86)>>
+
+
+
+Float Point Unit-FPU
+~~~~~~~~~~~~~~~~~~~~
+
+* Unidad de procesamiento de datos en coma flotante
+* Antiguamente era una unidad no integrada en la CPU denominada coprocesador matemático
+* Utiliza registros específicos denominados SSE distintos de los Registros de Propósito General utilizados por la ALU para realizar operaciones con números enteros.
+
+

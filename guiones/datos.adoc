@@ -1,0 +1,623 @@
+Representación de los Datos
+===========================
+
+:doctitle: Representación de los Datos
+
+
+Introducción
+------------
+
+Objetivos
+~~~~~~~~~
+
+* Programación:
+** Desarrollar programas que almacenen y procesen distintos tipos de datos como enteros con signo, caracteres, arrays, strings de distintos tamaños como 1 byte, 2 bytes, 4 bytes, etc..
+** Empleo de los sufijos de los mnemónicos: analizar el tamaño de los operandos según el sufijo del mnemónico empleado, el tamaño del operando registro y el tipo de operando en memoria.
+** Emplear distintos tipos de modos de direccionamiento (inmediato, directo, indirecto, indexado) de acceso a los operandos
+** Empleo de Macros mediante directivas.
+** Concepto de llamada al sistema operativo.
+* Análisis:
+** Comprobación del tipo de alineamiento 'little endian' de los datos almacenados en memoria
+** Analizar el contenido de la memoria como números con signo, caracteres, arrays y strings: tipos y tamaños de los operandos numéricos y de los operandos alfanuméricos 
+** Realizar la operación de desensamblaje para comprobar el lenguaje máquina del módulo ejecutable cargado en la memoria principal
+
+
+
+
+
+Módulos fuente: características
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*  *datos_size.s*
+** Declaración del tamaño de los operandos:
+*** Mediante las directivas  (.byte, .2byte, .short, etc ..)
+** Declaración de *arrays* de datos numéricos mediante directivas (.short,.int, etc ..)
+** Declaración de datos *alfanuméricos* mediante:
+*** Directivas del ensamblador (.ascii, .asciiz, .string, etc)
+** Empleo de Macros
+* *datos_sufijos.s*
+** Acceso a los operandos mediante instrucciones con los *sufijos*  (b,w,l,q)
+* *datos_direccionamiento.s*
+** Diferentes Modos de direccionamiento de los operandos: inmediato, directo, indirecto, indexado 
+
+
+Requisitos
+~~~~~~~~~~
+
+* Teoría: representación de datos, formato de instrucciones y repertorio  ISA de la arquitectura X86.
+** Almacenamiento con *alineamiento interno* de bytes "little endian"
+* Práctica previa: Introducción a la programación en lenguaje ensamblador AT&T x86-32
+* Conceptos del lenguaje de *programación C*: 
+** Punteros, array, string y operación de casting.
+
+LEEME
+-----
+
+* Lectura del guión de prácticas  y del capítulo 3 del Libro *Programming from the Ground-Up*.
+* <<prac_apu, Apuntes y Libro de Texto>>
+* <<prac_doc_mem, Documentación Memoria>>: Contenido y Formato de la Memoria 
+* <<prac_eval, Evaluación>>: sistema de evaluación
+* <<prac_plat_des, Plataforma de Desarrollo>> : configuración de la computadora personal
+* <<prac_prog,Programación>> : metodología
+
+Cuestiones Opcionales
+---------------------
+
+* <<prac_eval, "Autoevaluación de Prácticas">> opcional: <<prac_cues, Prácticas: Cuestionario>>
+** Los ejercicios opcionales suman 4 puntos en la calificación de las memorias.
+
+
+
+
+Registros internos de la CPU
+----------------------------
+
+* La arquitecura amd64 dispone de:
+** 16 registros de propósito general (RPG) de 64 bits cada uno: rax,rbx,rcx,rdx,rsi,rdi,rsp, etc
+** 1 registros de estado de 64 bits: rflags
+* El acceso a los registros de propósito general puede ser 'parcial':
+** Registro RAX: es un registro de 64 bits
+** Registro EAX: son los 32 bits de menor peso de RAX
+** Registro AX:  son los 16 bits de menor peso de RAX
+** Registro AL:  son los  8 bits de menor peso de RAX
+** Registro AH:  es el byte con los bits de las posiciones 8:15 de RAX
+* En las <<registros_32, "Hojas de Referencia Rápida">> están representados todos los nombres de los difererentes grupos de bits de cada registro de propósito general.
+
+
+Tamaño de los datos y variables
+-------------------------------
+
+Algoritmo
+~~~~~~~~~
+
+* La sección de instrucciones comprende un algoritmo que inicializa dos punteros.
+
+
+Edición del Módulo fuente: datos_size.s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Descargar el módulo fuente "datos_size.s" de miaulario y añadir los comentarios apropiados.
++
+
+[source,nasm]
+------------------
+### Programa: datos_size.s
+### Descripción: declarar y acceder a distintos tamaños de operandos
+### Compilación: gcc -m32 -g -o datos_size datos_size.s
+
+	## MACROS
+	.equ SYS_EXIT,	1
+	.equ SUCCESS,	0
+
+	## VARIABLES LOCALES
+	.data
+
+da1:	.byte   0x0A
+da2:	.2byte  0x0A0B
+da4:	.4byte  0x0A0B0C0D
+men1:	.ascii  "hola"		
+lista:  .int    1,2,3,4,5
+	
+	## INSTRUCCIONES
+	.global _start
+	.text
+_start:
+	mov $da4,%eax
+	lea da4,%ebx
+	mov (%eax),%ecx
+	mov (%ebx),%edx
+salida:
+	mov $SYS_EXIT, %eax	
+	mov $SUCCESS,  %ebx
+	int $0x80
+	
+	.end
+------------------
+
+Compilación
+~~~~~~~~~~~
+
+* Seguir los pasos del proceso de <<compilacion, compilación>> común a todas las sesiones.
+** +gcc -nostartfiles -m32 -g -o datos_size datos_size.s+
+
+Ejecución
+~~~~~~~~~
+
+* +./datos_size+
+* +echo $?+
+
+Análisis del módulo fuente
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+* Leer en las hojas de referencia rápida el <<programa_minimalista,Programa Ejemplo Minimalista>>
+
+
+Estructura en secciones: ensamblaje
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* La estructura del programa esta formada por los siguientes elementos:
+** Cabecera
+** Definición de Macros
+** Sección de Datos
+** Sección de Instrucciones
+
+Definición de Macros
+^^^^^^^^^^^^^^^^^^^^
+* Macro:
+** La construcción macro se utiliza en el programa fuente para sustituir datos utilizados en el programa fuente por símbolos de texto que faciliten la lectura del código fuente. 
+** Para ello empleamos la directiva "EQU" cuya sintaxis es: +.EQU  SÍMBOLO, dato+
+** El preprocesador en la primera fase de la compilación sustituirá el texto SIMBOLO que aparece a lo largo de la sección de datos e instrucciones por el dato asociado.
+* Macros empleadas
+** SYS_EXIT : código de la llamada al sistema para finalizar el programa y devolver el control al Sistema Operativo. En la arquitectura i386 su valor es 1.
+** SUCCESS  : código empleado por los programas para indicar que su ejecución se ha realizado con normalidad. Su valor es 0.
+
+Sección de Datos
+^^^^^^^^^^^^^^^^
+
+* Interpretar las etiquetas y directivas de reserva de memoria e inicialización para los datos utilizando la <<directivas_as, tabla de directivas>>: identificar las variables ordinarias, strings y arrays.
+
+CAUTION:  Si un objeto de memoria es inicializado con un número entero que es representado con menos dígitos que el tamaño del objeto, los digitos de mayor peso tendrán de valor cero. Por ejemplo:  +.4byte 0xFF+ equivale a +.4byte 0x000000FF+
+
+
+Sección de Instrucciones
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Determinar la instrucción de entrada al programa.
+* Determinar el bloque de salida del programa.
+
+
+GDB: Observaciones
+~~~~~~~~~~~~~~~~~~
+
+* El depurador al visualizar el contenido de los registros:
+** únicamente visualiza el número de bytes del tamaño de los operandos..aunque los registros "r-x" son de 64 bits (rax,rbx,etc..)
+** con números enteros con signo, no visualiza los ceros de mayor peso, es decir, ni el signo ni la extensión de signo de los números positivos.
+
+GDB:Ejecución paso a paso
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Inicialización
+^^^^^^^^^^^^^^
+* Compilar el programa con la opción de generación de la tabla de símbolos requerida por el depurador y generar el módulo binario ejecutable:
+** +gcc -nostartfiles -m32 -g  -o datos_size datos_size.s+
+* Abrir el depurador GDB, cargar el módulo binario ejecutable y comprobar que se carga la tabla de símbolos junto al módulo binario ejecutable.
+** +gdb+
+** +file datos_size+
+** +info sources+
+* Abrir la ventana para el módulo fuente
+** +layout src+ ó +Control-x Control-a+
+* Configurar el fichero para el logging histórico de los comandos.
+** +set trace-commands on+
+** +set logging file datos_size_gdb_asm.txt+ 
+** +set logging on+
+** +shell ls -l datos_size_gdb_asm.txt+
+* Activar un punto de ruptura en la instrucción de entrada al programa.
+** +b _start+
+* Ejecutar el programa deteniéndolo en la primera instrucción del programa.
+** +run+
+
+Comandos y operadores: x, p, disas, casting, &, ++*++, @ 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* comando eXaminar *x*: vuelca el contenido de una *dirección* de memoria
+** +x /nvt address+
+** formato /nvt : "t" es el 'tamaño' de la variable en memoria , "v" la codificación del 'valor' del contenido de memoria a visualizar y "n" el 'número' de veces que hay que volcar secuencialmente grupos de bytes en memoria de tamaño "t" comenzando en  la dirección 'address'
+** +help x+ : formatos d (decimal) ,x (hexadecimal),t (binario) ,o (octal) ,c (character) ,a (address),i (instruction),etc
+** ejemplos:
+*** x /1d4 address (ejecutar 1 vez el comando examinar en código decimal volcando un objeto de 4bytes ubicado en la dirección address)
+*** x /2t4 address (ejecutar 2 veces el comando examinar en código binario: volcando la primera vez un objeto de 4 bytes ubicado en la dirección address y volcando la segunda vez un objeto de 4 bytes ubicado en la dirección address+4)
+*** x /100x1 address: vuelca 100 datos de 1 byte en código hexadecimal a partir de la dirección address.
+** La sintaxis del argumento del comando examinar es la misma que en lenguaje de *programación de C*.
+*** work language: +show language+ -> indica que el lenguaje de las expresiones GDB son ASM (pej $eax) pero en cambio también admite el lenguaje C (&variable)
+*** work languages supported: +set language+
+* operador *&* : se utiliza como prefijo de una etiqueta para evaluar la dirección de memoria a la que hace referencia una etiqueta
+* operador *** : se utiliza para evaluar el contenido de una posición de memoria mediante la indirección de un puntero
+* operación de *casting*:
+** <<prog_C, Apéndice Programación Lenguaje C>> 
+** El casting consiste en definir o redifinir el tipo de variable. Se utiliza como prefijo de la variable a redefinir y va entre paréntesis.
+** la etiqueta "lista" está definida en la sección de datos mediante la directiva ".int". Esta directiva reserva memoria para inicializar los datos a partir de la dirección &lista pero NO es una declaración de tipo por lo que el depurador NO tiene información sobre el tipo de elementos del array lista y por ello es necesario realizar declaraciones en modo casting.
+** Ej. (char *): el tipo +char *+ es un puntero a un entero de 1 byte.   
+* comando Print *p*: Evalua el argumento del comando y el valor resultante lo imprime en pantalla
+** La sintaxis del argumento del comando examinar es la misma que en lenguaje de programación de C.
+** Ej. p /a &lista : evalua &lista cuyo valor resulante se imprime con formato tipo "a" (address)
+** formatos de impresión: los mismos que eXaminar: +help x+
+** operador @: *direccion*@*n*: array artificial: evalua la expresión "direccion" (a la izda de @) y debe ser una dirección de memoria. Crea una array artificial de longitud "n" (el valor del parámetro a la derecha del operador @) bytes. 
+
+* comando *disas* : desensambla el código binario traduciéndolo a código ensamblador.
+
+
+
+
+Análisis
+^^^^^^^^
+* Análisis del contenido de la memoria principal mediante el depurador GDB:
++
+
+[source,shell]
+--------
+//Alineamiento interno de los bytes de un dato
+x /tb &da1
+x /xh &da2
+x /xw &da4
+x /5xb &da4	-> Alineamiento little endian
+
+//Alineamiento de los bytes de un string
+x /5cb &men1	-> Alineamiento en secuencia
+x /5xb &men1
+
+//Volcado de un string
+p /s (char *)&men1	-> imprime una cadena de caracteres desde la primera dirección hasta encontrar el caracter NULL (0x00).
+
+//Volcado de un array
+x /5xw &lista	        -> contenido de 5 elementos de lista
+p /a &lista	        -> dirección del array lista
+p /a &lista+1  -> el depurador informa que es necesario realizar algún tipo de casting (declaración dinámica)
+p /a (void *)&lista+1  	-> se incrementa en 1 byte
+p /a (int  *)&lista+1   -> escalado: se incrementa en  1*4 bytes apuntando al segundo elemento del array
+p lista                	-> el depurador informa que es necesario realizar un casting
+p (int)lista            -> primer elemento del array
+p (int *)&lista	        -> dirección del array lista
+p *((int *)&lista+1)    -> segundo elemento de lista
+x /dw (int *)&lista+1   -> segundo elemento de lista
+p (int [5])lista        -> contenido de cinco elementos de lista
+p *(int *)&lista@5      -> array artificial de 5 elementos de tipo int a partir de la dirección  &lista.
+
+//volcado de una instrucción
+p &_start
+x /i &_start		-> desensambla: convierte el código máquina en código ensamblador.
+
+//Desensamblar: Conversión del código máquina en ensamblador
+disas /r _start
+layout split
+
+//Análisis de los punteros
+b salida
+c
+p /a &da4
+x /x4 &da4
+p /x (int)da4
+p /x $eax
+p /x *(int *)$eax 
+--------
+
+
+
+
+Tamaño de los Operandos
+-----------------------
+
+Edición del Módulo fuente: datos_sufijos.s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Descargar el módulo fuente "datos_sufijos.s" de miaulario y añadir los comentarios apropiados.
++
+
+[source, nasm]
+--------------------
+### Programa: datos_sufijos.s
+### Descripción: utilizar distintos sufijos para los mnemónicos indicado distintos tamaños de operandos
+### Compilación: gcc -nostartfiles -m32 -g -o datos_sufijos datos_sufijos.s
+
+	## MACROS
+	.equ SYS_EXIT,	1
+	.equ SUCCESS,	0
+
+	## VARIABLES LOCALES
+	.data
+
+da1:	.byte   0x0A
+da2:	.2byte  0x0A0B
+da4:	.4byte  0x0A0B0C0D
+saludo:	.ascii  "hola"
+lista:  .int    1,2,3,4,5
+	
+	## INSTRUCCIONES
+	.global _start
+	.text
+_start:
+
+	## Reset de Registros 
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+
+	## Carga de datos
+	## mov da1,da4		ERROR: por referenciar las dos direcciones efectivas de los dos operandos a la memoria principal
+	mov  da4,%eax
+	movl da4,%ebx
+	movw da4,%cx
+	movb da4,%dl
+
+	## Reset de Registros
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+
+	## Carga de datos
+	mov  da4,%al		#aplica el tamaño de AL
+	## movw  da4,%al	ERROR: incoherencia entre -w y AL
+	movb da4,%ebx  	        #AVISO, NO error: incoherencia entre el regisro BL y el sufijo 
+
+
+
+	mov  da1,%ecx
+	mov  da4,%dx
+
+	## Reset de Registros
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+
+	## Carga de datos
+	
+        mov  da1,%al
+
+	## inc da1     	ERROR: por ser la dirección efectiva del operando una referencia a la memoria principal no restringe el tamaño del operando. Al no especificar tampoco sufijo el ensamblador no reconoce el tamaño del operando.
+	incb da1
+	incw da2
+	incl da4
+
+## salida
+	mov $SYS_EXIT, %eax	
+	mov $SUCCESS,  %ebx
+	int $0x80
+	
+	.end
+--------------------
+
+Compilación
+~~~~~~~~~~~
+
+* Seguir los pasos de la <<compilacion_asm, compilación >> de un módulo en lenguaje ensamblador.
+** +gcc -nostartfiles -m32 -g -o datos_sufijos datos_sufijos.s+
+** WARNING: *Aviso:* empleando '%bl' en lugar de '%ebx' debido a la utilización de 'b' como sufijo
+*** Es un aviso de la sintaxis de la instrucción +movb da4,%ebx+, NO es un error.
+
+Ejecución
+~~~~~~~~~
+
+* +./datos_sufijos+
+* +echo $?+
+
+
+Análisis del módulo fuente asm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Sufijos de los mnemónicos indicando distintos tamaños de los operandos: b,w,l
+** +movw da4,%cx+  : el sufijo "w" de 2 bytes y el registro destino CX de dos bytes.
+** +movw da4,%al+  : el sufijo "w" impone una transferencia de 2 bytes a un registro destino AL de 1 byte -> error en el ensamblaje.
+** +movb da4,%ebx+ : el sufijo "b" no es coherente con el registro destino EBX de 4 bytes y el ensamblaje se produce con BL.
+* Sin sufijo: 	
+** +xor  %eax,%eax+ : operandos fuente y destino EAX de 4 bytes
+** +mov  da4,%al+  : el registro destino AL limita la transferencia a 1 byte y no hay contradicción con el sufijo ya que éste no existe.
+** +mov  da1,%ecx+ : de los dos operandos, registro y memoria, es el registro quien prioriza el tamaño de la transferencia.
+** +inc da1+       : Al ser la dirección efectiva del operando una referencia a la memoria principal no restringe el tamaño del operando. Al no especificar tampoco un sufijo el ensamblador no reconoce el tamaño del operando -> error en el ensamblaje
+
+Deducción del tamaño del operando en una instrucción asm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+. Diferencia entre la referencia a un operando en memoria o registro
+.. Un operando referenciado mediante una dirección de memoria no tiene un tamaño específico para el assembler.
+.. En cambio el nombre de un registro si es asociado a un tamaño de operando por el assembler.
+. En una instrucción con un único operando en memoria el tamaño es deducido por el assembler gracias al sufijo del mnemónico, por lo tanto en este caso si el mnemónico no tiene sufijo el assembler no traducirá la instrucción.
+. En una instrucción con dos operandos, uno en memoria y otro en un registro, es el operando en el registro o el sufijo quienes especifican el tamaño de los dos operandos fuente y destino:
+.. Si el mnemónico tiene sufijo, es dicho sufijo quien especifica el tamaño de los operandos fuente y destino.
+.. Si el mnemónico no tiene sufijo, es el tamaño del registro quien especifica el tamaño de los operandos fuente y destino.
+. Casos de error
+.. En el caso de que el mnemónico tenga un sufijo mayor que el tamaño del registro destino.
+.. En el caso de que el mnemónico no tenga sufijo y el tamaño del registro fuente sea mayor que el registro destino.
+
+
+
+
+GDB:Ejecución paso a paso
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Inicialización
+^^^^^^^^^^^^^^
+* Compilar el programa con la opción de generación de la tabla de símbolos requerida por el depurador y generar el módulo binario ejecutable:
+** +gcc -nostartfiles -m32 -g  -o datos_sufijo datos_sufijo.s+ donde modulo_fuente se sustituye por el nombre del archivo que se desea compilar.
+* Abrir el depurador GDB, cargar el módulo binario ejecutable y comprobar que se carga la tabla de símbolos junto al módulo binario ejecutable.
+** +gdb+
+** +file modulo_ejecutable+
+** +info sources+
+* Abrir la ventana para el módulo fuente
+** +layout src+ ó +Control-x Control-a+
+* Configurar el fichero para el logging histórico de los comandos.
+** +set trace-commands on+
+** +set logging file datos_sufijo_gdb_asm.txt+ 
+** +set logging on+
+** +shell ls -l datos_sufijo_gdb_asm.txt+
+* Activar un punto de ruptura en la instrucción de entrada al programa.
+** +b _start+
+* Ejecutar el programa deteniéndolo en la primera instrucción del programa.
+** +run+
+* abrir la ventana de visualización de los registros
+** +layout regs+
+* Análisis del contenido de la memoria principal mediante el depurador GDB.
+** Ejecutar el programa paso a paso analizando el resultado de la ejecución de cada instrucción
+** +n+
+** RET, RET, RET, ....
+
+
+
+Modos de Direccionamiento
+-------------------------
+
+Edición del Módulo fuente: datos_direccionamiento.s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Descargar el módulo fuente "datos_direccionamiento.s" de miaulario y añadir los comentarios apropiados.
++
+
+[source,nasm]
+-------------------
+
+### Program:     datos_direccionamiento.s
+### Descripción: Emplear estructuras de datos con diferentes direccionamientos
+### Compilación: gcc -m32 -g -o datos_direccionamiento datos_direccionamiento.s
+###		 sin la opción startfiles al utilizar el punto de entrada referenciado con la etiqueta "main"
+	
+	## MACROS
+	.equ SYS_EXIT,	1
+	.equ SUCCESS,	0
+
+	## VARIABLES LOCALES
+	.data
+
+	.align 4				     # Alineamiento con direcciones de MP múltiplos de 4
+da2:	.2byte  0x0A0B,0b0000111101011100,-21,0xFFFF # Array da2 de elementos de 2 bytes
+	.align 4
+lista:  .word    1,2,3,4,5	# Array lista de elementos de 2 bytes
+	.align 8
+buffer:	.space  100		# Array buffer de 100 bytes
+	.align 2
+saludo:
+	.string "Hola"		# Array saludo de elementos de 1 byte por ser caracteres
+	
+	## INSTRUCCIONES
+	.global main
+	.text
+main:
+
+	## RESET	
+
+	xor  %eax,%eax
+	xor  %ebx,%ebx
+	xor  %ecx,%ecx
+	xor  %edx,%edx
+	xor  %esi,%esi
+        xor  %edi,%edi
+
+	## ALGORITMO sum1toN
+
+	## Direccionamiento inmediato
+	mov $4,%si
+	## Direccionamiento indexado
+bucle:	add lista(,%esi,2),%di
+	## Direccionamiento a registro
+	dec %si
+	## Direccionamiento relativo al PC
+	jns bucle
+
+
+	## EJERCICIOS SOBRE DIRECCIONAMIENTO
+	
+	## Direccionamiento indirecto
+	lea buffer,%eax		#inicializo el puntero EAX
+	## mov da2,(%eax) ERROR: la dirección efectiva de los dos operandos hacen referencia a la memoria principal
+	mov da2,%bx
+	mov %bx, (%eax)
+	## Direccionamiento directo
+	incw da2
+	## Direccionamiento indexado
+	lea  da2,%ebx
+	## inc 2(%ebx) ERROR: dirección efectiva a memoria y no hay sufijo
+	incw 2(%ebx)
+	
+	mov $3,%esi
+	mov da2(,%esi,2),%ebx
+		
+	## SALIDA
+	
+	mov $SYS_EXIT, %eax	
+	mov $SUCCESS,  %ebx
+	int $0x80
+	
+	.end
+-------------------
+
+
+
+Compilación
+~~~~~~~~~~~
+
+* Seguir los pasos de la <<compilacion_asm, compilación >> de un módulo en lenguaje ensamblador.
+** El punto de entrada no es "_start".
+** +gcc -m32 -g -o datos_direccionamiento datos_direccionamiento.s+
+
+Ejecución
+~~~~~~~~~
+
+* +./datos_direccionamiento+
+* +echo $?+
+
+Análisis del módulo fuente asm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Alineación de datos mediante la directiva +.align n+ asigna una dirección de memoria múltiplo de 'n' al siguiente dato declarado.
+
+CAUTION: NO está permitido que en el caso de una instrucción con dos operandos, ambos estén en la memoria principal. Uno o los dos operandos han de estar en los registros de propósito general.
+
+GDB: Ejecución paso a paso
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+inicialización
+^^^^^^^^^^^^^^
+* Compilar el programa con la opción de generación de la tabla de símbolos requerida por el depurador y generar el módulo binario ejecutable:
+** +gcc  -m32 -g  -o datos_direccionamiento datos_direccionamiento.s+ donde modulo_fuente se sustituye por el nombre del archivo que se desea compilar.
+* Abrir el depurador GDB, cargar el módulo binario ejecutable y comprobar que se carga la tabla de símbolos junto al módulo binario ejecutable.
+** +gdb+
+** +file datos_direccionamiento+
+** +info sources+
+* Abrir la ventana para el módulo fuente
+** +layout src+ ó +Control-x Control-a+
+* Configurar el fichero para el logging histórico de los comandos.
+** +set trace-commands on+
+** +set logging file datos_direccionamiento_gdb_asm.txt+ 
+** +set logging on+
+** +shell ls -l datos_direccionamiento_gdb_asm.txt+
+* Activar un punto de ruptura en la instrucción de entrada al programa.
+** +b _start+
+* Ejecutar el programa deteniéndolo en la primera instrucción del programa.
+** +run+
+
+Análisis
+^^^^^^^^
+
+* Array 'da2'
+** Imprimir la dirección de memoria del array 'da2' y el contenido del primer elemento: +x /xh &da2+
+** 4 elementos de 2bytes del array da2: +x /4xh &da2+
+** +p /x (short[4])da2+
+* Array 'lista'
+** +ptype lista+
+** +p (short[5])lista+ 
+* Array 'buffer'
+** +ptype buffer+
+**  Imprimir la dirección de memoria del array 'buffer' y comprobar su alineamiento: +p &buffer+
+* String
+** +ptype saludo+ : no debug info -> no admite referencia elemento array expresión 'saludo[n]'
+** +p /c (char[5])saludo+   :casting array
+** +x /5c (char *)&saludo+  :casting puntero
+** +p /c *(char *)&saludo+  :casting puntero e indirección
+** +p /s (char *)&saludo+   :casting puntero y formato string
+
+
+
+
+
+
+ 

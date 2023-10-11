@@ -1,0 +1,30 @@
+Memoria Virtual
+===============
+
+:doctitle: Memoria Virtual
+
+Introducción
+------------
+
+* Información detallada se puede consultar en el <<apendice_memvirtual, Apéndice>>
+* La memoria virtual se estudia detalladamente en la asignatura de Sistemas Operativos, por lo que aquí únicamente se van a recordar un par de ideas fundamentales.
+
+Punto de vista del Programador y CPU
+------------------------------------
+
+* Cuando el programador programa en el lenguaje ensamblador, cuando se trabaja con el debugger, etc y se visualizan direcciones de memoria, dichas direcciones de memoria pertenecen al espacio de direcciones VIRTUAL, no al espacio de direcciones físico.
+* De la misma forma la CPU opera con direcciones virtuales. Por ejemplo el contador de programa trabaja con direcciones virtuales
+** Por ello es necesario un circuito hardware que traduzca direcciones virtuales a direcciones físicas y se las entregue al controlador de memoria MC. Dicho traductor hardware se denomina Memory Managment Unit (MMU).
+
+
+Espacio virtual de direcciones de memoria
+-----------------------------------------
+
+* El compilador, linker, etc cuando traducen lenguajes de programación de alto nivel como el lenguaje C o bajo nivel como el lenguaje ASM, etc y lo convierten en lenguaje máquina tienen que asignar direcciones de memoria a las instrucciones, variables, estructuras de datos, punteros, etc.. Está asignación se realiza de forma totalmente libre, sin tener en cuenta la memoria física de la computadora. Se asignan direcciones de forma abstracta, es decir, como si fuesen las entradas de una tabla donde el contenido de la tabla son las instrucciones y los datos.
+
+
+Organización lógica de un programa en lenguaje máquina: Secciones y Segmentos
+-----------------------------------------------------------------------------
+
+* Información sobre las secciones (data,text,rodata...) y los segmentos (código, datos, pila, heap ) en el <<apendice_segmentos_secciones, Apéndice>>
+* La organización lógica de los módulos de los programas en secciones y de un programa/proceso en segmentos facilita la traducción (compilador, linker, ensamblador) y también la asignación de memoria virtual al proceso.

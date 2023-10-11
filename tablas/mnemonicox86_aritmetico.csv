@@ -1,0 +1,26 @@
+Nombre  ;Comentario                      ;Código           ;Operación                                       ;O D I T S Z A P C
+ADD     ;Suma                            ;ADD Fuente,Dest  ;Dest:=Dest+ Fuente                              ;±       ± ± ± ± ±
+ADC     ;Suma con acarreo                ;ADC Fuente,Dest  ;Dest:=Dest+ Fuente +CF                          ;±       ± ± ± ± ±
+SUB     ;Resta                           ;SUB Fuente,Dest  ;Dest:=Dest- Fuente                              ;±       ± ± ± ± ±
+SBB     ;Resta con acarreo               ;SBB Fuente,Dest  ;Dest:=Dest-(Fuente +CF)                         ;±       ± ± ± ± ±
+DIV     ;División (sin signo)            ;DIV Op           ;Op=byte: AL:=AX / Op AH:=Resto                  ;?       ? ? ? ? ?
+DIV     ;División (sin signo)            ;DIV Op           ;Op=word:         AX:=DX:AX / Op DX:=Resto       ;?       ? ? ? ? ?
+DIV     ;386 División (sin signo)        ;DIV Op           ;Op=doublew.:     EAX:=EDX:EAX / Op EDX:=Resto   ;?	 ? ? ? ? ?
+IDIV    ;División entera con signo       ;IDIV Op          ;Op=byte:        AL:=AX / Op AH:=Resto           ;?	 ? ? ? ? ?
+IDIV    ;División entera con signo       ;IDIV Op          ;Op=word: AX:=DX:AX / Op DX:=Resto               ;?	 ? ? ? ? ?
+IDIV    ;386 División entera con signo   ;IDIV Op          ;Op=doublew.: EAX:=EDX:EAX / Op EDX:=Resto       ;?	 ? ? ? ? ?
+MUL     ;Multiplicación (sin signo)      ;MUL Op           ;Op=byte: AX:=AL*Op si AH=0 #                    ;±	 ? ? ? ? ±
+MUL     ;Multiplicación (sin signo)      ;MUL Op           ;Op=word: DX:AX:=AX*Op si DX=0 #                 ;±	 ? ? ? ? ±
+MUL     ;386 Multiplicación (sin signo)  ;MUL Op           ;Op=double: EDX:EAX:=EAX*Op si EDX=0 #           ;±	 ? ? ? ? ±
+IMUL    ;i Multiplic. entera con signo   ;IMUL Op          ;Op=byte: AX:=AL*Op si AL es suficiente #        ;±	 ? ? ? ? ±
+IMUL    ;Multiplic. entera con signo     ;IMUL Op          ;Op=word: DX:AX:=AX*Op si AX es suficiente #     ;±	 ? ? ? ? ±
+IMUL    ;386 Multiplic. entera con signo ;IMUL Op          ;Op=double: EDX:EAX:=EAX*Op si EAX es sufi. #    ;±	 ? ? ? ? ±
+INC     ;Incrementar                     ;INC Op           ;Op:=Op+1 (El Carry no resulta afectado !)       ;±	 ± ± ± ±
+DEC     ;Decrementar                     ;DEC Op           ;Op:=Op-1 (El Carry no resulta afectado !)       ;±       ± ± ± ±
+CMP     ;Comparar                        ;CMP Fuente,Destino; Destino-Fuente                                ;±       ± ± ± ± ±
+SAL     ;Desplazam. aritm. a la izq.     ;SAL              ;Op,Cantidad                                     ;i       ± ± ? ± ±
+SAR     ;Desplazam. aritm. a la der.     ;SAR              ;Op,Cantidad                                     ;i       ± ± ? ± ±
+RCL     ;Rotar a la izq. c/acarreo       ;RCL Op,Cantidad  ;                                                ;i               ±
+RCR     ;Rotar a la derecha c/acarreo    ;RCR Op,Cantidad  ;                                                ;i               ±
+ROL     ;Rotar a la izquierda            ;ROL Op,Cantidad  ;                                                ;i               ±
+ROR     ;Rotar a la derecha              ;ROR Op,Cantidad  ;  

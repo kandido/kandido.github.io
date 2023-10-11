@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_representación_de_los_datos_2" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+<ul class="sectlevel1">
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html">12. Introducción a la Programación en Lenguaje Ensamblador AT&amp;T x86-32</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html"><span class="toc-current">13. Representación de los Datos</span></a>
+<ul class="sectlevel2">
+<li><a href="_representación_de_los_datos_2.html#_introducción_18">13.1. Introducción</a>
+<ul class="sectlevel3">
+<li><a href="_representación_de_los_datos_2.html#_objetivos_4">13.1.1. Objetivos</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_módulos_fuente_características">13.1.2. Módulos fuente: características</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_requisitos_4">13.1.3. Requisitos</a>
+</li>
+</ul>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_leeme_2">13.2. LEEME</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_cuestiones_opcionales">13.3. Cuestiones Opcionales</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_registros_internos_de_la_cpu">13.4. Registros internos de la CPU</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_tamaño_de_los_datos_y_variables">13.5. Tamaño de los datos y variables</a>
+<ul class="sectlevel3">
+<li><a href="_representación_de_los_datos_2.html#_algoritmo_3">13.5.1. Algoritmo</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_edición_del_módulo_fuente_datos_size_s">13.5.2. Edición del Módulo fuente: datos_size.s</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_compilación_3">13.5.3. Compilación</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_ejecución_3">13.5.4. Ejecución</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_análisis_del_módulo_fuente_2">13.5.5. Análisis del módulo fuente</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_gdb_observaciones">13.5.6. GDB: Observaciones</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_gdbejecución_paso_a_paso">13.5.7. GDB:Ejecución paso a paso</a>
+</li>
+</ul>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_tamaño_de_los_operandos">13.6. Tamaño de los Operandos</a>
+<ul class="sectlevel3">
+<li><a href="_representación_de_los_datos_2.html#_edición_del_módulo_fuente_datos_sufijos_s">13.6.1. Edición del Módulo fuente: datos_sufijos.s</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_compilación_4">13.6.2. Compilación</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_ejecución_4">13.6.3. Ejecución</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_análisis_del_módulo_fuente_asm">13.6.4. Análisis del módulo fuente asm</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_deducción_del_tamaño_del_operando_en_una_instrucción_asm">13.6.5. Deducción del tamaño del operando en una instrucción asm</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_gdbejecución_paso_a_paso_2">13.6.6. GDB:Ejecución paso a paso</a>
+</li>
+</ul>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_modos_de_direccionamiento_3">13.7. Modos de Direccionamiento</a>
+<ul class="sectlevel3">
+<li><a href="_representación_de_los_datos_2.html#_edición_del_módulo_fuente_datos_direccionamiento_s">13.7.1. Edición del Módulo fuente: datos_direccionamiento.s</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_compilación_5">13.7.2. Compilación</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_ejecución_5">13.7.3. Ejecución</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_análisis_del_módulo_fuente_asm_2">13.7.4. Análisis del módulo fuente asm</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html#_gdb_ejecución_paso_a_paso">13.7.5. GDB: Ejecución paso a paso</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html">14. Operaciones Aritméticas y Lógicas</a>
+</li>
+<li><a href="_instrucciones_de_saltos_condicionales.html">15. Instrucciones de Saltos Condicionales</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html">16. LLamadas al Sistema Operativo (Kernel)</a>
+</li>
+<li><a href="_subrutinas_2.html">17. Subrutinas</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html">18. Imágenes: Bit Map Portable</a>
+</li>
+</ul>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_representación_de_los_datos_2">13. Representación de los Datos</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_introducción_18">13.1. Introducción</h3>
+<div class="sect3">
+<h4 id="_objetivos_4">13.1.1. Objetivos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Programación:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Desarrollar programas que almacenen y procesen distintos tipos de datos como enteros con signo, caracteres, arrays, strings de distintos tamaños como 1 byte, 2 bytes, 4 bytes, etc..</p>
+</li>
+<li>
+<p>Empleo de los sufijos de los mnemónicos: analizar el tamaño de los operandos según el sufijo del mnemónico empleado, el tamaño del operando registro y el tipo de operando en memoria.</p>
+</li>
+<li>
+<p>Emplear distintos tipos de modos de direccionamiento (inmediato, directo, indirecto, indexado) de acceso a los operandos</p>
+</li>
+<li>
+<p>Empleo de Macros mediante directivas.</p>
+</li>
+<li>
+<p>Concepto de llamada al sistema operativo.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Análisis:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Comprobación del tipo de alineamiento <em>little endian</em> de los datos almacenados en memoria</p>
+</li>
+<li>
+<p>Analizar el contenido de la memoria como números con signo, caracteres, arrays y strings: tipos y tamaños de los operandos numéricos y de los operandos alfanuméricos</p>
+</li>
+<li>
+<p>Realizar la operación de desensamblaje para comprobar el lenguaje máquina del módulo ejecutable cargado en la memoria principal</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_módulos_fuente_características">13.1.2. Módulos fuente: características</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>datos_size.s</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Declaración del tamaño de los operandos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mediante las directivas  (.byte, .2byte, .short, etc ..)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Declaración de <strong>arrays</strong> de datos numéricos mediante directivas (.short,.int, etc ..)</p>
+</li>
+<li>
+<p>Declaración de datos <strong>alfanuméricos</strong> mediante:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Directivas del ensamblador (.ascii, .asciiz, .string, etc)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Empleo de Macros</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>datos_sufijos.s</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Acceso a los operandos mediante instrucciones con los <strong>sufijos</strong>  (b,w,l,q)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>datos_direccionamiento.s</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Diferentes Modos de direccionamiento de los operandos: inmediato, directo, indirecto, indexado</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_requisitos_4">13.1.3. Requisitos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Teoría: representación de datos, formato de instrucciones y repertorio  ISA de la arquitectura X86.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Almacenamiento con <strong>alineamiento interno</strong> de bytes "little endian"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Práctica previa: Introducción a la programación en lenguaje ensamblador AT&amp;T x86-32</p>
+</li>
+<li>
+<p>Conceptos del lenguaje de <strong>programación C</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Punteros, array, string y operación de casting.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_leeme_2">13.2. LEEME</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Lectura del guión de prácticas  y del capítulo 3 del Libro <strong>Programming from the Ground-Up</strong>.</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_apu">Apuntes y Libro de Texto</a></p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_doc_mem">Documentación Memoria</a>: Contenido y Formato de la Memoria</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_eval">Evaluación</a>: sistema de evaluación</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_plat_des">Plataforma de Desarrollo</a> : configuración de la computadora personal</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_prog">Programación</a> : metodología</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cuestiones_opcionales">13.3. Cuestiones Opcionales</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_eval">"Autoevaluación de Prácticas"</a> opcional: <a href="_prácticas_cuestionario.html#prac_cues">Prácticas: Cuestionario</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Los ejercicios opcionales suman 4 puntos en la calificación de las memorias.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_registros_internos_de_la_cpu">13.4. Registros internos de la CPU</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>La arquitecura amd64 dispone de:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>16 registros de propósito general (RPG) de 64 bits cada uno: rax,rbx,rcx,rdx,rsi,rdi,rsp, etc</p>
+</li>
+<li>
+<p>1 registros de estado de 64 bits: rflags</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El acceso a los registros de propósito general puede ser <em>parcial</em>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Registro RAX: es un registro de 64 bits</p>
+</li>
+<li>
+<p>Registro EAX: son los 32 bits de menor peso de RAX</p>
+</li>
+<li>
+<p>Registro AX:  son los 16 bits de menor peso de RAX</p>
+</li>
+<li>
+<p>Registro AL:  son los  8 bits de menor peso de RAX</p>
+</li>
+<li>
+<p>Registro AH:  es el byte con los bits de las posiciones 8:15 de RAX</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>En las <a href="_programación_ensamblador_att_x86.html#registros_32">"Hojas de Referencia Rápida"</a> están representados todos los nombres de los difererentes grupos de bits de cada registro de propósito general.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tamaño_de_los_datos_y_variables">13.5. Tamaño de los datos y variables</h3>
+<div class="sect3">
+<h4 id="_algoritmo_3">13.5.1. Algoritmo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>La sección de instrucciones comprende un algoritmo que inicializa dos punteros.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_edición_del_módulo_fuente_datos_size_s">13.5.2. Edición del Módulo fuente: datos_size.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Descargar el módulo fuente "datos_size.s" de miaulario y añadir los comentarios apropiados.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">###</span> <span class="nl">Programa:</span> <span class="nf">datos_size.s</span>
+<span class="err">###</span> <span class="nf">Descripci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">declarar</span> <span class="nv">y</span> <span class="nv">acceder</span> <span class="nv">a</span> <span class="nb">di</span><span class="nv">stintos</span> <span class="nv">tama</span><span class="err">ñ</span><span class="nv">os</span> <span class="nv">de</span> <span class="nv">operandos</span>
+<span class="err">###</span> <span class="nf">Compilaci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">gcc</span> <span class="o">-</span><span class="nv">m32</span> <span class="o">-</span><span class="nv">g</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">datos_size</span> <span class="nv">datos_size.s</span>
+
+	<span class="err">##</span> <span class="nf">MACROS</span>
+	<span class="nf">.equ</span> <span class="nv">SYS_EXIT</span><span class="p">,</span>	<span class="mi">1</span>
+	<span class="nf">.equ</span> <span class="nv">SUCCESS</span><span class="p">,</span>	<span class="mi">0</span>
+
+	<span class="err">##</span> <span class="nf">VARIABLES</span> <span class="nv">LOCALES</span>
+	<span class="nf">.data</span>
+
+<span class="nl">da1:</span>	<span class="nf">.byte</span>   <span class="mh">0x0A</span>
+<span class="nl">da2:</span>	<span class="nf">.2byte</span>  <span class="mh">0x0A0B</span>
+<span class="nl">da4:</span>	<span class="nf">.4byte</span>  <span class="mh">0x0A0B0C0D</span>
+<span class="nl">men1:</span>	<span class="nf">.ascii</span>  <span class="s">"hola"</span>
+<span class="nl">lista:</span>  <span class="nf">.int</span>    <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span>
+
+	<span class="err">##</span> <span class="nf">INSTRUCCIONES</span>
+	<span class="nf">.global</span> <span class="nv">_start</span>
+	<span class="nf">.text</span>
+<span class="nl">_start:</span>
+	<span class="nf">mov</span> <span class="kc">$</span><span class="nv">da4</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+	<span class="nf">lea</span> <span class="nv">da4</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>
+	<span class="nf">mov</span> <span class="p">(</span><span class="o">%</span><span class="nb">eax</span><span class="p">),</span><span class="o">%</span><span class="nb">ecx</span>
+	<span class="nf">mov</span> <span class="p">(</span><span class="o">%</span><span class="nb">ebx</span><span class="p">),</span><span class="o">%</span><span class="nb">edx</span>
+<span class="nl">salida:</span>
+	<span class="nf">mov</span> <span class="kc">$</span><span class="nv">SYS_EXIT</span><span class="p">,</span> <span class="o">%</span><span class="nb">eax</span>
+	<span class="nf">mov</span> <span class="kc">$</span><span class="nv">SUCCESS</span><span class="p">,</span>  <span class="o">%</span><span class="nb">ebx</span>
+	<span class="nf">int</span> <span class="kc">$</span><span class="mh">0x80</span>
+
+	<span class="nf">.end</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compilación_3">13.5.3. Compilación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Seguir los pasos del proceso de <a href="_practicando_la_programación_desde_el_principio.html#compilacion">compilación</a> común a todas las sesiones.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -nostartfiles -m32 -g -o datos_size datos_size.s</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_3">13.5.4. Ejecución</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>./datos_size</code></p>
+</li>
+<li>
+<p><code>echo $?</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_análisis_del_módulo_fuente_2">13.5.5. Análisis del módulo fuente</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Leer en las hojas de referencia rápida el <a href="_programación_ensamblador_att_x86.html#programa_minimalista">Programa Ejemplo Minimalista</a></p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_estructura_en_secciones_ensamblaje">Estructura en secciones: ensamblaje</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La estructura del programa esta formada por los siguientes elementos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cabecera</p>
+</li>
+<li>
+<p>Definición de Macros</p>
+</li>
+<li>
+<p>Sección de Datos</p>
+</li>
+<li>
+<p>Sección de Instrucciones</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_definición_de_macros">Definición de Macros</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Macro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La construcción macro se utiliza en el programa fuente para sustituir datos utilizados en el programa fuente por símbolos de texto que faciliten la lectura del código fuente.</p>
+</li>
+<li>
+<p>Para ello empleamos la directiva "EQU" cuya sintaxis es: <code>.EQU  SÍMBOLO, dato</code></p>
+</li>
+<li>
+<p>El preprocesador en la primera fase de la compilación sustituirá el texto SIMBOLO que aparece a lo largo de la sección de datos e instrucciones por el dato asociado.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Macros empleadas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SYS_EXIT : código de la llamada al sistema para finalizar el programa y devolver el control al Sistema Operativo. En la arquitectura i386 su valor es 1.</p>
+</li>
+<li>
+<p>SUCCESS  : código empleado por los programas para indicar que su ejecución se ha realizado con normalidad. Su valor es 0.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sección_de_datos">Sección de Datos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Interpretar las etiquetas y directivas de reserva de memoria e inicialización para los datos utilizando la <a href="_programación_ensamblador_att_x86.html#directivas_as">tabla de directivas</a>: identificar las variables ordinarias, strings y arrays.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Si un objeto de memoria es inicializado con un número entero que es representado con menos dígitos que el tamaño del objeto, los digitos de mayor peso tendrán de valor cero. Por ejemplo:  <code>.4byte 0xFF</code> equivale a <code>.4byte 0x000000FF</code>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sección_de_instrucciones">Sección de Instrucciones</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Determinar la instrucción de entrada al programa.</p>
+</li>
+<li>
+<p>Determinar el bloque de salida del programa.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gdb_observaciones">13.5.6. GDB: Observaciones</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El depurador al visualizar el contenido de los registros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>únicamente visualiza el número de bytes del tamaño de los operandos..aunque los registros "r-x" son de 64 bits (rax,rbx,etc..)</p>
+</li>
+<li>
+<p>con números enteros con signo, no visualiza los ceros de mayor peso, es decir, ni el signo ni la extensión de signo de los números positivos.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gdbejecución_paso_a_paso">13.5.7. GDB:Ejecución paso a paso</h4>
+<div class="sect4">
+<h5 id="_inicialización">Inicialización</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Compilar el programa con la opción de generación de la tabla de símbolos requerida por el depurador y generar el módulo binario ejecutable:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -nostartfiles -m32 -g  -o datos_size datos_size.s</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir el depurador GDB, cargar el módulo binario ejecutable y comprobar que se carga la tabla de símbolos junto al módulo binario ejecutable.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gdb</code></p>
+</li>
+<li>
+<p><code>file datos_size</code></p>
+</li>
+<li>
+<p><code>info sources</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir la ventana para el módulo fuente</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>layout src</code> ó <code>Control-x Control-a</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Configurar el fichero para el logging histórico de los comandos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>set trace-commands on</code></p>
+</li>
+<li>
+<p><code>set logging file datos_size_gdb_asm.txt</code></p>
+</li>
+<li>
+<p><code>set logging on</code></p>
+</li>
+<li>
+<p><code>shell ls -l datos_size_gdb_asm.txt</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Activar un punto de ruptura en la instrucción de entrada al programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>b _start</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejecutar el programa deteniéndolo en la primera instrucción del programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>run</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_comandos_y_operadores_x_p_disas_casting">Comandos y operadores: x, p, disas, casting, &amp;, <code>*</code>, @</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>comando eXaminar <strong>x</strong>: vuelca el contenido de una <strong>dirección</strong> de memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>x /nvt address</code></p>
+</li>
+<li>
+<p>formato /nvt : "t" es el <em>tamaño</em> de la variable en memoria , "v" la codificación del <em>valor</em> del contenido de memoria a visualizar y "n" el <em>número</em> de veces que hay que volcar secuencialmente grupos de bytes en memoria de tamaño "t" comenzando en  la dirección <em>address</em></p>
+</li>
+<li>
+<p><code>help x</code> : formatos d (decimal) ,x (hexadecimal),t (binario) ,o (octal) ,c (character) ,a (address),i (instruction),etc</p>
+</li>
+<li>
+<p>ejemplos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>x /1d4 address (ejecutar 1 vez el comando examinar en código decimal volcando un objeto de 4bytes ubicado en la dirección address)</p>
+</li>
+<li>
+<p>x /2t4 address (ejecutar 2 veces el comando examinar en código binario: volcando la primera vez un objeto de 4 bytes ubicado en la dirección address y volcando la segunda vez un objeto de 4 bytes ubicado en la dirección address+4)</p>
+</li>
+<li>
+<p>x /100x1 address: vuelca 100 datos de 1 byte en código hexadecimal a partir de la dirección address.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La sintaxis del argumento del comando examinar es la misma que en lenguaje de <strong>programación de C</strong>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>work language: <code>show language</code> &#8594; indica que el lenguaje de las expresiones GDB son ASM (pej $eax) pero en cambio también admite el lenguaje C (&amp;variable)</p>
+</li>
+<li>
+<p>work languages supported: <code>set language</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>operador <strong>&amp;</strong> : se utiliza como prefijo de una etiqueta para evaluar la dirección de memoria a la que hace referencia una etiqueta</p>
+</li>
+<li>
+<p>operador <strong>*</strong> : se utiliza para evaluar el contenido de una posición de memoria mediante la indirección de un puntero</p>
+</li>
+<li>
+<p>operación de <strong>casting</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_lenguaje_de_programación_c_2.html#prog_C">Apéndice Programación Lenguaje C</a></p>
+</li>
+<li>
+<p>El casting consiste en definir o redifinir el tipo de variable. Se utiliza como prefijo de la variable a redefinir y va entre paréntesis.</p>
+</li>
+<li>
+<p>la etiqueta "lista" está definida en la sección de datos mediante la directiva ".int". Esta directiva reserva memoria para inicializar los datos a partir de la dirección &amp;lista pero NO es una declaración de tipo por lo que el depurador NO tiene información sobre el tipo de elementos del array lista y por ello es necesario realizar declaraciones en modo casting.</p>
+</li>
+<li>
+<p>Ej. (char *): el tipo <code>char *</code> es un puntero a un entero de 1 byte.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>comando Print <strong>p</strong>: Evalua el argumento del comando y el valor resultante lo imprime en pantalla</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La sintaxis del argumento del comando examinar es la misma que en lenguaje de programación de C.</p>
+</li>
+<li>
+<p>Ej. p /a &amp;lista : evalua &amp;lista cuyo valor resulante se imprime con formato tipo "a" (address)</p>
+</li>
+<li>
+<p>formatos de impresión: los mismos que eXaminar: <code>help x</code></p>
+</li>
+<li>
+<p>operador @: <strong>direccion</strong>@<strong>n</strong>: array artificial: evalua la expresión "direccion" (a la izda de @) y debe ser una dirección de memoria. Crea una array artificial de longitud "n" (el valor del parámetro a la derecha del operador @) bytes.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>comando <strong>disas</strong> : desensambla el código binario traduciéndolo a código ensamblador.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_análisis_3">Análisis</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Análisis del contenido de la memoria principal mediante el depurador GDB:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="shell">//Alineamiento interno de los bytes de un dato
+x /tb &amp;da1
+x /xh &amp;da2
+x /xw &amp;da4
+x /5xb &amp;da4	-&gt; Alineamiento little endian
+
+//Alineamiento de los bytes de un string
+x /5cb &amp;men1	-&gt; Alineamiento en secuencia
+x /5xb &amp;men1
+
+//Volcado de un string
+p /s <span class="o">(</span>char <span class="k">*</span><span class="o">)</span>&amp;men1	-&gt; imprime una cadena de caracteres desde la primera dirección hasta encontrar el caracter NULL <span class="o">(</span>0x00<span class="o">)</span><span class="nb">.</span>
+
+//Volcado de un array
+x /5xw &amp;lista	        -&gt; contenido de 5 elementos de lista
+p /a &amp;lista	        -&gt; dirección del array lista
+p /a &amp;lista+1  -&gt; el depurador informa que es necesario realizar algún tipo de casting <span class="o">(</span>declaración dinámica<span class="o">)</span>
+p /a <span class="o">(</span>void <span class="k">*</span><span class="o">)</span>&amp;lista+1  	-&gt; se incrementa en 1 byte
+p /a <span class="o">(</span>int  <span class="k">*</span><span class="o">)</span>&amp;lista+1   -&gt; escalado: se incrementa en  1<span class="k">*</span>4 bytes apuntando al segundo elemento del array
+p lista                	-&gt; el depurador informa que es necesario realizar un casting
+p <span class="o">(</span>int<span class="o">)</span>lista            -&gt; primer elemento del array
+p <span class="o">(</span>int <span class="k">*</span><span class="o">)</span>&amp;lista	        -&gt; dirección del array lista
+p <span class="k">*</span><span class="o">((</span>int <span class="k">*</span><span class="o">)</span>&amp;lista+1<span class="o">)</span>    -&gt; segundo elemento de lista
+x /dw <span class="o">(</span>int <span class="k">*</span><span class="o">)</span>&amp;lista+1   -&gt; segundo elemento de lista
+p <span class="o">(</span>int <span class="o">[</span>5]<span class="o">)</span>lista        -&gt; contenido de cinco elementos de lista
+p <span class="k">*</span><span class="o">(</span>int <span class="k">*</span><span class="o">)</span>&amp;lista@5      -&gt; array artificial de 5 elementos de tipo int a partir de la dirección  &amp;lista.
+
+//volcado de una instrucción
+p &amp;_start
+x /i &amp;_start		-&gt; desensambla: convierte el código máquina en código ensamblador.
+
+//Desensamblar: Conversión del código máquina en ensamblador
+disas /r _start
+layout <span class="nb">split</span>
+
+//Análisis de los punteros
+b salida
+c
+p /a &amp;da4
+x /x4 &amp;da4
+p /x <span class="o">(</span>int<span class="o">)</span>da4
+p /x <span class="nv">$eax</span>
+p /x <span class="k">*</span><span class="o">(</span>int <span class="k">*</span><span class="o">)</span><span class="nv">$eax</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tamaño_de_los_operandos">13.6. Tamaño de los Operandos</h3>
+<div class="sect3">
+<h4 id="_edición_del_módulo_fuente_datos_sufijos_s">13.6.1. Edición del Módulo fuente: datos_sufijos.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Descargar el módulo fuente "datos_sufijos.s" de miaulario y añadir los comentarios apropiados.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">###</span> <span class="nl">Programa:</span> <span class="nf">datos_sufijos.s</span>
+<span class="err">###</span> <span class="nf">Descripci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">utilizar</span> <span class="nb">di</span><span class="nv">stintos</span> <span class="nv">sufijos</span> <span class="nv">para</span> <span class="nv">los</span> <span class="nv">mnem</span><span class="err">ó</span><span class="nv">nicos</span> <span class="nv">indicado</span> <span class="nb">di</span><span class="nv">stintos</span> <span class="nv">tama</span><span class="err">ñ</span><span class="nv">os</span> <span class="nv">de</span> <span class="nv">operandos</span>
+<span class="err">###</span> <span class="nf">Compilaci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">gcc</span> <span class="o">-</span><span class="nv">nostartfiles</span> <span class="o">-</span><span class="nv">m32</span> <span class="o">-</span><span class="nv">g</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">datos_sufijos</span> <span class="nv">datos_sufijos.s</span>
+
+	<span class="err">##</span> <span class="nf">MACROS</span>
+	<span class="nf">.equ</span> <span class="nv">SYS_EXIT</span><span class="p">,</span>	<span class="mi">1</span>
+	<span class="nf">.equ</span> <span class="nv">SUCCESS</span><span class="p">,</span>	<span class="mi">0</span>
+
+	<span class="err">##</span> <span class="nf">VARIABLES</span> <span class="nv">LOCALES</span>
+	<span class="nf">.data</span>
+
+<span class="nl">da1:</span>	<span class="nf">.byte</span>   <span class="mh">0x0A</span>
+<span class="nl">da2:</span>	<span class="nf">.2byte</span>  <span class="mh">0x0A0B</span>
+<span class="nl">da4:</span>	<span class="nf">.4byte</span>  <span class="mh">0x0A0B0C0D</span>
+<span class="nl">saludo:</span>	<span class="nf">.ascii</span>  <span class="s">"hola"</span>
+<span class="nl">lista:</span>  <span class="nf">.int</span>    <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span>
+
+	<span class="err">##</span> <span class="nf">INSTRUCCIONES</span>
+	<span class="nf">.global</span> <span class="nv">_start</span>
+	<span class="nf">.text</span>
+<span class="nl">_start:</span>
+
+	<span class="err">##</span> <span class="nf">Reset</span> <span class="nv">de</span> <span class="nv">Registros</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">eax</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">ebx</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">ecx</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">edx</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+
+	<span class="err">##</span> <span class="nf">Carga</span> <span class="nv">de</span> <span class="nv">datos</span>
+	<span class="err">##</span> <span class="nf">mov</span> <span class="nv">da1</span><span class="p">,</span><span class="nv">da4</span>		<span class="nv">ERROR</span><span class="p">:</span> <span class="nv">por</span> <span class="nv">referenciar</span> <span class="nv">las</span> <span class="nv">dos</span> <span class="nb">di</span><span class="nv">recciones</span> <span class="nv">efectivas</span> <span class="nv">de</span> <span class="nv">los</span> <span class="nv">dos</span> <span class="nv">operandos</span> <span class="nv">a</span> <span class="nv">la</span> <span class="nv">memoria</span> <span class="nv">principal</span>
+	<span class="nf">mov</span>  <span class="nv">da4</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+	<span class="nf">movl</span> <span class="nv">da4</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>
+	<span class="nf">movw</span> <span class="nv">da4</span><span class="p">,</span><span class="o">%</span><span class="nb">cx</span>
+	<span class="nf">movb</span> <span class="nv">da4</span><span class="p">,</span><span class="o">%</span><span class="nb">dl</span>
+
+	<span class="err">##</span> <span class="nf">Reset</span> <span class="nv">de</span> <span class="nv">Registros</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">eax</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">ebx</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">ecx</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">edx</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+
+	<span class="err">##</span> <span class="nf">Carga</span> <span class="nv">de</span> <span class="nv">datos</span>
+	<span class="nf">mov</span>  <span class="nv">da4</span><span class="p">,</span><span class="o">%</span><span class="nb">al</span>		<span class="err">#</span><span class="nv">aplica</span> <span class="nv">el</span> <span class="nv">tama</span><span class="err">ñ</span><span class="nv">o</span> <span class="nv">de</span> <span class="nb">AL</span>
+	<span class="err">##</span> <span class="nf">movw</span>  <span class="nv">da4</span><span class="p">,</span><span class="o">%</span><span class="nb">al</span>	<span class="nv">ERROR</span><span class="p">:</span> <span class="nv">incoherencia</span> <span class="nv">entre</span> <span class="o">-</span><span class="nv">w</span> <span class="nv">y</span> <span class="nb">AL</span>
+	<span class="nf">movb</span> <span class="nv">da4</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>  	        <span class="err">#</span><span class="nv">AVISO</span><span class="p">,</span> <span class="nv">NO</span> <span class="nv">error</span><span class="p">:</span> <span class="nv">incoherencia</span> <span class="nv">entre</span> <span class="nv">el</span> <span class="nv">regisro</span> <span class="nb">BL</span> <span class="nv">y</span> <span class="nv">el</span> <span class="nv">sufijo</span>
+
+
+
+	<span class="nf">mov</span>  <span class="nv">da1</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>
+	<span class="nf">mov</span>  <span class="nv">da4</span><span class="p">,</span><span class="o">%</span><span class="nb">dx</span>
+
+	<span class="err">##</span> <span class="nf">Reset</span> <span class="nv">de</span> <span class="nv">Registros</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">eax</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">ebx</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">ecx</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">edx</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+
+	<span class="err">##</span> <span class="nf">Carga</span> <span class="nv">de</span> <span class="nv">datos</span>
+
+        <span class="nf">mov</span>  <span class="nv">da1</span><span class="p">,</span><span class="o">%</span><span class="nb">al</span>
+
+	<span class="err">##</span> <span class="nf">inc</span> <span class="nv">da1</span>     	<span class="nv">ERROR</span><span class="p">:</span> <span class="nv">por</span> <span class="nv">ser</span> <span class="nv">la</span> <span class="nb">di</span><span class="nv">recci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">efectiva</span> <span class="nv">del</span> <span class="nv">operando</span> <span class="nv">una</span> <span class="nv">referencia</span> <span class="nv">a</span> <span class="nv">la</span> <span class="nv">memoria</span> <span class="nv">principal</span> <span class="nv">no</span> <span class="nv">restringe</span> <span class="nv">el</span> <span class="nv">tama</span><span class="err">ñ</span><span class="nv">o</span> <span class="nv">del</span> <span class="nv">operando.</span> <span class="nb">Al</span> <span class="nv">no</span> <span class="nb">esp</span><span class="nv">ecificar</span> <span class="nv">tampoco</span> <span class="nv">sufijo</span> <span class="nv">el</span> <span class="nv">ensamblador</span> <span class="nv">no</span> <span class="nv">reconoce</span> <span class="nv">el</span> <span class="nv">tama</span><span class="err">ñ</span><span class="nv">o</span> <span class="nv">del</span> <span class="nv">operando.</span>
+	<span class="nf">incb</span> <span class="nv">da1</span>
+	<span class="nf">incw</span> <span class="nv">da2</span>
+	<span class="nf">incl</span> <span class="nv">da4</span>
+
+<span class="err">##</span> <span class="nf">salida</span>
+	<span class="nf">mov</span> <span class="kc">$</span><span class="nv">SYS_EXIT</span><span class="p">,</span> <span class="o">%</span><span class="nb">eax</span>
+	<span class="nf">mov</span> <span class="kc">$</span><span class="nv">SUCCESS</span><span class="p">,</span>  <span class="o">%</span><span class="nb">ebx</span>
+	<span class="nf">int</span> <span class="kc">$</span><span class="mh">0x80</span>
+
+	<span class="nf">.end</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compilación_4">13.6.2. Compilación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Seguir los pasos de la <a href="_practicando_la_programación_desde_el_principio.html#compilacion_asm">compilación </a> de un módulo en lenguaje ensamblador.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -nostartfiles -m32 -g -o datos_sufijos datos_sufijos.s</code></p>
+</li>
+<li>
+<p>WARNING: <strong>Aviso:</strong> empleando <em>%bl</em> en lugar de <em>%ebx</em> debido a la utilización de <em>b</em> como sufijo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es un aviso de la sintaxis de la instrucción <code>movb da4,%ebx</code>, NO es un error.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_4">13.6.3. Ejecución</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>./datos_sufijos</code></p>
+</li>
+<li>
+<p><code>echo $?</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_análisis_del_módulo_fuente_asm">13.6.4. Análisis del módulo fuente asm</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Sufijos de los mnemónicos indicando distintos tamaños de los operandos: b,w,l</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>movw da4,%cx</code>  : el sufijo "w" de 2 bytes y el registro destino CX de dos bytes.</p>
+</li>
+<li>
+<p><code>movw da4,%al</code>  : el sufijo "w" impone una transferencia de 2 bytes a un registro destino AL de 1 byte &#8594; error en el ensamblaje.</p>
+</li>
+<li>
+<p><code>movb da4,%ebx</code> : el sufijo "b" no es coherente con el registro destino EBX de 4 bytes y el ensamblaje se produce con BL.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sin sufijo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>xor  %eax,%eax</code> : operandos fuente y destino EAX de 4 bytes</p>
+</li>
+<li>
+<p><code>mov  da4,%al</code>  : el registro destino AL limita la transferencia a 1 byte y no hay contradicción con el sufijo ya que éste no existe.</p>
+</li>
+<li>
+<p><code>mov  da1,%ecx</code> : de los dos operandos, registro y memoria, es el registro quien prioriza el tamaño de la transferencia.</p>
+</li>
+<li>
+<p><code>inc da1</code>       : Al ser la dirección efectiva del operando una referencia a la memoria principal no restringe el tamaño del operando. Al no especificar tampoco un sufijo el ensamblador no reconoce el tamaño del operando &#8594; error en el ensamblaje</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deducción_del_tamaño_del_operando_en_una_instrucción_asm">13.6.5. Deducción del tamaño del operando en una instrucción asm</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Diferencia entre la referencia a un operando en memoria o registro</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Un operando referenciado mediante una dirección de memoria no tiene un tamaño específico para el assembler.</p>
+</li>
+<li>
+<p>En cambio el nombre de un registro si es asociado a un tamaño de operando por el assembler.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>En una instrucción con un único operando en memoria el tamaño es deducido por el assembler gracias al sufijo del mnemónico, por lo tanto en este caso si el mnemónico no tiene sufijo el assembler no traducirá la instrucción.</p>
+</li>
+<li>
+<p>En una instrucción con dos operandos, uno en memoria y otro en un registro, es el operando en el registro o el sufijo quienes especifican el tamaño de los dos operandos fuente y destino:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Si el mnemónico tiene sufijo, es dicho sufijo quien especifica el tamaño de los operandos fuente y destino.</p>
+</li>
+<li>
+<p>Si el mnemónico no tiene sufijo, es el tamaño del registro quien especifica el tamaño de los operandos fuente y destino.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Casos de error</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>En el caso de que el mnemónico tenga un sufijo mayor que el tamaño del registro destino.</p>
+</li>
+<li>
+<p>En el caso de que el mnemónico no tenga sufijo y el tamaño del registro fuente sea mayor que el registro destino.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gdbejecución_paso_a_paso_2">13.6.6. GDB:Ejecución paso a paso</h4>
+<div class="sect4">
+<h5 id="_inicialización_2">Inicialización</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Compilar el programa con la opción de generación de la tabla de símbolos requerida por el depurador y generar el módulo binario ejecutable:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -nostartfiles -m32 -g  -o datos_sufijo datos_sufijo.s</code> donde modulo_fuente se sustituye por el nombre del archivo que se desea compilar.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir el depurador GDB, cargar el módulo binario ejecutable y comprobar que se carga la tabla de símbolos junto al módulo binario ejecutable.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gdb</code></p>
+</li>
+<li>
+<p><code>file modulo_ejecutable</code></p>
+</li>
+<li>
+<p><code>info sources</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir la ventana para el módulo fuente</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>layout src</code> ó <code>Control-x Control-a</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Configurar el fichero para el logging histórico de los comandos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>set trace-commands on</code></p>
+</li>
+<li>
+<p><code>set logging file datos_sufijo_gdb_asm.txt</code></p>
+</li>
+<li>
+<p><code>set logging on</code></p>
+</li>
+<li>
+<p><code>shell ls -l datos_sufijo_gdb_asm.txt</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Activar un punto de ruptura en la instrucción de entrada al programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>b _start</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejecutar el programa deteniéndolo en la primera instrucción del programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>run</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>abrir la ventana de visualización de los registros</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>layout regs</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Análisis del contenido de la memoria principal mediante el depurador GDB.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejecutar el programa paso a paso analizando el resultado de la ejecución de cada instrucción</p>
+</li>
+<li>
+<p><code>n</code></p>
+</li>
+<li>
+<p>RET, RET, RET, &#8230;&#8203;.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modos_de_direccionamiento_3">13.7. Modos de Direccionamiento</h3>
+<div class="sect3">
+<h4 id="_edición_del_módulo_fuente_datos_direccionamiento_s">13.7.1. Edición del Módulo fuente: datos_direccionamiento.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Descargar el módulo fuente "datos_direccionamiento.s" de miaulario y añadir los comentarios apropiados.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">###</span> <span class="nl">Program:</span>     <span class="nf">datos_direccionamiento.s</span>
+<span class="err">###</span> <span class="nf">Descripci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">Emplear</span> <span class="nb">es</span><span class="nv">tructuras</span> <span class="nv">de</span> <span class="nv">datos</span> <span class="nv">con</span> <span class="nb">di</span><span class="nv">ferentes</span> <span class="nb">di</span><span class="nv">reccionamientos</span>
+<span class="err">###</span> <span class="nf">Compilaci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">gcc</span> <span class="o">-</span><span class="nv">m32</span> <span class="o">-</span><span class="nv">g</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">datos_direccionamiento</span> <span class="nv">datos_direccionamiento.s</span>
+<span class="err">###</span>		 <span class="nf">sin</span> <span class="nv">la</span> <span class="nv">opci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">startfiles</span> <span class="nb">al</span> <span class="nv">utilizar</span> <span class="nv">el</span> <span class="nv">punto</span> <span class="nv">de</span> <span class="nv">entrada</span> <span class="nv">referenciado</span> <span class="nv">con</span> <span class="nv">la</span> <span class="nv">etiqueta</span> <span class="err">"</span><span class="nv">main</span><span class="err">"</span>
+
+	<span class="err">##</span> <span class="nf">MACROS</span>
+	<span class="nf">.equ</span> <span class="nv">SYS_EXIT</span><span class="p">,</span>	<span class="mi">1</span>
+	<span class="nf">.equ</span> <span class="nv">SUCCESS</span><span class="p">,</span>	<span class="mi">0</span>
+
+	<span class="err">##</span> <span class="nf">VARIABLES</span> <span class="nv">LOCALES</span>
+	<span class="nf">.data</span>
+
+	<span class="nf">.align</span> <span class="mi">4</span>				     <span class="err">#</span> <span class="nb">Al</span><span class="nv">ineamiento</span> <span class="nv">con</span> <span class="nb">di</span><span class="nv">recciones</span> <span class="nv">de</span> <span class="nv">MP</span> <span class="nv">m</span><span class="err">ú</span><span class="nv">ltiplos</span> <span class="nv">de</span> <span class="mi">4</span>
+<span class="nl">da2:</span>	<span class="nf">.2byte</span>  <span class="mh">0x0A0B</span><span class="p">,</span><span class="mb">0b</span><span class="mi">0000111101011100</span><span class="p">,</span><span class="o">-</span><span class="mi">21</span><span class="p">,</span><span class="mh">0xFFFF</span> <span class="err">#</span> <span class="nv">Array</span> <span class="nv">da2</span> <span class="nv">de</span> <span class="nv">elementos</span> <span class="nv">de</span> <span class="mi">2</span> <span class="kt">byte</span><span class="nv">s</span>
+	<span class="nf">.align</span> <span class="mi">4</span>
+<span class="nl">lista:</span>  <span class="nf">.word</span>    <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span>	<span class="err">#</span> <span class="nv">Array</span> <span class="nv">lista</span> <span class="nv">de</span> <span class="nv">elementos</span> <span class="nv">de</span> <span class="mi">2</span> <span class="kt">byte</span><span class="nv">s</span>
+	<span class="nf">.align</span> <span class="mi">8</span>
+<span class="nl">buffer:</span>	<span class="nf">.space</span>  <span class="mi">100</span>		<span class="err">#</span> <span class="nv">Array</span> <span class="nv">buffer</span> <span class="nv">de</span> <span class="mi">100</span> <span class="kt">byte</span><span class="nv">s</span>
+	<span class="nf">.align</span> <span class="mi">2</span>
+<span class="nl">saludo:</span>
+	<span class="nf">.string</span> <span class="s">"Hola"</span>		<span class="err">#</span> <span class="nv">Array</span> <span class="nv">saludo</span> <span class="nv">de</span> <span class="nv">elementos</span> <span class="nv">de</span> <span class="mi">1</span> <span class="kt">byte</span> <span class="nv">por</span> <span class="nv">ser</span> <span class="nv">caracteres</span>
+
+	<span class="err">##</span> <span class="nf">INSTRUCCIONES</span>
+	<span class="nf">.global</span> <span class="nv">main</span>
+	<span class="nf">.text</span>
+<span class="nl">main:</span>
+
+	<span class="err">##</span> <span class="nf">RESET</span>
+
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">eax</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">ebx</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">ecx</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">edx</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+	<span class="nf">xor</span>  <span class="o">%</span><span class="nb">esi</span><span class="p">,</span><span class="o">%</span><span class="nb">esi</span>
+        <span class="nf">xor</span>  <span class="o">%</span><span class="nb">edi</span><span class="p">,</span><span class="o">%</span><span class="nb">edi</span>
+
+	<span class="err">##</span> <span class="nf">ALGORITMO</span> <span class="nv">sum1toN</span>
+
+	<span class="err">##</span> <span class="nf">Direccionamiento</span> <span class="nv">inmediato</span>
+	<span class="nf">mov</span> <span class="kc">$</span><span class="mi">4</span><span class="p">,</span><span class="o">%</span><span class="nb">si</span>
+	<span class="err">##</span> <span class="nf">Direccionamiento</span> <span class="nv">indexado</span>
+<span class="nl">bucle:</span>	<span class="nf">add</span> <span class="nv">lista</span><span class="p">(,</span><span class="o">%</span><span class="nb">esi</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="o">%</span><span class="nb">di</span>
+	<span class="err">##</span> <span class="nf">Direccionamiento</span> <span class="nv">a</span> <span class="nv">registro</span>
+	<span class="nf">dec</span> <span class="o">%</span><span class="nb">si</span>
+	<span class="err">##</span> <span class="nf">Direccionamiento</span> <span class="nv">relativo</span> <span class="nb">al</span> <span class="nv">PC</span>
+	<span class="nf">jns</span> <span class="nv">bucle</span>
+
+
+	<span class="err">##</span> <span class="nf">EJERCICIOS</span> <span class="nv">SOBRE</span> <span class="nb">DI</span><span class="nv">RECCIONAMIENTO</span>
+
+	<span class="err">##</span> <span class="nf">Direccionamiento</span> <span class="nv">indirecto</span>
+	<span class="nf">lea</span> <span class="nv">buffer</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>		<span class="err">#</span><span class="nv">inicializo</span> <span class="nv">el</span> <span class="nv">puntero</span> <span class="nb">EAX</span>
+	<span class="err">##</span> <span class="nf">mov</span> <span class="nv">da2</span><span class="p">,(</span><span class="o">%</span><span class="nb">eax</span><span class="p">)</span> <span class="nv">ERROR</span><span class="p">:</span> <span class="nv">la</span> <span class="nb">di</span><span class="nv">recci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">efectiva</span> <span class="nv">de</span> <span class="nv">los</span> <span class="nv">dos</span> <span class="nv">operandos</span> <span class="nv">hacen</span> <span class="nv">referencia</span> <span class="nv">a</span> <span class="nv">la</span> <span class="nv">memoria</span> <span class="nv">principal</span>
+	<span class="nf">mov</span> <span class="nv">da2</span><span class="p">,</span><span class="o">%</span><span class="nb">bx</span>
+	<span class="nf">mov</span> <span class="o">%</span><span class="nb">bx</span><span class="p">,</span> <span class="p">(</span><span class="o">%</span><span class="nb">eax</span><span class="p">)</span>
+	<span class="err">##</span> <span class="nf">Direccionamiento</span> <span class="nb">di</span><span class="nv">recto</span>
+	<span class="nf">incw</span> <span class="nv">da2</span>
+	<span class="err">##</span> <span class="nf">Direccionamiento</span> <span class="nv">indexado</span>
+	<span class="nf">lea</span>  <span class="nv">da2</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>
+	<span class="err">##</span> <span class="nf">inc</span> <span class="mi">2</span><span class="p">(</span><span class="o">%</span><span class="nb">ebx</span><span class="p">)</span> <span class="nv">ERROR</span><span class="p">:</span> <span class="nb">di</span><span class="nv">recci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">efectiva</span> <span class="nv">a</span> <span class="nv">memoria</span> <span class="nv">y</span> <span class="nv">no</span> <span class="nv">hay</span> <span class="nv">sufijo</span>
+	<span class="nf">incw</span> <span class="mi">2</span><span class="p">(</span><span class="o">%</span><span class="nb">ebx</span><span class="p">)</span>
+
+	<span class="nf">mov</span> <span class="kc">$</span><span class="mi">3</span><span class="p">,</span><span class="o">%</span><span class="nb">esi</span>
+	<span class="nf">mov</span> <span class="nv">da2</span><span class="p">(,</span><span class="o">%</span><span class="nb">esi</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="o">%</span><span class="nb">ebx</span>
+
+	<span class="err">##</span> <span class="nf">SALIDA</span>
+
+	<span class="nf">mov</span> <span class="kc">$</span><span class="nv">SYS_EXIT</span><span class="p">,</span> <span class="o">%</span><span class="nb">eax</span>
+	<span class="nf">mov</span> <span class="kc">$</span><span class="nv">SUCCESS</span><span class="p">,</span>  <span class="o">%</span><span class="nb">ebx</span>
+	<span class="nf">int</span> <span class="kc">$</span><span class="mh">0x80</span>
+
+	<span class="nf">.end</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_compilación_5">13.7.2. Compilación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Seguir los pasos de la <a href="_practicando_la_programación_desde_el_principio.html#compilacion_asm">compilación </a> de un módulo en lenguaje ensamblador.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El punto de entrada no es "_start".</p>
+</li>
+<li>
+<p><code>gcc -m32 -g -o datos_direccionamiento datos_direccionamiento.s</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejecución_5">13.7.3. Ejecución</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>./datos_direccionamiento</code></p>
+</li>
+<li>
+<p><code>echo $?</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_análisis_del_módulo_fuente_asm_2">13.7.4. Análisis del módulo fuente asm</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Alineación de datos mediante la directiva <code>.align n</code> asigna una dirección de memoria múltiplo de <em>n</em> al siguiente dato declarado.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+NO está permitido que en el caso de una instrucción con dos operandos, ambos estén en la memoria principal. Uno o los dos operandos han de estar en los registros de propósito general.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gdb_ejecución_paso_a_paso">13.7.5. GDB: Ejecución paso a paso</h4>
+<div class="sect4">
+<h5 id="_inicialización_3">inicialización</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Compilar el programa con la opción de generación de la tabla de símbolos requerida por el depurador y generar el módulo binario ejecutable:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc  -m32 -g  -o datos_direccionamiento datos_direccionamiento.s</code> donde modulo_fuente se sustituye por el nombre del archivo que se desea compilar.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir el depurador GDB, cargar el módulo binario ejecutable y comprobar que se carga la tabla de símbolos junto al módulo binario ejecutable.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gdb</code></p>
+</li>
+<li>
+<p><code>file datos_direccionamiento</code></p>
+</li>
+<li>
+<p><code>info sources</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Abrir la ventana para el módulo fuente</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>layout src</code> ó <code>Control-x Control-a</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Configurar el fichero para el logging histórico de los comandos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>set trace-commands on</code></p>
+</li>
+<li>
+<p><code>set logging file datos_direccionamiento_gdb_asm.txt</code></p>
+</li>
+<li>
+<p><code>set logging on</code></p>
+</li>
+<li>
+<p><code>shell ls -l datos_direccionamiento_gdb_asm.txt</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Activar un punto de ruptura en la instrucción de entrada al programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>b _start</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejecutar el programa deteniéndolo en la primera instrucción del programa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>run</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_análisis_4">Análisis</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Array <em>da2</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Imprimir la dirección de memoria del array <em>da2</em> y el contenido del primer elemento: <code>x /xh &amp;da2</code></p>
+</li>
+<li>
+<p>4 elementos de 2bytes del array da2: <code>x /4xh &amp;da2</code></p>
+</li>
+<li>
+<p><code>p /x (short[4])da2</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Array <em>lista</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ptype lista</code></p>
+</li>
+<li>
+<p><code>p (short[5])lista</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Array <em>buffer</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ptype buffer</code></p>
+</li>
+<li>
+<p>Imprimir la dirección de memoria del array <em>buffer</em> y comprobar su alineamiento: <code>p &amp;buffer</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>String</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ptype saludo</code> : no debug info &#8594; no admite referencia elemento array expresión <em>saludo[n]</em></p>
+</li>
+<li>
+<p><code>p /c (char[5])saludo</code>   :casting array</p>
+</li>
+<li>
+<p><code>x /5c (char *)&amp;saludo</code>  :casting puntero</p>
+</li>
+<li>
+<p><code>p /c *(char *)&amp;saludo</code>  :casting puntero e indirección</p>
+</li>
+<li>
+<p><code>p /s (char *)&amp;saludo</code>   :casting puntero y formato string</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html">Introducción a la Programación en Lenguaje Ensamblador AT&amp;T x86-32</a> | ↑ Up: <a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_operaciones_aritméticas_y_lógicas.html">Operaciones Aritméticas y Lógicas</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

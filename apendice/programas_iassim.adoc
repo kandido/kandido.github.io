@@ -1,0 +1,373 @@
+Programas ensamblador IASSim
+============================
+
+:doctitle: Programas ensamblador IASSim
+
+[[iassim_ejemplos]]
+Ejemplo 1: sum1toN.ias
+----------------------
+
+* *Versión Demo* 'tutorial.ias': la versión demo que se incluye en el archivo de descarga del simulador.
++
+
+[source,sh]
+----------------------------------------------------------------------
+loop:   S(x)->Ac+  n    ;load n into AC
+        Cc->S(x)   pos  ;if AC >= 0, jump to pos
+        halt            ;otherwise done
+        .empty          ;a 20-bit 0
+pos:    S(x)->Ah+  sum  ;add n to the sum
+        At->S(x)   sum  ;put total back at sum
+        S(x)->Ac+  n    ;load n into AC
+        S(x)->Ah-  one  ;decrement n
+        At->S(x)   n    ;store decremented n
+        Cu->S(x)   loop ;go back and do it again 
+n:     .data 5  ;will loop 6 times total
+one:   .data 1  ;constant for decrementing n
+sum:   .data 0  ;where the running/final total is kept
+----------------------------------------------------------------------
+
+* Ejemplo con la *Versión Demo*  'tutorial.ias':
+** cambiar el nombre del módulo fuente: 'sum1toN.ias'
+** reeditar el programa con etiquetas y comentarios en castellano.
+** comentar el código con la información de los módulos descritos en las fases previas del desarrollo del programa
++
+
+[source,sh]
+-------------
+;;;;;;;;;;;;;; CABECERA
+; Modulo fuente sum1toN.ias
+; Calcula la suma de una secuencia de numeros enteros: suma = 1+2+..+n
+; dato de entrada : N y dato de salida : suma
+; Algoritmo : bucle de N iteraciones
+;             Los sumandos se van generando en sentido descendente de n a -1
+;             Si el sumando es negativo -> -1 , no se realiza la suma y finaliza el bucle
+; Estructuras de datos : variables n y suma . Constante uno. 
+; Lenguaje ensamblador: IASSim
+; ISA: Arquitectura de la maquina IAS de Von Neumann
+
+;;;;;;;;;;;;;;;; SECCION DE INSTRUCCIONES
+;Arquitectura orientada a Acumulador (AC)
+;Registros accesibles : AC
+; algoritmo: Bucle que genera los sumandos n, n-1, .... -1
+;	     y realiza la operación suma = n + suma si n>=0
+
+; inicio bucle : suma y generacion de sumandos
+bucle:  S(x)->Ac+  n    	;cargar sumando
+        Cc->S(x)   sumar  	;si el sumando < 0 fin del bucle
+	; fin del bucle
+        halt            	; stop
+        .empty          	;a 20-bit 0 para que el nº de instrucciones sea par.
+	; realizar la suma
+sumar:  S(x)->Ah+  sum  ;
+        At->S(x)   sum  ;
+	; actualizar sumando
+        S(x)->Ac+  n    ;
+        S(x)->Ah-  uno  ;
+        At->S(x)   n    ;
+        ; siguiente iteracion
+	Cu->S(x)   bucle ;
+
+;;;;;;;;;;;;;;;;;;;SECCION DE DATOS  
+; Declaracion de etiquetas, reserva de memoria externa, inicializacion.
+; Variables ordinarias 
+n:     .data 5  ; sumando e inicializacion
+sum:   .data 0  ; suma parcial y final
+; constantes
+uno:   .data 1  ; 
+-------------
+
+
+
+
+
+
+
+
+
+Ejemplo 2: Producto/Cociente
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Enunciado
+^^^^^^^^^
+* Desarrollar el programa que realice la operación latexmath:[$N(N+1)/2$] equivalente a obtener el resultado de la suma del Tutorial1 latexmath:[$\sum_{i=1}^{N}i=N(N+1)/2$].
+** Pseudocódigo del algoritmo
+** Organigrama del algoritmo
+** Programa en lenguaje RTL-> Comentar apropiadamente el programa (cabecera con metainformación,secciones estructurales,bloques funcionales).
+** Programa en lenguaje Ensamblador
+** Ejecutar el programa paso a paso analizando el valor de los registros al ejecutar la multiplicación y la división.
+
+* A TENER EN CUENTA en la descripción RTL:
+** El producto de dos números de M dígitos da como resultado un número de 2M dígitos, es decir, el doble que los multiplicandos. Esto dificulta las operaciones aritméticas posteriores a la multiplación en la expresión matemática. Por ello dejaremos la operación multiplicación para el final dando prioridad a la suma y a la división
+*** stem:[$N(N+1)/2 = ((N+1)/2) * N $]
+** La división de un  número entero por 2 puede tener resto 1 ó 0 dependiendo de si el dividendo es par o impar
+*** Si N es impar -> (N+1)/2 tiene el resto 0 ->  latexmath:[$((N+1)/2) * N $] donde N+1 es par
+*** Si N es par   -> (N+1)/2 tiene el resto 1 -> (N+1) = Cociente*2+Resto -> latexmath:[$N(N+1)/2 = N*C+N/2$] donde N es par
+** La división por una potencia de 2 como 2^1^ se realiza mediante una operación lógica: desplazar 1  bit a la izda el dividendo. El número de bits a desplazar es el valor del exponente.
+*** descripción RTL  *AC <- AC<<1*
+
+
+
+Pseudocódigo
+^^^^^^^^^^^^
+* Descripción del algoritmo mediante expresiones modo texto en lenguaje NATURAL
+* VARIABLES:
+** variable suma : almacena los resultados parciales y final
+** variable N    : almacena el dato de entrada
+* Estructura del CODIGO imperativo:
+** La construcción de instrucciones básica es una asignación
+*** stem:[$suma = N(N+1)/2 $]
+
+
+
+
+Organigramas: Alto Nivel y RTL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Descripción gráfica del algoritmo:
+** Alto Nivel: lenguaje natural imperativo 
+** RTL: lenguaje de bajo nivel que tiene en cuenta la ISA de la computadora
++
+
+[.text-center]
+image::./images/von_neumann/nn1_orga.png[Diagrama de Flujo: Alto Nivel y RTL, title="Diagrama de Flujo: Pseudocódigo y RTL"]
+
+
+
+Lenguaje Ensamblador IAS 
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* versión sum1toN_mul_A.ias
++
+
+-----
+; Suma de los primeros N numeros enteros. Y=N(N+1)/2
+; CPU IAS
+; lenguaje ensamblador: simaulador IASSim
+; Ejercicio 2.1 del libro de William Stalling, Estructura de Computadores
+
+; SECCION DE INSTRUCCIONES
+; ¿Es N par? -> Resto de N/2
+S(x)->Ac+ n    ;01 n   ;AC    <- M[n]
+.
+.
+; Caso 1º: N par
+.
+.
+; Caso 2º: N impar
+.
+.
+; Multiplicación N(N+1)/2
+.
+.
+; SECCION DE DATOS
+; Declaracion e inicializacion de variables
+y:     .data 0  ;resultado
+
+; Declaracion de las Constantes
+n:    .data 5   ;parametro N
+uno:  .data 1
+dos:  .data 2
+
+-----
+
+* versión simplificada sum1toM_mul.ias: realizo primero la multiplicación N(N+1) y el resultado siempre es par. A continuación divido por 2.
++
+
+----
+; Suma de los primeros N numeros enteros. Y=N(N+1)/2
+; CPU IAS
+; lenguaje ensamblador: simaulador IASSim
+; Ejercicio 2.1 del libro de William Stalling, Estructura de Computadores
+
+; SECCION DE INSTRUCCIONES
+S(x)->Ac+ n    ;01 n   ;AC    <- M[n]
+S(x)->Ah+ uno  ;05 uno ;AC    <- AC+1
+At->S(x) y     ;11 y   ;M[y]  <- AC
+S(x)->R y      ;09 y   ;AR    <- M[y]
+S(x)*R->A n    ;0B n   ;AC:AR <- AR*M[n]
+; Caso particular donde AC=0
+R->A           ;0A     ;AC    <- AR
+A/S(x)->R dos  ;0C 2   ;AR    <- AC/2
+;Al ser par el dividendo el resto es cero
+R->A           ;0A     ;AC    <- AR
+At->S(x) y     ;11 y   ;M[y]  <- AC
+halt
+; como el numero de instrucciones  es par no es necesaria la directiva .empty
+
+
+; SECCION DE DATOS
+; Declaracion e inicializacion de variables
+y:     .data 0  ;resultado
+
+; Declaracion de las Constantes
+n:    .data 5   ;parametro N
+uno:  .data 1
+dos:  .data 2
+
+----
+
+
+simulación
+^^^^^^^^^^
+* simulación con el emulador IASsim
+
+
+
+
+Ejemplo 3: Vectores
+~~~~~~~~~~~~~~~~~~~
+
+Enunciado
+^^^^^^^^^
+
+* Realizar la suma 'C = A + B' de dos vectores A y B de 10 elementos cada uno inicializados ambos con los valores del 1 al 10.
+
+NOTE: Para acceder a cada elemento de un vector es necesario ir incrementando la dirección absoluta de memoria del operando en la instrucción que accede a los elementos del vector, por lo tanto, es necesario modificar el campo de operando de la instrucción. Hay una instrucción de transferencia de los 12 bits del campo de operando a los 12 bits de menor peso del registro AC , es decir,  
+AC(28:39) <- M[operando](8:19) . Y otra instrucción que realiza la transferencia inversa M[operando (8:19)] <- AC(28:39).  
+De esta manera se pueden realizar operaciones de aritméticas y lógicas sobre los 12 bits del campo de operando de una instrucción.
+
+** Pseudocódigo del algoritmo
+** Organigrama del algoritmo
+** Programa en lenguaje RTL -> Comentar apropiadamente el programa (cabecera con metainformación,secciones estructurales,bloques funcionales).
+** Programa en lenguaje Ensamblador: Se aconseja no realizar el programa directamente en su totalidad sino por fases, comenzando por una versión sencilla e ir avanzando hasta completar el programa en la versión final. Por ejemplo:
+*** 1ª versión : Inicializar el vector A[i]=i
+*** 2ª versión : Inicializar los vectores A[i]=i, B[i]=i, C[i]=i
+*** 3ª versión : C[i]=A[i]+B[i]
+*** Posibles variables : len:longitud del vector, A0: dirección del primer elemento del Vector A, i: índice del vector, etc.
+** Ejecutar el programa paso a paso depurando las distintas versiones del programa. 
+
+Pseudocódigo
+^^^^^^^^^^^^
+* Descripción del algoritmo mediante expresiones modo texto en lenguaje NATURAL
+* VARIABLES:
+** variables vector A,B,C : Declararlas e inicializarlas A[i]=i, B[i]=i, C[i]=0
+** variable len : almacena el tamaño de los vectores
+** variable A0    : almacena la dirección del primer elemento de vector A
+** variable i    : índice al elemento de posición i de cualquier vector
+* Estructura del CODIGO imperativo:
+** La construcción de instrucciones básica es un bucle
+*** El bucle cuenta las iteraciones en sentido descendente
+*** Se inicializa el índice "i"=len-1 y
+*** En cada iteración se asigna A[i]=i , B[i]=i, C[i]=A[i]+B[i]
+*** En cada iteración se actualiza el índice i=i-1
+*** Se sale del bucle cuando i=-1
+
+
+
+
+Organigramas (1ª versión): Alto Nivel y RTL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Descripción gráfica del algoritmo:
+** Alto Nivel: lenguaje natural imperativo 
+** RTL: lenguaje de bajo nivel que tiene en cuenta la ISA de la computadora
++
+
+[.text-center]
+image::./images/von_neumann/vectorABC_orga.png[Diagrama de Flujo: Alto Nivel y RTL, title="Diagrama de Flujo: Pseudocódigo y RTL"]
+
+
+
+Organigrama (2ª versión):  RTL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Una posibilidad: inicializar los 3 vectores A[], B[] y C[]
+
+
+Organigrama (3ª versión): RTL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Versión definitiva: El vector C[] = A[]+B[]
+
+
+Lenguaje Ensamblador IAS (1ª versión)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* vector_iniciar_A.ias
++
+
+-----
+; vector_iniciar_A.ias 
+; Inicializar el vector A
+; A es un vector  de tamano "len" que esta almacenados en secuencia. La direccion del primer elemento de A se guardo en la variable A0
+; inicializamos el vector  A[i]=i 
+; El acceso a los elementos del array se realiza escribiendo en el campo de direcciones de la instruccion de lectura/escritura.
+; Unicamente puden tener etiquetas las instrucciones de las izquierda por lo que habrá que utilizar las instrucciones Cu'->S(x) etiqueta [Salto a la instrucción derecha en la posición etiqueta] y Cu'->S(x) etiqueta [Salto a la instrucción izquierda en la posición etiqueta] para ALINEAR todas las etiquetas en instrucciones izquierda.
+; Es necesario saber si las instrucciones de las direcciones bucle,suma y C estan a la izda o derecha de la palabra de memoria.
+; El numero de instrucciones ha de ser par. Utilizar .empty en caso impar.
+; sin acentos en los comentarios
+; Help online : manual de referencia -> tipos de datos
+; View -> Preferences -> Capacidad de Memoria Selectron
+
+
+;;;;;;;;;;;;;;;;;;SECCION DE INSTRUCCIONES
+
+;;;;;;;;;;; Inicializo indice i = len - 1
+dcha1:	Cu'->S(x)   dcha1	; salta a la dcha de dcha1
+	S(x)->Ac+  len		;
+	S(x)->Ah-  uno		;
+	At->S(x)   i		;
+
+;;;;;;;;; inicio while : condicion elemento > 0
+bucle: 	Cc->S(x)   actu_A   	;si AC >= 0, salto a Actu_A
+	Cu->S(x)   fin		
+
+;;;;;;;;; Actualizo vector A[i]=i 
+	; actualizo el puntero a A[i]
+actu_A:		S(x)->Ac+  cero		;	
+	S(x)->Ah+  A0		;inicializo puntero con A[0]
+	S(x)->Ah+  i		;inicializo puntero con A[0]+i
+	Ap->S(x)  wa		;Actualizo campo de direcciones de la instruccion IZDA localizada en "wa" M[wa](8:19) <- AC(28:39)
+	; actualizo A[i]=i
+	S(x)->Ac+  i	  	;
+	Cu->S(x)  wa		; salta a la izda de wa
+wa:	At->S(x)   100		;M[100]<-AC. La direccion 100 cambia en tiempo de ejecucion.
+
+
+;;;;;;;;;; Siguiente iteracion 
+	S(x)->Ac+  i		;
+	S(x)->Ah-  uno		;
+	At->S(x)   i		;       
+	Cc->S(x)   bucle
+	.empty
+fin:	halt
+	.empty
+	
+
+;;;;;;;;;;;;;;;;SECCION DE DATOS
+
+;;;;;;; variables ordinarias
+len:		.data 10	; longitud vectores A[], B[] y C[]
+A0:		.data 30	; direccion A[0]
+i:		.data 0		; indice del array
+
+;;;;;;;; constantes
+uno:		.data 1		; 
+cero:		.data 0
+
+-----
+
+Simulación (1ª versión)
+^^^^^^^^^^^^^^^^^^^^^^^
+* Realizar la ejecución del código binario con el emulador IASsim
+
+Lenguaje Ensamblador IAS (2ª versión)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Desarrollar el código fuente del programa vector_iniciar_A_B_C.ias:
+
+Simulación (2ª versión)
+^^^^^^^^^^^^^^^^^^^^^^^
+* Realizar la ejecución del código binario con el emulador IASsim
+
+Lenguaje Ensamblador IAS (3ª versión)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Desarrollar el código fuente del programa vectorA+B.ias: 
+
+Simulación (3ª versión)
+^^^^^^^^^^^^^^^^^^^^^^^
+* Realizar la ejecución del código binario con el emulador IASsim
+
+
+
+

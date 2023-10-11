@@ -1,0 +1,585 @@
+Introducción a la programación en el lenguaje Ensamblador
+=========================================================
+:author: Cándido Aramburu 
+:email: candido@unavarra.es
+:revnumber: v1.0.0
+:revdate: 2015 Marzo 1
+:doctitle: Introducción a la programación en el lenguaje Ensamblador 
+:toc:
+:toclevels: 3
+:numbered:
+:icons:
+:lang: es
+:encode: ISO-8859-1
+:imagesdir: /usr/local/etc/asciidoc/ 
+:iconsdir: /usr/local/etc/asciidoc/images/icons/
+
+Introducción
+------------
+
+
+
+Objetivos de la Practica
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Objetivos específicos:
+
+* *Toolchain*:Practicar con las herramientas de edición, compilación 'gcc', ensamblaje 'as', encadenador 'ld' .
+* *Depuración*: Depurador 'gdb'. Ejecutar un programa en modo 'paso a paso' con el debugger.
+* *Análisis*:Practicar con las herramientas de análisis 'readelf', 'objdump'. Diferenciar entre el módulo objeto reubicable y el módulo objeto ejecutable.Desensamblar el código ejecutable.
+* *Estructura*:Comprender la estructura de un módulo fuente mínimo en lenguaje ensamblador.
+* *Lenguaje Ensamblador*:Familiarizarse con el lenguaje de programación en ensamblador GNU_Assembly 'gas' basado en el lenguaje desarrollado por AT&T
+* *Traductor Ensamblador*:Conocer las directivas del traductor assembler 'as'.
+* *Lenguaje Máquina*:Familiarizarse con la representación de direcciones, datos e instrucciones en lenguaje máquina
+* *Hardware*:Comprender la arquitectura de un computador, cpu y memoria, desde el punto de vista del programador: memoria interna y memoria externa.
+* *Kernel*:Comprender la relación entre un proceso de usuario y el sistema operativo a través de las 'llamadas al sistema'.
+
+Objetivos generales:
+
+* Programación en lenguaje ensamblador
+* Comprender el funcionamiento de la computadora desde el punto de vista de un programador de bajo nivel.
+* Relacionar las propiedades de un lenguaje de alto nivel con un lenguaje de bajo nivel.
+* Utilizar herramientas de desarrollo de bajo nivel. 
+** Desarrollar habilidades de intuición y  deducción en el empleo de las herramientas y en buscar qué herramientas.
+
+Por lo tanto el lenguaje ensamblador puede ser utilizado como una herramienta para descubrir la arquitectura y el funcionamiento de la computadora. No es el objetivo central de esta asignatura ser un experto en lenguajes de programación ni en el desarrollo de algoritmos, objetivos centrales de otras asignaturas.
+
+
+Recursos
+~~~~~~~~
+
+* Disponible en miaulario:
+** Los módulos fuente link:../modulos_fuente/as_groundup.tar[as_groundup.tar] utilizados están disponibles en el servidor de miaulario de la UPNA.
+** El libro de texto en que se basan los guiones de prácticas en lenguaje ensamblador : <<programming_from_ground_up>>. 
+** Hojas de referencia rápida
+* Libros de texto: ver apartado de Bibliografía
+
+
+Evaluacion
+~~~~~~~~~~
+
+* Es necesario guardar todos los programas utilizados (fuentes y binarios) en el pendrive ya que el contenido puede ser evaluado en cualquier momento durante las prácticas a lo largo de todo el curso y durante el examen.
+
+* Las respuestas a las cuestiones que se plantean a lo largo de las prácticas estarán respondidas en la memoria.
+
+* Los conceptos utilizados en prácticas tanto sobre la arquitectura de un computador como sobre las herramientas de desarrollo forman parte del contenido a evaluar en las pruebas parciales y finales.
+
+* Entrega de la memoria:
+** La semana de la sesión de prácticas antes del sábado a las 14:00
+** Se entregará *un único archivo* en formato *PDF*.
+** Nombre del archivo: apellido1_apellido2_tituloguionpractica.pdf 
+** El archivo de contener:
+... los datos personales del alumno
+... preguntas del guión y respuestas.
+... módulos del código fuente
+
+
+Herramientas
+~~~~~~~~~~~~
+
+Es necesario para la ejecución de la práctica:
+
+* Fuentes en lenguaje AT&T:
+** exit.s
+* Plataforma: GNU/linux(AMD64)/x86_64(Intel ó AMD)
+* Recursos GNU:
+** Herramienta integrada de desarrollo: Emacs,u otra herramienta IDE.
+** as : ensamblador del lenguaje AT&T
+** ld : linker
+** cc : compilador de C
+** gcc : driver de compilación
+** gdb : depurador.
+** readelf: metainformación del fichero ELF
+** objdump: volcado de metainformación del módulo objeto.
+
+* Disponible en red y en local(/usr/share/doc ó info ó man):
+** Manuales GNU
+*** http://www.gnu.org/s/gdb/documentation/[manual_GDB] 
+*** http://www.gnu.org/software/emacs/#Manuals[Emacs]
+*** https://sourceware.org/binutils/docs-2.24/[binutils]: as,ld,objdump,...
+*** https://gcc.gnu.org/onlinedocs/[gcc]
+
+exit.c
+------
+
+* Antes de realizar la programación en lenguaje ASM la realizamos en lenguaje C.
+* Objetivo del programa: Salir del programa entregando un parámetro al kernel linux.
+** Utilizamos la función 'exit()' de la librería 'libc'. Atención: no utilizar la función '_exit()'.
+** Ayuda: +man 3 exit+. Apuntes de C (librería libc)
+* Cuando ejecutamos un programa a través de la interfaz shell de gnu/linux (prompt $), se llama al sistema operativo para la creación del proceso. Una vez creado el proceso el S.O. lo llama para que la CPU lo ejecute. Una vez finalizada la ejecución del proceso se retorna al  sistema operativo que lo llamó devolviendo este un valor al S.O.. Mediante el comando +echo $?+ imprimimos el parámetro recibido por el sistema operativo.
+
+Modulo Fuente
+~~~~~~~~~~~~~
+
+
+* +exit.c+
++
+[source,c]
+----------------------------------------------------------------------
+#include <stdlib.h>
+
+void main (void)
+{
+exit (0xFF);
+}
+----------------------------------------------------------------------
+
+Librería libc
+^^^^^^^^^^^^^
+
+* La función exit(0xFF) es una función de la librería standard 'libc.so'.
+* Una librería es un agrupamiento de funciones (exit(),printf(),getchar(), etc) que suelen estar codificadas en un único fichero como la librería standard de C "libc".
+
+
+Compilación
+^^^^^^^^^^^
+
+* +gcc  -o exit exit.c+
+** --save-temps : genera el módulo ensamblador, módulo objeto y módulo ejecutable
+
+
+Enlazamiento
+^^^^^^^^^^^^
+
+* El linker tiene que enlazar los diferentes modulos objeto reubicables '*.o' para lo cual debe de resolver el valor de las direcciones de memoria al que hacen referencia los diferentes módulos.
+* Este enlazamiento se puede realizar de forma estática o dinámica
+** El enlazamiento estático se realiza antes de la ejecución y los módulos '*.o' quedan enlazados en el módulo final ejecutable.
+** El enlazamiento dinámico se realiza durante la ejecución del módulo ejecutable.
+*** Por ejemplo el enlazamiento con la función exit() de la librería dinámica libc.so se realiza dinamicamente. Es decir por un lado se carga en memoria la función 'exit()' y por otro lado se carga en memoria el programa +exit+ (resultado de compilar exit.s). Son dos cargas en memoria independientes. Durante la ejecución cuando nuestro programa +exit+ llame a 'exit' el linker tendrá que calcular la dirección donde comienza 'exit'.
+
+
+Ejecución
+^^^^^^^^^
+
+* +ls -l exit*+: compruebo que me encuentro en la carpeta que contiene los módulos fuente y ejecutable.
+* +file exit+  : compruebo que tenemos disponible el módulo objeto ejecutable en el formato ELF.
+* +./exit+     : Ejecución del programa.
+* +echo $?+    : Imprime el valor entregado por el programa 'exit.c' al kernel 'linux'.
+
+Depuración: exit.c
+~~~~~~~~~~~~~~~~~~
+
+Compilación
+^^^^^^^^^^^
+
+* Es necesario que en el proceso de compilación hayamos utilizado la opción de incluir la tabla de símbolos en el módulo ejecutable.
+
+
+Depurador
+^^^^^^^^^
+
+. Alternativa gdb 
+* +gdb exit+
+
+
+. Alternativa Emacs
+** +emacs exit.c &+
+** M-x gdb
+** (gdb) info sources -> si no aparece el módulo fuente exit.c asociado al ejecutable exit es porque no está bien compilado.
+** M-x gdb-many-windows
+
+[source,sh]
+----------------------------------------------------------------------
+Current directory is ~/tutoriales/C_tutorial/groundup/exit/standard/
+GNU gdb (GDB) 7.10
+Copyright (C) 2015 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-unknown-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from exit...done.
+
+(gdb)
+----------------------------------------------------------------------
+
+
+
+Desemsamblaje
+^^^^^^^^^^^^^
+
+. La herramienta 'objdump' desde un terminal.
+** obtener el módulo objeto reubicable con +gcc -g -o exit.o exit.c+
+** +$objdump -S exit.o+
++
+
+[source,asm]
+----------------------------------------------------------------------
+exit.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <main>:
+  Al finalizar la ejecución ejecutar en el terminal: echo $? y comprobar que visualizamos el valor de retorno.
+*/
+#include <stdlib.h>
+
+int main (void)
+{
+   0:	55                   	push   %rbp
+   1:	48 89 e5             	mov    %rsp,%rbp
+  exit(0xFF);
+   4:	bf ff 00 00 00       	mov    $0xff,%edi
+   9:	e8 00 00 00 00       	callq  e <main+0xe>
+
+----------------------------------------------------------------------
+
+
+
+. Emacs
+* (gdb) b main
+* (gdb) run
+* Añadir una nueva ventana donde desensamblar el módulo ejecutable
+** Posicionar el puntero en la nueva ventana
+** Barra de Herramientas -> Gud -> GDB-Windows -> Disassembly 
++
+
+[source,asm]
+----------------------------------------------------------------------
+Dump of assembler code for function main:
+0x00000000004004d6 <+0>:	push   %rbp
+0x00000000004004d7 <+1>:	mov    %rsp,%rbp
+0x00000000004004da <+4>:	mov    $0xff,%edi
+0x00000000004004df <+9>:	callq  0x4003b0 <exit@plt>
+End of assembler dump.
+----------------------------------------------------------------------
+
+
+. GDB
+* (gdb) b main
+* (gdb) run
+* (gdb) disassemble main
++
+
+[source,asm]
+----------------------------------------------------------------------
+Dump of assembler code for function main:
+   0x00000000004004d6 <+0>:	push   %rbp
+   0x00000000004004d7 <+1>:	mov    %rsp,%rbp
+   0x00000000004004da <+4>:	mov    $0xff,%edi
+   0x00000000004004df <+9>:	callq  0x4003b0 <exit@plt>
+End of assembler dump.
+----------------------------------------------------------------------
+
+* ¿ Qué operación realiza la sentencia en ensamblador +callq  0x4003b0 <exit@plt>+ ?
+
+Ejecución paso a paso
+^^^^^^^^^^^^^^^^^^^^^
+
+* Ejecutar comandos del debuger GDB 
++
+
+[source,c]
+----------------------------------------------------------------------
+(gdb) nexti
+(gdb) p $rdi
+$1 = 255
+(gdb) continue
+(gdb) start
+(gdb) p main
+(gdb) x /i main
+(gdb) continue
+----------------------------------------------------------------------
+
+* ¿qué relación tiene el valor 255 con el módulo fuente en C?
+* ¿qué relación tiene el registro RDI con el módulo fuente en C?
+* ¿qué instrucción del código ensamblador utiliza el registro RDI?
+** ¿Cuales son los operandos fuente y destino de dicha instrucción?
+** ¿Qué tipos de direccionamiento utiliza dicha instrucción?
+* ¿En que dirección se encuentra la primera instrucción máquina de la función main?
+** ¿Cual es la primera instrucción instrucción máquina de la función main?
+
+exit.s
+------
+
+* Objetivo del programa: Salir del programa entregando un parámetro al kernel linux.
+* Hay que relacionar este módulo fuente en lenguaje ensamblador con el módulo fuente del ejercicio anterior en lenguaje C.
+
+
+Módulo fuente exit.s
+~~~~~~~~~~~~~~~~~~~~
+
+* Lenguaje AT&T 32 bits
++
+
+[source,asm]
+----------------------------------------------------------------------
+###	PURPOSE 
+	
+###	INPUT
+	
+###	OUTPUT echo $?
+	
+###	VARIABLES
+	
+	.section .data
+	
+	.section .text
+	
+	.globl _start
+_start:				# program entry point
+	movl $1, %eax
+	movl $0xFF, %ebx
+	int $0x80
+----------------------------------------------------------------------
+
+* Lenguaje AT&T 64 bits
+
++
+[source,asm]
+----------------------------------------------------------------------
+###	PURPOSE 	programa con el código mínimo
+	
+###	INPUT		ninguna
+	
+###	OUTPUT 		echo $?
+	
+###	VARIABLES	ninguna
+	
+	.section .data
+	
+	.section .text
+	
+	.globl _start
+_start:				# dirección del contador de programa al ejecutar el proceso
+	movq $60, %rax
+	movq $0xFF, %rdi
+	syscall
+	
+	
+	.end
+----------------------------------------------------------------------
+
+Compilación
+^^^^^^^^^^^
+* Compilar
+** Con el front-end gcc:
++
+
+[source,sh]
+----------------------------------------------------------------------
+gcc -nostartfiles -o exit exit.s
+----------------------------------------------------------------------
+** Con el toolchain: as-ld
++
+
+[source,sh]
+----------------------------------------------------------------------
+as -o exit.o exit.s
+ld -o exit exit.o
+----------------------------------------------------------------------
+
+Ejecución
+^^^^^^^^^
+* Ejecución:
+
+[source,sh]
+----------------------------------------------------------------------
+./exit
+echo $?
+----------------------------------------------------------------------
+
+Descripción Llamada al Sistema EXIT (32 bits)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* El programa exit.s realiza una *llamada al sistema* a ejecutar por el kernel mediante la instrucción 'int 0x80'. Los parametros de la llamada a la función se realizan mediante los registros EAX y EBX. EAX contiene el código que hace referencia al nombre de la función [exit] y EBX contiene el valor del argumento de la función [0xFF].
+* La instrucción 'int' recibe el nombre de interrupción software y el campo de operando '0x80'  es una *llamada al sistema* o llamada al kernel del sistema operativo. El programa exit.s se *interrumpe* , a través de la instrucción ensamblador +int 0x80+, para realizar una llamada al sistema.
+
+
+Descripción Llamada al Sistema EXIT (64 bits)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* El programa exit.s realiza una *llamada al sistema*, una llamada al kernel, mediante la instrucción 'syscall'. Los parametros que se pasan al kernel, antes de la llamada, se realizan mediante los registros RAX y RDI. RAX contiene el código que hace referencia al nombre de la función que debe de ejecutar el kernel, en este caso el 60 es el código de la función EXIT .RDI contiene el valor del argumento de la función [0xFF]. 
+* La instrucción 'syscall' recibe el nombre de  *llamada al sistema* o llamada al kernel del sistema operativo. El programa exit.s se *interrumpe*  a través de la instrucción ensamblador +syscall+, para realizar una llamada al sistema.
+* ¿la función exit del kernel que operación realiza? -> manual: +man 3 exit+
+
+
+IMPORTANT: Todos los programas escritos en lenguaje ensamblador deben de finalizar mediante la llamada al sistema 'EXIT'
+
+
+
+
+
+
+
+Cuestiones
+~~~~~~~~~~
+
+. ¿ Qué programa llama al objeto ejecutable 'exit' resultado de compilar exit.s?
+. ¿ Qué valor devuelve la función exit.s y a qué programa o proceso se lo devuelve?
+. ¿ Qué directivas hay en el programa fuente y que significa cada una ?
+. ¿ Qué etiqueta es obligatoria para 'as' y que función desempeña?
+. ¿ Cual es el tamaño de los registros de propósito general RAX y RDI?
+. ¿ Por qué vale 60 el contenido del registro RAX?
+. ¿ Cuál es la función del registro RDI en este módulo?
+. ¿ Que función realiza la instrucción +syscall+?
+
+
+Análisis de los diferentes módulos exit
+---------------------------------------
+
+Módulos a analizar
+~~~~~~~~~~~~~~~~~~
+
+* Se pueden analizar los módulos objetos ejecutable y reubicable tando del programa *exit.c* como del programa *exit.s*
+
+Herramientas
+~~~~~~~~~~~~
+
+* Utilización de las herramientas de análisis de GNU:
+** file, readelf (Displays information about ELF files), objdump
+** las herramientas readelf y objdump son casi equivalentes.  readelf es más detallista que objdump y objdump permite desensamblar.
+* manuales:  man file ,man readelf, man objdump
+
+Análisis
+~~~~~~~~
+
+* Análisis del Modulo Objeto
++
+
+[source,sh]
+----------------------------------------------------------------------
+file exit.o                     -> propiedades del módulo objeto
+file exit			-> propiedades del módulo ejecutable
+readelf -h exit.o               -> imprime la cabecera del módulo ejecutable
+readelf -h exit
+readelf -S exit.o               -> imprime las secciones y sus propiedades
+readelf -S exit
+readelf -x .text  exit          -> imprime la sección .text en hexadecimal
+objdump  -d exit.o              -> Disassembly of executable section: la salida está en ASM y binario
+objdump  -S exit.o              -> Disassembly of executable section: la salida está en C(si existe), ASM y binario
+objdump  -t exit.o              -> imprime la tabla de símbolos
+objdump -sj .text exit.o        -> imprime la sección .text en hexadecimal
+objdump  -d exit              	-> Disassembly of executable section: la salida está en ASM y binario
+objdump  -S exit              	-> Disassembly of executable section: la salida está en C(si existe), ASM y binario
+objdump  -t exit              	-> imprime la tabla de símbolos
+objdump -sj .text exit        	-> imprime la sección .text en hexadecimal
+size exit.o		  	-> Tamaño de cada sección y el total
+size exit		  	-> Tamaño de cada sección y el total
+----------------------------------------------------------------------
+
+CAUTION: objdump también vuelca información con el módulo objeto ejecutable PERO las librerías tienen que estar enlazadas *estáticamente*. Bien con +gcc --static -nostarfiles -m32 -g -o maximum maximum.s+ o +as --32 -o maximum.o maximum.s+ , +ld -melf_i386 -o maximum maximum.o+. No se pueden desensamblar las direcciones que el linker resuelve dinámicamente en tiempo de ejecución.
+
+Cuestiones
+^^^^^^^^^^
+
+. Comparar el tamaño de los módulos reubicable y ejecutable. ¿A qué es debido?
+. Comparar el tamaño de los módulos ejecutables correspondientes a los módulos fuente exit.c y exit.s
+. Indicar del módulo objeto la clase de objeto, el tipo de datos, máquina, sistema operativo, interfaz ABI y tipo de módulo. 
+. ¿ Cuál es el punto de entrada del módulo reubicable y cuál el del módulo ejecutable?
+. Si observamos la columna Addr de los dos módulos objeto ¿Cuál es la diferencia?¿Cuál es la relación con el linker?
+. La sección de texto del módulo ejecutable en que dirección virtual de la memoria  comienza y cual es su tamaño.
+. ¿ Cuántas secciones tiene el módulo objeto?
+. ¿ Cuál es el código máquina de la instrucción +int 0x80+ ?
+. Si observamos la compilación de exit.s en que dirección se encuentra el punto de entrada a la función exit() de la librería libc.
+
+
+Depuración: exit.s 
+------------------
+
+Ejecución Paso a Paso
+~~~~~~~~~~~~~~~~~~~~~
+* Utilizar el depurador 'gdb' desde el entorno multiventana de 'emacs'.
+* Abrir con Emacs el módulo fuente.
+* Abrir el debugger +M-x gdb+
+* Configurar el Entorno de Desarrollo multiventana: +M-x gdb-many-windows+
+* (gdb) help
+* (gdb) h
+** todos los comandos se pueden referenciar mediante la sentencia completa o las primeras iniciales
+* (gdb) h disassemble
+* (gdb) disassemble '_start'
+* (gdb) disassemble /r '_start'
+* (gdb) disassemble /m '_start'
+* (gdb) b '_start'
+** breakpoint: especifica un punto de ruptura en la posición de memoria '_start'
+** (gdb) h break
+** (gdb) apropos breakpoints 
+** Fijarse en la ventana de puntos de ruptura (breakpoints)
+* (gdb) run
+* (gdb) x /10xb '_start'
+* (gdb) x /10x '_start'
+* (gdb) x $eax -> los registros se indican con el prefijo $
+** (gdb) h x
+*** el comando 'x' tiene siempre como argumento una dirección de memoria
+*** Las expresiones de GDB se basan en la sintaxis del lenguaje de programación en C
+* (gdb) x /10x &'_start'
+* (gdb) x /4x  &$eax
+** Ir fijándose en las *VENTANAS*(buffers) :
+***  interprete de comandos gdb
+***  módulo fuente
+***  frames del stack(pila)
+***  variables locales y registros internos de la CPU. 
+***  puntos de ruptura
+** Volcar el contenido de todos los regitros activando la pestaña 'registers' o con el comando: (gdb) info registers
+* Ejecutar paso paso las instrucciones en ensamblador con el comando +step+ ó +s+ parando el programa en la última instrucción.
+
+** Indicar el contenido de RAX, RBX, EFLAGS, EIP
+** (gdb) h p
+** (gdb) print /x $eax
+** (gdb) print /x $eflags
+** (gdb) p /t $eflags
+** (gdb) p $eflags
+** (gdb) p $ebx
+
+* Parar y arrancar de nuevo desde el punto de entrada
+** (gdb) stop
+** (gdb) start
++
+
+[source,sh]
+----------------------------------------------------------------------
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Function "main" not defined.
+Make breakpoint pending on future shared library load? (y or [n]) n
+Starting program: /home/candido/tutoriales/as_tutorial/algoritmos_x86-32/groundup/exit 
+Breakpoint 1, _start () at exit.s:18
+----------------------------------------------------------------------
+** (gdb) x /i $eip
+** (gdb) x /i $eip+5
+** (gdb) s  -> ejecuto únicamente la primera instrucción +mov $1,%eax+
+** (gdb) x /i $eip
+** (gdb) stop
+** (gdb) quit
+
+Cuestiones
+^^^^^^^^^^
+
+* Responder a las siguientes cuestiones:
+. ¿Cual ha sido el contenido del registro EFLAG?¿y el del flag de Signo SF?
+. ¿En que dirección de memoria se inicia el programa?
+. ¿Cuál es la dirección de memoria de la última instrucción del programa?
+. Especificar cuantos bytes ocupa cada instrucción.
+. ¿Qué comando imprime el contenido del contador de programa? Indicar el contenido antes de ejecutar la última instrucción.
+. ¿Qué expresión dereferencia el puntero contador de programa antes de ejecutar la última instrucción?
+** Utilizar  el comando imprimir memoria
+.. Las expresiones de GDB se basan en la sintaxis del lenguaje de programación en C
+.. Indicar el contenido dererenciado 
+. Examinar la memoria a la que apunta el contador de programa antes de ejecutar la última instrucción.
+
+
+
+
+
+
+
+
+
+Bibliografía
+------------
+
+[bibliography]
+.Libros
+- [[[programming_from_ground_up]]] http://programminggroundup.blogspot.com/2007/01/programming-from-ground-up.html[Programming from the Ground Up. Jonathan Bartlett]: GNU Assembler, AT&T language
+- [[[Paul Carter]] http://www.drpaulcarter.com/pcasm/[Paul Carter]: Netwide Assembler, Intel language
+
+
+

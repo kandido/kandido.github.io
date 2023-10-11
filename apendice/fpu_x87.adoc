@@ -1,0 +1,43 @@
+FPU x87
+=======
+
+:doctitle: FPU x87
+
+[[fpu_x87]]
+FPU x87
+-------
+
+Resumen
+~~~~~~~
+
+* Arquitectura x87:
+** '1980'
+** es un repertorio de instrucciones que realiza operaciones matemáticas complejas con números reales como calcular la tangente,etc .
+* x87 coprocessor o x87 FPU(Float Point Unit):
+** es un procesador independiente de la CPU x86 para ejecutar instrucciones de la arquitectura x87.
+* The x87 registers:
+** Son registros internos a la FPU. 8-level deep non-strict 'stack structure' ranging from ST(0) to ST(7). No son directamente accesibles, sino que se acceden con push, pop o desplazamiento relativo al top de la pila.
+* FPU : es un componente de la unidad central de procesamiento especializado en el cálculo de operaciones en coma flotante de la misma manera que la ALU lo es con números enteros almacenados en los registros RPG.
+* Formato de datos:
+**  single precision, double precision and 80-bit double-extended precision binary floating-point arithmetic as per the IEEE 754
+**  ó múltiples enteros en el mismo registro de 8,16 o 32 bits.
+* FP: Float Point : Registros de la pila de la FPU, nueva denominación de los registros ST.
+* MMX:  Conjunto de instrucciones SIMD (Single Instruction Multiple Data) diseñado por Intel e introducido en '1997' en sus microprocesadores Pentium MMX. 
+** MMX reutiliza los ocho registros FPR existentes de la FPU por lo que no se puede utilizar simultáneamente con instrucciones mms e instruccioes fpu. Los registros MMX de 64 bits son directamente accesibles a diferencia de los FPR con arquitectura de pila.
+** Still, x87 instructions  are the default for GCC when generating IA32 floating-point code.
+
+* SSE: Streaming SIMD Extensions (SSE) es un conjunto de instrucciones SIMD extension del subconjunto MMX para la arquitectura x86 , no la x87,  designed by Intel for  digital signal processing and graphics processing applications. 
+** Comenzó con el Pentium III en 1999.
+** Añade 16 nuevos registros de 128 bits XMM0-XMM15 
+** XMM:  SSE floating point instructions operate on a new independent register set (the XMM registers), and it adds a few integer instructions that work on MMX registers. 
+** SSE2 in the Pentium 4 ('2000').
+* AVX: extensiones vectoriales avanzadas
+** Añade 16 registros de 256 bits: YMM0-YMM15
+** Las instrucciones que antes operaban con XMM de 128 bits ahora operan con los 128 bits de menor peso de los YMM.
+
+Refs
+~~~~
+
+* http://home.agh.edu.pl/~amrozek/x87.pdf[Programming With the x87 Floating-Point Unit]: Intel Vol. 1 8-1
+* http://csapp.cs.cmu.edu/2e/waside.html[Computer Systems: A Programmer's Perspective, 2/E (CS:APP2e) Randal E. Bryant and David R. O'Hallaron, Carnegie Mellon University]
+

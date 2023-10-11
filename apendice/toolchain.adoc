@@ -1,0 +1,59 @@
+Toolchain: Cadena de Herramientas en el proceso de compilación
+==============================================================
+
+:doctitle: Toolchain: Cadena de Herramientas en el proceso de compilación
+
+
+[[toolchain]]
+Toolchain
+---------
+
+* Se conoce por Toolchain a los distintos programas o herramientas que intervienen en la obtención de una aplicación en lenguaje máquina a partir de módulos en lenguajes símbolicos como C, ensamblador y módulos librería.
+
+* Las 3 herramientas principales en el proceso de traducción son : el compilador, el ensamblador y el linker. También hay herramientas de análisis de los programas en lenguaje binario (Pej desensamblador).
+** https://sourceware.org/binutils/docs-2.25/[binutils]: 
+*** https://sourceware.org/binutils/docs-2.25/as/index.html[*as: traductor assembler*]: opciones de la línea de comandos, directivas, tipos de datos, etc
+*** https://sourceware.org/binutils/docs-2.25/ld/index.html[ld: linker]
+*** https://sourceware.org/binutils/docs-2.25/binutils/index.html[objdump, readelf, ....]
+
+Proceso de compilación de un programa en lenguaje C
+---------------------------------------------------
+
+include::../includes/images/proceso_compilacion/proceso_compilacion.adoc[Proceso Compilación]
+
+
+Traductores del proceso de ensamblaje
+-------------------------------------
+
+* Existen dos lenguajes ensamblador para la ISA i386/amd64, dos sintaxis diferentes, que deben de ser traducidos por diferentes traductores de ensamblador produciendo un módulo binario en el mismo lenguaje máquina.
+* los traductores de ensamblador  "NASM" (Netwide Asm), "FASM", "MASM", "TASM", and "YASM" traducen módulos fuente que utilizan la sintaxis del lenguaje ensamblador *intel* a modulos binarios para las arquitecturas i386/amd64
+* El traductor "as" de la fundación GNU traduce módulos fuente  que utilizan las sintaxis del lenguaje de ensamblador *AT&T* a módulos binarios para las arquitecturas i386/amd64
+
+* La traducción entre la representación del módulo fuente en lenguaje ensamblador almacenado en un fichero del disco duro y la representación del programa en lenguaje máquina se da en el <<fases_compilacion, proceso de ensamblaje>>:
+** Módulo Fuente en lenguaje ensamblador -> Traductor Ensamblador -> Módulo Objeto Reubicable -> Linker -> Módulo Objeto Ejecutable Binario-> Cargador -> Proceso
+*** Ejemplo: hola_mundo.s -> *as* -> hola_mundo.o -> *ld* -> hola_mundo (formato ELF) -> *loader* -> hola_mundo (memoria principal) -> creación proceso (hola_mundo en ejecución). "as", "ld" y "loader" son las herramientas GNU necesarias para la creación de un proceso a partir del módulo en lenguaje ensamblador.
+*** el linker *ld* mezcla el módulo objeto con módulos del entorno del sistema operativo y con módulos de las librerías.
+
+Assembler "as"
+--------------
+
+Directivas 
+~~~~~~~~~~
+
+* Directivas del traductor ensamblador "as" utilizado por el sistema GNU/linux para el lenguaje ensamblador AT&T.
+** Al assembler de GNU también se el conoce como "gas".
+** https://www.gnu.org/software/binutils/[binutils] -> https://sourceware.org/binutils/docs-2.26/as/index.html[as assembler]: manual oficial
+** http://www.coranac.com/files/gba/re-ejected-gasref.pdf[gas ref card]
+*** .word reserva 2 bytes en amd64.
+** https://docs.oracle.com/cd/E26502_01/html/E28388/eoiyg.html[oracle]
+** https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent[opciones para x86 y x86-64]
+
+
+Manual 
+^^^^^^
+
+* https://sourceware.org/binutils/docs/as/[binutils as]: manual oficial
+* http://asm.sourceforge.net/howto/Assembly-HOWTO.html[Linux Assembly howto]: referencias a diferentes assemblers
+* http://web.mit.edu/gnu/doc/html/as_1.html[MIT]
+
+

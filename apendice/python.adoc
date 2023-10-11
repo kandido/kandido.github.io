@@ -1,0 +1,109 @@
+Python
+======
+
+:doctitle: Python
+
+Tutorial Python
+---------------
+
+Intro
+~~~~~
+
+* Python es un lenguaje de alto nivel, interactivo y orientado a objetos que  incluye una extensa biblioteca de clases con un montón de ayudas para  programas de red, administración del sistema, sonidos y gráficos.
+
+
+Refs
+~~~~
+
+* https://www.python.org/
+
+
+Versiones
+~~~~~~~~~
+
+* Dos versiones principales
+** versión 2.7
+** versión 3.0
+
+
+Instalación
+~~~~~~~~~~~
+
+Ubuntu: Paquete básico
+~~~~~~~~~~~~~~~~~~~~~~
+
+. Ubuntu : +sudo apt-get python+ (versión 2.7) 
+** +dpkg -l python2+
+** +python2 --version+
+. Ubuntu : +sudo apt-get python3+ (versión 3.0)
+** +dpkg -l python3+
+** +python3 --version+
+
+pip (instalador de python) en un entorno virtual
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* http://timsherratt.org/digital-heritage-handbook/docs/python-pip-virtualenv/
+* https://docs.python.org/2/installing/index.html
+** Installing into the system Python on Linux: Para utilizar pip la mejor opción es utilizar un entorno virtual y así no interferir con la instalación de la distrubción Ubuntu
+
+* Versión 2.7:
+.. Instalador 'pip2' de python: 
++
+
+----
+sudo apt-get install python-pip python-dev build-essential
+sudo -H pip2 install --upgrade pip
+sudo pip -V 
+---- 
+.. https://docs.python.org/2/installing/index.html#installing-index[2.7 índice de instalación]: 
+*** +python -m pip install SomePackage+
+*** '-m' : module, switch de la aplicación python
+*** '-m pip': módulo pip
+*** install : opción del módulo pip
+*** Somepackage: módulo que va a instalar el módulo instalador pip de python.
+
+* Versión 3.0:
+.. Instalador 'pip3' de python: 
++
+
+----
+sudo apt-get install python3-pip
+sudo -H pip3 install --upgrade pip
+sudo pip3 -V 
+---- 
+
+
+Ejemplos
+~~~~~~~~
+
+* comandos
++
+
+----
+help("modules")
+help("binascii")
+help(string atoi)
+>>> help()
+>>> builtins  ->  bin(),hex(),oct()
+help > help
+help > bin
+help > q
+help ('string')
+help ('string.letters')
+
+----
+
+* +pydoc -k keymd+
+* +pip seard keymd+
+
+* funciones builtins
++
+
+----
+ord('H')
+hex(ord('a'))
+chr(97)
+chr(0x61)
+s="Hola"
+hex(ord(c)) for c in s
+----

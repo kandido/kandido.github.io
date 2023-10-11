@@ -1,0 +1,5504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+
+<article lang="en">
+<articleinfo>
+    <title>Lenguajes de programación para sum1toN</title>
+</articleinfo>
+<section id="sum1toN_lang">
+<title>Otros Lenguajes para sum1toN</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Refs
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="http://wiki.c2.com/?ArraySumInManyProgrammingLanguages">http://wiki.c2.com/?ArraySumInManyProgrammingLanguages</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="https://www.rosettacode.org/wiki/Sum_and_product_of_an_array#With_explicit_conversion">https://www.rosettacode.org/wiki/Sum_and_product_of_an_array#With_explicit_conversion</ulink>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Desarrollar el algoritmo sum1toN en :  Lisp, Python, Java, C, Pascal,  &#8230;
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+elisp
+</simpara>
+<programlisting language="lisp" linenumbering="unnumbered">(setq array [1 2 3 4 5])
+(apply '+ (append array nil))
+(apply '* (append array nil))</programlisting>
+</listitem>
+<listitem>
+<simpara>
+Phyton
+</simpara>
+<programlisting language="python" linenumbering="unnumbered">&gt;&gt;&gt; sum(range(5,0,-1))</programlisting>
+</listitem>
+<listitem>
+<simpara>
+Java
+</simpara>
+<programlisting language="java" linenumbering="unnumbered">/* Programa Fuente: sum1toN.java
+
+ compilación: javac sum1toN.java -&gt; genera el BYTECODE sum1toN.class
+ ejecución   -&gt; java -cp . sum1toN  ; necesita el bytecode *.class y ejecutará el main de class
+
+*/
+
+public class sum1toN {
+// método main encapsulado en la clase class, static para que main no pueda cambiar los atributos, publico para ser accesible.
+    public static void main(String[] args) {
+        System.out.println("Suma de Números enteros");
+        int x=5, suma=0;
+
+      while (x &gt;= 0 ) {
+         System.out.print( x );
+         System.out.print(",");
+         suma=suma+x;
+         x--;
+      }
+      System.out.print("\n");
+      System.out.print("suma="+suma);
+      System.out.print("\n");
+    }
+}</programlisting>
+</listitem>
+<listitem>
+<simpara>
+C
+</simpara>
+<screen>/*
+  Programa:       sum1toN.c
+  Descripción:    realiza la suma de la serie 1,2,3,...N
+                  Es el programa en lenguaje C equivalente a sum1toN.ias de la máquina IAS de von Neumann
+  Lenguaje:       C99
+  Descripción:    Suma de los primeros 5 números naturales
+  Entrada:        Definida en una variable
+  Salida:         Sin salida
+  Compilación:    gcc -m32 -g -o sum1toN sum1toN.c -&gt; -g: módulo binario depurable
+                                                   -&gt; -m: módulo binario arquitectura x86-32 bits
+  S.O:            GNU/linux 4.10 ubuntu 17.04 x86-64
+  Librería:       /usr/lib/x86_64-linux-gnu/libc.so
+  CPU:            Intel(R) Core(TM) i5-6300U CPU @ 3.0GHz
+  Compilador:     gcc version 6.3
+  Ensamblador:    GNU assembler version 2.28
+  Linker/Loader:  GNU ld (GNU Binutils for Ubuntu) 2.28
+  Asignatura:     Estructura de Computadores
+  Fecha:          20/09/2017
+  Autor:          Cándido Aramburu
+*/
+
+#include &lt;stdio.h&gt;  // cabecera de la librería de la función printf()
+
+// función de entrada al programa
+void  main (void)
+{
+  // Declaración de variables locales
+  char suma=0;
+  char n=0b101;
+  // bucle
+  while(n&gt;0){
+    suma+=n;
+    n--;
+  }
+ printf("\n La suma es = %d \n",suma);
+}</screen>
+</listitem>
+<listitem>
+<simpara>
+Lenguaje ensamblador intel y assembler nasm
+</simpara>
+<screen>;;; Programa: sum1toN.asn
+;;; Descripción: realiza la suma de la serie 1,2,3,...N
+;;; Lenguaje INTEL
+;;; Assembler NASM
+
+;;; nasm -hf -&gt; ayuda de la opción f
+;;; Ensamblaje nasm -g -f elf  sum1toN.asm -o sum1toN.o
+;;; linker -&gt; ld -m elf_i386    -o sum1toN sum1toN.o
+
+        BITS 32 ; cpu MODE
+        ;;  Declaración de variables
+        section .data
+
+n:      dd 5    ; 4 bytes
+
+        global _start
+
+        ;;  Comienzo del código
+        section .text
+_start:
+        mov ecx,0 ; ECX implementa la variable suma
+        mov edx,[n]  ; EDX implementa es un alias de la variable n
+bucle:
+        add ecx,edx
+        sub edx,1
+        jnz bucle
+
+        mov ebx, ecx ; el argumento de salida al S.O. a través de EBX según convenio
+
+        ;; salida
+        mov eax,1  ; código de la llamada al sistema operativo: subrutina exit
+        int 0x80     ; llamada al sistema operativo</screen>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+<section id="_lenguaje_rtl">
+<title>Lenguaje RTL</title>
+<section id="_introducción">
+<title>Introducción</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Lenguaje de descripción de INSTRUCCIONES: Register Transfer Language (RTL)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El lenguaje RTL tiene como objetivo poder expresar las instrucciones que ejecuta la CPU como sumar(ADD),restar(SUB),mover(MOV), etc. La descripción se realiza a nivel de transferencia de datos entre <emphasis>registros</emphasis> internos de la CPU o entre registros internos y la memoria externa.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El lenguaje RTL , mediante símbolos interpretables por el programador, permite describir su comportamiento a nivel hardware y así definir el diseño de la arquitectura de una máquina.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Los <emphasis>registros</emphasis> son el elemento fundamental de memoria en la ruta de los datos e instrucciones entre las distintas unidades básicas de la computadora. Un registro es un circuito digital que almacena, memoriza, un dato.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+La ruta de los datos está formada por los buses y los elementos (<emphasis>registros</emphasis>, multiplexores, switches, contadores, etc ) que se conectan a través de los buses
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Ejemplo: ruta de un dato desde una posición de la memoria principal hacia los registros de operando de la ALU.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Concepto de buffer: etapa intermedia de memoria en la ruta de los datos.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+La ejecución de las instrucciones que ejecuta la CPU implica la transferencia de datos a través de los registros de la ruta de datos.
+</simpara>
+</listitem>
+</itemizedlist>
+<caution><simpara>No confundir el RTL (Register Transfer Language) con el RTL (Register Transfer Level). El Register Transfer Level es utilizado por los lenguajes de descripción de HARDWARE (Hardware Description Language HDL)</simpara></caution>
+</section>
+<section id="_registros">
+<title>Registros</title>
+<section id="_arquitectura">
+<title>Arquitectura</title>
+<itemizedlist>
+<listitem>
+<simpara>
+La arquitectura de un registro comprende su funcionalidad y la estructura su implementación
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Los registros:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>almacenan</emphasis> una palabra formada por una secuencia de bits.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+son una array de celdas en una dimensión, donde cada celda almacena un bit.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Su tamaño normalmente es un múltiplo de 8 bytes y recibe un nombre.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+8 bits: 1 Byte
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+16 bits: Word. Por razones históricas.(recordad que el tamaño de una palabra en otro contexto depende de la máquina de que se trate)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+32 bits: double word
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+64 bits: quad word
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Las celdas se enumeran empezando por cero.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+LSB: Least Significant Bit es el bit de menor peso
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+MSB: Most Significant Bit es el bit de mayor peso
+</simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__1.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__1.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_estructura">
+<title>Estructura</title>
+<itemizedlist>
+<listitem>
+<simpara>
+La  estructura del registro es la implementación de su funcionalidad
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Cada bit del dato a registrar se almacena en una celda con capacidad de memoria. Las celdas de un registro se implementan con un circuito digital denominado flip-flop. Cada flip-flop almacena un bit.
+</simpara>
+</listitem>
+</itemizedlist>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__2.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__2.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<itemizedlist>
+<listitem>
+<simpara>
+El registro está conectado al mundo exterior mediante buses: bus de entrada y bus de salida
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+CS: Chip Select : conecta la salida interna del registro R0 al bus de salida &#8594; Operación de lectura del registro
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Load: Si la señal está activa se ordena la carga del valor del bus de entrada en el registro R0, se registra el dato de entrada. Operación de escritura en el registro.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Clock: señal digital binaria periódica.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+La carga es síncrona con la señal de reloj clock CLK. El sincronismo se produce en los flancos positivos <emphasis>_\|</emphasis>  o negativos
+</simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__3.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__3.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_símbolos">
+<title>Símbolos</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Los nombres de los registros se expresan mediante mayúsculas
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+PC: Program Counter
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+IR: Instruction Regiter
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+R2: Registro 2
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Secciones de un registro
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+PC(L) : Byte de menor peso del registro contador de programa
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+PC(H) : Byte de mayor peso del registro contador de programa
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+PC(7:0): Secuencia de bits de la posición cero hasta la posición séptima del registro contador de programa.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_sentencias_rtl">
+<title>Sentencias RTL</title>
+<section id="_operaciones_y_sentencias_rtl">
+<title>Operaciones y Sentencias RTL</title>
+<itemizedlist>
+<listitem>
+<simpara>
+En lenguaje RTL entendemos por sentencia una expresión que implica realizar operaciones con los registros.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Operaciones RTL:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+transferencias entre registros, suma del contenido de dos registros, invertir el contenido de un registro, etc
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_microoperación">
+<title>Microoperación</title>
+<itemizedlist>
+<listitem>
+<simpara>
+MICROoperaciones: operaciones realizadas por el MICROprocesador internamente, al ejecutar una Instrucción Máquina.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Ejemplos: escribir en un registro, orden de lectura a la M.Principal, leer de un registro, Decodificar una instrucción, incrementar un contador, sumar (microordenes al circuito sumador), desplazamiento de los bits de un registro, lógica AND,  etc&#8230;
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+La operación de escribir en un registro o leer en un registro para la CPU es una microoperación.
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_transferencia_entre_registros">
+<title>Transferencia entre registros</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Operador transferencia &#8592;
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Sentencia transferencia: R2&#8592;R1
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+A R1 se le llama registro fuente y a R2 registro destino
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Copiamos el contenido del registro R1 en el registro R2
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_sentencia_condicional">
+<title>Sentencia Condicional</title>
+<itemizedlist>
+<listitem>
+<simpara>
+If (K1=1) then R2&#8592;R1
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+K1:R2&#8592;R1
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+La transferencia o copia se realiza únicamente si K1 es verdad es decir K1 vale el valor lógico 1.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_sentencia_concurrente">
+<title>Sentencia Concurrente</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Operador coma
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+K3:R2&#8592;R1,R3&#8592;R1
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Si K3 es verdad el contenido de R1 se copia en R2 y R3
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_referencia_a_la_memoria_principal">
+<title>Referencia a la Memoria Principal</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Se utilizan los corchetes y el símbolo M.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+M[0x80000] : contenido de la posición de memoria 0x8000
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+AC &#8592; M[0x80000] : copiar  el contenido de memoria de la posición 0x8000 al registro AC
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+AC &#8592; M[AC] : copiar el contenido de la posición de memoria a la que <emphasis role="strong">apunta</emphasis> el registro AC en el registro AC
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+M[0x8000] &#8592; AC: copiar el contenido del registro AC en la posición de Memoria 0x8000
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+M[0x8000] &#8592; R[AC]: copiar el contenido del registro AC en la posición de Memoria 0x8000
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_left_right_value">
+<title>Left-Right Value</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Este concepto se utiliza en el lenguaje C al definir la sentencia asignación <emphasis>=</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+M[0x1000] &#8592; M[0x2000]
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+El contenido de la posición 0x2000 se copia en la posición 0x1000
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Lo que hay a la derecha del operador &#8592; se evalua y se obtiene un VALOR
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Lo que hay a la izda del operador &#8592; es una DIRECCION o REFERENCIA a Memoria (Principal o Registro)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_ejemplos_rtl_con_expresiones_aritmetico_lógicas">
+<title>Ejemplos RTL con expresiones aritmetico-lógicas</title>
+<itemizedlist>
+<listitem>
+<simpara>
+AC &#8592; R1 v R2
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Operación lógica OR
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+(K1+K2):R1 &#8592; R2+R3,R4&#8592;R5^R6
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+El símbolo <emphasis>+</emphasis> tiene dos significados: booleano o aritmético.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+En k1+k2 tiene significado booleano: or. Aquí no tiene sentido la suma aritmética de señales lógicas. Tiene sentido evaluar si la señales están activas o no.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+En R2+R3 tiene significado aritmético.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Para indicar prioridad en una expresión utilizaremos los paréntesis.
+</simpara>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+<section id="form_inst">
+<title>Formato de Instrucción: ISA Intel x86-64</title>
+<section id="_ejemplo_subq_16_rsp">
+<title>Ejemplo subq    $16,%rsp</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Ejemplo:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+instrucción máquina intel x86.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis role="strong">4001a4:       48 83 ec 10   &#8594;  subq    $16,%rsp</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+¿Cómo interpretar la instrucción máquina  <emphasis role="strong">4883EC10</emphasis>? Es necesario consultar el <emphasis role="strong">Manual de Referencia de la Arquitectura ISA de la máquina x86</emphasis> y tener conocimientos de los modos de direccionamiento.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html">manual oficial de intel x86 ó x86-64</ulink>: cuidado con la sintaxis intel.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+consultar el volumen 2B (capítulo 4, pag 394)para la instrucción <emphasis>SUB</emphasis>. Hay que tener encuenta el tamaño de los operandos y los modos de direccionamiento.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El sufijo q de la operación <emphasis role="strong">SUBQ</emphasis> indica operando de 64 bits. El operando fuente <emphasis role="strong">$16</emphasis> es referenciado con direccionamiento inmediato y se puede codificar con 8 bits y el operando destino <emphasis role="strong">%RSP</emphasis> es un registro de 64 bits. Por lo tanto la descripcion intel en el manual será <emphasis role="strong">SUB r64, imm8</emphasis> que se corresponde con el código de operación <emphasis role="strong">REX.W + 83 /5 ib</emphasis>.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+La descripción del código de operación que hace intel no es sencilla y es necesario consultar la Interpretación de la Instrucción en el <emphasis role="strong">volumen 3 3.1 INTERPRETING THE INSTRUCTION REFERENCE PAGES</emphasis> y el Formato de Instrucción en el <emphasis role="strong">volumen 2A (capítulo 2 Formato de Instrucción)</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Figura 2.1 Intel 64 and IA-32 Architectures Instruction Format
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El formato de instrucción tiene los campos: <emphasis role="strong">REXprefix-CodOp-ModRB</emphasis> que en nuestro caso valen <emphasis role="strong">48-83-EC</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+interpretación del campo REXprefix: <emphasis role="strong">REX.W</emphasis>: Manual &#8594; El prefijo REX se utiliza para operandos de 64 bits bien inmediatos y/o registros GlobalPurposeRegister(rax,rbx, etc), 2.2.1.2 More on REX Prefix Fields
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+El primer byte es <literal>48</literal> &#8594; <literal>01001000</literal> donde el bit de la posición 3 está activado por lo que según la tabla "Table 2-4. REX Prefix Fields [BITS: 0100WRXB]" quiere decir que el <emphasis role="strong">operando es de 64bits</emphasis>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<emphasis role="strong">/5</emphasis> : the ModR/M byte of the instruction uses only the r/m (register or memory) operand. <emphasis role="strong">En este caso register</emphasis>.Ver el subcampo R/M más abajo.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis role="strong">ib</emphasis> : A 1-byte (ib) immediate operand.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Campo Primary Opcode: El segundo byte vale <literal>83</literal> &#8594; Operación de resta <emphasis role="strong">SUB</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Campo ModRB: El tercer byte vale <literal>EC</literal> &#8594; <literal>1110-1100</literal> hace referencia al registro RSP.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+2.1.3 ModR/M and SIB Bytes: Many instructions that refer to an operand in memory (memoria principal o registro interno CPU) ha
+ve an addressing-form specifier byte (called the ModR/M &#8230;). Este campo se divide en subcampos: <emphasis role="strong">Mod-Reg/Opcode-R/M</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Subcampo Mod: <literal>11</literal> : The mod field combines with the r/m field to form 32 possible values: eight registers (rax, rbx, rcx, rdx, rsi, rdi, rsp, rbp) and 24 addressing modes
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Subcampo Reg/Opcode: En este caso no es Secondary Opcode sino que es Reg: rrr= <literal>101</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Subcampo R/M: En este caso R: bbb= <literal>100</literal> The r/m field can specify a register as an operand or it can be combined with the mod field to encode an addressing mode. <emphasis role="strong">En este caso es el registro operando con código 4</emphasis>. En la tabla 3.1 el código del <emphasis role="strong">quad word register</emphasis> con el <emphasis role="strong">Reg Field</emphasis> de valor <emphasis role="strong">4</emphasis> es el registro <emphasis role="strong">RSP</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Figure 2-5. Register-Register Addressing (No Memory Operand); REX.X Not Used &#8594; Mod=11 &#8594; Rrrr =0101 &#8594; Bbbb=0100
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+El cuarto byte vale en hexadecimal <literal>10</literal> que se corresponde con el valor inmediato 16 en decimal y debe ser expandido a 64bits.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_otros_x86_32">
+<title>Otros x86-32</title>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="http://www.c-jump.com/CIS77/CPU/x86/lecture.html#X77_0010_real_encoding">http://www.c-jump.com/CIS77/CPU/x86/lecture.html#X77_0010_real_encoding</ulink>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>ADD cl,al</literal> &#8594; 02C8
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<literal>ADD EAX, [ ESI + disp8 ]</literal> &#8594; 0346XX
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="http://en.wikibooks.org/wiki/X86_Assembly/Control_Flow#Jump_Instructions">jump instructions</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Hola mundo x86
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">08048190 &lt;_start&gt;:
+ 8048190:       b8 04 00 00 00          mov    $0x4,%eax
+ 8048195:       bb 01 00 00 00          mov    $0x1,%ebx
+ 804819a:       b9 f4 9f 04 08          mov    $0x8049ff4,%ecx
+ 804819f:       8b 15 ff 9f 04 08       mov    0x8049fff,%edx
+ 80481a5:       cd 80                   int    $0x80
+ 80481a7:       b8 01 00 00 00          mov    $0x1,%eax
+ 80481ac:       bb 00 00 00 00          mov    $0x0,%ebx
+ 80481b1:       cd 80                   int    $0x80</programlisting>
+</listitem>
+<listitem>
+<simpara>
+<emphasis role="strong">b8 04 00 00 00</emphasis> &#8594;   mov    $0x4,%eax
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Manual: <emphasis>B8 + rd  MOV reg32,imm32   2             Move immediate dword to register</emphasis>:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Campo de Código de Operación: <emphasis role="strong">B8</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Campo de operando: double word: 32 bits: <emphasis role="strong">04 00 00 00</emphasis>  &#8594; little endian &#8594; es el dato 0x00000004
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+<section id="_intel_x86_amd_64">
+<title>Intel x86 / AMD 64</title>
+<section id="_hola_mundo">
+<title>Hola Mundo</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Cada  Arquitectura de Computador posee su propio lenguaje ensamblador.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Módulo Fuente hola_mundo.s en lenguaje ensamblador.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+x86-64
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">### ----------------------------------------------------------------
+###     hola_x86-64_att.s
+###
+###     Programa simple de iniciación para el desarrollo de programas en Ensamblador x86-64 AT&amp;T.
+###
+###     Ficheros complementarios: macros_x86-64_gas.h
+###
+###
+### Compilación:
+###             assemble using: as  hola_intel_gas.s -o hola_intel_gas.o
+###             link using:     ld  hola_intel_gas.o -o hola_intel_gas
+###             Driver gcc:     gcc   -nostartfiles   hola_intel_gas.s  -o hola_intel_gas
+###
+###     revised on: FEBRERO 2015 -- for Linuxs x86_64 environment
+###
+### ----------------------------------------------------------------
+        .att_syntax
+
+        ## Incluir el fichero con las Macros
+        .include "macros_x86-64_gas.h"
+
+        ## Declaración de símbolos externos
+        .global _start          # visible entry-point
+
+
+        ## Reserva de Memoria para datos variables
+        .section        .data
+
+msg0:   .ascii "Hola Mundo\n"
+len0:   .quad   . - msg0        #tamaño en bytes de la cadena msg0
+
+
+        ## Sección para el Código de las Instrucciones en Lenguaje Ensamblador
+        .section .text
+
+_start:
+
+        ## Prompt del programa: imprimir mensaje
+
+        ## Llamada al kernel para que acceda a la pantalla e imprima.
+        mov     $SYS_WRITE, %rax        # service ID-number
+        mov     $STDOUT_ID, %rdi        # device ID-number
+        mov     $msg0, %rsi             # message address
+        mov     len0, %rdx      # message length
+        syscall
+
+
+
+        ## terminate this program
+        mov     $SYS_EXIT, %eax         # service ID-number
+        mov     $0, %rdi                # setup exit-code
+        syscall                         # enter the kernel
+
+        .end                            # no more to assemble</programlisting>
+<programlisting language="c" linenumbering="unnumbered">## Macros en el fichero macros_x86-64_gas.h
+
+## Llamadas al Sistema
+.equ    STDIN_ID,  0            # input-device (keyboard)
+.equ    STDOUT_ID, 1            # output-device (screen)
+.equ    SYS_READ,  0            # ID-number for 'read'
+.equ    SYS_WRITE, 1            # ID-number for 'write'
+.equ    SYS_OPEN,  2            # ID-number for 'open'
+.equ    SYS_CLOSE, 3            # ID-number for 'close'
+.equ    SYS_EXIT,  60           # ID-number for 'exit'</programlisting>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_programación_ensamblador">
+<title>Programación ensamblador</title>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="http://www.felixcloutier.com/x86/">Felix Cloutier</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="http://kluge.in-chemnitz.de/docs/notes/assembly.php">kluge</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html">IA64</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="http://developer.amd.com/resources/documentation-articles/developer-guides-manuals/">AMD64</ulink>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="http://developer.amd.com/wordpress/media/2008/10/24594_APM_v3.pdf">AMD64 Architecture Programmer’s Manual Volume 3: General Purpose and</ulink> System Instructions
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_números_reales">
+<title>Números Reales</title>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="http://kluge.in-chemnitz.de/docs/notes/assembly.php">kluge</ulink>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+interesantes los ejemplos de operaciones con números reales
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_discusión_por_qué_asm_at_amp_t">
+<title>Discusión por qué ASM AT&amp;T</title>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="http://es.tldp.org/Presentaciones/200002hispalinux/conf-28/28.ps.gz">http://es.tldp.org/Presentaciones/200002hispalinux/conf-28/28.ps.gz</ulink>
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_miscellaneous">
+<title>Miscellaneous</title>
+<section id="_tipos_de_datos">
+<title>Tipos de Datos</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Tipos de Datos:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Dirección de memoria o referencia a memoria: etiqueta longitud
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>mov $longitud,%edx</literal>   &#8594;  <emphasis>mov    0x8049fff,%edx</emphasis> &#8594; en lenguage de alto nivel es la inicialización de un puntero
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+número entero con signo : formato complemento a 2.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>mov    $0x4,%eax</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El operando 0x4 está  localizado en la propia instrucción, en el campo de operando. El dato 0x4 se almacena en "little endian" &#8594; Campo de operando: double word: 32 bits 0x00000004 &#8594; En memoria ascendente : dirección 8048191: 04 00 00 00
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+carácter: codificación ASCII
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>08049ff4 &lt;mensaje&gt;:</literal> 48 6f 6c 61 20 &#8594; H o l a SP
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_ciclo_de_instrucción">
+<title>Ciclo de Instrucción</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Intervención de la CPU en la instrucción <emphasis role="strong">4001a4:       48 83 ec 10   &#8594;  subq    $16,%rsp</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+La CPU durante el ciclo de instrucción (fase captura- fase decodificación-fase ejecución) realiza una secuencia de tareas.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+La secuencia de tareas a realizar la CPU durante el ciclo de instrucción lo describimos en lenguaje RTL.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+MBR &#8592;M[0x4001a4]
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+IR  &#8592;MBR
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+AC  &#8592; RSP
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+AC  &#8592; AC-16 ; (ALU resta)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+RSP &#8592; AC
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+PC  &#8592; PC+1
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+MAR &#8592; PC
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_hola_mundo_s">
+<title>hola_mundo.s</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Compilar el programa en lenguaje ensamblador hola_mundo.s y volcar el módulo objeto binario.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Módulo fuente: <emphasis>hola_mundo.s.</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Código Máquina- Código Ensamblador
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Sección Datos
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">08049ff4 &lt;mensaje&gt;: 48 6f 6c 61 20 4d 75 63 64 6f 0a       H o l a SP m u n d o /n
+08049fff &lt;longitud&gt;: 0b 00</programlisting>
+<itemizedlist>
+<listitem>
+<simpara>
+En un lenguaje de alto nivel sería la declaración e inicialización de variables.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Etiqueta: referencia a memoria
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Cada caracter ocupa un byte (codificación ASCII). No interpretar el string como un todo (no little endian) a diferencia de los números enteros y reales.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El dato referenciado por la etiqueta longitud está en formato <emphasis>little endian</emphasis> &#8594; 00 0b
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Sección Instrucciones
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">08048190 &lt;_start&gt;:
+ 8048190:       b8 04 00 00 00          mov    $0x4,%eax
+ 8048195:       bb 01 00 00 00          mov    $0x1,%ebx
+ 804819a:       b9 f4 9f 04 08          mov    $0x8049ff4,%ecx
+ 804819f:       8b 15 ff 9f 04 08       mov    0x8049fff,%edx
+ 80481a5:       cd 80                   int    $0x80
+ 80481a7:       b8 01 00 00 00          mov    $0x1,%eax
+ 80481ac:       bb 00 00 00 00          mov    $0x0,%ebx
+ 80481b1:       cd 80                   int    $0x80</programlisting>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+</section>
+<section id="_motorola_68000">
+<title>Motorola 68000</title>
+<section id="_hola_mundo_2">
+<title>Hola Mundo</title>
+<programlisting language="c" linenumbering="unnumbered">;CISC Sharp X68000 (Human68K): Motorola 68000
+        pea (string)    ; push string address onto stack
+        dc.w $FF09      ; call DOS "print" by triggering an exception
+        addq.l #4,a7    ; restore the stack pointer
+
+        dc.w $FF00      ; call DOS "exit"
+
+string:
+        dc.b "Hello, world!",13,10,0</programlisting>
+</section>
+<section id="_isa">
+<title>ISA</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Referencias
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="http://lux.dmcs.pl/pn/asembler_68000/asm.html">Instruction Set Basic</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="https://en.wikibooks.org/wiki/68000_Assembly#Indirect_addressing_with_postincrement">Wikibook</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="https://www.nxp.com/files-static/archives/doc/ref_manual/M68000PRM.pdf">Manual de Referencia</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="http://www.freescale.com/files/archives/doc/ref_manual/M68000PRM.pdf">Motorola 68K ó M68000</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+m68k hasta 1991
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+ppc (powerpc) desde 1991 con Apple e IBM &#8594; iMac (1996-2006)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+arquitectura general
+</simpara>
+<screen>2 versiones: Procesador de 16 bits ó 32 bits
+Aprox . 90 instrucciones máquina
+12 modos de  direccionamiento
+9 formatos de instrucción distintos y con tamaños de una a cinco palabras
+Ancho del  bus  de datos: 16 bits ó 32 bits
+Tamaño mínimo  direccionable : 1 byte
+Ancho del  bus  de direcciones: 24 bits (2^24^bytes = 16 Mbytes de memoria direccionables )</screen>
+</listitem>
+<listitem>
+<simpara>
+Registros:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+8 Registros de Datos de propósito general (16/32): D0-D7
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+7 Registros de Instrucciones de propósito general (16/32) :A0-A6
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+modos de direccionamiento
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+# : inmediato
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Di : registro directo
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(Ai):  indirecto de registro
+</simpara>
+</listitem>
+<listitem>
+<simpara>
++(Ai): indirecto de registro con postincremento con la escala del tamaño del operando (1,2,4 bytes)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(Ai)+: indirecto de registro con postincremento con la escala del tamaño del operando
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+-(Ai): indirecto de registro con predecremento con la escala del tamaño del operando
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(Ai)-: indirecto de registro con preincremento con la escala del tamaño del operando
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+D(Ai): indirecto de registro con desplazamiento D
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+D(Ai,Ri.X) : registro Ai indirecto indexado Ri con desplazamiento D
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+D(PC) : relativo al PC con desplazamiento D
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+D(PC,Ri.X) : relativo al PC indexado Ri con desplazamiento D
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Datos
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Enteros en Complemento a 2 .
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Sufijos Operación: B byte (1 byte), W word (2 bytes) , L long (4 Byte)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Prejijos datos: $ hexadecimal
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Memoria
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Big Endian : LSB en la dirección más alta y MSB en la dirección más baja
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_mips">
+<title>MIPS</title>
+<section id="_isa_2">
+<title>ISA</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Procesador con una arquitectura de 32 bits
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Microprocessor without Interlocked Pipeline Stages (MIPS) Architecture
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Versiones de la arquitectura MIPS:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+MIPS I ( R2000 cpu), II ( R6000), III (R4000), IV (R8000, R5000, R10000), and V (nunca implementada);
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+MIPS32/64 :MIPS32 is based on MIPS II with some additional features from MIPS III, MIPS IV, and MIPS V; MIPS64 is based on MIPS V
+</simpara>
+<screen>70 instrucciones máquina
+Instrucciones clasificadas en cuatro grupos
+        Movimiento de datos
+Aritmética entera, logicas y desplazamiento
+        Control de flujo
+        Aritmética en punto flotante
+4 modos de  direccionamiento
+        Inmediato
+        Directo de registros
+        Indirecto con desplazamiento
+        Indirecto con desplazamiento relativo al PC
+Banco de 64 registros (32 bits cada uno)
+        32 de propósito general (R0-R31)
+        32 para instrucciones en punto flotante (F0-F31). Pueden usarse como:
+        32 registros para operaciones en simple precisión (32 bits)
+        16 registros para operaciones en doble precisión (64 bit)
+3 formatos de instrucción distintos con longitud única de 32 bits:
+         Op Code: 6 bits
+         R :three registers, a shift amount field, and a function field;
+         I :two registers and a 16-bit immediate value
+         J :26-bit jump target
+Arquitectura registro-registro
+        Sólo las instrucciones de LOAD y STORE hacen referencia a memoria
+        El resto de instrucciones operan sobre registros
+                Instrucciones con tres operandos: 2 op.fuente y 1 op.Destino
+
+Notación ensamblador: op  x, y, z    x&lt;-(y)op(z)
+Datos:
+        Enteros Complemento a 2 : byte (1B), media palabra (2B), palabra (4B)
+        Nº Reales: IEEE-754 simple y doble precisión</screen>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="https://en.wikipedia.org/wiki/MIPS_architecture">MIPS architecture</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="https://en.wikipedia.org/wiki/List_of_MIPS_architecture_processors">Versiones de la ISA MIPS</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="https://en.wikipedia.org/wiki/MIPS_architecture_processors">procesadores con arquitectura MIPS</ulink>: R2000, etc
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="http://logos.cs.uic.edu/366/notes/mips%20quick%20tutorial.htm">quick tutorial</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="https://rivoire.cs.sonoma.edu/cs351/wemips/">Emulador MIPS Online</ulink>
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_arm">
+<title>ARM</title>
+<section id="_hola_mundo_3">
+<title>Hola Mundo</title>
+<programlisting language="c" linenumbering="unnumbered">/*
+
+ Programa en lenguaje ensamblador AT&amp;T para el procesador ARM
+
+ Programa fuente: hello_world.s
+ Assembler:       arm-linux-gnueabi-as -o hello_world.o hello_world.s
+ Linker:          arm-linux-gnueabi-ld -o hello_world hello_world.o
+
+*/
+        .data
+
+        msg:
+        .ascii "Hello, ARM World!\n"
+        len = . - msg
+
+
+        .text
+
+        .globl _start
+_start:
+        /* write syscall */
+        mov %r0, $1
+        ldr %r1, =msg
+        ldr %r2, =len
+        mov %r7, $4
+        swi $0
+
+        /* exit syscall */
+        mov %r0, $0
+        mov %r7, $1
+        swi $0</programlisting>
+</section>
+<section id="_isa_3">
+<title>ISA</title>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.subset.architecture.reference/index.html">ARM</ulink>: Advanced RISC Machine
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.subset.architecture.reference/index.html">Developer Guides</ulink>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+<section id="fpu_x87">
+<title>FPU x87</title>
+<section id="_resumen">
+<title>Resumen</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Arquitectura x87:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>1980</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+es un repertorio de instrucciones que realiza operaciones matemáticas complejas con números reales como calcular la tangente,etc .
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+x87 coprocessor o x87 FPU(Float Point Unit):
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+es un procesador independiente de la CPU x86 para ejecutar instrucciones de la arquitectura x87.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+The x87 registers:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Son registros internos a la FPU. 8-level deep non-strict <emphasis>stack structure</emphasis> ranging from ST(0) to ST(7). No son directamente accesibles, sino que se acceden con push, pop o desplazamiento relativo al top de la pila.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+FPU : es un componente de la unidad central de procesamiento especializado en el cálculo de operaciones en coma flotante de la misma manera que la ALU lo es con números enteros almacenados en los registros RPG.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Formato de datos:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+single precision, double precision and 80-bit double-extended precision binary floating-point arithmetic as per the IEEE 754
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+ó múltiples enteros en el mismo registro de 8,16 o 32 bits.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+FP: Float Point : Registros de la pila de la FPU, nueva denominación de los registros ST.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+MMX:  Conjunto de instrucciones SIMD (Single Instruction Multiple Data) diseñado por Intel e introducido en <emphasis>1997</emphasis> en sus microprocesadores Pentium MMX.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+MMX reutiliza los ocho registros FPR existentes de la FPU por lo que no se puede utilizar simultáneamente con instrucciones mms e instruccioes fpu. Los registros MMX de 64 bits son directamente accesibles a diferencia de los FPR con arquitectura de pila.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Still, x87 instructions  are the default for GCC when generating IA32 floating-point code.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+SSE: Streaming SIMD Extensions (SSE) es un conjunto de instrucciones SIMD extension del subconjunto MMX para la arquitectura x86 , no la x87,  designed by Intel for  digital signal processing and graphics processing applications.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Comenzó con el Pentium III en 1999.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Añade 16 nuevos registros de 128 bits XMM0-XMM15
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+XMM:  SSE floating point instructions operate on a new independent register set (the XMM registers), and it adds a few integer instructions that work on MMX registers.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+SSE2 in the Pentium 4 (<emphasis>2000</emphasis>).
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+AVX: extensiones vectoriales avanzadas
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Añade 16 registros de 256 bits: YMM0-YMM15
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Las instrucciones que antes operaban con XMM de 128 bits ahora operan con los 128 bits de menor peso de los YMM.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_refs">
+<title>Refs</title>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="http://home.agh.edu.pl/~amrozek/x87.pdf">Programming With the x87 Floating-Point Unit</ulink>: Intel Vol. 1 8-1
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="http://csapp.cs.cmu.edu/2e/waside.html">Computer Systems: A Programmer&#8217;s Perspective, 2/E (CS:APP2e) Randal E. Bryant and David R. O&#8217;Hallaron, Carnegie Mellon University</ulink>
+</simpara>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+<section id="pila">
+<title>Concepto</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Stack ó Pila:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Estructura de Datos Last Input First Output (LIFO)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Memoria Externa
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Dirección de apilamiento: En sentido de direcciones de memoria DECRECIENTE.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Un programa está estructurado en segmentos: Segmento datos, Segmento instrucciones, Segmento pila, &#8230;
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Memoria Principal Segmentada:
+</simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__4.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__4.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_anchura">
+<title>Anchura</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Anchura de la pila &#8594; Word Size :
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+En el caso de x86-64 : anchura de 64 bits
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+En la arquitectura i386 son 32 bits
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Alineamiento de memoria de pila&#8594; múltiplos del word size
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+En el caso de x86-64 : múltiplos de 8 bytes (64 bits) &#8594; Direcciones en hexadecimal finalizadas en 0 y en 8.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Si el dato a apilar es menor que la anchura de la pila será necesario extenderlo. El tipo de extensión dependerá del tipo de dato (entero con signo, etc)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Segmento Pila de la arquitectura i386:
+</simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__5.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__5.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_frame_frame_pointer_y_stack_pointer">
+<title>Frame: frame pointer y stack pointer</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Frame: Partición de la sección pila
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Cada función que es llamada genera un frame
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Los límites del <emphasis role="strong">frame activo</emphasis>  se señalan con dos punteros:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+límite inferior: frame pointer, señala la ubicación del <emphasis>primer</emphasis> elemente apilado.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+límite superior: stack pointer, señala la ubicación del <emphasis>último</emphasis> elemento apilado.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Stack Pointer (<emphasis role="strong">sp</emphasis>)
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Puntero que apunta al elemento TOP del frame: límite alto de la pila  donde se ubica el último elemento apilado.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+En intel x86 es el registro RSP
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Frame pointer (<emphasis role="strong">fp</emphasis>)
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Puntero que apunta al elemento BOTTOM del frame : límite bajo de la pila  donde se ubica el primer elemento apilado.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+En intel x86 es el registro RBP
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Sección de Pila (partición en Frames)
+</simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__6.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__6.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</listitem>
+<listitem>
+<simpara>
+(a) La pila no esta formada
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(b) llamada a main: se forma el frame de main. El frame crece y decrece según apilamos y extraemos
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(c) llamada de main a sumMtoN: el frame sumMtoN se forma sobre el anterior de main: nuevos punteros FP y SP.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(d) llamada de sumMtoN a printf: el frame printf se forma sobre el anterior de sumMtoN: nuevos punteros FP y SP.
+</simpara>
+</listitem>
+</itemizedlist>
+<note><simpara>La pila es una estructura dinámica que se genera en el momento de la llamada de una función y desaparece con el retorno de la función</simpara></note>
+</section>
+<section id="_instrucciones_ensamblador_push_pop">
+<title>Instrucciones Ensamblador Push-Pop</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Instrucción Push-Pop : Apilamiento-Extracción
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Push Op_source
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Operación: insertar dato.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Operando destino: la pila.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El stack pointer se DECREMENTA en una palabra . SP &#8592; SP-1*WordSize y después se inserta el operando fuente en el destino.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Pop Op_dest
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Operación: extraer dato.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Operando fuente: El último objeto apilado.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Primero se extrae el objeto referenciado por el stack pointer. A continuación el stack pointer se INCREMENTA en una palabra. SP &#8592; SP+1*WordSize
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__7.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__7.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<itemizedlist>
+<listitem>
+<simpara>
+(a) La pila no esta formada
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(b) Se forma la pila inicializando los punteros de pila: frame pointer (fp) y stack pointer (sp)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(c) Ejecución de push
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(d) Ejecución de push
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(e) Ejecución de pop
+</simpara>
+</listitem>
+</itemizedlist>
+<section id="_anidamiento_de_llamadas">
+<title>Anidamiento de llamadas</title>
+<itemizedlist>
+<listitem>
+<simpara>
+TODO
+</simpara>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+<section id="llamadas_SO">
+<title>Introducción</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Se conoce con el nombre de <emphasis>llamadas al sistema</emphasis> a las Llamadas que realizar el programa de usuario a subrutinas del Kernel del Sistema Operativo.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Para realizar funciones privilegiadas del sistema operativo como el acceso a los dispositivos i/o de la computadora es necesario que los programas de usuario llamen al kernel para que sea éste quien realice la operación de una manera segura y eficaz. De esta forma se evita que el programador de aplicaciones acceda al hardware y al mismo tiempo se facilita la programación.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Ejemplos de llamadas
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis role="strong">exit</emphasis> : el kernel suspende la ejecución del programa eliminando el proceso
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis role="strong">read</emphasis> : el kernel lee los datos de un fichero accediendo al disco duro
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis role="strong">write</emphasis>: el kernel escribe en un fichero
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis role="strong">open</emphasis> : el kernel abre un fichero
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis role="strong">close</emphasis>: el kernel cierra el proceso
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+más ejemplos de llamada en el listado <literal>man 2 syscalls</literal>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+La llamada a los servicios del kernel denominados <emphasis>syscalls</emphasis> se puede realizar de dos formas: <emphasis role="strong">directa</emphasis> o <emphasis role="strong">indirecta</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Directa: desde ASM mediante la instrucción <literal>syscall</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Indirecta: desde C o ASM mediante funciones de la librería <literal>libc</literal>: wrappers de las llamadas directas
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+API/ABI
+</simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__8.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__8.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</listitem>
+<listitem>
+<simpara>
+Ejemplo
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">* printf() -&gt; write(int fd, const void *buf, size_t count) -&gt; [RAX-RDI-RSI-RDX-R10-R8-R9,syscall] -&gt; kernel syscall write
+* API      -&gt;        wrapper function                      -&gt;                ABI                  -&gt;  kernel syscall</programlisting>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_manuales_de_las_llamadas">
+<title>Manuales de las llamadas</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Los syscall están descritos en los manuales de los wrappers de la librería libc
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+listado de los syscall
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>info syscalls</literal> o <literal>man syscalls</literal>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+syscalls:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+exit  &#8594; <literal>man 3 exit</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+read  &#8594; <literal>man 2 read</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+write &#8594; <literal>man 2 write</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+open  &#8594; <literal>man 2 open</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+close &#8594; <literal>man 2 close</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+etc..
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Los argumentos de la llamada al sistema son los asociados a la función wrapper de la biblioteca libc.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+El 1º argumento de la llamada al sistema es el argumento de la IZDA de la función en libc y el último el de la DCHA.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_llamada_indirecta">
+<title>Llamada INDIRECTA</title>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis role="strong">C</emphasis>: El programador de aplicaciones en C utiliza las funciones interfaz de la librería <emphasis>libc</emphasis> de GNU para acceder <emphasis role="strong">indirectamente</emphasis> al kernel a través de los <emphasis>contenedores (wrapper)</emphasis>.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+system calls wrapper: adaptación al lenguaje C de las llamadas implementadas en lenguaje ASM
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_llamada_directa">
+<title>LLamada DIRECTA</title>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis role="strong">ASM</emphasis>: El programador de aplicaciones en lenguaje ASM utiliza las <emphasis>llamadas al sistema</emphasis> para acceder <emphasis role="strong">directamente</emphasis> al kernel
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+La llamada se realiza mediante la instrucción ensamblador <literal>syscall</literal> en x86-64 y <literal>int 0x80</literal> en x86-32
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Los argumentos de la llamada se pasan a través de los registros de propósito general GPR
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El tipo de llamada se especifica a través de un número entero y se pasa a través <emphasis role="strong">RAX</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Códigos "System call number" disponibles en el fichero <emphasis>/usr/include/asm/unistd_32.h</emphasis>
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">## Macros en el fichero macros_x86-64_gas.h
+
+## Llamadas al Sistema
+.equ    STDIN_ID,  0            # input-device (keyboard)
+.equ    STDOUT_ID, 1            # output-device (screen)
+.equ    SYS_READ,  0            # ID-number for 'read'
+.equ    SYS_WRITE, 1            # ID-number for 'write'
+.equ    SYS_OPEN,  2            # ID-number for 'open'
+.equ    SYS_CLOSE, 3            # ID-number for 'close'
+.equ    SYS_EXIT,  60           # ID-number for 'exit'</programlisting>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<section id="_argumentos_de_la_llamada_directa">
+<title>Argumentos de la llamada directa</title>
+<itemizedlist>
+<listitem>
+<simpara>
+El convenio de la llamada está descrito en la norma ABI
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+x86-64
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Los 6 primeros argumentos de la llamada se pasan a través de los registros siguiendo la secuencia: <emphasis role="strong">RDI-RSI-RDX-R10-R8-R9</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El valor de retorno de la llamada se pasa a través del registro <emphasis role="strong">RAX</emphasis>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+x86-32
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Los 6 primeros argumentos se pasan a través de de los registros siguiendo la secuencia: <emphasis role="strong">EBX-ECX-EDX-ESI-EDI-EBP</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El valor de retorno de la llamada se pasa a través del registro <emphasis role="strong">EAX</emphasis>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+manual libc: Información sobre cuáles son los argumentos de las llamadas
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_códigos_de_la_llamada_directa">
+<title>Códigos de la llamada directa</title>
+<itemizedlist>
+<listitem>
+<simpara>
+El código de llamada es un número entero asociado a la función que va a ejecutar el kernel
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El código de llamada se pasa al kernel a través de <emphasis role="strong">RAX</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Códigos:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>/usr/include/asm/unistd_64.h</emphasis>: declaración de macros con el código de la llamada en la arquitectura x86-64
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+exit &#8594; 60, read &#8594; 0, write &#8594; 1, open &#8594; 2, close &#8594; 3, etc..
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>/usr/include/asm/unistd_32.h</emphasis> : declaración de macros con el código de la llamada en la arquitectura x86-32
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>/usr/include/bits/syscall.h</emphasis>  : macros antiguas también válidas en la arquitectura x86-32
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_ejemplos_lenguaje_c">
+<title>Ejemplos: lenguaje C</title>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>exit (status_value)</literal> y <literal>syscall(exit_code,status_value)</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+exit(0xFF) y syscall(60,0xFF)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<literal>write (int fd, const void *buf, size_t count)</literal> y <literal>syscall(write_code,int fd, const void *buf, size_t count)</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+write (0,buffer,80) y syscall(1,1,buffer,80)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_ejemplos_asm_indirecto">
+<title>Ejemplos: ASM INDIRECTO</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Programando en lenguaje ASM podemos llamar a los wrappers de la librería libc.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<literal>exit(status_value)</literal>
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">mov $status_value,%rdi
+call exit</programlisting>
+</listitem>
+<listitem>
+<simpara>
+<literal>syscall(exit_code,status_value)</literal>
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">mov $60,%rax
+mov $status_value,%rdi
+call syscall</programlisting>
+</listitem>
+<listitem>
+<simpara>
+<literal>write(int fd, const void *buf, size_t count)</literal>
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">mov fd,%rdi                     #fd es la refencia al fichero donde se va a escribir
+mov $buffer_address_label, %rsi #dirección de memoria de lo que se va a escribir en el fichero
+mov size,%rdx                   #tamaño del buffer de memoria que se va a escribir
+call write                      #orden de escritura al kernel a través de la librería libc</programlisting>
+</listitem>
+<listitem>
+<simpara>
+<literal>syscall(write_code,int fd, const void *buf, size_t count)</literal>
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">mov $1,%rax
+mov $1,%rdi                     # 1 es el código del fichero pantalla. En unix los dispositivos son ficheros.
+mov $buffer_address_label,%rsi
+mov size,%rdx
+call syscall</programlisting>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_ejemplos_asm_directo">
+<title>Ejemplos: ASM DIRECTO</title>
+<itemizedlist>
+<listitem>
+<simpara>
+exit
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">mov $60,%rax
+mov $status_value,%rdi
+syscall</programlisting>
+</listitem>
+<listitem>
+<simpara>
+write
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">mov $1,%rax
+mov $1,%rdi                     # 1 es el código del fichero pantalla. En unix los dispositivos son ficheros.
+mov $buffer_address_label,%rsi
+mov size,%rdx
+syscall</programlisting>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_línea_de_comandos">
+<title>Línea de Comandos</title>
+<section id="_procedimiento">
+<title>Procedimiento</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Process Initialization
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Cuando escribimos un comando o programa  en la línea de comandos del shell el sistema operativo los interpreta como una secuencia de strings. Por ejemplo <literal>$suma 2 3</literal> son tres argumentos en la línea de comandos:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+La codificación de un string es la secuencia de sus caracteres en código ASCII y finalizada con el caracter NULL cuyo código es 0x00
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+el string "suma": 5 caracteres ASCII: 0x73,0x75,0x6d,0x61,0x00
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+el string "2"   : 2 caracteres ASCII: 0x32,0x00
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+el string "3"   : 2 caracteres ASCII: 0x33,0x00
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Como son 3 los argumentos de la línea el parametro argument counter <emphasis role="strong">argc</emphasis> valdrá 3.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Los tres strings de la línea de comandos, "suma"-"2"-"3", son asignados a la variable array de strings <emphasis>argv</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+argv[0] apunta al string "suma"
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+argv[1] apunta al string "2"
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+argv[2] apunta al string "3"
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+argv[argc] apunta al caracter NULL
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+argv es una array de punteros, por lo tanto, es del tipo (char **)argv
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+kernel
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+El kernel declara el prototipo <literal>extern int main (int argc , char* argv[] , char* envp[]) ;</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+declaración y definición del módulo principal <literal>main</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+La función <literal>main</literal> es declarada como global por el kernel y es definida por el usuario.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>argc</emphasis> is a non-negative argument count;
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>argv</emphasis> is an array of argument strings, with argv[argc]==0;
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>envp</emphasis> is an array of environment strings, also terminated by a null pointer.
+</simpara>
+<programlisting language="C" linenumbering="unnumbered">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+/*
+ * Introducimos en la línea de comandos el programa y un argumento
+ * Si el argumento tiene espacios en blanco, entrecomillarlo con comillas simples:'Hola Mundo'
+ * gcc -g -o linea_comandos linea_comandos.c
+ * ./programa 'Hola Mundo'
+ */
+
+int  main (int parc, char *parv[])
+{
+  if (parc==1){
+    printf("Introducimos en la línea de comandos cualquier mensaje\n\n");
+    exit (EXIT_FAILURE);
+  }
+  printf("%s\n",parv[1]);
+  return EXIT_SUCCESS;
+}</programlisting>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_stack_initialization">
+<title>Stack Initialization</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Cuando comienza a ejecutarse al función <emphasis>main()</emphasis> o la instrucción <emphasis>_start</emphasis> el estado de la pila es el siguiente:
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Stack Initialization
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+El kernel pasa los argumentos <emphasis role="strong">argc</emphasis> y <emphasis role="strong">argv</emphasis> de la función global main a través de la PILA. La función main es la función llamada.
+</simpara>
+<table
+frame="all"
+rowsep="1" colsep="1"
+>
+<title>Convenio ABI: Stack</title>
+<?dbhtml table-width="50%"?>
+<?dbfo table-width="50%"?>
+<?dblatex table-width="50%"?>
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="106*"/>
+<colspec colname="col_2" colwidth="106*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Stack Reference </entry>
+<entry align="center" valign="top"> Interpretation</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara></simpara></entry>
+<entry align="center" valign="top"><simpara>arguments strings</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara></simpara></entry>
+<entry align="center" valign="top"><simpara>0</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>1 word cada variable</simpara></entry>
+<entry align="center" valign="top"><simpara>Environment pointers</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>8+8*argc(%rsp)</simpara></entry>
+<entry align="center" valign="top"><simpara>0</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>8*argc(%rsp)</simpara></entry>
+<entry align="center" valign="top"><simpara>- pointer to argcº string</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>- - - - - - - -</simpara></entry>
+<entry align="center" valign="top"><simpara>- - - - - - - - - - -</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>16(%rsp)</simpara></entry>
+<entry align="center" valign="top"><simpara>- pointer to 2º argument string &#8594; argv[1]</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>8(%rsp)</simpara></entry>
+<entry align="center" valign="top"><simpara>- pointer to 1º argument string &#8594; string argv[0]</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>0(%rsp)</simpara></entry>
+<entry align="center" valign="top"><simpara>- argument count &#8594; argc</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_rutina_principal_con_retorno">
+<title>Rutina principal con Retorno</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Si la rutina principal no termina con la llamada <emphasis role="strong">exit</emphasis> y termina con la instrucción <emphasis role="strong">ret</emphasis> el convenio de llamada es el de llamada a función por lo que los parámetros <emphasis>argc</emphasis> y <emphasis>argv</emphasis> se pasan a través de los registros <emphasis role="strong">RDI-RSI-RDX-RCX-R8-R9</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Ejemplo: <emphasis>imprimir_arg.s</emphasis>
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">### gcc imprimir_arg.s
+### ./a.out 'Hola Mundo'
+###
+###
+
+        .equ STDOUT,1
+        .equ SYSWRITE,1
+        .equ EXIT_SUCCESS,0XFF
+        .equ ARGV1,8
+
+
+mensaje:
+        .ascii "Introducir un mensaje como argumento del programa. Si el mensaje tiene espacios blancos, poner el mensaje entre comillas simples ''\n"
+        .equ LON,. - mensaje    #longitud del mensaje
+
+        .section .text
+        .global main
+main:
+        push %rsi               #salvo el argumento argv
+        ## comprobar que la ĺínea de comandos tiene dos argumentos
+        cmp $2,%rdi
+        je imp_arg
+        ## si solo tengo el programa sin argumentos :imprimir en la pantalla
+        mov $SYSWRITE,%rax
+        mov $STDOUT,%rdi        #fd es la refencia al fichero donde se va a escribir
+        mov $mensaje, %rsi               #dirección de memoria de lo que se va a escribir en el fichero
+        mov $LON,%rdx                   #tamaño del buffer de memoria que se va a escribir
+        syscall                  #orden de escritura al kernel
+        jmp salida
+imp_arg:
+        pop  %rsi           #el stack pointer apunta al %rsi salvado y lo recupero -&gt; argv -&gt; argv[0]
+        add $ARGV1, %rsi    #rsi apunta al primer puntero, si le sumo 8 apunto al segundo puntero
+        mov (%rsi), %rdi    #mediante la indirección tengo el segundo puntero
+        call puts
+
+salida:
+        ret
+
+        .end</programlisting>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_ejercicios_suma_linea_com_s_maximum_linea_com_s">
+<title>Ejercicios: suma_linea_com.s ,maximum_linea_com.s</title>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+suma_linea_com.s
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Introducir los datos del programa <emphasis>suma_linea_com.s</emphasis> (suma de dos sumandos) a través de la línea de comandos
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">### función: sumar dos números enteros de un dígito.
+###          los sumandos se pasan a través de la línea de comandos
+        ## Compilación en la arquitectura x86-64
+        ## gcc  -nostartfiles -g -o suma_linea_com suma_linea_com.s
+        ## (gdb) run 5 7</programlisting>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+maximum_linea_com.s
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Introducir los datos del programa <emphasis>maximum_linea_com.s</emphasis> a través de la línea de comandos
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</orderedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+<section id="prog_C">
+<title>Introducción</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Esto no es un tutorial de Programación en Lenguaje C, el objetivo de este capítulo es comentar aspectos puntuales de la programación en lenguaje C que son utilizados en la asignatura de Estructura de Computadores.
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_casting">
+<title>Casting</title>
+<section id="_concepto">
+<title>Concepto</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Sintaxis
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">(type_name) expression</programlisting>
+<itemizedlist>
+<listitem>
+<simpara>
+Conversión explícita mediante el operador unitario <emphasis role="strong">( )</emphasis>.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Los operadores unitarios tienen mayor precedencia que los binarios.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_ejemplo">
+<title>Ejemplo</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Ejemplo de la división de números enteros
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">int i=8,j=5;
+float x;
+x = i / j;
+x = (float) i / j;</programlisting>
+</listitem>
+<listitem>
+<simpara>
+La variable ordinaria es declarada inicialmente como tipo <emphasis>int</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+La operación i/j &#8594; 8/5 daría como resultado el número entero 1
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Si realizamos el casting <emphasis role="strong">(float)</emphasis> sobre la variable <emphasis role="strong">i</emphasis> entonces la variable i es de tipo float y no int, por lo que su valor será el número real 8.000 y no el entero 8.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+(float)i/j = 8.0000/5 = 1.6000
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_puntero">
+<title>Puntero</title>
+<section id="_referencias">
+<title>Referencias</title>
+<simpara>Libro de texto K.N. King: Capítulo 11. Pointers. Pg241</simpara>
+</section>
+<section id="_introducción_2">
+<title>Introducción</title>
+<simpara>El concepto de puntero es fundamental en programación imperativa de bajo nivel ya que simplifica el código para la programación de algoritmos que incluyen estructuras de datos sencillas o complejas.</simpara>
+<important><simpara>Para el aprendizaje de: conceptos relacionados con los punteros, su sintaxis, su aplicación, etc&#8230;, es necesesaria la ejecución de los programas en modo PASO A PASO para poder visualizar los contenidos y referencias de los objetos en memoria. Utilizaremos el debugger GDB.</simpara></important>
+</section>
+<section id="_concepto_2">
+<title>Concepto</title>
+<section id="_memoria">
+<title>Memoria</title>
+<itemizedlist>
+<listitem>
+<simpara>
+La memoria principal RAM esta organizada en Bytes direccionables.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El rango de direcciones depende de la arquitectura de la máquina.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+P.ej: un Bus de direcciones de 48 líneas podría direccionar 2<superscript>48</superscript> = 2<superscript>8</superscript> x 2<superscript>40</superscript> = 256 TB
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Un <emphasis>objeto</emphasis> es una región de memoria (múltiples bytes ) asignada a un dato entero, dato caracter, array de datos float, bloque de instrucciones, etc. En este contexto de memoria el concepto objeto difiere del concepto objeto de programación orientada a objetos.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+En la memoria RAM se implementan <emphasis>objetos</emphasis> que son referenciados por las direcciones de memoria donde se encuentran. La referencia es la dirección del primer byte donde se almacena el objeto de múltiples bytes.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Mapa de memoria:
+</simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__9.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__9.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_puntero_2">
+<title>Puntero</title>
+<simpara>Un puntero equivale a una dirección de memoria</simpara>
+<simpara>En cambio una VARIABLE PUNTERO:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Es una variable que almacena un dato que representa una dirección de memoria.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Las variables puntero almancenan punteros.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Restringen sus valores a los valores de las direcciones de memoria. Nunca podrá ser un valor negativo o real, etc
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Apuntan a objetos
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Hacen referencia a objetos
+</simpara>
+</listitem>
+</itemizedlist>
+<caution><simpara>El libro de K.N.King distingue entre "variable puntero" y puntero. En la literatura en general cuando se habla de punteros se está hablando de variables puntero, en cuyo caso al contenido del puntero se le llama referencia o dirección al objeto referenciado.</simpara></caution>
+<simpara>Representación gráfica de la "variable puntero" <emphasis>p</emphasis></simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__10.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__10.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<simpara>p       : identificador de la variable puntero</simpara>
+<simpara>x       : identificador del objeto referenciado, por ejemplo una variable ordinaria.</simpara>
+<simpara>flecha  : <emphasis>inicialización</emphasis> de la variable puntero <emphasis>p</emphasis> apuntando al objeto <emphasis>x</emphasis></simpara>
+<simpara>Ejemplos de punteros, objetos y variables de punteros</simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__11.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__11.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<itemizedlist>
+<listitem>
+<simpara>
+La variable puntero de la dirección 0x0B000100 (bytes <emphasis>+0,+1,+2,+3</emphasis>) contiene la dirección 0x0B000000 que apunta a un objeto de 1 byte.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+La variable puntero de la dirección 0x0B000104 (bytes <emphasis>+0,+1,+2,+3</emphasis>) contiene la dirección 0x0B000001 que apunta a un objeto de 2 bytes.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+La variable puntero de la dirección 0x0B000108 (bytes <emphasis>+0,+1,+2,+3</emphasis>) contiene la dirección 0x0B000003 que apunta a un objeto de 4 bytes.
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_leftvalue_rightvalue">
+<title>LeftValue-RightValue</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Una variable ordinaria referenciada en un operador asignación (=) tiene diferente interpretación si está a la izquierda o derecha del operador asignación:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+x=y
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+x : la variable ordinaria a la izda se interpreta como la dirección en memoria de x : leftvalue de x
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+y : la variable ordinaria a la derecha se interpreta como el contenido en memoria de y : rightvalue de y
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+El contenido del objeto es el RightValue
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+La referencia al objeto es el LeftValue
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El contenido de una variable puntero es el LeftValue del objeto referenciado.
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_módulo_ilustrativo">
+<title>Módulo Ilustrativo</title>
+<programlisting language="c" linenumbering="unnumbered">/* Iniciación a los punteros.*/
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void main (void)
+{
+
+  /* Concepto */
+
+
+
+  /*Operador Dirección*/
+
+  int   i, k, *p, *q;
+  float x, y, *r, *s;
+  char  c, d, *u, *v;
+  i = 10;
+  k = 100;
+  x = 3E-10f;
+  y = 3.1416;
+  c = 'A';
+  d = '@';
+
+  p = &amp;i;
+  q = &amp;k;
+  r = &amp;x;
+  s = &amp;y;
+  u = &amp;c;
+  v = &amp;d;
+
+  printf("Introducir un carácter \n");
+  scanf("%c",&amp;c);
+  printf("El carácter leído es el %c \n", c);
+
+  /*Operador Indirección*/
+
+  printf("El carácter leído es el %c \n", *u);
+  printf("El valor de la variable i es %d o también  %d \n", i, *p);
+  printf("El valor de PI es %f o también %f \n", y, *s);
+
+  /*String Variable*/
+  /*Array*/
+  char cadena[]="Hola";
+
+  /*Puntero*/
+  char *saludo="Hola";
+  char **pt_saludo;
+
+  pt_saludo = &amp;saludo;
+
+  exit (0);
+}</programlisting>
+</section>
+<section id="_declaración">
+<title>Declaración</title>
+<simpara>Syntaxis: <literal>type *pointer_variable</literal></simpara>
+<programlisting language="c" linenumbering="unnumbered">int   i, k, *p, *q;
+float x, y, *r, *s;
+char  c, d, *u, *v;
+i = 10;
+k = 100;
+x = 3E-10f;
+y = 3.1416;
+c = 'A';
+d = '@';</programlisting>
+<simpara><emphasis>*p</emphasis>, <emphasis>*q</emphasis>, etc&#8230; son declaraciones de  <emphasis>variable puntero</emphasis>. El asterisco NO realiza ninguna operación sobre la variable, únicamente es el prefijo para indicar el TIPO puntero.</simpara>
+</section>
+<section id="_operador_dirección">
+<title>Operador Dirección</title>
+<simpara>Símbolo <emphasis>&amp;</emphasis></simpara>
+<programlisting language="c" linenumbering="unnumbered">p = &amp;i;
+q = &amp;k;
+r = &amp;x;
+s = &amp;y;
+u = &amp;c;
+v = &amp;d;
+scanf(&amp;c);
+scanf(u);</programlisting>
+<simpara>El operador &amp; obtiene el LeftValue de la variable y se utiliza para inicializar punteros.</simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__12.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__12.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</section>
+<section id="_operador_indirección_o_dereferencia">
+<title>Operador Indirección o Dereferencia</title>
+<simpara>Símbolo <emphasis>*</emphasis></simpara>
+<simpara>Prefijo de una variable puntero: accede al objeto referenciado</simpara>
+<programlisting language="c" linenumbering="unnumbered">printf("El valor de la variable i es %d o %d \n", i, *p);
+printf("El valor de PI es %f o %f \n", y, *s);</programlisting>
+</section>
+<section id="_ejemplo_2">
+<title>Ejemplo</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Declarar objetos de distintos tipos: integer, float, char
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Declarar objetos de tipo puntero e inicializarlos con los objetos anteriores
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Representar gráficamente los punteros
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Low Level: memoria RAM
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+High Level: diagramas con cajas que apuntan con flechas.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_aplicaciones_de_los_punteros">
+<title>Aplicaciones de los punteros</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Array
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Puntero Array
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Aritmética de Punteros
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+String Literal
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Puntero a Puntero
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Acceso a String
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Nombre del array
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Variable puntero
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Estructura de datos
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Lista de Nombres (Array de punteros a strings)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Funciones
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Pase de argumentos por referencia
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Retorno por referencia.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Argumentos del comando en línea del shell de Linux.
+</simpara>
+</listitem>
+</itemizedlist>
+<section id="_puntero_array">
+<title>Puntero Array</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Concepto
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Un array es un puntero y una lista de elementos. El puntero apunta al primer elemento de la lista.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Cuando se crea un array se crean dos objetos
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Los elementos del array cuya asignación de memoria es contigua
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El puntero que apunta al primer elemento del array
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Ejemplo
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Array de Números : <literal>data_items : 3,67,34,222,45,75,54,34,44,33,22,11,66,0</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Declarar e inicializar
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Lectura
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Escritura
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Puntero CONSTANTE
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+NO SE PUEDE MODIFICAR EL VALOR DEL PUNTERO
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Modificar el puntero
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Ejemplo:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Array de Caracteres: <literal>cadena : H,o,l,a,<emphasis>\0</emphasis></literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Declarar e inicializar <literal>char cadena[]={<emphasis>H</emphasis>,<emphasis>o</emphasis>,<emphasis>l</emphasis>,<emphasis>a</emphasis>,<emphasis>\0</emphasis>};</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Lectura
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Escritura
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_aritmética_de_punteros">
+<title>Aritmética de Punteros</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Indexación: primer elemento MÁS la posición elemento <emphasis>i</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>data_items + i</emphasis>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Modificar las expresiones de referencia a los elementos del array por expresiones aritmética de punteros
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_string_literal">
+<title>String Literal</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Concepto en dos fases
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Array de nombre "Hola" cuyos elementos son de tipo caracter.
+</simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__13.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__13.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</listitem>
+<listitem>
+<simpara>
+Inicializar Array con el String <emphasis>Hola</emphasis>
+</simpara>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__14.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__14.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Ejemplo
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Declarar un array tipo carácter e inicializarlo con un string literal <literal>"Hola"</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>char cadena[]="Hola";</literal>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+String literal:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Cadena de carácteres
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Dobles comillas
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Arrays
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Acceder al array declarado : lectura y escritura
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Acceder al array de inicialización: lectura y escritura
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+¿ Copia de arrays mediante asignación <literal>cadena1=cadena2</literal> ?
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_puntero_a_puntero">
+<title>Puntero a Puntero</title>
+<informalfigure>
+<mediaobject>
+  <imageobject>
+  <imagedata fileref="apendice__15.png"/>
+  </imageobject>
+  <textobject><phrase>apendice__15.png</phrase></textobject>
+</mediaobject>
+</informalfigure>
+<itemizedlist>
+<listitem>
+<simpara>
+Ejemplo
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>u</emphasis> apunta al  carácter <emphasis>c</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>pt_pt</emphasis> apunta a <emphasis>u</emphasis>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_string_variable">
+<title>String Variable</title>
+<section id="_nombre_del_array">
+<title>Nombre del Array</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Declaro el array de caracteres <literal>cadena</literal> y lo inicializo con el string Hola : <literal>char cadena[]="Hola";</literal>
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_variable_puntero">
+<title>Variable Puntero</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Declaro la variable <literal>saludo</literal> y lo inicializo con el puntero <literal>cadena</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>char **saludo</literal>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_funciones">
+<title>Funciones</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Pase de argumentos por <emphasis role="strong">Referencia</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Declarar los parámetros de la función como variables puntero.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Retorno por <emphasis role="strong">Referencia</emphasis>.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Declarar el valor de retorno como puntero.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+<section id="_prácticas_2">
+<title>Prácticas</title>
+<section id="prac_apu">
+<title>Documentación: guiones, bibliografía, apuntes</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Disponible en miaulario:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Apuntes <emphasis>eecc_book.pdf</emphasis> que incluyen los guiones, hojas de referencia, apéndices, ejercicios de autoevaluación y teoría.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Los módulos con el código fuente <emphasis role="strong">.s</emphasis> (miaulario/Recursos/prácticas/codigo_fuente.zip) <ulink url="https://miaulario.unavarra.es/portal/site/2018_0_240306_1/tool/d61518aa-72cb-45df-a7f8-b71f90e7907e?panel=Main">link G1</ulink> utilizados en todas las prácticas están disponibles en el servidor de miaulario de la <emphasis>UPNA:Recursos/prácticas</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El libro de texto en que se basan los guiones de prácticas en lenguaje ensamblador : <link linkend="PGU"><emphasis>Programming from the Ground-Up</emphasis></link>.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="prac_plat_des">
+<title>Plataforma de Desarrollo</title>
+<section id="_herramientas">
+<title>Herramientas</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Editores
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="https://www.tecmint.com/best-open-source-linux-text-editors/">Editores</ulink>: gedit, emacs, vim, sublime, kate,
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="https://www.tecmint.com/best-linux-ide-editors-source-code-editors/">Herramientas integradas de edición,compilación,depuración</ulink>:  eclipse CDT, netbeans, code::blocks, codelite, Microsoft’s Visual Studio Code Editor, jetbrains clion, jeany, ajunta , GNAT Programming Studio, emacs, kdevelop, codestudio, etc
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Denominaciones
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>i386</literal> : denominación de linux a la arquitectura  x86-32
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<literal>amd64</literal>: denomiación de linux a la arquitectura x86-64
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<literal>IA32</literal>: denominación de Intel para la arquitectura  x86-32
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<literal>IA64</literal>: denominación de Intel para la arquitectura  x86-64
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Sistema Operativo GNU/linux: Distribución Ubuntu : cualquier versión posterior al año 2014: 14.04, 14.08,..,17.04, 17.08
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>lsb_release -a</literal>: distribución
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<literal>uname -o</literal> : S.O.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<literal>uname -r</literal> : kernel
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<literal>uname -a</literal> : procesador
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Librerías necesarias para que las herramientas <emphasis>gcc, as, ld</emphasis> sean operativas en la arquitectura <emphasis role="strong">i386</emphasis> de 32 bits.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>dpkg -l gcc-multilib</literal> :
+</simpara>
+<screen>Deseado=desconocido(U)/Instalar/eliminaR/Purgar/retener(H)
+|
+Estado=No/Inst/ficheros-Conf/desempaqUetado/medio-conF/medio-inst(H)/espera-disparo(W)/pendienTe-disparo
+|/ Err?=(ninguno)/requiere-Reinst (Estado,Err: mayúsc.=malo)
+||/ Nombre         Versión      Arquitectura Descripción
++++-==============-============-============-=================================
+ii  gcc-multilib   4:7.3.0-3ubu amd64        GNU C compiler (multilib files)</screen>
+</listitem>
+<listitem>
+<simpara>
+Si en las dos primeras columnas "Deseado/Estado" no pone <emphasis role="strong">ii</emphasis> significa que no están instaladas las librerías.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Compruebo que están en el repositorio accesible a través de la red internet:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>apt-cache show gcc-multilib</literal> : repositorio
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<literal>sudo apt-get install gcc-multilib</literal> : descarga e instalación sólo en caso de tener derechos de administridor
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Toolchain
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>as --version &amp; ld --version &amp; gcc --version</literal> : anotar las versiones
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_referencias_2">
+<title>Referencias</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Recursos <link linkend="GNU"><emphasis>GNU</emphasis></link>:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Herramienta  integrada de desarrollo IDE (Emacs,Eclipse,<link linkend="VIM">Vim</link>, etc&#8230;) o un Editor (Geany,Kate,Gedit,Sublime, etc&#8230;)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<link linkend="GAS">as</link> : ensamblador del lenguaje AT&amp;T
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+ld : linker
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+cc : compilador de C
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<link linkend="gcc">GCC</link> : front-end del toolchain automático : Gnu Compiler Collection. Driver de diferentes lenguajes dependiendo de la extensión del fichero fuente.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>man gcc</literal>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<link linkend="gdb">GDB</link> : depurador.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>man gdb</literal>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="prac_doc_mem">
+<title>Documento Memoria: Contenido y Formato</title>
+<section id="_contenido">
+<title>Contenido</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Durante el desarrollo de la práctica :
+</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>
+Es necesario reeditar el código fuente de los programas desarrollados con <emphasis>comentarios</emphasis>.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Compilar el módulo fuente mediante <emphasis>comandos en línea</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Análizar el código fuente y binario mediante el <emphasis>depurador</emphasis>: las operaciones a realizar con el depurador es necesario salvarlas en un fichero.
+</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>
+Durante la realización de la práctica es necesario tener abierto un Editor de texto para ir realizando la memoria simultáneamente a la ejecución de la práctica.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El Documento Memoria ha de contener:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Una portada con el título de la práctica y los datos personales.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+La primera hoja con una tabla de contenidos a modo de índice, no es necesario indicar Nº de página.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Los módulos fuente comentados,
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Los comandos de compilación y análisis.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El historial de comandos GDB y sus salidas, utilizados durante la práctica.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Un apartado de conclusiones con lo aprendido en la práctica.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Un apartado de dudas sin resolver.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Preguntas explícitas que aparecen a lo largo de la memoria, si las hay.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis role="strong">OPCIONALMENTE</emphasis> las preguntas y respuestas del cuestionario de Autoevaluación de Prácticas. Ver apartado Evaluación.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Todo tipo Informacion Personal Necesaria a modo de apuntes para utilizar en el exámen.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_formato">
+<title>Formato</title>
+<itemizedlist>
+<listitem>
+<simpara>
+La estructura interna de la memoria es libre.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El formato de la memoria ha de ser <emphasis role="strong">PDF</emphasis>, y no microsoft word u otro formato diferente.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El nombre del fichero memoria ha de ser <emphasis role="strong">N-XXX-apellido1_apellido2.pdf</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+el nombre del ficheero no contendrá sni acentos ni eñes ni espacios en blanco
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+XX significa el grupo de prácticas: P1 ó P2 ó P3
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+N significa el número de la sesión de prácticas: 1,2,3,4 ó 5.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_entrega_del_documento_memoria">
+<title>Entrega del Documento Memoria</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Entregar el Documento Memoria a través de la aplicación <emphasis role="strong">Tareas</emphasis> del Servidor Miaulario. El plazo será el indicado por el profesor a través del calendario de tareas. La entrega de memorias fuera de plazo significa tener que examinarse de dicha práctica en la convocatoria ordinaria.
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="prac_eval">
+<title>Evaluación</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Se evaluará:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+la entrega de la memoria por el canal establecido con una penalización de 1 punto por cada día de retraso.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+la estructura y formato de la memoria con los datos personales, índice, introducción, desarrollo, conclusiones y formato pdf con el nombre apropiado.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+los comentarios de alto nivel (pseudocódigo) especificados en el módulo fuente tanto a nivel de bloque de instrucciones como instrucciones complicadas de interpretar o que se consideren importantes en la comprensión del código.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+el cuestionario opcional de <emphasis role="strong">Autoevaluación de Prácticas</emphasis>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<important><simpara>El profesor evaluará de forma continua la actitud y labor del estudiante en el laboratorio pudiendo liberar al alumno de la realización del exámen si los conocimientos y tareas realizadas así lo demuestran.</simpara></important>
+<important><simpara>Las preguntas y respuestas del cuestionario de <emphasis role="strong">Autoevaluación de Prácticas</emphasis> localizable en el capítulo V de los apuntes de la asignatura se realizan fuera del horario de prácticas a título personal. Si no se realiza la autoevaluación la puntuación máxima de la memoria será de <emphasis role="strong">6 puntos</emphasis> y si se realiza la puntuación máxima será de <emphasis role="strong">10 puntos</emphasis>.</simpara></important>
+</section>
+<section id="prac_prog">
+<title>Programación</title>
+<section id="_metodología">
+<title>Metodología</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Leer el enunciado del programa a desarrollar.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Editar la descripción del algoritmo como Pseudocódigo:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Desarrollar el algoritmo definiendo las estructuras de datos y estructuras de instrucciones.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+constantes,variables, arrays, punteros, inicalizaciones, bucles, sentencias selección, funciones y parámetros, entrada y salida del programa, etc
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Dibujar el Organigrama de alto nivel
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Para un lenguaje de alto nivel (Pascal,C &#8230;), basado en el pseudocódigo.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Dibujar Organigrama de bajo nivel
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Desarrollar el algoritmo en lenguaje <emphasis role="strong">RTL</emphasis> basándose en la arquitectura x86. Traducir el organigrama de alto nivel a bajo nivel. Traduciendo  secciones, variables, arrays, punteros, inicializaciones, bucles, sentencias selección, subrutinas y parámetros, entrada y salida del programa etc.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Convertir el código RTL en lenguaje ensamblador <emphasis role="strong">AT&amp;T</emphasis> para la arquitectura x86.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Compilación con <emphasis role="strong">gcc</emphasis> o mediante la cadena de herramientas (toolchain) : <emphasis role="strong">as</emphasis>-<emphasis role="strong">ld</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Depurar errores de síntesis.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Ejecución: depurar errores en modo paso a paso mediante el depurador <emphasis role="strong">GDB</emphasis>
+</simpara>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+<section id="compilacion">
+<title>Compilación</title>
+<section id="_módulo_fuente_en_lenguaje_c">
+<title>Módulo fuente en lenguaje C</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Compilación
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>gcc -m32 -o sum1toN sum1toN.c</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>m32</emphasis> : 32 bits architecture machine
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>sum1toN.c</emphasis> : módulo fuente en lenguaje C
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>-o</emphasis> : output
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>sum1toN</emphasis> sin extensión: módulo objeto ejecutable aunque sería más preciso decir cargable en la memoria principal.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+carga en memoria principal
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+la hace automáticamente el S.O. al llamar al programa ejecutable desde un terminal o escritorio.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<literal>gcc -m32 -g -o sum1toN sum1toN.c</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>-g</emphasis>: especifica que se genere la tabla de símbolos del programa fuente <emphasis>sum1toN.c</emphasis> para el debuger GDB y se inserte en el módulo ejecutable <emphasis>sum1toN</emphasis> . De está manera se asocian el código binario, por ejemplo de una etiqueta, a su símbolo (lenguaje texto).
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="fases_compilacion">
+<title>Fases de la compilación</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Parar la compilación en la 1ª fase: preprocesamiento: <literal>gcc -E sum1toN.c -o sum1toN.i</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>*.i</emphasis>: Salida del preprocesador: elimina la información que no es código (comentarios,etc)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Parar la compilación en la 2ª fase: traducir C a ensamblador: <literal>gcc -S sum1toN.c -o sum1toN.s</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis><emphasis role="strong">.s</emphasis>: módulo en lenguaje fuente ensamblador <emphasis></emphasis>.s</emphasis>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Parar la compilación en la 3ª fase: Generar el módulo objeto reubicable: <literal>gcc -c sum1toN.c -o sum1toN.o</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>*.o</emphasis>: módulo objeto reubicable : código binario antes de ser enlazado mediante el linker con otros módulos objeto del sistema operativo, de la librería de C <emphasis>libc</emphasis> u otros módulos del programador.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Realizar las 4 fases : Generar el módulo objeto ejecutable: <literal>gcc -c sum1toN.c -o sum1toN</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+fichero sin extensión: módulo objeto ejecutable: módulo binario configurado para ser cargado en la memoria principal y ejecutado por la CPU.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<literal>gcc -m32 --save-temps -o sum1toN sum1toN.c</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>--save-temps</emphasis>: gcc genera (save) los 3 ficheros parciales (temps) del proceso total de compilación <emphasis><emphasis role="strong">.i</emphasis>,<emphasis></emphasis>.s</emphasis>,<emphasis>*.o</emphasis> .
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Comprobar que en total disponemos de 5 ficheros: <emphasis><emphasis role="strong">.c</emphasis>,<emphasis></emphasis>.i</emphasis>,<emphasis><emphasis role="strong">.s</emphasis>,<emphasis></emphasis>.o</emphasis> y el ejecutable sin extensión.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_toolchain">
+<title>Toolchain</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Cómo alternativa a realizar la compilación mediante un único comando con el driver <emphasis role="strong">gcc</emphasis> que ejecuta las distintas fases de compilación el proceso de compilación de puede realizar mediante el encadenamiento de herramientas que realizan cada una de ellas una de las distintas fases.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Herramientas del toolchain:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Traducción de C a Ensamblador: no tiene una herramienta propia: <literal>gcc -S sum1toN.c -o sum1toN.s</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis role="strong">as</emphasis>: Herramienta de Ensamblaje o ensamblador: <literal>as --32 --gstabs -o sum1toN.o sum1toN.s</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>--32</emphasis>: arquitectura de 32 bits
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>--gstabs</emphasis>: genera la tabla de símbolos
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>-o</emphasis> : fichero de salida : módulo binario reubicable <emphasis>*.o</emphasis>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<emphasis role="strong">ld</emphasis>: Herramienta de Enlazado ó Lincado: <literal>ld -melf_i386  -o sum1toN sum1toN.o</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>-melf_i386</emphasis> : arquitectura 32 bits
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>-o</emphasis>: fichero de salida : módulo binario ejecutable
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+<section id="compilacion_asm">
+<title>módulo fuente en lenguaje ensamblador</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Comentar el programa fuente de manera abstracta funcional/operativa y no literal RTL
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Toolchain manual:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>as --32 --gstabs -o sum1toN.o sum1toN.s</literal> : ensamblaje
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>*.s</emphasis> : módulo fuente en lenguaje asm
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>*.o</emphasis> : módulo objeto reubicalble
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>--stabs</emphasis>: generación de la tabla de símbolos e inserción en el módulo ejecutable.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>--32</emphasis>  :  módulos fuente y objeto para la ISA de 32 bits
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+<literal>ld -melf_i386 -o sum1toN sum1toN.o</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>-melf_i386</emphasis>: módulos objeto para la ISA de 32 bits
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Toolchain automático
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>gcc -m32 -nostartfiles -g -o sum1toN sum1toN.s</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>-m32</emphasis>: módulos fuente y objeto para la arquitectura i386.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<emphasis>-nostartfiles</emphasis> : especifica que el punto de entrada no es main sino <emphasis>_start</emphasis>.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<note><simpara>Si el punto de entrada es <emphasis role="strong">main</emphasis> entonces es necesario informar al linker de que el punto de entrada (entry) es main:  <literal>gcc  -e main -m32 -nostartfiles -g -o sum1toN sum1toN.s</literal> y <literal>ld -e main -melf_i386 -o sum1toN sum1toN.o</literal></simpara></note>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>g</emphasis>: especifica que se genere la tabla de símbolos del programa fuente <emphasis>sum1toN.s</emphasis> para el debuger GDB y se se inserte en el módulo ejecutable <emphasis>sum1toN</emphasis>
+</simpara>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+<section id="_errores_comunes">
+<title>Errores Comunes</title>
+<section id="_gcc">
+<title>gcc</title>
+<itemizedlist>
+<listitem>
+<simpara>
+En Ubuntu 18.0 si se compila para amd64 (gcc -nostartfiles -g -o sum1to64 sum1to64.s) la compilación se detiene con el mensaje de error:
+</simpara>
+<screen>/usr/bin/x86_64-linux-gnu-ld: /tmp/ccbhD6Vr.o: relocation R_X86_64_32S against `.data' can not be used when making a PIE object; recompile con -fPIC
+/usr/bin/x86_64-linux-gnu-ld: falló el enlace final: Sección no representable en la salida
+collect2: error: ld returned 1 exit status</screen>
+<itemizedlist>
+<listitem>
+<simpara>
+causa: está activada por defecto al opción -pie y hay que desactivarla
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+solución: (gcc <emphasis role="strong">-no-pie</emphasis> -nostartfiles -g -o sum1to64 sum1to64.s)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_gdb">
+<title>gdb</title>
+<itemizedlist>
+<listitem>
+<simpara>
+El logging histórico de los comandos gdb para salvarlos en un fichero se encuentra desactivado
+</simpara>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+</section>
+<section id="_arquitectura_amd64">
+<title>Arquitectura amd64</title>
+<section id="sum1toN_amd64">
+<title>Módulo fuente: sum1toN.s</title>
+<screen>        #### Programa: sum1toN.s
+        ### Descripción: realiza la suma de la serie 1,2,3,...N. La entrada se define en el propio programa y la salida se pasa al S.O.
+        ### Lenguaje: Lenguaje ensamblador de GNU para la arquitectura AMD64
+        ### gcc  -no-pie -g -nostartfiles -o sum1toN  sum1toN.s
+        ### Ensamblaje as  --gstabs sum1toN.s -o sum1toN.o
+        ### linker -&gt; ld    -o sum1toN sum1toN.o
+        ##  Declaración de variables
+        ##  SECCION DE DATOS
+          .section .data
+
+n:      .quad 5
+
+          .global _start
+
+          ##  Comienzo del código
+          ##  SECCION DE INSTRUCCIONES
+
+          .section .text
+_start:
+        movq $0,%rdi # RDI implementa la variable suma
+        movq n,%rdx
+bucle:
+        add %rdx,%rdi
+        sub $1,%rdx
+        jnz bucle
+
+        ## el argumento de salida al S.O. a través de RDI según convenio ABI AMD64
+        ## salida
+          mov $60, %rax # código de la llamada al sistema operativo: subrutina exit
+          syscall # llamada al sistema operativo para que ejecute la subrutina según el valor de RAX
+
+
+          .end</screen>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+</section>
+<section id="_ano_2018">
+<title>Año 2018</title>
+<section id="_noviembre">
+<title>Noviembre</title>
+<literallayout class="monospaced">1ª Prueba Parcial. 2018 Noviembre 10.
+Grado de Informática 2º curso. Estructura de Computadores.
+Universidad Pública de Navarra.
+Duración: 90 minutos.
+Apellidos:
+Nombre:</literallayout>
+<important><simpara>Puede utilizarse todo tipo de información escrita como memorias de prácticas, apuntes, hojas de referencia, etc. No puede utilizarse ningún dispositivo electrónico como calculadoras, teléfonos, ordenadores, etc &#8230; Se han de incluir en la respuetas todo tipo de desarrollo necesario para llegar al resultado.</simpara></important>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+Computadora Institute Advanced Studies (IAS) de von Neumann:
+</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>
+(1 pto) Desarrollar un programa que realice la resta 0x00-0xFF y almacene el resultado en la variable denominada "resta". ¿Cuál será el contenido de la posición de memoria de la variable "resta"?
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(1 pto) ¿Qué relación existe entre los tres componentes MAR, MBR y PC?
+</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>
+(1 pto) Cuál es el código digital del string de seis caracteres "Hola \n"
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(1 pto) Los números 0123 y 0777 son números sin signo en base octal. Realizar la suma 0123+0777 directamente en base octal.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(1 pto) Los números 0xABC y 0xEFE son números con signo en complemento a dos. Realizar la resta 0xABC-0xEFE directamente. Calcular el valor del resultado.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(1 pto) Representar el número decimal 6.25 en formato IEEE-754 de doble precisión.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Formato de instrucciones:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Una computadora tiene una unidad de memoria de 256K palabras 32 bits cada una direccionable byte a byte. En una de las palabras de la memoria se almacena una instrucción. La instrucción tiene un formato de cuatro campos: un bit de indirección, un código de operación, un campo de operando para direccionar uno de los 64 registros y campo de operando que contiene direcciones de memoria.
+</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>
+(2 pto) ¿Cuantos bits forman el campo de código de operación?¿Y del campo de registro?¿Y del campo de direcciones?
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(2 pto) ¿Cuantos bits forman parte del bus de direcciones y del bus de datos de la unidad de memoria?
+</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+(2 pto) En una subrutina indicar qué relación existe entre el puntero "frame pointer" del frame de la subrutina y la dirección de memoria donde se guarda la dirección de retorno.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(3 pto) Completar el código fuente del programa en lenguaje ensamblador adjunto teniendo en cuenta los comentarios que se adjuntan en el módulo fuente siguiente donde el algoritmo desarrollado realiza la conversión de un número decimal a código binario:
+</simpara>
+<screen>### Programa: convert_decbin.s
+### Descripción: Convierte el número natural decimal 15 en binario mediante divisiones sucesivas por 2
+###              El código binario tiene un tamaño de 32 bits
+### gcc -m32 -g -nostartfiles -o convert_decbin convert_decbin.s
+### Ensamblaje as --32 --gstabs convert_decbin.s -o convert_decbin.o
+### linker -&gt; ld -melf_i386    -o convert_decbin convert_decbin.o
+
+        ## MACROS
+
+
+
+        ## DATOS
+
+dec:    .         15    # decimal (tamaño 4 bytes) a convertir en un código binario de 32 bits
+        ## bin almacena el código en sentido inverso, bin[0] almacena el bit de menor peso.
+bin:    .space  32      # array de 32 bytes: almacena en cada byte un bit del código binario de 32 bits.
+divisor:        .       # divisor (de tamaño 1 byte)
+
+        ## INSTRUCCIONES
+
+
+
+
+        ## inicializo ECX con el valor del divisor
+
+
+        ## inicializo el índice del array bin
+
+
+        ## Cargo el dividendo en EAX
+                                # eax &lt;-x
+
+        ## extiendo el bit de signo del dividendo en EDX
+                                # El dividendo siempre es positivo
+
+        ## Divisiones sucesivas por 2 hasta que el cociente valga 0
+bucle:
+        ## idivl : [EDX:EAX] / Operando_fuente
+                                # EAX&lt;-Cociente{x/y} , EDX&lt;-Resto{x/y}
+                                # guardo el resto (de tamaño 1 byte) en el array bin
+        ## extiendo el bit de signo en edx
+                                # El dividendo siempre es positivo
+
+        ## actualizo el índice del array
+
+
+        ## compruebo si el cociente ha llegado a cero para salir del bucle
+
+
+        ## Devuelvo el número de bits del código binario en EBX
+
+
+        ## Código de la llamada al sistema operativo
+
+
+        ## Interrumpo la rutina y llamo al S.O.</screen>
+<itemizedlist>
+<listitem>
+<simpara>
+Mediante comandos del depurador GDB
+</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>
+(2 pto) imprimir el contenido del array "bin" con dos expresiones diferentes utilizando los comandos "examinar" y/o "imprimir".
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(2 pto) imprimir el contenido del primer elemento del array bin
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(2 pto) imprimir el contenido del último elemento del array bin
+</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+(2 pto) Llamadas al sistema
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Completar el programa "convert_decbin.s" con el código necesario para imprimir en la pantalla un mensaje de bienvenida mediante la llamada directa write.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</orderedlist>
+</section>
+</section>
+<section id="_ano_2017">
+<title>Año 2017</title>
+<literallayout class="monospaced">Prueba Parcial. 2017 Septiembre 22.
+Grado de Informática 2º curso. Estructura de Computadores.
+Universidad Pública de Navarra.
+Duración: 30 minutos.
+Apellidos:
+Nombre:</literallayout>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+En el modelo de Von Neumann cuál es la función de la Unidad de Control .
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Cuáles son las distintas fases del ciclo de instrucción de la máquina de Von Neumann.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Convertir el número decimal 291 en base octal.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Realizar la operación -18-21 en complemento a 2.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+En qué consiste el concepto de abstracción en al organización de una computadora.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Desarrollar el programa en lenguaje ensamblador sum.ias, de la máquina IAS, que implemente el algoritmo s=1+2.
+</simpara>
+<literallayout class="monospaced">Prueba Parcial. 2017 Octubre 10.
+Grado de Informática 2º curso. Estructura de Computadores.
+Universidad Pública de Navarra.
+Duración: 30 minutos.
+Apellidos:
+Nombre:</literallayout>
+</listitem>
+</orderedlist>
+<important><simpara>Puede utilizarse todo tipo de información escrita como memorias de prácticas, apuntes, hojas de referencia, etc</simpara></important>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+Completar el módulo fuente exa_2017.s en lenguaje ensamblador AT&amp;T x86-32.(6 ptos)
+</simpara>
+<screen>### Estructura de Computadores curso 2017-18. Prueba evaluatoria 2017 Octubre 10
+###
+### Objetivos:
+###             Manejar la codificación de datos enteros con signo
+###             Estructuras de datos: puntero y array
+###             Modos de direccionamientos indirectos e indexados
+###             Lenguaje asm x86-32
+### Algoritmo:  El array lista contiene cinco números enteros negativos de tamaño dos bytes,
+###             desde -5 hasta -1, siendo -5 el valor de la posición cero.
+###             Copiar el contenido del array lista en el buffer.
+###             Al buffer se accede indirectamente a través de la variable puntero EAX
+###             El argumento de salida enviado al sistema operativo ha de ser
+###             el primer valor del array lista.
+        ## MACROS
+        .equ    SYS_EXIT, 1     # Código de la llamada al sistema operativo
+        .equ    LEN,      5     # Longitud del array y del buffer
+        ## VARIABLES: lista y buffer
+        .data
+lista: # Array inicializado con datos representados en HEXADECIMAL
+
+        _ _ _ _
+buffer: # Reserva memoria para el buffer sin inicializar.
+
+        _ _ _ _
+        ## INSTRUCCIONES
+        ## Punto de entrada
+
+        _ _ _ _
+
+        _ _ _ _
+_start:
+        ## inicializo el argumento de salida con el valor cero
+
+        _ _ _ _
+
+        _ _ _ _
+        ## inicializo la variable puntero EAX
+
+        _ _ _ _
+
+        _ _ _ _
+        ## inicializo el bucle con el número de iteracciones. Utilizar las macros.
+        mov   ,%esi
+bucle:
+        _ _ _ _
+
+        _ _ _ _
+
+        _ _ _ _
+
+        _ _ _ _
+        dec %esi
+        jns bucle
+        ## salida
+
+        mov _ _ _ _,%eax
+
+        int _ _ _ _
+        .end</screen>
+<itemizedlist>
+<listitem>
+<simpara>
+Cuestiones:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Comando gdb para visualizar el contenido del buffer una vez finalizada la copia (2 pto):
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(gdb)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Si la etiqueta lista apunta a la dirección 0x00555438 indicar el contenido de las direcciones (2 pto):
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+0x0055543C :
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+0x0055543D :
+</simpara>
+<literallayout class="monospaced">Prueba Ordinaria. 2018 Diciembre 7.
+Grado de Informática 2º curso. Estructura de Computadores.
+Universidad Pública de Navarra.
+Duración: 45 minutos.</literallayout>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</orderedlist>
+<simpara>1ª PARTE (10 ptos)</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Duración: 20 minutos
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Calificación:
+</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+(3 ptos) Resta de números sin signo: 0x8000 - 0x7AFF  &#8594; las operaciones han de realizarse en código HEXADECIMAL exclusivamente
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="6"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+<listitem>
+<simpara>
+(3 ptos) Resta de números con signo: 0x8000 - 0x7AFF   &#8594; las operaciones han de realizarse en código HEXADECIMAL exclusivamente
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="6"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+<listitem>
+<simpara>
+(3 ptos) Relacionar en una sola frase los conceptos: contador de programa, ruta de datos, ciclo de instrucción, secuenciador, microordenes, unidad aritmetico lógica, microarquitectura , captura de instrucción.
+</simpara>
+</listitem>
+</orderedlist>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="6"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+<simpara>2ª PARTE (10 pts)</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Duración: 25 minutos
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Calificación:
+</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+(6 ptos) Desarrollar el módulo fuente <emphasis>cadena_longitud.s</emphasis> en lenguaje ensamblador AT&amp;T x86-32.
+</simpara>
+<screen>/*
+
+Programa: calcular el tamaño de una cadena de caracteres  inicializada en el propio programa fuente con la frase "Hola"
+Algoritmo: Implementar un bucle hasta encontrar el caracter fin de string :  \0
+Etiquetas: La referencia al string se realizará mediante el símbolo cadena.
+Comentarios: Se ha de comentar el módulo fuente por bloques de código que tengan un sentido en lenguajes de alto nivel exclusivamente, no por líneas de código que describan una instrucción máquina.
+*/
+
+
+        ## Definición de MACROS
+        .equ SUCCESS, 0
+        .equ SYS_EXIT, 1
+        .equ FIN_CAR, '\0'</screen>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="29"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+</orderedlist>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Cuestiones: (4 ptos)
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Dos comando gdb para visualizar el contenido del objeto almacenado en la dirección cadena
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+(gdb)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+(gdb)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Comando gdb para visualizar exclusivamente el carácter fin de cadena.
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+(gdb)
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Indicar los dos comandos necesarios para compilar el programa fuente anterior mediante un toolchain manual, sin utilizar el front-end gcc.
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="3"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+<literallayout class="monospaced">GRUPO:
+APELLIDOS:
+NOMBRE:</literallayout>
+<literallayout class="monospaced">Prueba Ordinaria. 2018 Diciembre 7.
+Grado de Informática 2º curso. Estructura de Computadores.
+Universidad Pública de Navarra.
+Duración: 50 minutos.</literallayout>
+<simpara>3ª PARTE (10 ptos)</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Duración: 50 minutos
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Calificación:
+</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+(2 ptos) En una llamada a una subrutina con 6 argumentos y una variable local al finalizar el ciclo de instrucción de la instrucción <emphasis role="strong">CALL subrutina</emphasis>  el stack pointer apunta a la dirección 0xFFFA0C. Calcular:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+La dirección de memoria donde se guarda la dirección de retorno
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="right" valign="top" morerows="2"><simpara><emphasis role="strong"></emphasis></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+<listitem>
+<simpara>
+La dirección de memoria de la variable local
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="2"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+<listitem>
+<simpara>
+La dirección de memoria del 1º argumento de la subrutina
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="2"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+</itemizedlist>
+</listitem>
+</orderedlist>
+</listitem>
+</itemizedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+(4 ptos) El diagrama de bloques de la microarquitectura de la cpu de una computadora con un tamaño de palabra de 16 bits se corresponde con el de la figura en la hoja adjunta. La ISA de dicha computadora dispone de un lenguaje ensamblador que se corresponde con los mnemónicos y la sintaxis AT&amp;T x86-32 . En la memoria principal se carga el código máquina, correspondiente a la sección de instrucciones del módulo fuente, siguiente:
+</simpara>
+<literallayout class="monospaced">movw $0xF000,R0
+movw R0,R1
+addw R1,R0
+subw R1,R0</literallayout>
+<itemizedlist>
+<listitem>
+<simpara>
+Si el secuenciador de la unidad de control está diseñado como una máquina de 4 estados T0,T1,T2 y T3 , indicar en la tabla adjunta las microórdenes a ejecutar en cada estado del ciclo de instrucción para cada instrucción del programa.
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="5">
+<colspec colname="col_1" colwidth="85*"/>
+<colspec colname="col_2" colwidth="85*"/>
+<colspec colname="col_3" colwidth="85*"/>
+<colspec colname="col_4" colwidth="85*"/>
+<colspec colname="col_5" colwidth="85*"/>
+<thead>
+<row>
+<entry align="left" valign="top">        </entry>
+<entry align="center" valign="top">T0 </entry>
+<entry align="center" valign="top"> T1 </entry>
+<entry align="center" valign="top"> T2 </entry>
+<entry align="center" valign="top"> T3</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="2"><simpara><emphasis role="strong">mov $0xF000,R0</emphasis></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+<entry align="left" valign="top" morerows="2"><simpara><emphasis role="strong">movw R0,R1</emphasis></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+<entry align="left" valign="top" morerows="2"><simpara><emphasis role="strong">addw R1,R0</emphasis></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+<entry align="left" valign="top" morerows="2"><simpara><emphasis role="strong">subw R1,R0</emphasis></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="center" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+</itemizedlist>
+</listitem>
+</orderedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+(4 ptos) Organización de una memoria jerarquizada
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+En el proceso de compilación de un programa, desde la fase inicial de edición hasta la carga del programa en un proceso en la memoria principal, la cadena de herramientas "toolchain" genera distintos espacios de memoria en los diferentes módulos del proceso de traducción de código. Rellenar la tabla adjunta con las características propias de cada espacio generado.
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="5">
+<colspec colname="col_1" colwidth="85*"/>
+<colspec colname="col_2" colwidth="85*"/>
+<colspec colname="col_3" colwidth="85*"/>
+<colspec colname="col_4" colwidth="85*"/>
+<colspec colname="col_5" colwidth="85*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Herramienta</entry>
+<entry align="left" valign="top"> Programa</entry>
+<entry align="left" valign="top">Estructura del Espacio de Memoria y Direccionamiento </entry>
+<entry align="left" valign="top">Tipo de direcciones </entry>
+<entry align="left" valign="top"> Localización del código</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara><literal>Edición</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>Módulo Fuente</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>Secciones y Etiquetas</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>Virtual,No lineal</literal></simpara></entry>
+<entry align="left" valign="top"><simpara><literal>Mem. Secundaria: Disco duro</literal></simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+<entry align="left" valign="top" morerows="2"><simpara><literal></literal></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+<listitem>
+<simpara>
+Cómo estructura el controlador de memoria caché dentro de la jerarquía de memoria la memoria caché y la memoria RAM dinámica.
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="3"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+<listitem>
+<simpara>
+Físicamente, en que consiste una celda de memoria RAM dinámica.
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="3"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+<listitem>
+<simpara>
+Cómo sincroniza las transferencias de datos a través del bus del sistema, una memoria ram dinámica Double Data Rate DDR.
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="3"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+</itemizedlist>
+</listitem>
+</orderedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>
+(3 ptos) Mecanismos de operaciones E/S
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+Dibujar el diagrama de bloques del HW necesario entre una tecla del teclado y las unidades básicas de la arquitectura von Neumann de una computadora para realizar la transferencia de datos mediante el mecanismo de interrupciones.
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="19"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+<listitem>
+<simpara>
+Dibujar el diagrama de bloques del SW necesario entre una tecla del teclado y las unidades básicas de la arquitectura von Neumann de una computadora para realizar la transferencia de datos mediante el mecanismo de interrupciones.
+</simpara>
+<informaltable
+frame="all"
+rowsep="1" colsep="1"
+>
+<?dbhtml table-width="100%"?>
+<?dbfo table-width="100%"?>
+<?dblatex table-width="100%"?>
+<tgroup cols="1">
+<colspec colname="col_1" colwidth="425*"/>
+<tbody>
+<row>
+<entry align="left" valign="top" morerows="26"><simpara></simpara></entry>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+<row>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+</listitem>
+</itemizedlist>
+</listitem>
+</orderedlist>
+<simpara><?asciidoc-pagebreak?></simpara>
+</section>
+<section id="_introduccion">
+<title>Introducción</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Información
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<ulink url="https://miaulario.unavarra.es/access/content/group/b15fc60b-3c66-452d-a7d9-42ec8cdab3a1/CSIE_WEB/site_csie/zoom-gida/zoom-gida_es.html">https://miaulario.unavarra.es/access/content/group/b15fc60b-3c66-452d-a7d9-42ec8cdab3a1/CSIE_WEB/site_csie/zoom-gida/zoom-gida_es.html</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+correo electrónico <ulink url="mailto:csie@unavarra.es">csie@unavarra.es</ulink>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_instalacion_de_zoom">
+<title>Instalación de Zoom</title>
+<itemizedlist>
+<listitem>
+<simpara>
+El conferenciante necesita instalarse la aplicación ZOOM en su versión básica (gratuita)
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="https://zoom.us/">https://zoom.us/</ulink>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Es necesario registrarse
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+En la versión Ubuntu 18.0 desde el navegador Firefox no se puede iniciar el cliente
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Descargar el paquete zoom_amd64.deb
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+comando de instalación: <literal>dpkg -i zoom_amd64.deb</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Abrir el cliente: <literal>./zoom</literal>
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_guia_de_usuario_zoom">
+<title>Guía de usuario Zoom</title>
+<section id="_configuracion">
+<title>Configuración</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Testear el audio
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_sesion_de_videoconferencia">
+<title>Sesión de videoconferencia</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Desde miaulario &#8594; login &#8594; asignatura &#8594; videoconferencia
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<ulink url="https://miaulario.unavarra.es/access/content/group/b15fc60b-3c66-452d-a7d9-42ec8cdab3a1/CSIE_WEB/site_csie/zoom-gida/zoom-gida_es.html">https://miaulario.unavarra.es/access/content/group/b15fc60b-3c66-452d-a7d9-42ec8cdab3a1/CSIE_WEB/site_csie/zoom-gida/zoom-gida_es.html</ulink>
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+</article>

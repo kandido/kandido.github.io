@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_llamadas_al_sistema_operativo_kernel" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+<ul class="sectlevel1">
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html">12. Introducción a la Programación en Lenguaje Ensamblador AT&amp;T x86-32</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html">13. Representación de los Datos</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html">14. Operaciones Aritméticas y Lógicas</a>
+</li>
+<li><a href="_instrucciones_de_saltos_condicionales.html">15. Instrucciones de Saltos Condicionales</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html"><span class="toc-current">16. LLamadas al Sistema Operativo (Kernel)</span></a>
+<ul class="sectlevel2">
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_introducción_21">16.1. Introducción</a>
+<ul class="sectlevel3">
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_qué_son_las_llamadas_al_sistema">16.1.1. Qué son las llamadas al sistema</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_manuales_de_las_llamadas_al_sistema">16.1.2. Manuales de las llamadas al sistema</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_códigos_de_las_llamadas">16.1.3. Códigos de las llamadas</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_cómo_pasar_los_argumentos_directamente_al_kernel">16.1.4. Cómo pasar los argumentos directamente al Kernel</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_como_pasar_los_argumentos_indirectamente_a_través_de_funciones_libc">16.1.5. Como pasar los argumentos indirectamente a través de funciones libc</a>
+</li>
+</ul>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_leeme_5">16.2. LEEME</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_cuestiones_5">16.3. Cuestiones</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_llamada_exit">16.4. Llamada Exit</a>
+<ul class="sectlevel3">
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_edición_del_módulo_fuentesalida_c_salida_s">16.4.1. Edición del Módulo fuente:salida.c / salida.s</a>
+</li>
+</ul>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_llamar_a_la_librería_de_c_desde_código_ensamblador">16.5. LLamar a la librería de C desde código ensamblador</a>
+<ul class="sectlevel3">
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_imprimir_s_printf">16.5.1. imprimir.s: printf</a>
+</li>
+</ul>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html#_llamadas_al_sistema_en_la_arquitectura_amd64">16.6. Llamadas al Sistema en la Arquitectura AMD64</a>
+</li>
+</ul>
+</li>
+<li><a href="_subrutinas_2.html">17. Subrutinas</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html">18. Imágenes: Bit Map Portable</a>
+</li>
+</ul>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_llamadas_al_sistema_operativo_kernel">16. LLamadas al Sistema Operativo (Kernel)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_introducción_21">16.1. Introducción</h3>
+<div class="sect3">
+<h4 id="_qué_son_las_llamadas_al_sistema">16.1.1. Qué son las llamadas al sistema</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El HW está protegido por el Kernel del SO y por lo tanto el programador de ensamblador accede al HW indirectamente a través de las "LLamadas al Sistema" solicitando operaciones de entrada/salida al Sistema Operativo. Por lo tanto si queremos acceder al teclado y al monitor será necesario realizar llamadas al kernel.</p>
+</li>
+<li>
+<p>Definición de  la interfaz entre el programador y el kernel del SO: <em>System V Application Binary Interface: SysV-ABI</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>El lenguaje ensamblador sigue la norma ABI para el lenguaje C.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>En este guión se trabajan las llamadas al sistema de la arquitectura i386.</p>
+</li>
+<li>
+<p>LLamadas al sistema desde el código ensamblador:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>directamente con la instrucción <code>int $0x80</code></p>
+</li>
+<li>
+<p>indirectamente a través de las funciones de la librería standard <em>libc</em> con la instrucción <code>call</code></p>
+</li>
+<li>
+<p>En código ensamblador es necesario pasar los argumentos previamente a la ejecución de la llamada <code>call</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_manuales_de_las_llamadas_al_sistema">16.1.2. Manuales de las llamadas al sistema</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Listado con los nombres de las llamadas a al sistema:  <code>man syscalls</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>LLamada al sistema <em>exit</em>: <code>man 3 exit</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>describe la función de llamada al sistema</p>
+</li>
+<li>
+<p>especifíca el nombre de la cabecera de la librería necesaria para compilar en lenguaje C.</p>
+</li>
+<li>
+<p>especifíca los parámetros que necesita la función y el orden en que son transferidos.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>LLamada al sistema <em>write</em>: <code>man 2 write</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_códigos_de_las_llamadas">16.1.3. Códigos de las llamadas</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Códigos de las llamadas al sistema en la arquitectura x86-32:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>/usr/include/asm/unistd_32.h</em></p>
+</li>
+<li>
+<p><em>/usr/include/x86-64-linux-gnu/asm/unistd_32.h</em></p>
+</li>
+<li>
+<p>llamada exit &#8594; Código 1</p>
+</li>
+<li>
+<p>read &#8594; 3</p>
+</li>
+<li>
+<p>write &#8594; 4</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El código de la llamada se pasa a tavés del registro <em>EAX</em>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cómo_pasar_los_argumentos_directamente_al_kernel">16.1.4. Cómo pasar los argumentos directamente al Kernel</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>A diferencia de los argumentos de las llamadas a subrutinas de usuario que se pasan a través de la pila, los argumentos  de las llamadas a subrutinas del sistema operativo utilizan los registros como memoria para pasar los argumentos.</p>
+</li>
+<li>
+<p>Los parámetros del primero al sexto se corresponden con los registros : <em>EBX,ECX,EDX,ESI,EDI,EBP</em></p>
+</li>
+<li>
+<p>Valor de retorno: <em>EAX</em></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_como_pasar_los_argumentos_indirectamente_a_través_de_funciones_libc">16.1.5. Como pasar los argumentos indirectamente a través de funciones libc</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Desde un módulo fuente en ASM</p>
+</li>
+<li>
+<p>Los parámetros se pasan a las funciones libc través de la <em>pila</em>  y por lo tanto también a los <em>wrappers</em> de la librería de C.</p>
+</li>
+<li>
+<p>Valor de retorno: <em>EAX</em></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_leeme_5">16.2. LEEME</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Lectura del guión de prácticas  y del capítulo 3 del Libro Programming from the Ground-Up.</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_apu">Apuntes y Libro de Texto</a></p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_doc_mem">Documentación Memoria</a>: Contenido y Formato de la Memoria</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_eval">Evaluación</a>: sistema de evaluación</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_plat_des">Plataforma de Desarrollo</a> : configuración de la computadora personal</p>
+</li>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_prog">Programación</a> : metodología</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cuestiones_5">16.3. Cuestiones</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_practicando_la_programación_desde_el_principio.html#prac_eval">"Autoevaluación de Prácticas"</a> opcional: <a href="_prácticas_cuestionario.html#prac_cues">Prácticas: Cuestionario</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_llamada_exit">16.4. Llamada Exit</h3>
+<div class="sect3">
+<h4 id="_edición_del_módulo_fuentesalida_c_salida_s">16.4.1. Edición del Módulo fuente:salida.c / salida.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -m32 -g -o salida salida.c</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span><span class="kt">void</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">exit</span> <span class="p">(</span><span class="mh">0xFF</span><span class="p">);</span>
+    <span class="p">}</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>gcc -m32 -o salida salida.c</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="cm">/* Llamada al sistema desde C
+   Prototipo:    int syscall(int number, ...);
+   man syscall
+*/</span>
+
+<span class="cp">#define _GNU_SOURCE
+#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;sys/syscall.h&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">syscall</span> <span class="p">(</span><span class="n">__NR_exit</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">);</span>
+    <span class="p">}</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>gcc -m32 -g -nostartfiles -o salida salida.s</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c">        <span class="p">.</span><span class="n">global</span> <span class="n">_start</span>
+        <span class="p">.</span><span class="n">section</span> <span class="p">.</span><span class="n">text</span>
+<span class="n">_start</span><span class="o">:</span>
+        <span class="n">push</span>    <span class="err">$</span><span class="mh">0xFF</span>   	<span class="err">#</span><span class="k">return</span> <span class="n">code</span>
+        <span class="n">call</span> 	<span class="n">exit</span>		<span class="err">#</span><span class="n">libc</span> <span class="n">library</span>
+        <span class="p">.</span><span class="n">end</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>gcc -m32 -g -nostartfiles -o salida salida.s</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c">        <span class="p">.</span><span class="n">global</span> <span class="n">_start</span>
+        <span class="p">.</span><span class="n">section</span> <span class="p">.</span><span class="n">text</span>
+<span class="n">_start</span><span class="o">:</span>
+        <span class="n">push</span>    <span class="err">$</span><span class="mh">0xFF</span>   	<span class="err">#</span><span class="k">return</span> <span class="n">code</span>
+        <span class="n">push</span>    <span class="err">$</span><span class="mi">1</span>		<span class="err">#</span> <span class="n">exit</span> <span class="n">syscall</span> <span class="n">code</span>
+        <span class="n">call</span> 	<span class="n">syscall</span>		<span class="err">#</span><span class="n">libc</span> <span class="n">library</span>
+        <span class="p">.</span><span class="n">end</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>gcc -m32 -g -nostartfiles -o salida salida.s</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c">        <span class="p">.</span><span class="n">global</span> <span class="n">_start</span>
+        <span class="p">.</span><span class="n">section</span> <span class="p">.</span><span class="n">text</span>
+<span class="n">_start</span><span class="o">:</span>
+         <span class="n">mov</span> 	 <span class="err">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="n">eax</span>	<span class="err">#</span><span class="n">exit</span>
+         <span class="n">mov</span>     <span class="err">$</span><span class="mh">0xFF</span><span class="p">,</span><span class="o">%</span><span class="n">ebx</span>   	<span class="err">#</span><span class="n">argument</span>
+         <span class="kt">int</span>     <span class="err">$</span><span class="mh">0x80</span>          <span class="err">#</span><span class="n">system</span> <span class="n">call</span>
+         <span class="p">.</span><span class="n">end</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_llamar_a_la_librería_de_c_desde_código_ensamblador">16.5. LLamar a la librería de C desde código ensamblador</h3>
+<div class="sect3">
+<h4 id="_imprimir_s_printf">16.5.1. imprimir.s: printf</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>imprimir.s</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c">        <span class="p">.</span><span class="n">section</span> <span class="p">.</span><span class="n">data</span>
+<span class="n">planet</span><span class="o">:</span>
+	<span class="p">.</span><span class="kt">long</span> <span class="mi">9</span>                        <span class="err">#</span> <span class="n">variable</span> <span class="n">planet</span>
+
+        <span class="p">.</span><span class="n">section</span> <span class="p">.</span><span class="n">rodata</span>
+<span class="n">mensaje</span><span class="o">:</span>
+        <span class="p">.</span><span class="n">asciz</span> <span class="s">"El número de planetas es %d </span><span class="se">\n</span><span class="s">"</span>        <span class="err">#</span><span class="n">string</span> <span class="n">con</span> <span class="n">formato</span> <span class="n">de</span> <span class="n">la</span> <span class="n">funci</span><span class="err">ó</span><span class="n">n</span> <span class="n">printf</span>
+
+	<span class="p">.</span><span class="n">global</span> <span class="n">_start</span>
+        <span class="p">.</span><span class="n">section</span> <span class="p">.</span><span class="n">text</span>
+<span class="n">_start</span><span class="o">:</span>
+        <span class="cp">## imprimir en la pantalla
+</span>        <span class="n">push</span> <span class="n">planet</span>               <span class="err">#</span> <span class="mi">2</span><span class="err">º</span> <span class="n">argumento</span> <span class="n">de</span> <span class="n">la</span> <span class="n">funci</span><span class="err">ó</span><span class="n">n</span> <span class="n">printf</span>
+        <span class="n">push</span> <span class="err">$</span><span class="n">mensaje</span>     <span class="err">#</span> <span class="mi">1</span><span class="err">º</span> <span class="n">argumento</span> <span class="n">de</span> <span class="n">la</span> <span class="n">funci</span><span class="err">ó</span><span class="n">n</span> <span class="n">printf</span><span class="o">:</span> <span class="n">direcci</span><span class="err">ó</span><span class="n">n</span> <span class="n">del</span> <span class="n">string</span>
+        <span class="n">call</span> <span class="n">printf</span>
+        <span class="cp">## salir al sistema
+</span>	<span class="n">push</span> <span class="err">$</span><span class="mi">0</span>
+        <span class="n">call</span> <span class="n">exit</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Compilación con <em>gcc</em> : no es necesario indicar al linker el módulo objeto libc ya que lo enlaza por defecto.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>gcc -m32 -g -nostartfiles -o imprimir imprimir.s</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Compilación con <em>as</em> y <em>ld</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>as --32 -gstabs -o imprimir.o imprimir.s</code></p>
+</li>
+<li>
+<p><code>ld -melf_i386 -dynamic-linker /lib32/ld-linux.so.2  -o imprimir imprimir.o -lc</code> : enlazar con el módulo objeto libc</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_llamadas_al_sistema_en_la_arquitectura_amd64">16.6. Llamadas al Sistema en la Arquitectura AMD64</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>LLamadas a las funciones de la librería standard <em>libc</em>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El manual de los prototipos de las funciones libc son accesibles en GNU con el comando <em>man</em>. Ej <code>man write</code></p>
+</li>
+<li>
+<p>Es necesario pasar los argumentos previamente a la ejecución de la llamada mediante la instrucción <em>call</em>.</p>
+</li>
+<li>
+<p>Los parámetros se pasan a través de los registros <em>%rdi, %rsi, %rdx, %rcx, %r8 and %r9</em> que se asocia con los argumentos de la función de libc en sentido izda&#8594;dcha.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Preservar los registros : %rbp, %rbx and %r12 through %r15</p>
+</li>
+<li>
+<p>Valor de retorno: Uno de los dos registros libres de la secuencia %rax, %rdx.</p>
+</li>
+<li>
+<p>Ejemplo:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="n">exit</span> <span class="p">(</span><span class="mh">0xFF</span><span class="p">)</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="n">xor</span>	<span class="o">%</span><span class="n">rax</span>            <span class="err">#</span><span class="n">resetear</span> <span class="n">RAX</span>
+<span class="n">mov</span>     <span class="err">$</span><span class="mh">0xFF</span><span class="p">,</span> <span class="o">%</span><span class="n">rdi</span>   	<span class="err">#</span><span class="k">return</span> <span class="n">code</span>
+<span class="n">call</span> 	<span class="n">exit</span>		<span class="err">#</span><span class="n">libc</span> <span class="n">library</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="n">mov</span> 	<span class="err">$</span><span class="mi">60</span><span class="p">,</span><span class="o">%</span><span class="n">rax</span>	<span class="err">#</span><span class="n">exit</span>
+<span class="n">mov</span>     <span class="err">$</span><span class="mh">0xFF</span><span class="p">,</span> <span class="o">%</span><span class="n">rdi</span>   	<span class="err">#</span><span class="k">return</span> <span class="n">code</span>
+<span class="n">syscall</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_instrucciones_de_saltos_condicionales.html">Instrucciones de Saltos Condicionales</a> | ↑ Up: <a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_subrutinas_2.html">Subrutinas</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

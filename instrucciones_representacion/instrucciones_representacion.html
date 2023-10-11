@@ -1,0 +1,2664 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.10" />
+<title>Tema 5: Representacion de las Instrucciones</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(3);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Tema 5: Representacion de las Instrucciones</h1>
+<span id="author">Cándido Aramburu</span><br />
+<span id="email"><code>&lt;<a href="mailto:candido@unavarra.es">candido@unavarra.es</a>&gt;</code></span><br />
+<span id="revnumber">version v1.0.0,</span>
+<span id="revdate">2018-09-24</span>
+<div id="toc">
+  <div id="toctitle">Tabla de contenidos</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_temario">1. Temario</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic" start="5">
+<li>
+<p>
+Representación de instrucciones
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Lenguaje máquina, lenguaje ensamblador y lenguajes de alto nivel
+</p>
+</li>
+<li>
+<p>
+Formato de instrucción
+</p>
+</li>
+<li>
+<p>
+Tipos de instrucción y modos de direccionamiento
+</p>
+</li>
+</ol></div>
+</li>
+</ol></div>
+<div class="sect2">
+<h3 id="_bibliografia">1.1. Bibliografía</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Tema referenciado en el libro de texto W. Stalling
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Capítulo 12: Conjuntos de Instrucciones : Características y Funciones (Datos, Operandos y Operaciones)
+</p>
+</li>
+<li>
+<p>
+Capítulo 13: Conjuntos de Instrucciones: Formatos de instrucciones y Modos de Direccionamiento (Lenguaje Ensamblador)
+</p>
+</li>
+<li>
+<p>
+Apéndice B: Lenguaje Ensamblador y Toolchain
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_objetivos">2. Objetivos</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Analizar la arquitectura del repertorio de las instrucciones máquina (Formato de instrucciones, formato de datos, operaciones y direccionamiento de operandos) de arquitecturas ISA en general.
+</p>
+</li>
+</ul></div>
+<div class="sect2">
+<h3 id="_requisitos">2.1. Requisitos</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Requisitos:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Von Neumann Architecture: Arquitectura de una Computadora, Máquina IAS.
+</p>
+</li>
+<li>
+<p>
+Programación en lenguaje ensamblador IAS
+</p>
+</li>
+<li>
+<p>
+Representacion de datos
+</p>
+</li>
+<li>
+<p>
+Operaciones Aritméticas y Lógicas
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_introduccion">3. Introducción</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_diseno">3.1. Diseño</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+El diseño de la arquitectura del repertorio de instrucciones (<strong>ISA</strong>: instruction set architecture) de una computadora comprender diseñar y definir:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Estructura de la Computadora: CPU-Memoria-Bus-I/O
+</p>
+</li>
+<li>
+<p>
+La representación y formato de los datos
+</p>
+</li>
+<li>
+<p>
+<strong>La representación y formato de las instrucciones</strong>
+</p>
+</li>
+<li>
+<p>
+Repertorio de instrucciones: Las operaciones y modos de direccionamiento que ha de interpretar y ejecutar la computadora.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+La arquitectura ISA define la potencialidad de la CPU de la computadora.
+</p>
+</li>
+<li>
+<p>
+El diseño de la arquitectura ISA va a afectar al rendimiento de la computadora.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Programa binario resultado de la compilación del programa fuente.
+</p>
+</li>
+<li>
+<p>
+Ocupación de Memoria
+</p>
+</li>
+<li>
+<p>
+Implementación (dificultad) y rendimiento de la CPU.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_representacion">3.2. Representación</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+En este tema se trata de la representación e interpretación de las instrucciones.
+</p>
+</li>
+<li>
+<p>
+Las instrucciones se pueden representar en dos lenguajes
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Lenguaje binario
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El lenguaje binario implica un <em>formato de la instrucción</em>.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Lenguaje símbolico o lenguaje ensamblador
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El lenguaje ensambladro implica una <em>sintaxis</em>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+La representación de las instrucciones en lenguaje binario permite su almacenamiento en la memoria principal así como facilitar el ciclo de instrucción mediante su decodificación y ejecución por parte de la CPU.
+</p>
+</li>
+<li>
+<p>
+La representación de las instrucciones en lenguaje simbólico tiene como objetivo facilitar la tarea del programador en la interpretación  de las instrucciones y en el desarrollo de programas en lenguaje ensamblador.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_estructura_de_la_memoria">3.3. Estructura de la Memoria</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Jerarquía de Memoria: Registros internos a la CPU y Memoria principal (DRAM) externa a la CPU
+</p>
+</li>
+</ul></div>
+<div class="sect3">
+<h4 id="_memoria_principal">3.3.1. Memoria Principal</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Espacio de direcciones lineal: Notación hexacecimal
+</p>
+</li>
+<li>
+<p>
+Direccionamiento: bytes : notación hexadecimal
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_elementos_de_una_instruccion_maquina">4. Elementos de una Instrucción Máquina</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Código de Operaciones:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+La instrucción debe de especificar que operación debe de realizar la CPU. Operaciones cómo las aritméticas de suma y resta ,  operaciones lógicas como not y and, operaciones de transferencia de datos entre posiciones de la memoria principal, operaciones de entrada y salida como la transferencia de datos del disco duro a la memoria principal, etc
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Source Operand Reference:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Una operación puede requerir el procesamiento de uno o más datos. Por ejemplo la operación lógica not requiere de un operando.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Target Operand Reference:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Una operación  de suma requiere de dos operandos, uno es el operando fuente y otro el operando destino.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Result Reference:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Una operación de suma requiere salvar el resultado de la operación.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Next Instruction Reference:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Una vez finalizada la ejecución de la instrucción es necesario indicar a la CPU donde esta almacenada la próxima instrucción a ejecutar a través del Contador de Programa PC.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_representacion_de_las_instrucciones_en_lenguaje_ensamblador_asm_para_la_arquitectura_i386_amd64">5. Representación de las instrucciones en lenguaje ensamblador (ASM) para la arquitectura i386/amd64</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_lenguaje_maquina_binario">5.1. Lenguaje Máquina Binario</h3>
+<div class="sect3">
+<h4 id="_almacenamiento_en_memoria">5.1.1. Almacenamiento en Memoria</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Una vez realizado el proceso de traducción del módulo fuente en lenguaje ensamblador se genera un módulo objeto en lenguaje binario que se almacena en el disco duro en forma de fichero.
+</p>
+</li>
+<li>
+<p>
+El fichero que contiene el módulo objeto ejecutable en lenguaje binario es necesario cargarlo en la memoria principal. Esta tarea la realiza el <strong>cargador</strong> del sistema operativo.
+</p>
+</li>
+<li>
+<p>
+Cada dirección de memoria apunta a 1 byte.
+</p>
+</li>
+<li>
+<p>
+La dirección más baja apunta a todo el objeto: instrucción o dato.
+</p>
+</li>
+<li>
+<p>
+Ejemplo:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>4001a4:       48 83 ec 10</strong>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+En la posición <strong>0x4001A4</strong> está el byte <strong>48</strong>
+</p>
+</li>
+<li>
+<p>
+En la posición <strong>0x4001A4+1</strong> está el byte <strong>83</strong>
+</p>
+</li>
+<li>
+<p>
+En la posición <strong>0x4001A4+2</strong> está el byte <strong>EC</strong>
+</p>
+</li>
+<li>
+<p>
+En la posición <strong>0x4001A4+3</strong> está el byte <strong>10</strong>
+</p>
+</li>
+<li>
+<p>
+En la posición de memoria principal <code>0x4001A4</code> está almacenada la instrucción de 4 Bytes
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_operandos_modos_de_direccionamiento">6. Operandos: Modos de Direccionamiento</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_localizacion">6.1. Localización</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Posibles ubicaciones de los operandos.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+En la propia instrucción
+</p>
+</li>
+<li>
+<p>
+Memoria interna: registros CPU
+</p>
+</li>
+<li>
+<p>
+Memoria Principal: memoria DRAM
+</p>
+</li>
+<li>
+<p>
+Memoria i/o: registros en controladores de entrada/salidas denominados puertos.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_direcciones_referenciadas_durante_el_ciclo_de_instruccion">6.2. Direcciones referenciadas durante el ciclo de instrucción</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Durante el ciclo de instrucción se pueden referenciar:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Una dirección para referenciar a la instrucción
+</p>
+</li>
+<li>
+<p>
+Una dirección para el operando primero
+</p>
+</li>
+<li>
+<p>
+Una dirección para el operando segundo
+</p>
+</li>
+<li>
+<p>
+Una dirección para el resultado
+</p>
+</li>
+<li>
+<p>
+Una dirección que referencie a la siguiente instrucción
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Tipos de  instrucciones según el número de direcciones referenciadas durante su ejecución.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Instrucciones sin operando, con un operando, con múltiples operandos.
+</p>
+</li>
+<li>
+<p>
+Depende de la arquitectura: Acumulador (Ej: máquina IAS), Registro-Memoria(Ej: máquina x86), Load/Store (Ej:ARM ), Stack (Ej: máquina JVM), Memoria-Memoria
+</p>
+</li>
+<li>
+<p>
+referencias implicitas al operando
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_direcciones_implicitas">6.3. Direcciones implícitas</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Direcciones que no aparecen explícitamente en la instrucción. Ejemplos:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Próxima instrucción en el Contador de Programa
+</p>
+</li>
+<li>
+<p>
+Resultado en el Acumulador
+</p>
+</li>
+<li>
+<p>
+etc
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_tipos_de_arquitecturas_de_operando_ejemplos">6.4. Tipos de Arquitecturas de Operando: Ejemplos</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+3 Tipos
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Arquitectura orientada a Acumulador: Un operando está implicitamente en el Acumulador
+</p>
+</li>
+<li>
+<p>
+Arquitectura orientada a Stack (pila):
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Los operandos se introducen o extraen de la pila interna de la CPU
+</p>
+</li>
+<li>
+<p>
+Concepto de pila: push/pop &#8594; empujar/extraer &#8594; el primero en entrar es el último en salir &#8594; First Input Last Output
+</p>
+</li>
+<li>
+<p>
+SP: Registro Stack Pointer : registro que apunta al Top de la pila (parte alta de la pila)
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Arquitectura orientada a Registros:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Dos tipos: Reg/Mem y Load/Store, como es el caso de la arquitectura amd64 y arm respectivamente.
+</p>
+</li>
+<li>
+<p>
+Reg/Mem : para que la instrucción se ejecute uno de los dos operandos debe de estar en un registro
+</p>
+</li>
+<li>
+<p>
+Load/Store: Los dos operandos deben de estar en dos registros para que dicha instrucción se ejecute
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Ejemplo: código para realizar la operación <strong>C=A+B</strong> en 4 arquitecturas de operando diferentes.
+</p>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="hsides"
+cellspacing="0" cellpadding="4">
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<thead>
+<tr>
+<th align="center" valign="top"> Stack          </th>
+<th align="center" valign="top">Acumulator </th>
+<th align="center" valign="top"> Register/Memory </th>
+<th align="center" valign="top">Load/Store</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table"><strong>Push A</strong></p></td>
+<td align="center" valign="top"><p class="table"><strong>Load A</strong></p></td>
+<td align="center" valign="top"><p class="table"><strong>Load R1,A</strong></p></td>
+<td align="center" valign="top"><p class="table"><strong>Load R1,A</strong></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><strong>Push B</strong></p></td>
+<td align="center" valign="top"><p class="table"><strong>Add B</strong></p></td>
+<td align="center" valign="top"><p class="table"><strong>Add R3,R1,B</strong></p></td>
+<td align="center" valign="top"><p class="table"><strong>Load R2,B</strong></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><strong>Add</strong></p></td>
+<td align="center" valign="top"><p class="table"><strong>Store C</strong></p></td>
+<td align="center" valign="top"><p class="table"><strong>Store R3,C</strong></p></td>
+<td align="center" valign="top"><p class="table"><strong>Add R3,R1,R2</strong></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"><strong>Pop C</strong></p></td>
+<td align="center" valign="top"><p class="table"><strong></strong></p></td>
+<td align="center" valign="top"><p class="table"><strong></strong></p></td>
+<td align="center" valign="top"><p class="table"><strong>Store R3,C</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Los nombres de las variables, A, B,C son referencias a la Memoria Principal.
+</p>
+</li>
+<li>
+<p>
+Descripción RTL
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Stack: M[SP]&#8592;M[A],SP&#8592;SP-1; M[SP]&#8592;M[B],SP&#8592;SP-1;M[SP+1]&#8592;M[SP]+M[SP+1],SP&#8592;SP+1;
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>Add</strong>    &#8594; NO hay referencia ni al operando fuente ni al operando destino.
+</p>
+</li>
+<li>
+<p>
+Los operandos han de cargarse previamente en la pila
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Acumulator: AC&#8592;M[A];AC&#8592;AC+M[B];C&#8592;M[AC]
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>Add B</strong>   &#8594; NO hay referencia al operando DESTINO
+</p>
+</li>
+<li>
+<p>
+El Operando destino a de cargarse previamente en el acumulador.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Reg/Mem: R1&#8592;M[A];R3&#8592;R1+M[B];M[C]&#8592;R3
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>Add R3,R1,B</strong>  &#8594; NO se puede referencia a más de un operando en MEMORIA
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Si un operando está almacenado en la memoria, el resto a de cargarse previamente en los registros.
+</p>
+</li>
+<li>
+<p>
+Load/Store: R1&#8592;M[A];R2&#8592;M[B];R3&#8592;R1+R2;M[C]&#8592;R3.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>Add R3,R1,R2</strong> &#8594;Solamente se hacen referencias a REGISTROS, ninguna referencia a memoria
+</p>
+</li>
+<li>
+<p>
+Los operandos fuente y destino han de cargarse previamente en los registros
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="/etc/asciidoc/images/icons/note.png" alt="Nota" />
+</td>
+<td class="content">La arquitectura x86 está orientada a Reg/Mem, por lo que no se puede referenciar en la misma instrucción a un operando fuente en MEMORIA y el operando destino también en MEMORIA, es decir, ambos operandos referenciados a MEMORIA.</td>
+</tr></table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Ejemplo de código para realizar la opeación <strong>(A-B)/(DxE+C)</strong> según 4 arquitecturas ISA diferentes: arquitectura con 3 operandos referenciados, con 2 operandos referenciados, con 1 operando referenciado y ninǵún operando referenciado
+</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/cpu/addresses_arch.jpg" alt="../images/cpu/addresses_arch.jpg" />
+</div>
+</div>
+</li>
+<li>
+<p>
+4º Caso: Arquitectura de Operando tipo Stack:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+M[SP]&#8592;M[C];M[SP]&#8592;M[E];M[SP]&#8592;M[D];MUL;ADD;M[SP]&#8592;M[B];M[SP]&#8592;M[A];SUB;DIV
+</p>
+</li>
+<li>
+<p>
+push C; push E; push D; mul; add; push B; push A; sub; div;
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_tipos_de_direccionamiento">6.5. Tipos de Direccionamiento</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Inmediato: El operando está en la propia "instrucción"
+</p>
+</li>
+<li>
+<p>
+Directo  : El campo de operando contiene una "dirección" que apunta a la memoria principal donde está ubicado el operando.
+</p>
+</li>
+<li>
+<p>
+Registro : El operando está en el "registro"
+</p>
+</li>
+<li>
+<p>
+Indirecto: El campo de operando contiene una "dirección ó registro" que apunta a la memoria principal donde hay una "dirección" que apunta a la memoria principal donde está ubicado el operando.
+</p>
+</li>
+<li>
+<p>
+Desplazamiento: Registro Base, Registro Indice : La dirección efectiva donde se encuentra el operando se obtiene realizando una operación aritmética donde pueden intervenir registros, números , etc.
+</p>
+</li>
+</ul></div>
+<div class="imageblock ditaa">
+<div class="content">
+<img src="instrucciones_representacion__1.png" alt="instrucciones_representacion__1.png" />
+</div>
+<div class="title">Figura 1. Formato de Instrucción</div>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Op: Operando : DATO
+</p>
+</li>
+<li>
+<p>
+A: Campo de Operando  del Formato de Instrucción
+</p>
+</li>
+<li>
+<p>
+EA: Efective Address
+</p>
+</li>
+<li>
+<p>
+Los <em>operandos</em> pueden estar almacenados en:
+</p>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Memoria externa RAM
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Una dirección de memoria conteniendo un dato.
+</p>
+</li>
+<li>
+<p>
+Una dirección de memoria conteniendo una instrucción. El dato es uno de los campos de a propia instrucción. Direccionamieno Inmediato.
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+Memoria interna GPR
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Registros rax,eax,&#8230;
+</p>
+</li>
+</ol></div>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+La <em>dirección</em> de referencia de la ubicación del operando se obtiene según los distintos modos de direccionamiento
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Inmediato:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El operando se obtiene del campo de la propia instrucción.
+</p>
+</li>
+<li>
+<p>
+EA= no existe
+</p>
+</li>
+<li>
+<p>
+Op=A
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Directo:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El operando está en la memoria externa. El campo de operando contiene la dirección efectiva
+</p>
+</li>
+<li>
+<p>
+EA=A
+</p>
+</li>
+<li>
+<p>
+Op=M[EA]
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Registro:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El operando está en la memoria interna. El campo de operando contiene la referencia del Registro.
+</p>
+</li>
+<li>
+<p>
+EA=A
+</p>
+</li>
+<li>
+<p>
+Op=R
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Indirecto:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+La dirección efectiva esta almacenada en una posición de memoria externa o interna.
+</p>
+</li>
+<li>
+<p>
+EA=M[A] o R
+</p>
+</li>
+<li>
+<p>
+Op=M[M[A]] o M[R]
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Desplazamiento:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+La dirección efectiva del operando se obtiene mediante una operación aritmética entre una dirección base y un desplazamiento relativo a la dirección base. La dirección base se toma como referencia y el desplazamiento es relativo a la dirección base.
+</p>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Relativo al contador de programa PC:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+La dirección base es implíctamente el contador de programa y el desplazamiento está en el campo de operando.
+</p>
+</li>
+<li>
+<p>
+EA=PC+A
+</p>
+</li>
+<li>
+<p>
+Op=M[EA]
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Relativo a Base:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El desplazamiento está en el campo de operando y la dirección base está en el registro.
+</p>
+</li>
+<li>
+<p>
+EA=R+A
+</p>
+</li>
+<li>
+<p>
+Op=M[EA]
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Indexado:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El desplazamiento está en el registro y la dirección base está en el campo de operando.
+</p>
+</li>
+<li>
+<p>
+EA=A+R
+</p>
+</li>
+<li>
+<p>
+Op=M[EA]
+</p>
+</li>
+</ul></div>
+</li>
+</ol></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Para hacer referencia a los operandos fuente o destino la arquitectura de la instrucción es muy <em>flexible</em> ya que se dispone de distintos modos de direccionar dichos operandos.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_operaciones">7. Operaciones</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_codigos_de_operacion">7.1. Códigos de Operación</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+La codificación del conjunto de operaciones depende de cada arquitectura ISA.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_tipos_de_operaciones">7.2. Tipos de Operaciones</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Categorías:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Data Processing: Arithmetic and logic instructions
+</p>
+</li>
+<li>
+<p>
+Data Load/Store: Movement of data into or out of register and/or memory
+locations
+</p>
+</li>
+<li>
+<p>
+Data Movement: I/O instructions
+</p>
+</li>
+<li>
+<p>
+Control: Test and Branch instructions
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="paragraph"><p><span class="image">
+<img src="../images/instrucciones_representacion/tipos_instrucciones.png" alt="tipos de instrucciones" />
+</span></p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+El repertorio puede ser: reducido/extenso, complejo/sencillo.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_isa_de_diferentes_computadoras">8. ISA de Diferentes Computadoras</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_x86">8.1. x86</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.felixcloutier.com/x86/">Felix Cloutier</a>
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_motorola_m68000">8.2. Motorola M68000</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+link: <a href="http://lux.dmcs.pl/pn/asembler_68000/asm.html">instruction set</a>
+</p>
+</li>
+<li>
+<p>
+arquitectura general
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>Procesador de 16 bits
+Aprox . 90 instrucciones máquina
+12 modos de  direccionamiento
+9 formatos de instrucción distintos y con tamaños de una a cinco palabras
+Ancho del  bus  de datos: 16 bits
+Tamaño mínimo  direccionable : 1 byte
+Ancho del  bus  de direcciones: 24 bits (2^24^bytes = 16 Mbytes de memoria direccionables )</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+Registros:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+8 Registros de Datos de propósito general: D0-D7
+</p>
+</li>
+<li>
+<p>
+7 Registros de Instrucciones de propósito general A0-A6
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+modos de direccionamiento
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+# : inmediato
+</p>
+</li>
+<li>
+<p>
+Di : registro directo
+</p>
+</li>
+<li>
+<p>
+(Ai):  indirecto de registro
+</p>
+</li>
+<li>
+<p>
+(Ai)+: indirecto de registro con postincremento
+</p>
+</li>
+<li>
+<p>
+-(Ai): indirecto de registro con preincremento
+</p>
+</li>
+<li>
+<p>
+D(Ai): indirecto de registro con desplazamiento D
+</p>
+</li>
+<li>
+<p>
+D(Ai,Ri.X) : registro Ai indirecto indexado Ri con desplazamiento D
+</p>
+</li>
+<li>
+<p>
+D(PC) : relativo al PC con desplazamiento D
+</p>
+</li>
+<li>
+<p>
+D(PC,Ri.X) : relativo al PC indexado Ri con desplazamiento D
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Datos
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Enteros en Complemento a 2 .
+</p>
+</li>
+<li>
+<p>
+Sufijos Operación: B byte (1 byte), W word (2 bytes) , L long (4 Byte)
+</p>
+</li>
+<li>
+<p>
+Prejijos datos: $ hexadecimal
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Memoria
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Big Endian : LSB en la dirección más alta y MSB en la dirección más baja
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_mips">8.3. MIPS</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://logos.cs.uic.edu/366/notes/mips%20quick%20tutorial.htm">http://logos.cs.uic.edu/366/notes/mips%20quick%20tutorial.htm</a>
+</p>
+</li>
+<li>
+<p>
+Procesador RISC de 32 bits
+</p>
+</li>
+<li>
+<p>
+Microprocessor without Interlocked Pipeline Stages (MIPS)
+</p>
+</li>
+<li>
+<p>
+Versiones de MIPS: MIPS I, II, III, IV, and V; 5 distribuciones para MIPS32/64.
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>~70 instrucciones máquina
+Instrucciones clasificadas en cuatro grupos
+        Movimiento de datos  ̧
+        Aritmética entera, logicas y desplazamiento
+        Control de flujo
+        Aritmética en punto flotante
+4 modos de  direccionamiento
+        Inmediato
+        Directo de registros
+        Indirecto con desplazamiento
+        Indirecto con desplazamiento relativo al PC
+Banco de 64 registros (32 bits cada uno)
+        32 de propósito general (R0-R31)
+        32 para instrucciones en punto flotante (F0-F31). Pueden usarse como:
+        32 registros para operaciones en simple precisión (32 bits)
+        16 registros para operaciones en doble precisión (64 bit)
+3 formatos de instrucción distintos con longitud única de 32 bits:
+         Op Code: 6 bits
+         R :three registers, a shift amount field, and a function field;
+         I :two registers and a 16-bit immediate value
+         J :26-bit jump target
+Arquitectura registro-registro
+        Sólo las instrucciones de LOAD y STORE hacen referencia a memoria
+        El resto de instrucciones operan sobre registros
+                Instrucciones con tres operandos: 2 op.fuente y 1 op.Destino
+ ̧             Notación ensamblador: op  x, y, z    x←(y)op(z)
+Datos:
+        Enteros Complemento a 2 : byte (1B), media palabra (2B), palabra (4B)
+        Nº Reales: IEEE-754 simple y doble precisión</code></pre>
+</div></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_arm">8.4. ARM</h3>
+<div class="paragraph"><p>*</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ejercicios_representacion_instrucciones">9. Ejercicios: Representación Instrucciones</h2>
+<div class="sectionbody">
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Comparar los computadores de 1,2 y 3 direcciones escribiendo los programas para calcular la expresión X= (A+B*C)/(D-E*F-G*H) siendo los repertorios los siguientes:
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+1 Dirección:LOAD M; STORE M; SUM M; RES M; MUL M; DIV M.
+</p>
+</li>
+<li>
+<p>
+2 Direcciones:MOVE X,Y; SUM X,Y; RES X,Y; MUL X,Y; DIV X,Y
+</p>
+</li>
+<li>
+<p>
+3 Direcciones:SUM X,Y,Z; RES X,Y,Z; MUL X,Y,Z; DIV X,Y,Z.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Donde M es una posición de memoria y X,Y,Z son direcciones de memoria o registros.
+</p>
+</li>
+</ul></div>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+Sea un computador con palabras de 32 bits. La CPU tiene 64 instrucciones diferentes de un operando, 32 registros de propósito general de 32 bits y posibilidad de direccionamiento directo a registro o indirecto con desplazamiento a registro-base.a)Diseñar el formato de instrucción para este computador. Debe especificar un registro de dirección y un desplazamiento, además del modo de direccionamiento y código de operación.b)¿Cuál es el máximo valor del desplazamiento (el desplaz. es un número en C2)?
+</p>
+</li>
+<li>
+<p>
+Un computador con palabras de 24 bits posee 16 instrucciones diferentes de un operando, 8 registros para de propósito general, y 3 modos de direccionamiento (directo a registro, indirecto con registro e indirecto con desplazamiento a registro-base)a)Diseñar un formato de instrucción para este computador. Debe especificar el código de operación, el modo de direccionamiento, un registro y un desplazamiento.b)¿Cuál es el rango de valores del desplazamiento en magnitud?, ¿y en C2?
+</p>
+</li>
+<li>
+<p>
+Un computador tiene un formato de instrucción de 11 bits donde el campo de operando es de 4 bits. ¿Es posible codificar en este formato 5 instrucciones de dos operandos, 45 de un operando y 48 sin operando?. Justificar la respuesta.
+</p>
+</li>
+<li>
+<p>
+Un computador de 16 bits de ancho de palabra (instrucciones, palabra de memoria, registros) y 8 registros, tiene el siguiente repertorio de instrucciones:
+        ??14 instrucciones de referencia de un solo operando en memoria, con direccionamiento directo e indirecto de memoria
+        ??31 instrucciones con dos operandos con los modos de direccionamiento directo e indirecto de registro.
+        ??32 instrucciones sin operando explícito.
+        a)Especificar la codificación de las instrucciones.
+        b)Especificar la zona de memoria alcanzable en cada tipo de direccionamiento y rango posible de valores de los operandos (en C’2).
+</p>
+</li>
+<li>
+<p>
+Un computador basado en el 68000 presenta los siguientes contenidos en registro y memoria:
+</p>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="center" valign="top">REGISTROS</th>
+<th align="center" valign="top">MEMORIA</th>
+<th align="center" valign="top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table">A1 = 100</p></td>
+<td align="center" valign="top"><p class="table">Dirección</p></td>
+<td align="center" valign="top"><p class="table">Contenido</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">A2 = 2</p></td>
+<td align="center" valign="top"><p class="table">99</p></td>
+<td align="center" valign="top"><p class="table">104</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">100</p></td>
+<td align="center" valign="top"><p class="table">108</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">101</p></td>
+<td align="center" valign="top"><p class="table">106</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">102</p></td>
+<td align="center" valign="top"><p class="table">107</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">&#8230;</p></td>
+<td align="center" valign="top"><p class="table">&#8230;</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">199</p></td>
+<td align="center" valign="top"><p class="table">100</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">200</p></td>
+<td align="center" valign="top"><p class="table">34</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">201</p></td>
+<td align="center" valign="top"><p class="table">96</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">202</p></td>
+<td align="center" valign="top"><p class="table">201</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Si el contenido del desplazamiento de la instrucción en ejecución es desp=99 ¿Cuál seria el valor del operando (de tamaño byte) con los siguientes modos de direccionamientos?.
+</p>
+<div class="olist lowerroman"><ol class="lowerroman">
+<li>
+<p>
+Directo de memoria o absoluto (dirección = desplazamiento).
+</p>
+</li>
+<li>
+<p>
+Directo de registro con A1.
+</p>
+</li>
+<li>
+<p>
+Indirecto de registro con A1.
+</p>
+</li>
+<li>
+<p>
+Indirecto con desplazamiento con registro base A1
+</p>
+</li>
+<li>
+<p>
+Indirecto con desplazamiento con registro base A2.
+</p>
+</li>
+<li>
+<p>
+Indirecto con desplazamiento con registro base A1 e indexado con A2.
+</p>
+</li>
+<li>
+<p>
+Indirecto de registro con predecremento con A1.
+</p>
+</li>
+</ol></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Un computador presenta los siguientes contenidos en registro y memoria:
+</p>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="center" valign="top">REGISTROS</th>
+<th align="center" valign="top">MEMORIA</th>
+<th align="center" valign="top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table">R1=99</p></td>
+<td align="center" valign="top"><p class="table">Dirección</p></td>
+<td align="center" valign="top"><p class="table">Contenido</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">R2=6</p></td>
+<td align="center" valign="top"><p class="table">96</p></td>
+<td align="center" valign="top"><p class="table">100</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">97</p></td>
+<td align="center" valign="top"><p class="table">102</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">98</p></td>
+<td align="center" valign="top"><p class="table">101</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">99</p></td>
+<td align="center" valign="top"><p class="table">104</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">100</p></td>
+<td align="center" valign="top"><p class="table">108</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">101</p></td>
+<td align="center" valign="top"><p class="table">106</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">102</p></td>
+<td align="center" valign="top"><p class="table">107</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">103</p></td>
+<td align="center" valign="top"><p class="table">109</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">104</p></td>
+<td align="center" valign="top"><p class="table">110</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Si el contenido del desplazamiento de la instrucción en ejecución es 96 ¿Cuál seria el valor del operando con los siguientes direccionamientos?.
+        a)Directo de memoria (dir = desp).
+        b)Indirecto de memoria memoria (dir memoria = desp).
+        c)Directo de registro con R1.
+        d)Indirecto de registro con R1.
+        e)Indirecto con desplazamiento con registro base R2
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Se tiene un computador con un ancho de palabra de 32 bits y con un banco de registros de 32 registros de 32 bits. El computador tiene 64 instrucciones diferentes y los siguientes modos de direccionamiento; directo de memoria, indirecto de memoria e indirecto con desplazamiento a registro-base.
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Diseñar los dos formatos de las instrucciones de dos operandos sabiendo que siempre un operando está en memoria y otro en registro.
+</p>
+</li>
+<li>
+<p>
+Si cada dirección de memoria especifica un byte ¿qué zona de memoria se puede acceder con cada uno de los modos de direccionamiento?
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+Consideremos cuatro arquitectura de procesador: acumulador, pila, memoria-memoria y registro-registro con 16 registros. Para las cuatro arquitectura se tienen los siguientes datos comunes:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El código de operación es siempre 1 byte
+</p>
+</li>
+<li>
+<p>
+Todas las direcciones de memoria son 2 bytes
+</p>
+</li>
+<li>
+<p>
+Todos los datos son 4 bytes
+</p>
+</li>
+<li>
+<p>
+Todas las instrucciones tienen una longitud igual a un numero entero de bytes
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Escribir de forma genérica los programas en lenguaje ensamblador de cada una de las arquitecturas para realizar la siguiente operación; A=B+C. Para cada programa, calcular el tráfico con  memoria  y  el  tamaño  del  código. ¿Cuál es mas eficiente?.
+</p>
+</li>
+<li>
+<p>
+Escribir los cuatro programas ensamblador  para  la  siguiente  secuencia de operaciones A=B+C ; B=A+C ; D=A-B Calcular el   trafico con memoria y el tamaño del código. ¿Cuál es más eficiente?.
+</p>
+</li>
+</ol></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Considerando que en un procesador cada  búsqueda de instrucción y cada acceso a un  operando consumen un ciclo y teniendo en  cuenta los siguientes datos en millones de  referencias.
+</p>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<thead>
+<tr>
+<th align="center" valign="top"></th>
+<th align="center" valign="top">TEX</th>
+<th align="center" valign="top">Spice</th>
+<th align="center" valign="top">C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table">Arquitectura R-R</p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">Referencias de datos</p></td>
+<td align="center" valign="top"><p class="table">5.4</p></td>
+<td align="center" valign="top"><p class="table">4.9</p></td>
+<td align="center" valign="top"><p class="table">1.4</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">Palabras de instr.</p></td>
+<td align="center" valign="top"><p class="table">14</p></td>
+<td align="center" valign="top"><p class="table">18.9</p></td>
+<td align="center" valign="top"><p class="table">3.9</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">Arquitectura M-M</p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table"></p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">Referencias a datos</p></td>
+<td align="center" valign="top"><p class="table">12.4</p></td>
+<td align="center" valign="top"><p class="table">10.5</p></td>
+<td align="center" valign="top"><p class="table">4.1</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">Palabras de instr</p></td>
+<td align="center" valign="top"><p class="table">7.5</p></td>
+<td align="center" valign="top"><p class="table">8.4</p></td>
+<td align="center" valign="top"><p class="table">2.4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Calcular el porcentajes de accesos a  memoria que son para buscar  instruccio nes de los tres programas para  la arquitectura R-R y para la arquitectura  M-M.
+</p>
+</li>
+<li>
+<p>
+¿Cuál es la relación de accesos totales  entre ambas arquitecturas?
+</p>
+</li>
+</ol></div>
+</li>
+<li>
+<p>
+Mostrar el contenido de todos los registros y  posiciones de memoria afectadas (sin incluir  el PC) por la  ejecución de cada una de las  instrucciones, suponiendo que partimos  siempre de las condiciones iniciales  especificadas:
+</p>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="center" valign="top">Instrucciones:</th>
+<th align="center" valign="top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table">a. CLR.L</p></td>
+<td align="center" valign="top"><p class="table">-(A1)</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">b.  CLR.W</p></td>
+<td align="center" valign="top"><p class="table">D2</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">c.  MOVE.W</p></td>
+<td align="center" valign="top"><p class="table">$1204,D1</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">d.  MOVE.W</p></td>
+<td align="center" valign="top"><p class="table">#$1204,D1</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">e.  MOVE.B</p></td>
+<td align="center" valign="top"><p class="table">(A2)+,$1200</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">f.  MOVE.L</p></td>
+<td align="center" valign="top"><p class="table">D1,-(A2)</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">g.  MOVE.L</p></td>
+<td align="center" valign="top"><p class="table">(A1)+,D2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="center" valign="top">Condiciones iniciales:</th>
+<th align="center" valign="top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table">REGISTROS</p></td>
+<td align="center" valign="top"><p class="table">MEMORIA</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">A1:00001202</p></td>
+<td align="center" valign="top"><p class="table">001200:1111</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">A2:00001204</p></td>
+<td align="center" valign="top"><p class="table">001202:2222</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">D1:01020304</p></td>
+<td align="center" valign="top"><p class="table">001204:3333</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">D2:F0F1F2F3</p></td>
+<td align="center" valign="top"><p class="table">001206:4444</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">001208:5555</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">00120A:6666</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>
+Mostrar el contenido de todos los registros  y posic iones de memoria afectadas (sin  incluir el PC) por la ejecución de cada una  de las instrucciones, suponiendo que  partimos siempre de las condiciones iniciales  especificadas:
+</p>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="center" valign="top">Instrucciones:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table">a. MOVEA.W -(A1),A3</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">b. CLR.B  -11(A2)</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">c. MOVE.W  (A4)+,-100(A1,D5.W)</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">d. MOVE.W  #$1FF,D5</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="center" valign="top">Condiciones iniciales:</th>
+<th align="center" valign="top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table">REGISTROS</p></td>
+<td align="center" valign="top"><p class="table">MEMORIA</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">A1:00001504</p></td>
+<td align="center" valign="top"><p class="table">001500:1234</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">A2:00001510</p></td>
+<td align="center" valign="top"><p class="table">001502:5678</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">A3:11122233</p></td>
+<td align="center" valign="top"><p class="table">001504:9ABC</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">A4:00001506</p></td>
+<td align="center" valign="top"><p class="table">001506:EF11</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">D5:FA000064</p></td>
+<td align="center" valign="top"><p class="table">001508:2233</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table"></p></td>
+<td align="center" valign="top"><p class="table">00150A:4455</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>
+Suponiendo que se dan las siguientes  condiciones iniciales, mostrar el contenido  de todos los registros y posiciones de  memoria afectadas (incluyendo el PC) por la ejecución de cada una de las instrucciones.  Suponer, además, que las instrucciones  están en posiciones consecutivas de  memoria, a partir de la dirección $2000, y que se ejecutan en secuencia.
+</p>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="center" valign="top">Condiciones iniciales:</th>
+<th align="center" valign="top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table">REGISTROS</p></td>
+<td align="center" valign="top"><p class="table">MEMORIA</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">A1:00001504</p></td>
+<td align="center" valign="top"><p class="table">001500:1234</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">A2:00001510</p></td>
+<td align="center" valign="top"><p class="table">001502:5678</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">A4:00001506</p></td>
+<td align="center" valign="top"><p class="table">001504:9ABC</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">D3:11122233</p></td>
+<td align="center" valign="top"><p class="table">001506:EF11</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">D5:FA000070</p></td>
+<td align="center" valign="top"><p class="table">001508:2233</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">D6:AB00FF9B</p></td>
+<td align="center" valign="top"><p class="table">00150A:4455</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="center" valign="top">Instrucciones:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center" valign="top"><p class="table">CLR.B  -(A4)</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">MOVE.L  -124(A2, D5.W), -(A1)</p></td>
+</tr>
+<tr>
+<td align="center" valign="top"><p class="table">MOVE.W  $64(A4,D6.W), D3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Version v1.0.0<br />
+Last updated
+ 2018-09-24 13:13:35 CEST
+</div>
+</div>
+</body>
+</html>

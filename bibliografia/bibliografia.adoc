@@ -1,0 +1,78 @@
+
+[[arqui_computadores]]
+[bibliography]
+.Arquitectura de Computadores
+- [[[WS_es]]] William Stallings. Organización y arquitectura de computadores .
+Edición 7, reimpresa Pearson Prentice Hall
+ISBN 8489660824, 9788489660823 . 2006
+- [[[WS_en]]] William Stallings.Computer Organization and Architecture: Designing for Performance.
+ 9ª Ed Upper Saddle River (NJ) : Prentice Hall, 2013
+ISBN 0-273-76919-7 . 2012
+- [[[Randal_Bryant]]]Randal E. Bryant, David R. O'Hallaron. Computer Systems: A Programmer's Perspective. Addison-Wesley. 2nd Edition. 2010.
+- [[[Patt_Henn]]]David A. Patterson, John L. Hennessy. Computer Organizarion and Design. The Hardware / Software Interface. Morgan Kaufmann. 2009. Libro Standard de la mayoría de las Universidades.
+- [[[MoMano]]] Computer System Architecture, Morris Mano.
+
+
+
+
+
+    
+[bibliography]
+.x86
+- [[[FLAGS]]] https://en.wikipedia.org/wiki/FLAGS_register
+
+[[prog_ensamblador]]
+[bibliography]
+.Programación Ensamblador
+- [[[PGU]]] http://programminggroundup.blogspot.com.es/2007/01/programming-from-ground-up.html[Programming from the Ground Up] 
+  Jonathan Bartlett Edited by Dominick Bruno, Jr.
+  Copyright © 2003 by Jonathan Bartlett Published by Bartlett Publishing in Broken Arrow, Oklahom
+  ISBN 0-9752838-4-7
+- [[[UPC]]]https://upcommons.upc.edu/handle/2117/115067[El ensamblador... pero si es muy fácil]: IA-32 (i386) (sintaxis AT&T)
+- [[[ATT]]] https://docs.oracle.com/cd/E26502_01/html/E28388/eoiyg.html[Oracle AT&T language]
+- [[[WikiBook]]] https://en.wikibooks.org/wiki/X86_Assembly[Apuntes WikiBook:x86 Assembly: AT&T]
+- [[[pc_asm]]]Paul Carter. PC Assembly Language. Acceso libre. 2006.
+- [[[asm_linux]]] Jeff Duntemann. Assembly Language Step-by-Step: Programming with Linux. Wiley Ed. 3rd Edition. 2009.
+
+- [[[NASM_tuto]]] https://www.tutorialspoint.com/assembly_programming/index.htm[Tutorial NASM tutorialspoint]
+- [[[NASM_bristol]]] http://www.c-jump.com/CIS77/CIS77syllabus.htm[Apuntes Bristol Community College: Prog. NASM ]
+- [[[i386]]] http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/toc.htm[i386 (32 bits)]
+- [[[A64]]] http://www.felixcloutier.com/x86/[amd64 (64 bits)]: *recomendado*
+- [[[IAL]]] https://software.intel.com/en-us/articles/introduction-to-x64-assembly[Intel asm language]: Intel oficial Vol 1 Basic Architecture
+- [[[AMD]]] http://support.amd.com/TechDocs/24593.pdf[AMD oficial]. Vol 3. 2.3 Summary of Registers and Data Types
+- [[[paul_carter]]] http://pacman128.github.io/pcasm/[Paul Carter PC Assembly Language. Acceso libre. 2006.]: Netwide Assembler NASM, Intel language
+- [[[j_dunte]]] http://www.duntemann.com/[Jeff Duntemann]. Assembly Language Step-by-Step: Programming with Linux. Wiley Ed. 3rd Edition. 2009.
+- [[[irvine]]] http://kipirvine.com/[Kip R. Irvine]. Assembly Language for x86 Processors. Pearson. 6th Edition. 2014.
+
+[[low_level_docs]]
+[bibliography]
+.Documentos de Programación de Bajo Nivel
+- [[[ABI_i386]]] https://www.uclibc.org/docs/psABI-i386.pdf[ABI i386]
+- [[[ms_llamada]]] https://docs.microsoft.com/es-es/cpp/build/x64-software-conventions?view=vs-2017[Convención de llamada MicroSoft]
+
+[bibliography]
+.Lenguaje de Programación C
+- [[[c_king]]] http://knking.com/books/c/[K.N.King] C programming, a Modern Approach W.W. Norton 2ªEd. 2008.
+
+[bibliography]
+.Herramientas de Desarrollo de Programas
+- [[[I386]]]https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent:[AS i386]: syntax, mnemonics, register
+- [[[GNU]]] https://www.gnu.org/manual/manual.html[GNU Software Development]
+- [[[GAS]]] http://sourceware.org/binutils/docs-2.31/as/index.html[GNU ASsembler]
+- [[[GDB]]] https://www.gnu.org/software/gdb/documentation/[debugger GDB]
+- [[[GCC]]] https://gcc.gnu.org/onlinedocs/gcc/[Compilador GCC]
+- [[[CPP]]] https://gcc.gnu.org/onlinedocs/cpp/[Preprocessor cpp]
+- [[[BiU]]] http://sourceware.org/binutils/docs-2.31/binutils/index.html[herramientas GNU binutils]:as,ld,objdump,...
+- [[[VIM]]] https://www.vim.org/docs.php[Vim]
+- [[[EMACS]]] http://www.gnu.org/software/emacs/#Manuals[Emacs]
+
+[bibliography]
+.Artículos
+- [[[jvn]]] https://www.linuxvoice.com/john-von-neumann/[linuxvoice]
+- [[[w_uni]]]  http://www.cs.uwm.edu/classes/cs458/Lecture/HTML/ch04.html[wisconsin university RTL]
+
+
+
+
+
+

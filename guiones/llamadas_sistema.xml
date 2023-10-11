@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+
+<article lang="es">
+<articleinfo>
+    <title>LLamadas al Sistema Operativo (Kernel)</title>
+    <date>2013 May 5</date>
+    <author>
+        <firstname>Cándido</firstname>
+        <surname>Aramburu</surname>
+        <email>candido@unavarra.es</email>
+    </author>
+    <authorinitials>CA</authorinitials>
+<revhistory><revision><revnumber>v1.0.0</revnumber><date>2013 May 5</date><authorinitials>CA</authorinitials></revision></revhistory>
+</articleinfo>
+<section id="_general">
+<title>General</title>
+<itemizedlist>
+<listitem>
+<simpara>
+El HW está protegido por el Kernel del SO y por lo tanto el programado de ensamblador accede al HW indirectamente a través de las "LLamadas al Sistema". Por lo tanto si queremos acceder al teclado y al monitor será necesario realizar llamadas al kernel.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Definición de  la interfaz entre el programador y el kernel del SO: <emphasis>System V Application Binary Interface: SysV-ABI</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+El lenguaje ensamblador sigue la norma ABI para el lenguaje C.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+LLamadas al sistema desde el código ensamblador:
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+directamente con la instrucción <literal>syscall</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+indirectamente a través de las funciones de la librería standard <emphasis>libc</emphasis> con la instrucción <literal>call</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+En código ensamblador es necesario pasar los argumentos previamente a la ejecución de la llamada <literal>call</literal>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+<section id="_manuales_de_las_llamadas_al_sistema">
+<title>Manuales de las llamadas al sistema</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Listado con los nombres de las llamadas a al sistema:  <literal>man syscalls</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+LLamada al sistema <emphasis>exit</emphasis>: <literal>man 3 exit</literal>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+describe la función de llamada al sistema
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+especifíca el nombre de la cabecera de la librería necesaria para compilar en lenguaje C.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+especifíca los parámetros que necesita la función y el orden en que son transferidos.
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+LLamada al sistema <emphasis>write</emphasis>: <literal>man 2 write</literal>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_arquitectura_x86_64">
+<title>Arquitectura x86-64</title>
+<section id="_codigos_de_las_llamadas">
+<title>Codigos de las llamadas</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Códigos de las llamadas al sistema: <emphasis>/usr/include/asm/unistd_64.h</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+El código de la llamada se pasa a tavés del registro <emphasis>RAX</emphasis>.
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_como_pasar_los_argumentos_directamente_al_kernel">
+<title>Como pasar los argumentos directamente al Kernel</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Los parámetros del primero al sexto se corresponden con los registros : <emphasis><emphasis role="strong">RDI-RSI-RDX-R10-R8-R9</emphasis></emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Valor de retorno: <emphasis>RAX</emphasis>
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_exit">
+<title>exit()</title>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>gcc -g -o salida salida.c</literal>
+</simpara>
+<programlisting language="c" linenumbering="unnumbered">#include &lt;stdlib.h&gt;
+void main (void)
+{
+  exit (0xFF);
+    }</programlisting>
+</listitem>
+<listitem>
+<simpara>
+<literal>gcc  -o salida salida.c</literal>
+</simpara>
+<programlisting language="C" linenumbering="unnumbered">/* Llamada al sistema desde C
+   Prototipo:    int syscall(int number, ...);
+   man syscall
+*/
+
+#define _GNU_SOURCE
+#include &lt;unistd.h&gt;
+#include &lt;sys/syscall.h&gt;
+
+void main (void)
+{
+  syscall (__NR_exit,0xFF);
+    }</programlisting>
+</listitem>
+<listitem>
+<simpara>
+<literal>gcc -g -nostartfiles -o salida salida.s</literal>
+</simpara>
+<programlisting language="asm" linenumbering="unnumbered">        .global _start
+        .section .text
+_start:
+        mov    $0xFF,%rdi       #return code
+        call    exit            #libc library
+        .end</programlisting>
+</listitem>
+<listitem>
+<simpara>
+<literal>gcc -g -nostartfiles -o salida salida.s</literal>
+</simpara>
+<programlisting language="asm" linenumbering="unnumbered">        .global _start
+        .section .text
+_start:
+        mov    $0xFF,%rdi       #return code
+        mov    $60,%rax         # exit syscall code
+        call    syscall         #libc library
+        .end</programlisting>
+</listitem>
+<listitem>
+<simpara>
+<literal>gcc -g -nostartfiles -o salida salida.s</literal>
+</simpara>
+<programlisting language="asm" linenumbering="unnumbered">        .global _start
+        .section .text
+_start:
+         mov    $0xFF,%rdi      #return code
+         mov    $60,%rax        # exit syscall code
+         syscall                #system call
+         .end</programlisting>
+</listitem>
+</itemizedlist>
+</section>
+<section id="_printf">
+<title>printf ()</title>
+<itemizedlist>
+<listitem>
+<simpara>
+<emphasis>imprimir_ind.s</emphasis>
+</simpara>
+<programlisting language="asm" linenumbering="unnumbered">### imprimir dos cadenas utilizando la librería libc
+
+        .equ STDOUT,1
+        .equ SYSWRITE,1
+
+        .section .data
+planet:
+        .byte 9
+        .section .rodata
+mensaje:
+        .asciz "El número de planetas es %d \n"        #string con formato de la función printf
+saludo:
+        .ascii "Hola\n"
+        .equ LON,. - saludo    #longitud del mensaje referenciado por saludo
+
+        .section .text
+        .global _start
+_start:
+        ## imprimir en la pantalla
+        mov $STDOUT,%rdi        #fd es la refencia al fichero donde se va a escribir
+        mov $saludo, %rsi               #dirección de memoria de lo que se va a escribir en el fichero
+        mov $LON,%rdx                   #tamaño del buffer de memoria que se va a escribir
+        call write                      #orden de escritura al kernel a través de la librería libc
+
+        ## imprimir en la pantalla
+        mov planet,%rsi       # 2º argumento de la función printf
+        mov $mensaje,%rdi     # 1º argumento de la función printf: dirección del string
+        call printf
+        ## salir al sistema
+        mov    $0x0,%rdi        #return code
+        call exit</programlisting>
+<itemizedlist>
+<listitem>
+<simpara>
+Compilación con <emphasis>gcc</emphasis> : no es necesario indicar al linker el módulo objeto libc
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>gcc  -g -nostartfiles -o imprimir imprimir.s</literal>
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>
+Compilación con <emphasis>as</emphasis> y <emphasis>ld</emphasis>
+</simpara>
+<itemizedlist>
+<listitem>
+<simpara>
+<literal>as  -gstabs -o imprimir.o imprimir.s</literal>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+<literal>ld  -dynamic-linker /lib/ld-linux.so.2  -o imprimir imprimir.o -lc</literal> : lincar con el módulo libc
+</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</section>
+</section>
+<section id="_ejercicios">
+<title>Ejercicios</title>
+<itemizedlist>
+<listitem>
+<simpara>
+Desarrollar el programa <emphasis>hola_mundo_v1.s</emphasis> que imprima en pantalla el mensaje "Hola Mundo" utilizando la librería <emphasis>libc</emphasis>
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Desarrollar el programa <emphasis>hola_mundo_v2.s</emphasis> que imprima en pantalla el mensaje "Hola Mundo" sin utilizar la librería <emphasis>libc</emphasis>.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Desarrollar el programa <emphasis>hola_mundo_v3.s</emphasis> que imprima en pantalla el mensaje "Introducir Mensaje:", lea del teclado cualquier mensaje e imprima en pantalla el mensaje introducido a través del teclado.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Desarrollar el programa <emphasis>hola_mundo_v4.s</emphasis> que lee el mensaje "Hola Mundo" de la línea de comandos pasando los argumentos a través de la pila.
+</simpara>
+</listitem>
+<listitem>
+<simpara>
+Desarrollar el programa <emphasis>hola_mundo_v5.s</emphasis> que lee el mensaje "Hola Mundo" de la línea de comandos pasando los argumentos a través de los registros.
+</simpara>
+</listitem>
+</itemizedlist>
+</section>
+</article>

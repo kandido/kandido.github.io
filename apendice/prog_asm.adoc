@@ -1,0 +1,758 @@
+Lenguajes de programación en Ensamblador
+========================================
+
+:doctitle: Lenguajes de programación en Ensamblador
+
+
+[[leng_asm]]
+Manuales de referencia 
+----------------------
+
+Lenguaje Intel
+~~~~~~~~~~~~~~
+* Manuales oficiales
+** http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html[Intel]: Vol 2
+** http://developer.amd.com/resources/documentation-articles/developer-guides-manuals/[AMD]: apartado Manuals : vol 3
+** http://developer.amd.com/wordpress/media/2008/10/24594_APM_v3.pdf[AMD64 Architecture Programmer’s Manual Volume 3: General Purpose and] System Instructions 
+
+* Manuales no oficiales:
+** http://www.felixcloutier.com/x86/[manual Intel quick]: *recomendado*
+** http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/toc.htm[intel descriptivo i386]
+*** http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/c17.htm[Repertorio ISA y Formato de Instrucción]
+** http://kluge.in-chemnitz.de/docs/notes/assembly.php[kluge]
+** http://www.unixwiz.net/techtips/x86-jumps.html[Saltos Condicionales]
+
+
+Netwide ASM (NASM) para el lenguaje de intel
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Ejemplo <<sum1toN_nasm, sum1toN.asm>> de programa en lenguaje ensamblador intel y assembler "NetWide Asm" (nasm).
+* Tutorial completo <<NASM_tuto, NASM tutorialspoint>>
+* Apuntes de la  <<NASM_bristol, Universidad de Bristol>>
+* Apuntes del <<paul_carter, Dr. Paul Carter>> y <<pc_asm, Dr. Paul Carter>>
+
+
+lenguaje AT&T
+~~~~~~~~~~~~~
+
+* https://docs.oracle.com/cd/E53394_01/html/E54851/eqbsu.html[Oracle Solaris ASM]
+** En este documento  a la sintaxis AT&T la denomina "Oracle Solaris".
+** http://docs.oracle.com/cd/E19253-01/817-5477/817-5477.pdf[AT&T Solaris Manual amd64-i386 ]: lenguaje y traductor assembler.
+
+[[assembler_as_i386]]
+Características arquitectura i386
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent:[Assembler: Características dependientes de la arquitectura x86]
+
+
+[[assembler_as_directivas_i386]]
+Assembler (Traductor Ensamblador): Directivas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* https://sourceware.org/binutils/docs-2.26/as/Pseudo-Ops.html#Pseudo-Ops:[Directivas del traductor Assembler] 
+
+Discusión por qué ASM AT&T
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+* http://es.tldp.org/Presentaciones/200002hispalinux/conf-28/28.ps.gz
+
+
+TRANSFERENCIA
+~~~~~~~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="<1,2*<2,<4,<2",options="header"]
+|====
+include::../tablas/mnemonicox86_transferencia.csv[]
+|====
+
+
+*  Flags: *±* =Afectado por esta instrucción, *?* =Indefinido luego de esta instrucción
+
+
+
+
+ARITMÉTICOS
+~~~~~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="<1,2*<2,<4,<2",options="header"]
+|====
+include::../tablas/mnemonicox86_aritmetico.csv[]
+|====
+
+* *i*:para más información ver especificaciones de la intrucción, 
+* *#*:entonces CF:=0, OF:=0 sino CF:=1, OF:=1
+
+
+
+LÓGICOS                                                                                                              
+~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="<1,2*<2,<4,<2",options="header"]
+|====
+include::../tablas/mnemonicox86_logico.csv[]
+|====
+
+MISCELÁNEOS                                                                                                     
+~~~~~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="<1,2*<2,<4,<2",options="header"]
+|====
+include::../tablas/mnemonicox86_miscelaneo.csv[]
+|====
+
+
+
+SALTOS  (generales)
+~~~~~~~~~~~~~~~~~~~
+
+* https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow#Jump_if_Lesser[wiki x86 assembly]
+
+------------------------
+Nombre  Comentario                      Código          Operación  
+CALL    Llamado a subrutina             CALL Proc                  
+JMP     Saltar                          JMP Dest
+JE      Saltar si es igual              JE Dest         (= JZ)     
+JZ      Saltar si es cero               JZ Dest         (= JE)     
+JCXZ    Saltar si CX es cero            JCXZ Dest                  
+JP      Saltar si hay paridad           JP Dest         (= JPE)    
+JPE     Saltar si hay paridad par       JPE Dest        (= JP)
+JPO     Saltar si hay paridad impar     JPO Dest        (= JNP)                     
+JNE     Saltar si no es igual           JNE Dest        (= JNZ)	    
+JNZ     Saltar si no es cero            JNZ Dest        (= JNE)	    
+JECXZ   Saltar si ECX es cero           JECXZ Dest 386	    
+JNP     Saltar si no hay paridad        JNP Dest        (= JPO)
+RET     Retorno de subrutina            RET
+------------------------		          
+
+
+SALTOS  Sin Signo (Cardinal) SALTOS Con Signo (Integer)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+------------
+Nombre  Comentario                      Código          Operación          
+JA      Saltar si es superior           JA Dest         (= JNBE)           
+JAE     Saltar si es superior o igual   JAE Dest        (= JNB = JNC)      
+JB      Saltar si es inferior           JB Dest         (= JNAE = JC)      
+JBE     Saltar si es inferior o igual   JBE Dest        (= JNA)            
+JNA     Saltar si no es superior        JNA Dest        (= JBE)            
+JNAE    Saltar si no es super. o igual  JNAE Dest       (= JB = JC)        
+JNB     Saltar si no es inferior        JNB Dest        (= JAE = JNC)      
+JNBE    Saltar si no es infer. o igual  JNBE Dest       (= JA)             
+JC      Saltar si hay carry JC Dest     JO  Dest        Saltar si hay Overflow  
+JNC     Saltar si no hay carry          JNC Dest
+JNO     Saltar si no hay Overflow       JNO Dest
+JS      Saltar si hay signo (=negativo) JS Dest   
+JG      Saltar si es mayor              JG Dest         (= JNLE)	 
+JGE     Saltar si es mayor o igual      JGE Dest        (= JNL)	 
+JL      Saltar si es menor              JL Dest         (= JNGE)	 
+JLE     Saltar si es menor o igual      JLE Dest        (= JNG)	 
+JNG     Saltar si no es mayor           JNG Dest        (= JLE)	 
+JNGE    Saltar si no es mayor o igual   JNGE Dest       (= JL)	 
+JNL     Saltar si no es inferior        JNL Dest        (= JGE)	 
+JNLE    Saltar si no es menor o igual   JNLE Dest       (= JG)        
+------------
+
+
+FLAGS (ODITSZAPC)
+~~~~~~~~~~~~~~~~~
+
+------------
+O: Overflow resultado de operac. sin signo es muy grande o pequeño.
+D: Dirección
+I: Interrupción Indica si pueden ocurrir interrupciones o no.
+T: Trampa Paso, por paso para debugging
+S: Signo Signo del resultado. Razonable sólo para enteros. 1=neg. 0=pos.
+Z: Cero Resultado de la operación es cero. 1=Cero
+A: Carru Aux. Similar al Carry, pero restringido para el nibble bajo únicamente
+P: Paridad 1=el resultado tiene cantidad par de bits en uno
+C: Carry resultado de operac. sin signo es muy grande o inferior a cero
+------------
+
+Sufijos
+~~~~~~~
+
+* Sufijos de los mnemónicos del código de operación:
+** 'q' : quad: operando de 8 bytes: cuádruple palabra
+** 'l' : long: operando de 4 bytes: doble palabra
+** 'w' : word: operando de 2 bytes: palabra
+** 'b' : byte: operando de 1 byte
+
+* Si el mnemónico de operación no lleva sufijo el tamaño por defecto del operando es 'long'
+
+
+Intel x86-32 /i386
+------------------
+
+[[sum1toN_att_32]]
+sum1toN.s
+~~~~~~~~~
+* Lenguaje ensamblador ATT para la arquitectura x86-32
++
+
+[source,nasm]
+----
+### Programa: sum1toN.s
+### Descripción: realiza la suma de la serie 1,2,3,...N
+### gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
+### Ensamblaje as --32 --gstabs fuente.s -o objeto.o
+### linker -> ld -melf_i386 -I/lib/i386-linux-gnu/ld-linux.so.2   -o ejecutable objeto.o -lc
+
+        ##  Declaración de variables
+        .section .data
+
+n:	.int 5
+       
+        .global _start
+
+        ##  Comienzo del código
+        .section .text
+_start:
+        mov $0,%ecx # ECX implementa la variable suma
+        mov n,%edx
+bucle:
+        add %edx,%ecx
+        sub $1,%edx
+        jnz bucle
+       
+        mov %ecx, %ebx # el argumento de salida al S.O. a través de EBX según convenio
+                
+        ## salida
+        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
+        int $0x80     # llamada al sistema operativo
+
+        
+        .end
+----
+
+[[intel_i386_hola_asmbin]]
+hola_mundo.s
+~~~~~~~~~~~~
+
+* Compilar el programa en lenguaje ensamblador hola_mundo.s y volcar el módulo objeto binario.
+** Módulo fuente: 'hola_mundo.s.' 
++
+
+[source,nasm]
+----
+### 
+### 	hola_mundo.s
+### 
+### 	Programa simple de iniciación para el desarrollo de programas en Ensamblador x86-32 AT&T.
+###
+### Compilación:
+### 		assemble using: as --32 hola_mundo.s -o hola_mundo.o
+### 		link using:   	ld -melf-i386 hola_mundo.o -o hola_mundo
+###             Driver gcc: 	gcc  -m32 -nostartfiles   hola_mundo.s  -o hola_mundo
+###                                   
+### 	revised on: Septiembre 2022 -- for Linux's i386 environment
+### 
+### 
+	.att_syntax		
+	
+	
+	## Declaración de símbolos externos
+	.global	_start		# visible entry-point
+
+
+	## Reserva de Memoria para datos variables
+	.section	.data
+
+mensaje:	.ascii "Hola mundo\n"
+longitud:	.2byte	. - mensaje 	#tamaño en bytes de la cadena mensaje
+
+	## Sección para el Código de las Instrucciones en Lenguaje Ensamblador
+	.section .text
+	
+_start:	
+
+
+	mov 	$4, %eax	# SYS_WRITE
+	mov 	$1, %ebx	# device ID-number
+	mov 	$mensaje, %ecx	# message address
+	mov 	longitud, %edx	# message length
+	int 	$0x80		# enter the kernel
+
+	## terminate this program
+	mov 	$1, %eax		# SYS_EXIT
+	mov 	$0, %ebx		# return value
+	int 	$0x80			# enter the kernel
+	
+	.end				# no more to assemble 
+----
+
+hola_mundo: Código Máquina Binario
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+* *Sección de Datos*
++
+
+[source,nasm]
+----------------------------------------------------------------------
+08049ff4 <mensaje>: 48 6f 6c 61 20 4d 75 63 64 6f 0a       H o l a SP m u n d o /n
+08049fff <longitud>: 0b 00
+----------------------------------------------------------------------
+** En un lenguaje de alto nivel sería la declaración e inicialización de variables.
+** Etiqueta: referencia a memoria
+** Cada caracter ocupa un byte (codificación ASCII). No interpretar el string como un todo (no little endian) a diferencia de los números enteros y reales.
+** El dato referenciado por la etiqueta longitud está en formato 'little endian' -> 00 0b
+* *Sección de Instrucciones*
++
+
+[source,nasm]
+----------------------------------------------------------------------
+
+## Sección para el Código de las Instrucciones en Lenguaje Ensamblador
+
+08048190 <_start>:
+ 8048190:	b8 04 00 00 00       	mov    $0x4,%eax
+ 8048195:	bb 01 00 00 00       	mov    $0x1,%ebx
+ 804819a:	b9 f4 9f 04 08       	mov    $0x8049ff4,%ecx
+ 804819f:	8b 15 ff 9f 04 08    	mov    0x8049fff,%edx
+ 80481a5:	cd 80                	int    $0x80
+
+## terminate this program
+
+ 80481a7:	b8 01 00 00 00       	mov    $0x1,%eax
+ 80481ac:	bb 00 00 00 00       	mov    $0x0,%ebx
+ 80481b1:	cd 80                	int    $0x80
+
+----------------------------------------------------------------------
+
+Volcado de un programa binario
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Mediante el comando: +objdump -d hola_mundo+, donde hola_mundo es el módulo binario ejecutable.
+
+
+
+Almacenamiento del programa binario en la Memoria Principal
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Una vez realizado el proceso de traducción del módulo fuente en lenguaje ensamblador se genera un módulo objeto en lenguaje binario que se almacena en el disco duro en forma de fichero.
+* El fichero que contiene el módulo objeto ejecutable en lenguaje binario es necesario cargarlo en la memoria principal. Esta tarea la realiza el *cargador* del sistema operativo. 
+* Cada dirección de memoria apunta a 1 byte.
+* La dirección más baja apunta a todo el objeto: instrucción o dato.
+* Ejemplo:  
+** instrucción máquina arquitectura amd64. 
+*** *4001a4:       48 83 ec 10   ->  subq    $16,%rsp*
+** *4001a4:       48 83 ec 10*
+*** En la posición *0x4001A4* está el byte *48*
+*** En la posición *0x4001A4+1* está el byte *83*
+*** En la posición *0x4001A4+2* está el byte *EC*
+*** En la posición *0x4001A4+3* está el byte *10*
+*** En la posición de memoria principal +0x4001A4+ está almacenada la instrucción de 4 Bytes
+
+
+[[form_inst]]
+Interpretación de una instrucción en Código Máquina: Formato de Instrucción de la ISA Intel x86-64
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Ejemplo: 
+** instrucción máquina arquitectura amd64. 
+*** *4001a4:       48 83 ec 10   ->  subq    $16,%rsp*
+** Interpretación del programador:
+*** lenguaje ensamblador AT&T de la arquitectura x86.
+*** Descripción de la instrucción en lenguaje *RTL*: 'RSP <- RSP - 16'
+*** En la posición de memoria principal 0x4001A4 está almacenada la instrucción +subq    $16,%rsp+
+*** subq indica la operación de resta con datos enteros de 64 bits (sufijo q). Resta del operando destino el operando fuente.
+*** El operando fuente  tiene valor decimal 16, 0x10 en hexadecimal y el direccionamiento de este operando es inmediato, es decir, su valor es 16 y está ubicado en la propia instrucción.
+*** El operando destino está almacenado en el registro interno de la CPU denominado RSP
+*** La referencia a la Próxima Instrucción la realiza no la instrucción sino la CPU realizando la opeación PC<-PC+tamaño de la instrucción en bytes.
+** ¿Cómo interpretar una instrucción máquina  en lenguaje binario ? Es necesario consultar el *Manual de Referencia de la Arquitectura ISA de la máquina x86* y tener conocimientos de los modos de direccionamiento.
+** http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html[manual oficial de intel x86 ó x86-64]: cuidado con la sintaxis intel.
+*** consultar el volumen 2B (capítulo 4, pag 394)para la instrucción 'SUB'. Hay que tener encuenta el tamaño de los operandos y los modos de direccionamiento.
+*** El sufijo q de la operación *SUBQ* indica operando de 64 bits. El operando fuente *$16* es referenciado con direccionamiento inmediato y se puede codificar con 8 bits y el operando destino *%RSP* es un registro de 64 bits. Por lo tanto la descripcion intel en el manual será *SUB r64, imm8* que se corresponde con el código de operación *REX.W + 83 /5 ib*.
+*** La descripción del código de operación que hace intel no es sencilla y es necesario consultar la Interpretación de la Instrucción en el *volumen 3 3.1 INTERPRETING THE INSTRUCTION REFERENCE PAGES* y el Formato de Instrucción en el *volumen 2A (capítulo 2 Formato de Instrucción)*
+*** Figura 2.1 Intel 64 and IA-32 Architectures Instruction Format 
+*** El formato de instrucción tiene los campos: *REXprefix-CodOp-ModRB* que en nuestro caso valen *48-83-EC*
+**** interpretación del campo REXprefix: *REX.W*: Manual -> El prefijo REX se utiliza para operandos de 64 bits bien inmediatos y/o registros GlobalPurposeRegister(rax,rbx, etc), 2.2.1.2 More on REX Prefix Fields
+***** El primer byte es +48+ -> +01001000+ donde el bit de la posición 3 está activado por lo que según la tabla "Table 2-4. REX Prefix Fields [BITS: 0100WRXB]" quiere decir que el *operando es de 64bits*
+**** */5* : the ModR/M byte of the instruction uses only the r/m (register or memory) operand. *En este caso register*.Ver el subcampo R/M más abajo.
+**** *ib* : A 1-byte (ib) immediate operand.
+**** Campo Primary Opcode: El segundo byte vale +83+ -> Operación de resta *SUB*
+**** Campo ModRB: El tercer byte vale +EC+ -> +1110-1100+ hace referencia al registro RSP.
+***** 2.1.3 ModR/M and SIB Bytes: Many instructions that refer to an operand in memory (memoria principal o registro interno CPU) ha
+ve an addressing-form specifier byte (called the ModR/M ...). Este campo se divide en subcampos: *Mod-Reg/Opcode-R/M*
+***** Subcampo Mod: +11+ : The mod field combines with the r/m field to form 32 possible values: eight registers (rax, rbx, rcx, rdx, rsi, rdi, rsp, rbp) and 24 addressing modes
+***** Subcampo Reg/Opcode: En este caso no es Secondary Opcode sino que es Reg: rrr= +101+
+***** Subcampo R/M: En este caso R: bbb= +100+ The r/m field can specify a register as an operand or it can be combined with the mod field to encode an addressing mode. *En este caso es el registro operando con código 4*. En la tabla 3.1 el código del *quad word register* con el *Reg Field* de valor *4* es el registro *RSP*
+***** Figure 2-5. Register-Register Addressing (No Memory Operand); REX.X Not Used -> Mod=11 -> Rrrr =0101 -> Bbbb=0100 
+**** El cuarto byte vale en hexadecimal +10+ que se corresponde con el valor inmediato 16 en decimal y debe ser expandido a 64bits.
+
+Intel x86-64 / AMD 64
+---------------------
+
+[[sum1toN_att_64]]
+sum1toN.s
+~~~~~~~~~
+
+-----------
+	#### Programa: sum1toN.s
+	### Descripción: realiza la suma de la serie 1,2,3,...N. La entrada se define en el propio programa y la salida se pasa al S.O.
+	### Lenguaje: Lenguaje ensamblador de GNU para la arquitectura AMD64
+	### gcc  -no-pie -g -nostartfiles -o sum1toN  sum1toN.s
+	### Ensamblaje as  --gstabs sum1toN.s -o sum1toN.o
+        ### linker -> ld    -o sum1toN sum1toN.o
+	##  Declaración de variables
+	##  SECCION DE DATOS
+	  .section .data
+
+n:      .quad 5
+	       
+	  .global _start  
+
+	  ##  Comienzo del código
+	  ##  SECCION DE INSTRUCCIONES
+
+	  .section .text
+_start:
+        movq $0,%rdi # RDI implementa la variable suma
+        movq n,%rdx
+bucle:
+        add %rdx,%rdi
+        sub $1,%rdx
+        jnz bucle
+       
+        ## el argumento de salida al S.O. a través de RDI según convenio ABI AMD64             
+	## salida
+          mov $60, %rax	# código de la llamada al sistema operativo: subrutina exit
+	  syscall # llamada al sistema operativo para que ejecute la subrutina según el valor de RAX
+
+	        
+	  .end
+-----------
+
+
+Hola Mundo
+~~~~~~~~~~
+
+* Módulo Fuente hola_mundo.s en lenguaje ensamblador.
++
+
+[source,nasm]
+----------------------------------------------------------------------
+### ----------------------------------------------------------------
+### 	hola_x86-64_att.s
+### 
+### 	Programa simple de iniciación para el desarrollo de programas en Ensamblador x86-64 AT&T.
+###
+### 	Ficheros complementarios: macros_x86-64_gas.h
+### 		
+###
+### Compilación:
+### 		assemble using: as  hola_intel_gas.s -o hola_intel_gas.o
+### 		link using:   	ld  hola_intel_gas.o -o hola_intel_gas
+###             Driver gcc: 	gcc   -nostartfiles   hola_intel_gas.s  -o hola_intel_gas
+###                                   
+### 	revised on: FEBRERO 2015 -- for Linuxs x86_64 environment
+### 
+### ----------------------------------------------------------------
+	.att_syntax		
+	
+	## Incluir el fichero con las Macros
+	.include "macros_x86-64_gas.h"
+	
+	## Declaración de símbolos externos
+	.global	_start		# visible entry-point
+
+
+	## Reserva de Memoria para datos variables
+	.section	.data
+
+msg0:	.ascii "Hola Mundo\n"
+len0:	.quad	. - msg0 	#tamaño en bytes de la cadena msg0
+
+
+	## Sección para el Código de las Instrucciones en Lenguaje Ensamblador
+	.section .text
+	
+_start:	
+
+	## Prompt del programa: imprimir mensaje
+
+	## Llamada al kernel para que acceda a la pantalla e imprima.
+	mov 	$SYS_WRITE, %rax	# service ID-number 
+	mov 	$STDOUT_ID, %rdi	# device ID-number 
+	mov 	$msg0, %rsi		# message address
+	mov 	len0, %rdx	# message length
+	syscall
+
+		
+
+	## terminate this program
+	mov 	$SYS_EXIT, %eax		# service ID-number
+	mov 	$0, %rdi		# setup exit-code
+	syscall 			# enter the kernel
+	
+	.end				# no more to assemble 
+
+
+----------------------------------------------------------------------
++
+
+[source,nasm]
+----------------------------------------------------------------------
+## Macros en el fichero macros_x86-64_gas.h
+
+## Llamadas al Sistema
+.equ	STDIN_ID,  0		# input-device (keyboard)
+.equ	STDOUT_ID, 1		# output-device (screen)
+.equ	SYS_READ,  0		# ID-number for 'read'
+.equ	SYS_WRITE, 1		# ID-number for 'write'
+.equ	SYS_OPEN,  2		# ID-number for 'open'
+.equ	SYS_CLOSE, 3		# ID-number for 'close'
+.equ	SYS_EXIT,  60		# ID-number for 'exit'
+----------------------------------------------------------------------
+
+
+
+
+Miscellaneous
+~~~~~~~~~~~~~
+
+Tipos de Datos
+^^^^^^^^^^^^^^
+* Tipos de Datos:
+** Dirección de memoria o referencia a memoria: la  etiqueta de nombre longitud
+*** +mov $longitud,%edx+   ->  'mov    0x8049fff,%edx' -> en lenguage de alto nivel es la inicialización de un puntero
+** número entero con signo : formato complemento a 2.
+*** +mov    $0x4,%eax+
+*** El operando 0x4 está  localizado en la propia instrucción, en el campo de operando. El dato 0x4 se almacena en "little endian" -> Campo de operando: double word: 32 bits 0x00000004 -> En memoria ascendente : dirección 8048191: 04 00 00 00 
+** carácter: codificación ASCII
+*** +08049ff4 <mensaje>:+ 48 6f 6c 61 20 -> H o l a SP
+
+Números Reales
+^^^^^^^^^^^^^^
+* http://kluge.in-chemnitz.de/docs/notes/assembly.php[kluge]
+** interesantes los ejemplos de operaciones con números reales
+
+Ciclo de Instrucción
+^^^^^^^^^^^^^^^^^^^^
+
+* Intervención de la CPU en la instrucción *4001a4:       48 83 ec 10   ->  subq    $16,%rsp*
+**  La CPU durante el ciclo de instrucción (fase captura- fase decodificación-fase ejecución) realiza una secuencia de tareas.
+**  La secuencia de tareas a realizar la CPU durante el ciclo de instrucción lo describimos en lenguaje RTL.
+**  MBR <-M[0x4001a4]
+**  IR  <-MBR
+**  AC  <- RSP
+**  AC  <- AC-16 ; (ALU resta)
+**  RSP <- AC
+**  PC  <- PC+1
+**  MAR <- PC
+
+[[sum1toN_nasm]]
+sum1toN.s: lenguaje intel
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Lenguaje ensamblador INTEL y assembler nasm
++
+
+[source,nasm]
+----
+;;; Programa: sum1toN.asm
+;;; Descripción: realiza la suma de la serie 1,2,3,...N
+;;; Lenguaje INTEL
+;;; Assembler NASM
+
+;;; nasm -hf -> ayuda de la opción f 
+;;; Ensamblaje nasm -g -f elf  sum1toN.asm -o sum1toN.o
+;;; linker -> ld -m elf_i386    -o sum1toN sum1toN.o 
+
+	BITS 32	; cpu MODE
+        ;;  Declaración de variables
+        section .data
+
+n:	dd 5	; 4 bytes
+       
+        global _start
+
+        ;;  Comienzo del código
+        section .text
+_start:
+        mov ecx,0 ; ECX implementa la variable suma
+        mov edx,[n]  ; EDX implementa es un alias de la variable n
+bucle:
+        add ecx,edx
+        sub edx,1
+        jnz bucle
+       
+        mov ebx, ecx ; el argumento de salida al S.O. a través de EBX según convenio
+                
+        ;; salida
+        mov eax,1  ; código de la llamada al sistema operativo: subrutina exit
+        int 0x80     ; llamada al sistema operativo
+----
+
+Arquitectura ARM
+----------------
+
+
+Hola Mundo
+~~~~~~~~~~
+
+
+[source,nasm]
+----------------------------------------------------------------------
+/*
+
+ Programa en lenguaje ensamblador AT&T para el procesador ARM
+        
+ Programa fuente: hello_world.s
+ Assembler:       arm-linux-gnueabi-as -o hello_world.o hello_world.s
+ Linker:          arm-linux-gnueabi-ld -o hello_world hello_world.o
+        
+*/
+	.data
+
+	msg:
+	.ascii "Hello, ARM World!\n"
+	len = . - msg
+
+
+	.text
+
+	.globl _start
+_start:
+	/* write syscall */
+	mov %r0, $1
+	ldr %r1, =msg
+	ldr %r2, =len
+	mov %r7, $4
+	swi $0
+
+	/* exit syscall */
+	mov %r0, $0
+	mov %r7, $1
+	swi $0
+
+----------------------------------------------------------------------
+
+ISA
+~~~
+
+* http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.subset.architecture.reference/index.html[ARM]: Advanced RISC Machine
+** http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.subset.architecture.reference/index.html[Developer Guides]
+
+
+
+Motorola 68000
+--------------
+
+Hola Mundo
+~~~~~~~~~~
+
+[source,nasm]
+----------------------------------------------------------------------
+;CISC Sharp X68000 (Human68K): Motorola 68000 
+        pea (string)    ; push string address onto stack
+        dc.w $FF09      ; call DOS "print" by triggering an exception
+        addq.l #4,a7    ; restore the stack pointer
+ 
+        dc.w $FF00      ; call DOS "exit"
+ 
+string:
+        dc.b "Hello, world!",13,10,0
+----------------------------------------------------------------------
+
+ISA
+~~~
+
+* Referencias
+** http://lux.dmcs.pl/pn/asembler_68000/asm.html[Instruction Set Basic]
+** https://en.wikibooks.org/wiki/68000_Assembly#Indirect_addressing_with_postincrement[Wikibook]
+** https://www.nxp.com/files-static/archives/doc/ref_manual/M68000PRM.pdf[Manual de Referencia]
+** http://www.freescale.com/files/archives/doc/ref_manual/M68000PRM.pdf[Motorola 68K ó M68000]
+** m68k hasta 1991
+** ppc (powerpc) desde 1991 con Apple e IBM -> iMac (1996-2006)
+* arquitectura general
++
+
+------------
+2 versiones: Procesador de 16 bits ó 32 bits
+Aprox . 90 instrucciones máquina
+12 modos de  direccionamiento
+9 formatos de instrucción distintos y con tamaños de una a cinco palabras
+Ancho del  bus  de datos: 16 bits ó 32 bits
+Tamaño mínimo  direccionable : 1 byte
+Ancho del  bus  de direcciones: 24 bits (2^24^bytes = 16 Mbytes de memoria direccionables )
+------------
+* Registros:
+** 8 Registros de Datos de propósito general (16/32): D0-D7
+** 7 Registros de Instrucciones de propósito general (16/32) :A0-A6
+* modos de direccionamiento
+** # : inmediato
+** Di : registro directo
+** (Ai):  indirecto de registro
+** +(Ai): indirecto de registro con postincremento con la escala del tamaño del operando (1,2,4 bytes)
+** (Ai)+: indirecto de registro con postincremento con la escala del tamaño del operando
+** -(Ai): indirecto de registro con predecremento con la escala del tamaño del operando
+** (Ai)-: indirecto de registro con preincremento con la escala del tamaño del operando
+** D(Ai): indirecto de registro con desplazamiento D
+** D(Ai,Ri.X) : registro Ai indirecto indexado Ri con desplazamiento D
+** D(PC) : relativo al PC con desplazamiento D
+** D(PC,Ri.X) : relativo al PC indexado Ri con desplazamiento D
+* Datos
+** Enteros en Complemento a 2 .
+** Sufijos Operación: B byte (1 byte), W word (2 bytes) , L long (4 Byte)
+** Prejijos datos: $ hexadecimal
+* Memoria
+** Big Endian : LSB en la dirección más alta y MSB en la dirección más baja
+
+
+
+Arquitectura MIPS
+-----------------
+
+ISA
+~~~
+
+* Procesador con una arquitectura de 32 bits
+* Microprocessor without Interlocked Pipeline Stages (MIPS) Architecture
+* Versiones de la arquitectura MIPS: 
+** MIPS I ( R2000 cpu), II ( R6000), III (R4000), IV (R8000, R5000, R10000), and V (nunca implementada); 
+** MIPS32/64 :MIPS32 is based on MIPS II with some additional features from MIPS III, MIPS IV, and MIPS V; MIPS64 is based on MIPS V
++
+
+----
+70 instrucciones máquina
+Instrucciones clasificadas en cuatro grupos
+	Movimiento de datos
+Aritmética entera, logicas y desplazamiento
+	Control de flujo
+	Aritmética en punto flotante
+4 modos de  direccionamiento
+	Inmediato
+	Directo de registros	
+	Indirecto con desplazamiento
+	Indirecto con desplazamiento relativo al PC
+Banco de 64 registros (32 bits cada uno)
+	32 de propósito general (R0-R31)
+	32 para instrucciones en punto flotante (F0-F31). Pueden usarse como:
+	32 registros para operaciones en simple precisión (32 bits)
+	16 registros para operaciones en doble precisión (64 bit)
+3 formatos de instrucción distintos con longitud única de 32 bits:
+	 Op Code: 6 bits 
+	 R :three registers, a shift amount field, and a function field;
+	 I :two registers and a 16-bit immediate value
+	 J :26-bit jump target
+Arquitectura registro-registro
+	Sólo las instrucciones de LOAD y STORE hacen referencia a memoria
+	El resto de instrucciones operan sobre registros
+		Instrucciones con tres operandos: 2 op.fuente y 1 op.Destino
+
+Notación ensamblador: op  x, y, z    x<-(y)op(z)
+Datos:
+	Enteros Complemento a 2 : byte (1B), media palabra (2B), palabra (4B)
+	Nº Reales: IEEE-754 simple y doble precisión
+----
+
+* https://en.wikipedia.org/wiki/MIPS_architecture[MIPS architecture]
+* https://en.wikipedia.org/wiki/List_of_MIPS_architecture_processors[Versiones de la ISA MIPS]
+* https://en.wikipedia.org/wiki/MIPS_architecture_processors[procesadores con arquitectura MIPS]: R2000, etc
+* http://logos.cs.uic.edu/366/notes/mips%20quick%20tutorial.htm[quick tutorial]
+* https://rivoire.cs.sonoma.edu/cs351/wemips/[Emulador MIPS Online]
+
+
+
+
+

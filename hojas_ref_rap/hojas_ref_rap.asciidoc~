@@ -1,0 +1,351 @@
+Programación Ensamblador AT&T x86
+=================================
+:author: Cándido Aramburu 
+:email: candido@unavarra.es
+:revnumber: v1.0.0
+:revdate: 2018 September 19
+:doctitle: Programación Ensamblador AT&T x86
+:numbered:
+:icons:
+:lang: es
+:encode: ISO-8859-1
+:toc:
+:ascii-ids:
+:ruta-apuntes: home/candido/Dropbox/apuntes
+include::/{ruta-apuntes}/include_apuntes.txt[]
+
+ifdef::backend-docbook45[<<<]
+
+Programa básico x86-32
+----------------------
+
+* Módulo fuente: 'sum1toN.s'
++
+
+--------
+### Programa: sum1toN.s
+### Descripción: realiza la suma de la serie 1,2,3,...N
+### Es el programa en lenguaje AT&T i386 equivalente a sum.ias de la máquina IAS de von Neumann
+### gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
+### Ensamblaje as --32 --gstabs sum1toN.s -o sum1toN.o
+### linker -> ld -melf_i386  -o sum1toN sum1toN.o 
+        ##  Declaración de variables
+        .section .data
+n:	.int 5
+        .global _start
+        ##  Comienzo del código
+        .section .text
+_start:
+        mov $0,%ecx # ECX implementa la variable suma
+        mov n,%edx
+bucle:
+        add %edx,%ecx
+        sub $1,%edx
+        jnz bucle       
+        mov %ecx, %ebx # el argumento de salida al S.O. a través de EBX según convenio                
+        ## salida
+        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
+        int $0x80     # llamada al sistema operativo        
+        .end
+--------
+
+* Compilación: +gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s+
+* Ensamblaje: +as --32 --gstabs sum1toN.s -o sum1toN.o+
+* linker: +ld -melf_i386  -o sum1toN sum1toN.o+ 
+* Directivas del traductor ensamblador: .section, .data, .text, .byte, .end, etc... empiezan con un punto como prefijo
+* Sintaxis instrucción asm: 'etiqueta:  mnemónico  Operando_fuente, Operand_Destino  #comentarios'
+* Las etiquetas llevan el sufijo *:*
+* La etiqueta *_start*: es el punto de entrada al programa. Obligatoria. La utiliza el linker.
+* Sufijos de los mnemónicos
+** *b* -> byte -> 1Byte  ->Ej: movb
+** *w* -> word -> 2Bytes ->Ej: movw  . En este contexto word son 2 bytes por razones históricas.
+** *l* -> long -> 4Bytes ->Ej: movl  . Valor por defecto.
+** *q* -> quad -> 8Bytes ->Ej: movq
+* Direccionamientos de los operandos:
+** En la misma instrucción los operandos fuente y destino no pueden hacer ambos referencia a la memoria Principal.
+** inmediato: prefijo del operando *$*
+** registro:  prefijo del registro *%*
+** directo:   el operando es una etiqueta que apunta a la memoria principal
+** indirecto: el operando es una etiqueta o un registro: utiliza paréntesis. (etiqueta) ó (%registro). Ver indexado.
+*** La etiqueta referencia una posición de memoria que contiene a su vez una dirección de la memoria principal que apunta al operando.
+*** El registro contiene la dirección de la memoria principal que apunta al operando.
+
+ifdef::backend-docbook45[<<<]
+
+** indexado
+*** dirección efectiva: 'base + index*scale + disp' -> la sintaxis es:  disp(base,índice,escala)
+*** foo(%ebp,%esi,4)    -> dirección efectiva= 'EBP + 4*ESI + foo'
+*** (%edi)              -> dirección efectiva= 'EDI' -> direccionamiento indirecto
+*** -4(%ebp)    	-> dirección efectiva= 'EBP - 4' 
+*** foo(,%eax,4)	-> dirección efectiva= '4*EAX + foo'
+*** foo(,1)     	-> dirección efectiva= foo
+** Cualquier instrucción que tiene una referencia a un operando en la memoria principal y no tiene una referencia a registro, debe especificar el tamaño del operando  (byte, word, long, or quadruple) con una instrucción que lleve el sufijo (`b', `w', `l' or `q', respectivamente). 
+
+
+ifdef::backend-docbook45[<<<]
+
+Directivas Assembler AS
+-----------------------
+
+* Manual
+** https://sourceware.org/binutils/docs/as/
+
+.Directivas básicas
+[width="100%",cols="<m",options=""]
+|====
+|.global o .globl 	: variables globales
+|.section .data 	: sección de las variables locales estáticas inicializadas
+|.section .text 	: sección de las instrucciones
+|.section .bss  	: sección de las variables sin inicializar
+|.section .rodata 	: sección de las variables de sólo lectura
+|.type	  name , type description  : tipo de variable, p.ej @function
+|.end  			: fin del ensamblaje
+|.common   100    	: reserva 100 bytes sin inicializar y puede ser referenciado globalmente
+|.lcomm   bucle, 100 	: reserva 100bytes referenciados con el símbolo local bucle. Sin inicializar.
+|.space    100    	: reserva 100 bytes inicializados a cero
+|.space    100, 3 	: reserva 100 bytes inicializados a 3
+|.string  "Hola" 	: añade el byte 0 al final de la cadena
+|.asciz   "Hola" 	: añade el byte 0 al final de la cadena
+|.ascii   "Hola"	: no añade le caracter NULL de final de cadena
+|.byte    3,7,-10,0b1010,0xFF,0777 : tamaño 1Byte y formatos decimal,decimal,decimal,binario,hexadecimal,octal
+|.2byte    3,7,-10,0b1010,0xFF,0777 : tamaño 2Bytes
+|.word    3,7,-10,0b1010,0xFF,0777 : tamaño 2Bytes
+|.short   3,7,-10,0b1010,0xFF,0777 : tamaño 2B
+|.4byte    3,7,-10,0b1010,0xFF,0777 : tamaño 4B
+|.long    3,7,-10,0b1010,0xFF,0777 : tamaño 4B
+|.int     3,7,-10,0b1010,0xFF,0777 : tamaño 4B
+|.8byte    3,7,-10,0b1010,0xFF,0777 : tamaño 8B
+|.quad    3,7,-10,0b1010,0xFF,0777 : tamaño 8B
+|.octa    3,7,-10,0b1010,0xFF,0777 : formato octal
+|.double  3.14159, 2 E-6 : precisión doble
+|.float   2E-6, 3.14159  : precisión simple
+|.single  2E-6           : precisión simple
+|.include "file"	: incluye el fichero . Obligatorias las comillas.
+|.macro macname macargs	: define el comienzo de una macro de nombre macname y argumentos macargs
+|.endmacro		: define el final de una macro
+|.align   n             : las instrucciones o datos posteriores empezarán en una dirección multiplo de n bytes.
+|====
+
+* Alineamiento *Little Endian*: El byte de menor peso, LSB, se almacena en la posición de memoria más baja.
+** .int OxAABBCCDD -> 0xDD se almacena primero en la dirección más baja, el resto de bytes se almacenan en sentido ascendente en el orden 0xCC,0xBB,0xAA
+
+
+
+ifdef::backend-docbook45[<<<]
+Repertorio de Instrucciones Ensamblador
+---------------------------------------
+
+* Lenguaje Ensamblador AT&T
+
+TRANSFERENCIA
+~~~~~~~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="5*^1",options="header"]
+|====
+include::../tablas/mnemonicox86_transferencia.csv[]
+|====
+
+
+*  Flags: *±* =Afectado por esta instrucción, *?* =Indefinido luego de esta instrucción
+
+ifdef::backend-docbook45[<<<]
+
+ARITMÉTICOS
+~~~~~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="5*^1",options="header"]
+|====
+include::../tablas/mnemonicox86_aritmetico.csv[]
+|====
+
+* *i*:para más información ver especificaciones de la intrucción, 
+* *#*:entonces CF:=0, OF:=0 sino CF:=1, OF:=1
+
+ifdef::backend-docbook45[<<<]
+
+LÓGICOS                                                                                                              
+~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="5*^1",options="header"]
+|====
+include::../tablas/mnemonicox86_logico.csv[]
+|====
+
+MISCELÁNEOS                                                                                                     
+~~~~~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="5*^1",options="header"]
+|====
+include::../tablas/mnemonicox86_miscelaneo.csv[]
+|====
+
+
+
+SALTOS  (generales)
+~~~~~~~~~~~~~~~~~~~
+
+------------------------
+Nombre  Comentario                      Código          Operación  
+CALL    Llamado a subrutina             CALL Proc                  
+JMP     Saltar                          JMP Dest
+JE      Saltar si es igual              JE Dest         (= JZ)     
+JZ      Saltar si es cero               JZ Dest         (= JE)     
+JCXZ    Saltar si CX es cero            JCXZ Dest                  
+JP      Saltar si hay paridad           JP Dest         (= JPE)    
+JPE     Saltar si hay paridad par       JPE Dest        (= JP)
+JPO     Saltar si hay paridad impar     JPO Dest        (= JNP)                     
+JNE     Saltar si no es igual           JNE Dest        (= JNZ)	    
+JNZ     Saltar si no es cero            JNZ Dest        (= JNE)	    
+JECXZ   Saltar si ECX es cero           JECXZ Dest 386	    
+JNP     Saltar si no hay paridad        JNP Dest        (= JPO)
+RET     Retorno de subrutina            RET
+------------------------		          
+
+
+SALTOS  Sin Signo (Cardinal) SALTOS Con Signo (Integer)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+------------
+Nombre  Comentario                      Código          Operación          
+JA      Saltar si es superior           JA Dest         (= JNBE)           
+JAE     Saltar si es superior o igual   JAE Dest        (= JNB = JNC)      
+JB      Saltar si es inferior           JB Dest         (= JNAE = JC)      
+JBE     Saltar si es inferior o igual   JBE Dest        (= JNA)            
+JNA     Saltar si no es superior        JNA Dest        (= JBE)            
+JNAE    Saltar si no es super. o igual  JNAE Dest       (= JB = JC)        
+JNB     Saltar si no es inferior        JNB Dest        (= JAE = JNC)      
+JNBE    Saltar si no es infer. o igual  JNBE Dest       (= JA)             
+JC      Saltar si hay carry JC Dest     JO  Dest        Saltar si hay Overflow  
+JNC     Saltar si no hay carry          JNC Dest
+JNO     Saltar si no hay Overflow       JNO Dest
+JS      Saltar si hay signo (=negativo) JS Dest   
+JG      Saltar si es mayor              JG Dest         (= JNLE)	 
+JGE     Saltar si es mayor o igual      JGE Dest        (= JNL)	 
+JL      Saltar si es menor              JL Dest         (= JNGE)	 
+JLE     Saltar si es menor o igual      JLE Dest        (= JNG)	 
+JNG     Saltar si no es mayor           JNG Dest        (= JLE)	 
+JNGE    Saltar si no es mayor o igual   JNGE Dest       (= JL)	 
+JNL     Saltar si no es inferior        JNL Dest        (= JGE)	 
+JNLE    Saltar si no es menor o igual   JNLE Dest       (= JG)        
+------------
+
+
+FLAGS (ODITSZAPC)
+~~~~~~~~~~~~~~~~~
+
+------------
+O: Overflow resultado de operac. sin signo es muy grande o pequeño.
+D: Dirección
+I: Interrupción Indica si pueden ocurrir interrupciones o no.
+T: Trampa Paso, por paso para debugging
+S: Signo Signo del resultado. Razonable sólo para enteros. 1=neg. 0=pos.
+Z: Cero Resultado de la operación es cero. 1=Cero
+A: Carru Aux. Similar al Carry, pero restringido para el nibble bajo únicamente
+P: Paridad 1=el resultado tiene cantidad par de bits en uno
+C: Carry resultado de operac. sin signo es muy grande o inferior a cero
+------------
+
+
+
+ifdef::backend-docbook45[<<<]
+
+Registros
+---------
+
+
+[cols="a,a"]
+|==================================
+|
+image::./images/hojas_ref_rap/reg_amd64.png[alt="Registros amd64", height="400",align="center"]
+|
+image::./images/hojas_ref_rap/rflags.png[alt="Registros Flags", width="300",align="center"]
+|==================================
+
+* Los registros de propósito general RPG son:
+** `%eax' (el acumulador), `%ebx', `%ecx', `%edx', `%edi', `%esi', `%ebp' (puntero frame), and `%esp' (puntero stack). 
+
+[cols="a"]
+|==================================
+|
+image::./images/hojas_ref_rap/reg_amd.png[alt="Registros RPG", height="300",align="center"]
+|==================================
+
+
+ifdef::backend-docbook45[<<<]
+
+[cols="a"]
+|==================================
+|
+image::./images/hojas_ref_rap/gdb_posterior.png[alt="gdb 1", width="700",align="center"]
+|==================================
+
+[cols="a"]
+|==================================
+|
+image::./images/hojas_ref_rap/gdb_anterior.png[alt="gdb 2", width="700",align="center"]
+|==================================
+
+ifdef::backend-docbook45[<<<]
+
+GDB
+---
+
+* Comandos básicos: ejecutar el comando +gdb+
++
+
+----
+shell date
+shell pwd
+shell ls
+shTAB
+shell daTAB
+C-x a
+C-x o
+histórico comandos: navegar con las flechas
+set trace-commands on
+set logging file gdb_salida.txt
+set logging on
+shell ls -l gdb_salida.txt
+file modulo_bin
+info sources
+info source
+break main
+b _start
+info breakpoints
+info reTAB
+run
+next , n , n 5
+step , s
+RETURN
+continue, c
+start
+until, RETURN, RETURN ...
+next instruction, ni, RET, RET, RET, RET, until, RET,..hasta salir del bucle
+step ,s
+si
+ptype varible 
+whatis variable 
+print variable, p variable, p /t variable, p /x n
+p &n
+p $rax
+p $eax
+p $ax
+p $ah
+p $rflags
+p $eflags
+p /t $eflags
+p $rip
+x dirección
+x &variable, x /1bw &variable, +x /1xw &variable, x /4xw &variable
+pending? n
+layout split
+h layout
+layout src
+focus src : navegar
+focus cmd : navegar
+info registers
+info reTAB
+disas /r _start
+disas /m _start
+q
+----

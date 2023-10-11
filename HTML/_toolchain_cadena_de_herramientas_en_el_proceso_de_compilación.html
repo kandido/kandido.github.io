@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+<ul class="sectlevel1">
+<li><a href="_arquitectura_de_una_computadora.html">21. Arquitectura de una Computadora</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">22. RTL Register Transfer Language</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html">23. Programas ensamblador IASSim</a>
+</li>
+<li><a href="_simulador_iassim_2.html">24. Simulador IASSim</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html">25. Lenguajes de programación de Alto y Bajo Nivel</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html">26. Lenguajes de programación en Ensamblador</a>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html"><span class="toc-current">27. Toolchain: Cadena de Herramientas en el proceso de compilación</span></a>
+<ul class="sectlevel2">
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html#toolchain">27.1. Toolchain</a>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html#_proceso_de_compilación_de_un_programa_en_lenguaje_c">27.2. Proceso de compilación de un programa en lenguaje C</a>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html#_traductores_del_proceso_de_ensamblaje">27.3. Traductores del proceso de ensamblaje</a>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html#_assembler_as">27.4. Assembler "as"</a>
+<ul class="sectlevel3">
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html#_directivas">27.4.1. Directivas</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_practicando_la_programación_desde_el_principio.html">28. Practicando la Programación desde el Principio</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_pila.html">30. Pila</a>
+</li>
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html">31. Programas en Lenguaje Ensamblador: Propuestas</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html">32. Apéndice: Unidad CPU</a>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">33. Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">34. Apéndice: Memoria Virtual</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">35. Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">36. FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">37. Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">38. Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html">39. Estructura de Computadores 2022: Segundo Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">40. Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">41. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">42. Miaulario: Videoconferencia</a>
+</li>
+</ul>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación">27. Toolchain: Cadena de Herramientas en el proceso de compilación</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="toolchain">27.1. Toolchain</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Se conoce por Toolchain a los distintos programas o herramientas que intervienen en la obtención de una aplicación en lenguaje máquina a partir de módulos en lenguajes símbolicos como C, ensamblador y módulos librería.</p>
+</li>
+<li>
+<p>Las 3 herramientas principales en el proceso de traducción son : el compilador, el ensamblador y el linker. También hay herramientas de análisis de los programas en lenguaje binario (Pej desensamblador).</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://sourceware.org/binutils/docs-2.25/">binutils</a>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://sourceware.org/binutils/docs-2.25/as/index.html"><strong>as: traductor assembler</strong></a>: opciones de la línea de comandos, directivas, tipos de datos, etc</p>
+</li>
+<li>
+<p><a href="https://sourceware.org/binutils/docs-2.25/ld/index.html">ld: linker</a></p>
+</li>
+<li>
+<p><a href="https://sourceware.org/binutils/docs-2.25/binutils/index.html">objdump, readelf, &#8230;&#8203;.</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_proceso_de_compilación_de_un_programa_en_lenguaje_c">27.2. Proceso de compilación de un programa en lenguaje C</h3>
+<div class="imageblock text-center text-center kroki-format-svg kroki">
+<div class="content">
+<img src="https://kroki.io/graphviz/svg/eNqNj00KwkAMhfeeIszeEwiCFnVjsegBSmYaNHV-SmpX4mE8gCuP0Is5rVgRRFzm5X0vLwXvBasDrOA8Uml7LxobYNmQPxEkCsZTyIQqCYZqdBzl0GlJcBVbLIJ008DNdmmPqIWPbm2xJPVh2OiSYsKcPQoH2FKj2aC2T9ua_ZHkF7AoyTSnAVAJyr5vQR5SckEYn4usbxw6vWcMt3evJsOL9Sv5XaFWQ4UvPstaSNob5gX79uoik0fN5ORz989luDwAO-SAQg==" alt="Proceso de Compilación">
+</div>
+<div class="title">Figure 110. Proceso de Compilación</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_traductores_del_proceso_de_ensamblaje">27.3. Traductores del proceso de ensamblaje</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Existen dos lenguajes ensamblador para la ISA i386/amd64, dos sintaxis diferentes, que deben de ser traducidos por diferentes traductores de ensamblador produciendo un módulo binario en el mismo lenguaje máquina.</p>
+</li>
+<li>
+<p>los traductores de ensamblador  "NASM" (Netwide Asm), "FASM", "MASM", "TASM", and "YASM" traducen módulos fuente que utilizan la sintaxis del lenguaje ensamblador <strong>intel</strong> a modulos binarios para las arquitecturas i386/amd64</p>
+</li>
+<li>
+<p>El traductor "as" de la fundación GNU traduce módulos fuente  que utilizan las sintaxis del lenguaje de ensamblador <strong>AT&amp;T</strong> a módulos binarios para las arquitecturas i386/amd64</p>
+</li>
+<li>
+<p>La traducción entre la representación del módulo fuente en lenguaje ensamblador almacenado en un fichero del disco duro y la representación del programa en lenguaje máquina se da en el <a href="_practicando_la_programación_desde_el_principio.html#fases_compilacion">proceso de ensamblaje</a>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo Fuente en lenguaje ensamblador &#8594; Traductor Ensamblador &#8594; Módulo Objeto Reubicable &#8594; Linker &#8594; Módulo Objeto Ejecutable Binario&#8594; Cargador &#8594; Proceso</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo: hola_mundo.s &#8594; <strong>as</strong> &#8594; hola_mundo.o &#8594; <strong>ld</strong> &#8594; hola_mundo (formato ELF) &#8594; <strong>loader</strong> &#8594; hola_mundo (memoria principal) &#8594; creación proceso (hola_mundo en ejecución). "as", "ld" y "loader" son las herramientas GNU necesarias para la creación de un proceso a partir del módulo en lenguaje ensamblador.</p>
+</li>
+<li>
+<p>el linker <strong>ld</strong> mezcla el módulo objeto con módulos del entorno del sistema operativo y con módulos de las librerías.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_assembler_as">27.4. Assembler "as"</h3>
+<div class="sect3">
+<h4 id="_directivas">27.4.1. Directivas</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Directivas del traductor ensamblador "as" utilizado por el sistema GNU/linux para el lenguaje ensamblador AT&amp;T.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Al assembler de GNU también se el conoce como "gas".</p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/binutils/">binutils</a> &#8594; <a href="https://sourceware.org/binutils/docs-2.26/as/index.html">as assembler</a>: manual oficial</p>
+</li>
+<li>
+<p><a href="http://www.coranac.com/files/gba/re-ejected-gasref.pdf">gas ref card</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>.word reserva 2 bytes en amd64.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://docs.oracle.com/cd/E26502_01/html/E28388/eoiyg.html">oracle</a></p>
+</li>
+<li>
+<p><a href="https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent">opciones para x86 y x86-64</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_manual">Manual</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://sourceware.org/binutils/docs/as/">binutils as</a>: manual oficial</p>
+</li>
+<li>
+<p><a href="http://asm.sourceforge.net/howto/Assembly-HOWTO.html">Linux Assembly howto</a>: referencias a diferentes assemblers</p>
+</li>
+<li>
+<p><a href="http://web.mit.edu/gnu/doc/html/as_1.html">MIT</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_lenguajes_de_programación_en_ensamblador.html">Lenguajes de programación en Ensamblador</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_practicando_la_programación_desde_el_principio.html">Practicando la Programación desde el Principio</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

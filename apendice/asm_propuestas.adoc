@@ -1,0 +1,377 @@
+Programas en Lenguaje Ensamblador: Propuestas
+=============================================
+
+:doctitle: Programas en Lenguaje Ensamblador: Propuestas
+
+[[asm_propu]]
+Nivel Medio
+-----------
+
+Formato BMP
+~~~~~~~~~~~
+
+Circulo
+^^^^^^^
+
+* link:https://en.wikipedia.org/wiki/Midpoint_circle_algorithm[Algoritmo del Punto Medio]
++
+
+----
+x: eje abscisa -> positivo hacia dcha
+y: eje ordenada -> positivo hacia arriba
+ecuación círculo: centro (0,0) y primer octante (x_positivo, y_positivo, y<x). Los órdenes de los octantes van en el sentido contrario a las agujas del reloj
+ecuación discreta yn e xn números enteros:
+  xn e yn limitados al primer octante: 
+  primer punto : x1=r y1=0
+  segundo punto: y2 se incrementa en 1 -> y2=y1+1
+               : x2 sólo tiene dos alternativas: idéntico al anterior x1 ó incrementar en una unidad
+               : obtener x2 según la ecuación del círculo -> x^2^~n+1~ = x^2^~n~ -2*y~n~-1
+----
+** x^2^~n+1~ = x^2^~n~ -2*y~n~-1: se puede resolver con números reales pero interesa la aritmética con números enteros y así poder programar en lenguaje ensamblador.
+** Variant with *integer-based* arithmetic ->  Bresenham's line algorithm: desarrollada con aritmética entera
+* Bresenham circle: 
++
+
+----
+xn e yn números enteros 
+coordenadas en el primer octante
+origen círculo (0,0)
+x_inicio=r
+y_inicio=0
+E_inicio=3-2r
+
+en cada interacción:
+	E_actual <0 -> E_next=Ecur + 2*(3+2*yc) ; x_next=x_actual ; y_next=y_actual+1
+	E_actual >0 -> E_next=Ecur + 2*(5+2*yc-2*xc) ; x_next=x_actual-1 ; y_next=y_actual+1)
+siguiente interacción:
+        E_actual=E_next ; y_actual=y_next ; x_actual=x_next
+----
+* Código fuente en C
++
+
+[source,c]
+----
+/*
+
+Programa: pixel_circulo.c
+Descripción: algoritmo de  Bresenham  . https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
+             OJO: las ecuaciones matemáticas está desarrolladas para un OCTANTE de centro (y=0,x=0) (abajo esquina izda). Eje vertical -> x, Eje horizontal -> y
+              OJO: por eso las ecuaciones matemáticas empiezan el octante en (xc=r,yc=0) (abajo derecha) y el octante se pinta subiendo (yc+1) y va hacia la izda (xc no cambia o xc=xc-1) hacia el centro x=0. 
+              OJO: el orden de los octantes se puede denominar de dos formas. En el artículo el primer octante es el x_positivo , y positivo e y<x y lo siguientes octantes van en el sentido contrario a las agujas del reloj. Yo he ordenado los octantes según un reloj donde el primer octante va de las 12:00 a las dos agujas entre la 1 y las dos enumerando los octantes a favor de las agujas del reloj. Para que el primer octante empiece el primer punto en las 12:00 y no en las 3:00 como en las ecuaciones matemáticas, lo que hago es mapear la x que es la abcisa matemática no como columna j del bmp sino como fila i, es decir, x->i y->j. Al CAMBIAR filas por columnas el primer octante empieza en las 12:00.
+              OJO: el formato BPM tiene el (0,0) (abajo esquina izda). Eje vertical -> filas i, Eje horizontal -> columnas j
+             
+            
+          pixels_generator(): Función externa para la definición de los colores RGB en una imagen de formato BMP
+          Programa principal main(): bmp_funcion_arguDimension.c
+
+gcc -m32 -g -c  -o pixel_circulo.o pixel_circulo.c
+ con la opción -c se genera el módulo objeto sin generar el módulo ejecutable
+
+ATENCION: la DIMENSION DEL ARRAY se declara tanto en el fichero con la llamada a la funcion_mod como en el fichero con la definición de la función.He probado a poner diferentes valores a DIMENSION en los dos ficheros (llamada y definición ) y no hay error de compilación ni de ejecución pero el resultado de la ejecución si que cambia.
+
+
+
+
+El primer octante se calcula con el centro en (0,0) y luego se traslada.
+El segundo octante y hasta el octavo se calcula haciendo simetria directa y traslación del primer octante
+
+*/
+
+
+
+#define DIMENSION  512 // OJO: es obligatorio que los array multidimensionales tengan definido por lo menos TODAS las dimensiones menos una
+
+//
+typedef unsigned char BYTE;
+
+// definición del tipo de cada pixel. Cada pixel son tres bytes . Cada byte es tipo BYTE.
+typedef struct
+{
+        BYTE    b;  
+        BYTE    g;
+        BYTE    r;
+} RGB_data; 
+
+void  pintar(int i,int j,BYTE blue, BYTE green, BYTE red, RGB_data reg_mem[][DIMENSION]);
+
+void pixels_generator_circulo(unsigned int origen_x, unsigned int origen_y, unsigned int radio, unsigned int proporcion,unsigned int dimension,  RGB_data reg_mem[][DIMENSION])
+{
+
+int Ecur,Enext,xn,xc,yn,yc,i,j;
+
+// las ecuaciones matemáticas está desarrolladas para un circulo de centro (0,0)
+Ecur=3-2*radio;
+xc=radio;
+yc=0;
+
+
+while (yc<xc) {  // primer octante (x,y) -> (x e y positivo con y<x) Eje vertical -> x Eje horizontal -> y => (abcisa,ordenada)...(x,y)
+  if (Ecur < 0) {
+    xn=xc;
+    yn=yc+1;
+    Enext = Ecur + 2*(3+2*yc);
+
+    }
+  else {
+    xn=xc-1;
+    yn=yc+1;
+    Enext = Ecur + 2*(5+2*yc-2*xc);
+    //printf ("i=%d x=%d y=%d Ecur=%d Enext=%d \n",i,x[i],y[i],Ecur,Enext);
+
+    } 
+
+ // traslación del centro (0,0) (x_origen,y_origen)
+  i=origen_x+xc; // la x como FILA
+  j=origen_y+yc; // la j como COLUMNA -> entonces la j es la abscisa -> (j,i). Este cambio en el espacio matematico es (y,x)
+
+  // coordenadas primer octante (y,x)  
+  pintar(i,j,0,0,0xFF,reg_mem);
+
+  // SIMETRIA segundo octante respecto del primero -> (x,y)
+  i=origen_y+yc; 
+  j=origen_x+xc;
+  pintar(i,j,0,0xFF,0,reg_mem);
+  
+// SIMETRIA tercer octante respecto del primero -> (x,-y) -> la ordenada es negativa -> la i
+  i=origen_y-yc;
+  j=origen_x+xc;
+  pintar(i,j,0xFF,0,0,reg_mem);
+
+// SIMETRIA cuarto octante respecto del primero -> (y,-x) -> la ordenada es negativa -> la i
+  i=origen_x-xc;
+  j=origen_y+yc;
+  pintar(i,j,0xFF,0xFF,0XFF,reg_mem);
+ 
+// SIMETRIA quinto octante respecto del primero -> (-y,-x)
+  i=origen_x-xc;
+  j=origen_y-yc;
+  pintar(i,j,0,0,0XFF,reg_mem);
+
+ // SIMETRIA sexto octante respecto del primero -> (-x,-y)
+  i=origen_y-yc;
+  j=origen_x-xc;
+  pintar(i,j,0,0xFF,0,reg_mem);
+
+ // SIMETRIA septimo octante respecto del primero -> (-x,y)
+  i=origen_y+yc;
+  j=origen_x-xc;
+  pintar(i,j,0xFF,0,0,reg_mem);
+
+// SIMETRIA octavo octante respecto del primero -> (-y,x)
+  i=origen_x+xc;
+  j=origen_y-yc;
+  pintar(i,j,0xFF,0xFF,0XFF,reg_mem);
+
+  Ecur=Enext;
+  yc=yn;
+  xc=xn;
+  
+  }
+
+
+}
+
+void pintar(int i,int j,BYTE blue, BYTE green, BYTE red, RGB_data reg_mem[][DIMENSION]){
+
+ // intensidad de rojo
+  reg_mem[i][j].r = red;
+  // intensidad de verde
+  reg_mem[i][j].g = green;
+  // intensidad de azul
+  reg_mem[i][j].b = blue;
+
+}
+
+----
+
+
+Línea
+^^^^^
+
+* link:https://en.wikipedia.org/wiki/Bresenham's_line_algorithm[Bresenham's_line_algorithm]
+** x: eje abscisa -> positivo hacia dcha
+** y: eje ordenada -> positivo hacia abajo
+** (0,0) : esquina arriba,izda
+** (x0,y0) e (x1,y1) son los extremos de la recta
+** la recta tiene pendiente < 1
+** Ecuación de la línea -> f(x,y)=0
+** f(x,y) = A*X+B*y+C = 0
+** Código fuente en C
++
+
+[source,c]
+----
+#define DIMENSION  1024 
+typedef unsigned char BYTE;
+typedef struct
+{
+        BYTE    b;  
+        BYTE    g;
+        BYTE    r;
+} RGB_data; 
+
+void  pintar(int i,int j,BYTE blue, BYTE green, BYTE red, RGB_data reg_mem[][DIMENSION]);
+
+void pixels_generator_linea(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int dimension,  RGB_data reg_mem[][DIMENSION]) {
+
+int i1,i2,dx,dy,d,x,y,xmax;
+// las ecuaciones matemáticas está desarrolladas para una recta de pendiente MENOR que 1
+// (x1,y1) y (x2,y2) son los extremos de la recta en el PRIMER CUADRANTE
+
+dx=x2-x1;
+dy = y2-y1;
+i1=2*dy;
+i2=2*(dy-dx);
+d=i1-dx;
+
+if (dx<0) {  
+    x=x2;
+    y=y2;
+    xmax=x1;
+    }
+else {
+    x=x1;
+    y=y1;
+    xmax=x2;
+    } 
+while (x < xmax){
+  if (d<0)
+    d=d+i1;
+  else {
+    d=d+i2;
+    y=y+1;
+    }
+  x=x+1;
+// x columnas -> j
+// y filas -> i
+  pintar(y,x,0,0,0xFF,reg_mem);
+}
+}
+
+void pintar(int i,int j,BYTE blue, BYTE green, BYTE red, RGB_data reg_mem[][DIMENSION]){
+
+ // intensidad de rojo
+  reg_mem[i][j].r = red;
+  // intensidad de verde
+  reg_mem[i][j].g = green;
+  // intensidad de azul
+  reg_mem[i][j].b = blue;
+
+}
+
+----
+
+* Código para pedientes menor y mayor que 1
++
+
+
+[source,c]
+----
+/*
+
+Programa: pixel_linea.c
+Descripción: algoritmo de  Bresenham: https://en.wikipedia.org/wiki/Bresenham's_line_algorithm -> concepto
+                                    : https://www.javatpoint.com/computer-graphics-bresenhams-line-algorithm -> algoritmo
+                                    :https://iq.opengenus.org/bresenham-line-drawining-algorithm/ -> pendiente >1
+             ejes: x abcisa ( positivo de izda a derecha) e y ordenada (positivo de arriba abajo)
+             origen coordenadas : (esquina izda arriba)
+             algoritmo matemático para rectas con pendiente inferior a la unidad
+             pixels_generator(): Función externa para la definición de los colores RGB en una imagen de formato BMP
+             Programa principal main(): bmp_funcion_arguDimension.c
+
+gcc -m32 -g -c  -o pixel_linea.o pixel_linea.c
+ con la opción -c se genera el módulo objeto sin generar el módulo ejecutable
+
+ATENCION: la DIMENSION DEL ARRAY se declara tanto en el fichero con la llamada a la funcion_mod como en el fichero con la definición de la función.He probado a poner diferentes valores a DIMENSION en los dos ficheros (llamada y definición ) y no hay error de compilación ni de ejecución pero el resultado de la ejecución si que cambia.
+
+*/
+
+
+
+#define DIMENSION  1024 // OJO: es obligatorio que los array multidimensionales tengan definido por lo menos TODAS las dimensiones menos una
+
+//
+typedef unsigned char BYTE;
+
+// definición del tipo de cada pixel. Cada pixel son tres bytes . Cada byte es tipo BYTE.
+typedef struct
+{
+        BYTE    b;  
+        BYTE    g;
+        BYTE    r;
+} RGB_data; 
+
+void  pintar(int i,int j,BYTE blue, BYTE green, BYTE red, RGB_data reg_mem[][DIMENSION]);
+
+void pixels_generator_linea(unsigned int x1, unsigned int y1, unsigned int x2, unsigned int y2, unsigned int dimension,  RGB_data reg_mem[][DIMENSION]) {
+
+int i1,i2,i3,dx,dy,d,x,y,xmax;
+float p;
+// // (x1,y1) y (x2,y2) son los extremos de la recta en el PRIMER CUADRANTE
+
+dx=x2-x1;
+dy = y2-y1;
+i1=2*dy;
+i2=2*(dy-dx);
+i3=2*dx;
+p=(float)dy/dx;//pediente
+
+
+  // el extremo inicial (izda) puede ser (x1,y1) ó (x2,y2)
+  if (dx<0) {  
+    x=x2;
+    y=y2;
+    xmax=x1;
+    }
+  else {
+    x=x1;
+    y=y1;
+    xmax=x2;
+    } 
+  
+    if (p<1.0) { // pendiente menor que 1
+      d=2*dy-dx; 
+      while (x < xmax){
+      if (d<0)
+        d=d+i1;
+      else { // pendiente mayor que 1
+        d=d+i2;
+        y=y+1;
+        }
+      x=x+1;
+      pintar(y,x,0,0,0xFF,reg_mem);
+      }
+      }
+    else {
+   // p>1
+     d=2*dx-dy;
+     while (x < xmax){
+     if (d<0)
+       d=d+i3;
+     else {
+       d=d-i2;
+       x=x+1;
+       }
+     y=y+1;
+     pintar(y,x,0,0,0xFF,reg_mem);
+     }
+     }
+// x columnas -> j
+// y filas -> i
+ 
+}
+
+
+void pintar(int i,int j,BYTE blue, BYTE green, BYTE red, RGB_data reg_mem[][DIMENSION]){
+
+ // intensidad de rojo
+  reg_mem[i][j].r = red;
+  // intensidad de verde
+  reg_mem[i][j].g = green;
+  // intensidad de azul
+  reg_mem[i][j].b = blue;
+
+}
+
+----
+

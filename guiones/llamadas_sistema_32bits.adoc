@@ -1,0 +1,239 @@
+LLamadas al Sistema Operativo (Kernel)
+======================================
+
+:doctitle: LLamadas al Sistema Operativo (Kernel)
+
+
+Introducción
+------------
+
+Qué son las llamadas al sistema
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* El HW está protegido por el Kernel del SO y por lo tanto el programador de ensamblador accede al HW indirectamente a través de las "LLamadas al Sistema" solicitando operaciones de entrada/salida al Sistema Operativo. Por lo tanto si queremos acceder al teclado y al monitor será necesario realizar llamadas al kernel.
+* Definición de  la interfaz entre el programador y el kernel del SO: 'System V Application Binary Interface: SysV-ABI'
+** El lenguaje ensamblador sigue la norma ABI para el lenguaje C.
+* En este guión se trabajan las llamadas al sistema de la arquitectura i386.
+* LLamadas al sistema desde el código ensamblador:
+** directamente con la instrucción +int $0x80+
+** indirectamente a través de las funciones de la librería standard 'libc' con la instrucción +call+
+** En código ensamblador es necesario pasar los argumentos previamente a la ejecución de la llamada +call+
+
+
+Manuales de las llamadas al sistema
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Listado con los nombres de las llamadas a al sistema:  +man syscalls+
+** LLamada al sistema 'exit': +man 3 exit+   
+*** describe la función de llamada al sistema
+*** especifíca el nombre de la cabecera de la librería necesaria para compilar en lenguaje C.
+*** especifíca los parámetros que necesita la función y el orden en que son transferidos.
+** LLamada al sistema 'write': +man 2 write+
+
+
+
+Códigos de las llamadas
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Códigos de las llamadas al sistema en la arquitectura x86-32: 
+** '/usr/include/asm/unistd_32.h'
+** '/usr/include/x86-64-linux-gnu/asm/unistd_32.h'
+** llamada exit -> Código 1
+** read -> 3
+** write -> 4
+* El código de la llamada se pasa a tavés del registro 'EAX'.
+
+
+Cómo pasar los argumentos directamente al Kernel
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* A diferencia de los argumentos de las llamadas a subrutinas de usuario que se pasan a través de la pila, los argumentos  de las llamadas a subrutinas del sistema operativo utilizan los registros como memoria para pasar los argumentos.
+* Los parámetros del primero al sexto se corresponden con los registros : 'EBX,ECX,EDX,ESI,EDI,EBP'
+* Valor de retorno: 'EAX'
+
+
+Como pasar los argumentos indirectamente a través de funciones libc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Desde un módulo fuente en ASM
+* Los parámetros se pasan a las funciones libc través de la 'pila'  y por lo tanto también a los 'wrappers' de la librería de C.
+
+* Valor de retorno: 'EAX'
+
+LEEME
+-----
+
+* Lectura del guión de prácticas  y del capítulo 3 del Libro Programming from the Ground-Up.
+* <<prac_apu, Apuntes y Libro de Texto>>
+* <<prac_doc_mem, Documentación Memoria>>: Contenido y Formato de la Memoria 
+* <<prac_eval, Evaluación>>: sistema de evaluación
+* <<prac_plat_des, Plataforma de Desarrollo>> : configuración de la computadora personal
+* <<prac_prog,Programación>> : metodología
+
+Cuestiones
+----------
+
+* <<prac_eval, "Autoevaluación de Prácticas">> opcional: <<prac_cues, Prácticas: Cuestionario>>
+
+
+
+Llamada Exit
+------------
+
+
+Edición del Módulo fuente:salida.c / salida.s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* +gcc -m32 -g -o salida salida.c+
++
+
+[source,c]
+----------------------------------------------------------------------
+#include <stdlib.h>
+void main (void)
+{
+  exit (0xFF);
+    }
+----------------------------------------------------------------------
+
+* +gcc -m32 -o salida salida.c+
++
+
+[source,c]
+----------------------------------------------------------------------
+/* Llamada al sistema desde C
+   Prototipo:    int syscall(int number, ...);
+   man syscall
+*/
+
+#define _GNU_SOURCE         
+#include <unistd.h>
+#include <sys/syscall.h>  
+
+void main (void)
+{
+  syscall (__NR_exit,0xFF);
+    }
+
+----------------------------------------------------------------------
+
+* +gcc -m32 -g -nostartfiles -o salida salida.s+
++
+
+[source,c]
+----------------------------------------------------------------------
+        .global _start
+        .section .text
+_start:
+        push    $0xFF   	#return code
+        call 	exit		#libc library
+        .end
+----------------------------------------------------------------------
+
+* +gcc -m32 -g -nostartfiles -o salida salida.s+
++
+
+[source,c]
+----------------------------------------------------------------------
+        .global _start
+        .section .text
+_start:
+        push    $0xFF   	#return code
+        push    $1		# exit syscall code
+        call 	syscall		#libc library
+        .end
+----------------------------------------------------------------------
+
+
+
+* +gcc -m32 -g -nostartfiles -o salida salida.s+ 
++
+
+[source,c]
+----------------------------------------------------------------------
+        .global _start
+        .section .text
+_start:
+         mov 	 $1,%eax	#exit
+         mov     $0xFF,%ebx   	#argument
+         int     $0x80          #system call
+         .end
+----------------------------------------------------------------------
+
+
+LLamar a la librería de C desde código ensamblador
+--------------------------------------------------
+
+imprimir.s: printf
+~~~~~~~~~~~~~~~~~~
+
+
+* imprimir.s
++
+
+[source,c]
+----------------------------------------------------------------------
+        .section .data
+planet:  
+	.long 9                        # variable planet
+
+        .section .rodata
+mensaje:
+        .asciz "El número de planetas es %d \n"        #string con formato de la función printf
+
+	.global _start
+        .section .text
+_start:
+        ## imprimir en la pantalla
+        push planet               # 2º argumento de la función printf
+        push $mensaje     # 1º argumento de la función printf: dirección del string
+        call printf
+        ## salir al sistema
+	push $0
+        call exit
+
+----------------------------------------------------------------------
+** Compilación con 'gcc' : no es necesario indicar al linker el módulo objeto libc ya que lo enlaza por defecto.
+*** +gcc -m32 -g -nostartfiles -o imprimir imprimir.s+
+** Compilación con 'as' y 'ld'
+*** +as --32 -gstabs -o imprimir.o imprimir.s+
+*** +ld -melf_i386 -dynamic-linker /lib32/ld-linux.so.2  -o imprimir imprimir.o -lc+ : enlazar con el módulo objeto libc
+
+
+
+Llamadas al Sistema en la Arquitectura AMD64
+--------------------------------------------
+
+
+* LLamadas a las funciones de la librería standard 'libc'.
+** El manual de los prototipos de las funciones libc son accesibles en GNU con el comando 'man'. Ej +man write+
+** Es necesario pasar los argumentos previamente a la ejecución de la llamada mediante la instrucción 'call'.
+** Los parámetros se pasan a través de los registros '%rdi, %rsi, %rdx, %rcx, %r8 and %r9' que se asocia con los argumentos de la función de libc en sentido izda->dcha.
+* Preservar los registros : %rbp, %rbx and %r12 through %r15
+* Valor de retorno: Uno de los dos registros libres de la secuencia %rax, %rdx.
+* Ejemplo:
++
+
+[source,c]
+----------------------------------------------------------------------
+#include <stdlib.h>
+
+exit (0xFF)
+----------------------------------------------------------------------
++
+
+[source,c]
+----------------------------------------------------------------------
+xor	%rax            #resetear RAX
+mov     $0xFF, %rdi   	#return code
+call 	exit		#libc library
+----------------------------------------------------------------------
++
+
+[source,c]
+----------------------------------------------------------------------
+mov 	$60,%rax	#exit
+mov     $0xFF, %rdi   	#return code
+syscall
+----------------------------------------------------------------------
+
+

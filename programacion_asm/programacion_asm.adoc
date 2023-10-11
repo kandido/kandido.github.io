@@ -1,0 +1,1348 @@
+Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.
+==================================================================================================
+
+:doctitle: Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.
+
+
+
+Temario
+-------
+
+. Programación en lenguaje Ensamblador x86
+.. x86 :Representación de Datos, Representación de Instrucciones, Modos de direccionamiento.
+.. Sentencias de asignación
+.. Sentencias condicionales
+.. Bucles
+.. LLamadas y retorno de funcion o subrutina
+
+
+
+
+
+Introducción
+------------
+
+Objetivos
+~~~~~~~~~
+
+* Analizar la arquitectura del repertorio de las instrucciones máquina (Formato de instrucciones, formato de datos, operaciones y direccionamiento de operandos) de la arquitectura x86-64 para su utilización en el desarrollo práctico de programas en lenguaje ensamblador Gnu_AS(gas). 
+
+* Capacidad para desarrollar pequeños programas en lenguaje ensamblador para la arquitectura x86 (32 bits) tanto en papel impreso como en un entorno de desarrollo computacional bien en el ordenador personal y también en las estaciones de trabajo del Laboratorio de Informática.
+
+Requisitos
+~~~~~~~~~~
+
+* Requisitos:
+** Von Neumann Architecture: Arquitectura de una Computadora, Máquina IAS.
+** Programación en lenguaje ensamblador IAS
+** Representacion de datos
+** Operaciones Aritméticas y Lógicas
+** Representación de las Instrucciones
+*** <<gas_sintax_direcci, Sintaxis y Direccionamiento ASM x86>>: Sintaxis de las instrucciones en lenguaje ensamblador GnuAS y modos de direccionamiento para la arquitectura x86. 
+
+Referencias
+~~~~~~~~~~~
+
+* Manual Assembler as: <<toolchain, Apéndice: Cadena de herramientas Toolchain "as i386">>
+* *Leerse* los ocho primeros apartados del manual "Assembler as": <<assembler_as_i386,  Apéndice: Características "as i386">>
+* Manual Assembler as: <<assembler_as_directivas_i386, Apéndice: Directivas "as i386">>
+* Referencias a manuales en el <<leng_asm,Apéndice>>
+* Bibliografía: <<prog_ensamblador, Programación Ensamblador>>.
+* Apuntes completos <<WikiBook, WikiBook>> de programación en lenguaje AT&T con diversidad de aspectos.
+ 
+Estructura de la  Computadora con Arquitectura Intel x86-64
+-----------------------------------------------------------
+
+Manuales Intel ISA x86
+~~~~~~~~~~~~~~~~~~~~~~
+
+* https://www.intel.es/content/www/es/es/architecture-and-technology/64-ia-32-architectures-software-developer-vol-1-manual.html
+* 8 Volúmenes: 1,2A,2B,2C,3A,3B,3C,3D
+** Volume 1: Basic Architecture
+** Volumes 2A, 2B and 2C: Instruction Set Reference
+** Volumes 3A, 3B, 3C and 3D: System Programming Guide
+
+
+
+Intro
+~~~~~
+
+* Para poder programar en lenguaje ensamblador GAS x86 eficazmente es necesario tener las nociones básicas de la ISA x86.
+* Se va analizar la arquitectura amd64 de 64 bits que abarca también a la arquitectura i386 de 32 bits.
+* Las empresas Intel y AMD comparten dichas arquitecturas cuyo  mercado abarca tanto ordenadores de sobremesa como servidores.
+
+
+CPU-Memoria
+~~~~~~~~~~~
+
+* Ver la estructura general de una computadora en el <<estr_comp,Apéndice>>
+
+Registros internos a la CPU x86
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+introducción
+^^^^^^^^^^^^
+
+* Registos NO accesibles por el programador en la arquitectura amd64
+** PC: Contador del Programa : x86 lo denomina RIP: 64 bits
+** IR: Registro de instrucción : 64 bits
+** MBR: Registro buffer de Memoria : 64 bits -> WORD SIZE : 64
+** MAR: Registro de direcciones de Memoria: 40 bits 
+*** Capacidad de Memoria: 2^40^ : 1TB
+* Para el caso de la arquitectura i386 sustituir 64 bits por 32 bits y el registro MAR también es de 32 bits.
+
+
+
+
+Registros visibles al programador
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[width="50%", cols="5*<m"]
+|=====================================================
+|63-0| 31-0 | 15-0| 15-8| 7-0
+|rax | eax | ax  | ah  | al
+|rbx | ebx | bx  | bh  | bl
+|rcx | ecx | cx  | ch  | cl
+|rdx | edx | dx  | dh  | dl
+|rsi | esi | si  |     | sil
+|rdi | edi | di  |     | dil
+|rbp | ebp | bp  |     | bpl 
+|rsp | esp | sp  |     | spl
+|r8  | r8d | r8w |     | r8b
+|r9  | r9d | r9w |     | r9b
+|r10 | r10d | r10w|     | r10b
+|r11 | r11d | r11w|     | r11b
+|r12 | r12d | r12w|     | r12b
+|r13 | r13d | r13w|     | r13b
+|r14 | r14d | r14w|     | r14b
+|r15 | r15d | r15w|     | r15b
+|=====================================================
+
+Compatibilidad 32-64
+^^^^^^^^^^^^^^^^^^^^
+* En la nominación de los registros de la arquitectura de 64 bits sustituir R  por E y obtenemos la nominación de la arquitectura de 32 bits.
+
+[width="50%"]
+|============================================================================
+|64 bits 	|32 bits
+|RIP		|EIP
+|RAX		|EAX
+|RFLAG		|EFLAG
+|.......        | .............
+|============================================================================
+
+* Hay excepciones
+
+[[CFR]]
+Control Flag Register
+^^^^^^^^^^^^^^^^^^^^^
+
+* Registro de STATUS: La ejecución de una instrucción, activa unos bits denominados banderines que indican consecuencias de la operación realizada. Ejemplo: banderín de overflow : indica que la operación aritmética realizada ha resultado en un desbordamiento del resultado de dicha operación.
+* http://en.wikipedia.org/wiki/FLAGS_register_(computing)[wikipedia]
+* Unicamente nos fijamos en los flags OSZAPC.
++
+
+.RFLAG Register
+[width="50%",cols="<,^,<",options="header"]
+|======================
+|Flag |Bit |Name
+|CF |0 |Carry flag
+|PF |2 |Parity flag
+|AF |4 |Adjust flag
+|ZF |6 |Zero flag
+|SF |7 |Sign flag
+|OF |11 |Overflow flag
+|======================
+
+* Carry flag:
+** se activa si la llevada afecta a una posición de bit mayor que del ancho de palabra (word size) de la ALU en una operación aritmética de números enteros sin signo o con signo
+* Overflow flag:
+** se activa si teniendo en cuenta el bit de mayor peso MSB (aunque esté fuera el word size) indicase error en la operación aritmética con números enteros con signo. Si no se tiene en cuenta el MSB fuera del word size, la operación es correcta.
+* Parity Even flag:
+** indica si el número de bits del byte LSB del resultado de la última operación ha sido par.
+* Sign flag:
+** se activa si el resultado de la última operación ha sido negativo.
+* Adjust flag:
+** se activa si hay llevada en el nibble LSB del resultado de la última operación
+
+Casos de Overflow
+^^^^^^^^^^^^^^^^^
+
+IMPORTANT: Ejemplos de errores matemáticos por overflow: <<of_cf_unsigned_signed, activación de los flags CF y OF>> 
+
+
+
+
+Otros Registros internos a la CPU x86
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+image::./images/instrucciones_representacion/registers_1200x800.png[]
+
+
+* Segment Registers: CS,DS,ES,FS,GS,SS
+** https://en.wikipedia.org/wiki/X86_memory_segmentation
+** Normalmente se utilizan de forma implicita: las instrucciones están en el segmento de código en direcciones relativas al registro CS, los datos están el segment data en direcciones relativas al registro DS, la pila están el segmento stack en direcciones relativas al registro SS.
+** utilización explícita:
+*** +movl $42, %fs:(%eax)  ; M[fs:eax]<-42) ; eax contiene la dirección relativa a la dirección FS+
+** El Sistema Operativo utiliza los registros segmento en la gestión de memoria virtual mediante los mecanismos de paginación y segmentación: https://nixhacker.com/segmentation-in-intel-64-bit/ : La gestión de la memoria es un tema de la segunda parte de la asignatura.
+* Los registros fp, mmx y xmm se utilizan para ejecutar instrucciones complejas como la tangente que operan con números reales en coma flotante o instrucciones que ejecutan operaciones sobre múltiples datos enteros (Single Instruction Multiple Data) (P.ej producto escalar).
+* Más información en el <<fpu_x87, apéndice FPU_x87>> 
+
+
+
+
+Representación de los datos en lenguaje ensamblador (ASM) para la arquitectura i386/amd64
+-----------------------------------------------------------------------------------------
+
+Tipos de Datos
+~~~~~~~~~~~~~~
+
+Números y Caracteres
+^^^^^^^^^^^^^^^^^^^^
+* Número sin signo (naturales): codificación binario natural
+* Números enteros con signo: entero codificados en *complemento a 2* 
+* Números reales reales codificados en formato *IEEE-754* de simple o doble precisión
+* Caracteres alfanuméricos: código *ASCII*
+
+Directivas de la Sección de Datos 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Referencia <<assembler_as_directivas_i386, Apéndice>>
+
+.Directivas básicas
+[width="100%",format="csv",separator=";",cols="2*<1",options="header"]
+|====
+Directivas              ; descripción
+.global o .globl etiqueta	; variables globales
+.section .data 	; sección de las variables locales estáticas inicializadas
+.section .text 	; sección de las instrucciones
+.section .bss  	; sección de las variables sin inicializar
+.section .rodata 	; sección de las variables de sólo lectura
+.type	  name , type description  ; tipo de variable, p.ej @function
+.common   100    	; reserva 100 bytes sin inicializar y puede ser referenciado globalmente
+.lcomm   bucle, 100 	; reserva 100bytes referenciados con el símbolo local bucle. Sin inicializar.
+.space    100    	; reserva 100 bytes inicializados a cero
+.space    100, 3 	; reserva 100 bytes inicializados a 3
+.string  "Hola" 	; añade el byte 0 al final de la cadena
+.asciz   "Hola" 	; añade el byte 0 al final de la cadena
+.ascii   "Hola"	; no añade le caracter NULL de final de cadena
+.byte    3,7,-10,0b1010,0xFF,0777 ; tamaño 1Byte y formatos decimal,decimal,decimal,binario,hexadecimal,octal
+.2byte    3,7,-10,0b1010,0xFF,0777 ; tamaño 2Bytes
+.word    3,7,-10,0b1010,0xFF,0777 ; tamaño 2Bytes
+.short   3,7,-10,0b1010,0xFF,0777 ; tamaño 2B
+.4byte    3,7,-10,0b1010,0xFF,0777 ; tamaño 4B
+.long    3,7,-10,0b1010,0xFF,0777 ; tamaño 4B
+.int     3,7,-10,0b1010,0xFF,0777 ; tamaño 4B
+.8byte    3,7,-10,0b1010,0xFF,0777 ; tamaño 8B
+.quad    3,7,-10,0b1010,0xFF,0777 ; tamaño 8B
+.octa    3,7,-10,0b1010,0xFF,0777 ; formato octal
+.double  3.14159, 2 E-6 ; precisión doble
+.float   2E-6, 3.14159  ; precisión simple
+.single  2E-6           ; precisión simple
+.include "file"	; incluye el fichero . Obligatorias las comillas.
+.equ     SUCCESS, 0     ; macro que asocia el símbolo SUCCESS al número 0
+.macro macname macargs	; define el comienzo de una macro de nombre macname y argumentos macargs
+.endmacro		; define el final de una macro
+.align   n             ; las instrucciones o datos posteriores empezarán en una dirección multiplo de n bytes.
+.end  			; fin del ensamblaje
+|====
+
+* Et: Etiqueta
+
+Tamaño del operando x86
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Tamaño del operando: sufijos de los MNEMÓNICOS. 
++
+
+-----------
+q (quad) 8bytes
+l (long) 4bytes 
+w (word) 2bytes
+b (byte) 1byte
+----------- 
+
+** Ejemplos:
+*** movq  %rax,resultado 
+*** movl  %eax,resultado
+*** movw  %ax,resultado
+*** movb  %ah,resultado
+
+
+Alineamiento de Bytes: Big-Little Endian
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Los bytes de un dato de varios bytes se pueden almacenar en memoria en sentido MSB-____- LSB ó MSB-____-LSB
+* Alineamiento 'Little Endian': El byte de menor peso LSB se almacena en la posición de memoria más baja
+* Ejemplo *0x40000: 00 AF BF CF* 
+** En la posición de memoria principal 0x40000 está almacenado el dato de 4 bytes: +00 AF BF CF+
+*** Los bytes se guardan en dirección de memoria ascendente. Cuando se escribe en horizontal, ascendente significa de izda a dcha.
+*** En la posición *0x40000* está el byte 00 -> *LSB* (Least Significant Byte)
+*** En la posición *0x40001* está el byte AF
+*** En la posición *0x40002* está el byte BF
+*** En la posición *0x40003* está el byte CF -> *MSB* (Most Significant Byte)
++
+
+[ditaa]
+----------------------------------------------------------------------
+
+DIRECCIONES         CONTENIDO
+
+              +----------------------+
+   0x00000    |                      |
+              +----------------------+
+   0x00001    |                      |
+              +----------------------+
+   0x00002    |                      |
+              +----------------------+
+              |                      |
+              +----------------------+
+              |                      |
+              +----------------------+
+              |                      |
+              +----------------------+
+   0x40000    |          00          | LSB
+              +----------------------+
+   0x40001    |          AF          |
+              +----------------------+
+   0x40002    |          BF          |
+              +----------------------+
+   0x40003    |          CF          | MSB
+              +----------------------+
+              |                      |
+              +----------------------+
+              |                      |
+              +----------------------+
+              |                      |
+              +----------------------+
+   0xfffff    |                      |
+              +----------------------+
+
+----------------------------------------------------------------------
+
+** El byte de menor peso se almacena en la posición de memoria más baja. La posición más baja de las cuatro es la 0x4000 donde se almacena el 00, luego este es el byte de menor peso. El dato almacenado en formato little-endian  es el *0xCFBFAF00*.
+** La arquitectura i386/amd64 utiliza LITTLE ENDIAN
+* Tipos de información que siguen el formato little endian.
+** Para las instrucciones el formato es por campos por lo que no tiene sentido hablar de posiciones de mayor o menor peso de la instrucción por lo que no siguen el formato little endian.
+** Las cadenas de caracteres (strings) no representan un valor y por lo tanto no siguen el formato little endian.
+** Los números enteros se almacenan siguiendo el formato little endian.
+** Los números reales se almacenan siguiendo el formato little endian
+** Las direcciones de memoria se almacenan siguiendo la organización Little Endian.
+* Formato Big Endian
+** El orden de almacenamiento es el inverso al little endian, es decir, el byte LSB del dato se almacena en la dirección de memoria mayor de la región que ocupa el dato.
+
+Ejemplo
+~~~~~~~
+
+* Analizar el código del programa <<sum1toN_att_32, sum1toN att x86-32>>
+
+
+[[repertorio_instruc_oper]]
+Repertorio de Instrucciones en lenguaje ensamblador (ASM) para la arquitectura i386/amd64: Operaciones
+------------------------------------------------------------------------------------------------------
+
+Ejemplo
+~~~~~~~
+
+* En cada apartado que se estudia a continuación analizar el código del programa <<sum1toN_att_32, sum1toN att x86-32>> interpretando los códigos de operación. 
+
+Manual rápido
+~~~~~~~~~~~~~
+
+* http://www.felixcloutier.com/x86/[manual Intel quick]: *recomendado*
+
+Manuales y Tablas
+~~~~~~~~~~~~~~~~~
+
+* Referencias a manuales en el <<leng_asm,Apéndice>>
+
+Tipo de descripción de Códigos de Operación en el Manual de Intel
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Operación MOV
+^^^^^^^^^^^^^
+
+* http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/MOV.htm[MOV]
++
+
+[source,sh]
+----------------------------------------------------------------------
+MOV -- Move Data
+
+Opcode   Instruction       Clocks        Description
+
+88  /r   MOV r/m8,r8       2/2           Move byte register to r/m byte
+89  /r   MOV r/m16,r16     2/2           Move word register to r/m word
+89  /r   MOV r/m32,r32     2/2           Move dword register to r/m dword
+8A  /r   MOV r8,r/m8       2/4           Move r/m byte to byte register
+8B  /r   MOV r16,r/m16     2/4           Move r/m word to word register
+8B  /r   MOV r32,r/m32     2/4           Move r/m dword to dword register
+8C  /r   MOV r/m16,Sreg    2/2           Move segment register to r/m word
+8D  /r   MOV Sreg,r/m16    2/5,pm=18/19  Move r/m word to segment register
+A0       MOV AL,moffs8     4             Move byte at (seg:offset) to AL
+A1       MOV AX,moffs16    4             Move word at (seg:offset) to AX
+A1       MOV EAX,moffs32   4             Move dword at (seg:offset) to EAX
+A2       MOV moffs8,AL     2             Move AL to (seg:offset)
+A3       MOV moffs16,AX    2             Move AX to (seg:offset)
+A3       MOV moffs32,EAX   2             Move EAX to (seg:offset)
+B0 + rb  MOV reg8,imm8     2             Move immediate byte to register
+B8 + rw  MOV reg16,imm16   2             Move immediate word to register
+B8 + rd  MOV reg32,imm32   2             Move immediate dword to register
+C6       MOV r/m8,imm8     2/2           Move immediate byte to r/m byte
+C7       MOV r/m16,imm16   2/2           Move immediate word to r/m word
+C7       MOV r/m32,imm32   2/2           Move immediate dword to r/m dword
+
+----------------------------------------------------------------------
+
+** MOV NO afecta a ningún flag
+** dword :double word: 32 bits
+** r8: registro de 8 bits
+** r/m8 : registro de cualquier tamaño o posición de memoria de 8 bits
+** imm8 : operando inmediato de 8 bits
+** reg8 : registro de 8 bits
+** Sreg : registros segmento -> CS,DS,ES,FS,GS,SS
+** The moffs8, moffs16, and moffs32 operands specify a simple offset relative to the segment base, where 8, 16, and 32 refer to the size of the data. The address-size attribute of the instruction determines the size of the offset, either 16 or 32 bits.
++
+
+----
+https://www.intel.es/content/www/es/es/architecture-and-technology/64-ia-32-architectures-software-developer-vol-1-manual.html
+3.7.4 Specifying a Segment Selector
+The segment selector can be specified either implicitly or explicitly. [...] The processor automatically chooses a segment according to the rules given in Table 3-5.
+
+SS Any memory reference which uses the ESP or EBP register as a base register.
+
+DS All data references, except when relative to stack or string destination.
+----
+
+
+CAUTION: la sintaxis del lenguage ASM de los manuales  no es  la sintaxis de AT&T sino Intel ->  mnemónico operando_destino, operando fuente
+
+
+
+
+[[mnemonicos_basicos_explicados]]
+Mnemónicos Básicos (Explicados)
+-------------------------------
+
+
+Operaciones aritméticas
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* https://www.felixcloutier.com/x86/mul[mul]: multiplicación de números naturales, sin signo
++
+
+----
+Performs an unsigned multiplication of the first operand (destination operand) and the second operand (source operand) and stores the result in the destination operand. The destination operand is an implied operand located in register AL, AX or EAX (depending on the size of the operand); the source operand is located in a general-purpose register or a memory location
+----
+* https://www.felixcloutier.com/x86/imul[imul]: multiplicación de números enteros con signo
+** Puede tener 1,2 o 3 operandos
+** +imull Etiqueta+ :  R[ %edx ]:R[ %eax ] ← M[Etiqueta] × R[ %eax ]
++
+
+----
+Performs a signed multiplication of two operands. This instruction has three forms, depending on the number of operands.
+
+    One-operand form — This form is identical to that used by the MUL instruction. Here, the source operand (in a general-purpose register or memory location) is multiplied by the value in the AL, AX, EAX, or RAX register (depending on the operand size) and the product (twice the size of the input operand) is stored in the AX, DX:AX, EDX:EAX, or RDX:RAX registers, respectively.
+----
+
+
+* https://www.felixcloutier.com/x86/div[div]: división de números naturales, sin signo
+* https://www.felixcloutier.com/x86/idiv[idiv]: división de números enteros con signo
+** Puede tener 1,2 o 3 operandos
++
+
+----
+Divides the (signed) value in the AX, DX:AX, or EDX:EAX (dividend) by the source operand (divisor) and stores the result in the AX (AH:AL), DX:AX, or EDX:EAX registers. The source operand can be a general-purpose register or a memory location. The action of this instruction depends on the operand size (dividend/divisor).
+
+Non-integral results are truncated (chopped) towards 0
+----
+** +idiv+
+*** EAX<-Cociente{[EDX:EAX]/M[Op_fuente]} , EDX<-Resto{[EDX:EAX]/M[Op_fuente]}
+
+Extensión del signo
+~~~~~~~~~~~~~~~~~~~
+
+* movsbw src,Reg -> Mov Sign Byte to Word
+* movsbl src,Reg -> Mov Sign Byte to Long
+* movswl rc,Reg  -> Mov Sign Word to Long
+
+Cambio de tamaño
+~~~~~~~~~~~~~~~~
+
+* movzbw src,Reg -> Mov Byte to Word
+* movzbl src,Reg -> Mov Byte to Long
+* movzwl src,Reg -> Mov Word to Long
+
+
+
+
+
+Operaciones Booleanas
+~~~~~~~~~~~~~~~~~~~~~
+
+* https://www.felixcloutier.com/x86/not[NOT] 
+** no flags
+* https://www.felixcloutier.com/x86/and[AND]
+** Clear CF,OF
+** Modifica SF,ZF,PF
+* https://www.felixcloutier.com/x86/or[OR]
+** Clear CF,OF
+* https://www.felixcloutier.com/x86/xor[XOR]
+** Clear CF,OF
+** Modifica SF,ZF,PF
+
+[[prog_condicional]]
+Procesamiento Condicional: CMP,TEST,SETcc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CMP
+^^^
+* https://www.felixcloutier.com/x86/cmp[CMP]
+* Modifica CF,OF,SF,ZF,PF,AF
+* The condition codes used by the Jcc, CMOVcc, and SETcc instructions are based on the results of a CMP instruction
+* Compares the first source operand with the second source operand and sets the status flags in the EFLAGS register according to the results. The comparison is performed by subtracting the second operand from the first operand and then setting the status flags in the same manner as the *SUB instruction*. When an immediate value is used as an operand, it is sign-extended to the length of the first operand.
+** Es decir, hay que saber interpretar la instrucción de resta SUB y en concreto el flag OF  para signed overflow y CF para unsigned overflow.
+** Ejercicios:
+*** Realizar el <<cmp_ejercicio,ejercicio instrucción CMP>> y también en el guión de prácticas que se estudia los saltos realizar la interpretación manual de las instrucciones CMP.  
+
+
+SUB
+^^^
+
+* https://www.felixcloutier.com/x86/sub[SUB]
+* Subtracts the second operand (source operand) from the first operand (destination operand) and stores the result in the destination operand. When an immediate value is used as an operand, it is sign-extended to the length of the destination operand format.
+* The SUB instruction performs integer subtraction. 
+* It evaluates the result for both signed and unsigned integer operands and sets the OF and CF flags to indicate an overflow in the signed or unsigned result, respectively. The SF flag indicates the sign of the signed result.
+** Es decir, realiza la resta tanto interpretando los operandos como números naturales y números con signo ya que la representación binaria del resultado es la misma. En caso de overflow utiliza el flag OF para la interpretación con signo y para el overflow sin signo el flag CF. 
+
+TEST
+^^^^
+* https://www.felixcloutier.com/x86/test[TEST]
+** Computes the bit-wise logical *AND* of first operand (source 1 operand) and the second operand (source 2 operand)
+** Clear CF,OF
+** Modifica SF,ZF,PF
+
+SETcc
+^^^^^
+* https://www.felixcloutier.com/x86/setcc[SETcc]
+** SETcc operand
+** No modifica ningún flag. Modifica el operando si se cumple la condición.
+
+MOV
+^^^
+
+* https://www.felixcloutier.com/x86/mov[MOV]
+** La instrucción MOV no afecta a ningún flag del registro EFLAG
+
+
+
+Saltos
+~~~~~~
+
+Condicionales: Jcc
+^^^^^^^^^^^^^^^^^^
+
+* https://www.felixcloutier.com/x86/jcc[Jcc]
+** Comprueba la condición y si se cumple se ejecuta el salto a la dirección referenciada en el campo de operando.
+** jump short: el valor del operando es relativo al PC
+** Chequea los flags CF, OF, PF, SF, and ZF.
+** "less” and “greater”: compara números con signo: jl, jle, jg, jge, etc...
+** “above” and “below” : compara números sin signo: ja, jae, jb, jbe, etc... 
+* Antes de un salto condicional es necesario ejecutar algún tipo de instrucción donde la relación (aritmética, lógica, etc ) de los operandos sea condición para la ejecución del salto. Instrucciones previas pueden ser: CMP y TEST. 
+
+Indirectos
+^^^^^^^^^^
+
+Símbolo ++*++: 
+
+El Símbolo asterisco  para indicar indirección en los saltos y diferenciarlos del direccionamiento relativo. 
+
+
+--------
+jmp bucle   -> salto relativo a EIP
+jmp *bucle
+jmp *eax
+jmp *(eax)
+jmp *(mem)
+jmp *table(%ebx,%esi,4)
+--------
+
+En cambio en los movimientos MOV no hace falta el símbolo asterisco ya que no hay movimientos con direccionamiento relativo.
+
+Desplazamiento y rotación
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* +sar+,+sal+ : Shift Arithmetic Right, Shift Arithmetic Left.
+** desplazamiento aritmético: El digito entrante por la izda o dcha es el bit de signo. 
++
+
+----
+Shifts the bits in the first operand (destination operand) to the left or right by the number of bits specified in the second operand (count operand). Bits shifted beyond the destination operand boundary are first shifted into the CF flag, then discarded. At the end of the shift operation, the CF flag contains the last bit shifted out of the destination operand.
+----
+** +sarl $31, %edx+ : desplazamiento de 31 bits a la dcha y el bit entrante es el bit de signo el operando en EDX.
+* +shr+,+shl+
+* desplazmiento lógico: entran ceros
+** Ejemplos de multiplicación y división
+* ROL,ROR : rotación hacia la izquierda y rotación hacia la derecha.
+** el bit que sale fuera se copia en CF
+** Aplicación: conversión endianess
+
+Cambiar el Endianess
+~~~~~~~~~~~~~~~~~~~~
+
+-------------
+## Cambio del endianess en EAX. Previamente guarda el original de EAX y al final restaura EAX
+swapbytes:
+       xchg (%ebx), %eax
+       bswap %eax
+       xchg (%ebx), %eax
+-------------
+
+
+
+
+Formato de Instrucción: ISA Intel x86-64
+----------------------------------------
+
+* Apéndice <<form_inst, Formato Instrucción>>
+
+
+
+Subrutinas
+----------
+
+Referencias
+~~~~~~~~~~~
+
+ * <<ABI_i386, ABI x86-32>>
+ * <<ms_llamada, Convenio de LLamada MicroSoft>>
+
+Introducción
+~~~~~~~~~~~~
+
+* Las subrutinas en lenguaje ensamblador son el equivalente a las funciones en el lenguaje de programación en C, por lo que es necesario repasar el concepto de función en el lenguaje C.
+* En la sesión de practicas 5 se programarán subrutinas.
+
+Lenguaje C: Sentencia Función
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Introducción
+^^^^^^^^^^^^
+
+El objetivo de las funciones es descomponer el programa en módulos de código para dotar al programa de una estructura organizada que facilite el desarrollo del programa y su mantenimiento.
+La librería standard "libc" son colecciones de funciones básicas desarrolladas en el lenguaje C que son reutilizadas por la mayoría de los programas. De esta manera el programador no tiene que inventar la rueda.
+Por lo tanto en un programa coexisten funciones desarrolladas por el propio usuario en lenguaje C y funciones de librerías accesibles en código binario.
+
+
+Declaración
+^^^^^^^^^^^
+* La *declaración* de una función en lenguaje C se denomina *prototipo*. Ejemplo de prototipo: +int sumMtoN(short sumando1, short sumando2)+
+donde
+** Nombre: el nombre de la función es 'sumMtoN'
+** Argumentos: el nombre del primer argumento es 'sumando1' y es del tipo short, el nombre del 2º argumento es 'sumando2' y es del tipo shrot.
+** Tipo del valor de retorno: el tipo del valor de retorno es int.
+
+Definición
+^^^^^^^^^^
+* La *definición* de la función 'sumMtoN' consiste en desarrollar el algoritmo mediante sentencias de C, es decir, el cuerpo de la función:
++
+
+----
+int sumMtoN(short sumando1, short sumando2)   {
+      //sumando2 > sumando1
+      short i;
+      int resultado=0; // variable local a la función
+      i=sumando2;
+        while (i >= sumando1) {
+          resultado += i ;
+          i--;
+        }
+      printf("\n\t Subrutina sumMtoN \n");
+      return resultado; 
+    }
+----
+** resultado es la variable que contiene el valor de retorno
+
+LLamada y Retorno
+^^^^^^^^^^^^^^^^^
+
+* La función 'main()' llama a la función 'sumMtoN()' la cual después de ser ejecutada devuelve el resultado de la suma.
++
+
+----
+/*
+   Programa: sumMtoN.c
+   Compilación: gcc -g -ggdb3 -o sumMtoN sumMtoN.c
+                -ggdb3 : inserta en la tabla de símbolos del depurador información de macros
+                https://gcc.gnu.org/onlinedocs/gcc-12.2.0/gcc/Debugging-Options.html#Debugging-Options
+*/
+
+// Prototipos de las funciones
+#include <stdio.h>  // Declaración de la función printf()
+#include <stdlib.h>  // Declaración de la función exit()
+
+//Macros
+#define SUCCESS   0
+
+//Prototipos: declaración de la función sumMtoN()
+int sumMtoN(short sumando1, short sumando2);
+
+// Definición de la Función Principal main()
+void main(void) {
+       //Inicialización de los argumentos M y N de la función sumMtoN()
+       short M=1, N=1, longitud;
+       // Llamada a las funciones printf() y sumMtoN()
+       longitud=printf("El resultado de la suma es %d \n", sumMtoN(M,N));
+       printf("El número de caracteres de la cadena anterior impresa es %d\n",longitud);
+       // La evaluación de sumMtoN consiste en:  llamar a la función y capturar el valor de retorno.
+       // Llamada a la función exit
+       exit(SUCCESS);
+     }
+
+// Definición de las Funciones
+int sumMtoN(short sumando1, short sumando2)   {
+      //sumando2 > sumando1
+      short i;
+      int resultado=0; // variable local a la función
+      i=sumando2;
+        while (i >= sumando1) {
+          resultado += i ;
+          i--;
+        }
+      printf("\n\t Subrutina sumMtoN \n");
+      return resultado; 
+    }
+
+----
+
+.. La *evaluación* de sumMtoN() consiste enobtener el *valor de retorno* de la ejecución de la función 'sumMtoN()'
+.. printf -> sumMtoN : printf llama a sumMtoN , se evalua sumMtoN y se imprime el resultado de evaluar la función 'sumMtoN()'.
+.. El valor de retorno de la función printf() es el número de caracteres de la cadena impresa. Abrir un terminal y ejecutar el manual "man 3" para leer el apartado "RETURN VALUE". 
+
+
+Anidamiento de Funciones
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Anidamiento de llamadas: init() -> main() -> sumMtoN() -> printf() -> write()
+* El shell el sistema operativo GNU/linux llama a la función principal main()  del programa de usuario, que a su vez llama a la función printf() de la librería libc , la cual a su vez llama a la función de usuario sumMtoN() y a la función  write() del sistema operativo.
+* Retorno: 
++
+
+[ditaa]
+----
+write()--->+
+           |
+           +-->printf() -> main () -> exit()-> shell
+           |
+sumMtoN()->+   
+----
+
+Pila/Frame
+~~~~~~~~~~
+
+* Ver concepto de pila en el <<pila, Apéndice>>.
+* La pila es una 'sección' del programa en ejecución en la memoria principal. A diferencia de la sección de datos y la sección de instrucciones la pila se crea en tiempo de ejecución ,no durante la carga en memoria.
+* Los argumentos M y N de la función 'sumMtoN()' se pasan de la función main() a la función 'sumMtoN()' a través de la pila.
+* Partición de la pila en frames: Cada función del programa tiene su zona limitada dentro del 'segmento' de pila. A cada zona limitada asociada a cada función se le denomina *frame*. Por lo tanto en la sección pila se irán anidando frames cada vez que se llame a un función, e irán desapareciendo frames cada que vez que se retorne de un función.
+** La función 'main()' crea su frame cuando es llamada por el shell y la función 'sumMtoN' crea su propio frame cuando es llamada por main().
+** Los frames se apilan según se anidan las llamadas a subrutinas. Y se desactivan según retornan.
+** Dinamismo: En un momento dado de la ejecución del programa el último frame generado es el frame activo.
+*** La parte baja del frame activo esta referenciada por el puntero EBP y la parte alta del frame (top) por el puntero ESP. Los términos bajo y alto hacen referencia a la dirección del *apilamiento* y no a direcciones de memoria. Parte baja y alta del apilamiento.
+
+
+
+
+Argumentos de la subrutina
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+* Los argumentos deben de transferirse a través de la pila y antes de realizar la llamada.
+* Los argumentos se apilan uno detrás de otro comenzando por el último argumento y finalizando con el primer argumento.
+* Se apilan mediante la  instrucción +push argumento+ donde el operando es el argumento a transferir.
++
+
+----
+push N
+push M
+----
+
+
+Llamada a la subrutina
+~~~~~~~~~~~~~~~~~~~~~~
+
+* La rutina llamante 'main' llama a la subrutina 'sumMtoN' mediante la instrucción +call sumMtoN+. Por lo que la rutina 'main' queda interrumpida hasta que finalice la ejecución de la subrutina 'sumMtoN'.
+* La instrucción +call+ se ejecuta en dos fases:
+.. Apila la dirección de retorno: en la rutina 'main' siguiente instrucción a +call sumMtoN+: *ESP <- ESP-4* y  *M[ESP] <- PC*
+.. Salta a la etiqueta 'sumMtoN': *PC <- sumMtoN*
+* básicamente la instrucción call es una salto con retorno a la dirección donde fue interrumpida la rutina llamante.
++
+
+----
+push N
+push M
+call sumMtoN
+----
+
+Definición de la subrutina
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Nombre: 'sumMtoN'
+* El nombre de la subrutina es la etiqueta que apunta a la primera instrucción de la subrutina.
+* La subrutina finaliza con la instrucción ret.
+* La subrutina está estructurada en 3 partes:
+** Prólogo:
+... Salvar los registros que van a ser modificados por el cuerpo de la subrutina.
+... Activar el nuevo frame inicializando los punteros +EBP+ y +ESP+.
+** Cuerpo:
+... Capturar los argumentos y procesarlos
+** Epílogo:
+... Salvar el valor de retorno en el registro +EAX+
+... Recuperar el valor de los registros salvados en el Prólogo
+... Activar el frame de la función que ha realizado la llamada actualizando +EBP+ y +ESP+ con sus antiguos valores.
+... Retorno a la función que ha realizado la llamada.
+* Código
++
+
+----
+# Comienzo de la subrutina
+sumMtoN:
+# Prólogo
+		push  %ebp 	# salvo el bottom del frame de la función llamante en la parte baja del nuevo frame
+		mov   %esp,%ebp # configuro el puntero %ebp apuntando a la parte baja del nuevo frame
+		push   xxx      # Si fuera necesario: salvar registros que se utilizarán en el Cuerpo de la subrutina
+		push   xxx
+# Cuerpo
+		mov 8(%ebp),%ebx	#capturo el 1º argumento
+		mov 12(%ebp),%ecx	#capturo el 2º argumento
+		xxx xxx
+		xxx xxx
+# Epílogo
+		mov resultado,%eax	#inicializo el valor de retorno
+                pop   xxx               #recuperar registros que se salvaron en el prólogo
+		pop   xxx
+                mov %ebp,%esp
+                pop %ebp
+		ret
+----
+
+Animación: anidamiento de llamadas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* https://diveintosystems.org/book/C8-IA32/recursion.html
+** Programación de sum1toN por programación recurrente: la subrutina sum se llama así misma.
+** Visualización del crecimiento y decrecimiento de la pila con las sucesivas llamadas y retornos.
+
+
+Registros a Preservar
+~~~~~~~~~~~~~~~~~~~~
+
+
+
+Rutina llamante: arquitectura i386 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+* La rutina que realiza la llamada (caller routine) está obligada a preservar los siguientes registros si los está utilizando:
+
+** EAX-ECX-EDX
+
+CAUTION: Es decir, dichos registros pueden ser utilizados libremente por la subrutina llamada. En caso de no ser utilizados por la subrutina no sería necesario preservarlos. En caso de ser utilizados por la rutina principal se copiarían en la pila *antes de realizar la llamada* a la subrutina y serían recuperados al finalizar la subrutina.
+
+* Ejemplo:
++
+
+----
+mov $0,%edx     # asigno el valor cero al registro EDX
+call subrutina
+# AL VOLVER DE LA SUBRUTINA EDX no tiene porque valor CERO
+add %edx,%edx # la operación no tiene porque ser 0+0
+----
+** solución:
++
+
+----
+mov $0,%edx     # asigno el valor cero al registro EDX
+push %edx	# salvo el valor de EDX en la pila
+
+call subrutina
+
+pop %edx	# recupero el valor de EDX desde la pila
+add %edx,%edx   # realiza la operación 0+0
+----
+** lo mismo para los registros EAX y ECX
+
+Subrutina llamada: arquitectura i386 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+La subrutina llamada (callee routine) está obligada a preservar los siguientes registros:
+
+* EBX-ESP-EBP-ESI-EDI y X87CW
+
+Es decir, dichos registros al finalizar la subrutina de mantener el mismo valor que antes de la llamada. En caso de no utilizarlos no sería necesario preservarlos
+
+Arquitectura amd64
+^^^^^^^^^^^^^^^^^^
+
+Caller routine: The registers RAX, RCX, RDX, R8, R9, R10, R11 are considered volatile and must be considered destroyed on function calls (unless otherwise safety-provable by analysis such as whole program optimization).
+
+Callee routine: The registers RBX, RBP, RDI, RSI, RSP, R12, R13, R14, and R15 are considered nonvolatile and must be saved and restored by a function that uses them.
+
+Retorno de la subrutina
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* La última instrucción de la subrutina es *RET* cuya ejecución por la Unidad de Control de la CPU realiza las siguientes órdenes:
+.. *PC <- M[ESP]* : extrae de la pila la dirección de retorno guardada por la instrucción *CALL* y la carga en el Contador de Programa, por lo que se ejecutará el ciclo de instrucción de la instrucción posterior a *call sumMtoN*
+.. Actualiza el stack pointer: *ESP <- ESP + 4*
+* Es necesario que en el epílogo de la subrutina, antes de la ejecución de RET el stack pointer apunte a la dirección de la pila donde está almacenada la dirección de retorno. 
+
+
+
+Estado de la pila 
+~~~~~~~~~~~~~~~~~
+
+Análisis
+^^^^^^^^
+
+* La pila es una estructura dinámica cuyo estado (registros puntero EIP,EBP,ESP) cambian según se realizan llamadas y retornos de subrutinas. Razonar el contenido de dichos registros y verificarlo con el depurador GDB.
+
+
+Previo al salto  de la llamada a la subrutina
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Estado de la pila ejecutando la 'rutina main' justo antes de ejecutar la instrucción +call sumMtoN+:
+** El frame activo de la pila es el correspodiente a main.
+** Los últimos datos apilados en el 'frame main' son los argumentos de 'sumMtoN'
++
+
+----
+	push N
+	push M
+	call sumMtoN
+----
+* Analizar el contenido de los  registros EIP,EBP,ESP:
+** EIP: instruction pointer    ->
+** EBP: stack bottom pointer   ->
+** ESP: stack top pointer      ->
+
+Posterior al salto de la llamada a la subrutina
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Estado de la pila ejecutando la 'subrutina sumMtoN' justo después de ejecutar el salto +call sumMtoN+:
+** El frame activo de la pila es el correspodiente a main.
+** El último dato apilado en el frame main es la 'dirección de retorno' a main desde sumMtoN
+* Analizar el contenido de los  registros EIP,EBP,ESP:
+** EIP: instruction pointer    ->
+** EBP: stack bottom pointer   ->
+** ESP: stack top pointer      ->
+
+
+Creación del nuevo frame 'sumMtoN'
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Estado de la pila después de ejecutar:
++
+
+----
+sumMtoN:
+	push %ebp
+	mov  %esp,%ebp
+----
+* Analizar el contenido de los  registros EIP,EBP,ESP:
+** EIP: instruction pointer    ->
+** EBP: stack bottom pointer   ->
+** ESP: stack top pointer      ->
+
+Previo al salto de retorno
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Estado de la pila ejecutando la 'subrutina sumMtoN' justo antes de ejecutar la instrucción +ret+: 
+** El frame activo de la pila es el correspodiente a sumMtoN.
+** El puntero del top 'ESP'  del frame sumMtoN apunta a la dirección de pila que contiene la 'dirección de retorno'  
+* Analizar el contenido de los  registros EIP,EBP,ESP:
+** EIP: instruction pointer    ->
+** EBP: stack bottom pointer   ->
+** ESP: stack top pointer      ->
+
+Posterior al salto de retorno
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Estado de la pila ejecutando la 'subrutina sumMtoN' justo después de ejecutar la instrucción +ret+:
+** La ejecución de +ret+ ha realizado las siguientes operaciones:
+*** +pop %irp+
+** El frame activo de la pila es el correspodiente a main.
+* Analizar el contenido de los  registros EIP,EBP,ESP:
+** EIP: instruction pointer    ->
+** EBP: stack bottom pointer   ->
+** ESP: stack top pointer      ->
+
+Ejercicios de programación práctica
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Ir al capítulo de <<ejer_llamada_subru,Ejercicios>>
+
+Llamadas al Sistema Operativo
+-----------------------------
+
+Introducción
+~~~~~~~~~~~~
+
+* Se conoce con el nombre de 'llamadas al sistema' a las Llamadas que realizar el programa de usuario a subrutinas del Kernel del Sistema Operativo.
+ 
+* Para realizar funciones privilegiadas del sistema operativo como el acceso a los dispositivos i/o de la computadora es necesario que los programas de usuario llamen al kernel para que sea éste quien realice la operación de una manera segura y eficaz. De esta forma se evita que el programador de aplicaciones acceda al hardware y al mismo tiempo se facilita la programación.
+
+* Ejemplos de llamadas
+** *exit* : el kernel suspende la ejecución del programa eliminando el proceso
+** *read* : el kernel lee los datos de un fichero accediendo al disco duro
+** *write*: el kernel escribe en un fichero
+** *open* : el kernel abre un fichero
+** *close*: el kernel cierra el proceso
+** más ejemplos de llamada en el listado +man 2 syscalls+
+
+* La llamada a los servicios del kernel denominados 'syscalls' se puede realizar de dos formas: *directa* o *indirecta*
+** Directa: desde ASM mediante la instrucción +syscall+
+** Indirecta: desde C o ASM mediante funciones de la librería +libc+: wrappers de las llamadas directas
+* API/ABI
++
+
+[ditaa]
+----------------------------------------------------------------------
+
+ system call wrapper () -> C function
+          |
+          | INDIRECTA
+          v
++------------------------+
+|     C library libc     |    syscall -> assembly instruction
+|         |              |   
+|         |              |      |
+|         |              |      |DIRECTA
+|         |              |      |
++---------|--------------+------|----+-------ABI
+|         v                     v    |
+|              kernel                |
+|        (syscall functions)         |
++------------------------------------+
+               HW
+----------------------------------------------------------------------
+
+
+
+Arquitectura amd64
+~~~~~~~~~~~~~~~~~~
+
+Códigos de llamada
+^^^^^^^^^^^^^^^^^^
+
+*  '/usr/include/asm/unistd_64.h ': declaración de macros con el código de la llamada en la arquitectura x86-64
+*  '/usr/include/bits/syscall.h'  : macros antiguas también válidas en la arquitectura x86-32
+
+
+Argumentos
+^^^^^^^^^^
+
+* Ejemplo arquitectura *amd64*
+** Para pasar los argumentos no se utiliza la pila (memoria externa) sino los registros RPG (memoria interna de la CPU)
+** Los 6 primeros argumentos se pasan a través de los registros: [RAX-RDI-RSI-RDX-R10-R8-R9] previamente a la instrucción de la llamada +syscall+ 
++
+
+[source,c]
+----------------------------------------------------------------------
+* printf() -> write(int fd, const void *buf, size_t count) -> [RAX-RDI-RSI-RDX-R10-R8-R9,syscall] -> kernel syscall write
+* API      ->        wrapper function                      ->                ABI                  ->  kernel syscall
+----------------------------------------------------------------------
+
+
+Ejemplos amd64
+^^^^^^^^^^^^^^
+
+* Ver en el <<llamadas_SO, Apéndice>>
+
+Arquitectura i386
+~~~~~~~~~~~~~~~~~
+
+Norma
+^^^^^
+
+* ABI SystemV i386: Aplication Binary Interface (ABI)
+** La norma ABI SystemV i386 es la norma oficial donde se describe la interfaz binaria, es decir, como se comunican los distintos módulos de un programa a nivel binario, a  nivel de lenguaje máquina.
+** La llamada al kernel se realiza mediante la instrucción +int $0x80+ donde int es el mnemónico de interrupción (se interrumpe el programa de usuario en ejecución para llamar a una función del kernel)
+
+
+
+
+Códigos de llamada
+~~~~~~~~~~~~~~~~~~
+
+* '/usr/include/asm/unistd_32.h' : declaración de macros con el código de la llamada
+** '/usr/include/bits/syscall.h': macros antiguas también válidas
+* llamadas típicas:
+** *exit-fork-read-write-open-close-...*
++
+
+[width="80%",cols="<,<,<8",options="header"]
+|========================================================================
+3+^s|exit - terminate current process
+|In	|eax	|1
+|       | ebx	|return code
+|Out  2+|(This call does not return)
+3+^s|fork - create child process
+|In	|eax	|2
+|Out	|eax	|0 in the clone; process id of clone or EAGAIN or ENOMEM in caller
+3+^s|read - read from file or device
+|In	|eax	|3
+|       | ebx	|file descriptor
+|       | ecx	|address of the buffer to read into
+|       | edx	|maximum number of bytes to read
+|Out	|eax	|number of bytes actually read  :  EAGAIN  :  EBADF  :  EFAULT  :  EINTR  :  EINVAL  :  EIO  :  EISDIR
+3+^s|write - write to file or device
+|In	|eax	|4
+|       | ebx	|file descriptor
+|       | ecx	|address of the buffer to write from
+|       | edx	|maximum number of bytes to write
+|Out	|eax	|number of bytes actually sent  :  EAGAIN  :  EBADF  :  EFAULT  :  EINTR  :  EINVAL  :  EIO  :  ENOSPC  :  EPIPE
+3+^s|open - open, create, or truncate a file or device
+|In	|eax	|5
+|       | ebx	|address of zero-terminated pathname
+|       | ecx	|file access bits
+|       | edx	|file permission mode
+|Out	|eax	|file descriptor of opened file  :  EACCESS  :  EEXIST  :  EFAULT  :  EISDIR  :  ELOOP  :  EMFILE,  :  ENAMETOOLONG  :  ENFILE  :  ENOENT  :  ENODEV  :  ENODIR  :  ENOMEM  :  ENOSPC  :  ENXIO  :  EROFS  :  ETXTBSY
+3+^s|close - close a file or device
+|In	|eax	|6
+|       | ebx	|file descriptor
+|Out	|eax	|zero for success  :  EBADF
+3+^s|waitpid - wait for a processes to terminate
+|In	|eax	|7
+|       | ebx	|process id of the process to wait for
+|       | ecx	|0, or address of buffer to hold exit state
+|       | edx	|option flags  :  0  :  WNOHANG  :  WUNTRACED
+|Out	|eax	|pid of finished process  :  ECHILD  :  EINVAL  :  ERESTART
+|       | ecx	|exit state of finished process, if non-zero value was input in ecx
+3+^s|create - create a file
+|In	|eax	|8
+|       | ebx	|address of zero-terminated pathname
+|       | ecx	|file permission mode
+|Out	|eax	|file descriptor of opened file  :  EACCESS  :  EEXIST  :  EFAULT  :  EISDIR  :  ELOOP  :  EMFILE,  :  ENAMETOOLONG  :  ENFILE  :  ENOENT  :  ENODEV  :  ENODIR  :  ENOMEM  :  ENOSPC  :  ENXIO  :  EROFS  :  ETXTBSY
+|Note 2+|This call is identical to calling open with access bits O_CREATE : O_WRONLY : O_TRUNC
+3+^s|link - create a hard link to a file
+|In	|eax	|9
+|       | ebx	|address of zero-terminated pathname of existing file name
+|       | ecx	|address of zero-terminated pathname of new name
+|Out	|eax	|0  :  EACCESS  :  EIO  :  EPERM  :  EEXIST  :  EFAULT  :  ELOOP  :  EMLINK  :  ENAMETOOLONG  :  ENOENT  :  ENOMEM  :  ENOSPC  :  ENOTDIR  :  EPERM  :  EROFS  :  EXDEV
+3+^s|unlink - delete a name and remove file when not busy
+|In	|eax	|10
+|       | ebx	|address of zero-terminated pathname of existing file name
+|Out	|eax	|0  :  EACCES  :  EFAULT  :  EIO  :  EISDIR  :  ELOOP  :  ENAMETOOLONG  :  ENOENT  :  ENOMEM  :  ENOTDIR  :  EPERM  :  EROFS
+3+^s|execve - execute a program
+|In	|eax	|11
+|       | ebx	|address of zero-terminated pathname of program
+|       | ecx	|address of zero-terminated list of addresses of zero-terminated argument strings
+|       | edx	|address of zero-terminated list of addresses of zero-terminated environment strings
+|Out	|eax	|If success, no return because the new program inherits resources and overwrites caller; otherwise: E2BIG  :  EACCES  :  EINVAL  :  EIO  :  EISDIR  :  ELIBBAD  :  ELOOP  :  ENFILE  :  ENOEXEC  :  ENOENT  :  ENOMEM  :  ENOTDIR  :  EFAULT  :  ENAMETOOLONG  :  EPERM  :  ETXTBUSY
+3+^s|chdir - change working directory
+|In	|eax	|12
+|       | ebx	|address of zero-terminated pathname of existing directory
+|Out	|eax	|0  :  EACCES  :  EBADF  :  EFAULT  :  EIO  :  ELOOP  :  ENAMETOOLONG  :  ENOENT  :  ENOMEM  :  ENOTDIR
+|========================================================================
+
+* File descriptors
+** 0 (STDIN): The standard input for the terminal device (normally the keyboard). Diferenciar la macro STDOUT_FILEIN de la macro stdin.
+** 1 (STDOUT): The standard output for the terminal device (normally the terminal screen). Diferenciar la macro STDOUT_FILENO de la macro stdout.
+** 2 (STDERR): The standard error output for the terminal device (normally the terminal screen)
+
+
+
+Como pasar los argumentos
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Para pasar los argumentos no se utiliza la pila (memoria externa) sino los registros RPG (memoria interna de la CPU)
+* Los 6 primeros argumentos se pasan a través de los registros: [EBX-ECX-EDX-ESI-EDI-EBP] previamente a la instrucción de la llamada +int $0x80+ 
++
+
+[source,c]
+----------------------------------------------------------------------
+* printf() -> write(int fd, const void *buf, size_t count) -> [EBX-ECX-EDX-ESI-EDI-EBP,int 0x80] -> kernel syscall write
+* API      ->        wrapper function                      ->                ABI                  ->  kernel syscall
+----------------------------------------------------------------------
+
+* Pasar los argumentos 1º-2º-3º-4º-5º-6º a través de los registros 'EBX-ECX-EDX-ESI-EDI-EBP' en el orden indicado en el prototipo de la función en C:
+* Ej: llamada a la 'syscall exit' del kernel desde un módulo fuente en lenguaje ASM:
+** +man 3 exit+
+** +syscall(exit_code,int status)+
+** módulo asm 
++
+
+[source,nasm]
+----------------------------------------------------------------------
+mov $1,%eax
+mov $status_value,%ebx
+int $0x80
+----------------------------------------------------------------------
+
+* Ej: llamada a la 'syscall write' del kernel desde un módulo fuente en lenguaje ASM:
+** +man 2 write+
+** +syscall(write_code,int fd, const void *buf, size_t count)+
+** módulo asm
++
+
+[source,nasm]
+----------------------------------------------------------------------
+mov $4,%eax
+mov $1,%ebx
+mov $buffer_address_label,%ecx
+mov size,%edx
+int $0x80
+----------------------------------------------------------------------
+
+* Valor de Retorno
+** El valor de retorno se pasa a través del registro 'EAX'
+
+
+LLamadas a las funciones de la librería standard de C
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Desde ASM se puede llamar a las funciones de la librería de C instalada en linux: 'libc'
+* Para llamar a la función 'printf()' utilizamos la instrucción +call printf+
+* Los argumentos de la función se pasan previamente a la llamada. 
+** Los argumentos se pasan a través de la *pila* en el sentido Dcha->Izda a como estan definidos.
+* Es necesario linkar el módulo objeto con la librería 'libc'
+* Ej:
+** Programación C
++
+
+[source,c]
+----------------------------------------------------------------------
+planetas = 9; 
+printf("El número de planetas es %d \n", planetas);
+----------------------------------------------------------------------
+** Programación ASM
++
+
+[source,nasm]
+----------------------------------------------------------------------
+     .section .data
+cadena:
+     .asciz "El número de planetas es %d \n"
+planetas:
+     .long 0
+     .section .text
+_start:
+     movl $9,planetas
+     push planetas
+     push $cadena
+     call printf
+     call exit
+     .end 
+----------------------------------------------------------------------
+
+ 
+Línea de comandos
+^^^^^^^^^^^^^^^^^
+
+* Process Initialization
+* en el kernel está declarada la función main(): +extern int main (int argc , char* argv[] , char* envp[]) ;+
+** declaración y definición del módulo principal
+** 'argc' is a non-negative argument count;
+** 'argv' is an array of argument strings, with argv[argc]==0;
+** 'envp' is an array of environment strings, also terminated by a null pointer.
+* Stack Initialization
++
+
+.Convenio ABI: Stack 
+[width="50%",cols="<,^",options="header"]
+|==========================================
+|Stack Reference | Interpretation
+|                | arguments strings
+|4n(%esp) 	|- pointer to nº string
+| 	|
+|8(%esp) 	|- pointer to 2º argument string
+|4(%esp) 	|- pointer to 1º argument string
+|0(%esp) 	|- argc
+|==========================================
+
+Ejemplo
+~~~~~~~
+
+* Introducir los datos del programa suma.s a través de 	a línea de comandos
++
+
+[source,scala]
+----------------------------------------------------------------------
+### función: sumar dos números enteros de un dígito.
+###          los sumandos se pasan a través de la línea de comandos
+        ## gcc -m32 -nostartfiles -g -o sum_input sum_imput.s
+        ## run 5 7 
+        ##  x /a  (char**)($esp+4)  -> 0xffffd0a4:	0xffffd26e
+        ##  x /c  *(char**)($esp+4) -> 0xffffd26e:	47 '/'
+        ##  x /s  *(char**)($esp+4) -> 0xffffd26e:	 "/home/candido/tutoriales/as_tutorial/algoritmos_x86-32/basicos/sum_input"
+        ##  p /s *(char**)($esp+4)  -> 0xffffd26e "/home/candido/tutoriales/as_tutorial/algoritmos_x86-32/basicos/sum_input"
+        ##  x /s  *(char**)($esp+8) -> 0xffffd2b7:	 "5"
+        ##  x /s  *(char**)($esp+12) -> 0xffffd2b9:	 "7"
+        
+        .section .text
+	.globl _start
+_start: 
+
+        ## instrucciones aclaratorias
+
+	leal 8(%esp),%eax       #eax contiene argv[1] la dirección de la pila que contiene el pointer al argumento string 
+        movl 8(%esp),%ebx       #ebx tiene el contendio de la pila= dirección del string
+        xor %ecx,%ecx
+        movb (%ebx),%cl        #caracter ASCII
+
+        ## string argument pointers
+        movl 8(%esp),%eax       #eax tiene el contendio de la pila= dirección del string. argv[1]
+        movl 12(%esp),%ebx       #eax tiene el contendio de la pila= dirección del string. argv[2]
+        ## fetch string indirect
+        ## convert ascii numbers to values
+        xor %ecx,%ecx
+        xor %edx,%edx
+        movb (%eax),%cl         # indirección para acceder al string referenciado por argv[1]
+        movb (%ebx),%dl         # indirección para acceder al string referenciado por argv[1]
+        subl $0x30,%ecx  
+        subl $0x30,%edx
+
+        push %ecx
+        push %edx
+        
+        call suma
+
+	## salida
+        movl %eax,%ebx
+	movl  $1, %eax	    #1 is the exit() syscall
+	int   $0x80
+
+
+### Función que calcula el máximo entre dos valores
+	.type suma, @function
+	.section .text
+suma:
+	## prologo
+	push %ebp
+	movl %esp,%ebp
+	subl $1,%esp            #reserva de memoria
+	push %ebx
+	push %edi
+	push %esi
+	## captura de argumentos
+	movl 8(%ebp),%eax      #1º argumento 
+	movl 12(%ebp),%ecx     #2º argumento
+	## cuerpo
+	addl %ecx,%eax          #
+	## guardar resultado
+
+	## el resultado está en EAX  
+	## epilogo
+	pop %esi
+	pop %edi
+	pop %ebx
+	mov %ebp,%esp           # frame anterior
+	pop %ebp
+	ret                     # recuperar dirección de retorno
+----------------------------------------------------------------------
+
+
+
+
+
+
+
+

@@ -1,0 +1,81 @@
+Quick x86 assembly mnemonics NUP-UPNA 
+
+                                        NEG  ;Negación (compl a 2)
+ADD     ;Suma                           NOT  ;Invertir cada bit
+ADC     ;Suma con acarreo               AND  ;'Y' (And) lógico
+SUB     ;Resta                          OR   ;'O' (Or) lógico
+SBB     ;Resta con acarreo              XOR  ;'O' (Or) exclusivo   
+DIV     ;División (sin signo)           SHL  ;Desplazam.lógico a la izq.
+DIV     ;División (sin signo)           SHR  ;Desplazam.lógico a la der.
+DIV     ;386 División (sin signo)       MOV  ;Mover (copiar)
+IDIV    ;División entera con signo      XCHG ;Intercambiar
+IDIV    ;División entera con signo      STC  ;Set the carry (Carry=1) 
+IDIV    ;386 División entera con signo  CLC  ;Clear Carry (Carry=0)
+MUL     ;Multiplicación (sin signo)     CMC  ;Complementar Carry
+MUL     ;Multiplicación (sin signo)     STD  ;Setear dirección
+MUL     ;386 Multiplicación (sin signo) CLD  ;Limpiar dirección
+IMUL    ;i Multiplic. entera con signo  STI  ;Flag de Interrupción en 1
+IMUL    ;Multiplic. entera con signo    CLI  ;Flag de Interrupción en 0
+IMUL    ;386 Multiplic. entera con signoPUSH ;Apilar en la pila     
+INC     ;Incrementar                    PUSHF;Apila los flags
+DEC     ;Decrementar                    PUSHA;Apila los regs generales
+CMP     ;Comparar                       POP  ;Desapila de la pila
+SAL     ;Desplazam. aritm. a la izq.    POPF ;Desapila a los flags
+SAR     ;Desplazam. aritm. a la der.    POPA ;Desapila a los reg. general.
+RCL     ;Rotar a la izq. c/acarreo      CBW  ;Conv. Byte a Word
+RCR     ;Rotar a la derecha c/acarreo   CWD  ;Conv. Word a Doble
+ROL     ;Rotar a la izquierda           CWDE ;Conv. Word a Doble Exten.
+ROR     ;Rotar a la derecha             IN   ;Entrada                 
+NOP     ;Hacer nada                     OUT  ;Salida
+LEA     ;Cargar direciión Efectiva      Directivas
+INT     ;Interrupción			.global o .globl label
+CALL    Llamada a subrutina        	.section .data
+JMP     Saltar                     	.section .text
+JE      Saltar si es igual         	.section .bss
+JZ      Saltar si es cero          	.section .rodata
+JCXZ    Saltar si CX es cero       	.type name,description
+JP      Saltar si hay paridad      	.common   size
+JPE     Saltar si hay paridad par  	.lcomm    label,size
+JPO     Saltar si hay paridad impar	.space    size
+JNE     Saltar si no es igual           .end
+JNZ     Saltar si no es cero       	.string
+JECXZ   Saltar si ECX es cero      	.asciz
+JNP     Saltar si no hay paridad   	.ascii
+RET     Retorno de subrutina		.byte
+JA      Saltar si es superior          	.2byte
+JAE     Saltar si es superior o igual  	.word
+JB      Saltar si es inferior          	.short
+JBE     Saltar si es inferior o igual  	.4byte
+JNA     Saltar si no es superior       	.long
+JNAE    Saltar si no es super. o igual 	.int
+JNB     Saltar si no es inferior       	.8byte   
+JNBE    Saltar si no es infer. o igual 	.quad
+JC      Saltar si hay carry JC Dest    	.octa
+JNC     Saltar si no hay carry         	.double
+JNO     Saltar si no hay Overflow      	.float   
+JS      Saltar si hay signo (=negativo)	.single     
+JG      Saltar si es mayor             	.include "file" 
+JGE     Saltar si es mayor o igual     	.equ     SUCCESS
+JL      Saltar si es menor             	.macro macname m
+JLE     Saltar si es menor o igual     	.endmacro       
+JNG     Saltar si no es mayor          	.align number     
+JNGE    Saltar si no es mayor o igual  	            
+JNL     Saltar si no es inferior       
+JNLE    Saltar si no es menor o igual
+|63-0| 31-0 | 15-0| 15-8| 7-0 
+|rax | eax | ax  | ah  | al   
+|rbx | ebx | bx  | bh  | bl   
+|rcx | ecx | cx  | ch  | cl   
+|rdx | edx | dx  | dh  | dl   
+|rsi | esi | si  |     | sil  
+|rdi | edi | di  |     | dil  
+|rbp | ebp | bp  |     | bpl  
+|rsp | esp | sp  |     | spl  
+|r8  | r8d | r8w |     | r8b  
+|r9  | r9d | r9w |     | r9b  
+|r10 | r10d | r10w|     | r10b
+|r11 | r11d | r11w|     | r11b
+|r12 | r12d | r12w|     | r12b
+|r13 | r13d | r13w|     | r13b
+|r14 | r14d | r14w|     | r14b
+|r15 | r15d | r15w|     | r15b

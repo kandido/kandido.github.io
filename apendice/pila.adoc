@@ -1,0 +1,230 @@
+Pila
+====
+
+:doctitle: Pila
+
+[[pila]]
+Concepto
+--------
+* Stack ó Pila:
+** Estructura de Datos Last Input First Output (LIFO)
+* Memoria Externa
+* Dirección de apilamiento: En sentido de direcciones de memoria DECRECIENTE.
+* Un programa está estructurado en segmentos: Segmento datos, Segmento instrucciones, Segmento pila, ...
+** Memoria Principal Segmentada:
++
+
+[ditaa]
+----
+                                                                                                          
+ 0x00000000+---------+      
+           | cBLU    |       
+           |         |       
+           +---------+       
+           |         |       
+           | Segmento|
+           | Datos   |
+           |         |       
+           +---------+       
+           |         |       
+           | Segmento|
+           | Instruc.|
+           |         |                    
+           +---------+        
+           |         |       
+           | Segmento|
+           | Pila    |
+           |         |                    
+           +---------+                                
+           |         |       
+           | cBLU    |       
+           |         |       
+ 0xFFFFFFFF+---------+    
+           <-4Bytes--> 
+
+----
+
+Anchura
+-------
+
+* Anchura de la pila -> Word Size :  
+** En el caso de x86-64 : anchura de 64 bits
+** En la arquitectura i386 son 32 bits
+* Alineamiento de memoria de pila-> múltiplos del word size
+** En el caso de x86-64 : múltiplos de 8 bytes (64 bits) -> Direcciones en hexadecimal finalizadas en 0 y en 8.
+** Si el dato a apilar es menor que la anchura de la pila será necesario extenderlo. El tipo de extensión dependerá del tipo de dato (entero con signo, etc)
+
+* Segmento Pila de la arquitectura i386:
++
+
+[ditaa]
+----------------------------------------------------------------------
+                                                                                                          
+ 0x00000000+---------+      
+           | cBLU    |       
+           |         |       
+           +---------+       
+ 0xA0000000|  cDDD   |       
+           +---------+       
+ 0xA0000004|  cBBB   |       
+           +---------+       
+ 0xA0000008|  cBBB   |       
+           +---------+       
+ 0xA000000C|  c999   |       
+           +---------+       
+ 0xA0000010|  c999   |       
+           +---------+       
+ 0xA0000014|  c999   |       
+           +---------+       
+ 0xA0000018|  c999   |       
+           +---------+       
+ 0xB000001C|         |       
+           | cBLU    |       
+           |         |       
+ 0xFFFFFFFF+---------+    
+           <-4Bytes-->                         
+   	                
+	 
+----------------------------------------------------------------------
+
+
+Frame: frame pointer y stack pointer
+------------------------------------
+
+* Frame: Partición de la sección pila
+** Cada función que es llamada genera un frame
+** Los límites del *frame activo*  se señalan con dos punteros:
+*** límite inferior: frame pointer, señala la ubicación del 'primer' elemente apilado.
+*** límite superior: stack pointer, señala la ubicación del 'último' elemento apilado.
+* Stack Pointer (*sp*) 
+** Puntero que apunta al elemento TOP del frame: límite alto de la pila  donde se ubica el último elemento apilado.
+** En intel x86 es el registro RSP 
+* Frame pointer (*fp*)
+** Puntero que apunta al elemento BOTTOM del frame : límite bajo de la pila  donde se ubica el primer elemento apilado.
+** En intel x86 es el registro RBP
+* Sección de Pila (partición en Frames)
++
+
+[ditaa]
+----------------------------------------------------------------------
+ Address   ---DRAM----                                                                                    
+ 0x00000000+---------+    0x00000000+---------+      0x00000000+---------+      0x00000000+---------+     
+           |         |              |         |                |         |                |         |     
+           +         |              +         |                +         |                +         |     
+           | cBLU    |              | cBLU    |                | cBLU    |                | cBLU    |     
+           |         |              |         |                |         |                |         |     
+           +---------+              +         +                +         +                +         +     
+ 0xA0000000|  cDDD   |              |         |                |         |                |         | 
+           +---------+              +         +                +         +                +---------+     
+ 0xAFFFFFF9|  cBBB   |              |         |                |         |           sp-> |         |         
+           +---------+              +         +                +         +                +  printf +     
+           |  cBBB   |              |         |                |         |                |         |<-fp     
+           +---------+              +         +                +---------+                +---------+     
+ 0xAFFFFFFD|  c999   |              |         |                |         | <-sp           |         |     
+           +---------+              +         +                + sumMtoN +                + sumMtoN +     
+           |  c999   |              |         |           fp-> |         |                |         |     
+           +---------+              +---------+                +---------+                +---------+     
+           |  c999   |              |         | <-sp           |         |                |         |     
+           +---------+              +   main  +                +  main   +                +  main   +     
+           |  c999   |         fp-> |         |                |         |                |         |     
+           +---------+              +---------+                +---------+                +---------+     
+ 0xB0000000|         |              |         |                |         |                |         |     
+           | cBLU    |              | cBLU    |                |  cBLU   |                |  cBLU   |     
+           |         |              |         |                |         |                |         |        
+ 0xFFFFFFFF+---------+    0xFFFFFFFF+---------+      0xFFFFFFFF+---------+      0xFFFFFFFF+---------+     	 
+           <--Word---> 	                           
+   	        (a)                    (b)                        (c)                         (d) 
+	 
+----------------------------------------------------------------------
+
+* (a) La pila no esta formada
+* (b) llamada a main: se forma el frame de main. El frame crece y decrece según apilamos y extraemos
+* (c) llamada de main a sumMtoN: el frame sumMtoN se forma sobre el anterior de main: nuevos punteros FP y SP.
+* (d) llamada de sumMtoN a printf: el frame printf se forma sobre el anterior de sumMtoN: nuevos punteros FP y SP.
+
+NOTE: La pila es una estructura dinámica que se genera en el momento de la llamada de una función y desaparece con el retorno de la función
+
+Instrucciones Ensamblador Push-Pop 
+----------------------------------
+
+* Instrucción Push-Pop : Apilamiento-Extracción
+** Push Op_source
+*** Operación: insertar dato. 
+*** Operando destino: la pila.
+*** El stack pointer se DECREMENTA en una palabra . SP <- SP-1*WordSize y después se inserta el operando fuente en el destino.
+** Pop Op_dest
+*** Operación: extraer dato.
+*** Operando fuente: El último objeto apilado.
+*** Primero se extrae el objeto referenciado por el stack pointer. A continuación el stack pointer se INCREMENTA en una palabra. SP <- SP+1*WordSize
+
+
+
+[ditaa]
+----------------------------------------------------------------------
+ Address   ---DRAM----                                                                                    
+ 0xFFFFFFFF+---------+    0xFFFFFFFF+---------+      0xFFFFFFFF+---------+      0xFFFFFFFF+---------+     
+           |         |              |         |                |         |                |         |     
+           +         |              +         |                +         |                +         |     
+           | cBLU    |              | cBLU    |                | cBLU    |                | cBLU    |     
+           |         |              |         |                |         |                |         |     
+           +---------+              +---------+                +---------+                +---------+     
+ 0x0B000000|  cDDD   |         fp-> |         |<-sp       fp-> |         |           fp-> |         | 
+           +---------+              +---------+                +---------+                +---------+     
+ 0x0AFFFFFF|  cBBB   |              |         |                |         |<-sp            |         |         
+           +---------+              +         +                +---------+                +---------+     
+           |  cBBB   |              |         |                |         |                |         |<-sp     
+           +---------+              +         +                +         +                +---------+     
+ 0xAFFFFFFD|  c999   |              |         |                |         |                |         |     
+           +---------+              + cBLU    +                + cBLU    +                + cBLU    +     
+           |  c999   |              |         |                |         |                |         |     
+           +---------+              +         +                +         +                +         +     
+           |  c999   |              |         |                |         |                |         |     
+           +---------+              +         +                +         +                +         +     
+           |  c999   |              |         |                |         |                |         |     
+           +---------+              +         +                +         +                +         +     
+ 0xAFFFFFF9|         |              |         |                |         |                |         |     
+           |         |              |         |                |         |                |         |     
+           |         |              |         |                |         |                |         |        
+ 0x00000000+---------+    0x00000000+---------+      0x00000000+---------+      0x00000000+---------+     	 
+           <--Word---> 	                           
+   	        (a)                    (b)                        (c)                         (d) 
+	 
+  0xFFFFFFFF+---------+    
+            |         |    
+            +         |    
+            | cBLU    |    
+            |         |    
+            +---------+    
+       fp-> |         |    
+            +---------+    
+            |         |<-sp    
+            +---------+    
+            |         |
+            +         +    
+            |         |    
+            + cBLU    +    
+            |         |    
+            +         +    
+            |         |    
+            +         +    
+            |         |    
+            +         +    
+            |         |    
+            |         |    
+            |         |    
+  0x00000000+---------+    
+                (e)
+----------------------------------------------------------------------
+
+
+* (a) La pila no esta formada
+* (b) Se forma la pila inicializando los punteros de pila: frame pointer (fp) y stack pointer (sp)
+* (c) Ejecución de push 
+* (d) Ejecución de push
+* (e) Ejecución de pop
+
+Anidamiento de llamadas
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* TODO
+

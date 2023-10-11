@@ -1,0 +1,220 @@
+RTL Register Transfer Language
+==============================
+
+:doctitle: RTL Register Transfer Language
+
+[[RTL_lang]]
+Lenguaje RTL
+------------
+
+
+
+Introducción
+~~~~~~~~~~~~
+
+* Lenguaje de descripción de INSTRUCCIONES: Register Transfer Language (RTL)
+
+* El lenguaje RTL tiene como objetivo poder expresar las instrucciones que ejecuta la CPU como sumar(ADD),restar(SUB),mover(MOV), etc. La descripción se realiza a nivel de transferencia de datos entre 'registros' internos de la CPU o entre registros internos y la memoria externa. 
+* El lenguaje RTL , mediante símbolos interpretables por el programador, permite describir su comportamiento a nivel hardware y así definir el diseño de la arquitectura de una máquina.
+* Los 'registros' son el elemento fundamental de memoria en la ruta de los datos e instrucciones entre las distintas unidades básicas de la computadora. Un registro es un circuito digital que almacena, memoriza, un dato.
+* La ruta de los datos está formada por los buses y los elementos ('registros', multiplexores, switches, contadores, etc ) que se conectan a través de los buses
+** Ejemplo: ruta de un dato desde una posición de la memoria principal hacia los registros de operando de la ALU.
+** Concepto de buffer: etapa intermedia de memoria en la ruta de los datos.
+* La ejecución de las instrucciones que ejecuta la CPU implica la transferencia de datos a través de los registros de la ruta de datos.
+
+CAUTION: No confundir el RTL (Register Transfer Language) con el RTL (Register Transfer Level). El Register Transfer Level es utilizado por los lenguajes de descripción de HARDWARE (Hardware Description Language HDL)
+
+Registros 
+~~~~~~~~~
+
+ifdef::backend-slidy2[>>>]
+
+Arquitectura
+^^^^^^^^^^^^
+
+
+* La arquitectura de un registro comprende su funcionalidad y la estructura su implementación
+* Los registros:
+** 'almacenan' una palabra formada por una secuencia de bits.
+** son una array de celdas en una dimensión, donde cada celda almacena un bit.
+* Su tamaño normalmente es un múltiplo de 8 bytes y recibe un nombre.
+** 8 bits: 1 Byte
+** 16 bits: Word. Por razones históricas.(recordad que el tamaño de una palabra en otro contexto depende de la máquina de que se trate)
+** 32 bits: double word
+** 64 bits: quad word
+* Las celdas se enumeran empezando por cero.
+** LSB: Least Significant Bit es el bit de menor peso
+** MSB: Most Significant Bit es el bit de mayor peso
++
+
+[ditaa]
+----------------------------------------------------------------------
+
++---+---+---+---+---+---+---+---+
+| 7 |   |   |   |   |   |   | 0 |
++---+---+---+---+---+---+---+---+
+ MSB                         LSB  
+
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+| 15|   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+ MSB                                                         LSB
+
+
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+| 1 | 0 | 1 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | 0 | 0 | 1 | 1 | 1 | 0 |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+ MSB                                                         LSB
+----------------------------------------------------------------------
+
+Estructura
+^^^^^^^^^^
+
+* La  estructura del registro es la implementación de su funcionalidad
+* Cada bit del dato a registrar se almacena en una celda con capacidad de memoria. Las celdas de un registro se implementan con un circuito digital denominado flip-flop. Cada flip-flop almacena un bit.
+
+[ditaa]
+----------------------------------------------------------------------
+       Chip Select (CS)
+             |
+             v
+          +-----+        
+          |     |        
+          |     |        
+          |     |        
+          |     |        
+          |     |        
+          |     |        
+   Input  |     | Output       
+  +--/--> |  R0 | ---/-->
+    16    |     |   16       
+          |     |        
+          |     |        
+          |     |        
+          |     |        
+          |     |        
+          |     |        
+          +-----+   
+            ^  ^
+            |  |
+         Load  Clock
+
+----------------------------------------------------------------------
+
+*  El registro está conectado al mundo exterior mediante buses: bus de entrada y bus de salida
+* CS: Chip Select : conecta la salida interna del registro R0 al bus de salida -> Operación de lectura del registro
+* Load: Si la señal está activa se ordena la carga del valor del bus de entrada en el registro R0, se registra el dato de entrada. Operación de escritura en el registro.
+* Clock: señal digital binaria periódica.
+* La carga es síncrona con la señal de reloj clock CLK. El sincronismo se produce en los flancos positivos '_\|'  o negativos
++
+
+[ditaa]
+----------------------------------------------------------------------
+          T = 1/f
+<-------------------->
+
+               +-----+               +-----+               +-----+               +-----+            
+               |     |               |     |               |     |               |     |  
+               |     |               |     |               |     |               |     |         
+               |     |               |     |               |     |               |     |             
+               |     v               |     v               |     v               |     v    
+               |     |               |     |               |     |               |     |               
+               |     |               |     |               |     |               |     |     
+               |     |               |     |               |     |               |     |               
++--------------+     +---------------+     +---------------+     +---------------+     +
+
+Señal de reloj, clock.
+
+----------------------------------------------------------------------
+
+
+Símbolos
+~~~~~~~~
+
+* Los nombres de los registros se expresan mediante mayúsculas
+** PC: Program Counter
+** IR: Instruction Regiter
+** R2: Registro 2
+* Secciones de un registro
+** PC(L) : Byte de menor peso del registro contador de programa
+** PC(H) : Byte de mayor peso del registro contador de programa
+** PC(7:0): Secuencia de bits de la posición cero hasta la posición séptima del registro contador de programa.
+
+
+Sentencias RTL
+~~~~~~~~~~~~~~
+ifdef::backend-slidy2[>>>]
+
+Operaciones y Sentencias RTL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* En lenguaje RTL entendemos por sentencia una expresión que implica realizar operaciones con los registros.
+* Operaciones RTL:
+** transferencias entre registros, suma del contenido de dos registros, invertir el contenido de un registro, etc
+
+Microoperación
+^^^^^^^^^^^^^^
+
+* MICROoperaciones: operaciones realizadas por el MICROprocesador internamente, al ejecutar una Instrucción Máquina.
+** Ejemplos: escribir en un registro, orden de lectura a la M.Principal, leer de un registro, Decodificar una instrucción, incrementar un contador, sumar (microordenes al circuito sumador), desplazamiento de los bits de un registro, lógica AND,  etc...
+* La operación de escribir en un registro o leer en un registro para la CPU es una microoperación.
+
+
+
+
+Transferencia entre registros
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Operador transferencia <-
+* Sentencia transferencia: R2<-R1
+** A R1 se le llama registro fuente y a R2 registro destino
+** Copiamos el contenido del registro R1 en el registro R2
+
+
+Sentencia Condicional
+^^^^^^^^^^^^^^^^^^^^^
+
+* If (K1=1) then R2<-R1
+** K1:R2<-R1
+** La transferencia o copia se realiza únicamente si K1 es verdad es decir K1 vale el valor lógico 1.
+
+
+Sentencia Concurrente
+^^^^^^^^^^^^^^^^^^^^^
+
+* Operador coma
+* K3:R2<-R1,R3<-R1
+** Si K3 es verdad el contenido de R1 se copia en R2 y R3
+
+Referencia a la Memoria Principal
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Se utilizan los corchetes y el símbolo M.
+* M[0x80000] : contenido de la posición de memoria 0x8000
+* AC <- M[0x80000] : copiar  el contenido de memoria de la posición 0x8000 al registro AC
+* AC <- M[AC] : copiar el contenido de la posición de memoria a la que *apunta* el registro AC en el registro AC
+* M[0x8000] <- AC: copiar el contenido del registro AC en la posición de Memoria 0x8000
+** M[0x8000] <- R[AC]: copiar el contenido del registro AC en la posición de Memoria 0x8000
+
+
+Left-Right Value
+^^^^^^^^^^^^^^^^
+
+* Este concepto se utiliza en el lenguaje C al definir la sentencia asignación '='
+* M[0x1000] <- M[0x2000]
+** El contenido de la posición 0x2000 se copia en la posición 0x1000
+** Lo que hay a la derecha del operador <- se evalua y se obtiene un VALOR
+** Lo que hay a la izda del operador <- es una DIRECCION o REFERENCIA a Memoria (Principal o Registro)
+
+
+Ejemplos RTL con expresiones aritmetico-lógicas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* AC <- R1 v R2 
+** Operación lógica OR
+* (K1+K2):R1 <- R2+R3,R4<-R5^R6
+** El símbolo '+' tiene dos significados: booleano o aritmético.
+*** En k1+k2 tiene significado booleano: or. Aquí no tiene sentido la suma aritmética de señales lógicas. Tiene sentido evaluar si la señales están activas o no.
+*** En R2+R3 tiene significado aritmético. 
+* Para indicar prioridad en una expresión utilizaremos los paréntesis.
+

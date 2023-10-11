@@ -1,0 +1,782 @@
+Introducción a la Estructura de los Computadores
+================================================
+:doctitle: Introducción a la Estructura de los Computadores
+:uri-apuntesonline: https://kandido.github.io/eecc_book.html
+
+
+[[introo]]
+Introducción
+------------
+
+* El objetivo de la asignatura Estructura de Computadores (240306) del Grado de http://www.unavarra.es/ets-industrialesytelecos/estudios/grado/grado-en-ingenieria-informatica/presentacion?submenu=yes[Ingeniería Informática] de la Universidad Pública de Navarra es ser un curso introductorio universitario a la arquitectura de los computadores, estudiando sus componentes básicos (procesador, memoria y módulo de entrada/salida) así como la programación de bajo nivel en lenguaje ensamblador x86 mediante la utilización de herramientas de desarrollo software como el compilador, depurador, etc.
+
+
+Arquitectura de una máquina
+---------------------------
+
+
+* Arquitectura: Organización, Estructura: Qué, Cómo, Implementación (tecnología)
++
+
+[.text-center]
+.Estructura del Automóvil
+image::./images/introduccion/vehicle_arch.jpg[scaledwidth="50%",align="center"]
+
+
+image::./images/introduccion/Personal_computer,_exploded_6.png[scaledwidth="50%",align="center",title="Personal Computer" ]
+
+
+
+image::./images/introduccion/motherboard_parts.jpg[scaledwidth="50%",align="center",title="Placa Base"]
+
+
+
+
+
+Arquitectura desde la perspectiva HW 
+------------------------------------
+
+* 4 Módulos Básicos: CPU-MEMORIA-CONTROLADORES Entrada/Salida [Periféricos]-BUSES
+
+image::./images/introduccion/cpui7.jpeg[scaledwidth="600",align="center",title="CPU Intel Core i7 4ª Generación" ]
+
+
+
+image::./images/introduccion/RAMtypes2.jpg[width="600",align="center",title="Memoria DRAM"]
+
+
+
+image::./images/introduccion/memoria_SSD.png[width="600",align="center",title="Periféricos: Memoria de Semiconductor Solid State Drive (SSD)" ] 
+image::./images/introduccion/Seagate.jpg[width="600",align="center",title="Periféricos: Disco Duro Seagate" ] 
+image::./images/introduccion/memoria_M2M.png[width="600",align="center",title="Periféricos: Memoria M2M" ]
+
+
+image::./images/introduccion/BusOnMotherboard.png[dwidth="600",align="center",title="Bus de la Placa Base"]
+
+
+image::./images/introduccion/busribbon.jpeg[width="600",align="center",title="Bus Cableado"]
+
+
+
+
+Lenguajes de Programación y Lenguaje Máquina
+--------------------------------------------
+
+
+image::./images/introduccion/lenguajemaquina.png[scaledwidth="30%",align="center",title="Lenguaje Máquina: Binario"]
+
+
+
+* Lenguaje Pascal
++
+
+[source,pascal]
+----------------------------------------------------------------------
+program Hello_world;
+ begin 
+   writeln('hello world')
+ end.
+----------------------------------------------------------------------
+
+
+
+
+* L. Máquina-Binario Intel x86
++
+
+[source,pascal]
+----------------------------------------------------------------------
+# [2] begin
+00000000004001a0 <PASCALMAIN>:
+  4001a0:	01010101                   				
+  4001a1:	01001000 10001001 11100101             			
+  4001a4:	01001000 10000011 11101100 00010000          		
+  4001a8:	01001000 10001001 01011101 11111000          		
+  4001ac:	11101000 10110111 00111110 00000001 00000000       	
+# [3] writeln('hello world')
+  4001b1:	11101000 11001010 10010011 00000001 00000000      
+  4001b6:	01001000 10001001 10100011             		
+  4001b9:	01001000 10001001 11011110             	
+  4001bc:	01001000 10111010 11000000 11110110 01100001 00000000 00000000 	
+  4001c3:	00000000 00000000 00000000 
+  4001c6:	10111111 00000000 00000000 00000000 00000000      	
+  4001cb:	11101000 01111000 10010110 00000001 00000000       	
+  4001d0:	11101000 00010011 00111101 00000001 00000000       	
+  4001d5:	01001000 10001001 11011111             	
+  4001d8:	11101000 01110011 10010101 00000001 00000000       	
+  4001dd:	11101000 00000110 00111101 00000001 00000000       	
+  4001e2:	11101000 10011001 01000010 00000001 00000000       	
+  4001e7:	01001000 10001011 01011101 11111000          	
+  4001eb:	10101001                   	
+  4001ec:	10010011                   	  
+----------------------------------------------------------------------
+
+
+* Lenguaje Máquina (Código Hexadecimal) vs Lenguaje Ensamblador ASM x86
++
+
+[source,pascal]
+----------------------------------------------------------------------
+# [2] begin
+00000000004001a0 <PASCALMAIN>:
+  4001a0:	55                   	push   %rbp
+  4001a1:	48 89 e5             	mov    %rsp,%rbp
+  4001a4:	48 83 ec 10          	sub    $0x10,%rsp
+  4001a8:	48 89 5d f8          	mov    %rbx,-0x8(%rbp)
+  4001ac:	e8 b7 3e 01 00       	callq  414068 <FPC_INITIALIZEUNITS>
+# [3] writeln('hello world')
+  4001b1:	e8 ca 93 01 00       	callq  419580 <fpc_get_output>
+  4001b6:	48 89 c3             	mov    %rax,%rbx
+  4001b9:	48 89 de             	mov    %rbx,%rsi
+  4001bc:	48 ba c0 f6 61 00 00 	movabs $0x61f6c0,%rdx
+  4001c3:	00 00 00 
+  4001c6:	bf 00 00 00 00       	mov    $0x0,%edi
+  4001cb:	e8 78 96 01 00       	callq  419848 <FPC_WRITE_TEXT_SHORTSTR>
+  4001d0:	e8 13 3d 01 00       	callq  413ee8 <FPC_IOCHECK>
+  4001d5:	48 89 df             	mov    %rbx,%rdi
+  4001d8:	e8 73 95 01 00       	callq  419750 <fpc_writeln_end>
+  4001dd:	e8 06 3d 01 00       	callq  413ee8 <FPC_IOCHECK>
+  4001e2:	e8 99 42 01 00       	callq  414480 <FPC_DO_EXIT>
+  4001e7:	48 8b 5d f8          	mov    -0x8(%rbp),%rbx
+  4001eb:	c9                   	leaveq 
+  4001ec:	c3                   	retq   
+----------------------------------------------------------------------
+
+* Lenguaje de programación humano (texto) vs Lenguaje de programación máquina (binario)
+* Traducir -> Compilar
+* Interpretar
+* Lenguajes de programación: javascript, ruby, python, java, bash, C, assembly
+** Niveles de abstracción: humano/máquina
+
+
+Interface Software/Hardware
+---------------------------
+
+* Interacción directa del Programador con el hardware Máquina -> Programación en un lenguaje de bajo nivel (ensamblador, C)
++
+
+[ditaa]
+....
+
+
+                                               +-----------------------------+
+                                               |   Programador  Bajo Nivel   |
+                                               |                             |
+                                               +-------------+---------------+
+                                                             |                        SOFTWARE
+      -------------------------------------------------------|--------------------------------
+                                                             +                        HARDWARE
+                                                             |                                
+                                                             v                                
+                                               +-----------------------------+               
+                                               |   Unidad Central de Proceso |               
+                                               |                             |               
+                                               +-------------+---------------+               
+                                                             |                               
+               +----------------------+----------------------+-----------+        
+               |                      |                                  |            
+               v                      v                                  v    
+  +-------------------+  +-------------------+  +------------------------------------------+
+  | Memoria Principal |  | Cálculo Aritmético|  |                Controladores I/O         |
+  |                   |  | y Lógico          |  |                                          |      
+  +-------------------+  +-------------------+  +------+-----------+-------------+---------+
+                                                       |           |             |
+                                                       v           v             v
+                                                  +----+---+ +-----+----+ +------+------+                          
+                                                  | Display| | Teclado  | | Disco Duro  |
+                                                  |        | |          | |             |
+                                                  +--------+ +----------+ +-------------+
+
+
+....
+
+* Programación de bajo nivel
+** Módulo fuente: Lenguaje C ó Lenguaje ensamblador
+** Módulo objeto: Lenguaje máquina -> Compilación, Ensamblaje y Enlazado del Módulo Fuente.
+** Sistemas Bare Metal: No hay Sistema Operativo. Programamos directamente sobre el Hardware.
+
+* Interacción indirecta del programador con el hardware de la máquina. El programador interactua con el Sistema Operativo (S.O.)
+** Interacción del Kernel (núcleo, pej linux) del Sistema Operativo (S.O.) con la máquina (pej intel x86)
+
+[ditaa]
+....
+
+                                               +-----------------------------+
+                                               |         Programador         |
+                                               |       LLamadas al S.O.      |
+                                               +-------------+---------------+
+                                                             |
+                                               +-----------------------------+
+                                               |         Kernel              |
+                                               |         Drivers             |
+                                               +-------------+---------------+
+                                                             |                        SOFTWARE
+      -------------------------------------------------------|--------------------------------
+                                                             +                        HARDWARE
+                                                             |                                
+                                                             v                                
+                                               +-----------------------------+               
+                                               |   Unidad Central de Proceso |               
+                                               |                             |               
+                                               +-------------+---------------+               
+                                                             |                               
+               +----------------------+----------------------+-----------+        
+               |                      |                                  |            
+               v                      v                                  v    
+  +-------------------+  +-------------------+  +------------------------------------------+
+  | Memoria Principal |  | Cálculo Aritmético|  |                Controladores I/O         |
+  |                   |  | y Lógico          |  |                                          |      
+  +-------------------+  +-------------------+  +------+-----------+-------------+---------+
+                                                       |           |             |
+                                                       v           v             v
+                                                  +----+---+ +-----+----+ +------+------+                          
+                                                  | Display| | Teclado  | | Disco Duro  |
+                                                  |        | |          | |             |
+                                                  +--------+ +----------+ +-------------+
+
+
+....
+
+* Sistemas con Sistema Operativo (pej GNU/linux): A la hora de programar recurrimos a librerías que acceden al hardware a travéś del sistema opearitov. Pej la función printf(), de la librería libc, al compilarse se traduce en la función write() del sistema operativo la cual llama al driver (en el sistema operativo) de la tarjeta gráfica de la pantalla. El Sistema operativo consigue "abstraer" el HW físico de la máquina y facilita enormemente la programación al no tener que conocer el funcionamiento físico de la computadora.
+
+
+
+
+
+
+Apuntes
+-------
+
+book
+~~~~
+
+* Están disponibles los apuntes en: en castellano y formato link:./PDF/eecc_book.pdf[PDF], en euskera y formato link:./PDF/kkee_book.pdf[PDF],  en castellano y formato {uri-apuntesonline}[HTML] siendo este último el más actualizado.
++
+
+image::./images/introduccion/qr_eecc.jpg[scaledwidth="50%",align="center", title="Apuntes On Line"]
+
+
+slides
+~~~~~~
+
+* Están disponibles las transparencias en: en castellano y formatos link:./eecc_slides.html[HTML] y link:./PDF/eecc_slides.pdf[PDF]
+
+
+
+Temario
+-------
+
+
+* http://www.unavarra.es/ficha-asignaturaDOA?languageId=100000&codPlan=240&codAsig=240306[Web Estructura de Ordenadores]
++
+
+
+[source,sh]
+----------------------------------------------------------------------
+Temario
+
+1 - Introducción
+2 - Arquitectura de Von Neumann
+     2.1 CPU
+     2.2 Memoria
+     2.3 Entrada / Salida
+3 - Representación de datos
+     3.1 Bit, Byte y Palabra
+     3.2 Caracteres, enteros y reales
+4 - Aritmética y lógica
+     4.1 Operaciones aritméticas y lógicas sobre enteros en binario
+     4.2 Redondeo y propagación de error en números reales
+5 - Representación de instrucciones
+     5.1 Lenguaje máquina, lenguaje ensamblador y lenguajes de alto nivel
+     5.2 Formato de instrucción
+     5.3 Tipos de instrucción y modos de direccionamiento
+6 - Programación en lenguaje ensamblador de construcciones básicas de los lenguajes de alto nivel
+     6.1 Sentencias de asignación
+     6.2 Sentencias condicionales
+     6.3 Bucles
+     6.4 LLamadas y retorno de funcion o subrutina
+7 - Arquitectura y organización de la CPU
+     7.1 Conjunto de instrucciones
+     7.2 Arquitecturas CISC, RISC y VLIW
+     7.3 Fases de ejecución de una instrucción
+     7.4 Camino de datos
+8 - Sistema de entrada / salida
+     8.1 Sincronización por encuesta
+     8.2 Sincornización por interrupción
+     8.3 Vector de interrupciones
+     8.4 Acceso directo a memoria DMA
+     8.5 Programación en lenguaje ensamblador de rutinas de entrada/salida
+9 - Organización de la memoria
+     9.1 Jerarquía de memoria
+     9.2 Latencia y ancho de banda
+     9.3 Memoria cache
+     9.4 Memoria virtual
+----------------------------------------------------------------------
+
+
+
+
+Bibliografia Basica
+~~~~~~~~~~~~~~~~~~~
+
+Imprenta
+^^^^^^^^
+
+* Teoría
+** http://williamstallings.com/ComputerOrganization/[William Stalling]
++
+
+image::./images/introduccion/william_stalling7_portada.jpg[width=300,align="center",title="William Stalling Book"]
+
+............................................................................
+Organización y arquitectura de computadores .William Stallings
+Edición 7, reimpresa Pearson Prentice Hall
+ISBN 8489660824, 9788489660823 . 2006
+............................................................................
+
+............................................................................
+Computer Organization and Architecture: Designing for Performance. 
+William Stallings
+9ª Ed Upper Saddle River (NJ) : Prentice Hall, [2013]
+ISBN 0-273-76919-7 . 2012
+............................................................................
+
+
+* http://williamstallings.com/COA/COA7e.html[COA 7ª]
+* https://www.pearson.com/us/higher-education/program/Stallings-Pearson-e-Text-for-Computer-Organization-and-Architecture-Access-Code-Card-11th-Edition/PGM2043621.html[11º Ed 2019]
+
+* Prácticas:
++
+
+
+image::./images/introduccion/programming_from_the_ground_up.jpg[scaledwidth="50%",align="center",title="Programming Assembly"]
+
+ Programming from the Ground Up 
+ by Jonathan Bartlett Edited by Dominick Bruno, Jr.
+ Copyright © 2003 by Jonathan Bartlett
+ ISBN 0-9752838-4-7
+ Published by Bartlett Publishing in Broken Arrow, Oklahom
+
+** Programming from the Ground Up  by Jonathan Bartlett. Programación en Lenguaje Ensamblador AT&T para la arquitectura x86.
+*** http://programminggroundup.blogspot.com.es/2007/01/programming-from-ground-up.html[PGU book online]
+*** http://savannah.nongnu.org/projects/pgubook/[PGU book home]
+*** http://download.savannah.gnu.org/releases/pgubook/[pdf]
+
+** https://upcommons.upc.edu/handle/2117/115067[El ensamblador... pero si es muy fácil]: IA-32 (i386) (sintaxis AT&T)
+
+
+* Manuales GNU:
+** Documentación de los Manuales: La mayoría de las aplicaciones y herramientas software de la fundación GNU y Linux disponen de Manuales bien on-line o bien localmente en la propia máquina. Manual del compilador gcc: +$man gcc+
+
+IMPORTANT: Es una habilidad a adquirir por el profesional informático el acceder y utilizar dichos manuales así como disponer de hojas de referencia de acceso rápido durante la sesiones de trabajo.
+
+Online
+^^^^^^
+
+* https://diveintosystems.org/book/preface.html
+
+Bibliografía Complementaria
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Ir al capítulo de la <<arqui_computadores, bibliografía>>.
+
+Profesorado
+-----------
+
+* Cándido Aramburu Mayoz.
+** Doctor Ingenierio Telecomunicación. Profesor Titular de Universidad.
+** Edificio los Tejos, planta 2ª. Despacho 2028.
+** correo electrónico interno: a través del servidor Miaulario.
+** http://www.unavarra.es/ficha-docente?rangoLetras=a-z&uid=364[PDI Profesorado]
+*** Tutorías, Aulas y Horario
++
+
+----
+Tutoría online (cita previa) y Presencial 
+Lugar: Edificio Los Tejos 2ª Planta, Despacho 2028 (Prof. Cándido Aramburu)
+
+        Lunes :     10:00-13:00
+        Miércoles   10:00-13:00
+
+G91 -> A226, G1 ->A113, G2->A122, P91->A015, P1->A305, P2->E-ISM, P3-A y P3-B ->A015
+G91(L-15:00), G1(X-17:00), G2(L-17:00), P91(X-19:00), P1(J-17:00), P2(M-19:00), P3-A y P3-B (M-17:00)
+Aula E-ISM: Edificio “Las Encinas” (Lado derecho entre la Biblioteca y el Rectorado) en el Sótano, Laboratorio de Informática “ISM”
+----
+
+* Andrés Garde Gurpegui
+** Técnico Superior de la Dirección General de Informática y Telecomunicaciones del Gobierno de Navarra.
+** Profesor Asociado (Prácticas de Laboratorio)
+** Edificio de Los Tejos, planta 2ª, Sala de Asociados del departamento de INGENIERÍA ELÉCTRICA, ELECTRÓNICA Y DE COMUNICACIÓN.
+** andres.gardeATunavarra.es
+** http://www.unavarra.es/pdi?uid=6578[PDI Profesorado]
+
+* Carlos Juan de Dios Ursúa
+** Ingeniería Eléctrica y Electrónica
+** Master en Robótica y Automatización
+** Profesor Asociado (Teoría Estructura Computadores)
+** Edificio de Los Tejos, planta 2ª, Sala de Asociados del departamento de INGENIERÍA ELÉCTRICA, ELECTRÓNICA Y DE COMUNICACIÓN.
+** carlos.juandediosATunavarra.es
+
+Grado Informática
+------------------
+
+
+* https://www.unavarra.es/sites/grados/informatica-y-telecomunicacion/ingenieria-informatica/asignaturas-y-profesorado.html[Grado Informatica]
+** 200 - Escuela Técnica Superior de Ingeniería Industrial, Informática y de Telecomunicación
+** 240 - Graduado o Graduada en Ingeniería Informática por la Universidad Pública de Navarra
+
+
+
+Calendarios
+-----------
+
+* https://www.unavarra.es/sites/estudios/calendarios.html[Calendario administrativo]
+** Teoría
+*** Grupo1 G1 Miércoles 17:00 A113
+*** Grupo2 G2 Lunes 17:00 A122 
+*** Grupo91 G91 Lunes 15:00 A223
+* Prácticas
+** https://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/Horario1C.htm[Calendario Aulas Informática 1º Cuatrimestre]
+** https://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/Horario2C.htm[Calendario Aulas Informática 2º Cuatrimestre]
+** P3-A: Martes a las 17:00 en A-015(40 puestos) -> Prácticas de los Grupos de teoría G1 y G2 
+** P3-B: Martes a las 17:00 en A-015(40 puestos) -> Prácticas de los Grupos de teoría G1 y G2 
+** P2: Miércoles a las 17:00 en E-ISM (36 puestos) -> Prácticas del Grupo de teoría G2 
+** P1: Lunes a las 19:00 en A305 (36 puestos) -> Prácticas del Grupo de teoría G1
+** P91: Miércoles 19:00 en A015 (20 puestos) -> Prácticas del Grupo de teoría Euskera 
+** Aula E-ISM: Edificio “Las Encinas” (Lado derecho entre la Biblioteca y el Rectorado) en el Sótano, Laboratorio de Informática “ISM”
+
+....
+SEPTIEMBRE	Martes	  	Miércoles	Jueves
+	        26 P3-A P2	27 P91   	28 P1
+OCTUBRE			
+	         3 P3-B		                5 P1
+	        10 P3-A P2	11 P91	
+	        17 P3-B		
+	        24 P3-A P2	25 P91	        26 P1
+	        31 P3-B		
+NOVIEMBRE			
+		7 P3-A P2	8 P91		9 P1
+		14 P3-B		
+		21 P3-A P2	22 P91		23 P1
+		28 P3-B		
+....
+
+////
+* https://www.unavarra.es/sites/grados/informatica-y-telecomunicacion/ingenieria-informatica/horarios-y-aulas.html#cCentralUPNA[Horarios y Aulas]
+** Teoría-Prácticas
++
+
+[width="80%", cols="<4m,<4m,<4m,<4m,<4m,<4m"]
+|================================
+| |Lunes |Martes |Miércoles |Jueves | Viernes 
+|15:00| T91-A135| |PG1G2-A303 |T1-A125 |
+|17:00| P91-A327| |PG2-A306 |T2-A234|
+|19:00| PG1-A336 | | | |
+|================================
+
+** Prácticas
++
+
+[width="40%", cols="<4m,<4m"]
+|================================
+|A336 P91 17:00| A303 PG1G2 15:00
+|P327 PG1 19:00| A306 PG2   17:00
+| 3/10 | 5/10
+| 17/10 |19/10 
+|24/10|
+|  |2/11  
+|7/11|16/11
+|21/11|23/11
+|28/11 | 30/11 
+|================================
++
+
+----
+* P91: 3/10,17/10,24/10,7/11,21/11,28/11
+* PG1: 3/10,17/10,24/10,7/11,21/11,28/11
+* PG2: 5/10,19/10,2/11,16/11,23/11,30/11
+* PG1G2: 5/10,19/10,2/11,16/11,23/11,30/11
+
+* T1: Aula A125
+* T2: Aula A234 
+* T91: Aula A135
+* Prof Andrés Garde: 3 Grupos de castellano P1,P2,P3
+* Prof Carlos Juan de Dios: Grupo de castellanos T2
+* Prof Cándido Aramburu: Grupo de euskera T91-P91 y grupo de castellano T1
+* Aula E-ISM: 34 puestos
+----
+
+
+// * P91: 5/9,12/9,19/9,26/9,3/10,10/10,17/10,24/10,31/10(¿¿),7/11,14/11,21/11,28/11
+
+// * PG2: 7/9, 14/9,21/9,28/9,5/10,12/10(FIESTA),19/10,26/10,2/11,9/11,16/11,23/11,30/114
+
+
+//image::./images/introduccion/calendario_resumen_2022.png[width=100%,align="center", title="Calendario Resumido"]
+
+
+
+ifdef::backend-html5[]
+++++
+include::../HTML/images/introduccion/calendario_orientativo_eecc_2022_reducido.html[Calendario Gráfico]
+++++
+endif::[]
+
+////
+
+.Calendario Semestre Otoño 2022  
+
+
+////
+[%header, format=csv]
+|===
+include::../HTML/images/introduccion/calendario_reducido.csv[Calendario Semestre Otoño]
+|===
+////
+
+
+* Fiestas
++
+
+------
+12 de octubre miércoles (Fiesta Nacional de España).
+01 de noviembre martes (Festividad de Todos los Santos).
+03 de diciembre martes (San Francisco Javier, Día de Navarra).
+06 de diciembre jueves (Día de la Constitución).
+------
+
+
+* Semanas del curso :
+** 15 semanas: Duración del curso 2 de Septiembre al 20 de Diciembre
+
+* https://www.unavarra.es/sites/grados/informatica-y-telecomunicacion/ingenieria-informatica/evaluacion.html#cCentralUPNA[calendario exámenes]
+** https://www2.unavarra.es/gesadj/CyD1/ETSIIT/Examenes/Grados/Otono/240_otono.pdf[otoño 2023]
+** Convocatoria Ordinaria 18/12/2023 08:00 Convocatoria Extraordinaria: 18/01/2024 16:00
+
+
+Ejercicios mediante resolución de problemas
+-------------------------------------------
+
+* Realización de ejercicios básicos a lo largo de cada capítulo del temario incluidos en los apuntes.
+* Ejercicios tipo examen.
+
+
+Prácticas
+--------
+
+Guiones
+~~~~~~~
+
+* Están disponibles los Cinco Guiones de Prácticas en los apuntes: en el documento eecc_book.pdf y en el documento https://kandido.github.io/eecc_book.html siendo este último el más actualizado
+
+Ejercicios de Evaluación
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Al comienzo de cada sesión de prácticas se realizará un ejercicio individual de 20 minutos sobre el contenido de la sesión anterior cuya nota entra dentro del cómputo de la nota global de prácticas. 
+
+Memorias
+~~~~~~~~
+
+* Prácticas Individuales. 
+* Memorias :
+** La entrega de la memoria a través del servidor de miaulario se realizará antes de la siguiente sesión de prácticas en la fecha indicada y publicada por el profesor.
+** La memoria es un documento único en formato PDF.
+** El nombre del fichero  debe ser apellido1_apellido2_tituloguionpractica.pdf
+** Contenido de la memoria.
+*** El programa descrito en pseudocódigo
+*** El código fuente en lenguaje ensamblador debidamente comentados en coherencia con el programa en pseudocódigo.
+** No se valora el estilo de la memoria sino su contenido ya que interesa que sirva como apuntes para las pruebas de evaluación.
+
+[NOTE]
+============================================================================
+
+* Imprescindible tomar notas dentro y fuera del laboratorio
+* Salvar todo el trabajo en un pendrive o enviarlo por correo
+
+============================================================================
+
+[CAUTION]
+============================================================================
+* Borrado automático a diario del contenido del disco duro.
+============================================================================
+
+
+
+
+Recursos Informáticos
+---------------------
+
+UPNA
+~~~~
+
+
+servicio informático
+^^^^^^^^^^^^^^^^^^^^
+
+* https://www.unavarra.es/servicio-informatico/servicios/pdi?languageId=100000[Servicio Informático UPNA]
+** http://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/GERES.pdf[Reserva Aulas]
+** https://www.unavarra.es/servicio-informatico/servicios/pdi?opcion=23[Aulas VDI] 
+** https://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/AccesoRemotoVDI.pdf[Manual Acceso Remoto VDI]
+** https://vdibroker.unavarra.es[Escritorio Virtual]
+* Laboratorio Remoto de Computación
+** https://laboratoriosvirtuales.unavarra.es/[acceso general] -> ¿?
+
+laboratorio remoto ARM/FPGA
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* No se contempla la utilización del laboratorio remoto ARM/FPGA dentro del plan de la asignatura pero se encuentra disponible para quien desee utilizarlo, para lo cual es necesario abrir una cuenta de acceso.
+* https://laboratoriosvirtuales.unavarra.es/fpga/#/[acceso fpga] -> laboratorio remoto FPGA-Raspberry
+** Guacamole login -> credenciales UPNA
+** Acceso a la tarjeta DE1-SoC (ARM) -> login  -> Consola shell linux 
+** Acceso a la tarjeta Raspberry (ARM) -> login -> Consola shell linux
+** Acceso a la tarjeta Xilinx (ARM) -> login -> Consola shell linux
+* https://labsland.com/es[Empresa Colaboradora Labsland]: Instancias DE1-SoC. Interfaz Web.
+** Se instalará su acceso a través de miaulario mediante el botón EDA.
+** Herramientas de diseño dispositivos digitales
+
+Estaciones de Trabajo: 32 y 64 bits
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Arquitectura
+^^^^^^^^^^^^
+
+NOTE: Si la estación de trabajo particular de un alumno es Ubuntu (64 bits) sobre un procesador x86-64 no hay ningún problema para la ejecución de programas con una arquitectura de x86-64, en cambio, los programas a desarrollar en la asignatura utilizan una arquitectura de 32 bits que para poder compilar y ejecutar dichos programas es necesario
+
+Qué instalar
+^^^^^^^^^^^^
+
+* Es necesario disponer de un PC con una CPU  cuya arquitectura sea x86-64 ó amd64  y un Sistema Operativo https://linuxfoundation.org/[linux]/https://www.gnu.org/software/[GNU] mediante la distribución distribución https://ubuntu.com/download[Ubuntu]. La distribución Ubuntu que sea reciente con una versión superior a la 18. Se recomienda la distribución Ubuntu ya que es la distribución instalada en el laboratorio de informática donde se realizan las prácticas.
+** El Sistema operativo puede estar instalado de forma nativa o virtual (VMware, Virtualbox, https://libvirt.org/[Virtio], etc). 
+* Para la realización de las prácticas es necesaria una instalación mínima con las herramientas de programación de bajo nivel: *binutils*, Compilador *gcc*,  Debugger *gdb*, Editor *vim*
+* En Ubuntu:
+** realizar la instalación de los paquetes mediante el comando +sudo apt-get install binutils gcc gcc-multilib gdb vim+
+** comprobar la instalación de los paquetes mediante el comando +dpkg -l binutils gcc gcc-multilib gdb vim+ que el estado de cada uno de los programas es 'ii'
+** comprobar las versiones: +gcc --version && as --version && ld --version && gdb --version && vim --version+
+* Para la edición de los programas en los lenguajes C y ensamblador ASM se podrá utilizar además del editor Vim, el editor preferido (nano,sublime,gedit,kate,emacs,etc..) y/o el IDE preferido (Visual Studio Code, Eclipse, etc..)
+
+
+Registrarse 
+~~~~~~~~~~~
+
+miaulario
+^^^^^^^^^
+
+* https://miaulario.unavarra.es/portal[Miaulario]
+
+Github
+^^^^^^
+
+* Es necesario tener una cuenta abierta en la plataforma de repositorios https://github.com/[Github]
+
+Google
+^^^^^^
+
+* https://support.google.com/accounts/answer/27441[Google account]
+* https://www.google.com/chrome/[Navegador Google Chrome]: permite seleccionar el idioma
+
+
+Grupos de Prácticas
+-------------------
+
+.Grupos de Prácticas  
+[%header, format=dsv]
+|===
+include::../HTML/images/introduccion/grupos_alumnos_eecc_2023-24.dsv[Listado de Grupos de Prácticas]
+|===
+
+
+
+
+Metodología
+-----------
+* Teoría, Ejercicios, Prácticas y Exámenes.
+
+.metodología
+[style="monospaced",width="100%",cols="7<e,1<e,1<e",options="header"]
+|====================================================================
+| Metodología - Actividad | Horas Presenciales| Horas no presenciales
+| A-1 Clases magistrales |  24 | 
+| A-2 Estudio autónomo| | 30
+| A-3 Sesiones prácticas| 16| 
+| A-4 Programación / experimentación u otros trabajos en ordenador / laboratorio| |20
+| A-5 Resolución de problemas, ejercicios y otras actividades de aplicación| |12
+| A-6 Aprendizaje basado en problemas y/o casos|  14|  
+| A-7 Elaboración de trabajos y/o proyectos y escritura de memorias| | 11
+| A-8 Lectura de Guiones, preparación de presentaciones de trabajos, proyectos, etc...| | 15
+| A-9 Actividades de Evaluación 	| |6
+| A-10 Tutorías | 	 2 	 |  	  	 
+| Total| 62| 88
+|====================================================================
+
+
+* La asignatura se desdobla en 2 partes
+** Parte I: Temas 1-6 (conceptos básicos)
+** Parte II: Temas 7-9 (conceptos avanzados y casos prácticos)
+
+
+
+Distribución de créditos
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Distribución de créditos:
+**  total créditos: 6 ECTS
+**  total horas: 6x25 : 150 horas
+**  horas presenciales: 62 horas
+*** clases : 24 horas. Durante 12 semanas (2horas/semana) de 15 semanas totales del curso
+*** prácticas de laboratorio: 16 horas. Durante 8 semanas (2horas/semana)
+*** problemas : 14 horas. Durante 7 semanas (2horas/semana)
+*** evaluación: 6 horas. Durante 3 semanas (2horas/semana) de 15 semanas totales del curso
+** tutorías   : 2 horas
+** horas no presenciales: 88 horas
+
+Distribución de créditos de las Prácticas
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Cada alumno tendrá 16 horas de prácticas en sesiones de 2 horas: 12 en el laboratorio y 4 para la realización de Memorias.
+
+Evaluación
+----------
+
+* http://www.unavarra.es/ficha-asignaturaDOA?languageId=100000&codPlan=240&codAsig=240306[Web Estructura de Ordenadores]
+
+* Nota Final: 15%(asistencia, actitud en la clase y en el laboratorio)+35%(prácticas)+35%(teoría y su ejercicios)+15%(programación en papel)
+* prácticas: Ejercicios en cada sesión de prácticas, Memorias y prueba final. Prueba final el 18/012/2023 (prácticas 1ª,2ª,3ª,4ª,5ª y 6ª), haciendo especial hincapié en la práctica de generación de imágenes BMP). 
+** Las prácticas suponen el 35% de la nota global, es necesaria una nota mínima de 4 puntos para aprobar la asignatura y son recuperables.
+** La nota de prácticas es la media ponderada de: asistencia a prácticas y entrega de memorias (15%), evaluación de los ejercicios realizados en el laboratorio en cada sesión (20%) y el examen final de prácticas(65%)
+
+* teoría: supone el 35% de la nota globales, es necesaria una nota mínima de 4 puntos en el primer parcial para aprobar la asignatura y son recuperables.
+** 2 pruebas parciales. Primera prueba parcial el 16 de Octubre (Temas del 1 al 6). Segunda prueba parcial en la convocatoria final ordinaria el 18/12/2023 (Temas del 6 al 9 y lo no visto en el primer parcial del 1 al 6).  
+** El primer parcial tiene un valor del 60% de la nota de teoría y el segundo parcial un 40%.
+
+* Programación en papel
+** Supone el 15% de la nota final 
+
+* Convocatoria Extraordinaria:
+** En caso de tener suspendidas bien las prácticas o bien la teoría, una aprobada y la otra suspendida, se guarda la nota de la parte aprobada (teoría o práctica).
+
+
+CAUTION: OBLIGATORIEDAD de las prácticas y de las pruebas teóricas:
+
+* Asistencia a las prácticas en el laboratorio: Es *obligatorio* asistir al 87.5% de las horas de prácticas en el laboratorio. 
+* Entrega de las memorias de prácticas: Es *obligatorio* entregar el 100% de las memorias dentro del plazo establecido en la fecha habilitada en el servidor de miaulario. No se reciben memorias de prácticas ni de tareas fuera del plazo fijado por el servidor de miaulario.
+* La obligatoriedad de la asistencia al 87.5% de las horas de prácticas así como la entrega de memorias en el plazo y medio establecido es condición necesaria para poder superar la asignatura.
+
+
+
+
+Exámenes:Contenidos
+-------------------
+
+* Los exámenes de teoría tendrán preguntas teóricas sobre conceptos vistos en clase y ejercicios con una distribución "aproximada" en el primer  parcial del: 20% preguntas sobre conceptos teóricos y un 80% de ejercicios ; y para el segundo parcial: 60% preguntas sobre conceptos teóricos y un 40% de ejercicios.
+* El examen de programación en papel se realizará sin ordenador y con las hojas de referencia de las instrucciones en el lenguaje ensamblador, el depurador GDB y las sentencias del lenguaje C. Consiste en preguntas sobre el programación en el lenguaje ensamblador y no sobre GDB.
+* El examen de prácticas en el laboratorio se realizará con las memorias de prácticas y las hojas de referencia y sin poder utilizar ninguna información electrónica ni de forma remota (acceso a internet) ni de forma local (pendrive USB,etc).
+ 
+* Calendario:
++
+
+----
+1º parcial teoría: Temas 1,2,3,4,5 y 6: 16/10/2022 
+2º parcial teoría: Todos los temas: 18/12/2023
+Examen de prácticas: Convocatoria Ordinaria 18/12/2023 
+----
+

@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_imágenes_bit_map_portable" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+<ul class="sectlevel1">
+<li><a href="_introducción_a_la_programación_en_lenguaje_ensamblador_att_x86_32.html">12. Introducción a la Programación en Lenguaje Ensamblador AT&amp;T x86-32</a>
+</li>
+<li><a href="_representación_de_los_datos_2.html">13. Representación de los Datos</a>
+</li>
+<li><a href="_operaciones_aritméticas_y_lógicas.html">14. Operaciones Aritméticas y Lógicas</a>
+</li>
+<li><a href="_instrucciones_de_saltos_condicionales.html">15. Instrucciones de Saltos Condicionales</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_kernel.html">16. LLamadas al Sistema Operativo (Kernel)</a>
+</li>
+<li><a href="_subrutinas_2.html">17. Subrutinas</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html"><span class="toc-current">18. Imágenes: Bit Map Portable</span></a>
+<ul class="sectlevel2">
+<li><a href="_imágenes_bit_map_portable.html#_introducción_23">18.1. Introducción</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_aplicación_2">18.2. Aplicación</a>
+<ul class="sectlevel3">
+<li><a href="_imágenes_bit_map_portable.html#_ficheros_incluidos">18.2.1. Ficheros incluidos</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_ejemplo_de_compilación_automática">18.2.2. Ejemplo de compilación automática</a>
+</li>
+</ul>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_formato_bmp">18.3. Formato BMP</a>
+<ul class="sectlevel3">
+<li><a href="_imágenes_bit_map_portable.html#_pantalla_pixel">18.3.1. Pantalla: pixel</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_codificación">18.3.2. Codificación</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_mapa_de_memoria_monitor_buffer">18.3.3. Mapa de memoria: Monitor &#8594; Buffer</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_fichero_bmp">18.3.4. Fichero BMP</a>
+</li>
+</ul>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_módulo_fuente_bitmap_gen_test_c">18.4. Módulo Fuente bitmap_gen_test.c</a>
+<ul class="sectlevel3">
+<li><a href="_imágenes_bit_map_portable.html#_descripción">18.4.1. Descripción</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_funciones_del_programa">18.4.2. Funciones del programa</a>
+</li>
+</ul>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_ejercicios_4">18.5. Ejercicios</a>
+<ul class="sectlevel3">
+<li><a href="_imágenes_bit_map_portable.html#_programación_en_c_2">18.5.1. Programación en C</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_programación_en_asm">18.5.2. Programación en ASM</a>
+</li>
+<li><a href="_imágenes_bit_map_portable.html#_gdb_2">18.5.3. GDB</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_imágenes_bit_map_portable">18. Imágenes: Bit Map Portable</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_introducción_23">18.1. Introducción</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Práctica introductoria al examen final por lo que se aconseja realizarla de forma <strong>individual</strong> para obtener el mayor rendimiento.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>El objetivo de la práctica es desarrollar una subrutina en lenguaje ensamblador equivalente a una función de C dentro de una aplicación de generación de imágenes con formato BMP.</p>
+</li>
+<li>
+<p>Los cuatro primeros ejercicios en lenguaje C se realizarán de forma guiada con el profesor y el resto de forma <strong>individual</strong>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_aplicación_2">18.2. Aplicación</h3>
+<div class="sect3">
+<h4 id="_ficheros_incluidos">18.2.1. Ficheros incluidos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Descargar el archivo <em>bmp_practica6.zip</em> y extraer los ficheros.</p>
+</li>
+<li>
+<p>Scripts:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>comp_ejec_vis.sh</code> : script que automatiza las tareas de compilar, ejecutar y visualizar llamando al script Makefile.</p>
+</li>
+<li>
+<p><code>Makefile_C</code> : script que automatiza la tarea de compilación del programa fuente C.</p>
+</li>
+<li>
+<p><code>Makefile_pixels_as</code>: script que automatiza la tarea de ensamblaje, compilación y enlazado de los módulos fuentes C y asm.</p>
+</li>
+<li>
+<p><code>LEEME.txt</code> : instrucciones de como proceder para editar los distintos programas fuente en lenguaje C y ensamblador y copiar dichos programas con los nombres apropiados antes de ejecutar el script <code>comp_ejec_vis.sh</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Módulos fuente:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>bitmap_gen_test.c</em>: Genera una imagen bitmap 512x512 en formato BMP y la guarda en el fichero <em>test.bmp</em>.</p>
+</li>
+<li>
+<p><em>cuadrado_128x128.c</em>: Genera una imagen bitmap DIMENSIONxDIMENSION en formato BMP y la guarda en el fichero <em>test.bmp</em>.</p>
+</li>
+<li>
+<p><em>cuadrados_4.c</em>: Genera cuatro rectángulos anidados bitmap en formato BMP y guarda la imagen en el fichero <em>test.bmp</em>.</p>
+</li>
+<li>
+<p><em>bmp_funcion.c</em>: Partiendo de <em>bitmap_gen_test.c</em> el bucle generador de pixels se define mediante la función <em>pixels_generator(xcoor,ycoor,top,buffer)</em></p>
+</li>
+<li>
+<p><em>bmp_as.c</em>: Módulo no incluido a desarrollar.</p>
+</li>
+<li>
+<p><em>pixels.s</em>: Módulo no incluido a desarrollar.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Fichero</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>test.bmp</em></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo_de_compilación_automática">18.2.2. Ejemplo de compilación automática</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Copiar <code>cp Makefile_C Makefile</code></p>
+</li>
+<li>
+<p>Copiar <code>cp cuadrados_4.c bmp_imagen.c</code> y ejecutar <code>comp_ejec_vis.sh</code></p>
+</li>
+<li>
+<p>Copiar <code>cp bitmap_gen_test.c bmp_imagen.c</code> y ejecutar <code>comp_ejec_vis.sh</code></p>
+</li>
+<li>
+<p>Interpretar los scripts <code>comp_ejec_vis.sh</code> y <code>Makefile</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_formato_bmp">18.3. Formato BMP</h3>
+<div class="sect3">
+<h4 id="_pantalla_pixel">18.3.1. Pantalla: pixel</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>La pantalla de la computadora está formada por una matriz bidimensional de pixeles, donde cada pixel está ubicado en un punto discreto de la pantalla programable. Físicamente el monitor de la computadora puede ser de diferentes tipos: CRT, LCD, LED, OLED, Plasma, etc. Desde el punto de vista funcional supongamos un monitor tipo LED donde cada pixel esta formado por 3 diodos Leds: un led azul, otro led verde y el tercer led rojo. La combinación de los 3 colores básicos da lugar a todos los colores posibles. Las dimensiones de un pixel, es decir 3 leds, es de unas pocas centenas de micrómetros. Un portátil con una pantalla de 15.6" tiene 15" de anchura por 12" de altura. El comando <code>xdpyinfo | grep <em>dimensions:</em></code> informa de : 1366x768 pixels (361x203 millimeters=73283 mm<sup>2</sup>) &#8594;73283mm<sup>2</sup>/(1366x768 pixels)=0,07mm<sup>2</sup>/pixel=70000&#181;m<sup>2</sup>/pixel,es decir, un cuadrado de 265&#181;m de lado.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_codificación">18.3.2. Codificación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El formato BitMapPortable (BPM) es un formato de imagen escalar, es decir, contiene los datos de <strong>cada pixel</strong> codificando la intensidad de los componentes RGB de color tal como  se visualizarán en la pantalla.</p>
+</li>
+<li>
+<p>En el formato BPM, la matriz de pixeles de la pantalla está vinculada a una estructura de datos tipo array bidimensional 2D de filas (eje horizontal) y columnas (eje vertical) almacenada en la memoria de la tarjeta de video. El origen de coordenadas del array es la esquina inferior izquierda. A cada par (x,y) del array 2D le corresponde el color de un pixel.</p>
+</li>
+<li>
+<p>True Color: cada elemento del array contiene un dato formada por 3 campos, donde cada campo representa un color (Blue-Green-Red) y ocupa un byte .Cada componente de color R-G-B está codificado con un byte que indica la intensidad del color. Ejemplos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>R-G-B:0xFF-0x00-0x00 &#8594; pixel 100% rojo e intensidad máxima.</p>
+</li>
+<li>
+<p>R-G-B:0xFF-0x00-0xFF &#8594; pixel 50% rojo y 50% azul &#8594; color morado.</p>
+</li>
+<li>
+<p>R-G-B:0x00-0x00-0x00 &#8594; ausencia de color &#8594; color negro</p>
+</li>
+<li>
+<p>R-G-B:0xFF-0xFF-0xFF &#8594; misma proporción de colores primarios &#8594; color blanco</p>
+</li>
+<li>
+<p>R-G-B:0x7F-0x7F-0x7F &#8594; misma proporción de colores primarios &#8594; escala de grises entre el negro (00-00-00) y el blanco (FF-FF-FF)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Una imagen de tamaño en pixeles 512x512 dara lugar a un array de 512 pixeles x 512 pixeles x 3 bytes/pixel = 786432Bytes = 768KB</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mapa_de_memoria_monitor_buffer">18.3.3. Mapa de memoria: Monitor &#8594; Buffer</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Al escribir los colores del array2D MxN en la memoria lineal donde cada dirección de memoria es <strong>un byte</strong>, la estructura de datos o buffer tiene sus componentes distribuidos de la siguiente forma:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>F0C0BGR-F0C1BGR-&#8230;&#8203;-F0C_(N-1)BGR-F1C0BGR-&#8230;&#8203;-F1C_(N-1)BGR-&#8230;&#8203;.-F_(M-1)C0BGR-F_(M-1)C1BGR-&#8230;&#8203;-F_(M-1)C_(N-1)BGR que se corresponden con las posiciones relativas 0-1-2-3-4-5-&#8230;&#8203;..-(MxNx3-1). Donde F0 es la fila 0, C0 la columna 0 y BGR la secuencia de 3 bytes Blue-Green-Red.</p>
+</li>
+<li>
+<p>longitud total del buffer de memoria: MxNx3 bytes</p>
+</li>
+<li>
+<p>Interpretación de F0C0BGR:</p>
+<div class="listingblock">
+<div class="content">
+<pre>*** pixel BGR de la Fila cero Columna cero
+*** BGR: 3 bytes en el orden azul-verde-rojo.
+*** El byte azul ocupará dentro del buffer la posición relativa 0, el byte verde la posición 1 y el byte rojo la posición 2. Posiciones relativas a la dirección del primer byte del buffer.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>F0C1BGR:</p>
+<div class="listingblock">
+<div class="content">
+<pre>el byte blue está en la posición 3 dentro del buffer
+el byte green está en la posición 4 dentro del buffer
+el byte red está en la posición 5 dentro del buffer</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Fila cero del monitor: F0C_(N-1)BGR:  En el buffer, el byte azul está en la posición 3*(N-1), el verde en 3*(N-1)+1 y el rojo en 3*(N-1)+2.</p>
+</li>
+<li>
+<p>Fila uno del monitor: F1C0BGR:  byte azul &#8594; posición 3*N</p>
+</li>
+<li>
+<p>Fila uno del monitor: F1C_(N-1)BGR:  byte azul &#8594; posición 3*N+3*(N-1)</p>
+</li>
+<li>
+<p>F_iC_jBGR:</p>
+<div class="listingblock">
+<div class="content">
+<pre>byte azul  -&gt; posición 3*N*i+3*j     donde 0&lt;i&lt;M y 0&lt;j&lt;N
+byte verde -&gt; posición (3*N*i+3*j)+1 donde 0&lt;i&lt;M y 0&lt;j&lt;N
+byte rojo  -&gt; posición (3*N*i+3*j)+2 donde 0&lt;i&lt;M y 0&lt;j&lt;N</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_fichero_bmp">18.3.4. Fichero BMP</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Las imágenes con formato BMP se guardan en ficheros con extensión "*.bmp" como "test.bmp"</p>
+</li>
+<li>
+<p>El fichero BMP además del buffer de datos contiene una cabecera con metainformación que no procede explicar en este contexto.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_módulo_fuente_bitmap_gen_test_c">18.4. Módulo Fuente bitmap_gen_test.c</h3>
+<div class="sect3">
+<h4 id="_descripción">18.4.1. Descripción</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El programa <em>bitmap_gen_test</em> genera un array 2D de pixeles y lo salva en el fichero <em>test.bmp</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Las dimensiones del array se definen en el programa fuente <em>bitmap_gen_test.c</em></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_funciones_del_programa">18.4.2. Funciones del programa</h4>
+<div class="sect4">
+<h5 id="_main">main()</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Función principal</p>
+</li>
+<li>
+<p>Descripción de bloques:</p>
+<div class="listingblock">
+<div class="content">
+<pre>RGB_data buffer[512][512]  : variable local done se declara y almacena el array 2D "buffer" de pixeles donde cada pixel es del tipo RGB_data
+
+Tipo de variable RGB_data:  3 bytes consecutivos donde el primero es la intensidad de azul, el segundo verde y el tercero rojo. Las intensidades son números enteros sin signo. Por ejemplo: 0x7F-0xFF-0x00  representa una intensidad 50% de azul, una intensidad 100% de verde y una intensidad 0% de rojo</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_memsetbuffer_0_sizeofbuffer">memset(buffer, 0, sizeof(buffer))</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Es una función de la librería standard libc &#8594; <code>man memset</code> &#8594; está declarada en la cabecera <em>string.h</em></p>
+</li>
+<li>
+<p>Inicializa a 0 el array 2D de pixeles "buffer".</p>
+</li>
+<li>
+<p>Ver como ejemplo la llamada a la función memset() en el módulo <em>bitmap_gen_test.c</em></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_bmp_generator_test_bmp_512_512_bytebuffer">bmp_generator("./test.bmp", 512, 512, (BYTE*)buffer)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Genera el fichero <em>test.bmp</em> y escribe en dicho fichero el contenido del array 2D de pixeles con nombre buffer.</p>
+</li>
+<li>
+<p>Para pasar el argumento buffer es necesario realizar el casting (BYTE*). Ver la declaración del tipo BYTE en el módulo <em>bitmap_gen_test.c</em></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_estructura_rgb_data">estructura RGB_data</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Ver la declaración del tipo <em>RGB_data</em> en el módulo <em>bitmap_gen_test.c</em>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_bucle_doble">bucle doble</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>bucle <strong>for</strong> :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la variable i es el índice de filas y la variable j el índice de columnas.</p>
+</li>
+<li>
+<p>buffer[i][j].b : byte blue del pixel de la posición (i,j)</p>
+</li>
+<li>
+<p>buffer[i][j].g : byte green del pixel de la posición (i,j)</p>
+</li>
+<li>
+<p>buffer[i][j].r : byte red del pixel de la posición (i,j)</p>
+</li>
+<li>
+<p>cada elemento de la matriz buffer[i][j] es una estructura de datos <em>RGB_data</em> declarada por el programador con los elementos b,g y r.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicios_4">18.5. Ejercicios</h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+El último ejercicio consistente en una subrutina en lenguaje ensamblador suele ser la base del examen de prácticas.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_programación_en_c_2">18.5.1. Programación en C</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Leer el procedimiento de programación en el fichero <strong>LEEME.txt</strong></p>
+</li>
+<li>
+<p>El objetivo es modificar la función principal <strong>main()</strong> del programa original <strong>bitmap_gen_test.c</strong> dando lugar a distintos programas independientes entre sí.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>- Compilar y ejecutar el program <em>bitmap_gen_test.c</em></p>
+</li>
+<li>
+<p>-  visualizar la imagen del fichero test.bmp: <strong>$display test.bmp</strong></p>
+</li>
+<li>
+<p>- Módulo <strong>cuadrado_128x128.c</strong> :Cambiar las dimensiones de la imagen a 128 pixeles x 128 pixeles editando la macro DIMENSION=128 un gris con una intensidad del 50% de su valor máximo.</p>
+</li>
+<li>
+<p>- Módulo <strong>cuadrados_4.c</strong>: Generar 4 cuadrados, uno dentro de otro simétricamente, donde el cuadrado mayor negro es 512x512 y el resto se reduce 1/8 cada uno. No utilizar ctes en las sentencias de C, utilizar las macros x_coor, y_coor, top para indicar el valor inicial del <strong>for</strong> y la posición máxima (top) de las filas y columnas. Colores de los cuadrados: background (00-00-00)/(FF-00-FF)/(00-FF-FF)/(FF-FF-00)/</p>
+</li>
+<li>
+<p>- Módulo <strong>bmp_funcion.c</strong>: Dentro de la función main(), sustituir el bloque de código que realiza el bucle para inicializar los pixeles del cuadrado convertirlo por una función con las siguientes características:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>prototipo: <em>void pixels_generator(unsigned int x, unsigned int y, unsigned int maximo, RGB_data reg_mem[][top])</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>x e y son el origen de coordenadas del cuadrado (esquina inferior izquierda)</p>
+</li>
+<li>
+<p>maximo es la coordenada mayor del cuadrado.</p>
+</li>
+<li>
+<p>llamada a la función: pixels_generator(xcoor,ycoor,top,buffer);</p>
+<div class="ulist">
+<ul>
+<li>
+<p>los argumentos xcoor=top/8, ycoor=top/8 y top=512 definirlos mediante macros</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_programación_en_asm">18.5.2. Programación en ASM</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>- Módulo <strong>bmp_as.c</strong>: Implementar la función <em>void pixels_generator(unsigned int maximo, RGB_data reg_mem[][top])</em> desarrollando en lenguaje ensamblador la subrutina  <em>pixels_generator</em> en el nuevo fichero <strong>array_pixel.s</strong>. El fichero en lenguaje ensamblador únicamente contendrá la subrutina.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La subrutina implementa el doble bucle.</p>
+</li>
+<li>
+<p>De forma implícita, en la propia subrutina, consideraremos los argumentos x=y=0 que definen el origen de coordenadas del cuadrado.</p>
+</li>
+<li>
+<p>Todos los pixeles del cuadrado tienen el mismo color cuya intensidad se define con las variables azul, verde y rojo.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gdb_2">18.5.3. GDB</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Para el módulo <strong>bmp_funcion.c</strong> indicar la posición de la pila donde se salva la dirección de retorno de la subrutina <strong>pixels_generator</strong>, así como el contenido del frame pointer y del stack pointer.</p>
+</li>
+<li>
+<p>Lo mismo que en el apartado anterior con el módulo <strong>bmp_as.c</strong> para la subrutina <em>pixels_generator</em></p>
+</li>
+<li>
+<p>Interpretar los comandos gdb en el caso siguiente:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="o">+</span><span class="n">file</span> <span class="n">bmp_imagen</span>
+<span class="n">Leyendo</span> <span class="n">s</span><span class="err">í</span><span class="n">mbolos</span> <span class="n">desde</span> <span class="n">bmp_imagen</span><span class="p">...</span><span class="n">hecho</span><span class="p">.</span>
+<span class="o">+</span><span class="n">b</span> <span class="n">main</span>
+<span class="n">Punto</span> <span class="n">de</span> <span class="n">interrupci</span><span class="err">ó</span><span class="n">n</span> <span class="mi">1</span> <span class="n">at</span> <span class="mh">0x851</span><span class="o">:</span> <span class="n">file</span> <span class="n">bmp_imagen</span><span class="p">.</span><span class="n">c</span><span class="p">,</span> <span class="n">line</span> <span class="mi">128</span><span class="p">.</span>
+<span class="o">+</span><span class="n">run</span>
+<span class="n">Starting</span> <span class="n">program</span><span class="o">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">candido</span><span class="o">/</span><span class="n">Dropbox</span><span class="o">/</span><span class="n">apuntes</span><span class="o">/</span><span class="n">apuntes_Estr_Computadores</span><span class="o">/</span><span class="n">upna</span><span class="o">/</span><span class="n">practicas</span><span class="o">/</span><span class="n">x86</span><span class="o">/</span><span class="n">BMP</span><span class="o">/</span><span class="n">bmp_imagen</span>
+
+<span class="n">Breakpoint</span> <span class="mi">1</span><span class="p">,</span> <span class="n">main</span> <span class="p">(</span><span class="n">argc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="mh">0xffffcb54</span><span class="p">)</span> <span class="n">at</span> <span class="n">bmp_imagen</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">128</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">s</span>
+<span class="n">pixels_generator</span> <span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">maximo</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">reg_mem</span><span class="o">=</span><span class="mh">0xfff3ca9c</span><span class="p">)</span> <span class="n">at</span> <span class="n">bmp_imagen</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">112</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">ptype</span> <span class="n">buffer</span>
+<span class="n">El</span> <span class="n">s</span><span class="err">í</span><span class="n">mbolo</span> <span class="err">«</span><span class="n">buffer</span><span class="err">»</span> <span class="n">no</span> <span class="n">est</span><span class="err">á</span> <span class="n">en</span> <span class="n">el</span> <span class="n">contexto</span> <span class="n">actual</span><span class="p">.</span>
+<span class="o">+</span><span class="n">ptype</span> <span class="n">reg_mem</span>
+<span class="n">type</span> <span class="o">=</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">BYTE</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">g</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span> <span class="p">(</span><span class="o">*</span><span class="p">)[</span><span class="mi">512</span><span class="p">]</span>
+<span class="o">+</span><span class="n">finish</span>
+<span class="n">Correr</span> <span class="n">hasta</span> <span class="n">la</span> <span class="n">salida</span> <span class="n">desde</span> <span class="err">#</span><span class="mi">0</span>  <span class="n">pixels_generator</span> <span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">maximo</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">reg_mem</span><span class="o">=</span><span class="mh">0xfff3ca9c</span><span class="p">)</span> <span class="n">at</span> <span class="n">bmp_imagen</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">114</span>
+<span class="mh">0x5655588a</span> <span class="n">in</span> <span class="n">main</span> <span class="p">(</span><span class="n">argc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="mh">0xffffcb54</span><span class="p">)</span> <span class="n">at</span> <span class="n">bmp_imagen</span><span class="p">.</span><span class="n">c</span><span class="o">:</span><span class="mi">139</span>
+<span class="o">+</span><span class="n">n</span>
+<span class="o">+</span><span class="n">ptype</span> <span class="n">buffer</span>
+<span class="n">type</span> <span class="o">=</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">BYTE</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">g</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span> <span class="p">[</span><span class="mi">512</span><span class="p">][</span><span class="mi">512</span><span class="p">]</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">xb</span> <span class="o">&amp;</span><span class="n">buffer</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span>
+<span class="err">$</span><span class="mi">1</span> <span class="o">=</span> <span class="mh">0xfff3ca9c</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">x</span> <span class="o">&amp;</span><span class="n">buffer</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">x</span> <span class="p">(</span><span class="o">*</span> <span class="n">RGB_data</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span>
+<span class="n">Un</span> <span class="n">syntax</span> <span class="n">error</span> <span class="n">en</span> <span class="n">la</span> <span class="n">expresi</span><span class="err">ó</span><span class="n">n</span><span class="p">,</span> <span class="n">cerca</span> <span class="n">de</span> <span class="err">«</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="err">»</span><span class="p">.</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="n">x</span> <span class="p">(</span><span class="n">RGB_data</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span> <span class="p">(</span><span class="n">RGB_data</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span> <span class="o">&amp;</span><span class="n">buffer</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="mh">0xfff3ca9c</span><span class="o">:</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span> <span class="n">buffer</span>
+<span class="n">value</span> <span class="n">requires</span> <span class="mi">786432</span> <span class="n">bytes</span><span class="p">,</span> <span class="n">which</span> <span class="n">is</span> <span class="n">more</span> <span class="n">than</span> <span class="n">max</span><span class="o">-</span><span class="n">value</span><span class="o">-</span><span class="n">size</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">2</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">}</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">r</span>
+<span class="err">$</span><span class="mi">3</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span> <span class="o">*</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">No</span> <span class="n">se</span> <span class="n">puede</span> <span class="n">acceder</span> <span class="n">a</span> <span class="n">la</span> <span class="n">memoria</span> <span class="n">en</span> <span class="n">la</span> <span class="n">direcci</span><span class="err">ó</span><span class="n">n</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span> <span class="o">*</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">4</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">5</span> <span class="o">=</span> <span class="mh">0xfff3ca9c</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">6</span> <span class="o">=</span> <span class="mh">0xfff3ca9f</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">7</span> <span class="o">=</span> <span class="mh">0xfff3ca9f</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">8</span> <span class="o">=</span> <span class="mh">0xfff3ca9f</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">].</span><span class="n">g</span>
+<span class="err">$</span><span class="mi">9</span> <span class="o">=</span> <span class="mh">0xfff3caa0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">].</span><span class="n">r</span>
+<span class="err">$</span><span class="mi">10</span> <span class="o">=</span> <span class="mh">0xfff3caa1</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">11</span> <span class="o">=</span> <span class="mh">0xfff54b5c</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">12</span> <span class="o">=</span> <span class="mh">0xff</span>
+<span class="o">+</span><span class="n">p</span>  <span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">13</span> <span class="o">=</span> <span class="mi">255</span> <span class="sc">'\377'</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">14</span> <span class="o">=</span> <span class="mh">0xff</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="o">*</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">)</span>
+<span class="err">$</span><span class="mi">15</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="n">buffer</span><span class="p">[</span><span class="mi">512</span><span class="p">][</span><span class="mi">512</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">16</span> <span class="o">=</span> <span class="mh">0x3d</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="n">buffer</span><span class="p">[</span><span class="mi">511</span><span class="p">][</span><span class="mi">511</span><span class="p">].</span><span class="n">b</span>
+<span class="err">$</span><span class="mi">17</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="n">buffer</span><span class="p">[</span><span class="mi">511</span><span class="p">][</span><span class="mi">511</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">18</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">}</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">19</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span> <span class="o">=</span> <span class="mh">0xff</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mh">0x0</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mh">0xff</span><span class="p">}</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="o">*</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">)</span>
+<span class="err">$</span><span class="mi">20</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="o">*</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">63</span><span class="p">)</span>
+<span class="err">$</span><span class="mi">21</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">x</span>  <span class="o">*</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">65</span><span class="p">)</span>
+<span class="err">$</span><span class="mi">22</span> <span class="o">=</span> <span class="mh">0x0</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">)</span>
+<span class="mh">0xfff44adc</span><span class="o">:</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">64</span><span class="p">][</span><span class="mi">64</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">23</span> <span class="o">=</span> <span class="mh">0xfff54b5c</span>
+<span class="o">+</span><span class="n">p</span> <span class="mh">0xfff54b5c</span> <span class="o">-</span> <span class="mh">0xfff44adc</span>
+<span class="err">$</span><span class="mi">24</span> <span class="o">=</span> <span class="mi">65664</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">))</span>
+<span class="mh">0xfff54b5c</span><span class="o">:</span>	<span class="mh">0xff</span>	<span class="mh">0x00</span>	<span class="mh">0xff</span>
+<span class="o">+</span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">))</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">++</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">))</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«</span><span class="o">+</span><span class="n">x</span><span class="err">»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">+</span><span class="mh">0xfff54b5c</span><span class="o">:</span>     <span class="mh">0xff</span>    <span class="mh">0x00</span>    <span class="mh">0xff</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«</span><span class="mh">0xfff54b5c</span><span class="err">»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">+</span><span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">))</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">++</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span>  <span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">64</span><span class="o">*</span><span class="mi">512</span><span class="o">+</span><span class="mi">64</span><span class="p">))</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«</span><span class="o">+</span><span class="n">x</span><span class="err">»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">+</span><span class="mh">0xfff54b5c</span><span class="o">:</span>     <span class="mh">0xff</span>    <span class="mh">0x00</span>    <span class="mh">0xff</span>
+<span class="n">orden</span> <span class="n">indefinida</span><span class="o">:</span> <span class="err">«</span><span class="mh">0xfff54b5c</span><span class="err">»</span><span class="p">.</span> <span class="n">Intente</span> <span class="n">con</span> <span class="err">«</span><span class="n">help</span><span class="err">»</span>
+<span class="o">+</span><span class="n">p</span> <span class="o">/</span><span class="n">a</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="err">$</span><span class="mi">25</span> <span class="o">=</span> <span class="mh">0xfff3ca9f</span>
+<span class="o">+</span><span class="n">x</span> <span class="o">/</span><span class="mi">3</span><span class="n">xb</span> <span class="p">(</span><span class="n">RGB_data</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">buffer</span><span class="o">+</span><span class="mi">1</span>
+<span class="mh">0xfff3ca9f</span><span class="o">:</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>	<span class="mh">0x00</span>
+<span class="o">+</span><span class="n">quit</span>
+
+<span class="n">DENTRO</span> <span class="n">DE</span> <span class="n">LA</span> <span class="n">SUBRUTINA</span> <span class="n">puedo</span> <span class="n">utilizar</span> <span class="n">los</span> <span class="n">tipos</span> <span class="n">declarados</span> <span class="n">en</span> <span class="n">main</span>
+
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">ptype</span> <span class="n">RGB_data</span>
+<span class="n">type</span> <span class="o">=</span> <span class="k">struct</span> <span class="p">{</span>
+    <span class="n">BYTE</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">g</span><span class="p">;</span>
+    <span class="n">BYTE</span> <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span>  <span class="o">*</span><span class="p">(</span><span class="n">RGB_data</span> <span class="o">*</span><span class="p">)</span><span class="n">RGB_ptr</span>
+<span class="err">$</span><span class="mi">29</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span> <span class="sc">'\000'</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span> <span class="sc">'\000'</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mi">255</span> <span class="sc">'\377'</span><span class="p">}</span>
+<span class="p">(</span><span class="n">gdb</span><span class="p">)</span> <span class="n">p</span>  <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">RGB_data</span> <span class="o">*</span><span class="p">)</span><span class="n">RGB_ptr</span><span class="p">).</span><span class="n">r</span>
+<span class="err">$</span><span class="mi">28</span> <span class="o">=</span> <span class="mi">255</span> <span class="sc">'\377'</span></code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_subrutinas_2.html">Subrutinas</a> | ↑ Up: <a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

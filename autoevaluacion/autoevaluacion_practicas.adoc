@@ -1,0 +1,286 @@
+Prácticas: Cuestionario
+=======================
+
+:doctitle: Prácticas: Cuestionario
+
+[[prac_cues]]
+Práctica 1ª: Introducción a la Programación en Lenguaje Ensamblador AT&T x86-32
+-------------------------------------------------------------------------------
+
+Cuestiones teóricas
+~~~~~~~~~~~~~~~~~~~
+
+. Cuál es la principal diferencia entre el lenguaje ensamblador AT&T y el propio de Intel.
+. Qué fases comprende el toolchain
+. Lista las herramientas de desarrollo a utilizar durante la realización de las prácticas mediante los dos procesadores utilizados.
+. Libro: Programming from the Ground-Up
+.. Qué es GNU/Linux
+.. Qué es GNU
+.. Qué es gcc
+.. Qué gestiona el kernel
+.. ¿Se puede acceder simultáneamente a  instruccines y datos?¿Por qué?
+.. Cuál es la función del registro PC
+.. Cuáles son los dos tipos de registros de la CPU
+.. Qué significa Word Size
+.. Qué es una varible puntero.
+.. Lista cuatro modos diferentes de direccionar un operando.
+
+
+Cuestiones prácticas
+~~~~~~~~~~~~~~~~~~~~
+
+. Comando de compilación del programa fuente ensamblador mediante el front-end 'gcc' qué incluya la tabla de símbolos para el depurador
+. Comando de enlace (linker) del módulo objeto reubicable.
+. Declaración en lenguaje C de la variable 'n' tipo entero con signo de un byte.
+. Instrucción en lenguaje ensamblador del programa sum1toN.s que realiza una suma.
+. Comandos del depurador gdb para la impresión del contenido de la variable 'n'
+. Ejecutar 'sum1toN', compilado de 'sum1toN.s', paso a paso mediante el depurador GDB ejecutando los comandos necesarios para:
+.. imprimir el contenido de la variable n y su dirección en memoria principal
+.. imprimir la dirección de la etiqueta bucle
+.. imprimir el contenido del 'registro ECX' al salir del bucle
+. Cambiar el tamaño de los operandos de la suma a 2 bytes
+.. Cambiar el tamaño del operando n -> +n: .word 5+
+. Cambiar la instrucción +add %edx,%ecx+ por la instrucción +addw %dx,%ec+
+. En GDB qué comando hay que utilizar para ejecutar todas las iteracciones del bucle del programa de forma continuada.
+. Comparando las versiones en lenguajes C y ASM de los módulos fuente, por qué la instrucción 'until' del depurador GDB en el caso del módulo fuente en lenguaje C se ejecuta durante la sentencia 'while'.
+. Editando el módulo fuente provocar un error de ensamblaje  al no haber coherencia entre  la declaración del tamaño del operando referenciado por la etiqueta 'n' y la declaración de tamaño de operandos de la instrucción 'add'.
+
+
+Práctica 2ª: Representación de los Datos 
+----------------------------------------
+
+Módulo datos_size.s
+~~~~~~~~~~~~~~~~~~~
+
+* ¿En qué orden se guardan los caracteres del string "hola"?
+* ¿Cuál es el código ASCII del carácter 'o'?
+* ¿Cuál es la dirección de memoria principal donde se almacena el string "hola"?
+* ¿Cuál es la dirección memoria principal donde se almacena el array lista?
+** ¿Cuál es el contenido de los primeros 4 bytes a partir de la dirección anterior en sentido ascendente?
+
+Módulo datos_sufijos.s
+~~~~~~~~~~~~~~~~~~~~~~
+* ¿En qué orden se guardan los bytes del dato da4?
+* ¿Cuál es el resultado de ejecutar +mov  da1,%ecx+? 
+
+
+Módulo datos_direccionamiento.s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Con el depurador ejecutar el programa en modo paso a paso realizando las siguientes operaciones.
+* Array 'da2'
+** Imprimir la dirección de memoria del array 'da2' y el contenido del primer elemento: +x /xh &da2+
+** 4 elementos de 2bytes del array da2: +x /4xh &da2+
+** +ptype da2+: no debug info: al no tener información el debuger del tamaño de los elementos es necesario indicarlos explicitamente en los comandos posteriores.
+*** Es necesario realizar un *casting* : Array de 4 elementos de tamaño 2bytes:  +p /x (short[4])da2+
+*** Fijarse con el comando 'eXaminar' el resultado es independiente de sí hacemos un *casting* (short *): +x /4xh (short *)&da2+
+**** El tamaño y tipo de dato lo fija el argumento del comando: '/4xh'
+** Comprobar la norma de almacenamiento 'little endian' identificando cada dirección de memoria a un byte con su contenido.
+** Acceder a la dirección de memoria del elemento de valor -21 del array 'da2': 
+*** el argumento elemento de array en +p da2[2]+ no es válido ya que el debugger carece de información
+* Desensamblar
+** +disas salto1+
+** +disas /r salto1+
+
+Práctica 3º: Operaciones Aritmetico-Lógicas e Instrucciones de Salto Condicionales
+----------------------------------------------------------------------------------
+
+
+
+Módulo op_arit_log.s
+~~~~~~~~~~~~~~~~~~~~
+
+* <<practica3:op_arit_log,Módulo fuente op_arit_log>>
+* Indicar cómo asociar el valor de los sumandos a las macros OPE1 y OPE2.
+* Sin cambiar el valor de los operandos:
+** indicar el valor de la resta en la instrucción *1*
+** indicar el valor de la multiplicación en la instrucción *2*
+** indicar el valor de la división en la instrucción *3*
+** indicar el valor de la división en la instrucción *4*
+** indicar el valor de las operaciones lógicas en la instrucción *5*
+
+Módulo saltos.s
+~~~~~~~~~~~~~~~
+
+* Registro de Flags
+** Editar, compilar y ejecutar el siguiente bloque de instrucciones para indicar el contenido del registro EAX y el estado de los flags CF,ZF,SF,PF,OF  después de la ejecución de cada instrucción :
++
+
+----
+	mov  $0xFFFFFFFF,%eax
+	shr  $1,%eax
+	add  %eax,%eax
+	testb $0xFF,%eax
+        cmpl $0xFFFFFFFF,%eax
+----
+
+* Saltos
+** Editar, compilar y ejecutar el siguiente bloque de instrucciones para indicar  el estado de los flags CF,ZF,SF,PF,OF antes de la ejecución de la instrucción de salto e indicar si se produce o no el salto.
++
+
+----
+	mov $0x00AA, %ax
+	mov $0xFF00, %bx
+	cmp %bx,%ax
+	ja  salto1
+	jg  salto2
+salto1: mov $0xFF,%ebx
+salto2: mov $1,%eax
+	int $0x80
+----
+
+
+Práctica 4: LLamadas al Sistema Operativo
+-----------------------------------------
+
+Módulo syscall_write_puts.c
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Desarrollar un programa en lenguaje C que  imprima en la pantalla el mensaje de bienvenida "Hola" . Utilizar las funciones puts(), write() y syscall() de la librería standard de C.
+** +man 2 puts+
+** +man 2 write+ : prototipo de la función 
++
+
+----
+WRITE(2)  Linux Programmer's Manual                                                
+
+NAME
+       write - write to a file descriptor
+
+SYNOPSIS
+       #include <unistd.h>
+
+       ssize_t write(int fd, const void *buf, size_t count);
+
+----
+*** 'fd' : file descriptor: el monitor es un fichero virtual con descriptor número 1.
+*** 'void *buf': buffer es un puntero que apunta a la cadena de caracteres a imprimir.
+*** 'count': tamaño máximo de la cadena de caracteres a imprimir
+*** Esta función llama indirectamente al sistema operativo a través de la llamada syscall().
++
+
+----
+/* 
+   Programa syscall_write_puts.c
+   Descripción: Realiza la llamada al sistema operativo para imprimir en la pantalla
+		Realiza la llamada de tres formas diferentes: puts,write,syscall.
+   Compilación: gcc -m32 -g -o puts_gets puts_gets.c
+*/
+
+
+// Cabeceras de librerías
+#include <stdio.h>  // prototipo de la función puts()
+#include <unistd.h> //declaración de las macros STDOUT_FILENO, STDIN_FILENO 
+#include <syscall.h> //declaración de la función syscall
+#include <sys/syscall.h>	// declaración de la macro __NR_write y __NR_exit
+#include <stdlib.h>  //declaración de exit()
+
+// Macros
+#define LON_BUF  5  // Tamaño del string
+
+
+void main (void)
+{
+
+  char buffer[LON_BUF]="Hola\n";
+
+
+  
+  puts("\n***************** Práctica : LLAMADAS AL SISTEMA *******************\n"); // función puts() de la librería libc
+  puts("\n***************** Imprimo el mensaje de bienvenida mediante la función write(): ");
+
+  write(STDOUT_FILENO, buffer,LON_BUF); // wrapper de la llamada al sistema write.
+                                        // ya que write() incluye un syscall(), llama indirectamente al sistema
+ 
+  puts("\n***************** Imprimo el mensaje de bienvenida mediante la llamada al sistema  syscall(): ");
+  syscall(__NR_write,STDOUT_FILENO,buffer,LON_BUF); // función syscall de llamada directa al sistema.
+  exit(0xAA); //Salir al sistema envíando el código 0xAA. No es lo mismo que retornar.
+
+  
+}
+----
+
+Módulo syscall_write_puts.s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Desarrollar un programa en lenguaje ensamblador x86-32 'syscall_write_puts.s' equivalente al programa 'syscall_write_puts.c' llamando a las funciones puts()  y write() . En lugar de utilizar la función syscall() realizar la llamada al sistema directamente con la instrucción +int 0x80+. Los argumentos de la llamada al sistema operativo se pasan a través de los registros:
+** 1º argumento: a través de EAX: tipo int:  valor '__NR_write' : valor 4
+** 2º argumento: EBX: tipo 'int fd': valor STDOUT_FILENO: valor 1
+** 3º argumento: ECX: tipo 'const void *buf' : puntero al string a imprimir , buffer
+** 4º argumento: EDX: tipo 'size_t count': valor LON_BUF: valor 5 
+** Descripción RTL
++
+
+----
+# llamada a la función puts de la librería libc. Es necesrio linkar con libc.
+pila <-argumento
+call puts
+# llamada a la función write de la librería libc. Es necesario linkar con libc.
+pila <- 3º argumento
+pila <- 2º argumento
+pila <- 1º argumento
+call write
+# LLamada al sistema operativo para ejecutar la operación write
+EAX<-4
+EBX<-1
+ECX<-etiqueta que apunta al string a imprimir
+EDX<-5
+call sistema_operativo
+# Llamada al sistema operativo para ejecutar la operación exit
+EAX<-1
+EBX<-0
+call sistema_operativo
+----
+ 
+
+
+Práctica 5: LLamadas a una Subrutina
+------------------------------------
+
+
+Módulo sumMtoN_aviso.c
+~~~~~~~~~~~~~~~~~~~~~~
+
+* Desarrollar el programa 'sumMtoN_aviso.c' equivalente al módulo en lenguaje asm 'sumMtoN.s' y añadiendo un mensaje de aviso en caso de error indicando la relación correcta entre los parámetros 1º sumando y 2º sumando.
+
+Módulo sumMtoN_aviso.s
+~~~~~~~~~~~~~~~~~~~~~~
+
+* Añadir al programa fuente 'sumMtoN.s' un mensaje de aviso en caso de error indicando la relación correcta entre los parámetros 1º sumando y 2º sumando.
+
+
+
+Práctica 6: Imagen Bit Map Portable
+-----------------------------------
+
+
+Programación en C
+~~~~~~~~~~~~~~~~~
+
+* Leer el procedimiento de programación en el fichero *LEEME.txt*
+* El objetivo es modificar la función principal *main()* del programa original *bitmap_gen_test.c* dando lugar a distintos programas independientes entre sí.
+. - Compilar y ejecutar el program 'bitmap_gen_test.c'
+. -  visualizar la imagen del fichero test.bmp: *$display test.bmp*
+. - Módulo *cuadrado_128x128.c* :Cambiar las dimensiones de la imagen a 128 pixeles x 128 pixeles definiendo la macro DIMENSION=128 y definiendo para cada pixel un color gris con una intensidad del 50% de su valor máximo.
+. - Módulo *cuadrados_4.c*: Generar 4 cuadrados, uno dentro de otro simétricamente, donde el cuadrado mayor negro es 512x512 y el resto se reduce 1/8 cada uno. No utilizar ctes en las sentencias de C, utilizar las macros x_coor, y_coor, top para indicar el valor inicial del *for* y la posición máxima (top) de las filas y columnas. Colores de los cuadrados: background (00-00-00)/(FF-00-FF)/(00-FF-FF)/(FF-FF-00)/
+. - Módulo *bmp_funcion.c*: El bloque de código que realiza el bucle para inicializar los pixeles del cuadrado convertirlo en la función:
+** prototipo: 'void pixels_generator(unsigned int x, unsigned int y, unsigned int maximo, RGB_data reg_mem[][top])'
+*** x e y son el origen de coordenadas del cuadrado
+*** maximo es la coordenada mayor del cuadrado
+*** llamada a la función: pixels_generator(xcoor,ycoor,top,buffer);
+**** los argumentos xcoor=top/8, ycoor=top/8 y top=512 definirlos mediante macros
+
+Programación en ASM
+~~~~~~~~~~~~~~~~~~~
+. - Módulo *bmp_as.c*: Implementar la función 'void pixels_generator(unsigned int maximo, RGB_data reg_mem[][top])' desarrollando en lenguaje ensamblador la subrutina  'pixels_generator' en el nuevo fichero *array_pixel.s*. El fichero en lenguaje ensamblador únicamente contendrá la subrutina.
+** La subrutina implementa el doble bucle.
+** De forma implicita en la propia subrutina consideraremos los argumentos x=y=0.
+** Azul, rojo y verde son las intensidades de todos los pixeles del cuadrado.
+
+
+GDB
+~~~
+
+. En el programa en *bmp_funcion.c* indicar la posición de la pila donde se salva la dirección de retorno de la subrutina *pixels_generator*, así como el contenido del frame pointer y del stack pointer.
+. Lo mismo que en el apartado anterior con el programa *bmp_as.c* para la subrutina 'pixels_generator'
+

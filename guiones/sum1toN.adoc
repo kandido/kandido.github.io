@@ -1,0 +1,456 @@
+Introducción a la Programación en Lenguaje Ensamblador AT&T x86-32
+==================================================================
+
+:doctitle: Introducción a la Programación en Lenguaje Ensamblador AT&T x86-32
+
+Introducción
+------------
+
+
+Objetivos
+~~~~~~~~~
+
+* Introducción a la *programación de bajo nivel* mediante los lenguajes 'C' y 'ensamblador AT&T' para la arquitectura *x86 de 32 bits* de Intel.
+* Utilización de herramientas de desarrollo de sw de bajo nivel como el toolchain (compilador, ensamblador, linker) y el depurador GDB, libres de la fundación GNU.
+* Desarrollo de una workstation mediante la instalación de herramientas de desarrollo en un entorno GNU/linux/x86 en una computadora personal.
+* Comprender el funcionamiento de la computadora desde el punto de vista de un programador de bajo nivel.
+* Relacionar las propiedades de un lenguaje de alto nivel con un lenguaje de bajo nivel.
+* El lenguaje ensamblador puede ser utilizado como una herramienta para analizar la arquitectura y el funcionamiento de la computadora. No es el objetivo central de esta asignatura ser un experto en lenguajes de programación de bajo nivel ni en el desarrollo de algoritmos, aunque sí un nivel muy básico.
+
+
+
+Requisitos
+~~~~~~~~~~
+
+Teóricos
+^^^^^^^^
+* Conocimientos muy básicos de una arquitectura ISA: Arquitectura modelo Von Neumann( Microarquitectura CPU, arquitectura Memoria Principal, ciclo de instrucción), representación de datos y operaciones aritméticas, formato de  instrucciones y programación básica en lenguaje ensamblador y lenguaje máquina con la máquina IAS de John von Neumann, la sintaxis del lenguaje ensamblador AT&T x86 y la arquitectura básicA del procesador x86-64 y x86-32 de intel.
+
+
+
+Prácticos
+^^^^^^^^^
+* Tener configurada la "Plataforma de Desarrollo" GNU/linux(AMD64)/x86_64(Intel ó AMD) con las herramientas apropiadas.
+* Conocimientos de programación imperativa en lenguaje C y del "Lenguaje de Transferencia entre Registros" RTL, manejo básico del entorno GNU/linux y una herramienta de edición.
+* Estar dado de alta en el sitio de la asignatura en servidor miaulario.
+* Haber realizado la simulación de ejecución de un programa en lenguaje ensamblador y lenguaje máquina.  Por ejemplo en la máquina IAS de John von Neumann mediante el emulador Web IASSim
+
+
+IMPORTANT: Haber analizado la sintaxis y estructura de un programa sencillo en lenguaje ensamblador AT&T x86, compilado, ejecutado  y analizada la ejecución del programa paso a paso mediante el depurador GDB mediante la información de <<prac_apu, Apéndice:Practicando la Programación desde el principio>> y el pequeño tutorial <<empezando_asm, Apéndice: empezando ASM>> y <<empezando_c, Apéndice: Empezando C>>
+
+LEEME
+-----
+
+* Lectura del guión de prácticas  y de los capítulos 1 y 2 del Libro Programming from the Ground-Up.
+* <<prac_apu, Apuntes y Libro de Texto>>
+
+IMPORTANT:  La memoria se realiza en tiempo real durante la realización de la práctica y es la única documentación impresa que se utilizará el día del examen, por lo que debe de estar bien documentada. La memoria se entrega unos días después de la realización de la memoria a través de MiAulario/TAREAS siguiendo las indicaciones especificadas en <<prac_doc_mem, Apéndice: Contenido y Formato de la Memoria>> y en la fecha indicada en MiAulario/TAREAS.
+
+
+* *Abrir en el Escritorio de la computadora un documento texto que será la MEMORIA donde se irá añadiendo toda la información obtenida durante toda la sesión de prácticas*
+* <<prac_eval, Evaluación>>: sistema de evaluación
+* <<prac_prog,Programación>> : metodología
+
+Cuestiones
+----------
+
+* <<prac_eval, "Autoevaluación de Prácticas">> opcional: <<prac_cues, Prácticas: Cuestionario>>
+
+
+Estación de Trabajo
+-------------------
+
+* Anotar las características de la <<prac_plat_des, Plataforma de Desarrollo>>  en el Documento Memoria.
+
+
+
+Programación sum1toN.c
+----------------------
+
+Algoritmo
+~~~~~~~~~
+
+
+* Desarrollar un programa en lenguaje C que realice la suma latexmath:[$\sum_{i=1}^{N}i$] cuyo resultado es latexmath:[$N(N+1)/2$] con la arquitectura 'i386' utilizando el <<prac_prog,método de programación>> de descripción inicial en lenguaje pseudocódigo y organigrama.
+
+Edición del Módulo fuente: sum1toN.c
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Editar el programa descargando el módulo fuente "sum1toN.c" de miaulario y añadiendo los comentarios apropiados.
+* Cabecera con información complementaria:
++
+
+[source,C]
+----
+/*
+ Programa: sum1toN.c
+ Descripción: realiza la suma de la serie 1,2,3,...N
+ Es el programa en lenguaje C equivalente a sum1toN.ias de la máquina IAS de von Neumann
+ y equivalente al programa sum1toN.s en lenguaje ensamblador AT&T
+Lenguaje:       C99
+Descripción:    Suma de los primeros 5 números naturales
+Entrada:        Definida en una variable
+Salida:         Sin salida periférica<<<<s
+Compilación:    gcc -m32 -g -o sum1toN sum1toN.c
+S.O:            GNU/linux 5.4.0-128-generic ubuntu 20.04 x86-64
+Librería:       /usr/lib/x86_64-linux-gnu/libc.so
+PC:		ThinkPad L560 product: 20F1S0H400 serial: MP15YSW7 
+CPU:            Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz width:64 bits
+Compilador:     gcc version 9.4.0 
+Ensamblador:    GNU assembler version 2.34
+Linker/Loader:  GNU ld (GNU Binutils for Ubuntu) 2.34
+Asignatura:     Estructura de Computadores
+Fecha:          25/09/2022
+Autor:          Cándido Aramburu
+*/
+
+----
+
+* Programa:
++
+
+----
+// Módulo Principal
+void  main (void) {
+  //Declaración de variables locales e inicialización de los parámetros del bucle
+  int sum=0,n=5;
+  //Bucle que genera los sumandos y realiza la suma
+  while(n>0){ 	//Condición de salida del bucle cuando el sumando es negativo
+    sum+=n;
+    n--;     	//Actualización del sumando
+  }		
+}	   	//Si las instrucciones se han ejecutado sin interrupción ni fallo main() devuelve el valor cero al sistema operativo.
+
+----
+
+
+
+Compilación
+~~~~~~~~~~~
+
+* Seguir los pasos del proceso de <<compilacion, compilación>> común a todas las sesiones.
+** +gcc -m32 -g -o sum1toN sum1toN.c+
+*** listar los ficheros: +ls -l sum1toN*+. ¿Qué representa cada uno de ellos?
+** +gcc --save-temps -m32 -g -o sum1toN sum1toN.c+
+*** listar los ficheros: +ls -l sum1toN*+. ¿Qué representan los nuevos ficheros?
+
+
+Análisis de los módulos
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Análisis para comprobar los distintos módulos: 
+** +file sum1toN.c+
+** +file sum1toN.i+
+** +file sum1toN.s+
+** +file sum1toN.o+
+** +file sum1toN+
+
+Ejecución
+~~~~~~~~~
+
+* +./sum1toN+ : llamada al módulo binario ejecutable
+* +echo $?+   : visualización del valor devuelto por el programa 'sum1toN' al sistema operativo linux.
+** El valor cero se utiliza como indicador de que el programa se ha ejecutado sin ningún tipo de contratiempo.
+
+Depuración
+~~~~~~~~~~
+
+introducción
+^^^^^^^^^^^^
+
+* La ejecución del programa paso a paso, instrucción a instrucción, permite un análisis minucioso de bajo nivel de la ejecución del programa pudiendo detener el programa y volcar el valor de las variables en la memoria principal, estado de los registros de la cpu, etc.
+* El Depurador GDB (GNU DeBugger) permite la ejecución a paso a paso y análisis de la memoria mediante un repertorio de comandos propios del depurador.
+
+
+Generación de la tabla de símbolos
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* +gcc -m32 -g -o sum1toN sum1toN.c+ 
+** opción *-g*: Inserta la "Tabla de Símbolos" en el módulo binario ejecutable.   
+* En la línea de comandos emplear el TABULADOR TAB para Completar los nombres: +gcc -m32 -g -o sum1TAB suTAB+ 
+
+gdb
+^^^
+* Abrir el depurador: +gdb+ para comenzar la sesión de depuración.
+** Ventana con el prompt *(gdb)*: línea de comandos propios del debugger que serán interpretados por el GDB.
+
+abrir una nueva ventana
+^^^^^^^^^^^^^^^^^^^^^^^
+
+* (gdb) +layout src+ ó +Control-x Control-a+
+* navegar entre las dos ventanas: +Control-x o+ y sino también +focus src+ y +focus cmd+
+* +help focus+ 
+
+Logging
+^^^^^^^
+
+CAUTION: El logging hay que configurarlo con las dos ventanas abiertas: la ventana de comandos y la ventana del código source. Si se hace teniendo solamente la ventana de comandos, luego al abrir más ventanas deja de loggear.
+
+* Salvar toda la sesión de depuración en el fichero 'sum1toN_gdb_c.txt'
+** Entradas ->  (gdb) +set trace-commands on+, 
+** Salidas ->   (gdb) +set logging file sum1toN_gdb_c.txt+ 
+** Activación ->  +set logging on+
++
+
+----
+Copying output to sum1toN_gdb_c.txt.
+Copying debug output to sum1toN_gdb_c.txt.
+----
+
+* Cada vez que salga y entre en el debugger en la misma sesión de prácticas y utilice el mismo fichero histórico 'sum1toN_gdb_c.txt' hay que realizar la configuración anterior con las dos ventanas abiertas.
+
+Comandos linux desde la línea de comandos gdb
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* +shell ls -l sum1toN_gdb_c.txt+
+** +shell date+
+** +shell pwd+
+** +shell ls+
+** +shTAB+ : Emplear el TABULADOR TAB para Completar los nombres.
+** +shell daTAB+
+
+COMPROBAR el histórico de la sesión de depuración
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Abrir una consola y en la carpeta de trabajo comprobar que existe el fichero 'sum1toN_gdb_c.txt' y que contiene los comandos gdb ejecutados anteriormente.
+
+CAUTION: Es muy frustante darse cuenta después de dos horas de trabajo que no se ha guardado todo el trabajo
+
+
+
+Ventanas
+^^^^^^^^
+* Layout: +C-x a+ -> por defecto dos ventanas: módulo fuente y línea de comandos.
+* Navegador ventanas: +C-x o+
+* Navegar por el histórico de comandos
+** Logging histórico de comandos: Activar la ventana de comandos del GDB. Navegar con las teclas flecha arriba/abajo.
+
+Ayuda
+^^^^^
+
+* +help shell+ ó +h shell+
+
+Cargar módulo objeto ejecutable
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Cargar el módulo objeto binario que contiene la Tabla de Símbolos: +file sum1toN+
+* módulo fuente con los símbolos asociados a la Tabla de Símbolos: +info sources+
+
+CAUTION: Observar que el depurador confirma la existencia de la tabla de símbolos, imprescindible para la depuración.
+
+
+Ejecución paso a paso
+^^^^^^^^^^^^^^^^^^^^^
+
+* punto ruptura en la entrada al programa: +break main+
+* Ejecución: +run+ hasta el punto de ruptura cuya línea NO se ejecuta -> Aparece el código fuente.
+* Next source line: +next+, +n+
+* Next 5 source lines: +n 5+, +print sum+, +p sum+
+* Comenzar desde el principio nuevamente: +run+ ó +start+
+* Continuar hasta el próximo punto de ruptura: +continue+, +c+
+* +run+, +n+, RETURN, RET, RET, +p sum+
+
+Bucle
+^^^^^
+* ¿cómo salir de un bucle de cientos o miles de iteracciones hasta la siguiente instrucción fuera del bucle?
+* +run+, +until+, RET,RET,RET..hasta salir del bucle.., +p sum+, +c+
+
+Análisis de la memoria principal DRAM
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* imprimir el contenido de variables y sus direcciones en la memoria principal
+* +print n+, +p n+, +p /t n+, +p /x n+, +ptype n+, +whatis n+,+p &n+
+* +print symbol+ : symbol es el nombre de la variable, no su dirección.
+* +p $eax+
+* +p $ebx+
+* +p $ecx+
+* +info registers+
+
+Desensamblar
+^^^^^^^^^^^^
+* Desensamblar: ingeniería inversa . Convierte el código binario en código ensamblador
+** +layout split+
+** Next machine instruction: +ni+, RET, RET, RET, RET, +until+, RET,..hasta salir del bucle
+*** Ejecuta instrucciones máquina (observar ventana con el código ensamblador)
+
+Salir
+^^^^^
+* +exit+
+
+CAUTION: Comprobar que el contenido del fichero 'sum1toN_gdb_C.txt' es correcto.
+
+
+Recordatorio: Documento Memoria
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Ir salvando el trabajo y comentándolo según se va realizando.
+* En la consola abrimos el fichero +sum1toN_gdb_C.txt+ que contiene todos los comandos utilizados con sus volcados.
+* Guardar el contenido de 'sum1toN_gdb_C.txt' en el Documento Memoria añadiendo los comentarios necesarios.
+
+Continuamos con más ejercicios
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Jugar con el módulo fuente
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+ 
+* Cambios en el Módulo fuente en lenguaje C.
+** Cambiar el tamaño de los datos con alguno de los siguientes tipos:
+*** char,short,int,long
+** Cambiar el formato de los números con alguno de los siguientes bases:
+*** decimal, hexadecimal, octal, binario -> prefijos 0x, 0, 0b -> 0x5, 05, 0b5
+** Compilar y ejecutarlos. Indicar en la memoria si da o no algún error
+
+Jugar con el depurador
+^^^^^^^^^^^^^^^^^^^^^^
+
+* GDB
+** Cambiar en el módulo fuente el tamaño de las variables a 'char' y la sentencia sum+=n por la sentencia sum-=n . 
+** Compilar el módulo fuente con la opción de inserción de la tabla de símbolos
+** Abrir el depurador y cargar el módulo binario 
+** Ejecutar en modo paso a paso observando las sumas parciales con lo siguientes comandos:
+*** +x /1db &sum+, +x /1tb &sum+, +x /1ob &sum+, +x /1xb &sum+
+*** indicar para comando el resultado
+*** Con la ayuda de +help x+ explica el significado de +1db+, +1tb+, +1ob+, +1xb+. 
+
+
+Programación sum1toN.s
+----------------------
+
+Algoritmo
+~~~~~~~~~
+
+* Desarrollar un programa en lenguaje ensamblador AT&T con la arquitectura 'i386' que realice la suma latexmath:[$\sum_{i=1}^{N}i$] cuyo resultado es latexmath:[$N(N+1)/2$] utilizando el <<prac_prog,método de programación>> de descripción inicial en lenguaje pseudocódigo y organigrama.
+
+
+Edición del Módulo fuente: sum1toN.s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Descargar el módulo fuente "sum1toN.s" de miaulario y añadir los comentarios apropiados.
+* x86 es la arquitectura de Intel de 32 bits
+* i386 significa en linux: arquitectura x86-32
+* Lenguaje ensamblador AT&T de GNU para la arquitectura i386 -> lenguaje GNU as -> lenguaje gas  
++
+
+[source,nasm]
+-----------
+### Programa: sum1toN.s
+### Descripción: realiza la suma de la serie 1,2,3,...N. La entrada se define en el propio programa y la salida se pasa al S.O.
+### Lenguaje: Lenguaje ensamblador de GNU para la arquitectura i386 -> GNU as -> gas -> AT&T
+### Es el programa en lenguaje AT&T i386 equivalente a sum.ias de la máquina IAS de von Neumann
+### gcc -m32 -g -nostartfiles -o sum1toN  sum1toN.s
+### Ensamblaje as --32 --gstabs sum1toN.s -o sum1toN.o
+### linker -> ld -melf_i386   -o sum1toN sum1toN.o 
+
+        ##  Declaración de variables
+	##  SECCION DE DATOS
+        .section .data
+
+n:      .int 5
+       
+        .global _start  
+
+        ##  Comienzo del código
+	##  SECCION DE INSTRUCCIONES
+        .section .text
+_start:
+        mov $0,%ecx # ECX implementa la variable suma
+        mov n,%edx
+bucle:
+        add %edx,%ecx
+        sub $1,%edx
+        jnz bucle
+       
+        mov %ecx, %ebx # el argumento de salida al S.O. a través de EBX según convenio ABI i386
+                
+        ## salida
+        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
+        int $0x80     # llamada al sistema operativo para que ejecute la subrutina según el valor de EAX
+
+        
+        .end
+-----------
+
+
+Compilación
+~~~~~~~~~~~
+
+* Seguir los pasos de la <<compilacion_asm, compilación >> de un módulo en lenguaje ensamblador.
+** +gcc -m32 -g -o sum1toN sum1toN.s+
+
+Ejecución
+~~~~~~~~~
+
+* +./sum1toN+
+* +echo $?+
+
+Análisis del módulo Fuente
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Leer en las hojas de referencia rápida el <<programa_minimalista,Programa Ejemplo Minimalista>>
+
+
+
+Depuración
+~~~~~~~~~~
+
+
+Inicio
+^^^^^^
+* Depurador GDB: GNU DeBugger.
+* +gcc -m32 -g -o sum1toN sum1toN.s+ 
+* +gdb+
+* +C-x a+ 
+* +C-x o+
+* +set trace-commands on+
+* +set logging file sum1toN_gdb_asm.txt+ 
+* +set logging on+
+* +shell ls -l sum1toN_gdb_asm.txt+
+
+
+Arrancar el programa
+^^^^^^^^^^^^^^^^^^^^
+* +file sum1toN+
+* +info sources+
+* +b _start+
+* +run+ 
+
+Analizar símbolos en memoria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* +ptype n+
+* +p n+
+** +x address+ : examine main memory address . Devuelve el contenido de la dirección de memoria address -> '&symbol' donde symbol es el nombre de la variable.
+* +x &n+, +x n+, +x /1bw &n+, +x /1xw &n+, +x /4xw &n+
+* +b bucle+
+* +c+
+* +start+
+* +c+
+* +n+
+
+Registros
+^^^^^^^^^
+* +p $ecx+
+* +p $edx+
+* +until+
+* +p $ecx+
+* +p $edx+
+* +info registers+
+
+Instrucciones máquina
+^^^^^^^^^^^^^^^^^^^^^
+* +layout split+
+* +start+
+* +c+
+
+Fin
+^^^
+
+* +exit+
+* En la consola abrimos el fichero +gedit  sum1toN_gdb_asm.txt+ que contiene todos los comandos utilizados con sus volcados.
+* Guardar el contenido de 'sum1toN_gdb_asm.txt' en el Documento Memoria añadiendo los comentarios necesarios. 
+ 
+
+
+Arquitectura amd64
+------------------
+
+* Ejemplo en el apéndice : <<sum1toN_att_64, sum1toN.s>>
+** Analizar el código, compilarlo, ejecutarlo y comprobar mediante el debugger que efectivamente los registros son de 64 bits.
+

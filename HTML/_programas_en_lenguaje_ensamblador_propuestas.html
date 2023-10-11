@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_programas_en_lenguaje_ensamblador_propuestas" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+<ul class="sectlevel1">
+<li><a href="_arquitectura_de_una_computadora.html">21. Arquitectura de una Computadora</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">22. RTL Register Transfer Language</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html">23. Programas ensamblador IASSim</a>
+</li>
+<li><a href="_simulador_iassim_2.html">24. Simulador IASSim</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html">25. Lenguajes de programación de Alto y Bajo Nivel</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html">26. Lenguajes de programación en Ensamblador</a>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html">27. Toolchain: Cadena de Herramientas en el proceso de compilación</a>
+</li>
+<li><a href="_practicando_la_programación_desde_el_principio.html">28. Practicando la Programación desde el Principio</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_pila.html">30. Pila</a>
+</li>
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html"><span class="toc-current">31. Programas en Lenguaje Ensamblador: Propuestas</span></a>
+<ul class="sectlevel2">
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html#asm_propu">31.1. Nivel Medio</a>
+<ul class="sectlevel3">
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html#_formato_bmp_2">31.1.1. Formato BMP</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_apéndice_unidad_cpu.html">32. Apéndice: Unidad CPU</a>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">33. Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">34. Apéndice: Memoria Virtual</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">35. Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">36. FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">37. Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">38. Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html">39. Estructura de Computadores 2022: Segundo Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">40. Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">41. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">42. Miaulario: Videoconferencia</a>
+</li>
+</ul>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_programas_en_lenguaje_ensamblador_propuestas">31. Programas en Lenguaje Ensamblador: Propuestas</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="asm_propu">31.1. Nivel Medio</h3>
+<div class="sect3">
+<h4 id="_formato_bmp_2">31.1.1. Formato BMP</h4>
+<div class="sect4">
+<h5 id="_circulo">Circulo</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm">Algoritmo del Punto Medio</a></p>
+<div class="listingblock">
+<div class="content">
+<pre>x: eje abscisa -&gt; positivo hacia dcha
+y: eje ordenada -&gt; positivo hacia arriba
+ecuación círculo: centro (0,0) y primer octante (x_positivo, y_positivo, y&lt;x). Los órdenes de los octantes van en el sentido contrario a las agujas del reloj
+ecuación discreta yn e xn números enteros:
+  xn e yn limitados al primer octante:
+  primer punto : x1=r y1=0
+  segundo punto: y2 se incrementa en 1 -&gt; y2=y1+1
+               : x2 sólo tiene dos alternativas: idéntico al anterior x1 ó incrementar en una unidad
+               : obtener x2 según la ecuación del círculo -&gt; x^2^~n+1~ = x^2^~n~ -2*y~n~-1</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>x<sup>2</sup><sub>n+1</sub> = x<sup>2</sup><sub>n</sub> -2*y<sub>n</sub>-1: se puede resolver con números reales pero interesa la aritmética con números enteros y así poder programar en lenguaje ensamblador.</p>
+</li>
+<li>
+<p>Variant with <strong>integer-based</strong> arithmetic &#8594;  Bresenham&#8217;s line algorithm: desarrollada con aritmética entera</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bresenham circle:</p>
+<div class="listingblock">
+<div class="content">
+<pre>xn e yn números enteros
+coordenadas en el primer octante
+origen círculo (0,0)
+x_inicio=r
+y_inicio=0
+E_inicio=3-2r
+
+en cada interacción:
+	E_actual &lt;0 -&gt; E_next=Ecur + 2*(3+2*yc) ; x_next=x_actual ; y_next=y_actual+1
+	E_actual &gt;0 -&gt; E_next=Ecur + 2*(5+2*yc-2*xc) ; x_next=x_actual-1 ; y_next=y_actual+1)
+siguiente interacción:
+        E_actual=E_next ; y_actual=y_next ; x_actual=x_next</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Código fuente en C</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="cm">/*
+
+Programa: pixel_circulo.c
+Descripción: algoritmo de  Bresenham  . https://en.wikipedia.org/wiki/Midpoint_circle_algorithm
+             OJO: las ecuaciones matemáticas está desarrolladas para un OCTANTE de centro (y=0,x=0) (abajo esquina izda). Eje vertical -&gt; x, Eje horizontal -&gt; y
+              OJO: por eso las ecuaciones matemáticas empiezan el octante en (xc=r,yc=0) (abajo derecha) y el octante se pinta subiendo (yc+1) y va hacia la izda (xc no cambia o xc=xc-1) hacia el centro x=0.
+              OJO: el orden de los octantes se puede denominar de dos formas. En el artículo el primer octante es el x_positivo , y positivo e y&lt;x y lo siguientes octantes van en el sentido contrario a las agujas del reloj. Yo he ordenado los octantes según un reloj donde el primer octante va de las 12:00 a las dos agujas entre la 1 y las dos enumerando los octantes a favor de las agujas del reloj. Para que el primer octante empiece el primer punto en las 12:00 y no en las 3:00 como en las ecuaciones matemáticas, lo que hago es mapear la x que es la abcisa matemática no como columna j del bmp sino como fila i, es decir, x-&gt;i y-&gt;j. Al CAMBIAR filas por columnas el primer octante empieza en las 12:00.
+              OJO: el formato BPM tiene el (0,0) (abajo esquina izda). Eje vertical -&gt; filas i, Eje horizontal -&gt; columnas j
+
+
+          pixels_generator(): Función externa para la definición de los colores RGB en una imagen de formato BMP
+          Programa principal main(): bmp_funcion_arguDimension.c
+
+gcc -m32 -g -c  -o pixel_circulo.o pixel_circulo.c
+ con la opción -c se genera el módulo objeto sin generar el módulo ejecutable
+
+ATENCION: la DIMENSION DEL ARRAY se declara tanto en el fichero con la llamada a la funcion_mod como en el fichero con la definición de la función.He probado a poner diferentes valores a DIMENSION en los dos ficheros (llamada y definición ) y no hay error de compilación ni de ejecución pero el resultado de la ejecución si que cambia.
+
+
+
+
+El primer octante se calcula con el centro en (0,0) y luego se traslada.
+El segundo octante y hasta el octavo se calcula haciendo simetria directa y traslación del primer octante
+
+*/</span>
+
+
+
+<span class="cp">#define DIMENSION  512 // OJO: es obligatorio que los array multidimensionales tengan definido por lo menos TODAS las dimensiones menos una
+</span>
+<span class="c1">//</span>
+<span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">BYTE</span><span class="p">;</span>
+
+<span class="c1">// definición del tipo de cada pixel. Cada pixel son tres bytes . Cada byte es tipo BYTE.</span>
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+        <span class="n">BYTE</span>    <span class="n">b</span><span class="p">;</span>
+        <span class="n">BYTE</span>    <span class="n">g</span><span class="p">;</span>
+        <span class="n">BYTE</span>    <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">RGB_data</span><span class="p">;</span>
+
+<span class="kt">void</span>  <span class="nf">pintar</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">,</span><span class="n">BYTE</span> <span class="n">blue</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">green</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">red</span><span class="p">,</span> <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">]);</span>
+
+<span class="kt">void</span> <span class="nf">pixels_generator_circulo</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">origen_x</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">origen_y</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">radio</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">proporcion</span><span class="p">,</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">dimension</span><span class="p">,</span>  <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">])</span>
+<span class="p">{</span>
+
+<span class="kt">int</span> <span class="n">Ecur</span><span class="p">,</span><span class="n">Enext</span><span class="p">,</span><span class="n">xn</span><span class="p">,</span><span class="n">xc</span><span class="p">,</span><span class="n">yn</span><span class="p">,</span><span class="n">yc</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">;</span>
+
+<span class="c1">// las ecuaciones matemáticas está desarrolladas para un circulo de centro (0,0)</span>
+<span class="n">Ecur</span><span class="o">=</span><span class="mi">3</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">radio</span><span class="p">;</span>
+<span class="n">xc</span><span class="o">=</span><span class="n">radio</span><span class="p">;</span>
+<span class="n">yc</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+
+
+<span class="k">while</span> <span class="p">(</span><span class="n">yc</span><span class="o">&lt;</span><span class="n">xc</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// primer octante (x,y) -&gt; (x e y positivo con y&lt;x) Eje vertical -&gt; x Eje horizontal -&gt; y =&gt; (abcisa,ordenada)...(x,y)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">Ecur</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">xn</span><span class="o">=</span><span class="n">xc</span><span class="p">;</span>
+    <span class="n">yn</span><span class="o">=</span><span class="n">yc</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">Enext</span> <span class="o">=</span> <span class="n">Ecur</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">yc</span><span class="p">);</span>
+
+    <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="n">xn</span><span class="o">=</span><span class="n">xc</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">yn</span><span class="o">=</span><span class="n">yc</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">Enext</span> <span class="o">=</span> <span class="n">Ecur</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">5</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">yc</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">xc</span><span class="p">);</span>
+    <span class="c1">//printf ("i=%d x=%d y=%d Ecur=%d Enext=%d \n",i,x[i],y[i],Ecur,Enext);</span>
+
+    <span class="p">}</span>
+
+ <span class="c1">// traslación del centro (0,0) (x_origen,y_origen)</span>
+  <span class="n">i</span><span class="o">=</span><span class="n">origen_x</span><span class="o">+</span><span class="n">xc</span><span class="p">;</span> <span class="c1">// la x como FILA</span>
+  <span class="n">j</span><span class="o">=</span><span class="n">origen_y</span><span class="o">+</span><span class="n">yc</span><span class="p">;</span> <span class="c1">// la j como COLUMNA -&gt; entonces la j es la abscisa -&gt; (j,i). Este cambio en el espacio matematico es (y,x)</span>
+
+  <span class="c1">// coordenadas primer octante (y,x)</span>
+  <span class="n">pintar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+
+  <span class="c1">// SIMETRIA segundo octante respecto del primero -&gt; (x,y)</span>
+  <span class="n">i</span><span class="o">=</span><span class="n">origen_y</span><span class="o">+</span><span class="n">yc</span><span class="p">;</span>
+  <span class="n">j</span><span class="o">=</span><span class="n">origen_x</span><span class="o">+</span><span class="n">xc</span><span class="p">;</span>
+  <span class="n">pintar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+
+<span class="c1">// SIMETRIA tercer octante respecto del primero -&gt; (x,-y) -&gt; la ordenada es negativa -&gt; la i</span>
+  <span class="n">i</span><span class="o">=</span><span class="n">origen_y</span><span class="o">-</span><span class="n">yc</span><span class="p">;</span>
+  <span class="n">j</span><span class="o">=</span><span class="n">origen_x</span><span class="o">+</span><span class="n">xc</span><span class="p">;</span>
+  <span class="n">pintar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+
+<span class="c1">// SIMETRIA cuarto octante respecto del primero -&gt; (y,-x) -&gt; la ordenada es negativa -&gt; la i</span>
+  <span class="n">i</span><span class="o">=</span><span class="n">origen_x</span><span class="o">-</span><span class="n">xc</span><span class="p">;</span>
+  <span class="n">j</span><span class="o">=</span><span class="n">origen_y</span><span class="o">+</span><span class="n">yc</span><span class="p">;</span>
+  <span class="n">pintar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="mh">0XFF</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+
+<span class="c1">// SIMETRIA quinto octante respecto del primero -&gt; (-y,-x)</span>
+  <span class="n">i</span><span class="o">=</span><span class="n">origen_x</span><span class="o">-</span><span class="n">xc</span><span class="p">;</span>
+  <span class="n">j</span><span class="o">=</span><span class="n">origen_y</span><span class="o">-</span><span class="n">yc</span><span class="p">;</span>
+  <span class="n">pintar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0XFF</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+
+ <span class="c1">// SIMETRIA sexto octante respecto del primero -&gt; (-x,-y)</span>
+  <span class="n">i</span><span class="o">=</span><span class="n">origen_y</span><span class="o">-</span><span class="n">yc</span><span class="p">;</span>
+  <span class="n">j</span><span class="o">=</span><span class="n">origen_x</span><span class="o">-</span><span class="n">xc</span><span class="p">;</span>
+  <span class="n">pintar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+
+ <span class="c1">// SIMETRIA septimo octante respecto del primero -&gt; (-x,y)</span>
+  <span class="n">i</span><span class="o">=</span><span class="n">origen_y</span><span class="o">+</span><span class="n">yc</span><span class="p">;</span>
+  <span class="n">j</span><span class="o">=</span><span class="n">origen_x</span><span class="o">-</span><span class="n">xc</span><span class="p">;</span>
+  <span class="n">pintar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+
+<span class="c1">// SIMETRIA octavo octante respecto del primero -&gt; (-y,x)</span>
+  <span class="n">i</span><span class="o">=</span><span class="n">origen_x</span><span class="o">+</span><span class="n">xc</span><span class="p">;</span>
+  <span class="n">j</span><span class="o">=</span><span class="n">origen_y</span><span class="o">-</span><span class="n">yc</span><span class="p">;</span>
+  <span class="n">pintar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="mh">0XFF</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+
+  <span class="n">Ecur</span><span class="o">=</span><span class="n">Enext</span><span class="p">;</span>
+  <span class="n">yc</span><span class="o">=</span><span class="n">yn</span><span class="p">;</span>
+  <span class="n">xc</span><span class="o">=</span><span class="n">xn</span><span class="p">;</span>
+
+  <span class="p">}</span>
+
+
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">pintar</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">,</span><span class="n">BYTE</span> <span class="n">blue</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">green</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">red</span><span class="p">,</span> <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">]){</span>
+
+ <span class="c1">// intensidad de rojo</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">red</span><span class="p">;</span>
+  <span class="c1">// intensidad de verde</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">g</span> <span class="o">=</span> <span class="n">green</span><span class="p">;</span>
+  <span class="c1">// intensidad de azul</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">b</span> <span class="o">=</span> <span class="n">blue</span><span class="p">;</span>
+
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_línea">Línea</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Bresenham&#8217;s_line_algorithm">Bresenham&#8217;s_line_algorithm</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>x: eje abscisa &#8594; positivo hacia dcha</p>
+</li>
+<li>
+<p>y: eje ordenada &#8594; positivo hacia abajo</p>
+</li>
+<li>
+<p>(0,0) : esquina arriba,izda</p>
+</li>
+<li>
+<p>(x0,y0) e (x1,y1) son los extremos de la recta</p>
+</li>
+<li>
+<p>la recta tiene pendiente &lt; 1</p>
+</li>
+<li>
+<p>Ecuación de la línea &#8594; f(x,y)=0</p>
+</li>
+<li>
+<p>f(x,y) = A*X+B*y+C = 0</p>
+</li>
+<li>
+<p>Código fuente en C</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="cp">#define DIMENSION  1024
+</span><span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">BYTE</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+        <span class="n">BYTE</span>    <span class="n">b</span><span class="p">;</span>
+        <span class="n">BYTE</span>    <span class="n">g</span><span class="p">;</span>
+        <span class="n">BYTE</span>    <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">RGB_data</span><span class="p">;</span>
+
+<span class="kt">void</span>  <span class="nf">pintar</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">,</span><span class="n">BYTE</span> <span class="n">blue</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">green</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">red</span><span class="p">,</span> <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">]);</span>
+
+<span class="kt">void</span> <span class="nf">pixels_generator_linea</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">dimension</span><span class="p">,</span>  <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">])</span> <span class="p">{</span>
+
+<span class="kt">int</span> <span class="n">i1</span><span class="p">,</span><span class="n">i2</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">xmax</span><span class="p">;</span>
+<span class="c1">// las ecuaciones matemáticas está desarrolladas para una recta de pendiente MENOR que 1</span>
+<span class="c1">// (x1,y1) y (x2,y2) son los extremos de la recta en el PRIMER CUADRANTE</span>
+
+<span class="n">dx</span><span class="o">=</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">;</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">;</span>
+<span class="n">i1</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">dy</span><span class="p">;</span>
+<span class="n">i2</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">dy</span><span class="o">-</span><span class="n">dx</span><span class="p">);</span>
+<span class="n">d</span><span class="o">=</span><span class="n">i1</span><span class="o">-</span><span class="n">dx</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">dx</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x2</span><span class="p">;</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y2</span><span class="p">;</span>
+    <span class="n">xmax</span><span class="o">=</span><span class="n">x1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">else</span> <span class="p">{</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x1</span><span class="p">;</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y1</span><span class="p">;</span>
+    <span class="n">xmax</span><span class="o">=</span><span class="n">x2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">xmax</span><span class="p">){</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="o">+</span><span class="n">i1</span><span class="p">;</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="o">+</span><span class="n">i2</span><span class="p">;</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="c1">// x columnas -&gt; j</span>
+<span class="c1">// y filas -&gt; i</span>
+  <span class="n">pintar</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">pintar</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">,</span><span class="n">BYTE</span> <span class="n">blue</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">green</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">red</span><span class="p">,</span> <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">]){</span>
+
+ <span class="c1">// intensidad de rojo</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">red</span><span class="p">;</span>
+  <span class="c1">// intensidad de verde</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">g</span> <span class="o">=</span> <span class="n">green</span><span class="p">;</span>
+  <span class="c1">// intensidad de azul</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">b</span> <span class="o">=</span> <span class="n">blue</span><span class="p">;</span>
+
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Código para pedientes menor y mayor que 1</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="cm">/*
+
+Programa: pixel_linea.c
+Descripción: algoritmo de  Bresenham: https://en.wikipedia.org/wiki/Bresenham's_line_algorithm -&gt; concepto
+                                    : https://www.javatpoint.com/computer-graphics-bresenhams-line-algorithm -&gt; algoritmo
+                                    :https://iq.opengenus.org/bresenham-line-drawining-algorithm/ -&gt; pendiente &gt;1
+             ejes: x abcisa ( positivo de izda a derecha) e y ordenada (positivo de arriba abajo)
+             origen coordenadas : (esquina izda arriba)
+             algoritmo matemático para rectas con pendiente inferior a la unidad
+             pixels_generator(): Función externa para la definición de los colores RGB en una imagen de formato BMP
+             Programa principal main(): bmp_funcion_arguDimension.c
+
+gcc -m32 -g -c  -o pixel_linea.o pixel_linea.c
+ con la opción -c se genera el módulo objeto sin generar el módulo ejecutable
+
+ATENCION: la DIMENSION DEL ARRAY se declara tanto en el fichero con la llamada a la funcion_mod como en el fichero con la definición de la función.He probado a poner diferentes valores a DIMENSION en los dos ficheros (llamada y definición ) y no hay error de compilación ni de ejecución pero el resultado de la ejecución si que cambia.
+
+*/</span>
+
+
+
+<span class="cp">#define DIMENSION  1024 // OJO: es obligatorio que los array multidimensionales tengan definido por lo menos TODAS las dimensiones menos una
+</span>
+<span class="c1">//</span>
+<span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">BYTE</span><span class="p">;</span>
+
+<span class="c1">// definición del tipo de cada pixel. Cada pixel son tres bytes . Cada byte es tipo BYTE.</span>
+<span class="k">typedef</span> <span class="k">struct</span>
+<span class="p">{</span>
+        <span class="n">BYTE</span>    <span class="n">b</span><span class="p">;</span>
+        <span class="n">BYTE</span>    <span class="n">g</span><span class="p">;</span>
+        <span class="n">BYTE</span>    <span class="n">r</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">RGB_data</span><span class="p">;</span>
+
+<span class="kt">void</span>  <span class="nf">pintar</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">,</span><span class="n">BYTE</span> <span class="n">blue</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">green</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">red</span><span class="p">,</span> <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">]);</span>
+
+<span class="kt">void</span> <span class="nf">pixels_generator_linea</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x1</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">y1</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x2</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">y2</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">dimension</span><span class="p">,</span>  <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">])</span> <span class="p">{</span>
+
+<span class="kt">int</span> <span class="n">i1</span><span class="p">,</span><span class="n">i2</span><span class="p">,</span><span class="n">i3</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">xmax</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">p</span><span class="p">;</span>
+<span class="c1">// // (x1,y1) y (x2,y2) son los extremos de la recta en el PRIMER CUADRANTE</span>
+
+<span class="n">dx</span><span class="o">=</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">;</span>
+<span class="n">dy</span> <span class="o">=</span> <span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">;</span>
+<span class="n">i1</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">dy</span><span class="p">;</span>
+<span class="n">i2</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">dy</span><span class="o">-</span><span class="n">dx</span><span class="p">);</span>
+<span class="n">i3</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">dx</span><span class="p">;</span>
+<span class="n">p</span><span class="o">=</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">dy</span><span class="o">/</span><span class="n">dx</span><span class="p">;</span><span class="c1">//pediente</span>
+
+
+  <span class="c1">// el extremo inicial (izda) puede ser (x1,y1) ó (x2,y2)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">dx</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x2</span><span class="p">;</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y2</span><span class="p">;</span>
+    <span class="n">xmax</span><span class="o">=</span><span class="n">x1</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="k">else</span> <span class="p">{</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x1</span><span class="p">;</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">y1</span><span class="p">;</span>
+    <span class="n">xmax</span><span class="o">=</span><span class="n">x2</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// pendiente menor que 1</span>
+      <span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">dy</span><span class="o">-</span><span class="n">dx</span><span class="p">;</span>
+      <span class="k">while</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">xmax</span><span class="p">){</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="o">+</span><span class="n">i1</span><span class="p">;</span>
+      <span class="k">else</span> <span class="p">{</span> <span class="c1">// pendiente mayor que 1</span>
+        <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="o">+</span><span class="n">i2</span><span class="p">;</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+      <span class="n">pintar</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+   <span class="c1">// p&gt;1</span>
+     <span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">dx</span><span class="o">-</span><span class="n">dy</span><span class="p">;</span>
+     <span class="k">while</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">xmax</span><span class="p">){</span>
+     <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+       <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="o">+</span><span class="n">i3</span><span class="p">;</span>
+     <span class="k">else</span> <span class="p">{</span>
+       <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="o">-</span><span class="n">i2</span><span class="p">;</span>
+       <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+       <span class="p">}</span>
+     <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+     <span class="n">pintar</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mh">0xFF</span><span class="p">,</span><span class="n">reg_mem</span><span class="p">);</span>
+     <span class="p">}</span>
+     <span class="p">}</span>
+<span class="c1">// x columnas -&gt; j</span>
+<span class="c1">// y filas -&gt; i</span>
+
+<span class="p">}</span>
+
+
+<span class="kt">void</span> <span class="nf">pintar</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span><span class="kt">int</span> <span class="n">j</span><span class="p">,</span><span class="n">BYTE</span> <span class="n">blue</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">green</span><span class="p">,</span> <span class="n">BYTE</span> <span class="n">red</span><span class="p">,</span> <span class="n">RGB_data</span> <span class="n">reg_mem</span><span class="p">[][</span><span class="n">DIMENSION</span><span class="p">]){</span>
+
+ <span class="c1">// intensidad de rojo</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">r</span> <span class="o">=</span> <span class="n">red</span><span class="p">;</span>
+  <span class="c1">// intensidad de verde</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">g</span> <span class="o">=</span> <span class="n">green</span><span class="p">;</span>
+  <span class="c1">// intensidad de azul</span>
+  <span class="n">reg_mem</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">b</span> <span class="o">=</span> <span class="n">blue</span><span class="p">;</span>
+
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_pila.html">Pila</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_apéndice_unidad_cpu.html">Apéndice: Unidad CPU</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

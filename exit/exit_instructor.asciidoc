@@ -1,0 +1,109 @@
+Introducción a la programación en lenguaje Ensamblador
+======================================================
+:author: Cándido Aramburu 
+:email: candido@unavarra.es
+:revnumber: v1.0.0
+:revdate: 2015 Marzo 1
+:doctitle: Introducción a la programación en lenguaje Ensamblador 
+:toc:
+:toclevels: 3
+:numbered:
+:icons:
+:lang: es
+:encode: ISO-8859-1
+:imagesdir: /usr/local/etc/asciidoc/ 
+:iconsdir: /usr/local/etc/asciidoc/images/icons/
+
+
+
+exit.s
+------
+
+
+Cuestiones
+~~~~~~~~~~
+
+. ¿ Qué programa llama al módulo 'exit'?
+. ¿ Qué valor devuelve la función exit.s y a qué programa o proceso se lo devuelve?
+. ¿ Qué directivas hay en el programa fuente y que significa cada una ?
+. ¿ Qué etiqueta es obligatoria para 'as' y que función desempeña?
+. ¿ Cual es el tamaño de los registros de propósito general EAX y EBX?
+. ¿ Por qué vale 1 el contenido del registro EAX?
+. ¿ Cuál es la función del registro EBX en este módulo?
+. ¿ Que función realiza la instrucción +int 0x80+?
+
+Toolchain: Ensamblaje - Encadenamiento - Depuración (tabla de símbolos)
+-----------------------------------------------------------------------
+
+
+Análisis
+~~~~~~~~
+
+
+
+Cuestiones
+^^^^^^^^^^
+
+. Comparar el tamaño de los módulos reubicable y ejecutable. ¿A qué es debido?
+. Comparar el tamaño de los módulos ejecutables correspondientes a los módulos fuente exit.c y exit.s
+. Indicar del módulo objeto la clase de objeto, el tipo de datos, máquina, sistema operativo, interfaz ABI y tipo de módulo. 
+. ¿ Cuál es el punto de entrada del módulo reubicable y cuál el del módulo ejecutable?
+. Si observamos la columna Addr de los dos módulos objeto ¿Cuál es la diferencia?¿Cuál es la relación con el linker?
+. La sección de texto del módulo ejecutable en que dirección virtual de la memoria  comienza y cual es su tamaño.
+. ¿ Cuántas secciones tiene el módulo objeto?
+. ¿ Cuál es el código máquina de la instrucción +int 0x80+ ?
+. Si observamos la compilación de exit.s en que dirección se encuentra el punto de entrada a la función exit() de la librería libc.
+
+
+Depuración: exit.s 
+------------------
+
+Ejecución Paso a Paso
+~~~~~~~~~~~~~~~~~~~~~
+
+
+Cuestiones
+^^^^^^^^^^
+
+* Responder a las siguientes cuestiones:
+. ¿Cual ha sido el contenido del registro EFLAG?¿y el del flag de Signo SF?
+. ¿En que dirección de memoria se inicia el programa?
+. ¿Cuál es la dirección de memoria de la última instrucción del programa?
+. Especificar cuantos bytes ocupa cada instrucción.
+. ¿Qué comando imprime el contenido del contador de programa? Indicar el contenido antes de ejecutar la última instrucción.
+. ¿Qué expresión dereferencia el puntero contador de programa antes de ejecutar la última instrucción?
+** Utilizar  el comando imprimir memoria
+.. Las expresiones de GDB se basan en la sintaxis del lenguaje de programación en C
+.. Indicar el contenido dererenciado 
+. Examinar la memoria a la que apunta el contador de programa antes de ejecutar la última instrucción.
+** La última instruccion es: int 0x80
++
+
+[source,c]
+----------------------------------------------------------------------
+
+(gdb) p $eip
+$1 = (void (*)()) 0x804817a <_start+10>
+(gdb) x /i $eip
+=> 0x804817a <_start+10>:	int    $0x80
+(gdb) disas /r $eip
+Dump of assembler code for function _start:
+   0x08048170 <+0>:	b8 01 00 00 00	mov    $0x1,%eax
+   0x08048175 <+5>:	bb 19 00 00 00	mov    $0x19,%ebx
+=> 0x0804817a <+10>:	cd 80	int    $0x80                ------> LENGUAJE MAQUINA INSTRUCCION int 0x80 -> cd80 -> 2 bytes
+End of assembler dump.
+(gdb) x /2xb $eip
+0x804817a <_start+10>:	0xcd	0x80                        -------> examina direcciones 7A y 7B
+(gdb) x /xh $eip
+0x804817a <_start+10>:	0x80cd                              -------> examina el objeto DATO en la dirección 7A como little endian
+(gdb) p /x  *(short *)$eip
+$2 = 0x80cd                                                 -------> imprime el objeto DATO short apuntado por el puntero EIP. (dato little endiann)
+(gdb) 
+----------------------------------------------------------------------
+
+
+
+
+
+
+

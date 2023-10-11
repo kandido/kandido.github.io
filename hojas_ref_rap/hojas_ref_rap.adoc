@@ -1,0 +1,598 @@
+Programación Ensamblador AT&T x86
+=================================
+
+:doctitle: Programación Ensamblador AT&T x86
+
+
+Programas  x86-32
+-----------------
+
+[[programa_minimalista]]
+Programa Minimalista
+~~~~~~~~~~~~~~~~~~~~
+
+* minimalista.s
++
+
+--------
+### Programa: minimalista.s
+### gcc -m32 -g  -o minimalista minimalista.s
+
+        .global main
+        .section .text
+main:
+        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
+        int $0x80     # llamada al sistema operativo        
+        .end
+--------
+
+
+Estructura del programa
+^^^^^^^^^^^^^^^^^^^^^^^
+
+* Una Cabecera y dos Secciones:
+** Cabecera con comentarios.
+** Sección de Datos: Se realiza la reserva de para implementar las variables inicializadas
+*** Directiva +.section .data+ ó únicamente +.data+
+** Sección de Instrucciones: Secuencia de instrucciones en lenguaje ensamblador
+*** Directiva +.section .text+ ó únicamente +.text+
+
+Cabecera
+^^^^^^^^
+* Cabecera con comentarios sobre:
+** Nombre del programa, lenguaje de programación.
+** Descripción del programa: entradas al programa, salidas, función del programa.
+** Entorno de programación: sistema operativo, assembler utilizado, comandos de compilación, ensamblaje, linker.
+** Comentarios sobre el autor, fecha, etc
+
+
+Sección de Datos
+^^^^^^^^^^^^^^^^
+* Directiva +.section .data+ : indica el comienzo de la sección de datos
+* Etiqueta +n:+  :reserva de memoria en la dirección simbólica 'n'
+* Directiva +.int+ :reserva de 4 bytes a partir de la dirección 'n': direcciones n,n+1,n+2,n+3 
+* Literal +5+ :valor de inicialización de la reserva de memoria
+
+Sección de Instrucciones : punto de entrada y bloque de salida: llamada del sistema y llamada al sistema
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Directiva +.section .text+ : indica el inicio de la sección de instrucciones.
+*  Sintaxis de las instrucciones en lenguaje AT&T :
+** +etiqueta:  operación operando_fuente,operando_destino  #comentario+
+* Punto de entrada al programa desde el sistema operativo:
+** El SISTEMA Operativo llama al programa o aplicación.
+** Etiqueta '_start:'  . Apunta a la primera instrucción del programa.
+** Directiva +.global+ : La etiqueta '_start' tiene que ser "visible" fuera del programa sum1toN para que el linker la enlace con el sistema operativo linux como punto de entrada, es decir, tiene que ser un símbolo 'global' al resto de programas y no  'local' al programa 'sum1toN'. El linker 'ld' por defecto presupone que el símbolo utilizado como etiqueta del punto de entrada es '_start'.
+* Punto de salida del programa al sistema operativo:
+** Es necesario acabar con el proceso del programa 'sum1toN' y liberar todos los recursos que este utilizando dicho proceso. Esta tarea de fin de proceso la tiene que realizar el sistema operativo o kernel linux.
+** El programa o aplicación llama al  El SISTEMA Operativo.
+** El programa 'sum1toN' llama al sistema operativo para realizar la operación de fin de proceso mediante la ejecución de la función *exit(argumento)* . El sistema operativo tiene un listado de posibles funciones que ejecuta si es llamado. Una de dichas funciones es exit(argumento).
+** LLamada al Sistema Operativo en lenguaje ensamblador:
+*** Registro EAX: almacena el código de la función a ejecutar por el Sistema Operativo. El código de la función 'exit' es 1.
+*** Registro EBX: almacena el código del argumento de la función 'exit(argumento)'. El valor 0 se interpreta como ejecución del programa correcta.
+*** Instrucción +int $0x80+ : esta instrucción llama al sistema operativo, INTerrumpe al sistema operativo para que ejecute la función asociada al código almacenado en el registro EAX. 
+** http://programminggroundup.blogspot.com/2007/01/appendix-c-important-system-calls.html[Programming from the Ground Up]
+
+
+Fin del ensamblaje
+^^^^^^^^^^^^^^^^^^
+* Directiva +.end+ 
+
+
+Ejemplo Básico
+~~~~~~~~~~~~~~
+
+* Módulo fuente: 'sum1toN.s'
++
+
+--------
+### Programa: sum1toN.s
+### Descripción: realiza la suma de la serie 1,2,3,...N
+### Es el programa en lenguaje AT&T i386 equivalente a sum.ias de la máquina IAS de von Neumann
+### gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
+### Ensamblaje as --32 --gstabs sum1toN.s -o sum1toN.o
+### linker -> ld -melf_i386  -o sum1toN sum1toN.o 
+        ##  Declaración de variables
+        .section .data
+n:	.int 5
+        .global _start
+        ##  Comienzo del código
+        .section .text
+_start:
+        mov $0,%ecx # ECX implementa la variable suma
+        mov n,%edx
+bucle:
+        add %edx,%ecx
+        sub $1,%edx
+        jnz bucle       
+        mov %ecx, %ebx # el argumento de salida al S.O. a través de EBX según convenio                
+        ## salida
+        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
+        int $0x80     # llamada al sistema operativo        
+        .end
+--------
+
+* Compilación: +gcc -nostartfiles -m32 -g -o sum1toN sum1toN.s+
+* Ensamblaje: +as --32 --gstabs sum1toN.s -o sum1toN.o+
+* linker: +ld -melf_i386  -o sum1toN sum1toN.o+ 
+* Directivas del traductor ensamblador: .section, .data, .text, .byte, .end, etc... empiezan con un punto como prefijo
+
+[width="100%", cols="<2m,<4m,<5m,<1m,<6m,<3m"]
+|=====================================================
+|label: |op_mnemonic |operand_source |, | operand_destination |;comment
+|=====================================================
+
+* Las etiquetas llevan el sufijo *:*
+* La etiqueta *_start*: es el punto de entrada al programa. Obligatoria. La utiliza el linker.
+* Sufijos de los mnemónicos
+** *b* -> byte -> 1Byte  ->Ej: movb
+** *w* -> word -> 2Bytes ->Ej: movw  . En este contexto word son 2 bytes por razones históricas.
+** *l* -> long -> 4Bytes ->Ej: movl  . Valor por defecto.
+** *q* -> quad -> 8Bytes ->Ej: movq
+* Direccionamientos de los operandos:
+** En la misma instrucción los operandos fuente y destino no pueden hacer ambos referencia a la memoria Principal.
+** inmediato: prefijo del operando *$*
+** registro:  prefijo del registro *%*
+** directo:   el operando es una etiqueta que apunta a la memoria principal
+** indirecto: el operando es una etiqueta o un registro: utiliza paréntesis. (etiqueta) ó (%registro). Ver indexado.
+*** La etiqueta referencia una posición de memoria que contiene a su vez una dirección de la memoria principal que apunta al operando.
+*** El registro contiene la dirección de la memoria principal que apunta al operando.
+** indexado
+*** dirección efectiva: 'base + index*scale + disp' -> la sintaxis es:  disp(base,índice,escala)
+*** foo(%ebp,%esi,4)    -> dirección efectiva= 'EBP + 4*ESI + foo'
+*** (%edi)              -> dirección efectiva= 'EDI' -> direccionamiento indirecto
+*** -4(%ebp)    	-> dirección efectiva= 'EBP - 4' 
+*** foo(,%eax,4)	-> dirección efectiva= '4*EAX + foo'
+*** foo(,1)     	-> dirección efectiva= foo
+** Cualquier instrucción que tiene una referencia a un operando en la memoria principal y no tiene una referencia a registro, debe especificar el tamaño del operando  (byte, word, long, or quadruple) con una instrucción que lleve el sufijo (`b', `w', `l' or `q', respectivamente). 
+
+
+
+
+
+[[directivas_as]]
+Directivas Assembler AS
+-----------------------
+
+* Manual
+** https://sourceware.org/binutils/docs/as/
+
+.Directivas básicas
+[width="100%",format="csv",separator=":",cols="2*<1",options="header"]
+|====
+.global o .globl 	: variables globales
+.section .data 	: sección de las variables locales estáticas inicializadas
+.section .text 	: sección de las instrucciones
+.section .bss  	: sección de las variables sin inicializar
+.section .rodata 	: sección de las variables de sólo lectura
+.type	  name , type description  : tipo de variable, p.ej @function
+.common   100    	: reserva 100 bytes sin inicializar y puede ser referenciado globalmente
+.lcomm   bucle, 100 	: reserva 100bytes referenciados con el símbolo local bucle. Sin inicializar.
+.space    100    	: reserva 100 bytes inicializados a cero
+.space    100, 3 	: reserva 100 bytes inicializados a 3
+.string  "Hola" 	: añade el byte 0 al final de la cadena
+.asciz   "Hola" 	: añade el byte 0 al final de la cadena
+.ascii   "Hola"	: no añade le caracter NULL de final de cadena
+.byte    3,7,-10,0b1010,0xFF,0777 : tamaño 1Byte y formatos decimal,decimal,decimal,binario,hexadecimal,octal
+.2byte    3,7,-10,0b1010,0xFF,0777 : tamaño 2Bytes
+.word    3,7,-10,0b1010,0xFF,0777 : tamaño 2Bytes
+.short   3,7,-10,0b1010,0xFF,0777 : tamaño 2B
+.4byte    3,7,-10,0b1010,0xFF,0777 : tamaño 4B
+.long    3,7,-10,0b1010,0xFF,0777 : tamaño 4B
+.int     3,7,-10,0b1010,0xFF,0777 : tamaño 4B
+.8byte    3,7,-10,0b1010,0xFF,0777 : tamaño 8B
+.quad    3,7,-10,0b1010,0xFF,0777 : tamaño 8B
+.octa    3,7,-10,0b1010,0xFF,0777 : formato octal
+.double  3.14159, 2 E-6 : precisión doble
+.float   2E-6, 3.14159  : precisión simple
+.single  2E-6           : precisión simple
+.include "file"	: incluye el fichero . Obligatorias las comillas.
+.equ     SUCCESS, 0     : macro que asocia el símbolo SUCCESS al número 0
+.macro macname macargs	: define el comienzo de una macro de nombre macname y argumentos macargs
+.endmacro		: define el final de una macro
+.align   n             : las instrucciones o datos posteriores empezarán en una dirección multiplo de n bytes.
+.end  			: fin del ensamblaje
+|====
+
+* Alineamiento *Little Endian*: El byte de menor peso, LSB, se almacena en la posición de memoria más baja.
+** .int OxAABBCCDD -> 0xDD se almacena primero en la dirección más baja, el resto de bytes se almacenan en sentido ascendente en el orden 0xCC,0xBB,0xAA
+
+
+
+
+[[rie]]
+Repertorio de Instrucciones Ensamblador
+---------------------------------------
+
+* <<repertorio_instruc_oper,Manuales del Repertorio de Instrucciones>>
+* Lenguaje Ensamblador AT&T
+
+TRANSFERENCIA
+~~~~~~~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="<1,2*<2,<4,<2",options="header"]
+|====
+include::../tablas/mnemonicox86_transferencia.csv[]
+|====
+
+
+*  Flags: *±* =Afectado por esta instrucción, *?* =Indefinido luego de esta instrucción
+
+
+
+
+ARITMÉTICOS
+~~~~~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="<1,2*<2,<4,<2",options="header"]
+|====
+include::../tablas/mnemonicox86_aritmetico.csv[]
+|====
+
+* *i*:para más información ver especificaciones de la intrucción, 
+* *#*:entonces CF:=0, OF:=0 sino CF:=1, OF:=1
+
+
+
+LÓGICOS                                                                                                              
+~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="<1,2*<2,<4,<2",options="header"]
+|====
+include::../tablas/mnemonicox86_logico.csv[]
+|====
+
+MISCELÁNEOS                                                                                                     
+~~~~~~~~~~~
+
+[width="100%",format="csv",separator=";",cols="<1,2*<2,<4,<2",options="header"]
+|====
+include::../tablas/mnemonicox86_miscelaneo.csv[]
+|====
+
+
+
+SALTOS  (generales)
+~~~~~~~~~~~~~~~~~~~
+
+* https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow#Jump_if_Lesser[wiki x86 assembly]
+
+------------------------
+Nombre  Comentario                      Código          Operación  
+CALL    Llamado a subrutina             CALL Proc                  
+JMP     Saltar                          JMP Dest
+JE      Saltar si es igual              JE Dest         (= JZ)     
+JZ      Saltar si es cero               JZ Dest         (= JE)     
+JCXZ    Saltar si CX es cero            JCXZ Dest                  
+JP      Saltar si hay paridad           JP Dest         (= JPE)    
+JPE     Saltar si hay paridad par       JPE Dest        (= JP)
+JPO     Saltar si hay paridad impar     JPO Dest        (= JNP)                     
+JNE     Saltar si no es igual           JNE Dest        (= JNZ)	    
+JNZ     Saltar si no es cero            JNZ Dest        (= JNE)	    
+JECXZ   Saltar si ECX es cero           JECXZ Dest 386	    
+JNP     Saltar si no hay paridad        JNP Dest        (= JPO)
+RET     Retorno de subrutina            RET
+------------------------		          
+
+
+SALTOS  Sin Signo (Cardinal) SALTOS Con Signo (Integer)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+------------
+Nombre  Comentario                      Código          Operación          
+JA      Saltar si es superior           JA Dest         (= JNBE)           
+JAE     Saltar si es superior o igual   JAE Dest        (= JNB = JNC)      
+JB      Saltar si es inferior           JB Dest         (= JNAE = JC)      
+JBE     Saltar si es inferior o igual   JBE Dest        (= JNA)            
+JNA     Saltar si no es superior        JNA Dest        (= JBE)            
+JNAE    Saltar si no es super. o igual  JNAE Dest       (= JB = JC)        
+JNB     Saltar si no es inferior        JNB Dest        (= JAE = JNC)      
+JNBE    Saltar si no es infer. o igual  JNBE Dest       (= JA)             
+JC      Saltar si hay carry JC Dest     JO  Dest        Saltar si hay Overflow  
+JNC     Saltar si no hay carry          JNC Dest
+JNO     Saltar si no hay Overflow       JNO Dest
+JS      Saltar si hay signo (=negativo) JS Dest   
+JG      Saltar si es mayor              JG Dest         (= JNLE)	 
+JGE     Saltar si es mayor o igual      JGE Dest        (= JNL)	 
+JL      Saltar si es menor              JL Dest         (= JNGE)	 
+JLE     Saltar si es menor o igual      JLE Dest        (= JNG)	 
+JNG     Saltar si no es mayor           JNG Dest        (= JLE)	 
+JNGE    Saltar si no es mayor o igual   JNGE Dest       (= JL)	 
+JNL     Saltar si no es inferior        JNL Dest        (= JGE)	 
+JNLE    Saltar si no es menor o igual   JNLE Dest       (= JG)        
+------------
+
+
+FLAGS (ODITSZAPC)
+~~~~~~~~~~~~~~~~~
+
+------------
+O: Overflow resultado de operac. sin signo es muy grande o pequeño.
+D: Dirección
+I: Interrupción Indica si pueden ocurrir interrupciones o no.
+T: Trampa Paso, por paso para debugging
+S: Signo Signo del resultado. Razonable sólo para enteros. 1=neg. 0=pos.
+Z: Cero Resultado de la operación es cero. 1=Cero
+A: Carru Aux. Similar al Carry, pero restringido para el nibble bajo únicamente
+P: Paridad 1=el resultado tiene cantidad par de bits en uno
+C: Carry resultado de operac. sin signo es muy grande o inferior a cero
+------------
+
+* Sufijos de los mnemónicos del código de operación:
+** 'q' : quad: operando de 8 bytes: cuádruple palabra
+** 'l' : long: operando de 4 bytes: doble palabra
+** 'w' : word: operando de 2 bytes: palabra
+** 'b' : byte: operando de 1 byte
+
+* Si el mnemónico de operación no lleva sufijo el tamaño por defecto del operando es 'long'
+
+<<<
+
+Listado de mnemónicos
+~~~~~~~~~~~~~~~~~~~~~
+
+----
+Quick x86 assembly mnemonics NUP-UPNA 
+
+                                        NEG  ;Negación (compl a 2)
+ADD     ;Suma                           NOT  ;Invertir cada bit
+ADC     ;Suma con acarreo               AND  ;'Y' (And) lógico
+SUB     ;Resta                          OR   ;'O' (Or) lógico
+SBB     ;Resta con acarreo              XOR  ;'O' (Or) exclusivo   
+DIV     ;División (sin signo)           SHL  ;Desplazam.lógico a la izq.
+DIV     ;División (sin signo)           SHR  ;Desplazam.lógico a la der.
+DIV     ;386 División (sin signo)       MOV  ;Mover (copiar)
+IDIV    ;División entera con signo      XCHG ;Intercambiar
+IDIV    ;División entera con signo      STC  ;Set the carry (Carry=1) 
+IDIV    ;386 División entera con signo  CLC  ;Clear Carry (Carry=0)
+MUL     ;Multiplicación (sin signo)     CMC  ;Complementar Carry
+MUL     ;Multiplicación (sin signo)     STD  ;Setear dirección
+MUL     ;386 Multiplicación (sin signo) CLD  ;Limpiar dirección
+IMUL    ;i Multiplic. entera con signo  STI  ;Flag de Interrupción en 1
+IMUL    ;Multiplic. entera con signo    CLI  ;Flag de Interrupción en 0
+IMUL    ;386 Multiplic. entera con signoPUSH ;Apilar en la pila     
+INC     ;Incrementar                    PUSHF;Apila los flags
+DEC     ;Decrementar                    PUSHA;Apila los regs generales
+CMP     ;Comparar                       POP  ;Desapila de la pila
+SAL     ;Desplazam. aritm. a la izq.    POPF ;Desapila a los flags
+SAR     ;Desplazam. aritm. a la der.    POPA ;Desapila a los reg. general.
+RCL     ;Rotar a la izq. c/acarreo      CBW  ;Conv. Byte a Word
+RCR     ;Rotar a la derecha c/acarreo   CWD  ;Conv. Word a Doble
+ROL     ;Rotar a la izquierda           CWDE ;Conv. Word a Doble Exten.
+ROR     ;Rotar a la derecha             IN   ;Entrada                 
+NOP     ;Hacer nada                     OUT  ;Salida                  
+LEA     ;Cargar dirección Efectiva      Directivas
+INT     ;Interrupción			.global ó .globl label
+CALL    Llamada a subrutina        	.section .data
+JMP     Saltar                     	.section .text
+JE      Saltar si es igual         	.section .bss
+JZ      Saltar si es cero          	.section .rodata
+JCXZ    Saltar si CX es cero       	.type name,description
+JP      Saltar si hay paridad      	.common   size
+JPE     Saltar si hay paridad par  	.lcomm    label,size
+JPO     Saltar si hay paridad impar	.space    size
+JNE     Saltar si no es igual           .end
+JNZ     Saltar si no es cero       	.string
+JECXZ   Saltar si ECX es cero      	.asciz
+JNP     Saltar si no hay paridad   	.ascii
+RET     Retorno de subrutina		.byte
+JA      Saltar si es superior          	.2byte
+JAE     Saltar si es superior o igual  	.word
+JB      Saltar si es inferior          	.short
+JBE     Saltar si es inferior o igual  	.4byte
+JNA     Saltar si no es superior       	.long
+JNAE    Saltar si no es super. o igual 	.int
+JNB     Saltar si no es inferior       	.8byte   
+JNBE    Saltar si no es infer. o igual 	.quad
+JC      Saltar si hay carry JC Dest    	.octa
+JNC     Saltar si no hay carry         	.double
+JNO     Saltar si no hay Overflow      	.float   
+JS      Saltar si hay signo (=negativo)	.single     
+JG      Saltar si es mayor             	.include "file" 
+JGE     Saltar si es mayor o igual     	.equ     NAME, value
+JL      Saltar si es menor             	.macro macname m
+JLE     Saltar si es menor o igual     	.endmacro       
+JNG     Saltar si no es mayor          	.align number     
+JNGE    Saltar si no es mayor o igual  	            
+JNL     Saltar si no es inferior       
+JNLE    Saltar si no es menor o igual
+|63-0| 31-0 | 15-0| 15-8| 7-0 
+|rax | eax | ax  | ah  | al   
+|rbx | ebx | bx  | bh  | bl   
+|rcx | ecx | cx  | ch  | cl   
+|rdx | edx | dx  | dh  | dl   
+|rsi | esi | si  |     | sil  
+|rdi | edi | di  |     | dil  
+|rbp | ebp | bp  |     | bpl  
+|rsp | esp | sp  |     | spl  
+|r8  | r8d | r8w |     | r8b  
+|r9  | r9d | r9w |     | r9b  
+|r10 | r10d | r10w|     | r10b
+|r11 | r11d | r11w|     | r11b
+|r12 | r12d | r12w|     | r12b
+|r13 | r13d | r13w|     | r13b
+|r14 | r14d | r14w|     | r14b
+|r15 | r15d | r15w|     | r15b
+----
+
+<<<
+
+
+[[registros_32]]
+Registros
+---------
+
+
+Visión completa
+~~~~~~~~~~~~~~~
+
+image::./images/hojas_ref_rap/reg_amd64.png[alt="Registros amd64", width="300",align="center"]
+
+
+
+
+* Los registros de propósito general RPG de 32 bits son:
+** `%eax' (el acumulador), `%ebx', `%ecx', `%edx', `%edi', `%esi', `%ebp' (puntero frame), and `%esp' (puntero stack). 
+
+[cols="a"]
+|==================================
+|
+image::./images/hojas_ref_rap/reg_amd.png[alt="Registros RPG", height="300",align="center"]
+|==================================
+
+
+
+Registros visibles al programador
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[width="50%", cols="5*<m"]
+|====
+|63-0| 31-0 | 15-0| 15-8| 7-0
+|rax | eax | ax  | ah  | al
+|rbx | ebx | bx  | bh  | bl
+|rcx | ecx | cx  | ch  | cl
+|rdx | edx | dx  | dh  | dl
+|rsi | esi | si  |     | sil
+|rdi | edi | di  |     | dil
+|rbp | ebp | bp  |     | bpl 
+|rsp | esp | sp  |     | spl
+|r8  | r8d | r8w |     | r8b
+|r9  | r9d | r9w |     | r9b
+|r10 | r10d | r10w|     | r10b
+|r11 | r11d | r11w|     | r11b
+|r12 | r12d | r12w|     | r12b
+|r13 | r13d | r13w|     | r13b
+|r14 | r14d | r14w|     | r14b
+|r15 | r15d | r15w|     | r15b
+|====
+
+Compatibilidad 32-64
+~~~~~~~~~~~~~~~~~~~~
+* En la nominación de los registros de la arquitectura de 64 bits sustituir R  por E y obtenemos la nominación de la arquitectura de 32 bits.
+
+[width="50%"]
+|============================================================================
+|64 bits 	|32 bits
+|RIP		|EIP
+|RAX		|EAX
+|RFLAG		|EFLAG
+|.......        | .............
+|============================================================================
+
+* Hay excepciones
+
+Control Flag Register
+~~~~~~~~~~~~~~~~~~~~~
+
+image::./images/hojas_ref_rap/rflags.png[alt="Registros Flags", width="300",align="center"]
+
+* Registro de STATUS: La ejecución de una instrucción, activa unos bits denominados banderines que indican consecuencias de la operación realizada. Ejemplo: banderín de overflow : indica que la operación aritmética realizada ha resultado en un desbordamiento del resultado de dicha operación.
+* http://en.wikipedia.org/wiki/FLAGS_register_(computing)[wikipedia]
+* Unicamente nos fijamos en los flags OSZAPC.
++
+
+.RFLAG Register
+[width="50%",cols="<,^,<",options="header"]
+|======================
+|Flag |Bit |Name
+|CF |0 |Carry flag
+|PF |2 |Parity flag
+|AF |4 |Adjust flag
+|ZF |6 |Zero flag
+|SF |7 |Sign flag
+|OF |11 |Overflow flag
+|======================
+
+* Carry flag:
+** se activa si la llevada se sale del ancho de palabra de la ALU en una operación aritmética de números enteros sin signo o con signo
+* Overflow flag:
+** se activa si teniendo en cuenta el bit de mayor peso MSB (aunque este fuera del tamaño) indica error en la operación aritmética con números enteros con signo.
+* Parity Even flag:
+** indica si el número de bits del byte LSB del resultado de la última operación ha sido par.
+* Sign flag:
+** se activa si el resultado de la última operación ha sido negativo.
+* Adjust flag:
+** se activa si hay llevada en el nibble LSB del resultado de la última operación
+
+
+
+[cols="a"]
+|==================================
+|
+image::./images/hojas_ref_rap/gdb_posterior.png[alt="gdb 1", width="700",align="center"]
+|==================================
+
+[cols="a"]
+|==================================
+|
+image::./images/hojas_ref_rap/gdb_anterior.png[alt="gdb 2", width="700",align="center"]
+|==================================
+
+
+
+
+
+GDB
+---
+
+* Comandos básicos: ejecutar el comando +gdb+
++
+
+----
+shell date
+shell pwd
+shell ls
+shTAB
+shell daTAB
+C-x a
+C-x o
+histórico comandos: navegar con las flechas
+set trace-commands on
+set logging file gdb_salida.txt
+set logging on
+shell ls -l gdb_salida.txt
+file modulo_bin
+info sources
+info source
+break main
+b _start
+info breakpoints
+info reTAB
+run
+next , n , n 5
+step , s
+RETURN
+continue, c
+start
+until, RETURN, RETURN ...
+next instruction, ni, RET, RET, RET, RET, until, RET,..hasta salir del bucle
+step ,s
+si
+ptype varible 
+whatis variable 
+print variable, p variable, p /t variable, p /x n
+p &n
+p $rax
+p $eax
+p $ax
+p $ah
+p $rflags
+p $eflags
+p /t $eflags
+p $rip
+x dirección
+x &variable, x /1bw &variable, +x /1xw &variable, x /4xw &variable
+pending? n
+layout split
+h layout
+layout src
+focus src : navegar
+focus cmd : navegar
+info registers
+info reTAB
+disas /r _start
+disas /m _start
+q
+----
+
+

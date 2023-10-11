@@ -1,0 +1,436 @@
+Representación de las Instrucciones
+===================================
+
+:doctitle: Representación de las Instrucciones
+
+////
+Refs
+
+http://www.fdi.ucm.es/profesor/mendias/512/512.html
+
+
+////
+
+
+Temario
+-------
+
+. Representación de instrucciones
+..  Lenguaje máquina, lenguaje ensamblador y lenguajes de alto nivel
+..  Formato de instrucción
+..  Tipos de instrucción y modos de direccionamiento
+
+
+Bibliografía
+~~~~~~~~~~~~
+
+* Tema referenciado en el libro de texto W. Stalling 
+** Capítulo 10: Conjuntos de Instrucciones : Características y Funciones (Datos, Operandos y Operaciones)
+** Capítulo 11: Conjuntos de Instrucciones: Formatos de instrucciones y Modos de Direccionamiento (Lenguaje Ensamblador)
+** Apéndice B: Lenguaje Ensamblador y Toolchain
+
+
+Objetivos
+---------
+
+* Analizar la arquitectura del repertorio de las instrucciones máquina (Formato de instrucciones, formato de datos, operaciones y direccionamiento de operandos) de arquitecturas ISA en general.
+
+Requisitos
+~~~~~~~~~~
+
+* Requisitos:
+** Von Neumann Architecture: Arquitectura de una Computadora, Máquina IAS.
+** Programación en lenguaje ensamblador IAS
+** Representacion de datos
+** Operaciones Aritméticas y Lógicas
+
+
+Lenguajes de programación de alto nivel vs Lenguajes de Programación de bajo nivel
+----------------------------------------------------------------------------------
+
+Lenguajes de alto nivel
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Los lenguajes de alto nivel como Java, Python, C, etc ... se desarrollaron para facilitar la tarea de programar algoritmos, estructuras de datos, etc...utilizando un lenguaje sencillo de manejar por los programadores. En cambio, los datos y las instrucciones que manejan las CPU de las computadoras están en otro lenguaje, el lenguaje MAQUINA BINARIO, que depende del tipo de procesador (intel,AMD,RISC-V,etc...) de la computadora. El lenguaje máquina de un procesador intel de nuestra computadora difiere del lenguaje MAQUINA del procesador arm de un smartphone. 
+
+Al igual que los datos, las instrucciones también es necesario codificarlas en un formato BINARIO. Los programas en lenguaje máquina formados por datos e instrucciones binarias están preparados para ser cargados en la memoria principal RAM y ser procesados por la CPU.
+
+* Ejemplos de lenguajes de Programación de alto y bajo nivel:  <<lang_altovsbajo, Apéndice>>.
+
+El lenguaje máquina y el lenguaje ensamblador
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* En este tema se trata de la representación e interpretación de las instrucciones en lenguaje máquina y lenguaje ensamblador.
+* Las instrucciones se pueden representar en dos lenguajes
+** Lenguaje máquina en formato binario : 0101010101111111000011111
+*** El lenguaje binario implica un *formato de la instrucción*.
+** Lenguaje símbolico o lenguaje ensamblador en formato texto :  'fin: ADD 0x33,resultado'
+*** El lenguaje ensamblador implica una *sintaxis*
+* La representación de las instrucciones en lenguaje binario permite su almacenamiento en la memoria principal así como facilitar el ciclo de instrucción mediante su decodificación y ejecución por parte de la CPU.
+* La representación de las instrucciones en lenguaje simbólico, como es el texto, tiene como objetivo facilitar la tarea del programador en la interpretación  de las instrucciones y en el desarrollo de programas en lenguaje ensamblador.
+* El estudio de los formatos de las instrucciones máquina de  un procesador específico se enmarca dentro del concepto ISA de la Arquitectura del Procesador <<estr_comp,Ver apéndice>>
+
+
+Elementos de una Instrucción Máquina
+------------------------------------
+
+* Una instrucción máquina se estructura en diferentes campos: campo de operaciones, campo de operando, etc ... El número de campos dependerá del procesador que se esté diseñando.
++
+
+[ditaa]
+----------------------------------------------------------------------
+
+         +------------------------------------------------------------------+
+         | Campo de Operaciones |  Campo de Operando  | Campo de ...|       |
+         +----------------------------------+-------------------------------
+
+----------------------------------------------------------------------
+
+* En el caso de la máquina IAS el formato de instrucción tiene únicamente dos campos: el código de operación y el campo del operando.
+
+* Código de Operaciones:
+** La instrucción debe de especificar que operación debe de realizar la CPU. Operaciones cómo las aritméticas de suma y resta ,  operaciones lógicas como not y and, operaciones de transferencia de datos entre posiciones de la memoria principal, operaciones de entrada y salida como la transferencia de datos del disco duro a la memoria principal, etc
+* Source Operand Reference: 
+** Una operación puede requerir el procesamiento de uno o más datos. Por ejemplo la operación lógica NOT requiere de un operando, la operación suma ADD requiere de dos operandos, etc
+* Target Operand Reference:
+** Una operación  de suma requiere de dos operandos, uno es el operando fuente y otro el operando destino.
+* Result Reference:
+** Una operación de suma requiere salvar el resultado de la operación.
+* Next Instruction Reference: 
+** Una vez finalizada la ejecución de la instrucción es necesario indicar a la CPU donde esta almacenada la próxima instrucción a ejecutar a través del Contador de Programa PC.
+
+* Direcciones del operando implícitas: Direcciones que no aparecen explícitamente en la instrucción. Ejemplos:
+** La Próxima instrucción es la dirección almacenada en otro registro: el Contador de Programa
+** El Resultado de la operación se guarda en otro registro: el Acumulador
+** etc
+
+
+Tipos de Arquitecturas de Operando: Ejemplos
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* 3 Tipos
+** Arquitectura orientada a *Acumulador*: Un operando está implicitamente en el Acumulador
+** Arquitectura orientada a *Stack* (<<pila, Apéndice Pila>>):
+*** Los operandos se introducen o extraen de la pila interna de la CPU
+*** Concepto de pila: push/pop -> empujar/extraer -> el primero en entrar es el último en salir -> First Input Last Output
+*** SP: Registro Stack Pointer : registro que apunta al Top de la pila (parte alta de la pila)
+** Arquitectura orientada a *Registros*:
+*** Dos tipos: Reg/Mem y Load/Store, como es el caso de la arquitectura amd64 y arm respectivamente.
+*** Reg/Mem : para que la instrucción se ejecute uno de los dos operandos debe de estar en un registro 
+*** Load/Store: Los dos operandos deben de estar en dos registros para que dicha instrucción se ejecute 
+* Ejemplo: código para realizar la operación *C=A+B* en 4 arquitecturas de operando diferentes.
++
+
+[width="80%",cols="4*^s",frame="topbot",options="header"]
+|==========================
+| Stack          |Acumulator | Register/Memory |Load/Store
+|Push A          |Load A     |Load R1,A        |Load R1,A
+|Push B          |Add B      |Add R3,R1,B      |Load R2,B
+|Add             |Store C    |Store R3,C       |Add R3,R1,R2 
+|Pop C          |           |                 |Store R3,C
+|==========================
+** Los nombres de las variables, A, B,C son referencias a la Memoria Principal.
+** Descripción RTL
+*** Stack: M[SP]<-M[A],SP<-SP-1; M[SP]<-M[B],SP<-SP-1;M[SP+1]<-M[SP]+M[SP+1],SP<-SP+1;
+**** *Add*    -> NO hay referencia ni al operando fuente ni al operando destino.
+**** Los operandos han de cargarse previamente en la pila
+*** Acumulator: AC<-M[A];AC<-AC+M[B];C<-M[AC] 
+**** *Add B*   -> NO hay referencia al operando DESTINO 
+**** El Operando destino a de cargarse previamente en el acumulador.
+*** Reg/Mem: R1<-M[A];R3<-R1+M[B];M[C]<-R3
+**** *Add R3,R1,B*  -> NO se puede referencia a más de un operando en MEMORIA
+*** Si un operando está almacenado en la memoria, el resto a de cargarse previamente en los registros.
+*** Load/Store: R1<-M[A];R2<-M[B];R3<-R1+R2;M[C]<-R3.
+**** *Add R3,R1,R2* ->Solamente se hacen referencias a REGISTROS, ninguna referencia a memoria
+**** Los operandos fuente y destino han de cargarse previamente en los registros
+
+
+NOTE: La arquitectura x86 está orientada a Reg/Mem, por lo que no se puede referenciar en la misma instrucción a un operando fuente en MEMORIA y el operando destino también en MEMORIA, es decir, ambos operandos referenciados a MEMORIA.   
+
+
+* Ejemplo de código para realizar la opeación *(A-B)/(DxE+C)* según 4 arquitecturas ISA diferentes: arquitectura con 3 operandos referenciados, con 2 operandos referenciados, con 1 operando referenciado y ninǵún operando referenciado
++
+
+image::./images/instrucciones_representacion/addresses_arch.jpg[]
+
+
+* 4º Caso: Arquitectura de Operando tipo Stack:
+** M[SP]<-M[C];M[SP]<-M[E];M[SP]<-M[D];MUL;ADD;M[SP]<-M[B];M[SP]<-M[A];SUB;DIV
+** push C; push E; push D; mul; add; push B; push A; sub; div;
+
+Instrucciones en lenguaje máquina de la arquitectura x86
+--------------------------------------------------------
+
+* Ver el apéndice <<intel_i386_hola_asmbin, Apéndice>> a modo de comprender un ejemplo. No es posible programar manualmente en lenguaje máquina en una computadora actual.
+
+Representación de las instrucciones en el lenguaje ensamblador (ASM) para computadoras en general 
+-------------------------------------------------------------------------------------------------
+
+
+
+Introducción
+~~~~~~~~~~~~
+
+* Los dos campos más importantes y casi únicos del formato de instrucción son: El código de operación y los modos de direccionamiento de los campos de operandos. El número de operandos puede ser 0,1,2,3,etc
+
+Códigos de Operación
+~~~~~~~~~~~~~~~~~~~~
+
+* La codificación del conjunto de operaciones depende de cada arquitectura ISA.
+* Categorías según el tipo de operaciones:
+** Data Processing: Arithmetic and logic instructions
+** Data Load/Store: Movement of data into or out of register and/or memory
+locations
+** Data Movement: I/O instructions
+** Control: Test and Branch instructions
+
+** El repertorio puede ser: reducido/extenso, complejo/sencillo.
+* En el lenguaje ensamblador a la palabra que indica el tipo de opeación, por ejemplo ADD para una suma, se le denomina *mnemónico* y suele estar en lengua inglesa, permitiendo intuir fácilmente de que operación se trata.
+* La mejor forma de prácticar con los mnemónicos del lenguaje ensamblador es programando, lo cual se verá en el siguiente tema <<repertorio_instruc_oper, lenguaje ensamblador x86>>
+
+image:./images/instrucciones_representacion/tipos_instrucciones.png[tipos de instrucciones]
+
+
+
+Operandos: Modos de Direccionamiento
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Localización
+^^^^^^^^^^^^
+
+* Posibles ubicaciones de los operandos.
+** En la propia instrucción
+** Memoria interna: registros CPU
+** Memoria Principal: memoria DRAM
+** Memoria i/o: registros en controladores de entrada/salidas denominados puertos.
+* La instrucción tiene que hacer referencia de alguna forma (modo de direccionamiento) a  la ubicación del operando.
+
+Direcciones referenciadas durante el ciclo de instrucción
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Durante el ciclo de instrucción se pueden referenciar:
+** Una dirección para referenciar a la instrucción
+** Una dirección para el operando primero
+** Una dirección para el operando segundo
+** Una dirección para el resultado
+** Una dirección que referencie a la siguiente instrucción
+
+* Tipos de  instrucciones según el número de direcciones referenciadas durante su ejecución.
+** Instrucciones sin operando, con un operando, con múltiples operandos.
+** Depende de la arquitectura: Acumulador (Ej: máquina IAS), Registro-Memoria(Ej: máquina x86), Load/Store (Ej:ARM ), Stack (Ej: máquina JVM), Memoria-Memoria
+** referencias implicitas al operando
+
+
+
+
+
+Formato de instrucción: Campos
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+[ditaa]
+----------------------------------------------------------------------
+
+         +--------+-------------------------+--------------+
+         | Cod Op |  Mod. Direccionamiento  |      A       |
+         +--------+-------------------------+--------------+
+
+----------------------------------------------------------------------
+
+
+* *Ejemplo particular* de una estructura del formato de instrucción en tres campos en una arquitectura ISA.
+** Código de Operación: mover, cargar, sumar, restar, etc
+** Código A: campo de operando : hace referencia a la localización del operando
+** Código Mod. Direc: representa el modo de interpretar el campo A
+* EA: Efective Address : Dirección efectiva donde está localizado el operando
+* Op: Operando .Es el dato contenido en la dirección efectiva EA.
+* Los datos 'operando' Op pueden estar almacenados en:
+. Memoria externa RAM
+.. Una dirección de memoria conteniendo un dato. 
+.. Una dirección de memoria conteniendo una instrucción. El dato es uno de los campos de a propia instrucción. Direccionamieno Inmediato.
+. Memoria interna GPR
+.. Registros rax,eax,... 
+
+Tipos de direccionamiento
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* La 'dirección' de referencia efectiva E.A. de la ubicación del operando se obtiene según los distintos modos de direccionamiento.
+* El modo de direccionamiento está codificado en el campo M.D.
+* Inmediato:
+** El operando se obtiene del campo de la propia instrucción.
+** EA= no existe
+** Op=A
+* Directo:
+** El operando está en la memoria externa. El campo de operando contiene la dirección efectiva
+** EA=A
+** Op=M[EA]
+* Registro:
+** El operando está en la memoria interna. El campo de operando contiene la referencia del Registro.
+** EA=A
+** Op=R
+* Indirecto:
+** La dirección efectiva esta almacenada en una posición de memoria externa o interna.
+** EA=M[A] o R
+** Op=M[M[A]] o M[R]
+* Desplazamiento:
+** La dirección efectiva del operando se obtiene mediante una operación aritmética entre una dirección base y un desplazamiento relativo a la dirección base. La dirección base se toma como referencia y el desplazamiento es relativo a la dirección base.
+.. Relativo al contador de programa PC:
+*** La dirección base es implíctamente el contador de programa y el desplazamiento está en el campo de operando.
+*** EA=PC+A
+*** Op=M[EA] 
+.. Relativo a Base:
+*** El desplazamiento está en el campo de operando y la dirección base está en el registro.
+*** EA=R+A
+*** Op=M[EA] 
+.. Indexado: 
+*** El desplazamiento está en el registro y la dirección base está en el campo de operando.
+*** EA=A+R
+*** Op=M[EA] 
+* Para hacer referencia a los operandos fuente o destino la arquitectura de la instrucción es muy 'flexible' ya que se dispone de distintos modos de direccionar dichos operandos.
+
+
+[[gas_sintax_direcci]]
+Lenguaje Intel versus Lenguaje  AT&T
+------------------------------------
+
+Lenguajes ensamblador de la arquitectura  i386/amd64
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* El lenguaje en código máquina del repertorio de instrucciones de la arquitectura AMD64 es único pero no así el lenguaje ensamblador correspondiente a dicha arquitectura.
+* En la asignatura "Estructura de Computadores" se utiliza la sintaxis *AT&T* de la compañía telefónica americana AT&T.
+
+Sintaxis de las instrucciones en el lenguaje INTEL 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* El formato de las instrucciones en lenguaje ensamblador se conoce como 'sintaxis' de las instrucciones.
+* SINTAXIS ASM: Etiqueta-Código de Operación- Operando1- Operando2- Comentario
+* x86-64
+* x86 
++
+
+.Sintaxis Intel
+[width="100%", cols="<2m,<4m,<6m,<1m,<5m,<3m"]
+|=====================================================
+|label: |op_mnemonic |operand_destination |, | operand_source |#comment
+|=====================================================
+
+** Ejemplo:
+*** +bucle:  sub     rsp,16                ;RSP <- RSP-16. Comienzo del bucle con la operación substraction+
+***         +je      bucle                 ;je: jump equal: salto si la última operación dió resultado cero+
+*** +suma:   add     eax,esi               ;EAX <- EAX+M[ESI] . Sumar+ 
+***         +mov     ax,[resultado]        ;AX <- M[resultado]. Copiar el resultado+        
+
+NOTE: La sintaxis del lenguaje ensamblador depende del traductor del proceso de ensamblaje (assembler) utilizado, en este caso, se utiliza el assembler NASM. Ver un ejemplo en el <<sum1toN_nasm, Apéndice>> de un programa en lenguaje ensamblador intel y assembler "NetWide Asm" (nasm)
+
+
+GNU Assembly (Gas)
+^^^^^^^^^^^^^^^^^^
+
+* Lenguaje desarrollado por la empresa de telefonía AT&T
+* Assembler gas (GNU as)
+** arquitecturas: i386, amd64, mips, 68000, etc
+** Sintaxis: Etiqueta-Código de Operación- Operando1- Operando2- Comentario
++
+
+.Sintaxis AT&T
+[width="100%", cols="<2m,<4m,<5m,<1m,<6m,<3m"]
+|=====================================================
+|label: |op_mnemonic |operand_source |, | operand_destination |;comment
+|=====================================================
+
+** Ejemplo:
+*** +bucle:  subq     $16,%rsp                ;RSP <- RSP-16. Comienzo del bucle con la operación substraction+
+***         +je       bucle                   ;je: jump equal: salto si la última operación dió resultado cero+
+*** +suma:   addl     %esi,%eax               ;EAX <- EAX+M[ESI] . Sumar+ 
+***         +movw     %ax,resultado           ;AX <- M[resultado]. Copiar el resultado+         
+* ETIQUETA
+** Se especifica en la primera columna. Tiene el sufijo *:* 
+* CODIGO DE OPERACION: Se utilizan símbolos 'mnemónicos' que ayudan a interpretar intuitivamente la operación. Pej: ADD sumar, MOV mover, SUB restar, ...
+* OPERANDO FUENTE Y/O DESTINO
+** dato alfanumérico: representación alfanumérica 	-> 16
+*** direccionamiento 'inmediato': prefijo *$*
+** dirección de memoria externa: etiqueta		-> resultado
+*** direccionamiento 'directo'
+** registros internos de la CPU: %rax,%rbx,%rsp,%esi,..	
+*** El prefijo *%* significa que el nombre hace referencia a un registro
+** tamaño del dato operando: *sufijos* de los mnemónicos: q(quad):8 bytes, l(long):4 bytes, w(word):2 bytes, b(byte):1 byte.
+
+NOTE: La sintaxis del lenguaje ensamblador depende del traductor del proceso de ensamblaje (assembler) utilizado, en este caso, se utiliza el assembler GAS. 
+
+Operandos: Modos de Direccionamiento
+------------------------------------
+
+Localización
+~~~~~~~~~~~~
+
+* Ejemplo:
+** +bucle:  SUBQ     $16,%rsp                ;comienzo del bucle+
+*** Operando fuente: $ indica direccionamiento INMEDIATO .El operando está en la propia instrucción -> Operando=16
+*** Operando destino: % indica REGISTRO. El operando está en el registro RSP
+** +suma:   ADDW     (%ESI),resultado        ;fin de operación+ 
+*** Operando fuente: () indica INDIRECCION y % registro .El registro ESI continene la dirección de memoria donde está el operando
+*** Operando destino: "resultado" es una etiqueta. Direccionamiento ABSOLUTO. El operando está en la dirección de memoria "resultado". 
+
+
+Modos de Direccionamiento
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Manual del assembler, apartado directivas dependientes de la arquitectura x86
+** https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent:
+ 
+IMPORTANT: *RECOMENDABLE* leerse los seis primeros apartados por lo menos 
+
+
+* Direccionamientos:
++
+
+[width="100%", cols="<m,<4m"]
+|=====================================================
+|INMEDIATO: |El valor del operando está ubicado inmediatamente después del código de operación de la instruccion. Unicamente se especifica el operando fuente.
+.2+|    |sintaxis: el valor del operando se indica con el prefijo *$* .
+        |ejemplo: *movl $0xabcd1234, %ebx*. El operando fuente es el valor 0xABCD1234
+| REGISTRO: |El valor del operando está localizado en un registro de la CPU.
+.2+|    |sintaxis: Nombre del registro con el prefijo *%*.
+        |ejemplo: *movl %eax, %ebx*. El operando fuente es el REGISTRO EAX y el destino es el REGISTRO EBX
+|DIRECTO:  |La dirección efectiva apuntando al operando almacenado en la Memoria Principal es la dirección absoluta referenciada por la etiqueta especificada en el campo de operando. El programador utiliza el direccionamiento directo pero el compilador lo transforma en un direccionamiento relativo al contador de programa. Ver direccionamiento con desplazamiento.
+.2+|    |sintaxis: una etiqueta definida por el programador 
+	|ejemplo: *je somePlace*   . Salto a la dirección marcada por la etiqueta somePlace si el resultado de la operación anterior activa el flag ZF=1 del registro RFLAG.
+|INDEXADO: |El valor del operando está localizado en memoria. La dirección efectiva apuntando a Memoria es la SUMA del valor del registro_base MAS scale POR el valor en el registro_índice, MAS el offset. 'EA=Offset+R_Base+R_índice*Scale'
+.2+|    |sintaxis: lista de valores separados por coma y entre paréntesis (base_register, index_register, scale) y precedido por un offset.
+        |ejemplo: *movl $0x6789cdef, -16(%edx, %eax, 4)* . La dirección efectiva del destino es  EDX + EAX*4 - 16.
+|INDIRECTO: |Si  el modo general de indexación  lo particularizamos en +(base_register)+ entonces la dirección del operando no se obtiene mediante una indexación sino que la dirección efectiva es el contenido de rdx y por lo tanto se accede al operando indirectamente.
+.2+|    |sintaxis:  (base_register)
+        |ejemplo: *movl $0x6789cdef, (%edx)* . La dirección efectiva del destino es  EDX. EDX es un puntero.
+|RELATIVO: registro base más un offset:  |El valor del operando está ubicado en memoria. La dirección efectiva del operando es la suma del valor contenido en un registro base más un valor de offset.
+.2+|  	|sintaxis: registro entre paréntesis y el offset inmediatamente antes del paréntesis.
+      	|ejemplo: *movl $0xaabbccdd, -12(%eax)*  . La dirección efectiva del operando destino es  EAX-12 
+
+|=====================================================
+
+
+Ejemplos
+^^^^^^^^
+
+.Modos de Direccionamiento de los Operandos
+[width="100%",cols="<1m,<1m,<1m",options="header"]
+|====
+|Direccionamiento Operando | Valor Operando | Nombre del Modo
+|$0   | Valor Cero   | Inmediato
+|%rax | RAX | Registro
+|loop_exit | M[loop_exit] | Directo
+|data_items(,%rdi,4) | M[data_item + 4*RDI] | Indexado
+|(%rbx) | M[RBX] | Indirecto
+|(%rbx,%rdi,4) | M[RBX + 4*RDI] | Indirecto Indexado
+|====
+
+** M[loop_exit]: directo ya que loop_exit es una dirección de memoria externa y M indica la memoria externa.
+** M[RBX]: indirecto ya que RBX es una dirección de memoria interna y M indica memoria externa: A la mem. externa se accede a través de la mem. interna.
+
+
+
+
+
+Programas en lenguaje ASM y lenguaje Binario
+--------------------------------------------
+
+* Ejemplos en el <<leng_asm, Apéndice>>
+

@@ -1,0 +1,83 @@
+240306 ESTRUCTURA DE COMPUTADORES
+
+PRACTICA 6: BMP IMAGENES
+Cándido Aramburu
+
+Ejercicio : Convertir función en lenguaje C pixel_generator() en subrutina en lenguage ASM AT&T "call pixel_generator"
+
+SUBRUTINA ASM: void pixel_generator (unsigned int maximo, RGB_data reg_mem[][top])
+	main () en bmp_as.c : llama a la subrutina
+	       Definición de la subrutina: array_pixel.s en LENGUAJE at&t
+        
+Toolchain:
+1-generar módulo objeto reubicable *.o -> gcc -o bmp_as.o bmp_as.c
+2-generar módulo objeto reubicable *.o -> as -o array_pixel.o array_pixel.s
+        
+  bmp_as.o    array_pìxel.o   ¿call pixel_generator?
+  bmp_as.o -> call pixel_generator -> ¿localización de la subrutina? array_pixel.o
+       
+  ld -o bmp_as  bmp_as.o  array_pixel.o
+        
+Pasar argumentos desde C
+    /*Declaración del Prototipo fuera de la función main para que sea de tipo externo*/
+    void pixel_generator(unsigned int maximo, RGB_data reg_mem[][top]);
+    /*llamada*/
+    pixel_generator(top,buffer);
+      
+Programar una subrutina:
+    A- Común a todas las subrutinas
+       	1- sección text. Definir: nombre,etiqueta,tipo de etiqueta función, tipo global. 
+       	2. prólogo: crear el nuevo frame de la pila. Definir punteros: frame y stack
+       	3. salvar en la pila los registros: EBX,ECX,EDX,ESI,EDI
+       	4. Capturar los argumentos
+       	5.....Específico
+       	6. Devolver el resultado por EAX
+       	7. epílogo: restaurar frame pointer y poner el stack pointer apuntando a la dirección de retorno
+      	8. RET
+            
+            
+  B- Específico de la subrutina pixel_generator()
+      	1- (i,j)Blue  -> buffer + offset .
+         array M x N
+         buffer: (0,0) azul :primer byte del buffer
+         offset del azul del pixel (i,j):  3*N*i + 3*j
+      	2- multiplicación
+            3*N
+               mov $N,%ebx
+               imul $3,%ebx
+            4*a+b
+               mov $a,%eax
+               mov $b,%ebx
+               lea (%ebx,%eax,4), %ecx
+  C. Compilar y Ejecutar paso a paso según se VA EDITANDO para comprobar:
+     	1- Que se guarda en la pila la dirección de retorno
+     	2- Que se sale correctamente de la subrutina y no afecta a la rutina principal
+     	3- Que se capturan los argumentos.
+	4- Que se accede correctamente al buffer desde la subrutina
+	5- Que se escribe correctamente el dato del primer pixel del buffer
+	6- Que se escribe correctamente la primera fila de pixels
+        7- Que se escribe correctamente en el array de pixels antes de salir de la subrutina
+        8- Que se ejecuta correctamente la subrutina y se retorna
+        9- Que se genera correctamente el fichero  test.bmp.
+
+
+Programación general
+  A- Sintaxis general
+	1- Errores comúnes
+            MAL            
+               eax(buffer,%ecx,2)
+               (buffer)
+               ($6,%ecx)
+               imul 8(%ebp),buffer
+            BIEN         
+               buffer(%eax,%ecx,2)
+               (%ecx)
+               -4(%ecx)
+                        
+                    
+                    
+                    
+                    
+                    
+                    
+                    

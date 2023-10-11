@@ -1,0 +1,4 @@
+Instrucciones:
+CLR.B  -(A4)
+"MOVE.L  -124(A2, D5.W), -(A1)"
+"MOVE.W  $64(A4,D6.W), D3"

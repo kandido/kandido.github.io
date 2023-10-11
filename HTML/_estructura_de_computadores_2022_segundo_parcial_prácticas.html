@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_estructura_de_computadores_2022_segundo_parcial_prácticas" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+<ul class="sectlevel1">
+<li><a href="_arquitectura_de_una_computadora.html">21. Arquitectura de una Computadora</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">22. RTL Register Transfer Language</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html">23. Programas ensamblador IASSim</a>
+</li>
+<li><a href="_simulador_iassim_2.html">24. Simulador IASSim</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html">25. Lenguajes de programación de Alto y Bajo Nivel</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html">26. Lenguajes de programación en Ensamblador</a>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html">27. Toolchain: Cadena de Herramientas en el proceso de compilación</a>
+</li>
+<li><a href="_practicando_la_programación_desde_el_principio.html">28. Practicando la Programación desde el Principio</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_pila.html">30. Pila</a>
+</li>
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html">31. Programas en Lenguaje Ensamblador: Propuestas</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html">32. Apéndice: Unidad CPU</a>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">33. Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">34. Apéndice: Memoria Virtual</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">35. Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">36. FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">37. Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">38. Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html"><span class="toc-current">39. Estructura de Computadores 2022: Segundo Parcial Prácticas</span></a>
+<ul class="sectlevel2">
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html#_introducción_28">39.1. Introducción</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html#_metodología_del_examen_2">39.2. Metodología del examen</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html#_examen_líneas">39.3. Examen "líneas"</a>
+</li>
+</ul>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">40. Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">41. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">42. Miaulario: Videoconferencia</a>
+</li>
+</ul>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_estructura_de_computadores_2022_segundo_parcial_prácticas">39. Estructura de Computadores 2022: Segundo Parcial Prácticas</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Apellidos:</strong></p>
+</li>
+<li>
+<p><strong>Nombre:</strong></p>
+</li>
+<li>
+<p><strong>Grupo:</strong></p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_introducción_28">39.1. Introducción</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Día del examen: 12 Enero 2023 Jueves 8:00AM-12:00AM</p>
+</li>
+<li>
+<p>Lugar:</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_metodología_del_examen_2">39.2. Metodología del examen</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Elegir uno y sólo uno de los dos ejercicios: ejercicio "subrutinas" ó ejercicio "líneas"</p>
+</li>
+<li>
+<p>Ejercicio "subrutinas": Nota máxima 6 puntos. Desarrollar una rutina y una subrutina simples. Preguntas sobre el contenido de la pila con el debugger. Tiempo de realización del examen 45 minutos.</p>
+</li>
+<li>
+<p>Ejercicio "líneas": Nota máxima 10 puntos. Desarrollar un programa que en lenguaje ensamblador x86 que dibuje una recta en formato BMP basándose en su solución en lenguaje C y en la solución incompleta en código ensamblador con comentarios sobre el código a desarrollar, por lo que se parte de la solución en pseudocódigo. Requisito imprescindible: conocimiento detallado de la práctica BMP, soltura con el código de acceso a la pila (epilogo, prologo, salvar contexto, implementar variables locales, etc&#8230;&#8203;) y habilidad en la detección de errores en tiempo de compilación y en tiempo de ejecución. A modo de ejemplo esta disponible en la carpeta de prácticas de mi aulario el módulo bmp_linea.c y pixel_linea.c que genera la imagen de una recta en formato BMP.</p>
+</li>
+<li>
+<p>Una vez arrancada la computadora el alumno ha de crear la carpeta <strong>/home/alumno/subrutinas</strong> ó <strong>/home/alumno/lineas</strong></p>
+</li>
+<li>
+<p>El alumno dispondrá de 10 minutos al comienzo del examen para descargarse el enunciado del examen de MiAulario &#8594; Recursos &#8594; Prácticas &#8594;</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En el caso del examen tipo "subrutinas" descargarse únicamente el fichero <strong>subrutinas.c</strong> en la carpeta <strong>/home/alumno/subrutinas</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A continuación cambiará el nombre del fichero <strong>subrutinas.c</strong> con el enunciado, por el nombre del único fichero personalizado a entregar según se indica más abajo. Sólo se entregar UN fichero con extensión s.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>En el caso del examen tipo "líneas" descargarse los ficheros <strong>pixel_linea.s</strong>, <strong>pixel_linea.c</strong> y <strong>bmp_linea.c</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A continuación cambiará el nombre del fichero <strong>pixel_linea.s</strong> con el enunciado, por el nombre del único fichero personalizado a entregar según se indica más abajo. Sólo se entregar UN fichero con extensión s.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Habrá abiertas dos tareas (una para cada opción) desde el comienzo del examen con limitación de tiempo para entregar el resultado del examen en formato digital en un <strong>único</strong> archivo en formato ZIP. Una tarea será <strong>examen_subrutina</strong> y la otra <strong>examen_linea</strong>. En cada tarea el archivo a entregar tendrá <strong>EL MISMO NOMBRE</strong>. Se avisará cuando falten 10 y 5 minutos para el cierre de cada una de las tareas.</p>
+</li>
+<li>
+<p>Los apartados anterioreos emulan la opción "líneas" con un enunciado en caso de que los módulos fuente fuesen: bmp_linea.c y pixel_linea.s. En el examen los módulos serán otros diferentes: bmp_circulo.c y pixel_circulo.c. Por lo que la segunda opción consistirá en dibujar un círculo en lugar de una recta.</p>
+</li>
+<li>
+<p>El archivo <strong>s</strong>  contendrá el módulo fuente en código asm dependiendo de la opción elegida:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el módulo fuente: Apellido1_Apellido2.s, pej, <strong>Alen_Urra.s</strong>, cada alumno con sus propios apellidos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>código fuente y preguntas/respuestas GDB en los comentarios.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+el nombre del fichero con el código fuente ha de ser <strong>obligatoriamente</strong> uno de los nombres del listado del apéndice "Nominación de los ficheros del examen" de los apuntes. NO ES VALIDO UN NOMBRE GENERICO COMO EXAMEN.s, tiene que estar personalizado para poder distinguir cada uno de los 90 exámenes a recoger.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo fuente ensamblador:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se ha de completar y depurar.</p>
+</li>
+<li>
+<p>añadir los comentarios que se consideren oportunos ayudan a la lectura e interpretación del programa</p>
+</li>
+<li>
+<p><strong>responder</strong> a las preguntas sobre el depurador GDB en el propio módulo fuente.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>No se puede conectar telemáticamente ni a la red de la UPNA ni al exterior de la Universidad</p>
+</li>
+<li>
+<p>Se puede utilizar un pendrive conteniendo cualquier tipo de información: guiones de prácticas, memorias de prácticas, apuntes, hojas de referencia rápida.</p>
+</li>
+<li>
+<p>Se puede utilizar cualquier tipo de material impreso: apuntes, memorias, libros, etc &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_examen_líneas">39.3. Examen "líneas"</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Para los alumnos que elijan hacer la segunda opción del examen, "líneas" sobre gráficas bmp se ha subido a miaulario/recursos/prácticas dos módulos fuente: bmp_linea.c y pixel_linea.c.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>bmp_linea.c llama a la función pixel_generator_linea() definida en pixel_linea.c.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El módulo ensamblador pixel_linea.s ha de ser fiel reflejo del módulo pixel_linea.c. En los comentarios del módulo ensamblador deben de aparecer las sentencias del lenguaje C. por ejemplo:</p>
+<div class="listingblock">
+<div class="content">
+<pre>#dx=x2-x1;
+   neg x1
+   add x2,x1
+
+#dy = y2-y1;
+   neg y1
+   add y2,y1
+
+#i1=2*dy;
+
+
+
+#i2=2*(dy-dx);
+
+
+#   while (x &lt; xmax){
+while:
+     mov dx,$eax
+
+# if (d&lt;0)
+     mov dx,$eax
+
+# else
+else:
+     mov dx,$eax
+
+endif:
+     mov dx,$eax
+
+while_exit:
+    mov dx,$eax</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Las variables locales a la función pixels_generator_linea(), es decir,  i1,i2,dx,dy,d,x,y,xmax para ser locales también en ensamblador y por lo tanto han de definirse en el frame de la función pixels_generator_linea() y no en la "section data" común a todas las funciones del fichero.</p>
+</li>
+<li>
+<p>El módulo ensamblador ha de contener los siguientes comentarios pregunta/respuesta:</p>
+<div class="listingblock">
+<div class="content">
+<pre># comando de generación del módulo objeto pixel_linea.o
+# respuesta_1:
+
+# comando de generación del módulo ejecutable bmp_linea
+# respuesta_2:
+
+# comando de apertura de la sesión de depuración
+# respuesta_3: gdb --readnow
+
+# (gdb) captura de la dirección de retorno al programa principal bmp_linea
+# comando_4:
+# respuesta_4:
+
+
+# (gdb) captura del primer elemento de la pila después del prólogo de pixel_linea
+# comando_5:
+# respuesta_5:</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">Estructura de Computadores 2022: Primer Parcial Prácticas</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_nominación_de_los_ficheros_del_examen.html">Nominación de los ficheros del examen</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+Memoria Cache
+=============
+
+:doctitle: Memoria Cache
+
+
+
+Bibliografia
+------------
+
+* Libro William Stalling
+** Capítulo 4.
+
+Introducción
+------------
+
+* Objetivo
+** Principio de Localidad: Espacial y Temporal
+* Ejercicio: Tiempo de acceso (probabilidad fallo ó exito)
+* Tecnología: 6T
+* Estructura
+** Controladora: función
+* Espacios de direcciones
+** memoria principal
+** memoria cache
+* Funciones de correspondencia entre espacios de direcciones:
+** Mapeo Directo
+** Asociación total
+** Asociación por conjuntos
+
+
+Principios Basicos
+------------------
+
+Tecnologia
+~~~~~~~~~~
+
+* Cell: SRAM-6T
+
+
+[.text-center]
+image::images/cache/sram_cell_6T.png[align="center",title="SRAM-cell"]
+
+Funcionalidad
+~~~~~~~~~~~~~
+
+* Cuello de Botella von Neumann: la latencia del ciclo de instrucción es mucho menor que la latencia de acceso a la memoria principal -> tiempos muertos de la CPU.
+* Memoria Cache:
+** Integrada en la CPU con tiempos de accesos un orden de magnitud menor que la memoria DRAM.
+** Es la Copia de regiones o bloques de la memoria principal.
+** Acierto-Fallo: Si la instrucción/dato a la que apunta la dirección de memoria principal DRAM está en la memoria caché, la cpu captura la instrucción o dato de la Memoria caché interna a la cpu cuyo tiempo de acceso es mucho menor que la memoria externa DRAM.
+** Hit-Miss
+** Ejemplo 4.1 del libro
+* Principio de Localidad
+** Espacial: bucles, subrutinas, arrays -> almacenamiento de instrucciones y datos en direcciones próximas.
+** Temporal: histórico -> secuencia de acceso a datos e instrucciones en direcciones próximas.
+
+
+
+Jerarquía
+~~~~~~~~~
+
+* Niveles de Cache
+** Level L1: Interna a la CPU : SRAM : memorias separadas para instrucciones y memoria para datos
+** Level L2: Externa/Interna a la CPU: 
+** Level L3: Externa a la CPU
+
+image::./images/cache/cache_levels.jpg[align="center",title="3 Levels"]
+
+* Para aumentar la velocidad de conmutación de los transistores de las celdas de la memoria SRAM caché es necesario incrementar la corriente que circula por ellos y para ello es necesario aumentar el tamaño de dichos transistores, consumiendo más superficie de Silicio. Esta es una de las limitaciones de la capacidad de la memoria de alta velocidad a unas de decenas de Kbytes. Para mejorar esta limitación surgen los distintos niveles a distintas velocidades, siendo el nivel L1 el de mayor velocidad. Los nivels L2 y L3 de menor velocidad están fabricados con transistores de menor tamaño permitiendo aumentar su capacidad al orde de los Mbytes.
+
+Interconexion
+~~~~~~~~~~~~~
+
+* En serie CPU->L1->L2->L3->SDRAM
+* CPU->L : transferencia de Palabras
+* L->SDRAM: bloques
+
+image::./images/cache/cache_cpu_dram.png[align="center",title="Interconexión"]
+
+
+image::./images/cache/cache_cpu_dram_connection.png[align="center",title="Interconexión"]
+
+
+image::./images/cache/cache_mmu_dram.png[align="center",title="MMU"]
+
+
+
+
+
+Estructura Cache/Principal
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+image::./images/cache/cache_dram_block.png[align="center",title="Estructura de agrupamiento"]
+
+** Cache: bytes -> palabras -> líneas
+** MP: bytes -> palabras -> bloques
+** Se copian bloques de la Memoria Principal en líneas de la Memoria Caché, por lo que, el tamaño de un bloque y de una línea es el mismo.
+
+Principal
+^^^^^^^^^
+
+* Dirección: n bits : bus de direcciones del sistema ->Capacidad=2^n^ palabras -> OJO: no bytes
+* Direccionable: palabras : bus de datos del sistema
+* Organizada en Bloques de K palabras
+* Número de bloques : Capacidad en palabras / K
+
+Cache
+^^^^^
+
+* Dirección: Nº de Línea y Palabra
+* Direccionable: Palabra
+* Capacidad: C Líneas
+* Organizada en Líneas de K palabras y 1 etiqueta
+* Etiqueta: Asociación Línea con Bloque de la Memoria Principal
+
+Operacion de Lectura
+~~~~~~~~~~~~~~~~~~~~
+
+image::./images/cache/cache_read_operation.png[[align="center",title="Read Operation (RA: Read Address)"]
+
+** Organigrama de operaciones
+** Controladora de la Caché
+
+
+Elementos de Diseño de la Cache
+-------------------------------
+
+* Elementos:
+** Tamaño de la Caché, Función de Correspondencia, Algoritmos de Sustitución, Política de Escritura, Tamaño de Línea, Número de Cachés
+
+Tamaño
+~~~~~~
+
+* Contradicción: Cuanto más grande más lenta y más probabilidades de acierto.
+* L1: KB
+* L2: MB
+* L3: MB
+
+Funcion de Correspondencia Memoria_Principal/Memoria_Caché
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Distintas formas de asociar los bloques de la Memoria Principal con las líneas de la Memoria Caché.
+* Tipos de correspondencia Bloque <-> Línea:
+** Directa (Direct mapping), Totalmente Asociativa (Full associative), Asociativa en Grupo (Set associative)
+
+Ejemplo
+^^^^^^^
+
+* Libro W.Stalling. Capítulo 4. Ejemplo 4.2
+* Ejemplo para los 3 casos:
+** 'm':caché de capacidad 64 KB= 4*2^14^ bytes
+** MP :
+*** word size : 1 byte
+*** palabras/bloque = 4. 
+*** capacidad = 16MB = 2^24^bytes= 2^24^bytes / (4bytes/bloque)= 2^22^ bloques = 4M bloques
+
+
+* La capacidad 'm' de la caché = 4*2^14^ bytes / (4bytes/línea) = 2^14^ líneas = 16K líneas
+
+* Como un bloque de la MP equivale a un línea de la Caché -> La relación de capacidad caché/MP es 16K/4M = 1/(2^8^)
+
+
+Asociación Directa
+^^^^^^^^^^^^^^^^^^
+
+* Estructura de direcciones
+** Memoria principal : bloques de palabras
+** Memoria cache : líneas de palabras
+** El tamaño de un bloque de la memoria principal es el mismo que el tamaño de una línea de la Caché.
+* Función de correspondecia de la controladora de la Caché:
+** determinista - ningún grado de libertad en la elección de la línea correspondiente a un bloque determinado.
+** el *campo de línea* de la dirección de memoria principal apunta a la única línea de la Caché donde puede estar la palabra que busca la controladora. Si el *campo tag* de la dirección de memoria principal coincide con el campo tag de la línea de la Caché, significa que la palabra buscada está en esa línea y puede ser capturada de la línea caché ya que es una copia del bloque de la memoria principal, se dice que ha habido un "hit". En caso de fallo ("miss") habrá que capturar la palabra de la Memoria Principal, por lo que la latencia será la suma del tiempo empleado en comprobación del tag más el de accesso a la palabra de la memoria principal.
+
+
+image::./images/cache/cache_directmap.png[[align="center",title="Direct Map Structure"]
+
+
+* i: número de línea de caché
+* j: número de bloque de la memoria principal
+* m: número de líneas en la caché
+* Función de correspondencia
+** i = j módulo m
+* Organización de la caché
+** Memoria_Caché/Controladora_Caché/Memoria_Principal 
++
+
+image::./images/cache/cache_directmap_controller.png[[align="center",title="Direct Map Controller"]
+
+* Formato de direcciones
+** Dirección física de la memoria principal: bloque-palabra
+** Dirección física de la memoria cache: tag-línea-palabra
+* Operación de búsqueda de una palabra en la memoria caché.
+** Determinar los campos de etiqueta, línea y palabra del formato de direcciones de la memoria caché.
+** La palabra pudiera estar en únicamente en la línea asignada, por lo que es necesario comparar únicamente la etiqueta de dicha línea con la etiqueta del formato de direcciones.
+* Ejemplo 4.2
+** Apartado a)
+** Formato de la dirección de memoria en campos:
++
+
+----
+2^2^ palabras -> campo palabra de 2 bits
+2^14^ líneas  -> campo de línea de 14 bis
+resto de bits (24-14-2)=8 -> campo de etiqueta de 8 bits
+----
+** ...continuar
+
+
+Totalmente Asociativa
+^^^^^^^^^^^^^^^^^^^^^
+
+image::./images/cache/cache_fullassociative_controller.png[[align="center",title="Full Associative Controller!]
+
+* La correspondencia totalmente asociativa significa que no hay correspondencia
+** NO HAY NORMA -> CADA BLOQUE DE MP PUEDE SER ASIGNADA A CUALQUIER LINEA DE LA CACHE
+** LIBRE: un bloque de MP no tiene asignada ninguna línea específica y el controlador cache puede seleccionar qué línea será asignada a dicho bloque.
+* La dirección de memoria tiene únicamente dos campos
+** s bits= etiqueta: orden del bloque de MP : desde 1 hasta 4M.
+** w bits= orden de la palabra dentro del bloque: desde 1 hasta 4.
+* controlador de caché
+** todas las etiquetas de las líneas de caché son SIMULTANEAMENTE comparadas con la etiqueta de la palabra referenciada.
+*** en caso de éxito, s apunta a la línea que contiene la palabra referenciada y w apunta a la palabra referenciada.
+*** en caso de fracaso, s apunta al bloque de la MP que contiene la palabra referenciada y w apunta a la palabra referenciada.
+
+
+
+* Formato de direcciones
+** Dirección física de la memoria principal: bloque-palabra
+** Dirección física de la memoria cache: tag-palabra
+* Operación de búsqueda de una palabra en la memoria caché.
+** Determinar los campos de etiqueta y palabra del formato de direcciones de la memoria caché.
+** La palabra puede estar en cualquier línea, por lo que es necesario comparar las etiquetas de todas las líneas
+* Diferencia con el mapeo directo:
+** el campo de etiqueta tiene s bits >> s-r bits
+** la comparación es entre todas las etiquetas (etiquetas de gran longitud) -> hardware complejo -> coste
+** Ejemplo 4.2 : Formato de la dirección de memoria en campos:
++
+
+----
+2^2^ palabras -> campo palabra de 2 bits
+resto de bits (24-2)=22 -> campo de etiqueta de 22 bits
+----
+** ...continuar
+
+Asociativa por Conjuntos
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+image::./images/cache/cache_setassociative.png[Set Associative]
+
+
+* compromiso entre el rigor de la correspondencia directa y la flexibilidad de la correspondencia totalmente asociativa.
+** La dirección de memoria tiene 3 campos:TAG-SET-WORD -> (s-d-w)/d/w
+*** k líneas por conjunto.
+*** w bits : orden de la palabra. Con 2^w^ palabras formo un bloque
+*** d bits : 
+**** CONJUNTO de bloques o SET de bloques o SUPERbloque o SUPERlínea.
+****  d < l :dividimos la cache en v superbloques.
+**** Con v=2^d^ superbloques de k líneas/bloque formo la memoria cache.
+**** Al número k de líneas de cada superbloque se le denomina VIA (WAY)
+** estructura de la MP:  queda dividida en bloques y superbloques.
+*** 2^s^ es el número de bloques de la MP,  que si los agrupo en sets de k bloques tendré en la MP 2^t^ agrupamientos de 2^d^ sets cada uno -> 
+2^s^*2^w^ = 2^t^*2^d^*k*2^w^ -> 2^s^=2^t^*2^d^*k -> Nº de bloques en MP = Nº de gruposX*Nºsets en la Caché*Líneas en el Set
+*** s-d bits: nº de bits de la etiqueta 
+
+** función de correspondencia
+*** i = j modulo v -> NORMA SEMIRIGIDA: CADA BLOQUE TIENE ASIGNADO UN CONJUNTO ESPECIFICO DE LINEAS PERO NO TIENE ASIGNADA LA LINEA DENTRO DEL CONJUNTO
+*** donde 'v' es el número de superbloques, 'j' es el número de bloque en MP e 'i' el número de superbloque en la caché.
+*** dentro del superbloque 'i' hay flexibilidad para asignarle una de las líneas o vías dentro del superbloque.
+
+
+* número de vías
+** si el número de vías fuese 1 no habría ninguna libertad de asignación y estaríamos en el caso de correspondencia directa
+** si el número de vías fuese 2 habría lago de libertad ya que habría que elegir una línea a sustituir de dos líneas posibles.
+** si el número de vías fuese la capacidad de la caché el grado de libertad sería máximo, a sustituir una línea de m posibles.
+
+
+image::./images/cache/cache_setassociative_controller.png[[align="center",title="Set Associative Controller"]
+
+* Formato de direcciones
+** Dirección física de la memoria principal: bloque-palabra
+** Dirección física de la memoria cache: tag-set-palabra
+* Operación de búsqueda de una palabra en la memoria caché.
+** Determinar los campos de etiqueta y set del formato de direcciones de la memoria caché.
+** La palabra puede estar en cualquier línea pero únicamente del set asignado, por lo que es necesario comparar las etiquetas únicamente de las líneas de dicho set.
+* Ejemplo 4.2 : sets con 2 vías
+** Formato de la dirección de memoria en campos:
++
+
+----
+2^2^ palabras -> campo palabra de 2 bits
+k=2
+El número de Sets en la caché -> m / k = 2^14^/2 = 2^13^ conjuntos en la Caché -> d=13 bits
+Etiqueta : resto de bits = (24-13-2)= 9 bits
+----
+** ...continuar
+
+Comparativa de los 3 tipos de funciones
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* En la función de correspondencia de mapeo directo no hay ninguna libertada a la hora de seleccionar la línea de la cache, esta viene determinada por la función de correspencia. En el caso de función asociativa total la libertad es total pudiendo elegir la línea a ocupar siguiendo criterios estadísticos, etc. En el caso de función asociativa por conjuntos no hay ninguna libertad en la asignación del conjunto de líneas determinado por la función pero sí en la elección de la línea dentro del conjunto asignado por la función. 
+* Los dos primeros casos, mapeo directo y asociativa total, son los casos extremos de la asociativa por conjuntos:
+** Asociativa por conjuntos con un set de una línea sería el caso de mapeo directo
+** Asociativa por conjuntos con un set de todas las líneas de la caché sería el caso de asociativa total
+
+image::./images/cache/cache_assoc_size.png[[align="center",title="Probabilidad de éxito en función del tamaño y la función de asociación"]
+
+
+Políticas
+---------
+
+Reemplazo
+~~~~~~~~~
+
+* La política de reemplazo de la controladora de la caché es según la cual cuando se produce un "miss" se tiene que seleccionar un línea de la caché para ser eliminada de la caché y dejar sitio al bloque capturado de la memoria principal. La política más popular es la  *least-recently used (LRU)* según la cual se descartan primero los elementos menos usados recientemente
+
+Escritura
+~~~~~~~~~
+
+* Al igual que con la Lectura, con la Escritura la CPU escribe en la Caché, por lo que el contenido de la línea donde se ha realizado la escritura no coincide con el bloque asociado en la Memoria Principal. La política de Escritura consiste en especificar cuando se realiza la copia de la línea de la cache y los bloques de memoria asociados con diferente contenido. La política *Write-Back* consiste en realizar la actualización o copia en el momento en el que se va a descartar dicha línea según la política de Reemplazo.
+
+Ejemplo de Optimización
+-----------------------
+
+Producto Matricial
+~~~~~~~~~~~~~~~~~~
+
+* https://johnnysswlab.com/make-your-programs-run-faster-by-better-using-the-data-cache/
+** El producto matricial en lenguaje C implementado mediante un bucle que accede a los Arrays de datos es un ejemplo de cómo tener en cuenta la organización de la memoria Caché a la hora de programar el algoritmo. En el ejemplo se ve la técnica "loop interchange" para modificar el orden de captura de los elementos de los arrays.
+
+
+Thinkpad L560
+-------------
+
+* +cpuid | more+
++
+
+----
+  --- cache 0 ---
+      cache type                           = data cache (1)
+      cache level                          = 0x1 (1)
+      ways of associativity                = 0x8 (8)
+      number of sets                       = 0x40 (64)
+      (size synth)                         = 32768 (32 KB)
+      ¿tamaño de línea?                    32KB=2^15^Bytes= 64sets x 8líneas/set x n_bytes/línea=512*n=2^9^*n -> n=2^6^=64Bytes
+      Mode: 0x01 (Write Back)
+ --- cache 1 ---
+      cache type                           = instruction cache (2)
+      cache level                          = 0x1 (1)
+      ways of associativity                = 0x8 (8)
+      number of sets                       = 0x40 (64)
+      (size synth)                         = 32768 (32 KB)
+      Mode: 0x01 (Write Back)
+--- cache 2 ---
+      cache type                           = unified cache (3)
+      cache level                          = 0x2 (2)
+      ways of associativity                = 0x4 (4)
+      number of sets                       = 0x400 (1024)
+      (size synth)                         = 262144 (256 KB)
+      ¿tamaño de línea?                    256KB=2^18^Bytes= 1024sets x 4líneas/set x n_bytes/línea=2^12^*n -> n=2^6^=64Bytes
+      --- cache 3 ---
+      cache type                           = unified cache (3)
+      cache level                          = 0x3 (3)
+      ways of associativity                = 0xc (12)
+      number of sets                       = 0x1000 (4096)
+      (size synth)                         = 3145728 (3 MB)
+----
+
+* +getconf LEVEL1_DCACHE_LINESIZE+
+* +getconf LEVELTABTAB+
+* +sudo hwinfo | grep -i cache -A 10+
+* +sudo dmidecode -t 17+
+** cache -> write-back instruction

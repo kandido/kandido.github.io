@@ -1,0 +1,57 @@
+extends: default-with-font-fallbacks
+font:
+  catalog:
+    merge: true 
+    Mplus1mn:
+      normal: mplus-1mn-regular.ttf
+      bold: mplus-1mn-bold.ttf   
+      italic: mplus-1mn-thin.ttf
+      bold_italic: mplus-1mn-medium.ttf
+#     light: mplus-1mn-light.ttf
+#   Estos ficheros ttf los he descargado de GNU y les he cambiado el nombre poniendolos en minúsculas
+    Free Mono:
+      normal: free-mono.ttf
+      bold: free-mono-bold.ttf
+      italic:  free-mono-oblique.ttf
+      bold_italic: free-mono-bold_oblique.ttf
+    Free Sans:
+      normal: free-sans.ttf
+      bold: free-sans-bold.ttf
+      italic: free-sans-oblique.ttf
+      bold_italic: free-sans-bold_oblique.ttf
+    Free Serif:
+      normal: free-serif.ttf
+      bold: free-serif-bold.ttf
+      italic: free-serif-italic.ttf
+      bold_italic: free-serif-bold_italic.ttf
+# Fallback Font : En caso de que no se encuentre para un símbolo los fonts anteriores
+    DroidSansFallback: droid-sans-fallback.ttf
+  fallbacks: [M+ 1p Fallback, Noto Emoji, DroidSansFallback]
+# Pie de Página lado dcha
+footer:
+  recto:
+    right:
+      content: '{chapter-title} | *{page-number}*'
+    left:
+      content: Kandido Aranburu
+# Pie de Página lado izda
+  verso:
+    left:
+      content: '*{page-number}* | {chapter-title}'
+#Cabecera
+header:
+  height: $base_line_height_length * 2
+  recto:
+    left:
+      content: image:./HTML/images/varios/nup-upna.png[width=60]
+    center:
+      content: '{document-title}'
+# aquí especifico el  tipo de letra global donde utilizará los caracteres Free Sans
+base:
+  text_align: justify
+  font_color: #333333
+  font_family: Free Sans
+caption:
+  align: center
+
+

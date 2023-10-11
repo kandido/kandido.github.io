@@ -1,0 +1,3712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_unidad_de_memoria" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+<ul class="sectlevel1">
+<li><a href="_procesador_central.html">7. Procesador Central</a>
+</li>
+<li><a href="_mecanismos_de_entradasalida.html">8. Mecanismos de Entrada/Salida</a>
+</li>
+<li><a href="_unidad_de_memoria.html"><span class="toc-current">9. Unidad de Memoria</span></a>
+<ul class="sectlevel2">
+<li><a href="_unidad_de_memoria.html#_introducción_12">9.1. Introducción</a>
+<ul class="sectlevel3">
+<li><a href="_unidad_de_memoria.html#_temario_9">9.1.1. Temario</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_libro_william_stalling">9.1.2. Libro: William Stalling</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_refs_2">9.1.3. Refs</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_historia">9.1.4. Historia</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_interés">9.1.5. Interés</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_perspectivas">9.1.6. Perspectivas</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_jerarquía_de_memoria">9.1.7. Jerarquía de Memoria</a>
+</li>
+</ul>
+</li>
+<li><a href="_unidad_de_memoria.html#_registros_2">9.2. Registros</a>
+<ul class="sectlevel3">
+<li><a href="_unidad_de_memoria.html#_isa_4">9.2.1. ISA</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_arquitectura_amd64_3">9.2.2. Arquitectura amd64</a>
+</li>
+</ul>
+</li>
+<li><a href="_unidad_de_memoria.html#_memoria_principal_ram_dinámica_dram">9.3. Memoria Principal (RAM Dinámica DRAM)</a>
+<ul class="sectlevel3">
+<li><a href="_unidad_de_memoria.html#_tipos_de_memoria_de_semicoductor">9.3.1. Tipos de Memoria de Semicoductor</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_memoria_principal_semiconductora">9.3.2. Memoria PRINCIPAL semiconductora</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_organización_avanzada_de_memorias_dram">9.3.3. Organización avanzada de memorias DRAM</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_info_complementaria">9.3.4. Info complementaria</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_thinkpad_t560">9.3.5. Thinkpad T560</a>
+</li>
+</ul>
+</li>
+<li><a href="_unidad_de_memoria.html#_memoria_cache">9.4. Memoria Cache</a>
+<ul class="sectlevel3">
+<li><a href="_unidad_de_memoria.html#_bibliografia_2">9.4.1. Bibliografia</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_introducción_14">9.4.2. Introducción</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_principios_basicos">9.4.3. Principios Basicos</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_elementos_de_diseño_de_la_cache">9.4.4. Elementos de Diseño de la Cache</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_políticas">9.4.5. Políticas</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_ejemplo_de_optimización">9.4.6. Ejemplo de Optimización</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_thinkpad_l560">9.4.7. Thinkpad L560</a>
+</li>
+</ul>
+</li>
+<li><a href="_unidad_de_memoria.html#_memoria_virtual">9.5. Memoria Virtual</a>
+<ul class="sectlevel3">
+<li><a href="_unidad_de_memoria.html#_introducción_15">9.5.1. Introducción</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_punto_de_vista_del_programador_y_cpu">9.5.2. Punto de vista del Programador y CPU</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_espacio_virtual_de_direcciones_de_memoria">9.5.3. Espacio virtual de direcciones de memoria</a>
+</li>
+<li><a href="_unidad_de_memoria.html#_organización_lógica_de_un_programa_en_lenguaje_máquina_secciones_y_segmentos">9.5.4. Organización lógica de un programa en lenguaje máquina: Secciones y Segmentos</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_unidad_de_memoria">9. Unidad de Memoria</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_introducción_12">9.1. Introducción</h3>
+<div class="sect3">
+<h4 id="_temario_9">9.1.1. Temario</h4>
+<div class="olist arabic">
+<ol class="arabic" start="9">
+<li>
+<p>Organización de la memoria</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Jerarquía de memoria</p>
+</li>
+<li>
+<p>Latencia y ancho de banda</p>
+</li>
+<li>
+<p>Memoria cache</p>
+</li>
+<li>
+<p>Memoria virtual</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_libro_william_stalling">9.1.2. Libro: William Stalling</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Introducir conceptos de William.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>William tiene un capítulo para la memoria principal y otro para memoria cache</p>
+</li>
+<li>
+<p>Capítulo 4 : Caché</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La introducción de la memoria cache tiene Conceptos Generales</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Capítulo 5 : Memoria Interna (DRAM)</p>
+</li>
+<li>
+<p>Capítulo 6 : Memoria Externa (Almacenamiento Periférico)</p>
+</li>
+<li>
+<p>Capítulo 8 : Sistemas Operativos: Gestión de Memoria</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_refs_2">9.1.3. Refs</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>What Every Programmer Should Know About Memory. Ulrich Drepper. Red Hat, Inc.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>su lectura completa requiere un nivel avanzado</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_historia">9.1.4. Historia</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El gran avance del Ingeniero John Von Neumann fue desarrollar la computadora IAS en la cual los programas no eran cableados sino almacenados electrónicamente en una unidad de memoria denominada Selectron. Los programas eran "editados" mediante la escritura de tarjetas de cartón perforadas que posteriormente eran convertidas en secuencias de digitos binarios para poder ser almacenadas en código binario en la unidad de memoria Selectrón. De esta manera surgió el concepto de "programa almacenado" o software y el desarrollo de las <strong>unidades de memoria</strong>.</p>
+</li>
+<li>
+<p>La memoria no consistía de una única unidad sino que se estructuraba en distintos niveles:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Nivel cpu: registros PC,MAR,MBR, IR, IBR, Acumuladores AC y AR : registros con capacidad para almacenar una instrucción y un dato.</p>
+</li>
+<li>
+<p>Memoria principal: memoria Selectron con capacidad para almacenar programas agrupando en una sección las instrucciones y en otra sección los datos. Capacidad para direccionar 4K palabras de 40 bits cada palabra</p>
+</li>
+<li>
+<p>Memoria secundaria: Tambores magnéticos "drum" con capacidad para almacenar una colección de programas.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_interés">9.1.5. Interés</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Programación en un lenguaje de alto nivel</p>
+<div class="ulist">
+<ul>
+<li>
+<p>¿Tenemos en cuenta el concepto memoria? &#8594; Abstracción de los mecanismos de gestión de memoria por parte del S.O, hardware, etc</p>
+</li>
+<li>
+<p>Tener conocimientos de la estructura, organización y gestión de la memoria ayuda a la hora de programar &#8594; Fase de depuración, diseño, etc</p>
+</li>
+<li>
+<p>Ingeniería de programación y de sistemas</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Conocimientos previos sobre memoria: temas previos de la asignatura Estructura de Computadores.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>variable, puntero,  registros, secciones, direccionamiento, violación de segmento, linker, &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Conocimiento de S.O.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Gestión de la memoria de los procesos, paginación, memoria virtual, TLB, etc</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Objetivo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Qué: Almacenar: datos e instrucciones &#8594; programas &#8594; ficheros &#8594; procesos</p>
+</li>
+<li>
+<p>Para qué:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitectura von-Neumann: programa almacenado.</p>
+</li>
+<li>
+<p>Ciclo de Instrucción: Captura (datos, instrucciones) de la CPU. Esquema de bloques CPU-RAM.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cómo: Cómo se almacenan ,cómo se capturan?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Físicamente la memoria es</p>
+<div class="ulist">
+<ul>
+<li>
+<p>chip de semiconductor conectado a la CPU.</p>
+</li>
+<li>
+<p>memoria semiconductor interna a la CPU</p>
+</li>
+<li>
+<p>memoria magnética de almacenamiento masivo</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El tema Memoria está aislado del resto de:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la arquitectura de la computadora?:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>de la CPU? del kernel?</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>la programación?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>instrucciones y datos?</p>
+</li>
+<li>
+<p>qué es un array?</p>
+</li>
+<li>
+<p>un goto?</p>
+</li>
+<li>
+<p>en ensamblador que es la directiva .text?</p>
+</li>
+<li>
+<p>qué es la pila?</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_perspectivas">9.1.6. Perspectivas</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El concepto de memoria puede ser estudiado en función de diferentes perspectivas.</p>
+</li>
+<li>
+<p>Gestión de la Memoria  de los procesos en ejecución por parte del kernel del sistema operativo vs Organización de Memoria (ficheros,secciones,jerarquía de memoria ,..)</p>
+</li>
+<li>
+<p>ISA: acceso a memoria, modos de direccionamiento, little endian, etc</p>
+</li>
+<li>
+<p>Software:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Programación:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>variables (reserva e inicialización de memoria), punteros, asignación dinámica de la memoria malloc(), secciones de memoria (text,data,rodata,bss,etc..), pila, ..</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Herramientas:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Compilador, Linker (direcciones reubicables, resolución direcciones, segmentos de memoria,.. ), Cargador (memoria física, mapa de memoria, etc ..), volcado de memoria (objdump, ..)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sistema Operativo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Gestor de memoria virtual</p>
+</li>
+<li>
+<p>Gestión del sistema de ficheros virtual</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Hardware:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad de gestión de memoria MMU (Memory Management Unit): Convertidor del espacion de direcciones virtual en físico.</p>
+</li>
+<li>
+<p>Módulos de Memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>tarjetas,chips,conexión buses</p>
+</li>
+<li>
+<p>características: capacidad, velocidad, consumo, tecnología</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_jerarquía_de_memoria">9.1.7. Jerarquía de Memoria</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Hoy en día la tecnología de semiconductor ha conseguido avances en capacidad y memoria manteniendo la estructura por niveles en la siguente jerarquía:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Jerarquía memoria</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Niveles: L0,L1,L2,L3,L4</p>
+</li>
+<li>
+<p>Memoria Registros CPU &#8594; L0</p>
+</li>
+<li>
+<p>Memoria Cache &#8594; L1,L2,L3</p>
+</li>
+<li>
+<p>Memoria Principal</p>
+</li>
+<li>
+<p>Memoria Secundaria: disco, pen-drive</p>
+</li>
+<li>
+<p>Características</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Capacidad ascendente top-down</p>
+</li>
+<li>
+<p>Tiempo del ciclo de memoria ascendente top-down</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memoria/MemoryHierarchy.png" alt="MemoryHierarchy" width="600" height="400">
+</div>
+<div class="title">Figure 62. Memory Hierarchy</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_registros_2">9.2. Registros</h3>
+<div class="sect3">
+<h4 id="_isa_4">9.2.1. ISA</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Los  registros son unidades de memoria de capacidad una única palabra (instrucción, dato, dirección de memoria, resultado temporal, etc ) y de latencia del orden de 1 ns. Nominación típica de estos registros son el Contador de Programa, el Registro de Instrucción, el Acumulador, el Buffer de Datos, etc&#8230;&#8203;. Son utilizados por la Unidad de Control en la ruta de datos de la microarquitectura de la CPU como parte fundamental del ciclo de instrucción. Estos registros no  son accesibles por el programador.</p>
+</li>
+<li>
+<p>Los registros accesibles por el programador son el nivel L0 de la jerarquía de memoria de la arquitectura de la computadora. Son conocidos los Registros de Propósito General referenciados en el campo de dirección del formato de instrucción de la Arquitectura del Repertorio de Instrucciones (ISA). En el caso de la arquitectura x86-32 están los registros de propósito general de EXtensión: EXA, EXB, EXC, ESP, ESI, etc&#8230;&#8203;. (extensión de la arquitectura anterior de 16 bits AX,BX,CX, etc&#8230;&#8203;).</p>
+</li>
+<li>
+<p>Debido a que los  registros forman parte de la microarquitectura de la cpu, este apartado se podría estudiar también dentro del tema dedicado a la CPU.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_arquitectura_amd64_3">9.2.2. Arquitectura amd64</h4>
+<div class="imageblock">
+<div class="content">
+<img src="./images/instrucciones_representacion/registers_1200x800.png" alt="registers 1200x800">
+</div>
+<div class="title">Figure 63. x86 registers</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memoria/Table_of_x86_Registers_svg.png" alt="Table of x86 Registers svg" width="1000" height="500">
+</div>
+<div class="title">Figure 64. Registers x86</div>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/memoria/instruction_extensions_simd.png" alt="instruction extensions simd" width="600" height="300">
+</div>
+<div class="title">Figure 65. SIMD instructions evolution</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Observar que al igual que rax incluye a eax y eax incluye ax y ax incluye al, también zmm incluye a ymm e ymm incluye a xmm</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/X86#x86_registers">wiki x86</a></p>
+</li>
+<li>
+<p><a href="./basicos_x86_Registers.html">General Purpose Registers x86</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>RAX,etc</p>
+</li>
+<li>
+<p>RFLAGS</p>
+</li>
+<li>
+<p>CS-DS-SS-</p>
+</li>
+<li>
+<p>ST0-ST7</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Float Point Registers</p>
+</li>
+<li>
+<p>alias de los registros FPU</p>
+</li>
+<li>
+<p>eight 80-bit wide registers: 32-, 64-, or 80-bit floating point, 16-, 32-, or 64-bit (binary) integer, and 80-bit packed decimal integer.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>MMX</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ya en desuso y superados por XMM.</p>
+</li>
+<li>
+<p>MMX instructions: <em>integer SIMD</em> (Single Instruction Multiple Data). MMX is a  instruction set designed by Intel, introduced in 1997 with its P5-based Pentium line of microprocessors.  a single instruction can then be applied to two 32-bit integers, four 16-bit integers, or eight 8-bit integers at once.</p>
+</li>
+<li>
+<p>MM0-MM7 (64 bits).  Each register is 64 bits wide and can be used to hold either 64-bit integers, or multiple smaller integers in a "packed" format.</p>
+</li>
+<li>
+<p>packed data types: two 32-bit integers, four 16-bit integers, or eight 8-bit integers concurrently &#8594; solo enteros.</p>
+</li>
+<li>
+<p>Trabaja sólo con enteros pero por causas de compatibilidad en los cambios de contexto de los S.O. se creo un alias entre los MMX y los FPU generando el problema de no poder utilizar en una misma aplicación los FP y los MMX ya que las operaciones de uno afecta al otro.</p>
+</li>
+<li>
+<p>Los registros FP del FPU x87 tiene acceso modo pila mientras que los MMX tienen acceso aleatorio.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>XMM</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ya en desuso y superados por YMM.</p>
+</li>
+<li>
+<p>XMM0–XMM15 (128 bits)</p>
+</li>
+<li>
+<p>SSE (Streaming SIMD Extensions) instruction. Is an <em>floating point SIMD</em> instruction set extension to the x86 architecture introduced on 1999 with Pentium III.</p>
+</li>
+<li>
+<p>Evolución de los MMX. Equivalente a MMX pero con datos de tipo coma flotante.</p>
+</li>
+<li>
+<p>Se puede operar simultaneamente con los FP,MMX y XMM.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>YMM</p>
+<div class="ulist">
+<ul>
+<li>
+<p>YMM0-YMM15 (256 bits)</p>
+</li>
+<li>
+<p>La extensión de los XMM a 256 bits</p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX</a>: Advanced Vector Extensions instructions</p>
+</li>
+<li>
+<p>Unicamente datos en coma flotante: <em>floating point SIMD</em></p>
+</li>
+<li>
+<p>AVX introduces a three-operand SIMD instruction format, where the destination register is distinct from the two source operands</p>
+</li>
+<li>
+<p>Compatibilidad: The AVX instructions support both 128-bit and 256-bit SIMD</p>
+</li>
+<li>
+<p>Intel comienza con este set en el 2011: Sandy Bridge processor, Q1 2011.</p>
+</li>
+<li>
+<p><a href="https://software.intel.com/en-us/blogs/2011/06/13/haswell-new-instruction-descriptions-now-available/">AVX2</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Haswell microarchitecture año 2013: Haswell processor, Q2 2013</p>
+</li>
+<li>
+<p>AVX2 - <em>Integer</em> data types expanded to 256-bit SIMD</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>ZMM</p>
+<div class="ulist">
+<ul>
+<li>
+<p>(ZMM0-ZMM31) : 512 bits</p>
+</li>
+<li>
+<p><a href="https://software.intel.com/en-us/blogs/2013/avx-512-instructions">Intel AVX-512</a>: Julio 2013</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Programs can pack eight double precision or sixteen single precision floating-point numbers, or eight 64-bit integers, or sixteen 32-bit integers within the 512-bit vectors. This enables processing of twice the number of data elements that AVX/AVX2 can process with a single instruction and four times that of SSE.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX-512 instructions</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Control_register">Control Registers x86</a>:CRx</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Controlar por ejemplo la paginación de memoria.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/X86_debug_register">Debug Registers x86</a>:DRx</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Se utilizan para implementar por ejemplo las direcciones de los puntos de ruptura: DR0-DR3</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Check</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En linux con la instrucción <code>cpuid</code> podemos chequear la compabilidad de la cpu con la extensiones ISA: mmx,sse,avx,etc</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Conceptos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SIMD: Single instruction multiple data.</p>
+</li>
+<li>
+<p>Vectorizing code: instrucción que operan con vectores &#8594; una operación sobre múltiples datos simultáneamente.</p>
+</li>
+<li>
+<p>DSP: Digital Signal Processor</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tipos de registros</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikibooks.org/wiki/Microprocessor_Design/Register_File" class="bare">https://en.wikibooks.org/wiki/Microprocessor_Design/Register_File</a></p>
+</li>
+<li>
+<p>Register File: memoria estática formada por una secuencia de registros con un bus de direcciones que mediante un decodificador selecciona uno de los registros.</p>
+</li>
+<li>
+<p>Register Banking: dos posibles interpretaciones.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Banked Registers for Interrupt Handling: En lugar de utilizar la memoria principal (pila) para  salvar y recuperar los registros cuando es interrumpido la ejecución de un proceso debido a una interrupción externa, utilizamos registros internos de la CPU para tal propósito: Se incrementa la velocidad de respuesta a una interrupción. La forma de implementar esta técnica es renombrando los registros utilizados por la rutina que interrumpe respecto de la rutina interrumpida.</p>
+</li>
+<li>
+<p>Agrupamiento por bancos: El conjunto de registros se agrupa por bancos que pueden ser accedidos simultáneamente.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_memoria_principal_ram_dinámica_dram">9.3. Memoria Principal (RAM Dinámica DRAM)</h3>
+<div class="sect3">
+<h4 id="_tipos_de_memoria_de_semicoductor">9.3.1. Tipos de Memoria de Semicoductor</h4>
+<table class="tableblock frame-ends grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Memory Type</th>
+<th class="tableblock halign-left valign-top">Category</th>
+<th class="tableblock halign-left valign-top">Erasure</th>
+<th class="tableblock halign-left valign-top">Write Mechanism</th>
+<th class="tableblock halign-left valign-top">Volatility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Random-access memory (RAM)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Read-write memory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Electrically, byte-level</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Electrically</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Volatile</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Read-only memory (ROM)</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>Read-only memory</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>Not possible</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Masks</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="5"><p class="tableblock"><code>Nonvolatile</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Programmable ROM (PROM)</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="4"><p class="tableblock"><code>Electrically</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Erasable PROM (EPROM)</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="3"><p class="tableblock"><code>Read-mostly memory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UV light,chip-level</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Electrically Erasable PROM (EEPROM)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Electrically, byte-level</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Flash memory</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Electrically,block-level</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Random Access: se puede acceder a cualquier dirección de memoria de forma ALEATORIA, no secuencial (para acceder a la posición 3ª no es necesario acceder antes a la 1ª y 2ª)</p>
+</li>
+<li>
+<p>Volátil: si se quita la alimentación, el contenido de la memoria se borra.</p>
+</li>
+<li>
+<p>ROM: Read Only Memory &#8594; El contenido de la memoria se escribe en la fábrica y el usuario únicamente puede leerla.</p>
+</li>
+<li>
+<p>PROM: ROM Programable &#8594; Los programas de usuario sólo pueden leer la memoria pero el administrador la puede actualizar. Por ejemplo la BIOS.</p>
+</li>
+<li>
+<p>Erasable: la memoria ROM programable se debe de borrar antes de escribir &#8594; se borra con luz ultravioleta</p>
+</li>
+<li>
+<p>EE: electrycaly erasable . La PROM se borra eléctricamente en lugar de con luz UV</p>
+</li>
+<li>
+<p>Flash: la memoria en lugar de borrarse secuencialmente, de palabra en palabra, lo cual es lento, se borra por grandes bloques. Un gran bloque se borrar en un instánte (efecto flash)</p>
+</li>
+<li>
+<p>SSD: Solide State Drive : Memoria flash de alta capacidad</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SLC, TLC y MLC (Single-, Triple- y Multi- level cell)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_memoria_principal_semiconductora">9.3.2. Memoria PRINCIPAL semiconductora</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Un programa almacenado en una memoria secundaria (disco externo) ha de ser cargado por el sistema operativo en la Memoria Principal para poder ser ejecutado por la CPU. La Unidad de Control captura instrucciones/datos que están en la memoria principal.</p>
+</li>
+<li>
+<p>Las operaciones que realiza la CPU con la memoria principal son la <strong>LECTURA</strong> y la <strong>ESCRITURA</strong> (Read/Write) de datos e instrucciones binarias.</p>
+</li>
+<li>
+<p>RAM:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Semiconductor Silicio: transistores.</p>
+</li>
+<li>
+<p>Random Acces Memory</p>
+</li>
+<li>
+<p>Operaciones de lectura y escritura</p>
+</li>
+<li>
+<p>Volátil</p>
+</li>
+<li>
+<p>Tipos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>SRAM: <strong>Static</strong> RAM.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mientras está alimentada la información no se pierde. No tiene fugas, no es necesaria refrescar la información cada unos pocos milisegundos.</p>
+</li>
+<li>
+<p>Estructura de la Celda 6T: seis transistores. Tamaño y consumo elevados. Latencia y capacidad reducidas.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Memoria caché.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>DRAM: <strong>Dynamic</strong> RAM .</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Estructura de la celda: 1C1T: un condensador y un transistor. Tamaño y consumo reducidos.Latencia y capacidad elevadas.</p>
+</li>
+<li>
+<p>Memoria principal: Los programas se cargan en dicha memoria para ser ejecutados por la CPU.</p>
+</li>
+<li>
+<p>Las celdas bit (condensadores) tienen fugas por lo que necesita periódicamente una reescritura (DINAMISMO).</p>
+</li>
+<li>
+<p>Asíncrona DRAM:</p>
+</li>
+<li>
+<p><strong>Síncrona SDRAM</strong>: Las operaciones R/W se realizan en instantes de tiempo marcados por un</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/tarjeta_micron_1.png" alt="tarjeta micron 1">
+</div>
+<div class="title">Figure 66. Dual Inline Memory Module (DIMM)</div>
+</div>
+<div class="paragraph">
+<p>Cada módulo se inserta en un slot de la placa base de la computadora.</p>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/tarjeta_micron_2.png" alt="tarjeta micron 2">
+</div>
+<div class="title">Figure 67. Dual Inline Memory Module (DIMM)</div>
+</div>
+<div class="paragraph">
+<p>Una tarjeta ó Módulo es un agrupamiento por chips. Los chips suelen estar soldados por ambas caras del módulo DIMM.</p>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/tarjeta_esquema.png" alt="tarjeta esquema">
+</div>
+<div class="title">Figure 68. Dual Inline Memory Module (DIMM)</div>
+</div>
+<div class="sect4">
+<h5 id="_organización">Organización</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Celda de memoria:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>es la unidad básica de almacenamiento de un bit (Binary digIT). El bit es un valor lógico <em>High</em> o <em>Low</em>, <em>1</em> o <em>0</em></p>
+</li>
+<li>
+<p>acceso a la celda:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la línea de direcciones selecciona la celda a leer o escribir</p>
+</li>
+<li>
+<p>la línea de bit es la línea de entrada/salida del bit a leer o escribir.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Matriz: las celdas de memoria se organizan en una estructura 2D matricial formadas por filas y columnas</p>
+</li>
+<li>
+<p>Bus del Sistema: bus de interconexión entre el <strong>controlador MC</strong> (Memory Controller) y la CPU.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La unidad de control de la CPU no se comunica directamente con la Memoria Principal. La Unidad de Control de la CPU da ordenes de lectura y escritura, pero se desentiende de acciones más primitivas y específicas de la organización y tecnología de la Memoria Principal. Para dichas tareas específicas de las memorias DRAM está el <strong>controlador MC</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bus de Memoria: bus de interconexión entre el controlador MC y la MP</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Bus Direcciones:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El bus de direcciones transfiere el código de la palabra a seleccionar</p>
+</li>
+<li>
+<p>La dirección se almacena temporalmente en el buffer de direcciones de la memoria</p>
+</li>
+<li>
+<p>El bus de direcciones se conecta al buffer de direcciones de la memoria</p>
+</li>
+<li>
+<p>El buffer de direcciones se conecta a la entrada del decodificador de  direcciones de la memoria</p>
+</li>
+<li>
+<p>La dirección se decodifica. La salida del decodificador activa la dirección de memoria del dato/instrucción a leer o escribir</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bus Datos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El dato de salida o entrada se almacena temporalmente en el buffer de datos i/o de la memoria</p>
+</li>
+<li>
+<p>Las celdas no se conectan directamente al buffer de datos i/o de la memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>las salidas de las celdas seleccionadas son amplificadas para detectar si almacenan <em>0</em> o <em>1</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El bus de datos esta conectado al buffer de datos de la memoria</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bus Control:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es necesario alimentar la memoria con una tensión continua de unos pocos voltios (1v)</p>
+</li>
+<li>
+<p>Señal de lectura y escritura que activa la CPU o el controlador E/S</p>
+</li>
+<li>
+<p>Señal de reloj de sincronismo. Sincroniza las tareas a realizar entre la MP y el controlador de memoria (MC)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bus chip select:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Señal <em>Chip Select</em> (CS) de selección del módulo de memoria que lo conecta a los buses de direcciones y de datos . Si la señal CS no está activa el módulo de memoria está desconectado de los buses.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/system.png" alt="system">
+</div>
+<div class="title">Figure 69. Computer System</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Controlador de Memoria (MC)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La MP no se conecta directamente a la CPU. El controlador MC hace de intermediario.</p>
+</li>
+<li>
+<p>El controlador MC se conecta por un lado a la CPU y por otro lado a la memoria MP.</p>
+</li>
+<li>
+<p>La CPU envía comandos al controlador MC para que actue sobre la MP.</p>
+</li>
+<li>
+<p>El controlador MC es un secuenciador que sabe cómo actuar sobre la estructura interna de la memoria para:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>qué módulo seleccionar, qué chip selececcionar, que palabra seleccionar.</p>
+</li>
+<li>
+<p>leer y escribir un dato</p>
+</li>
+<li>
+<p>otras acciones sobre la memoria como mantenimiento, chequeo, detección de errores, etc</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/System_Bus_Structure_RAM_Controller.gif" alt="System Bus Structure RAM Controller">
+</div>
+<div class="title">Figure 70. Memory Controller</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Memory Management Unit (MMU)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Las direcciones con que opera la Unidad de Control de la CPU en sus registros de próposito general, contador de programa, etc, no son físicas &#8594; son <strong>direcciones virtuales</strong></p>
+</li>
+<li>
+<p>Cuando programamos, el programador, el compilador, el linker, el desensamblador, el depurador, etc trabajan en el espacio virtual. El módulo ejecutable ELF y los procesos hacen referencia al espacio virtual.</p>
+</li>
+<li>
+<p>Los procesos (programas que están siendo ejecutados por la CPU) operan con direcciones del espacio virtual &#8594; memoria virtual del proceso</p>
+</li>
+<li>
+<p>MMU: circuito electrónico HW que <strong>traduce direcciones</strong> del espacio virtual (CPU) en direcciones físicas de la MP y que serán las que se transfieran al bus del controlador de la caché y al controlador de memoria MC para poder acceder a la memoria física.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_dram_dynamic_random_access_memory">DRAM (Dynamic Random Access Memory)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Celda</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Estructura física:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es un condensador Metal-Dielectrico-Metal(Polysilicio) fabricado en un substrato de Silicio.</p>
+</li>
+<li>
+<p>Su capacidad es del orden de femto-faradios: C=10~(-15)F</p>
+</li>
+<li>
+<p>Si le aplicamos una tensión de 1mv la carga almacenada  Q=CV= 1mv*1fF =1*10(-18) culombios que equivale a una decena de electrones.</p>
+</li>
+<li>
+<p>Su forma es la de un cilindro empotrado en el substrato.</p>
+</li>
+<li>
+<p>La sección transversal del condensador es del orden de 30 nm en el año 2010</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/3_nm_process">evolución proceso tecnológico</a>: 3nm node en el año 2023</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La densidad de condensadores es del orden del giga &#8594; 10~9 condensadores.</p>
+</li>
+<li>
+<p>Es necesario conectar el condensador a las líneas de direcciones y de bit para acceder a él. Se conecta a través de UN transistor CMOS que hace de interruptor.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/cell_1t1c.png" alt="cell 1t1c">
+</div>
+<div class="title">Figure 71. cell_1t1c</div>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/cell_capacitor.png" alt="cell capacitor">
+</div>
+<div class="title">Figure 72. cell_capacitor</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_dram_operaciones_de_lectura_escritura_refresco">DRAM (Operaciones de lectura-escritura-refresco)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Almacenamiento:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el condensador inicialmente no está conectado a ninguna línea ya que su interruptor está abierto</p>
+<div class="ulist">
+<ul>
+<li>
+<p>en circuito abierto el condensador almacena la carga mientras está alimentado &#8594; volátil</p>
+</li>
+<li>
+<p>el condensador tiene FUGAS y se descarga a través del substrato. Es necesario reescribir el bit cada 64 ms: DYNAMIC (la información que almacena no puede ser estática, hay que REFRESCARLA PERIODICAMENTE)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Escritura:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cerramos el interruptor (línea de dirección) para conectar el condensador a la línea de bit ( línea de dato)</p>
+</li>
+<li>
+<p>A través de  la línea de bit cargamos (<em>H</em> ) o descargamos (<em>L</em>) el condesador</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Lectura:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Una vez seleccionada la celda a leer, está se conecta al Sensor de Carga (amplificador) que detecta su estado y lo escribe en el buffer i/o</p>
+</li>
+<li>
+<p>Esta <strong>lectura es DESTRUCTIVA</strong>, dejando el condensador descargado. Es necesario que el amplificador realimente el condensador a su estado original. La escritura del buffer i/o y la RE-escritura del condensador se dan simultáneamente.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Refresco</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es necesario leer y reescribir todos los condensadores. Esta operación la realiza el sensor de carga.</p>
+</li>
+<li>
+<p>Es necesario reescribir todas las celdas en un tiempo inferior a los 64ms.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejemplo_de_estructura">Ejemplo de Estructura</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.anandtech.com/print/3851/everything-you-always-wanted-to-know-about-sdram-memory-but-were-afraid-to-ask" class="bare">https://www.anandtech.com/print/3851/everything-you-always-wanted-to-know-about-sdram-memory-but-were-afraid-to-ask</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_dram_matrizarray_2d">DRAM Matriz(Array 2D)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo: un bus de direcciones de 30 líneas puede direccionar una de las 2<sup>30</sup> CELDAS, a seleccionar UNA de ellas.</p>
+</li>
+<li>
+<p>Mediante un DEMULTIPLEXOR de 30 entradas binario (Bus de direcciones) y 2<sup>30</sup> salidas (se activa sólo una salida) podemos seleccionar 1 fila que contine una celda o bit de memoria.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/dram/demux.png" alt="demux">
+</div>
+<div class="title">Figure 73. Demultiplexor/Decoder</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Un demultiplexor de 2<sup>30</sup> salidas (1.073.741.824 de salidas) es imposible de fabricar</p>
+</li>
+<li>
+<p>Solución:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>organizar las CELDAS en un array 2D : Filas y columnas: 1 DEMUX o DECODIFICADOR para filas y 1 DEMUX/MUX o DECODIFICADOR para las columnas</p>
+</li>
+<li>
+<p>2<sup>30</sup> = 2<sup>15</sup>*2<sup>15</sup> = Ahora el número de salidas de cada demux se ha reducido de 2<sup>30</sup> a 2<sup>15</sup>, es decir, se ha reducido a 32.768 salidas, un factor raíz cuadrada. Un multiplexor con 32.768 salidas es posible de fabricarse.</p>
+</li>
+<li>
+<p>word line selecciona todas las columnas de una fila (ROW) de celdas</p>
+</li>
+<li>
+<p>bit line selecciona una de las columnas (COL) de la fila seleccionada</p>
+</li>
+<li>
+<p>el resultado es seleccionar una CELDA del ARRAY y cargar (LECTURA) el BUFFER I/O</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bus de direcciones muy denso: ejemplo de 30 líneas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Podemos diseñar un bus con la mitad de líneas y multiplexar en dos tiempos el código de direcciones(parte que selecciona la fila y parte que selecciona la columna).</p>
+</li>
+<li>
+<p>Multiplexación temporal de la dirección de filas y la dirección de columnas: REDUCIMOS EL NUMERO DE LINEAS EN LA PLACA BASE</p>
+</li>
+<li>
+<p>RAS: Row Address Strobe : Señal que válida el bus de direcciones indicando que es el código que selecciona la FILA del array.</p>
+</li>
+<li>
+<p>CAS: Row Address Strobe : Señal que válida el bus de direcciones indicando que es el código que selecciona la COLUMNA del array.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Burst (ráfaga)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Una vez seleccionada una fila de celdas (OPEN ROW) si queremos celdas consecutivas de la misma columna podemos leer o escribirlas consecutivamente en cada ciclo de reloj . Bloque de palabras a transferir a/desde la memoria Caché. El controlador de memoria ha tenido que enviar un comando a la memoria para configurar el número de palabras de la ráfaga.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/array1.png" alt="array1">
+</div>
+<div class="title">Figure 74. Array de celdas</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Organización de celdas en una dimensión: 1D:  Filas.</p>
+</li>
+<li>
+<p>Un circuito decodificador de filas</p>
+</li>
+<li>
+<p>1024 filas y cada fila son 16 celdas.</p>
+</li>
+<li>
+<p>El <strong>buffer i/o</strong> es de 16 bits.</p>
+</li>
+<li>
+<p>Al direccionar una fila se conectan las 16 celdas al buffer i/o ó gating i/o</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tanto no se pueden conectar directamente al bus de direcciones, es necesario un amplificador o sensor de CARGA. A la salida de dicho amplificador está el registro ó registros (BUFFER) de entrad/salida i/o. Es decir, el contenido binario de las celdas se vuelca en el BUFFER I/O. El buffer i/o está hecho en una tecnología capaz de conducir las líneas del bus de DATOS de la placa base.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/array2.png" alt="array2">
+</div>
+<div class="title">Figure 75. Array de celdas 2D</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Organización de celdas en dos dimensiones: 2D: matriz de filas y columnas</p>
+</li>
+<li>
+<p>Dos decodificadores: un decodificador de filas y un decodificador de columnas.</p>
+</li>
+<li>
+<p>Cada par (fila, columna) accede a una celda.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_logica_del_chip_figura_5_3_del_libro">Logica del Chip (Figura 5.3 del libro)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Componentes:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>buffers: direcciones y columnas</p>
+</li>
+<li>
+<p>decodificadores: decodifican el código de direccion de fila y de columna y seleccionan (fila,columna) una celda.</p>
+</li>
+<li>
+<p>sensor de carga (amplificador): detecta si la celda está cargada o descargada y da como salida un <em>H</em> o <em>L</em> en el buffer i/o.</p>
+</li>
+<li>
+<p>4 señales de control: RAS, CAS, WE, OE</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la combinación de señales de control (2<sup>4</sup>) se utiliza también para codificar los <a href="http://en.wikipedia.org/wiki/Synchronous_dynamic_random-access_memory">comandos</a> del controlador de memoria.</p>
+</li>
+<li>
+<p>COMANDOS: son ordenes a los módulos de memoria donde las características de la memoria como el timing (tiempos de latencia, ciclo, etc) y el burst length (número de palabras por bloque, longitud de la ráfaga) son programables y por lo tanto la CPU puede configurar estos parámetros.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>circuitería de refresco:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>contador de direcciones y temporizador</p>
+</li>
+<li>
+<p>la asociación JEDEC recomienda un refresco completo cada 64 ms.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_encapsulado">Encapsulado</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La memoria de semiconductor ocupa unos pocos mm<sup>2</sup> que debe de ser protegido (térmica y mecánica) y permitir que la conexiones sean robustas para permitir su soldadura a las líneas externas por lo que require un encapsulado de plástico.</p>
+</li>
+<li>
+<p>Los terminales del encapsulado se denominan PIN y son soldados a la tarjeta de memorias.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>pines o terminales:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>address bus (A0-A29)</p>
+</li>
+<li>
+<p>data bus (DQ0-DQ7) : los chips no tienen 64 pines de datos : 1,2,4,8.</p>
+</li>
+<li>
+<p>alimentación Vcc</p>
+</li>
+<li>
+<p>masa Vss</p>
+</li>
+<li>
+<p>chip select /CS</p>
+</li>
+<li>
+<p>write enable (/WE): <em>L</em>(escritura) <em>H</em> (lectura)</p>
+</li>
+<li>
+<p>output enable (/OE): <em>L</em>(los pines de datos se conectan al bus de datos)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_temporización_de_la_operación_de_lecturaescritura">Temporización de la operación de lectura/escritura</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>En el <a href="_apéndice_unidad_de_memoria_dram.html#apendice_temporizacion_dram">Apéndice</a> hay información detallada sobre las distintas señales que controla la temporización de las operaciones del controlador de memoria MC con la tarjeta de memoria.</p>
+</li>
+<li>
+<p>Los tiempos o latencias tRAS, tCAS, etc son retardos que se deben de respetar entre todas la señales que controlan los intervalos de tiempo en que se activa las distintas señales de <strong>control temporal</strong> para seleccionar direcciones de la memoria y esperar el tiempo necesario para que finalice el ciclo de lectura o de escritura en la memoria.</p>
+</li>
+<li>
+<p>Sincronismo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El bus de control de la memoria tiene un hilo que es el <strong>reloj</strong> de las operaciones de lectura y escritura de la memoria principal. No confundir con el reloj de la Unidad de Control de la CPU.</p>
+</li>
+<li>
+<p>SDRAM : Synchronous Dynamic RAM, adding a <strong>clock</strong> (and a clock enable) line. All other signals are received on the <em>rising edge</em> of the clock. No responde tan rápido como es posible, sino que espera al flanco de subida.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El módulo de memoria MP es programable por lo que podemos alterar los tiempos tCL-tRCD-tRP-tRAS y también la longitud de la ráfaga(burst o bloque)</p>
+</li>
+<li>
+<p>El módulo de memoria MP suele indicar la secuencia tCL-tRCD-tRP-tRAS con valores típicos de ciclos del reloj de memoria.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_agrupamientos_módulos_rank_chips_bank">Agrupamientos: Módulos-Rank-Chips-Bank</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Jerarquía: Estructura de la memoria DRAM en agrupamientos de direcciones</p>
+</li>
+</ul>
+</div>
+<div class="sect5">
+<h6 id="_channel">Channel</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Channel :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>interfaces del controlador de memoria con el bus del sistema.</p>
+</li>
+<li>
+<p>Cada canal tiene su propio bus de memoria físico.</p>
+</li>
+<li>
+<p>El controlador tiene acceso al bus del sistema y a más de un bus de memoria.</p>
+</li>
+<li>
+<p>Todos lo canales de un mismo controlador de memoria conforman todo el espacio de memoria física, por lo tanto un controlador tiene asignado un canal lógico (todo el espacio de memoria) formado por varios físicos ( distintos espacios de memoria)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_module_dimm">Module DIMM</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Dual Inline Memory Module (DIMM):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Dual Inline significa que la tarjeta o módulo tiene conectores en ambas caras de la tarjeta.</p>
+</li>
+<li>
+<p>Proporciona la conexión física al bus de datos ( palabra de 64 bits), al bus de direcciones, al bus de control y al bus de chip-select (CS)  del BUS de MEMORIA.</p>
+</li>
+<li>
+<p>Es la tarjeta de memoria encapsulada que se inserta en el socket de la placa base conectándose al bus de memoria del controlador de memoria (MC)</p>
+</li>
+<li>
+<p>Para los PC la conexión de los módulos de memoria es <a href="http://en.wikipedia.org/wiki/DIMM">DIMM</a> y para los portátiles <a href="http://en.wikipedia.org/wiki/SO-DIMM">SO-DIMM</a>. El encapsulamiento DIMM permite disponer de conectores y de chips en ambos lados de la tarjeta (front-side y back-side)</p>
+</li>
+<li>
+<p>En el módulo están interconectados todos los  chips de memoria de la tarjeta.</p>
+</li>
+<li>
+<p>Un canal del controlador puede contectarse a más de un módulo de memoria: P.ej dos módulos de 4GB cada uno.Si un canal tiene más de un modulo, todos los modulos comparten el mismo BUS DE MEMORIA. Cada módulo implementa direcciones de memoria diferentes.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_rank">Rank</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Rank	:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es un conjunto o <em>agrupamiento de bancos</em> dentro de todo el sistema de memoria (todos los módulos DIMM ,no cada módulo DIMM). Donde los bancos están implementados en Chips. Para seleccionar los bancos de un rank hay contectar los chips de dichos bancos de tal forma que la señal chip select (CS) sea común a todos ellos, compartiendo así el mismo espacio de direcciones.</p>
+</li>
+<li>
+<p>Así organizados, todos los bancos de los chips del mismo rank pueden responder AL UNISONO al mismo bus de direcciones (filas,columnas). Al activar la señal CS y seleccionar una Fila , se consigue activar todas las columnas de todas las filas de todos los arrays de todos los bancos de los chips del mismo rank. Este es el objetivo del agrupamiento.</p>
+</li>
+<li>
+<p>Un rank es independiente del resto, con direcciones de memoria <em>diferentes</em>, compartiendo el mismo bus de direcciones y bus de chip select. Un rank al ser INDEPENDIENTE puede ser precargado, refrescado, activado, etc al mismo que el resto de ranks.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/rank1.png" alt="rank1">
+</div>
+<div class="title">Figure 76. Rank: agrupamiento de chips en el módulo de memoria DIMM</div>
+</div>
+<div class="paragraph">
+<p><strong>RANK</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>4 módulos DIMM con 4 chips cada uno.</p>
+</li>
+<li>
+<p>Agrupamiento de los bancos de los chips en el SISTEMA de memoria ( todos los módulo de memoria DIMM).</p>
+</li>
+<li>
+<p>En este caso cada Rank agrupa todos los chips del mismo módulo y por lo tanto todos los bancos de cada chip.</p>
+</li>
+<li>
+<p>Cada chip select selecciona un rank diferente.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/rank2.png" alt="rank2">
+</div>
+<div class="title">Figure 77. Rank</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_chip">Chip</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Chip	:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es el circuito integrado que contiene el <em>die</em> de semiconductor  donde están implemetadas las celdas de memoria (condensadores) y los interrruptores (transistores).</p>
+</li>
+<li>
+<p>El número de pins del chip dependerá del tamaño del dato proporcionado y de la capacidad de almacenamiento de datos.</p>
+</li>
+<li>
+<p>El número de bits <em>"N"</em> del dato proporcionado por el chip a través del buffer i/o, se indica diciendo que el chip es <em>xN</em>: x2,x4,x8,x16,x32</p>
+</li>
+<li>
+<p>Esta formado por <em>MULTIPLES bancos</em>, un <em>buffer i/o</em>, un <em>demux</em> de filas, un <em>demux</em> de columnas y la lógica de control.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/bank2.png" alt="bank2">
+</div>
+<div class="title">Figure 78. Chipx16</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Chipx16 formado por 4 bancos y 1 buffer i/o de 16 bits.</p>
+</li>
+<li>
+<p>Cada banco son 16 arrays 2D &#8594; el 16 es la 3D, y 8196x512 es cada array 2D</p>
+</li>
+<li>
+<p>Cada array tiene 8192 filas y 512 columnas. 2<sup>13</sup> filas x  2<sup>9</sup> columnas = 2<sup>22</sup> celdas</p>
+</li>
+<li>
+<p>Capacidad de cada banco 3D: 2<sup>22</sup> celdas x 16 bits = 4*2<sup>20</sup>*2Bytes=8MBytes</p>
+</li>
+<li>
+<p>Cada banco 3D es un espacio de direcciones de 8MB independiente.</p>
+</li>
+<li>
+<p>Chipx16 : 4 Bancos : 32 MB &#8594; 16M x2Bytes DRAM &#8594; 16M x16bits DRAM</p>
+<div class="ulist">
+<ul>
+<li>
+<p>bus de datos: 16 bits &#8594; 2 bytes</p>
+</li>
+<li>
+<p>bus de direcciones: para una capacidad de 32 MB : 2<sup>25</sup> &#8594; 25 hilos</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_bank">Bank</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Este término es confuso ya que depende del contexto e incluso hay diversas interpretaciones.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En el caso de la cpu de intel 4004 es &#8230;&#8203; (ver Tema CPU apartado i4004)</p>
+</li>
+<li>
+<p>En el entorno linux si ejecutamos el comando "lshw -C memory" aparece información de los distintos bancos, donde en este entorno banco esta asociado a slot de memoria de la placa base.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bank:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Un chip se estructura en bancos.</p>
+</li>
+<li>
+<p>Los bancos se agrupan de forma lógica en Ranks conectando el mismo orden o número de banco de distintos chips.</p>
+</li>
+<li>
+<p>Un banco es un conjunto, <em>agrupamiento de arrays 2D</em>,al agrupar arrays 2D tenemos una estructura 3D.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Al dibujar la estructura 3D observar que para dirección (fila-columna) tenemos un dato de tamaño el número de arrays del banco.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Si cada array contribuye con un bit al buffer i/o, entonces, el número de arrays del banco será el mismo que el número de bits del buffer i/o.</p>
+</li>
+<li>
+<p>Así organizados, todos los arrays del mismo orden de banco de distintos chips pueden responder AL UNISONO al mismo bus de direcciones (filas,columnas). Cada array del banco proporciona el bit de la celda seleccionada por lo que el número de bits del dato proporcionado por el banco será el número de arrays del banco.</p>
+</li>
+<li>
+<p><strong>Todos</strong> los bancos del chip forman parte del <strong>mismo</strong> buffer i/o del chip.</p>
+</li>
+<li>
+<p>El número de bits <em>"n"</em> , del dato proporcionado por el banco a través del buffer i/o, se indica diciendo que el chip es <em>xn</em>: x2,x4,x8,x16,x32</p>
+</li>
+<li>
+<p>Bancos de distintos chips son independientes unos de otros, con direcciones de memoria <em>diferentes</em>, compartiendo el mismo bus de direcciones y bus de chip select. Un banco al ser INDEPENDIENTE del resto puede ser precargado, refrescado, activado, etc al mismo tiempo que el resto de bancos del mismo rank: PARALELISMO a nivel de Bancos, con el objetivo de reducir los tiempos de acceso a la memoria DRAM.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/bank1.png" alt="bank1">
+</div>
+<div class="title">Figure 79. Bank: Array en el chip de memoria DIMM</div>
+</div>
+<div class="paragraph">
+<p>Tres chips. Cada Chip esta formado por un <strong>BANCO</strong>. Un banco es un agrupamiento de Arrays.</p>
+</div>
+<div class="paragraph">
+<p>Chip x2 DRAM:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>x2 significa un chip con un buffer i/o de 2 bits &#8594; bus de datos de 2 bits</p>
+</li>
+<li>
+<p>Un banco con 2 arrays. Cada array proporciona 1 bit.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Chip x4 DRAM:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>x4 significa un chip con un buffer i/o de 4 bits &#8594; bus de datos de 4 bits</p>
+</li>
+<li>
+<p>Un banco con 4 arrays. Cada array proporciona 1 bit.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Chip x8 DRAM:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>x8 significa un chip buffer i/o de 8 bits &#8594; bus de datos de 8 bits</p>
+</li>
+<li>
+<p>Un banco con 8 arrays. Cada array proporciona 1 bit.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_página_row_buffer">Página / Row-Buffer</h6>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/dram/page.png" alt="page">
+</div>
+<div class="title">Figure 80. Page</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>No confundir con las páginas virtuales del Sistema Operativo</p>
+</li>
+<li>
+<p>Cada conjunto de Bancos del mismo orden (pej Banco número 3) de diferentes chips del mismo Rank, tienen asocidado un "registro virtual" denominado ROW-BUFFER. Es virtual o lógico ya que abarca distintos chips físicos.</p>
+</li>
+<li>
+<p>Una página abarca los datos (misma fila, misma columna de los distintos arrays del banco) de la misma dirección de fila (Pej número 2) de diferentes bancos con el mismo orden o número de banco (Pej número 3). Al conjunto de filas de todos los  banco se denomina <strong>página</strong> (una página está formada por filas). Por lo tanto el contenido del ROW-BUFFER es el de una página. Al row-buffer se descargan más columnas que la requerida, de esta forma el row-buffer hace de CACHE (copia) guardando datos adyacentes al solicitado, pero que no son requeridos inicialmente. Posteriormente se seleccionan todas las columnas del mismo orden (pej columna 2) de cada fila del row-buffer y se cargan en el buffer i/o.  En el siguiente acceso a memoria puede que el dato requerido ya esté en el buffer, por lo que NO es necesaria descargar el dato de las celdas del array y por lo tanto se reduce la latencia y la lectura del dato es mucho más rápida. Por ejemplo en el caso de querer leer un array si el array ha sido almacenado en un página se podría leer toda la página con un solo acceso a las celdas y posteriormente transferir el contenido del buffer por ráfagas.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_array">Array</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Array:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Son agrupamientos o conjuntos de celdas organizados en filas y columnas.</p>
+</li>
+<li>
+<p>Una dirección de memoria (fila,columna) selecciona una celda del array.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_celda">Celda</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Celdas:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Una celda de memoria almacena la información de 1 o más (2,4,8,16) bits. Inicialmente, mientras no se especifique lo contrario, almacenará un único bit.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_lectura_de_una_palabra_de_la_memoria_mp">LECTURA de una palabra de la memoria MP</h5>
+<div class="sect5">
+<h6 id="_selección_de_chipbancofilascolumna">Selección de Chip/Banco/Filas/Columna</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo de Lectura: Memoria de 4 chipsx4 con 8 bancos por chip y bancos con 4 arrays 1024x512 cada uno. La memoria está organizada en 1 rank de 32 bancos.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>El controlador de Memoria recibe una dirección física en el espacio lineal y lo mapea al espacio Rank/Bank/Row/Column</p>
+</li>
+<li>
+<p>Se selecciona un número de rank:  (pej 1)</p>
+</li>
+<li>
+<p>Se selecciona un número de banco entre 1 y 8: (pej 3)</p>
+</li>
+<li>
+<p>Se selecciona una fila entre 1 y 1024: (pej 2)</p>
+</li>
+<li>
+<p>Quedan seleccionadas todas las filas (pej fila 2) de todos los bancos (pej banco número 3) del mismo rank (pej rank número 1)</p>
+</li>
+<li>
+<p>los datos (4 bits: b<sub>3</sub>b<sub>2</sub>b<sub>1</sub>b<sub>0</sub>) de todas las columnas (512 columnas)  de las filas seleccionadas (la <strong>fila 2</strong>)  del banco seleccionado (el <strong>banco 3</strong>) de cada chip ( chips) se descargan en el <strong>ROW-BUFFER</strong>.</p>
+</li>
+<li>
+<p>Se selecciona un número de columna (pej 2)</p>
+</li>
+<li>
+<p>Todas las columnas de orden 2 se descargan en los 4 bufferes i/o (uno de cada chip). Dato de 4bits/columna x 4chips = 16 bits</p>
+</li>
+<li>
+<p>La salida de los 4 bufferes i/o (16bits) activan las líneas del bus de datos (16 hilos).</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="images/dram/row-buffer.png" alt="row buffer">
+</div>
+<div class="title">Figure 81. Page on Row-Buffer: Rank Nº1/Banco Nº3/Fila Nº2</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_precargaopenrow">Precarga/OpenRow</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Fases:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>la dirección de memoria proporcionada por la CPU es convertida en dirección física por el circuito MMU</p>
+</li>
+<li>
+<p>El circuito MP debe de descomponer la dirección física de memoria en los códigos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>RANK-BANK-ROW-COLUMN</p>
+</li>
+<li>
+<p>Los códigos están asociados a: dentro del módulo de memoria un rank específico, dentro del rank un bank específico, dentro del bank una fila específica y dentro de la fila una columna específica.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Una vez que han sido identificados el rank-bank-row, se PRECARGAN los bit_lines del banco (se polarizan con la tensión media que hay entre un cero lógico y un uno lógico).</p>
+</li>
+<li>
+<p>Una vez precargado el banco se ACTIVA (OPEN) la fila: la fila queda abierta cuando los miles de amplificadores sensores de carga detectan los contenidos de los miles de celdas de  las filas seleccionadas de todos los arrays del banco. La página esta abierta cuando las salidas de los amplificadores recuperan los valores sensados y activan las line_bit con los datos almacenados.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Esta acción comienza con la activación de la señal /RAS y la espera del tiempo tRCD</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Una vez transcurrido el tRCD se selecciona las columnas específicas de todos los arrays del banco (x4,x8,..) y se carga el buffer i/o con el dato seleccionado.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Esta acción comienza con la activación de la señal /CAS.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejemplo_4">Ejemplo</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Si un sistema tiene una capacidad de memoria principal de 16GB y la estructuramos en 4 módulos cuyos chipsx16 se organizan en 4 ranks con 16 chips/rank, 8 bancos/chip, 16 arrays/banco. Calcular el número de bits/array.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>2<sup>4</sup> x 2<sup>30</sup> x 2<sup>3</sup> bits/byte = 2<sup>2</sup> (ranks/canal) x 2<sup>4</sup> (chips/rank) x 2<sup>3</sup> (bancos/chip) x 2<sup>4</sup> (array/banco)x N (bits/array) &#8594; N = 2<sup>(4+30+3-2-4-3-4)</sup> = 2^24 bits organizados en un array 2D</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Los 4 módulos al completo se organizan en 4 ranks
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Una posible solución sería 2<sup>12</sup> filas x 2<sup>12</sup> columnas.</p>
+</li>
+<li>
+<p>El buffer i/o de transferencia de datos al bus de memoria tiene el tamaño x16, es decir, 16 bits.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_organización_avanzada_de_memorias_dram">9.3.3. Organización avanzada de memorias DRAM</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Información detallada en el <a href="_apéndice_unidad_de_memoria_dram.html#apendice_organizacion_dram">Apéndice</a></p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_sdram_synchronous_dram">SDRAM (Synchronous DRAM)</h5>
+<div class="sect5">
+<h6 id="_introducción_13">Introducción</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>El flanco del reloj es el patrón de comienzo y fin de las operaciones</p>
+</li>
+<li>
+<p><strong>DDR (Double Data Rate)</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Permite transferir el bit tanto en el flanco de <strong>bajada</strong> como de <strong>subida</strong> del reloj (<strong>doble bombeo</strong>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>frecuencia del buffer i/o</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El buffer i/o de la memoria pude ir a frecuencias x2, x4 y x8 respecto de la frecuencia de acceso a la celda.</p>
+</li>
+<li>
+<p><strong>Supercelda</strong> ó <strong>Macrocelda</strong>:Ahora una selección (fila,columna) de un array supone no la seleccion de 1 celda sino la de 2, 4 u 8 CELDAS del array.</p>
+</li>
+<li>
+<p>DDR1: una macrocelda de 2<sup>1</sup> celdas &#8594; 2 celdas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1ª Generación:  año 2000</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>DDR2: una macrocelda de 2<sup>2</sup> celdas &#8594; 4 celdas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>2ª Generación:  año 2006</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>DDR3: una macrocelda de 2<sup>3</sup> celdas &#8594; 8 celdas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>3ª Generación:  año 2011</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>DDR4: una macrocelda de 2<sup>4</sup> celdas &#8594; 16 celdas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>4ª Generación:  año 2014</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>DDR5: una macrocelda de 2<sup>5</sup> celdas &#8594; 32 celdas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>5ª Generación:  año 2020</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/dram/ddr1_frequency.png" alt="ddr1 frequency">
+</div>
+<div class="title">Figure 82. Velocidad de transferencia DDR</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_macroceldas_buffer_io">Macroceldas &#8594; Buffer i/o</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Las celdas (condensadores) almacenan muy poco carga (picoculombios) y por lo tanto no se pueden conectar directamente al bus de direcciones, es necesario un amplificador o sensor de CARGA. A la salida de dicho amplificador está el registro ó registros (BUFFER) de entrad/salida i/o. Es decir, el contenido binario de las celdas se vuelca en el BUFFER I/O. El buffer i/o está hecho en una tecnología capaz de conducir las líneas del bus de DATOS de la placa base.</p>
+</li>
+<li>
+<p>Cada bit de un registro i/o almacenaría el contenido de una única celda.  Por lo que para leer macroceldas son necesarios un registro por cada celda de la macrocelda. Se llama BUFFER al conjunto de registros. Una memoria DDR3 tendrá por lo tanto un buffer i/o de 8 Registros y en cada registro se almacena una palabra. Si el chip de la memoria es x16, en cada registros se almacenaran palabras de 16 bits.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Cuando programamos una instrucción como "movw sum,%ax", el controlador de memoria MC de una memoria DDR3 no se limita a leer sólo el dato sum de 2 bytes, sino que lee por lo menos 8 palabras consecutivas y las lee simultáneamente en un solo acceso depositándolas en el buffer i/o contectado al bus de datos.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>El buffer i/o puede almacenar hasta una página de datos. El buffering permite que el dato a capturar ya esté en la salida de la memoria sin tener que acceder a las celdas. En definitiva, el buffer es una cache (copia) de las celdas próximas a los datos que están siendo capturados. De esta forma se reducen los tiempos de acceso a la memoria, ya que realmente sólo se está accediendo al buffer i/o.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_velocidad_de_transferencia">Velocidad de transferencia</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>BW (bits/s) = BF(ciclos/s)*CW(bits/channel)*TC(transferencias/ciclo)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FE: Frecuencia efectiva: Frecuencia de las Transferencias</p>
+</li>
+<li>
+<p>BF: Frecuencia del bus del sistema (próximo a 1GHz en el año 2000)</p>
+</li>
+<li>
+<p>CW: número de bits del data bus del canal. Típicamente 64 bits (año 2000) &#8594; arquitectura x86-64</p>
+</li>
+<li>
+<p>TC: en un ciclo del reloj del bus del sistema el número de transferencias. Típicamente 1 transferencia (flanco de subida) o 2 transferencias(flancos de subida y bajada) por ciclo del reloj del bus BF.</p>
+</li>
+<li>
+<p>BW (bits/s) = frecuencia efectiva*anchura bus datos= 400MHz*2*64 = 51200*10~6 bits/s = 51.2Gbps = 6400 MBps &#8592; sistema decimal (habitual)</p>
+</li>
+<li>
+<p>NC: número de celdas/macrocelda</p>
+</li>
+<li>
+<p>CA: frecuencia de acceso a las celdas = FE/NC</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/dram/clock.png" alt="clock">
+</div>
+<div class="title">Figure 83. Velocidad de transferencia</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejemplo_de_módulo_de_memoria_pc2_6400_ddr2_800_5_5_5_16">Ejemplo de módulo de Memoria:  PC2-6400 (DDR2-800) 5-5-5-16</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo PC2-6400 (DDR2-800) 5-5-5-16</p>
+</li>
+<li>
+<p>PC2 : SDRAM de segunda generación &#8594; Double_Data_Rate x2 &#8594; macroceldas de 4 celdas.</p>
+</li>
+<li>
+<p>6400 MB/s de <strong>ancho de banda</strong> ó <strong>througput</strong> &#8594; BW= 6400 MB/s</p>
+</li>
+<li>
+<p>FE=800MHz de ciclo efectivo de reloj del bus del sistema: doble que la frecuencia de bus BF &#8594; 800MHz=2*BF</p>
+<div class="ulist">
+<ul>
+<li>
+<p>DDR: en cada ciclo BF se realizan dos transferencias &#8594; TC=2</p>
+</li>
+<li>
+<p>Cada palabra de 64 bits se transfiere en un ciclo de 800MHz &#8594; CW=800MHz</p>
+</li>
+<li>
+<p>Ciclo de Reloj del Bus de memoria BF=800MHz/2 &#8594; BF=400MHz</p>
+</li>
+<li>
+<p>Clock cycle time = 1/400MHz = 2.5ns</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>5-5-5-16 son los <strong>ciclos de reloj</strong> (400MHz&#8592;&#8594;2.5ns) de los tiempos tCL-tRCD-tRP-tRAS &#8594; 12.5ns-12.5ns-12.5ns-40ns</p>
+</li>
+<li>
+<p>DDR2 &#8594; NC=2<sup>2</sup> &#8594; 4 celdas por macrocelda</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CA=FE/NC=800MHz/4=200MHz &#8594; frecuenica de acceso a las macroceldas</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/dram/ddr2_frequency.png" alt="ddr2 frequency">
+</div>
+<div class="title">Figure 84. Velocidad de transferencia DDR2</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejemplo_de_módulo_de_memoria_ddr3_800_pc3_6400_5_5_5">Ejemplo de módulo de Memoria: DDR3-800 / PC3-6400 5-5-5</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>módulo de memoria DDR3-800 ó PC3-6400</p>
+<div class="ulist">
+<ul>
+<li>
+<p>timing 5-5-5</p>
+</li>
+<li>
+<p>800MHz es la frecuencia efectiva del bus de datos &#8594; 800MT/s</p>
+</li>
+<li>
+<p>6400 MB/s es el ancho de banda</p>
+</li>
+<li>
+<p>DDR &#8594; La frecuencia del bus de memoria es la mita de la frecuencia efectiva = 800/2 = 400MHz. Equivale a un ciclo de reloj  de 1/400MHz = 2.5ns</p>
+</li>
+<li>
+<p>5-5-5: son los ciclos de reloj, a la frecuencia real del bus de 400MHz, de los parámetros timing tCL-tRCD-tRP</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/dram/ddr3_frequency.png" alt="ddr3 frequency">
+</div>
+<div class="title">Figure 85. Velocidad de transferencia DDR3</div>
+</div>
+<table class="tableblock frame-ends grid-all stretch">
+<caption class="title">Table 13. DDR3</caption>
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1112%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Standard name</th>
+<th class="tableblock halign-left valign-top">Memory clock(MHz)</th>
+<th class="tableblock halign-left valign-top">Cycle time(ns)</th>
+<th class="tableblock halign-left valign-top">I/O bus clock(MHz)</th>
+<th class="tableblock halign-left valign-top">Data rate(MT/s)</th>
+<th class="tableblock halign-left valign-top">Module name</th>
+<th class="tableblock halign-left valign-top">Peak transfer rate(MB/s)</th>
+<th class="tableblock halign-left valign-top">Timings(CL-tRCD-tRP)</th>
+<th class="tableblock halign-left valign-top">CAS latency(ns)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DDR3-800D</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>100</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>10</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>400</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>800</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>PC3-6400</code></p></td>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock"><code>6400</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5-5-5</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>12½</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DDR3-800E</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>6-6-6</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>15 </code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>El 4º dígito es tRAS (mínimo retardo entre la activación y la precarga) no ha sido proporcionado. La cuarta columna proporciona tCL en nanosegundos.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Parámetros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Memory clock: 100MHz: frecuencia de acceso a las palabras. Transferencia celda &#8594; buffer i/o</p>
+</li>
+<li>
+<p>Cycle time: 10ns: en esta tabla se refiere  al período del memory clock y no tiene el significado de la definición de ciclo de memoria</p>
+</li>
+<li>
+<p>I/O bus clock: 400MHz:reloj del bus de memoria cuyos flancos(positivo,negativo) sincronizan las transferencias de las palabras.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ciclo de bus = 1/400Mhz = 2.5ns = este es el facto de tiempo de los retardos o latencias tCL,tRCD, etc</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Data rate: 800MT/s &#8594; Las transferencias se realizan a la frecuencia efectiva.</p>
+</li>
+<li>
+<p>Peak transfer rate: ancho de banda BW:6400MB/s</p>
+</li>
+<li>
+<p>timings: número de ciclos del reloj i/o bus clock de duración de los eventos:5-5-5-12½</p>
+<div class="ulist">
+<ul>
+<li>
+<p>tCL = 5 ciclos de reloj = 5 x 2.5 = 12.5ns</p>
+</li>
+<li>
+<p>tRCD = 5 ciclos de reloj = 5 x 2.5 = 12.5ns</p>
+</li>
+<li>
+<p>tRP = 5 ciclos de reloj = 5 x 2.5 = 12.5ns</p>
+</li>
+<li>
+<p>tRAS = no se ha proporcionado</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ejemplo_pc3_22400_11_14_14_35">Ejemplo PC3-22400 11-14-14-35</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.corsair.com/es-es/dominator-platinum-with-corsair-link-connector-1-65v-16gb-dual-channel-ddr3-memory-kit-cmd16gx3m4a2800c11">Dominator® Platinum with Corsair Link Connector — 1.65V 16GB Dual Channel DDR3 Memory Kit (CMD16GX3M4A2800C11)</a>:</p>
+</li>
+<li>
+<p>Memory Type: DDR3</p>
+</li>
+<li>
+<p>Speed Rating: PC3-22400 (2800MHz)</p>
+</li>
+<li>
+<p>Tested Latency: 11-14-14-35</p>
+</li>
+<li>
+<p>Our Price:80€</p>
+</li>
+<li>
+<p>16GB Kit (4 x 4GB)</p>
+</li>
+<li>
+<p>Dual Channel</p>
+</li>
+<li>
+<p>Características deducidas:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ancho de banda de pico = 22400MB/s</p>
+</li>
+<li>
+<p>Data rate (1data=8Bytes) = 2800MT/s</p>
+</li>
+<li>
+<p>I/O bus effective clock = 2800MHz. I/O hace referencia al bus del buffer i/o de la memoria.</p>
+</li>
+<li>
+<p>I/O bus clock = 2800MHz / 2 = 1400MHz</p>
+</li>
+<li>
+<p>I/O bus cycle time= 1/1400MHz = 710ps</p>
+</li>
+<li>
+<p>Latencies</p>
+<div class="ulist">
+<ul>
+<li>
+<p>tCL  = 11 ciclos = 11 x 710ps = 7.8ns</p>
+</li>
+<li>
+<p>tRCD = 14 ciclos = 14 x 710ps = 10ns</p>
+</li>
+<li>
+<p>tRP  = 14 ciclos = 14 x 710ps = 10ns</p>
+</li>
+<li>
+<p>tRAS = 35 ciclos = 35 x 710ps = 24.8ns</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Mejora PC3-22400 vs PC3-6400</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mejora del I/O bus cycle time = 710ps frente a 2.5ns = una reducción de 1.79ns = 1.79/2.5 = 71%</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_diferencia_entre_pc2_6400_y_pc3_6400">Diferencia entre PC2-6400 y PC3-6400</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>No ha diferencias en cuanto a latencias ya que un 5-5-5 en los dos casos se refiere a una frecuencia del bus de memoria de 400MHz.</p>
+</li>
+<li>
+<p>Hay diferencias en cuanto a pines, tensión de alimentación, etc</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_anchos_de_banda_standard">Anchos de banda standard</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulos DDR1 SDRAM: PC-3200/PC-2700/PC-2100/PC-1600</p>
+</li>
+<li>
+<p>Módulos DDR2 SDRAM: PC2-6400/PC2-5300/PC2-4200/PC2-3200</p>
+</li>
+<li>
+<p>Módulos DDR3 SDRAM:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PC3-22400/PC3-21300/PC3-19200/PC3-17066/PC3-15000/PC3-12800/PC3-10600/PC3-8500/PC3-6400</p>
+</li>
+<li>
+<p>DDR3-2800/DDR3-2666/DDR3-2400/DDR3-2133/DDR3-1866/DDR3-1600/DDR3-1325/DDR3-1065/DDR3-800/</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_capacidad">Capacidad</h5>
+<div class="sect5">
+<h6 id="_registeredbuffered_memory">Registered/Buffered Memory</h6>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Registered_memory" class="bare">http://en.wikipedia.org/wiki/Registered_memory</a></p>
+</li>
+<li>
+<p>Registered: RDIMM: Entre el controlador de memoria y el módulo de memoria hay un registro que memoriza la info de las líneas de control. Se manda el comando de control previamente a la transferencia, añadiendo un ciclo extra de bus. De esta forma se eliminan las líneas de control para la transferencia de comandos al controlador y así se disminuye la carga del bus de memoria del controlador de memoria y se consigue conectar más módulos al canal del controlador aumentando la capacidad de memoria.</p>
+</li>
+<li>
+<p>Unbuffered: UDIMM: No se latchea las info de la líneas de control.</p>
+</li>
+<li>
+<p>fully buffered:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Se registra tanto la info de las señales de control como de las señales de datos y direcciones con una reducción considerable de la carga de todos los buses del canal del controlador de memoria.</p>
+</li>
+<li>
+<p>Los datos se transfieren en serie en lugar de en paralelo reduciendo el número de líneas y por lo tanto aumentando el número de módulos de memoria conectados al canal.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_bank_switching">Bank Switching</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Bank_switching">Bank Switching</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>En arquitecturas limitadas de 8 y 16 bits (Por ejemplo intel 4004) se utiliza la técnica <em>memory banking</em> para aumentar la capacidad de memoria.</p>
+</li>
+<li>
+<p>En lugar de incrementar anchura del bus de direcciones incrementando el tamaño de palabra de la CPU y el bus de la placa base, se añaden más dispositivos de memoria direccionables mediante el mismo bus y un nuevo registro que selecciona uno de los dispositivos de memoria (Bank). <strong>No confundir</strong> con los bancos de los chips de memoria ni con los bancos de registros.</p>
+</li>
+<li>
+<p>Bank switching significa cambiar de banco de memoria.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_info_complementaria">9.3.4. Info complementaria</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Información complementaria en el <a href="_apéndice_unidad_de_memoria_dram.html#apendice_organizacion_dram">Apéndice</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_thinkpad_t560">9.3.5. Thinkpad T560</h4>
+<div class="sect4">
+<h5 id="_comandos_3">comandos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>listado</p>
+<div class="listingblock">
+<div class="content">
+<pre>sudo lshw -short -C memory
+sudo lshw -class memory
+lspci | grep -i mem -&gt; memory controller -&gt; chipset
+sudo inxi -m
+sudo cpu-x
+sudo dmidecode -t memory
+sudo dmidecode -t 16
+lsmem
+free
+cat /proc/meminfo
+ https://access.redhat.com/solutions/406773</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_análisis_2">análisis</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sudo dmidecode -t 17</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>  DDR3
+  Transfer rate 1600 MT/s
+  channel A
+  channel B
+  bank locator bank0
+  bank locator bank2
+  SODIMM DDR3 Synchronous 1600 MHz (0,6 ns)
+  -bank:0 -&gt; slot: ChannelA-DIMM0
+  -bank:2 -&gt; slot: ChannelB-DIMM0</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>slot: A memory slot is each individual plug for memory</p>
+</li>
+<li>
+<p>bank: A bank, is just a grouping of memory slots</p>
+</li>
+<li>
+<p>channel: A channel is a memory bus that is dedicated for data to travel from the CPU to the RAM modules</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>sudo hwinfo | grep -i mem -A 10</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_memoria_cache">9.4. Memoria Cache</h3>
+<div class="sect3">
+<h4 id="_bibliografia_2">9.4.1. Bibliografia</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Libro William Stalling</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Capítulo 4.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_introducción_14">9.4.2. Introducción</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Objetivo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Principio de Localidad: Espacial y Temporal</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejercicio: Tiempo de acceso (probabilidad fallo ó exito)</p>
+</li>
+<li>
+<p>Tecnología: 6T</p>
+</li>
+<li>
+<p>Estructura</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Controladora: función</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Espacios de direcciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>memoria principal</p>
+</li>
+<li>
+<p>memoria cache</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Funciones de correspondencia entre espacios de direcciones:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mapeo Directo</p>
+</li>
+<li>
+<p>Asociación total</p>
+</li>
+<li>
+<p>Asociación por conjuntos</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_principios_basicos">9.4.3. Principios Basicos</h4>
+<div class="sect4">
+<h5 id="_tecnologia">Tecnologia</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Cell: SRAM-6T</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="images/cache/sram_cell_6T.png" alt="sram cell 6T">
+</div>
+<div class="title">Figure 86. SRAM-cell</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_funcionalidad_2">Funcionalidad</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Cuello de Botella von Neumann: la latencia del ciclo de instrucción es mucho menor que la latencia de acceso a la memoria principal &#8594; tiempos muertos de la CPU.</p>
+</li>
+<li>
+<p>Memoria Cache:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Integrada en la CPU con tiempos de accesos un orden de magnitud menor que la memoria DRAM.</p>
+</li>
+<li>
+<p>Es la Copia de regiones o bloques de la memoria principal.</p>
+</li>
+<li>
+<p>Acierto-Fallo: Si la instrucción/dato a la que apunta la dirección de memoria principal DRAM está en la memoria caché, la cpu captura la instrucción o dato de la Memoria caché interna a la cpu cuyo tiempo de acceso es mucho menor que la memoria externa DRAM.</p>
+</li>
+<li>
+<p>Hit-Miss</p>
+</li>
+<li>
+<p>Ejemplo 4.1 del libro</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Principio de Localidad</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Espacial: bucles, subrutinas, arrays &#8594; almacenamiento de instrucciones y datos en direcciones próximas.</p>
+</li>
+<li>
+<p>Temporal: histórico &#8594; secuencia de acceso a datos e instrucciones en direcciones próximas.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_jerarquía">Jerarquía</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Niveles de Cache</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Level L1: Interna a la CPU : SRAM : memorias separadas para instrucciones y memoria para datos</p>
+</li>
+<li>
+<p>Level L2: Externa/Interna a la CPU:</p>
+</li>
+<li>
+<p>Level L3: Externa a la CPU</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cache/cache_levels.jpg" alt="cache levels">
+</div>
+<div class="title">Figure 87. 3 Levels</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Para aumentar la velocidad de conmutación de los transistores de las celdas de la memoria SRAM caché es necesario incrementar la corriente que circula por ellos y para ello es necesario aumentar el tamaño de dichos transistores, consumiendo más superficie de Silicio. Esta es una de las limitaciones de la capacidad de la memoria de alta velocidad a unas de decenas de Kbytes. Para mejorar esta limitación surgen los distintos niveles a distintas velocidades, siendo el nivel L1 el de mayor velocidad. Los nivels L2 y L3 de menor velocidad están fabricados con transistores de menor tamaño permitiendo aumentar su capacidad al orde de los Mbytes.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_interconexion">Interconexion</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>En serie CPU&#8594;L1&#8594;L2&#8594;L3&#8594;SDRAM</p>
+</li>
+<li>
+<p>CPU&#8594;L : transferencia de Palabras</p>
+</li>
+<li>
+<p>L&#8594;SDRAM: bloques</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cache/cache_cpu_dram.png" alt="cache cpu dram">
+</div>
+<div class="title">Figure 88. Interconexión</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cache/cache_cpu_dram_connection.png" alt="cache cpu dram connection">
+</div>
+<div class="title">Figure 89. Interconexión</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cache/cache_mmu_dram.png" alt="cache mmu dram">
+</div>
+<div class="title">Figure 90. MMU</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_estructura_cacheprincipal">Estructura Cache/Principal</h5>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cache/cache_dram_block.png" alt="cache dram block">
+</div>
+<div class="title">Figure 91. Estructura de agrupamiento</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Cache: bytes &#8594; palabras &#8594; líneas</p>
+</li>
+<li>
+<p>MP: bytes &#8594; palabras &#8594; bloques</p>
+</li>
+<li>
+<p>Se copian bloques de la Memoria Principal en líneas de la Memoria Caché, por lo que, el tamaño de un bloque y de una línea es el mismo.</p>
+</li>
+</ul>
+</div>
+<div class="sect5">
+<h6 id="_principal">Principal</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Dirección: n bits : bus de direcciones del sistema &#8594;Capacidad=2<sup>n</sup> palabras &#8594; OJO: no bytes</p>
+</li>
+<li>
+<p>Direccionable: palabras : bus de datos del sistema</p>
+</li>
+<li>
+<p>Organizada en Bloques de K palabras</p>
+</li>
+<li>
+<p>Número de bloques : Capacidad en palabras / K</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_cache">Cache</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Dirección: Nº de Línea y Palabra</p>
+</li>
+<li>
+<p>Direccionable: Palabra</p>
+</li>
+<li>
+<p>Capacidad: C Líneas</p>
+</li>
+<li>
+<p>Organizada en Líneas de K palabras y 1 etiqueta</p>
+</li>
+<li>
+<p>Etiqueta: Asociación Línea con Bloque de la Memoria Principal</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_operacion_de_lectura">Operacion de Lectura</h5>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_read_operation.png" alt="[align=&quot;center&quot;">
+</div>
+<div class="title">Figure 92. Read Operation (RA: Read Address)</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Organigrama de operaciones</p>
+</li>
+<li>
+<p>Controladora de la Caché</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_elementos_de_diseño_de_la_cache">9.4.4. Elementos de Diseño de la Cache</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Elementos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Tamaño de la Caché, Función de Correspondencia, Algoritmos de Sustitución, Política de Escritura, Tamaño de Línea, Número de Cachés</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_tamaño">Tamaño</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Contradicción: Cuanto más grande más lenta y más probabilidades de acierto.</p>
+</li>
+<li>
+<p>L1: KB</p>
+</li>
+<li>
+<p>L2: MB</p>
+</li>
+<li>
+<p>L3: MB</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_funcion_de_correspondencia_memoria_principalmemoria_caché">Funcion de Correspondencia Memoria_Principal/Memoria_Caché</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Distintas formas de asociar los bloques de la Memoria Principal con las líneas de la Memoria Caché.</p>
+</li>
+<li>
+<p>Tipos de correspondencia Bloque &lt;&#8594; Línea:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Directa (Direct mapping), Totalmente Asociativa (Full associative), Asociativa en Grupo (Set associative)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect5">
+<h6 id="_ejemplo_5">Ejemplo</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Libro W.Stalling. Capítulo 4. Ejemplo 4.2</p>
+</li>
+<li>
+<p>Ejemplo para los 3 casos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>m</em>:caché de capacidad 64 KB= 4*2<sup>14</sup> bytes</p>
+</li>
+<li>
+<p>MP :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>word size : 1 byte</p>
+</li>
+<li>
+<p>palabras/bloque = 4.</p>
+</li>
+<li>
+<p>capacidad = 16MB = 2<sup>24</sup>bytes= 2<sup>24</sup>bytes / (4bytes/bloque)= 2<sup>22</sup> bloques = 4M bloques</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La capacidad <em>m</em> de la caché = 4*2<sup>14</sup> bytes / (4bytes/línea) = 2<sup>14</sup> líneas = 16K líneas</p>
+</li>
+<li>
+<p>Como un bloque de la MP equivale a un línea de la Caché &#8594; La relación de capacidad caché/MP es 16K/4M = 1/(2<sup>8</sup>)</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_asociación_directa">Asociación Directa</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>Estructura de direcciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Memoria principal : bloques de palabras</p>
+</li>
+<li>
+<p>Memoria cache : líneas de palabras</p>
+</li>
+<li>
+<p>El tamaño de un bloque de la memoria principal es el mismo que el tamaño de una línea de la Caché.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Función de correspondecia de la controladora de la Caché:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>determinista - ningún grado de libertad en la elección de la línea correspondiente a un bloque determinado.</p>
+</li>
+<li>
+<p>el <strong>campo de línea</strong> de la dirección de memoria principal apunta a la única línea de la Caché donde puede estar la palabra que busca la controladora. Si el <strong>campo tag</strong> de la dirección de memoria principal coincide con el campo tag de la línea de la Caché, significa que la palabra buscada está en esa línea y puede ser capturada de la línea caché ya que es una copia del bloque de la memoria principal, se dice que ha habido un "hit". En caso de fallo ("miss") habrá que capturar la palabra de la Memoria Principal, por lo que la latencia será la suma del tiempo empleado en comprobación del tag más el de accesso a la palabra de la memoria principal.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_directmap.png" alt="[align=&quot;center&quot;">
+</div>
+<div class="title">Figure 93. Direct Map Structure</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>i: número de línea de caché</p>
+</li>
+<li>
+<p>j: número de bloque de la memoria principal</p>
+</li>
+<li>
+<p>m: número de líneas en la caché</p>
+</li>
+<li>
+<p>Función de correspondencia</p>
+<div class="ulist">
+<ul>
+<li>
+<p>i = j módulo m</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Organización de la caché</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Memoria_Caché/Controladora_Caché/Memoria_Principal</p>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_directmap_controller.png" alt="[align=&quot;center&quot;">
+</div>
+<div class="title">Figure 94. Direct Map Controller</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Formato de direcciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Dirección física de la memoria principal: bloque-palabra</p>
+</li>
+<li>
+<p>Dirección física de la memoria cache: tag-línea-palabra</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Operación de búsqueda de una palabra en la memoria caché.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Determinar los campos de etiqueta, línea y palabra del formato de direcciones de la memoria caché.</p>
+</li>
+<li>
+<p>La palabra pudiera estar en únicamente en la línea asignada, por lo que es necesario comparar únicamente la etiqueta de dicha línea con la etiqueta del formato de direcciones.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplo 4.2</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Apartado a)</p>
+</li>
+<li>
+<p>Formato de la dirección de memoria en campos:</p>
+<div class="listingblock">
+<div class="content">
+<pre>2^2^ palabras -&gt; campo palabra de 2 bits
+2^14^ líneas  -&gt; campo de línea de 14 bis
+resto de bits (24-14-2)=8 -&gt; campo de etiqueta de 8 bits</pre>
+</div>
+</div>
+</li>
+<li>
+<p>&#8230;&#8203;continuar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_totalmente_asociativa">Totalmente Asociativa</h6>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_fullassociative_controller.png" alt="[align=&quot;center&quot;">
+</div>
+<div class="title">Figure 95. "Full Associative Controller!</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>La correspondencia totalmente asociativa significa que no hay correspondencia</p>
+<div class="ulist">
+<ul>
+<li>
+<p>NO HAY NORMA &#8594; CADA BLOQUE DE MP PUEDE SER ASIGNADA A CUALQUIER LINEA DE LA CACHE</p>
+</li>
+<li>
+<p>LIBRE: un bloque de MP no tiene asignada ninguna línea específica y el controlador cache puede seleccionar qué línea será asignada a dicho bloque.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La dirección de memoria tiene únicamente dos campos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>s bits= etiqueta: orden del bloque de MP : desde 1 hasta 4M.</p>
+</li>
+<li>
+<p>w bits= orden de la palabra dentro del bloque: desde 1 hasta 4.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>controlador de caché</p>
+<div class="ulist">
+<ul>
+<li>
+<p>todas las etiquetas de las líneas de caché son SIMULTANEAMENTE comparadas con la etiqueta de la palabra referenciada.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>en caso de éxito, s apunta a la línea que contiene la palabra referenciada y w apunta a la palabra referenciada.</p>
+</li>
+<li>
+<p>en caso de fracaso, s apunta al bloque de la MP que contiene la palabra referenciada y w apunta a la palabra referenciada.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Formato de direcciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Dirección física de la memoria principal: bloque-palabra</p>
+</li>
+<li>
+<p>Dirección física de la memoria cache: tag-palabra</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Operación de búsqueda de una palabra en la memoria caché.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Determinar los campos de etiqueta y palabra del formato de direcciones de la memoria caché.</p>
+</li>
+<li>
+<p>La palabra puede estar en cualquier línea, por lo que es necesario comparar las etiquetas de todas las líneas</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Diferencia con el mapeo directo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el campo de etiqueta tiene s bits &gt;&gt; s-r bits</p>
+</li>
+<li>
+<p>la comparación es entre todas las etiquetas (etiquetas de gran longitud) &#8594; hardware complejo &#8594; coste</p>
+</li>
+<li>
+<p>Ejemplo 4.2 : Formato de la dirección de memoria en campos:</p>
+<div class="listingblock">
+<div class="content">
+<pre>2^2^ palabras -&gt; campo palabra de 2 bits
+resto de bits (24-2)=22 -&gt; campo de etiqueta de 22 bits</pre>
+</div>
+</div>
+</li>
+<li>
+<p>&#8230;&#8203;continuar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_asociativa_por_conjuntos">Asociativa por Conjuntos</h6>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_setassociative.png" alt="Set Associative">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>compromiso entre el rigor de la correspondencia directa y la flexibilidad de la correspondencia totalmente asociativa.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La dirección de memoria tiene 3 campos:TAG-SET-WORD &#8594; (s-d-w)/d/w</p>
+<div class="ulist">
+<ul>
+<li>
+<p>k líneas por conjunto.</p>
+</li>
+<li>
+<p>w bits : orden de la palabra. Con 2<sup>w</sup> palabras formo un bloque</p>
+</li>
+<li>
+<p>d bits :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CONJUNTO de bloques o SET de bloques o SUPERbloque o SUPERlínea.</p>
+</li>
+<li>
+<p>d &lt; l :dividimos la cache en v superbloques.</p>
+</li>
+<li>
+<p>Con v=2<sup>d</sup> superbloques de k líneas/bloque formo la memoria cache.</p>
+</li>
+<li>
+<p>Al número k de líneas de cada superbloque se le denomina VIA (WAY)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>estructura de la MP:  queda dividida en bloques y superbloques.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>2<sup>s</sup> es el número de bloques de la MP,  que si los agrupo en sets de k bloques tendré en la MP 2<sup>t</sup> agrupamientos de 2<sup>d</sup> sets cada uno &#8594;
+2<sup>s</sup>*2<sup>w</sup> = 2<sup>t</sup>*2<sup>d</sup>*k*2<sup>w</sup> &#8594; 2<sup>s</sup>=2<sup>t</sup>*2<sup>d</sup>*k &#8594; Nº de bloques en MP = Nº de gruposX*Nºsets en la Caché*Líneas en el Set</p>
+</li>
+<li>
+<p>s-d bits: nº de bits de la etiqueta</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>función de correspondencia</p>
+<div class="ulist">
+<ul>
+<li>
+<p>i = j modulo v &#8594; NORMA SEMIRIGIDA: CADA BLOQUE TIENE ASIGNADO UN CONJUNTO ESPECIFICO DE LINEAS PERO NO TIENE ASIGNADA LA LINEA DENTRO DEL CONJUNTO</p>
+</li>
+<li>
+<p>donde <em>v</em> es el número de superbloques, <em>j</em> es el número de bloque en MP e <em>i</em> el número de superbloque en la caché.</p>
+</li>
+<li>
+<p>dentro del superbloque <em>i</em> hay flexibilidad para asignarle una de las líneas o vías dentro del superbloque.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>número de vías</p>
+<div class="ulist">
+<ul>
+<li>
+<p>si el número de vías fuese 1 no habría ninguna libertad de asignación y estaríamos en el caso de correspondencia directa</p>
+</li>
+<li>
+<p>si el número de vías fuese 2 habría lago de libertad ya que habría que elegir una línea a sustituir de dos líneas posibles.</p>
+</li>
+<li>
+<p>si el número de vías fuese la capacidad de la caché el grado de libertad sería máximo, a sustituir una línea de m posibles.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_setassociative_controller.png" alt="[align=&quot;center&quot;">
+</div>
+<div class="title">Figure 96. Set Associative Controller</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Formato de direcciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Dirección física de la memoria principal: bloque-palabra</p>
+</li>
+<li>
+<p>Dirección física de la memoria cache: tag-set-palabra</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Operación de búsqueda de una palabra en la memoria caché.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Determinar los campos de etiqueta y set del formato de direcciones de la memoria caché.</p>
+</li>
+<li>
+<p>La palabra puede estar en cualquier línea pero únicamente del set asignado, por lo que es necesario comparar las etiquetas únicamente de las líneas de dicho set.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplo 4.2 : sets con 2 vías</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Formato de la dirección de memoria en campos:</p>
+<div class="listingblock">
+<div class="content">
+<pre>2^2^ palabras -&gt; campo palabra de 2 bits
+k=2
+El número de Sets en la caché -&gt; m / k = 2^14^/2 = 2^13^ conjuntos en la Caché -&gt; d=13 bits
+Etiqueta : resto de bits = (24-13-2)= 9 bits</pre>
+</div>
+</div>
+</li>
+<li>
+<p>&#8230;&#8203;continuar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_comparativa_de_los_3_tipos_de_funciones">Comparativa de los 3 tipos de funciones</h6>
+<div class="ulist">
+<ul>
+<li>
+<p>En la función de correspondencia de mapeo directo no hay ninguna libertada a la hora de seleccionar la línea de la cache, esta viene determinada por la función de correspencia. En el caso de función asociativa total la libertad es total pudiendo elegir la línea a ocupar siguiendo criterios estadísticos, etc. En el caso de función asociativa por conjuntos no hay ninguna libertad en la asignación del conjunto de líneas determinado por la función pero sí en la elección de la línea dentro del conjunto asignado por la función.</p>
+</li>
+<li>
+<p>Los dos primeros casos, mapeo directo y asociativa total, son los casos extremos de la asociativa por conjuntos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Asociativa por conjuntos con un set de una línea sería el caso de mapeo directo</p>
+</li>
+<li>
+<p>Asociativa por conjuntos con un set de todas las líneas de la caché sería el caso de asociativa total</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cache/cache_assoc_size.png" alt="[align=&quot;center&quot;">
+</div>
+<div class="title">Figure 97. Probabilidad de éxito en función del tamaño y la función de asociación</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_políticas">9.4.5. Políticas</h4>
+<div class="sect4">
+<h5 id="_reemplazo">Reemplazo</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La política de reemplazo de la controladora de la caché es según la cual cuando se produce un "miss" se tiene que seleccionar un línea de la caché para ser eliminada de la caché y dejar sitio al bloque capturado de la memoria principal. La política más popular es la  <strong>least-recently used (LRU)</strong> según la cual se descartan primero los elementos menos usados recientemente</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_escritura">Escritura</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Al igual que con la Lectura, con la Escritura la CPU escribe en la Caché, por lo que el contenido de la línea donde se ha realizado la escritura no coincide con el bloque asociado en la Memoria Principal. La política de Escritura consiste en especificar cuando se realiza la copia de la línea de la cache y los bloques de memoria asociados con diferente contenido. La política <strong>Write-Back</strong> consiste en realizar la actualización o copia en el momento en el que se va a descartar dicha línea según la política de Reemplazo.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo_de_optimización">9.4.6. Ejemplo de Optimización</h4>
+<div class="sect4">
+<h5 id="_producto_matricial">Producto Matricial</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://johnnysswlab.com/make-your-programs-run-faster-by-better-using-the-data-cache/" class="bare">https://johnnysswlab.com/make-your-programs-run-faster-by-better-using-the-data-cache/</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>El producto matricial en lenguaje C implementado mediante un bucle que accede a los Arrays de datos es un ejemplo de cómo tener en cuenta la organización de la memoria Caché a la hora de programar el algoritmo. En el ejemplo se ve la técnica "loop interchange" para modificar el orden de captura de los elementos de los arrays.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_thinkpad_l560">9.4.7. Thinkpad L560</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>cpuid | more</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>  --- cache 0 ---
+      cache type                           = data cache (1)
+      cache level                          = 0x1 (1)
+      ways of associativity                = 0x8 (8)
+      number of sets                       = 0x40 (64)
+      (size synth)                         = 32768 (32 KB)
+      ¿tamaño de línea?                    32KB=2^15^Bytes= 64sets x 8líneas/set x n_bytes/línea=512*n=2^9^*n -&gt; n=2^6^=64Bytes
+      Mode: 0x01 (Write Back)
+ --- cache 1 ---
+      cache type                           = instruction cache (2)
+      cache level                          = 0x1 (1)
+      ways of associativity                = 0x8 (8)
+      number of sets                       = 0x40 (64)
+      (size synth)                         = 32768 (32 KB)
+      Mode: 0x01 (Write Back)
+--- cache 2 ---
+      cache type                           = unified cache (3)
+      cache level                          = 0x2 (2)
+      ways of associativity                = 0x4 (4)
+      number of sets                       = 0x400 (1024)
+      (size synth)                         = 262144 (256 KB)
+      ¿tamaño de línea?                    256KB=2^18^Bytes= 1024sets x 4líneas/set x n_bytes/línea=2^12^*n -&gt; n=2^6^=64Bytes
+      --- cache 3 ---
+      cache type                           = unified cache (3)
+      cache level                          = 0x3 (3)
+      ways of associativity                = 0xc (12)
+      number of sets                       = 0x1000 (4096)
+      (size synth)                         = 3145728 (3 MB)</pre>
+</div>
+</div>
+</li>
+<li>
+<p><code>getconf LEVEL1_DCACHE_LINESIZE</code></p>
+</li>
+<li>
+<p><code>getconf LEVELTABTAB</code></p>
+</li>
+<li>
+<p><code>sudo hwinfo | grep -i cache -A 10</code></p>
+</li>
+<li>
+<p><code>sudo dmidecode -t 17</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>cache &#8594; write-back instruction</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_memoria_virtual">9.5. Memoria Virtual</h3>
+<div class="sect3">
+<h4 id="_introducción_15">9.5.1. Introducción</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Información detallada se puede consultar en el <a href="_apéndice_memoria_virtual.html#apendice_memvirtual">Apéndice</a></p>
+</li>
+<li>
+<p>La memoria virtual se estudia detalladamente en la asignatura de Sistemas Operativos, por lo que aquí únicamente se van a recordar un par de ideas fundamentales.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_punto_de_vista_del_programador_y_cpu">9.5.2. Punto de vista del Programador y CPU</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Cuando el programador programa en el lenguaje ensamblador, cuando se trabaja con el debugger, etc y se visualizan direcciones de memoria, dichas direcciones de memoria pertenecen al espacio de direcciones VIRTUAL, no al espacio de direcciones físico.</p>
+</li>
+<li>
+<p>De la misma forma la CPU opera con direcciones virtuales. Por ejemplo el contador de programa trabaja con direcciones virtuales</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Por ello es necesario un circuito hardware que traduzca direcciones virtuales a direcciones físicas y se las entregue al controlador de memoria MC. Dicho traductor hardware se denomina Memory Managment Unit (MMU).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_espacio_virtual_de_direcciones_de_memoria">9.5.3. Espacio virtual de direcciones de memoria</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El compilador, linker, etc cuando traducen lenguajes de programación de alto nivel como el lenguaje C o bajo nivel como el lenguaje ASM, etc y lo convierten en lenguaje máquina tienen que asignar direcciones de memoria a las instrucciones, variables, estructuras de datos, punteros, etc.. Está asignación se realiza de forma totalmente libre, sin tener en cuenta la memoria física de la computadora. Se asignan direcciones de forma abstracta, es decir, como si fuesen las entradas de una tabla donde el contenido de la tabla son las instrucciones y los datos.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_organización_lógica_de_un_programa_en_lenguaje_máquina_secciones_y_segmentos">9.5.4. Organización lógica de un programa en lenguaje máquina: Secciones y Segmentos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Información sobre las secciones (data,text,rodata&#8230;&#8203;) y los segmentos (código, datos, pila, heap ) en el <a href="_apéndice_memoria_virtual.html#apendice_segmentos_secciones">Apéndice</a></p>
+</li>
+<li>
+<p>La organización lógica de los módulos de los programas en secciones y de un programa/proceso en segmentos facilita la traducción (compilador, linker, ensamblador) y también la asignación de memoria virtual al proceso.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_mecanismos_de_entradasalida.html">Mecanismos de Entrada/Salida</a> | ↑ Up: <a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

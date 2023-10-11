@@ -1,0 +1,10 @@
+[.text-center]
+["graphviz", "proceso_compilacion.png", align="center", title="Proceso de Compilación"]
+-----
+digraph G {
+"Módulo Fuente C" -> Preprocesamiento -> Compilador -> "Módulo ASM" -> "Ensamblaje" -> "Módulo Objeto Binario Reubicable" -> Linker -> "Módulo Objeto Binario Ejecutable" -> "Cargador en Memoria" -> "Proceso en Ejecución";
+"Módulos Objeto Reubicables"-> Linker;
+"Módulos Objeto librería_dinámica_libc_en_memoria" -> "Proceso en Ejecución";
+ }
+-----
+

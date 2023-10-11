@@ -1,0 +1,2106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 10.2.0" />
+<title>Introducción a la Estructura de los Computadores</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overridden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Introducción a la Estructura de los Computadores</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="introo">Introducción</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+El objetivo de la asignatura Estructura de Computadores (240306) del Grado de <a href="http://www.unavarra.es/ets-industrialesytelecos/estudios/grado/grado-en-ingenieria-informatica/presentacion?submenu=yes">Ingeniería Informática</a> de la Universidad Pública de Navarra es ser un curso introductorio universitario a la arquitectura de los computadores, estudiando sus componentes básicos (procesador, memoria y módulo de entrada/salida) así como la programación de bajo nivel en lenguaje ensamblador x86 mediante la utilización de herramientas de desarrollo software como el compilador, depurador, etc.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_arquitectura_de_una_máquina">Arquitectura de una máquina</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Arquitectura: Organización, Estructura: Qué, Cómo, Implementación (tecnología)
+</p>
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="./images/introduccion/vehicle_arch.jpg" alt=".text-center" />
+</div>
+<div class="title">Figure 1. Estructura del Automóvil</div>
+</div>
+</li>
+</ul></div>
+<div class="imageblock">
+<div class="content">
+<img src="sunset.jpg" alt="Sunset" />
+</div>
+<div class="title">Figure 2. A mountain sunset</div>
+</div>
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="./images/introduccion/Personal_computer,_exploded_6.png" alt="./images/introduccion/Personal_computer,_exploded_6.png" />
+</div>
+<div class="title">Figure 3. Personal Computer</div>
+</div>
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="./images/introduccion/motherboard_parts.jpg" alt="./images/introduccion/motherboard_parts.jpg" />
+</div>
+<div class="title">Figure 4. Placa Base</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_perspectiva_hw">Perspectiva HW</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+4 Módulos Básicos: CPU-MEMORIA-CONTROLADORES Entrada/Salida [Periféricos]-BUSES
+</p>
+</li>
+</ul></div>
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="./images/introduccion/cpui7.jpeg" alt="./images/introduccion/cpui7.jpeg" />
+</div>
+<div class="title">Figure 5. CPU Intel Core i7 4ª Generación</div>
+</div>
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="./images/introduccion/RAMtypes2.jpg" alt="./images/introduccion/RAMtypes2.jpg" />
+</div>
+<div class="title">Figure 6. Memoria DRAM</div>
+</div>
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="./images/introduccion/Seagate.jpg" alt="./images/introduccion/Seagate.jpg" />
+</div>
+<div class="title">Figure 7. Periféricos: Disco Duro Seagate</div>
+</div>
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="./images/introduccion/BusOnMotherboard.png" alt="./images/introduccion/BusOnMotherboard.png" />
+</div>
+<div class="title">Figure 8. Bus de la Placa Base</div>
+</div>
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="./images/introduccion/busribbon.jpeg" alt="./images/introduccion/busribbon.jpeg" />
+</div>
+<div class="title">Figure 9. Bus Cableado</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lenguajes_de_programación_niveles">Lenguajes de Programación: Niveles</h2>
+<div class="sectionbody">
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="./images/introduccion/lenguajemaquina.png" alt="./images/introduccion/lenguajemaquina.png" />
+</div>
+<div class="title">Figure 10. Lenguaje Máquina</div>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Pascal
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #0000FF">program</span></span> Hello_world<span style="color: #990000">;</span>
+ <span style="font-weight: bold"><span style="color: #0000FF">begin</span></span>
+   <span style="font-weight: bold"><span style="color: #0000FF">writeln</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'hello world'</span><span style="color: #990000">)</span>
+ <span style="font-weight: bold"><span style="color: #0000FF">end</span></span><span style="color: #990000">.</span></tt></pre></div></div>
+</li>
+<li>
+<p>
+L. Máquina-Binario Intel x86
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt># <span style="color: #990000">[</span><span style="color: #993399">2</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">begin</span></span>
+00000000004001a0 <span style="color: #990000">&lt;</span>PASCALMAIN<span style="color: #990000">&gt;:</span>
+  4001a0<span style="color: #990000">:</span>       <span style="color: #993399">01010101</span>
+  4001a1<span style="color: #990000">:</span>       <span style="color: #993399">01001000</span> <span style="color: #993399">10001001</span> <span style="color: #993399">11100101</span>
+  4001a4<span style="color: #990000">:</span>       <span style="color: #993399">01001000</span> <span style="color: #993399">10000011</span> <span style="color: #993399">11101100</span> <span style="color: #993399">00010000</span>
+  4001a8<span style="color: #990000">:</span>       <span style="color: #993399">01001000</span> <span style="color: #993399">10001001</span> <span style="color: #993399">01011101</span> <span style="color: #993399">11111000</span>
+  4001ac<span style="color: #990000">:</span>       <span style="color: #993399">11101000</span> <span style="color: #993399">10110111</span> <span style="color: #993399">00111110</span> <span style="color: #993399">00000001</span> <span style="color: #993399">00000000</span>
+# <span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">writeln</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'hello world'</span><span style="color: #990000">)</span>
+  4001b1<span style="color: #990000">:</span>       <span style="color: #993399">11101000</span> <span style="color: #993399">11001010</span> <span style="color: #993399">10010011</span> <span style="color: #993399">00000001</span> <span style="color: #993399">00000000</span>
+  4001b6<span style="color: #990000">:</span>       <span style="color: #993399">01001000</span> <span style="color: #993399">10001001</span> <span style="color: #993399">10100011</span>
+  4001b9<span style="color: #990000">:</span>       <span style="color: #993399">01001000</span> <span style="color: #993399">10001001</span> <span style="color: #993399">11011110</span>
+  4001bc<span style="color: #990000">:</span>       <span style="color: #993399">01001000</span> <span style="color: #993399">10111010</span> <span style="color: #993399">11000000</span> <span style="color: #993399">11110110</span> <span style="color: #993399">01100001</span> <span style="color: #993399">00000000</span> <span style="color: #993399">00000000</span>
+  4001c3<span style="color: #990000">:</span>       <span style="color: #993399">00000000</span> <span style="color: #993399">00000000</span> <span style="color: #993399">00000000</span>
+  4001c6<span style="color: #990000">:</span>       <span style="color: #993399">10111111</span> <span style="color: #993399">00000000</span> <span style="color: #993399">00000000</span> <span style="color: #993399">00000000</span> <span style="color: #993399">00000000</span>
+  4001cb<span style="color: #990000">:</span>       <span style="color: #993399">11101000</span> <span style="color: #993399">01111000</span> <span style="color: #993399">10010110</span> <span style="color: #993399">00000001</span> <span style="color: #993399">00000000</span>
+  4001d0<span style="color: #990000">:</span>       <span style="color: #993399">11101000</span> <span style="color: #993399">00010011</span> <span style="color: #993399">00111101</span> <span style="color: #993399">00000001</span> <span style="color: #993399">00000000</span>
+  4001d5<span style="color: #990000">:</span>       <span style="color: #993399">01001000</span> <span style="color: #993399">10001001</span> <span style="color: #993399">11011111</span>
+  4001d8<span style="color: #990000">:</span>       <span style="color: #993399">11101000</span> <span style="color: #993399">01110011</span> <span style="color: #993399">10010101</span> <span style="color: #993399">00000001</span> <span style="color: #993399">00000000</span>
+  4001dd<span style="color: #990000">:</span>       <span style="color: #993399">11101000</span> <span style="color: #993399">00000110</span> <span style="color: #993399">00111101</span> <span style="color: #993399">00000001</span> <span style="color: #993399">00000000</span>
+  <span style="color: #993399">4001e2</span><span style="color: #990000">:</span>       <span style="color: #993399">11101000</span> <span style="color: #993399">10011001</span> <span style="color: #993399">01000010</span> <span style="color: #993399">00000001</span> <span style="color: #993399">00000000</span>
+  <span style="color: #993399">4001e7</span><span style="color: #990000">:</span>       <span style="color: #993399">01001000</span> <span style="color: #993399">10001011</span> <span style="color: #993399">01011101</span> <span style="color: #993399">11111000</span>
+  4001eb<span style="color: #990000">:</span>       <span style="color: #993399">10101001</span>
+  4001ec<span style="color: #990000">:</span>       <span style="color: #993399">10010011</span></tt></pre></div></div>
+</li>
+<li>
+<p>
+L. Máquina-Hexadecimal vs Lenguaje Ensamblador ASM x86
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt># <span style="color: #990000">[</span><span style="color: #993399">2</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">begin</span></span>
+00000000004001a0 <span style="color: #990000">&lt;</span>PASCALMAIN<span style="color: #990000">&gt;:</span>
+  4001a0<span style="color: #990000">:</span>       <span style="color: #993399">55</span>                      push   <span style="color: #990000">%</span>rbp
+  4001a1<span style="color: #990000">:</span>       <span style="color: #993399">48</span> <span style="color: #993399">89</span> e5                mov    <span style="color: #990000">%</span>rsp<span style="color: #990000">,%</span>rbp
+  4001a4<span style="color: #990000">:</span>       <span style="color: #993399">48</span> <span style="color: #993399">83</span> ec <span style="color: #993399">10</span>             sub    $<span style="color: #993399">0x10</span><span style="color: #990000">,%</span>rsp
+  4001a8<span style="color: #990000">:</span>       <span style="color: #993399">48</span> <span style="color: #993399">89</span> 5d f8             mov    <span style="color: #990000">%</span>rbx<span style="color: #990000">,-</span><span style="color: #993399">0x8</span><span style="color: #990000">(%</span>rbp<span style="color: #990000">)</span>
+  4001ac<span style="color: #990000">:</span>       e8 b7 3e <span style="color: #993399">01</span> <span style="color: #993399">00</span>          callq  <span style="color: #993399">414068</span> <span style="color: #990000">&lt;</span>FPC_INITIALIZEUNITS<span style="color: #990000">&gt;</span>
+# <span style="color: #990000">[</span><span style="color: #993399">3</span><span style="color: #990000">]</span> <span style="font-weight: bold"><span style="color: #0000FF">writeln</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'hello world'</span><span style="color: #990000">)</span>
+  4001b1<span style="color: #990000">:</span>       e8 ca <span style="color: #993399">93</span> <span style="color: #993399">01</span> <span style="color: #993399">00</span>          callq  <span style="color: #993399">419580</span> <span style="color: #990000">&lt;</span>fpc_get_output<span style="color: #990000">&gt;</span>
+  4001b6<span style="color: #990000">:</span>       <span style="color: #993399">48</span> <span style="color: #993399">89</span> c3                mov    <span style="color: #990000">%</span>rax<span style="color: #990000">,%</span>rbx
+  4001b9<span style="color: #990000">:</span>       <span style="color: #993399">48</span> <span style="color: #993399">89</span> de                mov    <span style="color: #990000">%</span>rbx<span style="color: #990000">,%</span>rsi
+  4001bc<span style="color: #990000">:</span>       <span style="color: #993399">48</span> ba c0 f6 <span style="color: #993399">61</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>    movabs $<span style="color: #993399">0x61f6c0</span><span style="color: #990000">,%</span>rdx
+  4001c3<span style="color: #990000">:</span>       <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>
+  4001c6<span style="color: #990000">:</span>       bf <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>          mov    $<span style="color: #993399">0x0</span><span style="color: #990000">,%</span>edi
+  4001cb<span style="color: #990000">:</span>       e8 <span style="color: #993399">78</span> <span style="color: #993399">96</span> <span style="color: #993399">01</span> <span style="color: #993399">00</span>          callq  <span style="color: #993399">419848</span> <span style="color: #990000">&lt;</span>FPC_WRITE_TEXT_SHORTSTR<span style="color: #990000">&gt;</span>
+  4001d0<span style="color: #990000">:</span>       e8 <span style="color: #993399">13</span> 3d <span style="color: #993399">01</span> <span style="color: #993399">00</span>          callq  413ee8 <span style="color: #990000">&lt;</span>FPC_IOCHECK<span style="color: #990000">&gt;</span>
+  4001d5<span style="color: #990000">:</span>       <span style="color: #993399">48</span> <span style="color: #993399">89</span> df                mov    <span style="color: #990000">%</span>rbx<span style="color: #990000">,%</span>rdi
+  4001d8<span style="color: #990000">:</span>       e8 <span style="color: #993399">73</span> <span style="color: #993399">95</span> <span style="color: #993399">01</span> <span style="color: #993399">00</span>          callq  <span style="color: #993399">419750</span> <span style="color: #990000">&lt;</span>fpc_writeln_end<span style="color: #990000">&gt;</span>
+  4001dd<span style="color: #990000">:</span>       e8 <span style="color: #993399">06</span> 3d <span style="color: #993399">01</span> <span style="color: #993399">00</span>          callq  413ee8 <span style="color: #990000">&lt;</span>FPC_IOCHECK<span style="color: #990000">&gt;</span>
+  <span style="color: #993399">4001e2</span><span style="color: #990000">:</span>       e8 <span style="color: #993399">99</span> <span style="color: #993399">42</span> <span style="color: #993399">01</span> <span style="color: #993399">00</span>          callq  <span style="color: #993399">414480</span> <span style="color: #990000">&lt;</span>FPC_DO_EXIT<span style="color: #990000">&gt;</span>
+  <span style="color: #993399">4001e7</span><span style="color: #990000">:</span>       <span style="color: #993399">48</span> 8b 5d f8             mov    <span style="color: #990000">-</span><span style="color: #993399">0x8</span><span style="color: #990000">(%</span>rbp<span style="color: #990000">),%</span>rbx
+  4001eb<span style="color: #990000">:</span>       c9                      leaveq
+  4001ec<span style="color: #990000">:</span>       c3                      retq</tt></pre></div></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_interface_software_hardware">Interface Software/Hardware</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Interacción del Programador con la Máquina: Programación de bajo nivel. Integración en el Kernel del Sistema Operativo.
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>                                               +-----------------------------+
+                                               |   Programación Bajo Nivel   |
+                                               |                             |
+                                               +-------------+---------------+
+                                                             |                        SOFTWARE
+      -------------------------------------------------------|--------------------------------
+                                                             +                        HARDWARE
+                                                             |
+                                                             v
+                                               +-----------------------------+
+                                               |   Unidad Central de Proceso |
+                                               |                             |
+                                               +-------------+---------------+
+                                                             |
+               +----------------------+----------------------+-----------+
+               |                      |                                  |
+               v                      v                                  v
+  +-------------------+  +-------------------+  +------------------------------------------+
+  | Memoria Principal |  | Cálculo Aritmético|  |                Controladores I/O         |
+  |                   |  | y Lógico          |  |                                          |
+  +-------------------+  +-------------------+  +------+-----------+-------------+---------+
+                                                       |           |             |
+                                                       v           v             v
+                                                  +----+---+ +-----+----+ +------+------+
+                                                  | Display| | Teclado  | | Disco Duro  |
+                                                  |        | |          | |             |
+                                                  +--------+ +----------+ +-------------+</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+Programación de bajo nivel
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Módulo fuente: Lenguaje C ó Lenguaje ensamblador
+</p>
+</li>
+<li>
+<p>
+Módulo objeto: Lenguaje máquina &#8594; Compilación, Ensamblaje y Enlazado del Módulo Fuente.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Dos tipos de Programacióon de bajo nivel en lenguaje máquina
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Bare metal        &#8594; Programación de sistemas empotrados &#8594; Raspberry Pi (Ej: control de una video cámara)
+</p>
+</li>
+<li>
+<p>
+Sistema Operativo &#8594; Programación de Sistemas (Programación de Drivers, etc)
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_temario">Temario</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_a_href_http_www_unavarra_es_ficha_asignaturadoa_languageid_100000_amp_codplan_240_amp_codasig_240306_web_estructura_de_ordenadores_a"><a href="http://www.unavarra.es/ficha-asignaturaDOA?languageId=100000&amp;codPlan=240&amp;codAsig=240306">Web Estructura de Ordenadores</a></h3>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>Temario
+
+<span style="color: #993399">1</span> - Introducción
+<span style="color: #993399">2</span> - Arquitectura de Von Neumann
+     <span style="color: #993399">2.1</span> CPU
+     <span style="color: #993399">2.2</span> Memoria
+     <span style="color: #993399">2.3</span> Entrada <span style="color: #990000">/</span> Salida
+<span style="color: #993399">3</span> - Representación de datos
+     <span style="color: #993399">3.1</span> Bit<span style="color: #990000">,</span> Byte y Palabra
+     <span style="color: #993399">3.2</span> Caracteres<span style="color: #990000">,</span> enteros y reales
+<span style="color: #993399">4</span> - Aritmética y lógica
+     <span style="color: #993399">4.1</span> Operaciones aritméticas y lógicas sobre enteros en binario
+     <span style="color: #993399">4.2</span> Redondeo y propagación de error en números reales
+<span style="color: #993399">5</span> - Representación de instrucciones
+     <span style="color: #993399">5.1</span> Lenguaje máquina<span style="color: #990000">,</span> lenguaje ensamblador y lenguajes de alto nivel
+     <span style="color: #993399">5.2</span> Formato de instrucción
+     <span style="color: #993399">5.3</span> Tipos de instrucción y modos de direccionamiento
+<span style="color: #993399">6</span> - Programación en lenguaje ensamblador de construcciones básicas de los lenguajes de alto nivel
+     <span style="color: #993399">6.1</span> Sentencias de asignación
+     <span style="color: #993399">6.2</span> Sentencias condicionales
+     <span style="color: #993399">6.3</span> Bucles
+     <span style="color: #993399">6.4</span> LLamadas y retorno de funcion o subrutina
+<span style="color: #993399">7</span> - Arquitectura y organización de la CPU
+     <span style="color: #993399">7.1</span> Conjunto de instrucciones
+     <span style="color: #993399">7.2</span> Arquitecturas CISC<span style="color: #990000">,</span> RISC y VLIW
+     <span style="color: #993399">7.3</span> Fases de ejecución de una instrucción
+     <span style="color: #993399">7.4</span> Camino de datos
+<span style="color: #993399">8</span> - Sistema de entrada <span style="color: #990000">/</span> salida
+     <span style="color: #993399">8.1</span> Sincronización por encuesta
+     <span style="color: #993399">8.2</span> Sincornización por interrupción
+     <span style="color: #993399">8.3</span> Vector de interrupciones
+     <span style="color: #993399">8.4</span> Acceso directo a memoria DMA
+     <span style="color: #993399">8.5</span> Programación en lenguaje ensamblador de rutinas de entrada/salida
+<span style="color: #993399">9</span> - Organización de la memoria
+     <span style="color: #993399">9.1</span> Jerarquía de memoria
+     <span style="color: #993399">9.2</span> Latencia y ancho de banda
+     <span style="color: #993399">9.3</span> Memoria cache
+     <span style="color: #993399">9.4</span> Memoria virtual</tt></pre></div></div>
+</div>
+<div class="sect2">
+<h3 id="_bibliografia_basica">Bibliografia Basica</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.book-info.com/isbn/1-4058-9270-6.htm">book info</a>: por autores &#8594; william stalling, etc
+</p>
+</li>
+</ul></div>
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="./images/introduccion/william_stalling7_portada.jpg" alt="./images/introduccion/william_stalling7_portada.jpg" width="300" />
+</div>
+<div class="title">Figure 11. William Stalling Book</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Organización y arquitectura de computadores .William Stallings
+Edición 7, reimpresa Pearson Prentice Hall
+ISBN 8489660824, 9788489660823 . 2006</code></pre>
+</div></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Computer Organization and Architecture: Designing for Performance.
+William Stallings
+9ª Ed Upper Saddle River (NJ) : Prentice Hall, [2013]
+ISBN 0-273-76919-7 . 2012</code></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://williamstallings.com/COA/COA7e.html">COA 7ª</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.pearsonhighered.com/educator/academic/product/0,,0131856448,00+en-USS_01DBC.html">Pearson</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://www.pearson.com/us/higher-education/program/Stallings-Pearson-e-Text-for-Computer-Organization-and-Architecture-Access-Code-Card-11th-Edition/PGM2043621.html">11º Ed 2019</a>
+</p>
+</li>
+</ul></div>
+<div class="imageblock" style="text-align:center;">
+<div class="content">
+<img src="./images/introduccion/programming_from_the_ground_up.jpg" alt="./images/introduccion/programming_from_the_ground_up.jpg" />
+</div>
+<div class="title">Figure 12. Programming Assembly</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Programming from the Ground Up
+by Jonathan Bartlett Edited by Dominick Bruno, Jr.
+Copyright © 2003 by Jonathan Bartlett
+ISBN 0-9752838-4-7
+Published by Bartlett Publishing in Broken Arrow, Oklahom</code></pre>
+</div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Programming from the Ground Up  by Jonathan Bartlett. Programación en Lenguaje Ensamblador AT&amp;T para la arquitectura x86.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://programminggroundup.blogspot.com.es/2007/01/programming-from-ground-up.html">PGU book online</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://savannah.nongnu.org/projects/pgubook/">PGU book home</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://download.savannah.gnu.org/releases/pgubook/">pdf</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Documentación de los Manuales: La mayoría de las aplicaciones y herramientas software de la fundación GNU y Linux disponen de Manuales bien on-line o bien localmente en la propia máquina. Manual del compilador gcc: <code>$man gcc</code>
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">Es una habilidad a adquirir por el profesional informático el acceder y utilizar dichos manuales así como disponer de hojas de referencia de acceso rápido durante la sesiones de trabajo.</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bibliografía_complementaria">Bibliografía Complementaria</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+David A. Patterson, John L. Hennessy. Computer Organizarion and Design. The Hardware / Software Interface. RISC-V Edition. Morgan Kaufmann Series in Computer Architecture. 2017.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Libro Standard de la mayoría de las Universidades.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Randal E. Bryant, David R. O&#8217;Hallaron. Computer Systems: A Programmer&#8217;s Perspective. Addison-Wesley. 2nd Edition. 2010.
+</p>
+</li>
+<li>
+<p>
+Paul Carter. PC Assembly Language. Acceso libre. 2006.
+</p>
+</li>
+<li>
+<p>
+K.N.King. C programming, a Modern Approach W.W. Norton 2ªEd. 2008.
+</p>
+</li>
+<li>
+<p>
+Jeff Duntemann. Assembly Language Step-by-Step: Programming with Linux. Wiley Ed. 3rd Edition. 2009.
+</p>
+</li>
+<li>
+<p>
+Kip R. Irvine. Assembly Language for x86 Processors. Pearson. 6th Edition. 2014.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_profesorado">Profesorado</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Cándido Aramburu Mayoz.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Doctor Ingenierio Telecomunicación. Profesor Titular de Universidad.
+</p>
+</li>
+<li>
+<p>
+Edificio los Tejos, planta 2ª. Despacho 2028.
+</p>
+</li>
+<li>
+<p>
+Tutorías semestre Otoño : Viernes de 8:00 a 14:00
+</p>
+</li>
+<li>
+<p>
+correo electrónico interno: a través del servidor Miaulario.
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.unavarra.es/ficha-docente?rangoLetras=a-z&amp;uid=364">PDI Profesorado</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Andrés Garde Gurpegui
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Técnico Superior de la Dirección General de Informática y Telecomunicaciones del Gobierno de Navarra.
+</p>
+</li>
+<li>
+<p>
+Profesor Asociado (Prácticas de Laboratorio)
+</p>
+</li>
+<li>
+<p>
+Edificio de Los Tejos, planta 2ª, Sala de Asociados del departamento de INGENIERÍA ELÉCTRICA, ELECTRÓNICA Y DE COMUNICACIÓN.
+</p>
+</li>
+<li>
+<p>
+andres.gardeATunavarra.es
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.unavarra.es/pdi?uid=6578">PDI Profesorado</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_grado_informática">Grado Informática</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.unavarra.es/sites/grados/informatica-y-telecomunicacion/ingenieria-informatica/asignaturas-y-profesorado.html">Grado Informatica</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+200 - Escuela Técnica Superior de Ingeniería Industrial, Informática y de Telecomunicación
+</p>
+</li>
+<li>
+<p>
+240 - Graduado o Graduada en Ingeniería Informática por la Universidad Pública de Navarra
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_calendarios">Calendarios</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.unavarra.es/sites/estudios/calendarios.html">Calendario administrativo</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Teoría: Grupo1 GG Jueves 15:00 A318 ; Grupo2 GG Viernes 17:00 A207 ; Grupo91 GG Lunes 19:00 A135
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<a href="http://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/Horario1C.htm">Calendario Aulas Informática 1Cuatrimestre</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/Horario2C.htm">Calendario Aulas Informática 2Cuatrimestre</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://www.unavarra.es/sites/grados/informatica-y-telecomunicacion/ingenieria-informatica/asignaturas-y-profesorado.html">Grado Informatica</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Teoría
+</p>
+<div class="tableblock">
+<table rules="all"
+width="60%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<col width="16%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>Lunes</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Martes</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Miércoles</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Jueves</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Viernes</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>15:00</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>T1-A318</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>17:00</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>T2-A207</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>19:00</code></p></td>
+<td align="left" valign="top"><p class="table"><code>T91-A135</code></p></td>
+<td align="left" valign="top"><p class="table"><code>P91</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Prácticas
+</p>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><code>A310 P3</code></p></td>
+<td align="left" valign="top"><p class="table"><code>A310 P2</code></p></td>
+<td align="left" valign="top"><p class="table"><code>A306 P91</code></p></td>
+<td align="left" valign="top"><p class="table"><code>P-ARQ P1</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>15:00-17:00</code></p></td>
+<td align="left" valign="top"><p class="table"><code>17:00-19:00</code></p></td>
+<td align="left" valign="top"><p class="table"><code>19:00-21:00</code></p></td>
+<td align="left" valign="top"><p class="table"><code>19:00-21:00</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>30/9</code></p></td>
+<td align="left" valign="top"><p class="table"><code>30/9</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>14/10</code></p></td>
+<td align="left" valign="top"><p class="table"><code>14/10</code></p></td>
+<td align="left" valign="top"><p class="table"><code>5/10</code></p></td>
+<td align="left" valign="top"><p class="table"><code>5/10</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>28/10</code></p></td>
+<td align="left" valign="top"><p class="table"><code>28/10</code></p></td>
+<td align="left" valign="top"><p class="table"><code>19/10</code></p></td>
+<td align="left" valign="top"><p class="table"><code>19/10</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>2/11</code></p></td>
+<td align="left" valign="top"><p class="table"><code>2/11</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>11/11</code></p></td>
+<td align="left" valign="top"><p class="table"><code>11/11</code></p></td>
+<td align="left" valign="top"><p class="table"><code>16/11</code></p></td>
+<td align="left" valign="top"><p class="table"><code>16/11</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>25/11</code></p></td>
+<td align="left" valign="top"><p class="table"><code>25/11</code></p></td>
+<td align="left" valign="top"><p class="table"><code>30/11</code></p></td>
+<td align="left" valign="top"><p class="table"><code>30/11</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>
+T1: Aula A318
+</p>
+</li>
+<li>
+<p>
+T2: Aula A207
+</p>
+</li>
+<li>
+<p>
+T91: Aula A135
+</p>
+</li>
+<li>
+<p>
+P3: Jueves a las 15:00 en A310&#8594; Grupos de teoría G1 y G2
+</p>
+</li>
+<li>
+<p>
+P2: Jueves a las 17:00 en A310 &#8594; Grupo de teoría G2
+</p>
+</li>
+<li>
+<p>
+P1:  Martes a las 19:00 en P-ARQ&#8594; Grupo de teoría G1
+</p>
+</li>
+<li>
+<p>
+P91: Martes a las 19:00 en  &#8594; Grupo de teoría Euskera
+</p>
+</li>
+<li>
+<p>
+Prof Andrés Garde: 3 Grupos de Castellano P1,P2,P3
+</p>
+</li>
+<li>
+<p>
+Prof Cándido Aramburu: Grupo Euskera: Aula A306
+</p>
+</li>
+<li>
+<p>
+Aula P-ARQ: Aula Arquitectura, segunda planta del edificio Pinos. Aula con 30 puestos y sistema de video proyección.
+Software igual que el resto del aulario.
+</p>
+</li>
+<li>
+<p>
+Semanas del curso :
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+15 semanas: Duración del curso 2 de Septiembre al 17 de Diciembre
+</p>
+</li>
+<li>
+<p>
+Período de Evaluación:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+ordinaria: del 17 al 22 de diciembre y del 7 al 12 de enero 2022
+</p>
+</li>
+<li>
+<p>
+recuperación: del 17 de enero al 25 de enero 2022
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Fiestas
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>12 de octubre (Fiesta Nacional de España).
+01 de noviembre (Festividad de Todos los Santos).
+03 de diciembre (San Francisco Javier, Día de Navarra).
+06 de diciembre (Día de la Constitución).
+08 de diciembre (Inmaculada Concepción).</code></pre>
+</div></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_grupos_de_prácticas">Grupos de Prácticas</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+P1,P2,P3
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>P1                              P2                                      P3
+
+Aguirre Eguizabal, Endika        Espinoza Zarate, Danny Alexander Da Cunha Moreira, Diogo Manuel
+Aldanondo Jimenez, Roberto       Ezziani , Yasin                  de la Nava Ortego, Asier
+Aldaz Burgoa, Miguel             Flamarique Arellano, Aritz       Dealbert Gonçalves, Pablo
+Aller Errea, Yeray               Gallo Ansa, Borja                Diez de Rada Beltran, Alba
+Alvarez Garcia, David            Garde Gurpegui, Andrés           Hijarrubia Bezares, Odei
+Andreu Mangado, Alvaro           Gomez Jauregui, Samuel           Lopez Goñi, Juan
+Aranguren Ortiz, Javier          Itoiz Garcia, Raúl               Muñoz Lahoz, David
+Arriazu Muñoz, Jon               Jimenez Navarcorena, Oscar       Peñas Escribano, Lucas
+Arribillaga Ciriza, Ekaitz       Kamp Ortega, Axel                Perez de Iriarte Les, Mikelats
+Artazcoz Velaz, Javier           Larralde Baldanta, Ibai          Resano Aisa, Jaime
+Arteaga Mayor, Diego             Leon Iso, Oriol                  Reviriego Reinaldo, Adrián
+Ayala Lauroba, Dennis            Lopez de Vicente, Miguel         Salvoch Vilches, Mikel
+Azcoiti Peña, Luis               Mancho Gochi, Daniel             Sanchez Monreal, Julen
+Azcona Recari, Guillermo         Marin Munarriz, Adriana          Santos Garzon, Jaider Felipe
+Barandiaran Lasheras, Nerea      Monclus Radigales, Pablo         Sarango Quizhpe, Alexánder
+Barriuso Cervera, Pablo          Morala Martinez, Andrea          Sola Delgado, Iván
+Basterra Arteaga, Paula          Morales Zufia, Martín            Sotomayor Ramos, Eliezer
+Bastida Vidaurre, Andrés         Muro Marco, Javier               Tarragona Rebollo, Odei
+Blasco Di Rosa, Sol              Navascues Martinez, Ivan         Uranga Roldan, Aitor
+Bodziony , Karolina Maria        Pernaut Murolas, Javier          Urdiroz Arroyo, Iker
+Bouzarhoun el Asry, Wassim       Rodriguez Meneses, Julen         Valencia Aldunate, Sergio
+Cardenas Curicho, Solange Samanta Ruiz Cabodevilla, Adrian        Varela Martinez, Iñigo
+Castilla Jaurrieta, Pedro        Ruiz Oyarzun, Carlos             Verde Perez, Pablo
+Ciordia Barcos, Antonino         Sagaseta de Ilurdoz Sanchez, Miguel Vergara Dominguez, Sergio
+Cojocaru , Mihail                Sanchez Albardiaz, Juan          Vons Vons, Igor Volodimir
+Couceiro Eizaguirre, Javier      Zubiri Remirez, Fermín           Zabalegui Murugarren, Iker
+Razvant Sofrone, Dragos</code></pre>
+</div></div>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_metodología">Metodología</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Teoría, Ejercicios, Prácticas y Exámenes.
+</p>
+</li>
+</ul></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 1. metodología</caption>
+<col width="77%" />
+<col width="11%" />
+<col width="11%" />
+<thead>
+<tr>
+<th align="left" valign="top"> Metodología - Actividad </th>
+<th align="left" valign="top"> Horas Presenciales</th>
+<th align="left" valign="top"> Horas no presenciales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><em>A-1 Clases magistrales</em></p></td>
+<td align="left" valign="top"><p class="table"><em>24</em></p></td>
+<td align="left" valign="top"><p class="table"><em></em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><em>A-2 Estudio autónomo</em></p></td>
+<td align="left" valign="top"><p class="table"><em></em></p></td>
+<td align="left" valign="top"><p class="table"><em>30</em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><em>A-3 Sesiones prácticas</em></p></td>
+<td align="left" valign="top"><p class="table"><em>16</em></p></td>
+<td align="left" valign="top"><p class="table"><em></em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><em>A-4 Programación / experimentación u otros trabajos en ordenador / laboratorio</em></p></td>
+<td align="left" valign="top"><p class="table"><em></em></p></td>
+<td align="left" valign="top"><p class="table"><em>20</em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><em>A-5 Resolución de problemas, ejercicios y otras actividades de aplicación</em></p></td>
+<td align="left" valign="top"><p class="table"><em></em></p></td>
+<td align="left" valign="top"><p class="table"><em>12</em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><em>A-6 Aprendizaje basado en problemas y/o casos</em></p></td>
+<td align="left" valign="top"><p class="table"><em>14</em></p></td>
+<td align="left" valign="top"><p class="table"><em></em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><em>A-7 Elaboración de trabajos y/o proyectos y escritura de memorias</em></p></td>
+<td align="left" valign="top"><p class="table"><em></em></p></td>
+<td align="left" valign="top"><p class="table"><em>11</em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><em>A-8 Lectura de Guiones, preparación de presentaciones de trabajos, proyectos, etc&#8230;</em></p></td>
+<td align="left" valign="top"><p class="table"><em></em></p></td>
+<td align="left" valign="top"><p class="table"><em>15</em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><em>A-9 Actividades de Evaluación</em></p></td>
+<td align="left" valign="top"><p class="table"><em></em></p></td>
+<td align="left" valign="top"><p class="table"><em>6</em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><em>A-10 Tutorías</em></p></td>
+<td align="left" valign="top"><p class="table"><em>2</em></p></td>
+<td align="left" valign="top"><p class="table"><em></em></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><em>Total</em></p></td>
+<td align="left" valign="top"><p class="table"><em>62</em></p></td>
+<td align="left" valign="top"><p class="table"><em>88</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+La asignatura se desdobla en 2 partes
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Parte I: Temas 1-9 (conceptos básicos)
+</p>
+</li>
+<li>
+<p>
+Parte II: Temas 1-9 (conceptos avanzados y casos prácticos)
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="sect2">
+<h3 id="_distribución_de_créditos">Distribución de créditos</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Distribución de créditos:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+total créditos: 6 ECTS
+</p>
+</li>
+<li>
+<p>
+total horas: 6x25 : 150 horas
+</p>
+</li>
+<li>
+<p>
+horas presenciales: 62 horas
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+clases : 24 horas. Durante 12 semanas (2horas/semana) de 15 semanas totales del curso
+</p>
+</li>
+<li>
+<p>
+prácticas de laboratorio: 16 horas. Durante 8 semanas (2horas/semana)
+</p>
+</li>
+<li>
+<p>
+problemas : 14 horas. Durante 7 semanas (2horas/semana)
+</p>
+</li>
+<li>
+<p>
+evaluación: 6 horas. Durante 3 semanas (2horas/semana) de 15 semanas totales del curso
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+tutorías   : 2 horas
+</p>
+</li>
+<li>
+<p>
+horas no presenciales: 88 horas
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_distribución_de_créditos_de_las_prácticas">Distribución de créditos de las Prácticas</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Cada alumno tendrá 16 horas de prácticas en sesiones de 2 horas: 12 en el laboratorio y 4 para la realización de Memorias.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_evaluación">Evaluación</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Ver ficha de la asignatura
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+prácticas: parcial después de las dos primeras sesiones y final de las 3 sesiones restantes. Nota media mínima de 4.
+</p>
+</li>
+<li>
+<p>
+teoría: parcial cada 2 temas &#8594; 4 pruebas parciales. Nota media mínima de 4
+</p>
+</li>
+<li>
+<p>
+10%(asistencia y actitud en clase y laboratorio)+30%(prácticas y trabajos)+45%(conceptos y ejercicios)+15%(programación)
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">OBLIGATORIEDAD DE LAS PRACTICAS: hay que asistir al 14/16 horas  de las prácticas y entregar el 100% de las memorias dentro del plazo establecido en miaulario.</td>
+</tr></table>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">OBLIGATORIEDAD DE LAS PRUEBAS TEORICAS: Para la realización de la media es necesario haber realizado TODAS las pruebas teóricas: las de evaluación contínua y las del examen final.</td>
+</tr></table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Asistencia a las prácticas en el laboratorio: Es <strong>obligatorio</strong> asistir al 87.5% de las horas de prácticas en el laboratorio.
+</p>
+</li>
+<li>
+<p>
+Entrega de las memorias de prácticas: Es <strong>obligatorio</strong> entregar el 100% de las memorias dentro del plazo establecido en la fecha habilitada en el servidor de miaulario. No se reciben memorias de prácticas ni de tareas fuera del plazo fijado por el servidor de miaulario.
+</p>
+</li>
+<li>
+<p>
+La obligatoriedad de la asistencia al 87.5% de las horas de prácticas así como la entrega de memorias en el plazo y medio establecido es condición necesaria para poder superar la asignatura.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ejercicios_mediante_resolución_de_problemas">Ejercicios mediante resolución de problemas</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Realización de ejercicios básicos a lo largo del capítulo y ejercicios del fin de cada capítulo en clase y fuera de clase.
+</p>
+</li>
+<li>
+<p>
+Ejercicios tipo examen.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prácticas">Prácticas</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_memorias">Memorias</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Guiones :aulario virtual
+</p>
+</li>
+<li>
+<p>
+Prácticas Individuales.
+</p>
+</li>
+<li>
+<p>
+Memorias :
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+La entrega de la memoria a través del servidor de miaulario se realizará antes de la siguiente sesión de prácticas en la fecha indicada y publicada por el profesor.
+</p>
+</li>
+<li>
+<p>
+La memoria es un documento único en formato PDF.
+</p>
+</li>
+<li>
+<p>
+El nombre del fichero  debe ser apellido1_apellido2_tituloguionpractica.pdf
+</p>
+</li>
+<li>
+<p>
+Contenido de la memoria.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El programa descrito en pseudocódigo
+</p>
+</li>
+<li>
+<p>
+El código fuente en lenguaje ensamblador debidamente comentados en coherencia con el programa en pseudocódigo.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+No se valora el estilo de la memoria sino su contenido ya que interesa que sirva como apuntes para las pruebas de evaluación.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="ulist"><ul>
+<li>
+<p>
+Imprescindible tomar notas dentro y fuera del laboratorio
+</p>
+</li>
+<li>
+<p>
+Salvar todo el trabajo en un pendrive o enviarlo por correo
+</p>
+</li>
+</ul></div>
+</td>
+</tr></table>
+</div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+<div class="ulist"><ul>
+<li>
+<p>
+Borrado automático a diario del contenido del disco duro.
+</p>
+</li>
+</ul></div>
+</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_estaciones_de_trabajo_32_y_64_bits">Estaciones de Trabajo: 32 y 64 bits</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Es necesario disponer de una plataforma linux de 64 bits con el sistema operativo instalado de forma nativa o virtual (VMware, Virtualbox, etc). Por ejemplo en el laboratorio está instalada la distribución Ubuntu.
+</p>
+</li>
+<li>
+<p>
+Si la estación de trabajo particular de un alumno es Ubuntu (64 bits) sobre un procesador x86-64 no hay ningún problema para la ejecución de programas con una arquitectura de x86-64, en cambio, los programas a desarrollar en la asignatura utilizan una arquitectura de 32 bits que para poder compilar y ejecutar dichos programas es necesario
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Instalar las  librerías <strong>gcc-multilib</strong> que necesita el compilador y el linker para que el procesador de 64 bits ejecute programas de 32 bits.
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>instalación en Ubuntu -&gt; sudo apt-get install gcc-multilib
+comprobación -&gt; dpkg -l gcc-multilib</code></pre>
+</div></div>
+</li>
+</ol></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_proyectos">Proyectos</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Los proyectos deben ser propuestos por los alumnos durante la primera parte de la asignatura para su aprobación.
+</p>
+</li>
+<li>
+<p>
+Parte II de la asignatura: Optativo
+</p>
+</li>
+<li>
+<p>
+Utilización de la tarjeta Raspberry Pi (linux/ARM) o de la tarjeta DE1-SoC (linux/ARM) del laboratorio remoto
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_recursos_informáticos">Recursos Informáticos</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_upna">UPNA</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.unavarra.es/servicio-informatico/servicios/pdi?languageId=100000">Servicio Informático UPNA</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.unavarra.es/servicio-informatico/servicios/pdi?opcion=23">Aulas VDI</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://vdibroker.unavarra.es">Escritorio Virtual</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Sistema Operativo linux/gnu. Distribución Ubuntu.
+</p>
+</li>
+<li>
+<p>
+Herramientas binutils de bajo nivel: Compilador gcc, Assembler as, Debugger gdb, Editor vim
+</p>
+</li>
+<li>
+<p>
+Herramientas de diseño dispositivos digitales: quartus
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Laboratorio Remoto de Computación
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://laboratoriosvirtuales.unavarra.es/">https://laboratoriosvirtuales.unavarra.es/</a> &#8594; ¿?
+</p>
+</li>
+<li>
+<p>
+<a href="https://laboratoriosvirtuales.unavarra.es/fpga/#/">https://laboratoriosvirtuales.unavarra.es/fpga/#/</a> &#8594; laboratorio remoto FPGA-Raspberry
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Guacamole login
+</p>
+</li>
+<li>
+<p>
+Acceso a la tarjeta DE1-SoC (ARM) &#8594; login  &#8594; Consola shell linux
+</p>
+</li>
+<li>
+<p>
+Acceso a la tarjeta Raspberry (ARM) &#8594; login &#8594; Consola shell linux
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<a href="https://labsland.com/es">Empresa Colaboradora Labsland</a>: Instancias DE1-SoC. Interfaz Web.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Se instalará su acceso a través de miaulario mediante el botón EDA.
+</p>
+</li>
+<li>
+<p>
+Herramientas de diseño dispositivos digitales
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_programación">Programación</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.ic.unicamp.br/en/~edson/disciplinas/mc404/2017-2s/abef/IAS-Assembler/assembler.html">ias assembler unicamp online</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://www.onlinegdb.com/classroom">gdb online</a>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated
+ 2022-08-29 11:53:35 CEST
+</div>
+</div>
+</body>
+</html>

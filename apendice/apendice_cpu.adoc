@@ -1,0 +1,119 @@
+Apéndice: Unidad CPU
+====================
+
+:doctitle: Apéndice: Unidad CPU
+
+
+[[apendice_cpu]]
+Microarquitecturas Modernas (Año 2000 en adelante)
+--------------------------------------------------
+
+* link:https://mitterandekole.medium.com/modern-cpu-architecture-2-microarchitecture-8bcd80ce52ae[Blog Medimu: mitterandekole]
+* branch prediction : La cpu tiene capacidad para adelantarse a las instrucciones de salto y predecir la dirección del salto. De esta forma no se producen fallos en la ejecución "pipeline" y se puede "predecir" que instrucciones se van a ejecutar antes de comenzar sus ciclos de instrucción asociados.
+* ejecución especulativa: consiste en comenzar el ciclo de instrucción de instrucciones que no se sabe si van a ser finalmente ejecutadas.
+* Front End: El bloque Front End de la Unidad de Control consiste en predecir que instrucciones se van a ejecutar, capturarlas de la memoria Caché y decodificarlas en microoperanciones antes de que llegue su turno -> Pre-Fetch (Pre-Captura). Se precapturan y se guardan en el buffer del Front-End. De esta forma cuando comience el ciclo de instrucción de las instrucciones precapturadas ya están decodificadas, es decir, tienen las primeras fases del ciclo de instrucción ya realizadas.
+
+Intel
+-----
+
+* https://www.youtube.com/watch?v=1CXE2f2Syd4[Youtube Coffe Lake (2017), Ice Lake(2019)]
+
+AMD
+---
+
+* link:https://www.tomshardware.com/reviews/amd-4th-gen-epyc-genoa-9654-9554-and-9374f-review-96-cores-zen-4-and-5nm-disrupt-the-data-center/2[: Zen4]
+
+Skylake-U
+---------
+
+* Procesador Intel: Core i5-6300U
+
+image::./images/cpu/skylake_block_diagram.svg.png[width=700,height=400,align="center", title="Skylake microarchitecture"]
+
+* Front End -> Bloque de la U.C. que adelanta las fases de captura y decodificación.
+* Concepto de out-of-order execution (OoO) y microoperación (uOP, no confundir con el microcódigo de la unidad de control):
++
+
+----
+The microprocessors with out-of-order execution are translating all instructions into microoperations - abbreviated µops or uops. A simple instruction such as ADD EAX,EBX generates only one µop, while an instruction like ADD EAX,[MEM1] may generate two: one for reading from memory into a temporary (unnamed) register, and one for adding the contents of the temporary register to EAX. The instruction ADD [MEM1],EAX may
+generate three µops: one for reading from memory, one for adding, and one for writing the result back to memory. The advantage of this is that the µops can be executed out of order.
+Example:
+	; Example 2.1. Out of order processing
+	mov eax, [mem1]
+	imul eax, 5
+	add eax, [mem2]
+	mov [mem3], eax
+Here, the ADD EAX,[MEM2] instruction is split into two µops. The advantage of this is that the microprocessor can fetch the value of [MEM2] at the SAME TIME as it is doing the multiplication. If none of the data are in the cache, then the microprocessor will start to fetch [MEM2] immediately after starting to fetch [MEM1], and long before the multiplication can start. 
+----
+* Observar dos rutas de operaciones completamente diferentes: MOP y uOP.
+** MOP: macro instrucciones : son las instrucciones ISA de intel de tipo CISC
+** uOP: las instrucciones ISA del tipo CISC se dividen en instrucciones más sencillas del tipo RISC.
+
+ARM Cortex-A76/Cortex-A55
+-------------------------
+
+Intro
+~~~~~
+
+* https://en.wikipedia.org/wiki/Arm_(company)
+* ARM : Acorn (bellota) RISC Machine -> Advanced RISC Machines
+* Arquitectura RISC.
+
+
+Teléfono Huawei P30 Pro
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* El teléfono Huawei P30 Pro modelo VOG-L29 incorpora un MultiProcessor System On Chip (MPSoC) Huawei *Kirin 980*. El SoC integra tanto los cores como el chipset.
++
+
+----
+August 31, 2018
+Kirin 980 is a 64-bit high-performance mobile ARM LTE SoC designed by HiSilicon and introduced in late 2018. Fabricated on TSMC's 7 nm process, the 980 incorporates four big Cortex-A76 cores operating at up to 2.6 GHz along with four little Cortex-A55 cores operating at up to 1.8 GHz. This SoC has an LTE modem supporting 1.4 Gbps download (Cat21), incorporates an ARM Mali-G76, and supports LPDDR4X-4266 memory.
+----
+
+image::./images/cpu/Huawei-HiSilicon-Kirin-980-MPSoC.png[width=400,height=300,align="center", title="Kirin MPSoC" ]
+
+
+ISA Cortex-A76/Cortex-A55
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Arquitectura  ISA ARMv8.2-A
++
+
+----
+64 bits
+ver manual ISA ARMv8.2-A de la compañia ARM
+----
+
+* Microarquitectura
+** https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors
+
+Multicore
+~~~~~~~~~
+
+* 8 núcleos
+* arquitectura heterogénea big.LITTLE: 2 tipos de core > 4+4
+** big cores : alto rendimiento y consumo moderado -> Cortex-A76
+** LITTLE.cores: rendimiento moderado y bajo consumo -> Cortex-A55
+
+Microarquitectura Cortex-A76
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors
+* https://en.wikipedia.org/wiki/ARM_Cortex-A76
++
+
+----
+The Cortex-A76 frontend is a 4-wide decode out-of-order superscalar design. It can fetch 4 instructions per cycle. And[clarification needed] rename and dispatch 4 Mops, and 8 µops per cycle. The out-of-order window size is 128 entries. The backend is 8 execution ports with a pipeline depth of 13 stages and the execution latencies of 11 stages
+----
+** superscalar : ruta de datos de 4 vías (4-way)
+** pipeline: 13 etapas
+
+Microarquitectura Cortex-A55
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* https://en.wikipedia.org/wiki/ARM_Cortex-A55
+* https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors
+** superscalar: ruta de datos de 2 vías (2-way)
+** pipeline: 8 etapas
+

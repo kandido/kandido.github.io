@@ -1,0 +1,44 @@
+EECC: Instructor  (240306)
+==========================
+:stem: latexmath 
+:doctype: book
+:doctitle: EECC: Instructor  (240306)
+:Author:          Cándido Aramburu
+:Email:           candido@unavarra.es
+:Author Initials: C.
+:Revision:	  0.6.0
+:Key words:	  computer, architecture
+:revdate: {localdate}
+:toc:
+:toclevels: 3
+:numbered:
+:lang: es
+:encode: ISO-8859-1
+:ascii-ids:
+:pdf-version: 1.7
+//:show-link-uri:
+:icons: font
+:source-highlighter: rouge
+:asciidoctor-fetch-kroki:
+:docinfo1:
+
+// cd ~/Dropbox/apuntes/apuntes_Estr_Computadores/upna-book-v2/instructor
+// cojo las imagenes del mismo sitio que apuntes upna alumnos
+//asciidoctor -a imagesdir=../../HTML -r asciidoctor-multipage -r asciidoctor-kroki  -b multipage_html5  -B . -D ./HTML -a stylesheet="my-asciidoctor.css" --trace instructor.adoc
+
+
+= I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.
+
+// Push titles down one level.
+:leveloffset: 1
+
+include::./tareas/tareas.adoc[Tareas]
+include::./otros_apuntes/otros_apuntes.adoc[Otros Apuntes]
+include::./entrada_salida/entrada_salida.adoc[Entrada/Salida]
+include::./programacion/programacion.adoc[Programación]
+include::./ejercicios/ejercicios.adoc[Ejercicios]
+
+// Return to normal title levels.
+:leveloffset: 0
+
+

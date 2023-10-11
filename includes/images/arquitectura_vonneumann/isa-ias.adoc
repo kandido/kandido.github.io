@@ -1,0 +1,31 @@
+[.text-center]
+["graphviz", "isa-ias",align="center", title="Instruction Set Architecture (ISA)" ]
+----------------------------------------------------------------------
+digraph G {
+ ISA -> "Estructura de la Computadora";
+ ISA -> "Formatos";
+ ISA -> "Repertorio de instrucciones";
+ "Estructura de la Computadora" -> CPU;
+ "Estructura de la Computadora" -> Memoria;
+ "Estructura de la Computadora" -> "I/O";
+ "Estructura de la Computadora" -> Bus;
+ Memoria -> Jerarquía ;
+ Jerarquía -> "Memoria Principal";
+ "Memoria Principal" -> "Espacio Lineal"
+ "Memoria Principal" -> "Bus direcciones 12 bits"
+ Jerarquía -> Registros;
+ Registros -> "Accesibles AC,AR"
+ Registros -> "No Accesibles: PC,IBR,IR,MBR,MAR"
+ "Formatos" -> Instrucciones;
+ "Instrucciones" -> "Código Operaciones"
+ "Instrucciones" -> "Ref Operando Fuente" -> "Dirección Absoluta"
+ "Formatos" -> "Datos";
+  "Datos" -> "Enteros Complemento a 2";
+ "Repertorio de instrucciones" -> Operaciones;
+ "Operaciones" -> "Transferencia-Aritmética-Lógica-SaltoCondicional"
+ "Repertorio de instrucciones" -> "Modos de Direccionamiento";
+ "Modos de Direccionamiento" -> "Dirección Absoluta";
+}
+----------------------------------------------------------------------
+
+

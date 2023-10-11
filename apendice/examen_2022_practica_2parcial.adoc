@@ -1,0 +1,124 @@
+Estructura de Computadores 2022: Segundo Parcial Prácticas
+==========================================================
+
+:doctitle: Estructura de Computadores 2022: Segundo Parcial Prácticas
+
+// sin el prefijo Chapter n
+ 
+
+* *Apellidos:*                                                    
+* *Nombre:*
+* *Grupo:*
+
+Introducción
+------------
+
+* Día del examen: 12 Enero 2023 Jueves 8:00AM-12:00AM 
+* Lugar: 
+
+
+
+Metodología del examen
+----------------------
+
+* Elegir uno y sólo uno de los dos ejercicios: ejercicio "subrutinas" ó ejercicio "líneas"
+* Ejercicio "subrutinas": Nota máxima 6 puntos. Desarrollar una rutina y una subrutina simples. Preguntas sobre el contenido de la pila con el debugger. Tiempo de realización del examen 45 minutos.
+* Ejercicio "líneas": Nota máxima 10 puntos. Desarrollar un programa que en lenguaje ensamblador x86 que dibuje una recta en formato BMP basándose en su solución en lenguaje C y en la solución incompleta en código ensamblador con comentarios sobre el código a desarrollar, por lo que se parte de la solución en pseudocódigo. Requisito imprescindible: conocimiento detallado de la práctica BMP, soltura con el código de acceso a la pila (epilogo, prologo, salvar contexto, implementar variables locales, etc...) y habilidad en la detección de errores en tiempo de compilación y en tiempo de ejecución. A modo de ejemplo esta disponible en la carpeta de prácticas de mi aulario el módulo bmp_linea.c y pixel_linea.c que genera la imagen de una recta en formato BMP.
+
+* Una vez arrancada la computadora el alumno ha de crear la carpeta */home/alumno/subrutinas* ó */home/alumno/lineas*
+* El alumno dispondrá de 10 minutos al comienzo del examen para descargarse el enunciado del examen de MiAulario -> Recursos -> Prácticas ->
+** En el caso del examen tipo "subrutinas" descargarse únicamente el fichero *subrutinas.c* en la carpeta */home/alumno/subrutinas*
+*** A continuación cambiará el nombre del fichero *subrutinas.c* con el enunciado, por el nombre del único fichero personalizado a entregar según se indica más abajo. Sólo se entregar UN fichero con extensión s.
+** En el caso del examen tipo "líneas" descargarse los ficheros *pixel_linea.s*, *pixel_linea.c* y *bmp_linea.c* 
+*** A continuación cambiará el nombre del fichero *pixel_linea.s* con el enunciado, por el nombre del único fichero personalizado a entregar según se indica más abajo. Sólo se entregar UN fichero con extensión s.
+
+* Habrá abiertas dos tareas (una para cada opción) desde el comienzo del examen con limitación de tiempo para entregar el resultado del examen en formato digital en un *único* archivo en formato ZIP. Una tarea será *examen_subrutina* y la otra *examen_linea*. En cada tarea el archivo a entregar tendrá *EL MISMO NOMBRE*. Se avisará cuando falten 10 y 5 minutos para el cierre de cada una de las tareas.
+
+* Los apartados anterioreos emulan la opción "líneas" con un enunciado en caso de que los módulos fuente fuesen: bmp_linea.c y pixel_linea.s. En el examen los módulos serán otros diferentes: bmp_circulo.c y pixel_circulo.c. Por lo que la segunda opción consistirá en dibujar un círculo en lugar de una recta.
+
+* El archivo *s*  contendrá el módulo fuente en código asm dependiendo de la opción elegida:
+** el módulo fuente: Apellido1_Apellido2.s, pej, *Alen_Urra.s*, cada alumno con sus propios apellidos.
+*** código fuente y preguntas/respuestas GDB en los comentarios.
+
+
+IMPORTANT: el nombre del fichero con el código fuente ha de ser *obligatoriamente* uno de los nombres del listado del apéndice "Nominación de los ficheros del examen" de los apuntes. NO ES VALIDO UN NOMBRE GENERICO COMO EXAMEN.s, tiene que estar personalizado para poder distinguir cada uno de los 90 exámenes a recoger.
+
+
+* Módulo fuente ensamblador:
+** se ha de completar y depurar.
+** añadir los comentarios que se consideren oportunos ayudan a la lectura e interpretación del programa
+** *responder* a las preguntas sobre el depurador GDB en el propio módulo fuente.
+
+* No se puede conectar telemáticamente ni a la red de la UPNA ni al exterior de la Universidad
+* Se puede utilizar un pendrive conteniendo cualquier tipo de información: guiones de prácticas, memorias de prácticas, apuntes, hojas de referencia rápida.
+* Se puede utilizar cualquier tipo de material impreso: apuntes, memorias, libros, etc ...
+
+Examen "líneas"
+---------------
+
+*  Para los alumnos que elijan hacer la segunda opción del examen, "líneas" sobre gráficas bmp se ha subido a miaulario/recursos/prácticas dos módulos fuente: bmp_linea.c y pixel_linea.c. 
+** bmp_linea.c llama a la función pixel_generator_linea() definida en pixel_linea.c.
+
+* El módulo ensamblador pixel_linea.s ha de ser fiel reflejo del módulo pixel_linea.c. En los comentarios del módulo ensamblador deben de aparecer las sentencias del lenguaje C. por ejemplo:
++
+
+----
+#dx=x2-x1;
+   neg x1
+   add x2,x1
+
+#dy = y2-y1;
+   neg y1
+   add y2,y1
+
+#i1=2*dy;
+
+
+
+#i2=2*(dy-dx);
+
+
+#   while (x < xmax){
+while:
+     mov dx,$eax
+
+# if (d<0)
+     mov dx,$eax
+
+# else
+else:
+     mov dx,$eax
+
+endif:
+     mov dx,$eax
+
+while_exit:
+    mov dx,$eax
+----
+
+* Las variables locales a la función pixels_generator_linea(), es decir,  i1,i2,dx,dy,d,x,y,xmax para ser locales también en ensamblador y por lo tanto han de definirse en el frame de la función pixels_generator_linea() y no en la "section data" común a todas las funciones del fichero.
+* El módulo ensamblador ha de contener los siguientes comentarios pregunta/respuesta:
++
+
+----
+# comando de generación del módulo objeto pixel_linea.o
+# respuesta_1:
+
+# comando de generación del módulo ejecutable bmp_linea
+# respuesta_2:
+
+# comando de apertura de la sesión de depuración
+# respuesta_3: gdb --readnow
+
+# (gdb) captura de la dirección de retorno al programa principal bmp_linea
+# comando_4:
+# respuesta_4:
+
+
+# (gdb) captura del primer elemento de la pila después del prólogo de pixel_linea
+# comando_5:
+# respuesta_5:
+
+
+----
+

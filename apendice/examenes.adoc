@@ -1,0 +1,419 @@
+Exámenes de Cursos Anteriores
+=============================
+
+:doctitle: Exámenes de Cursos Anteriores
+
+
+Año 2018
+--------
+
+Noviembre
+~~~~~~~~~
+
+
+ 1ª Prueba Parcial. 2018 Noviembre 10.
+ Grado de Informática 2º curso. Estructura de Computadores. 
+ Universidad Pública de Navarra. 
+ Duración: 90 minutos. 
+ Apellidos:
+ Nombre: 
+
+
+IMPORTANT: Puede utilizarse todo tipo de información escrita como memorias de prácticas, apuntes, hojas de referencia, etc. No puede utilizarse ningún dispositivo electrónico como calculadoras, teléfonos, ordenadores, etc ... Se han de incluir en la respuetas todo tipo de desarrollo necesario para llegar al resultado.
+
+
+. Computadora Institute Advanced Studies (IAS) de von Neumann:
+.. (1 pto) Desarrollar un programa que realice la resta 0x00-0xFF y almacene el resultado en la variable denominada "resta". ¿Cuál será el contenido de la posición de memoria de la variable "resta"? 
+.. (1 pto) ¿Qué relación existe entre los tres componentes MAR, MBR y PC?
+. (1 pto) Cuál es el código digital del string de seis caracteres "Hola \n"
+. (1 pto) Los números 0123 y 0777 son números sin signo en base octal. Realizar la suma 0123+0777 directamente en base octal.
+. (1 pto) Los números 0xABC y 0xEFE son números con signo en complemento a dos. Realizar la resta 0xABC-0xEFE directamente. Calcular el valor del resultado.
+. (1 pto) Representar el número decimal 6.25 en formato IEEE-754 de doble precisión.
+. Formato de instrucciones:
+**  Una computadora tiene una unidad de memoria de 256K palabras 32 bits cada una direccionable byte a byte. En una de las palabras de la memoria se almacena una instrucción. La instrucción tiene un formato de cuatro campos: un bit de indirección, un código de operación, un campo de operando para direccionar uno de los 64 registros y campo de operando que contiene direcciones de memoria.
+..  (2 pto) ¿Cuantos bits forman el campo de código de operación?¿Y del campo de registro?¿Y del campo de direcciones?
+..  (2 pto) ¿Cuantos bits forman parte del bus de direcciones y del bus de datos de la unidad de memoria?
+
+
+.  (2 pto) En una subrutina indicar qué relación existe entre el puntero "frame pointer" del frame de la subrutina y la dirección de memoria donde se guarda la dirección de retorno.
+.  (3 pto) Completar el código fuente del programa en lenguaje ensamblador adjunto teniendo en cuenta los comentarios que se adjuntan en el módulo fuente siguiente donde el algoritmo desarrollado realiza la conversión de un número decimal a código binario:
++
+
+----
+### Programa: convert_decbin.s
+### Descripción: Convierte el número natural decimal 15 en binario mediante divisiones sucesivas por 2
+### 		 El código binario tiene un tamaño de 32 bits
+### gcc -m32 -g -nostartfiles -o convert_decbin convert_decbin.s
+### Ensamblaje as --32 --gstabs convert_decbin.s -o convert_decbin.o
+### linker -> ld -melf_i386    -o convert_decbin convert_decbin.o 
+
+	## MACROS
+	
+
+
+	## DATOS
+
+dec:    .	  15	# decimal (tamaño 4 bytes) a convertir en un código binario de 32 bits
+	## bin almacena el código en sentido inverso, bin[0] almacena el bit de menor peso.
+bin:	.space	32	# array de 32 bytes: almacena en cada byte un bit del código binario de 32 bits.
+divisor:	.	# divisor (de tamaño 1 byte)
+
+	## INSTRUCCIONES
+
+
+
+
+	## inicializo ECX con el valor del divisor
+ 
+
+	## inicializo el índice del array bin
+
+
+	## Cargo el dividendo en EAX
+        			# eax <-x
+
+	## extiendo el bit de signo del dividendo en EDX
+		 		# El dividendo siempre es positivo
+
+	## Divisiones sucesivas por 2 hasta que el cociente valga 0
+bucle:
+	## idivl : [EDX:EAX] / Operando_fuente 
+				# EAX<-Cociente{x/y} , EDX<-Resto{x/y}
+				# guardo el resto (de tamaño 1 byte) en el array bin
+	## extiendo el bit de signo en edx
+				# El dividendo siempre es positivo
+
+	## actualizo el índice del array
+	
+
+	## compruebo si el cociente ha llegado a cero para salir del bucle
+	
+
+	## Devuelvo el número de bits del código binario en EBX
+
+	
+	## Código de la llamada al sistema operativo
+
+	
+	## Interrumpo la rutina y llamo al S.O.
+	
+
+----
+
+** Mediante comandos del depurador GDB
+..  (2 pto) imprimir el contenido del array "bin" con dos expresiones diferentes utilizando los comandos "examinar" y/o "imprimir".
+..  (2 pto) imprimir el contenido del primer elemento del array bin
+..  (2 pto) imprimir el contenido del último elemento del array bin
+
+.  (2 pto) Llamadas al sistema
+** Completar el programa "convert_decbin.s" con el código necesario para imprimir en la pantalla un mensaje de bienvenida mediante la llamada directa write.  
+
+Año 2017
+--------
+
+ Prueba Parcial. 2017 Septiembre 22.
+ Grado de Informática 2º curso. Estructura de Computadores. 
+ Universidad Pública de Navarra. 
+ Duración: 30 minutos. 
+ Apellidos:
+ Nombre: 
+
+
+. En el modelo de Von Neumann cuál es la función de la Unidad de Control .
+. Cuáles son las distintas fases del ciclo de instrucción de la máquina de Von Neumann. 
+. Convertir el número decimal 291 en base octal.
+. Realizar la operación -18-21 en complemento a 2.
+. En qué consiste el concepto de abstracción en al organización de una computadora.
+. Desarrollar el programa en lenguaje ensamblador sum.ias, de la máquina IAS, que implemente el algoritmo s=1+2.
+
+
+
+ Prueba Parcial. 2017 Octubre 10.
+ Grado de Informática 2º curso. Estructura de Computadores. 
+ Universidad Pública de Navarra. 
+ Duración: 30 minutos. 
+ Apellidos:
+ Nombre: 
+
+
+IMPORTANT: Puede utilizarse todo tipo de información escrita como memorias de prácticas, apuntes, hojas de referencia, etc
+
+
+
+. Completar el módulo fuente exa_2017.s en lenguaje ensamblador AT&T x86-32.(6 ptos)
++
+
+-------------
+### Estructura de Computadores curso 2017-18. Prueba evaluatoria 2017 Octubre 10
+### 
+### Objetivos:
+### 		Manejar la codificación de datos enteros con signo
+### 		Estructuras de datos: puntero y array
+### 		Modos de direccionamientos indirectos e indexados
+### 		Lenguaje asm x86-32
+### Algoritmo:  El array lista contiene cinco números enteros negativos de tamaño dos bytes, 
+###		desde -5 hasta -1, siendo -5 el valor de la posición cero.
+### 		Copiar el contenido del array lista en el buffer.
+###		Al buffer se accede indirectamente a través de la variable puntero EAX
+###		El argumento de salida enviado al sistema operativo ha de ser 
+###		el primer valor del array lista.
+	## MACROS
+	.equ	SYS_EXIT, 1	# Código de la llamada al sistema operativo
+	.equ	LEN,      5	# Longitud del array y del buffer
+	## VARIABLES: lista y buffer
+	.data
+lista: # Array inicializado con datos representados en HEXADECIMAL
+
+	_ _ _ _					
+buffer: # Reserva memoria para el buffer sin inicializar.
+
+	_ _ _ _					
+	## INSTRUCCIONES
+	## Punto de entrada
+
+	_ _ _ _
+
+	_ _ _ _	
+_start:
+	## inicializo el argumento de salida con el valor cero
+	
+	_ _ _ _
+ 
+	_ _ _ _
+	## inicializo la variable puntero EAX
+	
+	_ _ _ _
+
+	_ _ _ _ 
+	## inicializo el bucle con el número de iteracciones. Utilizar las macros.
+	mov   ,%esi
+bucle:	
+	_ _ _ _ 
+	
+	_ _ _ _
+
+	_ _ _ _
+	
+	_ _ _ _
+	dec %esi
+	jns bucle
+	## salida
+
+	mov _ _ _ _,%eax
+
+	int _ _ _ _
+	.end
+	
+-------------
+
+
+* Cuestiones:
+** Comando gdb para visualizar el contenido del buffer una vez finalizada la copia (2 pto):
+*** .
+*** (gdb) 
+** Si la etiqueta lista apunta a la dirección 0x00555438 indicar el contenido de las direcciones (2 pto):
+*** .
+*** 0x0055543C :
+*** . 
+*** 0x0055543D :
+
+
+
+ 
+ Prueba Ordinaria. 2018 Diciembre 7.
+ Grado de Informática 2º curso. Estructura de Computadores. 
+ Universidad Pública de Navarra. 
+ Duración: 45 minutos. 
+  
+
+
+
+1ª PARTE (10 ptos)			
+
+* Duración: 20 minutos 
+* Calificación:
+
+. (3 ptos) Resta de números sin signo: 0x8000 - 0x7AFF  -> las operaciones han de realizarse en código HEXADECIMAL exclusivamente     
++
+
+[width="100%"]
+|==========================
+.7+|        
+|==========================
+. (3 ptos) Resta de números con signo: 0x8000 - 0x7AFF   -> las operaciones han de realizarse en código HEXADECIMAL exclusivamente  
++
+
+[width="100%"]
+|==========================
+.7+|        
+|==========================
+. (3 ptos) Relacionar en una sola frase los conceptos: contador de programa, ruta de datos, ciclo de instrucción, secuenciador, microordenes, unidad aritmetico lógica, microarquitectura , captura de instrucción.       
+[width="100%"]
++
+|==========================
+.7+|        
+|==========================
+<<<<<
+
+2ª PARTE (10 pts)
+
+* Duración: 25 minutos
+* Calificación:
+
+. (6 ptos) Desarrollar el módulo fuente 'cadena_longitud.s' en lenguaje ensamblador AT&T x86-32. 
++
+
+--------------
+/*
+
+Programa: calcular el tamaño de una cadena de caracteres  inicializada en el propio programa fuente con la frase "Hola"
+Algoritmo: Implementar un bucle hasta encontrar el caracter fin de string :  \0  	
+Etiquetas: La referencia al string se realizará mediante el símbolo cadena.
+Comentarios: Se ha de comentar el módulo fuente por bloques de código que tengan un sentido en lenguajes de alto nivel exclusivamente, no por líneas de código que describan una instrucción máquina.
+*/
+
+
+	## Definición de MACROS
+	.equ SUCCESS, 0
+	.equ SYS_EXIT, 1
+	.equ FIN_CAR, '\0'
+--------------
++
+
+[width="100%"]
+|==========================
+.30+|        
+|==========================
+
+<<<
+
+* Cuestiones: (4 ptos)
+** Dos comando gdb para visualizar el contenido del objeto almacenado en la dirección cadena
+*** (gdb)
+*** (gdb)
+** Comando gdb para visualizar exclusivamente el carácter fin de cadena.
+*** (gdb)
+** Indicar los dos comandos necesarios para compilar el programa fuente anterior mediante un toolchain manual, sin utilizar el front-end gcc.
++
+
+[width="100%"]
+|==========================
+.4+|        
+|==========================
+
+<<<
+
+ GRUPO:					
+ APELLIDOS:					
+ NOMBRE:
+ 
+ Prueba Ordinaria. 2018 Diciembre 7.
+ Grado de Informática 2º curso. Estructura de Computadores. 
+ Universidad Pública de Navarra. 
+ Duración: 50 minutos. 
+
+3ª PARTE (10 ptos)
+
+* Duración: 50 minutos
+* Calificación:
+
+. (2 ptos) En una llamada a una subrutina con 6 argumentos y una variable local al finalizar el ciclo de instrucción de la instrucción *CALL subrutina*  el stack pointer apunta a la dirección 0xFFFA0C. Calcular: 
+** La dirección de memoria donde se guarda la dirección de retorno
++
+
+[width="100%",cols=">s"]
+|==========================
+.3+|        
+|==========================
+** La dirección de memoria de la variable local
++
+
+[width="100%"]
+|==========================
+.3+|        
+|==========================
+** La dirección de memoria del 1º argumento de la subrutina
++
+
+[width="100%"]
+|==========================
+.3+|        
+|==========================
+
+<<<
+. (4 ptos) El diagrama de bloques de la microarquitectura de la cpu de una computadora con un tamaño de palabra de 16 bits se corresponde con el de la figura en la hoja adjunta. La ISA de dicha computadora dispone de un lenguaje ensamblador que se corresponde con los mnemónicos y la sintaxis AT&T x86-32 . En la memoria principal se carga el código máquina, correspondiente a la sección de instrucciones del módulo fuente, siguiente:
+ 
+ 	movw $0xF000,R0
+ 	movw R0,R1
+ 	addw R1,R0
+ 	subw R1,R0
+  
+** Si el secuenciador de la unidad de control está diseñado como una máquina de 4 estados T0,T1,T2 y T3 , indicar en la tabla adjunta las microórdenes a ejecutar en cada estado del ciclo de instrucción para cada instrucción del programa.
++
+
+[width="100%",cols="<s,4*^m",options="header"]
+|==========================
+|        |T0 | T1 | T2 | T3
+|mov $0xF000,R0  |  |   |   | 
+|movw R0,R1      |  |   |   |      
+|addw R1,R0      |  |   |   |  
+|subw R1,R0      |  |   |   |      
+|==========================
+
+<<<
+
+. (4 ptos) Organización de una memoria jerarquizada
+** En el proceso de compilación de un programa, desde la fase inicial de edición hasta la carga del programa en un proceso en la memoria principal, la cadena de herramientas "toolchain" genera distintos espacios de memoria en los diferentes módulos del proceso de traducción de código. Rellenar la tabla adjunta con las características propias de cada espacio generado.
++
+
+[width="100%",cols="5*<m",options="header"]
+|==========================
+|Herramienta| Programa|Estructura del Espacio de Memoria y Direccionamiento |Tipo de direcciones | Localización del código 
+|Edición    |Módulo Fuente | Secciones y Etiquetas                          | Virtual,No lineal  | Mem. Secundaria: Disco duro 
+|           |              |                                                |                    |
+|           |              |                                                |                    |
+|           |              |                                                |                    |
+|           |              |                                                |                    |
+|==========================
+
+** Cómo estructura el controlador de memoria caché dentro de la jerarquía de memoria la memoria caché y la memoria RAM dinámica.
++
+
+[width="100%"]
+|==========================
+.4+|        
+|==========================
+** Físicamente, en que consiste una celda de memoria RAM dinámica.
++
+
+[width="100%"]
+|==========================
+.4+|        
+|==========================
+** Cómo sincroniza las transferencias de datos a través del bus del sistema, una memoria ram dinámica Double Data Rate DDR.
++
+
+[width="100%"]
+|==========================
+.4+|        
+|==========================
+
+<<<
+
+. (3 ptos) Mecanismos de operaciones E/S
+** Dibujar el diagrama de bloques del HW necesario entre una tecla del teclado y las unidades básicas de la arquitectura von Neumann de una computadora para realizar la transferencia de datos mediante el mecanismo de interrupciones.
++
+
+[width="100%"]
+|==========================
+.20+|        
+|==========================
+
+** Dibujar el diagrama de bloques del SW necesario entre una tecla del teclado y las unidades básicas de la arquitectura von Neumann de una computadora para realizar la transferencia de datos mediante el mecanismo de interrupciones.
++
+[width="100%"]
+|==========================
+.27+|        
+|==========================
+
+

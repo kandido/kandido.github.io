@@ -1,0 +1,515 @@
+Practicando la Programación desde el Principio
+==============================================
+
+:doctitle: Practicando la Programación desde el Principio
+
+[[prac_apu]]
+Documentación: guiones, bibliografía, apuntes
+---------------------------------------------
+
+* Disponible en miaulario:
+** Apuntes 'eecc_book.pdf' que incluyen los guiones, hojas de referencia, apéndices, ejercicios de autoevaluación y teoría.
+** Los módulos con el código fuente *.s* (miaulario/Recursos/prácticas/codigo_fuente.zip) https://miaulario.unavarra.es/portal/site/2018_0_240306_1/tool/d61518aa-72cb-45df-a7f8-b71f90e7907e?panel=Main[link G1] utilizados en todas las prácticas están disponibles en el servidor de miaulario de la 'UPNA:Recursos/prácticas'
+** El libro de texto en que se basan los guiones de prácticas en lenguaje ensamblador : <<PGU, 'Programming from the Ground-Up'>>. 
+** Libro de introducción a la programación en lenguaje ensamblador : <<UPC, 'Programar ASM ... pero sí es muy fácil>>
+
+
+
+
+[[prac_plat_des]]
+Plataforma de Desarrollo
+------------------------
+
+Herramientas
+~~~~~~~~~~~~
+
+* Editores
+** https://www.tecmint.com/best-open-source-linux-text-editors/[Editores]: gedit, emacs, vim, sublime, kate,
+** https://www.tecmint.com/best-linux-ide-editors-source-code-editors/[Herramientas integradas de edición,compilación,depuración]:  eclipse CDT, netbeans, code::blocks, codelite, Microsoft’s Visual Studio Code Editor, jetbrains clion, jeany, ajunta , GNAT Programming Studio, emacs, kdevelop, codestudio, etc
+* Denominaciones
+** +i386+ : denominación de linux a la arquitectura  x86-32
+** +amd64+: denomiación de linux a la arquitectura x86-64
+** +IA32+: denominación de Intel para la arquitectura  x86-32
+** +IA64+: denominación de Intel para la arquitectura  x86-64
+* Sistema Operativo GNU/linux: Distribución Ubuntu : cualquier versión posterior al año 2014: 14.04, 14.08,..,17.04, 17.08
+** +lsb_release -a+: distribución
+** +uname -o+ : S.O. 
+** +uname -r+ : kernel 
+** +uname -a+ : procesador
+* Librerías necesarias para que las herramientas 'gcc, as, ld' sean operativas en la arquitectura *i386* de 32 bits.
+** +dpkg -l gcc-multilib+ : 
++
+
+----------
+Deseado=desconocido(U)/Instalar/eliminaR/Purgar/retener(H)
+|
+Estado=No/Inst/ficheros-Conf/desempaqUetado/medio-conF/medio-inst(H)/espera-disparo(W)/pendienTe-disparo
+|/ Err?=(ninguno)/requiere-Reinst (Estado,Err: mayúsc.=malo)
+||/ Nombre         Versión      Arquitectura Descripción
++++-==============-============-============-=================================
+ii  gcc-multilib   4:7.3.0-3ubu amd64        GNU C compiler (multilib files)
+----------
+
+** Si en las dos primeras columnas "Deseado/Estado" no pone *ii* significa que no están instaladas las librerías.
+*** Compruebo que están en el repositorio accesible a través de la red internet: 
+**** +apt-cache show gcc-multilib+ : repositorio
+**** +sudo apt-get install gcc-multilib+ : descarga e instalación sólo en caso de tener derechos de administridor
+* Toolchain
+** +as --version & ld --version & gcc --version+ : anotar las versiones
+
+Programación online
+~~~~~~~~~~~~~~~~~~~
+
+* https://www.ic.unicamp.br/en/~edson/disciplinas/mc404/2017-2s/abef/IAS-Assembler/assembler.html[ias assembler unicamp online]
+* https://www.onlinegdb.com/classroom[gdb online]
+
+Referencias
+~~~~~~~~~~~
+* Recursos <<GNU,'GNU' >>:
+** Herramienta  integrada de desarrollo IDE (Emacs,Eclipse,<<VIM,Vim>>, etc...) o un Editor (Geany,Kate,Gedit,Sublime, etc...)
+** <<GAS, as>> : ensamblador del lenguaje AT&T
+** ld : linker
+** cc : compilador de C
+** <<GCC,GCC>> : front-end del toolchain automático : Gnu Compiler Collection. Driver de diferentes lenguajes dependiendo de la extensión del fichero fuente.
+*** +man gcc+
+** <<GDB,GDB>> : depurador.
+*** +man gdb+
+
+[[prac_doc_mem]]
+Documento Memoria: Contenido y Formato
+--------------------------------------
+
+Contenido
+~~~~~~~~~
+
+* Durante el desarrollo de la práctica :
+.. Es necesario reeditar el código fuente de los programas desarrollados con 'comentarios'.
+.. Compilar el módulo fuente mediante 'comandos en línea'
+.. Análizar el código fuente y binario mediante el 'depurador': las operaciones a realizar con el depurador es necesario salvarlas en un fichero. 
+* Durante la realización de la práctica es necesario tener abierto un Editor de texto para ir realizando la memoria simultáneamente a la ejecución de la práctica.
+* El Documento Memoria ha de contener: 
+** Una portada con el título de la práctica y los datos personales.
+** La primera hoja con una tabla de contenidos a modo de índice, no es necesario indicar Nº de página.
+** Los módulos fuente comentados,
+** Los comandos de compilación y análisis.
+** El historial de comandos GDB y sus salidas, utilizados durante la práctica.
+** Un apartado de conclusiones con lo aprendido en la práctica.
+** Un apartado de dudas sin resolver.
+** Preguntas explícitas que aparecen a lo largo de la memoria, si las hay.
+** *OPCIONALMENTE* las preguntas y respuestas del cuestionario de Autoevaluación de Prácticas. Ver apartado Evaluación.
+** Todo tipo Informacion Personal Necesaria a modo de apuntes para utilizar en el exámen.
+
+
+
+Formato
+~~~~~~~
+
+* La estructura interna de la memoria es libre.
+* El formato de la memoria ha de ser *PDF*, y no microsoft word u otro formato diferente.
+* El nombre del fichero memoria ha de ser *N-XXX-apellido1_apellido2.pdf* 
+** el nombre del ficheero no contendrá ni acentos, ni espacios en blanco 
+** XXX significa el grupo de prácticas: P1 ó P2 ó P1P2 ó P91
+** N significa el número de la sesión de prácticas: 1,2,3,4 ó 5.
+
+
+Entrega del Documento Memoria
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Entregar el Documento Memoria a través de la aplicación *Tareas* del Servidor Miaulario. El plazo será el indicado por el profesor a través del calendario de tareas. La entrega de memorias fuera de plazo significa tener que examinarse de dicha práctica en la convocatoria ordinaria.
+
+[[prac_eval]]
+Evaluación
+----------
+
+* Se evaluará:
+** La entrega de la memoria por el canal establecido con una penalización de 1 punto por cada día de retraso.
+** La estructura y formato de la memoria con los datos personales, índice, introducción, desarrollo, conclusiones y formato pdf con el nombre apropiado.
+** Los comentarios de alto nivel (pseudocódigo) especificados en el módulo fuente tanto a nivel de bloque de instrucciones como instrucciones complicadas de interpretar o que se consideren importantes en la comprensión del código.
+** El cuestionario *opcional* de *Autoevaluación de Prácticas*. Si no se realizan los ejercicios de autoevaluación de prácticas y se añaden a las memorias la nota máxima de las memorias será de *6 puntos*.
+
+IMPORTANT: El profesor evaluará de forma continua la actitud y labor del estudiante en el laboratorio pudiendo liberar al alumno de la realización del exámen si los conocimientos y tareas realizadas así lo demuestran.
+
+
+[[prac_prog]]
+Programación
+------------
+
+Metodología
+~~~~~~~~~~~
+
+* Leer el enunciado del programa a desarrollar.
+* Editar la descripción del algoritmo como Pseudocódigo:  
+** Desarrollar el algoritmo definiendo las estructuras de datos y estructuras de instrucciones.
+*** constantes,variables, arrays, punteros, inicalizaciones, bucles, sentencias selección, funciones y parámetros, entrada y salida del programa, etc
+* Dibujar el Organigrama de alto nivel
+** Para un lenguaje de alto nivel (Pascal,C ...), basado en el pseudocódigo.
+* Dibujar Organigrama de bajo nivel
+** Desarrollar el algoritmo en lenguaje *RTL* basándose en la arquitectura x86. Traducir el organigrama de alto nivel a bajo nivel. Traduciendo  secciones, variables, arrays, punteros, inicializaciones, bucles, sentencias selección, subrutinas y parámetros, entrada y salida del programa etc.
+* Convertir el código RTL en lenguaje ensamblador *AT&T* para la arquitectura x86.
+* Compilación con *gcc* o mediante la cadena de herramientas (toolchain) : *as*-*ld*
+** Depurar errores de síntesis.
+* Ejecución: depurar errores en modo paso a paso mediante el depurador *GDB*
+
+
+[[compilacion]]
+Compilación
+-----------
+
+Módulo fuente en lenguaje C
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Compilación
+** +gcc -m32 -o sum1toN sum1toN.c+
+*** 'm32' : 32 bits architecture machine
+*** 'sum1toN.c' : módulo fuente en lenguaje C
+*** '-o' : output 
+*** 'sum1toN' sin extensión: módulo objeto ejecutable aunque sería más preciso decir cargable en la memoria principal.
+** carga en memoria principal
+*** la hace automáticamente el S.O. al llamar al programa ejecutable desde un terminal o escritorio.
+** +gcc -m32 -g -o sum1toN sum1toN.c+
+*** '-g': especifica que se genere la tabla de símbolos del programa fuente 'sum1toN.c' para el debuger GDB y se inserte en el módulo ejecutable 'sum1toN' . De está manera se asocian el código binario, por ejemplo de una etiqueta, a su símbolo (lenguaje texto).
+
+Punto de entrada al programa: main vs '_start'
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* El punto de entrada al programa ha de ser nominado mediante la etiqueta *_start* ó *main*.
+** Directiva *global*: el punto de entrada se define en el módulo fuente y se declara como global, es decir tiene que se accesible por otros programas. El punto de entrada tiene que ser accesible por el 'linker' que lo declara como un símbolo definido externamente.
+
+
+CAUTION: Si no se especifica la opción  -nostartfiles del compilador gcc, la etiqueta de entrada al programa ensamblador ha da ser *main*. Si se especifica la opción -nostartfiles entonces la entrada al programa será *_start*
+
+* Compilación si el punto de entrada es '_start': +gcc -nostartfiles -g -m32 -o sum1toN sum1toN.s+
+* Compilación si el punto de entrada es 'main': +gcc -g -m32 -o sum1toN sum1toN.s+
+
+
+[[fases_compilacion]]
+Fases de la compilación
+~~~~~~~~~~~~~~~~~~~~~~~
+
+
+include::../includes/images/proceso_compilacion/proceso_compilacion.adoc[Proceso Compilación]
+
+
+
+* Parar la compilación en la 1ª fase: preprocesamiento: +gcc -E sum1toN.c -o sum1toN.i+
+** '*.i': Salida del preprocesador: elimina la información que no es código (comentarios,etc)
+* Parar la compilación en la 2ª fase: traducir C a ensamblador: +gcc -S sum1toN.c -o sum1toN.s+
+** '*.s': módulo en lenguaje fuente ensamblador '*.s' 
+* Parar la compilación en la 3ª fase: Generar el módulo objeto reubicable: +gcc -c sum1toN.c -o sum1toN.o+
+** '*.o': módulo objeto reubicable : código binario antes de ser enlazado mediante el linker con otros módulos objeto del sistema operativo, de la librería de C 'libc' u otros módulos del programador.
+* Realizar las 4 fases : Generar el módulo objeto ejecutable: +gcc -c sum1toN.c -o sum1toN+
+** fichero sin extensión: módulo objeto ejecutable: módulo binario configurado para ser cargado en la memoria principal y ejecutado por la CPU. 
+* +gcc -m32 --save-temps -o sum1toN sum1toN.c+
+** '--save-temps': gcc genera (save) los 3 ficheros parciales (temps) del proceso total de compilación '*.i','*.s','*.o' .
+** Comprobar que en total disponemos de 5 ficheros: '*.c','*.i','*.s','*.o' y el ejecutable sin extensión.
+
+Toolchain
+~~~~~~~~~
+* Cómo alternativa a realizar la compilación mediante un único comando con el driver *gcc* que ejecuta las distintas fases de compilación el proceso de compilación de puede realizar mediante el encadenamiento de herramientas que realizan cada una de ellas una de las distintas fases.
+* Herramientas del toolchain: 
+** Traducción de C a Ensamblador: no tiene una herramienta propia: +gcc -S sum1toN.c -o sum1toN.s+
+** *as*: Herramienta de Ensamblaje o ensamblador: +as --32 --gstabs -o sum1toN.o sum1toN.s+
+*** '--32': arquitectura de 32 bits
+*** '--gstabs': genera la tabla de símbolos
+*** '-o' : fichero de salida : módulo binario reubicable '*.o'
+** *ld*: Herramienta de Enlazado ó Lincado: +ld -melf_i386  -o sum1toN sum1toN.o+
+*** '-melf_i386' : arquitectura 32 bits
+*** '-o': fichero de salida : módulo binario ejecutable
+
+
+[[compilacion_asm]]
+módulo fuente en lenguaje ensamblador
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Comentar el programa fuente de manera abstracta funcional/operativa y no literal RTL
+* Toolchain manual:
+** +as --32 --gstabs -o sum1toN.o sum1toN.s+ : ensamblaje
+*** '*.s' : módulo fuente en lenguaje asm
+*** '*.o' : módulo objeto reubicalble
+*** '--stabs': generación de la tabla de símbolos e inserción en el módulo ejecutable.
+*** '--32'  :  módulos fuente y objeto para la ISA de 32 bits
+** +ld -melf_i386 -o sum1toN sum1toN.o+
+*** '-melf_i386': módulos objeto para la ISA de 32 bits
+* Toolchain automático
+** +gcc -m32 -nostartfiles -g -o sum1toN sum1toN.s+
+*** '-m32': módulos fuente y objeto para la arquitectura i386.
+*** '-nostartfiles' : especifica que el punto de entrada no es main sino '_start'.
+
+NOTE: Si el punto de entrada es *main* entonces es necesario informar al linker de que el punto de entrada (entry) es main:  +gcc  -e main -m32 -nostartfiles -g -o sum1toN sum1toN.s+ y +ld -e main -melf_i386 -o sum1toN sum1toN.o+
+
+
+*** 'g': especifica que se genere la tabla de símbolos del programa fuente 'sum1toN.s' para el debuger GDB y se se inserte en el módulo ejecutable 'sum1toN'
+
+
+Depuración
+----------
+
+* El debugger que utilizamos es el programa 'gdb' de GBU : Gnu DeBugger
+* <<GDB, Manual GDB>>
+* Para poder depurar un programa hay que compilarlo con la opción de depuración *-g*:  +gcc -g -m32 -o sum1toN sum1toN.s+
+** comprobar con +file sum1toN+ que contiene los símbolos para la depuración
+* Ejecutar +gdb+ -> se abre la ventana de comandos del depurador  . El prompt es (gdb)
++
+
+----
+(gdb) file sum1toN -> reading symbols from binary program
+(gdb) breakpoint main -> añade un punto de ruptura donde se detendrá la ejecución
+(gdb) run -> ejecución
+(gdb) layout src ó Contol-x Control-a -> se añade la ventana con el código fuente
+(gdb) focus src ó Conrol-x o -> se cambia de ventana donde están activadas las flechas del teclado para poder navegar.
+----
+* Las expresiones que emplean los comandos están en el lenguaje de programación de C
++
+
+----
+print &sum -> imprime la dirección de la variable sum
+print sum  -> imprime el contenido de la variable sum
+print *sum_pointer -> imprime el contenido del objeto al que apunta el puntero sum_pointer
+----
+
+
+
+Errores Comunes
+---------------
+
+gcc
+~~~
+
+* En Ubuntu 18.0 si se compila para amd64 (gcc -nostartfiles -g -o sum1to64 sum1to64.s) la compilación se detiene con el mensaje de error:
++
+
+----
+/usr/bin/x86_64-linux-gnu-ld: /tmp/ccbhD6Vr.o: relocation R_X86_64_32S against `.data' can not be used when making a PIE object; recompile con -fPIC
+/usr/bin/x86_64-linux-gnu-ld: falló el enlace final: Sección no representable en la salida
+collect2: error: ld returned 1 exit status
+----
+** causa: está activada por defecto al opción -pie y hay que desactivarla
+** solución: (gcc *-no-pie* -nostartfiles -g -o sum1to64 sum1to64.s)
+
+gdb
+~~~
+
+* El logging histórico de los comandos gdb para salvarlos en un fichero se encuentra desactivado
+
+
+
+
+Programar y Depurar desde cero
+------------------------------
+
+[[empezando_asm]]
+Empezando: ASM
+~~~~~~~~~~~~~~
+
+herramientas
+^^^^^^^^^^^^
+* +gdb --version+
+* +gcc --version+
+
+Módulo fuente ASM
+^^^^^^^^^^^^^^^^^
+
+* sum1toN.s
++
+
+[source,nasm]
+----
+### Programa: sum1toN.s
+### Descripción: realiza la suma de la serie 1,2,3,...5
+### gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
+### Ensamblaje as --32 --gstabs fuente.s -o objeto.o
+### linker -> ld -melf_i386 -I/lib/i386-linux-gnu/ld-linux.so.2   -o ejecutable objeto.o -lc
+
+        ##  Declaración de variables
+        .section .data
+
+n:	.int 5
+       
+        .global _start
+
+        ##  Comienzo del código
+        .section .text
+_start:
+        mov $0,%ecx # ECX implementa la variable suma
+        mov n,%edx
+bucle:
+        add %edx,%ecx
+        sub $1,%edx
+        jnz bucle
+       
+        mov %ecx, %ebx # el argumento de salida al S.O. a través de EBX según convenio
+                
+        ## salida
+        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
+        int $0x80     # llamada al sistema operativo
+
+        
+        .end
+----
+
+
+
+Compilación
+^^^^^^^^^^^
+* Con '_start': +gcc -nostartfiles -g -m32 -o sum1toN sum1toN.s+
+* Con 'main': +gcc -g -m32 -o sum1toN sum1toN.s+
+
+
+Propiedades Módulo Binario
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Módulo Binario: +file sum1toN+
+
+Ejecución
+^^^^^^^^^
+
+* +./sum1toN+
+* +echo $?+
+
+
+Depurando
+^^^^^^^^^
+
+* Depurador +gdb+
++
+
+----
+file sum1toN
+layout src  ó Control-x Control-a
+break main ó b main
+run ó r
+rTAB    -> autocompletado
+help r  -> ¿ r es run?
+print n ó p n
+print /x n
+p /t n
+p /o n
+next ó n
+n 6
+continue ó c
+start ó s
+n 6
+p $ecx
+
+set $ecx=-1
+p $ecx
+info regs
+layout regs
+layout src
+
+set var n=10
+set var &n=10
+set var {int}&n=10
+set var {int *}&n=10
+
+set var {char[10]}&n="Hola"
+p /s n
+
+set $pc=&main
+
+quit
+----
++
+
+----
+info sources
+shell ls
+help layout
+layout src
+layout asm
+layout split
+help p
+  formatos de print: /t /x /o /s /a
+----
+
+[[empezando_c]]
+Empezando: C
+~~~~~~~~~~~~
+
+
+* sum1toN.c
++
+
+[source,c]
+----
+/*
+Programa: sum1toN.c
+
+gcc -g -m32 -o sum1toN sum1toN.c 
+file sum1toN
+./sum1toN
+echo $?
+
+*/
+
+// Declaración de la función exit()
+#include <stdlib.h>
+
+// Módulo Principal
+int  main (void) {
+  //Declaración de variables locales e inicialización de los parámetros del bucle
+  int sum=0,n=5;
+  //Bucle que genera los sumandos y realiza la suma
+  while(n>0){ 	//Condición de salida del bucle cuando el sumando es negativo
+    sum+=n;
+    n--;     	//Actualización del sumando
+  }
+  exit (sum);
+}	   	//exit: finaliza la ejecución del programa y devuelve el argumento sum al S.operativo.
+----
+* Compilación: +gcc -g -m32 -o sum1toN sum1toN.c+
+* Módulo Binario: +file sum1toN+
+* Depurador +gdb+
++
+
+----
+file sum1toN
+layout src
+break main
+run
+next
+continue
+start
+next 6
+print sum
+quit
+----
++
+
+----
+file sum1toN  -> symbols table confirmation
+layout src
+breakpoint main ó b main
+r ó run
+h l ó help list
+n ó next -> ejecutar siguiente línea del módulo fuente
+n 6  -> ejecuta 6 veces n
+c ó continue
+s ó start
+q ó quit
+----
++
+
+
+----
+ptype sum
+whatis sum
+p /d sum
+p /x sum
+p /t sum
+p /o sum
+p /a &sum
+p sum
+p &sum
+set var sum=22
+p sum
+set var {int}&sum=-3
+p /x sum
+----
++
+
+----
+info sources
+shell ls
+help layout
+layout src
+layout asm
+layout split
+----

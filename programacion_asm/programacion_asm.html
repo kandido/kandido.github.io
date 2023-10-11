@@ -1,0 +1,3072 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.10" />
+<title></title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+</div>
+<div id="content">
+<div class="paragraph"><p>Programación en Lenguaje Ensamblador (x86)</p></div>
+<div class="exampleblock">
+<div class="content">
+<div class="olist arabic"><ol class="arabic" start="6">
+<li>
+<p>
+Programación en lenguaje Ensamblador x86
+</p>
+<div class="olist loweralpha"><ol class="loweralpha">
+<li>
+<p>
+Representación de Datos
+</p>
+</li>
+<li>
+<p>
+Representación de Instrucciones
+</p>
+</li>
+<li>
+<p>
+Modos de direccionamiento
+</p>
+</li>
+</ol></div>
+</li>
+</ol></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Tema referenciado en el libro de texto W. Stalling
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Apéndice B: Lenguaje Ensamblador y Toolchain
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Analizar la arquitectura del repertorio de las instrucciones máquina (Formato de instrucciones, formato de datos, operaciones y direccionamiento de operandos) de la arquitectura x86-64 para su utilización en el desarrollo de programas en lenguaje ensamblador GNU_asm_x86 (gas).
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Requisitos:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Von Neumann Architecture: Arquitectura de una Computadora, Máquina IAS.
+</p>
+</li>
+<li>
+<p>
+Programación en lenguaje ensamblador IAS
+</p>
+</li>
+<li>
+<p>
+Representacion de datos
+</p>
+</li>
+<li>
+<p>
+Operaciones Aritméticas y Lógicas
+</p>
+</li>
+<li>
+<p>
+Representación de las Instrucciones
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>*</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Los procesadores intel reciben nombre por todos conocidos: Pentium II, Pentium III, Corei3, Corei5, Corei7, etc
+</p>
+</li>
+<li>
+<p>
+La arquitectura de las computadoras que utilizan dichos procesadores responden a una arquitectura común
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Arquitectura x86 en el caso de la arquitectura de 32 bits
+</p>
+</li>
+<li>
+<p>
+Arquitectura x86-64 en el caso de la arquitectura de 64 bits.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Procesadores con arquitectura x86 de 32 bits
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>    1978 y 1979 Intel 8086 y 8088. Primeros microprocesadores de la arquitectura x86.
+    1980 Intel 8087. Primer coprocesador numérico de la arquitectura x86, inicio de la serie x87.
+    1980 NEC V20 y V30. Clones de procesadores 8088 y 8086, respectivamente, fabricados por NEC.
+    1982 Intel 80186 y 80188. Mejoras del 8086 y 8088.
+    1982 Intel 80286. Aparece el modo protegido, tiene capacidad para multitarea.
+    1985 Intel 80386. Primer microprocesador x86 de 32 bits.
+    1989 Intel 80486. Incorpora el coprocesador numérico en el propio circuito integrado.
+    1993 Intel Pentium. Mejor desempeño, arquitectura superescalar.
+    1995 Pentium Pro. Ejecución fuera de orden y Ejecución especulativa
+    1996 Amd k5. Rival directo del Intel Pentium.
+    1997 Intel Pentium II. Mejora la velocidad en código de 16 Bits, incorpora MMX
+    1998 AMD K6-2. Competidor directo del Intel Pentium II, introducción de 3DNow!
+    1999 Intel Pentium III. Introducción de las instrucciones SSE
+    2000 Intel Pentium 4. NetBurst. Mejora en las instrucciones SSE
+    2005 Intel Pentium D. EM64T. Bit NX, Intel Viiv</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+Procesadores con arquitectura x86-64 de 64 bits
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>2003 AMD Opteron. Primer microprocesador x86 de 64 bits, con el conjunto de instrucciones AMD64)
+2003 AMD Athlon.
+2006 Intel Core 2. Introducción de microarquitectura Intel P8. Menor consumo, múltiples núcleos, soporte de virtualización en hardware    incluyendo x86-64 y SSSE3.
+2008 Core i7
+2009 Core i5
+2010 Core i3</code></pre>
+</div></div>
+</li>
+<li>
+<p>
+<a href="https://computerhoy.com/noticias/hardware/que-significan-numeros-letras-procesadores-intel-56812">significado del código de los nombres de procesadores intel serie Core</a>: El primer dígito del código indica la generación (en el 2017 salió la 8ª generación)
+</p>
+</li>
+<li>
+<p>
+Intel Serie Core:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.intel.com/content/www/us/en/products/processors/core/view-all.html">https://www.intel.com/content/www/us/en/products/processors/core/view-all.html</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Intel Serie Core X : familias i9, i7 ,i5
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.intel.com/content/www/us/en/products/processors/core/x-series.html">Intel Serie X</a>:
+</p>
+</li>
+<li>
+<p>
+<a href="https://ark.intel.com/products/series/123588/Intel-Core-X-series-Processors">https://ark.intel.com/products/series/123588/Intel-Core-X-series-Processors</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<a href="https://es.wikipedia.org/wiki/Anexo:Procesadores_AMD">https://es.wikipedia.org/wiki/Anexo:Procesadores_AMD</a>
+</p>
+</li>
+<li>
+<p>
+COMPETENCIA INTEL-AMD año 2018 en computadoras de sobremesa.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.techradar.com/news/intel-coffee-lake-release-date-news-and-rumors">AMD Ryzen 2nd Generation - INTEL Core i7-8086K</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Ên el entorno Linux a la arquitectura de intel x86 de 32 bits la denomina <strong>i386</strong> y a la arquitectura de amd x86-64 la denomina <strong>amd64</strong>.
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Al hablar de la arquitectura de un procesador nos referimos a la Instruction Set Architecture (ISA) del procesador. Por lo que  no no s referiremos a un procesador específico sino a un conjunto de proceadores todos ellos con la misma ISA ejecutanto el mismo repertorio de instrucciones máquina. Hablaremos de un procesador i386 ó de un procesador amd64 para referirnos a la ISA compatible con dicho procesador.
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Componentes básicos de la CPU
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+ALU
+</p>
+</li>
+<li>
+<p>
+Unidad de Control
+</p>
+</li>
+<li>
+<p>
+Registros internos
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Función de la CPU
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+LLevar a cabo el ciclo de instrucción de las instrucciones almacenadas en la memoria principal
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Jerarquía de Memoria: Registros internos a la CPU y Memoria principal (DRAM) externa a la CPU
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Memoria DRAM: Dynamic Random Access Memory
+</p>
+</li>
+<li>
+<p>
+Almacena la secuencia de instrucciones máquina binarias y los datos en formato binario.
+</p>
+</li>
+<li>
+<p>
+Espacio de direcciones lineal: Notación hexacecimal
+</p>
+</li>
+<li>
+<p>
+Direccionamiento: bytes : notación hexadecimal
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="../referencia/Introduction_to_x64_Assembly.pdf">intel_x64_assembly</a>
+</p>
+</li>
+<li>
+<p>
+Registos accesibles NO accesibles por el programador en la arquitectura amd64
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+PC: Contador del Programa : x86 lo denomina RIP: 64 bits
+</p>
+</li>
+<li>
+<p>
+IR: Registro de instrucción : 64 bits
+</p>
+</li>
+<li>
+<p>
+MBR: Registro buffer de Memoria : 64 bits &#8594; WORD SIZE : 64
+</p>
+</li>
+<li>
+<p>
+MAR: Registro de direcciones de Memoria: 40 bits
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Capacidad de Memoria: 2<sup>40</sup>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Para el caso de la arquitectura i386 sustituir 64 bits por 32 bits y el registro MAR también es de 32 bits.
+</p>
+</li>
+</ul></div>
+<div class="tableblock">
+<table rules="all"
+width="30%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><code>63-0</code></p></td>
+<td align="left" valign="top"><p class="table"><code>31-0</code></p></td>
+<td align="left" valign="top"><p class="table"><code>15-0</code></p></td>
+<td align="left" valign="top"><p class="table"><code>15-8</code></p></td>
+<td align="left" valign="top"><p class="table"><code>7-0</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>rax</code></p></td>
+<td align="left" valign="top"><p class="table"><code>eax</code></p></td>
+<td align="left" valign="top"><p class="table"><code>ax</code></p></td>
+<td align="left" valign="top"><p class="table"><code>ah</code></p></td>
+<td align="left" valign="top"><p class="table"><code>al</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>rbx</code></p></td>
+<td align="left" valign="top"><p class="table"><code>ebx</code></p></td>
+<td align="left" valign="top"><p class="table"><code>bx</code></p></td>
+<td align="left" valign="top"><p class="table"><code>bh</code></p></td>
+<td align="left" valign="top"><p class="table"><code>bl</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>rcx</code></p></td>
+<td align="left" valign="top"><p class="table"><code>ecx</code></p></td>
+<td align="left" valign="top"><p class="table"><code>cx</code></p></td>
+<td align="left" valign="top"><p class="table"><code>ch</code></p></td>
+<td align="left" valign="top"><p class="table"><code>cl</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>rdx</code></p></td>
+<td align="left" valign="top"><p class="table"><code>edx</code></p></td>
+<td align="left" valign="top"><p class="table"><code>dx</code></p></td>
+<td align="left" valign="top"><p class="table"><code>dh</code></p></td>
+<td align="left" valign="top"><p class="table"><code>dl</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>rsi</code></p></td>
+<td align="left" valign="top"><p class="table"><code>esi</code></p></td>
+<td align="left" valign="top"><p class="table"><code>si</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>sil</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>rdi</code></p></td>
+<td align="left" valign="top"><p class="table"><code>edi</code></p></td>
+<td align="left" valign="top"><p class="table"><code>di</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>dil</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>rbp</code></p></td>
+<td align="left" valign="top"><p class="table"><code>ebp</code></p></td>
+<td align="left" valign="top"><p class="table"><code>bp</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>bpl</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>rsp</code></p></td>
+<td align="left" valign="top"><p class="table"><code>esp</code></p></td>
+<td align="left" valign="top"><p class="table"><code>sp</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>spl</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>r8</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r8d</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r8w</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>r8b</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>r9</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r9d</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r9w</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>r9b</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>r10</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r10</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r10w</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>r10b</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>r11</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r11</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r11w</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>r11b</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>r12</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r12</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r12w</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>r12b</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>r13</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r13</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r13w</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>r13b</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>r14</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r14</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r14w</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>r14b</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>r15</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r15</code></p></td>
+<td align="left" valign="top"><p class="table"><code>r15w</code></p></td>
+<td align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>r15b</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+En la nominación de los registros de la arquitectura de 64 bits sustituir R  por E y obtenemos la nominación de la arquitectura de 32 bits.
+</p>
+</li>
+</ul></div>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">64 bits</p></td>
+<td align="left" valign="top"><p class="table">32 bits</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">RIP</p></td>
+<td align="left" valign="top"><p class="table">EIP</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">RAX</p></td>
+<td align="left" valign="top"><p class="table">EAX</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">RFLAG</p></td>
+<td align="left" valign="top"><p class="table">EFLAG</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">&#8230;&#8230;.</p></td>
+<td align="left" valign="top"><p class="table">&#8230;&#8230;&#8230;&#8230;.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Hay excepciones
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Registro de STATUS: La ejecución de una instrucción, activa unos bits denominados banderines que indican consecuencias de la operación realizada. Ejemplo: banderín de overflow : indica que la operación aritmética realizada ha resultado en un desbordamiento del resultado de dicha operación.
+</p>
+</li>
+<li>
+<p>
+<a href="http://en.wikipedia.org/wiki/FLAGS_register_(computing)">wikipedia</a>
+</p>
+</li>
+<li>
+<p>
+Unicamente nos fijamos en los flags OSZAPC.
+</p>
+<div class="tableblock">
+<table rules="all"
+width="50%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 1. RFLAG Register</caption>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="left" valign="top">Flag </th>
+<th align="center" valign="top">Bit </th>
+<th align="left" valign="top">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">CF</p></td>
+<td align="center" valign="top"><p class="table">0</p></td>
+<td align="left" valign="top"><p class="table">Carry flag</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">PF</p></td>
+<td align="center" valign="top"><p class="table">2</p></td>
+<td align="left" valign="top"><p class="table">Parity flag</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">AF</p></td>
+<td align="center" valign="top"><p class="table">4</p></td>
+<td align="left" valign="top"><p class="table">Adjust flag</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">ZF</p></td>
+<td align="center" valign="top"><p class="table">6</p></td>
+<td align="left" valign="top"><p class="table">Zero flag</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">SF</p></td>
+<td align="center" valign="top"><p class="table">7</p></td>
+<td align="left" valign="top"><p class="table">Sign flag</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">OF</p></td>
+<td align="center" valign="top"><p class="table">11</p></td>
+<td align="left" valign="top"><p class="table">Overflow flag</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>
+Carry flag:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+se activa si la llevada se sale del ancho de palabra de la ALU en una operación aritmética de números enteros sin signo o con signo
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Overflow flag:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+se activa si teniendo en cuenta el bit de mayor peso MSB (aunque este fuera del tamaño) indica error en la operación aritmética con números enteros con signo.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Parity Even flag:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+indica si el número de bits del byte LSB del resultado de la última operación ha sido par.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Sign flag:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+se activa si el resultado de la última operación ha sido negativo.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Adjust flag:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+se activa si hay llevada en el nibble LSB del resultado de la última operación
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Ejemplos
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><code>  11111111
+  00000001
+----------
+ 100000000 -&gt; hay acarreo y también overflow ya que si consideramos el MSB=1 el resultado sería erróneo, es decir, si realizasemos una     extensión de signo el resultado sería erroneo y por lo tanto hay que rechazar el dígito fuera de rango
+
+
+A  :    11110000
+-B :   +11101100
+----------------
+A–B:   111011100 -&gt; hay acarreo pero no overflow ya que el MSB=1 fuera del tamaño no afecta al signo del resultado.</code></pre>
+</div></div>
+</li>
+</ul></div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/instrucciones_representacion/registers_1200x800.png" alt="../images/instrucciones_representacion/registers_1200x800.png" />
+</div>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Los bytes de un dato de varios bytes se pueden almacenar en memoria en sentido MSB-<em><em>_- LSB ó MSB-</em>_</em>-LSB
+</p>
+</li>
+<li>
+<p>
+Alineamiento <em>Little Endian</em>: El byte de menor peso LSB se almacena en la posición de memoria más baja
+</p>
+</li>
+<li>
+<p>
+Ejemplo 0x40000: 00 AF BF CF
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+En la posición de memoria principal 0x40000 está almacenado el dato de 4 bytes: <code>00 AF BF CF</code>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Los bytes se guardan en dirección de memoria ascendente. Cuando se escribe en horizontal, ascendente significa de izda a dcha.
+</p>
+</li>
+<li>
+<p>
+En la posición <strong>0x40000</strong> está el byte 00 &#8594; <strong>LSB</strong> (Least Significant Byte)
+</p>
+</li>
+<li>
+<p>
+En la posición <strong>0x40001</strong> está el byte AF
+</p>
+</li>
+<li>
+<p>
+En la posición <strong>0x40002</strong> está el byte BF
+</p>
+</li>
+<li>
+<p>
+En la posición <strong>0x40003</strong> está el byte CF &#8594; <strong>MSB</strong> (Most Significant Byte)
+</p>
+<div class="imageblock ditaa">
+<div class="content">
+<img src="programacion_asm__1.png" alt="programacion_asm__1.png" />
+</div>
+</div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+El byte de menor peso se almacena en la posición de memoria más baja. La posición más baja de las cuatro es la 0x4000 donde se almacena el 00, luego este es el byte de menor peso. El dato almacenado en formato little-endian  es el <strong>0xCFBFAF00</strong>.
+</p>
+</li>
+<li>
+<p>
+La arquitectura i386/amd64 utiliza LITTLE ENDIAN
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+En el caso de las instrucciones el formato es por campos por lo que no tiene sentido hablar de posiciones de mayor o menor peso de la instrucción. Lo que si tiene sentido es que uno de los campos operando almacene un dato o una dirección y entonces dicho campo seguirá el almacenamiento Little Endian.
+</p>
+</li>
+<li>
+<p>
+Formato Big Endian
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El orden de almacenamiento es el inverso al little endian, es decir, el byte LSB del dato se almacena en la dirección de memoria mayor de la región que ocupa el dato.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Número sin signo (naturales): codificación binario natural
+</p>
+</li>
+<li>
+<p>
+Números enteros con signo: entero codificados en complemento a 2
+</p>
+</li>
+<li>
+<p>
+Números reales reales codificados en formato IEEE-754 de simple o doble precisión
+</p>
+</li>
+<li>
+<p>
+Caracteres alfanuméricos: código ASCII
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+&#8594; manual del assembler, apartado directivas dependientes de la arquitectura x86
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent">https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent</a>:
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="/etc/asciidoc/images/icons/important.png" alt="Important" />
+</td>
+<td class="content"><strong>OBLIGATORIO</strong> leerse los seis primeros apartados por lo menos</td>
+</tr></table>
+</div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 2. Datos</caption>
+<col width="100%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.common   100    &#8594; reserva 100 bytes sin inicializar y puede ser referenciado globalmente</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.lcomm   bucle, 100 &#8594; reserva 100bytes referenciados con el símbolo local bucle. Sin inicializar.</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.space    100    &#8594; reserva 100 bytes inicializados a cero</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.space    100, 3 &#8594; reserva 100 bytes inicializados a 3.</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.string  "Hola" &#8594; añade el byte 0 al final de la cadena</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.asciz   "Hola" &#8594; añade el byte 0 al final de la cadena</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.ascii   "Hola"</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.byte    3,7,-10,0b1010,0xFF,0777 &#8594; tamaño 1Byte y formatos decimal,decimal,decimal,binario,hexadecimal,octal</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.word    3,7,-10,0b1010,0xFF,0777 &#8594; 2Bytes</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.long    3,7,-10,0b1010,0xFF,0777 &#8594; 4B</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.quad    3,7,-10,0b1010,0xFF,0777 &#8594; 8B</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.int     3,7,-10,0b1010,0xFF,0777 &#8594; 4B</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.octa    3,7,-10,0b1010,0xFF,0777</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.short   3,7,-10,0b1010,0xFF,0777 &#8594; 2B</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.double  3.14159, 2 E-6 &#8594; precisión doble</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.float   2E-6, 3.14159  &#8594; precisión simple</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>.single  2E-6           &#8594; precisión simple</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+tamaño del operando: sufijos de los MNEMÓNICOS. Ejemplo: mov*q*, mov*l*, mov*w*, mov*b*.
+</p>
+<div class="listingblock">
+<div class="content">
+<pre><code>q (quad) 8bytes
+l (long) 4bytes
+w (word) 2bytes
+b (byte) 1byte</code></pre>
+</div></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Directivas del traductor ensamblador
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.gnu.org/software/binutils/">binutils</a> &#8594; <a href="https://sourceware.org/binutils/docs-2.26/as/index.html">as assembler</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.coranac.com/files/gba/re-ejected-gasref.pdf">gas ref card</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+.word reserva 2 bytes en amd64.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<a href="https://docs.oracle.com/cd/E26502_01/html/E28388/eoiyg.html">oracle</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent">x86 y x86-64 dependent</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://ftp.icm.edu.pl/packages/linux-uk/alpha/alpha/asm6.html">alpha architecture</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+El lenguaje en código máquina del repertorio de instrucciones de la arquitectura AMD64 es único pero no así el lenguaje ensamblador correspondiente.
+</p>
+</li>
+<li>
+<p>
+Existen dos lenguajes ensamblador para la ISA i386/amd64, dos sintaxis difernetes, que deben de ser traducidos por diferentes traductores de ensamblador produciendo un módulo binario en el mismo lenguaje máquina.
+</p>
+</li>
+<li>
+<p>
+los traductores de ensamblador  "NASM", "FASM", "MASM", "TASM", and "YASM" traducen módulos fuente que utilizan la sintaxis del lenguaje ensamblador <strong>intel</strong> a modulos binarios para las arquitecturas i386/amd64
+</p>
+</li>
+<li>
+<p>
+El traductor "as" de la fundación GNU traduce módulos fuente  que utilizan las sinteaxis del lenguaje de ensamblador <strong>AT&amp;T</strong> a módulos binarios para las arquitecturas i386/amd64
+</p>
+</li>
+<li>
+<p>
+En la asignatura "Estructura de Computadores" se utiliza la sintaxis <strong>AT&amp;T</strong>.
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html">manual oficial de lenguaje ASM intel x86 ó x86-64</a>:
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.felixcloutier.com/x86/">manual lenguaje ASM Intel quick</a>: <strong>recomendado</strong>
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://docs.oracle.com/cd/E53394_01/html/E54851/eqbsu.html">Oracle Solaris ASM</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+En este documento  a la sintaxis AT&amp;T la denomina "Oracle Solaris".
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+El formato de las instrucciones en lenguaje ensamblador se conoce como <em>sintaxis</em> de las instrucciones.
+</p>
+</li>
+<li>
+<p>
+SINTAXIS ASM: Etiqueta-Código de Operación- Operando1- Operando2- Comentario
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+x86-64
+</p>
+</li>
+<li>
+<p>
+x86
+</p>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 3. Sintaxis</caption>
+<col width="11%" />
+<col width="22%" />
+<col width="22%" />
+<col width="11%" />
+<col width="22%" />
+<col width="11%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><code>label:</code></p></td>
+<td align="left" valign="top"><p class="table"><code>operation_mnemonic</code></p></td>
+<td align="left" valign="top"><p class="table"><code>operand_destination</code></p></td>
+<td align="left" valign="top"><p class="table"><code>,</code></p></td>
+<td align="left" valign="top"><p class="table"><code>operand_source</code></p></td>
+<td align="left" valign="top"><p class="table"><code>#comment</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Lenguaje desarrollado por la empresa de telefonía AT&amp;T
+</p>
+</li>
+<li>
+<p>
+gas i386
+</p>
+</li>
+<li>
+<p>
+gas amd64
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Sintaxis: Etiqueta-Código de Operación- Operando1- Operando2- Comentario
+</p>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 4. Sintaxis</caption>
+<col width="11%" />
+<col width="22%" />
+<col width="22%" />
+<col width="11%" />
+<col width="22%" />
+<col width="11%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><code>label:</code></p></td>
+<td align="left" valign="top"><p class="table"><code>operation_mnemonic</code></p></td>
+<td align="left" valign="top"><p class="table"><code>operand_source</code></p></td>
+<td align="left" valign="top"><p class="table"><code>,</code></p></td>
+<td align="left" valign="top"><p class="table"><code>operand_destination</code></p></td>
+<td align="left" valign="top"><p class="table"><code>;comment</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li>
+<p>
+Ejemplo:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>bucle:  SUBQ     $16,%rsp                ;comienzo del bucle</code>
+</p>
+</li>
+<li>
+<p>
+<code>suma:   ADDW     [%ESI],resultado        ;fin de operación</code>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+ETIQUETA
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Se especifica en la primera columna. Tiene el sufifjo <strong>:</strong>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+CODIGO DE OPERACION: Se utilizan símbolos <em>mnemónicos</em> que ayudan a interpretar intuitivamente la operación. Pej: ADD sumar, MOV mover, SUB restar, &#8230;
+</p>
+</li>
+<li>
+<p>
+OPERANDO FUENTE Y/O DESTINO
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+dato alfanumérico: representación alfanumérica    &#8594; 16
+</p>
+</li>
+<li>
+<p>
+dirección de memoria externa: etiqueta              &#8594; resultado
+</p>
+</li>
+<li>
+<p>
+registros internos de la CPU: %rax,%rbx,%rsp,%esi,.. &#8594; %rsp,%esi
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El prefijo % significa que el nombre hace referencia a un registro
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+tamaño del dato operando: sufijos de los mnemónicos: q,l,w,b
+</p>
+</li>
+<li>
+<p>
+localización del operando o <strong>modo de direccionamiento</strong>: símbolos de puntuación $,[],(),etc como expresión aritmética para la obtención de la DIRECCION EFECTIVA del operando &#8594; [%esi],$16
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Ejemplo:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+instrucción máquina arquitectura amd64.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>4001a4:       48 83 ec 10   &#8594;  subq    $16,%rsp</strong>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Interpretación del programador:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+lenguaje ensamblador AT&amp;T de la arquitectura x86.
+</p>
+</li>
+<li>
+<p>
+En la posición de memoria principal 0x4001A4 está almacenada la instrucción <code>subq    $16,%rsp</code>
+</p>
+</li>
+<li>
+<p>
+subq indica la operación de resta con datos enteros de 64 bits (sufijo q). Resta del operando destino el operando fuente.
+</p>
+</li>
+<li>
+<p>
+El operando fuente  tiene valor decimal 16, 0x10 en hexadecimal y el direccionamiento de este operando es inmediato, es decir, su valor es 16 y está ubicado en la propia instrucción.
+</p>
+</li>
+<li>
+<p>
+El operando destino está almacenado en el registro interno de la CPU denominado RSP
+</p>
+</li>
+<li>
+<p>
+La referencia a la Próxima Instrucción la realiza no la instrucción sino la CPU realizando la opeación PC&#8592;PC+tamaño de la instrucción en bytes.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+La traducción entre la representación del módulo fuente en lenguaje ensamblador almacenado en un fichero del disco duro y la representación del programa en lenguaje máquina se da en el proceso de ensamblaje:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Módulo Fuente en lenguaje ensamblador &#8594; Traductor Ensamblador &#8594; Módulo Objeto Reubicable &#8594; Linker &#8594; Módulo Objeto Ejecutable Binario&#8594; Cargador &#8594; Proceso
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Ejemplo: hola_mundo.s &#8594; <strong>as</strong> &#8594; hola_mundo.o &#8594; <strong>ld</strong> &#8594; hola_mundo (formato ELF) &#8594; <strong>loader</strong> &#8594; hola_mundo (memoria principal) &#8594; creación proceso (hola_mundo en ejecución). "as", "ld" y "loader" son las herramientas GNU necesarias para la creación de un proceso a partir del módulo en lenguaje ensamblador.
+</p>
+</li>
+<li>
+<p>
+el linker <strong>ld</strong> mezcla el módulo objeto con módulos del entorno del sistema operativo y con módulos de las librerías.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Apéndice B del libro de texto.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="imageblock graphviz">
+<div class="content">
+<img src="ensamblaje-proceso.png" alt="ensamblaje-proceso.png" />
+</div>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Formato de la instrucción
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Complicado
+</p>
+</li>
+<li>
+<p>
+Campos
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+cada elemento de la instrucción (Código de operación, operando fuente, etc) se puede codificar en un campo diferente.
+</p>
+</li>
+<li>
+<p>
+El formato de las instrucciones depende de cada máquina. Habrá que consultar el manual de referencia para el programador de la arquitectura ISA para conocer los campos de dicho formato.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Ejemplo:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+instrucción máquina intel x86.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>4001a4:       48 83 ec 10   &#8594;  subq    $16,%rsp</strong>
+</p>
+</li>
+<li>
+<p>
+Descripción de la instrucción en lenguaje <strong>RTL</strong>: <em>RSP &#8592; RSP - 16</em>
+</p>
+</li>
+<li>
+<p>
+¿Cómo interpretar una instrucción máquina  en lenguaje binario ? Es necesario consultar el <strong>Manual de Referencia de la Arquitectura ISA de la máquina x86</strong> y tener conocimientos de los modos de direccionamiento. Este ejemplo se desarrolla al final de este Tema en el apartado 8) <em>Formato de Instrucción de la arquitectura ISA x86</em>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Una vez realizado el proceso de traducción del módulo fuente en lenguaje ensamblador se genera un módulo objeto en lenguaje binario que se almacena en el disco duro en forma de fichero.
+</p>
+</li>
+<li>
+<p>
+El fichero que contiene el módulo objeto ejecutable en lenguaje binario es necesario cargarlo en la memoria principal. Esta tarea la realiza el <strong>cargador</strong> del sistema operativo.
+</p>
+</li>
+<li>
+<p>
+Cada dirección de memoria apunta a 1 byte.
+</p>
+</li>
+<li>
+<p>
+La dirección más baja apunta a todo el objeto: instrucción o dato.
+</p>
+</li>
+<li>
+<p>
+Ejemplo:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>4001a4:       48 83 ec 10</strong>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+En la posición <strong>0x4001A4</strong> está el byte <strong>48</strong>
+</p>
+</li>
+<li>
+<p>
+En la posición <strong>0x4001A4+1</strong> está el byte <strong>83</strong>
+</p>
+</li>
+<li>
+<p>
+En la posición <strong>0x4001A4+2</strong> está el byte <strong>EC</strong>
+</p>
+</li>
+<li>
+<p>
+En la posición <strong>0x4001A4+3</strong> está el byte <strong>10</strong>
+</p>
+</li>
+<li>
+<p>
+En la posición de memoria principal <code>0x4001A4</code> está almacenada la instrucción de 4 Bytes
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Ejemplo:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>bucle:  SUBQ     $16,%rsp                ;comienzo del bucle</code>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Operando fuente: $ indica direccionamiento INMEDIATO .El operando está en la propia instrucción &#8594; Operando=16
+</p>
+</li>
+<li>
+<p>
+Operando destino: % indica REGISTRO. El operando está en el registro RSP
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<code>suma:   ADDW     [%ESI],resultado        ;fin de operación</code>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Operando fuente: [] indica INDIRECCION y % registro .El registro ESI continene la dirección de memoria donde está el operando
+</p>
+</li>
+<li>
+<p>
+Operando destino: "resultado" es una etiqueta. Direccionamiento ABSOLUTO. El operando está en la dirección de memoria "resultado".
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+&#8594; manual del assembler, apartado directivas dependientes de la arquitectura x86
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent">https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent</a>:
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="/etc/asciidoc/images/icons/important.png" alt="Important" />
+</td>
+<td class="content"><strong>RECOMENDABLE</strong> leerse los seis primeros apartados por lo menos</td>
+</tr></table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Direccionamiento
+</p>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="33%" />
+<col width="66%" />
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><code>INMEDIATO:</code></p></td>
+<td align="left" valign="top"><p class="table"><code>El valor del operando está ubicado inmediatamente después del código de operación de la instruccion. Unicamente se especifica el operando fuente.</code></p></td>
+</tr>
+<tr>
+<td rowspan="2" align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>sintaxis: el valor del operando se indica con el prefijo <strong>$</strong> .</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>ejemplo: <strong>movl $0xabcd1234, %ebx</strong>. El operando fuente es el valor 0xABCD1234</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>REGISTRO:</code></p></td>
+<td align="left" valign="top"><p class="table"><code>El valor del operando está localizado en un registro de la CPU.</code></p></td>
+</tr>
+<tr>
+<td rowspan="2" align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>sintaxis: Nombre del registro con el prefijo <strong>%</strong>.</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>ejemplo: <strong>movl %eax, %ebx</strong>. El operando fuente es el REGISTRO EAX y el destino es el REGISTRO EBX</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>DIRECTO:</code></p></td>
+<td align="left" valign="top"><p class="table"><code>La dirección efectiva apuntando al operando almacenado en la Memoria Principal es la dirección absoluta referenciada por la etiqueta especificada en el campo de operando. El programador utiliza el direccionamiento directo pero el compilador lo transforma en un direccionamiento relativo al contador de programa. Ver direccionamiento con desplazamiento.</code></p></td>
+</tr>
+<tr>
+<td rowspan="2" align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>sintaxis: una etiqueta definida por el programador</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>ejemplo: <strong>je somePlace</strong>   . Salto a la dirección marcada por la etiqueta somePlace si el resultado de la operación anterior activa el flag ZF=1 del registro RFLAG.</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>INDEXADO:</code></p></td>
+<td align="left" valign="top"><p class="table"><code>El valor del operando está localizado en memoria. La dirección efectiva apuntando a Memoria es la SUMA del valor del registro_base MAS scale POR el valor en el registro_índice, MAS el offset. <em>EA=Offset+R_Base+R_índice*Scale</em></code></p></td>
+</tr>
+<tr>
+<td rowspan="2" align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>sintaxis: lista de valores separados por coma y entre paréntesis (base_register, index_register, scale) y precedido por un offset.</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>ejemplo: <strong>movl $0x6789cdef, -16(%edx, %eax, 4)</strong> . La dirección efectiva del destino es  EDX + EAX*4 - 16.</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>INDIRECTO:</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Si  el modo general de indexación  lo particularizamos en <code>(base_register)</code> entonces la dirección del operando no se obtiene mediante una indexación sino que la dirección efectiva es el contenido de rdx y por lo tanto se accede al operando indirectamente.</code></p></td>
+</tr>
+<tr>
+<td rowspan="2" align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>sintaxis:  (base_register)</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>ejemplo: <strong>movl $0x6789cdef, (%edx)</strong> . La dirección efectiva del destino es  EDX. EDX es un puntero.</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>RELATIVO: registro base más un offset:</code></p></td>
+<td align="left" valign="top"><p class="table"><code>El valor del operando está ubicado en memoria. La dirección efectiva del operando es la suma del valor contenido en un registro base más un valor de offset.</code></p></td>
+</tr>
+<tr>
+<td rowspan="2" align="left" valign="top"><p class="table"><code></code></p></td>
+<td align="left" valign="top"><p class="table"><code>sintaxis: registro entre paréntesis y el offset inmediatamente antes del paréntesis.</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>ejemplo: <strong>movl $0xaabbccdd, -12(%eax)</strong>  . La dirección efectiva del operando destino es  EAX-12</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+</ul></div>
+<div class="tableblock">
+<table rules="all"
+width="100%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<caption class="title">Table 5. Modos de Direccionamiento de los Operandos</caption>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+<thead>
+<tr>
+<th align="left" valign="top">Direccionamiento Operando </th>
+<th align="left" valign="top"> Valor Operando </th>
+<th align="left" valign="top"> Nombre del Modo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table"><code>$0</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Valor Cero</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Inmediato</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>%rax</code></p></td>
+<td align="left" valign="top"><p class="table"><code>RAX</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Registro</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>loop_exit</code></p></td>
+<td align="left" valign="top"><p class="table"><code>M[loop_exit]</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Directo</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>data_items(,%rdi,4)</code></p></td>
+<td align="left" valign="top"><p class="table"><code>M[data_item + 4*RDI]</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Indexado</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>(%rbx)</code></p></td>
+<td align="left" valign="top"><p class="table"><code>M[RBX]</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Indirecto</code></p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table"><code>(%rbx,%rdi,4)</code></p></td>
+<td align="left" valign="top"><p class="table"><code>M[RBX + 4*RDI]</code></p></td>
+<td align="left" valign="top"><p class="table"><code>Indirecto Indexado</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+M[loop_exit]: directo ya que loop_exit es una dirección de memoria externa y M indica la memoria externa.
+</p>
+</li>
+<li>
+<p>
+M[RBX]: indirecto ya que RBX es una dirección de memoria interna y M indica memoria externa: A la mem. externa se accede a través de la mem. interna.
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/toc.htm">Appendice A</a>: opcode map
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/MOV.htm">MOV</a>
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>MOV -- Move Data
+
+Opcode   Instruction       Clocks        Description
+
+<span style="color: #993399">88</span>  /r   MOV r/m<span style="color: #993399">8</span><span style="color: #990000">,</span>r8       <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">2</span>           Move byte register to r/m byte
+<span style="color: #993399">89</span>  /r   MOV r/m<span style="color: #993399">16</span><span style="color: #990000">,</span>r16     <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">2</span>           Move word register to r/m word
+<span style="color: #993399">89</span>  /r   MOV r/m<span style="color: #993399">32</span><span style="color: #990000">,</span>r32     <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">2</span>           Move dword register to r/m dword
+8A  /r   MOV r8<span style="color: #990000">,</span>r/m<span style="color: #993399">8</span>       <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">4</span>           Move r/m byte to byte register
+8B  /r   MOV r16<span style="color: #990000">,</span>r/m<span style="color: #993399">16</span>     <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">4</span>           Move r/m word to word register
+8B  /r   MOV r32<span style="color: #990000">,</span>r/m<span style="color: #993399">32</span>     <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">4</span>           Move r/m dword to dword register
+8C  /r   MOV r/m<span style="color: #993399">16</span><span style="color: #990000">,</span>Sreg    <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">2</span>           Move segment register to r/m word
+8D  /r   MOV Sreg<span style="color: #990000">,</span>r/m<span style="color: #993399">16</span>    <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">5</span><span style="color: #990000">,</span><span style="color: #009900">pm</span><span style="color: #990000">=</span><span style="color: #993399">18</span><span style="color: #990000">/</span><span style="color: #993399">19</span>  Move r/m word to segment register
+A0       MOV AL<span style="color: #990000">,</span>moffs8     <span style="color: #993399">4</span>             Move byte at <span style="color: #990000">(</span>seg<span style="color: #990000">:</span>offset<span style="color: #990000">)</span> to AL
+A1       MOV AX<span style="color: #990000">,</span>moffs16    <span style="color: #993399">4</span>             Move word at <span style="color: #990000">(</span>seg<span style="color: #990000">:</span>offset<span style="color: #990000">)</span> to AX
+A1       MOV EAX<span style="color: #990000">,</span>moffs32   <span style="color: #993399">4</span>             Move dword at <span style="color: #990000">(</span>seg<span style="color: #990000">:</span>offset<span style="color: #990000">)</span> to EAX
+A2       MOV moffs8<span style="color: #990000">,</span>AL     <span style="color: #993399">2</span>             Move AL to <span style="color: #990000">(</span>seg<span style="color: #990000">:</span>offset<span style="color: #990000">)</span>
+A3       MOV moffs16<span style="color: #990000">,</span>AX    <span style="color: #993399">2</span>             Move AX to <span style="color: #990000">(</span>seg<span style="color: #990000">:</span>offset<span style="color: #990000">)</span>
+A3       MOV moffs32<span style="color: #990000">,</span>EAX   <span style="color: #993399">2</span>             Move EAX to <span style="color: #990000">(</span>seg<span style="color: #990000">:</span>offset<span style="color: #990000">)</span>
+B0 <span style="color: #990000">+</span> rb  MOV reg8<span style="color: #990000">,</span>imm8     <span style="color: #993399">2</span>             Move immediate byte to register
+B8 <span style="color: #990000">+</span> rw  MOV reg16<span style="color: #990000">,</span>imm16   <span style="color: #993399">2</span>             Move immediate word to register
+B8 <span style="color: #990000">+</span> rd  MOV reg32<span style="color: #990000">,</span>imm32   <span style="color: #993399">2</span>             Move immediate dword to register
+C6       MOV r/m<span style="color: #993399">8</span><span style="color: #990000">,</span>imm8     <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">2</span>           Move immediate byte to r/m byte
+C7       MOV r/m<span style="color: #993399">16</span><span style="color: #990000">,</span>imm16   <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">2</span>           Move immediate word to r/m word
+C7       MOV r/m<span style="color: #993399">32</span><span style="color: #990000">,</span>imm32   <span style="color: #993399">2</span><span style="color: #990000">/</span><span style="color: #993399">2</span>           Move immediate dword to r/m dword
+</tt></pre></div></div>
+</li>
+<li>
+<p>
+dword :double word: 32 bits
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="/etc/asciidoc/images/icons/caution.png" alt="Caution" />
+</td>
+<td class="content">la sintaxis del lenguage ASM no es AT&amp;T sino intel &#8594;  mnemónico operando_destino, operando fuente</td>
+</tr></table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+Hola mundo x86
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #993399">08048190</span> <span style="color: #990000">&lt;</span>_start<span style="color: #990000">&gt;:</span>
+ <span style="color: #993399">8048190</span><span style="color: #990000">:</span>       b8 <span style="color: #993399">04</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>          mov    $<span style="color: #993399">0x4</span><span style="color: #990000">,%</span>eax
+ <span style="color: #993399">8048195</span><span style="color: #990000">:</span>       bb <span style="color: #993399">01</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>          mov    $<span style="color: #993399">0x1</span><span style="color: #990000">,%</span>ebx
+ 804819a<span style="color: #990000">:</span>       b9 f4 9f <span style="color: #993399">04</span> <span style="color: #993399">08</span>          mov    $<span style="color: #993399">0x8049ff4</span><span style="color: #990000">,%</span>ecx
+ 804819f<span style="color: #990000">:</span>       8b <span style="color: #993399">15</span> ff 9f <span style="color: #993399">04</span> <span style="color: #993399">08</span>       mov    <span style="color: #993399">0x8049fff</span><span style="color: #990000">,%</span>edx
+ 80481a5<span style="color: #990000">:</span>       cd <span style="color: #993399">80</span>                   <span style="color: #009900">int</span>    $<span style="color: #993399">0x80</span>
+ 80481a7<span style="color: #990000">:</span>       b8 <span style="color: #993399">01</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>          mov    $<span style="color: #993399">0x1</span><span style="color: #990000">,%</span>eax
+ 80481ac<span style="color: #990000">:</span>       bb <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>          mov    $<span style="color: #993399">0x0</span><span style="color: #990000">,%</span>ebx
+ 80481b1<span style="color: #990000">:</span>       cd <span style="color: #993399">80</span>                   <span style="color: #009900">int</span>    $<span style="color: #993399">0x80</span>
+</tt></pre></div></div>
+</li>
+<li>
+<p>
+<strong>b8 04 00 00 00</strong> &#8594;   mov    $0x4,%eax
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Manual: <em>B8 + rd  MOV reg32,imm32   2             Move immediate dword to register</em>:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Campo de Código de Operación: <strong>B8</strong>
+</p>
+</li>
+<li>
+<p>
+Campo de operando: double word: 32 bits: <strong>04 00 00 00</strong>  &#8594; little endian &#8594; es el dato 0x00000004
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+ISA: Instruction Set Architecture
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Interfaz SW/HW
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Diseño de la arquitectura, diseño de la Interfaz CPU/SW
+</p>
+</li>
+<li>
+<p>
+Dos tipos según privilegio: ISA Usuario - ISA Sistema
+</p>
+</li>
+<li>
+<p>
+Características a tener en cuenta
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Operation repertoire: How many and which operations to provide, and how complex operations should be
+</p>
+</li>
+<li>
+<p>
+Data types: The various types of data upon which operations are performed
+</p>
+</li>
+<li>
+<p>
+Instruction format: Instruction length (in bits), number of addresses, size of various fields, and so on
+</p>
+</li>
+<li>
+<p>
+Registers: Number of processor registers that can be referenced by instructions, and their use
+</p>
+</li>
+<li>
+<p>
+Addressing: The mode or modes by which the address of an operand is specified
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs/as/">binutils as</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+&#8594; manual del assembler, apartado directivas dependientes de la arquitectura x86
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent">https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent</a>:
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="/etc/asciidoc/images/icons/important.png" alt="Important" />
+</td>
+<td class="content"><strong>OBLIGATORIO</strong> leerse los seis primeros apartados por lo menos de la sección información dependiente de la arquitectura intel x86-64</td>
+</tr></table>
+</div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://asm.sourceforge.net/howto/Assembly-HOWTO.html">http://asm.sourceforge.net/howto/Assembly-HOWTO.html</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://web.mit.edu/gnu/doc/html/as_1.html">http://web.mit.edu/gnu/doc/html/as_1.html</a>
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Listado de mnemónicos con su descripción
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Visión global. Categorías. Ejemplos.
+</p>
+</li>
+<li>
+<p>
+Manuales oficiales
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html">Intel</a>: Vol 2
+</p>
+</li>
+<li>
+<p>
+<a href="http://developer.amd.com/resources/documentation-articles/developer-guides-manuals/">AMD</a>: apartado Manuals : vol 3
+</p>
+</li>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs-2.25/">binutils</a>:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs-2.25/as/index.html"><strong>as: traductor assembler</strong></a>: opciones de la línea de comandos, directivas, tipos de datos, etc
+</p>
+</li>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs-2.25/ld/index.html">ld: linker</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs-2.25/binutils/index.html">objdump, readelf, &#8230;.</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Manuales no oficiales:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.felixcloutier.com/x86/">manual Intel quick</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/toc.htm">intel descriptivo i386</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/c17.htm">Repertorio ISA y Formato de Instrucción</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<a href="http://docs.oracle.com/cd/E19253-01/817-5477/817-5477.pdf">AT&amp;T Solaris Manual amd64-i386 </a>: lenguaje y traductor assembler.
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.unixwiz.net/techtips/x86-jumps.html">Saltos Condicionales</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Tabla
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>Intel Assembler <span style="color: #993399">80186</span>
+
+TRANSFERENCIA Flags
+Nombre Comentario                       Código                      Operación                                          O D I T S Z A P C
+<span style="color: #008080">MOV</span>    <span style="font-weight: bold"><span style="color: #000000">Mover</span></span> <span style="color: #990000">(</span>copiar<span style="color: #990000">)</span>                   <span style="color: #008080">MOV</span> Dest<span style="color: #990000">,</span><span style="color: #008080">Fuente</span>      Dest<span style="color: #990000">:=</span>Fuente
+XCHG   Intercambiar                     <span style="color: #008080">XCHG</span> Op1<span style="color: #990000">,</span><span style="color: #008080">Op2</span>         Op1<span style="color: #990000">:=</span>Op2 <span style="color: #990000">,</span> Op2<span style="color: #990000">:=</span>Op1
+STC    Set <span style="color: #008080">the</span> <span style="font-weight: bold"><span style="color: #000000">carry</span></span> <span style="color: #990000">(</span>Carry <span style="color: #990000">=</span> <span style="color: #993399">1</span><span style="color: #990000">)</span>        <span style="color: #008080">STC</span>                  CF<span style="color: #990000">:=</span><span style="color: #993399">1</span>                                                              <span style="color: #993399">1</span>
+CLC    <span style="color: #008080">Clear</span> <span style="font-weight: bold"><span style="color: #000000">Carry</span></span> <span style="color: #990000">(</span>Carry <span style="color: #990000">=</span> <span style="color: #993399">0</span><span style="color: #990000">)</span>          <span style="color: #008080">CLC</span>                  CF<span style="color: #990000">:=</span><span style="color: #993399">0</span>                                                              <span style="color: #993399">0</span>
+CMC    Complementar Carry               <span style="color: #008080">CMC</span>                  CF<span style="color: #990000">:=</span>Ø                                                              ±
+STD    Setear dirección                 <span style="color: #008080">STD</span>                  DF<span style="color: #990000">:=</span><span style="color: #993399">1</span><span style="color: #990000">(</span>interpreta strings de arriba <span style="color: #008080">hacia</span> abajo<span style="color: #990000">)</span>      <span style="color: #993399">1</span>
+CLD    Limpiar dirección                <span style="color: #008080">CLD</span>                 DF<span style="color: #990000">:=</span><span style="color: #993399">0</span><span style="color: #990000">(</span>interpreta strings de abajo <span style="color: #008080">hacia</span> arriba<span style="color: #990000">)</span>      <span style="color: #993399">0</span>
+STI    Flag de Interrupción en <span style="color: #993399">1</span>        <span style="color: #008080">STI</span>                 IF<span style="color: #990000">:=</span><span style="color: #993399">1</span>                                                  <span style="color: #993399">1</span>
+CLI    Flag de Interrupción en <span style="color: #993399">0</span>        <span style="color: #008080">CLI</span>                 IF<span style="color: #990000">:=</span><span style="color: #993399">0</span>                                                  <span style="color: #993399">0</span>
+PUSH   Apilar en la pila                PUSH Fuente          <span style="color: #008080">DEC</span> SP<span style="color: #990000">,</span> <span style="color: #990000">[</span>SP<span style="color: #990000">]:=</span>Fuente
+PUSHF  Apila los flags                  <span style="color: #008080">PUSHF</span>                O<span style="color: #990000">,</span> D<span style="color: #990000">,</span> I<span style="color: #990000">,</span> T<span style="color: #990000">,</span> S<span style="color: #990000">,</span> Z<span style="color: #990000">,</span> A<span style="color: #990000">,</span> P<span style="color: #990000">,</span> C <span style="color: #993399">286</span><span style="color: #990000">+:</span> <span style="color: #008080">También</span> NT<span style="color: #990000">,</span> IOPL
+PUSHA  Apila los registros generales    <span style="color: #008080">PUSHA</span>                AX<span style="color: #990000">,</span> CX<span style="color: #990000">,</span> DX<span style="color: #990000">,</span> BX<span style="color: #990000">,</span> SP<span style="color: #990000">,</span> BP<span style="color: #990000">,</span> SI<span style="color: #990000">,</span> DI
+POP    Desapila de la pila              POP <span style="color: #008080">Dest</span>             Destino<span style="color: #990000">:=[</span>SP<span style="color: #990000">],</span> INC SP
+POPF   Desapila a los flags             <span style="color: #008080">POPF</span>                 O<span style="color: #990000">,</span> D<span style="color: #990000">,</span> I<span style="color: #990000">,</span> T<span style="color: #990000">,</span> S<span style="color: #990000">,</span> Z<span style="color: #990000">,</span> A<span style="color: #990000">,</span> P<span style="color: #990000">,</span> C <span style="color: #993399">286</span><span style="color: #990000">+:</span> <span style="color: #008080">También</span> NT<span style="color: #990000">,</span> IOPL
+POPA   Desapila a <span style="color: #008080">los</span> reg<span style="color: #990000">.</span> general<span style="color: #990000">.</span>     <span style="color: #008080">POPA</span>                 DI<span style="color: #990000">,</span> SI<span style="color: #990000">,</span> BP<span style="color: #990000">,</span> SP<span style="color: #990000">,</span> BX<span style="color: #990000">,</span> DX<span style="color: #990000">,</span> CX<span style="color: #990000">,</span> AX
+CBW    Convertir Byte a Word            <span style="color: #008080">CBW</span>                  AX<span style="color: #990000">:=</span><span style="font-weight: bold"><span style="color: #000000">AL</span></span> <span style="color: #990000">(</span><span style="color: #008080">con</span> signo<span style="color: #990000">)</span>
+CWD    Convertir Word a Doble           <span style="color: #008080">CWD</span>                  DX<span style="color: #990000">:</span>AX<span style="color: #990000">:=</span><span style="font-weight: bold"><span style="color: #000000">AX</span></span> <span style="color: #990000">(</span><span style="color: #008080">con</span> signo<span style="color: #990000">)</span>
+<span style="color: #008080">CWDE</span>   Conv<span style="color: #990000">.</span> Word a <span style="color: #008080">Doble</span> Exten<span style="color: #990000">.</span>        CWDE <span style="color: #993399">386</span>             EAX<span style="color: #990000">:=</span><span style="font-weight: bold"><span style="color: #000000">AX</span></span> <span style="color: #990000">(</span><span style="color: #008080">con</span> signo<span style="color: #990000">)</span>
+IN_i   Entrada                          <span style="color: #008080">IN</span> Dest<span style="color: #990000">,</span><span style="color: #008080">Puerto</span>       AL<span style="color: #990000">/</span>AX<span style="color: #990000">/</span>EAX <span style="color: #990000">:=</span> byte<span style="color: #990000">/</span>word<span style="color: #990000">/</span><span style="color: #009900">double</span> del <span style="color: #008080">puerto</span> especifi<span style="color: #990000">.</span>
+OUT_i  Salida                           <span style="color: #008080">OUT</span> Puerto<span style="color: #990000">,</span><span style="color: #008080">Fuente</span>    Byte<span style="color: #990000">/</span>word<span style="color: #990000">/</span><span style="color: #009900">double</span> del <span style="color: #008080">puerto</span> especifi<span style="color: #990000">.</span> <span style="color: #990000">:=</span> AL<span style="color: #990000">/</span>AX<span style="color: #990000">/</span>EAX
+
+i para más información ver especificaciones de la <span style="color: #008080">intrucción</span> Flags<span style="color: #990000">:</span> ±<span style="color: #990000">=</span>Afectado por <span style="color: #008080">esta</span> instrucción <span style="color: #990000">?=</span>Indefinido luego de esta instrucción
+
+ARITMÉTICOS Flags
+Nombre  Comentario                      Código                  Operación                                       O D I T S Z A P C
+ADD     Suma                            <span style="color: #008080">ADD</span> Dest<span style="color: #990000">,</span><span style="color: #008080">Fuente</span>         Dest<span style="color: #990000">:=</span>Dest<span style="color: #990000">+</span> Fuente                              ±       ± ± ± ± ±
+ADC     Suma con acarreo                <span style="color: #008080">ADC</span> Dest<span style="color: #990000">,</span><span style="color: #008080">Fuente</span>         Dest<span style="color: #990000">:=</span>Dest<span style="color: #990000">+</span> Fuente <span style="color: #990000">+</span>CF                          ±       ± ± ± ± ±
+SUB     Resta                           <span style="color: #008080">SUB</span> Dest<span style="color: #990000">,</span><span style="color: #008080">Fuente</span>         Dest<span style="color: #990000">:=</span>Dest<span style="color: #990000">-</span> Fuente                              ±       ± ± ± ± ±
+SBB     Resta con acarreo               <span style="color: #008080">SBB</span> Dest<span style="color: #990000">,</span><span style="color: #008080">Fuente</span>         Dest<span style="color: #990000">:=</span>Dest<span style="color: #990000">-(</span>Fuente <span style="color: #990000">+</span>CF<span style="color: #990000">)</span>                         ±       ± ± ± ± ±
+<span style="color: #008080">DIV</span>     Divisió<span style="font-weight: bold"><span style="color: #000000">n</span></span> <span style="color: #990000">(</span><span style="color: #008080">sin</span> signo<span style="color: #990000">)</span>            DIV <span style="color: #008080">Op</span>                  Op<span style="color: #990000">=</span>byte<span style="color: #990000">:</span> AL<span style="color: #990000">:=</span>AX <span style="color: #990000">/</span> <span style="color: #008080">Op</span> AH<span style="color: #990000">:=</span>Resto                  <span style="color: #990000">?</span>       <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span>
+<span style="color: #008080">DIV</span>     Divisió<span style="font-weight: bold"><span style="color: #000000">n</span></span> <span style="color: #990000">(</span><span style="color: #008080">sin</span> signo<span style="color: #990000">)</span>            DIV <span style="color: #008080">Op</span>                  Op<span style="color: #990000">=</span>word<span style="color: #990000">:</span>         AX<span style="color: #990000">:=</span>DX<span style="color: #990000">:</span>AX <span style="color: #990000">/</span> <span style="color: #008080">Op</span> DX<span style="color: #990000">:=</span>Resto       <span style="color: #990000">?</span>       <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span>
+DIV     <span style="color: #993399">386</span> Divisió<span style="font-weight: bold"><span style="color: #000000">n</span></span> <span style="color: #990000">(</span><span style="color: #008080">sin</span> signo<span style="color: #990000">)</span>        DIV <span style="color: #008080">Op</span>                  Op<span style="color: #990000">=</span>doublew<span style="color: #990000">.:</span>     EAX<span style="color: #990000">:=</span>EDX<span style="color: #990000">:</span>EAX <span style="color: #990000">/</span> <span style="color: #008080">Op</span> EDX<span style="color: #990000">:=</span>Resto   <span style="color: #990000">?</span>      <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span>
+IDIV    División entera con signo       IDIV <span style="color: #008080">Op</span>                 Op<span style="color: #990000">=</span>byte<span style="color: #990000">:</span>        AL<span style="color: #990000">:=</span>AX <span style="color: #990000">/</span> <span style="color: #008080">Op</span> AH<span style="color: #990000">:=</span>Resto           <span style="color: #990000">?</span>      <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span>
+IDIV    División entera con signo       IDIV <span style="color: #008080">Op</span>                 Op<span style="color: #990000">=</span>word<span style="color: #990000">:</span> AX<span style="color: #990000">:=</span>DX<span style="color: #990000">:</span>AX <span style="color: #990000">/</span> <span style="color: #008080">Op</span> DX<span style="color: #990000">:=</span>Resto               <span style="color: #990000">?</span>      <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span>
+IDIV    <span style="color: #993399">386</span> División entera con signo   IDIV <span style="color: #008080">Op</span>                 Op<span style="color: #990000">=</span>doublew<span style="color: #990000">.:</span> EAX<span style="color: #990000">:=</span>EDX<span style="color: #990000">:</span>EAX <span style="color: #990000">/</span> <span style="color: #008080">Op</span> EDX<span style="color: #990000">:=</span>Resto       <span style="color: #990000">?</span>      <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span>
+<span style="color: #008080">MUL</span>     Multiplicació<span style="font-weight: bold"><span style="color: #000000">n</span></span> <span style="color: #990000">(</span><span style="color: #008080">sin</span> signo<span style="color: #990000">)</span>      MUL <span style="color: #008080">Op</span>                  Op<span style="color: #990000">=</span>byte<span style="color: #990000">:</span> AX<span style="color: #990000">:=</span>AL<span style="color: #990000">*</span>Op <span style="color: #008080">si</span> AH<span style="color: #990000">=</span><span style="color: #993399">0</span> ¨                    ±    <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> ±
+<span style="color: #008080">MUL</span>     Multiplicació<span style="font-weight: bold"><span style="color: #000000">n</span></span> <span style="color: #990000">(</span><span style="color: #008080">sin</span> signo<span style="color: #990000">)</span>      MUL <span style="color: #008080">Op</span>                  Op<span style="color: #990000">=</span>word<span style="color: #990000">:</span> DX<span style="color: #990000">:</span>AX<span style="color: #990000">:=</span>AX<span style="color: #990000">*</span>Op <span style="color: #008080">si</span> DX<span style="color: #990000">=</span><span style="color: #993399">0</span> ¨                 ±    <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> ±
+MUL     <span style="color: #993399">386</span> Multiplicació<span style="font-weight: bold"><span style="color: #000000">n</span></span> <span style="color: #990000">(</span><span style="color: #008080">sin</span> signo<span style="color: #990000">)</span>  MUL <span style="color: #008080">Op</span>                  Op<span style="color: #990000">=</span><span style="color: #009900">double</span><span style="color: #990000">:</span> EDX<span style="color: #990000">:</span>EAX<span style="color: #990000">:=</span>EAX<span style="color: #990000">*</span>Op <span style="color: #008080">si</span> EDX<span style="color: #990000">=</span><span style="color: #993399">0</span> ¨           ±    <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> ±
+IMUL    <span style="color: #008080">i</span> Multiplic<span style="color: #990000">.</span> entera con signo   IMUL <span style="color: #008080">Op</span>                 Op<span style="color: #990000">=</span>byte<span style="color: #990000">:</span> AX<span style="color: #990000">:=</span>AL<span style="color: #990000">*</span>Op si AL es suficiente ¨        ±     <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> ±
+<span style="color: #008080">IMUL</span>    Multiplic<span style="color: #990000">.</span> entera con signo     IMUL <span style="color: #008080">Op</span>                 Op<span style="color: #990000">=</span>word<span style="color: #990000">:</span> DX<span style="color: #990000">:</span>AX<span style="color: #990000">:=</span>AX<span style="color: #990000">*</span>Op si AX es suficiente ¨     ±     <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> ±
+IMUL    <span style="color: #993399">386</span> Multiplic<span style="color: #990000">.</span> entera con signo IMUL <span style="color: #008080">Op</span>                 Op<span style="color: #990000">=</span><span style="color: #009900">double</span><span style="color: #990000">:</span> EDX<span style="color: #990000">:</span>EAX<span style="color: #990000">:=</span>EAX<span style="color: #990000">*</span>Op si EAX <span style="color: #008080">es</span> sufi<span style="color: #990000">.</span> ¨    ±     <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> <span style="color: #990000">?</span> ±
+INC     Incrementar                     INC <span style="color: #008080">Op</span>                  Op<span style="color: #990000">:=</span>Op<span style="color: #990000">+</span><span style="color: #993399">1</span> <span style="color: #990000">(</span>El Carry no <span style="color: #008080">resulta</span> afectado <span style="color: #990000">!)</span>       ±      ± ± ± ±
+DEC     Decrementar                     DEC <span style="color: #008080">Op</span>                  Op<span style="color: #990000">:=</span>Op<span style="color: #990000">-</span><span style="color: #993399">1</span> <span style="color: #990000">(</span>El Carry no <span style="color: #008080">resulta</span> afectado <span style="color: #990000">!)</span>       ±       ± ± ± ±
+CMP     Comparación Resta               <span style="color: #008080">CMP</span>                     Op1<span style="color: #990000">,</span><span style="color: #008080">Op2</span> Op1<span style="color: #990000">-</span>Op2                                 ±       ± ± ± ± ±
+<span style="color: #008080">SAL</span>     Desplazam<span style="color: #990000">.</span> aritm<span style="color: #990000">.</span> a <span style="color: #008080">la</span> izq<span style="color: #990000">.</span>     <span style="color: #008080">SAL</span>                     Op<span style="color: #990000">,</span>Cantidad                                     i       ± ± <span style="color: #990000">?</span> ± ±
+<span style="color: #008080">SAR</span>     Desplazam<span style="color: #990000">.</span> aritm<span style="color: #990000">.</span> a <span style="color: #008080">la</span> der<span style="color: #990000">.</span>     <span style="color: #008080">SAR</span>                     Op<span style="color: #990000">,</span>Cantidad                                     i       ± ± <span style="color: #990000">?</span> ± ±
+RCL     Rotar a <span style="color: #008080">la</span> izq<span style="color: #990000">.</span> c<span style="color: #990000">/</span>acarreo       <span style="color: #008080">RCL</span> Op<span style="color: #990000">,</span>Cantidad                                                         i               ±
+RCR     Rotar a la <span style="color: #008080">derecha</span> c<span style="color: #990000">/</span>acarreo    <span style="color: #008080">RCR</span> Op<span style="color: #990000">,</span>Cantidad                                                         i               ±
+ROL     Rotar a la izquierda            <span style="color: #008080">ROL</span> Op<span style="color: #990000">,</span>Cantidad                                                         i               ±
+ROR     Rotar a la derecha              <span style="color: #008080">ROR</span> Op<span style="color: #990000">,</span>Cantidad                                                         i               ±
+
+i para más información ver especificaciones de <span style="color: #008080">la</span> intrucción <span style="color: #990000">*</span><span style="color: #008080">entonces</span> CF<span style="color: #990000">:=</span><span style="color: #993399">0</span><span style="color: #990000">,</span> OF<span style="color: #990000">:=</span><span style="color: #993399">0</span> <span style="color: #008080">sino</span> CF<span style="color: #990000">:=</span><span style="color: #993399">1</span><span style="color: #990000">,</span> OF<span style="color: #990000">:=</span><span style="color: #993399">1</span>
+
+LÓGICOS Flags
+
+Nombre Comentario                       Código                  Operación                                       O D I T S Z A P C
+<span style="color: #008080">NEG</span>    Negació<span style="font-weight: bold"><span style="color: #000000">n</span></span> <span style="color: #990000">(</span>complemento a <span style="color: #993399">2</span><span style="color: #990000">)</span>       NEG <span style="color: #008080">Op</span>                  Op<span style="color: #990000">:=</span><span style="color: #993399">0</span><span style="color: #990000">-</span>Op <span style="color: #008080">si</span> Op<span style="color: #990000">=</span><span style="color: #993399">0</span> <span style="color: #008080">entonces</span> CF<span style="color: #990000">:=</span><span style="color: #993399">0</span> <span style="color: #008080">sino</span> CF<span style="color: #990000">:=</span><span style="color: #993399">1</span>      ±       ± ± ± ± ±
+NOT    Invertir cada bit                NOT <span style="color: #008080">Op</span>                  Op<span style="color: #990000">:=</span>Ø<span style="color: #990000">~</span><span style="font-weight: bold"><span style="color: #000000">Op</span></span> <span style="color: #990000">(</span>invierte <span style="color: #008080">cada</span> bit<span style="color: #990000">)</span>
+AND    <span style="color: #FF0000">'Y'</span> <span style="color: #990000">(</span>And<span style="color: #990000">)</span> lógico                 <span style="color: #008080">AND</span> Dest<span style="color: #990000">,</span><span style="color: #008080">Fuente</span>         Dest<span style="color: #990000">:=</span>Dest <span style="color: #990000">^</span> Fuente                             <span style="color: #993399">0</span>       ± ± <span style="color: #990000">?</span> ± <span style="color: #993399">0</span>
+OR     <span style="color: #FF0000">'O'</span> <span style="color: #990000">(</span>Or<span style="color: #990000">)</span> lógico                  <span style="color: #008080">OR</span>                      Dest<span style="color: #990000">,</span><span style="color: #008080">Fuente</span> Dest<span style="color: #990000">:=</span>Dest v Fuente                 <span style="color: #993399">0</span>       ± ± <span style="color: #990000">?</span> ± <span style="color: #993399">0</span>
+XOR    <span style="color: #FF0000">'O'</span> <span style="color: #990000">(</span>Or<span style="color: #990000">)</span> exclusivo               <span style="color: #008080">XOR</span> Dest<span style="color: #990000">,</span><span style="color: #008080">Fuente</span>         Dest<span style="color: #990000">:=</span><span style="font-weight: bold"><span style="color: #000000">Dest</span></span> <span style="color: #990000">(</span>xor<span style="color: #990000">)</span> Fuente                         <span style="color: #993399">0</span>       ± ± <span style="color: #990000">?</span> ± <span style="color: #993399">0</span>
+<span style="color: #008080">SHL</span>    Desplazam<span style="color: #990000">.</span> lógico a <span style="color: #008080">la</span> izq<span style="color: #990000">.</span>      <span style="color: #008080">SHL</span> Op<span style="color: #990000">,</span>Cantidad                                                         i       ± ± <span style="color: #990000">?</span> ± ±
+<span style="color: #008080">SHR</span>    Desplazam<span style="color: #990000">.</span> lógico a <span style="color: #008080">la</span> der<span style="color: #990000">.</span>      <span style="color: #008080">SHR</span> Op<span style="color: #990000">,</span>Cantidad                                                         i       ± ± <span style="color: #990000">?</span> ± ±
+TEST   Comparación AND                  <span style="color: #008080">TEST</span> Dest<span style="color: #990000">,</span><span style="color: #008080">Fuente</span>       <span style="font-weight: bold"><span style="color: #000000">Dest</span></span> <span style="color: #990000">(</span>and<span style="color: #990000">)</span> Fuente
+
+
+MISCELÁNEOS                                                                                                     Flags
+Nombre  Comentario                       Código Operación                                                       O D I T S Z A P C
+NOP     Hacer nada                       NOP No hace operación alguna
+LEA     Cargar direciión Efectiva        <span style="color: #008080">LEA</span> Dest<span style="color: #990000">,</span><span style="color: #008080">Fuente</span> Dest <span style="color: #990000">:=</span> dirección fuente
+INT     Interrupción                     INT Num Interrumpe <span style="color: #008080">el</span> progr<span style="color: #990000">.</span> actual<span style="color: #990000">,</span> corre la subrutina <span style="color: #008080">de</span> <span style="color: #009900">int</span><span style="color: #990000">.</span>            <span style="color: #993399">0</span> <span style="color: #993399">0</span>
+
+<span style="font-weight: bold"><span style="color: #000000">SALTOS</span></span>  <span style="color: #990000">(</span>generales<span style="color: #990000">).</span>
+Nombre  Comentario                      Código          Operación               Name    Comentario                    Código    Operación
+CALL    Llamado a subrutina             CALL Proc                               RET     Retorno de subrutina          RET
+JMP     Saltar                          JMP Dest
+JE      Saltar si es igual              <span style="color: #008080">JE</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>         <span style="color: #990000">(</span>º JZ<span style="color: #990000">)</span>                  JNE     Saltar si no es igual         <span style="color: #008080">JNE</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>  <span style="color: #990000">(</span>º JNZ<span style="color: #990000">)</span>
+JZ      Saltar si es cero               <span style="color: #008080">JZ</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>         <span style="color: #990000">(</span>º JE<span style="color: #990000">)</span>                  JNZ     Saltar si no es cero          <span style="color: #008080">JNZ</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>  <span style="color: #990000">(</span>º JNE<span style="color: #990000">)</span>
+JCXZ    Saltar si CX es cero            JCXZ Dest                               JECXZ   Saltar si ECX es cero         JECXZ Dest <span style="color: #993399">386</span>
+JP      Saltar si hay paridad           <span style="color: #008080">JP</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>         <span style="color: #990000">(</span>º JPE<span style="color: #990000">)</span>                 JNP     Saltar si no hay paridad      <span style="color: #008080">JNP</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>   <span style="color: #990000">(</span>º JPO<span style="color: #990000">)</span>
+JPE     Saltar si hay paridad par       <span style="color: #008080">JPE</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>        <span style="color: #990000">(</span>º JP<span style="color: #990000">)</span>
+JPO     Saltar si hay paridad impar   <span style="color: #008080">JPO</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>   <span style="color: #990000">(</span>º JNP<span style="color: #990000">)</span>
+
+SALTOS  <span style="color: #008080">Sin</span> <span style="font-weight: bold"><span style="color: #000000">Signo</span></span> <span style="color: #990000">(</span>Cardinal<span style="color: #990000">)</span> SALTOS <span style="color: #008080">Con</span> <span style="font-weight: bold"><span style="color: #000000">Signo</span></span> <span style="color: #990000">(</span>Integer<span style="color: #990000">)</span>
+JA      Saltar si es superior           <span style="color: #008080">JA</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>         <span style="color: #990000">(</span>º JNBE<span style="color: #990000">)</span>                JG      Saltar si es mayor            <span style="color: #008080">JG</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>   <span style="color: #990000">(</span>º JNLE<span style="color: #990000">)</span>
+JAE     Saltar si es superior o igual   <span style="color: #008080">JAE</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>        <span style="color: #990000">(</span>º JNB º JNC<span style="color: #990000">)</span>           JGE     Saltar si es mayor o igual    <span style="color: #008080">JGE</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>  <span style="color: #990000">(</span>º JNL<span style="color: #990000">)</span>
+JB      Saltar si es inferior           <span style="color: #008080">JB</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>         <span style="color: #990000">(</span>º JNAE º JC<span style="color: #990000">)</span>           JL      Saltar si es menor            <span style="color: #008080">JL</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>  <span style="color: #990000">(</span>º JNGE<span style="color: #990000">)</span>
+JBE     Saltar si es inferior o igual   <span style="color: #008080">JBE</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>        <span style="color: #990000">(</span>º JNA<span style="color: #990000">)</span>                 JLE     Saltar si es menor o igual    <span style="color: #008080">JLE</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span> <span style="color: #990000">(</span>º JNG<span style="color: #990000">)</span>
+JNA     Saltar si no es superior        <span style="color: #008080">JNA</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>        <span style="color: #990000">(</span>º JBE<span style="color: #990000">)</span>                 JNG     Saltar si no es mayor         <span style="color: #008080">JNG</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span> <span style="color: #990000">(</span>º JLE<span style="color: #990000">)</span>
+JNAE    Saltar si no <span style="color: #008080">es</span> super<span style="color: #990000">.</span> o igual  <span style="color: #008080">JNAE</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>       <span style="color: #990000">(</span>º JB º JC<span style="color: #990000">)</span>             JNGE    Saltar si no es mayor o igual <span style="color: #008080">JNGE</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span> <span style="color: #990000">(</span>º JL<span style="color: #990000">)</span>
+JNB     Saltar si no es inferior        <span style="color: #008080">JNB</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>        <span style="color: #990000">(</span>º JAE º JNC<span style="color: #990000">)</span>           JNL     Saltar si no es inferior      <span style="color: #008080">JNL</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span> <span style="color: #990000">(</span>º JGE<span style="color: #990000">)</span>
+JNBE    Saltar si no <span style="color: #008080">es</span> infer<span style="color: #990000">.</span> o igual  <span style="color: #008080">JNBE</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span>       <span style="color: #990000">(</span>º JA<span style="color: #990000">)</span>                  JNLE    Saltar si no es menor o igual <span style="color: #008080">JNLE</span> <span style="font-weight: bold"><span style="color: #000000">Dest</span></span> <span style="color: #990000">(</span>º JG<span style="color: #990000">)</span>
+JC      Saltar si hay carry JC Dest     JO              Saltar si hay Overflow  JO Dest
+JNC     Saltar si no hay carry          JNC Dest
+JNO     Saltar si no hay Overflow       JNO Dest
+JS      Saltar si <span style="color: #008080">hay</span> <span style="font-weight: bold"><span style="color: #000000">signo</span></span> <span style="color: #990000">(=</span>negativo<span style="color: #990000">)</span> JS Dest
+
+
+I<span style="color: #990000">:</span> Interrupción Indica si pueden ocurrir interrupciones <span style="color: #008080">o</span> no<span style="color: #990000">.</span>
+T<span style="color: #990000">:</span> Trampa<span style="color: #990000">.</span> Paso <span style="color: #008080">por</span> paso<span style="color: #990000">,</span> para la depuración
+C<span style="color: #990000">:</span> Carry<span style="color: #990000">.</span> Resultado <span style="color: #008080">de</span> operac<span style="color: #990000">.</span> <span style="color: #008080">sin</span> signo<span style="color: #990000">.</span> El resultado es muy grande o inferior <span style="color: #008080">a</span> cero<span style="color: #990000">.</span>
+O<span style="color: #990000">:</span> Overflow<span style="color: #990000">.</span> Resultado <span style="color: #008080">de</span> operac<span style="color: #990000">.</span> sin signo es muy grande <span style="color: #008080">o</span> pequeño<span style="color: #990000">.</span>
+S<span style="color: #990000">:</span> Signo  del ú<span style="color: #008080">ltimo</span> resultado<span style="color: #990000">.</span> Razonable sólo <span style="color: #008080">para</span> enteros<span style="color: #990000">.</span> <span style="color: #993399">1</span><span style="color: #990000">=</span>neg<span style="color: #990000">.</span> <span style="color: #993399">0</span><span style="color: #990000">=</span>pos<span style="color: #990000">.</span>
+Z<span style="color: #990000">:</span> Cero<span style="color: #990000">.</span> Resultado de la operación <span style="color: #008080">es</span> cero<span style="color: #990000">.</span> <span style="color: #993399">1</span><span style="color: #990000">=</span>Cero
+A<span style="color: #990000">:</span> <span style="color: #008080">Carru</span> Aux<span style="color: #990000">.</span> Similar <span style="color: #008080">al</span> Carry<span style="color: #990000">,</span> pero restringido para el nibble bajo únicamente
+P<span style="color: #990000">:</span> <span style="color: #008080">Paridad</span> <span style="font-weight: bold"><span style="color: #000000">par</span></span> <span style="color: #990000">(</span>even<span style="color: #990000">),</span> el último resultado tiene cantidad par de bits
+</tt></pre></div></div>
+</li>
+<li>
+<p>
+Sufijos de los mnemónicos del código de operación:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>q</em> : quad: operando de 8 bytes: cuádruple palabra
+</p>
+</li>
+<li>
+<p>
+<em>l</em> : long: operando de 4 bytes: doble palabra
+</p>
+</li>
+<li>
+<p>
+<em>w</em> : word: operando de 2 bytes: palabra
+</p>
+</li>
+<li>
+<p>
+<em>b</em> : byte: operando de 1 byte
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Si el mnemónico de operación no lleva sufijo el tamaño por defecto del operando es <em>long</em>
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://en.wikibooks.org/wiki/X86_Assembly/Control_Flow#Jump_Instructions">jump instructions</a>
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Ejemplo:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+instrucción máquina intel x86.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>4001a4:       48 83 ec 10   &#8594;  subq    $16,%rsp</strong>
+</p>
+</li>
+<li>
+<p>
+¿Cómo interpretar la instrucción máquina  <strong>4883EC10</strong>? Es necesario consultar el <strong>Manual de Referencia de la Arquitectura ISA de la máquina x86</strong> y tener conocimientos de los modos de direccionamiento.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<a href="http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html">manual oficial de intel x86 ó x86-64</a>: cuidado con la sintaxis intel.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+consultar el volumen 2B (capítulo 4, pag 394)para la instrucción <em>SUB</em>. Hay que tener encuenta el tamaño de los operandos y los modos de direccionamiento.
+</p>
+</li>
+<li>
+<p>
+El sufijo q de la operación <strong>SUBQ</strong> indica operando de 64 bits. El operando fuente <strong>$16</strong> es referenciado con direccionamiento inmediato y se puede codificar con 8 bits y el operando destino <strong>%RSP</strong> es un registro de 64 bits. Por lo tanto la descripcion intel en el manual será <strong>SUB r64, imm8</strong> que se corresponde con el código de operación <strong>REX.W + 83 /5 ib</strong>.
+</p>
+</li>
+<li>
+<p>
+La descripción del código de operación que hace intel no es sencilla y es necesario consultar la Interpretación de la Instrucción en el <strong>volumen 3 3.1 INTERPRETING THE INSTRUCTION REFERENCE PAGES</strong> y el Formato de Instrucción en el <strong>volumen 2A (capítulo 2 Formato de Instrucción)</strong>
+</p>
+</li>
+<li>
+<p>
+Figura 2.1 Intel 64 and IA-32 Architectures Instruction Format
+</p>
+</li>
+<li>
+<p>
+El formato de instrucción tiene los campos: <strong>REXprefix-CodOp-ModRB</strong> que en nuestro caso valen <strong>48-83-EC</strong>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+interpretación del campo REXprefix: <strong>REX.W</strong>: Manual &#8594; El prefijo REX se utiliza para operandos de 64 bits bien inmediatos y/o registros GlobalPurposeRegister(rax,rbx, etc), 2.2.1.2 More on REX Prefix Fields
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El primer byte es <code>48</code> &#8594; <code>01001000</code> donde el bit de la posición 3 está activado por lo que según la tabla "Table 2-4. REX Prefix Fields [BITS: 0100WRXB]" quiere decir que el <strong>operando es de 64bits</strong>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<strong>/5</strong> : the ModR/M byte of the instruction uses only the r/m (register or memory) operand. <strong>En este caso register</strong>.Ver el subcampo R/M más abajo.
+</p>
+</li>
+<li>
+<p>
+<strong>ib</strong> : A 1-byte (ib) immediate operand.
+</p>
+</li>
+<li>
+<p>
+Campo Primary Opcode: El segundo byte vale <code>83</code> &#8594; Operación de resta <strong>SUB</strong>
+</p>
+</li>
+<li>
+<p>
+Campo ModRB: El tercer byte vale <code>EC</code> &#8594; <code>1110-1100</code> hace referencia al registro RSP.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+2.1.3 ModR/M and SIB Bytes: Many instructions that refer to an operand in memory (memoria principal o registro interno CPU) ha
+ve an addressing-form specifier byte (called the ModR/M &#8230;). Este campo se divide en subcampos: <strong>Mod-Reg/Opcode-R/M</strong>
+</p>
+</li>
+<li>
+<p>
+Subcampo Mod: <code>11</code> : The mod field combines with the r/m field to form 32 possible values: eight registers (rax, rbx, rcx, rdx, rsi, rdi, rsp, rbp) and 24 addressing modes
+</p>
+</li>
+<li>
+<p>
+Subcampo Reg/Opcode: En este caso no es Secondary Opcode sino que es Reg: rrr= <code>101</code>
+</p>
+</li>
+<li>
+<p>
+Subcampo R/M: En este caso R: bbb= <code>100</code> The r/m field can specify a register as an operand or it can be combined with the mod field to encode an addressing mode. <strong>En este caso es el registro operando con código 4</strong>. En la tabla 3.1 el código del <strong>quad word register</strong> con el <strong>Reg Field</strong> de valor <strong>4</strong> es el registro <strong>RSP</strong>
+</p>
+</li>
+<li>
+<p>
+Figure 2-5. Register-Register Addressing (No Memory Operand); REX.X Not Used &#8594; Mod=11 &#8594; Rrrr =0101 &#8594; Bbbb=0100
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+El cuarto byte vale en hexadecimal <code>10</code> que se corresponde con el valor inmediato 16 en decimal y debe ser expandido a 64bits.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Ejemplos:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.c-jump.com/CIS77/CPU/x86/lecture.html#X77_0010_real_encoding">http://www.c-jump.com/CIS77/CPU/x86/lecture.html#X77_0010_real_encoding</a>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>ADD cl,al</code> &#8594; 02C8
+</p>
+</li>
+<li>
+<p>
+<code>ADD EAX, [ ESI + disp8 ]</code> &#8594; 0346XX
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://es.tldp.org/Presentaciones/200002hispalinux/conf-28/28.ps.gz">http://es.tldp.org/Presentaciones/200002hispalinux/conf-28/28.ps.gz</a>
+</p>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Ejemplo:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Módulo fuente: <em>hola_mundo.s.</em>
+</p>
+</li>
+<li>
+<p>
+Código Máquina- Código Ensamblador
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Sección Datos
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>08049ff4 <span style="color: #990000">&lt;</span>mensaje<span style="color: #990000">&gt;:</span> <span style="color: #993399">48</span> 6f 6c <span style="color: #993399">61</span> <span style="color: #993399">20</span> 4d <span style="color: #993399">75</span> <span style="color: #993399">63</span> <span style="color: #993399">64</span> 6f 0a       H o l a SP m u n <span style="color: #008080">d</span> o <span style="color: #990000">/</span>n
+08049fff <span style="color: #990000">&lt;</span>longitud<span style="color: #990000">&gt;:</span> 0b <span style="color: #993399">00</span></tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+En un lenguaje de alto nivel sería la declaración e inicialización de variables.
+</p>
+</li>
+<li>
+<p>
+Etiqueta: referencia a memoria
+</p>
+</li>
+<li>
+<p>
+Cada caracter ocupa un byte (codificación ASCII). No interpretar el string como un todo (no little endian) a diferencia de los números enteros y reales.
+</p>
+</li>
+<li>
+<p>
+El dato referenciado por longitud está en formato <em>little endian</em> &#8594; 00 0b
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Sección Instrucciones
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #993399">08048190</span> <span style="color: #990000">&lt;</span>_start<span style="color: #990000">&gt;:</span>
+ <span style="color: #993399">8048190</span><span style="color: #990000">:</span>       b8 <span style="color: #993399">04</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>          mov    $<span style="color: #993399">0x4</span><span style="color: #990000">,%</span>eax
+ <span style="color: #993399">8048195</span><span style="color: #990000">:</span>       bb <span style="color: #993399">01</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>          mov    $<span style="color: #993399">0x1</span><span style="color: #990000">,%</span>ebx
+ 804819a<span style="color: #990000">:</span>       b9 f4 9f <span style="color: #993399">04</span> <span style="color: #993399">08</span>          mov    $<span style="color: #993399">0x8049ff4</span><span style="color: #990000">,%</span>ecx
+ 804819f<span style="color: #990000">:</span>       8b <span style="color: #993399">15</span> ff 9f <span style="color: #993399">04</span> <span style="color: #993399">08</span>       mov    <span style="color: #993399">0x8049fff</span><span style="color: #990000">,%</span>edx
+ 80481a5<span style="color: #990000">:</span>       cd <span style="color: #993399">80</span>                   <span style="color: #009900">int</span>    $<span style="color: #993399">0x80</span>
+ 80481a7<span style="color: #990000">:</span>       b8 <span style="color: #993399">01</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>          mov    $<span style="color: #993399">0x1</span><span style="color: #990000">,%</span>eax
+ 80481ac<span style="color: #990000">:</span>       bb <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>          mov    $<span style="color: #993399">0x0</span><span style="color: #990000">,%</span>ebx
+ 80481b1<span style="color: #990000">:</span>       cd <span style="color: #993399">80</span>                   <span style="color: #009900">int</span>    $<span style="color: #993399">0x80</span>
+</tt></pre></div></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Tipos de Datos:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Dirección de memoria o referencia a memoria: etiqueta longitud
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>mov $longitud,%edx</code>   &#8594;  <em>mov    0x8049fff,%edx</em> &#8594; en lenguage de alto nivel es la inicialización de un puntero
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+número entero con signo : formato complemento a 2.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>mov    $0x4,%eax</code>
+</p>
+</li>
+<li>
+<p>
+El operando 0x4 está  localizado en la propia instrucción, en el campo de operando. El dato 0x4 se almacena en "little endian" &#8594; Campo de operando: double word: 32 bits 0x00000004 &#8594; En memoria ascendente : dirección 8048191: 04 00 00 00
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+carácter: codificación ASCII
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>08049ff4 &lt;mensaje&gt;:</code> 48 6f 6c 61 20 &#8594; H o l a SP
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Intervención de la CPU
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+La CPU durante el ciclo de instrucción (fase captura- fase decodificación-fase ejecución) realiza una secuencia de tareas.
+</p>
+</li>
+<li>
+<p>
+La secuencia de tareas a realizar la CPU durante el ciclo de instrucción lo describimos en lenguaje RTL.
+</p>
+</li>
+<li>
+<p>
+MBR &#8592;M[0x4001a4]
+</p>
+</li>
+<li>
+<p>
+IR  &#8592;MBR
+</p>
+</li>
+<li>
+<p>
+AC  &#8592; RSP
+</p>
+</li>
+<li>
+<p>
+AC  &#8592; AC-16 ; (ALU resta)
+</p>
+</li>
+<li>
+<p>
+RSP &#8592; AC
+</p>
+</li>
+<li>
+<p>
+PC  &#8592; PC+1
+</p>
+</li>
+<li>
+<p>
+MAR &#8592; PC
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div></div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Version v1.0.0<br />
+Last updated
+ 2018-09-21 09:04:22 CEST
+</div>
+</div>
+</body>
+</html>

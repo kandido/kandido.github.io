@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_representación_de_los_datos" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+<ul class="sectlevel1">
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html">1. Introducción a la Estructura de los Computadores</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html">2. Arquitectura Von Neumann</a>
+</li>
+<li><a href="_representación_de_los_datos.html"><span class="toc-current">3. Representación de los Datos</span></a>
+<ul class="sectlevel2">
+<li><a href="_representación_de_los_datos.html#_temario_3">3.1. Temario</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_objetivo">3.2. Objetivo</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_datos_e_instrucciones_codificación_binaria">3.3. Datos e Instrucciones: Codificación Binaria</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_bit_byte_palabra">3.4. Bit, Byte, Palabra</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_números_enteros">3.5. Números Enteros</a>
+<ul class="sectlevel3">
+<li><a href="_representación_de_los_datos.html#_base_decimal">3.5.1. Base Decimal</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_base_binaria">3.5.2. Base Binaria</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_conversión_decimal_binaria">3.5.3. Conversión Decimal-Binaria</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_base_octal">3.5.4. Base Octal</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_calculadora">3.5.5. Calculadora</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_python">3.5.6. Python</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_enteros_con_signo">3.5.7. Enteros con Signo</a>
+</li>
+</ul>
+</li>
+<li><a href="_representación_de_los_datos.html#_números_reales">3.6. Números Reales</a>
+<ul class="sectlevel3">
+<li><a href="_representación_de_los_datos.html#_coma_fija">3.6.1. Coma Fija</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_coma_flotante">3.6.2. Coma Flotante</a>
+</li>
+</ul>
+</li>
+<li><a href="_representación_de_los_datos.html#_character_type">3.7. Character Type</a>
+<ul class="sectlevel3">
+<li><a href="_representación_de_los_datos.html#_ascii">3.7.1. ASCII</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_python_2">3.7.2. Python</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_unicode_utf_8">3.7.3. Unicode UTF-8</a>
+</li>
+</ul>
+</li>
+<li><a href="_representación_de_los_datos.html#_iso_8859_1">3.8. ISO-8859-1</a>
+<ul class="sectlevel3">
+<li><a href="_representación_de_los_datos.html#_programación_en_c">3.8.1. Programación en C</a>
+</li>
+<li><a href="_representación_de_los_datos.html#_otros">3.8.2. Otros</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html">4. Operaciones Aritmeticas y Logicas</a>
+</li>
+<li><a href="_representación_de_las_instrucciones.html">5. Representación de las Instrucciones</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html">6. Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.</a>
+</li>
+</ul>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_representación_de_los_datos">3. Representación de los Datos</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_temario_3">3.1. Temario</h3>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Representación de datos</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Bit, Byte y Palabra</p>
+</li>
+<li>
+<p>Caracteres, enteros y reales</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_objetivo">3.2. Objetivo</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Representación de los datos alfanuméricos en el lenguaje máquina, es decir, código binario.</p>
+</li>
+<li>
+<p>Libro de texto W.Stalling</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Parte 3ª, Capítulo 9 : Sistemas Numéricos</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_datos_e_instrucciones_codificación_binaria">3.3. Datos e Instrucciones: Codificación Binaria</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Un programa almacenado en la memoria principal se representa en <em>lenguaje máquina</em> y está compuesto por datos e instrucciones . El lenguaje de la máquina es el lenguaje binario formado por los símbolos <em>0</em> y <em>1</em>. Por lo tanto los datos e instrucciones de un programa almacenado en la memoria principal debe de codificarse y representarse mediante estos dos símbolos.</p>
+</li>
+<li>
+<p>Los datos tienen un valor númerico que pueden ser procesados por la Unidad Aritmetico Lógica (ALU) para realizar operaciones aritméticas como la suma, resta, etc ó lógicas como las operaciones not,or,etc.</p>
+</li>
+<li>
+<p>Los datos son secuencias de <em>0</em> y <em>1</em> almacenados en la memoria que son capturados por la CPU para ser procesados pej mediante operaciones aritméticas como la suma.</p>
+</li>
+<li>
+<p>Las instrucciones son secuencias de <em>0</em> y <em>1</em> almacenados en la memoria que son capturados por la CPU para ser interpretados y proceder a su ejecución. Pej la instrucción "sumar" dos números enteros.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bit_byte_palabra">3.4. Bit, Byte, Palabra</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>BInary digiT (bit) : los dígitos binarios son el <em>0</em> y el <em>1</em>. Son los símbolos que se utilizan para codificar tanto las instrucciones como los datos de un programa almacenado en memoria.</p>
+</li>
+<li>
+<p>Byte: Es una secuencia de 8 dígitos binarios. Ejemplo: 00110101</p>
+</li>
+<li>
+<p>Palabra: Es una secuencia de dígitos binarios múltiplo de 8, es decir, múltiplo de un byte. En el entorno de arquitectura de computadores se define como el número de bits del bus de datos que conecta la unidad central de proceso (CPU) a la Memoria principal y también suele ser la anchura de los registros de propósito general de memoria interna de la CPU.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En linux +sudo lshw -C system | more + &#8594; anchura: <strong>64 bits</strong></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sh">    lur
+    descripción: Notebook
+    producto: 20F1S0H400 <span class="o">(</span>LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560<span class="o">)</span>
+    fabricante: LENOVO
+    versión: ThinkPad L560
+    serie: MP15YSW7
+    anchura: 64 bits
+    capacidades: smbios-2.8 dmi-2.8 smp vsyscall32
+    configuración: <span class="nv">administrator_password</span><span class="o">=</span>disabled <span class="nv">chassis</span><span class="o">=</span>notebook <span class="nv">family</span><span class="o">=</span>ThinkPad L560 power-on_password<span class="o">=</span>disabled <span class="nv">sku</span><span class="o">=</span>LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560 <span class="nv">uuid</span><span class="o">=</span>4C2F45AA-0A2C-B211-A85C-B5C56EB5BBAC</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_números_enteros">3.5. Números Enteros</h3>
+<div class="sect3">
+<h4 id="_base_decimal">3.5.1. Base Decimal</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Son representados mediante un Sistema Posicional basado en:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Número en Base Decimal</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Representación mediante la combinación de diez Dígitos: 0,1,2,3,&#8230;&#8203;,9</p>
+</li>
+<li>
+<p>Posición &#8594; índice</p>
+</li>
+<li>
+<p>Pesos de cada posición&#8594; son potencias de la forma <em>10<sup>posición</sup></em> &#8594; &#8230;&#8203;,Centenas, decenas, unidades</p>
+</li>
+<li>
+<p>Valor representado = sumatorio de digitos ponderados con su peso posicional</p>
+</li>
+<li>
+<p>Ejemplo: Dada la representación 1197 de un número decimal entero, calcular su valor.</p>
+<div class="listingblock">
+<div class="content">
+<pre>Posición        3       2       1       0
+Peso         	10^3    10^2    10^1    10^0
+             	1000    100     10      1
+Digito	        1       1       9       7
+Ponderación  	1*1000  1*100   9*10    7*1
+
+Valor		1*1000+1*100+9*10+7*1=mil ciento noventa y siete.
+
+La representación uno-uno-nueve-siete tiene el valor mil ciento noventa y siete</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_base_binaria">3.5.2. Base Binaria</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Número codificado en Base 2</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Representación mediante la combinación de dos Dígitos: 0,1</p>
+</li>
+<li>
+<p>Posición &#8594; índice</p>
+</li>
+<li>
+<p>Pesos de cada posición&#8594; son potencias de la forma <em>2<sup>posición</sup></em> &#8594; &#8230;&#8203;2<sup>5</sup>,2<sup>4</sup>,2<sup>3</sup>,2<sup>2</sup>,2<sup>1</sup>,2<sup>0</sup>&#8230;&#8203;,64,32,16,8,4,2,1</p>
+</li>
+<li>
+<p>Valor representado = sumatorio de digitos ponderados con su peso posicional</p>
+</li>
+<li>
+<p>Ejemplo: Dada la representación 1010 de un número binario entero, calcular su valor.</p>
+<div class="listingblock">
+<div class="content">
+<pre>Posición        3       2       1       0
+Peso         	2^3   	2^2   	2^1     2^0
+             	8    	4     	2       1
+Dígitos         1       0       1       0
+Ponderación     1*8     0*4     1*2     0*1
+
+Valor		1*8+0*4+1*2+0*1 = diez
+
+La representación uno-cero-uno-cero tiene el valor diez</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La Rueda: representación y valor de los números sin signo con 3 bits.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/datos_representacion/rueda_unsigned.png" alt="rueda unsigned">
+</div>
+<div class="title">Figure 29. Representación Números sin Signo</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_conversión_decimal_binaria">3.5.3. Conversión Decimal-Binaria</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Divisiones sucesivas / 2 &#8594; Dividendo1 = 2*Cociente1 <em>+</em>  Resto1</p>
+</li>
+<li>
+<p>Cociente1 = 2*Cociente2 <em>+</em> Resto2 &#8594; Dividendo1 = <em>2 * (2*Cociente2 + Resto2) + Resto1 = Resto1*2<sup>0</sup> + Resto2*2<sup>1</sup> +Cociente*2<sup>2</sup></em></p>
+</li>
+<li>
+<p>Resto1 es el dígito binario de la posición 0, Resto2 es el digito binario de la posición 1, Cociente es el dígito binario de la posición 2.</p>
+</li>
+<li>
+<p>Regla: los digitos binarios son todos los restos y el último cociente.</p>
+</li>
+<li>
+<p>La división se termina cuando un cociente no es divisible por 2, es decir, el cociente es 1. Este cociente es el MSB.</p>
+</li>
+<li>
+<p>Ejemplo: Valor 1197 &#8594; Calcular su representación en código binario &#8594; Solución: 10010101101</p>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. Conversión decimal binario</caption>
+<colgroup>
+<col style="width: 7.6923%;">
+<col style="width: 7.6923%;">
+<col style="width: 7.6923%;">
+<col style="width: 7.6923%;">
+<col style="width: 7.6923%;">
+<col style="width: 7.6923%;">
+<col style="width: 7.6923%;">
+<col style="width: 7.6923%;">
+<col style="width: 7.6923%;">
+<col style="width: 7.6923%;">
+<col style="width: 7.6923%;">
+<col style="width: 7.6923%;">
+<col style="width: 7.6924%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Número</th>
+<th class="tableblock halign-left valign-top" colspan="2">1ª Div</th>
+<th class="tableblock halign-left valign-top" colspan="2">2ª Div</th>
+<th class="tableblock halign-left valign-top" colspan="2">3ª Div</th>
+<th class="tableblock halign-left valign-top" colspan="2">4ª Div</th>
+<th class="tableblock halign-left valign-top" colspan="2">5ª Div</th>
+<th class="tableblock halign-left valign-top" colspan="2">6ª Div</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Coc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Resto</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Coc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Resto</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Coc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Resto</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Coc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Resto</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Coc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Resto</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Coc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Resto</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1197</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>598</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>299</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>149</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>74</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>37</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>18</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1112%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Número</th>
+<th class="tableblock halign-left valign-top" colspan="2">7ª Div</th>
+<th class="tableblock halign-left valign-top" colspan="2">8ª Div</th>
+<th class="tableblock halign-left valign-top" colspan="2">9ª Div</th>
+<th class="tableblock halign-left valign-top" colspan="2">10º Div</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Coc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Resto</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Coc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Resto</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Coc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Resto</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Coc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Resto</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1197</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>9</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>4</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_base_octal">3.5.4. Base Octal</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Base 8</p>
+</li>
+<li>
+<p>Digitos: 0,1,2,3,4,5,6,7</p>
+</li>
+<li>
+<p>Pesos: 8 elevado a la posición</p>
+</li>
+<li>
+<p>En C se específica la base con el prefijo <em>0</em> &#8594; <code>int 077;</code></p>
+</li>
+<li>
+<p>Conversión Octal &#8592;&#8594; Binario y viceversa &#8594; cada digito octal se descompone en un binario de 3 bits</p>
+</li>
+<li>
+<p>decimal 1197 &#8594; Calcular su representación en código octal.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>solución a) binario 10010101101 &#8594; octal 02255</p>
+</li>
+<li>
+<p>solución b) divisiones sucesivas por la base 8.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_base_hexadecimal">Base Hexadecimal</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Base 16</p>
+</li>
+<li>
+<p>Digitos: 0-1-2-3-4-5-6-7-8-9-A-B-C-D-E-F</p>
+</li>
+<li>
+<p>Pesos: 16 elevado a a la posición</p>
+</li>
+<li>
+<p>En C se específica la base con el prefijo <em>0x</em> &#8594; <code>int 0xAF;</code></p>
+</li>
+<li>
+<p>Hexadecimal &#8592;&#8594; Binario y viceversa &#8594; cada digito hexadecimal se descompone en un binario de 4 bits</p>
+</li>
+<li>
+<p>decimal 1197 &#8594; Calcular su representación en código hexadecimal</p>
+</li>
+<li>
+<p>Solución a) binario 10010101101 &#8594; 0x4AD</p>
+</li>
+<li>
+<p>Solución b) divisiones sucesivas por la base 16.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_calculadora">3.5.5. Calculadora</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Calculadora en el sistema Linux</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>candido@lur:~$ echo "obase=2 ; ibase=16; 80AA010F" | bc</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>10000000101010100000000100001111</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>echo "obase=10 ; ibase=16; 80AA010F" | bc</code> &#8594; es obligado poner primero la base del formato de salida</p>
+<div class="ulist">
+<ul>
+<li>
+<p>2.158.625.039</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Intérprete <code>$ bc</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_python">3.5.6. Python</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.python.org/3/tutorial/index.html" class="bare">https://docs.python.org/3/tutorial/index.html</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>help(builtins)</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="python"><span class="nb">bin</span><span class="p">(</span><span class="mi">1197</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">'0b10010101101'</span>
+<span class="nb">oct</span><span class="p">(</span><span class="mi">1197</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">'02255'</span>
+<span class="nb">hex</span><span class="p">(</span><span class="mi">1197</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">'0x4ad'</span>
+<span class="nb">int</span><span class="p">(</span><span class="mh">0x4ad</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mi">1197</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_enteros_con_signo">3.5.7. Enteros con Signo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Se van a estudiar dos formatos: Signo-Magnitud y Complemento a 2, siendo este último el más extendido en las arquitecturas de los computadores.</p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_signo_magnitud">Signo-Magnitud</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Formato Signo-Magnitud</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El bit más significativo no tiene valor, indica el signo: el cero para los números positivos y el uno para los negativos.</p>
+</li>
+<li>
+<p>El resto de bits representa el módulo del número entero</p>
+</li>
+<li>
+<p>Ejemplo :</p>
+</li>
+<li>
+<p>Valor <em>+1197</em> &#8594; Representación 010010101101</p>
+</li>
+<li>
+<p>Valor <em>-1197</em> &#8594; Representación 110010101101</p>
+</li>
+<li>
+<p>¿Cómo se representa el valor cero?</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_complemento_a_2">Complemento a 2</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Formato Complemento a 2.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Positivos: Igual que el formato signo-magnitud: Bit MSB= 0. Pesos: potencia 2<sup>posición</sup>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>More Significant Bit (MSB) &#8594; posición más elevado con valor distinto de cero.</p>
+</li>
+<li>
+<p>Less Significant Bit (LSB)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Negativos: Transformación del número con la misma magnitud pero positivo mediante la función Complemento a 2.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La Rueda: representación y valor de los números con signo con 3 bits.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/datos_representacion/rueda_signed.png" alt="rueda signed">
+</div>
+<div class="title">Figure 30. Representación Complemento a 2</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>N: cantidad de bits del número : 3  bits</p>
+</li>
+<li>
+<p>Dividir la circunferencia en el número de combinaciones binarias posibles: 2<sup>N</sup> : 2<sup>3</sup></p>
+</li>
+<li>
+<p>Pinto todas las combinaciones binarias en sentido agujas reloj de forma secuencial: 000,001,010,011,</p>
+</li>
+<li>
+<p>Pinto los valores de forma alternante: <em>0, +1, -1, +2, -2,&#8230;&#8203;.</em></p>
+</li>
+<li>
+<p>Ejercicio: Representar el número positivo <em>+4</em> en complemento a 2</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Conclusiones:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Asimetría entre el rango positivo y negativo</p>
+</li>
+<li>
+<p>El cero tiene una única representación</p>
+</li>
+<li>
+<p>Los números negativos comienzan por <em>1</em></p>
+</li>
+<li>
+<p>El valor -1 se codifica con todos los dígitos unos <em>111111111111111</em></p>
+</li>
+<li>
+<p>Extensión de Signo: un 1 por la izda es como en los positivos un cero por la izda: no tiene valor y se puede eliminar la repetición de 1 por la izda dejando el último <em>1</em> de los más significativos. <em>11110111</em> es equivalente a <em>10111</em>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Función Complemento a 2</strong>:  El complemento a 2 de un número entero equivale a cambiar su signo. La conversión entre números enteros positivos y negativos en complemento a 2 se puede realizar mediante distintos métodos.</p>
+</li>
+<li>
+<p>Ejemplos de obtención del complemento a 2 del número entero binario X:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Método 1: Realizar la operación lógica complemento (negación) de X y sumar 1 &#8594; ~X+1</p>
+<div class="ulist">
+<ul>
+<li>
+<p>X=0101 tiene valor <em>+5</em> en complemento a 2</p>
+</li>
+<li>
+<p>¿El complemento a 2 de 0101? <em>~0101 + 1 = 1010 + 1 = 1011 = -5</em> &#8594; El valor del complemento a 2 equivale a cambiar de signo.</p>
+</li>
+<li>
+<p>X=1111 tiene valor -1 en complemento a 2</p>
+</li>
+<li>
+<p>¿El complemento a 2 de 1111? <em>~1111 + 1 = 0000 + 1 = 0001 = +1</em></p>
+</li>
+<li>
+<p>X=0110011100010101010000 &#8594; positivo por tener el bit más significativo (MSB) cero</p>
+</li>
+<li>
+<p>C2(X)=1001100011101010101111+1=1001100011101010110000 &#8594; negativo por tener el bit más significativo (MSB) uno</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Método 2: Empezando por la posición 0 del código X (bit X<sub>0</sub>) copiar todos los dígitos hasta llegar al primer dígito 1 y a partir de ahí negar todos los dígitos hasta el bit más significativo (MSB).</p>
+<div class="ulist">
+<ul>
+<li>
+<p>X = 0110011100010101010000 &#8594; en total 22 bits</p>
+</li>
+<li>
+<p>El primer dígito 1 de X está en la posición 4 &#8594; 01100111000101010-10000 &#8594; copio los 5 primeros digitos e invierto los 17 restantes</p>
+</li>
+<li>
+<p>C2 (X) = 10011000111010101-10000</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Método 3: Realizar la operación aritmética 0-X</p>
+<div class="ulist">
+<ul>
+<li>
+<p>X = 0110011100010101010000</p>
+</li>
+<li>
+<p>0-X=0000000000000000000000 - 0110011100010101010000 = 1001100011101010110000</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Ejemplos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Representar el número entero negativo -1197 en signo-magnitud y en complemento a 2</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>+1197</em> = 010010101101 tanto en signo-magnitud como complemento a 2</p>
+</li>
+<li>
+<p><em>-1197</em> = 101101010011</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Calcular el rango de los números enteros con 8 bits en complemento a 2</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Código máximo positivo: 01111111 &#8594; Valor = 2<sup>7</sup>-1</p>
+</li>
+<li>
+<p>Código mínimo negativo: 10000000</p>
+<div class="ulist">
+<ul>
+<li>
+<p>C2(n=10000000) = 010000000 = 2<sup>7</sup> ,luego n=10000000 tiene el valor -2<sup>7</sup></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Rango [-2<sup>7</sup>,+2<sup>7</sup>-1]</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_números_reales">3.6. Números Reales</h3>
+<div class="sect3">
+<h4 id="_coma_fija">3.6.1. Coma Fija</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Números Reales en Coma Fija:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1234.56789</p>
+</li>
+<li>
+<p>Sistema Posicional</p>
+<div class="ulist">
+<ul>
+<li>
+<p>posición de los dígitos fracción: -1,-2,-3,&#8230;&#8203;</p>
+</li>
+<li>
+<p>pesos de los dígitos fracción: 10<sup>-1</sup>, 10<sup>-2</sup>, 10<sup>-3</sup></p>
+</li>
+<li>
+<p>ponderación 1234.56789 = 1*10<sup>3</sup>+2*10<sup>2</sup>+3*10<sup>1</sup>+4*10<sup>0</sup>+5*10<sup>-1</sup>+6*10<sup>-2</sup>+7*10<sup>-3</sup>+8*10<sup>-4</sup>+9*10<sup>-5</sup></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Base Binaria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1010.101 &#8594;  1*2<sup>3</sup>+0*2<sup>2</sup>+0*2<sup>1</sup>+1*2<sup>0</sup>+1*2<sup>-1</sup>+0*2<sup>-1</sup>+1*2<sup>-2</sup> &#8594; 10.625</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_coma_flotante">3.6.2. Coma Flotante</h4>
+<div class="sect4">
+<h5 id="_formato">Formato</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Coma Flotante &#8594;  Notación científica</p>
+<div class="ulist">
+<ul>
+<li>
+<p>-23.4567E-34 ó -23.4567*10<sup>-34</sup></p>
+</li>
+<li>
+<p>La <strong>mantisa</strong> o <strong>significando</strong> es el número que múltiplica a la potencia &#8594; -23.4567</p>
+</li>
+<li>
+<p>Mantisa <strong>normalizada</strong> : La mantisa tiene como parte entero un número entero de un dígito distinto de cero.&#8594; -2.34567*10<sup>-33</sup></p>
+<div class="ulist">
+<ul>
+<li>
+<p>parte entera de la mantisa normalizada : 2</p>
+</li>
+<li>
+<p>parte fracción de la mantisa normalizada : 0.34567</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El <strong>exponente</strong> es el número entero al que se eleva la base de la potencia. Depende del lugar de la coma en la mantisa. En este caso es -33.</p>
+</li>
+<li>
+<p>La <strong>base</strong> es la base de la potencia. En este ejemplo es 10.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Codificación Binaria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo:  1234.56789</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Parte Entera: 1234 &#8594; 10011010010</p>
+</li>
+<li>
+<p>Parte Fracción: 0.56789</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="scala"><span class="mf">0.56789</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">=</span> <span class="mf">1.13578</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.13578</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="o">,</span> <span class="n">bit</span> <span class="n">de</span> <span class="n">la</span> <span class="n">posición</span> <span class="o">-</span><span class="mi">1</span>
+<span class="mf">0.13578</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">=</span> <span class="mf">0.27156</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">bit</span> <span class="n">de</span> <span class="n">la</span> <span class="n">posición</span> <span class="o">-</span><span class="mi">2</span>
+<span class="mf">0.27156</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">=</span> <span class="mf">0.54312</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="o">,</span>  <span class="n">bit</span> <span class="n">de</span> <span class="n">la</span> <span class="n">posición</span> <span class="o">-</span><span class="mi">3</span>
+<span class="mf">0.54312</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">=</span> <span class="mf">1.08624</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.08624</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="o">,</span> <span class="n">bit</span> <span class="n">de</span> <span class="n">la</span> <span class="n">posición</span> <span class="o">-</span><span class="mi">4</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>fracción redondeada 0.1001</p>
+</li>
+<li>
+<p>fracción sin redondear 0.10010001011000010</p>
+</li>
+<li>
+<p>fracción redondeada 0.100100011</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Código Binario coma fija: 10011010010.10010001011000010</p>
+</li>
+<li>
+<p>Notación científica: 1.001101001010010001011000010*2<sup>+10</sup> &#8594; coma flotante &#8594; la parte entera siempre vale 1.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_precisión">Precisión</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Es el  número de digitos significantes</p>
+</li>
+<li>
+<p>Se dice que el número q es una aproximación del número p != 0 con una precisión de, al menos, <strong>m</strong> cifras signficativas en la base b, siempre que el error relativo |p-q|/p &#x2264; 0.5*b<sup>-m+1</sup></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cuando m es el mayor entero para el que se cumple la desigualdad anterior, se dice que q aproxima a p con m cifras signficativas.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplo</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>p = 1E0 y q = .9999E0 &#8594; Error relativo=0.1E-3&lt;0.5E(-4+1) &#8594; precisión de 4 cifras significativas</p>
+</li>
+<li>
+<p>Una calculadora, A, trabaja en base 2 con mantisa de 22 bits y otra, B, trabaja en base 16 con 6 dígitos de precision (24 bits). ¿Cuál de las dos es más precisa?</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_norma_ieee_standard_754">Norma IEEE-Standard 754</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Float</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Norma IEEE-Standard 754</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Precisión simple &#8594; formato de longitud 32 bits en 3 campos <em>Signo/Exponente/Fraccción</em> de longitudes 1/8/23 bits</p>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNqdzzEKwkAQheHeU_ylsiwkm0ILW-208QRjdsGFZCNJCpG9koV4hFxMIyIJIoJfN8PAvAcpT4u9bxtGTPa5e1tqTSuldNcKF-gvJyit9NB4-kJNiLsIq9MRRWrmEFnXkue-uwWsoxA2ElrfCGyrupTCn8VK_P9hlpIlg6IYwy_Jq3V3Cdbn7hGs6GszTZA-onW1yw8yuwPG10qW" alt="Diagram">
+</div>
+</div>
+</li>
+<li>
+<p>Precisión doble  &#8594; formato de longitud 64 bits en 3 campos <em>Signo/Exponente/Fraccción</em> de longitudes 1/11/52 bits</p>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNqVjzEOgkAURHtO8UoN2YRdApWtdtp4gu-yiZvAYoDCYq9kYTwCF1OMBRgbXzczyWQGNG-0PvmhZ0Fhvr2NUgzSyHhvcYEpTkhVquYs1cxPiMcI2-uFFJ2ZnMiuE2v9-AjsJQy-Fzi0XRP_qi1zSjObTaH5Rfa5MN5C5a2jcvX0gVWGUMtLd86eZf0EiQ8-vg==" alt="Diagram">
+</div>
+</div>
+</li>
+<li>
+<p><a href="http://sandbox.mc.edu/~bennet/cs110/flt/dtof.html">conversion manual</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Floating_point">wiki</a></p>
+</li>
+<li>
+<p>Binario: Tres campos</p>
+<table class="tableblock frame-ends grid-all" style="width: 80%;">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 57.1429%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>Signo</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>Exponente en Exceso</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>Fracción de la Mantisa Normalizada</code></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Valor (-1)<sup>Signo</sup> x 1.Fracción_Mantisa_Normalizada x 2<sup>Exponente</sup></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Signo: positivo -&#8594; bit <em>0</em> , negativo --&#8594;bit <em>1</em></p>
+</li>
+<li>
+<p>Exponente en exceso: Es el Exponente al que se añade 127 (precisión simple) ó 1023 (precisión doble)</p>
+</li>
+<li>
+<p>Mantisa Normalizada: Es la mantisa tal que su parte entera es <em>1</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Fracción de la Mantisa Normalizada: Es la fracción de la mantisa normalizada.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_conversores_de_código">Conversores de Código</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Conversores online:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.binaryconvert.com/index.html">binary converter</a>: tipos char,short,int,float,double</p>
+</li>
+<li>
+<p><a href="http://www.zator.com/Cpp/E2_2_4a1.htm">conversor ieee754</a></p>
+</li>
+<li>
+<p><a href="http://www.h-schmidt.net/FloatConverter/IEEE754.html">IEEE 754 single precision</a>: decimal &#8594; binario/hexadecimal y viceversa</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_float_point_representaciión_del_ceroinfinito_e_indeterminado">Float Point: Representaciión del Cero,Infinito e Indeterminado</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Cuando el campo del exponente son todo ceros o unos, no se sigue la regla general de un número normalizado</p>
+<table class="tableblock frame-all grid-all" style="width: 80%;">
+<caption class="title">Table 5. Single precision</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">Números</th>
+<th class="tableblock halign-center valign-top">Exp</th>
+<th class="tableblock halign-center valign-top">Fracción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>Ceros</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0x00</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>Números desnormalizados</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0x00</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>distinto de 0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>Números normalizados</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0x01-0xFE</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>cualquiera</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>Infinitos</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0xFF</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>NaN (Not a Number)</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0xFF</code></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>distinto de 0</code></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Cero</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Por qué el cero se representa en single precision como una secuencia de 32 ceros</p>
+</li>
+<li>
+<p>Por qué cuando el campo del exponente es cero la potencia es 2<sup>-126</sup> en lugar de 2<sup>-127</sup> y la mantisa se considera NO normalizada, es decir, 0.fracción en lugar de 1.fracción.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="http://www.cs.umd.edu/class/sum2003/cmsc311/Notes/Data/float.html">Notas Maryland</a></p>
+</li>
+<li>
+<p>Infinito</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_referencia_2">Referencia</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://people.ds.cam.ac.uk/nmm1/arithmetic/na1.pdf">numerical analysis</a>: programas ejemplo sencillos</p>
+</li>
+<li>
+<p><a href="http://grouper.ieee.org/groups/754/">IEEE</a></p>
+</li>
+<li>
+<p><a href="http://www.cs.berkeley.edu/~wkahan/">William Kahan</a></p>
+</li>
+<li>
+<p><a href="http://www.cs.yale.edu/homes/aspnes/pinewiki/C%282f%29FloatingPoint.html">Yale</a>: C programming. float.c.</p>
+</li>
+<li>
+<p><a href="https://randomascii.wordpress.com/category/floating-point/">Bruce Dawson blog</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://randomascii.wordpress.com/2012/01/11/tricks-with-the-floating-point-format/" class="bare">https://randomascii.wordpress.com/2012/01/11/tricks-with-the-floating-point-format/</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/IEEE_floating_point">wikipedia</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.validlab.com/goldberg/paper.pdf" class="bare">http://www.validlab.com/goldberg/paper.pdf</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://hal.archives-ouvertes.fr/hal-00128124v5/document">The pitfalls of verifying
+oating-point computations</a></p>
+</li>
+<li>
+<p><a href="http://arxiv.org/pdf/cs/0701192.pdf">el mismo?</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="http://www.cprogramming.com/tutorial/floating_point/understanding_floating_point_representation.html">cprogramming</a></p>
+</li>
+<li>
+<p><a href="http://www.codeproject.com/Articles/29637/Five-Tips-for-Floating-Point-Programming">code tips</a></p>
+</li>
+<li>
+<p><a href="https://www.cs.princeton.edu/courses/archive/fall09/cos323/precepts/precept2.html">c review</a>: practicas</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_character_type">3.7. Character Type</h3>
+<div class="sect3">
+<h4 id="_ascii">3.7.1. ASCII</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Codificación ASCII</p>
+<div class="ulist">
+<ul>
+<li>
+<p>American Standard Code International Intechange: codificación con 7 bits : rango 0x00-0x7F</p>
+</li>
+<li>
+<p>Tabla de conversión carácter-código_hexadecimal-código binario</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>man ascii</code></p>
+</li>
+<li>
+<p>K.N. King,Apéndice E, pg801</p>
+<table class="tableblock frame-ends grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Caracter</th>
+<th class="tableblock halign-center valign-top">ASCII hex</th>
+<th class="tableblock halign-left valign-top">Control (Secuencia de Escape)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0x30</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0x31</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>a</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0x61</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>A</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0x41</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>+</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0x2B</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>^J</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0x0A</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>nueva línea (\n)</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>^M</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>0x0D</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>retorno de carro (\r)</strong></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>fijarse la relación del código entre J y ^J, entre M y ^M&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>C program '\X' escapes are noted.
+
+       Oct   Dec   Hex   Char                        Oct   Dec   Hex   Char
+       ────────────────────────────────────────────────────────────────────────
+       000   0     00    NUL '\0'                    100   64    40    @
+       001   1     01    SOH (start of heading)      101   65    41    A
+       002   2     02    STX (start of text)         102   66    42    B
+       003   3     03    ETX (end of text)           103   67    43    C
+       004   4     04    EOT (end of transmission)   104   68    44    D
+       005   5     05    ENQ (enquiry)               105   69    45    E
+       006   6     06    ACK (acknowledge)           106   70    46    F
+       007   7     07    BEL '\a' (bell)             107   71    47    G
+       010   8     08    BS  '\b' (backspace)        110   72    48    H
+       011   9     09    HT  '\t' (horizontal tab)   111   73    49    I
+       012   10    0A    LF  '\n' (new line)         112   74    4A    J
+       013   11    0B    VT  '\v' (vertical tab)     113   75    4B    K
+       014   12    0C    FF  '\f' (form feed)        114   76    4C    L
+       015   13    0D    CR  '\r' (carriage ret)     115   77    4D    M
+       016   14    0E    SO  (shift out)             116   78    4E    N
+       017   15    0F    SI  (shift in)              117   79    4F    O
+       020   16    10    DLE (data link escape)      120   80    50    P
+       021   17    11    DC1 (device control 1)      121   81    51    Q
+       022   18    12    DC2 (device control 2)      122   82    52    R
+       023   19    13    DC3 (device control 3)      123   83    53    S
+       024   20    14    DC4 (device control 4)      124   84    54    T
+       025   21    15    NAK (negative ack.)         125   85    55    U
+       026   22    16    SYN (synchronous idle)      126   86    56    V
+       027   23    17    ETB (end of trans. blk)     127   87    57    W
+       030   24    18    CAN (cancel)                130   88    58    X
+       031   25    19    EM  (end of medium)         131   89    59    Y
+       032   26    1A    SUB (substitute)            132   90    5A    Z
+       033   27    1B    ESC (escape)                133   91    5B    [
+       034   28    1C    FS  (file separator)        134   92    5C    \  '\\'
+       035   29    1D    GS  (group separator)       135   93    5D    ]
+       036   30    1E    RS  (record separator)      136   94    5E    ^
+       037   31    1F    US  (unit separator)        137   95    5F    _
+       040   32    20    SPACE                       140   96    60    `
+       041   33    21    !                           141   97    61    a
+       042   34    22    "                           142   98    62    b
+       043   35    23    #                           143   99    63    c
+       044   36    24    $                           144   100   64    d
+       045   37    25    %                           145   101   65    e
+       046   38    26    &amp;                           146   102   66    f
+       047   39    27    ´                           147   103   67    g
+       050   40    28    (                           150   104   68    h
+       051   41    29    )                           151   105   69    i
+       052   42    2A    *                           152   106   6A    j
+       053   43    2B    +                           153   107   6B    k
+       054   44    2C    ,                           154   108   6C    l
+       055   45    2D    -                           155   109   6D    m
+       056   46    2E    .                           156   110   6E    n
+       057   47    2F    /                           157   111   6F    o
+       060   48    30    0                           160   112   70    p
+       061   49    31    1                           161   113   71    q
+       062   50    32    2                           162   114   72    r
+       063   51    33    3                           163   115   73    s
+       064   52    34    4                           164   116   74    t
+       065   53    35    5                           165   117   75    u
+       066   54    36    6                           166   118   76    v
+       067   55    37    7                           167   119   77    w
+       070   56    38    8                           170   120   78    x
+       071   57    39    9                           171   121   79    y
+       072   58    3A    :                           172   122   7A    z
+       073   59    3B    ;                           173   123   7B    {
+       074   60    3C    &lt;                           174   124   7C    |
+       075   61    3D    =                           175   125   7D    }
+       076   62    3E    &gt;                           176   126   7E    ~
+       077   63    3F    ?                           177   127   7F    DEL</pre>
+</div>
+</div>
+</li>
+<li>
+<p>ASCII Extendido</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Extended_ASCII#ISO_8859_and_proprietary_adaptations" class="bare">https://en.wikipedia.org/wiki/Extended_ASCII#ISO_8859_and_proprietary_adaptations</a></p>
+</li>
+<li>
+<p><code>man iso_8859_1</code>: latin-1: ascii extendido: 0x80-0xFF</p>
+</li>
+<li>
+<p><code>man iso_8859-1 | grep ñ</code></p>
+</li>
+<li>
+<p><a href="http://www.theasciicode.com.ar/ascii-printable-characters/vertical-bar-vbar-vertical-line-vertical-slash-ascii-code-124.html" class="bare">http://www.theasciicode.com.ar/ascii-printable-characters/vertical-bar-vbar-vertical-line-vertical-slash-ascii-code-124.html</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>El linux pulsar ctrl-Shift-u-ascii_code Enter</p>
+</li>
+<li>
+<p>Ejemplo: el código extendido de la <em>ñ</em> es 0xF1 &#8594; C-S-u-f1 Enter&#8594; C-S-u simultáneo y aparece la u esperando al código, F-1-enter</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="http://www.mauvecloud.net/charsets/CharCodeFinder.html">ascii code finder</a></p>
+</li>
+<li>
+<p>&#x30;</p>
+</li>
+<li>
+<p>&#x7e;</p>
+</li>
+<li>
+<p>&#xac;</p>
+</li>
+<li>
+<p>&#xf1;</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_python_2">3.7.2. Python</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>ejemplos de conversión</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>python</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="python"><span class="nb">ord</span><span class="p">(</span><span class="s">'A'</span><span class="p">)</span>
+<span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s">'A'</span><span class="p">))</span>
+<span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">))</span>
+<span class="nb">chr</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span>
+<span class="nb">chr</span><span class="p">(</span><span class="mh">0x41</span><span class="p">)</span>
+<span class="p">[</span><span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"Hola"</span><span class="p">]</span>
+<span class="p">[</span><span class="nb">chr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x6f</span><span class="p">,</span> <span class="mh">0x6c</span><span class="p">,</span> <span class="mh">0x61</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x4d</span><span class="p">,</span> <span class="mh">0x75</span><span class="p">,</span> <span class="mh">0x6e</span><span class="p">,</span> <span class="mh">0x64</span><span class="p">,</span> <span class="mh">0x6f</span><span class="p">]]</span>
+<span class="p">[</span><span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"ñ"</span><span class="p">]</span>
+<span class="p">[</span><span class="nb">hex</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s">"</span><span class="se">\n</span><span class="s"> </span><span class="se">\t</span><span class="s">"</span><span class="p">]</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_unicode_utf_8">3.7.3. Unicode UTF-8</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.unicode.org/main.html">Unicode Main</a></p>
+</li>
+<li>
+<p>Unicode Transformation Format (UTF)</p>
+</li>
+<li>
+<p>Unicode: Unicode can be implemented by different character encodings. The Unicode standard defines Unicode Transformation Formats (UTF): UTF-8, UTF-16, and UTF-32, and several other encodings. The most commonly used encodings are UTF-8, UTF-16, and the obsolete UCS-2 (a precursor of UTF-16 without full support for Unicode)</p>
+</li>
+<li>
+<p>Unicode encoded: <a href="https://www.unicode.org/versions/Unicode14.0.0/ch02.pdf#G25564" class="bare">https://www.unicode.org/versions/Unicode14.0.0/ch02.pdf#G25564</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Se describe con el prefijo U+ seguido de un número entero (integers from 0 to 0x10FFFF). Al código se le llama <strong>code point"</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>UTF-8:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The dominant encoding on the World Wide Web and on most Unix-like operating systems</p>
+</li>
+<li>
+<p>Uses one byte[note 1] (8 bits) for the first 128 code points, and up to 4 bytes for other characters. The first 128 Unicode code points represent the ASCII characters, which means that any ASCII text is also a UTF-8 text.</p>
+</li>
+<li>
+<p>La <em>ñ</em> da como salida 0xc3b1 . El terminal está configurado con salida Unicode UTF-8 según la variable de entorno local. Mediante el comando <strong>locale charmap</strong>  volcamos con que codificación tenemos la entrada/salida del terminal. Mediante <code>locale -m</code> los posibles. Podría haber sido iso-8859-1 (ascii extendido) en lugar de utf8.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>localectl status</code> &#8594; codificación de entrada del teclado</p>
+<div class="listingblock">
+<div class="content">
+<pre>  System Locale: LANG=eu_ES.UTF-8
+                  LANGUAGE=eu_ES:eu:en_GB:en
+       VC Keymap: n/a
+      X11 Layout: es
+       X11 Model: pc105</pre>
+</div>
+</div>
+</li>
+<li>
+<p><a href="http://www.utf8-chartable.de/unicode-utf8-table.pl?number=1024">utf8</a>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>8-bit Unicode Transformation Format</p>
+</li>
+<li>
+<p>Usa símbolos de longitud variable (de 1 a 4 bytes por carácter Unicode).</p>
+</li>
+<li>
+<p>Esta orientado a la transmisión de palabras de 1 byte.</p>
+</li>
+<li>
+<p><a href="http://www.fileformat.info/info/unicode/char/f1/index.htm">unicode ñ</a></p>
+</li>
+<li>
+<p>la ñ tiene <strong>unicode point <em>U+00F1</em></strong> ó <strong>hex_code_utf8 <em>0xC3B1</em></strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>en la wikipedia utf-8 explica cómo pasar de unicode point a hex code.</p>
+</li>
+<li>
+<p><a href="https://unicode-table.com/es/00F1/" class="bare">https://unicode-table.com/es/00F1/</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Problema para copiar los caracteres no US-ASCII de la barra URL de firefox: <a href="https://es.wikipedia.org/wiki/Conmutaci%C3%B3n_de_circuitos" class="bare">https://es.wikipedia.org/wiki/Conmutaci%C3%B3n_de_circuitos</a>. &#8594; C3B3 es el código hexadecimal del código utf-8 del carácter ó.</p>
+</li>
+<li>
+<p>wikipedia utf-8:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>desglose de códigos según 1byte,2byte,3 byte, 4 bytes.</p>
+</li>
+<li>
+<p>cómo se mapea el unicode code point del utf-8 a hexadecimal</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>man utf-8</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>showkey -a</code> : espera a pulsar una letra y visualizará el código de la letra pulsada en la codificación de entrada del sistema operativo.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El código de los caracteres del ASCII standard (7bits) coincide con el UTF8 pero no así para el resto de caracteres ASCII extendido.</p>
+</li>
+<li>
+<p>útil para descubrir el código de cada carácter en ascii standard y  el de caracteres ñ, á, é, í, ó, ú si en el código en que el sistema esté configurado (UTF8)</p>
+</li>
+<li>
+<p>útil para descubri el código de control de combinaciones Ctrl-C, CR, Ctrl-CR, Ctrl-D</p>
+<div class="literalblock">
+<div class="content">
+<pre>\ 	 92 0134 0x5c   -&gt; tecla ESC: escape
+^J 	 10 0012 0x0a   -&gt; teclas Ctrl-CR: Salto de línea
+^M 	 13 0015 0x0d   -&gt; tecla CR: Retorno de Carro
+^C 	  3 0003 0x03   -&gt; teclas Ctrl-c
+^D 	  4 0004 0x04   -&gt; teclas Ctrl-d
+ñ       195 0303 0xc3   -&gt; MSB: More Significand Byte.
+ 	177 0261 0xb1   -&gt; LSB: Less Significand Byte
+        hex_code_utf8   -&gt; 0xC3B1</pre>
+</div>
+</div>
+</li>
+<li>
+<p>UPNA &#8594; 0x55-0x50-0x4e-0x41-0x00 donde 0x00 es el caracter NUL de fin de cadena.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentos HTML</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ñ &#8594; &amp;#x00F1 &#8594; utiliza el código "unicode point"</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>URL &#8594; en la barra de direcciones de un navegador poner camión &#8594; enter</p>
+<div class="ulist">
+<ul>
+<li>
+<p>copiar la URL y copiarla en una nueva barra &#8594; <a href="https://www.google.com/search?channel=fs&amp;client=ubuntu&amp;q=cami%C3%B3n" class="bare">https://www.google.com/search?channel=fs&amp;client=ubuntu&amp;q=cami%C3%B3n</a></p>
+</li>
+<li>
+<p>%C3%B3 es el UTF-8 hex_code de ó</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sistema operativo : variables del entorno</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>env | grep LC_</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="http://www.unicode.org/charts/">Unicode chart</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Colocando el puntero sobre la categoría se visualiza el rango hexadecimal del charset</p>
+</li>
+<li>
+<p>Symbols Punctuation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Punctuation: ASCII Punctuation: <a href="http://www.unicode.org/charts/PDF/U0000.pdf">U0000.pdf</a></p>
+</li>
+<li>
+<p>Find chart by hex code: 278a</p>
+</li>
+<li>
+<p>Pictographs: Dingbats: x278a &#8594; &#x278a; &#8594; <a href="http://www.unicode.org/charts/PDF/U2700.pdf">U2700.pdf</a></p>
+</li>
+<li>
+<p>Mathematical symbols: Mathematical Operators:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode">wikipedia</a></p>
+</li>
+<li>
+<p><a href="http://www.unicode.org/charts/PDF/U2200.pdf">U2200</a>: Mathematical Operators Range: 2200–22FF</p>
+</li>
+<li>
+<p>U+2228 &#8594; hexadecimal x2228 &#8594; &#x2228; ó en decimal 8744 &#8744;</p>
+</li>
+<li>
+<p>U+22BC &#8594; x22bc &#8594; &#x22bc;</p>
+</li>
+<li>
+<p>U+22BD &#8594; x22bd &#8594; &#x22bd;</p>
+</li>
+<li>
+<p>U+22A6 &#8594; x22a6 &#8594; &#x22a6;</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>otros</p>
+<div class="ulist">
+<ul>
+<li>
+<p>x1f60b &#8594; &#x1f60b;</p>
+</li>
+<li>
+<p>U+00F1 &#8594; x00f1  &#8594; &#x00f1;</p>
+</li>
+<li>
+<p>241    &#8594; &#241;</p>
+</li>
+<li>
+<p>x2190 &#8594; &#x2190;</p>
+</li>
+<li>
+<p>x2192 &#8594; &#x2192;</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://wiki.mozilla.org/Help:Special_characters#Unicode" class="bare">https://wiki.mozilla.org/Help:Special_characters#Unicode</a></p>
+</li>
+<li>
+<p><a href="http://www.fileformat.info/info/unicode/char/305/index.htm">info detallada sobre un caracter unicode</a>: Pej U+0305</p>
+</li>
+<li>
+<p><a href="https://support.office.com/en-us/article/Insert-ASCII-or-Unicode-Latin-based-symbols-and-characters-d13f58d3-7bcb-44a7-a4d5-972ee12e50e0">Microsoft Office</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Overline">Overline o suprarayado</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>LibreOffice has direct support for several styles of overline in its <code>Format / Character / Font Effects" dialog: suprarayado</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_iso_8859_1">3.8. ISO-8859-1</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternativa a UTF-8 para el alfabeto latino</p>
+</li>
+<li>
+<p><a href="https://es.wikipedia.org/wiki/ISO/IEC_8859-1" class="bare">https://es.wikipedia.org/wiki/ISO/IEC_8859-1</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Sólo utiliza 1 byte , por lo tanto es equivalente al ascii extended.</p>
+</li>
+<li>
+<p>La norma ISO/IEC 8859-15 consistió en una revisión de la ISO 8859-1, incorporando el símbolo del Euro</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>man iso_8859-1</code></p>
+</li>
+<li>
+<p>La "ñ" tiene el código 0xF1</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_programación_en_c">3.8.1. Programación en C</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Convertir un carácter numérico en su valor entero</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mediante una operación aritmética</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Convertir un carácter minúscula en mayúscula</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Mediante una operación aritmética</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_otros">3.8.2. Otros</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.gnu.org/software/coreutils/manual/html_node/printf-invocation.html">Lenguaje C: printf</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>locale -a</code> &#8594; C.UTF8</p>
+</li>
+<li>
+<p>ñ &#8594; <code>env printf <em>\u00f1  \n</em></code> : incluir las simples comillas</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.gnu.org/software/coreutils/manual/html_node/printf-invocation.html#printf-invocation">printf invocation</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_arquitectura_von_neumann.html">Arquitectura Von Neumann</a> | ↑ Up: <a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_operaciones_aritmeticas_y_logicas.html">Operaciones Aritmeticas y Logicas</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

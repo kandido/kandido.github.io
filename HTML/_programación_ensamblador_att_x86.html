@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_programación_ensamblador_att_x86" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+<ul class="sectlevel1">
+<li><a href="_programación_ensamblador_att_x86.html"><span class="toc-current">19. Programación Ensamblador AT&amp;T x86</span></a>
+<ul class="sectlevel2">
+<li><a href="_programación_ensamblador_att_x86.html#_programas_x86_32">19.1. Programas  x86-32</a>
+<ul class="sectlevel3">
+<li><a href="_programación_ensamblador_att_x86.html#programa_minimalista">19.1.1. Programa Minimalista</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_ejemplo_básico">19.1.2. Ejemplo Básico</a>
+</li>
+</ul>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#directivas_as">19.2. Directivas Assembler AS</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#rie">19.3. Repertorio de Instrucciones Ensamblador</a>
+<ul class="sectlevel3">
+<li><a href="_programación_ensamblador_att_x86.html#_transferencia">19.3.1. TRANSFERENCIA</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_aritméticos">19.3.2. ARITMÉTICOS</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_lógicos">19.3.3. LÓGICOS</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_misceláneos">19.3.4. MISCELÁNEOS</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_saltos_generales">19.3.5. SALTOS  (generales)</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_saltos_sin_signo_cardinal_saltos_con_signo_integer">19.3.6. SALTOS  Sin Signo (Cardinal) SALTOS Con Signo (Integer)</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_flags_oditszapc">19.3.7. FLAGS (ODITSZAPC)</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_listado_de_mnemónicos">19.3.8. Listado de mnemónicos</a>
+</li>
+</ul>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#registros_32">19.4. Registros</a>
+<ul class="sectlevel3">
+<li><a href="_programación_ensamblador_att_x86.html#_visión_completa">19.4.1. Visión completa</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_registros_visibles_al_programador_2">19.4.2. Registros visibles al programador</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_compatibilidad_32_64_2">19.4.3. Compatibilidad 32-64</a>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_control_flag_register">19.4.4. Control Flag Register</a>
+</li>
+</ul>
+</li>
+<li><a href="_programación_ensamblador_att_x86.html#_gdb_3">19.5. GDB</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_programación_ensamblador_att_x86">19. Programación Ensamblador AT&amp;T x86</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_programas_x86_32">19.1. Programas  x86-32</h3>
+<div class="sect3">
+<h4 id="programa_minimalista">19.1.1. Programa Minimalista</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>minimalista.s</p>
+<div class="listingblock">
+<div class="content">
+<pre>### Programa: minimalista.s
+### gcc -m32 -g  -o minimalista minimalista.s
+
+        .global main
+        .section .text
+main:
+        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
+        int $0x80     # llamada al sistema operativo
+        .end</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_estructura_del_programa">Estructura del programa</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Una Cabecera y dos Secciones:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cabecera con comentarios.</p>
+</li>
+<li>
+<p>Sección de Datos: Se realiza la reserva de para implementar las variables inicializadas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Directiva <code>.section .data</code> ó únicamente <code>.data</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sección de Instrucciones: Secuencia de instrucciones en lenguaje ensamblador</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Directiva <code>.section .text</code> ó únicamente <code>.text</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_cabecera">Cabecera</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Cabecera con comentarios sobre:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Nombre del programa, lenguaje de programación.</p>
+</li>
+<li>
+<p>Descripción del programa: entradas al programa, salidas, función del programa.</p>
+</li>
+<li>
+<p>Entorno de programación: sistema operativo, assembler utilizado, comandos de compilación, ensamblaje, linker.</p>
+</li>
+<li>
+<p>Comentarios sobre el autor, fecha, etc</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sección_de_datos_2">Sección de Datos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Directiva <code>.section .data</code> : indica el comienzo de la sección de datos</p>
+</li>
+<li>
+<p>Etiqueta <code>n:</code>  :reserva de memoria en la dirección simbólica <em>n</em></p>
+</li>
+<li>
+<p>Directiva <code>.int</code> :reserva de 4 bytes a partir de la dirección <em>n</em>: direcciones n,n+1,n+2,n+3</p>
+</li>
+<li>
+<p>Literal <code>5</code> :valor de inicialización de la reserva de memoria</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_sección_de_instrucciones_punto_de_entrada_y_bloque_de_salida_llamada_del_sistema_y_llamada_al_sistema">Sección de Instrucciones : punto de entrada y bloque de salida: llamada del sistema y llamada al sistema</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Directiva <code>.section .text</code> : indica el inicio de la sección de instrucciones.</p>
+</li>
+<li>
+<p>Sintaxis de las instrucciones en lenguaje AT&amp;T :</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>etiqueta:  operación operando_fuente,operando_destino  #comentario</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Punto de entrada al programa desde el sistema operativo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El SISTEMA Operativo llama al programa o aplicación.</p>
+</li>
+<li>
+<p>Etiqueta <em>_start:</em>  . Apunta a la primera instrucción del programa.</p>
+</li>
+<li>
+<p>Directiva <code>.global</code> : La etiqueta <em>_start</em> tiene que ser "visible" fuera del programa sum1toN para que el linker la enlace con el sistema operativo linux como punto de entrada, es decir, tiene que ser un símbolo <em>global</em> al resto de programas y no  <em>local</em> al programa <em>sum1toN</em>. El linker <em>ld</em> por defecto presupone que el símbolo utilizado como etiqueta del punto de entrada es <em>_start</em>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Punto de salida del programa al sistema operativo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es necesario acabar con el proceso del programa <em>sum1toN</em> y liberar todos los recursos que este utilizando dicho proceso. Esta tarea de fin de proceso la tiene que realizar el sistema operativo o kernel linux.</p>
+</li>
+<li>
+<p>El programa o aplicación llama al  El SISTEMA Operativo.</p>
+</li>
+<li>
+<p>El programa <em>sum1toN</em> llama al sistema operativo para realizar la operación de fin de proceso mediante la ejecución de la función <strong>exit(argumento)</strong> . El sistema operativo tiene un listado de posibles funciones que ejecuta si es llamado. Una de dichas funciones es exit(argumento).</p>
+</li>
+<li>
+<p>LLamada al Sistema Operativo en lenguaje ensamblador:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Registro EAX: almacena el código de la función a ejecutar por el Sistema Operativo. El código de la función <em>exit</em> es 1.</p>
+</li>
+<li>
+<p>Registro EBX: almacena el código del argumento de la función <em>exit(argumento)</em>. El valor 0 se interpreta como ejecución del programa correcta.</p>
+</li>
+<li>
+<p>Instrucción <code>int $0x80</code> : esta instrucción llama al sistema operativo, INTerrumpe al sistema operativo para que ejecute la función asociada al código almacenado en el registro EAX.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="http://programminggroundup.blogspot.com/2007/01/appendix-c-important-system-calls.html">Programming from the Ground Up</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_fin_del_ensamblaje">Fin del ensamblaje</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Directiva <code>.end</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo_básico">19.1.2. Ejemplo Básico</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo fuente: <em>sum1toN.s</em></p>
+<div class="listingblock">
+<div class="content">
+<pre>### Programa: sum1toN.s
+### Descripción: realiza la suma de la serie 1,2,3,...N
+### Es el programa en lenguaje AT&amp;T i386 equivalente a sum.ias de la máquina IAS de von Neumann
+### gcc -m32 -g -nostartfiles -o sum1toN sum1toN.s
+### Ensamblaje as --32 --gstabs sum1toN.s -o sum1toN.o
+### linker -&gt; ld -melf_i386  -o sum1toN sum1toN.o
+        ##  Declaración de variables
+        .section .data
+n:	.int 5
+        .global _start
+        ##  Comienzo del código
+        .section .text
+_start:
+        mov $0,%ecx # ECX implementa la variable suma
+        mov n,%edx
+bucle:
+        add %edx,%ecx
+        sub $1,%edx
+        jnz bucle
+        mov %ecx, %ebx # el argumento de salida al S.O. a través de EBX según convenio
+        ## salida
+        mov $1, %eax  # código de la llamada al sistema operativo: subrutina exit
+        int $0x80     # llamada al sistema operativo
+        .end</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Compilación: <code>gcc -nostartfiles -m32 -g -o sum1toN sum1toN.s</code></p>
+</li>
+<li>
+<p>Ensamblaje: <code>as --32 --gstabs sum1toN.s -o sum1toN.o</code></p>
+</li>
+<li>
+<p>linker: <code>ld -melf_i386  -o sum1toN sum1toN.o</code></p>
+</li>
+<li>
+<p>Directivas del traductor ensamblador: .section, .data, .text, .byte, .end, etc&#8230;&#8203; empiezan con un punto como prefijo</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 9.5238%;">
+<col style="width: 19.0476%;">
+<col style="width: 23.8095%;">
+<col style="width: 4.7619%;">
+<col style="width: 28.5714%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>label:</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>op_mnemonic</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>operand_source</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>,</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>operand_destination</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>;comment</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Las etiquetas llevan el sufijo <strong>:</strong></p>
+</li>
+<li>
+<p>La etiqueta <strong>_start</strong>: es el punto de entrada al programa. Obligatoria. La utiliza el linker.</p>
+</li>
+<li>
+<p>Sufijos de los mnemónicos</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>b</strong> &#8594; byte &#8594; 1Byte  &#8594;Ej: movb</p>
+</li>
+<li>
+<p><strong>w</strong> &#8594; word &#8594; 2Bytes &#8594;Ej: movw  . En este contexto word son 2 bytes por razones históricas.</p>
+</li>
+<li>
+<p><strong>l</strong> &#8594; long &#8594; 4Bytes &#8594;Ej: movl  . Valor por defecto.</p>
+</li>
+<li>
+<p><strong>q</strong> &#8594; quad &#8594; 8Bytes &#8594;Ej: movq</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Direccionamientos de los operandos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En la misma instrucción los operandos fuente y destino no pueden hacer ambos referencia a la memoria Principal.</p>
+</li>
+<li>
+<p>inmediato: prefijo del operando <strong>$</strong></p>
+</li>
+<li>
+<p>registro:  prefijo del registro <strong>%</strong></p>
+</li>
+<li>
+<p>directo:   el operando es una etiqueta que apunta a la memoria principal</p>
+</li>
+<li>
+<p>indirecto: el operando es una etiqueta o un registro: utiliza paréntesis. (etiqueta) ó (%registro). Ver indexado.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La etiqueta referencia una posición de memoria que contiene a su vez una dirección de la memoria principal que apunta al operando.</p>
+</li>
+<li>
+<p>El registro contiene la dirección de la memoria principal que apunta al operando.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>indexado</p>
+<div class="ulist">
+<ul>
+<li>
+<p>dirección efectiva: <em>base + index*scale + disp</em> &#8594; la sintaxis es:  disp(base,índice,escala)</p>
+</li>
+<li>
+<p>foo(%ebp,%esi,4)    &#8594; dirección efectiva= <em>EBP + 4*ESI + foo</em></p>
+</li>
+<li>
+<p>(%edi)              &#8594; dirección efectiva= <em>EDI</em> &#8594; direccionamiento indirecto</p>
+</li>
+<li>
+<p>-4(%ebp)    	&#8594; dirección efectiva= <em>EBP - 4</em></p>
+</li>
+<li>
+<p>foo(,%eax,4)	&#8594; dirección efectiva= <em>4*EAX + foo</em></p>
+</li>
+<li>
+<p>foo(,1)     	&#8594; dirección efectiva= foo</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Cualquier instrucción que tiene una referencia a un operando en la memoria principal y no tiene una referencia a registro, debe especificar el tamaño del operando  (byte, word, long, or quadruple) con una instrucción que lleve el sufijo (&#8216;b&#8217;, &#8216;w&#8217;, &#8216;l&#8217; or &#8216;q&#8217;, respectivamente).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="directivas_as">19.2. Directivas Assembler AS</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Manual</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://sourceware.org/binutils/docs/as/" class="bare">https://sourceware.org/binutils/docs/as/</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 17. Directivas básicas</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">.global o .globl</th>
+<th class="tableblock halign-left valign-top">variables globales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.section .data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sección de las variables locales estáticas inicializadas</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.section .text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sección de las instrucciones</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.section .bss</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sección de las variables sin inicializar</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.section .rodata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sección de las variables de sólo lectura</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.type	  name , type description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tipo de variable, p.ej @function</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.common   100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reserva 100 bytes sin inicializar y puede ser referenciado globalmente</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.lcomm   bucle, 100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reserva 100bytes referenciados con el símbolo local bucle. Sin inicializar.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.space    100</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reserva 100 bytes inicializados a cero</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.space    100, 3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reserva 100 bytes inicializados a 3</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.string  "Hola"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">añade el byte 0 al final de la cadena</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.asciz   "Hola"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">añade el byte 0 al final de la cadena</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.ascii   "Hola"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no añade le caracter NULL de final de cadena</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.byte    3,7,-10,0b1010,0xFF,0777</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tamaño 1Byte y formatos decimal,decimal,decimal,binario,hexadecimal,octal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.2byte    3,7,-10,0b1010,0xFF,0777</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tamaño 2Bytes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.word    3,7,-10,0b1010,0xFF,0777</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tamaño 2Bytes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.short   3,7,-10,0b1010,0xFF,0777</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tamaño 2B</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.4byte    3,7,-10,0b1010,0xFF,0777</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tamaño 4B</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.long    3,7,-10,0b1010,0xFF,0777</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tamaño 4B</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.int     3,7,-10,0b1010,0xFF,0777</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tamaño 4B</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.8byte    3,7,-10,0b1010,0xFF,0777</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tamaño 8B</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.quad    3,7,-10,0b1010,0xFF,0777</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tamaño 8B</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.octa    3,7,-10,0b1010,0xFF,0777</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">formato octal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.double  3.14159, 2 E-6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">precisión doble</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.float   2E-6, 3.14159</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">precisión simple</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.single  2E-6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">precisión simple</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.include "file"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">incluye el fichero . Obligatorias las comillas.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.equ     SUCCESS, 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">macro que asocia el símbolo SUCCESS al número 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.macro macname macargs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">define el comienzo de una macro de nombre macname y argumentos macargs</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.endmacro</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">define el final de una macro</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.align   n</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">las instrucciones o datos posteriores empezarán en una dirección multiplo de n bytes.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">.end</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fin del ensamblaje</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Alineamiento <strong>Little Endian</strong>: El byte de menor peso, LSB, se almacena en la posición de memoria más baja.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>.int OxAABBCCDD &#8594; 0xDD se almacena primero en la dirección más baja, el resto de bytes se almacenan en sentido ascendente en el orden 0xCC,0xBB,0xAA</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="rie">19.3. Repertorio de Instrucciones Ensamblador</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#repertorio_instruc_oper">Manuales del Repertorio de Instrucciones</a></p>
+</li>
+<li>
+<p>Lenguaje Ensamblador AT&amp;T</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_transferencia">19.3.1. TRANSFERENCIA</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 18.1818%;">
+<col style="width: 36.3636%;">
+<col style="width: 18.1819%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Comentario</th>
+<th class="tableblock halign-left valign-top">Código</th>
+<th class="tableblock halign-left valign-top">Operación</th>
+<th class="tableblock halign-left valign-top">O D I T S Z A P C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mover (copiar)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOV Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Fuente</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XCHG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercambiar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XCHG Op1,Op2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op1:=Op2 , Op2:=Op1</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the carry (Carry = 1)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF:=1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear Carry (Carry = 0)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF:=0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CMC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Complementar Carry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CMC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF:=Ø</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setear dirección</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DF:=1(interpreta strings de arriba hacia abajo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Limpiar dirección</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DF:=0(interpreta strings de abajo hacia arriba)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flag de Interrupción en 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IF:=1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flag de Interrupción en 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IF:=0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apilar en la pila</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSH Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEC SP, [SP]:=Fuente</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSHF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apila los flags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSHF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O, D, I, T, S, Z, A, P, C 286+: También NT,IOPL</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSHA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apila los registros generales</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSHA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AX, CX, DX, BX, SP, BP, SI, DI</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desapila de la pila</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POP Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destino:=[SP], INC SP</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POPF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desapila a los flags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POPF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O,D,I,T,S,Z,A,P,C 286+: También NT,IOPL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">± ± ± ± ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POPA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desapila a los reg. general.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POPA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DI, SI, BP, SP, BX, DX, CX, AX</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CBW</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Convertir Byte a Word</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CBW</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AX:=AL (con signo)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CWD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Convertir Word a Doble</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CWD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DX:AX:=AX (con signo)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CWDE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Conv. Word a Doble Exten.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CWDE 386</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EAX:=AX (con signo)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Entrada</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IN Dest,Puerto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AL/AX/EAX := byte/word/double del puerto esp.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salida</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OUT Puer,Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Byte/word/double del puerto := AL/AX/EAX</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Flags: <strong>±</strong> =Afectado por esta instrucción, <strong>?</strong> =Indefinido luego de esta instrucción</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_aritméticos">19.3.2. ARITMÉTICOS</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 18.1818%;">
+<col style="width: 36.3636%;">
+<col style="width: 18.1819%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Comentario</th>
+<th class="tableblock halign-left valign-top">Código</th>
+<th class="tableblock halign-left valign-top">Operación</th>
+<th class="tableblock halign-left valign-top">O D I T S Z A P C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Suma</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADD Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest+ Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Suma con acarreo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADC Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest+ Fuente +CF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SUB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SUB Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest- Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SBB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resta con acarreo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SBB Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest-(Fuente +CF)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">División (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=byte: AL:=AX / Op AH:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?       ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">División (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=word:         AX:=DX:AX / Op DX:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?       ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">386 División (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=doublew.:     EAX:=EDX:EAX / Op EDX:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?	 ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">División entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=byte:        AL:=AX / Op AH:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?	 ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">División entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=word: AX:=DX:AX / Op DX:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?	 ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">386 División entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=doublew.: EAX:=EDX:EAX / Op EDX:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?	 ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiplicación (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=byte: AX:=AL*Op si AH=0 #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiplicación (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=word: DX:AX:=AX*Op si DX=0 #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">386 Multiplicación (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=double: EDX:EAX:=EAX*Op si EDX=0 #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i Multiplic. entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=byte: AX:=AL*Op si AL es suficiente #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiplic. entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=word: DX:AX:=AX*Op si AX es suficiente #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">386 Multiplic. entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=double: EDX:EAX:=EAX*Op si EAX es sufi. #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Incrementar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INC Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op:=Op+1 (El Carry no resulta afectado !)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decrementar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEC Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op:=Op-1 (El Carry no resulta afectado !)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CMP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comparar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CMP Fuente,Destino</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destino-Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desplazam. aritm. a la izq.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i       ± ± ? ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desplazam. aritm. a la der.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i       ± ± ? ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rotar a la izq. c/acarreo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCL Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i               ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rotar a la derecha c/acarreo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCR Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i               ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ROL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rotar a la izquierda</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ROL Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i               ±</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>i</strong>:para más información ver especificaciones de la intrucción,</p>
+</li>
+<li>
+<p><strong>#</strong>:entonces CF:=0, OF:=0 sino CF:=1, OF:=1</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_lógicos">19.3.3. LÓGICOS</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 18.1818%;">
+<col style="width: 36.3636%;">
+<col style="width: 18.1819%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Comentario</th>
+<th class="tableblock halign-left valign-top">Código</th>
+<th class="tableblock halign-left valign-top">Operación</th>
+<th class="tableblock halign-left valign-top">O D I T S Z A P C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NEG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Negación (complemento a 2)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NEG Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op:=0-Op si Op=0 entonces CF:=0 sino CF:=1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NOT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invertir cada bit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NOT Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op:=Ø~Op (invierte cada bit)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AND</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Y</em> (And) lógico</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AND Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest ^ Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0       ± ± ? ± 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>O</em> (Or) lógico</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OR  Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest v Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0       ± ± ? ± 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XOR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>O</em> (Or) exclusivo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XOR Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest (xor) Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0       ± ± ? ± 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SHL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desplazam. lógico a la izq.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SHL Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i       ± ± ? ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SHR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desplazam. lógico a la der.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SHR Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i       ± ± ? ± ±</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_misceláneos">19.3.4. MISCELÁNEOS</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 18.1818%;">
+<col style="width: 36.3636%;">
+<col style="width: 18.1819%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Comentario</th>
+<th class="tableblock halign-left valign-top">Código</th>
+<th class="tableblock halign-left valign-top">Operación</th>
+<th class="tableblock halign-left valign-top">O D I T S Z A P C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NOP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hacer nada</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NOP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No hace operación alguna</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LEA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cargar direciión Efectiva</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LEA Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest := dirección fuente</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interrupción</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT Num</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interrumpe el proceso actual y salta al vector Num</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_saltos_generales">19.3.5. SALTOS  (generales)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow#Jump_if_Lesser">wiki x86 assembly</a></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Nombre  Comentario                      Código          Operación
+CALL    Llamado a subrutina             CALL Proc
+JMP     Saltar                          JMP Dest
+JE      Saltar si es igual              JE Dest         (= JZ)
+JZ      Saltar si es cero               JZ Dest         (= JE)
+JCXZ    Saltar si CX es cero            JCXZ Dest
+JP      Saltar si hay paridad           JP Dest         (= JPE)
+JPE     Saltar si hay paridad par       JPE Dest        (= JP)
+JPO     Saltar si hay paridad impar     JPO Dest        (= JNP)
+JNE     Saltar si no es igual           JNE Dest        (= JNZ)
+JNZ     Saltar si no es cero            JNZ Dest        (= JNE)
+JECXZ   Saltar si ECX es cero           JECXZ Dest 386
+JNP     Saltar si no hay paridad        JNP Dest        (= JPO)
+RET     Retorno de subrutina            RET</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_saltos_sin_signo_cardinal_saltos_con_signo_integer">19.3.6. SALTOS  Sin Signo (Cardinal) SALTOS Con Signo (Integer)</h4>
+<div class="listingblock">
+<div class="content">
+<pre>Nombre  Comentario                      Código          Operación
+JA      Saltar si es superior           JA Dest         (= JNBE)
+JAE     Saltar si es superior o igual   JAE Dest        (= JNB = JNC)
+JB      Saltar si es inferior           JB Dest         (= JNAE = JC)
+JBE     Saltar si es inferior o igual   JBE Dest        (= JNA)
+JNA     Saltar si no es superior        JNA Dest        (= JBE)
+JNAE    Saltar si no es super. o igual  JNAE Dest       (= JB = JC)
+JNB     Saltar si no es inferior        JNB Dest        (= JAE = JNC)
+JNBE    Saltar si no es infer. o igual  JNBE Dest       (= JA)
+JC      Saltar si hay carry JC Dest     JO  Dest        Saltar si hay Overflow
+JNC     Saltar si no hay carry          JNC Dest
+JNO     Saltar si no hay Overflow       JNO Dest
+JS      Saltar si hay signo (=negativo) JS Dest
+JG      Saltar si es mayor              JG Dest         (= JNLE)
+JGE     Saltar si es mayor o igual      JGE Dest        (= JNL)
+JL      Saltar si es menor              JL Dest         (= JNGE)
+JLE     Saltar si es menor o igual      JLE Dest        (= JNG)
+JNG     Saltar si no es mayor           JNG Dest        (= JLE)
+JNGE    Saltar si no es mayor o igual   JNGE Dest       (= JL)
+JNL     Saltar si no es inferior        JNL Dest        (= JGE)
+JNLE    Saltar si no es menor o igual   JNLE Dest       (= JG)</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_flags_oditszapc">19.3.7. FLAGS (ODITSZAPC)</h4>
+<div class="listingblock">
+<div class="content">
+<pre>O: Overflow resultado de operac. sin signo es muy grande o pequeño.
+D: Dirección
+I: Interrupción Indica si pueden ocurrir interrupciones o no.
+T: Trampa Paso, por paso para debugging
+S: Signo Signo del resultado. Razonable sólo para enteros. 1=neg. 0=pos.
+Z: Cero Resultado de la operación es cero. 1=Cero
+A: Carru Aux. Similar al Carry, pero restringido para el nibble bajo únicamente
+P: Paridad 1=el resultado tiene cantidad par de bits en uno
+C: Carry resultado de operac. sin signo es muy grande o inferior a cero</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sufijos de los mnemónicos del código de operación:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>q</em> : quad: operando de 8 bytes: cuádruple palabra</p>
+</li>
+<li>
+<p><em>l</em> : long: operando de 4 bytes: doble palabra</p>
+</li>
+<li>
+<p><em>w</em> : word: operando de 2 bytes: palabra</p>
+</li>
+<li>
+<p><em>b</em> : byte: operando de 1 byte</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Si el mnemónico de operación no lleva sufijo el tamaño por defecto del operando es <em>long</em></p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+<div class="sect3">
+<h4 id="_listado_de_mnemónicos">19.3.8. Listado de mnemónicos</h4>
+<div class="listingblock">
+<div class="content">
+<pre>Quick x86 assembly mnemonics NUP-UPNA
+
+                                        NEG  ;Negación (compl a 2)
+ADD     ;Suma                           NOT  ;Invertir cada bit
+ADC     ;Suma con acarreo               AND  ;'Y' (And) lógico
+SUB     ;Resta                          OR   ;'O' (Or) lógico
+SBB     ;Resta con acarreo              XOR  ;'O' (Or) exclusivo
+DIV     ;División (sin signo)           SHL  ;Desplazam.lógico a la izq.
+DIV     ;División (sin signo)           SHR  ;Desplazam.lógico a la der.
+DIV     ;386 División (sin signo)       MOV  ;Mover (copiar)
+IDIV    ;División entera con signo      XCHG ;Intercambiar
+IDIV    ;División entera con signo      STC  ;Set the carry (Carry=1)
+IDIV    ;386 División entera con signo  CLC  ;Clear Carry (Carry=0)
+MUL     ;Multiplicación (sin signo)     CMC  ;Complementar Carry
+MUL     ;Multiplicación (sin signo)     STD  ;Setear dirección
+MUL     ;386 Multiplicación (sin signo) CLD  ;Limpiar dirección
+IMUL    ;i Multiplic. entera con signo  STI  ;Flag de Interrupción en 1
+IMUL    ;Multiplic. entera con signo    CLI  ;Flag de Interrupción en 0
+IMUL    ;386 Multiplic. entera con signoPUSH ;Apilar en la pila
+INC     ;Incrementar                    PUSHF;Apila los flags
+DEC     ;Decrementar                    PUSHA;Apila los regs generales
+CMP     ;Comparar                       POP  ;Desapila de la pila
+SAL     ;Desplazam. aritm. a la izq.    POPF ;Desapila a los flags
+SAR     ;Desplazam. aritm. a la der.    POPA ;Desapila a los reg. general.
+RCL     ;Rotar a la izq. c/acarreo      CBW  ;Conv. Byte a Word
+RCR     ;Rotar a la derecha c/acarreo   CWD  ;Conv. Word a Doble
+ROL     ;Rotar a la izquierda           CWDE ;Conv. Word a Doble Exten.
+ROR     ;Rotar a la derecha             IN   ;Entrada
+NOP     ;Hacer nada                     OUT  ;Salida
+LEA     ;Cargar dirección Efectiva      Directivas
+INT     ;Interrupción			.global ó .globl label
+CALL    Llamada a subrutina        	.section .data
+JMP     Saltar                     	.section .text
+JE      Saltar si es igual         	.section .bss
+JZ      Saltar si es cero          	.section .rodata
+JCXZ    Saltar si CX es cero       	.type name,description
+JP      Saltar si hay paridad      	.common   size
+JPE     Saltar si hay paridad par  	.lcomm    label,size
+JPO     Saltar si hay paridad impar	.space    size
+JNE     Saltar si no es igual           .end
+JNZ     Saltar si no es cero       	.string
+JECXZ   Saltar si ECX es cero      	.asciz
+JNP     Saltar si no hay paridad   	.ascii
+RET     Retorno de subrutina		.byte
+JA      Saltar si es superior          	.2byte
+JAE     Saltar si es superior o igual  	.word
+JB      Saltar si es inferior          	.short
+JBE     Saltar si es inferior o igual  	.4byte
+JNA     Saltar si no es superior       	.long
+JNAE    Saltar si no es super. o igual 	.int
+JNB     Saltar si no es inferior       	.8byte
+JNBE    Saltar si no es infer. o igual 	.quad
+JC      Saltar si hay carry JC Dest    	.octa
+JNC     Saltar si no hay carry         	.double
+JNO     Saltar si no hay Overflow      	.float
+JS      Saltar si hay signo (=negativo)	.single
+JG      Saltar si es mayor             	.include "file"
+JGE     Saltar si es mayor o igual     	.equ     NAME, value
+JL      Saltar si es menor             	.macro macname m
+JLE     Saltar si es menor o igual     	.endmacro
+JNG     Saltar si no es mayor          	.align number
+JNGE    Saltar si no es mayor o igual
+JNL     Saltar si no es inferior
+JNLE    Saltar si no es menor o igual
+|63-0| 31-0 | 15-0| 15-8| 7-0
+|rax | eax | ax  | ah  | al
+|rbx | ebx | bx  | bh  | bl
+|rcx | ecx | cx  | ch  | cl
+|rdx | edx | dx  | dh  | dl
+|rsi | esi | si  |     | sil
+|rdi | edi | di  |     | dil
+|rbp | ebp | bp  |     | bpl
+|rsp | esp | sp  |     | spl
+|r8  | r8d | r8w |     | r8b
+|r9  | r9d | r9w |     | r9b
+|r10 | r10d | r10w|     | r10b
+|r11 | r11d | r11w|     | r11b
+|r12 | r12d | r12w|     | r12b
+|r13 | r13d | r13w|     | r13b
+|r14 | r14d | r14w|     | r14b
+|r15 | r15d | r15w|     | r15b</pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="registros_32">19.4. Registros</h3>
+<div class="sect3">
+<h4 id="_visión_completa">19.4.1. Visión completa</h4>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/hojas_ref_rap/reg_amd64.png" alt="Registros amd64" width="300">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Los registros de propósito general RPG de 32 bits son:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8216;%eax&#8217; (el acumulador), &#8216;%ebx&#8217;, &#8216;%ecx&#8217;, &#8216;%edx&#8217;, &#8216;%edi&#8217;, &#8216;%esi&#8217;, &#8216;%ebp&#8217; (puntero frame), and &#8216;%esp&#8217; (puntero stack).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock text-center">
+<div class="content">
+<img src="./images/hojas_ref_rap/reg_amd.png" alt="Registros RPG" height="300">
+</div>
+</div>
+<div class="ulist">
+<ul>
+</ul>
+</div>
+<div class="paragraph nav-footer">
+<p></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_registros_visibles_al_programador_2">19.4.2. Registros visibles al programador</h4>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>63-0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>31-0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>15-0</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>15-8</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>7-0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rax</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>eax</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ax</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ah</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>al</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rbx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ebx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bh</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bl</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rcx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ecx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ch</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cl</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rdx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dh</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dl</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rsi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>esi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>si</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sil</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rdi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edi</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>di</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dil</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rbp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ebp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bp</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bpl</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rsp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>esp</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sp</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spl</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r8</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r8d</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r8w</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r8b</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r9</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r9d</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r9w</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r9b</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r10</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r10d</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r10w</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r10b</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r11</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r11d</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r11w</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r11b</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r12</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r12d</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r12w</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r12b</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r13</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r13d</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r13w</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r13b</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r14</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r14d</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r14w</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r14b</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r15</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r15d</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r15w</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>r15b</code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_compatibilidad_32_64_2">19.4.3. Compatibilidad 32-64</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>En la nominación de los registros de la arquitectura de 64 bits sustituir R  por E y obtenemos la nominación de la arquitectura de 32 bits.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64 bits</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32 bits</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RIP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EIP</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RAX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EAX</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RFLAG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EFLAG</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8230;&#8203;&#8230;&#8203;.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8230;&#8203;&#8230;&#8203;&#8230;&#8203;&#8230;&#8203;.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Hay excepciones</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_control_flag_register">19.4.4. Control Flag Register</h4>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/hojas_ref_rap/rflags.png" alt="Registros Flags" width="300">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Registro de STATUS: La ejecución de una instrucción, activa unos bits denominados banderines que indican consecuencias de la operación realizada. Ejemplo: banderín de overflow : indica que la operación aritmética realizada ha resultado en un desbordamiento del resultado de dicha operación.</p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/FLAGS_register_(computing)">wikipedia</a></p>
+</li>
+<li>
+<p>Unicamente nos fijamos en los flags OSZAPC.</p>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<caption class="title">Table 18. RFLAG Register</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Flag</th>
+<th class="tableblock halign-center valign-top">Bit</th>
+<th class="tableblock halign-left valign-top">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Carry flag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parity flag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adjust flag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ZF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zero flag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sign flag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Overflow flag</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Carry flag:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se activa si la llevada se sale del ancho de palabra de la ALU en una operación aritmética de números enteros sin signo o con signo</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Overflow flag:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se activa si teniendo en cuenta el bit de mayor peso MSB (aunque este fuera del tamaño) indica error en la operación aritmética con números enteros con signo.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Parity Even flag:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>indica si el número de bits del byte LSB del resultado de la última operación ha sido par.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sign flag:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se activa si el resultado de la última operación ha sido negativo.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Adjust flag:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se activa si hay llevada en el nibble LSB del resultado de la última operación</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock text-center">
+<div class="content">
+<img src="./images/hojas_ref_rap/gdb_posterior.png" alt="gdb 1" width="700">
+</div>
+</div>
+<div class="ulist">
+<ul>
+</ul>
+</div>
+<div class="paragraph nav-footer">
+<p></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock text-center">
+<div class="content">
+<img src="./images/hojas_ref_rap/gdb_anterior.png" alt="gdb 2" width="700">
+</div>
+</div>
+<div class="ulist">
+<ul>
+</ul>
+</div>
+<div class="paragraph nav-footer">
+<p></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gdb_3">19.5. GDB</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Comandos básicos: ejecutar el comando <code>gdb</code></p>
+<div class="listingblock">
+<div class="content">
+<pre>shell date
+shell pwd
+shell ls
+shTAB
+shell daTAB
+C-x a
+C-x o
+histórico comandos: navegar con las flechas
+set trace-commands on
+set logging file gdb_salida.txt
+set logging on
+shell ls -l gdb_salida.txt
+file modulo_bin
+info sources
+info source
+break main
+b _start
+info breakpoints
+info reTAB
+run
+next , n , n 5
+step , s
+RETURN
+continue, c
+start
+until, RETURN, RETURN ...
+next instruction, ni, RET, RET, RET, RET, until, RET,..hasta salir del bucle
+step ,s
+si
+ptype varible
+whatis variable
+print variable, p variable, p /t variable, p /x n
+p &amp;n
+p $rax
+p $eax
+p $ax
+p $ah
+p $rflags
+p $eflags
+p /t $eflags
+p $rip
+x dirección
+x &amp;variable, x /1bw &amp;variable, +x /1xw &amp;variable, x /4xw &amp;variable
+pending? n
+layout split
+h layout
+layout src
+focus src : navegar
+focus cmd : navegar
+info registers
+info reTAB
+disas /r _start
+disas /m _start
+q</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>↑ Up: <a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

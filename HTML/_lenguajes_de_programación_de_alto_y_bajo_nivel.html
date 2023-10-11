@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_lenguajes_de_programación_de_alto_y_bajo_nivel" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+<ul class="sectlevel1">
+<li><a href="_arquitectura_de_una_computadora.html">21. Arquitectura de una Computadora</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">22. RTL Register Transfer Language</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html">23. Programas ensamblador IASSim</a>
+</li>
+<li><a href="_simulador_iassim_2.html">24. Simulador IASSim</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html"><span class="toc-current">25. Lenguajes de programación de Alto y Bajo Nivel</span></a>
+<ul class="sectlevel2">
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#lang_altovsbajo">25.1. Lenguajes de programación de alto nivel vs lenguajes de bajo nivel</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html#sum1toN_lang">25.2. Ejemplo sum1toN en distintos lenguajes de Programación</a>
+</li>
+</ul>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html">26. Lenguajes de programación en Ensamblador</a>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html">27. Toolchain: Cadena de Herramientas en el proceso de compilación</a>
+</li>
+<li><a href="_practicando_la_programación_desde_el_principio.html">28. Practicando la Programación desde el Principio</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_pila.html">30. Pila</a>
+</li>
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html">31. Programas en Lenguaje Ensamblador: Propuestas</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html">32. Apéndice: Unidad CPU</a>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">33. Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">34. Apéndice: Memoria Virtual</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">35. Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">36. FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">37. Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">38. Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html">39. Estructura de Computadores 2022: Segundo Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">40. Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">41. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">42. Miaulario: Videoconferencia</a>
+</li>
+</ul>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_lenguajes_de_programación_de_alto_y_bajo_nivel">25. Lenguajes de programación de Alto y Bajo Nivel</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="lang_altovsbajo">25.1. Lenguajes de programación de alto nivel vs lenguajes de bajo nivel</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Aunque en los años 1960 se programaba en el lenguaje máquina y lenguaje ensamblador, esto resultaba muy poco productivo ya que refequería mucho esfuerzo y tiempo.</p>
+</li>
+<li>
+<p>La solución fue abstraer funciones de la computadora mediante lenguajes de alto nivel:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.tiobe.com/tiobe-index/" class="bare">https://www.tiobe.com/tiobe-index/</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El empleo de lenguajes de alto nivel efectivos para los programadores requiere de un traductor al lenguaje máquina de la computadora.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sum1toN_lang">25.2. Ejemplo sum1toN en distintos lenguajes de Programación</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Algoritmo sum1toN &#8594; \(\sum_{i=1}^{N}i=N(N+1)/2\)</p>
+</li>
+<li>
+<p>Refs</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://wiki.c2.com/?ArraySumInManyProgrammingLanguages" class="bare">http://wiki.c2.com/?ArraySumInManyProgrammingLanguages</a></p>
+</li>
+<li>
+<p><a href="https://www.rosettacode.org/wiki/Sum_and_product_of_an_array#With_explicit_conversion" class="bare">https://www.rosettacode.org/wiki/Sum_and_product_of_an_array#With_explicit_conversion</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Desarrollar el algoritmo sum1toN en :  Lisp, Python, Java, C, Pascal,  &#8230;&#8203;</p>
+</li>
+<li>
+<p>elisp</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="lisp"><span class="p">(</span><span class="k">setq</span> <span class="nc">array</span> <span class="nv">[1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="nv">5]</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">apply</span> <span class="ss">'+</span> <span class="p">(</span><span class="nb">append</span> <span class="nc">array</span> <span class="no">nil</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">apply</span> <span class="ss">'*</span> <span class="p">(</span><span class="nb">append</span> <span class="nc">array</span> <span class="no">nil</span><span class="p">))</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Phyton</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Java</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="java"><span class="cm">/* Programa Fuente: sum1toN.java
+
+ compilación: javac sum1toN.java -&gt; genera el BYTECODE sum1toN.class
+ ejecución   -&gt; java -cp . sum1toN  ; necesita el bytecode *.class y ejecutará el main de class
+
+*/</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">sum1toN</span> <span class="o">{</span>
+<span class="c1">// método main encapsulado en la clase class, static para que main no pueda cambiar los atributos, publico para ser accesible.</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Suma de Números enteros"</span><span class="o">);</span>
+	<span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="mi">5</span><span class="o">,</span> <span class="n">suma</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span>
+
+      <span class="k">while</span> <span class="o">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">)</span> <span class="o">{</span>
+         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span> <span class="n">x</span> <span class="o">);</span>
+         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">","</span><span class="o">);</span>
+	 <span class="n">suma</span><span class="o">=</span><span class="n">suma</span><span class="o">+</span><span class="n">x</span><span class="o">;</span>
+	 <span class="n">x</span><span class="o">--;</span>
+      <span class="o">}</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"\n"</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"suma="</span><span class="o">+</span><span class="n">suma</span><span class="o">);</span>
+      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="s">"\n"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>C</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="cm">/*
+  Programa:       sum1toN.c
+  Descripción:    realiza la suma de la serie 1,2,3,...N
+                  Es el programa en lenguaje C equivalente a sum1toN.ias de la máquina IAS de von Neumann
+  Lenguaje:       C99
+  Descripción:    Suma de los primeros 5 números naturales
+  Entrada:        Definida en una variable
+  Salida:         Sin salida
+  Compilación:    gcc -m32 -g -o sum1toN sum1toN.c -&gt; -g: módulo binario depurable
+                                                   -&gt; -m: módulo binario arquitectura x86-32 bits
+  S.O:            GNU/linux 4.10 ubuntu 17.04 x86-64
+  Librería:       /usr/lib/x86_64-linux-gnu/libc.so
+  CPU:            Intel(R) Core(TM) i5-6300U CPU @ 3.0GHz
+  Compilador:     gcc version 6.3
+  Ensamblador:    GNU assembler version 2.28
+  Linker/Loader:  GNU ld (GNU Binutils for Ubuntu) 2.28
+  Asignatura:     Estructura de Computadores
+  Fecha:          20/09/2017
+  Autor:          Cándido Aramburu
+*/</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="c1">  // cabecera de la librería de la función printf()</span><span class="cp">
+</span>
+<span class="c1">// función de entrada al programa</span>
+<span class="kt">void</span>  <span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="c1">// Declaración de variables locales</span>
+  <span class="kt">char</span> <span class="n">suma</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="n">b101</span><span class="p">;</span>
+  <span class="c1">// bucle</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+    <span class="n">suma</span><span class="o">+=</span><span class="n">n</span><span class="p">;</span>
+    <span class="n">n</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+ <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s"> La suma es = %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">suma</span><span class="p">);</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Lenguaje ensamblador ATT para la arquitectura x86-32</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">###</span> <span class="nl">Programa:</span> <span class="nf">sum.s</span>
+<span class="err">###</span> <span class="nf">Descripci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">realiza</span> <span class="nv">la</span> <span class="nv">suma</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">serie</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="nv">...N</span>
+<span class="err">###</span> <span class="nf">gcc</span> <span class="o">-</span><span class="nv">m32</span> <span class="o">-</span><span class="nv">g</span> <span class="o">-</span><span class="nv">nostartfiles</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span> <span class="nv">sum1toN.s</span>
+<span class="err">###</span> <span class="nf">Ensamblaje</span> <span class="nv">as</span> <span class="o">--</span><span class="mi">32</span> <span class="o">--</span><span class="nb">gs</span><span class="nv">tabs</span> <span class="nv">fuente.s</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">objeto.o</span>
+<span class="err">###</span> <span class="nf">linker</span> <span class="o">-&gt;</span> <span class="nv">ld</span> <span class="o">-</span><span class="nv">melf_i386</span> <span class="o">-</span><span class="nv">I</span><span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">i386</span><span class="o">-</span><span class="nv">linux</span><span class="o">-</span><span class="nv">gnu</span><span class="o">/</span><span class="nv">ld</span><span class="o">-</span><span class="nv">linux.so.2</span>   <span class="o">-</span><span class="nv">o</span> <span class="nv">ejecutable</span> <span class="nv">objeto.o</span> <span class="o">-</span><span class="nv">lc</span>
+
+        <span class="err">##</span>  <span class="nf">Declaraci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">de</span> <span class="nv">variables</span>
+        <span class="nf">.section</span> <span class="nv">.data</span>
+
+<span class="nl">n:</span>	<span class="nf">.int</span> <span class="mi">5</span>
+
+        <span class="nf">.global</span> <span class="nv">_start</span>
+
+        <span class="err">##</span>  <span class="nf">Comienzo</span> <span class="nv">del</span> <span class="nv">c</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span>
+        <span class="nf">.section</span> <span class="nv">.text</span>
+<span class="nl">_start:</span>
+        <span class="nf">mov</span> <span class="kc">$</span><span class="mi">0</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span> <span class="err">#</span> <span class="nb">ECX</span> <span class="nv">implementa</span> <span class="nv">la</span> <span class="nv">variable</span> <span class="nv">suma</span>
+        <span class="nf">mov</span> <span class="nv">n</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+<span class="nl">bucle:</span>
+        <span class="nf">add</span> <span class="o">%</span><span class="nb">edx</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>
+        <span class="nf">sub</span> <span class="kc">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+        <span class="nf">jnz</span> <span class="nv">bucle</span>
+
+        <span class="nf">mov</span> <span class="o">%</span><span class="nb">ecx</span><span class="p">,</span> <span class="o">%</span><span class="nb">ebx</span> <span class="err">#</span> <span class="nv">el</span> <span class="nv">argumento</span> <span class="nv">de</span> <span class="nv">salida</span> <span class="nb">al</span> <span class="nv">S.O.</span> <span class="nv">a</span> <span class="nv">trav</span><span class="err">é</span><span class="nv">s</span> <span class="nv">de</span> <span class="nb">EBX</span> <span class="ow">seg</span><span class="err">ú</span><span class="nv">n</span> <span class="nv">convenio</span>
+
+        <span class="err">##</span> <span class="nf">salida</span>
+        <span class="nf">mov</span> <span class="kc">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="nb">eax</span>  <span class="err">#</span> <span class="nv">c</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">llamada</span> <span class="nb">al</span> <span class="nb">si</span><span class="nv">stema</span> <span class="nv">operativo</span><span class="p">:</span> <span class="nv">subrutina</span> <span class="nv">exit</span>
+        <span class="nf">int</span> <span class="kc">$</span><span class="mh">0x80</span>     <span class="err">#</span> <span class="nv">llamada</span> <span class="nb">al</span> <span class="nb">si</span><span class="nv">stema</span> <span class="nv">operativo</span>
+
+
+        <span class="nf">.end</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Lenguaje ensamblador AT&amp;T para la arquitectura x86-64</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm">	<span class="err">####</span> <span class="nl">Programa:</span> <span class="nf">sum1toN.s</span>
+	<span class="err">###</span> <span class="nf">Descripci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">realiza</span> <span class="nv">la</span> <span class="nv">suma</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">serie</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="nv">...N.</span> <span class="nv">La</span> <span class="nv">entrada</span> <span class="nv">se</span> <span class="nv">define</span> <span class="nv">en</span> <span class="nv">el</span> <span class="nv">propio</span> <span class="nv">programa</span> <span class="nv">y</span> <span class="nv">la</span> <span class="nv">salida</span> <span class="nv">se</span> <span class="nv">pasa</span> <span class="nb">al</span> <span class="nv">S.O.</span>
+	<span class="err">###</span> <span class="nl">Lenguaje:</span> <span class="nf">Lenguaje</span> <span class="nv">ensamblador</span> <span class="nv">de</span> <span class="nv">GNU</span> <span class="nv">para</span> <span class="nv">la</span> <span class="nv">arquitectura</span> <span class="nv">AMD64</span>
+	<span class="err">###</span> <span class="nf">gcc</span>  <span class="o">-</span><span class="nv">no</span><span class="o">-</span><span class="nv">pie</span> <span class="o">-</span><span class="nv">g</span> <span class="o">-</span><span class="nv">nostartfiles</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span>  <span class="nv">sum1toN.s</span>
+	<span class="err">###</span> <span class="nf">Ensamblaje</span> <span class="nv">as</span>  <span class="o">--</span><span class="nb">gs</span><span class="nv">tabs</span> <span class="nv">sum1toN.s</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN.o</span>
+        <span class="err">###</span> <span class="nf">linker</span> <span class="o">-&gt;</span> <span class="nv">ld</span>    <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span> <span class="nv">sum1toN.o</span>
+	<span class="err">##</span>  <span class="nf">Declaraci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">de</span> <span class="nv">variables</span>
+	<span class="err">##</span>  <span class="nf">SECCION</span> <span class="nv">DE</span> <span class="nv">DATOS</span>
+	  <span class="nf">.section</span> <span class="nv">.data</span>
+
+<span class="nl">n:</span>      <span class="nf">.quad</span> <span class="mi">5</span>
+
+	  <span class="nf">.global</span> <span class="nv">_start</span>
+
+	  <span class="err">##</span>  <span class="nf">Comienzo</span> <span class="nv">del</span> <span class="nv">c</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span>
+	  <span class="err">##</span>  <span class="nf">SECCION</span> <span class="nv">DE</span> <span class="nv">INSTRUCCIONES</span>
+
+	  <span class="nf">.section</span> <span class="nv">.text</span>
+<span class="nl">_start:</span>
+        <span class="nf">movq</span> <span class="kc">$</span><span class="mi">0</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span> <span class="err">#</span> <span class="nb">RDI</span> <span class="nv">implementa</span> <span class="nv">la</span> <span class="nv">variable</span> <span class="nv">suma</span>
+        <span class="nf">movq</span> <span class="nv">n</span><span class="p">,</span><span class="o">%</span><span class="nb">rdx</span>
+<span class="nl">bucle:</span>
+        <span class="nf">add</span> <span class="o">%</span><span class="nb">rdx</span><span class="p">,</span><span class="o">%</span><span class="nb">rdi</span>
+        <span class="nf">sub</span> <span class="kc">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="nb">rdx</span>
+        <span class="nf">jnz</span> <span class="nv">bucle</span>
+
+        <span class="err">##</span> <span class="nf">el</span> <span class="nv">argumento</span> <span class="nv">de</span> <span class="nv">salida</span> <span class="nb">al</span> <span class="nv">S.O.</span> <span class="nv">a</span> <span class="nv">trav</span><span class="err">é</span><span class="nv">s</span> <span class="nv">de</span> <span class="nb">RDI</span> <span class="ow">seg</span><span class="err">ú</span><span class="nv">n</span> <span class="nv">convenio</span> <span class="nv">ABI</span> <span class="nv">AMD64</span>
+	<span class="err">##</span> <span class="nf">salida</span>
+          <span class="nf">mov</span> <span class="kc">$</span><span class="mi">60</span><span class="p">,</span> <span class="o">%</span><span class="nb">rax</span>	<span class="err">#</span> <span class="nv">c</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">llamada</span> <span class="nb">al</span> <span class="nb">si</span><span class="nv">stema</span> <span class="nv">operativo</span><span class="p">:</span> <span class="nv">subrutina</span> <span class="nv">exit</span>
+	  <span class="nf">syscall</span> <span class="err">#</span> <span class="nv">llamada</span> <span class="nb">al</span> <span class="nb">si</span><span class="nv">stema</span> <span class="nv">operativo</span> <span class="nv">para</span> <span class="nv">que</span> <span class="nv">ejecute</span> <span class="nv">la</span> <span class="nv">subrutina</span> <span class="ow">seg</span><span class="err">ú</span><span class="nv">n</span> <span class="nv">el</span> <span class="nv">valor</span> <span class="nv">de</span> <span class="nb">RAX</span>
+
+
+	  <span class="nf">.end</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>ARM</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="armasm"><span class="err">/*</span>      <span class="nf">Programa</span><span class="err">:</span> <span class="nv">sum1toN</span><span class="mf">.</span><span class="nv">s</span>
+        <span class="nf">Descripci</span><span class="err">ó</span><span class="nb">n</span><span class="err">:</span> <span class="nv">realiza</span> <span class="nv">la</span> <span class="nv">suma</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">serie</span> <span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mf">...</span><span class="nv">N</span>
+        <span class="nf">Es</span> <span class="nv">el</span> <span class="nv">programa</span> <span class="nv">en</span> <span class="nv">lenguaje</span> <span class="nv">ARM</span> <span class="nv">equivalente</span> <span class="nv">a</span> <span class="nv">sum1toN</span><span class="mf">.</span><span class="nv">ias</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">m</span><span class="err">á</span><span class="nv">quina</span> <span class="nv">IAS</span> <span class="nv">de</span> <span class="nv">von</span> <span class="nv">Neumann</span>
+        <span class="nb">gcc</span>  <span class="o">-</span><span class="nv">g</span> <span class="o">-</span><span class="nv">nostartfiles</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span> <span class="nv">sum1toN</span><span class="mf">.</span><span class="nv">s</span>
+        <span class="nf">Ensamblaje</span> <span class="nv">as</span>  <span class="o">--</span><span class="nv">gstabs</span> <span class="nv">sum1toN</span><span class="mf">.</span><span class="nv">s</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span><span class="mf">.</span><span class="nv">o</span>
+        <span class="nb">linker</span> <span class="o">-&gt;</span> <span class="nv">ld</span>     <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span> <span class="nv">sum1toN</span><span class="mf">.</span><span class="nv">o</span>
+<span class="err">*/</span>
+        <span class="err">@</span>  <span class="nv">Declaraci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">de</span> <span class="nv">variables</span>
+        <span class="err">.</span><span class="nb">section</span> <span class="mf">.</span><span class="nv">data</span>
+<span class="nl">n</span><span class="err">:</span>      <span class="err">.</span><span class="nb">int</span> <span class="mi">5</span>
+
+        <span class="err">.</span><span class="nb">global</span> <span class="nv">_start</span>
+
+        <span class="err">@</span> <span class="nv">Comienzo</span> <span class="nv">del</span> <span class="nv">c</span><span class="err">ó</span><span class="nv">digo</span>
+        <span class="err">.</span><span class="nb">section</span> <span class="mf">.</span><span class="nv">text</span>
+<span class="nl">_start</span><span class="err">:</span>
+        <span class="nb">mov</span> <span class="nv">r0</span><span class="o">,#</span><span class="mi">0</span>       <span class="no">@</span> <span class="nv">R0</span> <span class="nv">implementa</span> <span class="nv">la</span> <span class="nv">variable</span> <span class="nv">suma</span>
+        <span class="nb">ldr</span> <span class="nv">r2</span><span class="o">,=</span><span class="nv">n</span>       <span class="no">@</span> <span class="nv">R1</span> <span class="nv">implementa</span> <span class="nv">la</span> <span class="nv">variable</span> <span class="nv">n</span> <span class="nv">indirectamente</span>
+        <span class="nb">ldr</span> <span class="nv">r1</span><span class="o">,[</span><span class="nv">r2</span><span class="o">]</span>
+<span class="err">/*</span> <span class="nf">Direccionamiento</span> <span class="nv">directo</span><span class="err">:</span>
+        <span class="nb">mov</span> <span class="nv">r1</span><span class="o">,</span><span class="nv">n</span> <span class="nv">da</span> <span class="nv">error</span> <span class="nv">porque</span> <span class="nv">mov</span> <span class="nv">no</span> <span class="nv">admite</span> <span class="nv">direccionamiento</span> <span class="nv">a</span> <span class="nv">memoria</span> <span class="nv">directo</span><span class="mf">.</span>
+                 <span class="nb">mov</span> <span class="nv">admite</span> <span class="nv">direccionamiento</span> <span class="nv">inmediato</span> <span class="nv">si</span> <span class="nv">el</span> <span class="nv">literal</span> <span class="nv">de</span>  <span class="mi">32</span> <span class="nv">bits</span> <span class="nv">no</span> <span class="nv">tiene</span> <span class="nv">repetici</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">de</span> <span class="nv">ceros</span> <span class="nv">a</span> <span class="nv">izda</span> <span class="nv">y</span> <span class="nv">dcha</span>
+                 <span class="nb">para</span> <span class="nv">convertirlo</span> <span class="nv">en</span> <span class="nv">un</span> <span class="nv">literal</span> <span class="nv">de</span> <span class="mi">8</span> <span class="nv">bits</span> <span class="nv">seguido</span> <span class="nv">de</span> <span class="nv">desplazamientos</span>
+        <span class="nb">ldr</span> <span class="nv">r1</span><span class="o">,</span><span class="nv">n</span> <span class="nv">Error</span><span class="err">:</span> <span class="nv">reubicaci</span><span class="err">ó</span><span class="nv">n_interna</span> <span class="o">(</span><span class="nv">tipo</span> <span class="nv">OFFSET_IMM</span><span class="o">)</span> <span class="nv">no</span> <span class="nv">compuesta</span>
+                 <span class="nf">Da</span> <span class="nv">error</span> <span class="nb">al</span> <span class="nv">intentar</span> <span class="nv">codificar</span> <span class="nv">un</span> <span class="nv">literal</span> <span class="o">(</span><span class="nv">direcci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">n</span><span class="o">)</span> <span class="nv">de</span> <span class="mi">32</span> <span class="nv">bits</span><span class="mf">.</span>
+<span class="err">*/</span>
+
+<span class="nl">bucle</span><span class="err">:</span>
+        <span class="nb">add</span> <span class="nv">r0</span><span class="o">,</span><span class="nv">r1</span>
+        <span class="nb">subs</span>  <span class="nv">r1</span><span class="o">,#</span><span class="mi">1</span>
+        <span class="nb">bne</span> <span class="nv">bucle</span>
+
+        <span class="err">@</span><span class="nb">r0</span> <span class="nv">es</span> <span class="nv">el</span> <span class="nv">argumento</span> <span class="nv">de</span> <span class="nv">salida</span> <span class="nb">al</span> <span class="nv">S</span><span class="mf">.</span><span class="nv">O</span><span class="mf">.</span> <span class="nv">a</span> <span class="nv">trav</span><span class="err">é</span><span class="nv">s</span> <span class="nv">de</span> <span class="nv">EBX</span> <span class="nv">seg</span><span class="err">ú</span><span class="nv">n</span> <span class="nv">convenio</span>
+
+        <span class="err">/</span><span class="k">*</span> <span class="nv">exit</span> <span class="nv">syscall</span> <span class="o">*/</span>
+        <span class="nb">mov</span> <span class="nv">r7</span><span class="o">,</span> <span class="o">#</span><span class="mi">1</span>
+        <span class="nb">swi</span> <span class="o">#</span><span class="mi">0</span>
+
+        <span class="err">.</span><span class="nb">end</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_simulador_iassim_2.html">Simulador IASSim</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_lenguajes_de_programación_en_ensamblador.html">Lenguajes de programación en Ensamblador</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

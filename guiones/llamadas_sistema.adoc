@@ -1,0 +1,188 @@
+LLamadas al Sistema Operativo (Kernel)
+======================================
+
+:doctitle: LLamadas al Sistema Operativo (Kernel)
+
+
+General
+-------
+
+* El HW está protegido por el Kernel del SO y por lo tanto el programado de ensamblador accede al HW indirectamente a través de las "LLamadas al Sistema". Por lo tanto si queremos acceder al teclado y al monitor será necesario realizar llamadas al kernel.
+* Definición de  la interfaz entre el programador y el kernel del SO: 'System V Application Binary Interface: SysV-ABI'
+** El lenguaje ensamblador sigue la norma ABI para el lenguaje C.
+* LLamadas al sistema desde el código ensamblador:
+** directamente con la instrucción +syscall+
+** indirectamente a través de las funciones de la librería standard 'libc' con la instrucción +call+
+** En código ensamblador es necesario pasar los argumentos previamente a la ejecución de la llamada +call+
+
+
+Manuales de las llamadas al sistema
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Listado con los nombres de las llamadas a al sistema:  +man syscalls+
+** LLamada al sistema 'exit': +man 3 exit+   
+*** describe la función de llamada al sistema
+*** especifíca el nombre de la cabecera de la librería necesaria para compilar en lenguaje C.
+*** especifíca los parámetros que necesita la función y el orden en que son transferidos.
+** LLamada al sistema 'write': +man 2 write+
+
+
+
+Arquitectura x86-64
+-------------------
+
+
+Codigos de las llamadas
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Códigos de las llamadas al sistema: '/usr/include/asm/unistd_64.h'
+* El código de la llamada se pasa a tavés del registro 'RAX'.
+
+
+Como pasar los argumentos directamente al Kernel
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Los parámetros del primero al sexto se corresponden con los registros : '*RDI-RSI-RDX-R10-R8-R9*'
+* Valor de retorno: 'RAX'
+
+exit()
+~~~~~~
+
+* +gcc -g -o salida salida.c+
++
+
+[source,c]
+----------------------------------------------------------------------
+#include <stdlib.h>
+void main (void)
+{
+  exit (0xFF);
+    }
+----------------------------------------------------------------------
+
+* +gcc  -o salida salida.c+
++
+[source,C]
+----------------------------------------------------------------------
+/* Llamada al sistema desde C
+   Prototipo:    int syscall(int number, ...);
+   man syscall
+*/
+
+#define _GNU_SOURCE         
+#include <unistd.h>
+#include <sys/syscall.h>  
+
+void main (void)
+{
+  syscall (__NR_exit,0xFF);
+    }
+
+----------------------------------------------------------------------
+
+* +gcc -g -nostartfiles -o salida salida.s+
++
+
+[source,asm]
+----------------------------------------------------------------------
+        .global _start
+        .section .text
+_start:
+        mov    $0xFF,%rdi   	#return code
+        call 	exit		#libc library
+        .end
+----------------------------------------------------------------------
+
+* +gcc -g -nostartfiles -o salida salida.s+
++
+
+[source,asm]
+----------------------------------------------------------------------
+        .global _start
+        .section .text
+_start:
+        mov    $0xFF,%rdi    	#return code
+        mov    $60,%rax		# exit syscall code
+        call 	syscall		#libc library
+        .end
+----------------------------------------------------------------------
+
+
+
+* +gcc -g -nostartfiles -o salida salida.s+
++
+
+[source,asm]
+----------------------------------------------------------------------
+        .global _start
+        .section .text
+_start:
+         mov    $0xFF,%rdi    	#return code
+         mov    $60,%rax	# exit syscall code
+         syscall                #system call
+         .end
+----------------------------------------------------------------------
+
+
+
+printf ()
+~~~~~~~~~
+
+* 'imprimir_ind.s'
++
+
+[source,asm]
+----------------------------------------------------------------------
+### imprimir dos cadenas utilizando la librería libc
+
+        .equ STDOUT,1
+	.equ SYSWRITE,1
+        
+        .section .data
+planet:
+        .byte 9
+        .section .rodata
+mensaje:
+        .asciz "El número de planetas es %d \n"        #string con formato de la función printf
+saludo:
+        .ascii "Hola\n"
+	.equ LON,. - saludo    #longitud del mensaje referenciado por saludo                  
+
+        .section .text
+        .global _start
+_start:
+        ## imprimir en la pantalla
+        mov $STDOUT,%rdi        #fd es la refencia al fichero donde se va a escribir
+        mov $saludo, %rsi               #dirección de memoria de lo que se va a escribir en el fichero
+        mov $LON,%rdx			#tamaño del buffer de memoria que se va a escribir
+        call write			#orden de escritura al kernel a través de la librería libc
+
+        ## imprimir en la pantalla
+        mov planet,%rsi       # 2º argumento de la función printf
+        mov $mensaje,%rdi     # 1º argumento de la función printf: dirección del string
+        call printf
+        ## salir al sistema
+	mov    $0x0,%rdi   	#return code
+        call exit
+        
+
+
+----------------------------------------------------------------------
+** Compilación con 'gcc' : no es necesario indicar al linker el módulo objeto libc
+*** +gcc  -g -nostartfiles -o imprimir imprimir.s+
+** Compilación con 'as' y 'ld'
+*** +as  -gstabs -o imprimir.o imprimir.s+
+*** +ld  -dynamic-linker /lib/ld-linux.so.2  -o imprimir imprimir.o -lc+ : lincar con el módulo libc
+
+Ejercicios
+----------
+
+* Desarrollar el programa 'hola_mundo_v1.s' que imprima en pantalla el mensaje "Hola Mundo" utilizando la librería 'libc'
+* Desarrollar el programa 'hola_mundo_v2.s' que imprima en pantalla el mensaje "Hola Mundo" sin utilizar la librería 'libc'.
+* Desarrollar el programa 'hola_mundo_v3.s' que imprima en pantalla el mensaje "Introducir Mensaje:", lea del teclado cualquier mensaje e imprima en pantalla el mensaje introducido a través del teclado.
+* Desarrollar el programa 'hola_mundo_v4.s' que lee el mensaje "Hola Mundo" de la línea de comandos pasando los argumentos a través de la pila.
+* Desarrollar el programa 'hola_mundo_v5.s' que lee el mensaje "Hola Mundo" de la línea de comandos pasando los argumentos a través de los registros.
+
+
+
+

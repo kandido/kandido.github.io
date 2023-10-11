@@ -1,0 +1,358 @@
+Programazioaren Sarrera AT&T x86-32 Mihiztadura Hizkuntzetan  : batu1toN.s
+==========================================================================
+:author: Cándido Aramburu 
+:email: candido@unavarra.es
+:revnumber: v1.0.0
+:revdate: 24 Iraila 2017
+:doctitle: Programazioaren Sarrera AT&T x86-32 Mihiztadura Hizkuntzetan  : batu1toN.s
+:toc:
+:toclevels: 3
+:numbered:
+:icons:
+:lang: es
+:encode: ISO-8859-1
+:ascii-ids:
+// atributos personales 
+:ruta-apuntes: home/candido/Dropbox/apuntes
+include::/{ruta-apuntes}/include_apuntes.txt[]
+
+Logistika
+---------
+
+Aurreko Lana
+~~~~~~~~~~~~
+
+* Beharrezko lanan saio hasi baino lehen.
+* Kargatu *pen-drive* batean  Programming from the Ground-Up ikasgaiaren liburua, sw garatzeko tresna laguntzaren txostenak eta praktikaren eskuliburua.
+* sw garatzeko tresna laguntzaren txostenak  eta praktikaren gida hau inprimitu, Nireikasgelategia -> Ikasgaia -> Baliabideak -> Praktikak
+* batu1toN praktika gidaren irakurketa eta  Programming from the Ground-Up liburuaren lehen bi kapituluak
+* C eta mihiztadura hizkuntzetan (batu1toN.c - batu1toN.s) moduloak edizioa.
+* Konputagailu personalean garatzeko erramienak instalatu.
+* Eskuliburu hontako azkenen atalean Autoebaluzio ariketa eragin galdereei erantzunak emanez eta inprimitu txostena laborategian praktika saioa baino lehen emateko.
+
+Memoria: Edukia eta Formatoa
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Edukia
+^^^^^^
+* Praktika eraginkoan beharra da testu editore bat irikita edukitzea, txostena eta praktikak batean egiteko.
+* Txostena eduki behar du
+** Lehen orria aurreizena eta datu personalak.
+** Bigarren orria aurkibedea , ez da beharrezkoa zenbakiak jartzea.
+** Eskuliburu honen txostena atalaren galderak eta erantzunak y eta zati guztiak 'txostenan idatzi' anotazioa eramaten duenak
+** GDBren agindu historia eta bere irteerak, praktika honetan erabiliak.
+** Autoebaluazioaren galderak eta erantzunak.
+** Bakoitza nahi duen informaziaoa apunteaka arabera.
+
+Formatoa
+^^^^^^^^
+* Txostenaren egitura librea da.
+* PDF da fitxategiaren formatua, eta e microsoft word edo holako antzerakoa.
+* Txostenaren Fitxategia 1abizena_2abizena_XXXX-N.pdf izango da
+** fitxategiren izena ez du eñek edo tilde edo zuri karaktereak. 
+** XXXX praktikaren taldea esan nahi du: G91, G1P1, G1P2, G2P1, G2P2 lotuta azteazkena15:00, osteguna15:00, osteguna17:00, asteartea15:00 edo ostirala15:00.
+** N praktikaren saiao esan nahi du: 1,2,3,4 o 5.
+* Txostena PDF formatoan nireikasgelategiara bidaliko da tareas/etxeko-lanak karpetara.
+* Txostena paperean inprimitu behar da.
+
+Ariketa eta Txostenaren Ematea
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Autoebaluazioaren txostena paper formatoan praktika saioaren hasieran eman behar da.   
+* Praktikaren txostena  paper formatoan praktika saioaren hasieran eman behar da.
+* Praktikaren txostena  PDF formatoan bidaliko da nireikasgelategiara praktikaren saioa bukaeran.
+
+Ebaluaketa
+~~~~~~~~~~
+
+* Aurre lana saioa hasi baino lehen .
+* Praktikaren txostena saiao bukaeran.
+
+
+Sarrera
+-------
+
+Gaitasunak
+~~~~~~~~~~
+
+* Behe mailako programazioari sarrera  AT&T mihiztadura eta C hizkuntza bidez  Inteleko x86 32 bitarra  arkitekturako.
+* Behe mailako software tresnaren erabilpena, bai toolchain  (konpiladorea, mihiztatzailea, estekatzailea) eta GDB araztailea (debugger), GNUeko software librea.
+* Workstation eragin software garatzeko tresnak instalazio bidez, GNU/linux/x86 ingurune konputagailu pertsonalean.
+
+
+Eskakizunak
+~~~~~~~~~~~
+
+* Teorikoak: ISA arkitektura bat ezagutzea:  Von Neumann mota arkitektura ( Mikroarkitektura PUZ, Memoria nagusia, aginduaren zikloa), datuaren adierazpidea y eragingeta aritmetikoak , aginduaren formatoa,  mihiztadura eta makina lengoaian programazio oinarrizkoak 
+* Praktikoak: C hizkuntzetan programazioa , erabilpen oinarria  GNU/linux ingurenean, ediziorako, konpilatzeko eta arazteko tresnak.
+
+
+
+Plataformaren Arkitektura
+-------------------------
+
+* Izendapenak
+** +i386+ : x86-32 arkitekturari linuxen izendapena 
+** +amd64+: x86-64 arkitekturari linuxen izendapena 
+** IA32: x86-32 arkitektura intelen 
+** IA34: x86-64 arkitektura intelen
+
+Garatzeko Plataforma
+--------------------
+
+* Memorian idatzi komandoren ondoko erantzunak
+* GNU/linux Eragile Sistema: Ubuntu banaketa 2014tik aurrera : 14.04, 14.08,..,17.04, 17.08
+** +lsb_release -a+: banaketa
+** +uname -o+ : Eragile Sistema
+** +uname -r+ : kernela 
+** +uname -a+ : prozesadorea
+* Librerías
+** +apt-cache show gcc-multilib+ : gccren 32 bitarreko liburutegiak  gurutze konpilatzeko instalatutak daudela frogatu 
+*** +ls /usr/lib32+ : gcc 32 bitarreko liburutegiak instalatutak daudela frogatu
+*** +sudo apt-get install gcc-multilib+ : ez badakagu instalatutak instalatu
+* Toolchain
+** +as --version & ld --version & gcc --version+ : bertsioak idatzi
+
+
+
+batu1toN programazioa eta x86 konpiladorea
+------------------------------------------
+
+Iturburu Modulua:batu1toN.c
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+[source,C]
+----------------
+/*
+Programa: batu1toN.c
+Algoritmoa:    lehen 5 zenbaki osoak artean batuketa
+               Von Neumannko makinaren batu1toN.ias programaren C hizkuntzetan baliokidea
+Hizkuntza:     C99
+
+Sarrera:        aldagai batean definituta
+Irteera:        irteera gabe
+Konpilazioa:    gcc -m32 -g -o batu1toN batu1toN.c
+E.S.:            GNU/linux 3.2.0 ubuntu 12.04 x86-64
+Liburutegia:    /usr/lib/x86_64-linux-gnu/libc.so
+PUZ:            Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz
+Konpiladorea:     gcc version 4.6.4 (Ubuntu/Linaro 4.6.4-1ubuntu1~12.04)
+Mihiztatzaile:    GNU assembler version 2.22
+Linker/Loader:  GNU ld (GNU Binutils for Ubuntu) 2.22
+Ikasgaia:     Konputagailuen Egitura
+Data:          2017/09/20
+Eragile:          Cándido Aramburu
+*/
+
+void  main (void)
+{
+int batu=0,n=5;	//bertako aldagaien erazagupena
+  while(n>0){
+  batu+=n;
+  n--;
+  }
+}
+----------------
+
+Helburuak
+~~~~~~~~~
+
+* C Hizkuntza
+** datuaren adierazpidea: zenbaki osoen luzera desberdinak
+** main funtzioa: argumentuak eta itzulerakoan balioa
+** glibc liburutegia
+* Toolchain
+** tresnak: gcc, cc, as, ld
+* bitarreko moduloaren analisia
+** tresnak: file,gdb
+
+Ariketak
+~~~~~~~~
+
+* Edizioa: Iturburu Moduluan iradorkizun
+** Editore librea: gedit, sublime, kate, emacs, vim, ...
+* Konpilazioa:
+** +man gcc+
+*** gcc : front-end toolchain automatikoa : Gnu Compiler Collection
+** +gcc -m32 -o batu1toN batu1toN.c+
+*** 'm32' : 32 machine
+*** 'batu1toN.c' : C hizkuntzak iturburu modulua
+*** '-o' : output
+*** 'batu1toN' hedapen gabe: exekutatzeko objektu modulua, zehatzagoa izango zen esatea kargatzeko modulua memoria nagusietan.
+** memori nagusietan karga
+*** Sistema Eragilea automatikoki egiten du mahaigain edo terminaletik exekutatzeko programari deitzen denean 
+** +gcc -m32 --save-temps -o batu1toN batu1toN.c+
+*** '--save-temps': gcc sortzen du (save) fitxategi parzialak (temps) itzulpen prozesuan: bitatik da modulu mihiztadura hizkuntzetan '*.s'
+** +gcc -m32 -g -o batu1toN batu1toN.c+
+*** '-g': zehazten du ikur-taula sortzeko GDBentzako eta txertatzeko 'batu1toN' exekutatzeko moduluetan.  
+* Analisia
+** +file batu1toN.c+, +file batu1toN.s+, +file batu1toN+
+* Araztailea GDB:
+** Bitar moduluan ikur-taul txertatzeko: +gcc -m32 -g -o batu1toN batu1toN.c+ 
+** Komandoaren lerroan  TAB TABULADOREA erabili izenak betetzeko: +gcc -m32 -g -o batuTAB baTAB+ 
+** Araztailea iriki: +gdb+
+*** Lehio bat azaltzen da: Debuggerren agindu propioak. TAB TABULADOREA erabili izenak betetzeko.
+*** +shell date+
+*** +shell pwd+
+*** +shell ls+
+*** +shTAB+
+*** +shell daTAB+
+** Layout: +C-x a+ -> bi lehio lehenetsi: iturburu moduluen lehioa eta komandoaren lehioa.
+** Lehioaren nabigatzailea: +C-x o+
+** Komandoaren historia tartean mugitu.
+*** Komandoare loggin historikoa: GDB komandoaren lehioa aktibatu. beherantz/gorantz teklarekin nabigatu.
+** Logging: Sarrerak ->  +set trace-commands on+, Irteerak-> +set logging file batu1toN_gdb.txt+ , +set logging on+
+** +shell ls -l batu1toN_gdb.txt+
+** Ikur-taula modulu bitarra dutena, kargatu: +file batu1toN+
+** iturburu modulua daukan ikurrak taula-ikurrekin elkartuta: +info sources+
+** etendurako puntu bat: +break main+
+** Exekuzioa: +run+ etendurako punturaino, bere lerroa ez da exekutatzen -> iturburu kodea azaltzen da.
+** Next source line: +next+, +n+
+** Next 5 source lines: +n 5+, +print batu+, +p batu+
+** Hasieratik exekutatu berriz: +run+
+** Jarrai hurrengo etendurako punturaino: +continue+, +c+
+** +run+, +n+, RETURN, RET, RET, +p batu+
+** +run+, +until+, RET,RET,RET..begiztatik atera arte.., +p batu+, +c+
+** Prozesoaren egoera analisia:
+*** inprimitu aldagaien edukia eta beraren memoria nagusiaren helbideak.
+*** +print n+, +p n+, +p /t n+, +p /x n+, +ptype n+, +whatis n+,+p &n+, +x &n+, +x n+, +x /1bw &n+, +x /1xw &n+, +x /4xw &n+
+*** +print symbol+ : symbol aldagaiaren izena da, ez da bere helbidea.
+*** +x address+ : examine main memory address . address memoria nagusia helbidearen edukia sortzen du -> '&symbol' symbol dagokionez aldagaiaren izena da.
+** Mihiztadura alderantziz
+*** +layout split+
+*** Next machine instruction: +ni+, RET, RET, RET, RET, +until+, RET,..begiztatik atera arte
+
+Txostena
+~~~~~~~~
+
+* Iturburu Moduluan aldaketak
+** datuaren luzapena editatu
+*** char,short,int,long
+** zenbakiaren formatua aldatu
+*** hamartarra, hamaseitarra, zortzitarra, bitarra-> aurrizkia 0x, 0, 0b -> 0x5, 05, 0b5
+** konpilatu eta exekutatu. Akatsak sortzen badira edo ez zehaztu txostenean
+* GDB
+** Iturburu moduluan aldagaien luzapena aldatu 'char' bezela eta batu+=n sentenzia aldatu batu-=n ordez. 
+** konpilatu iturburu modulua ikur-taularekin txertatua
+** Araztailea iriki eta bitar modulua kargatu
+** pausoz pauso moduan exekutatu  batuketa partzialak ondoko komandoreekin:
+*** +x /1db &batu+, +x /1tb &batu+, +x /1ob &batu+, +x /1xb &batu+
+*** adierazi komando bakoitzeko erantzuna
+***  +help x+ laguntzarekin +1db+, +1tb+, +1ob+, +1xb+ ko esanahia azaldu. 
+
+
+
+Iturburu Modulua: batu1toN.s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* x86  32 bitarreko Intel arkitektura da
+* i386 linuxen x86-32 esan nahi du.
+* GNUren AT&T mihiztadura hizkuntza  i386 arkitekturako ->  GNU as hizkuntza->  gas hizkuntza
++
+
+-----------
+### Programa: batu1toN.s
+### Deskribapena: 1,2,3,...N zerrendaren batuketa. Sarrera programa bertan definitzen da eta irteera sistema eragilera bidaltzen da.
+### Hizkuntza:  i386 arkitekturako GNU mihiztadura lengoaia  -> GNU as -> gas -> AT&T
+### Von Neumannko makinaren batu1toN.ias programaren AT&T i386 mihiztadura hizkuntzetan baliokidea
+### gcc -m32 -g -nostartfiles -o batu1toN  batu1toN.s
+### mihiztatzeko as --32 --gstabs batu1toN.s -o batu1toN.o
+### linker -> ld -melf_i386   -o batu1toN batu1toN.o 
+
+        ##  Aldagaien erazagupena
+        .section .data
+
+n:      .int 5
+       
+        .global _start  
+
+        ##  Aginduen kodea hasiera
+        .section .text
+_start:
+        mov $0,%ecx # ECX batu aldagaia betetzen du
+        mov n,%edx
+begizta:
+        add %edx,%ecx
+        sub $1,%edx
+        jnz begizta
+       
+        mov %ecx, %ebx #  EBXen bidez araua betetzeko irteerako argumentua sistema eragilera bidaltzen da
+                
+        ## irteera
+        mov $1, %eax  # eragile sistemari deialdiaren kodea:  exit azpirrutina
+        int $0x80     # eragile sistemari deialdia
+
+        
+        .end
+-----------
+
+
+Ariketak
+~~~~~~~~
+
+* Iturburu programa iradorkizun funtzionamen egoeran eta ez literal RTL moduan
+* Toolchain eskuz:
+** +as --32 -gstabs -o batu1toN.o batu1toN.s+ : mihiztadura
+*** '*.s' : iturburu modulua asm hizkuntzan
+*** '*.o' : kokatzeko objektu modulua
+*** 'gstabs': ikur-taula sorrera
+*** '32'  :  objektu eta iturburu moduluak 32 bitar ISArentzako
+** +ld -melf_i386 -o batu1toN batu1toN.o+
+*** 'melf_i386' : objektu moduluak 32 bitar ISArentzako
+* Toolchain automatikoa
+** +gcc -m32 -nostartfiles -g -o batu1toN batu1toN.s+
+*** 'm32' : mihiztatzeko i386 arktiketura makinentzako
+*** 'nostartfiles' : zehazten du '_start' dela programaren agindu sarreraren kokapena.
+*** '-g': zehazten du ikur-taula sortzeko GDBentzako eta txertatzeko 'batu1toN' exekutatzeko moduluetan.  
+
+
+
+
+Txostena
+~~~~~~~~
+
+* Memoria nagusiaren kargatutako bitar moduluaren analisia: 
+* GDBren bidez beharrezko komandoak exekutatu ondorengo zehaztapenak lortzeko:
+** inprimitu n aldagaien edukia eta nagusi memoriaren helbidea
+** inprimitu begizta etiketaren helbidea
+** inprimitu 'ECX erregistroaren' edukia begiztatik ateratzekoan
+* batuketa agindu eragingaiaren luzapena aldatu  2 byte-rera
+** n aldagaiaren luzapena aldatu-> +n: .word 5+
+**  +add %edx,%ecx+ agindua aldatu  +addw %dx,%cx+ aginduaren alde.
+* Ze komandoa erabili behar da GDBen  jarraian exekutatzeko begiztaren iterazio guztiak
+* Iturburu modulua edizioaren bidez mihiztaduraren akats bat lortu  'n' etiketa erreferientza egiten duen eragingai luzeraren erazagupena eta  'add' agindu egiten duen eragingai luzeraren erazagupena artean adostasun ez dagoenean.
+
+
+Autoebaluazioa
+--------------
+
+Galdera teorikoak
+~~~~~~~~~~~~~~~~~
+
+. Zein da praktiketan  bi erabilitako prozesadoren arkitektura artean desberdintasun nagusiena?
+. Toolchainek zer faseak betetzen du?
+. Zeinek dira praktiketan bi erabilitako prozesadoren garatzeko tresnak?
+. Liburuari buruz: Programming from the Ground-Up
+.. Zer da GNU/Linux?
+.. Zer da GNU?
+.. Zer da gcc?
+.. Kernel zer kudeatzen du?
+.. Posible ahal da memoria nagusiaren aginduak eta datuak batera atzitu? Zergatik?
+.. PCren erregistroa zer funtzioa betetzen du
+.. PUZeren bi motako erregestrioak nortzuk dira
+.. Word Size zer du esan nahi.
+.. Zer da erakuske aldagai bat.
+.. Eragingai bat helbideratzeko lau mota deseberdinak zerrendatu.
+.. Liburuaren eranskine atala zer informazio dauka.
+
+
+Galdera praktikoak
+~~~~~~~~~~~~~~~~~~
+
+. Iturburu programa mihiztadura hizkuntzetan konpilatzeko komandoa gcc front-end bidez, ikur-taula araztailetzako txertatua.
+. Kokatutzeko modulu objektu estekako agindua (linker) modulu exekutzailea sortzeko.
+. n osoa zeinuarekin byte luzapen eragazupena C hizkuntzetan 
+. Batu1toN.s programaren agindua baukeketa bat egiten duna.
+
+
+

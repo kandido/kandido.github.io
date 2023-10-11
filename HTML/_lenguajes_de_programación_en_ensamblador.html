@@ -1,0 +1,2087 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_lenguajes_de_programación_en_ensamblador" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+<ul class="sectlevel1">
+<li><a href="_arquitectura_de_una_computadora.html">21. Arquitectura de una Computadora</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">22. RTL Register Transfer Language</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html">23. Programas ensamblador IASSim</a>
+</li>
+<li><a href="_simulador_iassim_2.html">24. Simulador IASSim</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html">25. Lenguajes de programación de Alto y Bajo Nivel</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html"><span class="toc-current">26. Lenguajes de programación en Ensamblador</span></a>
+<ul class="sectlevel2">
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#leng_asm">26.1. Manuales de referencia</a>
+<ul class="sectlevel3">
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_lenguaje_intel">26.1.1. Lenguaje Intel</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_lenguaje_att">26.1.2. lenguaje AT&amp;T</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#assembler_as_i386">26.1.3. Características arquitectura i386</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#assembler_as_directivas_i386">26.1.4. Assembler (Traductor Ensamblador): Directivas</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_discusión_por_qué_asm_att">26.1.5. Discusión por qué ASM AT&amp;T</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_transferencia_2">26.1.6. TRANSFERENCIA</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_aritméticos_2">26.1.7. ARITMÉTICOS</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_lógicos_2">26.1.8. LÓGICOS</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_misceláneos_2">26.1.9. MISCELÁNEOS</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_saltos_generales_2">26.1.10. SALTOS  (generales)</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_saltos_sin_signo_cardinal_saltos_con_signo_integer_2">26.1.11. SALTOS  Sin Signo (Cardinal) SALTOS Con Signo (Integer)</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_flags_oditszapc_2">26.1.12. FLAGS (ODITSZAPC)</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_sufijos">26.1.13. Sufijos</a>
+</li>
+</ul>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_intel_x86_32_i386">26.2. Intel x86-32 /i386</a>
+<ul class="sectlevel3">
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#sum1toN_att_32">26.2.1. sum1toN.s</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#intel_i386_hola_asmbin">26.2.2. hola_mundo.s</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_hola_mundo_código_máquina_binario">26.2.3. hola_mundo: Código Máquina Binario</a>
+</li>
+</ul>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_intel_x86_64_amd_64">26.3. Intel x86-64 / AMD 64</a>
+<ul class="sectlevel3">
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#sum1toN_att_64">26.3.1. sum1toN.s</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_hola_mundo">26.3.2. Hola Mundo</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_miscellaneous">26.3.3. Miscellaneous</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#sum1toN_nasm">26.3.4. sum1toN.s: lenguaje intel</a>
+</li>
+</ul>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_arquitectura_arm">26.4. Arquitectura ARM</a>
+<ul class="sectlevel3">
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_hola_mundo_2">26.4.1. Hola Mundo</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_isa_5">26.4.2. ISA</a>
+</li>
+</ul>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_motorola_68000">26.5. Motorola 68000</a>
+<ul class="sectlevel3">
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_hola_mundo_3">26.5.1. Hola Mundo</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_isa_6">26.5.2. ISA</a>
+</li>
+</ul>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_arquitectura_mips">26.6. Arquitectura MIPS</a>
+<ul class="sectlevel3">
+<li><a href="_lenguajes_de_programación_en_ensamblador.html#_isa_7">26.6.1. ISA</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html">27. Toolchain: Cadena de Herramientas en el proceso de compilación</a>
+</li>
+<li><a href="_practicando_la_programación_desde_el_principio.html">28. Practicando la Programación desde el Principio</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_pila.html">30. Pila</a>
+</li>
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html">31. Programas en Lenguaje Ensamblador: Propuestas</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html">32. Apéndice: Unidad CPU</a>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">33. Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">34. Apéndice: Memoria Virtual</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">35. Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">36. FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">37. Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">38. Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html">39. Estructura de Computadores 2022: Segundo Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">40. Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">41. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">42. Miaulario: Videoconferencia</a>
+</li>
+</ul>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_lenguajes_de_programación_en_ensamblador">26. Lenguajes de programación en Ensamblador</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="leng_asm">26.1. Manuales de referencia</h3>
+<div class="sect3">
+<h4 id="_lenguaje_intel">26.1.1. Lenguaje Intel</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Manuales oficiales</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html">Intel</a>: Vol 2</p>
+</li>
+<li>
+<p><a href="http://developer.amd.com/resources/documentation-articles/developer-guides-manuals/">AMD</a>: apartado Manuals : vol 3</p>
+</li>
+<li>
+<p><a href="http://developer.amd.com/wordpress/media/2008/10/24594_APM_v3.pdf">AMD64 Architecture Programmer’s Manual Volume 3: General Purpose and</a> System Instructions</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Manuales no oficiales:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.felixcloutier.com/x86/">manual Intel quick</a>: <strong>recomendado</strong></p>
+</li>
+<li>
+<p><a href="http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/toc.htm">intel descriptivo i386</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/c17.htm">Repertorio ISA y Formato de Instrucción</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="http://kluge.in-chemnitz.de/docs/notes/assembly.php">kluge</a></p>
+</li>
+<li>
+<p><a href="http://www.unixwiz.net/techtips/x86-jumps.html">Saltos Condicionales</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_netwide_asm_nasm_para_el_lenguaje_de_intel">Netwide ASM (NASM) para el lenguaje de intel</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo <a href="_lenguajes_de_programación_en_ensamblador.html#sum1toN_nasm">sum1toN.asm</a> de programa en lenguaje ensamblador intel y assembler "NetWide Asm" (nasm).</p>
+</li>
+<li>
+<p>Tutorial completo <a href="_ix_bibliografía.html#NASM_tuto">NASM tutorialspoint</a></p>
+</li>
+<li>
+<p>Apuntes de la  <a href="_ix_bibliografía.html#NASM_bristol">Universidad de Bristol</a></p>
+</li>
+<li>
+<p>Apuntes del <a href="_ix_bibliografía.html#paul_carter">Dr. Paul Carter</a> y <a href="_ix_bibliografía.html#pc_asm">Dr. Paul Carter</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_lenguaje_att">26.1.2. lenguaje AT&amp;T</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.oracle.com/cd/E53394_01/html/E54851/eqbsu.html">Oracle Solaris ASM</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>En este documento  a la sintaxis AT&amp;T la denomina "Oracle Solaris".</p>
+</li>
+<li>
+<p><a href="http://docs.oracle.com/cd/E19253-01/817-5477/817-5477.pdf">AT&amp;T Solaris Manual amd64-i386 </a>: lenguaje y traductor assembler.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="assembler_as_i386">26.1.3. Características arquitectura i386</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent:">Assembler: Características dependientes de la arquitectura x86</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="assembler_as_directivas_i386">26.1.4. Assembler (Traductor Ensamblador): Directivas</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://sourceware.org/binutils/docs-2.26/as/Pseudo-Ops.html#Pseudo-Ops:">Directivas del traductor Assembler</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_discusión_por_qué_asm_att">26.1.5. Discusión por qué ASM AT&amp;T</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://es.tldp.org/Presentaciones/200002hispalinux/conf-28/28.ps.gz" class="bare">http://es.tldp.org/Presentaciones/200002hispalinux/conf-28/28.ps.gz</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_transferencia_2">26.1.6. TRANSFERENCIA</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 18.1818%;">
+<col style="width: 36.3636%;">
+<col style="width: 18.1819%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Comentario</th>
+<th class="tableblock halign-left valign-top">Código</th>
+<th class="tableblock halign-left valign-top">Operación</th>
+<th class="tableblock halign-left valign-top">O D I T S Z A P C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mover (copiar)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MOV Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Fuente</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XCHG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Intercambiar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XCHG Op1,Op2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op1:=Op2 , Op2:=Op1</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the carry (Carry = 1)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF:=1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clear Carry (Carry = 0)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF:=0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CMC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Complementar Carry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CMC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF:=Ø</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Setear dirección</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DF:=1(interpreta strings de arriba hacia abajo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Limpiar dirección</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DF:=0(interpreta strings de abajo hacia arriba)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flag de Interrupción en 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IF:=1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Flag de Interrupción en 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CLI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IF:=0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSH</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apilar en la pila</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSH Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEC SP, [SP]:=Fuente</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSHF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apila los flags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSHF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O, D, I, T, S, Z, A, P, C 286+: También NT,IOPL</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSHA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Apila los registros generales</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUSHA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AX, CX, DX, BX, SP, BP, SI, DI</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desapila de la pila</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POP Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destino:=[SP], INC SP</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POPF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desapila a los flags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POPF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">O,D,I,T,S,Z,A,P,C 286+: También NT,IOPL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">± ± ± ± ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POPA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desapila a los reg. general.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POPA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DI, SI, BP, SP, BX, DX, CX, AX</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CBW</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Convertir Byte a Word</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CBW</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AX:=AL (con signo)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CWD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Convertir Word a Doble</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CWD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DX:AX:=AX (con signo)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CWDE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Conv. Word a Doble Exten.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CWDE 386</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EAX:=AX (con signo)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IN</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Entrada</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IN Dest,Puerto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AL/AX/EAX := byte/word/double del puerto esp.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OUT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Salida</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OUT Puer,Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Byte/word/double del puerto := AL/AX/EAX</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>Flags: <strong>±</strong> =Afectado por esta instrucción, <strong>?</strong> =Indefinido luego de esta instrucción</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_aritméticos_2">26.1.7. ARITMÉTICOS</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 18.1818%;">
+<col style="width: 36.3636%;">
+<col style="width: 18.1819%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Comentario</th>
+<th class="tableblock halign-left valign-top">Código</th>
+<th class="tableblock halign-left valign-top">Operación</th>
+<th class="tableblock halign-left valign-top">O D I T S Z A P C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Suma</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADD Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest+ Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Suma con acarreo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ADC Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest+ Fuente +CF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SUB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SUB Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest- Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SBB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resta con acarreo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SBB Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest-(Fuente +CF)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">División (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=byte: AL:=AX / Op AH:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?       ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">División (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=word:         AX:=DX:AX / Op DX:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?       ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">386 División (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=doublew.:     EAX:=EDX:EAX / Op EDX:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?	 ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">División entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=byte:        AL:=AX / Op AH:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?	 ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">División entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=word: AX:=DX:AX / Op DX:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?	 ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">386 División entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IDIV Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=doublew.: EAX:=EDX:EAX / Op EDX:=Resto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?	 ? ? ? ? ?</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiplicación (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=byte: AX:=AL*Op si AH=0 #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiplicación (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=word: DX:AX:=AX*Op si DX=0 #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">386 Multiplicación (sin signo)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=double: EDX:EAX:=EAX*Op si EDX=0 #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i Multiplic. entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=byte: AX:=AL*Op si AL es suficiente #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiplic. entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=word: DX:AX:=AX*Op si AX es suficiente #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">386 Multiplic. entera con signo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IMUL Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op=double: EDX:EAX:=EAX*Op si EAX es sufi. #</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ? ? ? ? ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Incrementar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INC Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op:=Op+1 (El Carry no resulta afectado !)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±	 ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Decrementar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEC Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op:=Op-1 (El Carry no resulta afectado !)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CMP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comparar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CMP Fuente,Destino</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destino-Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desplazam. aritm. a la izq.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i       ± ± ? ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desplazam. aritm. a la der.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SAR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i       ± ± ? ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rotar a la izq. c/acarreo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCL Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i               ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rotar a la derecha c/acarreo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RCR Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i               ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ROL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rotar a la izquierda</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ROL Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i               ±</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>i</strong>:para más información ver especificaciones de la intrucción,</p>
+</li>
+<li>
+<p><strong>#</strong>:entonces CF:=0, OF:=0 sino CF:=1, OF:=1</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_lógicos_2">26.1.8. LÓGICOS</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 18.1818%;">
+<col style="width: 36.3636%;">
+<col style="width: 18.1819%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Comentario</th>
+<th class="tableblock halign-left valign-top">Código</th>
+<th class="tableblock halign-left valign-top">Operación</th>
+<th class="tableblock halign-left valign-top">O D I T S Z A P C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NEG</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Negación (complemento a 2)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NEG Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op:=0-Op si Op=0 entonces CF:=0 sino CF:=1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">±       ± ± ± ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NOT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Invertir cada bit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NOT Op</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Op:=Ø~Op (invierte cada bit)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AND</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Y</em> (And) lógico</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AND Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest ^ Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0       ± ± ? ± 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>O</em> (Or) lógico</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OR  Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest v Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0       ± ± ? ± 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XOR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>O</em> (Or) exclusivo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XOR Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest:=Dest (xor) Fuente</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0       ± ± ? ± 0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SHL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desplazam. lógico a la izq.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SHL Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i       ± ± ? ± ±</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SHR</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Desplazam. lógico a la der.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SHR Op,Cantidad</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">i       ± ± ? ± ±</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_misceláneos_2">26.1.9. MISCELÁNEOS</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 9.0909%;">
+<col style="width: 18.1818%;">
+<col style="width: 18.1818%;">
+<col style="width: 36.3636%;">
+<col style="width: 18.1819%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Nombre</th>
+<th class="tableblock halign-left valign-top">Comentario</th>
+<th class="tableblock halign-left valign-top">Código</th>
+<th class="tableblock halign-left valign-top">Operación</th>
+<th class="tableblock halign-left valign-top">O D I T S Z A P C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NOP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hacer nada</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NOP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No hace operación alguna</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LEA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cargar direciión Efectiva</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LEA Fuente,Dest</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dest := dirección fuente</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interrupción</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT Num</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interrumpe el proceso actual y salta al vector Num</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 0</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_saltos_generales_2">26.1.10. SALTOS  (generales)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow#Jump_if_Lesser">wiki x86 assembly</a></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Nombre  Comentario                      Código          Operación
+CALL    Llamado a subrutina             CALL Proc
+JMP     Saltar                          JMP Dest
+JE      Saltar si es igual              JE Dest         (= JZ)
+JZ      Saltar si es cero               JZ Dest         (= JE)
+JCXZ    Saltar si CX es cero            JCXZ Dest
+JP      Saltar si hay paridad           JP Dest         (= JPE)
+JPE     Saltar si hay paridad par       JPE Dest        (= JP)
+JPO     Saltar si hay paridad impar     JPO Dest        (= JNP)
+JNE     Saltar si no es igual           JNE Dest        (= JNZ)
+JNZ     Saltar si no es cero            JNZ Dest        (= JNE)
+JECXZ   Saltar si ECX es cero           JECXZ Dest 386
+JNP     Saltar si no hay paridad        JNP Dest        (= JPO)
+RET     Retorno de subrutina            RET</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_saltos_sin_signo_cardinal_saltos_con_signo_integer_2">26.1.11. SALTOS  Sin Signo (Cardinal) SALTOS Con Signo (Integer)</h4>
+<div class="listingblock">
+<div class="content">
+<pre>Nombre  Comentario                      Código          Operación
+JA      Saltar si es superior           JA Dest         (= JNBE)
+JAE     Saltar si es superior o igual   JAE Dest        (= JNB = JNC)
+JB      Saltar si es inferior           JB Dest         (= JNAE = JC)
+JBE     Saltar si es inferior o igual   JBE Dest        (= JNA)
+JNA     Saltar si no es superior        JNA Dest        (= JBE)
+JNAE    Saltar si no es super. o igual  JNAE Dest       (= JB = JC)
+JNB     Saltar si no es inferior        JNB Dest        (= JAE = JNC)
+JNBE    Saltar si no es infer. o igual  JNBE Dest       (= JA)
+JC      Saltar si hay carry JC Dest     JO  Dest        Saltar si hay Overflow
+JNC     Saltar si no hay carry          JNC Dest
+JNO     Saltar si no hay Overflow       JNO Dest
+JS      Saltar si hay signo (=negativo) JS Dest
+JG      Saltar si es mayor              JG Dest         (= JNLE)
+JGE     Saltar si es mayor o igual      JGE Dest        (= JNL)
+JL      Saltar si es menor              JL Dest         (= JNGE)
+JLE     Saltar si es menor o igual      JLE Dest        (= JNG)
+JNG     Saltar si no es mayor           JNG Dest        (= JLE)
+JNGE    Saltar si no es mayor o igual   JNGE Dest       (= JL)
+JNL     Saltar si no es inferior        JNL Dest        (= JGE)
+JNLE    Saltar si no es menor o igual   JNLE Dest       (= JG)</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_flags_oditszapc_2">26.1.12. FLAGS (ODITSZAPC)</h4>
+<div class="listingblock">
+<div class="content">
+<pre>O: Overflow resultado de operac. sin signo es muy grande o pequeño.
+D: Dirección
+I: Interrupción Indica si pueden ocurrir interrupciones o no.
+T: Trampa Paso, por paso para debugging
+S: Signo Signo del resultado. Razonable sólo para enteros. 1=neg. 0=pos.
+Z: Cero Resultado de la operación es cero. 1=Cero
+A: Carru Aux. Similar al Carry, pero restringido para el nibble bajo únicamente
+P: Paridad 1=el resultado tiene cantidad par de bits en uno
+C: Carry resultado de operac. sin signo es muy grande o inferior a cero</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sufijos">26.1.13. Sufijos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Sufijos de los mnemónicos del código de operación:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>q</em> : quad: operando de 8 bytes: cuádruple palabra</p>
+</li>
+<li>
+<p><em>l</em> : long: operando de 4 bytes: doble palabra</p>
+</li>
+<li>
+<p><em>w</em> : word: operando de 2 bytes: palabra</p>
+</li>
+<li>
+<p><em>b</em> : byte: operando de 1 byte</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Si el mnemónico de operación no lleva sufijo el tamaño por defecto del operando es <em>long</em></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_intel_x86_32_i386">26.2. Intel x86-32 /i386</h3>
+<div class="sect3">
+<h4 id="sum1toN_att_32">26.2.1. sum1toN.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Lenguaje ensamblador ATT para la arquitectura x86-32</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">###</span> <span class="nl">Programa:</span> <span class="nf">sum1toN.s</span>
+<span class="err">###</span> <span class="nf">Descripci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span> <span class="nv">realiza</span> <span class="nv">la</span> <span class="nv">suma</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">serie</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="nv">...N</span>
+<span class="err">###</span> <span class="nf">gcc</span> <span class="o">-</span><span class="nv">m32</span> <span class="o">-</span><span class="nv">g</span> <span class="o">-</span><span class="nv">nostartfiles</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">sum1toN</span> <span class="nv">sum1toN.s</span>
+<span class="err">###</span> <span class="nf">Ensamblaje</span> <span class="nv">as</span> <span class="o">--</span><span class="mi">32</span> <span class="o">--</span><span class="nb">gs</span><span class="nv">tabs</span> <span class="nv">fuente.s</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">objeto.o</span>
+<span class="err">###</span> <span class="nf">linker</span> <span class="o">-&gt;</span> <span class="nv">ld</span> <span class="o">-</span><span class="nv">melf_i386</span> <span class="o">-</span><span class="nv">I</span><span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">i386</span><span class="o">-</span><span class="nv">linux</span><span class="o">-</span><span class="nv">gnu</span><span class="o">/</span><span class="nv">ld</span><span class="o">-</span><span class="nv">linux.so.2</span>   <span class="o">-</span><span class="nv">o</span> <span class="nv">ejecutable</span> <span class="nv">objeto.o</span> <span class="o">-</span><span class="nv">lc</span>
+
+        <span class="err">##</span>  <span class="nf">Declaraci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">de</span> <span class="nv">variables</span>
+        <span class="nf">.section</span> <span class="nv">.data</span>
+
+<span class="nl">n:</span>	<span class="nf">.int</span> <span class="mi">5</span>
+
+        <span class="nf">.global</span> <span class="nv">_start</span>
+
+        <span class="err">##</span>  <span class="nf">Comienzo</span> <span class="nv">del</span> <span class="nv">c</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span>
+        <span class="nf">.section</span> <span class="nv">.text</span>
+<span class="nl">_start:</span>
+        <span class="nf">mov</span> <span class="kc">$</span><span class="mi">0</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span> <span class="err">#</span> <span class="nb">ECX</span> <span class="nv">implementa</span> <span class="nv">la</span> <span class="nv">variable</span> <span class="nv">suma</span>
+        <span class="nf">mov</span> <span class="nv">n</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+<span class="nl">bucle:</span>
+        <span class="nf">add</span> <span class="o">%</span><span class="nb">edx</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>
+        <span class="nf">sub</span> <span class="kc">$</span><span class="mi">1</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+        <span class="nf">jnz</span> <span class="nv">bucle</span>
+
+        <span class="nf">mov</span> <span class="o">%</span><span class="nb">ecx</span><span class="p">,</span> <span class="o">%</span><span class="nb">ebx</span> <span class="err">#</span> <span class="nv">el</span> <span class="nv">argumento</span> <span class="nv">de</span> <span class="nv">salida</span> <span class="nb">al</span> <span class="nv">S.O.</span> <span class="nv">a</span> <span class="nv">trav</span><span class="err">é</span><span class="nv">s</span> <span class="nv">de</span> <span class="nb">EBX</span> <span class="ow">seg</span><span class="err">ú</span><span class="nv">n</span> <span class="nv">convenio</span>
+
+        <span class="err">##</span> <span class="nf">salida</span>
+        <span class="nf">mov</span> <span class="kc">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="nb">eax</span>  <span class="err">#</span> <span class="nv">c</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">llamada</span> <span class="nb">al</span> <span class="nb">si</span><span class="nv">stema</span> <span class="nv">operativo</span><span class="p">:</span> <span class="nv">subrutina</span> <span class="nv">exit</span>
+        <span class="nf">int</span> <span class="kc">$</span><span class="mh">0x80</span>     <span class="err">#</span> <span class="nv">llamada</span> <span class="nb">al</span> <span class="nb">si</span><span class="nv">stema</span> <span class="nv">operativo</span>
+
+
+        <span class="nf">.end</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="intel_i386_hola_asmbin">26.2.2. hola_mundo.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Compilar el programa en lenguaje ensamblador hola_mundo.s y volcar el módulo objeto binario.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo fuente: <em>hola_mundo.s.</em></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">###</span>
+<span class="err">###</span> 	<span class="nf">hola_mundo.s</span>
+<span class="err">###</span>
+<span class="err">###</span> 	<span class="nf">Programa</span> <span class="nb">si</span><span class="nv">mple</span> <span class="nv">de</span> <span class="nv">iniciaci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">para</span> <span class="nv">el</span> <span class="nv">desarrollo</span> <span class="nv">de</span> <span class="nv">programas</span> <span class="nv">en</span> <span class="nv">Ensamblador</span> <span class="nv">x86</span><span class="o">-</span><span class="mi">32</span> <span class="nv">AT</span><span class="o">&amp;</span><span class="nv">T.</span>
+<span class="err">###</span>
+<span class="err">###</span> <span class="nf">Compilaci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span>
+<span class="err">###</span> 		<span class="nf">assemble</span> <span class="nv">using</span><span class="p">:</span> <span class="nv">as</span> <span class="o">--</span><span class="mi">32</span> <span class="nv">hola_mundo.s</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">hola_mundo.o</span>
+<span class="err">###</span> 		<span class="nf">link</span> <span class="nv">using</span><span class="p">:</span>   	<span class="nv">ld</span> <span class="o">-</span><span class="nv">melf</span><span class="o">-</span><span class="nv">i386</span> <span class="nv">hola_mundo.o</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">hola_mundo</span>
+<span class="err">###</span>             <span class="nf">Driver</span> <span class="nv">gcc</span><span class="p">:</span> 	<span class="nv">gcc</span>  <span class="o">-</span><span class="nv">m32</span> <span class="o">-</span><span class="nv">nostartfiles</span>   <span class="nv">hola_mundo.s</span>  <span class="o">-</span><span class="nv">o</span> <span class="nv">hola_mundo</span>
+<span class="err">###</span>
+<span class="err">###</span> 	<span class="nf">revised</span> <span class="nv">on</span><span class="p">:</span> <span class="nv">Septiembre</span> <span class="mi">2022</span> <span class="o">--</span> <span class="nv">for</span> <span class="nv">Linux</span><span class="err">'</span><span class="nv">s</span> <span class="nv">i386</span> <span class="nv">environment</span>
+<span class="err">###</span>
+<span class="err">###</span>
+	<span class="nf">.att_syntax</span>
+
+
+	<span class="err">##</span> <span class="nf">Declaraci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">de</span> <span class="nv">s</span><span class="err">í</span><span class="nv">mbolos</span> <span class="nv">externos</span>
+	<span class="nf">.global</span>	<span class="nv">_start</span>		<span class="err">#</span> <span class="nv">visible</span> <span class="nv">entry</span><span class="o">-</span><span class="nv">point</span>
+
+
+	<span class="err">##</span> <span class="nf">Reserva</span> <span class="nv">de</span> <span class="nv">Memoria</span> <span class="nv">para</span> <span class="nv">datos</span> <span class="nv">variables</span>
+	<span class="nf">.section</span>	<span class="nv">.data</span>
+
+<span class="nl">mensaje:</span>	<span class="nf">.ascii</span> <span class="err">"</span><span class="nv">Hola</span> <span class="nv">mundo</span><span class="err">\</span><span class="nv">n</span><span class="err">"</span>
+<span class="nl">longitud:</span>	<span class="nf">.2byte</span>	<span class="nv">.</span> <span class="o">-</span> <span class="nv">mensaje</span> 	<span class="err">#</span><span class="nv">tama</span><span class="err">ñ</span><span class="nv">o</span> <span class="nv">en</span> <span class="kt">byte</span><span class="nv">s</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">cadena</span> <span class="nv">mensaje</span>
+
+	<span class="err">##</span> <span class="nf">Secci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">para</span> <span class="nv">el</span> <span class="nv">C</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span> <span class="nv">de</span> <span class="nv">las</span> <span class="nv">Instrucciones</span> <span class="nv">en</span> <span class="nv">Lenguaje</span> <span class="nv">Ensamblador</span>
+	<span class="nf">.section</span> <span class="nv">.text</span>
+
+<span class="nl">_start:</span>
+
+
+	<span class="nf">mov</span> 	<span class="kc">$</span><span class="mi">4</span><span class="p">,</span> <span class="o">%</span><span class="nb">eax</span>	<span class="err">#</span> <span class="nv">SYS_WRITE</span>
+	<span class="nf">mov</span> 	<span class="kc">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="nb">ebx</span>	<span class="err">#</span> <span class="nv">device</span> <span class="nv">ID</span><span class="o">-</span><span class="nv">number</span>
+	<span class="nf">mov</span> 	<span class="kc">$</span><span class="nv">mensaje</span><span class="p">,</span> <span class="o">%</span><span class="nb">ecx</span>	<span class="err">#</span> <span class="nv">message</span> <span class="nv">address</span>
+	<span class="nf">mov</span> 	<span class="nv">longitud</span><span class="p">,</span> <span class="o">%</span><span class="nb">edx</span>	<span class="err">#</span> <span class="nv">message</span> <span class="nv">length</span>
+	<span class="nf">int</span> 	<span class="kc">$</span><span class="mh">0x80</span>		<span class="err">#</span> <span class="nv">enter</span> <span class="nv">the</span> <span class="nv">kernel</span>
+
+	<span class="err">##</span> <span class="nf">terminate</span> <span class="nv">this</span> <span class="nv">program</span>
+	<span class="nf">mov</span> 	<span class="kc">$</span><span class="mi">1</span><span class="p">,</span> <span class="o">%</span><span class="nb">eax</span>		<span class="err">#</span> <span class="nv">SYS_EXIT</span>
+	<span class="nf">mov</span> 	<span class="kc">$</span><span class="mi">0</span><span class="p">,</span> <span class="o">%</span><span class="nb">ebx</span>		<span class="err">#</span> <span class="nv">return</span> <span class="nv">value</span>
+	<span class="nf">int</span> 	<span class="kc">$</span><span class="mh">0x80</span>			<span class="err">#</span> <span class="nv">enter</span> <span class="nv">the</span> <span class="nv">kernel</span>
+
+	<span class="nf">.end</span>				<span class="err">#</span> <span class="nv">no</span> <span class="nv">more</span> <span class="nv">to</span> <span class="nv">assemble</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_hola_mundo_código_máquina_binario">26.2.3. hola_mundo: Código Máquina Binario</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Sección de Datos</strong></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">08049</span><span class="nf">ff4</span> <span class="o">&lt;</span><span class="nv">mensaje</span><span class="o">&gt;</span><span class="p">:</span> <span class="mi">48</span> <span class="mi">6</span><span class="nv">f</span> <span class="mi">6</span><span class="nv">c</span> <span class="mi">61</span> <span class="mi">20</span> <span class="mi">4</span><span class="nv">d</span> <span class="mi">75</span> <span class="mi">63</span> <span class="mi">64</span> <span class="mi">6</span><span class="nv">f</span> <span class="mi">0</span><span class="nv">a</span>       <span class="nv">H</span> <span class="nv">o</span> <span class="nv">l</span> <span class="nv">a</span> <span class="nb">SP</span> <span class="nv">m</span> <span class="nv">u</span> <span class="nv">n</span> <span class="nv">d</span> <span class="nv">o</span> <span class="o">/</span><span class="nv">n</span>
+<span class="err">08049</span><span class="nf">fff</span> <span class="o">&lt;</span><span class="nv">longitud</span><span class="o">&gt;</span><span class="p">:</span> <span class="mb">0b</span> <span class="mi">00</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>En un lenguaje de alto nivel sería la declaración e inicialización de variables.</p>
+</li>
+<li>
+<p>Etiqueta: referencia a memoria</p>
+</li>
+<li>
+<p>Cada caracter ocupa un byte (codificación ASCII). No interpretar el string como un todo (no little endian) a diferencia de los números enteros y reales.</p>
+</li>
+<li>
+<p>El dato referenciado por la etiqueta longitud está en formato <em>little endian</em> &#8594; 00 0b</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Sección de Instrucciones</strong></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">##</span> <span class="nf">Secci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">para</span> <span class="nv">el</span> <span class="nv">C</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span> <span class="nv">de</span> <span class="nv">las</span> <span class="nv">Instrucciones</span> <span class="nv">en</span> <span class="nv">Lenguaje</span> <span class="nv">Ensamblador</span>
+
+<span class="err">08048190</span> <span class="err">&lt;</span><span class="nf">_start</span><span class="o">&gt;</span><span class="p">:</span>
+ <span class="err">8048190:</span>	<span class="nf">b8</span> <span class="mi">04</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x4</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+ <span class="err">8048195:</span>	<span class="nf">bb</span> <span class="mi">01</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x1</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>
+ <span class="err">804819</span><span class="nl">a:</span>	<span class="nf">b9</span> <span class="nv">f4</span> <span class="mi">9</span><span class="nv">f</span> <span class="mi">04</span> <span class="mi">08</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x8049ff4</span><span class="p">,</span><span class="o">%</span><span class="nb">ecx</span>
+ <span class="err">804819</span><span class="nl">f:</span>	<span class="err">8</span><span class="nf">b</span> <span class="mi">15</span> <span class="nv">ff</span> <span class="mi">9</span><span class="nv">f</span> <span class="mi">04</span> <span class="mi">08</span>    	<span class="nv">mov</span>    <span class="mh">0x8049fff</span><span class="p">,</span><span class="o">%</span><span class="nb">edx</span>
+ <span class="err">80481</span><span class="nl">a5:</span>	<span class="nf">cd</span> <span class="mi">80</span>                	<span class="nv">int</span>    <span class="kc">$</span><span class="mh">0x80</span>
+
+<span class="err">##</span> <span class="nf">terminate</span> <span class="nv">this</span> <span class="nv">program</span>
+
+ <span class="err">80481</span><span class="nl">a7:</span>	<span class="nf">b8</span> <span class="mi">01</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x1</span><span class="p">,</span><span class="o">%</span><span class="nb">eax</span>
+ <span class="err">80481</span><span class="nl">ac:</span>	<span class="nf">bb</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span> <span class="mi">00</span>       	<span class="nv">mov</span>    <span class="kc">$</span><span class="mh">0x0</span><span class="p">,</span><span class="o">%</span><span class="nb">ebx</span>
+ <span class="err">80481</span><span class="nl">b1:</span>	<span class="nf">cd</span> <span class="mi">80</span>                	<span class="nv">int</span>    <span class="kc">$</span><span class="mh">0x80</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_volcado_de_un_programa_binario">Volcado de un programa binario</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Mediante el comando: <code>objdump -d hola_mundo</code>, donde hola_mundo es el módulo binario ejecutable.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_almacenamiento_del_programa_binario_en_la_memoria_principal">Almacenamiento del programa binario en la Memoria Principal</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Una vez realizado el proceso de traducción del módulo fuente en lenguaje ensamblador se genera un módulo objeto en lenguaje binario que se almacena en el disco duro en forma de fichero.</p>
+</li>
+<li>
+<p>El fichero que contiene el módulo objeto ejecutable en lenguaje binario es necesario cargarlo en la memoria principal. Esta tarea la realiza el <strong>cargador</strong> del sistema operativo.</p>
+</li>
+<li>
+<p>Cada dirección de memoria apunta a 1 byte.</p>
+</li>
+<li>
+<p>La dirección más baja apunta a todo el objeto: instrucción o dato.</p>
+</li>
+<li>
+<p>Ejemplo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>instrucción máquina arquitectura amd64.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>4001a4:       48 83 ec 10   &#8594;  subq    $16,%rsp</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>4001a4:       48 83 ec 10</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>En la posición <strong>0x4001A4</strong> está el byte <strong>48</strong></p>
+</li>
+<li>
+<p>En la posición <strong>0x4001A4+1</strong> está el byte <strong>83</strong></p>
+</li>
+<li>
+<p>En la posición <strong>0x4001A4+2</strong> está el byte <strong>EC</strong></p>
+</li>
+<li>
+<p>En la posición <strong>0x4001A4+3</strong> está el byte <strong>10</strong></p>
+</li>
+<li>
+<p>En la posición de memoria principal <code>0x4001A4</code> está almacenada la instrucción de 4 Bytes</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="form_inst">Interpretación de una instrucción en Código Máquina: Formato de Instrucción de la ISA Intel x86-64</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>instrucción máquina arquitectura amd64.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>4001a4:       48 83 ec 10   &#8594;  subq    $16,%rsp</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Interpretación del programador:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>lenguaje ensamblador AT&amp;T de la arquitectura x86.</p>
+</li>
+<li>
+<p>Descripción de la instrucción en lenguaje <strong>RTL</strong>: <em>RSP &#8592; RSP - 16</em></p>
+</li>
+<li>
+<p>En la posición de memoria principal 0x4001A4 está almacenada la instrucción <code>subq    $16,%rsp</code></p>
+</li>
+<li>
+<p>subq indica la operación de resta con datos enteros de 64 bits (sufijo q). Resta del operando destino el operando fuente.</p>
+</li>
+<li>
+<p>El operando fuente  tiene valor decimal 16, 0x10 en hexadecimal y el direccionamiento de este operando es inmediato, es decir, su valor es 16 y está ubicado en la propia instrucción.</p>
+</li>
+<li>
+<p>El operando destino está almacenado en el registro interno de la CPU denominado RSP</p>
+</li>
+<li>
+<p>La referencia a la Próxima Instrucción la realiza no la instrucción sino la CPU realizando la opeación PC&#8592;PC+tamaño de la instrucción en bytes.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>¿Cómo interpretar una instrucción máquina  en lenguaje binario ? Es necesario consultar el <strong>Manual de Referencia de la Arquitectura ISA de la máquina x86</strong> y tener conocimientos de los modos de direccionamiento.</p>
+</li>
+<li>
+<p><a href="http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html">manual oficial de intel x86 ó x86-64</a>: cuidado con la sintaxis intel.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>consultar el volumen 2B (capítulo 4, pag 394)para la instrucción <em>SUB</em>. Hay que tener encuenta el tamaño de los operandos y los modos de direccionamiento.</p>
+</li>
+<li>
+<p>El sufijo q de la operación <strong>SUBQ</strong> indica operando de 64 bits. El operando fuente <strong>$16</strong> es referenciado con direccionamiento inmediato y se puede codificar con 8 bits y el operando destino <strong>%RSP</strong> es un registro de 64 bits. Por lo tanto la descripcion intel en el manual será <strong>SUB r64, imm8</strong> que se corresponde con el código de operación <strong>REX.W + 83 /5 ib</strong>.</p>
+</li>
+<li>
+<p>La descripción del código de operación que hace intel no es sencilla y es necesario consultar la Interpretación de la Instrucción en el <strong>volumen 3 3.1 INTERPRETING THE INSTRUCTION REFERENCE PAGES</strong> y el Formato de Instrucción en el <strong>volumen 2A (capítulo 2 Formato de Instrucción)</strong></p>
+</li>
+<li>
+<p>Figura 2.1 Intel 64 and IA-32 Architectures Instruction Format</p>
+</li>
+<li>
+<p>El formato de instrucción tiene los campos: <strong>REXprefix-CodOp-ModRB</strong> que en nuestro caso valen <strong>48-83-EC</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>interpretación del campo REXprefix: <strong>REX.W</strong>: Manual &#8594; El prefijo REX se utiliza para operandos de 64 bits bien inmediatos y/o registros GlobalPurposeRegister(rax,rbx, etc), 2.2.1.2 More on REX Prefix Fields</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El primer byte es <code>48</code> &#8594; <code>01001000</code> donde el bit de la posición 3 está activado por lo que según la tabla "Table 2-4. REX Prefix Fields [BITS: 0100WRXB]" quiere decir que el <strong>operando es de 64bits</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>/5</strong> : the ModR/M byte of the instruction uses only the r/m (register or memory) operand. <strong>En este caso register</strong>.Ver el subcampo R/M más abajo.</p>
+</li>
+<li>
+<p><strong>ib</strong> : A 1-byte (ib) immediate operand.</p>
+</li>
+<li>
+<p>Campo Primary Opcode: El segundo byte vale <code>83</code> &#8594; Operación de resta <strong>SUB</strong></p>
+</li>
+<li>
+<p>Campo ModRB: El tercer byte vale <code>EC</code> &#8594; <code>1110-1100</code> hace referencia al registro RSP.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>2.1.3 ModR/M and SIB Bytes: Many instructions that refer to an operand in memory (memoria principal o registro interno CPU) ha
+ve an addressing-form specifier byte (called the ModR/M &#8230;&#8203;). Este campo se divide en subcampos: <strong>Mod-Reg/Opcode-R/M</strong></p>
+</li>
+<li>
+<p>Subcampo Mod: <code>11</code> : The mod field combines with the r/m field to form 32 possible values: eight registers (rax, rbx, rcx, rdx, rsi, rdi, rsp, rbp) and 24 addressing modes</p>
+</li>
+<li>
+<p>Subcampo Reg/Opcode: En este caso no es Secondary Opcode sino que es Reg: rrr= <code>101</code></p>
+</li>
+<li>
+<p>Subcampo R/M: En este caso R: bbb= <code>100</code> The r/m field can specify a register as an operand or it can be combined with the mod field to encode an addressing mode. <strong>En este caso es el registro operando con código 4</strong>. En la tabla 3.1 el código del <strong>quad word register</strong> con el <strong>Reg Field</strong> de valor <strong>4</strong> es el registro <strong>RSP</strong></p>
+</li>
+<li>
+<p>Figure 2-5. Register-Register Addressing (No Memory Operand); REX.X Not Used &#8594; Mod=11 &#8594; Rrrr =0101 &#8594; Bbbb=0100</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El cuarto byte vale en hexadecimal <code>10</code> que se corresponde con el valor inmediato 16 en decimal y debe ser expandido a 64bits.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_intel_x86_64_amd_64">26.3. Intel x86-64 / AMD 64</h3>
+<div class="sect3">
+<h4 id="sum1toN_att_64">26.3.1. sum1toN.s</h4>
+<div class="listingblock">
+<div class="content">
+<pre>	#### Programa: sum1toN.s
+	### Descripción: realiza la suma de la serie 1,2,3,...N. La entrada se define en el propio programa y la salida se pasa al S.O.
+	### Lenguaje: Lenguaje ensamblador de GNU para la arquitectura AMD64
+	### gcc  -no-pie -g -nostartfiles -o sum1toN  sum1toN.s
+	### Ensamblaje as  --gstabs sum1toN.s -o sum1toN.o
+        ### linker -&gt; ld    -o sum1toN sum1toN.o
+	##  Declaración de variables
+	##  SECCION DE DATOS
+	  .section .data
+
+n:      .quad 5
+
+	  .global _start
+
+	  ##  Comienzo del código
+	  ##  SECCION DE INSTRUCCIONES
+
+	  .section .text
+_start:
+        movq $0,%rdi # RDI implementa la variable suma
+        movq n,%rdx
+bucle:
+        add %rdx,%rdi
+        sub $1,%rdx
+        jnz bucle
+
+        ## el argumento de salida al S.O. a través de RDI según convenio ABI AMD64
+	## salida
+          mov $60, %rax	# código de la llamada al sistema operativo: subrutina exit
+	  syscall # llamada al sistema operativo para que ejecute la subrutina según el valor de RAX
+
+
+	  .end</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_hola_mundo">26.3.2. Hola Mundo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo Fuente hola_mundo.s en lenguaje ensamblador.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">###</span> <span class="err">----------------------------------------------------------------</span>
+<span class="err">###</span> 	<span class="nf">hola_x86</span><span class="o">-</span><span class="mi">64</span><span class="nv">_att.s</span>
+<span class="err">###</span>
+<span class="err">###</span> 	<span class="nf">Programa</span> <span class="nb">si</span><span class="nv">mple</span> <span class="nv">de</span> <span class="nv">iniciaci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">para</span> <span class="nv">el</span> <span class="nv">desarrollo</span> <span class="nv">de</span> <span class="nv">programas</span> <span class="nv">en</span> <span class="nv">Ensamblador</span> <span class="nv">x86</span><span class="o">-</span><span class="mi">64</span> <span class="nv">AT</span><span class="o">&amp;</span><span class="nv">T.</span>
+<span class="err">###</span>
+<span class="err">###</span> 	<span class="nf">Ficheros</span> <span class="nv">complementarios</span><span class="p">:</span> <span class="nv">macros_x86</span><span class="o">-</span><span class="mi">64</span><span class="nv">_gas.h</span>
+<span class="err">###</span>
+<span class="err">###</span>
+<span class="err">###</span> <span class="nf">Compilaci</span><span class="err">ó</span><span class="nv">n</span><span class="p">:</span>
+<span class="err">###</span> 		<span class="nf">assemble</span> <span class="nv">using</span><span class="p">:</span> <span class="nv">as</span>  <span class="nv">hola_intel_gas.s</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">hola_intel_gas.o</span>
+<span class="err">###</span> 		<span class="nf">link</span> <span class="nv">using</span><span class="p">:</span>   	<span class="nv">ld</span>  <span class="nv">hola_intel_gas.o</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">hola_intel_gas</span>
+<span class="err">###</span>             <span class="nf">Driver</span> <span class="nv">gcc</span><span class="p">:</span> 	<span class="nv">gcc</span>   <span class="o">-</span><span class="nv">nostartfiles</span>   <span class="nv">hola_intel_gas.s</span>  <span class="o">-</span><span class="nv">o</span> <span class="nv">hola_intel_gas</span>
+<span class="err">###</span>
+<span class="err">###</span> 	<span class="nf">revised</span> <span class="nv">on</span><span class="p">:</span> <span class="nv">FEBRERO</span> <span class="mi">2015</span> <span class="o">--</span> <span class="nv">for</span> <span class="nv">Linuxs</span> <span class="nv">x86_64</span> <span class="nv">environment</span>
+<span class="err">###</span>
+<span class="err">###</span> <span class="err">----------------------------------------------------------------</span>
+	<span class="nf">.att_syntax</span>
+
+	<span class="err">##</span> <span class="nf">Incluir</span> <span class="nv">el</span> <span class="nv">fichero</span> <span class="nv">con</span> <span class="nv">las</span> <span class="nv">Macros</span>
+	<span class="nf">.include</span> <span class="s">"macros_x86-64_gas.h"</span>
+
+	<span class="err">##</span> <span class="nf">Declaraci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">de</span> <span class="nv">s</span><span class="err">í</span><span class="nv">mbolos</span> <span class="nv">externos</span>
+	<span class="nf">.global</span>	<span class="nv">_start</span>		<span class="err">#</span> <span class="nv">visible</span> <span class="nv">entry</span><span class="o">-</span><span class="nv">point</span>
+
+
+	<span class="err">##</span> <span class="nf">Reserva</span> <span class="nv">de</span> <span class="nv">Memoria</span> <span class="nv">para</span> <span class="nv">datos</span> <span class="nv">variables</span>
+	<span class="nf">.section</span>	<span class="nv">.data</span>
+
+<span class="nl">msg0:</span>	<span class="nf">.ascii</span> <span class="err">"</span><span class="nv">Hola</span> <span class="nv">Mundo</span><span class="err">\</span><span class="nv">n</span><span class="err">"</span>
+<span class="nl">len0:</span>	<span class="nf">.quad</span>	<span class="nv">.</span> <span class="o">-</span> <span class="nv">msg0</span> 	<span class="err">#</span><span class="nv">tama</span><span class="err">ñ</span><span class="nv">o</span> <span class="nv">en</span> <span class="kt">byte</span><span class="nv">s</span> <span class="nv">de</span> <span class="nv">la</span> <span class="nv">cadena</span> <span class="nv">msg0</span>
+
+
+	<span class="err">##</span> <span class="nf">Secci</span><span class="err">ó</span><span class="nv">n</span> <span class="nv">para</span> <span class="nv">el</span> <span class="nv">C</span><span class="err">ó</span><span class="nb">di</span><span class="nv">go</span> <span class="nv">de</span> <span class="nv">las</span> <span class="nv">Instrucciones</span> <span class="nv">en</span> <span class="nv">Lenguaje</span> <span class="nv">Ensamblador</span>
+	<span class="nf">.section</span> <span class="nv">.text</span>
+
+<span class="nl">_start:</span>
+
+	<span class="err">##</span> <span class="nf">Prompt</span> <span class="nv">del</span> <span class="nv">programa</span><span class="p">:</span> <span class="nv">imprimir</span> <span class="nv">mensaje</span>
+
+	<span class="err">##</span> <span class="nf">Llamada</span> <span class="nb">al</span> <span class="nv">kernel</span> <span class="nv">para</span> <span class="nv">que</span> <span class="nv">acceda</span> <span class="nv">a</span> <span class="nv">la</span> <span class="nv">pantalla</span> <span class="nv">e</span> <span class="nv">imprima.</span>
+	<span class="nf">mov</span> 	<span class="kc">$</span><span class="nv">SYS_WRITE</span><span class="p">,</span> <span class="o">%</span><span class="nb">rax</span>	<span class="err">#</span> <span class="nv">service</span> <span class="nv">ID</span><span class="o">-</span><span class="nv">number</span>
+	<span class="nf">mov</span> 	<span class="kc">$</span><span class="nv">STDOUT_ID</span><span class="p">,</span> <span class="o">%</span><span class="nb">rdi</span>	<span class="err">#</span> <span class="nv">device</span> <span class="nv">ID</span><span class="o">-</span><span class="nv">number</span>
+	<span class="nf">mov</span> 	<span class="kc">$</span><span class="nv">msg0</span><span class="p">,</span> <span class="o">%</span><span class="nb">rsi</span>		<span class="err">#</span> <span class="nv">message</span> <span class="nv">address</span>
+	<span class="nf">mov</span> 	<span class="nv">len0</span><span class="p">,</span> <span class="o">%</span><span class="nb">rdx</span>	<span class="err">#</span> <span class="nv">message</span> <span class="nv">length</span>
+	<span class="nf">syscall</span>
+
+
+
+	<span class="err">##</span> <span class="nf">terminate</span> <span class="nv">this</span> <span class="nv">program</span>
+	<span class="nf">mov</span> 	<span class="kc">$</span><span class="nv">SYS_EXIT</span><span class="p">,</span> <span class="o">%</span><span class="nb">eax</span>		<span class="err">#</span> <span class="nv">service</span> <span class="nv">ID</span><span class="o">-</span><span class="nv">number</span>
+	<span class="nf">mov</span> 	<span class="kc">$</span><span class="mi">0</span><span class="p">,</span> <span class="o">%</span><span class="nb">rdi</span>		<span class="err">#</span> <span class="nv">setup</span> <span class="nv">exit</span><span class="o">-</span><span class="nv">code</span>
+	<span class="nf">syscall</span> 			<span class="err">#</span> <span class="nv">enter</span> <span class="nv">the</span> <span class="nv">kernel</span>
+
+	<span class="nf">.end</span>				<span class="err">#</span> <span class="nv">no</span> <span class="nv">more</span> <span class="nv">to</span> <span class="nv">assemble</span></code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">##</span> <span class="nf">Macros</span> <span class="nv">en</span> <span class="nv">el</span> <span class="nv">fichero</span> <span class="nv">macros_x86</span><span class="o">-</span><span class="mi">64</span><span class="nv">_gas.h</span>
+
+<span class="err">##</span> <span class="nf">Llamadas</span> <span class="nb">al</span> <span class="nb">Si</span><span class="nv">stema</span>
+<span class="nf">.equ</span>	<span class="nv">STDIN_ID</span><span class="p">,</span>  <span class="mi">0</span>		<span class="err">#</span> <span class="nv">input</span><span class="o">-</span><span class="nv">device</span> <span class="p">(</span><span class="nv">keyboard</span><span class="p">)</span>
+<span class="nf">.equ</span>	<span class="nv">STDOUT_ID</span><span class="p">,</span> <span class="mi">1</span>		<span class="err">#</span> <span class="nv">output</span><span class="o">-</span><span class="nv">device</span> <span class="p">(</span><span class="nv">screen</span><span class="p">)</span>
+<span class="nf">.equ</span>	<span class="nv">SYS_READ</span><span class="p">,</span>  <span class="mi">0</span>		<span class="err">#</span> <span class="nv">ID</span><span class="o">-</span><span class="nv">number</span> <span class="nv">for</span> <span class="s">'read'</span>
+<span class="nf">.equ</span>	<span class="nv">SYS_WRITE</span><span class="p">,</span> <span class="mi">1</span>		<span class="err">#</span> <span class="nv">ID</span><span class="o">-</span><span class="nv">number</span> <span class="nv">for</span> <span class="s">'write'</span>
+<span class="nf">.equ</span>	<span class="nv">SYS_OPEN</span><span class="p">,</span>  <span class="mi">2</span>		<span class="err">#</span> <span class="nv">ID</span><span class="o">-</span><span class="nv">number</span> <span class="nv">for</span> <span class="err">'</span><span class="nv">open</span><span class="err">'</span>
+<span class="nf">.equ</span>	<span class="nv">SYS_CLOSE</span><span class="p">,</span> <span class="mi">3</span>		<span class="err">#</span> <span class="nv">ID</span><span class="o">-</span><span class="nv">number</span> <span class="nv">for</span> <span class="s">'close'</span>
+<span class="nf">.equ</span>	<span class="nv">SYS_EXIT</span><span class="p">,</span>  <span class="mi">60</span>		<span class="err">#</span> <span class="nv">ID</span><span class="o">-</span><span class="nv">number</span> <span class="nv">for</span> <span class="s">'exit'</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_miscellaneous">26.3.3. Miscellaneous</h4>
+<div class="sect4">
+<h5 id="_tipos_de_datos_2">Tipos de Datos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Tipos de Datos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Dirección de memoria o referencia a memoria: la  etiqueta de nombre longitud</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>mov $longitud,%edx</code>   &#8594;  <em>mov    0x8049fff,%edx</em> &#8594; en lenguage de alto nivel es la inicialización de un puntero</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>número entero con signo : formato complemento a 2.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>mov    $0x4,%eax</code></p>
+</li>
+<li>
+<p>El operando 0x4 está  localizado en la propia instrucción, en el campo de operando. El dato 0x4 se almacena en "little endian" &#8594; Campo de operando: double word: 32 bits 0x00000004 &#8594; En memoria ascendente : dirección 8048191: 04 00 00 00</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>carácter: codificación ASCII</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>08049ff4 &lt;mensaje&gt;:</code> 48 6f 6c 61 20 &#8594; H o l a SP</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_números_reales_2">Números Reales</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://kluge.in-chemnitz.de/docs/notes/assembly.php">kluge</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>interesantes los ejemplos de operaciones con números reales</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ciclo_de_instrucción">Ciclo de Instrucción</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Intervención de la CPU en la instrucción <strong>4001a4:       48 83 ec 10   &#8594;  subq    $16,%rsp</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>La CPU durante el ciclo de instrucción (fase captura- fase decodificación-fase ejecución) realiza una secuencia de tareas.</p>
+</li>
+<li>
+<p>La secuencia de tareas a realizar la CPU durante el ciclo de instrucción lo describimos en lenguaje RTL.</p>
+</li>
+<li>
+<p>MBR &#8592;M[0x4001a4]</p>
+</li>
+<li>
+<p>IR  &#8592;MBR</p>
+</li>
+<li>
+<p>AC  &#8592; RSP</p>
+</li>
+<li>
+<p>AC  &#8592; AC-16 ; (ALU resta)</p>
+</li>
+<li>
+<p>RSP &#8592; AC</p>
+</li>
+<li>
+<p>PC  &#8592; PC+1</p>
+</li>
+<li>
+<p>MAR &#8592; PC</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="sum1toN_nasm">26.3.4. sum1toN.s: lenguaje intel</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Lenguaje ensamblador INTEL y assembler nasm</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="c1">;;; Programa: sum1toN.asm</span>
+<span class="c1">;;; Descripción: realiza la suma de la serie 1,2,3,...N</span>
+<span class="c1">;;; Lenguaje INTEL</span>
+<span class="c1">;;; Assembler NASM</span>
+
+<span class="c1">;;; nasm -hf -&gt; ayuda de la opción f</span>
+<span class="c1">;;; Ensamblaje nasm -g -f elf  sum1toN.asm -o sum1toN.o</span>
+<span class="c1">;;; linker -&gt; ld -m elf_i386    -o sum1toN sum1toN.o</span>
+
+	<span class="k">BITS</span> <span class="mi">32</span>	<span class="c1">; cpu MODE</span>
+        <span class="c1">;;  Declaración de variables</span>
+        <span class="nf">section</span> <span class="nv">.data</span>
+
+<span class="nl">n:</span>	<span class="kd">dd</span> <span class="mi">5</span>	<span class="c1">; 4 bytes</span>
+
+        <span class="nf">global</span> <span class="nv">_start</span>
+
+        <span class="c1">;;  Comienzo del código</span>
+        <span class="nf">section</span> <span class="nv">.text</span>
+<span class="nl">_start:</span>
+        <span class="nf">mov</span> <span class="nb">ecx</span><span class="p">,</span><span class="mi">0</span> <span class="c1">; ECX implementa la variable suma</span>
+        <span class="nf">mov</span> <span class="nb">edx</span><span class="p">,[</span><span class="nv">n</span><span class="p">]</span>  <span class="c1">; EDX implementa es un alias de la variable n</span>
+<span class="nl">bucle:</span>
+        <span class="nf">add</span> <span class="nb">ecx</span><span class="p">,</span><span class="nb">edx</span>
+        <span class="nf">sub</span> <span class="nb">edx</span><span class="p">,</span><span class="mi">1</span>
+        <span class="nf">jnz</span> <span class="nv">bucle</span>
+
+        <span class="nf">mov</span> <span class="nb">ebx</span><span class="p">,</span> <span class="nb">ecx</span> <span class="c1">; el argumento de salida al S.O. a través de EBX según convenio</span>
+
+        <span class="c1">;; salida</span>
+        <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span><span class="mi">1</span>  <span class="c1">; código de la llamada al sistema operativo: subrutina exit</span>
+        <span class="nf">int</span> <span class="mh">0x80</span>     <span class="c1">; llamada al sistema operativo</span></code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_arquitectura_arm">26.4. Arquitectura ARM</h3>
+<div class="sect3">
+<h4 id="_hola_mundo_2">26.4.1. Hola Mundo</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="err">/*</span>
+
+ <span class="nf">Programa</span> <span class="nv">en</span> <span class="nv">lenguaje</span> <span class="nv">ensamblador</span> <span class="nv">AT</span><span class="o">&amp;</span><span class="nv">T</span> <span class="nv">para</span> <span class="nv">el</span> <span class="nv">procesador</span> <span class="nv">ARM</span>
+
+ <span class="nf">Programa</span> <span class="nv">fuente</span><span class="p">:</span> <span class="nv">hello_world.s</span>
+ <span class="nl">Assembler:</span>       <span class="nf">arm</span><span class="o">-</span><span class="nv">linux</span><span class="o">-</span><span class="nv">gnueabi</span><span class="o">-</span><span class="nv">as</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">hello_world.o</span> <span class="nv">hello_world.s</span>
+ <span class="nl">Linker:</span>          <span class="nf">arm</span><span class="o">-</span><span class="nv">linux</span><span class="o">-</span><span class="nv">gnueabi</span><span class="o">-</span><span class="nv">ld</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">hello_world</span> <span class="nv">hello_world.o</span>
+
+<span class="err">*/</span>
+	<span class="nf">.data</span>
+
+	<span class="nl">msg:</span>
+	<span class="nf">.ascii</span> <span class="err">"</span><span class="nv">Hello</span><span class="p">,</span> <span class="nv">ARM</span> <span class="nv">World</span><span class="err">!\</span><span class="nv">n</span><span class="err">"</span>
+	<span class="nf">len</span> <span class="err">=</span> <span class="nv">.</span> <span class="o">-</span> <span class="nv">msg</span>
+
+
+	<span class="nf">.text</span>
+
+	<span class="nf">.globl</span> <span class="nv">_start</span>
+<span class="nl">_start:</span>
+	<span class="err">/*</span> <span class="nf">write</span> <span class="nv">syscall</span> <span class="o">*/</span>
+	<span class="nf">mov</span> <span class="o">%</span><span class="nv">r0</span><span class="p">,</span> <span class="kc">$</span><span class="mi">1</span>
+	<span class="nf">ldr</span> <span class="o">%</span><span class="nv">r1</span><span class="p">,</span> <span class="err">=</span><span class="nv">msg</span>
+	<span class="nf">ldr</span> <span class="o">%</span><span class="nv">r2</span><span class="p">,</span> <span class="err">=</span><span class="nv">len</span>
+	<span class="nf">mov</span> <span class="o">%</span><span class="nv">r7</span><span class="p">,</span> <span class="kc">$</span><span class="mi">4</span>
+	<span class="nf">swi</span> <span class="kc">$</span><span class="mi">0</span>
+
+	<span class="err">/*</span> <span class="nf">exit</span> <span class="nv">syscall</span> <span class="o">*/</span>
+	<span class="nf">mov</span> <span class="o">%</span><span class="nv">r0</span><span class="p">,</span> <span class="kc">$</span><span class="mi">0</span>
+	<span class="nf">mov</span> <span class="o">%</span><span class="nv">r7</span><span class="p">,</span> <span class="kc">$</span><span class="mi">1</span>
+	<span class="nf">swi</span> <span class="kc">$</span><span class="mi">0</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_isa_5">26.4.2. ISA</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.subset.architecture.reference/index.html">ARM</a>: Advanced RISC Machine</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.subset.architecture.reference/index.html">Developer Guides</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_motorola_68000">26.5. Motorola 68000</h3>
+<div class="sect3">
+<h4 id="_hola_mundo_3">26.5.1. Hola Mundo</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="nasm"><span class="c1">;CISC Sharp X68000 (Human68K): Motorola 68000</span>
+        <span class="nf">pea</span> <span class="p">(</span><span class="nv">string</span><span class="p">)</span>    <span class="c1">; push string address onto stack</span>
+        <span class="nf">dc.w</span> <span class="kc">$</span><span class="nv">FF09</span>      <span class="c1">; call DOS "print" by triggering an exception</span>
+        <span class="nf">addq.l</span> <span class="err">#</span><span class="mi">4</span><span class="p">,</span><span class="nv">a7</span>    <span class="c1">; restore the stack pointer</span>
+
+        <span class="nf">dc.w</span> <span class="kc">$</span><span class="nv">FF00</span>      <span class="c1">; call DOS "exit"</span>
+
+<span class="nl">string:</span>
+        <span class="nf">dc.b</span> <span class="s">"Hello, world!"</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_isa_6">26.5.2. ISA</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Referencias</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://lux.dmcs.pl/pn/asembler_68000/asm.html">Instruction Set Basic</a></p>
+</li>
+<li>
+<p><a href="https://en.wikibooks.org/wiki/68000_Assembly#Indirect_addressing_with_postincrement">Wikibook</a></p>
+</li>
+<li>
+<p><a href="https://www.nxp.com/files-static/archives/doc/ref_manual/M68000PRM.pdf">Manual de Referencia</a></p>
+</li>
+<li>
+<p><a href="http://www.freescale.com/files/archives/doc/ref_manual/M68000PRM.pdf">Motorola 68K ó M68000</a></p>
+</li>
+<li>
+<p>m68k hasta 1991</p>
+</li>
+<li>
+<p>ppc (powerpc) desde 1991 con Apple e IBM &#8594; iMac (1996-2006)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>arquitectura general</p>
+<div class="listingblock">
+<div class="content">
+<pre>2 versiones: Procesador de 16 bits ó 32 bits
+Aprox . 90 instrucciones máquina
+12 modos de  direccionamiento
+9 formatos de instrucción distintos y con tamaños de una a cinco palabras
+Ancho del  bus  de datos: 16 bits ó 32 bits
+Tamaño mínimo  direccionable : 1 byte
+Ancho del  bus  de direcciones: 24 bits (2^24^bytes = 16 Mbytes de memoria direccionables )</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Registros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>8 Registros de Datos de propósito general (16/32): D0-D7</p>
+</li>
+<li>
+<p>7 Registros de Instrucciones de propósito general (16/32) :A0-A6</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>modos de direccionamiento</p>
+<div class="ulist">
+<ul>
+<li>
+<p># : inmediato</p>
+</li>
+<li>
+<p>Di : registro directo</p>
+</li>
+<li>
+<p>(Ai):  indirecto de registro</p>
+</li>
+<li>
+<p>+(Ai): indirecto de registro con postincremento con la escala del tamaño del operando (1,2,4 bytes)</p>
+</li>
+<li>
+<p>(Ai)+: indirecto de registro con postincremento con la escala del tamaño del operando</p>
+</li>
+<li>
+<p>-(Ai): indirecto de registro con predecremento con la escala del tamaño del operando</p>
+</li>
+<li>
+<p>(Ai)-: indirecto de registro con preincremento con la escala del tamaño del operando</p>
+</li>
+<li>
+<p>D(Ai): indirecto de registro con desplazamiento D</p>
+</li>
+<li>
+<p>D(Ai,Ri.X) : registro Ai indirecto indexado Ri con desplazamiento D</p>
+</li>
+<li>
+<p>D(PC) : relativo al PC con desplazamiento D</p>
+</li>
+<li>
+<p>D(PC,Ri.X) : relativo al PC indexado Ri con desplazamiento D</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Datos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Enteros en Complemento a 2 .</p>
+</li>
+<li>
+<p>Sufijos Operación: B byte (1 byte), W word (2 bytes) , L long (4 Byte)</p>
+</li>
+<li>
+<p>Prejijos datos: $ hexadecimal</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Memoria</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Big Endian : LSB en la dirección más alta y MSB en la dirección más baja</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_arquitectura_mips">26.6. Arquitectura MIPS</h3>
+<div class="sect3">
+<h4 id="_isa_7">26.6.1. ISA</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Procesador con una arquitectura de 32 bits</p>
+</li>
+<li>
+<p>Microprocessor without Interlocked Pipeline Stages (MIPS) Architecture</p>
+</li>
+<li>
+<p>Versiones de la arquitectura MIPS:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>MIPS I ( R2000 cpu), II ( R6000), III (R4000), IV (R8000, R5000, R10000), and V (nunca implementada);</p>
+</li>
+<li>
+<p>MIPS32/64 :MIPS32 is based on MIPS II with some additional features from MIPS III, MIPS IV, and MIPS V; MIPS64 is based on MIPS V</p>
+<div class="listingblock">
+<div class="content">
+<pre>70 instrucciones máquina
+Instrucciones clasificadas en cuatro grupos
+	Movimiento de datos
+Aritmética entera, logicas y desplazamiento
+	Control de flujo
+	Aritmética en punto flotante
+4 modos de  direccionamiento
+	Inmediato
+	Directo de registros
+	Indirecto con desplazamiento
+	Indirecto con desplazamiento relativo al PC
+Banco de 64 registros (32 bits cada uno)
+	32 de propósito general (R0-R31)
+	32 para instrucciones en punto flotante (F0-F31). Pueden usarse como:
+	32 registros para operaciones en simple precisión (32 bits)
+	16 registros para operaciones en doble precisión (64 bit)
+3 formatos de instrucción distintos con longitud única de 32 bits:
+	 Op Code: 6 bits
+	 R :three registers, a shift amount field, and a function field;
+	 I :two registers and a 16-bit immediate value
+	 J :26-bit jump target
+Arquitectura registro-registro
+	Sólo las instrucciones de LOAD y STORE hacen referencia a memoria
+	El resto de instrucciones operan sobre registros
+		Instrucciones con tres operandos: 2 op.fuente y 1 op.Destino
+
+Notación ensamblador: op  x, y, z    x&lt;-(y)op(z)
+Datos:
+	Enteros Complemento a 2 : byte (1B), media palabra (2B), palabra (4B)
+	Nº Reales: IEEE-754 simple y doble precisión</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/MIPS_architecture">MIPS architecture</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/List_of_MIPS_architecture_processors">Versiones de la ISA MIPS</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/MIPS_architecture_processors">procesadores con arquitectura MIPS</a>: R2000, etc</p>
+</li>
+<li>
+<p><a href="http://logos.cs.uic.edu/366/notes/mips%20quick%20tutorial.htm">quick tutorial</a></p>
+</li>
+<li>
+<p><a href="https://rivoire.cs.sonoma.edu/cs351/wemips/">Emulador MIPS Online</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html">Lenguajes de programación de Alto y Bajo Nivel</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html">Toolchain: Cadena de Herramientas en el proceso de compilación</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

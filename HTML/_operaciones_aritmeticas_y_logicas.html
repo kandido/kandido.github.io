@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_operaciones_aritmeticas_y_logicas" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+<ul class="sectlevel1">
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html">1. Introducción a la Estructura de los Computadores</a>
+</li>
+<li><a href="_arquitectura_von_neumann.html">2. Arquitectura Von Neumann</a>
+</li>
+<li><a href="_representación_de_los_datos.html">3. Representación de los Datos</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html"><span class="toc-current">4. Operaciones Aritmeticas y Logicas</span></a>
+<ul class="sectlevel2">
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_temario_4">4.1. Temario</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_objetivo_2">4.2. Objetivo</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_introduccion">4.3. Introduccion</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_aritmetica_binaria">4.4. Aritmetica Binaria</a>
+<ul class="sectlevel3">
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_suma_en_módulo_2_binaria_en_binario_puro_nº_naturales">4.4.1. Suma en módulo 2 (binaria) en binario puro (Nº NATURALES)</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_resta_en_módulo_2_binaria_en_binario_puro">4.4.2. Resta en módulo 2 (binaria) en binario puro</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_sumaresta_en_módulo_2_binaria_en_complemento_a_2">4.4.3. Suma/Resta en módulo 2 (binaria) en complemento a 2</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_suma_en_módulo_16_hexadecimal">4.4.4. Suma en Módulo 16 (Hexadecimal)</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_resta_en_módulo_16_hexadecimal">4.4.5. Resta en Módulo 16 (Hexadecimal)</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_tipos_de_variables_en_c">4.4.6. Tipos de variables en C</a>
+</li>
+</ul>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_operaciones_logicas">4.5. Operaciones Logicas</a>
+<ul class="sectlevel3">
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_operadores_bitwise">4.5.1. Operadores BITWISE</a>
+</li>
+</ul>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_multiplicación">4.6. Multiplicación</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_programación">4.7. Programación</a>
+<ul class="sectlevel3">
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_funciones_matemáticas">4.7.1. funciones matemáticas</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_aplicación">4.7.2. Aplicación</a>
+</li>
+</ul>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_hardware">4.8. Hardware</a>
+<ul class="sectlevel3">
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_circuitos_digitales">4.8.1. Circuitos Digitales</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_unidad_aritmetico_lógica_alu">4.8.2. Unidad Aritmetico Lógica (ALU)</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_registro_de_flags_eflag">4.8.3. Registro de flags EFLAG</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html#_float_point_unit_fpu">4.8.4. Float Point Unit-FPU</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_representación_de_las_instrucciones.html">5. Representación de las Instrucciones</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html">6. Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.</a>
+</li>
+</ul>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_operaciones_aritmeticas_y_logicas">4. Operaciones Aritmeticas y Logicas</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_temario_4">4.1. Temario</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Aritmética y lógica</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Operaciones aritméticas y lógicas sobre enteros en binario</p>
+</li>
+<li>
+<p>Redondeo y propagación de error en números reales</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_objetivo_2">4.2. Objetivo</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Operaciones aritméticas de suma y resta con números naturales y enteros representados en código binario.</p>
+</li>
+<li>
+<p>Operaciones lógicas de datos representados en código binario.</p>
+</li>
+<li>
+<p>Libro de texto</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Parte 3ª, Capítulo 10 : Aritmética del Computador</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_introduccion">4.3. Introduccion</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>La Unidad Aritmetico Lógica (ALU) es la unidad hardware básica encargada de realizar las operaciones de cálculo aritmético como la suma y resta y de realizar operaciones lógicas de tipo booleano como las operaciones NOT, OR, AND, etc</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_aritmetica_binaria">4.4. Aritmetica Binaria</h3>
+<div class="sect3">
+<h4 id="_suma_en_módulo_2_binaria_en_binario_puro_nº_naturales">4.4.1. Suma en módulo 2 (binaria) en binario puro (Nº NATURALES)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Los  números naturales no tienen la marca de un signo ya que son todos positivos: 0,1,2,3&#8230;&#8203;.</p>
+</li>
+<li>
+<p>Suma de datos en código binario puro</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Concepto de operación <strong>modular</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo: módulo 100.000 &#8594; Interpretación modular gráfica  mediante la circunferencia. Qué ocurre en el cuenta-kilómetros parcial del coche cuando llegamos a 99.999.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplo: Representación de los números binarios en módulo 8. Suma binaria en módulo 8. Representación gráfica para números binarios de 3 bits &#8594; módulo= 2<sup>3</sup> = 8</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/datos_representacion/rueda_unsigned.png" alt="rueda unsigned">
+</div>
+<div class="title">Figure 31. Representación Unsigned Number</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Suma: Gráficamente se puede ver que 7+1=0. La ALU al realizar la operación suma 111+001 da como resultado 000. 7+1 da como resultado el valor 8 que en módulo 8 es 0.</p>
+</li>
+<li>
+<p>Suma: ¿Cuánto sería 7+7? &#8594; 14 en módulo 8 es 6. Si el resultado es igual o superior al módulo hay que restarle el módulo tantas veces como sea necesario.</p>
+</li>
+<li>
+<p>Suma: Cuánto vale 33 en módulo 8 &#8594; 33-8*4=1 . El 1 está en el rango (0 , 7).</p>
+</li>
+<li>
+<p>Resta: Gráficamente se puede ver que 0-1=7. La ALU al realizar la operación resta 000-001 da como resultado 111</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El <strong>acarreo</strong> (llevada) se produce al llegar o pasar el valor  <em>2</em>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1+1=uno más uno = dos &gt;=2 &#8594; al valor dos le resto el módulo 2 (2-2=0) y me llevo una. El valor 2 en binario se representa como 1 0, donde el cero es la representación en la misma posición que el digito sumando y el 1 la llevada a la siguiente posición.</p>
+</li>
+<li>
+<p>1+1+1=uno más uno más uno = tres &gt;=2 &#8594; al valor tres le resto el módulo 2 (3-2=1) y me llevo una. El valor 3 en binario se representa como 1 1, donde el uno de la derecha es la representación en la misma posición que el digito sumando y el 1 de la izda es la llevada a la siguiente posición.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejercicio: calcular la suma de 10011011+00011011 = 10110110</p>
+<div class="literalblock">
+<div class="content">
+<pre>  Llevadas --&gt;          1 1   1 1
+
+                    1 0 0 1 1 0 1 1  &lt;--sumando
+                  + 0 0 0 1 1 0 1 1  &lt;--sumando
+
+  Valor suma          1 3 2 1 3 2
+                  *****************
+  Resultado --&gt;     1 0 1 1 0 1 1 0  &lt;--suma</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_overflow_ó_desbordamiento">Overflow ó Desbordamiento</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Se dice que la suma o resta se ha desbordado cuando:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El valor del resultado a representar está fuera del rango debido a la limitación del número de digitos.</p>
+</li>
+<li>
+<p>El resultado de la operación aritmética tiene un tamaño superior al permitido por la palabra de memoria o registro donde se almacena.</p>
+</li>
+<li>
+<p>La solución sería aumentar el número de digitos que representan al dato, pero no siempre se puede.</p>
+</li>
+<li>
+<p>Lógicamente si se da un desbordamiento el resultado que proporciona la ALU no es correcto. La ALU dispone de un flag o banderín de desbordamiento OF (overflow flag) que almacena un bit. Si el bit OF=1 significa que la  última operación realizada por la ALU ha producido overflow. El programador puede saber si ha habido error de overflow leyendo el banderín OF.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La unidad ALU dispone de dos registros de entrada de "1 byte", AL y BL, cada uno donde almacena dos datos : 10011011 y 10011011. Dispone también de un registro de salida de 1 byte, CL. Calcular el resultado de la suma en formato binario puro: CL &#8592; AL+BL y el valor del banderín OF.</p>
+<div class="listingblock">
+<div class="content">
+<pre>Llevadas --&gt;          1 1   1 1
+
+                  1 0 0 1 1 0 1 1  &lt;--AL
+      	        + 1 0 0 1 1 0 1 1  &lt;--BL
+
+Valor suma        2   1 3 2 1 3 2
+                *****************
+Resultado --&gt;  1  0 0 1 1 0 1 1 0  &lt;--suma
+
+CL : 0 0 1 1 0 1 1 0
+OF : 1</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Error de overflow ya que la ALU ha calculado el resultado de la suma: 00110110</p>
+</li>
+<li>
+<p>El resultado correcto 100110110 está fuera del rango de un registro de 8 bits. El rango permitido serían los números comprendidos entre 0000000 y 11111111, es decir, valores comprendidos entre 0 y 255. El dato 100110110 cuyo valor es 310. La solución sería diseñar una nueva CPU con registros cuyo tamaño de palabra sea mayor que 1 byte, pej 2 bytes. Entonces si a la entrada de la ALU tenemos AX=0000000010011011 BX=0000000010011011 , el resultado de la operación CX &#8592;AX+BX sería 0000000100110110 y OF=0 &#8594; no hay error de overflow.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_resta_en_módulo_2_binaria_en_binario_puro">4.4.2. Resta en módulo 2 (binaria) en binario puro</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Para poder restar dos números naturales (sin signo) es necesario que el valor del minuendo sea superior al del sustraendo.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>0-0 = 0</p>
+</li>
+<li>
+<p>1-1 = 0</p>
+</li>
+<li>
+<p>1-0 = 0</p>
+</li>
+<li>
+<p>¿Qué ocurre si a 0 le tengo que restar 1? Al valor 0 NO se el puede resta el valor 1. Cuando un dígito del minuendo en la posición "p" es menor que el dígito en la misma posición "p" del sustraendo, la solución es sumarle al minuendo de la posición p el módulo (2 en binario) y al mismo tiempo también sumarle el mismo valor al sustraendo pero a través de la posición "p+1", con lo cual si sumamos el mismo valor tanto al minuendo como al sustraendo el resultado de la resta no se ve afectado.</p>
+</li>
+<li>
+<p>posición "p": minuendo 0 - sustraendo1 &#8594; En el minuendo 0+módulo-1=0+2-1= 1. El valor 2 en la posición "p" equivale al valor 1 en la posición "p+1". En la posición "p+1" sumaremos 1 al sustraendo.</p>
+</li>
+<li>
+<p>posición "p": minuendo 0 - sustranedo 1 - llevada 1 &#8594; En el minuendo 0+módulo-1-1=0+2-1-1=0 y llevada 1 que sumaremos a la posición siguiente del sustraendo.</p>
+</li>
+<li>
+<p>posición "p": 1-1-1 &#8594; en el sustraendo 1+módulo-1-1=1+2-1-1= 1 y llevada 1 que sumaremos a la posición siguiente del sustraendo.</p>
+</li>
+<li>
+<p>10110110 - 10011011 = 00011011</p>
+<div class="listingblock">
+<div class="content">
+<pre>Sumar crédito al minuendo            2  2     2  2
+
+                            1  0  1  1  0  1  1  0  &lt;--minuendo
+      	                  - 1  0  0  1  1  0  1  1  &lt;--sustraendo
+
+
+Sumar llevada al sustraendo       1  1     1  1
+                          *************************
+Resta                       0  0  0  1  1  0  1  1</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_sumaresta_en_módulo_2_binaria_en_complemento_a_2">4.4.3. Suma/Resta en módulo 2 (binaria) en complemento a 2</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Repasar el formato complemento a 2 para números enteros con signo</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/datos_representacion/rueda_signed.png" alt="rueda signed">
+</div>
+<div class="title">Figure 32. Representación Complemento a 2</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_suma">suma</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Realizar la suma de en complemento a 2 de números enteros de 1 byte 00100101 y 0111</p>
+</li>
+<li>
+<p>Los dos datos empiezan por cero, luego son positivos según el formato complemento a 2</p>
+<div class="ulist">
+<ul>
+<li>
+<p>extiendo los sumandos para tener todos el mismo tamaño. 0111 extendiendo el bit de signo 0 es 00000111</p>
+<div class="listingblock">
+<div class="content">
+<pre>Llevadas --&gt;              1 1 1
+
+                  0 0 1 0 0 1 0 1  &lt;--AL
+      	        + 0 0 0 0 0 1 1 1  &lt;--BL
+
+Valor suma                1 3 2 2
+                *****************
+Resultado --&gt;     0 0 1 0 1 1 0 0  &lt;--suma</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_resta">resta</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La resta X-Y equivale a la suma X+(-Y). La resta -X-Y equivale a la suma <em><code>(-X)</code>(-Y)</em>. Por lo que la ALU las restas la realiza mediante la operación suma y cambiando de signo a los operandos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo: realizar la resta 27-101 en complemento a 2 utilizando registros de 1 byte</p>
+<div class="listingblock">
+<div class="content">
+<pre>primero codifico tanto el minuendo +27 como el sustraendo +101
+  +27 -&gt; 00011011
+ +101 -&gt; 01100101
+
+-101 es el complemento a 2 de +101 -&gt; 10011011
+
+La operación equivale a la suma (-101)+27 -&gt; 10011011+00011011
+
+Llevadas --&gt;          1 1   1 1
+
+                  1 0 0 1 1 0 1 1  &lt;--AL
+      	        + 0 0 0 1 1 0 1 1  &lt;--BL
+
+Valor suma            1 3 2 1 3 2
+                *****************
+Resultado --&gt;     1 0 1 1 0 1 1 0  &lt;--suma</pre>
+</div>
+</div>
+</li>
+<li>
+<p>¿ Cuál es el valor del resultado?</p>
+<div class="listingblock">
+<div class="content">
+<pre>el resultado tiene el bit de la posición más significativa a 1 por lo que su valor es negativo en complemento a 2. Si es negativo no puedo calcular su valor mediante sumas ponderadas ya que no es una representación posicional. Tengo que cambiar lo de signo para hacerlo positivo y así poder calcular su valor por suma ponderada.
+
+Complemento a 2 del resultado 10110110 -&gt; 01001010 cuyo valor es +74 , por lo que el valor de 10110010 es -74.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>repetir la operación cambiando de computadora y utilizando registros de 2 bytes. Basarse en el apartado anterior.</p>
+<div class="listingblock">
+<div class="content">
+<pre>Extiendo el bit de signo del número negativo 10011011 hasta completar los 16 bits
+  AX &lt;-- 1111111110011011   (-101)
+Extiendo el bit de signo del número positivo 00011011 hasta completar los 16 bits
+  BX &lt;-- 0000000000011011   (+27)
+Extiendo el bit de signo del resultado negativo 10110110 hasta completar los 16 bits
+  CX &lt;-- 1111111110110110   (-74)</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_overflow_en_complemento_a_2_c2">Overflow en Complemento a 2 (C2)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>El desbordamiento u overflow ocurre en las operaciones aritméticas suma y resta cuando el resultado de la operación es de un tamaño fuera del rango de posibles representaciones, por lo que el valor resultante no es válido y provoca errores.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo de suma utilizando registros de 2 bytes : 10000000+10000000 = 00000000 &#8658; Overflow</p>
+</li>
+<li>
+<p>Error ya que -128-128 no es cero.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Si los dos sumandos son negativos el resultado no puede ser positivo</p>
+<div class="listingblock">
+<div class="content">
+<pre>Para que el resultado fuese correcto deberíamos utilizar registros de un tamaño superior al byte, por ejemplo 9 bits. En este caso realizamos nuevamente la operación extendiendo los datos 1 bit más:
+110000000+110000000 = 100000000 -&gt; no hay overflow -&gt; la suma de dos números negativos ha dado negativo
+
+si realizamos la operación en decimal -&gt; (-128)+(-128) = (-256)</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Si los dos sumandos son positivos el resultado no puede ser negativo</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Intelx86 activa el error de overflow cuando en el resultado de una operación aritmética con signo el acarreo del bit MSB afecta al valor del resultado.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Observar que al realizar operaciones aritméticas de suma y resta, el código del resultado es idéntico en números sin signo y en complemento a 2. El código es idéntico pero su valor asociado no lo es.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_suma_en_módulo_16_hexadecimal">4.4.4. Suma en Módulo 16 (Hexadecimal)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Suma en módulo 16:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el acarreo se produce al llegar o pasar el valor del módulo: 16.</p>
+</li>
+<li>
+<p>0xF+0x1 = 0x10</p>
+<div class="ulist">
+<ul>
+<li>
+<p>F+1=quince más uno = dieciséis &gt;=16 &#8594; al resultado dieciséis le resto 16 (16-16=0) y me llevo una.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>0x3AF+0xA = 0x3B9</p>
+<div class="ulist">
+<ul>
+<li>
+<p>F+A=quince más 10 = 25&gt;=16 &#8594; al resultado veinticinco le resto 16 (25-16=9) y me llevo una</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>0x3A1F+0xF4E1=0x12F00</p>
+<div class="ulist">
+<ul>
+<li>
+<p>F+1=quince más 1 = 16&gt;=16 &#8594; al resultado dieciséis le resto 16 (16-16=0) y me llevo una.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_resta_en_módulo_16_hexadecimal">4.4.5. Resta en Módulo 16 (Hexadecimal)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Todo lo visto anteriormente para números binarios se puede realizar en cualquier otra base, por ejemplo en números codificados en hexadecimal.</p>
+</li>
+<li>
+<p>Resta en módulo 16:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el acarreo se produce cuando una posición p del minuendo es inferior a la misma posición p del sustraendo, en cuyo caso, es necesario sumar el módulo 16 al minuendo y la llevada a la posición siguiente p+1 del sustraendo:</p>
+</li>
+<li>
+<p>0x4308 - 0x1ABC = 0x</p>
+<div class="listingblock">
+<div class="content">
+<pre>                0x 4 3 0 8 &lt;-- Minuendo
+      	      - 0x 1 A B C &lt;-- Sustraendo
+LLevadas --&gt;       1 1 1
+              *************
+                0x 2 8 4 C</pre>
+</div>
+</div>
+</li>
+<li>
+<p>8-C &#8594; 8+módulo_16-12=8+16-12=12=0xC y llevada 1 a la posición siguiente</p>
+</li>
+<li>
+<p>0-B-LLevada &#8594; 0+módulo_16-11-1=0+16-11-1=4=0x4 y llevada 1 a la posición siguiente</p>
+</li>
+<li>
+<p>3-A-LLevada &#8594; 3+módulo_16-10-1=3+16-10=8=0x8 y llevada 1 a la posición siguiente</p>
+</li>
+<li>
+<p>4-1-LLevada &#8594; 4-1-1=2</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_suma_en_base_hexadecimal_en_formato_complemento_a_2">Suma en base hexadecimal en formato complemento a 2</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>0xEC+0xAB=0x97</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En binario el bit MSB es 1 significa que el valor es negativo</p>
+</li>
+<li>
+<p>Los dos sumandos y el resultado son negativos</p>
+</li>
+<li>
+<p>La suma de dos números negativos da overflow si el resultado es positivo, por lo que no hay overflow</p>
+</li>
+<li>
+<p>C2 de 0xEC &#8594; 0xEC negado es 0x13 y sumando 1 &#8594;  0x15</p>
+</li>
+<li>
+<p>C2 de 0xAB &#8594; 0x54+1 &#8594; 0x55</p>
+</li>
+<li>
+<p>C2 de 0x97 &#8594; 0x68+1 &#8594; 0x69</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_suma_en_base_8_octal">Suma en base 8 (Octal)</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Suma en módulo <em>8</em>. El acarreo se produce al llegar o pasar el valor del dígito <em>8</em>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>08+01 = 010</p>
+</li>
+<li>
+<p>0377+06 = 0305</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tipos_de_variables_en_c">4.4.6. Tipos de variables en C</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Enteros</p>
+<div class="ulist">
+<ul>
+<li>
+<p>char</p>
+</li>
+<li>
+<p>short</p>
+</li>
+<li>
+<p>int</p>
+</li>
+<li>
+<p>long</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Reales</p>
+<div class="ulist">
+<ul>
+<li>
+<p>float</p>
+</li>
+<li>
+<p>double</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Operador sizeof()</p>
+</li>
+<li>
+<p>Conversión de tipos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>casting</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_operaciones_logicas">4.5. Operaciones Logicas</h3>
+<div class="sect3">
+<h4 id="_operadores_bitwise">4.5.1. Operadores BITWISE</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Bitwise: operaciones bit a bit</p>
+<div class="ulist">
+<ul>
+<li>
+<p>not,and,or,xor</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_lenguaje_c">Lenguaje C</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.salesforce.com/us/developer/docs/apexcode/Content/langCon_apex_expressions_operators_understanding.htm" class="bare">https://www.salesforce.com/us/developer/docs/apexcode/Content/langCon_apex_expressions_operators_understanding.htm</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Boolean_algebra">Algebra Boole</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/List_of_logic_symbols">algebra symbols</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Bitwise operator: and &amp;, or |, xor ^, not ~</p>
+</li>
+<li>
+<p>Shift operator: left &lt;&lt;,right signed &gt;&gt;, right unsigned &gt;&gt;&gt;</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-ends grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-right valign-top">Operador</th>
+<th class="tableblock halign-center valign-top">Algebra</th>
+<th class="tableblock halign-left valign-top">C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top"><p class="tableblock"><strong>NOT</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>&#xac; &#x02dc;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>~</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><p class="tableblock"><strong>OR</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>&#x2228;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>|</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><p class="tableblock"><strong>AND</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>&#x2227;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&amp;</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><p class="tableblock"><strong>XOR</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>&#x2295;  &#x22bb;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>^</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><p class="tableblock"><strong>NOR</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>&#x22bd;</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><p class="tableblock"><strong>NAND</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><code>&#x22bc;</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><p class="tableblock"><strong>Left SHIFT</strong></p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>x &lt;&lt; m</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><p class="tableblock"><strong>Right SHIFT signed</strong></p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>x &gt;&gt; m</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><p class="tableblock"><strong>Right SHIFT unsigned</strong></p></td>
+<td class="tableblock halign-center valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>x &gt;&gt;&gt; m</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_tablas_de_la_verdad">Tablas de la Verdad</h5>
+<table class="tableblock frame-ends grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">x</th>
+<th class="tableblock halign-center valign-top">y</th>
+<th class="tableblock halign-center valign-top">z=x&#x2228;y</th>
+<th class="tableblock halign-center valign-top">z=x&#x2227;y</th>
+<th class="tableblock halign-center valign-top">z=x&#x2295;y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><strong>0</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect4">
+<h5 id="_expresión_lógica">Expresión Lógica</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>z=&#xac;x·y+x·&#xac;y</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Si desarrollamos la tabla de la verdad comprobamos su equivalencia con el operador XOR</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_multiplicación">4.6. Multiplicación</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Multiplicación 0xFF x 0x6</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Realizarla en Binario</p>
+</li>
+<li>
+<p>Observar que al multiplicar por una potencia de 2 hay un desplazamiento del multiplicando hacia la dcha</p>
+</li>
+<li>
+<p>multiplicar = sumar y desplazar</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_programación">4.7. Programación</h3>
+<div class="sect3">
+<h4 id="_funciones_matemáticas">4.7.1. funciones matemáticas</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://bisqwit.iki.fi/story/howto/bitmath/" class="bare">http://bisqwit.iki.fi/story/howto/bitmath/</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>El código fuente está escrito en lenguaje C</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Librería libm.so del standard de C</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_aplicación">4.7.2. Aplicación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Desarrollar un programa que multiplique números enteros con signo.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hardware">4.8. Hardware</h3>
+<div class="sect3">
+<h4 id="_circuitos_digitales">4.8.1. Circuitos Digitales</h4>
+<div class="sect4">
+<h5 id="_básicospuerta_lógicas">Básicos:Puerta lógicas</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Logic_gate">Puertas lógicas</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>not, and, or, xor</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_complejos">Complejos</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Adder_%28electronics%29#Full_adder">half adder, full adder</a></p>
+</li>
+<li>
+<p><a href="http://en.wikipedia.org/wiki/Binary_multiplier">multiplicador</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>circuito combinacional formado por puertas lógicas</p>
+</li>
+<li>
+<p>acumulador y registro desplazador</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_unidad_aritmetico_lógica_alu">4.8.2. Unidad Aritmetico Lógica (ALU)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Arithmetic logic unit (ALU)</p>
+</li>
+<li>
+<p>Circuito Digital</p>
+</li>
+<li>
+<p>Conexión CPU-DRAM</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Transferencia de Instrucciones y Datos</p>
+</li>
+<li>
+<p>La ALU es interna a la CPU y procesa datos numéricos enteros almacenaddos en los registros de propósito general.</p>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNrllt9LwzAQx5_bv-IelTLCtlcZrNMHweGoFEXGJLRBCjORJIJC_nhZ57ot3TVNHUXwnto0uXx6P74cwN5mjGtJ17CQImNKCQkpLzRczBbpZQBOm7M3IQsKN5-aSU4hmc7DaNDBosC-DXEThSYordxkUDLkizk-HlTX4tdBM1hU92V2T6Z-2kDC1Mda01wcbi33xekDXBeSZVkhOFNnAhOnHZDBpIlza6vmQI9HPnxwHKfDgKHJ2r8QrHQ65ZKghbNsl0_yszS9Sx2nnTSkKv0nfxL7RwgsLSeePCSwHYLTZXP-apW39XK0tuzYkCukatu2pEFK1I_G7jykH11QBu7fmaQ8Fy_DPdvB6qg8VIFv9CJhNCePstDs_KgCa7lJO3VFe6ytZtQVzUNrN0r7WigtBUwR3embI-6Bo4WUWlTwR6Lznzj8s_TcA9VV-QlgCPGXZrBrdstVTHkmIGcVm-pOtRsgb3k5QDpS5ju6nd6PBr_b5OqvcsisBb-3Veg1DVdDJ9VCuXyb0Os3kaHTLyYeNh59A0rkHLU=" alt="Arquitectura Intel x86 de 32 bits">
+</div>
+<div class="title">Figure 33. Arquitectura Intel x86 de 32 bits</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_registro_de_flags_eflag">4.8.3. Registro de flags EFLAG</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El registro de flags EFLAGS es un registro de memoria interno a la CPU Intel x86</p>
+</li>
+<li>
+<p>Cada bit del registro de 32 bits es un banderín o flag que se activa en función del resultado de la operación realizada por la última instrucción máquina ejecutada.</p>
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<caption class="title">Table 6. RFLAG Register</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Flag</th>
+<th class="tableblock halign-center valign-top">Bit</th>
+<th class="tableblock halign-left valign-top">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Carry flag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parity flag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adjust flag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ZF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">6</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zero flag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">7</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sign flag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OF</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">11</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Overflow flag</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Carry flag CF:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se activa si la llevada afecta a una posición de bit mayor que del ancho de palabra (word size) de la ALU en una operación aritmética de <strong>números enteros sin signo o con signo</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Overflow flag OF:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se activa si teniendo en cuenta el bit de mayor peso MSB (aunque esté fuera el word size) indicase error en la operación aritmética con <strong>números enteros con signo</strong>. Si no se tiene en cuenta el MSB fuera del word size, la operación es correcta.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Parity Even flag:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>indica si el número de bits del byte LSB del resultado de la última operación ha sido par.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sign flag:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se activa si el resultado de la última operación ha sido negativo.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Adjust flag:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se activa si hay llevada en el nibble LSB del resultado de la última operación</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div id="of_cf_unsigned_signed" class="ulist">
+<ul>
+<li>
+<p>Ejemplos:</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+Hay que diferenciar los casos suma CON signo y suma SIN signo. En el primer caso detectamos el error matemático únicamente con el flag OF y en el segundo caso detectamos el error matemático únicamente con el flag CF.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Números CON signo (complemento a 2):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>para saber si hay overflow siempre se suma&#8230;&#8203;una resta se puede convertir en suma</p>
+</li>
+<li>
+<p>El carrier flag CF no tiene sentido. Unicamente interpreto OF para saber si hay error en la operación aritmética.</p>
+<div class="listingblock">
+<div class="content">
+<pre>  11111111
++ 00000001
+__________
+ 100000000 -&gt; Esta suma NO es correcta, ya que para representar el resultado con 9 bits los operandos tienen que ser de 9 bits y por lo tanto hay que extender el bit de signo de los operandos de 8 bits. La suma con 9 bits sería:
+
+operandos y resultado con 9 bits:
+  111111111
++ 000000001
+___________
+  000000000 -&gt; NO hay Overflow ya que los operandos de la suma son de distinto signo
+
+operandos y resultado con 8 bits:
+  11111111
++ 00000001
+___________
+  00000000 -&gt; NO hay Overflow ya que los operandos de la suma son de distinto signo
+
+
+Nunca va haber overflow si sumamos datos de signo contrario
+
+
+ Resta A-B donde
+ A=11110000
+ B=00010100
+ A-B=A+(-B) -&gt; Convierto la resta en suma
+
+ A :    11110000
+-B :   +11101100
+________________
+A–B:    11011100 -&gt; Hay acarreo pero NO overflow. La suman de dos datos negativos da como resultado un número también negativo.CF=1 y OF=0
+
+ A=10000000
+ B=10000000
+ A+B
+
+ Para hacer la suma con 9 dígitos en lugar de 8 bits, extiendo los dos operandos hasta completar los 9 dígitos
+ A :    110000000
+ B :   +110000000
+_________________
+A+B:    100000000
+
+ Observamos que no hay overflow en el caso de que utilizasemos 9 dígitos. Pero si la ALU está operando con registros de 8 bits SÍ HAY overflow. Los dos sumandos son negativos (bit de signo posición 7ª) y el bit de signo del resultado (bit posición 7ª) es positivo luego el resultado es erróneo.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>números SIN signo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El overflow flag OF no tiene sentido. Unicamente interpreto CF para saber si hay error en la operación aritmética.</p>
+<div class="listingblock">
+<div class="content">
+<pre>  11111111
++ 00000001
+__________
+  00000000 -&gt; Hay acarreo en el bit más significativo luego CF=1. Conceptualmente hay overflow por lo que el resultado que obtiene la ALU aunque electrónicamente es correcto, no lo es matemáticamente (511+1=0). El efecto overflow lo detecto con CF=1.
+
+Extiendo los operandos de la operación anterior con 1 bit.
+  011111111
++ 000000001
+___________
+  100000000 -&gt; No hay acarreo -&gt; CF=0. Esta suma es correcta matemáticamente ya que 511+1=512 y por lo tanto no hay overflow -&gt; CF=0</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Se ve nuevamente en  el próximo capítulo <a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html#CFR">Programación en Lenguaje Ensamblador (x86)</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_float_point_unit_fpu">4.8.4. Float Point Unit-FPU</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad de procesamiento de datos en coma flotante</p>
+</li>
+<li>
+<p>Antiguamente era una unidad no integrada en la CPU denominada coprocesador matemático</p>
+</li>
+<li>
+<p>Utiliza registros específicos denominados SSE distintos de los Registros de Propósito General utilizados por la ALU para realizar operaciones con números enteros.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_representación_de_los_datos.html">Representación de los Datos</a> | ↑ Up: <a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_representación_de_las_instrucciones.html">Representación de las Instrucciones</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

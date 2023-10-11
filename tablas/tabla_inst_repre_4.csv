@@ -1,0 +1,8 @@
+Instrucciones:,
+a. CLR.L,-(A1)
+b.  CLR.W,D2
+c.  MOVE.W,"$1204,D1"
+d.  MOVE.W,"#$1204,D1"
+e.  MOVE.B,"(A2)+,$1200"
+f.  MOVE.L,"D1,-(A2)"
+g.  MOVE.L,"(A1)+,D2"

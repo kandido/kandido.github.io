@@ -1,0 +1,143 @@
+Unidad de Memoria
+=================
+
+:doctitle: Tema 9: Unidad de Memoria
+
+
+
+
+Introducción
+------------
+
+Temario
+~~~~~~~
+
+[start=9]
+
+. Organización de la memoria
+.. Jerarquía de memoria
+.. Latencia y ancho de banda
+.. Memoria cache
+.. Memoria virtual
+
+
+
+Libro: William Stalling
+~~~~~~~~~~~~~~~~~~~~~~~
+
+. Introducir conceptos de William.
+** William tiene un capítulo para la memoria principal y otro para memoria cache
+** Capítulo 4 : Caché
+*** La introducción de la memoria cache tiene Conceptos Generales
+** Capítulo 5 : Memoria Interna (DRAM)
+** Capítulo 6 : Memoria Externa (Almacenamiento Periférico)
+** Capítulo 8 : Sistemas Operativos: Gestión de Memoria
+
+
+Refs
+~~~~
+
+* What Every Programmer Should Know About Memory. Ulrich Drepper. Red Hat, Inc.
+** su lectura completa requiere un nivel avanzado
+
+
+Historia
+~~~~~~~~
+* El gran avance del Ingeniero John Von Neumann fue desarrollar la computadora IAS en la cual los programas no eran cableados sino almacenados electrónicamente en una unidad de memoria denominada Selectron. Los programas eran "editados" mediante la escritura de tarjetas de cartón perforadas que posteriormente eran convertidas en secuencias de digitos binarios para poder ser almacenadas en código binario en la unidad de memoria Selectrón. De esta manera surgió el concepto de "programa almacenado" o software y el desarrollo de las *unidades de memoria*.
+* La memoria no consistía de una única unidad sino que se estructuraba en distintos niveles:
+** Nivel cpu: registros PC,MAR,MBR, IR, IBR, Acumuladores AC y AR : registros con capacidad para almacenar una instrucción y un dato.
+** Memoria principal: memoria Selectron con capacidad para almacenar programas agrupando en una sección las instrucciones y en otra sección los datos. Capacidad para direccionar 4K palabras de 40 bits cada palabra
+** Memoria secundaria: Tambores magnéticos "drum" con capacidad para almacenar una colección de programas.
+
+
+Interés
+~~~~~~~
+
+* Programación en un lenguaje de alto nivel
+** ¿Tenemos en cuenta el concepto memoria? -> Abstracción de los mecanismos de gestión de memoria por parte del S.O, hardware, etc
+** Tener conocimientos de la estructura, organización y gestión de la memoria ayuda a la hora de programar -> Fase de depuración, diseño, etc
+** Ingeniería de programación y de sistemas
+* Conocimientos previos sobre memoria: temas previos de la asignatura Estructura de Computadores.
+** variable, puntero,  registros, secciones, direccionamiento, violación de segmento, linker, ...
+* Conocimiento de S.O.
+** Gestión de la memoria de los procesos, paginación, memoria virtual, TLB, etc
+* Objetivo
+** Qué: Almacenar: datos e instrucciones -> programas -> ficheros -> procesos
+** Para qué:
+*** Arquitectura von-Neumann: programa almacenado.
+*** Ciclo de Instrucción: Captura (datos, instrucciones) de la CPU. Esquema de bloques CPU-RAM.
+** Cómo: Cómo se almacenan ,cómo se capturan?
+* Físicamente la memoria es 
+** chip de semiconductor conectado a la CPU. 
+** memoria semiconductor interna a la CPU
+** memoria magnética de almacenamiento masivo
+* El tema Memoria está aislado del resto de:
+** la arquitectura de la computadora?:
+*** de la CPU? del kernel?
+** la programación?
+*** instrucciones y datos?
+*** qué es un array?
+*** un goto?
+*** en ensamblador que es la directiva .text?
+*** qué es la pila?
+
+Perspectivas
+~~~~~~~~~~~~
+
+* El concepto de memoria puede ser estudiado en función de diferentes perspectivas.
+* Gestión de la Memoria  de los procesos en ejecución por parte del kernel del sistema operativo vs Organización de Memoria (ficheros,secciones,jerarquía de memoria ,..)
+* ISA: acceso a memoria, modos de direccionamiento, little endian, etc
+* Software:
+** Programación:
+*** variables (reserva e inicialización de memoria), punteros, asignación dinámica de la memoria malloc(), secciones de memoria (text,data,rodata,bss,etc..), pila, ..
+** Herramientas:
+*** Compilador, Linker (direcciones reubicables, resolución direcciones, segmentos de memoria,.. ), Cargador (memoria física, mapa de memoria, etc ..), volcado de memoria (objdump, ..)
+** Sistema Operativo:
+*** Gestor de memoria virtual
+*** Gestión del sistema de ficheros virtual
+* Hardware: 
+** Unidad de gestión de memoria MMU (Memory Management Unit): Convertidor del espacion de direcciones virtual en físico.
+** Módulos de Memoria
+*** tarjetas,chips,conexión buses
+*** características: capacidad, velocidad, consumo, tecnología
+
+
+Jerarquía de Memoria
+~~~~~~~~~~~~~~~~~~~~
+
+* Hoy en día la tecnología de semiconductor ha conseguido avances en capacidad y memoria manteniendo la estructura por niveles en la siguente jerarquía:
+. Jerarquía memoria
+* Niveles: L0,L1,L2,L3,L4
+* Memoria Registros CPU -> L0
+* Memoria Cache -> L1,L2,L3
+* Memoria Principal 
+* Memoria Secundaria: disco, pen-drive
+* Características
+** Capacidad ascendente top-down
+** Tiempo del ciclo de memoria ascendente top-down
+
+image::./images/memoria/MemoryHierarchy.png[width=600,height=400,align="center", title="Memory Hierarchy" ]
+
+
+// Push titles down one level.
+:leveloffset: 2
+
+
+
+include::./registros/registros.adoc[Registros]
+
+
+
+include::./dram/dram.adoc[Memoria Principal SDRAM]
+
+
+
+include::./cache/cache.adoc[Memoria Cache SRAM]
+
+
+
+include::./memvirtual/memvirtual.adoc[Memoria Virtual]
+
+
+
+

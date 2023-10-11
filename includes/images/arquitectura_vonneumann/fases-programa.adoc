@@ -1,0 +1,7 @@
+[.text-center]
+["graphviz", "fases-programa", align="center", title="Fases de la Programación"]
+----------------------------------------------------------------------
+digraph G {
+ Pseudocódigo -> "Organigrama" -> RTL -> Ensamblador->Simulación;
+ }
+----------------------------------------------------------------------

@@ -1,0 +1,333 @@
+Imágenes: Bit Map Portable
+==========================
+
+:doctitle: Imágenes: Bit Map Portable
+
+
+Introducción
+------------
+
+IMPORTANT:  Práctica introductoria al examen final por lo que se aconseja realizarla de forma *individual* para obtener el mayor rendimiento. 
+
+* El objetivo de la práctica es desarrollar una subrutina en lenguaje ensamblador equivalente a una función de C dentro de una aplicación de generación de imágenes con formato BMP.
+* Los cuatro primeros ejercicios en lenguaje C se realizarán de forma guiada con el profesor y el resto de forma *individual*.
+
+Aplicación
+----------
+
+Ficheros incluidos
+~~~~~~~~~~~~~~~~~~
+
+* Descargar el archivo 'bmp_practica6.zip' y extraer los ficheros.
+* Scripts:
+** +comp_ejec_vis.sh+ : script que automatiza las tareas de compilar, ejecutar y visualizar llamando al script Makefile.
+** +Makefile_C+ : script que automatiza la tarea de compilación del programa fuente C.
+** +Makefile_pixels_as+: script que automatiza la tarea de ensamblaje, compilación y enlazado de los módulos fuentes C y asm. 
+** +LEEME.txt+ : instrucciones de como proceder para editar los distintos programas fuente en lenguaje C y ensamblador y copiar dichos programas con los nombres apropiados antes de ejecutar el script +comp_ejec_vis.sh+
+* Módulos fuente:
+** 'bitmap_gen_test.c': Genera una imagen bitmap 512x512 en formato BMP y la guarda en el fichero 'test.bmp'.
+** 'cuadrado_128x128.c': Genera una imagen bitmap DIMENSIONxDIMENSION en formato BMP y la guarda en el fichero 'test.bmp'.
+** 'cuadrados_4.c': Genera cuatro rectángulos anidados bitmap en formato BMP y guarda la imagen en el fichero 'test.bmp'.
+** 'bmp_funcion.c': Partiendo de 'bitmap_gen_test.c' el bucle generador de pixels se define mediante la función 'pixels_generator(xcoor,ycoor,top,buffer)'
+** 'bmp_as.c': Módulo no incluido a desarrollar.
+** 'pixels.s': Módulo no incluido a desarrollar.
+* Fichero
+** 'test.bmp'
+
+Ejemplo de compilación automática
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Copiar +cp Makefile_C Makefile+
+* Copiar +cp cuadrados_4.c bmp_imagen.c+ y ejecutar +comp_ejec_vis.sh+
+* Copiar +cp bitmap_gen_test.c bmp_imagen.c+ y ejecutar +comp_ejec_vis.sh+
+* Interpretar los scripts +comp_ejec_vis.sh+ y +Makefile+ 
+
+Formato BMP
+-----------
+
+Pantalla: pixel
+~~~~~~~~~~~~~~~
+
+* La pantalla de la computadora está formada por una matriz bidimensional de pixeles, donde cada pixel está ubicado en un punto discreto de la pantalla programable. Físicamente el monitor de la computadora puede ser de diferentes tipos: CRT, LCD, LED, OLED, Plasma, etc. Desde el punto de vista funcional supongamos un monitor tipo LED donde cada pixel esta formado por 3 diodos Leds: un led azul, otro led verde y el tercer led rojo. La combinación de los 3 colores básicos da lugar a todos los colores posibles. Las dimensiones de un pixel, es decir 3 leds, es de unas pocas centenas de micrómetros. Un portátil con una pantalla de 15.6" tiene 15" de anchura por 12" de altura. El comando +xdpyinfo | grep 'dimensions:'+ informa de : 1366x768 pixels (361x203 millimeters=73283 mm^2^) ->73283mm^2^/(1366x768 pixels)=0,07mm^2^/pixel=70000&#181;m^2^/pixel,es decir, un cuadrado de 265&#181;m de lado.
+
+
+Codificación
+~~~~~~~~~~~~
+
+* El formato BitMapPortable (BPM) es un formato de imagen escalar, es decir, contiene los datos de *cada pixel* codificando la intensidad de los componentes RGB de color tal como  se visualizarán en la pantalla.
+* En el formato BPM, la matriz de pixeles de la pantalla está vinculada a una estructura de datos tipo array bidimensional 2D de filas (eje horizontal) y columnas (eje vertical) almacenada en la memoria de la tarjeta de video. El origen de coordenadas del array es la esquina inferior izquierda. A cada par (x,y) del array 2D le corresponde el color de un pixel.
+* True Color: cada elemento del array contiene un dato formada por 3 campos, donde cada campo representa un color (Blue-Green-Red) y ocupa un byte .Cada componente de color R-G-B está codificado con un byte que indica la intensidad del color. Ejemplos:
+** R-G-B:0xFF-0x00-0x00 -> pixel 100% rojo e intensidad máxima.
+** R-G-B:0xFF-0x00-0xFF -> pixel 50% rojo y 50% azul -> color morado.
+** R-G-B:0x00-0x00-0x00 -> ausencia de color -> color negro
+** R-G-B:0xFF-0xFF-0xFF -> misma proporción de colores primarios -> color blanco
+** R-G-B:0x7F-0x7F-0x7F -> misma proporción de colores primarios -> escala de grises entre el negro (00-00-00) y el blanco (FF-FF-FF)
+* Una imagen de tamaño en pixeles 512x512 dara lugar a un array de 512 pixeles x 512 pixeles x 3 bytes/pixel = 786432Bytes = 768KB
+
+Mapa de memoria: Monitor -> Buffer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Al escribir los colores del array2D MxN en la memoria lineal donde cada dirección de memoria es *un byte*, la estructura de datos o buffer tiene sus componentes distribuidos de la siguiente forma:
+** F0C0BGR-F0C1BGR-...-F0C_(N-1)BGR-F1C0BGR-...-F1C_(N-1)BGR-....-F_(M-1)C0BGR-F_(M-1)C1BGR-...-F_(M-1)C_(N-1)BGR que se corresponden con las posiciones relativas 0-1-2-3-4-5-.....-(MxNx3-1). Donde F0 es la fila 0, C0 la columna 0 y BGR la secuencia de 3 bytes Blue-Green-Red.
+** longitud total del buffer de memoria: MxNx3 bytes
+** Interpretación de F0C0BGR:  
++
+
+----
+*** pixel BGR de la Fila cero Columna cero
+*** BGR: 3 bytes en el orden azul-verde-rojo.
+*** El byte azul ocupará dentro del buffer la posición relativa 0, el byte verde la posición 1 y el byte rojo la posición 2. Posiciones relativas a la dirección del primer byte del buffer.
+----
+** F0C1BGR: 
++
+
+----
+el byte blue está en la posición 3 dentro del buffer
+el byte green está en la posición 4 dentro del buffer
+el byte red está en la posición 5 dentro del buffer
+----
+** Fila cero del monitor: F0C_(N-1)BGR:  En el buffer, el byte azul está en la posición 3*(N-1), el verde en 3*(N-1)+1 y el rojo en 3*(N-1)+2.
+** Fila uno del monitor: F1C0BGR:  byte azul -> posición 3*N
+** Fila uno del monitor: F1C_(N-1)BGR:  byte azul -> posición 3*N+3*(N-1)
+** F_iC_jBGR: 
++
+
+----
+byte azul  -> posición 3*N*i+3*j     donde 0<i<M y 0<j<N
+byte verde -> posición (3*N*i+3*j)+1 donde 0<i<M y 0<j<N
+byte rojo  -> posición (3*N*i+3*j)+2 donde 0<i<M y 0<j<N
+----
+
+Fichero BMP
+~~~~~~~~~~~
+
+* Las imágenes con formato BMP se guardan en ficheros con extensión "*.bmp" como "test.bmp"
+* El fichero BMP además del buffer de datos contiene una cabecera con metainformación que no procede explicar en este contexto.
+
+
+Módulo Fuente bitmap_gen_test.c
+-------------------------------
+
+Descripción
+~~~~~~~~~~~
+
+* El programa 'bitmap_gen_test' genera un array 2D de pixeles y lo salva en el fichero 'test.bmp'
+** Las dimensiones del array se definen en el programa fuente 'bitmap_gen_test.c'
+
+Funciones del programa
+~~~~~~~~~~~~~~~~~~~~~~
+
+main()
+^^^^^^
+* Función principal
+* Descripción de bloques:
++
+
+------------------------
+RGB_data buffer[512][512]  : variable local done se declara y almacena el array 2D "buffer" de pixeles donde cada pixel es del tipo RGB_data
+
+Tipo de variable RGB_data:  3 bytes consecutivos donde el primero es la intensidad de azul, el segundo verde y el tercero rojo. Las intensidades son números enteros sin signo. Por ejemplo: 0x7F-0xFF-0x00  representa una intensidad 50% de azul, una intensidad 100% de verde y una intensidad 0% de rojo
+------------------------
+
+memset(buffer, 0, sizeof(buffer))
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Es una función de la librería standard libc -> +man memset+ -> está declarada en la cabecera 'string.h'
+* Inicializa a 0 el array 2D de pixeles "buffer".
+* Ver como ejemplo la llamada a la función memset() en el módulo 'bitmap_gen_test.c'
+
+
+bmp_generator("./test.bmp", 512, 512, (BYTE*)buffer)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* Genera el fichero 'test.bmp' y escribe en dicho fichero el contenido del array 2D de pixeles con nombre buffer.
+* Para pasar el argumento buffer es necesario realizar el casting (BYTE*). Ver la declaración del tipo BYTE en el módulo 'bitmap_gen_test.c'
+
+estructura RGB_data
+^^^^^^^^^^^^^^^^^^^
+* Ver la declaración del tipo 'RGB_data' en el módulo 'bitmap_gen_test.c'.
+
+bucle doble
+^^^^^^^^^^^
+* bucle *for* :
+**	la variable i es el índice de filas y la variable j el índice de columnas.
+**	buffer[i][j].b : byte blue del pixel de la posición (i,j)
+**	buffer[i][j].g : byte green del pixel de la posición (i,j)
+**	buffer[i][j].r : byte red del pixel de la posición (i,j)
+** cada elemento de la matriz buffer[i][j] es una estructura de datos 'RGB_data' declarada por el programador con los elementos b,g y r. 
+
+<<<<
+
+Ejercicios
+----------
+
+IMPORTANT: El último ejercicio consistente en una subrutina en lenguaje ensamblador suele ser la base del examen de prácticas.
+
+Programación en C
+~~~~~~~~~~~~~~~~~
+
+* Leer el procedimiento de programación en el fichero *LEEME.txt*
+* El objetivo es modificar la función principal *main()* del programa original *bitmap_gen_test.c* dando lugar a distintos programas independientes entre sí.
+. - Compilar y ejecutar el program 'bitmap_gen_test.c'
+. -  visualizar la imagen del fichero test.bmp: *$display test.bmp*
+. - Módulo *cuadrado_128x128.c* :Cambiar las dimensiones de la imagen a 128 pixeles x 128 pixeles editando la macro DIMENSION=128 un gris con una intensidad del 50% de su valor máximo.
+. - Módulo *cuadrados_4.c*: Generar 4 cuadrados, uno dentro de otro simétricamente, donde el cuadrado mayor negro es 512x512 y el resto se reduce 1/8 cada uno. No utilizar ctes en las sentencias de C, utilizar las macros x_coor, y_coor, top para indicar el valor inicial del *for* y la posición máxima (top) de las filas y columnas. Colores de los cuadrados: background (00-00-00)/(FF-00-FF)/(00-FF-FF)/(FF-FF-00)/
+. - Módulo *bmp_funcion.c*: Dentro de la función main(), sustituir el bloque de código que realiza el bucle para inicializar los pixeles del cuadrado convertirlo por una función con las siguientes características:
+** prototipo: 'void pixels_generator(unsigned int x, unsigned int y, unsigned int maximo, RGB_data reg_mem[][top])'
+*** x e y son el origen de coordenadas del cuadrado (esquina inferior izquierda)
+*** maximo es la coordenada mayor del cuadrado.
+*** llamada a la función: pixels_generator(xcoor,ycoor,top,buffer);
+**** los argumentos xcoor=top/8, ycoor=top/8 y top=512 definirlos mediante macros
+
+Programación en ASM
+~~~~~~~~~~~~~~~~~~~
+. - Módulo *bmp_as.c*: Implementar la función 'void pixels_generator(unsigned int maximo, RGB_data reg_mem[][top])' desarrollando en lenguaje ensamblador la subrutina  'pixels_generator' en el nuevo fichero *array_pixel.s*. El fichero en lenguaje ensamblador únicamente contendrá la subrutina.
+** La subrutina implementa el doble bucle.
+** De forma implícita, en la propia subrutina, consideraremos los argumentos x=y=0 que definen el origen de coordenadas del cuadrado.
+** Todos los pixeles del cuadrado tienen el mismo color cuya intensidad se define con las variables azul, verde y rojo.
+
+GDB
+~~~
+
+. Para el módulo *bmp_funcion.c* indicar la posición de la pila donde se salva la dirección de retorno de la subrutina *pixels_generator*, así como el contenido del frame pointer y del stack pointer.
+. Lo mismo que en el apartado anterior con el módulo *bmp_as.c* para la subrutina 'pixels_generator'
+. Interpretar los comandos gdb en el caso siguiente:
++
+
+[source,c]
+----
++file bmp_imagen
+Leyendo símbolos desde bmp_imagen...hecho.
++b main
+Punto de interrupción 1 at 0x851: file bmp_imagen.c, line 128.
++run
+Starting program: /home/candido/Dropbox/apuntes/apuntes_Estr_Computadores/upna/practicas/x86/BMP/bmp_imagen 
+
+Breakpoint 1, main (argc=1, argv=0xffffcb54) at bmp_imagen.c:128
++n
++n
++s
+pixels_generator (x=64, y=64, maximo=512, reg_mem=0xfff3ca9c) at bmp_imagen.c:112
++n
++n
++n
++n
++n
++ptype buffer
+El símbolo «buffer» no está en el contexto actual.
++ptype reg_mem
+type = struct {
+    BYTE b;
+    BYTE g;
+    BYTE r;
+} (*)[512]
++finish
+Correr hasta la salida desde #0  pixels_generator (x=64, y=64, maximo=512, reg_mem=0xfff3ca9c) at bmp_imagen.c:114
+0x5655588a in main (argc=1, argv=0xffffcb54) at bmp_imagen.c:139
++n
++ptype buffer
+type = struct {
+    BYTE b;
+    BYTE g;
+    BYTE r;
+} [512][512]
++x /xb &buffer
+0xfff3ca9c:	0x00
++p /a &buffer
+$1 = 0xfff3ca9c
++x /x &buffer
+0xfff3ca9c:	0x00
++x /x (* RGB_data)&buffer
+Un syntax error en la expresión, cerca de «)&buffer».
++x /x (RGB_data *)&buffer
+0xfff3ca9c:	0x00
++x /3xb (RGB_data *)&buffer
+0xfff3ca9c:	0x00	0x00	0x00
++x /3xb &buffer
+0xfff3ca9c:	0x00	0x00	0x00
++x /3xb &buffer[0][0]
+0xfff3ca9c:	0x00	0x00	0x00
++p /x buffer
+value requires 786432 bytes, which is more than max-value-size
++p /x buffer[0][0]
+$2 = {b = 0x0, g = 0x0, r = 0x0}
++p /x buffer[0][0].r
+$3 = 0x0
++p /x *(char *)buffer[0][0]
+No se puede acceder a la memoria en la dirección 0x0
++p /x *(char *)&buffer[0][0]
+$4 = 0x0
++p /a (char *)&buffer[0][0]
+$5 = 0xfff3ca9c
++p /a (char *)&buffer[0][1]
+$6 = 0xfff3ca9f
++p /a &buffer[0][1]
+$7 = 0xfff3ca9f
++p /a &buffer[0][1].b
+$8 = 0xfff3ca9f
++p /a &buffer[0][1].g
+$9 = 0xfff3caa0
++p /a &buffer[0][1].r
+$10 = 0xfff3caa1
++p /a &buffer[64][64].b
+$11 = 0xfff54b5c
++p /a buffer[64][64].b
+$12 = 0xff
++p  buffer[64][64].b
+$13 = 255 '\377'
++p /x  buffer[64][64].b
+$14 = 0xff
++p /x  *((char *)&buffer+64*512+64)
+$15 = 0x0
++p /x  buffer[512][512].b
+$16 = 0x3d
++p /x  buffer[511][511].b
+$17 = 0x0
++p /x  buffer[511][511]
+$18 = {b = 0x0, g = 0x0, r = 0x0}
++p /a buffer[64][64]
+$19 = {b = 0xff, g = 0x0, r = 0xff}
++p /x  *((char *)&buffer+64*512+64)
+$20 = 0x0
++p /x  *((char *)&buffer+64*512+63)
+$21 = 0x0
++p /x  *((char *)&buffer+64*512+65)
+$22 = 0x0
++x /3xb  ((char *)&buffer+64*512+64)
+0xfff44adc:	0x00	0x00	0x00
++p /a &buffer[64][64]
+$23 = 0xfff54b5c
++p 0xfff54b5c - 0xfff44adc
+$24 = 65664
++x /3xb  ((char *)&buffer+3*(64*512+64))
+0xfff54b5c:	0xff	0x00	0xff
++(gdb) x /3xb  ((char *)&buffer+3*(64*512+64))
+orden indefinida: «». Intente con «help»
+++x /3xb  ((char *)&buffer+3*(64*512+64))
+orden indefinida: «+x». Intente con «help»
++0xfff54b5c:     0xff    0x00    0xff
+orden indefinida: «0xfff54b5c». Intente con «help»
++(gdb) x /3xb  ((char *)&buffer+3*(64*512+64))
+orden indefinida: «». Intente con «help»
+++x /3xb  ((char *)&buffer+3*(64*512+64))
+orden indefinida: «+x». Intente con «help»
++0xfff54b5c:     0xff    0x00    0xff
+orden indefinida: «0xfff54b5c». Intente con «help»
++p /a (char *)&buffer[0][1]
+$25 = 0xfff3ca9f
++x /3xb (RGB_data *)&buffer+1
+0xfff3ca9f:	0x00	0x00	0x00
++quit
+
+DENTRO DE LA SUBRUTINA puedo utilizar los tipos declarados en main
+
+(gdb) ptype RGB_data
+type = struct {
+    BYTE b;
+    BYTE g;
+    BYTE r;
+}
+(gdb) p  *(RGB_data *)RGB_ptr
+$29 = {b = 0 '\000', g = 0 '\000', r = 255 '\377'}
+(gdb) p  (*(RGB_data *)RGB_ptr).r
+$28 = 255 '\377'
+
+----

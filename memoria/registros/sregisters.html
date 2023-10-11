@@ -1,0 +1,271 @@
+﻿<!doctype html>
+
+<html lang="en">
+<head>
+<link rel="stylesheet" href="css/content.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/print.css" type="text/css" media="print">
+<link rel="stylesheet" href="css/candy.css" type="text/css" media="screen" title="Candy">
+<link rel="stylesheet" href="css/handheld.css" type="text/css" media="handheld" title="Candy">
+<link rel="icon" href="css/icon.png" type="image/png">
+<meta name="Keywords" content="Intel, AMD, register, registers, assembly language, assembly">
+<meta name="Description" content="Describes the useful features of each Intel-Architecture register.">
+<title>The Art of Picking Intel Registers</title>
+</head>
+<body>
+
+<div id="title">
+<h1><a href="http://www.swansontec.com/index.html">Swanson Technologies</a></h1>
+</div>
+
+<div id="content">
+<h2>The Art of Picking Intel Registers</h2>
+<p><i>I wrote this article for an online magazine called <a href="http://www.scenerep.org/scenezine/issue12.php">Scene Zine</a>. Scene Zine caters to the Demo Scene, which is an digital art community dedicated to pushing the limits of computers through a mix of music, art, and computer programming. A particular category of demoscene productions, 4K intros, focus on the final production's raw file size. The goal is to put as much high-quality music, graphics, and animation as possible into only 4096 bytes. Doing this requires highly-specialized size optimization techniques, since 4096 bytes is less space than two pages of typed text or a true-color Windows XP icon. This article discusses some of these techniques.</i></p>
+
+<p>Some people have commented that they want to see more expert programming articles in Scene Zine. To remedy the situation, this article is for all assembly language programmers out there. It discusses the fine art of picking which registers to use in your code. This information should simplify your coding and help you write smaller routines.</p>
+
+<p>When the engineers at Intel designed the original 8086 processor, they had a
+special purpose in mind for each register. As they designed the instruction
+set, they created many optimizations and special instructions based on the
+function they expected each register to perform. Using registers according to
+Intel's original plan allows the code to take full advantage of these
+optimizations. Unfortunately, this seems to be a lost art. Few coders are aware
+of Intel's overall design, and most compilers are too the simplistic or focused
+on execution speed to use the registers properly. Understanding how the
+registers and instruction set fit together, however, is an important step on
+the road to effortless size-coding.</p>
+
+<p>Using the registers consistently has other advantages besides size
+optimization. Like using good variable names, using consistent registers makes
+code more readable. When they are used properly, the registers have meanings
+almost as clear as the loop counter, <var>i</var>, in higher-level languages. In fact, I
+occasionally name my variables in C after x86 registers because the register
+names are so descriptive. With proper register use, x86 assembler can be almost
+as self-documenting as a high-level language.</p>
+
+<p>Another benefit that consistent register use brings is better compression. In
+productions which use a compressor to pack the final build, such as 4K intros,
+creating more redundant code leads to smaller packed sizes. When code uses
+registers consistently, the same instruction sequences begin to appear over and
+over. This, in turn, improves the compression ratio.</p>
+
+<p>As a review, all x86-family CPU's have 8 general-purpose registers. The
+registers are 32 bits wide, although 16-bit versions are also accessible with a
+special one-byte instruction prefix. In 16-bit mode, the situation is reversed.
+The lower 16 bits are accessible by default, and the full registers are
+accessible only with a prefix byte.</p>
+
+<p>Each register name is really an acronym. This is true even for the
+"alphabetical" registers EAX, EBX, ECX, and EDX. The following list shows the
+register names and their meanings:</p>
+
+<ul>
+<li>EAX - Accumulator Register</li>
+<li>EBX - Base Register</li>
+<li>ECX - Counter Register</li>
+<li>EDX - Data Register</li>
+<li>ESI - Source Index</li>
+<li>EDI - Destination Index</li>
+<li>EBP - Base Pointer</li>
+<li>ESP - Stack Pointer</li>
+</ul>
+
+<p>In addition to the full-sized general registers, the x86 processor also has
+eight byte-sized registers. Since these registers map directly into EAX, EBX,
+ECX, and EDX, most people view them as parts of the larger registers. From the
+instruction set point of view, however, the 8-bit registers are separate
+entities. For example, the CL and CH registers share none of the ECX register's
+useful properties. Except for AL and AH, none of the 8-bit registers have any
+special significance in the instruction set, so this article does not mention
+them.</p>
+
+<h3>EAX: The Accumulator</h3>
+
+<p>There are three major processor architectures: register, stack, and
+accumulator. In a register architecture, operations such as addition or
+subtraction can occur between any two arbitrary registers. In a stack
+architecture, operations occur between the top of the stack and other items on
+the stack. In an accumulator architecture, the processor has single calculation
+register called the accumulator. All calculations occur in the accumulator, and
+the other registers act as simple data storage locations.</p>
+
+<p>Obviously, the x86 processor does not have an accumulator architecture. It
+does, however, have an accumulator-like register: EAX / AL. Although most
+calculations can occur between any two registers, the instruction set gives the
+accumulator special preference as a calculation register. For example, all nine
+basic operations (ADD, ADC, AND, CMP, OR, SBB, SUB, TEST, and XOR) have special
+one-byte opcodes for operations between the accumulator and a constant.
+Specialized operations, such as multiplication, division, sign extension, and
+BCD correction can only occur in the accumulator.</p>
+
+<p>Since most calculations occur in the accumulator, the x86 architecture contains
+many optimized instructions for moving data in and out of this register. To
+start, the processor has sixteen byte-sized XCHG opcodes for swapping data
+between the accumulator and any other register. These aren't terribly useful,
+but they show how strongly the Intel engineers preferred the accumulator over
+the other registers. For them, it was better to swap data into the accumulator
+to than to work with it where it was. Other instructions that move data in and
+out of the accumulator are LODS, STOS, IN, OUT, INS, OUTS, SCAS, and XLAT.
+Finally, the MOV instruction has a special one-byte opcode for moving data into
+the accumulator from a constant memory location.</p>
+
+<p>In your code, try to perform as much work in the accumulator as possible. As
+you will see, the remaining seven general-purpose registers exist primarily to
+support the calculation occurring in the accumulator.</p>
+
+<h3>EDX: The Data Register</h3>
+
+<p>Of the seven remaining general-purpose registers, the data register, EDX, is
+most closely tied to the accumulator. Instructions that deal with over sized
+data items, such as multiplication, division, CWD, and CDQ, store the most
+significant bits in the data register and the least significant bits in the
+accumulator. In a sense, the data register is the 64-bit extension of the
+accumulator. The data register also plays a part in IO instructions. In this
+case, the accumulator holds the data to read or write from the port, and the
+data register holds the port address.</p>
+
+<p>In your code, the data register is most useful for storing data related to the
+accumulator's calculation. In my experience, most calculations need only these
+two registers for storage if they are written properly.</p>
+
+<h3>ECX: The Count Register</h3>
+
+<p>The count register, ECX, is the x86 equivalent of the ubiquitous variable i.
+Every counting-related instruction in the x86 uses ECX. The most obvious
+counting instructions are LOOP, LOOPZ, and LOOPNZ. Another counter-based
+instruction is JCXZ, which, as the name implies, jumps when the counter is 0.
+The count register also appears in some bit-shift operations, where it holds
+the number of shifts to perform. Finally, the count register controls the
+string instructions through the REP, REPE, and REPNE prefixes. In this case,
+the count register determines the maximum number of times the operation will
+repeat.</p>
+
+<p>Particularly in demos, most calculations occur in a loop. In these situations,
+ECX is the logical choice for the loop counter, since no other register has so
+many branching operations built around it. The only problem is that this
+register counts downward instead of up as in high level languages. Designing a
+downward-counting is not hard, however, so this is only a minor difficulty.</p>
+
+<h3>EDI: The Destination Index</h3>
+
+<p>Every loop that generates data must store the result in memory, and doing so
+requires a moving pointer. The destination index, EDI, is that pointer. The
+destination index holds the implied write address of all string operations. The
+most useful string instruction, remarkably enough, is the seldom-used STOS.
+STOS copies data from the accumulator into memory and increments the
+destination index. This one-byte instruction is perfect, since the final result
+of any calculation should be in the accumulator anyhow, and storing results in
+a moving memory address is a common task.</p>
+
+<p>Many coders treat the destination index as no more than extra storage space.
+This is a mistake. All routines must store data, and some register must serve
+as the storage pointer. Since the destination index is designed for this job,
+using it for extra storage is a waste. Use the stack or some other register for
+storage, and use EDI as your global write pointer.</p>
+
+<h3>ESI: The Source Index</h3>
+
+<p>The source index, ESI, has the same properties as the destination index. The
+only difference is that the source index is for reading instead of writing.
+Although all data-processing routines write, not all read, so the source index
+is not as universally useful. When the time comes to use it, however, the
+source index is just as powerful as the destination index, and has the same
+type of instructions.</p>
+
+<p>In situations where your code does not read any sort of data, of course, using
+the source index for convenient storage space is acceptable.</p>
+
+<h3>ESP and EBP: The Stack Pointer and the Base Pointer</h3>
+
+<p>Of the eight general purpose registers, only the stack pointer, ESP, and the
+base pointer, EBP, are widely used for their original purpose. These two
+registers are the heart of the x86 function-call mechanism. When a block of
+code calls a function, it pushes the parameters and the return address on the
+stack. Once inside, function sets the base pointer equal to the stack pointer
+and then places its own internal variables on the stack. From that point on,
+the function refers to its parameters and variables relative to the base
+pointer rather than the stack pointer. Why not the stack pointer? For some
+reason, the stack pointer lousy addressing modes. In 16-bit mode, it cannot be
+a square-bracket memory offset at all. In 32-bit mode, it can be appear in
+square brackets only by adding an expensive SIB byte to the opcode.</p>
+
+<p>In your code, there is never a reason to use the stack pointer for anything
+other than the stack. The base pointer, however, is up for grabs. If your
+routines pass parameters by register instead of by stack (they should), there
+is no reason to copy the stack pointer into the base pointer. The base pointer
+becomes a free register for whatever you need.</p>
+
+<h3>EBX: The Base Register</h3>
+
+<p>In 16-bit mode, the base register, EBX, acts as a general-purpose pointer.
+Besides the specialized ESI, EDI, and EBP registers, it is the only
+general-purpose register that can appear in a square-bracket memory access (For
+example, MOV [BX], AX). In the 32-bit world, however, any register may serve as
+a memory offset, so the base register is no longer special.</p>
+
+<p>The base register gets its name from the XLAT instruction. XLAT looks up a
+value in a table using AL as the index and EBX as the base. XLAT is equivalent
+to MOV AL, [BX+AL], which is sometimes useful if you need to replace one 8-bit
+value with another from a table (Think of color look-up).</p>
+
+<p>So, of all the general-purpose registers, EBX is the only register without an
+important dedicated purpose. It is a good place to store an extra pointer or
+calculation step, but not much more.</p>
+
+<h3>Conclusion</h3>
+
+<p>The eight general-purpose registers in the x86 processor family each have a
+unique purpose. Each register has special instructions and opcodes which make
+fulfilling this purpose more convenient or efficient. The registers and their
+uses are shown briefly below:</p>
+
+<ul>
+<li>EAX - All major calculations take place in EAX, making it similar to a dedicated accumulator register.</li>
+<li>EDX - The data register is the an extension to the accumulator. It is most useful for storing data related to the accumulator's current calculation.</li>
+<li>ECX - Like the variable i in high-level languages, the count register is the universal loop counter.</li>
+<li>EDI - Every loop must store its result somewhere, and the destination index points to that place. With a single-byte STOS instruction to write data out of the accumulator, this register makes data operations much more size-efficient.</li>
+<li>ESI - In loops that process data, the source index holds the location of the input data stream. Like the destination index, EDI has a convenient one-byte instruction for loading data out of memory into the accumulator.</li>
+<li>ESP - ESP is the sacred stack pointer. With the important PUSH, POP, CALL, and RET instructions requiring it's value, there is never a good reason to use the stack pointer for anything else.</li>
+<li>EBP - In functions that store parameters or variables on the stack, the base pointer holds the location of the current stack frame. In other situations, however, EBP is a free data-storage register.</li>
+<li>EBX - In 16-bit mode, the base register was useful as a pointer. Now it is completely free for extra storage space.</li>
+</ul>
+
+<p>As an example of how these registers fit together, here is an outline of a
+typical routine:</p>
+
+<pre class="boxed">
+                <code class="keyword">mov</code>     <code class="var">esi, source_address</code>
+                <code class="keyword">mov</code>     <code class="var">edi, destination_address</code>
+                <code class="keyword">mov</code>     <code class="var">ecx, loop_count</code>
+<code class="var">my_loop:</code>        <code class="keyword">lodsd</code>
+
+                <code class="comment">;Do some calculations with eax here.</code>
+
+                <code class="keyword">stosd</code>
+                <code class="keyword">loop</code>    <code class="var">my_loop</code>
+</pre>
+
+<p>In this example, ECX is the loop counter, ESI points to the input data, and EDI
+points to the output data. Some calculations, such as a blur, filter, or
+perhaps a color look-up occur in the loop using EAX as a variable. This example
+is a bit simplistic, but hopefully it shows the general idea. A real routine
+would probably deal with much more complicated data than DWORD's, and would
+probably involve a bunch of floating-point as well.</p>
+
+<p>In conclusion, using the registers as Intel intended has several advantages. In
+the fist case, it allows your code to take advantage of many optimizations and
+special instructions. It also makes the code more readable, since registers
+perform predictable functions. Finally, using the registers consistently leads
+to better compression by promoting more repetitive instruction sequences.</p>
+
+<p><a href="http://www.webhostinghub.com/support/es/misc/el-arte-de-elegir">Spanish Translation</a></p>
+<p><a href="http://www.fatcow.com/edu/sregisters-swansontec-ua/">Ukrainian Translation</a></p>
+<p><a href="http://www.pkwteile.de/wissen/sztuka-grzebiac-registers-intel">Polish Translation</a></p>
+
+</div>
+
+<div id="info">
+<p class="copyright">Copyright © 2003 William Swanson</p>
+</div>
+
+</body>
+</html>

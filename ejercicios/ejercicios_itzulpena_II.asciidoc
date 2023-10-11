@@ -1,0 +1,1273 @@
+Ejercicios de los Temas 1-9
+===========================
+:Author:          Cándido Aramburu
+:Email:           candido@unavarra.es
+:Author Initials: C
+:Revision:	  0.6.0
+:Key words:	  computer, architecture
+:Revision history:
+:revdate: 2018 September 3
+:doctitle: Ejercicios de los Temas 1-9
+:toc:
+:toclevels: 3
+:numbered:
+:icons:
+:lang: es 
+:encode: ISO-8859-1
+:ascii-ids:
+:slideshowlocation: UPNA
+:slidebackgrounds: asciidocslidy
+:copyright: {date={localdate}}, {slideshowlocation} *** {author} ***; 
+
+ifdef::backend-slidy2[]
+include::slidybackgrounds.txt[]
+endif::backend-slidy2[]
+
+ifdef::backend-slidy2[>>>]
+
+
+Capitulo 4: Memoria Cache
+-------------------------
+
+* Ejemplo 4.2a Pg118. The system has a Cache memory of 64KB  and Main Memory of 16MB with a byte word size and four word block size. For a cache controller with direct mapping correspondence function search the main memory block addresses correspondences to cache memory 0x0CE7 number line .
+
+
+** Desarrollo:
+*** Memoria principal: 16MB, byte word, 4 byte block.
+**** 16MB -> 2^24^ -> 24 bits address bus
+*** Memoria cache: 64KB, 4 byte line, 16K lines.
+***** 16K -> 2^14^-> 14 bits campo de línea
+*** Direct mapping correspondence function: 0x0CE7 cache line 
+*** i=j mod m donde i es el número de línea, j el número de bloque y m el número de líneas de la caché.
+*** la dirección de 24 bits se descompone en : etiqueta-línea-palabra
++
+
+["ditaa"]
+-------------------------------------------------
+<-------------24 bits---------->
++------------------------------+
+|Tag      | Line number| Word  |
++------------------------------+
+<--8bits-><---14bits--><-2bits->
+-------------------------------------------------
+
+*** Cada tag agrupa 16K bloques -> 16K bloquesx4bytes/bloquexnúmero de tags N=16MB -> 2^14^x2^2^xN=2^24^bytes -> N=2^8^ Tags
+
+*** 0CE7 : 14 bits: 00-1100-1110-0111. Buscamos las direcciones de memoria asociadas a dicha línea.
+**** Tag 0, 	Linea 0CE7, Palabra 0 	-> 0000-0000-00-1100-1110-0111-00 = 0000-0000-0011-0011-1001-1100 -> 00339C
+**** Tag 1, 	Línea 0CE7, Palabra 0 	-> cambia el primer dígito a 1 					-> 01339C
+**** Tag 255,	Línea 0CE7, Palabra 0 	-> cambia el primer dígito a FF					-> FF339C
+**** Las direcciones de memoria son la dirección de la primera palabra de bloque en Memoria Principal.
+
+* 4.1 A set-associative cache consists of 64 lines, or slots, divided into four-line sets. Main memory contains 4K blocks of 128 words each. Show the format of main memory addresses.
+
+** Desarrollo:
+*** Caché: 64 líneas de 128 palabras cada una agrupadas en sets de 4 líneas
+**** 128 palabras -> 7 bits para direccionar la palabra dentro de la línea
+**** 16 sets -> 2^4^ -> 4 bits para direccionar los sets dentro de la caché
+*** Main memory: 4Kblocks de 2^7^palabras
+**** 12 bits para direccionar un bloque
+**** 2^19^ palabras->512Kpalabras -> 19 bits para direccionar una palabras -> ancho bus de direcciones
+*** set associative -> i = j mod v donde v es el número de sets, j el bloque e i el set
+**** Tag -> código para diferenciar los bloques que van al mismo set.  bits Tag=bits totales - bits Set - bits Word=19-4-7=8 bits.
+*** Tag/Set/Word -> 19 address bits descompuestos en los 3 campos de 8/4/7 bits
+
+** Sol:
+*** Tag/Set/Word : 8/4/7
+
+* 4.3 For the hexadecimal main memory addresses 111111, 666666,BBBBBB, show the following
+information, in hexadecimal format:
+a. Tag, Line, and Word values for a direct-mapped cache, using the format of Figure 4.10
+b. Tag and Word values for an associative cache, using the format of Figure 4.12
+c. Tag, Set, and Word values for a two-way set-associative cache, using the format of Figure 4.15
+
+** Desarrollo:
+*** a) Direct mapped Tag/Line/Word 		-> 24 address bits descompuestos en los 3 campos de 8/14/2 bits
+**** 111111 = 0001-0001-0001-0001-0001-0001 = 00010001-00010001000100-01=0001-0001-00-0100-0100-0100-01=11-0444-1 -> El 0 no se escribe en hex por la izda
+*** b) Full associative cache Tag/Word 		-> 24 address bits descompuestos en los 2 campos de 22/2 bits
+**** 111111 = 0001-0001-0001-0001-0001-0001 = 0001000100010001000100-01=00-0100-0100-0100-0100-0100-01=044444-1 -> El 0 no se escribe en hex por la izda
+*** c) Set associative cache Tag/Set/Word 	-> 24 address bits descompuestos en los 3 campos de 9/13/2
+**** 111111 = 0001-0001-0001-0001-0001-0001 = 000100010-0010001000100-01=0-0010-0010-0-0100-0100-0100-01=022/0444/1-1 -> El 0 no se escribe en hex por la izda
+
+** Sol:
+
+.Direcciones
+[width="80%",cols="<s,3*m",frame="topbot",options="header"]
+|====
+|Address		|111111 	|666666 	|BBBBBB
+|a. Tag/Line/Word 	|11/444/1	|66/1999/2	|BB/2EEE/3
+|b. Tag/Word	 	|44444/1	|199999/2	|2EEEEE/3
+|c. Tag/Set/Word 	|22/444/1	|CC/1999/2	|177/EEE/3
+|====
+
+* 4.5 Consider a 32-bit microprocessor that has an on-chip 16-KByte four-way set-associative cache. Assume that the cache has a line size of four 32-bit words. 
+a. Draw a block diagram of this cache showing its organization and how the different address fields are used to determine a cache hit/miss.
+b. Where in the cache is the word from memory location ABCDE8F8 mapped
+
+** Desarrollo:
+*** Memoria principal
+**** no dice nada del bus externo, supongo el máximo de 32 bits -> 2^32^Bytes -> 4GB
+*** Cache on-chip: bus local: 32 bits data bus y address bus: Set associative de 4 líneas por set. 
+**** 4 palabras de 4 bytes cada una por línea hacen un total de 16 bytes por línea (4 bits en el campo word). El código de 4 bits direcciona el primer byte de cada palabra (0x0 la palabra 0, 0x4 la palabra 1, 0x8 la palabra 2, 0xC la palabra 3)
+**** El número de sets es capacidad total/bytes por set = 16KB / (4líneas/set)*(4palabras/línea)*(4bytes/palabra) = 16KB/64B = 2^8^=256 sets -> 8bits
+**** el número de bloques en cache es capacidad/bytes_por_línea= 16KB/(4palabras/línea)*(4bytes/palabra)=1Kbloques
+**** los 1kbloques se asocian en sets de 4 líneas.
+**** address bus=tag bits+set bits+word bits -> 32=tag bits+8+4 -> tag_bits=32-8-4=20 bits. El campo Tag distingue bloques dentro del mismo set.
+**** ¿que bloques van al mismo set? i = j mod v, donde i es el número de set al que va el bloque j, v es el número de sets. Es decir, 2^20 bloques están asocidos al mismo set por lo que han de compartir 4 líneas -> 4 para 20.
+**** Tag/Set/Word -> 32 address bits descompuestos en los 3 campos de 20/8/4 bits
+*** a) Después de la descomposición tag/set/word se selecciona el set direccionado y se comparan los tags de las 4 líneas con el tag de la dirección absoluta. Son 4 comparadores, uno por vía. Al Comparador_1 irán la primera línea de cada set en que dividimos la memoria principal. 2^32^ bytes los agrupo en sets de 16 palabras por set -> la memoria principal queda dividida en 2^8^ sets
+*** b) Descomposición 20/8/4 de la dirección ABCD8F8-> ABCD/8F/8 -> 8F es el set 143 y el byte 8 es la palabra número 2.
+
+** Sol:
+a...   Descomposición: Tag/Set/Offset . 4 comparadores: 1 por cada vía del Set.
+b...   Set 143, cualquier línea, la doblepalabra número 2.
+
+* 4.7 The Intel 80486 has an on-chip, unified cache. It contains 8 KBytes and has a four-way set-associative organization and a block length of four 32-bit words. The cache is organized into 128 sets. There is a single “line valid bit” and three bits, B0, B1, and B2
+(the “LRU” bits), per line. On a cache miss, the 80486 reads a 16-byte line from main memory in a bus memory read burst. 
+ a. Draw a simplified diagram of the cache 
+ b. show how the different fields of the address are interpreted.
+
+** Desarrollo:
+*** Intel 80486 ( Pag 38,47,130) tiene un bus de memoria de 32 bits -> address bus de 32 bits que direccionan 1 byte.
+*** Caché: 8KB, set-associative de 4 vías, cada línea 4 palabras de 4 bytes (16 bytes con 4 bits), y 128 sets (7 bits)
+**** 4 palabras de 4 bytes cada una por línea hacen un total de 16 bytes por línea (4 bits en el campo word). El código de 4 bits direcciona el primer byte de cada palabra (0x0 la palabra 0, 0x4 la palabra 1, 0x8 la palabra 2, 0xC la palabra 3)
+*** Descomposición de los 32 bits : Tag/Set/Offset -> 21/7/4
+*** Además de los 32 bits es necesario añadir:
+**** 3 bits USO para indicar de las cuatro líneas quien es la MENOS recientemente utilizada, la de menor valor de los 8 posibles: 000-001-010-011-100-101-110-111
+**** 1 bit de validación que indica con el valor 1 que hace falta su actualización en MP antes de sobreescribir la línea -> técnica de postescritura.
+*** Línea: Valid/LRU/Tag/Set/Offset -> 1/3/21/7/4
+
+
+
+** Solución:
+a.. Esquema Set associative
+b.. Valid/LRU/Tag/Set/Offset -> 1/3/21/7/4
+
+
+* 4.15 Consider the following code:
++
+[source,c]
+----------------------------------------------------------------------
+for (i=0; i=20; i++)
+   for ( j=0; j=10; j++)
+         a[i] = a[i] * j ;
+----------------------------------------------------------------------
+
+a. Give one example of the spatial locality in the code.
+b. Give one example of the temporal locality in the code.
+
+** Desarrollo
+*** en el bucle interno siempre se repite la misma instrucción, siempre accedes a la misma dirección donde esta la instrucción -> localidad espacial
+*** en el bucle interno siempre se repite la misma instrucción, el futuro es el presente -> localidad temporal
+*** en el bucle interno con j=0 accedes al operando a[0] y en la siguiente iteracción se repite el mismo operando a[0] -> localidad espacial y temporal.
+* 4.18 Consider a cache of 4 lines of 16 bytes each. Main memory is divided into blocks of
+16 bytes each. That is, block 0 has bytes with addresses 0 through 15, and so on. Now
+consider a program that accesses memory in the following sequence of addresses:
++
+
+............................................................................
+Once: 63 through 70
+Loop ten times: 15 through 32; 80 through 95
+............................................................................
+
+ 
+
+a. Suppose the cache is organized as direct mapped. Memory blocks 0, 4, and so on are
+assigned to line 1; blocks 1, 5, and so on to line 2; and so on. Compute the hit ratio.
+b. Suppose the cache is organized as two-way set associative, with two sets of two
+lines each. Even-numbered blocks are assigned to set 0 and odd-numbered blocks
+are assigned to set 1. Compute the hit ratio for the two-way set-associative cache
+using the least recently used replacement scheme.
+
+
+* 4.21 Consider a single-level cache with an access time of 2.5 ns, a line size of 64 bytes, and a
+hit ratio of H = 0.95. Main memory uses a block transfer capability that has a firstword
+(4 bytes) access time of 50 ns and an access time of 5 ns for each word thereafter.
+a. What is the access time when there is a cache miss? Assume that the cache waits
+until the line has been fetched from main memory and then re-executes for a hit.
+b. Suppose that increasing the line size to 128 bytes increases the H to 0.97. Does this
+reduce the average memory access time?
+
+* 4.24 On the Motorola 68020 microprocessor, a cache access takes two clock cycles. Data
+access from main memory over the bus to the processor takes three clock cycles in the
+case of no wait state insertion; the data are delivered to the processor in parallel with
+delivery to the cache.
+a. Calculate the effective length of a memory cycle given a hit ratio of 0.9 and a
+clocking rate of 16.67 MHz.
+b. Repeat the calculations assuming insertion of two wait states of one cycle each
+per memory cycle.What conclusion can you draw from the results?
+
+
+* 4.27 For a system with two levels of cache, define Tc1 first-level cache access time; Tc2
+second-level cache access time; Tm memory access time;H1 first-level cache hit
+ratio;H2 combined first/second level cache hit ratio. Provide an equation for Ta for
+a read operation.
+
+ifdef::backend-docbook45[<<<]
+Capitulo 5: Memoria Sincrona Dinamica RAM (SDRAM)
+-------------------------------------------------
+
+* 5.x La arquitectura de un computador Intel tiene un bus del sistema con una frecuencia de reloj de 100MHz, el ancho del bus de datos son 64 bits y el ancho del bus de direcciones de la placa base es de 48 bits.
+a. Calcular el ancho de banda del bus en transferencias/s y en bytes/s
+b. Calcular la capacidad de memoria
+c. Calcular el ciclo de memoria teniendo en cuenta que la latencia de la memoria DRAM son 10ns.
+
+** Desarrollo
+...  100 x 10^6^ ciclos/seg x 1Transferencia/ciclo = 100MT/s
+... bus de direcciones -> 2^48^ Words =  2^8^ x 2^40^ = 256 TWords = 2^48^ x 2^3^ Bytes = 2 x 2^50^ = 2 petabytes 
+... ciclo de memoria ideal (sin bus multiplexado, sin precarga, etc)= 1 Transferencia= latencia_memoria + latencia_bus_transferencia = 10ns + 1/(10^8^) = 10ns + 10ns = 20 ns
+
+
+* 5.2 Consider a dynamic RAM that must be given a refresh cycle 64 times per ms. Each refresh operation requires 150 ns; a memory cycle requires 250 ns.What percentage of the memory’s total operating time must be given to refreshes?
+
+** Desarrollo
+*** en 1 ms 64 refrescos de 150ns -> 9600 ns refrescando
+*** 9600ns/1ms = 0.0096 = 1%
+
+** Sol: 
+a. 1%
+
+* 5.3 Figure 5.16 shows a simplified timing diagram for a DRAM read operation over a bus. The access time is considered to last from t1 to t2. Then there is a recharge time, lasting from t2 to t3, during which the DRAM chips will have to recharge before the processor can access them again.
+
+
+a. Assume that the access time is 60 ns and the recharge time is 40 ns.What is the memory cycle time? What is the maximum data rate this DRAM can sustain, assuming a 1-bit output?
+b. Constructing a 32-bit wide memory system using these chips yields what data transfer rate?
+
+** Desarrollo:
+** t1->t2 : direccionamiento
+** t2->t3
+*** acceso al dato
+*** recarga del bus de direcciones a medio camino entre el 0 y el 1
+*** 60ns de latencia y 40 de precarga = 100 ns de ciclo de memoria entre 2 lecturas consecutivas
+**** durante la precarga se realizaría el burst que puede ser mayor, menor o igual a la precarga
+*** El ciclo de bus de 100 ns son 1/100ns= 10MHz. Si transferimos un bit por ciclo de bus= 10Mbps
+*** Si utilizamos 32 líneas en paralelo = 32 bits/transferencia x 10MT/s = 320Mbps = 40 MB/s
+
+** Sol:
+... tcycle = 100ns. BW=10Mbps
+... 40MB/s
+
+* 5.4 Figure 5.6 indicates how to construct a module of chips that can store 1 MByte based on a group of four 256-Kbyte chips. Let’s say this module of chips is packaged as a single 1-Mbyte chip, where the word size is 1 byte. Give a high-level chip diagram of how to construct an 8-Mbyte computer memory using eight 1-Mbyte chips. Be sure to show the address lines in your diagram and what the address lines are used for.
+
+** Desarrollo:
+*** Con 4 chips de 256Kbit creo un módulo-chip de 1Mb 
+*** Con 8 chips de 1Mb creo un módulo de 8Mb llevando distintos chip select a cada chip de 1Mb. Para seleccionar 1 chip de 8 necesito 3 bits de direcciones, por ejemplo los 3 bits de mayor posición. Para direccionar un bit de un chip 1Mb necesito un bus de direcciones de 20 bits. En total necesito un bus de 20+3=23 bits.
+
+** Sol:
+... 8 chips x1 de capacidad 1M donde cada entrada chip-select es la salida de un decodificador de 3 líneas de dirección
+
+* 5.5 On a typical Intel 8086-based system, connected via system bus to DRAM memory, for a read operation, RAS is activated by the trailing edge of the Address Enable signal (Figure 3.19). However, due to propagation and other delays, RAS does not go active until 50 ns after Address Enable returns to a low. Assume the latter occurs in the middle of the second half of state T1 (somewhat earlier than in Figure 3.19). Data are read by the processor at the end of T3. For timely presentation to the processor, however, data must be provided 60 ns earlier by memory. This interval accounts for propagation delays along the data paths (from memory to processor) and processor data hold time requirements. Assume a clocking rate of 10 MHz. 
+... How fast (access time) should the DRAMs be if no wait states are to be inserted?
+... How many wait states do we have to insert per memory read operation if the access time of the DRAMs is 150 ns?
+
+** Desarrollo:
+***  Ciclo de lectura
+**** Load address - Address Enable (EA)- Address Command - Access Data
+**** Trailing edge = fall edge = negative edge 
+**** AE fall = en la segunda mitad del ciclo T1. Instante 75ns
+**** RAS = Read Command : Retardo de 50ns respecto de AE fall. Instante 75+50=125ns
+**** La presentación del dato en el bus debe ser realizada con 60 ns de antelación a la carga del dato en la CPU la final del ciclo T3(300ns), es decir, 300ns-60ns=240ns
+**** Reloj del bus del sistema = 10 MHz = 100 ns.
+.... Tiempo de acceso (desde la orden de lectura hasta volcar el dato la memoria) sin estados de espera = Tiempo de acceso mínimo impuesto por los retardos de la ruta de datos (CPU y bus): 240ns - 125ns = 115ns 
++
+
+[ditaa]
+----------------------------------------------------------------------
+                       0                                    300ns
+                       <-----T1----><-----T2----><-----T3---->
+                       -----        -----        -----        -----        -----
+Clock           ------/     \------/     \------/     \------/     \------/     \------        
+                          75ns
+                      <-------->
+                            ----
+Address Enable  -----------/    \-----------------------------------------
+                                     50ns
+                                 <-------->
+                                     ------
+Read            --------------------/      \--------------------------------
+                                           Acces Time Hold Time
+                                           <--------><-------->
+Data            -------------------------------------XXXXXXXXXX----------
+                                           <--------><-------->
+                                              115ns     60ns
+                                  <---------------------------->
+                                           Read cycle
+----------------------------------------------------------------------
+
+.... Si la memoria DRAM tiene un tiempo de acceso 150ns, superior a un ciclo de bus, desde la orden de lectura la cpu debe de esperar dos ciclos de reloj, uno el propio ciclo de la orden de lectura y otro ciclo extra o ciclo de ESPERA. Por lo que 200ns son suficientes para superar los 150ns del tiempo de acceso. Si el ciclo de espera comienza después de los 115ns, tenemos 215ns que superan a los 150ns.
+
+** Sol:
+
+... 115ns
+... 1
+
+
+
+ifdef::backend-docbook45[<<<]
+Capitulo 7: Sistemas Entrada/Salida
+-----------------------------------
+
+* 7.1 On a typical microprocessor, a distinct I/O address is used to refer to the I/O data registers and a distinct address for the control and status registers in an I/O controller for a given device. Such registers are referred to as ports. In the Intel 8088, two I/O instruction
+formats are used. In one format, the 8-bit opcode specifies an I/O operation; this is followed by an 8-bit port address. Other I/O opcodes imply that the port address is in the 16-bit DX register. How many ports can the 8088 address in each I/O addressing mode? .
+** Desarrollo:
+*** memory mapped i/o : se reservan direcciones RAM para i/o
+*** controlador i/o: registros datos, estado y control : puerto
+*** 2 formatos
+**** CodOP/Address(Dir Directo)  : 8bits/8bits
+**** CodOP/DX Register(Dir Indirecto)  : 8bits/8bits -> DX:16bits
+**** Número de puertos : Directo -> 2^8^ e Indirecto -> 2^16^ => total= 256+65536=65792 ports
+** Sol:
+*** 65792 puertos
+
+* 7.2 A similar instruction format is used in the Zilog Z8000 microprocessor family. In this case, there is a direct port addressing capability, in which a 16-bit port address is part of the instruction, and an indirect port addressing capability, in which the instruction references one of the 16-bit general purpose registers, which contains the port address. How many ports can the Z8000 address in each I/O addressing mode?
+
+** Desarrollo
+*** Modo directo: 2^16^ = 64K = 65536 ports
+*** Modo indirecto: 2^16^ = 64 K = 65536 ports
+** Sol
+*** 128K=131072 puertos
+
+* 7.5 A system is based on an 8-bit microprocessor and has two I/O devices. The I/O controllers for this system use separate control and status registers. Both devices handle data on a 1-byte-at-a-time basis.The first device has two status lines and three control lines.The second device has three status lines and four control lines.
+.. How many 8-bit I/O control module registers do we need for status reading and control of each device?
+.. What is the total number of needed control module registers given that the first device is an output-only device?
+.. How many distinct addresses are needed to control the two devices?
+
+** modelo: El controlador i/o de los perifericos tiene implementados los puertos que son la interfaz con el periférico. Los puertos son direccionables y estan formados por un banco de registros: registro de datos, registro de control, registro de estado.
+* Desarrollo:
+** buffer data de 8 bits: 2 puertos de datos (in,out) por cada periférico.
+** 1 buffer status de lectura (registro de estado) y 1 buffer control de escritura (registro de control) por cada periférico
+** las líneas de estado y control no son líneas de direccionamiento,sino que serán líneas conectadas a sus respectivos puertos. Las líneas de estado a 1 registro de estado y las líneas de control a 1 registro de control.
+
+.. : 1 registro de control y 1 registro de estado por cada periférico
+.. : periférico A (1Data+1Status+1Control) y  periférico B (2Data+1Status+1Control) = 7 registros
+.. : tantas direcciones como registros = 7 direcciones
+
+* Sol:
+.. 1 reg control y 1 reg estado
+.. 7 registros
+.. 7 direcciones
+
+
+* 7.6 For programmed I/O, Figure 7.5 indicates that the processor is stuck in a wait loop doing status checking of an I/O device. To increase efficiency, the I/O software could be written so that the processor periodically checks the status of the device. If the device is not ready, the processor can jump to other tasks. After some timed interval, the processor comes back to check status again.
++
+
+image:./images/ejercicios/7-5.png[]
+
+
+.. Consider the above scheme for outputting data one character at a time to a printer that operates at 10 characters per second (cps).What will happen if its status is scanned every 200 ms?
+
+.. Next consider a keyboard with a single character buffer. On average, characters are entered at a rate of 10 cps. However, the time interval between two consecutive key depressions can be as short as 60 ms. At what frequency should the keyboard be scanned by the I/O program?
+
+
+* Desarrollo:
+
+.. 10cps -> El periférico necesita transmitir 1 caracter cada 100ms y escribe en el puerto dicho dato. Si la CPU no salva el dato escrito por el periférico antes de cada escritura, los datos se pierden. Si la CPU consulta cada 200ms y el periférico escribe cada 100ms, cada dos datos uno se pierde. La solución sería aumentar el buffer de datos a dos carácteres o aumentar la frecuencia de consulta a períodos de 100ms.
+
+.. La velocidad media es de 10cps pero la frecuencia máxima es de 60ms. La frecuencia de escaneo de la CPU tiene que ser como mínimo de 1/60ms -> 16.66Hz
+
+
+* 7.10 Consider a system employing interrupt-driven I/O for a particular device that transfers data at an average of 8 KB/s on a continuous basis.
+
+a. Assume that interrupt processing takes about 100 us (i.e., the time to jump to the interrupt service routine (ISR), execute it, and return to the main program). Determine what fraction of processor time is consumed by this I/O device if it interrupts for every byte.
+b. Now assume that the device has two 16-byte buffers and interrupts the processor when one of the buffers is full. Naturally, interrupt processing takes longer, because the ISR must transfer 16 bytes.While executing the ISR, the processor takes about 8 us for the transfer of each byte. Determine what fraction of processor time is consumed by this I/O device in this case.
+c. Now assume that the processor is equipped with a block transfer I/O instruction such as that found on the Z8000.This permits the associated ISR to transfer each byte of a block in only 2 us. Determine what fraction of processor time is consumed by this I/O device in this case.
+
+* Desarrollo:
+.. 8kB/s -> T_int_rq=1/8KB/s=125us -> fracción=100us/125us=80%
+.. T_interrupt_service=100us(ISR+1byte)+15bytesx8us=220us -> T_16=16x125us=2ms -> fracción=220us/2000us=0.11=11%
+.. T_int_serv=100us(ISR+1byte)+15bytesx2us=130us -> fracción=130us/2000us=6.5%
+
+* 7.11 In virtually all systems that include DMA modules, DMA access to main memory is given higher priority than CPU access to main memory. Why?
+** Si el buffer de datos del DMAC se llena y no es leído, se perderían los datos. 
+
+* 7.12 A DMA module is transferring characters to memory using cycle stealing, from a device transmitting at 9600 bps. The processor is fetching instructions at the rate of 1 million instructions per second (1 MIPS). Suponer que la CPU está continuamente capturando instrucciones (no captura datos). By how much will the processor be slowed down due to the DMA activity?
+** 1MIPS -> 1 instrucción cada microsegundo. Como la CPU está continuamente capturando instrucciones tendrá ocupado el bus durante 1 microsegundo para captar cada instrucción y completar el ciclo de instrucción, por lo que el ciclo del bus del sistema es 1us.
+** 1 character = 8 bits
+** 9600 bps -> 1200 bytes/s -> 1/1200 seg/byte =833us/byte -> cada byte se transfiere por robo de ciclo. Se roba el bus del sistema cada 833us, es decir, cada 833 ciclos del bus del sistema.
+** El bus del sistema lo tiene el DMAC durante un ciclo, es decir, 1 us.
+** Cada 833 ciclos el DMAC roba 1 -> 1/833 -> 0.12%
+** 1MIPSx(1-0.0012)=998800 instrucciones por segundo.
+
+* 7.13 Consider a system in which bus cycles takes 500 ns. Transfer of bus control in either direction, from processor to I/O device or viceversa, takes 250 ns. One of the I/O devices has a data transfer rate of 50 KB/s and employs DMA. Data are transferred one byte at a time.
+
+a. Suppose we employ DMA in a burst mode. That is, the DMA interface gains bus mastership prior to the start of a block transfer and maintains control of the bus until the whole block is transferred. For how long would the device tie up the bus when transferring a block of 128 bytes?
+b. Repeat the calculation for cycle-stealing mode.
+
+* Desarrollo:
+** 500ns dura el ciclo del bus del sistema
+** T~tx~=1/50KB=20us/B. El DMA  según recibe el dato del periférico lo transfiere a la memoria principal, transfiriendo datos a través del bus del sistema a la misma velocidad del periférico. Sólo tiene sentido en periféricos de alta velocidad.
+a. Modo ráfaga: T=t~acceso_bus~+t~bus_io_transferencia_bloque~+t~liberar_bus~=250ns+128x20us+250ns=2560us
+b. Robo de ciclo T=128x(t~acceso_bus~+t~bus_io_transferencia_byte~+t~liberar_bus~)=128x(250ns+20us+250ns)=128x20.5us=2624us
+
+
+* 7.16 A DMA controller serves four receive-only telecommunication links (one per DMA channel) having a speed of 64 Kbps each.
+a. Would you operate the controller in burst mode or in cycle-stealing mode?
+b. What priority scheme would you employ for service of the DMA channels?
+* Desarrollo:
+.. Ahora el DMAC tendrá cuatro bufferes de datos y podría acceder al bus de la misma forma que con uno. Debido a que los enlaces de telecomunicaciones ocupan el canal de forma continua (voz o datos), todo el tiempo que dura la comunicaión, el modo ráfaga ocuparía el bus el 100% del tiempo. Por lo que seleccionamos el robo de ciclo.
+.. Prioridad entre 4 clientes: misma prioridad ya que tienen la misma velocidad. Si tuviesen diferentes velocidades, tendría mayor velocidad el más rápido, el de mayor tráfico.
+
+* 7.17 A 32-bit computer has two selector channels and one multiplexor channel. Each selector channel supports two magnetic disk and two magnetic tape units. The multiplexor channel has two line printers, two card readers, and 10 VDT terminals connected to it. Assume the following transfer rates:
+** Disk drive 800 KBytes/s
+** Magnetic tape drive 200 KBytes/s
+** Line printer 6.6 KBytes/s
+** Card reader 1.2 KBytes/s
+** VDT 1 KBytes/s
+** Estimate the maximum aggregate I/O transfer rate in this system.
+
+.. Los dos canales selector tienen los mismos periféricos. Un canal selector está permanentemente asignado a sus periféricos y sólo puede dar servicio a uno de los periféricos asignados. El multiplexor en cambio da servicio a todos -> Rate=800+800+2x6.6+2x1.2+10x1=1625.6KB/s
+
+* 7.18 A computer consists of a processor and an 'I/O device D' connected to 'main memory M' via a shared bus with a data bus width of one word. The processor can execute a maximum of 10^6^ instructions per second. An average instruction requires five machine cycles, three of which use the memory bus. A memory read or write operation uses one machine cycle. Suppose that the processor is continuously executing “background” programs that require 95% of its instruction execution rate but not any I/O instructions, es decir, el 5% son instrucciones I/O si utiliza mecanismo e/s por programa. Assume that one processor cycle equals one bus cycle. Now suppose the I/O device is to be used to transfer very large blocks of data between M and D.
+
+a. If programmed I/O is used and each one-word I/O transfer requires the processor to execute two instructions, estimate the maximum I/O data-transfer rate, in words per second, possible through D.
+
+b. Estimate the same rate if DMA is used.
+
+* Desarrollo:
+.. Mecanismo E/S por programa
+... La transferencia se realiza por programa y lo realiza la CPU. La transferencia de 1 palabra requiere la ejecución de dos instrucciones. 
+... 1 instrucción=3 ciclos máquina con el memory bus
+... Como el ciclo de bus equivale a un ciclo máquina -> 3 ciclos de bus con el memory bus -> La transferencia de una palabra requiere 3 ciclos de bus-> En cada ciclo de bus se transfiere un tercio de la palabra.
+... Los programas en background requieren el 95% de instrucciones a la CPU, dejando el 5% de instrucciones para I/O
+... Del 5% de instrucciones i/o el 2.5% son transferencias ya que hacen falta dos instrucciones i/o por transferencia.
+... T_transfer(1word)= 0.025x10^6^ instrucciones~io~/seg= 25000words/seg
+.. DMA: 
+... Observamos el tiempo que la CPU no utiliza el bus del sistema= 5% de instrucciones (5 ciclos por instrucción) MÁS  el 95% de instrucciones (2ciclos por instrucción).
+... El 5% de ejecución de CPU, la CPU esta libre :10^6^(inst/seg)x0.05x5(ciclos/instr)= 250000 ciclos/seg de procesador que utiliza el DMA= 250000 ciclos/seg de i/o que utiliza el DMA
+... El 95% de ejecución de CPU, el DMA comparte bus del sistema=10^6^x0.95x2 ciclos libres de los 5 ciclos= 1900000 ciclos/seg de cpu= 1900000 ciclos/seg i/o
+... Total=1900000+250000=2.150.000 ciclos/seg bus i/o
+... Si en cada ciclo se puede realizar una transferencia, esa sería la velocidad máxima. La CPU no realiza la operación de acceso a memoria, la realiza el controlador de memoria.
+
+ifdef::backend-docbook45[<<<]
+Capitulo 8: Operating System
+----------------------------
+
+* 8.3 A program computes the row sums Ci=Sum[aij] para j=1,n of an array A that is 100 by 100. Assume that the computer uses demand paging with a page size of 1000 words, and that the amount of main memory allotted for data is five page frames. Is there any difference in the page fault rate if A were stored in virtual memory by rows or columns? Explain.
+** Matriz A = 100x100 palabras = 10000 palabras 
+** Memoria: 5 marcos de páginas : 5000 palabras
+** Proceso: 10000 palabras se dividirá en 10000/1000=10 páginas
+** Almacenamiento por 'filas'
+** 1ª  página: a1_1,a1_2,..,a1_100,a2_1,..,a2_100,..,..,a10_1,..,a10_100 -> diez filas
+** 5ª  página: a41_1,..,..,a50_100
+** 10ª página: a91_1 ,..,..,a100_100
+** xª  página: desde a10*(x-1)+1_1 hasta a10*x_1 -> diez filas 
+** Ejecución primera fila: C1=SUM[a1j] j=1,100 
+*** Demand Paging: 
+**** La MP está vacía, ningún marco de página inicializado, todas las páginas en disco, sin copia en los marcos de la MPrincipal.
+**** captura de a11 -> FAULT (no está en MP, está en disco)-> copia 1ª página -> obtiene C1
+** Ejecución C2 -> a21 sí está en la primera página -> obtiene C2
+** Ejecución C3,..,C10 -> ningún fault ya que están en la primera página
+** Ejecución C11 -> FAULT -> copio la 2ª página
+** Ejecución C21 -> FAULT -> copio la 3ª página
+** FAULTS: C1,C11,C21,..,C91 
+** Cada vez que se ejecutan las 100 filas Ci se producen 10 Fallos
+** El resultado hubiese sido el mismo si en lugar de 5 páginas hubiese tenido una página si la política de reemplazo es la FIFO
+** se podrían utilizar 4 marcos de página con los mismos datos y realizar los reemplazos en el mismo marco. 
+
+* Almacenamiento por 'columnas' :
+** 1ª  página: a1_1,a2_1,..,a100_1,a1_2,..,a100_2,..,..,a1_10,..,a100_10 -> diez columnas
+** xª  página: desde a1_10*(x-1)+1 hasta a100_10*x -> diez columnas 
+*** Ejecución 1ª fila: C1=SUM[a1j] j=1,100
+**** necesito cargar las 100 columnas de la fila 1 -> necesito 10 páginas con diez columnas por página -> 10 FAULTS
+*** Ejecución nª fila: se necesitan 100 columnas que están distribuidas por páginas de 10 en 10 columnas. -> hacen falta 10 páginas -> 10 FAULTS
+** Cada vez que se ejecutan las 100 filas Ci : 10 Faults por fila -> 1000 FAULTS 
+
+* 8.4 Consider a fixed partitioning scheme with equal-size partitions of 2^16^ bytes and a total main memory size of 2^24^ bytes. A process table is maintained that includes a pointer to a partition for each resident process. How many bits are required for the pointer?
+** Las tablas de descriptores están formadas por el índice y el contenido que en este caso es un puntero.
+** 2^24^/2^16^=2^8^ particiones de la memoria
+** Tamaño de 2^16^ -> direcciones que terminan en hexadecimal en 0000 -> direcciones k*2^16^->0xnn0000
+** puntero: solo es necesario guardar los dos dígitos nn de mayor peso -> 8 bits 
+*** luego se desplazan 16 bits a a la izda para tener la dirección base
+
+* 8.6 Suppose the page table for the process currently executing on the processor looks like the following. All numbers are decimal, everything is numbered starting from zero, and all addresses are memory byte addresses. The page size is 1024 bytes.
+
+image::./images/ejercicios/8_6.png[alt="VM",title="VM",align="center"]
+
+* .
+a. Describe exactly how, in general, a virtual address generated by the CPU is translated into a physical main memory address.
+** La dirección virtual esta formada por los campos (VPN,VPO) -> (base,offset). Mediante la tabla de paginas virtuales traducimos VPN en PPN. La dirección física es el par (PPN,PPO) donde el offset PPO=VPO
+** Para qué este cacheada la página virtual en la tabla de páginas virtuales el bit de validación tiene que valer 1. 
+b. What physical address, if any, would each of the following virtual addresses correspond to? (Do not try to handle any page faults, if any.)
+.. 1052
+*** VPN=Mod{1052/1024}=1 -> Valid Bit=1 -> PPN=7
+*** VPO=Rest{1052/1024}=28
+*** Dirección física = 7*1024+28=7196
+.. 2221
+*** VPN=Mod{2221/1024}=2 -> Valid Bit=0
+*** No hay copia de esa página por lo que no se puede realizar la traducción
+.. 5499
+*** VPN=Mod{5499/1024}=5 -> Valid Bit=1 -> PPN=0 
+*** VPO=Rest{1052/1024}=379
+*** Dirección física = 0+379=379
+
+* 8.8 A process references five pages, A, B, C, D, and E, in the following order: A; B; C; D; A; B; E; A; B; C; D; E .Assume that the replacement algorithm is first-in-first-out and find the number of page transfers during this sequence of references starting with an empty main memory with three page frames. Repeat for four page frames.
+a. MP -> 3 marcos de página ; política FIFO
+** v/v/v; A-> A/v/v ; B-> A/B/v ; C-> A/B/C; D-> D/B/C; A-> D/A/C; B-> D/A/B; E-> E/A/B ; A-> E/A/B; B-> E/A/B; C-> E/C/B; D-> E/C/D; E-> E/C/D
+** 10 Fallos
+b. MP -> 4 marcos de página ; política FIFO
+** v/v/v/v; A-> A/v/v/v ; B-> A/B/v/v ; C-> A/B/C/v; D->A/B/C/D; A->A/B/C/D; B->A/B/C/D; E->E/B/C/D; A->E/A/C/D; B->E/A/B/D; C->E/A/B/C; D->D/A/B/C; E->D/E/B/C
+
+* 8.9 The following sequence of virtual page numbers is encountered in the course of execution on a computer with virtual memory: 3 4 2 6 4 7 1 3 2 6 3 5 1 2 3 Assume that a least recently used page replacement policy is adopted. Plot a graph of page hit ratio (fraction of page references in which the page is in main memory) as a function of main-memory page capacity n for 1<= n<=8. Assume that main memory is initially empty.
++
+
+[ditaa]
+----------------------------------------------------------------------
+
+Nº marcos | Fracción Aciertos| 3 4 2 6 4 7 1 3 2 6 3 5 1 2 3
+     1    |         0        |  
+     2    |         0        |  
+     3    |      2/15        |   4     4     3     3
+     4    |      3/15        |   4     4     3     3       3
+     5    |      4/15        |   4     4     3 2   3     2 3
+     6    |      7/15        |   4 2 6 4   1 3 2 6 3   1 2 3
+     7    |      8/15        | 3 4 2 6 4   1 3 2 6 3   1 2 3
+     8    |      8/15        | 3 4 2 6 4   1 3 2 6 3   1 2 3
+----------------------------------------------------------------------
+
+
+
+* 8.11 Suppose the program statement
++
+
+[source,c]
+----------------------------------------------------------------------
+for (i = 1; i <= n; i++)
+  a[i] = b[i] + c[i];
+----------------------------------------------------------------------
+
+* is executed in a memory with page size of 1000 words. Let n = 1000. Using a machine that has a full range of register-to-register instructions and employs index registers, write a hypothetical program to implement the foregoing statement. Then show the sequence of page references during execution.
+** En la memoria virtual estará tanto el código como los datos
+** Marcos de 1000 palabras.
+** Programa arquitectura load/store (espacio de direcciones virtual)
++
+
+[source,c]
+----------------------------------------------------------------------
+            SECCION CODIGO
+            Ri <- 1
+            Ra <- n
+loop_start: R1 <- b[Ri]
+            R2 <- c[Ri]
+            R3 <- R1+R2
+            a[Ri] <- R3
+            Flags <- Ri<Ra
+            Flags:PC <- loop_start
+            CPU <- halt
+            SECCION DATOS INICIALIZADOS
+uno:        1
+n:          1000
+a:          array a[1000]
+b:          array b[1000]
+c:          array c[1000]  
+----------------------------------------------------------------------
+** Asignación del espacio virtual
+*** Código en la página PV1
+*** array A ocupa una página -> PV2
+*** array B ocupa una página -> PV3
+*** array C ocupa una página -> PV4
+*** uno y n en una página de tipo datos -> PV5
+** Ejecución
+*** 1515(131411211)^1000^11
+
+
+* 8.13 Consider a computer system with both segmentation and paging. When a segment is in memory, some words are wasted on the last page. In addition, for a segment size s and a page size p, there are s/p page table entries. The smaller the page size, the less waste in the last page of the segment, but the larger the page table. What page size minimizes the total overhead?
+** Desarrollo:
+a. Número de páginas por segmento: tamaño del segmento/ tamaño de página = s/p
+b. Cada segmento tiene su propia tabla de páginas
+c. Si reducimos el tamaño de página se reduce la fragmentación interna pero se incrementa el número de entradas de la tabla de páginas.
+d. El Total de palabras desperdiciadas (w) es el desperdicio debido a las últimas páginas de cada segmento más el tamaño de la tabla de págincas. El valor medio de la fragmentación interna de todos los segmentos es p/2 y el tamaño de la tabla de páginas es proporcional al número de entradas de la tabla s/p -> w=p/2+s/p -> dw/dp=1/2-s/p^2^=0 -> p^2^=2s
+
+* 8.14 A computer has a cache, main memory, and a disk used for virtual memory. If a referenced word is in the cache, 20 ns are required to access it. If it is in main memory but not in the cache, 60 ns are needed to load it into the cache, and then the reference is started again. If the word is not in main memory, 12 ms are required to fetch the word from disk, followed by 60 ns to copy it to the cache, and then the reference is started again. The cache hit ratio is 0.9 and the main-memory hit ratio is 0.6. What is the average time in ns required to access a referenced word on this system? 
+
+** T=hit_cache*t_acc_ca+(1-hit_cache)*hit_main*(t_main_cache+t_acc_ca)+(1-hit_cache)*(1-hit_main)*(t_acc_disk_main+t_main_cache+t_acc_ca)=
+= 0.9*20+0.1*0.6*(60+20)+0.1*0.4*(12000000+60+20)=480us
+
+
+* 8.15 Assume a task is divided into four equal-sized segments and that the system builds an eight-entry page descriptor table for each segment. Thus, the system has a combination of segmentation and paging. Assume also that the page size is 2 Kbytes.
+a. What is the maximum size of each segment?
+b. What is the maximum logical address space for the task?
+c. Assume that an element in physical location 00021ABC is accessed by this task. What is the format of the logical address that the task generates for it? What is the maximum physical address space for the system?
+** Desarrollo:
+A. Tabla de PAGINAS: 8 entradas : 8 paginas virtuales de 2KB -> Segmento:8*2KB=16KB. 
+..   No dice nada pero ... La tabla de SEGMENTOS tendrá una entrada por segmento. Cada entrada de segmento apuntará a una tabla de página diferente. Una tabla de página por segmento.
+B. Proceso: 4 segmentos -> 4*16KB=64KB
+C. Dirección lógica -> Formato (Segmento,Pagina,VPO) -> (4seg,8pag,2KB)-> (2bits,3bits,11bits)-> Dirección lógica de 16 bits 
+.. Dirección física -> 00021ABC -> 8 digitos hex -> 32 bits -> 4GB
+.. Marcos de página -> 4GB/2KB -> 2*2^20^ marcos
+.. 00021ABC -> 0000-0000-0000-0010-0001-1010-1011-1100 -> marco/offset -> 21/11 -> 000000000000001000011 / 01010111100 -> marco 67/ offset 700
+D. Traducción: El offset virtual y físico idénticos (11bits) -> El segmento lógico (2bits) apunta a una tabla de páginas. La página virtual (3bits) es el offset de la tabla de páginas. Cada entrada de la tabla de páginas es un puntero a un marco de la memoria principal ( una dirección base de 21 bits). Se añadir la pregunta de inventarse la tabla de descripción de segmentos y las cuatro tablas de páginas de cada segmento. En este ejercicio la dirección lógica tendrá el offset  01010111100 y los 5 bits del par seg/página no se pueden saber ya que haría falta saber en que tabla y posición está el puntero al marco 67.
+
+
+* 8.16 Assume a microprocessor capable of accessing up to 2^32^ bytes of physical main memory. It implements one segmented logical address space of maximum size 2^31^ bytes. Each instruction contains the whole two-part address. External memory management units (MMUs) are used, whose management scheme assigns contiguous blocks of physical memory of fixed size 2^22^ bytes to segments. The starting physical address of a segment is always divisible by 1024. Show the detailed interconnection of the external mapping mechanism that converts logical addresses to physical addresses using the appropriate number of MMUs, and show the detailed internal structure of an MMU (assuming that each MMU contains a 128-entry directly mapped segment descriptor cache) and how each MMU is selected.
+** un espacio virtual segmentado de 2^31^ bytes: no es el espacio virtual de cada segmento sino el de todos los segmentos.
+** dirección lógica con dos partes -> (segmento,offset)
+** MP: Espacio de 2^32^ bytes con Bloques de 2^22^ bytes contiguos para cada segmento
+*** offset de 22 bits
+*** 2^31^/2^22^ = 2^9^ segmentos en espacio virtual -> 9 bits para el segmento en la dirección virtual y una tabla de segmentos con 512 entradas
+*** Dirección lógica de 31 bits (9,22) -> (seg,offset)
+** MP: segmentos alineados en multiplos de 1K
+*** segmento físico:los 10 bits de menor peso son cero y los 22 de mayor peso están en la 'tabla de segmentos'.
+*** Dirección física: segmento+offset
+** MMU: 'tabla de segmentos' de 128 entradas (2^7^)
+a. no tenemos una tabla con 512 entradas sino cuatro tablas de 128 cada una.
+b. cantidad de MMUs: Si tenemos 2^9^ segmentos en el espacio virtual y la MMU tiene una tabla de 2^7^ necesitaremos 4 MMUs.
+c. Traducción: espacio lógico (9,22)(seg,offset) en una dirección segmento+offset de 32 bits.
+.. De los 9 bits de segmento virtual, dos bits seleccionaran la MMU y otros siete bits la entrada de la tabla de segmentos. (2,7,22)
+.. los 9 bits de segmento lógico son el índice de la tabla de segmentos que contiene los 22 bits altos de un segmento físico.
+.. El offset físico también tiene un tamaño de 22 bits
+.. dirección física: dirección base múltiplo de 1K más offset de 22bits.
+
+
+
+* 8.17 Consider a paged logical address space (composed of 32 pages of 2 Kbytes each) mapped into a 1-Mbyte physical memory space.
+a. What is the format of the processor’s logical address?
+b. What is the length and width of the page table (disregarding the “access rights” bits)?
+c. What is the effect on the page table if the physical memory space is reduced by half?
+
+** Desarrollo:
+** MP : 1MB con páginas de 2KB -> 2^20^/2^11^ = 2^9^ marcos de página
+A. VPN/OFFSET -> VPN:32 páginas supone 2^5^, 5 bits ; OFFSET:2KB supone 2^11^, 11bits
+B. Tabla de páginas: longitud igual al número de paginas virtuales= 32 y anchura igual al puntero a uno de los 2^9^ marcos, es decir, 9 bits.
+C. Si se reduce la MP a la mitad, se reduce el número de marcos a la mitad también -> 2^8^ marcos de página -> anchura de 8 bits.
+
+* Randal Capítulo 9: Figure 9.19 shows the formats of the virtual and physical addresses. Since each page is 26 =64 bytes, the low-order 6 bits of the virtual and physical addresses serve as the VPO and PPO respectively.The high-order 8 bits of the virtual address serve as the VPN. The high-order 6 bits of the physical address serve as the PPN. Figure 9.20 shows a snapshot of our little memory system, including the TLB (Figure 9.20(a)), a portion of the page table (Figure 9.20(b)), and the L1 cache (Figure 9.20(c)). Above the figures of the TLB and cache, we have also shown how the bits of the virtual and physical addresses are partitioned by the hardware as it accesses these devices.
++
+
+image::./images/ejercicios/randal_9-19.png[]
++
+
+image::./images/ejercicios/randal_9-20.png[]
+
+** Given this initial setup, let’s see what happens when the CPU executes a load instruction that reads the byte at address 0x03d4
+** Solución
+*** TLBI:0x03
+*** TLBT:0x3
+*** VPN:0x0f
+*** VPO:0x14
+*** PPN=0x0D
+*** physical address=0x354
+*** CO=0x0
+*** CI=0x5
+*** CT=0x0D
+*** Data=0x36
+
+ifdef::backend-docbook45[<<<]
+Capitulo 12: Processor Structure and Function (Capitulo 14 en 9ªEd)
+-------------------------------------------------------------------
+
+* 12.1 a. If the last operation performed on a computer with an 8-bit word was an addition in which the two operands were 00000010 and 00000011, what would be the value of the following flags?
+** Carry
+** Zero
+** Overflow -> Número con signo
+** Sign
+** Even Parity -> Paridad PAR
+** Half-Carry
+
+** Desarrollo
+*** 0010+0011=0101 -> No hay llevada en el MSB, el resultado no es cero, no hay overflow, positivo, número de unos PAR,  no hay llevada en el bit de posición 3. Por lo que todos los flags desactivados excepto el de paridad par . El flag parity estará a 1.
+
+* 12.3 A microprocessor is clocked at a rate of 5 GHz.
+a. How long is a clock cycle? 
+b. What is the duration of a particular type of machine instruction consisting of three clock cycles?
+** Desarrollo
+*** a. T= 1/f = 1/(5*10^9^)=0.2ns
+*** b.  3T= 3*0.2=0.6ns
+
+
+* 12.4 A microprocessor provides an instruction capable of moving a string of bytes from one area of memory to another. The fetching and initial decoding of the instruction takes 10 clock cycles. Thereafter, it takes 15 clock cycles to transfer each byte. The microprocessor is clocked at a rate of 10 GHz.
+a. Determine the length of the instruction cycle for the case of a string of 64 bytes.
+b. What is the worst-case delay for acknowledging an interrupt if the instruction is noninterruptible?
+c. Repeat part (b) assuming the instruction can be interrupted at the beginning of each byte transfer
+** Desarrollo
+*** a) IC=Instruction Cycle= FI+DI+CO+FO+EI+WO; FI+DI=10T ; CO+FO= 0 ; EI= 15T/byte ; WO=0 ; T=1/(10*10^9^))=0.1 ns; IC=(10+15*64)*T=970*0.1= 97ns
+*** b) Justo nada más empezar la instrucción quedaría todo el ciclo para poder atender a la interrupción: 97 ns.
+*** c) Si se interrumpe antes de la primera transfer tardaría 10T como mucho, y si se interrumpe durante las transferencias sería 15T. Por lo que es caso peor sería 15T=15*0.1=1.5ns
+
+
+
+* 12.5 The Intel 8088 consists of a bus interface unit (BIU) and an execution unit (EU), which form a 2-stage pipeline. The BIU fetches instructions into a 4-byte instruction queue. The BIU also participates in address calculations, fetches operands, and writes results in memory as requested by the EU. If no such requests are outstanding and the bus is free, the BIU fills any vacancies in the instruction queue. When the EU completes execution of an instruction, it passes any results to the BIU (destined for memory or I/O) and proceeds to the next instruction. http://en.wikipedia.org/wiki/Intel_8088[wikipedia]:  the 8088 had an *8-bit* external data bus 
+a. Suppose the tasks performed by the BIU and EU take about equal time. By what factor does pipelining improve the performance of the 8088? Ignore the effect of branch instructions.
+b. Repeat the calculation assuming that the EU takes twice as long as the BIU. 
+** Desarrollo
+*** 0. El micro 8088 tiene un bus de datos de 8bits. La unidad de ejecución comprende la ALU y los Registros. La BIU junto a la EU forman conjuntamente una CPU segmentada con dos unidades. La 'prefetch instruction queue' es el buffer que almacena la siguiente instrucción a ejecutar.
+*** a. Una etapa tarda x y la siguiente también x. La primera instrucción tarda en ejecutarse 2x y cada intervalo x sale una nueva por lo que la mejoría a partir de la segunda instrucción es de x/2x => En un ciclo de instrucción (duración 2x) salen instrucciones cada intervalo x, es decir, el doble.
+*** b. x+2x=3x. A partir de la segunda instrucción tardan 2x. En un ciclo de instrucción 3x salen instrucciones cada 2x => (3x time  ciclo)/ (2x time/instrucción) = 1.5 veces más instrucciones por ciclo.
+
+
+* 12.6 Assume an 8088 is executing a program in which the probability of a program jump is 0.1. For simplicity, assume that all instructions are 2 bytes long. If the prefetch instruction queue is empty, the EU waits for the next instruction byte to be fetched and shifted to top of the queue.
+When the EU executes a branch or jump instruction, it transfers control to a location corresponding to another set of sequential instructions. 
+Whenever this happens, the BIU automatically resets the queue and then begins to fetch instructions from this new location to refill the queue.
+a. What fraction of instruction fetch bus cycles is wasted?
+b. Repeat if the instruction queue is 8 bytes long.
+
+** Buffer (de 4 bytes para dos instrucciones) -> BIU -> EU : Para leer una instrucción son necesarios *DOS ciclos de bus*, un bus de datos (1 byte) por ciclo de bus.
+
+
+
+** Desarrollo
+*** 0. Si no hay salto durante la ejecución de la instrucción N se captura la instrucción N+1.
++
+
+[ditaa]
+----------------------------------------------------------------------
+          BUFFER                    BIU             EU                 
+------------+------------    ---------------    ------------
+|N+2(2bytes)|N+1(2bytes)| -> | Captura N+2 | -> | Ejecuta N|
+------------+------------    ---------------    ------------
+
+                                |
+                                | Dos Ciclos de Bus para capturar una instrucción
+                                |
+                                v
+
+          BUFFER                    BIU             EU                 
+------------+------------    ---------------    --------------
+|N+3(2bytes)|N+2(2bytes)| -> | Captura N+3 | -> | Ejecuta N+1|
+------------+------------    ---------------    --------------
+----------------------------------------------------------------------
+
+*** 1. Si la ejecución de la instrucción N supone un salto de M instrucciones no se ejecutará la instrucción N+1 que espera en el buffer, sino que se debe ejecutar la instrucción N+M. Durante la ejecución de N NO se captura nada sino que se actualiza el Contador de Programa a N+M y en el siguiente ciclo de instruccióń se capturará N+M. Por lo que si hay salto, el ciclo de captura estará infrautilizado y será necesario vaciar el buffer de instrucciones.
+
+*** Interpretación  
++
+
+[ditaa]
+----------------------------------------------------------------------
+
+Pasar de una fase a otra de este esquema supone la captura de una instrucción (2 ciclos de bus) 
+
+
+          BUFFER                    BIU                    EU                 
+------------+------------    ---------------    -------------------------
+|N+1(2bytes)|  N(2bytes)| -> | Captura N+1 | -> | Ejecuta N -1          |  -> Ejecuta la instrucción anterior a la del salto
+------------+------------    ---------------    -------------------------
+
+
+          BUFFER                    BIU                    EU                 
+------------+------------    ---------------    -------------------------
+|N+2        |N+1        | -> | Captura N+2 | -> | Ejecuta N: salto a N+M|  -> Ejecuta la instrucción de salto: actualiza el PC
+------------+------------    ---------------    -------------------------
+
+          BUFFER                    BIU                EU                 
+------------+------------    ---------------    --------------
+|N+M        |  Vacia    | -> | Captura  N+M| -> | No Ejecuta |              -> La BIU vacía el Buffer y captura la inst N+M a la cola
+------------+------------    ---------------    --------------
+
+          BUFFER                    BIU                  EU                 
+------------+------------    ---------------    --------------
+|N+M+1      | N+M       | -> |Captura N+M+1| -> | No Ejecuta |            -> Rellena el buffer poniendo N+M en la cabeza de la cola 
+------------+------------    ---------------    --------------
+
+          BUFFER                    BIU                    EU                 
+------------+--------------    ---------------    --------------
+|N+M+2      | N+M+1       | -> |Captura N+M+2| -> |Ejecuta N+M |          -> La unidad de Control captura,interpreta y ejecuta N+M
+------------+--------------    ---------------    --------------
+
+----------------------------------------------------------------------
+*** a. Cuando la BIU capta de la memoria principal N+1 y lo pone en cola detrás de N, se están desaprovechando los dos ciclos de bus que se necesitan para la captura de la instrucción M+1 que no se va a ejecutar. Lo mismo ocurre con la captura de N+2 de la memoria princiapl. Por lo tanto se malgastan los ciclos del bus del sistema de N+1 y N+2, es decir, 4 ciclos de bus.
+*** El buffer de instrucción es de 4 bytes según el ejercicio anterior, por lo que es necesario "empujar" los 4 bytes de N+1 y N+2  para dejar pasar a la nueva instrucción N+M desde que es capturada de la memoria principal.  
+***  La captura de una instrucción no_jump supone 2 ciclos de bus bien utilizados, la instrucción estará en la cabeza del buffer cuando la vaya a ejecutar la CPU. La de una instrucción jump supone 2 ciclos bien utilizados en capturarla desde la memoria principal pero 4 ciclos mal utilizados en vaciar el buffer y desplazar la instrucción N+M desde la cola hasta la cabecera del buffer, mientras la cpu espera. De cada 100 instrucciones tendremos 100 instruccionesx2ciclos/instr bien utilizados y 10 instruccionesx4ciclos/instrucción mal utilizados-> en total 240 ciclos -> fracción de infrautilización= 40/240= 0.166= 17% del tiempo el bus no está siendo utilizado en operaciones fetch, la BIU está ocupado en vaciar el buffer.
+*** b. Con una cola de 8 bytes -> Total=100x2+10*8=280-> ineficiencia=80/280=0.285=28.5%
+
+
+
+* 12.7 Consider the timing diagram of Figures 12.10. Assume that there is only a two-stage pipeline (fetch, execute). Redraw the diagram to show how many time units are now needed for four instructions.
+
+** Desarrollo
++
+
+[ditaa]
+----------------------------------------------------------------------
+    --------------------------
+    | 1  | 2  | 3  | 4  | 5  |
+    -------------------------- 
+I1    FI   EI
+I2         FI   EI
+I3              FI   EI
+I4                   FI   EI
+----------------------------------------------------------------------
+
+*** Son necesarias 5 unidades de Tiempo
+
+* 12.9 A pipelined processor has a clock rate of 2.5 GHz and executes a program with 1.5 million instructions. The pipeline has five stages, and instructions are issued at a rate of one per clock cycle. Ignore penalties due to branch instructions and outof-sequence executions.
+a. What is the speedup of this processor for this program compared to a nonpipelined processor, making the same assumptions used in Section 12.4?
+b. What is throughput (in MIPS) of the pipelined processor?
+** Desarrollo
+*** a. Duración Programa con N instrucciones, segmentación de k etapas de duración t cada una= 1ª instrucción más el resto = 'k*t +(N-1)*t = t*(N+k-1) = para N>>k = t*(N-1)' . La relación sin_seg/con_seg = N*k*t / t(N+k-1) = Nk/(N+k-1) . Si N tiende a infinito -> Nk/N=k=5 
+*** b. Throughput = instrucciones del programa/duración del programa= N/{t*(N+k-1)}=1/t
+
+* 12.11 Consider an instruction sequence of length n that is streaming through the instruction pipeline. Let p be the probability of encountering a conditional or unconditional branch instruction, and let q be the probability that execution of a branch instruction I causes a jump to a nonconsecutive address. Assume that each such jump requires the pipeline to be cleared, destroying all ongoing instruction processing, when I emerges from the last stage. Revise Equations (12.1) and (12.2) to take these probabilities into account.
+
+
+** Desarrollo
+*** Instrucciones cuya ejecución es un salto no consecutivo : pqn
+*** Instrucciones cuya ejecución supone un no salto : (1-pq)n
+*** T_programa=T_inst_salto+T_inst_nosalto = {pq*nkt}+{(1-pq)*(k+n-1)t} 
+
+* 12.13 Consider the state diagrams of Figure 12.28. 
+a. Describe the behavior of each.
+b. Compare these with the branch prediction state diagram in Section 12.4. Discuss the relative merits of each of the three approaches to branch prediction.
+
+image:./images/ejercicios/cpu_12-13.png[scaledwidth="100%",align="center",title="Predicción de Salto"]
+
+*  Predict taken: predicción de SI salto.
+* Diagrama A:
+**  Cambio de predicción afirmativa a negativa:
+*** Partiendo de predicción de salto SI -> Dos "NO" consecutivos para cambiar la predicción a NO
+**  Cambio de predicción negativa a afirmativa:
+*** Partiendo de predicción de salto NO -> Un "SI"  para cambiar la predicción a SÍ
+* Diagrama B:
+**  Cambio de predicción afirmativa a negativa:
+*** Partiendo de predicción de salto SI -> Dos "NO" consecutivos para cambiar la predicción a NO
+**  Cambio de predicción negativa a afirmativa:
+*** Partiendo de predicción de salto NO -> Un "SI"  para cambiar la predicción a SÍ si previamente ha habido dos "NO SALTO" consecutivos
+*** Partiendo de predicción de salto NO -> Dos "SI"  para cambiar la predicción a SÍ si ha habido más de dos "NO SALTO" consecutivos
+
+* 12.14 The Motorola 680x0 machines include the instruction 'Decrement and Branch According to Condition', which has the following form:
++
+
+[source,c]
+----------------------------------------------------------------------
+     DBcc Dn, displacement
+
+where cc is one of the testable conditions, Dn is a general-purpose register, and displacement
+specifies the target address relative to the current address. 
+
+The instruction can be defined as follows:
+   if (cc = False)
+     then begin
+     Dn := (Dn) - 1;
+     if Dn != -1 then PC := (PC) + displacement end
+   else PC := (PC) + 2;
+----------------------------------------------------------------------
+
+** When the instruction is executed, the condition is first tested to determine whether the termination condition for the loop is satisfied. If so, no operation is performed and execution continues at the next instruction in sequence. If the condition is false, the specified data register is decremented and checked to see if it is less than zero. If it is less than zero, the loop is terminated and execution continues at the next instruction in sequence. Otherwise, the program branches to the specified location. Now consider the following assembly-language program fragment:
++
+
+[source,c]
+----------------------------------------------------------------------
+AGAIN CMPM.L (A0)+, (A1)+
+      DBNE D1, AGAIN
+      NOP
+----------------------------------------------------------------------
+
+
+** Two strings addressed by A0 and A1 are compared for equality; the string pointers are incremented with each reference. D1 initially contains the number of longwords (4 bytes) to be compared.
+a. The initial contents of the registers are A0 = $00004000, A1 = $00005000 and D1 = $000000FF (the $ indicates hexadecimal notation). Memory between $4000 and $6000 is loaded with words $AAAA. If the foregoing program is run, specify the number of times the DBNE loop is executed and the contents of the three registers when the NOP instruction is reached.
+b. Repeat (a), but now assume that memory between $4000 and $4FEE is loaded with $0000 and between $5000 and $6000 is loaded with $AAA.
+
+** Desarrollo:
+*** La instrucción DBcc se emplea como control de los bucles una vez finalizada cada iteracción. La condicción cc hace referencia a la última operación antes de la instrucción DBcc, en este caso CMPM.L. Si la condición es verdadera -> Fin de bucle y sigue la secuencia del programa. Si la condición es falsa decrementa el contador de iteraciones y salta al comienzo del bucle. Palabras tipo .L (Large) de 4 bytes. D1=0xFF. D1-1=0xFFFFFFFF. A0 puntero a string -> (A0) indirección -> (A0)+ incrementa el puntero en una palabra en cada ejecución.
+a. Los dos punteros apuntan a memoria cuyo contenido es $AAAA por lo tanto la comparación da como resultado EQUAL. La condición de la instrucción DBcc es NE, not equal, por lo tanto es FALSE  y sí se ejecuta el bucle.  Se ejecuta 0xFF+1 veces hasta llegar el contador D1=-1. Ultima dirección del puntero A0 -> 0x4000+0xFFpalabras+1palabra=0x4000+4x(0xFF)bytes+4bytes ->2^2^x(0xFF) equivale a desplazar 0xFF dos bits a la izda = 0x3FC -> 0x4000+0x3FC+4=0x4400. Puntero A1 ->  0x5000+0x3FC+4=0x5400.
+b. Todas las comparaciones dan como resultado distinto de cero -> NE -> por lo tanto TRUE -> Unicamente se ejecuta una iteracción. D1=0xFF-1=0xFE; A0=A0+1palabra=0x4004 y A1=0x5004
+
+
+* 12.15 Redraw Figures 12.19c (14.21c), assuming that the conditional branch is not taken
++
+
+image:./images/ejercicios/14-21.png[]
+
+** Desarrollo:
+*** 80486: 32 bits
+*** Etapas del cauce (pipeline) de instrucciones: FE-D1-D2-Ex-WB.
+*** Fetch: Captura de la instrucción
+*** D1: Decodifico Cod.Op y Modo Direccionamiento
+*** D2: Operaciones para el cálculo de la Dirección Efectiva del Operando
+*** EX: Operaciones ALU y acceso a operandos
+*** WB: EFLAGS, Resultados en Reg y Mem(Caché y MP)
+*** Figura 12.19 b) La 1ª ins. en EX lee el operando de la memoria y la 2ª en D2 accede a memoria para leer del puntero la dirección del operando.
+*** Figura 12.19 c) La instrucción CMP actualiza reg flags. La instrucción Jcc en D2 ya tiene la dirección de salto aunque actualiza el Contador de Programa en EX. La inst 3ª después de D2 de Jcc ya pueded ser capturada.
+*** Sí salto:
+**** La cpu realiza la captura de la 3ª instrucción (Fetch) inmediatamente despúes de la captura de la segunda pero dicha captura es errónea ya que ha capturado la siguiente en secuencia a la 2ª y no la instrucción target. La captura de la instrucción destino se ha de realizar cuando se conozca la dirección dónde se encuentra  dicha instrucción.
++
+
+[ditaa]
+----------------------------------------------------------------------
+
++------+------+------+------+------+
+|      |      |      |      | WB   | WB:Actualizar Flags -> Sí salto 
++------+------+------+------+------+
+       |      |      |  D2  |      | D2:Dirección destino
+       +------+------+------+------+------+------+------+------+
+                            |Fetch |      |      |  EX  |      | Fetch: instrucción destino del salto
+                            +------+------+------+------+------+
+----------------------------------------------------------------------
+
+*** No salto: 
+**** La CPU captura las 3 instrucciones en secuencia y no se equivoca en la 3ª ya que no hay salto.
++
+
+[ditaa]
+----------------------------------------------------------------------
+
++------+------+------+------+------+
+|      |      |      |      | WB   | WB:Actualizar Flags -> No salto 
++------+------+------+------+------+
+       |      |      |  D2  |      | D2:Dirección destino -> No salto
+       +------+------+------+------+------+------+
+              |Fetch |      |      |  EX  |      |Fetch: instrucción en secuencia
+              +------+------+------+------+------+
+----------------------------------------------------------------------
+
+
+
+* 12.16 Table 14.5 summarizes statistics from [MACD84] concerning branch behavior for various classes of applications. With the exception of type 1 branch behavior, there is no noticeable difference among the application classes. Determine the fraction of all branches that go to the branch target address for the scientific environment. Repeat for commercial and systems environments.
++
+
+image:./images/ejercicios/14-5.png[]
+
+** Desarrollo:
+*** tipo1=72.5 ; tipo2=9.8 ; tipo3=17.7
+**** tipo1: hay 3 casos dentro del tipo1 (1/3 salta incondicional,1/3 salta condicional,1/3 no salta)
+**** tipo2: 91%salta, el 9% no salta 
+**** tipo3: saltan todas
+*** Salto a destino= tipo1x[(0.2+0.4+0.35)x100/100+(43.2+24.3+32.5)x1/3]+ 
+                     tipo2x0.91+ 
+                     tipo3x100/100
+                    = 
+*** Saltos to taget por aplicaciones
+**** científica=tipo1x[(0.2 )x100/100+(43.2)x1/3]+ tipo2x0.91+tipo3x100/100=0.724-> El 72% de los saltos de una aplicación científica son a destino.
+**** comercial =tipo1x[(0.4 )x100/100+(24.3)x1/3]+ tipo2x0.91+tipo3x100/100=0.732
+**** sistema   =tipo1x[(0.35)x100/100+(32.5)x1/3]+ tipo2x0.91+tipo3x100/100=0.756
+
+
+
+
+Capitulo 13: Reduces Instruction Set Computer (Capítulo 15 en 9ªEd)
+-------------------------------------------------------------------
+
+* 13.3 We wish to determine the execution time for a given program using the various pipelining schemes discussed in Section 13.5. Let 
+N = number of executed instructions, J = number of jump instructions, D = number of memory accesses. For the simple sequential scheme (Figure 13.6a) for a RISC architecture, the execution time is 2N+D stages. Derive formulas for two-stage, three-stage, and four-stage pipelining.
++
+
+image:./images/ejercicios/15-6.png[]
+
+** Desarrollo:
+*** CAUCE SEGMENTADO: I -> captación de la instrucción. E-> operaciones ALU con Reg. u obtención de la dirección efectiva. D-> Transferencia Mem <-> Reg. 
+*** Cada instrucción tiene por lo menos dos etapas: E e I. En cambio la etapa D no la tienen todas las instrucciones (sólo load y store entre reg y mem)
+a. Figura apartado a ->T=Nx(t~e~+t~i~)+t~d~xD; si t~i~=t~e~=t~d~=t -> T=[2N+D]t
+b. Figura apartado b -> Cauce segmentado -> k=2 -> Sin instrucciones de salto -> T~k,n~=[k+(n-1)]t ->  T~2,n~=[2+(N-1)]t .
+.. Sólo es posible un acceso a memoria en cada etapa.
+.. I es una etapa, E y D forman una única etapa.
+.. E e I se solapan -> N etapas E|I
++
+
+[source,c]
+----------------------------------------------------------------------
+     +-----+
+     |  E  |
+     +-----+
+     |  I  |
+     +-----+ 
+----------------------------------------------------------------------
+.. D no se solapa -> D etapas
+.. En la fase E de la instrucción Branch se calcula la dirección de salto por lo que la fase I de la instrucción destino no puede coincidir con dicha fase E. Se soluciona con un instrucción de no operación NOOP.
+.. Los saltos originan un NOOP -> una etapa de retardo más que añadir
+.. T=(N+D+J)t
+c. Figura apartado c -> k=3 etapas
+.. En una etapa son posibles dos accesos a memoria.
+.. La 2ª instrucción load carga el dato en el registro en la etapa D por lo que no puede coincidir con la ejecución de la instrucción suma.
+.. D,E e I se solapan si no hay dependencia de datos
+.. Si hay dependencias D no se solapa por lo que hay una fracción de las D instrucciones que hay que sumar.
++
+
+[source,c]
+----------------------------------------------------------------------
+     +-----+
+     |  E  |
+     +-----+
+     |  I  |
+     +-----+ 
+                    -> N+alfaxD
+     +-----+
+     |  E  |
+     +-----+
+     |  I  |
+     +-----+ 
+     |  D  |
+     +-----+
+----------------------------------------------------------------------
+.. T=(N+alfa*D+J)t -> J noops
+d. Figura apartado d -> k=4 etapas
+.. Dividimos E en E1 (lectura RPG) y E2 (ALU y escritura RPG)
++
+
+[source,c]
+----------------------------------------------------------------------
+     +-----+
+     |  D  |
+     +-----+
+     | E2  |
+     +-----+ 
+     | E1  |
+     +-----+
+     |  I  |
+     +-----+
+----------------------------------------------------------------------
+.. El solape de D con dependencia de datos introduce un retardo y J otros dos según la figura.
+.. T=(N+alfa*D+2J)t
+
+
+
+* 13.4 Reorganize the code sequence in Figure 13.6d to reduce the number of NOOPs. Figura del ejercicio 13.3 d).
++
+
+image:risc_pipelining_13-6.png[scaledwidth="100%",align="center",title="Diagrama de Tiempos.Segmentación de 4 Etapas"]
+
+** La instrucción Branch la ejecutamos en la posición del 2º NOOP
+** Las dos instrucciones anteriores al salto (Add y Store) en lugar de los 2 NOOP después del salto Branch.
++
+
+[source,c]
+----------------------------------------------------------------------
+Load ra<-M
+Load rb<-M
+Noop
+Branch X
+Add  rc<-ra+rb
+Store M<-rc
+Next
+
+----------------------------------------------------------------------
+*** Mientras se ejecutan Add y Store se calcula la dirección X
++
+
+[ditaa]
+----------------------------------------------------------------------
+       +------+------+------+------+
+       |  I   |  E1  |  E2  |  D   |  Load ra<-M
+       +------+------+------+------+------+
+              |  I   |  E1  |  E2  | "D"  |  Load rb<-M
+              +------+------+------+------+
+                     |  I   |  E1  |  E2  |  Noop
+                     +------+------+------+------+
+                            |  I   |  E1  | &E2& | Branch X
+                            +------+------+------+------+
+                                   |  I   | "E1" |  E2  |  Add rc<-ra+rb
+                                   +------+------+------+------+------+
+                                          |  I   |  E1  |  E2  |  D   | Store M<-rc
+                                          +------+------+------+------+
+                                                 | &I&  |      |      | Next
+                                                 +------+------+------+
+----------------------------------------------------------------------
+*** Dependencias: Una vez que se carga rb en la fase "D" ya se puede leer rb en "E1"
+*** Dependencias: Una vez que se calcula X en &E2& ya se puede capturar la instrucción Next durante &I&
+
+* 13.5 Consider the following code fragment in a high-level language:
++
+
+[source,c]
+----------------------------------------------------------------------
+for I in 1...100 loop
+    S ← S + Q(I).VAL
+end loop;
+----------------------------------------------------------------------
+
+
+* Assume that Q is an array of 32-byte records and the VAL field is in the first 4 bytes of each record. Using x86 code, we can compile this program fragment as follows:
++
+
+[source,c]
+----------------------------------------------------------------------
+    MOV ECX,1 ;use register ECX to hold I
+LP: IMUL EAX, ECX, 32 ;get offset in EAX
+    MOV EBX, Q[EAX] ;load VAL field
+    ADD S, EBX ;add to S
+    INC ECX ;increment I
+    CMP ECX, 101 :compare to 101
+    JNE LP ;loop until I = 100
+----------------------------------------------------------------------
+
+* This program makes use of the IMUL instruction, which multiplies the second operand by the immediate value in the third operand and places the result in the first operand (see Problem 10.13). A RISC advocate would like to demonstrate that a clever compiler can eliminate unnecessarily complex instructions such as IMUL. Provide the demonstration by rewriting the above x86 program without using the IMUL instruction.
+
+.. Array Q: 100 registros (estructuras) de 32 bytes cada uno.
+..  VAL field: primeros 4 bytes del registro.
++
+
+[source,c]
+----------------------------------------------------------------------
+typedef struct {int VAL;....) Data;
+Data Q[100];
+----------------------------------------------------------------------
+.. Q(i).VAL : El campo VAL de cada registro Q(i)
++
+
+[source,c]
+----------------------------------------------------------------------
+    ## El bucle suma los campos VAL de los 100 registros
+    MOV ECX,1 ;use register ECX to hold I #Indice de registro del array Q
+LP: IMUL EAX, ECX, 32 ;get offset in EAX  #EAX: dirección relativa del campo VAL del registro al que apunta el índice ECX del array Q
+                                          #Cada 32 bytes un registro
+    MOV EBX, Q[EAX] ;load VAL field       #Q en ensamblador se estructrua en bytes. 100registrosx32bytes/registro=3200registros
+    ADD S, EBX      ;add to S             #Suma de los 4 bytes del campo VAL
+    INC ECX         ;increment I          #siguiente registro
+    CMP ECX, 101    ;compare to 101       #ultimo+1 registro?
+    JNE LP          ;loop until I = 100   #Siguiente interacción si no ultimo
+----------------------------------------------------------------------
+
+.. Multiplicar por 2^x^ equivale a un desplazamiento de x bits a la izda
+*** Multiplicar por 32 -> x2^5^ -> desplazar 5 bits a la izda : shl $5,%ecx
+
+* 13.6 Consider the following loop:
++
+
+[source,c]
+----------------------------------------------------------------------
+S := 0;
+   for K := 1 to 100 do
+S := S - K;
+----------------------------------------------------------------------
+
+* A straightforward translation of this into a 'generic' assembly language would look something like this:
++
+
+[source,c]
+----------------------------------------------------------------------
+   LD R1, 0          ;keep value of S in R1
+   LD R2,1           ;keep value of K in R2
+LP SUB R1, R1, R2    ;S := S - K
+   BEQ R2, 100, EXIT ;done if K = 100          #Branch EQual
+   ADD R2, R2, 1     ;else increment K
+   JMP LP            ;back to start of loop
+----------------------------------------------------------------------
+
+
+* A compiler for a 'RISC' machine will 'introduce' delay slots into this code so that the processor can employ the 'delayed branch mechanism'.The JMP instruction is easy to deal with, because this instruction is always followed by the SUB instruction; therefore, we can simply place a copy of the SUB instruction in the delay slot after the JMP. The BEQ presents a difficulty. We can’t leave the code as is, because the ADD instruction would then be executed one too many times. Therefore, a NOP instruction is needed. Show the resulting code.
+* Desarrollo:
+.. Delayed Branch
++
+
+image:./images/ejercicios/15-7.png[]
+
+*** La primera gráfica es un salto normal y las otras dos retardado. La última gráfica  supone una instrucción menos
+.. El programa presenta dos instrucciones de salto con retardo: BEQ y JMP
+.. JMP LP
+*** Salto incondicional. En el programa original se ejecutará el salto después de +SUB R1, R1, R2+. Solución:
++
+
+[source,c]
+----------------------------------------------------------------------
+   JMP LP            ;back to start of loop
+   ADD R2, R2, 1     ;else increment K
+----------------------------------------------------------------------
+*** De esta manera el salto se ejecuta después del +ADD R2, R2, 1+
+.. BEQ R2, 100, EXIT
+*** Salto condicional
+*** Si lo dejamos como está el salto será después del ADD R2, R2, 1. Solución:
++
+
+[source,c]
+----------------------------------------------------------------------
+   BEQ R2, 100, EXIT ;done if K = 100          #Branch EQual
+LP SUB R1, R1, R2    ;S := S - K   
+----------------------------------------------------------------------
+*** Ahora el salto condicional se realizará después de la resta SUB
+.. Solución 1ª:
++
+
+[source,c]
+----------------------------------------------------------------------
+   LD R1, 0          ;keep value of S in R1
+   LD R2,1           ;keep value of K in R2
+LP BEQ R2, 100, EXIT ;done if K = 100          #Branch EQual
+   SUB R1, R1, R2    ;S := S - K
+   JMP LP            ;back to start of loop
+   ADD R2, R2, 1     ;else increment K
+----------------------------------------------------------------------
+*** Tiene el defecto de que si R2=100 se ejecuta también SUB modificando el valor final de R1 y R2
+.. Solución Definitiva:
++
+
+[source,c]
+----------------------------------------------------------------------
+   LD R1, 0          ;keep value of S in R1
+   LD R2,1           ;keep value of K in R2
+LP BEQ R2, 100, EXIT ;done if K = 100          #Branch EQual
+   NOP
+   ADD R2, R2, 1     ;else increment K
+   JMP LP            ;back to start of loop
+   SUB R1, R1, R2    ;S := S - K
+----------------------------------------------------------------------
+
+
+
+* 13.7 A RISC machine may do both a mapping of symbolic registers to actual registers and a 'rearrangement' of instructions for pipeline efficiency. An interesting question arises as to the order in which these two operations should be done. Consider the following program fragment:
++
+
+[source,c]
+----------------------------------------------------------------------
+ LD SR1,A          ;load A into symbolic register 1
+ LD SR2, B         ;load B into symbolic register 2
+ ADD SR3, SR1, SR2 ;add contents of SR1 and SR2 and store in SR3
+ LD SR4, C
+ LD SR5,D
+ ADD SR6, SR4, SR5
+----------------------------------------------------------------------
+
+a. First do the register mapping and then any possible instruction reordering. How many machine registers are used? Has there been any pipeline improvement?
+b. Starting with the original program, now do instruction reordering and then any possible mapping. How many machine registers are used? Has there been any pipeline improvement?
+* Desarrollo:
+. 
+
+* 13.9 In many cases, common machine instructions that are not listed as part of the MIPS instruction set can be synthesized with a single MIPS instruction. Show this for the following:
+a. Register-to-register move
+b. Increment, decrement
+c. Complement
+d. Negate
+e. Clear
+
+* 13.11 SPARC is lacking a number of instructions commonly found on CISC machines.
+Some of these are easily simulated using either register R0, which is always set to 0, or a constant operand. These simulated instructions are called pseudoinstructions and are recognized by the SPARC compiler. Show how to simulate the following pseudoinstructions, each with a single SPARC instruction. In all of these, src and dst refer to registers. (Hint: A store to R0 has no effect.)
+a. MOV src, dst
+b. COMPARE src1, src2
+c. TEST src1
+d. NOT dst
+e. NEG dst
+f. INC dst
+g. DEC dst
+h. CLR dst
+i. NOP
+
+* 13.12 Consider the following code fragment:
++
+
+[source,c]
+----------------------------------------------------------------------
+ if K > 10
+   L := K + 1
+ else
+   L := K - 1;
+----------------------------------------------------------------------
+
+* A straightforward translation of this statement into SPARC assembler could take the following form:
++
+
+[source,c]
+----------------------------------------------------------------------
+    sethi %hi(K), %r8        ;load high-order 22 bits of address of location
+                         ;K into register r8
+    ld [%r8 + %lo(K)], %r8   ;load contents of location K into r8
+    cmp %r8, 10              ;compare contents of r8 with 10
+    ble L1                   ;branch if (r8) <= 10
+    nop
+    sethi %hi(K), %r9
+    ld [%r9 + %lo(K)], %r9   ;load contents of location K into r9
+    inc %r9                  ;add 1 to (r9)
+    sethi %hi(L), %r10
+    st %r9, [%r10 + %lo(L)]  ;store (r9) into location L
+    b L2
+    nop
+L1: sethi %hi(K), %r11
+    ld [%r11 + %lo(K)], %r12 ;load contents of location K into r12
+    dec %r12                 ;subtract 1 from (r12)
+    sethi %hi(L), %r13
+    st %r12, [%r13 + %lo(L)] ;store (r12) into location L
+L2:
+----------------------------------------------------------------------
+
+* The code contains a nop after each branch instruction to permit delayed branch operation.
+a. Standard compiler optimizations that have nothing to do with RISC machines aregenerally effective in being able to perform two transformations on the foregoing code. Notice that two of the loads are unnecessary and that the two stores can be merged if the store is moved to a different place in the code. Show the programafter making these two changes.
+b. It is now possible to perform some optimizations peculiar to SPARC. The nop after the ble can be replaced by moving another instruction into that delay slot and setting the annul bit on the ble instruction (expressed as ble,a L1). Show the program after this change.
+c. There are now two unnecessary instructions. Remove these and show the resulting program
+
+

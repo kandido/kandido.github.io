@@ -1,0 +1,21 @@
+Nombre ;Comentario                     ;Código 	        ;Operación                                      ;O D I T S Z A P C
+MOV    ;Mover (copiar)                 ;MOV Fuente,Dest ;Dest:=Fuente                                   ;                
+XCHG   ;Intercambiar                   ;XCHG Op1,Op2 	;Op1:=Op2 , Op2:=Op1                            ;                
+STC    ;Set the carry (Carry = 1)      ;STC 	        ;CF:=1                                          ;                1   
+CLC    ;Clear Carry (Carry = 0)        ;CLC 	       	;CF:=0 					        ;                0
+CMC    ;Complementar Carry 	       ;CMC 	        ;CF:=Ø                                          ;                ±
+STD    ;Setear dirección               ;STD             ;DF:=1(interpreta strings de arriba hacia abajo);  1              
+CLD    ;Limpiar dirección              ;CLD             ;DF:=0(interpreta strings de abajo hacia arriba);  0              
+STI    ;Flag de Interrupción en 1      ;STI             ;IF:=1                                          ;    1           
+CLI    ;Flag de Interrupción en 0      ;CLI             ;IF:=0                                          ;    0	      	   
+PUSH   ;Apilar en la pila 	       ;PUSH Fuente     ;DEC SP, [SP]:=Fuente                           ;                
+PUSHF  ;Apila los flags                ;PUSHF 	       	;O, D, I, T, S, Z, A, P, C 286+: También NT,IOPL;                
+PUSHA  ;Apila los registros generales  ;PUSHA 	       	;AX, CX, DX, BX, SP, BP, SI, DI                 ;                
+POP    ;Desapila de la pila            ;POP Dest 	;Destino:=[SP], INC SP                          ;                
+POPF   ;Desapila a los flags           ;POPF 		;O,D,I,T,S,Z,A,P,C 286+: También NT,IOPL        ;± ± ± ± ± ± ± ± ± 
+POPA   ;Desapila a los reg. general.   ;POPA 		;DI, SI, BP, SP, BX, DX, CX, AX                 ;    
+CBW    ;Convertir Byte a Word          ;CBW 		;AX:=AL (con signo)                             ;    
+CWD    ;Convertir Word a Doble         ;CWD 		;DX:AX:=AX (con signo)                          ;
+CWDE   ;Conv. Word a Doble Exten.      ;CWDE 386 	;EAX:=AX (con signo)                            ;    
+IN    ;Entrada                        ;IN Dest,Puerto 	;AL/AX/EAX := byte/word/double del puerto esp.  ;
+OUT    ;Salida                         ;OUT Puer,Fuente ;Byte/word/double del puerto := AL/AX/EAX       ;

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>EECC: Instructor  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_mecanismos_de_entradasalida" class="book">
+<div id="header">
+<h1>EECC: Instructor  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2022-11-24</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="instructor.html">EECC: Instructor  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+<ul class="sectlevel1">
+<li><a href="_tareas.html">1. Tareas</a>
+</li>
+<li><a href="_otros_apuntes.html">2. Otros Apuntes</a>
+</li>
+<li><a href="_mecanismos_de_entradasalida.html"><span class="toc-current">3. Mecanismos de Entrada/Salida</span></a>
+<ul class="sectlevel2">
+<li><a href="_mecanismos_de_entradasalida.html#_sincronizacion_por_interrupcion">3.1. Sincronizacion por Interrupcion</a>
+<ul class="sectlevel3">
+<li><a href="_mecanismos_de_entradasalida.html#_proceso_de_atención_a_las_interrupciones">3.1.1. Proceso de atención a las interrupciones</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_programación.html">4. Programación</a>
+</li>
+<li><a href="_ejercicios_2.html">5. Ejercicios</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_mecanismos_de_entradasalida">3. Mecanismos de Entrada/Salida</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_sincronizacion_por_interrupcion">3.1. Sincronizacion por Interrupcion</h3>
+<div class="sect3">
+<h4 id="_proceso_de_atención_a_las_interrupciones">3.1.1. Proceso de atención a las interrupciones</h4>
+<div class="sect4">
+<h5 id="_ejemplo_procesamiento_de_la_interrupción_originada_por_el_teclado">Ejemplo: Procesamiento de la interrupción originada por el teclado.</h5>
+<div class="imageblock">
+<div class="content">
+<img src="../../HTML/images/io/keyboard_interruption.jpg" alt="keyboard interruption">
+</div>
+<div class="title">Figure 1. Interrupción del Teclado</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Se pulsa una tecla y el controlador del teclado activa la señal IRQ1 del PIC</p>
+</li>
+<li>
+<p>El PIC examina si la IRQ1 está autorizada a interrumpir y si no hay interrupciones de mayor prioridad. En tal caso, el PIC activa la entrada INTR de la CPU</p>
+</li>
+<li>
+<p>La CPU interrumpe la ejecución del proceso main_application. Salva la dirección de retorno (PC) y desautoriza más interrupciones IRQ (Flag IF)</p>
+</li>
+<li>
+<p>La CPU comprueba que el flag IF autoriza la interrupción, confirma al PIC la aceptación de la interrupción y solicita el vector de interrupción asociado a la IRQ1.</p>
+</li>
+<li>
+<p>El PIC envía al bus de direcciones el vector 129 (0x81)</p>
+</li>
+<li>
+<p>El PIC desactiva la solicitud de interrupción INTR a la CPU para poder gestionar otra IRQ.</p>
+</li>
+<li>
+<p>La CPU guarda en el Interrupt Stack: (Flag Register,Code Segment,Instruction Pointer)</p>
+</li>
+<li>
+<p>La CPU resetea el flag IF desautorizando ser interrumpido durante el cambio de contexto. Captura el vector de interrupción 129 de la tabla de vectores de interrupción&#8594; captura de la tabla la entrada 129x4 que contiene la dirección de La Interruption Service Routine asociada al periférico teclado.</p>
+</li>
+<li>
+<p>La CPU actualiza CS:IP  para saltar a la dirección de la ISR 129 y comienza su ejecución</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>La ISR salva los registros no modificables en el Interrupt Stack &#8594;  Frame: Saved registers . Autoriza las interrupciones IF=1</p>
+</li>
+<li>
+<p>La ISR accede al periférico y se captura el valor de la tecla pulsada a través del data bus.</p>
+</li>
+<li>
+<p>Fin de la ISR . Se desautorizan las interrupciones durante la recuperación del anterior contexto. La CPU recupera el contexto del Interrupt Stack &#8594; Frame: Saved registers</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Se recupera la dirección de retorno y se actualiza CS:IP</p>
+</li>
+<li>
+<p>Continua la ejecución del programa interrumpido main_application</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ScienceDirect.com &#8594; Interrupt Vector - an overview | ScienceDirect Topics</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.sciencedirect.com/topics/engineering/interrupt-vector" class="bare">https://www.sciencedirect.com/topics/engineering/interrupt-vector</a></p>
+<div class="listingblock">
+<div class="content">
+<pre>The interrupt vectoring procedure of x86 processors is illustrated in Figure 4.14. Shown in the top-left corner is the interrupt vector table, which starts at 0x0, the very beginning of the memory space, and ends at 0x03FF. The table has 256 interrupt vectors. Each interrupt vector has 4 bytes, containing 2 bytes for the IP register followed by 2 bytes for the CS register. The 4 bytes together, CS:IP, form an address, pointing to the location of an ISR.
+
+
+Each interrupt is associated with an interrupt vector number:
+
+ For a hardware interrupt, its interrupt vector number is provided by the hardware device or PIC.
+ For a software interrupt, its interrupt vector number is provided by the int instruction.
+ For an internal interrupt, its interrupt vector number is fixed and is known by the processor.
+
+Given an interrupt vector number, the corresponding interrupt vector is located at the memory address corresponding to four times the interrupt vector number.
+
+The default x86 processor interrupt vector table is given on the left in Figure 4.15. The first 32 interrupt vectors (0x0-0x1F) are either reserved or defined by the x86 processor for internal interrupts (except 0x02, which is a vector for nonmaskable hardware interrupts). All the rest can be used for software interrupts and hardware interrupts.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The interrupting process shown in Figure 4.14 is explained below:</p>
+<div class="listingblock">
+<div class="content">
+<pre>1.
+A user presses a key on the keyboard, which drives an IRQ on the IRQ1 line of the 8259 master PIC.
+
+2.
+The PIC detects the IRQ on IRQ1. It changes the IRR by setting the bit corresponding to IRQ1. The PIC then examines the IMR to see if the interrupt source is disabled. If not, the PIC then determines if there is any higher-priority interrupt waiting to be serviced. If there is, this new IRQ has to wait until the higher-priority interrupt is serviced. If there is no higher-priority interrupt waiting to be serviced, the PIC stores the vector number 0x81 (the base 0x80 plus one offset) in an internal register, and asserts the INTR line to inform the processor.
+
+3.
+While the instruction j of the current program is being executed, the processor samples INT and detects an asserted line. After the execution of the instruction j has been completed, the current program is suspended. At this point, the value contained by CS:IP is the location of the next instruction of the current program.
+
+4.
+The processor examines the interrupt flag within the flags register. If the interrupt flag is set, the processor acknowledges the IRQ by asserting the INTA line to the PIC, expecting an interrupt vector number from the PIC.
+
+5.
+The PIC drives the interrupt vector number 0x81 to the system bus. It also sets the corresponding bit inside the in-service register, indicating that interrupt source 1 is currently being serviced.
+
+6.
+The PIC then deasserts the INTR line (so that a new IRQ can be asserted).
+
+7.
+The value of the flags register is pushed onto the interrupt stack. The values of CS and IP are also pushed onto the interrupt stack, so that the original program can be resumed later.
+
+8.
+To protect context switching, the “interrupt enable” flag of the flags register is cleared to disable further interrupts. The processor comes to the keyboard interrupt vector, which has 4 bytes, located at 4 ×0x81 = 0x0204.
+
+9.
+The keyboard interrupt vector contains the address of the keyboard ISR. By loading IP with the 16-bit data at 0x0204 and loading CS with the 16-bit data at 0x0206, the processor jumps to the start location of the keyboard ISR.
+
+9.1.
+Inside the ISR, the commonly used registers are first saved onto the interrupt stack. At this point, the processor has switched its context from the last task to the current ISR. The “interrupt enable” flag of the flags register is set to enable further interrupts, if interrupt nesting is desired.
+
+9.2.
+The portion of code pertinent to the requesting device is executed. In this case, the code of the key being pressed is stored in a memory area called the keyboard buffer.
+
+9.3.
+At the end of the ISR, interrupts are again disabled for context switching. The ISR first sends an EOI command to the master PIC’s command register. Upon receiving this command, the PIC can clear the appropriate bit in the in-service register, getting ready for new interrupts. The ISR then performs an instruction to pop up the top frame of the interrupt stack.
+
+
+10.
+The context of the original task is restored. Especially, CS:IP now refers to the next instruction of the original program.
+
+11.
+The processor is ready to resume the execution of the original program.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_otros_apuntes.html">Otros Apuntes</a> | ↑ Up: <a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a> | ⌂ Home: <a href="instructor.html">EECC: Instructor  (240306)</a> | Next: <a href="_programación.html">Programación</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2022-11-24 12:56:37 +0100
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

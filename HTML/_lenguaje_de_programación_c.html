@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_lenguaje_de_programación_c" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-04</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+<ul class="sectlevel1">
+<li><a href="_arquitectura_de_una_computadora.html">9. Arquitectura de una Computadora</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">10. RTL Register Transfer Language</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html">11. Programas ensamblador IASSim</a>
+</li>
+<li><a href="_simulador_iassim_2.html">12. Simulador IASSim</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html">13. Lenguajes de programación de Alto y Bajo Nivel</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html">14. Lenguajes de programación en Ensamblador</a>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html">15. Toolchain: Cadena de Herramientas en el proceso de compilación</a>
+</li>
+<li><a href="_practicando_la_programación_desde_el_principio.html">16. Practicando la Programación desde el Principio</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo.html">17. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_pila.html">18. Pila</a>
+</li>
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html">19. Programas en Lenguaje Ensamblador: Propuestas</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html">20. Apéndice: Unidad CPU</a>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">21. Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">22. Apéndice: Memoria Virtual</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html"><span class="toc-current">23. Lenguaje de Programación C</span></a>
+<ul class="sectlevel2">
+<li><a href="_lenguaje_de_programación_c.html#prog_C">23.1. Introducción</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_casting">23.2. Casting</a>
+<ul class="sectlevel3">
+<li><a href="_lenguaje_de_programación_c.html#_concepto">23.2.1. Concepto</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_ejemplo">23.2.2. Ejemplo</a>
+</li>
+</ul>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_puntero">23.3. Puntero</a>
+<ul class="sectlevel3">
+<li><a href="_lenguaje_de_programación_c.html#_referencias_3">23.3.1. Referencias</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_introducción_8">23.3.2. Introducción</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_concepto_2">23.3.3. Concepto</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_módulo_ilustrativo">23.3.4. Módulo Ilustrativo</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_declaración">23.3.5. Declaración</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_operador_dirección">23.3.6. Operador Dirección</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_operador_indirección_o_dereferencia">23.3.7. Operador Indirección o Dereferencia</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_ejemplo_2">23.3.8. Ejemplo</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_aplicaciones_de_los_punteros">23.3.9. Aplicaciones de los punteros</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_string_literal">23.3.10. String Literal</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_puntero_a_puntero">23.3.11. Puntero a Puntero</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_string_variable">23.3.12. String Variable</a>
+</li>
+<li><a href="_lenguaje_de_programación_c.html#_funciones">23.3.13. Funciones</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_fpu_x87.html">24. FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">25. Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">26. Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html">27. Estructura de Computadores 2022: Segundo Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">28. Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">29. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">30. Miaulario: Videoconferencia</a>
+</li>
+</ul>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_lenguaje_de_programación_c">23. Lenguaje de Programación C</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="prog_C">23.1. Introducción</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Esto no es un tutorial de Programación en Lenguaje C, el objetivo de este capítulo es comentar aspectos puntuales de la programación en lenguaje C que son utilizados en la asignatura de Estructura de Computadores.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_casting">23.2. Casting</h3>
+<div class="sect3">
+<h4 id="_concepto">23.2.1. Concepto</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Sintaxis</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="p">(</span><span class="n">type_name</span><span class="p">)</span> <span class="n">expression</span></code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Conversión explícita mediante el operador unitario <strong>( )</strong>.</p>
+</li>
+<li>
+<p>Los operadores unitarios tienen mayor precedencia que los binarios.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo">23.2.2. Ejemplo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo de la división de números enteros</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="mi">5</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">/</span> <span class="n">j</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span> <span class="n">i</span> <span class="o">/</span> <span class="n">j</span><span class="p">;</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>La variable ordinaria es declarada inicialmente como tipo <em>int</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p>La operación i/j &#8594; 8/5 daría como resultado el número entero 1</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Si realizamos el casting <strong>(float)</strong> sobre la variable <strong>i</strong> entonces la variable i es de tipo float y no int, por lo que su valor será el número real 8.000 y no el entero 8.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>(float)i/j = 8.0000/5 = 1.6000</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_puntero">23.3. Puntero</h3>
+<div class="sect3">
+<h4 id="_referencias_3">23.3.1. Referencias</h4>
+<div class="paragraph">
+<p>Libro de texto K.N. King: Capítulo 11. Pointers. Pg241</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_introducción_8">23.3.2. Introducción</h4>
+<div class="paragraph">
+<p>El concepto de puntero es fundamental en programación imperativa de bajo nivel ya que simplifica el código para la programación de algoritmos que incluyen estructuras de datos sencillas o complejas.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Para el aprendizaje de: conceptos relacionados con los punteros, su sintaxis, su aplicación, etc&#8230;&#8203;, es necesesaria la ejecución de los programas en modo PASO A PASO para poder visualizar los contenidos y referencias de los objetos en memoria. Utilizaremos el debugger GDB.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_concepto_2">23.3.3. Concepto</h4>
+<div class="sect4">
+<h5 id="_memoria_2">Memoria</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>La memoria principal RAM esta organizada en Bytes direccionables.</p>
+</li>
+<li>
+<p>El rango de direcciones depende de la arquitectura de la máquina.</p>
+</li>
+<li>
+<p>P.ej: un Bus de direcciones de 48 líneas podría direccionar 2<sup>48</sup> = 2<sup>8</sup> x 2<sup>40</sup> = 256 TB</p>
+</li>
+<li>
+<p>Un <em>objeto</em> es una región de memoria (múltiples bytes ) asignada a un dato entero, dato caracter, array de datos float, bloque de instrucciones, etc. En este contexto de memoria el concepto objeto difiere del concepto objeto de programación orientada a objetos.</p>
+</li>
+<li>
+<p>En la memoria RAM se implementan <em>objetos</em> que son referenciados por las direcciones de memoria donde se encuentran. La referencia es la dirección del primer byte donde se almacena el objeto de múltiples bytes.</p>
+</li>
+<li>
+<p>Mapa de memoria:</p>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNqNk8sOgjAQRdf2K2ZPGihvEmPS0nblK6A748LGP3CBCR8vpShioPYuSnPv6UzTCZTzStQ1AOBOFd3pD0JBExiBh9_yPi6BFt5qEYz7BVex7dmN_enGTL-OVfouDizRLCHEhQ01G4ahCxtpNooiFzbWbBzHFnYFDk_o8LKju5proJIksaRpmlrSLMvm0kl7lee5pURRFJaUUmpJGWP_25dlaSnBOV8uMTBCiAVmAKSUlkHODyNopBGfdcX3L_FxZV_XLGb21_7gGhO4PR93wBtkjvh4ogtqVSU4HM_7k6gOdUdcpoSPXi0ws80=" alt="Diagram">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_puntero_2">Puntero</h5>
+<div class="paragraph">
+<p>Un puntero equivale a una dirección de memoria</p>
+</div>
+<div class="paragraph">
+<p>En cambio una VARIABLE PUNTERO:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Es una variable que almacena un dato que representa una dirección de memoria.</p>
+</li>
+<li>
+<p>Las variables puntero almancenan punteros.</p>
+</li>
+<li>
+<p>Restringen sus valores a los valores de las direcciones de memoria. Nunca podrá ser un valor negativo o real, etc</p>
+</li>
+<li>
+<p>Apuntan a objetos</p>
+</li>
+<li>
+<p>Hacen referencia a objetos</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+El libro de K.N.King distingue entre "variable puntero" y puntero. En la literatura en general cuando se habla de punteros se está hablando de variables puntero, en cuyo caso al contenido del puntero se le llama referencia o dirección al objeto referenciado.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Representación gráfica de la "variable puntero" <em>p</em></p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNpTUIABbV0Y0IaKcCKEoBJcUIkChRownQ8UrEFSAGLbKSBAjUIFFydxRgMA_mQWrA==" alt="Diagram">
+</div>
+</div>
+<div class="paragraph">
+<p>p	: identificador de la variable puntero</p>
+</div>
+<div class="paragraph">
+<p>x	: identificador del objeto referenciado, por ejemplo una variable ordinaria.</p>
+</div>
+<div class="paragraph">
+<p>flecha	: <em>inicialización</em> de la variable puntero <em>p</em> apuntando al objeto <em>x</em></p>
+</div>
+<div class="paragraph">
+<p>Ejemplos de punteros, objetos y variables de punteros</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNq9mN1uwiAUx6_rU3DfNCm69SMxJlAgcXF2aXUPMLI32MWW-PAr_cA2hX4Iwo1aDvw85_yxf4sIKWhZAgCCahToXbxsNuFv2AzgB93wgXLcA9owuRiCm4zq3nle74Oc3IBR4KolHJ-uiiXdZSsUVSHqRcoC4KYEI06H4WHIenM5fqOXvAQFZbSg5-yISF4O4aDp0XI4vCnSlXxW9VaT5pA0h9nawSwg7SZJIbNHejEneXOM1wltWEwlslO0OUzsTAXJdEL9Y2VISs1JsypAC38hDFPBdoo2h8mc9YY4I1EHKmBOVABDJyqA0FVv4NYZafco6e4ZdCrwBnbEW-OQdMHrolcFeyonNF09WPsgHkXRyG81lZN3h2ryExVHhE-0BB_X84UW-WNEoUEex_Es8bHthfB4kiQKOSwDLGAIyfE0TXUpYLMUhMfhCKHx9vXdunLvRtsLe8MxxrrtDRsgbA3PskzVACsAYWg4IUT3_Q2rL1wMp5SOz1jbYmHMwp0ZJK29F2MKBbFhiUz-5sDaxGiUyiy0AmuV2mxv2IpsRqmx2fbk2UqlM0o13J495SBIrU-fAzn5IKMFqM6AvGx0BgwfXLh41lF_aV9dL7-fS2_NPoDg6-_nGwSHLn4vTFN7Vbinwz9wJQDU" alt="Diagram">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>La variable puntero de la dirección 0x0B000100 (bytes <em>+0,+1,+2,+3</em>) contiene la dirección 0x0B000000 que apunta a un objeto de 1 byte.</p>
+</li>
+<li>
+<p>La variable puntero de la dirección 0x0B000104 (bytes <em>+0,+1,+2,+3</em>) contiene la dirección 0x0B000001 que apunta a un objeto de 2 bytes.</p>
+</li>
+<li>
+<p>La variable puntero de la dirección 0x0B000108 (bytes <em>+0,+1,+2,+3</em>) contiene la dirección 0x0B000003 que apunta a un objeto de 4 bytes.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_leftvalue_rightvalue">LeftValue-RightValue</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Una variable ordinaria referenciada en un operador asignación (=) tiene diferente interpretación si está a la izquierda o derecha del operador asignación:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>x=y</p>
+<div class="ulist">
+<ul>
+<li>
+<p>x : la variable ordinaria a la izda se interpreta como la dirección en memoria de x : leftvalue de x</p>
+</li>
+<li>
+<p>y : la variable ordinaria a la derecha se interpreta como el contenido en memoria de y : rightvalue de y</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El contenido del objeto es el RightValue</p>
+</li>
+<li>
+<p>La referencia al objeto es el LeftValue</p>
+</li>
+<li>
+<p>El contenido de una variable puntero es el LeftValue del objeto referenciado.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_módulo_ilustrativo">23.3.4. Módulo Ilustrativo</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="cm">/* Iniciación a los punteros.*/</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="kt">void</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+
+  <span class="cm">/* Concepto */</span>
+
+
+
+  <span class="cm">/*Operador Dirección*/</span>
+
+  <span class="kt">int</span>   <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+  <span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">r</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
+  <span class="kt">char</span>  <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="o">*</span><span class="n">u</span><span class="p">,</span> <span class="o">*</span><span class="n">v</span><span class="p">;</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="n">k</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="mf">3E-10</span><span class="n">f</span><span class="p">;</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="p">.</span><span class="mi">1416</span><span class="p">;</span>
+  <span class="n">c</span> <span class="o">=</span> <span class="sc">'A'</span><span class="p">;</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="sc">'@'</span><span class="p">;</span>
+
+  <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span>
+  <span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">k</span><span class="p">;</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+  <span class="n">s</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">;</span>
+  <span class="n">u</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">;</span>
+  <span class="n">v</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Introducir un carácter </span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+  <span class="n">scanf</span><span class="p">(</span><span class="s">"%c"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"El carácter leído es el %c </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+
+  <span class="cm">/*Operador Indirección*/</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">"El carácter leído es el %c </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="o">*</span><span class="n">u</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"El valor de la variable i es %d o también  %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"El valor de PI es %f o también %f </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
+
+  <span class="cm">/*String Variable*/</span>
+  <span class="cm">/*Array*/</span>
+  <span class="kt">char</span> <span class="n">cadena</span><span class="p">[]</span><span class="o">=</span><span class="s">"Hola"</span><span class="p">;</span>
+
+  <span class="cm">/*Puntero*/</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="n">saludo</span><span class="o">=</span><span class="s">"Hola"</span><span class="p">;</span>
+  <span class="kt">char</span> <span class="o">**</span><span class="n">pt_saludo</span><span class="p">;</span>
+
+  <span class="n">pt_saludo</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">saludo</span><span class="p">;</span>
+
+  <span class="n">exit</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_declaración">23.3.5. Declaración</h4>
+<div class="paragraph">
+<p>Syntaxis: <code>type *pointer_variable</code></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="kt">int</span>   <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+<span class="kt">float</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">r</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">;</span>
+<span class="kt">char</span>  <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="o">*</span><span class="n">u</span><span class="p">,</span> <span class="o">*</span><span class="n">v</span><span class="p">;</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">3E-10</span><span class="n">f</span><span class="p">;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">3</span><span class="p">.</span><span class="mi">1416</span><span class="p">;</span>
+<span class="n">c</span> <span class="o">=</span> <span class="sc">'A'</span><span class="p">;</span>
+<span class="n">d</span> <span class="o">=</span> <span class="sc">'@'</span><span class="p">;</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><em>*p</em>, <em>*q</em>, etc&#8230;&#8203; son declaraciones de  <em>variable puntero</em>. El asterisco NO realiza ninguna operación sobre la variable, únicamente es el prefijo para indicar el TIPO puntero.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_operador_dirección">23.3.6. Operador Dirección</h4>
+<div class="paragraph">
+<p>Símbolo <em>&amp;</em></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span>
+<span class="n">q</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">k</span><span class="p">;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">;</span>
+<span class="n">u</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">;</span>
+<span class="n">v</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">;</span>
+<span class="n">scanf</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+<span class="n">scanf</span><span class="p">(</span><span class="n">u</span><span class="p">);</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>El operador &amp; obtiene el LeftValue de la variable y se utiliza para inicializar punteros.</p>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNpTUFBQ0NbV1VaA0ECgzaWgUKBQo6BQA-TY1YAkFGoyuRSwKOTCKqqgUIyuvRK7dgBZsBWm" alt="Diagram">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_operador_indirección_o_dereferencia">23.3.7. Operador Indirección o Dereferencia</h4>
+<div class="paragraph">
+<p>Símbolo <em>*</em></p>
+</div>
+<div class="paragraph">
+<p>Prefijo de una variable puntero: accede al objeto referenciado</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="n">printf</span><span class="p">(</span><span class="s">"El valor de la variable i es %d o %d </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"El valor de PI es %f o %f </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo_2">23.3.8. Ejemplo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Declarar objetos de distintos tipos: integer, float, char</p>
+</li>
+<li>
+<p>Declarar objetos de tipo puntero e inicializarlos con los objetos anteriores</p>
+</li>
+<li>
+<p>Representar gráficamente los punteros</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Low Level: memoria RAM</p>
+</li>
+<li>
+<p>High Level: diagramas con cajas que apuntan con flechas.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_aplicaciones_de_los_punteros">23.3.9. Aplicaciones de los punteros</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Array</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Puntero Array</p>
+</li>
+<li>
+<p>Aritmética de Punteros</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>String Literal</p>
+</li>
+<li>
+<p>Puntero a Puntero</p>
+</li>
+<li>
+<p>Acceso a String</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Nombre del array</p>
+</li>
+<li>
+<p>Variable puntero</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Estructura de datos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Lista de Nombres (Array de punteros a strings)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Funciones</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pase de argumentos por referencia</p>
+</li>
+<li>
+<p>Retorno por referencia.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Argumentos del comando en línea del shell de Linux.</p>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="_puntero_array">Puntero Array</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Concepto</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Un array es un puntero y una lista de elementos. El puntero apunta al primer elemento de la lista.</p>
+</li>
+<li>
+<p>Cuando se crea un array se crean dos objetos</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Los elementos del array cuya asignación de memoria es contigua</p>
+</li>
+<li>
+<p>El puntero que apunta al primer elemento del array</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Array de Números : <code>data_items : 3,67,34,222,45,75,54,34,44,33,22,11,66,0</code></p>
+</li>
+<li>
+<p>Declarar e inicializar</p>
+</li>
+<li>
+<p>Lectura</p>
+</li>
+<li>
+<p>Escritura</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Puntero CONSTANTE</p>
+<div class="ulist">
+<ul>
+<li>
+<p>NO SE PUEDE MODIFICAR EL VALOR DEL PUNTERO</p>
+</li>
+<li>
+<p>Modificar el puntero</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplo:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Array de Caracteres: <code>cadena : H,o,l,a,<em>\0</em></code></p>
+</li>
+<li>
+<p>Declarar e inicializar <code>char cadena[]={<em>H</em>,<em>o</em>,<em>l</em>,<em>a</em>,<em>\0</em>};</code></p>
+</li>
+<li>
+<p>Lectura</p>
+</li>
+<li>
+<p>Escritura</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_aritmética_de_punteros">Aritmética de Punteros</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Indexación: primer elemento MÁS la posición elemento <em>i</em></p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>data_items + i</em></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Modificar las expresiones de referencia a los elementos del array por expresiones aritmética de punteros</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_string_literal">23.3.10. String Literal</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Concepto en dos fases</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Array de nombre "Hola" cuyos elementos son de tipo caracter.</p>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNpTUPLIz0lU4tLWhQBtBUwAkkPHIIqrBqqgRkEXDdgp1IDFUTGIIssmAGzVHI8=" alt="Diagram">
+</div>
+</div>
+</li>
+<li>
+<p>Inicializar Array con el String <em>Hola</em></p>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNpTUPLIz0lU4tLWhQBtBUwAkkPHIIqrBqqgRkEXDdgBxTyAOB-Ic4A4EYj9Qn18FGrIsgkA3GEeTg==" alt="Diagram">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ejemplo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Declarar un array tipo carácter e inicializarlo con un string literal <code>"Hola"</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>char cadena[]="Hola";</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>String literal:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cadena de carácteres</p>
+</li>
+<li>
+<p>Dobles comillas</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Arrays</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Acceder al array declarado : lectura y escritura</p>
+</li>
+<li>
+<p>Acceder al array de inicialización: lectura y escritura</p>
+</li>
+<li>
+<p>¿ Copia de arrays mediante asignación <code>cadena1=cadena2</code> ?</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_puntero_a_puntero">23.3.11. Puntero a Puntero</h4>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNpTUFBQKCiJLyhRAIFSBShI5gKR2rq62lAazADRQBZYrgaIgBy7GgUwA0wDWXj1AQBe3xOV" alt="Diagram">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ejemplo</p>
+<div class="ulist">
+<ul>
+<li>
+<p><em>u</em> apunta al  carácter <em>c</em></p>
+</li>
+<li>
+<p><em>pt_pt</em> apunta a <em>u</em></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_string_variable">23.3.12. String Variable</h4>
+<div class="sect4">
+<h5 id="_nombre_del_array">Nombre del Array</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Declaro el array de caracteres <code>cadena</code> y lo inicializo con el string Hola : <code>char cadena[]="Hola";</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_variable_puntero">Variable Puntero</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Declaro la variable <code>saludo</code> y lo inicializo con el puntero <code>cadena</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>char **saludo</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_funciones">23.3.13. Funciones</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Pase de argumentos por <strong>Referencia</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Declarar los parámetros de la función como variables puntero.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Retorno por <strong>Referencia</strong>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Declarar el valor de retorno como puntero.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_apéndice_memoria_virtual.html">Apéndice: Memoria Virtual</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_fpu_x87.html">FPU x87</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2022-11-03 13:10:16 +0100
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

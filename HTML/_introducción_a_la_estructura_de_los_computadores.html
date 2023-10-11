@@ -1,0 +1,2461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_introducción_a_la_estructura_de_los_computadores" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-11</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+<ul class="sectlevel1">
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html"><span class="toc-current">1. Introducción a la Estructura de los Computadores</span></a>
+<ul class="sectlevel2">
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#introo">1.1. Introducción</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_arquitectura_de_una_máquina">1.2. Arquitectura de una máquina</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_arquitectura_desde_la_perspectiva_hw">1.3. Arquitectura desde la perspectiva HW</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_lenguajes_de_programación_y_lenguaje_máquina">1.4. Lenguajes de Programación y Lenguaje Máquina</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_interface_softwarehardware">1.5. Interface Software/Hardware</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_apuntes">1.6. Apuntes</a>
+<ul class="sectlevel3">
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_book">1.6.1. book</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_slides">1.6.2. slides</a>
+</li>
+</ul>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_temario">1.7. Temario</a>
+<ul class="sectlevel3">
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_bibliografia_basica">1.7.1. Bibliografia Basica</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_bibliografía_complementaria">1.7.2. Bibliografía Complementaria</a>
+</li>
+</ul>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_profesorado">1.8. Profesorado</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_grado_informática">1.9. Grado Informática</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_calendarios">1.10. Calendarios</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_ejercicios_mediante_resolución_de_problemas">1.11. Ejercicios mediante resolución de problemas</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_prácticas">1.12. Prácticas</a>
+<ul class="sectlevel3">
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_guiones">1.12.1. Guiones</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_ejercicios_de_evaluación">1.12.2. Ejercicios de Evaluación</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_memorias">1.12.3. Memorias</a>
+</li>
+</ul>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_recursos_informáticos">1.13. Recursos Informáticos</a>
+<ul class="sectlevel3">
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_upna">1.13.1. UPNA</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_estaciones_de_trabajo_32_y_64_bits">1.13.2. Estaciones de Trabajo: 32 y 64 bits</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_registrarse">1.13.3. Registrarse</a>
+</li>
+</ul>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_grupos_de_prácticas">1.14. Grupos de Prácticas</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_metodología">1.15. Metodología</a>
+<ul class="sectlevel3">
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_distribución_de_créditos">1.15.1. Distribución de créditos</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_distribución_de_créditos_de_las_prácticas">1.15.2. Distribución de créditos de las Prácticas</a>
+</li>
+</ul>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_evaluación">1.16. Evaluación</a>
+</li>
+<li><a href="_introducción_a_la_estructura_de_los_computadores.html#_exámenescontenidos">1.17. Exámenes:Contenidos</a>
+</li>
+</ul>
+</li>
+<li><a href="_arquitectura_von_neumann.html">2. Arquitectura Von Neumann</a>
+</li>
+<li><a href="_representación_de_los_datos.html">3. Representación de los Datos</a>
+</li>
+<li><a href="_operaciones_aritmeticas_y_logicas.html">4. Operaciones Aritmeticas y Logicas</a>
+</li>
+<li><a href="_representación_de_las_instrucciones.html">5. Representación de las Instrucciones</a>
+</li>
+<li><a href="_programación_en_lenguaje_ensamblador_x86_construcciones_básicas_de_los_lenguajes_de_alto_nivel.html">6. Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.</a>
+</li>
+</ul>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introducción_a_la_estructura_de_los_computadores">1. Introducción a la Estructura de los Computadores</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="introo">1.1. Introducción</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>El objetivo de la asignatura Estructura de Computadores (240306) del Grado de <a href="http://www.unavarra.es/ets-industrialesytelecos/estudios/grado/grado-en-ingenieria-informatica/presentacion?submenu=yes">Ingeniería Informática</a> de la Universidad Pública de Navarra es ser un curso introductorio universitario a la arquitectura de los computadores, estudiando sus componentes básicos (procesador, memoria y módulo de entrada/salida) así como la programación de bajo nivel en lenguaje ensamblador x86 mediante la utilización de herramientas de desarrollo software como el compilador, depurador, etc.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_arquitectura_de_una_máquina">1.2. Arquitectura de una máquina</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitectura: Organización, Estructura: Qué, Cómo, Implementación (tecnología)</p>
+<div class="imageblock text-center text-center">
+<div class="content">
+<img src="./images/introduccion/vehicle_arch.jpg" alt="vehicle arch">
+</div>
+<div class="title">Figure 1. Estructura del Automóvil</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/Personal_computer,_exploded_6.png" alt="Personal computer, exploded 6">
+</div>
+<div class="title">Figure 2. Personal Computer</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/motherboard_parts.jpg" alt="motherboard parts">
+</div>
+<div class="title">Figure 3. Placa Base</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_arquitectura_desde_la_perspectiva_hw">1.3. Arquitectura desde la perspectiva HW</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>4 Módulos Básicos: CPU-MEMORIA-CONTROLADORES Entrada/Salida [Periféricos]-BUSES</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/cpui7.jpeg" alt="cpui7">
+</div>
+<div class="title">Figure 4. CPU Intel Core i7 4ª Generación</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/RAMtypes2.jpg" alt="RAMtypes2" width="600">
+</div>
+<div class="title">Figure 5. Memoria DRAM</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/memoria_SSD.png" alt="memoria SSD" width="600">
+</div>
+<div class="title">Figure 6. Periféricos: Memoria de Semiconductor Solid State Drive (SSD)</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/Seagate.jpg" alt="Seagate" width="600">
+</div>
+<div class="title">Figure 7. Periféricos: Disco Duro Seagate</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/memoria_M2M.png" alt="memoria M2M" width="600">
+</div>
+<div class="title">Figure 8. Periféricos: Memoria M2M</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/BusOnMotherboard.png" alt="BusOnMotherboard">
+</div>
+<div class="title">Figure 9. Bus de la Placa Base</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/busribbon.jpeg" alt="busribbon" width="600">
+</div>
+<div class="title">Figure 10. Bus Cableado</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lenguajes_de_programación_y_lenguaje_máquina">1.4. Lenguajes de Programación y Lenguaje Máquina</h3>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/lenguajemaquina.png" alt="lenguajemaquina">
+</div>
+<div class="title">Figure 11. Lenguaje Máquina: Binario</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Lenguaje Pascal</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="pascal"><span class="k">program</span> <span class="n">Hello_world</span><span class="p">;</span>
+ <span class="k">begin</span>
+   <span class="k">writeln</span><span class="p">(</span><span class="s">'hello world'</span><span class="p">)</span>
+ <span class="k">end</span><span class="p">.</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>L. Máquina-Binario Intel x86</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="pascal"><span class="p">#</span> <span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="k">begin</span>
+<span class="m">00000000004001</span><span class="n">a0</span> <span class="p">&lt;</span><span class="n">PASCALMAIN</span><span class="p">&gt;:</span>
+  <span class="m">4001</span><span class="n">a0</span><span class="p">:</span>	<span class="m">01010101</span>
+  <span class="m">4001</span><span class="n">a1</span><span class="p">:</span>	<span class="m">01001000</span> <span class="m">10001001</span> <span class="m">11100101</span>
+  <span class="m">4001</span><span class="n">a4</span><span class="p">:</span>	<span class="m">01001000</span> <span class="m">10000011</span> <span class="m">11101100</span> <span class="m">00010000</span>
+  <span class="m">4001</span><span class="n">a8</span><span class="p">:</span>	<span class="m">01001000</span> <span class="m">10001001</span> <span class="m">01011101</span> <span class="m">11111000</span>
+  <span class="m">4001</span><span class="n">ac</span><span class="p">:</span>	<span class="m">11101000</span> <span class="m">10110111</span> <span class="m">00111110</span> <span class="m">00000001</span> <span class="m">00000000</span>
+<span class="p">#</span> <span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="k">writeln</span><span class="p">(</span><span class="s">'hello world'</span><span class="p">)</span>
+  <span class="m">4001</span><span class="n">b1</span><span class="p">:</span>	<span class="m">11101000</span> <span class="m">11001010</span> <span class="m">10010011</span> <span class="m">00000001</span> <span class="m">00000000</span>
+  <span class="m">4001</span><span class="n">b6</span><span class="p">:</span>	<span class="m">01001000</span> <span class="m">10001001</span> <span class="m">10100011</span>
+  <span class="m">4001</span><span class="n">b9</span><span class="p">:</span>	<span class="m">01001000</span> <span class="m">10001001</span> <span class="m">11011110</span>
+  <span class="m">4001</span><span class="n">bc</span><span class="p">:</span>	<span class="m">01001000</span> <span class="m">10111010</span> <span class="m">11000000</span> <span class="m">11110110</span> <span class="m">01100001</span> <span class="m">00000000</span> <span class="m">00000000</span>
+  <span class="m">4001</span><span class="n">c3</span><span class="p">:</span>	<span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span>
+  <span class="m">4001</span><span class="n">c6</span><span class="p">:</span>	<span class="m">10111111</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span> <span class="m">00000000</span>
+  <span class="m">4001</span><span class="n">cb</span><span class="p">:</span>	<span class="m">11101000</span> <span class="m">01111000</span> <span class="m">10010110</span> <span class="m">00000001</span> <span class="m">00000000</span>
+  <span class="m">4001</span><span class="n">d0</span><span class="p">:</span>	<span class="m">11101000</span> <span class="m">00010011</span> <span class="m">00111101</span> <span class="m">00000001</span> <span class="m">00000000</span>
+  <span class="m">4001</span><span class="n">d5</span><span class="p">:</span>	<span class="m">01001000</span> <span class="m">10001001</span> <span class="m">11011111</span>
+  <span class="m">4001</span><span class="n">d8</span><span class="p">:</span>	<span class="m">11101000</span> <span class="m">01110011</span> <span class="m">10010101</span> <span class="m">00000001</span> <span class="m">00000000</span>
+  <span class="m">4001</span><span class="n">dd</span><span class="p">:</span>	<span class="m">11101000</span> <span class="m">00000110</span> <span class="m">00111101</span> <span class="m">00000001</span> <span class="m">00000000</span>
+  <span class="m">4001e2</span><span class="p">:</span>	<span class="m">11101000</span> <span class="m">10011001</span> <span class="m">01000010</span> <span class="m">00000001</span> <span class="m">00000000</span>
+  <span class="m">4001e7</span><span class="p">:</span>	<span class="m">01001000</span> <span class="m">10001011</span> <span class="m">01011101</span> <span class="m">11111000</span>
+  <span class="m">4001</span><span class="n">eb</span><span class="p">:</span>	<span class="m">10101001</span>
+  <span class="m">4001</span><span class="n">ec</span><span class="p">:</span>	<span class="m">10010011</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Lenguaje Máquina (Código Hexadecimal) vs Lenguaje Ensamblador ASM x86</p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="pascal"><span class="p">#</span> <span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="k">begin</span>
+<span class="m">00000000004001</span><span class="n">a0</span> <span class="p">&lt;</span><span class="n">PASCALMAIN</span><span class="p">&gt;:</span>
+  <span class="m">4001</span><span class="n">a0</span><span class="p">:</span>	<span class="m">55</span>                   	<span class="n">push</span>   <span class="p">%</span><span class="n">rbp</span>
+  <span class="m">4001</span><span class="n">a1</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">e5</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rsp</span><span class="p">,%</span><span class="n">rbp</span>
+  <span class="m">4001</span><span class="n">a4</span><span class="p">:</span>	<span class="m">48</span> <span class="m">83</span> <span class="n">ec</span> <span class="m">10</span>          	<span class="n">sub</span>    <span class="mh">$0</span><span class="n">x10</span><span class="p">,%</span><span class="n">rsp</span>
+  <span class="m">4001</span><span class="n">a8</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="m">5</span><span class="n">d</span> <span class="n">f8</span>          	<span class="n">mov</span>    <span class="p">%</span><span class="n">rbx</span><span class="p">,-</span><span class="m">0x8</span><span class="p">(%</span><span class="n">rbp</span><span class="p">)</span>
+  <span class="m">4001</span><span class="n">ac</span><span class="p">:</span>	<span class="n">e8</span> <span class="n">b7</span> <span class="m">3</span><span class="n">e</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">414068</span> <span class="p">&lt;</span><span class="n">FPC_INITIALIZEUNITS</span><span class="p">&gt;</span>
+<span class="p">#</span> <span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="k">writeln</span><span class="p">(</span><span class="s">'hello world'</span><span class="p">)</span>
+  <span class="m">4001</span><span class="n">b1</span><span class="p">:</span>	<span class="n">e8</span> <span class="n">ca</span> <span class="m">93</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">419580</span> <span class="p">&lt;</span><span class="n">fpc_get_output</span><span class="p">&gt;</span>
+  <span class="m">4001</span><span class="n">b6</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">c3</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rax</span><span class="p">,%</span><span class="n">rbx</span>
+  <span class="m">4001</span><span class="n">b9</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">de</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rbx</span><span class="p">,%</span><span class="n">rsi</span>
+  <span class="m">4001</span><span class="n">bc</span><span class="p">:</span>	<span class="m">48</span> <span class="n">ba</span> <span class="n">c0</span> <span class="n">f6</span> <span class="m">61</span> <span class="m">00</span> <span class="m">00</span> 	<span class="n">movabs</span> <span class="mh">$0</span><span class="n">x61f6c0</span><span class="p">,%</span><span class="n">rdx</span>
+  <span class="m">4001</span><span class="n">c3</span><span class="p">:</span>	<span class="m">00</span> <span class="m">00</span> <span class="m">00</span>
+  <span class="m">4001</span><span class="n">c6</span><span class="p">:</span>	<span class="n">bf</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span> <span class="m">00</span>       	<span class="n">mov</span>    <span class="mh">$0</span><span class="n">x0</span><span class="p">,%</span><span class="n">edi</span>
+  <span class="m">4001</span><span class="n">cb</span><span class="p">:</span>	<span class="n">e8</span> <span class="m">78</span> <span class="m">96</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">419848</span> <span class="p">&lt;</span><span class="n">FPC_WRITE_TEXT_SHORTSTR</span><span class="p">&gt;</span>
+  <span class="m">4001</span><span class="n">d0</span><span class="p">:</span>	<span class="n">e8</span> <span class="m">13</span> <span class="m">3</span><span class="n">d</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">413</span><span class="n">ee8</span> <span class="p">&lt;</span><span class="n">FPC_IOCHECK</span><span class="p">&gt;</span>
+  <span class="m">4001</span><span class="n">d5</span><span class="p">:</span>	<span class="m">48</span> <span class="m">89</span> <span class="n">df</span>             	<span class="n">mov</span>    <span class="p">%</span><span class="n">rbx</span><span class="p">,%</span><span class="n">rdi</span>
+  <span class="m">4001</span><span class="n">d8</span><span class="p">:</span>	<span class="n">e8</span> <span class="m">73</span> <span class="m">95</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">419750</span> <span class="p">&lt;</span><span class="n">fpc_writeln_end</span><span class="p">&gt;</span>
+  <span class="m">4001</span><span class="n">dd</span><span class="p">:</span>	<span class="n">e8</span> <span class="m">06</span> <span class="m">3</span><span class="n">d</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">413</span><span class="n">ee8</span> <span class="p">&lt;</span><span class="n">FPC_IOCHECK</span><span class="p">&gt;</span>
+  <span class="m">4001e2</span><span class="p">:</span>	<span class="n">e8</span> <span class="m">99</span> <span class="m">42</span> <span class="m">01</span> <span class="m">00</span>       	<span class="n">callq</span>  <span class="m">414480</span> <span class="p">&lt;</span><span class="n">FPC_DO_EXIT</span><span class="p">&gt;</span>
+  <span class="m">4001e7</span><span class="p">:</span>	<span class="m">48</span> <span class="m">8</span><span class="n">b</span> <span class="m">5</span><span class="n">d</span> <span class="n">f8</span>          	<span class="n">mov</span>    <span class="p">-</span><span class="m">0x8</span><span class="p">(%</span><span class="n">rbp</span><span class="p">),%</span><span class="n">rbx</span>
+  <span class="m">4001</span><span class="n">eb</span><span class="p">:</span>	<span class="n">c9</span>                   	<span class="n">leaveq</span>
+  <span class="m">4001</span><span class="n">ec</span><span class="p">:</span>	<span class="n">c3</span>                   	<span class="n">retq</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Lenguaje de programación humano (texto) vs Lenguaje de programación máquina (binario)</p>
+</li>
+<li>
+<p>Traducir &#8594; Compilar</p>
+</li>
+<li>
+<p>Interpretar</p>
+</li>
+<li>
+<p>Lenguajes de programación: javascript, ruby, python, java, bash, C, assembly</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Niveles de abstracción: humano/máquina</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_interface_softwarehardware">1.5. Interface Software/Hardware</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Interacción directa del Programador con el hardware Máquina &#8594; Programación en un lenguaje de bajo nivel (ensamblador, C)</p>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNrdlMFKxDAQhu99irkPi89QW0VBXdld8RzasETSZkm7gYV5mT169hH6Yia6srW2tU0uYiAQ_mmHf_58JIpg3sLF2MK57cjuR622mhUsVxrgkr0oeBCGS1f1aTdSDRsWQ4ed6HW9vN48x6urU_uF36LfPghzj0OFm3iVttz7hhP2u_kDWD-VImc5JLysNZOQcwd6xiv1z7GOpkU7Qf7hhHzi6XdlBsCZxlafeZwlj5BGcM8LpQWzwIgyEztLDzk5aY4y20sFsRZ10bzWIlPUM36iLHJKugeVV3B7sfwWA_UnSHCAu-Zta3t29FlX75UMDnKB4VjSICnej4wZJMZ4tMSvQfGUx6fQCcdnfoJUVDvJDmSPG545JJz6odt7Tvda-cVA5wO11fCA8YwHtlnpcBFF77RcZpM=" alt="Diagram">
+</div>
+</div>
+</li>
+<li>
+<p>Programación de bajo nivel</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo fuente: Lenguaje C ó Lenguaje ensamblador</p>
+</li>
+<li>
+<p>Módulo objeto: Lenguaje máquina &#8594; Compilación, Ensamblaje y Enlazado del Módulo Fuente.</p>
+</li>
+<li>
+<p>Sistemas Bare Metal: No hay Sistema Operativo. Programamos directamente sobre el Hardware.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Interacción indirecta del programador con el hardware de la máquina. El programador interactua con el Sistema Operativo (S.O.)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Interacción del Kernel (núcleo, pej linux) del Sistema Operativo (S.O.) con la máquina (pej intel x86)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock kroki">
+<div class="content">
+<img src="https://kroki.io/ditaa/svg/eNrNlU1qwzAQhfc-hfYi6RmM3dJSB5ckpWthiyCQrSA5hsBcpsuuewRfrFKb1j-10lhKSmYlnsxj5vnzOEDTCs-OFQ4m2sHP6UmKjSQFyYVsb13tksQ4EYUIR6t5One06w-LfYcd9BpcS_SPVJaUe3bX2sWS1VSqcw577uhtF6v0bv0SLm8P9jO3gr8e8Ose2y7uw2Xc6f6_uOxXfQVYP5csJzmKaFlJvQFyarZLRpXwwfoC3_ClN4ol2hPkX52ASzzjXdUWcE5ja6x5PEk-QhqgBS2EZEQDw8qMbTU9YOSoeeXZjgsUSlYVzVvFMgEj40dCIye4-YtRhR5u0l4MMJ4goD1KmveN9hzok169UzLYygX2xxKspDgvmdpKTO1gib8HxYc8voRBOC7zA4qZ2nKyB31c08wgYdRPXb_neCeFWwzQHqCr-geMWzxwl5UBF0HwARuMnrM=" alt="Diagram">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Sistemas con Sistema Operativo (pej GNU/linux): A la hora de programar recurrimos a librerías que acceden al hardware a travéś del sistema opearitov. Pej la función printf(), de la librería libc, al compilarse se traduce en la función write() del sistema operativo la cual llama al driver (en el sistema operativo) de la tarjeta gráfica de la pantalla. El Sistema operativo consigue "abstraer" el HW físico de la máquina y facilita enormemente la programación al no tener que conocer el funcionamiento físico de la computadora.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_apuntes">1.6. Apuntes</h3>
+<div class="sect3">
+<h4 id="_book">1.6.1. book</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Están disponibles los apuntes en: en castellano y formato <a href="./PDF/eecc_book.pdf">PDF</a>, en euskera y formato <a href="./PDF/kkee_book.pdf">PDF</a>,  en castellano y formato <a href="https://kandido.github.io/eecc_book.html">HTML</a> siendo este último el más actualizado.</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/qr_eecc.jpg" alt="qr eecc">
+</div>
+<div class="title">Figure 12. Apuntes On Line</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_slides">1.6.2. slides</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Están disponibles las transparencias en: en castellano y formatos <a href="./eecc_slides.html">HTML</a> y <a href="./PDF/eecc_slides.pdf">PDF</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_temario">1.7. Temario</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.unavarra.es/ficha-asignaturaDOA?languageId=100000&amp;codPlan=240&amp;codAsig=240306">Web Estructura de Ordenadores</a></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="sh">Temario
+
+1 - Introducción
+2 - Arquitectura de Von Neumann
+     2.1 CPU
+     2.2 Memoria
+     2.3 Entrada / Salida
+3 - Representación de datos
+     3.1 Bit, Byte y Palabra
+     3.2 Caracteres, enteros y reales
+4 - Aritmética y lógica
+     4.1 Operaciones aritméticas y lógicas sobre enteros en binario
+     4.2 Redondeo y propagación de error en números reales
+5 - Representación de instrucciones
+     5.1 Lenguaje máquina, lenguaje ensamblador y lenguajes de alto nivel
+     5.2 Formato de instrucción
+     5.3 Tipos de instrucción y modos de direccionamiento
+6 - Programación en lenguaje ensamblador de construcciones básicas de los lenguajes de alto nivel
+     6.1 Sentencias de asignación
+     6.2 Sentencias condicionales
+     6.3 Bucles
+     6.4 LLamadas y retorno de funcion o subrutina
+7 - Arquitectura y organización de la CPU
+     7.1 Conjunto de instrucciones
+     7.2 Arquitecturas CISC, RISC y VLIW
+     7.3 Fases de ejecución de una instrucción
+     7.4 Camino de datos
+8 - Sistema de entrada / salida
+     8.1 Sincronización por encuesta
+     8.2 Sincornización por interrupción
+     8.3 Vector de interrupciones
+     8.4 Acceso directo a memoria DMA
+     8.5 Programación en lenguaje ensamblador de rutinas de entrada/salida
+9 - Organización de la memoria
+     9.1 Jerarquía de memoria
+     9.2 Latencia y ancho de banda
+     9.3 Memoria cache
+     9.4 Memoria virtual</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_bibliografia_basica">1.7.1. Bibliografia Basica</h4>
+<div class="sect4">
+<h5 id="_imprenta">Imprenta</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Teoría</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://williamstallings.com/ComputerOrganization/">William Stalling</a></p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/william_stalling7_portada.jpg" alt="william stalling7 portada" width="300">
+</div>
+<div class="title">Figure 13. William Stalling Book</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Organización y arquitectura de computadores .William Stallings
+Edición 7, reimpresa Pearson Prentice Hall
+ISBN 8489660824, 9788489660823 . 2006</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Computer Organization and Architecture: Designing for Performance.
+William Stallings
+9ª Ed Upper Saddle River (NJ) : Prentice Hall, [2013]
+ISBN 0-273-76919-7 . 2012</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://williamstallings.com/COA/COA7e.html">COA 7ª</a></p>
+</li>
+<li>
+<p><a href="https://www.pearson.com/us/higher-education/program/Stallings-Pearson-e-Text-for-Computer-Organization-and-Architecture-Access-Code-Card-11th-Edition/PGM2043621.html">11º Ed 2019</a></p>
+</li>
+<li>
+<p>Prácticas:</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/introduccion/programming_from_the_ground_up.jpg" alt="programming from the ground up">
+</div>
+<div class="title">Figure 14. Programming Assembly</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Programming from the Ground Up
+by Jonathan Bartlett Edited by Dominick Bruno, Jr.
+Copyright © 2003 by Jonathan Bartlett
+ISBN 0-9752838-4-7
+Published by Bartlett Publishing in Broken Arrow, Oklahom</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Programming from the Ground Up  by Jonathan Bartlett. Programación en Lenguaje Ensamblador AT&amp;T para la arquitectura x86.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://programminggroundup.blogspot.com.es/2007/01/programming-from-ground-up.html">PGU book online</a></p>
+</li>
+<li>
+<p><a href="http://savannah.nongnu.org/projects/pgubook/">PGU book home</a></p>
+</li>
+<li>
+<p><a href="http://download.savannah.gnu.org/releases/pgubook/">pdf</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://upcommons.upc.edu/handle/2117/115067">El ensamblador&#8230;&#8203; pero si es muy fácil</a>: IA-32 (i386) (sintaxis AT&amp;T)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Manuales GNU:</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentación de los Manuales: La mayoría de las aplicaciones y herramientas software de la fundación GNU y Linux disponen de Manuales bien on-line o bien localmente en la propia máquina. Manual del compilador gcc: <code>$man gcc</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Es una habilidad a adquirir por el profesional informático el acceder y utilizar dichos manuales así como disponer de hojas de referencia de acceso rápido durante la sesiones de trabajo.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_online">Online</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://diveintosystems.org/book/preface.html" class="bare">https://diveintosystems.org/book/preface.html</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_bibliografía_complementaria">1.7.2. Bibliografía Complementaria</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Ir al capítulo de la <a href="_ix_bibliografía.html#arqui_computadores">bibliografía</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_profesorado">1.8. Profesorado</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Cándido Aramburu Mayoz.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Doctor Ingenierio Telecomunicación. Profesor Titular de Universidad.</p>
+</li>
+<li>
+<p>Edificio los Tejos, planta 2ª. Despacho 2028.</p>
+</li>
+<li>
+<p>correo electrónico interno: a través del servidor Miaulario.</p>
+</li>
+<li>
+<p><a href="http://www.unavarra.es/ficha-docente?rangoLetras=a-z&amp;uid=364">PDI Profesorado</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Tutorías, Aulas y Horario</p>
+<div class="listingblock">
+<div class="content">
+<pre>Tutoría online (cita previa) y Presencial
+Lugar: Edificio Los Tejos 2ª Planta, Despacho 2028 (Prof. Cándido Aramburu)
+
+        Lunes :     10:00-13:00
+        Miércoles   10:00-13:00
+
+G91 -&gt; A226, G1 -&gt;A113, G2-&gt;A122, P91-&gt;A015, P1-&gt;A305, P2-&gt;E-ISM, P3-A y P3-B -&gt;A015
+G91(L-15:00), G1(X-17:00), G2(L-17:00), P91(X-19:00), P1(J-17:00), P2(M-19:00), P3-A y P3-B (M-17:00)
+Aula E-ISM: Edificio “Las Encinas” (Lado derecho entre la Biblioteca y el Rectorado) en el Sótano, Laboratorio de Informática “ISM”</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Andrés Garde Gurpegui</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Técnico Superior de la Dirección General de Informática y Telecomunicaciones del Gobierno de Navarra.</p>
+</li>
+<li>
+<p>Profesor Asociado (Prácticas de Laboratorio)</p>
+</li>
+<li>
+<p>Edificio de Los Tejos, planta 2ª, Sala de Asociados del departamento de INGENIERÍA ELÉCTRICA, ELECTRÓNICA Y DE COMUNICACIÓN.</p>
+</li>
+<li>
+<p>andres.gardeATunavarra.es</p>
+</li>
+<li>
+<p><a href="http://www.unavarra.es/pdi?uid=6578">PDI Profesorado</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Carlos Juan de Dios Ursúa</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ingeniería Eléctrica y Electrónica</p>
+</li>
+<li>
+<p>Master en Robótica y Automatización</p>
+</li>
+<li>
+<p>Profesor Asociado (Teoría Estructura Computadores)</p>
+</li>
+<li>
+<p>Edificio de Los Tejos, planta 2ª, Sala de Asociados del departamento de INGENIERÍA ELÉCTRICA, ELECTRÓNICA Y DE COMUNICACIÓN.</p>
+</li>
+<li>
+<p>carlos.juandediosATunavarra.es</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_grado_informática">1.9. Grado Informática</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.unavarra.es/sites/grados/informatica-y-telecomunicacion/ingenieria-informatica/asignaturas-y-profesorado.html">Grado Informatica</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>200 - Escuela Técnica Superior de Ingeniería Industrial, Informática y de Telecomunicación</p>
+</li>
+<li>
+<p>240 - Graduado o Graduada en Ingeniería Informática por la Universidad Pública de Navarra</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_calendarios">1.10. Calendarios</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.unavarra.es/sites/estudios/calendarios.html">Calendario administrativo</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Teoría</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Grupo1 G1 Miércoles 17:00 A113</p>
+</li>
+<li>
+<p>Grupo2 G2 Lunes 17:00 A122</p>
+</li>
+<li>
+<p>Grupo91 G91 Lunes 15:00 A223</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Prácticas</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/Horario1C.htm">Calendario Aulas Informática 1º Cuatrimestre</a></p>
+</li>
+<li>
+<p><a href="https://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/Horario2C.htm">Calendario Aulas Informática 2º Cuatrimestre</a></p>
+</li>
+<li>
+<p>P3-A: Martes a las 17:00 en A-015(40 puestos) &#8594; Prácticas de los Grupos de teoría G1 y G2</p>
+</li>
+<li>
+<p>P3-B: Martes a las 17:00 en A-015(40 puestos) &#8594; Prácticas de los Grupos de teoría G1 y G2</p>
+</li>
+<li>
+<p>P2: Miércoles a las 17:00 en E-ISM (36 puestos) &#8594; Prácticas del Grupo de teoría G2</p>
+</li>
+<li>
+<p>P1: Lunes a las 19:00 en A305 (36 puestos) &#8594; Prácticas del Grupo de teoría G1</p>
+</li>
+<li>
+<p>P91: Miércoles 19:00 en A015 (20 puestos) &#8594; Prácticas del Grupo de teoría Euskera</p>
+</li>
+<li>
+<p>Aula E-ISM: Edificio “Las Encinas” (Lado derecho entre la Biblioteca y el Rectorado) en el Sótano, Laboratorio de Informática “ISM”</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>SEPTIEMBRE	Martes	  	Miércoles	Jueves
+	        26 P3-A P2	27 P91   	28 P1
+OCTUBRE
+	         3 P3-B		                5 P1
+	        10 P3-A P2	11 P91
+	        17 P3-B
+	        24 P3-A P2	25 P91	        26 P1
+	        31 P3-B
+NOVIEMBRE
+		7 P3-A P2	8 P91		9 P1
+		14 P3-B
+		21 P3-A P2	22 P91		23 P1
+		28 P3-B</pre>
+</div>
+</div>
+<div class="ulist">
+<div class="title">Calendario Semestre Otoño 2022</div>
+<ul>
+<li>
+<p>Fiestas</p>
+<div class="listingblock">
+<div class="content">
+<pre>12 de octubre miércoles (Fiesta Nacional de España).
+01 de noviembre martes (Festividad de Todos los Santos).
+03 de diciembre martes (San Francisco Javier, Día de Navarra).
+06 de diciembre jueves (Día de la Constitución).</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Semanas del curso :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>15 semanas: Duración del curso 2 de Septiembre al 20 de Diciembre</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://www.unavarra.es/sites/grados/informatica-y-telecomunicacion/ingenieria-informatica/evaluacion.html#cCentralUPNA">calendario exámenes</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www2.unavarra.es/gesadj/CyD1/ETSIIT/Examenes/Grados/Otono/240_otono.pdf">otoño 2023</a></p>
+</li>
+<li>
+<p>Convocatoria Ordinaria 18/12/2023 08:00 Convocatoria Extraordinaria: 18/01/2024 16:00</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicios_mediante_resolución_de_problemas">1.11. Ejercicios mediante resolución de problemas</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Realización de ejercicios básicos a lo largo de cada capítulo del temario incluidos en los apuntes.</p>
+</li>
+<li>
+<p>Ejercicios tipo examen.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_prácticas">1.12. Prácticas</h3>
+<div class="sect3">
+<h4 id="_guiones">1.12.1. Guiones</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Están disponibles los Cinco Guiones de Prácticas en los apuntes: en el documento eecc_book.pdf y en el documento <a href="https://kandido.github.io/eecc_book.html" class="bare">https://kandido.github.io/eecc_book.html</a> siendo este último el más actualizado</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejercicios_de_evaluación">1.12.2. Ejercicios de Evaluación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Al comienzo de cada sesión de prácticas se realizará un ejercicio individual de 20 minutos sobre el contenido de la sesión anterior cuya nota entra dentro del cómputo de la nota global de prácticas.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_memorias">1.12.3. Memorias</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Prácticas Individuales.</p>
+</li>
+<li>
+<p>Memorias :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La entrega de la memoria a través del servidor de miaulario se realizará antes de la siguiente sesión de prácticas en la fecha indicada y publicada por el profesor.</p>
+</li>
+<li>
+<p>La memoria es un documento único en formato PDF.</p>
+</li>
+<li>
+<p>El nombre del fichero  debe ser apellido1_apellido2_tituloguionpractica.pdf</p>
+</li>
+<li>
+<p>Contenido de la memoria.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El programa descrito en pseudocódigo</p>
+</li>
+<li>
+<p>El código fuente en lenguaje ensamblador debidamente comentados en coherencia con el programa en pseudocódigo.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>No se valora el estilo de la memoria sino su contenido ya que interesa que sirva como apuntes para las pruebas de evaluación.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Imprescindible tomar notas dentro y fuera del laboratorio</p>
+</li>
+<li>
+<p>Salvar todo el trabajo en un pendrive o enviarlo por correo</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Borrado automático a diario del contenido del disco duro.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_recursos_informáticos">1.13. Recursos Informáticos</h3>
+<div class="sect3">
+<h4 id="_upna">1.13.1. UPNA</h4>
+<div class="sect4">
+<h5 id="_servicio_informático">servicio informático</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.unavarra.es/servicio-informatico/servicios/pdi?languageId=100000">Servicio Informático UPNA</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/GERES.pdf">Reserva Aulas</a></p>
+</li>
+<li>
+<p><a href="https://www.unavarra.es/servicio-informatico/servicios/pdi?opcion=23">Aulas VDI</a></p>
+</li>
+<li>
+<p><a href="https://www2.unavarra.es/gesadj/servicioInformatico/usuario/aulas/AccesoRemotoVDI.pdf">Manual Acceso Remoto VDI</a></p>
+</li>
+<li>
+<p><a href="https://vdibroker.unavarra.es">Escritorio Virtual</a></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Laboratorio Remoto de Computación</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://laboratoriosvirtuales.unavarra.es/">acceso general</a> &#8594; ¿?</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_laboratorio_remoto_armfpga">laboratorio remoto ARM/FPGA</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>No se contempla la utilización del laboratorio remoto ARM/FPGA dentro del plan de la asignatura pero se encuentra disponible para quien desee utilizarlo, para lo cual es necesario abrir una cuenta de acceso.</p>
+</li>
+<li>
+<p><a href="https://laboratoriosvirtuales.unavarra.es/fpga/#/">acceso fpga</a> &#8594; laboratorio remoto FPGA-Raspberry</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Guacamole login &#8594; credenciales UPNA</p>
+</li>
+<li>
+<p>Acceso a la tarjeta DE1-SoC (ARM) &#8594; login  &#8594; Consola shell linux</p>
+</li>
+<li>
+<p>Acceso a la tarjeta Raspberry (ARM) &#8594; login &#8594; Consola shell linux</p>
+</li>
+<li>
+<p>Acceso a la tarjeta Xilinx (ARM) &#8594; login &#8594; Consola shell linux</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><a href="https://labsland.com/es">Empresa Colaboradora Labsland</a>: Instancias DE1-SoC. Interfaz Web.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Se instalará su acceso a través de miaulario mediante el botón EDA.</p>
+</li>
+<li>
+<p>Herramientas de diseño dispositivos digitales</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_estaciones_de_trabajo_32_y_64_bits">1.13.2. Estaciones de Trabajo: 32 y 64 bits</h4>
+<div class="sect4">
+<h5 id="_arquitectura">Arquitectura</h5>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Si la estación de trabajo particular de un alumno es Ubuntu (64 bits) sobre un procesador x86-64 no hay ningún problema para la ejecución de programas con una arquitectura de x86-64, en cambio, los programas a desarrollar en la asignatura utilizan una arquitectura de 32 bits que para poder compilar y ejecutar dichos programas es necesario
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_qué_instalar">Qué instalar</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Es necesario disponer de un PC con una CPU  cuya arquitectura sea x86-64 ó amd64  y un Sistema Operativo <a href="https://linuxfoundation.org/">linux</a>/https://www.gnu.org/software/[GNU] mediante la distribución distribución <a href="https://ubuntu.com/download">Ubuntu</a>. La distribución Ubuntu que sea reciente con una versión superior a la 18. Se recomienda la distribución Ubuntu ya que es la distribución instalada en el laboratorio de informática donde se realizan las prácticas.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El Sistema operativo puede estar instalado de forma nativa o virtual (VMware, Virtualbox, <a href="https://libvirt.org/">Virtio</a>, etc).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Para la realización de las prácticas es necesaria una instalación mínima con las herramientas de programación de bajo nivel: <strong>binutils</strong>, Compilador <strong>gcc</strong>,  Debugger <strong>gdb</strong>, Editor <strong>vim</strong></p>
+</li>
+<li>
+<p>En Ubuntu:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>realizar la instalación de los paquetes mediante el comando <code>sudo apt-get install binutils gcc gcc-multilib gdb vim</code></p>
+</li>
+<li>
+<p>comprobar la instalación de los paquetes mediante el comando <code>dpkg -l binutils gcc gcc-multilib gdb vim</code> que el estado de cada uno de los programas es <em>ii</em></p>
+</li>
+<li>
+<p>comprobar las versiones: <code>gcc --version &amp;&amp; as --version &amp;&amp; ld --version &amp;&amp; gdb --version &amp;&amp; vim --version</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Para la edición de los programas en los lenguajes C y ensamblador ASM se podrá utilizar además del editor Vim, el editor preferido (nano,sublime,gedit,kate,emacs,etc..) y/o el IDE preferido (Visual Studio Code, Eclipse, etc..)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_registrarse">1.13.3. Registrarse</h4>
+<div class="sect4">
+<h5 id="_miaulario">miaulario</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://miaulario.unavarra.es/portal">Miaulario</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_github">Github</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Es necesario tener una cuenta abierta en la plataforma de repositorios <a href="https://github.com/">Github</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_google">Google</h5>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://support.google.com/accounts/answer/27441">Google account</a></p>
+</li>
+<li>
+<p><a href="https://www.google.com/chrome/">Navegador Google Chrome</a>: permite seleccionar el idioma</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_grupos_de_prácticas">1.14. Grupos de Prácticas</h3>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Grupos de Prácticas</caption>
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">ALUMNO EECC</th>
+<th class="tableblock halign-left valign-top">ID EECC</th>
+<th class="tableblock halign-left valign-top">GRUPO EECC</th>
+<th class="tableblock halign-left valign-top">PRACTICAS EECC</th>
+<th class="tableblock halign-left valign-top">AULA</th>
+<th class="tableblock halign-left valign-top">PROFESOR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alén Urra, Saúl</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alen.146325</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A015(30)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Andrés Garde</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alignani Álvarez, Tomás</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alignani.153933</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Altamirano Trujillo, Ruth Nazareth</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">altamirano.146080</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alustiza Sánchez, Aimar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alustiza.15399</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Álvarez Alonso, Markel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alvarez.147717</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alvira Ballano, Alonso</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">alvira.153972</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Andueza Del Campo, Eneko</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">andueza.153944</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Arellano Cameo, Juan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">arellano.154190</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Azkona Ekiza, Iker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">azkona.153931</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Aznarez Gil, Iñigo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">aznarez.138165</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Baquedano Simón, Javier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">baquedano.153945</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Barrena Ribas, Fermín</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">barrena.154004</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basterra Arteaga, Paula</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">basterra.128530</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bellera Alsina, Alberto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bellera.142014</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Biurrun Rodríguez, Luna María</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">biurrun.153961</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-A (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Blasco Catalán, Diego</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">blasco.154001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A305(36)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Andrés Garde</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Boukhlik , Hajar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boukhlik.153919</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bustince Labairu, Lucas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bustince.154005</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cabrero Jiménez, Natalia Ana</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cabrero.153898</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Calleja Pascual, Vidal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">calleja.149323</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cardenas Curicho, Solange Samanta</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cardenas.139474</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cerezo Uriz, Iñaki</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cerezo.147574</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chacón Flores, Malena Paola</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">chacon.145983</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chacón González, Rubén</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">chacon.154006</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Chueca Irisarri, Daniel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">chueca.146727</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clemos Gómara, Samuel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">clemos.153868</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Couceiro Eizaguirre, Javier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">couceiro.126729</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Crespo Lamelas, Markel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">crespo.153999</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dabán Baines, Jorge</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">daban.153969</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Del Carmen Hernández, Aimer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">delcarmen.153871</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Elizaincin Irungaray, Unax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">elizaincin.153965</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Escribano López, Miguel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">escribano.154010</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Espinosa Milla, Iván</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">espinosa.153952</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ezcurdia Ruiz, Fermín</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ezcurdia.153981</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ezpeleta García, Laura</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ezpeleta.153901</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fernández Picorelli, Marina</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fernandez.149320</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fortun Iñurrieta, Lucas Nicolas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fortun.140006</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Garate Moreno, Gaizka</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">garate.153980</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Garatea Larrayoz, Iñaki</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">garatea.139258</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">García Manterola, Julen</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">garcia.153963</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gómez De Segura Rodríguez, Laura</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gomezdesegura.153995</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">González Augusto, Ibai</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gonzalez.154119</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Goñi Lara, Iker</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">goni.147794</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Goyache Sarasa, Carlos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">goyache.153907</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Guardia Arriazu, Jon</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">guardia.153924</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Herrero Lanzas, Eva Isabel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">herrero.139723</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hualde Romero, Israel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">hualde.146905</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Illa Criado, Álvaro</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">illa.154577</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Iribarren Ruíz, Beñat</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">iribarren.148642</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Juárez Jiménez, Adrián</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">juarez.146292</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P1 (Jueves 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Larrayoz Díaz, Asier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">larrayoz.146585</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">EISM(34)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cándido</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Larrea Gallego, Javier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">larrea.154156</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Latasa Sancha, Iván</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">latasa.146388</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Leiza Dávila, Leyre</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">leiza.153964</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lumbreras Corredor, Imanol</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lumbreras.147551</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maeztu Vitaller, Carlos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maeztu.154202</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Manrique Rangel, Angelo Gabriel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">manrique.153940</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Martinez Alberdi, Pablo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">martinez.147687</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Martínez Arpón, Alain</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">martinez.146281</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Martinez Roncero, Rodrigo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">martinez.153968</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Martínez Sesma, Álvaro</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">martinez.149151</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Merino Pinedo, Javier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">merino.153915</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Molina Puyuelo, Alejandro</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">molina.147893</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Moral Garcia, Haizea</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">moral.147341</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muñoz Villanueva, Asier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">munoz.138255</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nagore Irigoyen, Alejandro</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nagore.95315</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ochoa Martínez, Ángela</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ochoa.153956</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Orenes Peñas, Martin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">orenes.153979</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ozcáriz Armendáriz, Iñaki</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ozcariz.153949</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parrales Gómez, Sarah Alicia</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parrales.153967</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Percaz Angós, Asier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">percaz.154165</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pidlubnyy Lahodyn, Artem</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pidlubnyy.154272</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pinillos Osteriz, Iñaki</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pinillos.153938</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pío Aymerich, Mikel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pio.153922</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Prim Labiano, Ainara</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">prim.153947</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Razvant Sofrone, Bogdan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">razvant.153957</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reimóndez Blanco, Luis Rafael</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">reimondez.154002</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Resano Eguizábal, Amaia Duo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">resano.154007</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rodríguez Hidalgo, Junior Alberto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rodriguez.153941</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rojas Urrutia, Aitor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rojas.150213</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Romero Samaniego, Oscar Hugo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">romero.153951</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P2(Martes 19-21)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ros Villanueva, Álvaro</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ros.154011</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A015(30)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Andrés</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ruiz de Gopegui Rubio, Paula</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ruizdegopegui.148800</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sáez Zubillaga, Javier</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">saez.154043</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sáinz González, Mario</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sainz.153904</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Santos Garzon, Jaider Felipe</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">santos.138639</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sotelo Aguirre, Martín</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sotelo.153910</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Suárez Etulain, Diego</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">suarez.153960</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tiraplegui Etulain, Manex</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tiraplegui.154012</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vallés Zamora, Miguel</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">valles.146260</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vicente Obeso, Mario</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vicente.154000</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vinces Velastegui, José Ignacio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">vinces.153986</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zamboran Maldonado, Andrea</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zamboran.146231</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zheng , Yushan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zheng.146049</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zubasti Aristu, Rubén</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zubasti.153989</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">G2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P3-B (Martes 17-19)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_metodología">1.15. Metodología</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Teoría, Ejercicios, Prácticas y Exámenes.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. metodología</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Metodología - Actividad</th>
+<th class="tableblock halign-left valign-top">Horas Presenciales</th>
+<th class="tableblock halign-left valign-top">Horas no presenciales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A-1 Clases magistrales</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A-2 Estudio autónomo</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">30</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A-3 Sesiones prácticas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A-4 Programación / experimentación u otros trabajos en ordenador / laboratorio</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">20</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A-5 Resolución de problemas, ejercicios y otras actividades de aplicación</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A-6 Aprendizaje basado en problemas y/o casos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">14</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A-7 Elaboración de trabajos y/o proyectos y escritura de memorias</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">11</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A-8 Lectura de Guiones, preparación de presentaciones de trabajos, proyectos, etc&#8230;&#8203;</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">15</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A-9 Actividades de Evaluación</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A-10 Tutorías</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">62</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">88</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p>La asignatura se desdobla en 2 partes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Parte I: Temas 1-6 (conceptos básicos)</p>
+</li>
+<li>
+<p>Parte II: Temas 7-9 (conceptos avanzados y casos prácticos)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_distribución_de_créditos">1.15.1. Distribución de créditos</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Distribución de créditos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>total créditos: 6 ECTS</p>
+</li>
+<li>
+<p>total horas: 6x25 : 150 horas</p>
+</li>
+<li>
+<p>horas presenciales: 62 horas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>clases : 24 horas. Durante 12 semanas (2horas/semana) de 15 semanas totales del curso</p>
+</li>
+<li>
+<p>prácticas de laboratorio: 16 horas. Durante 8 semanas (2horas/semana)</p>
+</li>
+<li>
+<p>problemas : 14 horas. Durante 7 semanas (2horas/semana)</p>
+</li>
+<li>
+<p>evaluación: 6 horas. Durante 3 semanas (2horas/semana) de 15 semanas totales del curso</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>tutorías   : 2 horas</p>
+</li>
+<li>
+<p>horas no presenciales: 88 horas</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_distribución_de_créditos_de_las_prácticas">1.15.2. Distribución de créditos de las Prácticas</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Cada alumno tendrá 16 horas de prácticas en sesiones de 2 horas: 12 en el laboratorio y 4 para la realización de Memorias.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_evaluación">1.16. Evaluación</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.unavarra.es/ficha-asignaturaDOA?languageId=100000&amp;codPlan=240&amp;codAsig=240306">Web Estructura de Ordenadores</a></p>
+</li>
+<li>
+<p>Nota Final: 15%(asistencia, actitud en la clase y en el laboratorio)+35%(prácticas)+35%(teoría y su ejercicios)+15%(programación en papel)</p>
+</li>
+<li>
+<p>prácticas: Ejercicios en cada sesión de prácticas, Memorias y prueba final. Prueba final el 18/012/2023 (prácticas 1ª,2ª,3ª,4ª,5ª y 6ª), haciendo especial hincapié en la práctica de generación de imágenes BMP).</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Las prácticas suponen el 35% de la nota global, es necesaria una nota mínima de 4 puntos para aprobar la asignatura y son recuperables.</p>
+</li>
+<li>
+<p>La nota de prácticas es la media ponderada de: asistencia a prácticas y entrega de memorias (15%), evaluación de los ejercicios realizados en el laboratorio en cada sesión (20%) y el examen final de prácticas(65%)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>teoría: supone el 35% de la nota globales, es necesaria una nota mínima de 4 puntos en el primer parcial para aprobar la asignatura y son recuperables.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>2 pruebas parciales. Primera prueba parcial el 16 de Octubre (Temas del 1 al 6). Segunda prueba parcial en la convocatoria final ordinaria el 18/12/2023 (Temas del 6 al 9 y lo no visto en el primer parcial del 1 al 6).</p>
+</li>
+<li>
+<p>El primer parcial tiene un valor del 60% de la nota de teoría y el segundo parcial un 40%.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Programación en papel</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Supone el 15% de la nota final</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Convocatoria Extraordinaria:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En caso de tener suspendidas bien las prácticas o bien la teoría, una aprobada y la otra suspendida, se guarda la nota de la parte aprobada (teoría o práctica).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+OBLIGATORIEDAD de las prácticas y de las pruebas teóricas:
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Asistencia a las prácticas en el laboratorio: Es <strong>obligatorio</strong> asistir al 87.5% de las horas de prácticas en el laboratorio.</p>
+</li>
+<li>
+<p>Entrega de las memorias de prácticas: Es <strong>obligatorio</strong> entregar el 100% de las memorias dentro del plazo establecido en la fecha habilitada en el servidor de miaulario. No se reciben memorias de prácticas ni de tareas fuera del plazo fijado por el servidor de miaulario.</p>
+</li>
+<li>
+<p>La obligatoriedad de la asistencia al 87.5% de las horas de prácticas así como la entrega de memorias en el plazo y medio establecido es condición necesaria para poder superar la asignatura.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exámenescontenidos">1.17. Exámenes:Contenidos</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Los exámenes de teoría tendrán preguntas teóricas sobre conceptos vistos en clase y ejercicios con una distribución "aproximada" en el primer  parcial del: 20% preguntas sobre conceptos teóricos y un 80% de ejercicios ; y para el segundo parcial: 60% preguntas sobre conceptos teóricos y un 40% de ejercicios.</p>
+</li>
+<li>
+<p>El examen de programación en papel se realizará sin ordenador y con las hojas de referencia de las instrucciones en el lenguaje ensamblador, el depurador GDB y las sentencias del lenguaje C. Consiste en preguntas sobre el programación en el lenguaje ensamblador y no sobre GDB.</p>
+</li>
+<li>
+<p>El examen de prácticas en el laboratorio se realizará con las memorias de prácticas y las hojas de referencia y sin poder utilizar ninguna información electrónica ni de forma remota (acceso a internet) ni de forma local (pendrive USB,etc).</p>
+</li>
+<li>
+<p>Calendario:</p>
+<div class="listingblock">
+<div class="content">
+<pre>1º parcial teoría: Temas 1,2,3,4,5 y 6: 16/10/2022
+2º parcial teoría: Todos los temas: 18/12/2023
+Examen de prácticas: Convocatoria Ordinaria 18/12/2023</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>↑ Up: <a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_arquitectura_von_neumann.html">Arquitectura Von Neumann</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

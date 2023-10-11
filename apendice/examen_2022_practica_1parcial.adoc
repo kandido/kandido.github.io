@@ -1,0 +1,127 @@
+Estructura de Computadores 2022: Primer Parcial Prácticas
+=========================================================
+
+:doctitle: Estructura de Computadores 2022: Primer Parcial Prácticas
+
+// sin el prefijo Chapter n
+ 
+
+* *Apellidos:*                                                    
+* *Nombre:*
+* *Grupo:*
+
+Introducción
+------------
+
+* Día del examen: 28 de Octubre 2022 Viernes 8:00AM-10:00AM 
+* Lugar: Aulas A307(grupos euskera y lunes 19:00-21:00)-A308(grupo miércoles 15:00-17:00)-A015(grupo miércoles 17:00-19:00):
+* El examen consistirá en el desarrollo de un programa en lenguaje ensamblador y  el empleo del depurador GDB teniendo en cuenta lo visto en las prácticas P1 y P2 y el tema 6 de teoría sobre programación en lenguaje ensamblador x86, del cual no entran las subrutinas, donde es requisito imprescindible haber realizado los ejercicios 15(instrucción CMP),16(flags CF/OF) y 17(instrucciones JLE,SETcc) tanto manualmente como su programación en código ensamblador, compilación, ejecución y *depuración*. El objetivo del ejercicio es demostrar habilidades en cuanto a desarrollo de programas de bajo nivel y su depuración.
+
+
+Módulo fuente
+-------------
+
+* Ejemplo o prototipo de lo que *podría ser* el enunciado del programa a desarrollar en lenguaje ensamblador 
+* A continuación se especifica *parte* del código fuente que es necesario completar y depurar por parte del alumnado ya que está incompleto y puede contener algún error o errores.
+* Hay que respetar los comentarios ya que indican lo que hay que programar a continuación del mismo y es motivo de evaluación.
+* El módulo fuente ha de contener la siguiente cabecera:
++
+
+[source,nasm]
+----
+### Estructura de Computadores. Examen 1º parcial curso 2022.
+### Programación en lenguaje ensamblador AT&T para la arquitectura x86 32 bits 
+### Programa: Apellido1_Apellido2.s, por ejemplo, Alen_Urra.s
+### 1ª parte del programa apellido1_apellido2.s (3 pts)
+###     Declarar la variable mensaje inicializandola con el caracter "m"
+###	Convertir el caracter "m" en una mayúscula "M"
+###     sabiendo que las letras mayúsculas tienen un código ASCII 0x20 menor que las minúsculas.
+###	código ASCII de "a" = 0x61 y de "A"=0x41
+### Preguntas sobre el depurador GDB (4 pts):
+###    las respuestas han de incluir tanto los comandos GDB como el resultado de ejecutar dichos comandos.
+###    a) imprimir el contenido ......... con el comando print -> p
+###    comando (gdb): 
+###    resultado: 
+###
+###    b) imprimir el contenido .... en código hexadecimal con el comando examine -> x
+###    comando (gdb): 
+###    resultado: 
+###
+###    c) imprimir la dirección de ..... en código hexadecimal con el comando p
+###    comando (gdb): 
+###    resultado: 
+##
+###
+### 2ª parte del programa apellido1_apellido2.s (3 pts): 
+### 	Descripción: programar el siguiente algoritmo condicional
+### 	Lógica positiva: Z=TRUE=1 ó Z=FALSE=0
+### 	La variable Z se implementará con el registro DL
+### 	Devuelve el valor de la variable Z al Sistema Operativo
+###     Valor de las variables X e Y con un tamaño de 1 byte -> X=-3 e Y=-1
+###     Z=TRUE si el producto lógico XY tiene un número par de unos
+###     Utilizar todos los mensajes que informan sobre el resultado del algoritmo durante la ejecución del mismo. NO cambiar ni añadir ningún mensaje.
+
+	# sección rodata: read only data -> variables de solo lectura -> constantes
+	.section .rodata
+saludo:	.string "Estructura de Computadores curso 2022. UPNA 28 de Octubre"
+resultado: .string 
+
+
+
+	# imprimir saludo        
+        push $saludo
+        call puts
+
+	# Convertir la letra minúscula en mayúscula
+
+	# Operación multiplicación lógica Z=XY
+    
+
+	Imprimir el resultado 
+	call puts
+
+	# Pasar el resultado al sistema operativo
+
+	# Fin
+
+----
+
+Metodología del examen
+----------------------
+
+
+* No se puede conectar telemáticamente ni a la red de la UPNA ni al exterior de la Universidad
+* Se puede utilizar un pendrive conteniendo cualquier tipo de información: guiones de prácticas, memorias de prácticas, apuntes, hojas de referencia rápida.
+* Se puede utilizar cualquier tipo de material impreso: apuntes, memorias, libros, etc ...
+
+* Una vez arrancada la computadora el alumno ha de crear la carpeta */home/alumno/examen_parte_I*
+* El alumno dispondrá de 10 minutos al comienzo del examen para descargarse el enunciado del examen de MiAulario -> Recursos -> Prácticas -> *examen_1parcial.s* en la carpeta  */home/alumno/examen_parte_I*
+** A continuación cambiará el nombre del fichero *examen_1parcial.s* con el enunciado por el nombre del fichero a entregar según se indica más abajo.
+
+* El examen consta de *3 ejercicios*.
+* El programa fuente a entregar es UNO y el programa binario también es UNO, pero se entregará el mismo programa dos veces.
+** La primera entrega correspondiente a los ejercicios 1º y 2º se deberá realizar antes de las *9:15 horas* a través de miaulario en la TAREA *examen_parte_I*
+** La segunda entrega (continuación de la primera parte) correspondiente a los ejercicios 1º, 2º y 3º se deberá entregar antes de las *10:00 horas* a través de miaulario en la TAREA *examen_parte_II*
+
+* Las dos partes se desarrollarán en carpetas diferentes del ordenador. La primera parte se desarrollará en la carpeta */home/alumno/examen_parte_I* y la segunda parte se desarrollará en la carpeta */home/alumno/examen_parte_II*
+
+* Habrá abiertas dos tareas desde el comienzo del examen con limitación de tiempo para entregar el resultado del examen en formato digital en un *único* archivo en formato ZIP en cada una de las tareas. En cada tarea el archivo a entregar tendrá *EL MISMO NOMBRE*. Se avisará cuando falten 10 y 5 minutos para el cierre de cada una de las tareas
+
+* El archivo ZIP de cada una de las dos tareas contendrá:
+** el módulo fuente: Apellido1_Apellido2.s, pej, *Alen_Urra.s*, cada alumno con sus propios apellidos.
+*** código fuente y preguntas/respuestas en los comentarios.
+** el módulo binario: Apellido1_Apellido2 , pej, *Alen_Urra*, cada alumno con sus propios apellidos.
+
+IMPORTANT: el nombre del fichero con el código fuente ha de ser *obligatoriamente* uno de los nombres del listado del apéndice "Nominación de los ficheros del examen" de los apuntes.
+
+
+* Módulo fuente
+** se ha de completar y depurar
+** añadir los comentarios que se considere ayudan a la lectura e interpretación del programa
+** *responder* a las preguntas sobre el depurador GDB en el propio módulo fuente.
+
+Evaluación
+----------
+
+* Parte de la evaluación se realizará durante la propia prueba, siendo los profesores quienes preguntarán a cada alumno antes y después de la primera tarea *examen_parte_I* sobre el resultado accediendo tanto al programa fuente como a la ejecución del programa binario. En caso de que el alumno haya finalizado la primera parte antes de las 10:15 deberá llamar al profesor para ser evaluado.
+

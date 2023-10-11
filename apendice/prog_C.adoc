@@ -1,0 +1,564 @@
+Lenguaje de Programación C
+==========================
+
+:doctitle: Lenguaje de Programación C
+
+[[prog_C]]
+Introducción
+------------
+
+* Esto no es un tutorial de Programación en Lenguaje C, el objetivo de este capítulo es comentar aspectos puntuales de la programación en lenguaje C que son utilizados en la asignatura de Estructura de Computadores.
+
+Casting
+-------
+
+Concepto
+~~~~~~~~
+
+* Sintaxis
++
+
+[source,c]
+----------------------------------------------------------------------
+(type_name) expression
+----------------------------------------------------------------------
+** Conversión explícita mediante el operador unitario *( )*.
+** Los operadores unitarios tienen mayor precedencia que los binarios.
+
+Ejemplo
+~~~~~~~
+* Ejemplo de la división de números enteros
++
+
+[source,c]
+----------------------------------------------------------------------
+int i=8,j=5;
+float x;
+x = i / j;
+x = (float) i / j;
+----------------------------------------------------------------------
+
+* La variable ordinaria es declarada inicialmente como tipo 'int'
+** La operación i/j -> 8/5 daría como resultado el número entero 1
+* Si realizamos el casting *(float)* sobre la variable *i* entonces la variable i es de tipo float y no int, por lo que su valor será el número real 8.000 y no el entero 8.
+*** (float)i/j = 8.0000/5 = 1.6000 
+
+Puntero
+-------
+
+Referencias
+~~~~~~~~~~~
+
+Libro de texto K.N. King: Capítulo 11. Pointers. Pg241
+
+Introducción
+~~~~~~~~~~~~
+
+El concepto de puntero es fundamental en programación imperativa de bajo nivel ya que simplifica el código para la programación de algoritmos que incluyen estructuras de datos sencillas o complejas.
+
+IMPORTANT: Para el aprendizaje de: conceptos relacionados con los punteros, su sintaxis, su aplicación, etc..., es necesesaria la ejecución de los programas en modo PASO A PASO para poder visualizar los contenidos y referencias de los objetos en memoria. Utilizaremos el debugger GDB.
+
+
+Concepto
+~~~~~~~~
+
+Memoria
+^^^^^^^
+
+* La memoria principal RAM esta organizada en Bytes direccionables.
+
+* El rango de direcciones depende de la arquitectura de la máquina.
+
+* P.ej: un Bus de direcciones de 48 líneas podría direccionar 2^48^ = 2^8^ x 2^40^ = 256 TB
+
+* Un 'objeto' es una región de memoria (múltiples bytes ) asignada a un dato entero, dato caracter, array de datos float, bloque de instrucciones, etc. En este contexto de memoria el concepto objeto difiere del concepto objeto de programación orientada a objetos.
+
+* En la memoria RAM se implementan 'objetos' que son referenciados por las direcciones de memoria donde se encuentran. La referencia es la dirección del primer byte donde se almacena el objeto de múltiples bytes.
+
+
+
+
+* Mapa de memoria:
++
+
+[ditaa]
+----
+ADDRESS   ----RAM----
+	          
+0x0000000 +---------+        
+0x0000001 |         |       
+          |         |       
+          | cBLU    |       
+          |         |       
+          +---------+         
+0x0B000000|  c000   |      
+          +---------+         
+0x0B000001|  c111   |         
+          +---------+      
+0x0B000002|  c222   |         
+          +---------+         
+0x0B000003|  c333   |         
+          +---------+         
+0x0B000004|  c444   |         
+          +---------+  
+	  |         |
+          |         |
+          
+          |         |
+          |         |
+	  +---------+         
+	  |  c555   |       
+	  +---------+       
+	  |  c666   |       
+	  +---------+       
+	  |  c777   |       
+	  +---------+       
+          |  c888   |         
+	  +---------+          
+	  |  c999   |       
+	  +---------+       
+	  |  cAAA   |       
+	  +---------+       
+	  |  cBBB   |       
+	  +---------+       
+          |  cCCC   |         
+	  +---------+       
+	  |  cDDD   |       
+	  +---------+       
+      	  |  cEEE   |              
+	  +---------+       
+   	  |  cFFF   |       
+          +---------+         
+          |         |       
+0xFFFFFFFD|         |
+0xFFFFFFFE| cBLU    |       
+0xFFFFFFFF+----+----+       
+          	            
+    ^     <-1 byte ->
+    |
+/--------------\
+|cRED PUNTEROS |
+\--------------/
+
+----
+
+Puntero
+^^^^^^^
+
+Un puntero equivale a una dirección de memoria
+
+En cambio una VARIABLE PUNTERO:
+
+* Es una variable que almacena un dato que representa una dirección de memoria. 
+* Las variables puntero almancenan punteros.
+* Restringen sus valores a los valores de las direcciones de memoria. Nunca podrá ser un valor negativo o real, etc
+* Apuntan a objetos
+* Hacen referencia a objetos
+
+
+CAUTION: El libro de K.N.King distingue entre "variable puntero" y puntero. En la literatura en general cuando se habla de punteros se está hablando de variables puntero, en cuyo caso al contenido del puntero se le llama referencia o dirección al objeto referenciado.
+
+Representación gráfica de la "variable puntero" 'p'
+
+[ditaa]
+----------------------------------------------------------------------
+          +---------+       	+---------------+
+      	p |    	o---|-----------|--->           | x
+	  +---------+       	+---------------+
+----------------------------------------------------------------------
+
+p	: identificador de la variable puntero
+
+x	: identificador del objeto referenciado, por ejemplo una variable ordinaria.
+
+
+flecha	: 'inicialización' de la variable puntero 'p' apuntando al objeto 'x'
+
+
+Ejemplos de punteros, objetos y variables de punteros
+
+[ditaa]
+----------------------------------------------------------------------
+ADDRESS   ----RAM----	
+          
+0x0000000 +---------+                      +---------------+     
+0x0000001 |         |       		   |               |
+          |         |       		   |               |
+          | cBLU    |       		   | cBLU          |
+          |         |       		   |               |
+          +---------+         		   +---------------+
+0x0B000000|         |      		   |  c00F         | OBJETOS REFERENCIADOS
+          +--    ---+         		   +---------------+
+0x0B000001|         |         		   |  cF00         |
+          +--    ---+      		   +---------------+
+0x0B000002|         |         		   |  cF00         |
+          +--    ---+         		   +---------------+
+0x0B000003|         |         		   |  c0F0         |
+          +--    ---+         		   +---------------+
+0x0B000004|         |         		   |  c0F0         |
+          +--    ---+  			   +---------------+
+0x0B000005|         |      		   |  c0F0         |
+          +--    ---+         		   +---------------+
+0x0B000006|         |         		   |  c0F0         |
+          +--    ---+      		   +---------------+
+0x0B000007|         |         		   |  cF00         |
+          +--    ---+         		   +---------------+
+0x0B000008|         |         		   |  c00F         |
+          +--    ---+         		   +---------------+
+0x0B000009|         |         		   |  c00F         |
+          +--    ---+  			   +---------------+
+0x0B00000A|         |      		   |  c00F         |
+          +--    ---+         		   +---------------+
+0x0B00000B|         |         		   |  c00F         |
+          +--    ---+      		   +---------------+
+0x0B00000C|         |         		   |  c00F         |
+          +--    ---+         		   +---------------+
+0x0B00000D|         |         		   |  c00F         |
+          +--    ---+         		   +---------------+
+0x0B00000E|         |         		   |  c00F         |
+          +--    ---+  			   +---------------+
+0x0B00000F|         |      		   |  c00F         |
+          +--    ---+         		   +---------------+
+0x0B000010|         |         		   |  c00F         |
+          +--    ---+      		   +---------------+
+0x0B000011|         |         		   |  c00F         |
+          +--    ---+         		   +---------------+
+0x0B000012|         |         		   |  c00F         |
+          +--    ---+         		   +---------------+
+0x0B000013|         |         		   |  c00F         |
+          +---------+  			   +---------------+
+	  |         |			   |               |
+          |         |			   |               |
+          	     			   	           
+          |         |			   |               |
+          |         |			   |               |
+	  +---------+       		   +---------------+
+0x0B000100|  c666   |       		   |c00F  00       |  VARIABLES PUNTERO
+	  +---------+       		   +---------------+
+0x0B000101|  c777   |       		   |c00F  00       |
+	  +---------+       		   +---------------+
+0x0B000102|  c888   |         		   |c00F  00       |
+	  +---------+          		   +---------------+
+0x0B000103|  c999   |       		   |c00F  0B       |
+	  +---------+       		   +---------------+
+0x0B000104|  cAAA   |       		   |cF00  01       |
+	  +---------+       		   +---------------+
+0x0B000105|  cBBB   |       		   |cF00  00       |
+	  +---------+       		   +---------------+
+0x0B000106|  cCCC   |         		   |cF00  00       |
+	  +---------+       		   +---------------+
+0x0B000107|  cDDD   |       		   |cF00  0B       |
+	  +---------+       		   +---------------+
+0x0B000108|  cEEE   |              	   |c0F0  03       |
+	  +---------+       		   +---------------+
+0x0B000109|  cFFF   |       		   |c0F0  00       |
+          +---------+         		   +---------------+
+0x0B00010A|  c999   |       		   |c0F0  00       |
+	  +---------+       		   +---------------+
+0x0B00010B|  cAAA   |       		   |c0F0  0B       |
+	  +---------+       		   +---------------+
+0x0B00010C|  cBBB   |       		   |cF00  07       |
+	  +---------+       		   +---------------+
+0x0B00010D|  cCCC   |         		   |cF00  00       |
+	  +---------+       		   +---------------+
+0x0B00010E|  cDDD   |       		   |cF00  00       |
+	  +---------+       		   +---------------+
+0x0B00010F|  cDDD   |       		   |cF00  0B       |
+	  +---------+       		   +---------------+
+      	  |  cEEE   |              	   |  cEEE         |
+	  +---------+       		   +---------------+
+   	  |  cFFF   |       		   |  cFFF         |
+          +---------+         		   +---------------+
+          |         |       		   |               |
+          |         |       		   |               |
+          | cBLU    |       		   | cBLU          |
+          +----+----+       		   +----+----------+
+          	            		   	     
+          <-1 byte ->   		   <-   1 byte    ->
+----------------------------------------------------------------------
+
+** La variable puntero de la dirección 0x0B000100 (bytes '+0,+1,+2,+3') contiene la dirección 0x0B000000 que apunta a un objeto de 1 byte.
+** La variable puntero de la dirección 0x0B000104 (bytes '+0,+1,+2,+3') contiene la dirección 0x0B000001 que apunta a un objeto de 2 bytes.
+** La variable puntero de la dirección 0x0B000108 (bytes '+0,+1,+2,+3') contiene la dirección 0x0B000003 que apunta a un objeto de 4 bytes.
+
+LeftValue-RightValue
+^^^^^^^^^^^^^^^^^^^^
+* Una variable ordinaria referenciada en un operador asignación (=) tiene diferente interpretación si está a la izquierda o derecha del operador asignación:
+** x=y 
+*** x : la variable ordinaria a la izda se interpreta como la dirección en memoria de x : leftvalue de x
+*** y : la variable ordinaria a la derecha se interpreta como el contenido en memoria de y : rightvalue de y
+* El contenido del objeto es el RightValue
+* La referencia al objeto es el LeftValue
+* El contenido de una variable puntero es el LeftValue del objeto referenciado.
+
+Módulo Ilustrativo
+~~~~~~~~~~~~~~~~~~
+
+
+[source,c]
+----------------------------------------------------------------------
+/* Iniciación a los punteros.*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void main (void)
+{
+
+  /* Concepto */
+
+
+
+  /*Operador Dirección*/
+
+  int   i, k, *p, *q;
+  float x, y, *r, *s;
+  char  c, d, *u, *v;
+  i = 10;
+  k = 100;
+  x = 3E-10f;
+  y = 3.1416;
+  c = 'A';
+  d = '@';
+
+  p = &i;
+  q = &k;
+  r = &x;
+  s = &y;
+  u = &c;
+  v = &d;
+
+  printf("Introducir un carácter \n");
+  scanf("%c",&c);
+  printf("El carácter leído es el %c \n", c);
+
+  /*Operador Indirección*/
+
+  printf("El carácter leído es el %c \n", *u);
+  printf("El valor de la variable i es %d o también  %d \n", i, *p);
+  printf("El valor de PI es %f o también %f \n", y, *s);
+
+  /*String Variable*/
+  /*Array*/
+  char cadena[]="Hola";
+
+  /*Puntero*/
+  char *saludo="Hola";
+  char **pt_saludo;
+
+  pt_saludo = &saludo;
+
+  exit (0);
+}
+
+----------------------------------------------------------------------
+
+
+Declaración
+~~~~~~~~~~~
+
+Syntaxis: +type *pointer_variable+
+
+[source,c]
+----------------------------------------------------------------------
+int   i, k, *p, *q;
+float x, y, *r, *s;
+char  c, d, *u, *v;
+i = 10;
+k = 100;
+x = 3E-10f;
+y = 3.1416;
+c = 'A';
+d = '@';
+----------------------------------------------------------------------
+
+'*p', '*q', etc... son declaraciones de  'variable puntero'. El asterisco NO realiza ninguna operación sobre la variable, únicamente es el prefijo para indicar el TIPO puntero.
+
+
+Operador Dirección
+~~~~~~~~~~~~~~~~~~
+
+Símbolo '&'
+
+[source,c]
+----------------------------------------------------------------------
+p = &i;
+q = &k;
+r = &x;
+s = &y;
+u = &c;
+v = &d;
+scanf(&c);
+scanf(u);
+----------------------------------------------------------------------
+
+El operador & obtiene el LeftValue de la variable y se utiliza para inicializar punteros.
+
+
+[ditaa]
+----------------------------------------------------------------------
+    +--+    +-----+
+  p |  |--->|     |i
+    +--+    +-----+
+
+
+    +--+    +-----+
+  s |  |--->|     |y
+    +--+    +-----+
+
+
+----------------------------------------------------------------------
+
+
+Operador Indirección o Dereferencia
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Símbolo '*'
+
+Prefijo de una variable puntero: accede al objeto referenciado
+
+[source,c]
+----------------------------------------------------------------------
+printf("El valor de la variable i es %d o %d \n", i, *p);
+printf("El valor de PI es %f o %f \n", y, *s);
+----------------------------------------------------------------------
+
+
+Ejemplo
+~~~~~~~
+
+* Declarar objetos de distintos tipos: integer, float, char
+* Declarar objetos de tipo puntero e inicializarlos con los objetos anteriores
+* Representar gráficamente los punteros
+** Low Level: memoria RAM
+** High Level: diagramas con cajas que apuntan con flechas.
+
+Aplicaciones de los punteros
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Array
+** Puntero Array
+** Aritmética de Punteros
+* String Literal
+* Puntero a Puntero
+* Acceso a String
+** Nombre del array
+** Variable puntero
+* Estructura de datos
+** Lista de Nombres (Array de punteros a strings)
+* Funciones
+** Pase de argumentos por referencia
+** Retorno por referencia.
+* Argumentos del comando en línea del shell de Linux.
+
+Puntero Array
+^^^^^^^^^^^^^
+
+* Concepto
+** Un array es un puntero y una lista de elementos. El puntero apunta al primer elemento de la lista.
+** Cuando se crea un array se crean dos objetos
+*** Los elementos del array cuya asignación de memoria es contigua
+*** El puntero que apunta al primer elemento del array
+* Ejemplo
+** Array de Números : +data_items : 3,67,34,222,45,75,54,34,44,33,22,11,66,0+
+** Declarar e inicializar
+** Lectura
+** Escritura
+* Puntero CONSTANTE
+** NO SE PUEDE MODIFICAR EL VALOR DEL PUNTERO
+** Modificar el puntero
+* Ejemplo: 
+** Array de Caracteres: +cadena : H,o,l,a,'\0'+
+** Declarar e inicializar +char cadena[]={'H','o','l','a','\0'};+
+** Lectura
+** Escritura
+
+Aritmética de Punteros
+^^^^^^^^^^^^^^^^^^^^^^
+
+* Indexación: primer elemento MÁS la posición elemento 'i'
+** 'data_items + i'
+* Modificar las expresiones de referencia a los elementos del array por expresiones aritmética de punteros
+
+String Literal
+~~~~~~~~~~~~~~
+
+* Concepto en dos fases
+** Array de nombre "Hola" cuyos elementos son de tipo caracter.
++
+
+[ditaa]
+----------------------------------------------------------------------
+ "Hola"
++-------+                   +---+---+---+---+------+
+|       | ----------------> |   |   |   |   |      |
++-------+                   +---+---+---+---+------+
+----------------------------------------------------------------------
+
+
+** Inicializar Array con el String 'Hola'
++
+
+[ditaa]
+----------------------------------------------------------------------
+ "Hola"
++-------+                   +---+---+---+---+------+
+|       | ----------------> | H | o | l | a | NULL |
++-------+                   +---+---+---+---+------+
+----------------------------------------------------------------------
+
+
+
+* Ejemplo 
+** Declarar un array tipo carácter e inicializarlo con un string literal +"Hola"+
+*** +char cadena[]="Hola";+
+** String literal: 
+*** Cadena de carácteres
+*** Dobles comillas
+* Arrays
+** Acceder al array declarado : lectura y escritura
+** Acceder al array de inicialización: lectura y escritura
+** ¿ Copia de arrays mediante asignación +cadena1=cadena2+ ? 
+
+
+Puntero a Puntero
+~~~~~~~~~~~~~~~~~
+
+[ditaa]
+----------------------------------------------------------------------
+    pt_pt     u        c
+    +--+    +---+   +-----+
+    |  |--->|   |-->|     |
+    +--+    +---+   +-----+
+
+----------------------------------------------------------------------
+
+* Ejemplo
+** 'u' apunta al  carácter 'c'   
+** 'pt_pt' apunta a 'u'          
+
+String Variable
+~~~~~~~~~~~~~~~
+
+Nombre del Array
+^^^^^^^^^^^^^^^^
+
+* Declaro el array de caracteres +cadena+ y lo inicializo con el string Hola : +char cadena[]="Hola";+
+
+Variable Puntero
+^^^^^^^^^^^^^^^^
+
+* Declaro la variable +saludo+ y lo inicializo con el puntero +cadena+
+** +char **saludo+
+
+Funciones
+~~~~~~~~~
+
+* Pase de argumentos por *Referencia*
+** Declarar los parámetros de la función como variables puntero.
+
+
+
+* Retorno por *Referencia*.
+** Declarar el valor de retorno como puntero.
+

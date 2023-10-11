@@ -1,0 +1,297 @@
+Computadora IAS: Programa sum1toN
+=================================
+:author: Cándido Aramburu 
+:email: candido@unavarra.es
+:revnumber: v1.0.0
+:revdate: 2017 Septiembre 12
+:doctitle: Computadora IAS: Programa sum1toN
+:toc:
+:toclevels: 3
+:numbered:
+:icons:
+:lang: es
+:encode: ISO-8859-1
+:ascii-ids:
+// atributos personales 
+:ruta-apuntes: home/candido/Dropbox/apuntes
+include::/{ruta-apuntes}/include_apuntes.txt[]
+
+Introducción
+------------
+
+Info
+~~~~
+
+* link:http://www.cs.colby.edu/djskrien/IASSim/[IASSim Web]: Universidad Colby
+
+Instalación
+~~~~~~~~~~~
+
+Prerrequisitos
+^^^^^^^^^^^^^^
+
+* Es necesario tener instalada la máquina virtual java en Windows o Linux
++
+
+---------
+IASSim 2.0.4
+March, 2012
+
+
+SYSTEM REQUIREMENTS
+
+You must have Java 1.5 or later installed on your machine and the Java interpreter must be in your path variable.  The easiest way to test whether your system is set up correctly is to open a terminal or command window and type in:
+    java -version
+If you get an error message or if it displays a version number below 1.5, then go to the web site
+	http://java.sun.com/
+to get the software.
+---------
+
+Downloading
+^^^^^^^^^^^
+
+* http://www.cs.colby.edu/djskrien/IASSim/[IASSim Web]
+
+
+
+Starting
+^^^^^^^^
+
+----------
+STARTING IASSIM
+
+1.  On a Macintosh computer, just double-click on the "IASSim2.0.4.app" file.
+
+2.  On a Windows computer, double-click on the "IASSim.bat" file.
+
+3.  On a Linux computer or for those who prefer to use the command line,
+    (a) open a command or terminal window and navigate to
+        the "IASSim2.0.4" folder (the folder containing this instruction file).
+	(b) Type in one of the following commands (all on one line):
+	    (Windows users)
+		java -cp IASSim2.0.4.jar;jhall.jar;IASSimHelp2.0.jar iassim.Main -m IAS.cpu
+		(Mac or Linux users)
+		java -cp IASSim2.0.4.jar:jhall.jar:IASSimHelp2.0.jar iassim.Main -m IAS.cpu
+	(c) You can also add an optional argument to the command line:
+		    -t <text-file-name>
+		For example, if you add the optional argument
+		    -t Foo.txt
+		then IASSim will, on startup, open the file Foo.txt as an
+		assembly language text file.  If Foo.txt is not in the same
+		directory as the IASSim2.0.4.jar file, then you need to add
+		the appropriate directory path to the file name. For example, use
+		    -t ../Foo.txt
+		if Foo.txt is in the parent directory.
+            
+----------
+
+Bugs
+^^^^
+
+* En la plataforma Ubuntu 17.04 el emulador no da los valores correctos de MAR
+
+Organigrama
+-----------
+
+* Organigrama alto nivel
++
+
+[ditaa]
+--------
+            +-------+
+	    |cFDA   |
+	    |sum=0  |
+            |n=0    |
+	    | {o}   |
+	    +---+---+
+	        |
+	        v
+            +-------+
+	    |       |      
+	    |{c}    |    
+	    |       |    +-----+
+    +------>+  n>0? +--->| Fin |
+    |	    | cDBF  |No  +-----+ 
+    |	    |       |         
+    |	    +---+---+         
+    |  	      Sí|
+    |	        v
+    |	  +-----+----+
+    |	  | cFF8     |	
+    |	  |sum=sum+n |             
+    |	  |          |             
+    |	  +-----+----+
+    |	        |
+    |	        v
+    |     +----------+
+    |     |          |
+    +---->+ N = N-1  |
+          |          |
+          +----------+
+--------
+
+
+
+Pseudoprograma
+--------------
+
+* Lenguaje alto nivel: propio de IASSim
++
+
+---------------
+/* 
+   adds up the values N+...+3+2+1 in a loop and puts
+   the result in a variable SUM.
+ */
+
+ INTEGER N = 5
+ INTEGER SUM = 0
+ DO WHILE (N > 0)
+     SUM = SUM + N
+     N = N - 1
+ END DO
+ HALT
+---------------
+
+
+
+C
+---
+
+* Lenguaje C
++
+
+[source,C]
+----------------
+/*
+ Programa: sum.c
+ Descripción: realiza la suma de la serie 1,2,3,...N
+ Es el programa en lenguaje C equivalente a sum.ias de la máquina IAS de von Neumann
+Lenguaje:       C99
+Descripción:    Suma de los primeros 5 números naturales
+Entrada:        Definida en una variable
+Salida:         Sin salida
+Compilación:    gcc  -o suma suma.c
+S.O:            GNU/linux 3.2.0 ubuntu 12.04 x86-64
+Librería:       /usr/lib/x86_64-linux-gnu/libc.so
+CPU:            Intel(R) Core(TM) i5-2520M CPU @ 2.50GHz
+Compilador:     gcc version 4.6.4 (Ubuntu/Linaro 4.6.4-1ubuntu1~12.04)
+Ensamblador:    GNU assembler version 2.22
+Linker/Loader:  GNU ld (GNU Binutils for Ubuntu) 2.22
+Asignatura:     Estructura de Computadores
+Fecha:          12/09/2016
+Autor:          Cándido Aramburu
+*/
+
+void  main (void)
+{
+int sum=0,n=5;	//Declaración de variables locales
+  while(n>0){
+  sum+=n;
+  n--;
+  }
+}
+----------------
+
+
+Register Transfer Language
+--------------------------
+
+* Lenguaje RTL.
++
+
+---------------
+# Declaración e inicialización de Datos
+# Escritura en la Memoria Principal
+# Direcciones de la Memoria Principal : Etiquetas
+		one <- 1
+		sum <- 0
+		n   <- 5   	
+
+#Instrucciones de transferencia entre Registros/MP
+
+		AC <- M[n]
+loop:	  AC>=0:PC <- pos	 
+	      halt
+pos:		AC <- M[sum] + M[n]
+	       sum <- AC
+		AC <- M[n]
+		AC <- AC-1
+		 n <- AC
+		PC <- loop
+---------------
+
+
+ASM-William Stalling
+--------------------
+
+* Lenguaje Ensamblador propio de William Stalling
++
+
+--------------
+# Reserva e inicialización de la Memoria Principal
+one: 	.data 1
+sum: 	.data 0
+n:   	.data 5
+
+#	Código de instrucciones
+	LOAD  	n
+loop:	JUMPC 	pos
+	HALT
+pos:	ADD 	sum
+	STORE 	sum
+	LOAD	n
+	SUB	one
+	STORE	n
+	JUMP	loop
+	.end
+--------------
+
+ASM-IASSim
+----------
+
+* Lenguaje IAS assembly
++
+
+---------------
+
+Programa:       suma.ias
+Lenguaje:       ensamblador Computadora IAS de Von Neumann
+Descripción:   Suma de los primeros 5 números naturales
+Entrada:        Datos inicializados en la Memoria Principal
+Salida:         Almacenada en la Memoria Principal
+Plataforma:     IASSim/JVM 8/GNU/linux 4.10.0-33/IAS x86-64/Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
+		JRE: OpenJDK Runtime Environment (build 1.8.0_131-8u131-b11-2ubuntu1.17.04.3-b11)
+                Escritorio: Gnome/Ubuntu 17.04/
+Emulación:     java -cp IASSim2.0.4.jar:jhall.jar:IASSimHelp2.0.jar iassim.Main -m IAS.cpu &
+Compilación cruzada:    propio del Emulador IASSim
+Ensamblador cruzado:    propio del Emulador IASSim
+CPU:            propio de la Computadora IAS de Von Neuman
+Asignatura:     Estructura de Computadores
+Fecha:          12/09/2017
+Autor:          Cándido Aramburu
+
+; adds up the values n+...+3+2+1(+0) in a loop and stores
+; the sum in memory at the location labeled "sum"
+
+loop:   S(x)->Ac+  n    ;load n into AC
+        Cc->S(x)   pos  ;if AC >= 0, jump to pos
+        halt            ;otherwise done
+        .empty          ;a 20-bit 0
+pos:    S(x)->Ah+  sum  ;add n to the sum
+        At->S(x)   sum  ;put total back at sum
+        S(x)->Ac+  n    ;load n into AC
+        S(x)->Ah-  one  ;decrement n
+        At->S(x)   n    ;store decremented n
+        Cu->S(x)   loop ;go back and do it again
+
+n:     .data 5  ;will loop 6 times total
+one:   .data 1  ;constant for decrementing n
+sum:   .data 0  ;where the running/final total is kept
+---------------
+
+
+x86
+----
+
+

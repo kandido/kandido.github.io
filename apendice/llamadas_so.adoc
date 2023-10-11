@@ -1,0 +1,432 @@
+Llamadas al Sistema Operativo
+=============================
+
+:doctitle: Llamadas al Sistema Operativo
+
+[[llamadas_SO]]
+Introducción
+------------
+
+* Se conoce con el nombre de 'llamadas al sistema' a las Llamadas que realizar el programa de usuario a subrutinas del Kernel del Sistema Operativo.
+ 
+* Para realizar funciones privilegiadas del sistema operativo como el acceso a los dispositivos i/o de la computadora es necesario que los programas de usuario llamen al kernel para que sea éste quien realice la operación de una manera segura y eficaz. De esta forma se evita que el programador de aplicaciones acceda al hardware y al mismo tiempo se facilita la programación.
+
+* Ejemplos de llamadas
+** *exit* : el kernel suspende la ejecución del programa eliminando el proceso
+** *read* : el kernel lee los datos de un fichero accediendo al disco duro
+** *write*: el kernel escribe en un fichero
+** *open* : el kernel abre un fichero
+** *close*: el kernel cierra el proceso
+** más ejemplos de llamada en el listado +man 2 syscalls+
+
+* La llamada a los servicios del kernel denominados 'syscalls' se puede realizar de dos formas: *directa* o *indirecta*
+** Directa: desde ASM mediante la instrucción +syscall+
+** Indirecta: desde C o ASM mediante funciones de la librería +libc+: wrappers de las llamadas directas
+* API/ABI
++
+
+[ditaa]
+----------------------------------------------------------------------
+
+ system call wrapper () -> C function
+          |
+          | INDIRECTA
+          v
++------------------------+
+|     C library libc     |    syscall -> assembly instruction
+|         |              |   
+|         |              |      |
+|         |              |      |DIRECTA
+|         |              |      |
++---------|--------------+------|----+-------ABI
+|         v                     v    |
+|              kernel                |
+|        (syscall functions)         |
++------------------------------------+
+               HW
+----------------------------------------------------------------------
+
+* Ejemplo
++
+
+[source,c]
+----------------------------------------------------------------------
+* printf() -> write(int fd, const void *buf, size_t count) -> [RAX-RDI-RSI-RDX-R10-R8-R9,syscall] -> kernel syscall write
+* API      ->        wrapper function                      ->                ABI                  ->  kernel syscall
+----------------------------------------------------------------------
+
+
+Manuales de las llamadas
+------------------------
+
+* Los syscall están descritos en los manuales de los wrappers de la librería libc
+* listado de los syscall
+** +info syscalls+ o +man syscalls+
+* syscalls:
+** exit  -> +man 3 exit+
+** read  -> +man 2 read+
+** write -> +man 2 write+
+** open  -> +man 2 open+
+** close -> +man 2 close+
+** etc..
+
+* Los argumentos de la llamada al sistema son los asociados a la función wrapper de la biblioteca libc. 
+** El 1º argumento de la llamada al sistema es el argumento de la IZDA de la función en libc y el último el de la DCHA.
+
+
+Llamada INDIRECTA
+-----------------
+
+* *C*: El programador de aplicaciones en C utiliza las funciones interfaz de la librería 'libc' de GNU para acceder *indirectamente* al kernel a través de los 'contenedores (wrapper)'.
+** system calls wrapper: adaptación al lenguaje C de las llamadas implementadas en lenguaje ASM
+
+
+LLamada DIRECTA
+---------------
+
+* *ASM*: El programador de aplicaciones en lenguaje ASM utiliza las 'llamadas al sistema' para acceder *directamente* al kernel
+** La llamada se realiza mediante la instrucción ensamblador +syscall+ en x86-64 y +int $0x80+ en x86-32
+** Los argumentos de la llamada se pasan a través de los registros de propósito general GPR
+** El tipo de llamada se especifica a través de un número entero y se pasa a través *RAX*
+*** Códigos "System call number" disponibles en el fichero '/usr/include/asm/unistd_32.h'
++
+
+[source,c]
+----------------------------------------------------------------------
+## Macros en el fichero macros_x86-64_gas.h
+
+## Llamadas al Sistema
+.equ	STDIN_ID,  0		# input-device (keyboard)
+.equ	STDOUT_ID, 1		# output-device (screen)
+.equ	SYS_READ,  0		# ID-number for 'read'
+.equ	SYS_WRITE, 1		# ID-number for 'write'
+.equ	SYS_OPEN,  2		# ID-number for 'open'
+.equ	SYS_CLOSE, 3		# ID-number for 'close'
+.equ	SYS_EXIT,  60		# ID-number for 'exit'
+----------------------------------------------------------------------
+
+Argumentos de la llamada directa
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* El convenio de la llamada está descrito en la norma ABI
+* x86-64 
+** Los 6 primeros argumentos de la llamada se pasan a través de los registros siguiendo la secuencia: *RDI-RSI-RDX-R10-R8-R9*
+** El valor de retorno de la llamada se pasa a través del registro *RAX*
+* x86-32 
+** Los 6 primeros argumentos se pasan a través de de los registros siguiendo la secuencia: *EBX-ECX-EDX-ESI-EDI-EBP*
+** El valor de retorno de la llamada se pasa a través del registro *EAX*
+* manual libc: Información sobre cuáles son los argumentos de las llamadas
+
+Códigos de la llamada directa
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* El código de llamada es un número entero asociado a la función que va a ejecutar el kernel
+* El código de llamada se pasa al kernel a través de *RAX*
+* Códigos:
+** '/usr/include/asm/unistd_64.h': declaración de macros con el código de la llamada en la arquitectura x86-64
+*** exit -> 60, read -> 0, write -> 1, open -> 2, close -> 3, etc..
+** '/usr/include/asm/unistd_32.h' : declaración de macros con el código de la llamada en la arquitectura x86-32
+** '/usr/include/bits/syscall.h'  : macros antiguas también válidas en la arquitectura x86-32
+
+
+Ejemplos: lenguaje C
+--------------------
+
+* +exit (status_value)+ y +syscall(exit_code,status_value)+
+** exit(0xFF) y syscall(60,0xFF)
+* +write (int fd, const void *buf, size_t count)+ y +syscall(write_code,int fd, const void *buf, size_t count)+
+** write (0,buffer,80) y syscall(1,1,buffer,80)
+
+
+Ejemplos: ASM INDIRECTO 
+-----------------------
+
+
+* Programando en lenguaje ASM podemos llamar a los wrappers de la librería libc.
+* +exit(status_value)+
++
+
+[source,c]
+----------------------------------------------------------------------
+mov $status_value,%rdi
+call exit
+----------------------------------------------------------------------
+* +syscall(exit_code,status_value)+
++
+
+[source,c]
+----------------------------------------------------------------------
+mov $60,%rax
+mov $status_value,%rdi
+call syscall
+----------------------------------------------------------------------
+
+* +write(int fd, const void *buf, size_t count)+
++
+
+[source,c]
+----------------------------------------------------------------------
+mov fd,%rdi			#fd es la refencia al fichero donde se va a escribir
+mov $buffer_address_label, %rsi #dirección de memoria de lo que se va a escribir en el fichero
+mov size,%rdx			#tamaño del buffer de memoria que se va a escribir
+call write			#orden de escritura al kernel a través de la librería libc
+----------------------------------------------------------------------
+* +syscall(write_code,int fd, const void *buf, size_t count)+
++
+
+[source,c]
+----------------------------------------------------------------------
+mov $1,%rax
+mov $1,%rdi			# 1 es el código del fichero pantalla. En unix los dispositivos son ficheros.
+mov $buffer_address_label,%rsi
+mov size,%rdx
+call syscall
+----------------------------------------------------------------------
+
+
+Ejemplos: ASM DIRECTO
+---------------------
+
+* exit
++
+
+[source,c]
+----------------------------------------------------------------------
+mov $60,%rax
+mov $status_value,%rdi
+syscall
+----------------------------------------------------------------------
+
+* write
++
+
+[source,c]
+----------------------------------------------------------------------
+mov $1,%rax
+mov $1,%rdi			# 1 es el código del fichero pantalla. En unix los dispositivos son ficheros.
+mov $buffer_address_label,%rsi
+mov size,%rdx
+syscall
+----------------------------------------------------------------------
+
+
+
+Línea de Comandos
+-----------------
+
+Procedimiento
+~~~~~~~~~~~~~
+
+* Process Initialization
+** Cuando escribimos un comando o programa  en la línea de comandos del shell el sistema operativo los interpreta como una secuencia de strings. Por ejemplo +$suma 2 3+ son tres argumentos en la línea de comandos:
+*** La codificación de un string es la secuencia de sus caracteres en código ASCII y finalizada con el caracter NULL cuyo código es 0x00
+*** el string "suma": 5 caracteres ASCII: 0x73,0x75,0x6d,0x61,0x00
+*** el string "2"   : 2 caracteres ASCII: 0x32,0x00
+*** el string "3"   : 2 caracteres ASCII: 0x33,0x00
+*** Como son 3 los argumentos de la línea el parametro argument counter *argc* valdrá 3.
+** Los tres strings de la línea de comandos, "suma"-"2"-"3", son asignados a la variable array de strings 'argv'
+*** argv[0] apunta al string "suma"
+*** argv[1] apunta al string "2"
+*** argv[2] apunta al string "3"
+*** argv[argc] apunta al caracter NULL
+*** argv es una array de punteros, por lo tanto, es del tipo (char **)argv
+* kernel
+** El kernel declara el prototipo +extern int main (int argc , char* argv[] , char* envp[]) ;+
+** declaración y definición del módulo principal +main+
+*** La función +main+ es declarada como global por el kernel y es definida por el usuario.
+** 'argc' is a non-negative argument count;
+** 'argv' is an array of argument strings, with argv[argc]==0;
+** 'envp' is an array of environment strings, also terminated by a null pointer.
++
+
+[source,C]
+----------------------------------------------------------------------
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+ * Introducimos en la línea de comandos el programa y un argumento
+ * Si el argumento tiene espacios en blanco, entrecomillarlo con comillas simples:'Hola Mundo'
+ * gcc -g -o linea_comandos linea_comandos.c
+ * ./programa 'Hola Mundo'
+ */
+
+int  main (int parc, char *parv[])
+{
+  if (parc==1){
+    printf("Introducimos en la línea de comandos cualquier mensaje\n\n");
+    exit (EXIT_FAILURE);
+  }
+  printf("%s\n",parv[1]);
+  return EXIT_SUCCESS;
+}
+----------------------------------------------------------------------
+
+
+Stack Initialization
+~~~~~~~~~~~~~~~~~~~~
+
+* Cuando comienza a ejecutarse al función 'main()' o la instrucción '_start' el estado de la pila es el siguiente:
+* Stack Initialization
+** El kernel pasa los argumentos *argc* y *argv* de la función global main a través de la PILA. La función main es la función llamada.
++
+
+.Convenio ABI: Stack 
+[width="50%",cols="<,^",options="header"]
+|==========================================
+|Stack Reference | Interpretation
+|                | arguments strings
+|                | 0
+|1 word cada variable   | Environment pointers
+|8+8*argc(%rsp)  | 0
+|8*argc(%rsp) 	 |- pointer to argcº string
+| - - - - - - - -|- - - - - - - - - - - 
+|16(%rsp) 	 |- pointer to 2º argument string -> argv[1]
+|8(%rsp) 	 |- pointer to 1º argument string -> string argv[0]
+|0(%rsp) 	 |- argument count -> argc
+|==========================================
+
+
+Rutina principal con Retorno
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+* Si la rutina principal no termina con la llamada *exit* y termina con la instrucción *ret* el convenio de llamada es el de llamada a función por lo que los parámetros 'argc' y 'argv' se pasan a través de los registros *RDI-RSI-RDX-RCX-R8-R9*
+* Ejemplo: 'imprimir_arg.s'
++
+
+[source,c]
+----------------------------------------------------------------------
+### gcc imprimir_arg.s
+### ./a.out 'Hola Mundo'
+###
+### 
+
+        .equ STDOUT,1
+        .equ SYSWRITE,1
+        .equ EXIT_SUCCESS,0XFF
+        .equ ARGV1,8
+
+
+mensaje:
+        .ascii "Introducir un mensaje como argumento del programa. Si el mensaje tiene espacios blancos, poner el mensaje entre comillas simples ''\n"
+        .equ LON,. - mensaje    #longitud del mensaje 
+        
+        .section .text
+        .global main
+main:
+        push %rsi               #salvo el argumento argv
+        ## comprobar que la ĺínea de comandos tiene dos argumentos
+        cmp $2,%rdi
+        je imp_arg
+        ## si solo tengo el programa sin argumentos :imprimir en la pantalla
+        mov $SYSWRITE,%rax
+        mov $STDOUT,%rdi        #fd es la refencia al fichero donde se va a escribir
+        mov $mensaje, %rsi               #dirección de memoria de lo que se va a escribir en el fichero
+        mov $LON,%rdx                   #tamaño del buffer de memoria que se va a escribir
+        syscall                  #orden de escritura al kernel 
+        jmp salida        
+imp_arg:
+        pop  %rsi           #el stack pointer apunta al %rsi salvado y lo recupero -> argv -> argv[0]
+        add $ARGV1, %rsi    #rsi apunta al primer puntero, si le sumo 8 apunto al segundo puntero
+        mov (%rsi), %rdi    #mediante la indirección tengo el segundo puntero
+        call puts
+        
+salida: 
+        ret
+
+        .end
+
+----------------------------------------------------------------------
+
+
+Ejercicios: suma_linea_com.s ,maximum_linea_com.s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+. suma_linea_com.s
+** Introducir los datos del programa 'suma_linea_com.s' (suma de dos sumandos) a través de la línea de comandos
++
+
+[source,c]
+----------------------------------------------------------------------
+### función: sumar dos números enteros de un dígito.
+###          los sumandos se pasan a través de la línea de comandos
+        ## Compilación en la arquitectura x86-64
+        ## gcc  -nostartfiles -g -o sum_input sum_imput.s
+        ## run 5 7
+        ##  x /x  %rsp              ->3                 argc:número de argumentos
+        ##  x /a  (char**)($rsp+8)  -> 0xffffd0a4:	0xffffd26e
+        ##  x /c  *(char**)($rsp+8) -> 0xffffd26e:	47 '/'
+        ##  x /s  *(char**)($rsp+8) -> 0xffffd26e:	 "/home/candido/tutoriales/as_tutorial/algoritmos_x86-32/basicos/sum_input"
+        ##  p /s *(char**)($rsp+8)  -> 0xffffd26e "/home/candido/tutoriales/as_tutorial/algoritmos_x86-32/basicos/sum_input"
+        ##  x /s  *(char**)($rsp+16) -> 0xffffd2b7:	 "5"
+        ##  x /s  *(char**)($rsp+24) -> 0xffffd2b9:	 "7"
+        
+        .section .text
+.globl _start
+_start: 
+
+        ## instrucciones aclaratorias
+
+	lea 8(%rsp),%rax       #eax contiene argv[1] la dirección de la pila que contiene el pointer al argumento string 
+        mov 8(%rsp),%rbx       #ebx tiene el contendio de la pila= dirección del string
+        xor %rcx,%rcx
+        movb (%rbx),%cl        #caracter ASCII
+
+        ## string argument pointers
+        mov 16(%rsp),%rax       #eax tiene el contendio de la pila= dirección del string. argv[2]
+        mov 24(%rsp),%rbx       #eax tiene el contendio de la pila= dirección del string. argv[3]
+        ## fetch string indirect
+        ## convert ascii numbers to values
+        xor %rcx,%rcx
+        xor %rdx,%rdx
+        movb (%rax),%cl         # indirección para acceder al string referenciado por argv[1]
+        movb (%rbx),%dl         # indirección para acceder al string referenciado por argv[1]
+        sub $0x30,%rcx  
+        sub $0x30,%rdx
+
+        mov %rcx,%rsi
+        mov %rdx,%rdi
+        
+        call suma
+
+	## salida
+        mov %rax,%rdi
+	mov  $60, %rax	    #1 is the exit() syscall
+	syscall
+
+
+### Función que calcula la suma entre dos valores
+	.type suma, @function
+	.section .text
+suma:
+	## prologo
+	push %rbp
+	mov %rsp,%rbp
+	sub $8,%rsp            #reserva de memoria
+
+	## captura de argumentos
+	mov %rdi,%rax      #1º argumento 
+	mov %rsi,%rcx     #2º argumento
+	## cuerpo
+	addl %ecx,%eax          #
+	## guardar resultado
+	## el resultado está en EAX
+salto:  
+	## epilogo
+
+	mov %rbp,%rsp           # frame anterior
+	pop %rbp
+	ret                     # recuperar dirección de retorno
+	
+----------------------------------------------------------------------
+
+
+
+
+. maximum_linea_com.s
+** Introducir los datos del programa 'maximum_linea_com.s' a través de la línea de comandos
+
+

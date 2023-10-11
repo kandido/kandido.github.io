@@ -1,0 +1,250 @@
+Estructura de Computadores 2022: Primer Parcial Teoría
+======================================================
+
+:doctitle: Estructura de Computadores 2022: Primer Parcial Teoría
+
+// sin el prefijo Chapter n
+ 
+
+* *Apellidos:*                                                    
+* *Nombre:*
+* *Grupo:*
+
+
+Ejercicios de los Temas 1-6
+---------------------------
+
+. Dado un computador con arquitectura Von Neumann, un bus de datos de 8 hilos y un bus de direcciones de 4 hilos. 
+.. Dibuja un esquema de la arquitectura del computador en el que aparezcan los principales elementos vistos en clase (0.5 pts)
++
+
+----
+.
+.
+.
+.
+.
+.
+.
+.
+.
+----
+.. Define los bits que debe tener cada uno de los siguientes registros (0.4 pts):
+... PC ->
+... IR ->
+... MAR ->
+... MBR ->
+.. Calcula la capacidad de almacenamiento de la memoria en Bytes (0.5 pts)
++
+
+----
+.
+.
+----
++
+
+.. Extendiendo el bus de direcciones a 8 hilos y con la siguiente tabla de memoria:
++
+
+.Memoria
+[width="30%",cols="2*^"]
+|===================================================
+|…|…
+|0x0A|LOAD 0x27
+|…|…
+|0x26|0x16
+|0x27|0x4A
+|0x28|0xF3
+|…|…
+|===================================================
++
+<<<
+
+** Empleando los registros de los apartados anteriore, más el bus del sistema y el acumulador, describe las fases del funcionamiento de un ciclo de instrucción en la máquina *IAS* con el PC=0x0A y el contenido de registros y buses. Para ello, rellena la siguiente tabla empleando tantas columnas como consideres necesarias.: (1’6 pts)
++
+
+.Ciclo de Instrucción
+[width="100%",cols="<2e,4*<3",options="header"]
+|===================================================
+||1|2|3|4
+|Descripción||||
+|PC||||
+|IR||||
+|MAR||||
+|MBR||||
+|Bus Datos||||
+|Bus Control||||
+|Bus Direcc.||||
+|Acumulador||||
+|===================================================
++
+
+.Ciclo de Instrucción
+[width="100%",cols="<2e,4*<3",options="header"]
+|===================================================
+||5|6|7|8
+|Descripción Fases||||
+|PC||||
+|IR||||
+|MAR||||
+|MBR||||
+|Bus Datos||||
+|Bus Control||||
+|Bus Direcc.||||
+|Acumulador||||
+|===================================================
++
+
+. Realiza la suma en hexadecimal con tres dígitos, mostrando las llevadas, de los siguientes enteros sin signo y muestra el resultado en hexadecimal y en binario: 0xF7+0x2A (0.5 pto)
++
+
+----
+Llevadas ->
+
+Sumando  ->
+
+Sumando  ->
+
+Suma     ->
+
+----
+<<<
+
+. Realiza la siguiente resta de números sin signo 1010010 – 110110 (0.5 pto)
++
+
+----
+Minuendo    ->
+
+Sustraendo  ->
+
+Llevadas    ->
+
+Resta       ->
+
+----
+. Con el *mínimo* número de digitos para que el resultado matemático sea correcto realizar las operaciones siguienets dados los números: A: 0101011 y B: 11011
+.. Siendo enteros sin signo: (1 pto)
+... Realiza la suma C = A '+' B
++
+
+----
+.
+.
+.
+.
+.
+.
+----
+
+... Representa A, B y C en hexadecimal y decimal
++
+
+----
+.
+.
+.
+.
+----
+.. Siendo enteros en Complemento a 2 (1 pto)
+... Realiza la suma C = A '+' B
++
+
+----
+.
+.
+.
+.
+.
+.
+----
+... Representa A, B y C en hexadecimal y decimal
++
+
+----
+.
+.
+.
+.
+----
+.. Siendo enteros en Signo-Magnitud (1 pto)
+... Razona para obtener el resultado de la suma C = A '+' B
++
+
+----
+.
+.
+.
+.
+.
+.
+----
+... Representa A, B y C en hexadecimal y decimal
++
+
+----
+.
+.
+.
+.
+----
+. Realiza la multiplicación en binario de los números naturales 0x26 y 0x3C (0.4 pto)
++
+
+----
+.
+.
+.
+.
+.
+.
+.
+.
+---- 
+. Un computador tiene los siguientes valores almacenados:
++
+
+.Memoria
+[width="100%",cols="4*<",options="header"]
+|===================================================
+2+|REGISTROS 2+|MEMORIA
+|Registro|Contenido|Dirección|Contenido
+|EAX|87|87|01
+|EBX|02|88|07
+|ECX|8C|89|03
+|   |  |8A|02
+|   |  |8B|08
+|   |  |8C|0F
+|   |  |8D|24
+|   |  |… |…
+|   |  |94|32
+|   |  |95|00
+|===================================================
++
+
+** Indica el modo de direccionamiento de cada instrucción y determina para una de ellas el valor del operando introducido en EDX con los siguientes modos de direccionamiento: (0.3 pts cada uno)
++
+
+[width="100%",cols="<2, <3, <1",options="header"]
+|===================================================
+|  | Modo | Valor Operando
+| movb $0x89, %edx | |
+| movb %eax, %edx | |
+| movb (%ecx,%ebx,4), %edx | |
+| movb (%eax), %edx | |
+| movb 0x88, %edx | |
+| movb -3(%ecx), %edx | |
+|===================================================
+
+. Si la última operación realizada en un computador intel de 8 bits es la suma de los siguientes números en complemento a 2: 10001011 y 10101101, *razona* cuál el valor de los siguientes banderines (0,2 pts cada una)
+.. Overflow Flag :
+.. Carry Flag :
+.. Zero Flag :
+.. Sign Flag :
+
+Programación en Lenguaje Ensamblador
+------------------------------------
+
+. Desarrolla el programa *main* completo en el lenguaje ensamblador AT&T de la arquitectura intel x86 que sume 4 a una variable entera *n* (tamaño 2 bytes) inicialmente definida con valor n = 5 y almacene el resultado en otra variable *sum* (tamaño 4 bytes) y devuelva el resultado al sistema operativo. Añadir al programa 5 comentarios que consideres básicos.
+
+

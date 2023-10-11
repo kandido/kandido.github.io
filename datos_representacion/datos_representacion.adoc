@@ -1,0 +1,684 @@
+Representación de los Datos
+===========================
+
+:doctitle: Tema 3: Representación de los Datos
+
+
+
+Temario
+-------
+
+[start=3]
+
+. Representación de datos
+.. Bit, Byte y Palabra
+.. Caracteres, enteros y reales
+
+
+Objetivo
+--------
+
+* Representación de los datos alfanuméricos en el lenguaje máquina, es decir, código binario.
+* Libro de texto W.Stalling
+** Parte 3ª, Capítulo 9 : Sistemas Numéricos 
+
+Datos e Instrucciones: Codificación Binaria
+-------------------------------------------
+
+* Un programa almacenado en la memoria principal se representa en 'lenguaje máquina' y está compuesto por datos e instrucciones . El lenguaje de la máquina es el lenguaje binario formado por los símbolos '0' y '1'. Por lo tanto los datos e instrucciones de un programa almacenado en la memoria principal debe de codificarse y representarse mediante estos dos símbolos.
+* Los datos tienen un valor númerico que pueden ser procesados por la Unidad Aritmetico Lógica (ALU) para realizar operaciones aritméticas como la suma, resta, etc ó lógicas como las operaciones not,or,etc.
+* Los datos son secuencias de '0' y '1' almacenados en la memoria que son capturados por la CPU para ser procesados pej mediante operaciones aritméticas como la suma.
+* Las instrucciones son secuencias de '0' y '1' almacenados en la memoria que son capturados por la CPU para ser interpretados y proceder a su ejecución. Pej la instrucción "sumar" dos números enteros. 
+
+
+Bit, Byte, Palabra
+------------------
+
+* BInary digiT (bit) : los dígitos binarios son el '0' y el '1'. Son los símbolos que se utilizan para codificar tanto las instrucciones como los datos de un programa almacenado en memoria.
+* Byte: Es una secuencia de 8 dígitos binarios. Ejemplo: 00110101
+* Palabra: Es una secuencia de dígitos binarios múltiplo de 8, es decir, múltiplo de un byte. En el entorno de arquitectura de computadores se define como el número de bits del bus de datos que conecta la unidad central de proceso (CPU) a la Memoria principal y también suele ser la anchura de los registros de propósito general de memoria interna de la CPU.
+** En linux +sudo lshw -C system | more + -> anchura: *64 bits*
++
+
+[source,sh]
+----------------------------------------------------------------------
+    lur                         
+    descripción: Notebook
+    producto: 20F1S0H400 (LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560)
+    fabricante: LENOVO
+    versión: ThinkPad L560
+    serie: MP15YSW7
+    anchura: 64 bits
+    capacidades: smbios-2.8 dmi-2.8 smp vsyscall32
+    configuración: administrator_password=disabled chassis=notebook family=ThinkPad L560 power-on_password=disabled sku=LENOVO_MT_20F1_BU_Think_FM_ThinkPad L560 uuid=4C2F45AA-0A2C-B211-A85C-B5C56EB5BBAC
+
+----------------------------------------------------------------------
+
+
+
+
+Números Enteros
+---------------
+
+
+
+Base Decimal
+~~~~~~~~~~~~
+* Son representados mediante un Sistema Posicional basado en:
+** Número en Base Decimal
+*** Representación mediante la combinación de diez Dígitos: 0,1,2,3,...,9
+*** Posición -> índice
+*** Pesos de cada posición-> son potencias de la forma '10^posición^' -> ...,Centenas, decenas, unidades
+*** Valor representado = sumatorio de digitos ponderados con su peso posicional
+*** Ejemplo: Dada la representación 1197 de un número decimal entero, calcular su valor.
++
+
+----
+Posición        3       2       1       0
+Peso         	10^3    10^2    10^1    10^0
+             	1000    100     10      1			
+Digito	        1       1       9       7
+Ponderación  	1*1000  1*100   9*10    7*1
+
+Valor		1*1000+1*100+9*10+7*1=mil ciento noventa y siete.
+
+La representación uno-uno-nueve-siete tiene el valor mil ciento noventa y siete
+----
+
+Base Binaria
+~~~~~~~~~~~~
+
+* Número codificado en Base 2
+** Representación mediante la combinación de dos Dígitos: 0,1
+** Posición -> índice
+** Pesos de cada posición-> son potencias de la forma '2^posición^' -> ...2^5^,2^4^,2^3^,2^2^,2^1^,2^0^...,64,32,16,8,4,2,1
+** Valor representado = sumatorio de digitos ponderados con su peso posicional
+** Ejemplo: Dada la representación 1010 de un número binario entero, calcular su valor.
++
+
+----
+Posición        3       2       1       0
+Peso         	2^3   	2^2   	2^1     2^0
+             	8    	4     	2       1			
+Dígitos         1       0       1       0
+Ponderación     1*8     0*4     1*2     0*1
+
+Valor		1*8+0*4+1*2+0*1 = diez
+
+La representación uno-cero-uno-cero tiene el valor diez
+----
+
+* La Rueda: representación y valor de los números sin signo con 3 bits.
++
+
+image::./images/datos_representacion/rueda_unsigned.png[scaledwidth="100%",title="Representación Números sin Signo",align="center",title-align="center"]
+
+
+Conversión Decimal-Binaria 
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Divisiones sucesivas / 2 -> Dividendo1 = 2*Cociente1 '+'  Resto1
+* Cociente1 = 2*Cociente2 '+' Resto2 -> Dividendo1 = '2 * (2*Cociente2 + Resto2) + Resto1 = Resto1*2^0^ + Resto2*2^1^ +Cociente*2^2^'
+* Resto1 es el dígito binario de la posición 0, Resto2 es el digito binario de la posición 1, Cociente es el dígito binario de la posición 2.
+* Regla: los digitos binarios son todos los restos y el último cociente.
+* La división se termina cuando un cociente no es divisible por 2, es decir, el cociente es 1. Este cociente es el MSB.
+* Ejemplo: Valor 1197 -> Calcular su representación en código binario -> Solución: 10010101101
++
+
+.Conversión decimal binario
+[width="100%",cols="13*<m",options="header"]
+|====
+|Número 2+| 1ª Div 2+| 2ª Div 2+|3ª Div 2+|4ª Div 2+| 5ª Div 2+|6ª Div 
+|	| Coc | Resto | Coc | Resto |Coc | Resto | Coc | Resto | Coc| Resto| Coc | Resto 
+| 1197  | 598 | 1     | 299 | 0     |149 | 1     | 74  | 1     | 37 | 0    | 18  | 1     
+|====
+
+[width="100%",cols="9*<m",options="header"]
+|====
+|Número 2+| 7ª Div 2+| 8ª Div 2+|9ª Div 2+|10º Div
+|	|  Coc | Resto | Coc | Resto | Coc | Resto | Coc | Resto 
+| 1197  |  9   | 0     | 4   | 1     | 2   | 0     | 1   |0
+|====
+
+Base Octal
+~~~~~~~~~~
+
+* Base 8
+* Digitos: 0,1,2,3,4,5,6,7
+* Pesos: 8 elevado a la posición
+* En C se específica la base con el prefijo '0' -> +int 077;+
+* Conversión Octal <--> Binario y viceversa -> cada digito octal se descompone en un binario de 3 bits
+* decimal 1197 -> Calcular su representación en código octal.
+** solución a) binario 10010101101 -> octal 02255
+** solución b) divisiones sucesivas por la base 8.
+
+Base Hexadecimal
+^^^^^^^^^^^^^^^^
+
+* Base 16
+* Digitos: 0-1-2-3-4-5-6-7-8-9-A-B-C-D-E-F
+* Pesos: 16 elevado a a la posición
+* En C se específica la base con el prefijo '0x' -> +int 0xAF;+
+* Hexadecimal <--> Binario y viceversa -> cada digito hexadecimal se descompone en un binario de 4 bits
+* decimal 1197 -> Calcular su representación en código hexadecimal
+* Solución a) binario 10010101101 -> 0x4AD
+* Solución b) divisiones sucesivas por la base 16.
+
+Calculadora
+~~~~~~~~~~~
+* Calculadora en el sistema Linux
+** +candido@lur:~$ echo "obase=2 ; ibase=16; 80AA010F" | bc+
+*** 10000000101010100000000100001111
+** +echo "obase=10 ; ibase=16; 80AA010F" | bc+ -> es obligado poner primero la base del formato de salida
+*** 2.158.625.039
+** Intérprete +$ bc+
+
+Python
+~~~~~~
+
+* https://docs.python.org/3/tutorial/index.html
+** help(builtins)
++
+
+[source,python]
+----------
+bin(1197) -> '0b10010101101'
+oct(1197) -> '02255'
+hex(1197) -> '0x4ad'
+int(0x4ad) -> 1197
+----------
+
+ 
+
+Enteros con Signo
+~~~~~~~~~~~~~~~~~
+
+* Se van a estudiar dos formatos: Signo-Magnitud y Complemento a 2, siendo este último el más extendido en las arquitecturas de los computadores.
+
+
+Signo-Magnitud 
+^^^^^^^^^^^^^^
+* Formato Signo-Magnitud
+** El bit más significativo no tiene valor, indica el signo: el cero para los números positivos y el uno para los negativos.
+** El resto de bits representa el módulo del número entero
+** Ejemplo :
+** Valor '+1197' -> Representación 010010101101
+
+** Valor '-1197' -> Representación 110010101101
+** ¿Cómo se representa el valor cero?
+
+Complemento a 2
+^^^^^^^^^^^^^^^
+* Formato Complemento a 2.
+** Positivos: Igual que el formato signo-magnitud: Bit MSB= 0. Pesos: potencia 2^posición^. 
+*** More Significant Bit (MSB) -> posición más elevado con valor distinto de cero.
+*** Less Significant Bit (LSB)
+** Negativos: Transformación del número con la misma magnitud pero positivo mediante la función Complemento a 2.
+
+
+
+* La Rueda: representación y valor de los números con signo con 3 bits.
++
+
+image::./images/datos_representacion/rueda_signed.png[scaledwidth="100%",title="Representación Complemento a 2",align="center",title-align="center"]
+
+** N: cantidad de bits del número : 3  bits
+** Dividir la circunferencia en el número de combinaciones binarias posibles: 2^N^ : 2^3^
+** Pinto todas las combinaciones binarias en sentido agujas reloj de forma secuencial: 000,001,010,011,
+** Pinto los valores de forma alternante: '0, +1, -1, +2, -2,....'
+** Ejercicio: Representar el número positivo '+4' en complemento a 2
+* Conclusiones:
+** Asimetría entre el rango positivo y negativo
+** El cero tiene una única representación
+** Los números negativos comienzan por '1'
+** El valor -1 se codifica con todos los dígitos unos '111111111111111'
+** Extensión de Signo: un 1 por la izda es como en los positivos un cero por la izda: no tiene valor y se puede eliminar la repetición de 1 por la izda dejando el último '1' de los más significativos. '11110111' es equivalente a '10111'.
+
+
+* *Función Complemento a 2*:  El complemento a 2 de un número entero equivale a cambiar su signo. La conversión entre números enteros positivos y negativos en complemento a 2 se puede realizar mediante distintos métodos.
+* Ejemplos de obtención del complemento a 2 del número entero binario X:
+..  Método 1: Realizar la operación lógica complemento (negación) de X y sumar 1 -> ~X+1 
+*** X=0101 tiene valor '+5' en complemento a 2
+*** ¿El complemento a 2 de 0101? '~0101 + 1 = 1010 + 1 = 1011 = -5' -> El valor del complemento a 2 equivale a cambiar de signo.
+*** X=1111 tiene valor -1 en complemento a 2
+*** ¿El complemento a 2 de 1111? '~1111 + 1 = 0000 + 1 = 0001 = +1'
+*** X=0110011100010101010000 -> positivo por tener el bit más significativo (MSB) cero
+*** C2(X)=1001100011101010101111+1=1001100011101010110000 -> negativo por tener el bit más significativo (MSB) uno
+.. Método 2: Empezando por la posición 0 del código X (bit X~0~) copiar todos los dígitos hasta llegar al primer dígito 1 y a partir de ahí negar todos los dígitos hasta el bit más significativo (MSB).
+*** X = 0110011100010101010000 -> en total 22 bits
+*** El primer dígito 1 de X está en la posición 4 -> 01100111000101010-10000 -> copio los 5 primeros digitos e invierto los 17 restantes
+*** C2 (X) = 10011000111010101-10000
+.. Método 3: Realizar la operación aritmética 0-X
+*** X = 0110011100010101010000 
+*** 0-X=0000000000000000000000 - 0110011100010101010000 = 1001100011101010110000
+* Ejemplos
+** Representar el número entero negativo -1197 en signo-magnitud y en complemento a 2
+*** '+1197' = 010010101101 tanto en signo-magnitud como complemento a 2
+*** '-1197' = 101101010011
+** Calcular el rango de los números enteros con 8 bits en complemento a 2
+*** Código máximo positivo: 01111111 -> Valor = 2^7^-1
+*** Código mínimo negativo: 10000000 
+**** C2(n=10000000) = 010000000 = 2^7^ ,luego n=10000000 tiene el valor -2^7^
+*** Rango [-2^7^,+2^7^-1]
+
+
+
+Números Reales
+--------------
+
+Coma Fija
+~~~~~~~~~
+
+* Números Reales en Coma Fija:
+** 1234.56789
+** Sistema Posicional
+*** posición de los dígitos fracción: -1,-2,-3,...
+*** pesos de los dígitos fracción: 10^-1^, 10^-2^, 10^-3^
+*** ponderación 1234.56789 = 1*10^3^+2*10^2^+3*10^1^+4*10^0^+5*10^-1^+6*10^-2^+7*10^-3^+8*10^-4^+9*10^-5^
+* Base Binaria
+** 1010.101 ->  1*2^3^+0*2^2^+0*2^1^+1*2^0^+1*2^-1^+0*2^-1^+1*2^-2^ -> 10.625
+
+Coma Flotante
+~~~~~~~~~~~~~
+
+
+
+Formato
+^^^^^^^
+
+* Coma Flotante ->  Notación científica
+** -23.4567E-34 ó -23.4567*10^-34^
+** La *mantisa* o *significando* es el número que múltiplica a la potencia -> -23.4567
+** Mantisa *normalizada* : La mantisa tiene como parte entero un número entero de un dígito distinto de cero.-> -2.34567*10^-33^
+*** parte entera de la mantisa normalizada : 2
+*** parte fracción de la mantisa normalizada : 0.34567
+** El *exponente* es el número entero al que se eleva la base de la potencia. Depende del lugar de la coma en la mantisa. En este caso es -33.
+** La *base* es la base de la potencia. En este ejemplo es 10.
+* Codificación Binaria
+** Ejemplo:  1234.56789
+*** Parte Entera: 1234 -> 10011010010
+*** Parte Fracción: 0.56789
++
+
+[source,scala]
+----------------------------------------------------------------------
+0.56789 * 2 = 1.13578 = 1 + 0.13578 -> 1, bit de la posición -1
+0.13578 * 2 = 0.27156 -> 0, bit de la posición -2
+0.27156 * 2 = 0.54312 -> 0,  bit de la posición -3
+0.54312 * 2 = 1.08624 = 1 + 0.08624 -> 1, bit de la posición -4
+----------------------------------------------------------------------
+**** fracción redondeada 0.1001
+**** fracción sin redondear 0.10010001011000010
+**** fracción redondeada 0.100100011
+*** Código Binario coma fija: 10011010010.10010001011000010
+*** Notación científica: 1.001101001010010001011000010*2^+10^ -> coma flotante -> la parte entera siempre vale 1.
+
+Precisión
+^^^^^^^^^
+
+* Es el  número de digitos significantes
+* Se dice que el número q es una aproximación del número p != 0 con una precisión de, al menos, *m* cifras signficativas en la base b, siempre que el error relativo |p-q|/p &#x2264; 0.5*b^-m+1^ 
+** Cuando m es el mayor entero para el que se cumple la desigualdad anterior, se dice que q aproxima a p con m cifras signficativas.
+* Ejemplo
+.. p = 1E0 y q = .9999E0 -> Error relativo=0.1E-3<0.5E(-4+1) -> precisión de 4 cifras significativas 
+.. Una calculadora, A, trabaja en base 2 con mantisa de 22 bits y otra, B, trabaja en base 16 con 6 dígitos de precision (24 bits). ¿Cuál de las dos es más precisa?
+
+Norma IEEE-Standard 754
+^^^^^^^^^^^^^^^^^^^^^^^
+
+* Float 
+** Norma IEEE-Standard 754
+*** Precisión simple -> formato de longitud 32 bits en 3 campos 'Signo/Exponente/Fraccción' de longitudes 1/8/23 bits
++
+
+["ditaa"]
+----------------------------------------------------------------------
+  1      8bits              23bits                       <-- tamaño en bits
+ +-+-------------+------------------------------------+
+ |S|  Exp + 127  | Fracción de la Mantisa  Normalizada|
+ +-+-------------+------------------------------------+
+ 31 30         23 22                                 0   <-- índice del bit (0 a la derecha)      
+----------------------------------------------------------------------
+
+*** Precisión doble  -> formato de longitud 64 bits en 3 campos 'Signo/Exponente/Fraccción' de longitudes 1/11/52 bits
++
+
+["ditaa"]
+----------------------------------------------------------------------
+  1      11bits              52bits            <-- tamaño en bits
+ +-+-------------+-----------------------+
+ |S|  Exp + 1023 | Fracción Mantisa  Norm|
+ +-+-------------+-----------------------+
+ 63 62         52 51                     0   <-- índice del bit (0 a la derecha) 
+----------------------------------------------------------------------
+*** http://sandbox.mc.edu/~bennet/cs110/flt/dtof.html[conversion manual]
+*** http://en.wikipedia.org/wiki/Floating_point[wiki]
+*** Binario: Tres campos
++
+
+[width="80%",cols="^1m,^2m,^4m",frame="topbot"]
+|==========================
+|Signo |Exponente en Exceso	|Fracción de la Mantisa Normalizada
+|==========================
+
+** Valor (-1)^Signo^ x 1.Fracción_Mantisa_Normalizada x 2^Exponente^ 
+*** Signo: positivo --> bit '0' , negativo --->bit '1'
+*** Exponente en exceso: Es el Exponente al que se añade 127 (precisión simple) ó 1023 (precisión doble)
+*** Mantisa Normalizada: Es la mantisa tal que su parte entera es '1'
+**** Fracción de la Mantisa Normalizada: Es la fracción de la mantisa normalizada.
+
+
+Conversores de Código
+^^^^^^^^^^^^^^^^^^^^^
+
+** Conversores online:
+**** http://www.binaryconvert.com/index.html[binary converter]: tipos char,short,int,float,double
+**** http://www.zator.com/Cpp/E2_2_4a1.htm[conversor ieee754]
+**** http://www.h-schmidt.net/FloatConverter/IEEE754.html[IEEE 754 single precision]: decimal -> binario/hexadecimal y viceversa
+
+
+Float Point: Representaciión del Cero,Infinito e Indeterminado
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Cuando el campo del exponente son todo ceros o unos, no se sigue la regla general de un número normalizado
++
+
+.Single precision
+[width="80%",cols="^m,^m,^m",options="header"]
+|====
+|Números 	|Exp 	|Fracción
+|Ceros 	|0x00 	|0
+|Números desnormalizados 	|0x00 	|distinto de 0
+|Números normalizados 	|0x01-0xFE 	|cualquiera
+|Infinitos 	|0xFF 	|0
+|NaN (Not a Number) 	|0xFF 	|distinto de 0
+|====
+
+
+* Cero
+** Por qué el cero se representa en single precision como una secuencia de 32 ceros
+** Por qué cuando el campo del exponente es cero la potencia es 2^-126^ en lugar de 2^-127^ y la mantisa se considera NO normalizada, es decir, 0.fracción en lugar de 1.fracción.
+* http://www.cs.umd.edu/class/sum2003/cmsc311/Notes/Data/float.html[Notas Maryland]
+* Infinito
+
+Referencia
+^^^^^^^^^^
+
+* http://people.ds.cam.ac.uk/nmm1/arithmetic/na1.pdf[numerical analysis]: programas ejemplo sencillos
+* http://grouper.ieee.org/groups/754/[IEEE]
+* http://www.cs.berkeley.edu/~wkahan/[William Kahan]
+* http://www.cs.yale.edu/homes/aspnes/pinewiki/C%282f%29FloatingPoint.html[Yale]: C programming. float.c.
+* https://randomascii.wordpress.com/category/floating-point/[Bruce Dawson blog]
+** https://randomascii.wordpress.com/2012/01/11/tricks-with-the-floating-point-format/
+* https://en.wikipedia.org/wiki/IEEE_floating_point[wikipedia]
+*** http://www.validlab.com/goldberg/paper.pdf
+**** https://hal.archives-ouvertes.fr/hal-00128124v5/document[The pitfalls of verifying 
+oating-point computations]
+**** http://arxiv.org/pdf/cs/0701192.pdf[el mismo?]
+* http://www.cprogramming.com/tutorial/floating_point/understanding_floating_point_representation.html[cprogramming]
+* http://www.codeproject.com/Articles/29637/Five-Tips-for-Floating-Point-Programming[code tips]
+* https://www.cs.princeton.edu/courses/archive/fall09/cos323/precepts/precept2.html[c review]: practicas
+
+
+
+
+
+Character Type
+--------------
+
+ASCII
+~~~~~
+
+
+* Codificación ASCII
+
+** American Standard Code International Intechange: codificación con 7 bits : rango 0x00-0x7F
+** Tabla de conversión carácter-código_hexadecimal-código binario
+*** +man ascii+
+***  K.N. King,Apéndice E, pg801
++
+
+[width="50%",cols="<s,^m,<s",frame="topbot",options="header"]
+|==========================
+|Caracter	|ASCII hex	| Control (Secuencia de Escape)	
+|0     		|0x30		|
+|1		|0x31		|
+|a		|0x61		|
+|A       	|0x41		|
+|+       	|0x2B		|
+|^J		|0x0A		|nueva línea (\n)
+|^M		|0x0D		|retorno de carro (\r)
+|==========================
+** fijarse la relación del código entre J y ^J, entre M y ^M...
+
++
+
+............................................................................
+C program '\X' escapes are noted.
+
+       Oct   Dec   Hex   Char                        Oct   Dec   Hex   Char
+       ────────────────────────────────────────────────────────────────────────
+       000   0     00    NUL '\0'                    100   64    40    @
+       001   1     01    SOH (start of heading)      101   65    41    A
+       002   2     02    STX (start of text)         102   66    42    B
+       003   3     03    ETX (end of text)           103   67    43    C
+       004   4     04    EOT (end of transmission)   104   68    44    D
+       005   5     05    ENQ (enquiry)               105   69    45    E
+       006   6     06    ACK (acknowledge)           106   70    46    F
+       007   7     07    BEL '\a' (bell)             107   71    47    G
+       010   8     08    BS  '\b' (backspace)        110   72    48    H
+       011   9     09    HT  '\t' (horizontal tab)   111   73    49    I
+       012   10    0A    LF  '\n' (new line)         112   74    4A    J
+       013   11    0B    VT  '\v' (vertical tab)     113   75    4B    K
+       014   12    0C    FF  '\f' (form feed)        114   76    4C    L
+       015   13    0D    CR  '\r' (carriage ret)     115   77    4D    M
+       016   14    0E    SO  (shift out)             116   78    4E    N
+       017   15    0F    SI  (shift in)              117   79    4F    O
+       020   16    10    DLE (data link escape)      120   80    50    P
+       021   17    11    DC1 (device control 1)      121   81    51    Q
+       022   18    12    DC2 (device control 2)      122   82    52    R
+       023   19    13    DC3 (device control 3)      123   83    53    S
+       024   20    14    DC4 (device control 4)      124   84    54    T
+       025   21    15    NAK (negative ack.)         125   85    55    U
+       026   22    16    SYN (synchronous idle)      126   86    56    V
+       027   23    17    ETB (end of trans. blk)     127   87    57    W
+       030   24    18    CAN (cancel)                130   88    58    X
+       031   25    19    EM  (end of medium)         131   89    59    Y
+       032   26    1A    SUB (substitute)            132   90    5A    Z
+       033   27    1B    ESC (escape)                133   91    5B    [
+       034   28    1C    FS  (file separator)        134   92    5C    \  '\\'
+       035   29    1D    GS  (group separator)       135   93    5D    ]
+       036   30    1E    RS  (record separator)      136   94    5E    ^
+       037   31    1F    US  (unit separator)        137   95    5F    _
+       040   32    20    SPACE                       140   96    60    `
+       041   33    21    !                           141   97    61    a
+       042   34    22    "                           142   98    62    b
+       043   35    23    #                           143   99    63    c
+       044   36    24    $                           144   100   64    d
+       045   37    25    %                           145   101   65    e
+       046   38    26    &                           146   102   66    f
+       047   39    27    ´                           147   103   67    g
+       050   40    28    (                           150   104   68    h
+       051   41    29    )                           151   105   69    i
+       052   42    2A    *                           152   106   6A    j
+       053   43    2B    +                           153   107   6B    k
+       054   44    2C    ,                           154   108   6C    l
+       055   45    2D    -                           155   109   6D    m
+       056   46    2E    .                           156   110   6E    n
+       057   47    2F    /                           157   111   6F    o
+       060   48    30    0                           160   112   70    p
+       061   49    31    1                           161   113   71    q
+       062   50    32    2                           162   114   72    r
+       063   51    33    3                           163   115   73    s
+       064   52    34    4                           164   116   74    t
+       065   53    35    5                           165   117   75    u
+       066   54    36    6                           166   118   76    v
+       067   55    37    7                           167   119   77    w
+       070   56    38    8                           170   120   78    x
+       071   57    39    9                           171   121   79    y
+       072   58    3A    :                           172   122   7A    z
+       073   59    3B    ;                           173   123   7B    {
+       074   60    3C    <                           174   124   7C    |
+       075   61    3D    =                           175   125   7D    }
+       076   62    3E    >                           176   126   7E    ~
+       077   63    3F    ?                           177   127   7F    DEL
+............................................................................
+
+
+
+* ASCII Extendido
+** https://en.wikipedia.org/wiki/Extended_ASCII#ISO_8859_and_proprietary_adaptations
+** +man iso_8859_1+: latin-1: ascii extendido: 0x80-0xFF
+** +man iso_8859-1 | grep ñ+
+** http://www.theasciicode.com.ar/ascii-printable-characters/vertical-bar-vbar-vertical-line-vertical-slash-ascii-code-124.html
+*** El linux pulsar ctrl-Shift-u-ascii_code Enter
+*** Ejemplo: el código extendido de la 'ñ' es 0xF1 -> C-S-u-f1 Enter-> C-S-u simultáneo y aparece la u esperando al código, F-1-enter
+** http://www.mauvecloud.net/charsets/CharCodeFinder.html[ascii code finder]
+** &#x30;
+** &#x7e;
+** &#xac;
+** &#xf1;
+
+Python
+~~~~~~
+
+* ejemplos de conversión
+** +python+
++
+
+[source,python]
+---------
+ord('A')
+hex(ord('A'))
+hex(ord('\n'))
+chr(65)
+chr(0x41)
+[hex(ord(c)) for c in "Hola"]
+[chr(c) for c in [0x48, 0x6f, 0x6c, 0x61, 0x20, 0x4d, 0x75, 0x6e, 0x64, 0x6f]]
+[hex(ord(c)) for c in "ñ"]
+[hex(ord(c)) for c in "\n \t"]
+---------
+
+
+Unicode UTF-8
+~~~~~~~~~~~~~
+
+* https://www.unicode.org/main.html[Unicode Main]
+* Unicode Transformation Format (UTF)
+* Unicode: Unicode can be implemented by different character encodings. The Unicode standard defines Unicode Transformation Formats (UTF): UTF-8, UTF-16, and UTF-32, and several other encodings. The most commonly used encodings are UTF-8, UTF-16, and the obsolete UCS-2 (a precursor of UTF-16 without full support for Unicode)
+* Unicode encoded: https://www.unicode.org/versions/Unicode14.0.0/ch02.pdf#G25564
+** Se describe con el prefijo U+ seguido de un número entero (integers from 0 to 0x10FFFF). Al código se le llama *code point"*
+
+* UTF-8: 
+** The dominant encoding on the World Wide Web and on most Unix-like operating systems
+** Uses one byte[note 1] (8 bits) for the first 128 code points, and up to 4 bytes for other characters. The first 128 Unicode code points represent the ASCII characters, which means that any ASCII text is also a UTF-8 text. 
+** La 'ñ' da como salida 0xc3b1 . El terminal está configurado con salida Unicode UTF-8 según la variable de entorno local. Mediante el comando *locale charmap*  volcamos con que codificación tenemos la entrada/salida del terminal. Mediante +locale -m+ los posibles. Podría haber sido iso-8859-1 (ascii extendido) en lugar de utf8.
+
+* +localectl status+ -> codificación de entrada del teclado 
++
+
+----
+  System Locale: LANG=eu_ES.UTF-8
+                  LANGUAGE=eu_ES:eu:en_GB:en
+       VC Keymap: n/a
+      X11 Layout: es
+       X11 Model: pc105
+----
+
+* http://www.utf8-chartable.de/unicode-utf8-table.pl?number=1024[utf8]:
+** 8-bit Unicode Transformation Format
+** Usa símbolos de longitud variable (de 1 a 4 bytes por carácter Unicode).
+** Esta orientado a la transmisión de palabras de 1 byte.
+** http://www.fileformat.info/info/unicode/char/f1/index.htm[unicode ñ]
+** la ñ tiene *unicode point 'U+00F1'* ó *hex_code_utf8 '0xC3B1'*
+*** en la wikipedia utf-8 explica cómo pasar de unicode point a hex code.
+*** https://unicode-table.com/es/00F1/
+**  Problema para copiar los caracteres no US-ASCII de la barra URL de firefox: https://es.wikipedia.org/wiki/Conmutaci%C3%B3n_de_circuitos. -> C3B3 es el código hexadecimal del código utf-8 del carácter ó. 
+** wikipedia utf-8: 
+*** desglose de códigos según 1byte,2byte,3 byte, 4 bytes.
+*** cómo se mapea el unicode code point del utf-8 a hexadecimal
+** +man utf-8+
+
+* +showkey -a+ : espera a pulsar una letra y visualizará el código de la letra pulsada en la codificación de entrada del sistema operativo.
+** El código de los caracteres del ASCII standard (7bits) coincide con el UTF8 pero no así para el resto de caracteres ASCII extendido.
+** útil para descubrir el código de cada carácter en ascii standard y  el de caracteres ñ, á, é, í, ó, ú si en el código en que el sistema esté configurado (UTF8)
+** útil para descubri el código de control de combinaciones Ctrl-C, CR, Ctrl-CR, Ctrl-D
++
+
+............................................................................
+\ 	 92 0134 0x5c   -> tecla ESC: escape
+^J 	 10 0012 0x0a   -> teclas Ctrl-CR: Salto de línea
+^M 	 13 0015 0x0d   -> tecla CR: Retorno de Carro 
+^C 	  3 0003 0x03   -> teclas Ctrl-c
+^D 	  4 0004 0x04   -> teclas Ctrl-d
+ñ       195 0303 0xc3   -> MSB: More Significand Byte. 
+ 	177 0261 0xb1   -> LSB: Less Significand Byte
+        hex_code_utf8   -> 0xC3B1
+............................................................................
+
+** UPNA -> 0x55-0x50-0x4e-0x41-0x00 donde 0x00 es el caracter NUL de fin de cadena.
+
+* Documentos HTML
+** ñ -> &#x00F1 -> utiliza el código "unicode point"
+
+* URL -> en la barra de direcciones de un navegador poner camión -> enter
+** copiar la URL y copiarla en una nueva barra -> https://www.google.com/search?channel=fs&client=ubuntu&q=cami%C3%B3n
+** %C3%B3 es el UTF-8 hex_code de ó
+
+* Sistema operativo : variables del entorno
+** +env | grep LC_+
+* http://www.unicode.org/charts/[Unicode chart]
+** Colocando el puntero sobre la categoría se visualiza el rango hexadecimal del charset
+** Symbols Punctuation:
+*** Punctuation: ASCII Punctuation: http://www.unicode.org/charts/PDF/U0000.pdf[U0000.pdf]
+*** Find chart by hex code: 278a
+*** Pictographs: Dingbats: x278a -> &#x278a; -> http://www.unicode.org/charts/PDF/U2700.pdf[U2700.pdf]
+*** Mathematical symbols: Mathematical Operators:
+**** https://en.wikipedia.org/wiki/Mathematical_operators_and_symbols_in_Unicode[wikipedia]
+**** http://www.unicode.org/charts/PDF/U2200.pdf[U2200]: Mathematical Operators Range: 2200–22FF
+**** U+2228 -> hexadecimal x2228 -> &#x2228; ó en decimal 8744 &#8744;
+**** U+22BC -> x22bc -> &#x22bc;
+**** U+22BD -> x22bd -> &#x22bd;
+**** U+22A6 -> x22a6 -> &#x22a6;
+** otros
+*** x1f60b -> &#x1f60b;
+*** U+00F1 -> x00f1  -> &#x00f1;
+*** 241    -> &#241;
+*** x2190 -> &#x2190;
+*** x2192 -> &#x2192;
+* https://wiki.mozilla.org/Help:Special_characters#Unicode
+* http://www.fileformat.info/info/unicode/char/305/index.htm[info detallada sobre un caracter unicode]: Pej U+0305
+* https://support.office.com/en-us/article/Insert-ASCII-or-Unicode-Latin-based-symbols-and-characters-d13f58d3-7bcb-44a7-a4d5-972ee12e50e0[Microsoft Office]
+* https://en.wikipedia.org/wiki/Overline[Overline o suprarayado]
+** LibreOffice has direct support for several styles of overline in its +Format / Character / Font Effects" dialog: suprarayado+
+
+ISO-8859-1
+----------
+
+* Alternativa a UTF-8 para el alfabeto latino
+* https://es.wikipedia.org/wiki/ISO/IEC_8859-1
+** Sólo utiliza 1 byte , por lo tanto es equivalente al ascii extended.
+** La norma ISO/IEC 8859-15 consistió en una revisión de la ISO 8859-1, incorporando el símbolo del Euro
+* +man iso_8859-1+
+* La "ñ" tiene el código 0xF1
+
+
+Programación en C
+~~~~~~~~~~~~~~~~~
+
+* Convertir un carácter numérico en su valor entero
+** Mediante una operación aritmética
+* Convertir un carácter minúscula en mayúscula
+** Mediante una operación aritmética
+
+Otros
+~~~~~
+
+* https://www.gnu.org/software/coreutils/manual/html_node/printf-invocation.html[Lenguaje C: printf]
+** +locale -a+ -> C.UTF8
+** ñ -> +env printf '\u00f1  \n'+ : incluir las simples comillas
+*** http://www.gnu.org/software/coreutils/manual/html_node/printf-invocation.html#printf-invocation[printf invocation]
+
+
+
+

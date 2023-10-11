@@ -1,0 +1,2429 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title>Introducción a la programación en el lenguaje Ensamblador</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(3);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Introducción a la programación en el lenguaje Ensamblador</h1>
+<span id="author">Cándido Aramburu</span><br />
+<span id="email"><code>&lt;<a href="mailto:candido@unavarra.es">candido@unavarra.es</a>&gt;</code></span><br />
+<span id="revnumber">version v1.0.0,</span>
+<span id="revdate">2015 Mars 5</span>
+<div id="toc">
+  <div id="toctitle">Tabla de contenidos</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introduccion">1. Introducción</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_objetivos_de_la_practica">1.1. Objetivos de la Practica</h3>
+<div class="paragraph"><p>Objetivos específicos:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<strong>Toolchain</strong>:Practicar con las herramientas de edición, compilación <em>gcc</em>, ensamblaje <em>as</em>, encadenador <em>ld</em> .
+</p>
+</li>
+<li>
+<p>
+<strong>Depuración</strong>: Depurador <em>gdb</em>. Ejecutar un programa en modo <em>paso a paso</em> con el debugger.
+</p>
+</li>
+<li>
+<p>
+<strong>Análisis</strong>:Practicar con las herramientas de análisis <em>readelf</em>, <em>objdump</em>. Diferenciar entre el módulo objeto reubicable y el módulo objeto ejecutable.Desensamblar el código ejecutable.
+</p>
+</li>
+<li>
+<p>
+<strong>Estructura</strong>:Comprender la estructura de un módulo fuente mínimo en lenguaje ensamblador.
+</p>
+</li>
+<li>
+<p>
+<strong>Lenguaje Ensamblador</strong>:Familiarizarse con el lenguaje de programación en ensamblador GNU_Assembly <em>gas</em> basado en el lenguaje desarrollado por AT&amp;T
+</p>
+</li>
+<li>
+<p>
+<strong>Traductor Ensamblador</strong>:Conocer las directivas del traductor assembler <em>as</em>.
+</p>
+</li>
+<li>
+<p>
+<strong>Lenguaje Máquina</strong>:Familiarizarse con la representación de direcciones, datos e instrucciones en lenguaje máquina
+</p>
+</li>
+<li>
+<p>
+<strong>Hardware</strong>:Comprender la arquitectura de un computador, cpu y memoria, desde el punto de vista del programador: memoria interna y memoria externa.
+</p>
+</li>
+<li>
+<p>
+<strong>Kernel</strong>:Comprender la relación entre un proceso de usuario y el sistema operativo a través de las <em>llamadas al sistema</em>.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Objetivos generales:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Programación en lenguaje ensamblador
+</p>
+</li>
+<li>
+<p>
+Comprender el funcionamiento de la computadora desde el punto de vista de un programador de bajo nivel.
+</p>
+</li>
+<li>
+<p>
+Relacionar las propiedades de un lenguaje de alto nivel con un lenguaje de bajo nivel.
+</p>
+</li>
+<li>
+<p>
+Utilizar herramientas de desarrollo de bajo nivel.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Desarrollar habilidades de intuición y  deducción en el empleo de las herramientas y en buscar qué herramientas.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="paragraph"><p>Por lo tanto el lenguaje ensamblador puede ser utilizado como una herramienta para descubrir la arquitectura y el funcionamiento de la computadora. No es el objetivo central de esta asignatura ser un experto en lenguajes de programación ni en el desarrollo de algoritmos, objetivos centrales de otras asignaturas.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_recursos">1.2. Recursos</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Disponible en miaulario:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Los módulos fuente <a href="../modulos_fuente/as_groundup.tar">as_groundup.tar</a> utilizados están disponibles en el servidor de miaulario de la UPNA.
+</p>
+</li>
+<li>
+<p>
+El libro de texto en que se basan los guiones de prácticas en lenguaje ensamblador : <a href="#programming_from_ground_up">[programming_from_ground_up]</a>.
+</p>
+</li>
+<li>
+<p>
+Hojas de referencia rápida
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Libros de texto: ver apartado de Bibliografía
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_evaluacion">1.3. Evaluacion</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Es necesario guardar todos los programas utilizados (fuentes y binarios) en el pendrive ya que el contenido puede ser evaluado en cualquier momento durante las prácticas a lo largo de todo el curso y durante el examen.
+</p>
+</li>
+<li>
+<p>
+Las respuestas a las cuestiones que se plantean a lo largo de las prácticas estarán respondidas en la memoria.
+</p>
+</li>
+<li>
+<p>
+Los conceptos utilizados en prácticas tanto sobre la arquitectura de un computador como sobre las herramientas de desarrollo forman parte del contenido a evaluar en las pruebas parciales y finales.
+</p>
+</li>
+<li>
+<p>
+Entrega de la memoria:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+La semana de la sesión de prácticas antes del sábado a las 14:00
+</p>
+</li>
+<li>
+<p>
+Se entregará <strong>un único archivo</strong> en formato <strong>PDF</strong>.
+</p>
+</li>
+<li>
+<p>
+Nombre del archivo: apellido1_apellido2_tituloguionpractica.pdf
+</p>
+</li>
+<li>
+<p>
+El archivo de contener:
+</p>
+<div class="olist lowerroman"><ol class="lowerroman">
+<li>
+<p>
+los datos personales del alumno
+</p>
+</li>
+<li>
+<p>
+preguntas del guión y respuestas.
+</p>
+</li>
+<li>
+<p>
+módulos del código fuente
+</p>
+</li>
+</ol></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_herramientas">1.4. Herramientas</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Es necesario para la ejecución de la práctica:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+LIBROOOOOOOOOOOOOOOOOOOOOOO
+</p>
+</li>
+<li>
+<p>
+REFCARDSSSSSSSSSSSSSSSSSSSS
+</p>
+</li>
+<li>
+<p>
+Hojas con los ORGANIGRAMAS
+</p>
+</li>
+<li>
+<p>
+Tomar Apuntesssssssssssssss
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Fuentes en lenguaje AT&amp;T:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+exit.s
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Plataforma: GNU/linux(AMD64)/x86_64(Intel ó AMD)
+</p>
+</li>
+<li>
+<p>
+Recursos GNU:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Herramienta integrada de desarrollo: Emacs,u otra herramienta IDE.
+</p>
+</li>
+<li>
+<p>
+as : ensamblador del lenguaje AT&amp;T
+</p>
+</li>
+<li>
+<p>
+ld : linker
+</p>
+</li>
+<li>
+<p>
+cc : compilador de C
+</p>
+</li>
+<li>
+<p>
+gcc : driver de compilación
+</p>
+</li>
+<li>
+<p>
+gdb : depurador.
+</p>
+</li>
+<li>
+<p>
+readelf: metainformación del fichero ELF
+</p>
+</li>
+<li>
+<p>
+objdump: volcado de metainformación de los módulos objeto reubicable .o y ejecutable
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Disponible en red y en local(/usr/share/doc ó info ó man):
+</p>
+</li>
+<li>
+<p>
+Libro de Prácticas
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://programminggroundup.blogspot.com.es/2007/01/programming-from-ground-up.html">http://programminggroundup.blogspot.com.es/2007/01/programming-from-ground-up.html</a>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Assemblers
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs/as/">https://sourceware.org/binutils/docs/as/</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://docs.oracle.com/cd/E26502_01/html/E28388/eoiyg.html">https://docs.oracle.com/cd/E26502_01/html/E28388/eoiyg.html</a> : AT&amp;T
+</p>
+</li>
+<li>
+<p>
+<a href="https://software.intel.com/en-us/articles/introduction-to-x64-assembly">https://software.intel.com/en-us/articles/introduction-to-x64-assembly</a> : INTEL
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Fundamental
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent">https://sourceware.org/binutils/docs-2.26/as/i386_002dDependent.html#i386_002dDependent</a>: syntax, mnemonics, register
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Mnemónicos
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/toc.htm">http://www.cs.nyu.edu/~mwalfish/classes/ut/s13-cs439/ref/i386/toc.htm</a>: i386 (32 bits)
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.felixcloutier.com/x86/">http://www.felixcloutier.com/x86/</a> : amd64 (64 bits)
+</p>
+</li>
+<li>
+<p>
+<a href="https://docs.oracle.com/cd/E26502_01/html/E28388/eoiyg.html">https://docs.oracle.com/cd/E26502_01/html/E28388/eoiyg.html</a> : AT&amp;T
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Arquitectura (Registros,&#8230;)
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://en.wikipedia.org/wiki/FLAGS_register">https://en.wikipedia.org/wiki/FLAGS_register</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://software.intel.com/en-us/articles/introduction-to-x64-assembly">https://software.intel.com/en-us/articles/introduction-to-x64-assembly</a>: Intel oficial Vol 1 Basic Architecture
+</p>
+</li>
+<li>
+<p>
+<a href="http://support.amd.com/TechDocs/24593.pdf">http://support.amd.com/TechDocs/24593.pdf</a> : AMD oficial. Vol 3. 2.3 Summary of Registers and Data Types
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Manuales GNU
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+$ <code>man</code>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.gnu.org/s/gdb/documentation/">manual_GDB</a>
+</p>
+</li>
+<li>
+<p>
+<a href="http://www.gnu.org/software/emacs/#Manuals">Emacs</a>
+</p>
+</li>
+<li>
+<p>
+<a href="https://sourceware.org/binutils/docs-2.24/">binutils</a>: as,ld,objdump,&#8230;
+</p>
+</li>
+<li>
+<p>
+<a href="https://gcc.gnu.org/onlinedocs/">gcc</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_programacion">2. Programación</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_metodologia">2.1. Metodología</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Leer la descripción del programa
+</p>
+</li>
+<li>
+<p>
+Pseudocódigo:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Desarrollar el algoritmo definiendo las estructuras de datos y estructuras de instrucciones.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+constantes,variables, arrays, punteros, inicalizaciones, bucles, sentencias selección, funciones y parámetros, entrada y salida del programa, etc
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Organigrama para un lenguaje de alto nivel
+</p>
+</li>
+<li>
+<p>
+Programación en lenguaje de alto nivel más comentarios
+</p>
+</li>
+<li>
+<p>
+Comando de compilación y ejecución.
+</p>
+</li>
+<li>
+<p>
+Test mediante el debugger y validación.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Ejecución en modo paso paso mediante la herramienta Debugger.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Pseudocódigo:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Traducir el pseudocódigo de alto nivel a pseudocódigo de bajo nivel
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+secciones, variables, arrays, punteros, inicializaciones, bucles, sentencias selección, subrutinas y parámetros, entrada y salida del programa etc.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Traducir el Organigrama de alto nivel a un Organigrama en un lenguaje de bajo nivel
+</p>
+</li>
+<li>
+<p>
+Programación en lenguaje de bajo nivel más comentarios
+</p>
+</li>
+<li>
+<p>
+Test mediante el debugger y validación.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Ejecución en modo paso paso mediante la herramienta Debugger.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_modulo_fuente_cabecera">2.2. Módulo Fuente: Cabecera</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Cabecera
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>Programa<span style="color: #990000">:</span>       suma<span style="color: #990000">.</span>s
+Lenguaje<span style="color: #990000">:</span>       ensamblador x86-<span style="color: #993399">64</span> AT<span style="color: #990000">&amp;</span>T
+Descripción<span style="color: #990000">:</span>   Suma de los primeros <span style="color: #993399">5</span> números naturales
+Entrada<span style="color: #990000">:</span>        Ninguna
+Salida<span style="color: #990000">:</span>         echo <span style="color: #009900">$?</span>
+Compilación<span style="color: #990000">:</span>   gcc -nostartfiles -o suma suma<span style="color: #990000">.</span>s
+S<span style="color: #990000">.</span>O<span style="color: #990000">:</span>            GNU/linux <span style="color: #993399">3.2</span><span style="color: #990000">.</span><span style="color: #993399">0</span> ubuntu <span style="color: #993399">12.04</span> x86-<span style="color: #993399">64</span>
+Librería<span style="color: #990000">:</span>      /usr/lib/x86_64-linux-gnu/libc<span style="color: #990000">.</span>so
+CPU<span style="color: #990000">:</span>            Intel<span style="color: #990000">(</span>R<span style="color: #990000">)</span> Core<span style="color: #990000">(</span>TM<span style="color: #990000">)</span> i5-2520M CPU @ <span style="color: #993399">2</span><span style="color: #990000">.</span>50GHz
+Compilador<span style="color: #990000">:</span>     gcc version <span style="color: #993399">4.6</span><span style="color: #990000">.</span><span style="color: #993399">4</span> <span style="color: #990000">(</span>Ubuntu/Linaro <span style="color: #993399">4.6</span><span style="color: #990000">.</span><span style="color: #993399">4</span>-1ubuntu1<span style="color: #990000">~</span><span style="color: #993399">12.04</span><span style="color: #990000">)</span>
+Ensamblador<span style="color: #990000">:</span>    GNU assembler version <span style="color: #993399">2.22</span>
+Linker/Loader<span style="color: #990000">:</span>  GNU ld <span style="color: #990000">(</span>GNU Binutils <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> Ubuntu<span style="color: #990000">)</span> <span style="color: #993399">2.22</span>
+Asignatura<span style="color: #990000">:</span>     Estructura de Computadores
+Fecha<span style="color: #990000">:</span>          <span style="color: #993399">20</span><span style="color: #990000">/</span><span style="color: #993399">09</span><span style="color: #990000">/</span><span style="color: #993399">2016</span>
+Autor<span style="color: #990000">:</span>          Cándido Aramburu</tt></pre></div></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_depuracion">3. Depuración</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_conceptos">3.1. Conceptos</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Depurador GDB de la fundación GNU: Gnu DebuGger
+</p>
+</li>
+<li>
+<p>
+Ideas a poner en práctica
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>Compilar incluyendo la tabla de símbolos
+Arrancar debugger en modo texto o en modo ventanas
+Cargar módulo a depurar y tabla de símbolos
+modo paso a paso
+Comenzar la ejecución hasta la ruptura
+Entorno  de ventanas
+visualizar memoria
+ayuda
+Simbolos de referencia a memoria<span style="color: #990000">:</span> Direcciones y contenidos
+Formatos y tamaños
+instrucciones y datos
+endianess
+registers
+Completion
+segmentos de los registros
+Salir del bucle
+Terminar la ejecución
+Reiniciar
+Desensamblar
+Salir</tt></pre></div></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_comandos">3.2. Comandos</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Incluir la tabla de símbolos en el módulo objeto ejecutable
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>gcc -g -nostartfiles -o suma suma.s</code>
+</p>
+</li>
+<li>
+<p>
+<code>gcc -g -o exit exit.c</code>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Comandos a practicar
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Para su realización es necesario que el programa a depurar tenga definida alguna variable en la memoria principal e inicializado algún registro.
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>$ gdb
+C-x a
+C-x a
+q
+$ gdb -tui
+file sum
+info <span style="font-weight: bold"><span style="color: #0000FF">source</span></span>
+info sources
+b _start
+info breakpoints
+run
+h layout
+h focus
+focus src <span style="color: #990000">:</span> navegar
+focus cmd <span style="color: #990000">:</span> navegar
+C-x a
+C-l
+p _start
+h p
+h x
+x _start
+x /bt _start<span style="color: #990000">,</span> x /ht _start<span style="color: #990000">,</span> x /wt _start<span style="color: #990000">,</span> x /gt _start
+x /i _start
+p símbolo_variable
+x símbolo_variable
+x <span style="color: #990000">&amp;</span>símbolo_variable
+x /h <span style="color: #990000">&amp;</span>símbolo_variable  -<span style="color: #990000">&gt;</span> little endian
+n
+info registers
+info reTAB
+p <span style="color: #009900">$rax</span>
+p <span style="color: #009900">$eax</span>
+p <span style="color: #009900">$ax</span>
+p <span style="color: #009900">$ah</span>
+p <span style="color: #009900">$rflags</span>
+p <span style="color: #009900">$eflags</span>
+p /t <span style="color: #009900">$eflags</span>
+p <span style="color: #009900">$rip</span>
+n
+RETURN
+ejecutar la penúltima instrucción del bucle
+<span style="font-weight: bold"><span style="color: #0000FF">until</span></span>
+c
+start
+pending<span style="color: #990000">?</span> n
+info breakTAB
+disas /r _start
+disas /m _start
+layout split
+layout src
+q</tt></pre></div></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_comentarios">3.3. Comentarios</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Comentarios
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+nota: si lanzamos <code>gdb exit &amp;</code> no aparece el prompt (gdb)
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Ayuda
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://sourceware.org/gdb/onlinedocs/gdb/Readline-Movement-Commands.html#Readline-Movement-Commands">https://sourceware.org/gdb/onlinedocs/gdb/Readline-Movement-Commands.html#Readline-Movement-Commands</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_emacs_depurador_gdb">3.4. EMACS: Depurador GDB</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>emacs exit.c &amp;</code>
+</p>
+</li>
+<li>
+<p>
+M-x gdb
+</p>
+</li>
+<li>
+<p>
+M-x gdb-many-windows
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Debuggers.html">Emacs Debugger</a>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>Current directory is <span style="color: #990000">~</span>/tutoriales/C_tutorial/groundup/exit/standard<span style="color: #990000">/</span>
+GNU gdb <span style="color: #990000">(</span>GDB<span style="color: #990000">)</span> <span style="color: #993399">7.10</span>
+Copyright <span style="color: #990000">(</span>C<span style="color: #990000">)</span> <span style="color: #993399">2015</span> Free Software Foundation<span style="color: #990000">,</span> Inc<span style="color: #990000">.</span>
+License GPLv3<span style="color: #990000">+:</span> GNU GPL version <span style="color: #993399">3</span> or later <span style="color: #990000">&lt;</span>http<span style="color: #990000">:</span>//gnu<span style="color: #990000">.</span>org/licenses/gpl<span style="color: #990000">.</span>html<span style="color: #990000">&gt;</span>
+This is free software<span style="color: #990000">:</span> you are free to change and redistribute it<span style="color: #990000">.</span>
+There is NO WARRANTY<span style="color: #990000">,</span> to the extent permitted by law<span style="color: #990000">.</span>  Type <span style="color: #FF0000">"show copying"</span>
+and <span style="color: #FF0000">"show warranty"</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> details<span style="color: #990000">.</span>
+This GDB was configured as <span style="color: #FF0000">"x86_64-unknown-linux-gnu"</span><span style="color: #990000">.</span>
+Type <span style="color: #FF0000">"show configuration"</span> <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> configuration details<span style="color: #990000">.</span>
+For bug reporting instructions<span style="color: #990000">,</span> please see<span style="color: #990000">:</span>
+<span style="color: #990000">&lt;</span>http<span style="color: #990000">:</span>//www<span style="color: #990000">.</span>gnu<span style="color: #990000">.</span>org/software/gdb/bugs<span style="color: #990000">/&gt;.</span>
+Find the GDB manual and other documentation resources online at<span style="color: #990000">:</span>
+<span style="color: #990000">&lt;</span>http<span style="color: #990000">:</span>//www<span style="color: #990000">.</span>gnu<span style="color: #990000">.</span>org/software/gdb/documentation<span style="color: #990000">/&gt;.</span>
+For <span style="font-weight: bold"><span style="color: #0000FF">help</span></span><span style="color: #990000">,</span> <span style="font-weight: bold"><span style="color: #0000FF">type</span></span> <span style="color: #FF0000">"help"</span><span style="color: #990000">.</span>
+Type <span style="color: #FF0000">"apropos word"</span> to search <span style="font-weight: bold"><span style="color: #0000FF">for</span></span> commands related to <span style="color: #FF0000">"word"</span><span style="color: #990000">...</span>
+Reading symbols from <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span><span style="color: #990000">...</span><span style="font-weight: bold"><span style="color: #0000FF">done</span></span><span style="color: #990000">.</span>
+
+<span style="color: #990000">(</span>gdb<span style="color: #990000">)</span></tt></pre></div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="/usr/local/etc/asciidoc/images/icons//important.png" alt="Importante" />
+</td>
+<td class="content">Observar que se ha leído la tabla de símbolos: "Reading symbols from exit&#8230;done."--&#8594; DONE!!!</td>
+</tr></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exit_c_i">4. exit.c (I)</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Antes de realizar la programación en lenguaje ASM la realizamos en lenguaje C.
+</p>
+</li>
+<li>
+<p>
+Objetivo del programa: Salir del programa entregando un parámetro al kernel linux.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Utilizamos la función <em>exit()</em> de la librería <em>libc</em>. Atención: no utilizar la función <em>_exit()</em>.
+</p>
+</li>
+<li>
+<p>
+Ayuda: <code>man 3 exit</code>. Apuntes de C (librería libc)
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+<div class="sect2">
+<h3 id="_modulo_fuente">4.1. Modulo Fuente</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>exit.c</code>
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">&lt;stdlib.h&gt;</span>
+
+<span style="color: #009900">void</span> <span style="font-weight: bold"><span style="color: #000000">main</span></span> <span style="color: #990000">(</span><span style="color: #009900">void</span><span style="color: #990000">)</span>
+<span style="color: #FF0000">{</span>
+<span style="font-weight: bold"><span style="color: #000000">exit</span></span> <span style="color: #990000">(</span><span style="color: #993399">0xFF</span><span style="color: #990000">);</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+</li>
+</ul></div>
+<div class="sect3">
+<h4 id="_libreria_libc">4.1.1. Librería libc</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+La función <em>exit(0xFF)</em> es una función de la librería standard <em>libc.so</em>.
+</p>
+</li>
+<li>
+<p>
+La función <em>exit(0xFF)</em> está definida en la cabecera <em>stdlib.h</em>.
+</p>
+</li>
+<li>
+<p>
+Una librería es un agrupamiento de funciones (exit(),printf(),getchar(), etc) que suelen estar codificadas en un único fichero como la librería standard de C "libc".
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_compilacion">4.1.2. Compilación</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>gcc  -o exit exit.c</code>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>ls -l</code> comprobar que se ha generado el módulo objeto ejecutable <em>exit</em>
+</p>
+</li>
+<li>
+<p>
+<code>file exit.c</code> imprime las propiedades del fichero <em>exit.c</em>
+</p>
+</li>
+<li>
+<p>
+<code>file exit</code>: imprime las propiedades del fichero <em>exit</em>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<code>gcc --save-temps -o exit exit.c</code>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Si utilizamos la opción --save-temps : genera el módulo ensamblador, módulo objeto y módulo ejecutable
+</p>
+</li>
+<li>
+<p>
+<code>ls -l</code>, comprobar que se han generado los módulos .s  y .o
+</p>
+</li>
+<li>
+<p>
+<code>file exit.s</code> imprime las propiedades del fichero <em>exit.s</em>
+</p>
+</li>
+<li>
+<p>
+<code>file exit.s</code> imprime las propiedades del fichero <em>exit.o</em>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+<code>gedit exit.s</code>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Observar las instrucciones del lenguaje ensamblador <em>AT&amp;T</em>
+</p>
+</li>
+<li>
+<p>
+Observar las directivas del traductor ensamblador <em>as</em>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_ejecucion">4.1.3. Ejecución</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>ls -l exit*</code>: compruebo que me encuentro en la carpeta que contiene los módulos fuente y ejecutable.
+</p>
+</li>
+<li>
+<p>
+<code>file exit</code>  : compruebo que tenemos disponible el módulo objeto ejecutable en el formato ELF.
+</p>
+</li>
+<li>
+<p>
+<code>./exit</code>     : Ejecución del módulo objeto ejecutable.
+</p>
+</li>
+<li>
+<p>
+<code>echo $?</code>    : Imprime el valor entregado por el programa <em>exit</em> al kernel <em>linux</em>.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_cuestiones">4.1.4. Cuestiones</h4>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Módulos objeto reubicable y ejecutable?
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+¿Tamaño en bytes?
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Módulo ensamblador
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Instrucciones del módulo ensamblador y su significado
+</p>
+</li>
+<li>
+<p>
+Símbolo main
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+qué tipo de símbolo es en la sintaxis del lenguaje ensamblador
+</p>
+</li>
+<li>
+<p>
+significado de las directivas asociadas a main
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exit_s_i">5. exit.s (I)</h2>
+<div class="sectionbody">
+<div class="ulist"><ul>
+<li>
+<p>
+Objetivo del programa: Salir del programa entregando un parámetro al kernel linux.
+</p>
+</li>
+<li>
+<p>
+Hay que relacionar este módulo fuente en lenguaje ensamblador con el módulo fuente del ejercicio anterior en lenguaje C.
+</p>
+</li>
+</ul></div>
+<div class="sect2">
+<h3 id="_modulo_fuente_2">5.1. Módulo fuente</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Lenguaje AT&amp;T 32 bits
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">#</span></span>##     PURPOSE
+
+<span style="font-weight: bold"><span style="color: #000080">#</span></span>##     INPUT
+
+<span style="font-weight: bold"><span style="color: #000080">#</span></span>##     <span style="color: #008080">OUTPUT</span> echo $<span style="color: #990000">?</span>
+
+<span style="font-weight: bold"><span style="color: #000080">#</span></span>##     VARIABLES
+
+        <span style="color: #990000">.</span>section <span style="color: #990000">.</span>data
+
+        <span style="color: #990000">.</span>section <span style="color: #990000">.</span>text
+
+        <span style="color: #990000">.</span>globl _start
+_start<span style="color: #990000">:</span>                         # program entry point
+        movl $<span style="color: #993399">1</span><span style="color: #990000">,</span> <span style="color: #990000">%</span>eax
+        movl $<span style="color: #993399">0xFF</span><span style="color: #990000">,</span> <span style="color: #990000">%</span>ebx
+        <span style="color: #009900">int</span> $<span style="color: #993399">0x80</span></tt></pre></div></div>
+</li>
+<li>
+<p>
+Lenguaje AT&amp;T 64 bits
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">#</span></span>##     PURPOSE         programa con el código mínimo
+
+<span style="font-weight: bold"><span style="color: #000080">#</span></span>##     INPUT           ninguna
+
+<span style="font-weight: bold"><span style="color: #000080">#</span></span>##     <span style="color: #008080">OUTPUT</span>          echo $<span style="color: #990000">?</span>
+
+<span style="font-weight: bold"><span style="color: #000080">#</span></span>##     VARIABLES       ninguna
+
+        <span style="color: #990000">.</span>section <span style="color: #990000">.</span>data
+
+        <span style="color: #990000">.</span>section <span style="color: #990000">.</span>text
+
+        <span style="color: #990000">.</span>globl _start
+_start<span style="color: #990000">:</span>                         # dirección del contador de programa al ejecutar el proceso
+        movq $<span style="color: #993399">60</span><span style="color: #990000">,</span> <span style="color: #990000">%</span>rax
+        movq $<span style="color: #993399">0xFF</span><span style="color: #990000">,</span> <span style="color: #990000">%</span>rdi
+        syscall
+
+
+        <span style="color: #990000">.</span>end</tt></pre></div></div>
+</li>
+</ul></div>
+<div class="sect3">
+<h4 id="_compilacion_64_bits">5.1.1. Compilación 64 bits</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Compilar
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Con el front-end <code>gcc</code>:
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>gcc -nostartfiles -o <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span> <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span><span style="color: #990000">.</span>s</tt></pre></div></div>
+<div class="ulist"><ul>
+<li>
+<p>
+<em>-nostartfiles</em>: opción para indicar que la función principal no se llama <strong>main</strong>
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Con el toolchain: <code>as-ld</code>
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>as -o <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span><span style="color: #990000">.</span>o <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span><span style="color: #990000">.</span>s
+ld -o <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span> <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span><span style="color: #990000">.</span>o</tt></pre></div></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_ejecucion_2">5.1.2. Ejecución</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Ejecución:
+</p>
+</li>
+</ul></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="color: #990000">.</span>/exit
+echo <span style="color: #009900">$?</span></tt></pre></div></div>
+</div>
+<div class="sect3">
+<h4 id="_cuestiones_2">5.1.3. Cuestiones</h4>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+¿ Qué programa llama al objeto ejecutable <em>exit</em> resultado de compilar exit.s?
+</p>
+</li>
+<li>
+<p>
+¿ Qué valor devuelve la función exit.s y a qué programa o proceso se lo devuelve?
+</p>
+</li>
+<li>
+<p>
+¿ Qué directivas hay en el programa fuente y que significa cada una ?
+</p>
+</li>
+<li>
+<p>
+¿ Qué etiqueta es obligatoria para <em>as</em>, de qué tipo es y qué función desempeña?
+</p>
+</li>
+<li>
+<p>
+¿ Cual es el tamaño de los registros de propósito general RAX y RDI?
+</p>
+</li>
+<li>
+<p>
+¿ Por qué vale 60 el contenido del registro RAX?
+</p>
+</li>
+<li>
+<p>
+¿ Cuál es la función del registro RDI en este módulo?
+</p>
+</li>
+<li>
+<p>
+¿ Que función realiza la instrucción <code>syscall</code>?
+</p>
+</li>
+</ol></div>
+</div>
+<div class="sect3">
+<h4 id="_cuestiones_3">5.1.4. Cuestiones</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Responder a las siguientes cuestiones:
+</p>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+¿Cual es son las funciones de los registros?
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+RIP,RSP,RAX,RDI,RFLAG
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+¿Cual ha sido el contenido del registro RFLAG?¿y el del flag de Signo SF?
+</p>
+</li>
+<li>
+<p>
+¿En que dirección de memoria se inicia el programa?
+</p>
+</li>
+<li>
+<p>
+¿Cuál es la dirección de memoria de la última instrucción del programa?
+</p>
+</li>
+<li>
+<p>
+Especificar cuantos bytes ocupa cada instrucción.
+</p>
+</li>
+<li>
+<p>
+¿Qué comando GDB imprime el contenido del contador de programa? Indicar el contenido antes de ejecutar la última instrucción.
+</p>
+</li>
+<li>
+<p>
+¿A qué objeto apunta el puntero contador de programa antes de ejecutar la última instrucción?¿De qúe tipo es dicho objeto?
+</p>
+</li>
+<li>
+<p>
+Examinar la memoria a la que apunta el contador de programa antes de ejecutar la última instrucción.
+</p>
+</li>
+</ol></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exit_c_ii">6. exit.c (II)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_desemsamblaje">6.1. Desemsamblaje</h3>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+La herramienta <em>objdump</em> desde un terminal.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+obtener el módulo objeto reubicable con <code>gcc -g -o exit.o exit.c</code>
+</p>
+</li>
+<li>
+<p>
+<code>$objdump -S exit.o</code>
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>exit<span style="color: #990000">.</span>o<span style="color: #990000">:</span>     file <span style="color: #008080">format</span> elf64<span style="color: #990000">-</span>x86<span style="color: #990000">-</span><span style="color: #993399">64</span>
+
+
+Disassembly <span style="color: #008080">of</span> section <span style="color: #990000">.</span>text<span style="color: #990000">:</span>
+
+<span style="color: #993399">0000000000000000</span> <span style="color: #990000">&lt;</span>main<span style="color: #990000">&gt;:</span>
+  Al finalizar la ejecución ejecutar en <span style="color: #008080">el</span> terminal<span style="color: #990000">:</span> echo $<span style="color: #990000">?</span> y comprobar que visualizamos el valor <span style="color: #008080">de</span> retorno<span style="color: #990000">.</span>
+<span style="color: #990000">*/</span>
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">&lt;stdlib.h&gt;</span>
+
+<span style="color: #009900">int</span> <span style="font-weight: bold"><span style="color: #000000">main</span></span> <span style="color: #990000">(</span><span style="color: #009900">void</span><span style="color: #990000">)</span>
+<span style="color: #FF0000">{</span>
+   <span style="color: #993399">0</span><span style="color: #990000">:</span>   <span style="color: #993399">55</span>                      push   <span style="color: #990000">%</span>rbp
+   <span style="color: #993399">1</span><span style="color: #990000">:</span>   <span style="color: #993399">48</span> <span style="color: #993399">89</span> <span style="color: #008080">e5</span>                mov    <span style="color: #990000">%</span>rsp<span style="color: #990000">,%</span>rbp
+  <span style="font-weight: bold"><span style="color: #000000">exit</span></span><span style="color: #990000">(</span><span style="color: #993399">0xFF</span><span style="color: #990000">);</span>
+   <span style="color: #993399">4</span><span style="color: #990000">:</span>   bf ff <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>          mov    $<span style="color: #993399">0xff</span><span style="color: #990000">,%</span>edi
+   <span style="color: #993399">9</span><span style="color: #990000">:</span>   e8 <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span> <span style="color: #993399">00</span>          <span style="color: #008080">callq</span>  e <span style="color: #990000">&lt;</span>main<span style="color: #990000">+</span><span style="color: #993399">0xe</span><span style="color: #990000">&gt;</span>
+</tt></pre></div></div>
+</li>
+</ul></div>
+</li>
+</ol></div>
+</div>
+<div class="sect2">
+<h3 id="_cuestiones_4">6.2. Cuestiones</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+¿Qué operación realiza la sentencia en ensamblador <code>callq  0x4003b0 &lt;<a href="mailto:exit@plt">exit@plt</a>&gt;</code> ?
+</p>
+</li>
+<li>
+<p>
+¿Qué relación tiene el valor 255 con el módulo fuente en C?
+</p>
+</li>
+<li>
+<p>
+¿Qué relación tiene el registro RDI con el módulo fuente en C?
+</p>
+</li>
+<li>
+<p>
+¿Qué instrucción del código ensamblador utiliza el registro RDI?
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+¿Cuales son los operandos fuente y destino de dicha instrucción?
+</p>
+</li>
+<li>
+<p>
+¿Qué tipos de direccionamiento utiliza dicha instrucción?
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+¿En que dirección se encuentra la primera instrucción máquina de la función main?
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+¿Cual es la primera instrucción máquina de la función main?
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exit_s_ii">7. exit.s (II)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_analisis_de_los_diferentes_modulos_exit">7.1. Análisis de los diferentes módulos exit</h3>
+<div class="sect3">
+<h4 id="_modulos_a_analizar">7.1.1. Módulos a analizar</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Se pueden analizar los módulos objetos ejecutable y reubicable tando del programa <strong>exit.c</strong> como del programa <strong>exit.s</strong>
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_herramientas_2">7.1.2. Herramientas</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Utilización de las herramientas de análisis de GNU:
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+file, readelf (Displays information about ELF files), objdump
+</p>
+</li>
+<li>
+<p>
+las herramientas readelf y objdump son casi equivalentes.  readelf es más detallista que objdump y objdump permite desensamblar.
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+manuales:  man file ,man readelf, man objdump
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_analisis">7.1.3. Análisis</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+Análisis de los  Modulos Objeto Binarios
+</p>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.5
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt>file <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span><span style="color: #990000">.</span>o                     -<span style="color: #990000">&gt;</span> propiedades del módulo objeto reubicable
+file <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span>                       -<span style="color: #990000">&gt;</span> propiedades del módulo ejecutable
+size <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span><span style="color: #990000">.</span>o                     -<span style="color: #990000">&gt;</span> Tamaño de cada sección y el total
+size <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span>                       -<span style="color: #990000">&gt;</span> Tamaño de cada sección y el total
+readelf -x <span style="color: #990000">.</span>text  <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span>          -<span style="color: #990000">&gt;</span> imprime la sección <span style="color: #990000">.</span>text en hexadecimal
+objdump  -d <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span><span style="color: #990000">.</span>o              -<span style="color: #990000">&gt;</span> Disassembly of executable section<span style="color: #990000">:</span> la salida está en ASM y binario
+objdump  -S <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span><span style="color: #990000">.</span>o              -<span style="color: #990000">&gt;</span> Disassembly of executable section<span style="color: #990000">:</span> la salida está en los lenguajes C<span style="color: #990000">(</span>si existe<span style="color: #990000">),</span> ASM y binario
+objdump  -t <span style="font-weight: bold"><span style="color: #0000FF">exit</span></span><span style="color: #990000">.</span>o              -<span style="color: #990000">&gt;</span> imprime la tabla de símbolos<span style="color: #990000">,</span> se puede comprobar si hay secciones <span style="color: #990000">.</span>debug para el Depurador</tt></pre></div></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_cuestiones_5">7.1.4. Cuestiones</h4>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Comparar el tamaño de los módulos reubicable y ejecutable. ¿A qué es debido?
+</p>
+</li>
+<li>
+<p>
+Comparar el tamaño de los módulos ejecutables correspondientes a los módulos fuente exit.c y exit.s
+</p>
+</li>
+<li>
+<p>
+Indicar del módulo objeto la clase de objeto, el tipo de datos, máquina, sistema operativo, interfaz ABI y tipo de módulo.
+</p>
+</li>
+<li>
+<p>
+¿ Cuál es el punto de entrada del módulo reubicable y cuál el del módulo ejecutable?
+</p>
+</li>
+<li>
+<p>
+Si observamos la columna de direcciones  de cada uno de los dos módulos objeto ¿Cuál es la diferencia?¿Cuál es la relación con el linker?Nota:es necesario que el módulo objeto ejecutable se haya obtenido a partir del assembler as y ld y no del gcc.
+</p>
+</li>
+<li>
+<p>
+La sección de texto del módulo ejecutable en que dirección virtual de la memoria  comienza y cual es su tamaño.
+</p>
+</li>
+<li>
+<p>
+¿ Cuántas secciones tiene el módulo objeto?
+</p>
+</li>
+<li>
+<p>
+¿ Cuál es el código máquina de la instrucción <code>syscall</code> ?
+</p>
+</li>
+<li>
+<p>
+Si observamos la compilación de <em>exit.s</em> en que dirección se encuentra el punto de entrada a la función exit() de la librería libc.
+</p>
+</li>
+</ol></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_apendice">8. Apéndice</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_compilacion_2">8.1. Compilación</h3>
+<div class="sect3">
+<h4 id="_librerias">8.1.1. Librerías</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>gcc  -o exit exit.c</code>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Durante la compilación se enlaza automáticamente con la librería libc.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Equivale a compilar <code>gcc -o exit exit.c -lc</code> donde la opción <em>-l</em> explicitamente indica enlazar con libc.
+</p>
+</li>
+<li>
+<p>
+Las librerías tienen todas ellas el prefijo <em>lib</em> (libc,libm,libxxx) que no se escribe junto a la opción <em>-l</em>
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_compilacion_de_un_modulo_at_amp_t_32_bits">8.1.2. Compilación de un módulo AT&amp;T 32 bits</h4>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Altenativa <em>gcc</em>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>gcc -m32  -nostartfiles -o exit exit.s</code> &#8594; no funciona en ubuntu 14.04
+</p>
+</li>
+</ul></div>
+</li>
+<li>
+<p>
+Alternativa <em>as-ld</em>
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>as --32 -o exit.o exit.s</code>
+</p>
+</li>
+<li>
+<p>
+<code>ld -melf_i386 -o exit exit.o</code>
+</p>
+</li>
+</ul></div>
+</li>
+</ol></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_enlazamiento_linker">8.2. Enlazamiento: linker</h3>
+<div class="sect3">
+<h4 id="_procedimiento">8.2.1. Procedimiento</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+El linker tiene que enlazar los diferentes modulos objeto reubicables <em>*.o</em> para lo cual debe de resolver el valor de las direcciones de memoria al que hacen referencia los diferentes módulos.
+</p>
+</li>
+<li>
+<p>
+En C normalmente utilizaremos funciones de la librería standard libc.
+</p>
+</li>
+<li>
+<p>
+Aunque no especifiquemos ninguna librería al compilar un módulo fuente, el linker siempre enlaza automáticamente con funciones del sistema operativo necesarias para la correcta ejecución de nuestro programa.
+</p>
+</li>
+<li>
+<p>
+Este enlazamiento se puede realizar de forma estática o dinámica
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+El enlazamiento estático se realiza antes de la ejecución y los módulos <em>*.o</em> quedan enlazados en el módulo final ejecutable.
+</p>
+</li>
+<li>
+<p>
+El enlazamiento dinámico se realiza durante la ejecución del módulo ejecutable.
+</p>
+<div class="ulist"><ul>
+<li>
+<p>
+Por ejemplo el enlazamiento con la función exit() de la librería dinámica libc.so se realiza dinamicamente. Es decir por un lado se carga en memoria la función <em>exit()</em> y por otro lado se carga en memoria el programa <code>exit</code> (resultado de compilar exit.s). Son dos cargas en memoria independientes. Durante la ejecución cuando nuestro programa <code>exit</code> llame a <em>exit</em> el linker tendrá que calcular la dirección donde comienza <em>exit</em>.
+</p>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_estructura_de_los_modulos_binarios">8.2.2. Estructura de los módulos binarios</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+<code>objdump -S exit.o</code>
+</p>
+</li>
+<li>
+<p>
+<code>objdump -S exit</code>
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_procedimiento_de_ejecucion_del_modulo_objeto_ejecutable">8.3. Procedimiento de Ejecución del módulo objeto ejecutable</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Cuando ejecutamos un programa a través de la interfaz shell de gnu/linux (prompt $), se llama al sistema operativo para la creación del proceso. Una vez creado el proceso, el S.O. lo llama para que la CPU lo ejecute. Una vez finalizada la ejecución del proceso se retorna al  sistema operativo que lo llamó devolviendo este un valor al S.O.. Mediante el comando <code>echo $?</code> imprimimos el parámetro recibido por el sistema operativo
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_llamadas_al_sistema">8.4. Llamadas al sistema</h3>
+<div class="sect3">
+<h4 id="_descripcion_llamada_al_sistema_exit_32_bits">8.4.1. Descripción Llamada al Sistema EXIT (32 bits)</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+El programa exit.s realiza una <strong>llamada al sistema</strong> a ejecutar por el kernel mediante la instrucción <em>int 0x80</em>. Los parametros de la llamada a la función se realizan mediante los registros EAX y EBX. EAX contiene el código que hace referencia al nombre de la función [exit] y EBX contiene el valor del argumento de la función [0xFF].
+</p>
+</li>
+<li>
+<p>
+La instrucción <em>int</em> recibe el nombre de interrupción software y el campo de operando <em>0x80</em>  es una <strong>llamada al sistema</strong> o llamada al kernel del sistema operativo. El programa exit.s se <strong>interrumpe</strong> , a través de la instrucción ensamblador <code>int 0x80</code>, para realizar una llamada al sistema.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect3">
+<h4 id="_descripcion_llamada_al_sistema_exit_64_bits">8.4.2. Descripción Llamada al Sistema EXIT (64 bits)</h4>
+<div class="ulist"><ul>
+<li>
+<p>
+El programa exit.s realiza una <strong>llamada al sistema</strong>, una llamada al kernel, mediante la instrucción <em>syscall</em>. Los parametros que se pasan al kernel, antes de la llamada, se realizan mediante los registros RAX y RDI. RAX contiene el código que hace referencia al nombre de la función que debe de ejecutar el kernel, en este caso el 60 es el código de la función EXIT .RDI contiene el valor del argumento de la función [0xFF].
+</p>
+</li>
+<li>
+<p>
+La instrucción <em>syscall</em> recibe el nombre de  <strong>llamada al sistema</strong> o llamada al kernel del sistema operativo. El programa exit.s se <strong>interrumpe</strong>  a través de la instrucción ensamblador <code>syscall</code>, para realizar una llamada al sistema.
+</p>
+</li>
+<li>
+<p>
+¿la función exit del kernel que operación realiza? &#8594; manual: <code>man 3 exit</code>
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<img src="/usr/local/etc/asciidoc/images/icons//important.png" alt="Importante" />
+</td>
+<td class="content">Todos los programas escritos en lenguaje ensamblador deben de finalizar mediante la llamada al sistema <em>EXIT</em></td>
+</tr></table>
+</div>
+<div class="imageblock ditaa">
+<div class="content">
+<img src="exit__1.png" alt="exit__1.png" />
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_descripcion_llamada_al_sistema_exit_desde_el_lenguaje_c">8.4.3. Descripción llamada al sistema EXIT desde el lenguaje C</h4>
+<div class="imageblock ditaa">
+<div class="content">
+<img src="exit__2.png" alt="exit__2.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_registros_punteros_a_la_pila">8.5. Registros punteros a la pila</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+(gdb) p $rsp
+</p>
+</li>
+<li>
+<p>
+(gdb) p $sp  &#8594; sp es un alias de stack pointer (top de la pila) por lo que equivale al registro $RSP
+</p>
+</li>
+<li>
+<p>
+(gdb) p $rbp
+</p>
+</li>
+<li>
+<p>
+(gdb) p $fp  &#8594; fp es un alias de frame pointer (bottom de la pila) por lo que equivale al registro $RBP
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bibliografia">9. Bibliografía</h2>
+<div class="sectionbody">
+<div class="ulist bibliography"><div class="title">Libros</div><ul>
+<li>
+<p>
+<a id="programming_from_ground_up"></a>[programming_from_ground_up] <a href="http://programminggroundup.blogspot.com/2007/01/programming-from-ground-up.html">Programming from the Ground Up. Jonathan Bartlett</a>: GNU Assembler, AT&amp;T language
+</p>
+</li>
+<li>
+<p>
+[<a id="Paul Carter"></a> <a href="http://www.drpaulcarter.com/pcasm/">Paul Carter</a>: Netwide Assembler, Intel language
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Version v1.0.0<br />
+Last updated 2016-11-05 18:15:01 CET
+</div>
+</div>
+</body>
+</html>

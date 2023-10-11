@@ -1,0 +1,4 @@
+Nombre  ;Comentario                  ;Código           ;Operación                                           ;O D I T S Z A P C
+NOP     ;Hacer nada                  ;NOP              ;No hace operación alguna                            ; 
+LEA     ;Cargar direciión Efectiva   ;LEA Fuente,Dest  ;Dest := dirección fuente                            ;
+INT     ;Interrupción                ;INT Num          ;Interrumpe el proceso actual y salta al vector Num  ;    0 0

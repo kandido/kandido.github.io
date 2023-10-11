@@ -1,0 +1,5 @@
+Instrucciones:
+"a. MOVE.W -(A1),A3"
+b. CLR.B  -11(A2)
+"c. MOVE.W  (A4)+,-100(A1,D5.W)"
+"d. MOVE.W  #$1FF,D5"

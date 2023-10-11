@@ -1,0 +1,84 @@
+Registros
+=========
+
+
+:doctitle: Registros
+
+ISA
+---
+
+* Los  registros son unidades de memoria de capacidad una única palabra (instrucción, dato, dirección de memoria, resultado temporal, etc ) y de latencia del orden de 1 ns. Nominación típica de estos registros son el Contador de Programa, el Registro de Instrucción, el Acumulador, el Buffer de Datos, etc.... Son utilizados por la Unidad de Control en la ruta de datos de la microarquitectura de la CPU como parte fundamental del ciclo de instrucción. Estos registros no  son accesibles por el programador.
+
+* Los registros accesibles por el programador son el nivel L0 de la jerarquía de memoria de la arquitectura de la computadora. Son conocidos los Registros de Propósito General referenciados en el campo de dirección del formato de instrucción de la Arquitectura del Repertorio de Instrucciones (ISA). En el caso de la arquitectura x86-32 están los registros de propósito general de EXtensión: EXA, EXB, EXC, ESP, ESI, etc.... (extensión de la arquitectura anterior de 16 bits AX,BX,CX, etc...).
+
+* Debido a que los  registros forman parte de la microarquitectura de la cpu, este apartado se podría estudiar también dentro del tema dedicado a la CPU. 
+
+Arquitectura amd64
+------------------
+
+image::./images/instrucciones_representacion/registers_1200x800.png[title="x86 registers"]
+
+
+image::./images/memoria/Table_of_x86_Registers_svg.png[height=500, width=1000,align="center",title="Registers x86"]
+
+[.text-center]
+image::./images/memoria/instruction_extensions_simd.png[height=300, width=600,align="center",title="SIMD instructions evolution" ]
+
+
+* Observar que al igual que rax incluye a eax y eax incluye ax y ax incluye al, también zmm incluye a ymm e ymm incluye a xmm
+* https://en.wikipedia.org/wiki/X86#x86_registers[wiki x86]
+* link:./basicos_x86_Registers.html[General Purpose Registers x86]
+** RAX,etc
+** RFLAGS
+** CS-DS-SS-
+** ST0-ST7
+*** Float Point Registers
+*** alias de los registros FPU
+*** eight 80-bit wide registers: 32-, 64-, or 80-bit floating point, 16-, 32-, or 64-bit (binary) integer, and 80-bit packed decimal integer.
+** MMX
+*** ya en desuso y superados por XMM.
+*** MMX instructions: 'integer SIMD' (Single Instruction Multiple Data). MMX is a  instruction set designed by Intel, introduced in 1997 with its P5-based Pentium line of microprocessors.  a single instruction can then be applied to two 32-bit integers, four 16-bit integers, or eight 8-bit integers at once.
+*** MM0-MM7 (64 bits).  Each register is 64 bits wide and can be used to hold either 64-bit integers, or multiple smaller integers in a "packed" format.  
+*** packed data types: two 32-bit integers, four 16-bit integers, or eight 8-bit integers concurrently -> solo enteros.
+*** Trabaja sólo con enteros pero por causas de compatibilidad en los cambios de contexto de los S.O. se creo un alias entre los MMX y los FPU generando el problema de no poder utilizar en una misma aplicación los FP y los MMX ya que las operaciones de uno afecta al otro.
+*** Los registros FP del FPU x87 tiene acceso modo pila mientras que los MMX tienen acceso aleatorio.
+** XMM
+*** Ya en desuso y superados por YMM.
+*** XMM0–XMM15 (128 bits)
+*** SSE (Streaming SIMD Extensions) instruction. Is an 'floating point SIMD' instruction set extension to the x86 architecture introduced on 1999 with Pentium III.
+*** Evolución de los MMX. Equivalente a MMX pero con datos de tipo coma flotante.
+*** Se puede operar simultaneamente con los FP,MMX y XMM.
+** YMM
+*** YMM0-YMM15 (256 bits)
+*** La extensión de los XMM a 256 bits
+*** https://en.wikipedia.org/wiki/Advanced_Vector_Extensions[AVX]: Advanced Vector Extensions instructions
+*** Unicamente datos en coma flotante: 'floating point SIMD'
+*** AVX introduces a three-operand SIMD instruction format, where the destination register is distinct from the two source operands
+*** Compatibilidad: The AVX instructions support both 128-bit and 256-bit SIMD
+*** Intel comienza con este set en el 2011: Sandy Bridge processor, Q1 2011.
+*** https://software.intel.com/en-us/blogs/2011/06/13/haswell-new-instruction-descriptions-now-available/[AVX2]
+**** Haswell microarchitecture año 2013: Haswell processor, Q2 2013
+**** AVX2 - 'Integer' data types expanded to 256-bit SIMD
+** ZMM
+*** (ZMM0-ZMM31) : 512 bits
+*** https://software.intel.com/en-us/blogs/2013/avx-512-instructions[Intel AVX-512]: Julio 2013
+**** Programs can pack eight double precision or sixteen single precision floating-point numbers, or eight 64-bit integers, or sixteen 32-bit integers within the 512-bit vectors. This enables processing of twice the number of data elements that AVX/AVX2 can process with a single instruction and four times that of SSE.
+*** https://en.wikipedia.org/wiki/Advanced_Vector_Extensions[AVX-512 instructions] 
+* https://en.wikipedia.org/wiki/Control_register[Control Registers x86]:CRx
+** Controlar por ejemplo la paginación de memoria.
+* https://en.wikipedia.org/wiki/X86_debug_register[Debug Registers x86]:DRx
+** Se utilizan para implementar por ejemplo las direcciones de los puntos de ruptura: DR0-DR3
+
+* Check
+** En linux con la instrucción +cpuid+ podemos chequear la compabilidad de la cpu con la extensiones ISA: mmx,sse,avx,etc
+* Conceptos
+** SIMD: Single instruction multiple data.
+** Vectorizing code: instrucción que operan con vectores -> una operación sobre múltiples datos simultáneamente.
+** DSP: Digital Signal Processor
+
+* Tipos de registros
+** https://en.wikibooks.org/wiki/Microprocessor_Design/Register_File
+** Register File: memoria estática formada por una secuencia de registros con un bus de direcciones que mediante un decodificador selecciona uno de los registros.
+** Register Banking: dos posibles interpretaciones.
+*** Banked Registers for Interrupt Handling: En lugar de utilizar la memoria principal (pila) para  salvar y recuperar los registros cuando es interrumpido la ejecución de un proceso debido a una interrupción externa, utilizamos registros internos de la CPU para tal propósito: Se incrementa la velocidad de respuesta a una interrupción. La forma de implementar esta técnica es renombrando los registros utilizados por la rutina que interrumpe respecto de la rutina interrumpida.
+*** Agrupamiento por bancos: El conjunto de registros se agrupa por bancos que pueden ser accedidos simultáneamente.
