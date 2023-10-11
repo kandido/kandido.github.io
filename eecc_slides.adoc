@@ -2116,9 +2116,11 @@ close 6
 
 === Ejercicios de Prácticas
 
-* Ejercicio: código ensamblador con servicio "write" según el prototipo del manual "man 2 write"
+* Datos: 
 ** Todos los números enteros de todos los ejercicios tendrán un tamaño de 2 bytes. 
 ** Dado el string  "The United Nations Convention on the Rights of the Child is an important agreement by countries who have promised to protect children’s rights." contar el número de veces que aparece a letra "a"
 ** Dado el array de números enteros: 0xFFFF,0x03,0x7FA0,0x87BC,0xBA34,0xFA,0x732 buscar el número con el valor negativo de menor módulo
 ** Dado el array lista_A : 12,-33,45 y el array lista_B: 76,89,-65 generar el array lista_D suma de los elementos de lista_A y lista_B
 ** Dado el array lista_A : 12,-33,45 y el array lista_B: 76,89,-65 generar el array lista_C formado el encadenamiento de lista_A y lista_B
+* Llamadas al Sistema
+** Función "write" según el prototipo del manual "man 2 write"
