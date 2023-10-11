@@ -10,8 +10,8 @@
 // Despite the warning of the documentation, https://github.com/asciidoctor/asciidoctor-reveal.js, highlight.js syntax highlighting WORKS, BUT, you need to explicitly set the highlighter using the below attribute
 // see http://discuss.asciidoctor.org/Highlighting-source-code-for-reveal-js-backend-td2750.html
 :source-highlighter: highlight.js
-:highlightjs-languages: vhdl, x86asm
-:source-language: vhdl, x86asm
+:highlightjs-languages: vhdl, x86asm, x86asmatt
+:source-language: vhdl, x86asm, x86asmatt
 //:source-highlighter: rouge
 //:source-highlighter: pygments
 // revealjs attributes
@@ -36,6 +36,8 @@
 //:lang: es
 //:encode: ISO-8859-1
 //:ascii-ids:
+//eecc_slides-docinfo-footer.html contiene la carga y registro del lenguaje x86asmatt, de chalkboard y de notes icon
+:docinfo: private
 :show-link-uri:
 :asciidoctor-fetch-kroki: 
 :experimental:
@@ -661,7 +663,7 @@ image:ADC_codigo.webp[Mountain,600,500,float="left"]
 Calcular para las resoluciones de 3 bit y 16 bits cual es el mínimo incremento de señal codificable o error de cuantificación: con 3 bits el número de niveles es 2^3^=8niveles y el mínimo relativo es 2^-3^=1/8; con 16 bits el número de niveles es 2^16^ y el mínimo relativo es 2^-16^= 1/65536. 
 
 [.text-left]
-Representación de los números en código binario : <<Tema2_RepInf>>
+Representación de los números en código binario : <<Tema3_RepDatos>>
 
 
 
@@ -2080,12 +2082,10 @@ suma:
 * Volcar el contenido de la cabecera "/usr/include/asm/instd_32.h"
 +
 
-[C,source]
+[source,C]
 ----
 exit 1
-fork 2
-read 3
-write 4
+fork 2r
 open 5
 close 6
 ----
@@ -2106,3 +2106,19 @@ close 6
 ----
 
 * Ejercicio: código ensamblador con servicio "write" según el prototipo del manual "man 2 write"
+
+=== Ejercicios
+
+* En los apuntes https://kandido.github.io/eecc_book.html[on line], en la sección III de "Ejercicios de Teoría" se invita a realizar como mínimo los ejercicios especificados en la "Lista mínima de ejercicios" de los cuales en clase se realizarán los siguientes:
+** Arquitectura de Von Neumann: 1.1,1.2,1.3,1.4 y 1.6 (no programar en lenguaje ensamblador IASSim)
+** Representación de los Datos: 2,3,4 y 5
+** Programación en Lenguaje ensamblador AT&T: 1.1, 1.2, 2.2.
+
+=== Ejercicios de Prácticas
+
+* Ejercicio: código ensamblador con servicio "write" según el prototipo del manual "man 2 write"
+** Todos los números enteros de todos los ejercicios tendrán un tamaño de 2 bytes. 
+** Dado el string  "The United Nations Convention on the Rights of the Child is an important agreement by countries who have promised to protect children’s rights." contar el número de veces que aparece a letra "a"
+** Dado el array de números enteros: 0xFFFF,0x03,0x7FA0,0x87BC,0xBA34,0xFA,0x732 buscar el número con el valor negativo de menor módulo
+** Dado el array lista_A : 12,-33,45 y el array lista_B: 76,89,-65 generar el array lista_D suma de los elementos de lista_A y lista_B
+** Dado el array lista_A : 12,-33,45 y el array lista_B: 76,89,-65 generar el array lista_C formado el encadenamiento de lista_A y lista_B
