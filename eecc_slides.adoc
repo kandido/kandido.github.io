@@ -67,6 +67,8 @@ Tema 3: Representación Digital de la Información: <<Tema3_RepDatos, Los Datos>
 Tema 4: Operaciones Aritméticas y Lógicas: <<op_nat, Nº Naturales>>, <<op_ent, Nº Enteros>>, <<op_log, Operaciones Lógicas>>   
 Tema 5: <<Tema5_RepInstrucciones, Representación Digital de la Información: las Instrucciones.>>
 Tema 6: <<Tema6_ProgAsm, Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.>>
+Ejercicios Teoría: <<Tema1-6_Ejer, Ejercicios Propuestos Temas 1-6>>
+Programas ASM Propuestos: <<Prac_Ejer_I, Al finalizar el 1º Parcial>>
 
 [#Tema1_Intro]
 == Tema 1 : Introducción a la Asignatura Estructura de Computadores.
@@ -1985,11 +1987,25 @@ sumMtoN:
 [source,x86asm]
 ----
 ## Subrutina sumMtoN.s
+### Descripcion: el shell de linux llama a la función main() y este llama a la subrutina suma()
+                 el shell de linux pasa a main() los strings de la línea de comandos pero aquí no se utilizan
+                 main() se va a definir como una subrutina (prologo,epilogo,etc ...)
+		 suma() tiene dos argumentos M y N y calcula la suma de números enteros desde M hasta N
+###             
+### gcc -m32 -o sumMtoN sumMtoN.s
+### Ensamblaje as --32  -o sumMtoN.o  sumMtoN.s
+### linker -> ld  -e main -melf_i386 -I/lib/i386-linux-gnu/ld-linux.so.2  -o  sumMtoN  sumMtoN.o 
+
+### manual de instrucciones x86 -> https://www.felixcloutier.com/x86/
+
 
 	.section .data
 M:	.byte 3
 N:	.byte 10
 resultado: .byte 0
+
+	## el shell de linux llama a main()
+	## el shell como funcion llamante ha preservado eax, ecx y edx
 
 	.global main
 	.section .text
@@ -1997,82 +2013,117 @@ main:
 	## prologo de main
 	push %ebp
 	mov %esp,%ebp
+	## variable local de main
+	sub $4,%esp
+	## como funcion que ha sido llamada por el shell preserva ebx, esi y edi para el shell
+        push %edi
+	push %esi
+	push %ebx
 
-	## preservar los registros por convenio
-	push %eax
-	push %ecx
+	## capturar argumentos de la funcion llamante (linea de comandos del shell)
+	##   en este caso no utilizo los argumentos
+	## podría procesar los argumentos del shell y utilizar cualquiera de los registros eax,ebx,ecx,edx,esi,edi
+        ##   en este caso no hay proceso
+
+	## Voy a llamar a suma() y empiezan los preparativos	
+	## preservar los registros que puede utilizar suma() libremente
 	push %edx
+	push %ecx
+	push %eax
 	
-	## pasar los argumentos
-	mov N,%ecx
+	## pasar los argumentos a suma()
+	movb N,%ecx   ## segundo argumento
         push %ecx
-	mov M,%edx
+	movb M,%edx  ## primer argumento
         push %edx
 
 	
 	## Llamar a la subrutina        
         call suma
 
-	## Guardar el resultado
-	mov %eax,resultado
+	## Guardar el resultado de suma()
+	movb %al,resultado
 
-	## recuperar los registros por convenio
-	pop %edx
-	pop %ecx
+	## recuperar los registros salvados antes de la llamada suma()
 	pop %eax
+	pop %ecx
+	pop %edx
+
+	## podría procesar los datos y utilizar cualquiera de los registros eax,ebx,ecx,edx,esi,edi y  la variable resultado
+	## En este caso no proceso nada, tengo el resultado en AL
+
+	## Finalizo la funcion main() como toda subrutina retornando a la función llamante, en este caso el shell de linux
+        ## como funcion que ha sido llamada por el shell recupera ebx, esi y edi para el shell
+        pop %ebx
+	pop %esi
+	pop %edi
+
+	## Retorna un valor al shell a traves de EAX por CONVENIO
+	movb resultado,%al
 
 	## epilogo de main
 	mov %ebp,%esp           # frame anterior
 	pop %ebp
-
-	## salida
-        movl resultado,%ebx
-	movl  $1, %eax	    #1 is the exit() syscall
-	int   $0x80
+        
+        ret
 
 
 
-### Función que calcula la suma de números de enteros en la secuencia entre dos límites dados
+### Funcion que calcula la suma de numeros de enteros en la secuencia entre dos limites dados
 	.type suma, @function
 	.section .text
 suma:
-	## prologo
+	## Pasos iniciales antes del procesamiento de los argumentos de suma()
+	## prologo: genera un nuevo frame para suma()
 	push %ebp
 	movl %esp,%ebp
         
-        # una variable local de 4 bytes
+        # una variable local de 4 bytes para suma()
 	subl $4,%esp            
-	## preserva los registros por el convenio
-	push %ebx
+
+	## preserva los registros utilizados por main()
 	push %edi
 	push %esi
+	push %ebx
 	
-        ## captura de argumentos
-	movl 8(%ebp),%eax      #1º argumento 
-	movl 12(%ebp),%ecx     #2º argumento
-	## algoritmo de la subrutina
-	## bucle
-        ##   xxxx xxxx
-        ##   xxxx xxxx
-	## el resultado está en EAX  
-	## recupera los  registros por el convenio
+        ## captura de argumentos de la función suma()
+	movb 8(%ebp),%al      #1º argumento 
+	movb 12(%ebp),%cl     #2º argumento
+
+
+	## algoritmo de la subrutina suma(): suma desde el 1º arg hasta el 2º arg
+        ## se pueden utilizar cualquiera de los registros eax,ebx,ecx,edx,esi,edi
+	## utilizo "al" como suma parcial y "bl" como sumando
+	movb %al,%bl
+bucle:
+	inc %bl
+	addb %bl,%al
+	cmpb %bl,%cl
+	jg  bucle         
+	
+	## el resultado esta en AL  por CONVENIO
+
+	## Comienza el retorno a la función llamante main()
+	## recupera los  registros salvados para main()
+	pop %ebx
 	pop %esi
 	pop %edi
-	pop %ebx
 
 	## epilogo
 	mov %ebp,%esp           # frame anterior
 	pop %ebp
-	ret                     # recuperar dirección de retorno
+	ret                     # recuperar dirección de retorno	
+	
+	.end
 ----
 
 
 
 === Ejercicio
-*  link:./as_code/sum1toN_v8.s[sum1toN_v8.s]
-** Convertir el bloque sum1toN en una subrutina
-*  link:./as_code/sum1toN_v9.s[sum1toN_v9.s]
-** Convertir el bloque sum1toN en una subrutina recursiva
+*  link:./as_code/sumMtoN_preservar.s[sumMtoN_preservar.s]
+** Convertir el bloque sumMtoN en una subrutina
+*  link:./as_code/recursion.c[recursion.c]
+** Convertir la función recursion.c en una subrutina recursiva
 
 === LLamadas al Sistema
 
@@ -2107,14 +2158,15 @@ close 6
 
 * Ejercicio: código ensamblador con servicio "write" según el prototipo del manual "man 2 write"
 
-=== Ejercicios
-
+[#Tema1-6_Ejer]
+== Ejercicios Propuestos Temas 1-6
 * En los apuntes https://kandido.github.io/eecc_book.html[on line], en la sección III de "Ejercicios de Teoría" se invita a realizar como mínimo los ejercicios especificados en la "Lista mínima de ejercicios" de los cuales en clase se realizarán los siguientes:
 ** Arquitectura de Von Neumann: 1.1,1.2,1.3,1.4 y 1.6 (no programar en lenguaje ensamblador IASSim)
 ** Representación de los Datos: 2,3,4 y 5
 ** Programación en Lenguaje ensamblador AT&T: 1.1, 1.2, 2.2.
 
-=== Ejercicios de Prácticas
+[#Prac_Ejer_I]
+== Ejercicios de Prácticas I
 
 * Datos: 
 ** Todos los números enteros de todos los ejercicios tendrán un tamaño de 2 bytes. 
