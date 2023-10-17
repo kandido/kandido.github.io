@@ -6,7 +6,7 @@
 :background-color="#ff0000":
 :icons: font
 :imagesdir: images
-:customcss: styles/mipruebaCSS.css
+:customcss: styles/myCustomCSS.css
 // Despite the warning of the documentation, https://github.com/asciidoctor/asciidoctor-reveal.js, highlight.js syntax highlighting WORKS, BUT, you need to explicitly set the highlighter using the below attribute
 // see http://discuss.asciidoctor.org/Highlighting-source-code-for-reveal-js-backend-td2750.html
 :source-highlighter: highlight.js
@@ -21,7 +21,7 @@
 // Al actualizar el slide no cambia de transpa y no se va al inicio
 :revealjs_hash: true   
 :revealjs_history: true
-:revealjs_center: false
+:revealjs_center: true
 :revealjs_width: "100%"
 :revealjs_height: "100%"
 :revealjs_margin: 0
