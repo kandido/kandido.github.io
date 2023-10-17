@@ -68,10 +68,23 @@ section[data-state="taula_ta"] table  {
     background: #f8f8f7;
 }
 
+
+/*LISTAS*/
+
 .reveal li {
 	font-family: 'Neuton', sans-serif;
 	text-align: left;
 	text-indent: 1px;
 	font-size: 0.80em;
 	font-weight: 400;
+}
+
+/*COLUMNAS*/
+
+
+.reveal .zutabe {
+  position: relative;
+  font-size: 0.6em;
+  top: 1px;
+  left: 0.5em;
 }
