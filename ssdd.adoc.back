@@ -1,7 +1,7 @@
 = Sistemas Digitales 
 // classic AsciiDoctor attributes
-:stem: latexmath
-//:stem:
+//:stem: latexmath
+:stem:
 :background-color="#ff0000":
 :icons: font
 :imagesdir: images
@@ -19,10 +19,13 @@
 // Al actualizar el slide no cambia de transpa y no se va al inicio
 :revealjs_hash: true   
 :revealjs_history: true
-:revealjs_center: true
-:revealjs_width: "100%"
-:revealjs_height: "100%"
-:revealjs_margin: 0
+
+
+//:revealjs_center: true
+//:revealjs_width: "100%"
+//:revealjs_height: "100%"
+//:revealjs_margin: 0
+
 //:revealjs_minScale: 1,
 //:revealjs_maxScale: 1
 
@@ -46,7 +49,12 @@
 
 :ruta-apuntes: home/candido/Dropbox/apuntes
 
-<<<
+== Transparencias en Formato PDF
+
+* link:./PDF/ssdd_slides.pdf[Transparencias PDF]
+* Si hay algún error de forma en el documento PDF que dificulte su interpretación, por favor, enviar un mensaje para su correción. Gracias.
+
+
 == Indice
 
 [%hardbreaks]
@@ -56,12 +64,17 @@ Tema 3: <<Tema3_BoolePuertas, Algebra de Boole. Puertas Lógicas.>>
 Tema 4: <<Tema4_VHDL, Lenguaje de Descripción Hardware VHDL.>>
 Tema 5: <<Tema5_CircArit, Circuitos Aritméticos.>>
 Tema 6: <<Tema6_OtrosCirc, Otros Circuitos Combinacionales.>>
+Parte 2ª : link:ssdd2.html[Sistemas Digitales: Segunda Parte]
+Tema 7: link:ssdd2.html#/Tema7_Seq[Circuitos Secuenciales]
+Tema 8: link:ssdd2.html#/Tema8_Fam[Circuitos Digitales Integrados. Familias Lógicas.]
+Tema 9: link:ssdd2.html#/Tema9_Mem[Memorias.]
+Tema 10: link:ssdd2.html#/Tema10_PLD[Dispositivos de Lógica Programable (PLD).]
+Tema 11: link:ssdd2.html#/Tema11_Dac[Convertidores Analógico/Digiales DAC/ADC.]
 
 
-
+[#Tema1_Intro]
 [.columns]
-<<<
-== Tema 1 : Introducción a los Sistemas Digitales Electrónicos [[Tema1_Intro]]
+== Tema 1 : Introducción a los Sistemas Digitales Electrónicos
 
 [.column]
 * Presentación
@@ -81,7 +94,6 @@ Tema 6: <<Tema6_OtrosCirc, Otros Circuitos Combinacionales.>>
 
 
 // [%notitle]
-<<<
 === Profesorado
 
 * Prof. Cándido Aramburu Mayoz.
@@ -100,7 +112,6 @@ Tema 6: <<Tema6_OtrosCirc, Otros Circuitos Combinacionales.>>
 * https://www.unavarra.es/eu/sites/Portada/home.html
 --
 
-<<<
 === Contacto
 
 * Despacho: Edificio Los Tejos 2 Planta: Despacho 2028 (Prof. Candido Aramburu)
@@ -112,12 +123,10 @@ Tema 6: <<Tema6_OtrosCirc, Otros Circuitos Combinacionales.>>
 ** Lunes (14-17) y  Miércoles (9-12)
 ** Cita Previa
 
-<<<
 === Calendario
 
 
 [.state=topleft]
-<<<
 === Febrero
 
 [%header, format=csv]
@@ -132,7 +141,6 @@ Lunes,Miércoles
 |===
 
 [.state=topleft]
-<<<
 === Marzo
 
 
@@ -140,14 +148,38 @@ Lunes,Miércoles
 |===
 Lunes,Lunes
 
-6,13
-20,27
+6-Tema6:Multiplexor-Decodificador,13-Tema6:BCD y Ejercicios Examen
+20-Tema7:Sist.Secu-Introducción y Ejercicios Examen ,27-Tema7:Sist.Secu-Ascensor y Ejercicios Examen 1 de Abril
 |===
 
-<<<
+
+[.state=topleft]
+=== Abril
+
+
+[%header, format=csv]
+|===
+Lunes,Lunes
+
+3-Tema7:Sist.Secu.Ascensor.VHDL, 10-Vacación S. Santa
+17-Tema7:Registros y Contadores, 24-Tema8:Familias Lógicas y Memorias
+|===
+
+[.state=topleft]
+=== Mayo
+
+
+[%header, format=csv]
+|===
+Lunes,Lunes
+
+1-Tema9: Lógica Programable y Ejercicios, 8-  Ejercicios
+15-Ejercicios, 22-Ejercicios
+Examen 24/05/2023 08:00, 12/06/2023 08:00
+|===
+
 === Sistemas Digitales
 
-<<<
 === Tomografía axial computarizada
 
 
@@ -155,7 +187,6 @@ image:bio_tac_clinic.jpeg[Mountain,400,300,float="left"]
 image:bio_tac_hw.jpeg[Mountain,400,300,float="right"]
 
 
-<<<
 === Sistema Digital
 
 image:bio_tac_block_fpga_2.jpeg[Mountain,650,550,float="left"]
@@ -173,20 +204,16 @@ Circuitos *_lógicos_* : multiplexores, filtros, codificadores, etc ... +
 
 
 
-<<<
 === Electrónica
 
-<<<
 === Equipos de Electrónica
 
 image:equipos_electronica.jpeg[Mountain,400,300,float="left"]
 
-<<<
 === Esquema Eléctrico
 
 image:esquema_electrico.png[Mountain,600,400,float="left"]
 
-<<<
 === Componentes de una tarjeta de circuito impreso
 
 image:pcb_componentes.png[Mountain,400,300,float="left"]
@@ -200,31 +227,25 @@ Componentes: +
  --el componente básico es el transistor -> un procesador puede tener cientos de millones. +
  --los microcircuitos hechos de transistores pueden ser tanto circuitos analógicos (un amplificador) como digitales (puertas lógicas) +
 
-<<<
 === Printed Circuit Board
 
 image:print_circuit_board.jpg[Mountain,600,400,float="left"]
 
-<<<
 === Instrumentación
 
 image:instrumentacion.webp[Mountain,600,500,float="left"]
 
-<<<
 === La Electrónica en la Profesión
 
 image:electronics_job.png[Mountain,750,600,float="left"]
 
-<<<
 === Técnico
 
 image:tecnico_electronica.jpeg[Mountain,400,300,float="left"]
 
-<<<
 === ¿ Profesiones relacionadas con la Electrónica?
 
 [state=txiki]
-<<<
 === Fases de Diseño de Circuitos Electrónicos Binarios
 
 . Funcional (manual): abstracción matemática
@@ -240,7 +261,6 @@ image:tecnico_electronica.jpeg[Mountain,400,300,float="left"]
 
 
 
-<<<
 === La Electrónica en la Carrera Universitaria
 
 * Conocimientos de Electrónica
@@ -252,8 +272,9 @@ image:tecnico_electronica.jpeg[Mountain,400,300,float="left"]
 *** Comercialización
 *** Usuario: Equipos, Plataformas
 
+
+
 [state=taula]
-<<<
 === Representación Científica y Prefijos de las Unidades
 
 
@@ -270,10 +291,8 @@ image:tecnico_electronica.jpeg[Mountain,400,300,float="left"]
 ** Notación científica -> 10^9^Hz
 ** Debidamente: Notación científica con prefijos f=1GHz -> T=1/f=10^-9^seg= 1ns
 
-<<<
 === Señales: Conversión Analógica Digital
 
-<<<
 === Analogica vs Digital
 
 * Señal Continua
@@ -283,14 +302,12 @@ image:tecnico_electronica.jpeg[Mountain,400,300,float="left"]
 ** Amplitud: finitos valores posibles en el rango
 ** Tiempo: finitos valores posibles en el rango 
 
-<<<
 === Señales : Muestreo y Cuantificación
 
 image:muestreo_cuantificacion.jpg[Mountain,900,400]
 
 
 
-<<<
 === Codificación
 
 image:ADC_codigo.webp[Mountain,600,500,float="left"]
@@ -303,7 +320,6 @@ Representación de los números en código binario : <<Tema2_RepInf>>
 
 
 
-<<<
 === Señales Binarias : Abstractas
 
 image:clock-signals.png[Mountain,400,300,float="left"]
@@ -314,7 +330,6 @@ Cronograma: Representación temporal de las señales digitales binarias.
 Esa representación típica de los libros de texto, pizarra de clase, etc ... es ideal ya que físicamente siempre habrá distorsión.
 
 
-<<<
 === Señales Binarias : Físicas
 
 image:Digital-signal-noise.svg.png[Mountain,400,300,float="left"]
@@ -325,10 +340,8 @@ La señal física está distorsionada por causas como pej: línea larga de trans
 Un ejemplo típico de distorsión son los tiempos de subida y bajada, que no son nulos sino del orden de unos nanosegundos.
 La distancia considerable entre los dos niveles (binario) a la entrada del receptor hace fácil la discriminación entre el '0' y el '1'.
 
-<<<
 === Digitalización de las Señales
 
-<<<
 === Ventajas
 * Calidad: Fácil de recuperar a pesar de la distorsión
 * Almacenamiento: Fiabilidad, Diversidad Formatos
@@ -336,7 +349,6 @@ La distancia considerable entre los dos niveles (binario) a la entrada del recep
 * Procesamiento: Sencillo, Flexible
 * Coste: Barato (componentes)
 
-<<<
 === Abstracción
 
 * Niveles: el 0 y el 1
@@ -344,10 +356,8 @@ La distancia considerable entre los dos niveles (binario) a la entrada del recep
 ** Matemáticas: Algebra de Boole
 
 
-<<<
 === Organización Académica
 
-<<<
 === Programa de la Asignatura
 
 * http://www.unavarra.es/ficha-asignaturaDOA/?languageId=100000&codPlan=246&codAsig=246110&anio=2022[Ficha Web Upna]
@@ -356,8 +366,10 @@ La distancia considerable entre los dos niveles (binario) a la entrada del recep
 ... *_Circuitos Secuenciales_*
 ... Otros: Números, Lógica Programable (VHDL), Teoría Tecnología
 * Bibliografía
+** Fundamentos de Electrónica Digital. Cecilio Blanco
+** Circuitos Electrónicos Digitales. Manuel Mazo
+** Fundamentos de Sistemas digitales. Thomas Floyd
 
-<<<
 === Prácticas
 * Tipo de prácticas:
 ** Diseño manual
@@ -366,18 +378,15 @@ La distancia considerable entre los dos niveles (binario) a la entrada del recep
 ** Descripción del Circuito mediante el Lenguaje VHDL. Fabricación del Circuito en tecnología FPGA
 
 
-<<<
 === Ejercicios
 
-* Tipo de problemas: Libro Verde -> Ejercicios tipo examen -> Sin calculadora y sin libros
-+
+* Tipo de problemas: Libro Verde -> Ejercicios tipo examen -> Sin calculadora y sin libros +
 
 -----
 El libro verde se adquiere en el edificio de rectorado, en la sección de comunicacion,
 que se encuentra en planta baja del edificio.
 El horario: 8 a 14:30. Precio 8.5$. 
 -----
-+
 
 ----
 * Capítulo 1: 1.1, 1.2, 1.4, 1.5, 1.6, 1.8, 1.9
@@ -392,17 +401,17 @@ El horario: 8 a 14:30. Precio 8.5$.
 * Los ejercicios del tema 2 (Representación de la Información) no están en el libro verde
 ** Miaulario -> Recursos -> Ejercicios
 
-<<<
+
+
 === Evaluación
 
 * Sistema de Evaluación:
 ** 75% teoría y 25% prácticas
-** Evaluación continua Teoría: dos parciales (30% 1º parcial y 45% 2º parcial). Nota mínima en el 2º parcial: 5. El Primer parcial se realizará el sábado 25 de Marzo a las 9:00, el segundo parcial el 24 de Mayo a las 8:00 y la recuperación el 12 de Junio a las 8:00
+** Evaluación continua Teoría: dos parciales (30% 1º parcial y 45% 2º parcial). Nota mínima en el 2º parcial: 4. El Primer parcial se realizará el sábado 1 de Abril a las 9:00, el segundo parcial el 24 de Mayo a las 8:00 y la recuperación el 12 de Junio a las 8:00
 ** Recuperación Teoría: Entra todo. Nota mínima: 5.
 ** Evaluación Prácticas: Un único exámen el sábado XX de Mayo, no recuperable.
 
 
-<<<
 === Metodología
 
 * Trabajo en clase: principalmente Ejercicios con su teoría asociada
@@ -414,12 +423,10 @@ El horario: 8 a 14:30. Precio 8.5$.
 * Tutorías
 ** Resolución de dudas
 
+[#Tema2_RepInf]
+== Tema 2 : Representación Digital de la Información
 
-<<<
-== Tema 2 : Representación Digital de la Información [[Tema2_RepInf]]
-
-[state=txiki]
-<<<
+[state=txikiago]
 === Indice
 
 * Información: números, caracteres, imagen, sonido, etc ..
@@ -436,11 +443,9 @@ El horario: 8 a 14:30. Precio 8.5$.
  
 
 
-<<<
 === Representación de los Números 
 
 [state="taula"]
-<<<
 === Representación de los Números Decimales
 
 [.text-left]
@@ -451,7 +456,7 @@ El horario: 8 a 14:30. Precio 8.5$.
 
 
 .Número 5451
-[width=100%,cols="<3s,4*^1"]
+[width=60%,cols="<3s,4*^1"]
 |===
 |Representación: 4+| los símbolos 5421
 |Posiciones: | 3 | 2 | 1 | 0
@@ -465,7 +470,6 @@ a|5*1000=cinco mil|4*100=cuatrocientos|5*10=cincuenta|1*1=uno
 |===
 
 [state="taula"]
-<<<
 === Representación de los Valores Enteros en Código Binario
 
 * ¿Número?¿Valor?¿Código?¿Representación?
@@ -474,7 +478,7 @@ a|5*1000=cinco mil|4*100=cuatrocientos|5*10=cincuenta|1*1=uno
 * Ejemplo: número 0b1011
 
 .Número 0b1011
-[width=100%,cols="<3s,4*^1"]
+[width=60%,cols="<3s,4*^1"]
 |===
 |Representación: 4+| los símbolos 1011
 |Posiciones: | 3 | 2 | 1 | 0
@@ -489,7 +493,6 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 
 
 
-<<<
 === Representación de los Valores Enteros en Código Binario
 
 * ¿Cómo se representa en binario el valor 123.125? b1111011.001
@@ -497,7 +500,6 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 * Parte Entera: divisiones sucesivas por la base 2
 * Parte Fracción: multiplicaciones sucesivas por la base 2
 
-<<<
 === Representación de los Valores Enteros en Código Octal
 
 * Dígitos: 0,1,2,3,4,5,6,7
@@ -507,7 +509,6 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 * Parte Entera: divisiones sucesivas por la base 8
 * Parte Fracción: multiplicaciones sucesivas por la base 8
 
-<<<
 === Representación de los Números en Hexadecimal
 
 * Dígitos: 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F ___ el valor de A es 10, B->11, C->12, D->13, E-14, F->15
@@ -517,7 +518,6 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 * Parte Entera: divisiones sucesivas por la base 16
 * Parte Fracción: multiplicaciones sucesivas por la base 16
 
-<<<
 === Calculadora de Python
 
 https://www.programiz.com/python-programming/online-compiler/[Python Intepreter Shell]
@@ -535,7 +535,6 @@ int(0x7B)
 
 
 [.columns]
-<<<
 === Conversiones entre el sistema binario y sistemas con base potencia de 2
 
 [.column]
@@ -555,7 +554,6 @@ int(0x7B)
 ** grupos de 3 bits
 
 
-<<<
 === Suma binaria
 
 * Suma 10011011+00011011 = 10110110
@@ -574,7 +572,6 @@ int(0x7B)
 
 * Cuando la suma en una posición específica tiene un valor es mayor o igual a la base hay que restar *n* veces la base y el valor *n* será la llevada a sumar en la posición siguiente.
 
-<<<
 === Resta binaria
 
 * Resta 10110110 - 10011011 = 00011011
@@ -594,7 +591,6 @@ Resta                       0  0  0  1  1  0  1  1
 
 * Cuando en una posición específica el minuendo es menor que el sustraendo se suma la base al minuendo antes de realizar la resta y se suma la llevada al sustraendo de la posición siguiente.
  
-<<<
 === Aritmética Modular: la rueda
 
 
@@ -610,7 +606,6 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 33 pasos en la rueda equivale al número 001 -> aritmética modular en módulo 8
 
 
-<<<
 === Operaciones aritméticas: Octal y Hexadecimal
 
 * Base Octal 
@@ -622,14 +617,12 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 
 
 
-<<<
 === Representación de Números con Valores Enteros
 
 * Signo-Magnitud
 * Complemento a la base menos 1
 * Complemento a la base
 
-<<<
 === Representación en Signo-Magnitud
 
 * Signo -> un dígito
@@ -639,7 +632,6 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 ** Ejemplo +123 -> 0123 y -123 -> 9123
 
 [state=txikiago]
-<<<
 === Representación en Signo-Magnitud
 
 * Signo -> un bit (Binary digIT)
@@ -651,7 +643,6 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 ** ¿Cuantas representaciones son posibles?¿Es simétrico el rango de valores representado?¿Cuantas representaciones tiene el cero?
 ** Extender el número de bits del número sin cambiar su valor
 
-<<<
 === Representación en complemento a la base menos 1. C9
 
 * Base 10: Complemento a 9 -> C9
@@ -663,7 +654,6 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 * El C9 de un número negativo es el código de su valor en positivo
 
 [state=txikiago]
-<<<
 === Representación en complemento a la base menos 1. C1
 
 * Base 2 : base-1=1 -> Complemento a 1 -> C1
@@ -677,7 +667,6 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 ** ¿Cuantas representaciones son posibles?¿Es simétrico el rango de valores representado?¿Cuantas representaciones tiene el cero?
 ** Extender el número de bits del número sin cambiar su valor
 
-<<<
 === Representación en complemento a la base 10 : C10
 
 * Signo -> un dígito
@@ -689,7 +678,6 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 * El C10 de un número negativo es el código de su valor en positivo
 
 [state=txikiago]
-<<<
 === Representación en complemento a la base 2 : C2
 
 * Signo -> un dígito
@@ -702,7 +690,6 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 ** El código del valor negativo se puede calcular a partir del código del valor positivo
 *** empezando por la dcha repetir los bits hasta el primer uno e invertir el resto de bits
 
-<<<
 === Representación en complemento a la base 2 : C2
 
 * El C2 de un número positivo es el código C2 de su valor en negativo
@@ -712,11 +699,10 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 ** Extender el número de bits del número sin cambiar su valor -> Extensión del bit de SIGNO 
 
 [state=txiki]
-<<<
 === Extensión del signo en C2
 
 .Razonamiento de la extensión de signo de un número negativo: números de 3 bits
-[width=90%,<1,2*<2]
+[width=60%,<1,2*<2]
 |===
 |Valor| C2 sin extensión | C2 con extensión
 |  +33 |  0100001    | 00100001
@@ -736,7 +722,6 @@ Calcular la representación del valor 33 en módulo 8 -> Resto(33/8)=1 -> en bin
 Se observa que en el C2 con extensión, al hacer al resta y extender con un 0 más el minuendo y el substraendo, provoca la extensión con un bit más en la resta de valor 1 en el digito más significante. Según añado ceros al minuendo y sustraendo, aparecen unos en la resta sin alterar su valor.
 
 [.columns, state=txiki]
-<<<
 === Operaciones aritméticas en C2
 
 [.column]
@@ -778,7 +763,6 @@ Resta     1 1 0 1 1 0 1 1 (Valor -101)
 
 
 [state=txiki]
-<<<
 === Operaciones ariméticas C2: Overflow o Desbordamiento
 
 * A = 0b00110110 y B = 0b10011011 -> Calcular A-B
@@ -800,7 +784,6 @@ Resta    1 0 0 1 1 0 1 1 (Valor -101)
 ** El valor -101 en lugar de la resta correcta +157 es debido a que el resultado esta fuera de rango -> 
 ** Observarmos que hemos hecho la SUMA de dos números POSITIVOS y el resultado ha sido NEGATIVO
 
-<<<
 === Operaciones ariméticas C2: Overflow
 
 IMPORTANT: Al realizar la suma de dos valores con el mismo signo si el resultado es de signo contrario hay overflow
@@ -808,7 +791,6 @@ IMPORTANT: Al realizar la suma de dos valores con el mismo signo si el resultado
 
 
 [state=txiki]
-<<<
 === Operaciones aritméticas C2: Overflow 
 
 * Overflow: la operación requiere operandos con mayor número de bits manteniendo el valor para que el resultado sea correcto.
@@ -820,7 +802,6 @@ IMPORTANT: Al realizar la suma de dos valores con el mismo signo si el resultado
 *** la repetición del bit más significativo no altera el valor de la representación
 *** el bit más significativo es 0 si es positivo y 1 si es negativo. Por lo tanto, 01010 equivale a 01010 ó 001010 ó 0....0001010. Por lo tanto, 1010 equivale a 11010 ó 111010 ó 1....1111010
 
-<<<
 === C2: Representación gráfica del Overflow
 
 image::rueda_signed.png[Rueda,500,500,float="left"]
@@ -831,13 +812,11 @@ Si a 010 le sumamos el valor 2 nos da como resultado 100
 Por lo tanto 010+010=100, es decir, 2+2=-4 -> *overflow* ya que el _+4_ necesita 4 bits y estamos trabajando con 3 bits únicamente.
 
 
-<<<
 === Asimetría del rango en C2: -4 con 3 bits
 
 * Con números de 3 bits los formatos S-M y C1 son simétricos con valores en el rango (+3,-3), en cambio el formato C2 tiene el rango (+3,-4)
 * En C2 el valor +4 se representa como 0b0100 y necesita por lo tanto 4 bits, no se puede representar con 3 bits, y el valor -4 se reprenta con el C2(0100), es decir, 1100 también con 4 bits. El 1100 se puede comprimir ya que tiene el signo extendido con la repetición de 1 de bit más significativo, por lo que la representación 100 es la representación del -4
 
-<<<
 === Complemento a 2 : Ejemplos
 
 * 0b101010101 está en C2 -> ¿Cual es su valor?
@@ -850,7 +829,6 @@ Por lo tanto 010+010=100, es decir, 2+2=-4 -> *overflow* ya que el _+4_ necesita
 * Si la representación de -123 es 0b100000101 ¿cual es la de '+123' ?
 ** C2(0b100000101)=0b011111011 representa el valor '+123'
 
-<<<
 === Aritmética Modular de valores representados en Complemento a 2
 
 image::rueda_signed.png[Rueda,500,500,float="left"]
@@ -864,11 +842,10 @@ A partir de la posición 110 si nos movemos en sentido antihorario (RESTA modula
 Los errores de *overflow* se resuelven aumentando el número de bits de la representación, pero siempre existira un rango que si lo traspasamos dará overflow.
 
 [state=taula]
-<<<
 === Comparación S-M, C1 y C2
 
 .Números de 3 bits
-[width=90%,cols="4*^"]
+[width=80%,cols="4*^"]
 |===
 |Valor|S-M| C1 | C2
 
@@ -885,7 +862,6 @@ Los errores de *overflow* se resuelven aumentando el número de bits de la repre
 
 
 
-<<<
 === Número en complemento a 2 y base hexadecimal
 
 CAUTION: Un número
@@ -896,7 +872,6 @@ CAUTION: Un número
 ** para saber su valor calculo su complementario C2 y tendré la representación del positivo
 *** 0x000-0xAAA =0x556 -> 5*16^2^+5*16^1^+5*16^0^ = 5*256+5*16+5 = 1280+80+5 = '+213' -> 0xAAA tiene de valor -213
 
-<<<
 === Número en complemento a 2 y base hexadecimal
 
 * Realizar la suma de los números en formato complemento a 2: 0x80+0x80
@@ -910,14 +885,13 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 
 
 [state=taula_ta]
-<<<
 === Extensión del signo en C2: problema de la BASE
 
 
 
 .Extensión del Signo del Nº 0x80 en C2 en binario, hexadecimal y octal
 
-[width=100%,cols="^1,3*<3"]
+[width=80%,cols="^1,3*<3"]
 |===
 |  NºBits | Binario | Hexadecimal | Octal
 
@@ -930,10 +904,9 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 |===
 
 
-
+[#C1_suma-resta]
 [state=txikiago]
-<<<
-=== Suma y Resta aritmética en C1 [[C1_suma-resta]]
+=== Suma y Resta aritmética en C1
 
 [%hardbreaks]
 -Ejemplos con datos de 4 bits -> Rango (-7,+7). +
@@ -955,7 +928,6 @@ CAUTION: Extender el número 0x80. ¿ Por qué hay que tener cuidado ?
 
 
 [state=txikiago]
-<<<
 === Suma aritmética en C1
 
 
@@ -969,7 +941,6 @@ El segmento o distancia del cero (1111) es [verde]#UNO#, el del -1 es DOS, el de
 
 
 
-<<<
 === Suma aritmética en C1
 
 
@@ -979,7 +950,6 @@ image::tema2_c1_suma-resta.png[]
 
 
 [state=txikiago]
-<<<
 === Suma y Resta aritmética en C1
 
 * Ej_1: suma: no hay conflicto -> 2+5=7 -> 0010+0101=0111
@@ -992,7 +962,6 @@ image::tema2_c1_suma-resta.png[]
 * Ej_5: resta: no cruza el cero (1111), B por ser negativo tiene un segmento mayor en 1. A la resta hay que *restarle 1* -> 2-(-5)=+7 -> 0010-1010=1000 y acarreo_MSB -> 1000-1=0111 ->+7
 
 
-<<<
 === Números Reales Binarios
 
 * Coma Fija
@@ -1005,7 +974,6 @@ image::tema2_c1_suma-resta.png[]
 *** Se dice que el número real en binario y en notación científica está normalizado si la parte entera de la mantisa vale 1.
 
 [state="txiki"]
-<<<
 === Números Reales Binarios: Norma IEEE-754
 
 * Campos del formato en notación científica : Signo, parte entera de la mantisa, parte fracción de la mantisa, base , exponente (módulo y signo)
@@ -1018,7 +986,6 @@ image::tema2_c1_suma-resta.png[]
 * Resumiendo, sólo es necesario representar: el signo del número , la fracción de la mantisa y el exponente en exceso. Por lo tanto el formato IEEE-754 tiene 3 campos.
 
 
-<<<
 === Formato IEEE-754 simple
 
 * representación de 32 bits: 1 bit para el signo / 8 bits para el exponente en exceso a 127 / 23 bits para la fracción
@@ -1034,7 +1001,6 @@ image::tema2_c1_suma-resta.png[]
  31 30         23 22                                 0   <--  bit pos 0 a la dcha      
 ----------------------------------------------------------------------
 
-<<<
 === Formato IEEE-754 doble
 
 
@@ -1052,7 +1018,6 @@ image::tema2_c1_suma-resta.png[]
 ----------------------------------------------------------------------
 
 [.columns, state=txikiago]
-<<<
 === El Nº -5.5/1024 en los dos Formatos IEEE-754
 
 [.column]
@@ -1083,10 +1048,8 @@ image::tema2_c1_suma-resta.png[]
 *** *0xBF76000000000000*
 
 
-<<<
 === Representación de los Caracteres
 
-<<<
 === Representación de los Caracteres
 
 * Tipos de Caracteres:
@@ -1098,7 +1061,6 @@ image::tema2_c1_suma-resta.png[]
 ** Unicode: UTF-8
 
 [.columns]
-<<<
 === ASCII Standard
 
 [.column.zutabe]
@@ -1134,7 +1096,6 @@ En decimal rango [0-127]
 *Upna* : 0x55706E61
 *año 2023*: 0x61--6F2032303233
 
-<<<
 === ASCII Extendido
 
 * Para poder representar caracteres de otras culturas Europeas es necesrio expandir el standard con 1 bit más
@@ -1157,7 +1118,6 @@ chr(0x41)
 ** La ñ tiene el código ASCII 0xF1
 
 [.state=txikiago]
-<<<
 === UTF-8
 
 * https://www.charset.org/utf-8[Character Set, HTML Converter, etc ...]
@@ -1171,7 +1131,6 @@ chr(0x41)
 ** unicode point U+00F1  -> los primeros 256 caracteres equivalen al ascii extendido
 
 [.columns]
-<<<
 === Unicode Points
 
 [.column]
@@ -1188,7 +1147,6 @@ chr(0x41)
 * U+2190: &#x2190;
 * U+2192: &#x2192;
 
-<<<
 === Otros Códigos Binarios
 
 * Binary Coded Decimal (BCD) natural
@@ -1197,7 +1155,6 @@ chr(0x41)
 * Gray
 * Johnson
 
-<<<
 ===  Binary Coded Decimal : BCD
 
 Codificación de números Naturales +
@@ -1217,7 +1174,7 @@ BCD Aiken 5421: Mismo concepto que el Aiken 2421 pero con los pesos 5421 +
 BCD en exceso a 3 : Al valor a representar se le suma 3 antes de la codificación binaria
 - 0 -> 0011, 7-> 1010, 347 -> 011001111010
 
-<<<
+
 === Código Gray
 
 Codificación de números Naturales +
@@ -1229,7 +1186,6 @@ El valor 4 en código Gray: 110, 0110, 00110, etc +
 La secuencia de los números es adyacente: únicamente cambia un bit
 
 [.columns]
-<<<
 === Codificador Gray Binario
 
 [.column]
@@ -1248,7 +1204,6 @@ Codificador gray -> binario: +
 - latexmath:[b_{MSB} = g_{MSB}] 
 --
 
-<<<
 === Johnson
 
 * Números Naturales
@@ -1256,20 +1211,18 @@ Codificador gray -> binario: +
 * A partir del número 1111 desplazar 1 bit a la izda y entra el bit 0
 * Johnson (4 bits) : 0000-0001-0011-0111-1111-1110-1100-1000
 
-
-
-<<<
 === Tema 2: Ejercicios
 
 *  Miaulario/Recursos/Ejercicios
-*  Fundamentos de sistemas digitales Thomas Floyd
+*  Bibliografía. Libros de texto:
+** Fundamentos de Electrónica Digital. Cecilio Blanco
+** Circuitos Electrónicos Digitales. Manuel Mazo
+** Fundamentos de Sistemas digitales. Thomas Floyd
 
-
-<<<
-== Tema 3 : Algebra de Conmutación ó Boole. Funciones Lógicas. [[Tema3_BoolePuertas]]
+[#Tema3_BoolePuertas]
+== Tema 3 : Algebra de Conmutación ó Boole. Funciones Lógicas.
 
 [state=txikiago]
-<<<
 === Matemática Lógica Binaria
 
 * Valores Lógicos Binarios : "0" , "1"
@@ -1285,7 +1238,6 @@ Codificador gray -> binario: +
 ** Operadores comparadores: > , >, ==, etc
 
 [.columns, state=taula_ta]
-<<<
 === Tablas de la Verdad de los operadores NOT, OR, AND, XOR
 
 [.column]
@@ -1334,7 +1286,6 @@ Codificador gray -> binario: +
 
 
 [.columns, state=taula_ta]
-<<<
 === Tablas de la Verdad de los operadores NOR, NAND, XNOR
 
 
@@ -1373,7 +1324,6 @@ Codificador gray -> binario: +
 |===
 
 
-<<<
 === Puertas Lógicas
 
 
@@ -1381,7 +1331,6 @@ image::puertas_logicas.png[]
 
 
 [.columns]
-<<<
 === Circuitos Digitales : Expresiones Lógicas
 
 [.column]
@@ -1394,7 +1343,6 @@ Circuito digital en 3 niveles: not-and-or.
 image::circuito_logic.png[]
 
 [.columns, state=txiki]
-<<<
 === Transparencias PDF: Miaulario/Recursos/Apuntes
 
 [.column]
@@ -1418,20 +1366,17 @@ image::circuito_logic.png[]
 ** Extender los términos como minitérminos
 ** Dibujar DK y agrupar celdas equivale a sacar factor común
 
-<<<
 === Link: algebra de conmutación funciones.pdf
 
 
 * link:./PDF/03_algebra_de_conmutacion_funciones_logicas.pdf[Algebra de Boole. Funciones Lógicas]
 
 
-<<<
 === Generación de Funciones mediante puertas Lógicas NAND 
 
 image::tema3_genfun_nand.png[]
 
 
-<<<
 === Formas Canónicas de una Función: Síntesis por minitérminos y maxitérminos
 
 
@@ -1440,7 +1385,6 @@ image::tema3_genfun_nand.png[]
 ** producto de sumas (POS) de variables
 
 [.columns, state=taula]
-<<<
 === Lógica Positiva/Negativa: Relación y/o con */+
 
 [.column]
@@ -1450,7 +1394,7 @@ image::tema3_genfun_nand.png[]
 [.column.is-two-third]
 
 .OR
-[cols="2*^1,^2"]
+[width=10%,cols="2*^1,^2"]
 |===
 |x|y|z = x + y
 |0|0|0
@@ -1466,7 +1410,7 @@ Z= *1* si "X" *o* "Y"  valen *1* -> z=(x+y)
 
 [.column.is-two-third]
 .AND
-[cols="2*^1,^2"]
+[width=10%,cols="2*^1,^2"]
 |===
 |x|y|z = x &#8729; y
 |0|0|0
@@ -1480,7 +1424,6 @@ Z= *0* si "X" *o* "Y"  valen *0* -> (z=x &#8729; y) +
 Z= *1* si "X" *e* "Y"  valen *1* -> (z=x &#8729; y)
 
 [.columns, state=taula_ta]
-<<<
 === Forma Canónica SOP: Suma de Minitérminos
 
 [.column]
@@ -1508,13 +1451,11 @@ Cada minitermino se sintetiza mediante una puerta AND.
 La síntesis de la función F tendría un nivel de puertas AND de 3 entradas y un nivel con una puerta OR con tantas entradas como minitérminos hacen 1 a la función.
 
 [.columns, state=taula_ta]
-<<<
 === Forma Canónica POS: Producto de Maxiterminos
 
 
 [.column]
 .Tabla de la Verdad de la Función F(x1,x2,x3)
-[cols="4*^1,1*<3"]
 |===
 | x1 | x2 | x3 | F | maxitérminos
 
@@ -1539,7 +1480,6 @@ La síntesis función F tendría un nivel de puertas OR de 3 entradas y un nivel
 
 
 
-<<<
 === Relación entre la forma canónica SOP y POS
 
 * Ejemplo F= F(x1,x2,x3) = m3+m4+m5
@@ -1548,7 +1488,6 @@ La síntesis función F tendría un nivel de puertas OR de 3 entradas y un nivel
 * [doble-ovlin]#F# = m&#773;0 &#8729; m&#773;1 &#8729; m&#773;2 &#8729; m&#773;6 &#8729; m&#773;7
 * [doble-ovlin]#F# = M0&#8729; M1&#8729; M2&#8729; M6&#8729; M7 = F
 
-<<<
 === Simplificación de las funciones mediante los Diagramas de Karnaugh (DK)
 
 * El Diagrama de Karnaugh es una representación gráfica multidimensional (2D, 3D, etc) mediante celdas de los minitérminos y maxitérminos de la tabla de la verdad unidimensional 1D
@@ -1560,7 +1499,6 @@ La síntesis función F tendría un nivel de puertas OR de 3 entradas y un nivel
 ** Cuanto mayor sea el número de celdas agrupadas mayor será el número de variables y términos simplificados.
 
 [.columns]
-<<<
 === Diagrama de Karnaugh de la funcion F(x1,x2,x3)
 
 [.column]
@@ -1572,7 +1510,6 @@ image::tema3_DK_1.png[]
 * Observar que cada celda equivale a un minitérmino y un maxitérmino de la Tabla de la verdad
 * Por lo tanto, el diagrama DK representa las formas canónicas SOP y POS.
 
-<<<
 === Simplificación de la Función mediante DK
 
 image::tema3_DK_2.png[]
@@ -1580,43 +1517,59 @@ image::tema3_DK_2.png[]
 Si sumamos los miniterminos de la 4ª columna  latexmath:[Y=f(x_1,x_2,x_3)=m_4+m_5=x_1\overline x_2\overline x_3+ x_1\overline x_2x_3 = x_1\overline x_2 (\overline x_3+x_3) = x_1\overline x_2], se ha simplificado el número de variables de 3 a dos. La función simplificada es latexmath:[Y= \overline x_1 x_2x_3+x_1\overline x_2] +
 Sumar dos miniterminos adyacentes equivale a agrupar dos celdas adyacentes y reducir una variable.
 
-<<<
 === Ejercicios básicos matemáticos en el dominio del Algebra de Boole
 
 * latexmath:[x*0=0; x*1=x \:\: ; \:\: x*\overline x=0 \:\: ; \:\: x+\overline x=1]
 * latexmath:[x=x*1=x*(y+\overline y) \:\: ; \:\: x=x+0=x+y*\overline y]
-* latexmath:[x\cdot(x+u+v+ ...)=x \:\: ; \:\: x+(x\cdot u\cdot v \cdot ...)=x]
+* latexmath:[x\cdot(x+u+v+ ...)= x(1+u+v+ ...)=x\cdot 1 = x ]
+* latexmath:[x+(x\cdot u\cdot v \cdot ...)= x(1+ u\cdot v \cdot ...) = x\cdot 1 = x]
 
 * Transformar una suma de productos de variables lógicas en producto de sumas de variables lógicas
 
 ** latexmath:[F=y\overline z + x\overline y + x\overline yz ] 
 ** cambio de nomenclatura para facilitar la explicación latexmath:[F=a_1a_2 + b_1b_2 + c_1c_2c_3] 
 
+[.columns]
+=== Ejercicios básicos : representación gráfica mediante conjuntos
 
-<<<
+
+
+[.column]
+--
+latexmath:[x+(x\cdot u\cdot v \cdot ...)= x(1+ u\cdot v \cdot ...) = x\cdot 1 = x] +
+
+image::tema3_absorcion_conjunto.png[align=left]
+--
+
+
+[.column]
+--
+latexmath:[x\cdot(x+u+v+ ...)= x(1+u+v+ ...)=x\cdot 1 = x ]
+
+
+image::tema3_absorcion_conjunto_2.png[align=left]
+--
+
+[state="txikiago"]
 === Ejercicios básicos matemáticos en el dominio del Algebra de Boole
 
 image::tema3_distributiva.png[]
-latexmath:[F=a_1a_2 + b_1b_2 + c_1c_2c_3 = (a_1+b_1+c_1)(a_1+b_1+c_2)(a_1+b_1+c_3)\cdot] +
-latexmath:[\cdot (a_1+b_2+c_1)(a_1+b_2+c_2)(a_1+b_2+c_3)\cdot] +
-latexmath:[\cdot (a_2+b_1+c_1)(a_2+b_1+c_2)(a_2+b_1+c_3)\cdot] +
-latexmath:[\cdot (a_2+b_2+c_1)(a_2+b_2+c_2)(a_2+b_2+c_3)] 
+latexmath:[F=a_1a_2 + b_1b_2 + c_1c_2c_3 = (a_1+b_1+c_1)(a_1+b_1+c_2)(a_1+b_1+c_3)\cdot\\   
+ \cdot (a_1+b_2+c_1)(a_1+b_2+c_2)(a_1+b_2+c_3)\cdot\\
+ \cdot (a_2+b_1+c_1)(a_2+b_1+c_2)(a_2+b_1+c_3)\cdot\\
+ \cdot (a_2+b_2+c_1)(a_2+b_2+c_2)(a_2+b_2+c_3)] 
 
-latexmath:[F=y\overline z + x\overline y + x\overline yz = (y+x+x)(y+x+\overline y)(y+x+z)\cdot] +
-latexmath:[\cdot (y+\overline y+x)(y+\overline y+\overline y)(y+\overline y+z)\cdot] +
-latexmath:[\cdot (\overline z+x+x)(\overline z+x+\overline y)(\overline z+x+z)\cdot] +
-latexmath:[\cdot (\overline z+\overline y+x)(\overline z+\overline y+\overline y)(\overline z+\overline y+z)] 
+latexmath:[F=y\overline z + x\overline y + x\overline yz = (y+x+x)(y+x+\overline y)(y+x+z)\cdot\\
+\cdot (y+\overline y+x)(y+\overline y+\overline y)(y+\overline y+z)\cdot\\
+\cdot (\overline z+x+x)(\overline z+x+\overline y)(\overline z+x+z)\cdot\\
+\cdot (\overline z+\overline y+x)(\overline z+\overline y+\overline y)(\overline z+\overline y+z)] 
 
-
-
-
-<<<
 === Ejercicios básicos matemáticos en el dominio del Algebra de Boole
 
 Simplificación
 
-latexmath:[F=(y+x)(1)(y+x+z)(1)(1)(1)(\overline z+x)(\overline z+x+\overline y)(1)(\overline z+\overline y+x)(\overline z+\overline y)(1)=]
-latexmath:[=(y+x)(y+x+z)(\overline z+x)(\overline z+x+\overline y)(\overline z+\overline y+x)(\overline z+\overline y)] 
+latexmath:[F=(y+x)(1)(y+x+z)(1)(1)(1)(\overline z+x)(\overline z+x+\overline y)(1)(\overline z+\overline y+x)(\overline z+\overline y)(1)=\\
+=(y+x)(y+x+z)(\overline z+x)(\overline z+x+\overline y)(\overline z+\overline y+x)(\overline z+\overline y) ] 
 
 POS -> Expansión para que tenga cada término las 3 variables 
 
@@ -1624,19 +1577,17 @@ latexmath:[F=(y+x+z\overline z)(y+x+z)(\overline z+x+y\overline y)(\overline z+x
 
 Aplico la propiedad Distributiva a cada término
 
-latexmath:[F=(y+x+z)(y+x+\overline z)(y+x+z)(\overline z+x+y)(\overline z+x+\overline y)(\overline z+x+\overline y)\cdot] +
-latexmath:[(\overline z+\overline y+x)(\overline z+\overline y+x)(\overline z+\overline y+\overline x) =  (y+x+z)(y+x+\overline z)(\overline z+x+\overline y)(\overline z+\overline y+\overline x)=] +
-latexmath:[=(x+y+z)(x+y+\overline z)(x+\overline y+\overline z)(\overline x+\overline y+\overline z)=M_0M_1M_3M_7
+latexmath:[F=(y+x+z)(y+x+\overline z)(y+x+z)(\overline z+x+y)(\overline z+x+\overline y)(\overline z+x+\overline y)\cdot\\
+(\overline z+\overline y+x)(\overline z+\overline y+x)(\overline z+\overline y+\overline x) =  (y+x+z)(y+x+\overline z)(\overline z+x+\overline y)(\overline z+\overline y+\overline x)= \\
+= (x+y+z)(x+y+\overline z)(x+\overline y+\overline z)(\overline x+\overline y+\overline z)=M_0M_1M_3M_7
 ]
 
-<<<
 === Ejercicios básicos matemáticos en el dominio del Algebra de Boole
 
 * F en la 1ª forma canónica
-* latexmath:[F=y\overline z + x\overline y + x\overline yz = y\overline z\cdot (x+\overline x) + x\overline y\cdot (z+\overline z) + x\overline yz = y\overline zx+ y\overline z\cdot\overline x+ x\overline yz +] +
-latexmath:[x\overline y\overline z + x\overline yz = xy\overline z + \overline x y\overline z + x\overline yz + x\overline y\overline z = m_6+m_2+m_5+m_4 ]
+* latexmath:[F=y\overline z + x\overline y + x\overline yz = y\overline z\cdot (x+\overline x) + x\overline y\cdot (z+\overline z) + x\overline yz = y\overline zx+ y\overline z\cdot\overline x+ x\overline yz +\\
+x\overline y\overline z + x\overline yz = xy\overline z + \overline x y\overline z + x\overline yz + x\overline y\overline z = m_6+m_2+m_5+m_4 ]
 
-<<<
 === Nominación Teoremas
 
 * conmutativa latexmath:[a\cdot b =] 
@@ -1648,7 +1599,6 @@ latexmath:[x\overline y\overline z + x\overline yz = xy\overline z + \overline x
 * a+1
 * a*0
 
-<<<
 === Simplificación de funciones mediante axiomas y teoremas del Algebra de Boole
 
 IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que pueden ser agrupados y simplificados.
@@ -1659,7 +1609,6 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 * Partiendo del agrupamiento DK razonar la simplificación de la función Y mediante los *axiomas y teoremas del algebra de Boole*. 
 
 [state=txiki]
-<<<
 === Simplificación de funciones mediante el Diagrama de Karnaugh
 
 * Agrupar celdas adyacentes en grupos de un número de celdas 2^n^ : 2, 4, 8, etc ...
@@ -1672,7 +1621,6 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 
 
 [.columns, state="txikiago"]
-<<<
 === Ejercicios matemáticos en dos dominios Gráfico/Algebra de Boole
 
 [.column]
@@ -1692,14 +1640,12 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 *** extender cada factor para que tenga las 3 variables
 *** aplicar la propiedad distributiva
 
-<<<
 === Cuaderno de Ejercicios: Capítulo 1
 
 * 1.1, 1.2, 1.4, 1.5, 1.6, 1.8, 1.9
 * Metodología: antes de comenzar a resolver el ejercicio hay que describir el método a seguir para resolver el ejercicio.
 
 [.columns, state=txikiago]
-<<<
 === Planteamiento de los Ejercicios Capítulo 1
 
 [.column]
@@ -1727,7 +1673,6 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 
 
 [.columns, state=txikiago]
-<<<
 === Planteamiento de los Ejercicios Capítulo 1
 
 [.column]
@@ -1745,7 +1690,6 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 
 
 [.columns, state=txikiago]
-<<<
 === Planteamiento de los Ejercicios Capítulo 1
 
 [.column]
@@ -1767,7 +1711,6 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 *** Anidamiento de funciones -> subfunciones
 
 [.columns, state=taula]
-<<<
 === Binary Coded Decimal (BCD)
 
 [.column]
@@ -1824,11 +1767,9 @@ image::tema3_BCD.png[]
 |1111| X
 |===
 
+[#Tema4_VHDL]
+== Tema 4: Lenguaje de Descripción Hardware VHDL
 
-<<<
-== Tema 4: Lenguaje de Descripción Hardware VHDL [[Tema4_VHDL]]
-
-<<<
 === Very high speed integrated circuits Hardware Description Language (VHDL)
 
 * HDL: Hardware Description Languages
@@ -1837,7 +1778,6 @@ image::tema3_BCD.png[]
 * ... y por supuesto también tiene sentencias y estructuras de programación que no describen circuitos digitales, por ejemplo imprimir en la pantalla una frase como "Hello World".
 
 [.columns]
-<<<
 === Descripción del Hardware de un circuito digital.
 
 [.column]
@@ -1870,13 +1810,11 @@ end rtl;
 image::tema4_xor.png[xor]
 --
 
-<<<
 === Cronogramas 
 
 image::light_bit.bmp[]
   
 
-<<<
 === Señales VHDL :tipos
 
 * Hay dos *tipos de señales* en el lenguaje vhdl:
@@ -1887,7 +1825,6 @@ image::light_bit.bmp[]
 ** [naranja]#SIGNAL# : s,t,u,v
 *** son señales internas al circuito y son bidireccionales: pueden conectarse tanto a la entrada como a la salida de una puerta lógica
 
-<<<
 === Señales VHDL : tipos de datos
 
 * hay diferentes *tipos de datos* para las señales
@@ -1895,19 +1832,17 @@ image::light_bit.bmp[]
 * en VHDL los valores de los bits hay que entrecomillarlos para diferenciarlos de los datos de tipo [naranja]#INTEGER#
 * tipo de dato secuencia de bits: *"* 010001010101 *"* -> doble entrecomillado si el dato se representa con más de un bit.
 
-<<<
 === Señales VHDL : Buses
 
-* Físicamente un Bus es un conjunto de pistas metálicas que sirven para transportar señales conectandos dos unidades
-* Por ejemplo el "bus de direcciones" de 32 hilos ó pistas de la memoria RAM sirve para seleccionar una dirección de 32 bits de la memoria. La dirección *01100110011001100110011001100110* se transporta desde la CPU hasta la memoria RAM a través de un bus de 32 pistas. Al bus de direcciones de memoria (address bus) se le podría llamar *A* y a cada hilo del bus *asciimath:[A_31]*,*asciimath:[A_30]*,...,*asciimath:[A_1]*,*asciimath:[A_0]*.
-* Desde el punto de vista lógico un bus es un vector o un array de dimensión "n", por ejemplo n=32.  
-* El tipo de datos de los buses *A* y *B* de 32 bits se podrían declarar como:
-** [naranja]#signal A,B :bit_vector(31 downto 0);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_31] y el bit LSB(más a la derecha) el bit asciimath:[A_0] y lo mismo con el bus B
-** [naranja]#signal A,B :bit_vector(0 to 31);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_0]y el bit LSB(más a la derecha) el bit asciimath:[A_31] y lo mismo con el bus B
+Físicamente un Bus es un conjunto de pistas metálicas que sirven para transportar señales conectandos dos unidades +
+Por ejemplo el "bus de direcciones" de 32 hilos ó pistas de la memoria RAM sirve para seleccionar una dirección de 32 bits de la memoria. La dirección *01100110011001100110011001100110* se transporta desde la CPU hasta la memoria RAM a través de un bus de 32 pistas. Al bus de direcciones de memoria (address bus) se le podría llamar *A* y a cada hilo del bus *asciimath:[A_31]*,*asciimath:[A_30]*,...,*asciimath:[A_1]*,*asciimath:[A_0]*. +
+Desde el punto de vista lógico un bus es un vector o un array de dimensión "n", por ejemplo n=32. + 
+El tipo de datos de los buses *A* y *B* de 32 bits se podrían declarar como: +
+-[naranja]#signal A,B :bit_vector(31 downto 0);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_31] y el bit LSB(más a la derecha) el bit asciimath:[A_0] y lo mismo con el bus B +
+- [naranja]#signal A,B :bit_vector(0 to 31);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_0]y el bit LSB(más a la derecha) el bit asciimath:[A_31] y lo mismo con el bus B
 
 
 [.columns]
-<<<
 === Sentencias VHDL : Asignación Concurrente
 
 [.column]
@@ -1931,7 +1866,6 @@ z <= u or v;
 
 
 [.columns, state=txikiago]
-<<<
 === Sentencias Concurrentes
 
 [.column]
@@ -1963,7 +1897,6 @@ y en la línea 3 del código +
 9- FIN de la actualización de todas las señales hasta el próximo evento en "x" o/y "y" +
 
 [.columns, state="txikiago"]
-<<<
 === Sentencias Concurrentes
 
 [.column]
@@ -2011,7 +1944,6 @@ v <= y and s;
 --
 
 [.columns, state=txiki]
-<<<
 === Entidad ===
 
 [.column]
@@ -2044,7 +1976,6 @@ end entity;
 --
 
 [.columns]
-<<<
 === Arquitectura ===
 
 [.column]
@@ -2064,7 +1995,6 @@ La descripción más sencilla es la *behavioral* ... pero también es la que exi
 --
 
 [.columns]
-<<<
 === Arquitectura ===
 
 [.column]
@@ -2094,7 +2024,6 @@ La relación entre las señales (puertos e internas) se define mediante "sentenc
 
 --
 
-<<<
 === Hojas de Referencia
 
 link:./PDF/VHDL_Cheat_Sheet.pdf[Hoja de referencia simple]
@@ -2102,7 +2031,6 @@ link:./PDF/VHDL_Cheat_Sheet.pdf[Hoja de referencia simple]
 link:./PDF/VHDL_QRC__01.pdf[Hoja de referencia completa]
 
 [.columns]
-<<<
 === Síntesis: Herramienta Quartus ===
 
 [.column]
@@ -2119,7 +2047,6 @@ Salida: simulación y síntesis : bitstream "quartus_light.sof"
 --
 
 [.columns]
-<<<
 === Simulación: Herramienta Modelsim/Questa
 
 [.column]
@@ -2131,7 +2058,6 @@ image::light_xor.bmp[]
 
 Verificar el correcto funcionamiento del circuito antes de su Fabricación
 --
-<<<
 === Fabricación: FPGA Cyclone V de Intel
 
 * Tarjeta de prototipado de Terasic *DE1 SoC*
@@ -2140,7 +2066,6 @@ Verificar el correcto funcionamiento del circuito antes de su Fabricación
 
 
 [.columns]
-<<<
 === Librerías y Paquetes
 
 [.column]
@@ -2173,7 +2098,6 @@ begin
 end rtl;
 --
 
-<<<
 === Primer Diseño
 
 Descripción del circuito minimalista *z=x* +
@@ -2194,7 +2118,6 @@ end minima;
 ----
 * El objetivo de este código es ser lo suficientemente simple para no dificultar su comprensión y centrarse en poner a punto la herramienta de desarrollo *Intel Quartus Prime Lite* desde cualquier computadora utilizando los recursos remotos de la UPNA.
 
-<<<
 === Primer Diseño
 
 Para poder ser fabricado en el laboratorio Remoto, es necesario que los puertos tenga los mismos nombres que se utilizan en el servidor del laboratorio Remoto. En este ejemplo la entrada serán los switches [naranja]#SW# y la salida los leds rojos [naranja]#LEDR#.
@@ -2214,7 +2137,6 @@ end minima;
 
 
 
-<<<
 === Ejercicios Prácticos de Diseño de Circuitos
 
 // * link:./PDF/vhdl_lab_remoto.pdf[VHDL mediante recursos Remotos]:PDF 
@@ -2227,7 +2149,6 @@ end minima;
 CAUTION: En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar la carpeta de Descargas como ubicación del proyecto de diseño. Si se utiliza la carpeta Descargas es necesario utilizar un SUBDIRECTORIO como por ejemplo "Descargas\ssdd"
 
 [state="txikiago"]
-<<<
 === Ejercicios Prácticos de Diseño de Circuitos
 
 . light_bit: inicio 
@@ -2242,7 +2163,6 @@ CAUTION: En el escritorio virtual de la Upna al utilizar el programa Quartus no 
 . light_sum: librería [naranja]#ieee# paquete [naranja]#numeric_std#
 
 
-<<<
 === Librerías y Paquetes
 
 * Librerías: contienen paquetes que definen tipos de señales, tipos de datos, operadores, etc
@@ -2261,7 +2181,6 @@ use std.standard.all;
 ** El paquete está descrito en el propio lenguaje VHDL ->  C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/std/standard.vhdl
 
 
-<<<
 === Señales std_logic
 
 .Señales binarias distorsionadas
@@ -2271,7 +2190,6 @@ image::tema4_signal_stdlogic.png[]
 * 6 tipos medibles: 1,H,W,X,L,0
 
 [.columns]
-<<<
 === Señales std_logic
 [.column]
 --
@@ -2290,7 +2208,6 @@ Valores No medibles: +
 *Z*: alta impedancia : salida en circuito abierto
 
 
-<<<
 === Librería IEEE: Paquete std_logic_1164
 
 * tipos de señales: [naranja]#std_logic# y [naranja]#std_logic_vector#
@@ -2308,7 +2225,6 @@ END light_de1soc ;
 
 * El paquete [naranja]#std_logic_1164# está localizado en: C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/ieee/stdlogic.vhdl
 
-<<<
 === Simulación y Fabricación
 
 * Simulación
@@ -2317,11 +2233,9 @@ END light_de1soc ;
 
 * Fabricación: acceso a través de Miaulario : Pestaña *DE1-SoC->>>Remoto*
 
+[#Tema5_CircArit]
+== Tema 5: Circuitos Aritméticos
 
-<<<
-== Tema 5: Circuitos Aritméticos [[Tema5_CircArit]]
-
-<<<
 === Índice
 
 * link:PDF/04_circuitos_aritmeticos.pdf[Tema4 Circuitos Aritméticos]: PDF
@@ -2332,7 +2246,6 @@ END light_de1soc ;
 * Circuito Multiplicador
 * Unidad Aritmetico-Lógica (ALU) 
 
-<<<
 === Operaciones Aritméticas
 
 * Suma y Resta : binario, hexadecimal y números enteros C1-C2
@@ -2362,7 +2275,6 @@ Llevadas       - 1 1 1 2 1 1 1 - -
 El resultado de la multiplicación tiene un tamaño de bits suma del número de bits de los factores.
 
 [state=txikiago]
-<<<
 === Semi-Sumador (Half Adder)
 
 
@@ -2377,7 +2289,6 @@ El resultado de la multiplicación tiene un tamaño de bits suma del número de 
 image::tema5_HA.png[]
 
 
-<<<
 === Sumador Completo (Full Adder)
 
 * Función: Suma de dos bits y acarreo anterior -> resultado suma y acarreo posterior
@@ -2390,14 +2301,12 @@ image::tema5_HA.png[]
 \overline A_i\cdot (B_i \oplus C_{i-1} ) + A_i\cdot \overline {(B_i \oplus C_{i-1} )} = A_i \oplus B_i \oplus C_{i-1}] 
 * latexmath:[C_i=A_i\cdot B_i + A_i\cdot C_{i-1}+ B_i\cdot C_{i-1}]
 
-<<<
-=== Sumador Completo
+=== Full Adder
 
 .Full Adder
 image::tema5_FA_symbol.png[]
 
 
-<<<
 === Sumador Completo usando semi-sumadores
 
 IMPORTANT: Concepto nuevo: Diseñar un circuito no como combinación de puertas lógicas sino como combinación de otros circuitos o bloques
@@ -2406,7 +2315,6 @@ IMPORTANT: Concepto nuevo: introducir en la tabla de la verdad variables-funcion
 
 
 [.columns, state="txikiago"]
-<<<
 === Sumador Completo usando semi-sumadores
 
 [.column.is-two-fifths]
@@ -2452,7 +2360,6 @@ HA_b -> (S_b,C_b)
 
 
 [.columns, state=taula]
-<<<
 === Sumador Completo usando semisumadores
 
 [.column]
@@ -2470,7 +2377,7 @@ latexmath:[C1=C_a + C_b]
 [.column]
 --
 .Full Adder
-[width=90%,cols="9*^1"]
+[width=10%,cols="9*^1"]
 |===
 |A1|B1|C0|Sa|Ca|Sb|Cb|C1|S1
 | 0| 0| 0| 0| 0| 0| 0| 0| 0 
@@ -2492,14 +2399,12 @@ latexmath:[C1=C_a + C_b]
 
 --
 
-<<<
 === Sumador Completo usando semisumadores
 
 
 image::tema5_FA.png[]
 
 
-<<<
 === Sumador Paralelo Acarreo Serie
 
 
@@ -2507,7 +2412,6 @@ image::tema5_FA.png[]
 image::tema5_sumpaacse.png[]
 
 
-<<<
 === Sumador Paralelo Acarreo Paralelo
 
 
@@ -2522,12 +2426,11 @@ image::tema5_sumpaacse.png[]
 ** Más rápido pero más complejo
 
 [state=taula_ta]
-<<<
-=== Sumador Paralelo Acarreo Paralelo
+=== Sumador Paralelo A. Paralelo
 
 
 .Funciones de Generación y Propagación del Acarreo
-[width=100%,cols="4*^1,1*^3,2*^1"]
+[width=70%,cols="4*^1,1*^3,2*^1"]
 |===
 |A_i|B_i|C_i-1|C_i| Descripción | *G*|*P*
 | 0| 0| 0 | *0* .2+|  Ni se Genera Ni se Propaga |0| 0 
@@ -2540,7 +2443,6 @@ image::tema5_sumpaacse.png[]
 | 1| 1| 1 | *1* | 1| 0
 |===
 
-<<<
 === Sumador Paralelo Acarreo Paralelo
 
 
@@ -2558,7 +2460,6 @@ latexmath:[C_3=G_3 + P_3 \cdot C_2 = ... = G_3 + P_3P_2 + P_3P_2G_1 + P_3P_2P_1C
 
 
 [state=txikiago]
-<<<
 === Sumador Serie
 
 Sumador serie: +
@@ -2573,7 +2474,6 @@ image::tema5_sum-serie.png[]
 
 
 [.columns]
-<<<
 === Sumador/Restador de 4 bits
 
 [.column]
@@ -2593,11 +2493,10 @@ image::tema5_sum-serie.png[]
 ** suma: la última llevada no se tiene en cuenta
 
 [.columns, state="taula"]
-<<<
 === Complementador
 
 [.column.is-one-fifth]
-[width=80%]
+[width=40%]
 |===
 | Control | Entrada | Salida
 .2+|    1    | 0  | 0
@@ -2617,37 +2516,31 @@ latexmath:[Control=1  \:\:  O_i=B_i]
 
 latexmath:[Control=0  \:\:   O_i=\overline B_i]
 --
-<<<
 === Sumador/Restador de 4 bits
 
 image::tema5_sumador-restador.png[]
 
 
-<<<
 === Sumador/Restador de 4 bits
 
 image::tema5_sumarestac1c2.png[]
 
-<<<
 === Semi-Restador
 
 * Mismos conceptos de diseño que para el Semi-Sumador
 ** TV -> lógica positiva o negativa -> Obtener Expresión lógica
 * La llevada (L) en lugar de acarreo recibe el nombre de Borrow
 
-<<<
 === Restador Completo
 
 * Mismos conceptos de diseño que para el Sumador Completo
 ** TV -> lógica positiva o negativa -> Obtener Expresión lógica
 
-<<<
 === Acumulador
 
 * Almacenar resultados parciales y reutilizarlos como operandos
 
 
-<<<
 === Multiplicador
 
 * Concepto de diseño: 
@@ -2655,7 +2548,6 @@ image::tema5_sumarestac1c2.png[]
 ** En cada punto de la matriz *(i,j)* se dispone de un sumador Full-Adder para realizar las sumas de dos en dos verticalmente y teniendo en cuenta el acarreo de la columna anterior, al igual que se realiza manualmente.
 ** Tener en cuenta que el número de bits del resultado es m+n.
 
-<<<
 === Unidad Aritmético Lógica (ALU)
 
 * Puede realizar diferentes operaciones: aritméticas , lógicas, etc
@@ -2669,12 +2561,11 @@ image::tema5_sumarestac1c2.png[]
 ** Los datos de entrada y salida siguen la lógica  negativa : son activas las señales de valor 0.
 ** Lógica negativa -> el dato 1000 representa al valor 7.
 
+[#Tema6_OtrosCirc]
+== Tema 6: Otros Circuitos Combinacionales
 
-<<<
-== Tema 6: Otros Circuitos Combinacionales [[Tema6_OtrosCirc]]
+.
 
-
-<<<
 === Tema 6: Indice
 
 *  link:PDF/05_otros_circuitos_combinacionales.pdf[Tema5 Otros Circuitos Combinacionales]: PDF
@@ -2686,16 +2577,14 @@ image::tema5_sumarestac1c2.png[]
 . <<gen_par,Generador-Comprobador de Paridad>>
 . <<compa,Comparador Binario>>
 
-
-<<<
-=== Circuitos Combinacionales [[circ_combi]]
+[#circ_combi]
+=== Circuitos Combinacionales
 
 * Concepto: Circuitos cuya salida un instante es resultado de la entrada en ese mismo instante sin tener cuenta la historia pasada
 * No tienen MEMORIA
 
-
-<<<
-=== Multiplexor [[mux]]
+[#mux]
+=== Multiplexor
 
 . Concepto
 . Símbolo
@@ -2706,7 +2595,6 @@ image::tema5_sumarestac1c2.png[]
 . Aplicaciones: Generador de Funciones
 
 [.columns]
-<<<
 === Concepto - Símbolo
 
 [.column]
@@ -2721,7 +2609,6 @@ image::tema6_multiplexor.png[]
 image::tema6_multiplexor-mov.gif[width=540,heigth=480]
 
 [state=taula]
-<<<
 === Diseño
 
 lenguaje natural: función del multiplexor ->  F=I0 si S1=0 y S0=0 ó F=I1 si S1=0 y S0=1 ó ...... +
@@ -2729,7 +2616,7 @@ lenguaje natural: función del multiplexor ->  F=I0 si S1=0 y S0=0 ó F=I1 si S1
 latexmath:[F=lógica \: positiva=\overline S_1 \overline S_0 I_0 + \overline S_1  S_0 I_1 +  S_1 \overline S_0 I_2 +  S_1  S_0 I_3]
 
 .TV
-[width=100%]
+[width=50%]
 |===
 | I3 | I2 | I1 | I0 | S2 | S1 | F
 
@@ -2739,7 +2626,17 @@ latexmath:[F=lógica \: positiva=\overline S_1 \overline S_0 I_0 + \overline S_1
 | X  | X  | X  | X  | 1  |  1 | I3
 |===
 
-<<<
+=== Diseño
+
+DK para una función de 6 variables +
+Gráfica de 2^6^=64 celdas +
+4 matrices de 16 celdas cada una, representadas en 3 dimensiones +
+1 matriz de variables latexmath:[I_3, I_2, I_1, I_0] para cada combinación latexmath:[S_2S_1] +
+
+image::tema6_mux_dk.png[]
+
+
+
 === Esquema Eléctrico
 
 * Señal Strobe : señal de validación, habilitación. Es necesario que este activa para que el circuito procese los datos de entrada y la salida sea válida. 
@@ -2748,13 +2645,11 @@ latexmath:[F=lógica \: positiva=\overline S_1 \overline S_0 I_0 + \overline S_1
 
 image::tema6_mux-esqelec.svg[width=340,heigth=280]
 
-<<<
 === Hoja de Características Comercial
 
 image::tema6_mux-comercial.png[]
 
 
-<<<
 === Extensión de Multiplexores
 
 * El número de entradas de los multiplexores es limitado. No hay multiplexores con 64 entradas. Para diseñar un multiplexor de 64 entradas es necesario utilizar multiplexores con un número de entradas inferior : 16,8,4,2 entradas. 
@@ -2764,14 +2659,12 @@ image::tema6_mux-comercial.png[]
 ** Un mux de 64 entradas es la combinación de 4 mux de 16 entradas de datos y 4 entradas de selección . Las 4 salidas de los 4 mux se multiplexan con un segundo mux de 4 entradas.
 ** Las señales de selección del 1º nivel de mux están interconectadas dando lugar a 4 entradas de control y el 2º nivel de mux tendría 2 entradas de control. Los dos niveles suman 6 entradas de control.
 
-<<<
 === Extensión de Multiplexores
 
 image::tema6_mux-extension.svg[width=440,heigth=340]
 
 
 
-<<<
 === Aplicaciones: Generador de Funciones
 
 
@@ -2779,7 +2672,6 @@ image::tema6_mux-extension.svg[width=440,heigth=340]
 * Por lo tanto un multiplexor con 3 entradas de control puede implementar una función lógica de 3 o más variables independientes.
 * Ejemplos.
 
-<<<
 === Ejemplos: Generador de Funciones
 
 . Generar con un MUX 8x1 la función latexmath:[F=\overline BCD +A\overline BD + \overline A \overline BC]
@@ -2790,9 +2682,8 @@ image::tema6_mux-extension.svg[width=440,heigth=340]
 ** Se observan variables comunes en todos los sumandos -> SOP
 
 
-
-<<<
-=== Codificador (Encoder) [[codi]]
+[#codi]
+=== Codificador (Encoder) 
 
 . Concepto
 . Símbolo
@@ -2800,7 +2691,6 @@ image::tema6_mux-extension.svg[width=440,heigth=340]
 
 
 [state=txikiago]
-<<<
 === Concepto
 
 * Un codificador realiza la conversión de un número con cualquier tipo de código no binario a código binario.
@@ -2809,13 +2699,12 @@ image::tema6_mux-extension.svg[width=440,heigth=340]
 image::tema6_codificador-hex.png[]
 
 [state=taula]
-<<<
 === Codificador Hexadecimal sin Prioridad : Diseño
 
 .TV del Codificador Hexadecimal
-[width=100%]
+[width=60%]
 |===
-|latexmath:[E_15]|latexmath:[E_14]|latexmath:[E_13]|..|latexmath:[E_1]|latexmath:[E_0]|latexmath:[S_3]|latexmath:[S_2]|latexmath:[S_1]|latexmath:[S_0]| Fila
+|latexmath:[E_{15}]|latexmath:[E_{14}]|latexmath:[E_{13}]|..|latexmath:[E_1]|latexmath:[E_0]|latexmath:[S_3]|latexmath:[S_2]|latexmath:[S_1]|latexmath:[S_0]| Fila
 |  0 |  0 |  0 |..|  0 |  *1* |  0 |  0 |  0 |  0 | 0ª
 |  0 |  0 |  0 |..|  *1* |  0 |  0 |  0 |  0 |  1 | 1ª
 | .. | .. | .. |..| .. | .. | .. | .. | .. |  ..  |
@@ -2828,7 +2717,6 @@ image::tema6_codificador-hex.png[]
 * El resto de combinaciones "no van a ocurrir" por lo que salida queda "X" en DK ó "dont't care" en VHDL , es decir, no importa que la salida valga cero ó uno para dichas entradas y las tenemos que definir 0 ó 1 en función de su optimización.
 
 [state=txikiago]
-<<<
 === Codificador Hexadecimal : Diseño
 
 * No se puede recurrir directamente a un DK ya que el número de celdas es muy elevado
@@ -2837,28 +2725,25 @@ image::tema6_codificador-hex.png[]
 ** vale 1 si: filas 1ª,3ª,5ª...15ª
 *** fila 1ª: 0000000000000010 -> es el minitérmino latexmath:[m_2] de 16 variables -> optimización: ¿se puede reducir el Nº de variables?
 *** Si de las filas RESTO capturo todas las filas latexmath:[m_i] donde latexmath:[E_1] valga 1 y las sumo a la fila 1ª -> puedo sacar factor común latexmath:[E_1]
-*** latexmath:[E_1*sum(m_i)=E_1 cdot 1] y así con las filas 3ª,5ª, etc
+*** latexmath:[E_1*\sum(m_i)=E_1 \cdot 1] y así con las filas 3ª,5ª, etc
 ** latexmath:[S_0=E_1+E_3+E_5+E_7+E_9+E_11+E_13+E_15]
 
-<<<
 === Codificador Hexadecimal : Diseño
 
 * Aplicamos el mismo método a las 4 salidas
-** latexmath:[S_0=E_1+E_3+E_5+E_7+E_9+E_11+E_13+E_15]
-** latexmath:[S_1=E_2+E_3+E_6+E_7+E_10+E_11]
-** latexmath:[S_2=E_4+E_5+E_6+E_7+E_12+E_13+E_14+E_15]
-** latexmath:[S_3=E_8+E_9+E_10+E_11+E_12+E_13+E_14+E_15]
+** latexmath:[S_0=E_1+E_3+E_5+E_7+E_9+E_{11}+E_{13}+E_{15}]
+** latexmath:[S_1=E_2+E_3+E_6+E_7+E_{10}+E_{11}]
+** latexmath:[S_2=E_4+E_5+E_6+E_7+E_{12}+E_{13}+E_{14}+E_{15}]
+** latexmath:[S_3=E_8+E_9+E_{10}+E_{11}+E_{12}+E_{13}+E_{14}+E_{15}]
 
 * ¿ Hubiesemos llegado al mismo resultado mediante el lenguaje natural?
 ** La salida latexmath:[S_k] igual a 1 si la entrada latexmath:[E_i=1] ó la entrada latexmath:[E_j=1] ó etc ...
 
-<<<
 === Ejemplo de Diseño: BCD sin prioridad
 
 * Mismo procedimiento que el codificador Hexadecimal sin prioridad.
 
 [.columns,state="taula"]
-<<<
 === Ejemplo de Diseño: Codificador 4x2 con prioridad
 
 [.column]
@@ -2881,14 +2766,14 @@ Ejemplo 1 : Codificador 4x2 con prioridad latexmath:[E_3 > E_2 > E_1 > E_0] +
 
 [.column]
 * lógica positiva
-** latexmath:[S_0=E_3+\overline {E_3}\overline {E_2} E_1 ] = optimizar = latexmath:[E_3+E_3 \overline {E_2} E_1+\overline {E_3}\overline {E_2} E_1 = E_3+\overline {E_2} E_1] 
+** latexmath:[S_0=E_3+\overline {E_3}\overline {E_2} E_1 ] = optimizar = latexmath:[E_3(1+\overline {E_2} E_1)+ \overline {E_3}\overline {E_2} E_1  = E_3+E_3 \overline {E_2} E_1+\overline {E_3}\overline {E_2} E_1 = E_3+ (E_3+ \overline E_3) \overline {E_2} E_1 = E_3+\overline {E_2} E_1] 
 
-** latexmath:[S_1=E_3+\overline E_3 E_2]= optimizar = latexmath:[E_3+E_3E_2+ \overline E_3 E_2=E_3+E_2]
+** latexmath:[S_1=E_3+ \overline E_3 E_2]= optimizar = latexmath:[ E_3(1 + E_2)+ \overline E_3 E_2 = E_3+E_3E_2+ \overline E_3 E_2 = E_3+ (E_3+ \overline E_3) E_2 = E_3+E_2]
+** Las optimizaciones realizadas mediante el algebra se pueden realizar también mediante el diagrama DK.
 
 
-
-<<<
-=== Decodificador / Demux [[decodi]]
+[#decodi]
+=== Decodificador / Demux
 
 . Concepto
 . Diseño: Salidas mutuamente excluyentes
@@ -2900,12 +2785,10 @@ Ejemplo 1 : Codificador 4x2 con prioridad latexmath:[E_3 > E_2 > E_1 > E_0] +
 .. Generador de Funciones: Decodificador y Multiplexor
 
 
-<<<
 === Concepto
 
 * El Decodificador realiza la función inversa del codificador, es decir, convierte la entrada de datos binaria en una salida de datos en código no binario.
 
-<<<
 === Diseño: Salidas mutuamente excluyentes
 
 Salidas Mutuamente excluyentes: únicamente se activa una de las salidas
@@ -2914,7 +2797,6 @@ Salidas Mutuamente excluyentes: únicamente se activa una de las salidas
 image::tema6_decoder.png[]
 
 
-<<<
 === Diseño: Salidas mutuamente excluyentes
 
 * Lenguaje Natural
@@ -2922,17 +2804,15 @@ image::tema6_decoder.png[]
 *** latexmath:[S_0= \overline E_3 \overline E_2 \overline E_1 \overline E_0] 
 ** La salida latexmath:[S_1] vale 1 si la entrada latexmath:[E_3E_2E_1E_0] vale 0001 -> minitérmino latexmath:[m_1]
 *** latexmath:[S_1= \overline E_3 \overline E_2 \overline E_1 E_0] 
-** La salida latexmath:[S_15] vale 1 si la entrada latexmath:[E_3E_2E_1E_0] vale 1111 -> minitérmino latexmath:[m_15]
-*** latexmath:[S_15= E_3 E_2  E_1 E_0] 
+** La salida latexmath:[S_{15}] vale 1 si la entrada latexmath:[E_3E_2E_1E_0] vale 1111 -> minitérmino latexmath:[m_{15}]
+*** latexmath:[S_{15}= E_3 E_2  E_1 E_0] 
 
-<<<
 === Ejemplo de Diseño: Decodificador BCD
 
 * link:http://bit.ly/1ohdG23[Decodificador BCD/DEC sn74ls42]
 * símbolo línea con lógica negativa +
 image:tema6_linealogicanegativa.svg[]
 
-<<<
 === Extensión de los Decodificadores
 
 * https://www.ti.com/lit/ds/symlink/cd54act138.pdf[3-LINE TO 8-LINE DECODERS/DEMULTIPLEXERS]: Diseñar un Decodificador de 32 Salidas mediante decodificadores CD54ACT138 3x8
@@ -2941,7 +2821,6 @@ image:tema6_linealogicanegativa.svg[]
 ** La función *enable* (habilitación) se obtiene mediante el operador *&* (and) de las 3 señales: latexmath:[\overline G2A ,\overline G2B \:y\: G1] correspondientes a los pines 4,5 y 6 del circuito integrado CD54ACT138.
 ** Las 8 salidas de datos operan en lógica *negativa* : se activan con un *0*
 
-<<<
 === Extensión de los Decodificadores mediante CD54ACT138.
 
 * El decodificador resultante de 32 salidas tendría una entrada binaria de 5 bits -> 2^5^ , latexmath:[A_4, A_3, A_2, A_1, A_0] y el decodificador CD54ACT138 3x8  solo tiene 3  entradas de datos, por lo que es necesario utilizar las señales "Enable".
@@ -2950,26 +2829,29 @@ image:tema6_linealogicanegativa.svg[]
 * Para realizar la segunda selección las entradas latexmath:[A_4, A_3] se asignan al bus de control Enable de los 4 decodificadores 3x8
 
 [.columns, state="taula"]
-<<<
 === Extensión de los Decodificadores mediante CD54ACT138.
+
+[.column]
+Hay que conectar las 3 señales de control con las 2 entradas de datos latexmath:[A_4, A_3] +
+La solución no es única: existen otras opciones para la síntesis de latexmath:[A_4, A_3]
+
 
 [.column]
 .Tabla de la Verdad
 [width=60%,cols="1*<4,5*^1"]
 |===
-| Decodificador Seleccionado |latexmath:[A_4] | latexmath:[A_3] | latexmath:[\overline G2B] | latexmath:[\overline G2A] | latexmath:[G1] 
+| Decodificador Seleccionado |latexmath:[A_4] | latexmath:[A_3] | latexmath:[\overline G2B] | latexmath:[\overline G2B]|  latexmath:[G1] 
 
-| Primero| 0 | 0 | | | 
-| Segundo| 0 | 1 | | | 
-| Tercero| 1 | 0 | | | 
-| Cuarto | 1 | 1 | | | 
+| Primero| 0 | 0 | latexmath:[A_4]| latexmath:[A_3]| 1 
+| Segundo| 0 | 1 | 0 | latexmath:[A_4]| latexmath:[A_3]
+| Tercero| 1 | 0 | latexmath:[A_3]| 0 | latexmath:[A_4]
+| Cuarto | 1 | 1 |latexmath:[ \overline A_4]| latexmath:[ \overline A_3] | 1
 |===
 
-[.column]
-* Hay que conectar las 3 señales de control con las 2 entradas de datos latexmath:[A_4, A_3]
+
+
 
 [state=txikiago]
-<<<
 === Diodo L.E.D.
 
 * Light-Emited Diode : diodo LED
@@ -2982,7 +2864,6 @@ El diodo LED es un dispositivo fabricado en una muestra de semicoductor formando
 [.small]#By Inductiveload - Own work by uploader, drawn in Solid Edge and Inkscape., Public Domain, https://commons.wikimedia.org/w/index.php?curid=6431789#
 
 [.columns]
-<<<
 === LED: Circuito Excitador
 
 [.column, state=txikiago]
@@ -3008,7 +2889,6 @@ Controlando la *tensión* de uno de los dos terminales producimos el encendido/a
 
 
 [.columns]
-<<<
 === Display 7 segmentos
 
 [.column]
@@ -3032,7 +2912,6 @@ image::tema6_display-16seg.gif[width=200,heigth=90]
 --
 
 [.columns, state="txikiago"]
-<<<
 === Excitador de un Display de 7 segmentos
 
 [.column]
@@ -3055,25 +2934,86 @@ Los 7 LEDs del Display se nombran con 7 letras según su posición.
 Los 7 LEDs del Display tienen el Anodo ó el Cátodo común.
 
 Si el Display es de *Anodo Común*, se puede controlar el Cátodo de cada LED libremente con un *0* : lógica negativa. +
--Iluminar el 0 : activar los segmentos a-b-c-d-e-f -> 0000001. +
--Iluminar el 5: activar los segmentos a-c-d-f-g -> 0100100.
+-Iluminar el 0 : activar los segmentos f-e-d-c-b-a -> 1000000. +
+-Iluminar el 5: activar los segmentos  g-f-d-c-a -> 0010010.
 
 Si el Display es de *Cátodo Común*, se puede controlar el Anodo de cada LED libremente con un *1* : lógica positiva. +
--Iluminar el 0 : activar los segmentos a-b-c-d-e-f -> 1111110. +
--Iluminar el 5: activar los segmentos a-c-d-f-g -> 1011011.
+-Iluminar el 0 : activar los segmentos f-e-d-c-b-a -> 0111111. +
+-Iluminar el 5: activar los segmentos g-f-d-c-a -> 1101101.
 
 --
-<<<
+
 === Decodificador Display 7 Segmentos
 
 * Mediante un decodificador 4x7 Binario/7seg_code podemos visualizar en el display un dígito hexadecimal codificado en binario.
 * Diseñar un Decodificador BIN_HEX a Display_7_segmentos de Anódo Común en código VHDL. Verificar su funcionamiento mediante la tarjeta DE1-SoC
-** Utilizar como puerto de entrada las señales de los switches SW(3 downto 0)
-** Utilizar como puerto de salida las señales del Display de 7 segmentos HEX0(6 downto 0)
+** Utilizar como puerto de entrada las señales de los switches SW(3 downto 0) -> el hexadecimal x"F" equivale al binario "1111"
+** Utilizar como puerto de salida las señales del Display de 7 segmentos HEX0(6 downto 0) -> g-f-e-d-c-b-a
 ** Cada digito hexadecimal de entrada estará codificado en binario con 4 bits y la salida será un bus de 7 líneas donde cada línea irá a uno de los LEDs 
 
+[.notes]
+--
+-- Universidad Pública de Navarra
+-- Sistemas Digitales
+-- Primavera 2023
+-- HEX0 -> gfedcba
+
+library std;
+use std.standard.all;
+
+entity decod7seg is
+  port (
+    SW   : in bit_vector(3 downto 0);
+    HEX0   : out bit_vector(6 downto 0)
+);
+end entity;
+
+architecture beha of decod7seg is
+begin
+ process (SW)
+ begin
+    case SW is
+        when x"0" =>
+            HEX0 <= "1000000";
+        when x"1" =>
+            HEX0 <= "1111001";
+        when x"2" =>
+            HEX0 <= "0100100";
+        when x"3" =>
+            HEX0 <= "0110000";
+        when x"4" =>
+            HEX0 <= "0011001";
+        when x"5" =>
+            HEX0 <= "0010010";
+        when x"6" =>
+            HEX0 <= "0000010";
+        when x"7" =>
+            HEX0 <= "1111000";
+        when x"8" =>
+            HEX0 <= "0000000";
+        when x"9" =>
+            HEX0 <= "0010000";
+        when x"A" =>
+            HEX0 <= "0001000";
+        when x"B" =>
+            HEX0 <= "0000011";
+        when x"C" =>
+            HEX0 <= "1000110";
+        when x"D" =>
+            HEX0 <= "0100001";
+        when x"E" =>
+            HEX0 <= "0000110";
+        when x"F" =>
+            HEX0 <= "0001110";
+        when others =>
+            HEX0 <= "0111111";
+        end case;
+ end process;
+end beha;
+   
+--
+
 [.columns]
-<<<
 === Decodificador Display 7 Segmentos
 
 [.column]
@@ -3095,7 +3035,6 @@ image::tema6_decoder_func.png[]
 * Si la función se expresa según la 2ª forma canónica sustituiríamos la puerta OR de salida por una puerta AND.
 
 [.columns, state=txikiago]
-<<<
 === Aplicaciones: Conversor Serie Paralelo
 
 [.column]
@@ -3142,7 +3081,6 @@ image::tema6_decoder_multiplexor_ej.png[]
 --
 
 [#conver, state=txikiago]
-<<<
 === Convertidores de Código
 
 * link:https://www.digchip.com/datasheets/parts/datasheet/477/SN74184.php[Convertidor BCD a Binario , 74184] 
@@ -3164,7 +3102,6 @@ image::tema6_decoder_multiplexor_ej.png[]
 
 
 [.columns, state=taula]
-<<<
 === Generador-Comprobador de Paridad
 
 [.column]
@@ -3195,7 +3132,6 @@ Ejemplo: Bit de paridad par del dato 01101101 +
 image::tema6_paridad_par_ej.png[]
 --
 
-<<<
 === Generador-Comprobador de Paridad: Comunicaciones
 
 
@@ -3205,7 +3141,6 @@ Si el generador de paridad del Receptor no coincide con el bit de paridad del Tr
 
 
 [.columns, state=taula]
-<<<
 === Generador-Comprobador de Paridad CY74FCT480T: Hoja de Características 
 
 [.column]
@@ -3224,7 +3159,6 @@ Como detector: recibe los 2 datos de 8 bits  y los 2 bits de paridad latexmath:[
 image::tema6_paridad_comercial.png[]
 
 [#compa]
-<<<
 === Comparador Binario
 
 . Concepto
@@ -3235,7 +3169,6 @@ image::tema6_paridad_comercial.png[]
 
 
 [state=txikiago]
-<<<
 === Concepto
 
 Comparador Binario: compara 2 datos A y B de entrada y expresa la relación entre ellos: A>B, A<B, A=B  +
@@ -3256,19 +3189,21 @@ latexmath:[G=A \overline B] +
 latexmath:[E=\overline A \overline B + AB = \overline {A \oplus B} = \overline { L \oplus G }] +
 
 [.columns, state="taula"]
-<<<
 === Diseño comparador de 4 bits
 
 [.column]
 --
 Para comparar 2 datos de varios bits se realiza la comparación bit a bit (wise) comenzando por el bit MSB +
 Síntesis de un comparador de 4 bits latexmath:[A_1,A_2,A_3,A_4 \:y\: B_1,B_2,B_3,B_4]. +
-- Lenguaje natural: G=1 si latexmath:[ A_4 > B_4] ó latexmath:[A_4=B_4=0] y latexmath:[A_3 > B_3] ó ... +
+- Lenguaje natural: G=1 si latexmath:[ A_4 > B_4] ó latexmath:[A_4=B_4=0] y latexmath:[A_3 > B_3] ó latexmath:[A_4=B_4=1] y latexmath:[A_3 > B_3] ó ... +
 - latexmath:[G=A_4\overline B_4 + \overline A_4 \overline B_4 A_3 \overline B_3 + ...] +
 Síntesis por extensión de comparadores de 1 bit +
-- Lenguaje natural: G=1 si latexmath:[G_4=1] ó latexmath:[E_4G_3=1] ó latexmath:[E_4E_3G_2=1] ó latexmath:[E_4E_3E_2G_1=1] +
+- Lenguaje natural: G=1 si latexmath:[G_4=1] ó latexmath:[E_4G_3=1] ó latexmath:[E_4E_3G_2=1] ó latexmath:[E_4E_3E_2G_1=1]: +
+- - latexmath:[G=G_4 + E_4G_3 + E_4E_3G_2 + E_4E_3E_2G_1 ] +
 - L=1 si latexmath:[L_4=1] ó latexmath:[E_4L_3=1] ó latexmath:[E_4E_3L_2=1] ó latexmath:[E_4E_3E_2L_1=1] +
-- E=1 si latexmath:[E_4E_3E_2E_1=1]
+- - latexmath:[L=L_4 + E_4L_3 + E_4E_3L_2 + E_4E_3E_2L_1 ] +
+- E=1 si latexmath:[E_4E_3E_2E_1=1] +
+- - latexmath:[E=E_4E_3E_2E_1 ] 
 --
 
 [.column]
@@ -3285,8 +3220,7 @@ Síntesis por extensión de comparadores de 1 bit +
 --
 
 [.columns, state=txikiago]
-<<<
-=== Comparadores de 4 bits con entradas de Expasión
+=== Comparadores de 4 bits con entradas de Expansión
 
 [.column.is-one-third]
 --
@@ -3313,10 +3247,16 @@ latexmath:[L_H=L_4+E_4L_3+E_4E_3L_2+E_4E_3E_2L_1+E_4E_3E_2E_1L_C] +
 latexmath:[E_H=E_8E_7E_6E_5E_L]
 --
 
-<<<
 === Extensión de Comparadores sin Entradas de Expansión
 
 * Diseñar un Comparador de datos de 7 bits mediante 2 comparadores de 4 bits.
+** Métodos ascencente y descencente.
+
+image::tema6_comparador_ascen-descen.svg[]
+
+=== Extensión de Comparadores sin Entradas de Expansión
+
+
 * Método ascendente : primero se compara los 4 bits LSB y a continuación los 4 bits MSB
 ** La salida del comparador (G,E,L) es la del comparador MSB
 ** El bit latexmath:[A_5] del comparador MSB se conecta a la salida G del comparador LSB
@@ -3326,22 +3266,40 @@ latexmath:[E_H=E_8E_7E_6E_5E_L]
 ** El bit latexmath:[A_3] del comparador LSB se conecta a la salida G del comparador MSB
 ** El bit latexmath:[B_3] del comparador LSB se conecta a la salida L del comparador MSB
 
-<<<
+
+
 === Comparador Comercial
 
 * https://www.digchip.com/datasheets/parts/datasheet/321/7485.php[Comparador CD74HC85]
+** comparador de 2 datos de 4 bits cada uno.
 
-<<<
+[.columns, state="txikiago"]
 === Comparador CD74HC85: conexión mediante entradas de expansión en paralelo ===
 
-* Diseñar un comparador de 24 bits mediante 6 comparadores : 5 comparadores (latexmath:[C_0,C_1,C_2,C_3,C_4 \: y \: C_5]) en el primer nivel de comparación y 1 comparador (latexmath:[C_6]) en el segundo nivel.
-* El comparador latexmath:[C_0] tiene las entradas GEL=010
-* Los comparadores del primer nivel (latexmath:[C_1,C_2,C_3 \: y  \:C_4]) tienen 4 entradas de datos y las entradas GEL con los *bits dato* (latexmath:[C_1 -> A_4,B_4]), (latexmath:[C_2 ->A_9,B_9]), (latexmath:[C_3 ->A_{14},B_{14}]) y (latexmath:[C_4 ->A_{19},B_{19}]) 
-* El comparador de segundo nivel tiene como entradas de datos las salidas GEL de los 4 comparadores del primer nivel (latexmath:[C_1,C_2,C_3 \: y \: C_4]) y como entrada GEL la salida GEL del comparador  latexmath:[C_0].
+[.column]
+
+* Diseñar un comparador de 24 bits mediante 6 comparadores : 5 comparadores (latexmath:[C_A,C_B,C_C,C_D \: y \: C_E]) en el primer nivel de comparación y 1 comparador (latexmath:[C_F]) en el segundo nivel.
+* El comparador latexmath:[C_A] tiene las entradas GEL=010
+* Los comparadores del primer nivel (latexmath:[C_A,C_B,C_C,C_D \: y  \:C_E]) tienen 4 entradas de datos y las entradas GEL con los *bits dato* (latexmath:[C_A -> 0,1,0]), (latexmath:[C_B ->A_5,0,B_5]), (latexmath:[C_C ->A_{10},0,B_{10}]), (latexmath:[C_D ->A_{15},0,B_{15}]) y latexmath:[C_E -> A_{20},0,B_{20}]),
+* El comparador de segundo nivel tiene como entradas de datos las salidas GEL de los 4 comparadores del primer nivel (latexmath:[C_B,C_C,C_D \: y \: C_E]) y como entrada GEL la salida GEL del comparador  latexmath:[C_A].
+
+[.column]
+image::tema6_comparador_24.svg[]
+
+
+
+
+
+
+ 
+
+
 
 
 == Ejercicios ==
 
 == Fin del Primer Parcial
+
+Parte 2ª : link:ssdd2.html[Sistemas Digitales: Segunda Parte]
 
 

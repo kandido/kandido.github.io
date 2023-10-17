@@ -1,49 +1,48 @@
 = Sistemas Digitales 
-// classic AsciiDoctor attributes
-//:stem: latexmath
+candido@unavarra.es
+#elije uno de: beige, black, league, night, serif, simple, sky, solarized, white
+:revealjs_theme: white
 :stem:
 :background-color="#ff0000":
-:icons: font
+:customcss: styles/mipruebaCSS.css
 :imagesdir: images
-:customcss: styles/myCustomCSS.css
-// Despite the warning of the documentation, https://github.com/asciidoctor/asciidoctor-reveal.js, highlight.js syntax highlighting WORKS, BUT, you need to explicitly set the highlighter using the below attribute
-// see http://discuss.asciidoctor.org/Highlighting-source-code-for-reveal-js-backend-td2750.html
+:iconsdir: imagenes/iconos
+:icontype: png
+:icons: font
 :source-highlighter: highlight.js
-:highlightjs-languages: vhdl
-:source-language: vhdl 
-//:source-highlighter: rouge
-//:source-highlighter: pygments
-// revealjs attributes
-:revealjs_theme: white
-:revealjs_slideNumber: true
-// Al actualizar el slide no cambia de transpa y no se va al inicio
-:revealjs_hash: true   
-:revealjs_history: true
-
-
-:revealjs_center: true
-:revealjs_width: "100%"
-:revealjs_height: "100%"
-:revealjs_margin: 0
-
-//:revealjs_minScale: 1,
-//:revealjs_maxScale: 1
-
-// plugins copiados de tutoriales/asciidoctor-revealjs/../primer.js
+:highlightjs-languages: x86asm
+:revealjs_slidenumber: true
 :revealjs_plugins_configuration: revealjs-plugins-conf.js
 :revealjs_plugins: revealjs-plugins.js
 
-//:scrollable: no pirula
+// /////////////////////////////:background-color="#ff0000":
 
+// Despite the warning of the documentation, https://github.com/asciidoctor/asciidoctor-reveal.js, highlight.js syntax highlighting WORKS, BUT, you need to explicitly set the highlighter using the below attribute
+// see http://discuss.asciidoctor.org/Highlighting-source-code-for-reveal-js-backend-td2750.html
+// /////////////////////////////:source-language: vhdl 
+//:source-highlighter: rouge
+//:source-highlighter: pygments
+// revealjs attributes
+// Al actualizar el slide no cambia de transpa y no se va al inicio
+// /////////////////////////////:revealjs_hash: true   
+// /////////////////////////////:revealjs_history: true
+:revealjs_center: false
+//:revealjs_width: "100%"
+//:revealjs_height: "100%"
+//:revealjs_margin: 0
+:revealjs_minScale: 0.4
+:revealjs_maxScale: 2.0
+// plugins copiados de tutoriales/asciidoctor-revealjs/../primer.js
 //:revealjs_history: true para go to file no pirula
 
 //:doctype: book
 //:lang: es
 //:encode: ISO-8859-1
 //:ascii-ids:
-:show-link-uri:
-:asciidoctor-fetch-kroki:
-:experimental:
+
+// /////////////////////////////:show-link-uri:
+// /////////////////////////////:asciidoctor-fetch-kroki:
+// /////////////////////////////:experimental:
 
 :ruta-transpas: home/candido/Dropbox/apuntes/apuntes_sistemas_digitales/upna/apuntes_repositorio/transpas_ssdd
 
@@ -55,6 +54,7 @@
 * Si hay algún error de forma en el documento PDF que dificulte su interpretación, por favor, enviar un mensaje para su correción. Gracias.
 
 
+[.scrollable]
 == Indice
 
 [%hardbreaks]
