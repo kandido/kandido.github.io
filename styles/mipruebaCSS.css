@@ -63,7 +63,15 @@ section[data-state="taula_txi"] table {
 section[data-state="taula_ta"] table  {
     font-family: 'Neuton', sans-serif;
     font-size: 0.5em;
-    margin-top: 0.5em;
-    padding: 0.1em;
+    margin-top: 0.1em;
+    padding: 0.01em;
     background: #f8f8f7;
+}
+
+.reveal li {
+	font-family: 'Neuton', sans-serif;
+	text-align: left;
+	text-indent: 1px;
+	font-size: 0.80em;
+	font-weight: 400;
 }
