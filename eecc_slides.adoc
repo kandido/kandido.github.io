@@ -17,14 +17,14 @@
 // revealjs attributes
 // NO DEJAR LINEAS EN BLANCO ANTES DEL WHITE
 :revealjs_theme: white
-:revealjs_slideNumber: true
+:revealjs_slideNumber: false
 // Al actualizar el slide no cambia de transpa y no se va al inicio
 :revealjs_hash: true   
 :revealjs_history: true
 :revealjs_center: false
-:revealjs_width: "100%"
-:revealjs_height: "100%"
-:revealjs_margin: 0
+//:revealjs_width: "100%"
+//:revealjs_height: "100%"
+//:revealjs_margin: 0
 //:revealjs_minScale: 1,
 //:revealjs_maxScale: 1
 // plugins copiados de tutoriales/asciidoctor-revealjs/../primer.js
@@ -37,14 +37,15 @@
 //:encode: ISO-8859-1
 //:ascii-ids:
 //eecc_slides-docinfo-footer.html contiene la carga y registro del lenguaje x86asmatt, de chalkboard y de notes icon
-:docinfo: private
-:show-link-uri:
+
+//:docinfo: private
+//:show-link-uri:
 :asciidoctor-fetch-kroki: 
-:experimental:
-:notitle:
+//:experimental:
+//:notitle:
 
 
-
+:ruta-images-book: /home/candido/Dropbox/apuntes/apuntes_Estr_Computadores/upna-book-v2/HTML/images
 :ruta-transpas: /home/candido/Dropbox/apuntes/apuntes_Estr_Computadores/upna/apuntes_repositorio/transpas_eecc
 
 :ruta-apuntes: home/candido/Dropbox/apuntes
@@ -59,7 +60,7 @@
 ////
 
 == Indice
-
+ 
 [%hardbreaks]
 Tema 1: <<Tema1_Intro, Introducción a la Asignatura Estructura de Computadores.>>
 Tema 2: <<Tema2_VonNeum, Arquitectura de Von Neumann.>>
@@ -69,6 +70,10 @@ Tema 5: <<Tema5_RepInstrucciones, Representación Digital de la Información: la
 Tema 6: <<Tema6_ProgAsm, Programación en Lenguaje Ensamblador (x86): Construcciones básicas de los lenguajes de alto nivel.>>
 Ejercicios Teoría: <<Tema1-6_Ejer, Ejercicios Propuestos Temas 1-6>>
 Programas ASM Propuestos: <<Prac_Ejer_I, Al finalizar el 1º Parcial>>
+Tema 3: <<Tema3_Float, Representación de los Datos: Números Reales>>
+Tema 7: <<Tema7_CPU, Unidad Central de Proceso.>>
+Tema 8: <<Tema8_IO, Mecanismos de Entrada/Salida>>
+Tema 9: <<Tema9_MEM, Unidad de Memoria.>>
 
 [#Tema1_Intro]
 == Tema 1 : Introducción a la Asignatura Estructura de Computadores.
@@ -255,19 +260,18 @@ image::eecc_tema2_niveles_isa.svg[]
 === Una máquina abstracta y muchas reales: compatibilidad
 
 * De la misma forma que cuan do aprendemos a conducir (pedales+cambio+volante) nos sirve para cualquier coche, la *arquitectura del conjunto de instrucciones* es la misma para múltiples procesadores.
-* La ISA amd64 ó x86-64 es la misma para todos los procesadores de Intel (core,xeon,etc...) o de AMD (Ryzen, etc). De esta forma un programa binario que se ejecute en un core-i7 también lo puede hacer en un Ryzen 9.
-
+* La ISA amd64 ó x86-64 es la misma para todos los procesadores de Intel (core,xeon,etc...) o de AMD (Ryzen, etc). De esta forma un programa binario que se ejecute en un core-i7 también lo puede hacer en un Ryzen 9.HON
 
 === Programa en lenguaje texto: suma de los 5 primeros números enteros 
 
 * Algoritmo latexmath:[$\sum_{i=1}^{5}i$]
 * Lenguaje de texto Python 
-
 +
-[source,phyton]
-----
+
+[source,python]
+---------
 sum(range(5,0,-1))
-----
+---------
 
 
 
@@ -276,8 +280,6 @@ sum(range(5,0,-1))
 === Programa en lenguaje texto: suma de los 5 primeros números enteros 
 
 [.column]
-Lenguaje C
-
 [source,C]
 ----
 /*
@@ -296,8 +298,6 @@ int main ()
 ----
 
 [.column]
-Lenguaje Java +
-
 [source,java]
 ----
 /* Programa Fuente: sum1toN.java
@@ -409,7 +409,6 @@ Disassembly of section .text:
 ----
 
 [.column]
-
 1ª columna: dirección de referencia a la instrucción +
  +
 2ª columna:  código máquina en hexadecimal +
@@ -444,7 +443,7 @@ Disassembly of section .text:
 
 
 
-[state=taula]
+[state=taula_txi]
 === Repertorio de la máquina IAS: tabla
 
 .Instruction Set I
@@ -462,7 +461,7 @@ Disassembly of section .text:
 |============================================================================
 
 
-[state=taula]
+[state=taula_txi]
 === Repertorio de la máquina IAS: tabla
 
 .Instruction Set II
@@ -855,8 +854,8 @@ a|1*8=ocho|0*4=cero|1*2=dos|1*1=uno
 
 === Calculadora de Python
 
-https://www.programiz.com/python-programming/online-compiler/[Python Intepreter Shell]
-
+* https://www.programiz.com/python-programming/online-compiler/[Python Intepreter Shell]
++
 
 [source,python]
 ----
@@ -2175,4 +2174,94 @@ close 6
 ** Dado el array lista_A : 12,-33,45 y el array lista_B: 76,89,-65 generar el array lista_D suma de los elementos de lista_A y lista_B
 ** Dado el array lista_A : 12,-33,45 y el array lista_B: 76,89,-65 generar el array lista_C formado el encadenamiento de lista_A y lista_B
 * Llamadas al Sistema
-** Función "write" según el prototipo del manual "man 2 write"
+** Imprimir en la pantalla el mensaje "Hola Mundo" mediante un programa en asm at&t:
+*** Mediante las funciones de C printf y puts según los prototipos de los manuales "man 3 printf" y "man 3 puts"
+*** Mediante la función del sistema "write" según el prototipo del manual "man 2 write"
+
+[#Tema3_Float]
+== Tema 3 Representación de los Datos: Números Reales
+
+[#Tema7_CPU]
+== Tema 7 Unidad Central de Proceso
+
+* Introducción
+* Fases de ejecución de una instrucción
+* Ruta de datos
+* Segmentación
+* Arquitecturas CISC, RISC y VLIW
+* Conjunto de instrucciones
+
+
+[.columns]
+=== Introducción
+
+[.column]
+* El objetivo principal de la CPU es la implementación del ciclo de instrucción. Es el soporte hardware para poder llevar a cabo todas las operaciones que conllevan las intrucciones de un programa.
+* Nombres: Procesador, microprocesador (El componente electrónico básico es el transistor con un tamaño en sus origenes del orden de la micra ), ..
+* Central porque la computadora tiene varios procesadores: Por ejemplo el controlador de la memoria y los controladores de los periféricos.
+* La CPU es una de las unidades básicas que conforman la arquitectura Von-Neumann (CPU-MP-IO) y Buses.
+
+[.column]
+--
+image::{ruta-images-book}/von_neumann/ias_architecture.png[scaledwidth="80%",align="center",title="IAS_Architecture"]
+--
+
+=== Puntos de Vista: SW vs HW
+
+image::{ruta-images-book}/cpu/puntosdevista_isa_uarch.svg[width=900,height=500,align="center", title="Puntos de Vista: SW y HW"]
+
+=== Puntos de Vista: SW vs HW
+
+* La CPU se puede ver desde el punto de vista del *programador* o desde el punto de vista del diseñador de procesadores (microarquitectura)
+* Desde el punto de vista del programador interesa conocer:
+** La Arquitectura del Repertorio de Instrucciones (ISA): Formatos de datos e intrucciones, operaciones,  modos de direccionamiento, registros, direccionamiento de la memoria, alineamiento de los datos, etc
+** Modos de Funcionamiento de la CPU: modo superusuario, modo usuario, modo interrupción. 
+* Desde el punto de vista de la Microarquitectura u organización interna de la CPU.
+** Las unidades básicas de la CPU son: Unidad de Control (UC), y la Ruta de Datos (ALU,FPU,MMU,Registros y circuitos de enrutamiento como multiplexores, conmutadores, etc).
+** La Unidad de Control se encarga de la gestión de las operaciones a realizar, mediante microórdenes, para completar el ciclo de instrucción. Electrónicamente es un circuito digital secuenciador cuyas secuencias son las fases del ciclo de instrucción.
+*** Las microórdenes son señales digitales binarias.
+
+=== Fases de ejecución de una instrucción
+
+image::{ruta-images-book}/cpu/12_5.jpg[title="Diagrama de Estados", scaledwidth="100%",align="center" ]
+Fetch-I I-Decode O-Fetch  Execute-I  Write-O  Interrupt-I  Next-I
+
+=== Unidad de Control: Microoperaciones
+
+* Microoperaciones: operaciones realizadas por la CPU internamente, al ejecutar una Instrucción Máquina.
+** Ejemplos: escribir en el registro MAR, orden de lectura a la MPrincipal, leer de MBR, interpretar de IR, incrementar PC, etc
+** Ejecución Síncrona con el reloj de la CPU:
++
+
+[ditaa]
+----------------------------------------------------------------------
+          T = 1/f
+<-------------------->
+
+               +-----+               +-----+               +-----+               +-----+            
+               |     |               |     |               |     |               |     |  
+               |     |               |     |               |     |               |     |         
+               |     |               |     |               |     |               |     |             
+               |     v               |     v               |     v               |     v    
+               |     |               |     |               |     |               |     |               
+               |     |               |     |               |     |               |     |     
+               |     |               |     |               |     |               |     |               
++--------------+     +---------------+     +---------------+     +---------------+     +
+----------------------------------------------------------------------
+
+*** Flancos de reloj: Cambio de nivel 0->1 (positivos) o  1->0 (negativos) 
+
+=== Unidad de control: micro-operaciones
+
+image::{ruta-images-book}/von_neumann/ias_operation.png[scaledwidth="50%",align="center",title="IAS Operation"]
+
+=== Ruta de datos
+
+=== Conjunto de instrucciones
+
+[#Tema8_IO]
+== Tema 8:  Mecanismos de Entrada/Salida
+
+[#Tema9_MEM]
+== Tema 9: Unidad de Memoria
+

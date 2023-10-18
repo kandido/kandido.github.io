@@ -1,0 +1,19 @@
+<script src="revealjs-plugins/menu/menu.js"></script>
+<link rel="stylesheet" href="revealjs-plugins/chalkboard/style.css">
+<script src="revealjs-plugins/chalkboard/plugin.js"></script>
+<script src="revealjs-plugins/highlightjs-x86asmatt-main/src/languages/x86asmatt.js"></script>
+<script>
+  Reveal.configure({
+    menu: {
+      side: 'right',
+      openButton: false
+    },
+    keyboard: {
+      67: function() { RevealChalkboard.toggleNotesCanvas() },
+      66: function() { RevealChalkboard.toggleChalkboard() }
+    }
+  })
+  Reveal.registerPlugin(RevealMenu)
+  Reveal.registerPlugin(RevealChalkboard)
+  Reveal.registerPlugin(RevealX86asmatt)
+</script>
