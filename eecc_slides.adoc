@@ -2208,7 +2208,7 @@ image::{ruta-images-book}/von_neumann/ias_architecture.png[scaledwidth="80%",ali
 
 === Puntos de Vista: SW vs HW
 
-image::{ruta-images-book}/cpu/puntosdevista_isa_uarch.svg[width=900,height=500,align="center", title="Puntos de Vista: SW y HW"]
+image::./book/puntosdevista_isa_uarch.svg[width=900,height=500,align="center", title="Puntos de Vista: SW y HW"]
 
 === Puntos de Vista: SW vs HW
 
@@ -2223,7 +2223,7 @@ image::{ruta-images-book}/cpu/puntosdevista_isa_uarch.svg[width=900,height=500,a
 
 === Fases de ejecución de una instrucción
 
-image::{ruta-images-book}/cpu/12_5.jpg[title="Diagrama de Estados", scaledwidth="100%",align="center" ]
+image::./book/12_5.jpg[title="Diagrama de Estados", scaledwidth="100%",align="center" ]
 Fetch-I I-Decode O-Fetch  Execute-I  Write-O  Interrupt-I  Next-I
 
 === Unidad de Control: Microoperaciones
@@ -2253,7 +2253,7 @@ Fetch-I I-Decode O-Fetch  Execute-I  Write-O  Interrupt-I  Next-I
 
 === Unidad de control: micro-operaciones
 
-image::{ruta-images-book}/von_neumann/ias_operation.png[scaledwidth="50%",align="center",title="IAS Operation"]
+image::./book/ias_operation.png[scaledwidth="50%",align="center",title="IAS Operation"]
 
 === Ruta de datos
 
