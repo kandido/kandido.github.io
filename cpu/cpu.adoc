@@ -322,7 +322,7 @@ Unidad de Control Microprogramada
 
 * Microprogramada:
 ** Las instrucciones máquina (ISA) almacenadas en la memoria principal y cuya secuencia consituye el *código máquina* del programa del usuario no son ejecutadas directamente por la UC. En su lugar cada instrucción en código máquina es traducida en una secuencia de *microinstrucciones* y cada microinstrucción genera las microoperaciones o microseñales de la unidad de control que conforman el ciclo de instrucción.
-** La secuencia de microinstrucciones asociadas a una microinstrucción constituye el *microcódigo* que se encuentra almacenada en una memoria de sólo lectura (Read Only Memory ROM) interna de la Unidad de control.
+** La secuencia de microinstrucciones asociadas a una instrucción constituye el *microcódigo* que se encuentra almacenada en una memoria de sólo lectura (Read Only Memory ROM) interna de la Unidad de control.
 ** Cambiando o añadiendo microcódigo a nuestra Unidad de Control conseguimos nuevas arquitecturas ISA de una manera más flexible que con la unidad de control cableada.
 *** http://en.wikipedia.org/wiki/Microcode[microcode]
 
