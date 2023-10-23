@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Apéndice: Memoria Virtual</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge .cm {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cp {
+  color: #999999;
+  font-weight: bold;
+}
+pre.rouge .c1 {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cpf {
+  color: #999988;
+  font-style: italic;
+}
+pre.rouge .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+pre.rouge .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+pre.rouge .ge {
+  color: #000000;
+  font-style: italic;
+}
+pre.rouge .gr {
+  color: #aa0000;
+}
+pre.rouge .gh {
+  color: #999999;
+}
+pre.rouge .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+pre.rouge .go {
+  color: #888888;
+}
+pre.rouge .gp {
+  color: #555555;
+}
+pre.rouge .gs {
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #aaaaaa;
+}
+pre.rouge .gt {
+  color: #aa0000;
+}
+pre.rouge .kc {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kd {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kn {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kp {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kr {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .kt {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .k, pre.rouge .kv {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .mf {
+  color: #009999;
+}
+pre.rouge .mh {
+  color: #009999;
+}
+pre.rouge .il {
+  color: #009999;
+}
+pre.rouge .mi {
+  color: #009999;
+}
+pre.rouge .mo {
+  color: #009999;
+}
+pre.rouge .m, pre.rouge .mb, pre.rouge .mx {
+  color: #009999;
+}
+pre.rouge .sa {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .sb {
+  color: #d14;
+}
+pre.rouge .sc {
+  color: #d14;
+}
+pre.rouge .sd {
+  color: #d14;
+}
+pre.rouge .s2 {
+  color: #d14;
+}
+pre.rouge .se {
+  color: #d14;
+}
+pre.rouge .sh {
+  color: #d14;
+}
+pre.rouge .si {
+  color: #d14;
+}
+pre.rouge .sx {
+  color: #d14;
+}
+pre.rouge .sr {
+  color: #009926;
+}
+pre.rouge .s1 {
+  color: #d14;
+}
+pre.rouge .ss {
+  color: #990073;
+}
+pre.rouge .s, pre.rouge .dl {
+  color: #d14;
+}
+pre.rouge .na {
+  color: #008080;
+}
+pre.rouge .bp {
+  color: #999999;
+}
+pre.rouge .nb {
+  color: #0086B3;
+}
+pre.rouge .nc {
+  color: #445588;
+  font-weight: bold;
+}
+pre.rouge .no {
+  color: #008080;
+}
+pre.rouge .nd {
+  color: #3c5d5d;
+  font-weight: bold;
+}
+pre.rouge .ni {
+  color: #800080;
+}
+pre.rouge .ne {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nl {
+  color: #990000;
+  font-weight: bold;
+}
+pre.rouge .nn {
+  color: #555555;
+}
+pre.rouge .nt {
+  color: #000080;
+}
+pre.rouge .vc {
+  color: #008080;
+}
+pre.rouge .vg {
+  color: #008080;
+}
+pre.rouge .vi {
+  color: #008080;
+}
+pre.rouge .nv, pre.rouge .vm {
+  color: #008080;
+}
+pre.rouge .ow {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .o {
+  color: #000000;
+  font-weight: bold;
+}
+pre.rouge .w {
+  color: #bbbbbb;
+}
+pre.rouge {
+  background-color: #f8f8f8;
+}
+</style>
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_sistemas_operativos_gestión_de_la_memoria" class="book">
+<div id="header">
+<h1>Apéndice: Memoria Virtual</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-23</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Apéndice: Memoria Virtual</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">Apéndice: Memoria Virtual</a>
+<ul class="sectlevel1">
+<li><a href="apendice_memvirtual.html">40. Bibliografia</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html"><span class="toc-current">41. Sistemas Operativos: Gestión de la Memoria</span></a>
+<ul class="sectlevel2">
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_sistemas_multiproceso">41.1. Sistemas Multiproceso</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_gestión_de_la_memoria_fisica">41.2. Gestión de la Memoria Fisica</a>
+<ul class="sectlevel3">
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_memoria_principal_3">41.2.1. Memoria Principal</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_swapping">41.2.2. Swapping</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_particionamiento_fragmentación">41.2.3. Particionamiento (Fragmentación)</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_alternativa">41.2.4. Alternativa</a>
+</li>
+</ul>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_gestión_mediante_la_memoria_virtual">41.3. Gestión mediante la Memoria Virtual</a>
+<ul class="sectlevel3">
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_alternativa_2">41.3.1. Alternativa</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_espacio_de_direcciones_virtual">41.3.2. Espacio de direcciones virtual</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_ejemplo_programa_exit">41.3.3. Ejemplo: programa exit</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_memoria_recurso_compartido">41.3.4. Memoria: Recurso compartido</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_traducción_virtual_fisico">41.3.5. Traducción virtual &#8594; fisico</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_direccionamiento_lógico">41.3.6. Direccionamiento lógico</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html#_dos_tipos_segmentación_y_paginación">41.3.7. Dos tipos: Segmentación y Paginación</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="apendice_segmentos_secciones.html">42. Memoria Virtual Segmentada</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html">43. Memoria Virtual Paginada</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria_2.html">44. Sistemas Operativos: Gestión de la Memoria</a>
+</li>
+</ul>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html">Estructura de Computadores 2022: Segundo Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">Miaulario: Videoconferencia</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_sistemas_operativos_gestión_de_la_memoria">41. Sistemas Operativos: Gestión de la Memoria</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_sistemas_multiproceso">41.1. Sistemas Multiproceso</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>En un sistema multitarea hay más de un proceso ejecutándose y residente en la memoria principal.</p>
+</li>
+<li>
+<p>La memoria principal es un recurso compartido por todos los procesos. En un entorno multiproceso, es necesario gestionar el recurso compartido para asignar regiones de memoria física a cada proceso, para proteger espacios de memoria entre los distintos procesos, etc</p>
+</li>
+<li>
+<p>Históricamente la memoria principal era muy limitada frente al tamaño de los programas.</p>
+</li>
+<li>
+<p>Técnicas de gestión de la memoria en sistemas operativos: swapping, particionamiento, memoria virtual, segmentación, paginación. .</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gestión_de_la_memoria_fisica">41.2. Gestión de la Memoria Fisica</h3>
+<div class="sect3">
+<h4 id="_memoria_principal_3">41.2.1. Memoria Principal</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>La memoria principal es la memoria física externa a la CPU e implementada en tecnología SDRAM con una capacidad típica en el año 2010 de 4GB.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_swapping">41.2.2. Swapping</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Significa intercambio.</p>
+</li>
+<li>
+<p>Los programas se almacenan en el disco duro como módulos objeto ejecutables.</p>
+</li>
+<li>
+<p>Los módulos ejecutables deben cargarse en memoria para ser ejecutados, convirtiéndose en procesos.</p>
+</li>
+<li>
+<p>La memoria es <em>limitada</em> por lo que no puede almacenar todos los procesos requeridos por el usuario.</p>
+</li>
+<li>
+<p>Una solución es que los procesos utilicen tanto la memoria principal como el disco duro. En memoria  residen los procesos  que son ejecutados en un momento dado y cuando uno de dichos procesos  no requiere de la CPU (espera a un evento i/o)(no está en estado <em>ready</em>) se intercambia con el disco duro por un proceso que si requiere de la CPU (está en estado ready). La transferencia del proceso hacia la memoira principal se denomina swap-in y la transferencia hacia el disco duro swap-out.</p>
+</li>
+<li>
+<p>Se <strong>intercambia todo</strong> el proceso.</p>
+</li>
+<li>
+<p>Hay un intercambio  de procesos completos entre la memoria  y el disco duro. Este es el concepto de swap para algunos sistemas operativos como Solaris y el que se toma por definición. En Linux tiene otro significado.</p>
+</li>
+<li>
+<p>Al trasladar un proceso de memoria al disco duro se genera un <strong>hueco en la memoria</strong>. La existencia de múltiples huecos dispersados por la memoria se le denomina <em>fragmentación externa</em>.</p>
+</li>
+<li>
+<p>El inconveniente es que el swapping requiere de un operación i/o con el disco duro ralentizando el rendimiento de la computadora.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_particionamiento_fragmentación">41.2.3. Particionamiento (Fragmentación)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>La clave</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Sin memoria virtual el código de los procesos en la memoria física ha de ser <strong>contiguo</strong>.</p>
+</li>
+<li>
+<p>Si no utilizamos memoria virtual el <em>particionamiento dinámico</em> (el proceso ocupa justo la región de memoria que necesita)  produce fragmentación externa al eliminar particiones y el <em>particionamiento fijo</em> (el proceso ocupa menos de la región que tiene reservada) produce fragmentación interna</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>La Solución</strong> para que un proceso pueda ocupar particiones <strong>NO CONTIGUAS</strong> en la memoria FISICA : memoria VIRTUAL.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Al poder asignar particiones pequeñas fijas no contiguas el fraccionamiento externo desaparece y el interno se reduce al máximo (inferior al tamaño de la partición)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El <strong>particionamiento</strong> es una técnica para asignar memoria principal a los distintos procesos que están siendo ejecutados concurrentemente en la computadora.</p>
+</li>
+<li>
+<p>La memoria se divide en múltiples regiones o <em>particiones</em> de tamaño no uniforme.</p>
+</li>
+<li>
+<p>A un proceso se le asigna una partición de <em>igual o mayor tamaño</em>.</p>
+</li>
+<li>
+<p>Se utiliza en sistemas multitarea donde la memoria principal es compartida por múltiples procesos. De esta manera se puede <em>gestionar el compartir</em> la memoria entre los diferentes procesos, protección, permisos, superusuario, etc</p>
+</li>
+<li>
+<p>Cuando el proceso no está ready se realiza un swapping con el disco duro.</p>
+</li>
+<li>
+<p>Dos alternativas : la estructura de las particiones puede ser fijo o variable en el tiempo. En los dos casos un proceso requiere una partición, es decir, una región de posiciones de memoria <strong>contiguas</strong>.</p>
+</li>
+<li>
+<p>Particionamiento <strong>FIJO</strong> :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La memoria principal se parte en regiones cuyo tamaño no varía durante la ejecución de los procesos.</p>
+</li>
+<li>
+<p>Pariticionamiento fijo con regiones de igual tamaño o particionamiento fijo con regiones de diferente tamaño.</p>
+</li>
+<li>
+<p>A los procesos se les asigna una partición de tamaño mayor que el requerido. Esto produce <strong>fragmentación interna</strong>, ya que una zona de la partición no es aprovechada por ningún proceso.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Particionamiento variable o <strong>DINAMICO</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A cada proceso se le asigna justo la memoria que necesita. No hay fragmentación interna.</p>
+</li>
+<li>
+<p>El tamaño de las particiones cambia dinámicamente según se intercambian procesos con el disco duro adaptándose al tamaño de estos.</p>
+</li>
+<li>
+<p>La <strong>fragmentación externa</strong> es considerable. Se podría reducir compactando los huecos dispersos, para lo cual es necesario mover o reubicar los procesos en la memoria principal. La reubicación de procesos significa resolver todas las direcciones físicas nuevamente en tiempo de ejecución &#8594; puede resultar inviable el tiempo requerido.</p>
+</li>
+<li>
+<p>Hay publicidad de programas que defragmentan la memoria principal lo cual no es posible ya que únicamente el S.O. conoce las direcciones físicas de un proceso.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_alternativa">41.2.4. Alternativa</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>La solución a la fragmentación debido a la técnica del particionamiento de la memoria física es la técnica de memoria virtual bien segmentada o bien paginada o ambas.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gestión_mediante_la_memoria_virtual">41.3. Gestión mediante la Memoria Virtual</h3>
+<div class="sect3">
+<h4 id="_alternativa_2">41.3.1. Alternativa</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Los problemas de gestionar la memoria de los procesos asignando a los procesos <em>directamente</em> un espacio de direcciones físico se resuelven mediante el mecamismo de la <em>memoria virtual</em>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_espacio_de_direcciones_virtual">41.3.2. Espacio de direcciones virtual</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El programador, el compilador, el linker y los procesos no operan con direcciones físicas.</p>
+</li>
+<li>
+<p>El programador referencia la memoria en el módulo fuente con símbolos (etiquetas, variables, nombres de funciones, etc)</p>
+</li>
+<li>
+<p>El compilador y el linker traducen los símbolos a direcciones de una memoria imaginaria lineal y contigua denominada memoria virtual.</p>
+</li>
+<li>
+<p>Esta independencia de las direcciones físicas simplifica enormemente la gestión de la memoria.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ejemplo_programa_exit">41.3.3. Ejemplo: programa exit</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Desensamblado del módulo objeto ejecutable residente en el disco</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>objdump -S exit</code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="c"><span class="nl">exit:</span>     <span class="n">file</span> <span class="n">format</span> <span class="n">elf64</span><span class="o">-</span><span class="n">x86</span><span class="o">-</span><span class="mi">64</span>
+
+
+<span class="n">Disassembly</span> <span class="n">of</span> <span class="n">section</span> <span class="p">.</span><span class="n">text</span><span class="o">:</span>
+
+<span class="mo">000000000040007</span><span class="mi">8</span> <span class="o">&lt;</span><span class="p">.</span><span class="n">text</span><span class="o">&gt;:</span>
+  <span class="mi">400078</span><span class="o">:</span>	<span class="mi">48</span> <span class="n">c7</span> <span class="n">c0</span> <span class="mi">3</span><span class="n">c</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> 	<span class="n">mov</span>    <span class="err">$</span><span class="mh">0x3c</span><span class="p">,</span><span class="o">%</span><span class="n">rax</span>
+  <span class="mi">40007</span><span class="n">f</span><span class="o">:</span>	<span class="mi">48</span> <span class="n">c7</span> <span class="n">c7</span> <span class="n">ff</span> <span class="mo">00</span> <span class="mo">00</span> <span class="mo">00</span> 	<span class="n">mov</span>    <span class="err">$</span><span class="mh">0xff</span><span class="p">,</span><span class="o">%</span><span class="n">rdi</span>
+  <span class="mi">400086</span><span class="o">:</span>	<span class="mi">0</span><span class="n">f</span> <span class="mo">05</span>                	<span class="n">syscall</span></code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Las direcciones 0x400078,.. son direcciones del espacio virtual. El espacio de direcciones virtual es <em>lineal</em>, contiguo y único.</p>
+</li>
+<li>
+<p>La dirección virtual <em>0x0000000000400078</em> comprende 16 dígitos hexadecimales, es decir, el espacio de direcciones virtual del proceso <em>exit</em> tiene capacidad para 2<sup>64</sup> Bytes.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_memoria_recurso_compartido">41.3.4. Memoria: Recurso compartido</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Cada proceso tiene su propio espacio de direcciones virtual.</p>
+</li>
+<li>
+<p>Todos los procesos han de compartir la misma memoria física.</p>
+</li>
+<li>
+<p>Todos los espacios virtuales han de ser traducidos al mismo espacio físico.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_traducción_virtual_fisico">41.3.5. Traducción virtual &#8594; fisico</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Cada vez que la CPU acceda a memoria para capturar instrucciones y datos o escribir resultados, será necesario <em>traducir</em> la dirección lógica en una dirección física. Es decir, las direcciones</p>
+</li>
+<li>
+<p>Esta traducción la realiza la unidad hardware <em>Management Memory Unit (MMU)</em>.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_direccionamiento_lógico">41.3.6. Direccionamiento lógico</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>En el intercambio de procesos entre la memoria y el disco duro, las direcciones físicas de memoria donde son cargados los datos y las instrucciones pueden cambiar. Debido a ello no es factible un modelo de direccionamiento que utilice direcciones físicas absolutas.</p>
+</li>
+<li>
+<p>Las direcciones del proceso se expresan de forma <strong>relativa</strong> respecto de una <strong>dirección base</strong>. Al par dirección base y offset se le denomina <em>dirección lógica</em>.</p>
+</li>
+<li>
+<p>Esta dirección lógica es una dirección virtual, no física.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dos_tipos_segmentación_y_paginación">41.3.7. Dos tipos: Segmentación y Paginación</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El espacio de memoria virtual se puede gestionar utilizando dos mecanismos o la combinaición de ellos:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Segmentación</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>La memoria virtual de un proceso se divide en unidades lógicas indivisibles denominadas segmentos</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Paginación</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>La memoria virtual de un proceso y la memoria física de la computadora se dividen en unidades denominadas páginas (lógicas en la memoria virtual y físicas en la memoria principal).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="apendice_memvirtual.html">Bibliografia</a> | ↑ Up: <a href="_apéndice_memoria_virtual.html">Apéndice: Memoria Virtual</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="apendice_segmentos_secciones.html">Memoria Virtual Segmentada</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

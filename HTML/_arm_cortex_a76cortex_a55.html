@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_arm_cortex_a76cortex_a55" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-23</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+<ul class="sectlevel1">
+<li><a href="_arquitectura_de_una_computadora.html">21. Arquitectura de una Computadora</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">22. RTL Register Transfer Language</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html">23. Programas ensamblador IASSim</a>
+</li>
+<li><a href="_simulador_iassim_2.html">24. Simulador IASSim</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html">25. Lenguajes de programación de Alto y Bajo Nivel</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html">26. Lenguajes de programación en Ensamblador</a>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html">27. Toolchain: Cadena de Herramientas en el proceso de compilación</a>
+</li>
+<li><a href="_practicando_la_programación_desde_el_principio.html">28. Practicando la Programación desde el Principio</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_pila.html">30. Pila</a>
+</li>
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html">31. Programas en Lenguaje Ensamblador: Propuestas</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html">32. Apéndice: Unidad CPU</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html">33. Modern CPU Architecture 2: Microarchitecture</a>
+</li>
+<li><a href="_intel_3.html">34. Intel</a>
+</li>
+<li><a href="_amd.html">35. AMD</a>
+</li>
+<li><a href="_skylake_u.html">36. Skylake-U</a>
+</li>
+<li><a href="_arm_cortex_a76cortex_a55.html"><span class="toc-current">37. ARM Cortex-A76/Cortex-A55</span></a>
+<ul class="sectlevel2">
+<li><a href="_arm_cortex_a76cortex_a55.html#_intro_2">37.1. Intro</a>
+</li>
+<li><a href="_arm_cortex_a76cortex_a55.html#_teléfono_huawei_p30_pro">37.2. Teléfono Huawei P30 Pro</a>
+</li>
+<li><a href="_arm_cortex_a76cortex_a55.html#_isa_cortex_a76cortex_a55">37.3. ISA Cortex-A76/Cortex-A55</a>
+</li>
+<li><a href="_arm_cortex_a76cortex_a55.html#_multicore">37.4. Multicore</a>
+</li>
+<li><a href="_arm_cortex_a76cortex_a55.html#_microarquitectura_cortex_a76">37.5. Microarquitectura Cortex-A76</a>
+</li>
+<li><a href="_arm_cortex_a76cortex_a55.html#_microarquitectura_cortex_a55">37.6. Microarquitectura Cortex-A55</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">Apéndice: Memoria Virtual</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html">Estructura de Computadores 2022: Segundo Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">Miaulario: Videoconferencia</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_arm_cortex_a76cortex_a55">37. ARM Cortex-A76/Cortex-A55</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_intro_2">37.1. Intro</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Arm_(company" class="bare">https://en.wikipedia.org/wiki/Arm_(company</a>)</p>
+</li>
+<li>
+<p>ARM : Acorn (bellota) RISC Machine &#8594; Advanced RISC Machines</p>
+</li>
+<li>
+<p>Arquitectura RISC.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_teléfono_huawei_p30_pro">37.2. Teléfono Huawei P30 Pro</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>El teléfono Huawei P30 Pro modelo VOG-L29 incorpora un MultiProcessor System On Chip (MPSoC) Huawei <strong>Kirin 980</strong>. El SoC integra tanto los cores como el chipset.</p>
+<div class="listingblock">
+<div class="content">
+<pre>August 31, 2018
+Kirin 980 is a 64-bit high-performance mobile ARM LTE SoC designed by HiSilicon and introduced in late 2018. Fabricated on TSMC's 7 nm process, the 980 incorporates four big Cortex-A76 cores operating at up to 2.6 GHz along with four little Cortex-A55 cores operating at up to 1.8 GHz. This SoC has an LTE modem supporting 1.4 Gbps download (Cat21), incorporates an ARM Mali-G76, and supports LPDDR4X-4266 memory.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cpu/Huawei-HiSilicon-Kirin-980-MPSoC.png" alt="Huawei HiSilicon Kirin 980 MPSoC" width="400" height="300">
+</div>
+<div class="title">Figure 113. Kirin MPSoC</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_isa_cortex_a76cortex_a55">37.3. ISA Cortex-A76/Cortex-A55</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitectura  ISA ARMv8.2-A</p>
+<div class="listingblock">
+<div class="content">
+<pre>64 bits
+ver manual ISA ARMv8.2-A de la compañia ARM</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Microarquitectura</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_multicore">37.4. Multicore</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>8 núcleos</p>
+</li>
+<li>
+<p>arquitectura heterogénea big.LITTLE: 2 tipos de core &gt; 4+4</p>
+<div class="ulist">
+<ul>
+<li>
+<p>big cores : alto rendimiento y consumo moderado &#8594; Cortex-A76</p>
+</li>
+<li>
+<p>LITTLE.cores: rendimiento moderado y bajo consumo &#8594; Cortex-A55</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_microarquitectura_cortex_a76">37.5. Microarquitectura Cortex-A76</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/ARM_Cortex-A76" class="bare">https://en.wikipedia.org/wiki/ARM_Cortex-A76</a></p>
+<div class="listingblock">
+<div class="content">
+<pre>The Cortex-A76 frontend is a 4-wide decode out-of-order superscalar design. It can fetch 4 instructions per cycle. And[clarification needed] rename and dispatch 4 Mops, and 8 µops per cycle. The out-of-order window size is 128 entries. The backend is 8 execution ports with a pipeline depth of 13 stages and the execution latencies of 11 stages</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>superscalar : ruta de datos de 4 vías (4-way)</p>
+</li>
+<li>
+<p>pipeline: 13 etapas</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_microarquitectura_cortex_a55">37.6. Microarquitectura Cortex-A55</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/ARM_Cortex-A55" class="bare">https://en.wikipedia.org/wiki/ARM_Cortex-A55</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>superscalar: ruta de datos de 2 vías (2-way)</p>
+</li>
+<li>
+<p>pipeline: 8 etapas</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_skylake_u.html">Skylake-U</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_apéndice_unidad_de_memoria_dram.html">Apéndice: Unidad de Memoria DRAM</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

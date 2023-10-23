@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>FPU x87</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_metodología_del_examen" class="book">
+<div id="header">
+<h1>FPU x87</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-23</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">FPU x87</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">Apéndice: Memoria Virtual</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+<ul class="sectlevel1">
+<li><a href="_introducción_27.html">51. Introducción</a>
+</li>
+<li><a href="_módulo_fuente_3.html">52. Módulo fuente</a>
+</li>
+<li><a href="_metodología_del_examen.html"><span class="toc-current">53. Metodología del examen</span></a>
+</li>
+<li><a href="_evaluación_2.html">54. Evaluación</a>
+</li>
+</ul>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html">Estructura de Computadores 2022: Segundo Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">Miaulario: Videoconferencia</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_metodología_del_examen">53. Metodología del examen</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>No se puede conectar telemáticamente ni a la red de la UPNA ni al exterior de la Universidad</p>
+</li>
+<li>
+<p>Se puede utilizar un pendrive conteniendo cualquier tipo de información: guiones de prácticas, memorias de prácticas, apuntes, hojas de referencia rápida.</p>
+</li>
+<li>
+<p>Se puede utilizar cualquier tipo de material impreso: apuntes, memorias, libros, etc &#8230;&#8203;</p>
+</li>
+<li>
+<p>Una vez arrancada la computadora el alumno ha de crear la carpeta <strong>/home/alumno/examen_parte_I</strong></p>
+</li>
+<li>
+<p>El alumno dispondrá de 10 minutos al comienzo del examen para descargarse el enunciado del examen de MiAulario &#8594; Recursos &#8594; Prácticas &#8594; <strong>examen_1parcial.s</strong> en la carpeta  <strong>/home/alumno/examen_parte_I</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>A continuación cambiará el nombre del fichero <strong>examen_1parcial.s</strong> con el enunciado por el nombre del fichero a entregar según se indica más abajo.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El examen consta de <strong>3 ejercicios</strong>.</p>
+</li>
+<li>
+<p>El programa fuente a entregar es UNO y el programa binario también es UNO, pero se entregará el mismo programa dos veces.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La primera entrega correspondiente a los ejercicios 1º y 2º se deberá realizar antes de las <strong>9:15 horas</strong> a través de miaulario en la TAREA <strong>examen_parte_I</strong></p>
+</li>
+<li>
+<p>La segunda entrega (continuación de la primera parte) correspondiente a los ejercicios 1º, 2º y 3º se deberá entregar antes de las <strong>10:00 horas</strong> a través de miaulario en la TAREA <strong>examen_parte_II</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Las dos partes se desarrollarán en carpetas diferentes del ordenador. La primera parte se desarrollará en la carpeta <strong>/home/alumno/examen_parte_I</strong> y la segunda parte se desarrollará en la carpeta <strong>/home/alumno/examen_parte_II</strong></p>
+</li>
+<li>
+<p>Habrá abiertas dos tareas desde el comienzo del examen con limitación de tiempo para entregar el resultado del examen en formato digital en un <strong>único</strong> archivo en formato ZIP en cada una de las tareas. En cada tarea el archivo a entregar tendrá <strong>EL MISMO NOMBRE</strong>. Se avisará cuando falten 10 y 5 minutos para el cierre de cada una de las tareas</p>
+</li>
+<li>
+<p>El archivo ZIP de cada una de las dos tareas contendrá:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>el módulo fuente: Apellido1_Apellido2.s, pej, <strong>Alen_Urra.s</strong>, cada alumno con sus propios apellidos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>código fuente y preguntas/respuestas en los comentarios.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>el módulo binario: Apellido1_Apellido2 , pej, <strong>Alen_Urra</strong>, cada alumno con sus propios apellidos.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+el nombre del fichero con el código fuente ha de ser <strong>obligatoriamente</strong> uno de los nombres del listado del apéndice "Nominación de los ficheros del examen" de los apuntes.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Módulo fuente</p>
+<div class="ulist">
+<ul>
+<li>
+<p>se ha de completar y depurar</p>
+</li>
+<li>
+<p>añadir los comentarios que se considere ayudan a la lectura e interpretación del programa</p>
+</li>
+<li>
+<p><strong>responder</strong> a las preguntas sobre el depurador GDB en el propio módulo fuente.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_módulo_fuente_3.html">Módulo fuente</a> | ↑ Up: <a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">Estructura de Computadores 2022: Primer Parcial Prácticas</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_evaluación_2.html">Evaluación</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>
