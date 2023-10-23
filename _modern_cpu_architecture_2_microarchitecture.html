@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Estructura de Computadores  (240306)</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_modern_cpu_architecture_2_microarchitecture" class="book">
+<div id="header">
+<h1>Estructura de Computadores  (240306)</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-23</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Estructura de Computadores  (240306)</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+<ul class="sectlevel1">
+<li><a href="_arquitectura_de_una_computadora.html">21. Arquitectura de una Computadora</a>
+</li>
+<li><a href="_rtl_register_transfer_language.html">22. RTL Register Transfer Language</a>
+</li>
+<li><a href="_programas_ensamblador_iassim.html">23. Programas ensamblador IASSim</a>
+</li>
+<li><a href="_simulador_iassim_2.html">24. Simulador IASSim</a>
+</li>
+<li><a href="_lenguajes_de_programación_de_alto_y_bajo_nivel.html">25. Lenguajes de programación de Alto y Bajo Nivel</a>
+</li>
+<li><a href="_lenguajes_de_programación_en_ensamblador.html">26. Lenguajes de programación en Ensamblador</a>
+</li>
+<li><a href="_toolchain_cadena_de_herramientas_en_el_proceso_de_compilación.html">27. Toolchain: Cadena de Herramientas en el proceso de compilación</a>
+</li>
+<li><a href="_practicando_la_programación_desde_el_principio.html">28. Practicando la Programación desde el Principio</a>
+</li>
+<li><a href="_llamadas_al_sistema_operativo_2.html">29. Llamadas al Sistema Operativo</a>
+</li>
+<li><a href="_pila.html">30. Pila</a>
+</li>
+<li><a href="_programas_en_lenguaje_ensamblador_propuestas.html">31. Programas en Lenguaje Ensamblador: Propuestas</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html">32. Apéndice: Unidad CPU</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html"><span class="toc-current">33. Modern CPU Architecture 2: Microarchitecture</span></a>
+<ul class="sectlevel2">
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_key_building_blocks_in_a_cpus_isa">33.1. Key Building Blocks in a CPU’s ISA</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_pipeline_depth">33.2. Pipeline Depth</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_speculation">33.3. Speculation</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_front_end_predict_and_fetch">33.4. Front End: Predict and Fetch</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_front_end_decode">33.5. Front End: Decode</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_amd">33.6. AMD</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_skylake_u">33.7. Skylake-U</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_arm_cortex_a76cortex_a55">33.8. ARM Cortex-A76/Cortex-A55</a>
+<ul class="sectlevel3">
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_intro_2">33.8.1. Intro</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_teléfono_huawei_p30_pro">33.8.2. Teléfono Huawei P30 Pro</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_isa_cortex_a76cortex_a55">33.8.3. ISA Cortex-A76/Cortex-A55</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_multicore">33.8.4. Multicore</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_microarquitectura_cortex_a76">33.8.5. Microarquitectura Cortex-A76</a>
+</li>
+<li><a href="_modern_cpu_architecture_2_microarchitecture.html#_microarquitectura_cortex_a55">33.8.6. Microarquitectura Cortex-A55</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">34. Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">35. Apéndice: Memoria Virtual</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">36. Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">37. FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">38. Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">39. Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html">40. Estructura de Computadores 2022: Segundo Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">41. Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">42. Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">43. Miaulario: Videoconferencia</a>
+</li>
+</ul>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_modern_cpu_architecture_2_microarchitecture">33. Modern CPU Architecture 2: Microarchitecture</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>:author:Mitterand Ekole</p>
+</div>
+<div class="paragraph">
+<p><a href="https://mitterandekole.medium.com/modern-cpu-architecture-2-microarchitecture-8bcd80ce52ae">Blog Medium: mitterandekole</a></p>
+</div>
+<div class="paragraph">
+<p>In the last article we talked about the modern CPU architecture. We discussed what a CPU was, a brief history of the CPU, we explained the concept of computing abstraction layers, and Instruction Set Architectures. The ISA is what we normally refer to as the architecture of the CPU.</p>
+</div>
+<div class="paragraph">
+<p>Today we will delve into what the microarchitecture of the CPU is made up of. In other words how exactly are ISAs implemented, what are it’s building blocks and how does it operate. This is an in-depth explanation.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="nehalem.webp" alt="Intel Nehalem CPU Microarchitecture">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_key_building_blocks_in_a_cpus_isa">33.1. Key Building Blocks in a CPU’s ISA</h3>
+<div class="paragraph">
+<p>A microarchitecture is an implementation of an Instruction Set Architecture. The microarchitecture operates on the four step cycle:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The first step “Fetch” is to extract information from memory so the CPU knows exactly what the program wants executed.</p>
+</li>
+<li>
+<p>The next step “Decode” requires that the information is broken down into chunks of bits of data(native operations). At this stage there is a creation of multiple internal operations as a result of chunks of instructions being broken down.</p>
+</li>
+<li>
+<p>Once instructions have been decoded, the CPU needs to execute them, that brings us to the next step “Execute”. There are numerous types of execution operations, like arithmetic operations(add, multiply, divide etc.), Boolean operations(AND, NOT, OR, XOR etc.), data comparison and decision operations(chooses where next to go in the code), operation as such are known as “branches” as they can steer code to different places. The execute stage of a CPU varies depending on the ISA, as many CPU with more sophisticated ISAs can perform much more operations.</p>
+</li>
+<li>
+<p>Finally the CPU stores the results, sometimes these results are stored locally in Registers, or Memory, this is known as the Write back step.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These operations make up the fundamental building blocks of a CPU, when put together they are referred to as a CPUs “Pipeline”</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="pipeline_3etapas.webp" alt="CPU with 3 Pipelines">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pipeline_depth">33.2. Pipeline Depth</h3>
+<div class="paragraph">
+<p>Now that we have described what a pipeline looks like, what do modern microprocessors look like? Over the years the average number of pipeline stages have grown. A pipeline is similar to an assembly line. The more stages are added, the less is done at each individual stage. The more pipeline stages you have the faster each stage can run and more stages are being done in parallel. A modern microprocessor has about 15–20 stages.</p>
+</div>
+<div class="paragraph">
+<p>The Fetch and Decode cycle typically have 6–10 stages, collectively these are called the frontend of the microprocessor. The Execute and Write back have also grown roughly into 6 to 10 stages. These are called the backend of the microprocessor. A CPU’s pipeline is synchronous, and what that means is each pipeline is controlled by a clock signal, and each data goes from one pipeline stage to the next as a CPU clock completes a cycle. The number of stages partially determines what the peak frequency of the CPU is. Modern CPUs can run up to 5GHz, the amount of logic in these stages determines how fast the stages or clock can operate. If a CPU runs at 5GHz this implies each stage need to run and complete at 5billionths of a second.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_speculation">33.3. Speculation</h3>
+<div class="paragraph">
+<p>If you recall the basic pipeline illustrated above, at the beginning we fetch the instructions and towards the end we execute these instructions. Some of these instructions are known as branches . This represents a decision point or “fork in the road” like an exit on a highway. Do we want to keep going or exit now and follow a different path? When a branch is being executed, you are making that decision. As the pipeline grows you get farther and farther away from the answer of which path to take. When the branch says to take a different path we need to tell the beginning of the pipeline to redirect to a different instruction. The work that was in progress is thrown away.</p>
+</div>
+<div class="paragraph">
+<p>This is both bad for performance and as well as for power, since we have spent time executing instructions that were not needed for the program’s execution. We could avoid speculation by simply stopping every time we saw a branch and just wait for it to execute and tell us what path in the code to go. This would be safe, but will be very slow. However there lots of branches in most codes, that implies a lot of time spent waiting.</p>
+</div>
+<div class="paragraph">
+<p>As pipelines get longer, the penalty for guessing wrong gets worse. Fetch becomes further away from execute, which means it takes us much stages to realize that we are executing on a wrong path. To remedy this, microprocessors invest heavily in design to make accurate predictions at the beginning of the pipeline. We call this the art of branch prediction.</p>
+</div>
+<div class="paragraph">
+<p>When we see that we have gone down the wrong path, we can update or refine the prediction with what the right path was. Then the next time we see that address the branch predictor can tell us to go to a different address. Modern CPU architectures can often predict branches with a near perfect accuracy that makes them seem almost clairvoyant. When a microprocessor executes newer instructions than a branch without knowing if that branch is taken or not , it is referred to as Speculative Execution.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_front_end_predict_and_fetch">33.4. Front End: Predict and Fetch</h3>
+<div class="paragraph">
+<p>Branch predictors have become incredibly complex in order to improve their accuracy while still able to steer fetching of instructions at high frequencies. Branch predictors today can often times record, and understand, learn past history of hundreds, thousands of branches before them in order to make a single prediction of the next branch and where it is going. The sophistication of modern day branch predictors is really kind of a precursor if one might think in terms of artificial intelligence, in terms of learning from past behavior and how the future will behave. They’ve become so accurate, they are now in charge of deciding which address to fetch next, even if the prediction ends up being “keep calm and carry on”.</p>
+</div>
+<div class="paragraph">
+<p>Now CPU frequencies have increased much faster than memory speeds, this means it takes longer to fetch data from memory, and to help offset the long round trip time to main memory and back, we keep local copies of main memory internally in structures known as Caches . The frontend has an instruction cache so that it can read instructions in just one to two cycles instead of the hundreds that may take to go to main memory. For power and performance optimization, many adjacent instructions are fetched at the same time, which are then handed off to the decoders. If the instruction cache does not have the data, then the data is requested from the memory’s subsystem. The main goal of the frontend of a pipeline is to ensure there are always enough instructions for the backend to execute and to avoid the idle time spent waiting for instruction bytes from memory.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_front_end_decode">33.5. Front End: Decode</h3>
+<div class="paragraph">
+<p>The second half of the frontend is where program instructions are decoded into the microarchitectures internal operations which are called micro-operations. This is the strongest connection between the ISA and the microarchitecture. ISA instructions often include additional bits of data that gives the CPU more information relevant to the operation, which the CPU uses to decode and execute the instruction in an efficient way according to it’s microarchitecture. Microarchitectures are typically built so that most instructions map directly into a single micro-operation, but not all. This helps us to simplify the backend of the pipeline . However there are often some instructions which are more complex and may require the generation of multiple micro-operations. The frontend is always looking at how to decode and prepare those instructions to be executed efficiently. Some microarchitectures decode cache and save these micro-operations for the next time they need to be decoded. This saves the energy require to decode them and improves performance when one to many expansion is common. After instructions are decoded or read from the decode cache, they are then passed to the backend of the pipeline.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>branch prediction : La cpu tiene capacidad para adelantarse a las instrucciones de salto y predecir la dirección del salto. De esta forma no se producen fallos en la ejecución "pipeline" y se puede "predecir" que instrucciones se van a ejecutar antes de comenzar sus ciclos de instrucción asociados.</p>
+</li>
+<li>
+<p>ejecución especulativa: consiste en comenzar el ciclo de instrucción de instrucciones que no se sabe si van a ser finalmente ejecutadas.</p>
+</li>
+<li>
+<p>Front End: El bloque Front End de la Unidad de Control consiste en las dos primeras etapas: Fetch y Decode. En la etapa Fetch se predice que instrucciones se van a ejecutar, capturarlas de la memoria Caché del decodificador y decodificarlas en microoperanciones antes de que llegue su turno &#8594; Pre-Fetch (Pre-Captura). Se precapturan y se guardan en el buffer del Front-End haciendo cola. De esta forma cuando comience el ciclo de instrucción de las instrucciones precapturadas ya están decodificadas, es decir, tienen las primeras fases del ciclo de instrucción ya realizadas.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_amd">33.6. AMD</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://www.tomshardware.com/reviews/amd-4th-gen-epyc-genoa-9654-9554-and-9374f-review-96-cores-zen-4-and-5nm-disrupt-the-data-center/2">: Zen4</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_skylake_u">33.7. Skylake-U</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Procesador Intel: Core i5-6300U</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cpu/skylake_block_diagram.svg.png" alt="skylake block diagram.svg" width="700" height="400">
+</div>
+<div class="title">Figure 112. Skylake microarchitecture</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Front End &#8594; Bloque de la U.C. que adelanta las fases de captura y decodificación.</p>
+</li>
+<li>
+<p>Concepto de out-of-order execution (OoO) y microoperación (uOP, no confundir con el microcódigo de la unidad de control):</p>
+<div class="listingblock">
+<div class="content">
+<pre>The microprocessors with out-of-order execution are translating all instructions into microoperations - abbreviated µops or uops. A simple instruction such as ADD EAX,EBX generates only one µop, while an instruction like ADD EAX,[MEM1] may generate two: one for reading from memory into a temporary (unnamed) register, and one for adding the contents of the temporary register to EAX. The instruction ADD [MEM1],EAX may
+generate three µops: one for reading from memory, one for adding, and one for writing the result back to memory. The advantage of this is that the µops can be executed out of order.
+Example:
+	; Example 2.1. Out of order processing
+	mov eax, [mem1]
+	imul eax, 5
+	add eax, [mem2]
+	mov [mem3], eax
+Here, the ADD EAX,[MEM2] instruction is split into two µops. The advantage of this is that the microprocessor can fetch the value of [MEM2] at the SAME TIME as it is doing the multiplication. If none of the data are in the cache, then the microprocessor will start to fetch [MEM2] immediately after starting to fetch [MEM1], and long before the multiplication can start.</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Observar dos rutas de operaciones completamente diferentes: MOP y uOP.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>MOP: macro instrucciones : son las instrucciones ISA de intel de tipo CISC</p>
+</li>
+<li>
+<p>uOP: las instrucciones ISA del tipo CISC se dividen en instrucciones más sencillas del tipo RISC.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_arm_cortex_a76cortex_a55">33.8. ARM Cortex-A76/Cortex-A55</h3>
+<div class="sect3">
+<h4 id="_intro_2">33.8.1. Intro</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Arm_(company" class="bare">https://en.wikipedia.org/wiki/Arm_(company</a>)</p>
+</li>
+<li>
+<p>ARM : Acorn (bellota) RISC Machine &#8594; Advanced RISC Machines</p>
+</li>
+<li>
+<p>Arquitectura RISC.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_teléfono_huawei_p30_pro">33.8.2. Teléfono Huawei P30 Pro</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>El teléfono Huawei P30 Pro modelo VOG-L29 incorpora un MultiProcessor System On Chip (MPSoC) Huawei <strong>Kirin 980</strong>. El SoC integra tanto los cores como el chipset.</p>
+<div class="listingblock">
+<div class="content">
+<pre>August 31, 2018
+Kirin 980 is a 64-bit high-performance mobile ARM LTE SoC designed by HiSilicon and introduced in late 2018. Fabricated on TSMC's 7 nm process, the 980 incorporates four big Cortex-A76 cores operating at up to 2.6 GHz along with four little Cortex-A55 cores operating at up to 1.8 GHz. This SoC has an LTE modem supporting 1.4 Gbps download (Cat21), incorporates an ARM Mali-G76, and supports LPDDR4X-4266 memory.</pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/cpu/Huawei-HiSilicon-Kirin-980-MPSoC.png" alt="Huawei HiSilicon Kirin 980 MPSoC" width="400" height="300">
+</div>
+<div class="title">Figure 113. Kirin MPSoC</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_isa_cortex_a76cortex_a55">33.8.3. ISA Cortex-A76/Cortex-A55</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitectura  ISA ARMv8.2-A</p>
+<div class="listingblock">
+<div class="content">
+<pre>64 bits
+ver manual ISA ARMv8.2-A de la compañia ARM</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Microarquitectura</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_multicore">33.8.4. Multicore</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>8 núcleos</p>
+</li>
+<li>
+<p>arquitectura heterogénea big.LITTLE: 2 tipos de core &gt; 4+4</p>
+<div class="ulist">
+<ul>
+<li>
+<p>big cores : alto rendimiento y consumo moderado &#8594; Cortex-A76</p>
+</li>
+<li>
+<p>LITTLE.cores: rendimiento moderado y bajo consumo &#8594; Cortex-A55</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_microarquitectura_cortex_a76">33.8.5. Microarquitectura Cortex-A76</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/ARM_Cortex-A76" class="bare">https://en.wikipedia.org/wiki/ARM_Cortex-A76</a></p>
+<div class="listingblock">
+<div class="content">
+<pre>The Cortex-A76 frontend is a 4-wide decode out-of-order superscalar design. It can fetch 4 instructions per cycle. And[clarification needed] rename and dispatch 4 Mops, and 8 µops per cycle. The out-of-order window size is 128 entries. The backend is 8 execution ports with a pipeline depth of 13 stages and the execution latencies of 11 stages</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>superscalar : ruta de datos de 4 vías (4-way)</p>
+</li>
+<li>
+<p>pipeline: 13 etapas</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_microarquitectura_cortex_a55">33.8.6. Microarquitectura Cortex-A55</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/ARM_Cortex-A55" class="bare">https://en.wikipedia.org/wiki/ARM_Cortex-A55</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors" class="bare">https://en.wikipedia.org/wiki/Comparison_of_Armv8-A_processors</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>superscalar: ruta de datos de 2 vías (2-way)</p>
+</li>
+<li>
+<p>pipeline: 8 etapas</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="_apéndice_unidad_cpu.html">Apéndice: Unidad CPU</a> | ↑ Up: <a href="_viii_apéndices.html">VIII Apéndices</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_apéndice_unidad_de_memoria_dram.html">Apéndice: Unidad de Memoria DRAM</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

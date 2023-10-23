@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>FPU x87</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_introducción_27" class="book">
+<div id="header">
+<h1>FPU x87</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-23</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">FPU x87</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">Apéndice: Memoria Virtual</a>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+<ul class="sectlevel1">
+<li><a href="_introducción_27.html"><span class="toc-current">51. Introducción</span></a>
+</li>
+<li><a href="_módulo_fuente_3.html">52. Módulo fuente</a>
+</li>
+<li><a href="_metodología_del_examen.html">53. Metodología del examen</a>
+</li>
+<li><a href="_evaluación_2.html">54. Evaluación</a>
+</li>
+</ul>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html">Estructura de Computadores 2022: Segundo Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">Miaulario: Videoconferencia</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_introducción_27">51. Introducción</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Día del examen: 28 de Octubre 2022 Viernes 8:00AM-10:00AM</p>
+</li>
+<li>
+<p>Lugar: Aulas A307(grupos euskera y lunes 19:00-21:00)-A308(grupo miércoles 15:00-17:00)-A015(grupo miércoles 17:00-19:00):</p>
+</li>
+<li>
+<p>El examen consistirá en el desarrollo de un programa en lenguaje ensamblador y  el empleo del depurador GDB teniendo en cuenta lo visto en las prácticas P1 y P2 y el tema 6 de teoría sobre programación en lenguaje ensamblador x86, del cual no entran las subrutinas, donde es requisito imprescindible haber realizado los ejercicios 15(instrucción CMP),16(flags CF/OF) y 17(instrucciones JLE,SETcc) tanto manualmente como su programación en código ensamblador, compilación, ejecución y <strong>depuración</strong>. El objetivo del ejercicio es demostrar habilidades en cuanto a desarrollo de programas de bajo nivel y su depuración.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>↑ Up: <a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">Estructura de Computadores 2022: Primer Parcial Prácticas</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_módulo_fuente_3.html">Módulo fuente</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

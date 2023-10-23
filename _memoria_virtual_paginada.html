@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="keywords" content="computer, architecture">
+<meta name="author" content="Cándido Aramburu">
+<title>Apéndice: Memoria Virtual</title>
+<style>
+@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700";
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
+
+
+
+h1, h2, h3, h4, h5, h6, #toctitle,
+.sidebarblock > .content > .title {
+  color: rgba(221, 72, 20, 0.8);
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Change some CSS.
+<style>
+.imageblock{
+  &.text-center > .title {
+    text-align: center !important;
+  }
+}
+</style>
+
+-->
+
+<style type="text/css"> .imageblock > .title { text-align: center; } </style>
+
+<style>.toc-current{font-weight: bold;} .toc-root{font-family: "Open Sans","DejaVu Sans",sans-serif;
+                       font-size: 0.9em;} #content{display: flex; flex-direction: column; flex: 1 1 auto;}
+             .nav-footer{text-align: center; margin-top: auto;}
+             .nav-footer > p > a {white-space: nowrap;}</style>
+</head>
+<body id="_memoria_virtual_paginada" class="book">
+<div id="header">
+<h1>Apéndice: Memoria Virtual</h1>
+<div class="details">
+<span id="author" class="author">Cándido Aramburu</span><br>
+<span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
+<span id="revdate">2023-10-23</span>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<p><span class="toc-root"><a href="eecc_book.html">Apéndice: Memoria Virtual</a></span></p><ul class="sectlevel0">
+<li><a href="_i_arquitectura_del_repertorio_de_instrucciones_isa_computadora_von_neumann_datos_instrucciones_programación.html">I Arquitectura del Repertorio de Instrucciones (ISA): computadora von Neumann, datos, instrucciones, programación.</a>
+</li>
+<li><a href="_ii_unidades_básicas_procesador_central_unidad_de_memoria_mecanismos_entradasalida.html">II Unidades Básicas: Procesador Central, Unidad de Memoria, Mecanismos Entrada/Salida.</a>
+</li>
+<li><a href="_iii_ejercicios_de_teoría.html">III Ejercicios de Teoría</a>
+</li>
+<li><a href="_iv_autoevaluación_teoría.html">IV Autoevaluación Teoría</a>
+</li>
+<li><a href="_v_guiones_de_prácticas_programación_ensamblador_x86.html">V Guiones de Prácticas: Programación Ensamblador x86</a>
+</li>
+<li><a href="_vi_hojas_de_referencia_rápida.html">VI Hojas de Referencia Rápida</a>
+</li>
+<li><a href="_vii_autoevaluación_prácticas.html">VII Autoevaluación Prácticas</a>
+</li>
+<li><a href="_viii_apéndices.html">VIII Apéndices</a>
+</li>
+<li><a href="_apéndice_unidad_de_memoria_dram.html">Apéndice: Unidad de Memoria DRAM</a>
+</li>
+<li><a href="_apéndice_memoria_virtual.html">Apéndice: Memoria Virtual</a>
+<ul class="sectlevel1">
+<li><a href="apendice_memvirtual.html">40. Bibliografia</a>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria.html">41. Sistemas Operativos: Gestión de la Memoria</a>
+</li>
+<li><a href="apendice_segmentos_secciones.html">42. Memoria Virtual Segmentada</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html"><span class="toc-current">43. Memoria Virtual Paginada</span></a>
+<ul class="sectlevel2">
+<li><a href="_memoria_virtual_paginada.html#_fundamento">43.1. Fundamento</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_concepto_de_memoria_virtual_paginada">43.2. Concepto de Memoria Virtual Paginada</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_fragmentación">43.3. Fragmentación</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_mmu">43.4. MMU</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_virtual_memory_cached">43.5. Virtual Memory Cached</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_tabla_de_paginas">43.6. Tabla de paginas</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_multilevel_paging">43.7. Multilevel paging</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_intel_evolución_memoria_virtual">43.8. Intel: Evolución memoria virtual</a>
+<ul class="sectlevel3">
+<li><a href="_memoria_virtual_paginada.html#_80386_2">43.8.1. 80386</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_amd64_2">43.8.2. amd64</a>
+</li>
+</ul>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_glosario">43.9. Glosario</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_traducción_dirección_virtual_a_fisica">43.10. Traducción: dirección virtual a fisica</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_translation_lookaside_buffer">43.11. Translation Lookaside Buffer</a>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_ejercicio">43.12. Ejercicio</a>
+<ul class="sectlevel3">
+<li><a href="_memoria_virtual_paginada.html#_desarrollo">43.12.1. Desarrollo</a>
+</li>
+</ul>
+</li>
+<li><a href="_memoria_virtual_paginada.html#_intel_core_i7">43.13. Intel Core i7</a>
+</li>
+</ul>
+</li>
+<li><a href="_sistemas_operativos_gestión_de_la_memoria_2.html">44. Sistemas Operativos: Gestión de la Memoria</a>
+</li>
+</ul>
+</li>
+<li><a href="_lenguaje_de_programación_c_2.html">Lenguaje de Programación C</a>
+</li>
+<li><a href="_fpu_x87.html">FPU x87</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_teoría.html">Estructura de Computadores 2022: Primer Parcial Teoría</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_primer_parcial_prácticas.html">Estructura de Computadores 2022: Primer Parcial Prácticas</a>
+</li>
+<li><a href="_estructura_de_computadores_2022_segundo_parcial_prácticas.html">Estructura de Computadores 2022: Segundo Parcial Prácticas</a>
+</li>
+<li><a href="_nominación_de_los_ficheros_del_examen.html">Nominación de los ficheros del examen</a>
+</li>
+<li><a href="_exámenes_de_cursos_anteriores.html">Exámenes de Cursos Anteriores</a>
+</li>
+<li><a href="_miaulario_videoconferencia.html">Miaulario: Videoconferencia</a>
+</li>
+<li><a href="_ix_bibliografía.html">IX Bibliografía</a>
+</li>
+<li><a href="_x_glosario.html">X Glosario</a>
+</li>
+<li><a href="_xi_colofón.html">XI Colofón</a>
+</li>
+<li><a href="_index.html">Index</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_memoria_virtual_paginada">43. Memoria Virtual Paginada</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_fundamento">43.1. Fundamento</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>La paginación consiste en dividir tanto la memoria <em>física</em> como la memoria <em>virtual</em> de los procesos en pequeños <em>pedazos</em> denominados páginas.</p>
+</li>
+<li>
+<p>Los pedazos de memoria física se denominan <em>marcos de página</em> y los pedazos de memoria virtual del proceso se denominan <em>páginas</em></p>
+</li>
+<li>
+<p>En este caso se asigna cada página a un marco de página diferente, quedando los trozos de proceso diseminados en zonas <strong>NO CONTIGUAS</strong> de la memoria.</p>
+</li>
+<li>
+<p>De esta manera se reduce la fragmentación interna ,ya que la memoria infrautilizada siempre será menor al tamaño de una página.</p>
+</li>
+<li>
+<p>El sistema operativo genera para cada proceso la <em>tabla de páginas</em> que mapea páginas con marcos.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PTE: Page Table Entry &#8594; (index,PhysPageNumber)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Dirección lógica</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Cada dirección lógica estará formada por la dirección base de la página y el offset dentro de la página. Direccionamiento <strong>no lineal</strong>, (dirección base, desplazamiento)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Traducción de dirección lógica a física.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El espacio de direcciones físico es único y contiguo, es decir, lineal.</p>
+</li>
+<li>
+<p>La dirección base de la página del proceso se asocia con la dirección base del marco: tabla de páginas.</p>
+</li>
+<li>
+<p>El offset dentro del marco será el mismo que el offset dentro de la página.</p>
+</li>
+<li>
+<p>La gestión de la paginación la realiza la MMU</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_concepto_de_memoria_virtual_paginada">43.2. Concepto de Memoria Virtual Paginada</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Debido a que no es necesario cargar todas las páginas del proceso &#8594; el espacio de memoria del <strong>PROCESO</strong> puede ser <strong>mayor</strong> que la memoria física &#8594; concepto de <strong>memoria virtual</strong></p>
+</li>
+<li>
+<p>La memoria virtual es única, contigua, es decir, <em>LINEAL</em>. Es una abstracción para no depender de las direcciones físicas.</p>
+</li>
+<li>
+<p>Por el principio de localidad en la memoria física sólo está la copia de las páginas virtuales que son necesarias dinámicamente en un momento dado.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>concepto de cache</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La memoria principal es la cache de la memoria secundaria (ficheros el disco o pendrive)</p>
+</li>
+<li>
+<p>SDRAM cache</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_fragmentación">43.3. Fragmentación</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>En el desalojo de áreas de memoria que no son necesarias se generan huecos que fragmentan la memoria física en una sucesión de áreas de memoria utilizadas y áreas no utilizadas</p>
+</li>
+<li>
+<p>La fragmentación interna será menor cuanto más pequeñas sean las páginas.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En la paginación las páginas pueden tener bytes sin utilizar, son huecos internos a las páginas.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>La fragmentación externa se reduce ya que los marcos de página pueden ser asignados a un proceso independientemente del tamaño del proceso.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Un proceso ocupará los huecos dejados por las páginas que no tienen porque ser contiguas. El tamaño del proceso afectará al número de páginas requeridas en caso de que queramos tener todo el proceso residente en memoria principal.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mmu">43.4. MMU</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Unidad Hardware interna a la CPU</p>
+</li>
+<li>
+<p>Su entrada es el bus de direcciones virtuales y su salida el bus de direcciones físicas.</p>
+</li>
+<li>
+<p>La MMU accede a la tabla de descripción de segmentos y a la tabla de páginas y realiza la traducción de dirección virtual en dirección física</p>
+</li>
+<li>
+<p>La tabla de páginas de la MMU es la función de correspondencia que mapea el espacio virtual y el físico.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_virtual_memory_cached">43.5. Virtual Memory Cached</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Tabla de páginas con función de correspondencia fully associative (las VPages se asocian con cualquier Marco de página)</p>
+</li>
+<li>
+<p>Bit de validación</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1 &#8594; cached page</p>
+</li>
+<li>
+<p>o &#8594; uncached page: allocated o unallocated</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/vm_concept.png" alt="MMU">
+</div>
+<div class="title">Figure 117. MMU</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/vm_table.png" alt="MMU">
+</div>
+<div class="title">Figure 118. MMU</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tabla_de_paginas">43.6. Tabla de paginas</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>La tabla de páginas reside en la memoria principal SDRAM.</p>
+</li>
+<li>
+<p>Las entradas de la tabla son un puntero a marcos de página física</p>
+</li>
+<li>
+<p>Tantas entradas como páginas virtuales</p>
+</li>
+<li>
+<p>El número de página virtual es el índice de la tabla.</p>
+</li>
+<li>
+<p>La MMU accede a la tabla de páginas y realiza la traducción de dirección virtual en dirección física</p>
+</li>
+<li>
+<p>El kernel actualiza la tabla de páginas y activa las transferencias</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/vm_table_protection.png" alt="MMU">
+</div>
+<div class="title">Figure 119. Protección</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>SUP: SUPervisor: únicamente el kernel tiene acceso</p>
+</li>
+<li>
+<p>Write No: read only.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/formato_direcciones.png" alt="MMU">
+</div>
+<div class="title">Figure 120. Formato de Direcciones</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_multilevel_paging">43.7. Multilevel paging</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Debido a qué la tabla de páginas puede ser enorme se considera reducir el área de ram que consume la tabla mediante una organización jerárquica de múltiples tablas.</p>
+</li>
+<li>
+<p>La memoria se puede dividir jerárquicamente en agrupamientos de páginas. Superpáginas que agrupan páginas, hiperpáginas que agrupan superpáginas.</p>
+</li>
+<li>
+<p>Ejemplo: Paginación de 3 niveles: Nivel 1 de pedazos de 16 MB, nivel 2 de pedazos de 2MB, nivel 2 de páginas de 4KB.</p>
+</li>
+<li>
+<p>Cada nivel de agrupamiento lleva asociada una tabla de descripción de dicho nivel. La tabla de páginas se convierte en una jerarquía de múltiples tablas.</p>
+</li>
+<li>
+<p>En el proceso de traducción de la MMU la dirección virtual se descompone en múltiples campos. Cada campo será un índice de cada tabla asociada, enlazando tantas páginas como niveles.</p>
+</li>
+<li>
+<p>Si la tabla de nivel i tiene un contenido NULL no existirá las tablas de niveles superiores i+1,i+2,etc de la cadena de enlaces.</p>
+</li>
+<li>
+<p>El  hecho de acceder a múltiples tablas no ralentiza la traducción de direcciones si las tablas están implementadas en la cache interna de la MMU. Sería distinto si dichas páginas estuviesen en la memoria DRAM.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/table_multiple.png" alt="MMU" height="400">
+</div>
+<div class="title">Figure 121. Tabla de dos niveles</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/table_level_k.png" alt="MMU">
+</div>
+<div class="title">Figure 122. Tabla de K niveles</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_intel_evolución_memoria_virtual">43.8. Intel: Evolución memoria virtual</h3>
+<div class="sect3">
+<h4 id="_80386_2">43.8.1. 80386</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Se utiliza por primera vez la paginación.</p>
+</li>
+<li>
+<p>La traducción de memoria virtual en física conlleva dos fases: primero la segmentación y a continuación la paginación (opcional)</p>
+</li>
+<li>
+<p>Ver mecanismo de segmentación.</p>
+</li>
+<li>
+<p>La segmentación traduce el espacio virtual en un espacio  lineal de 32 bits con campos:dir(10 bits)-pag(10)-offset(12)</p>
+</li>
+<li>
+<p>Se implementa dos niveles de tablas de paǵinas: dir es una tabla de punteros de tablas de páginas (directorio de páginas)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>con 10 bits se consiguen 2<sup>10</sup> punteros a tablas &#8594; 1K tablas</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>pag es el índice de la tabla de páginas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>con 10 bits se consiguen 2<sup>10</sup> entradas de tabla &#8594; 1K páginas virtuales asociadas a 1K páginas físicas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La dirección de página física son 32 bits</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Con 12 bits de offset el tamaño de página es 2<sup>12</sup>=4KB</p>
+</li>
+<li>
+<p>1K tablas donde cada tabla contiene 1K páginas son en total 1M de páginas y cada página 4KB da un total de 4GB de direcciones de memoria física.</p>
+</li>
+<li>
+<p>Por lo que de los 64TB de memoria virtual posible podemos traducir en un momento dado a 24GB de memoria segmentada y cada segmento de 4GB lineales a 4GB de memoria física.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_amd64_2">43.8.2. amd64</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>amd64 &#8594; 64 bits &#8594; Espacio Virtual teórico = 2<sup>64</sup> = 16 ExaBytes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Paginación y <strong>no segmentación</strong>.</p>
+</li>
+<li>
+<p>Espacio Virtual = 256 TeraBytes ya que la CPU únicamente utiliza 48 bits para el espacio de direcciones virtual <em>porque</em> es suficiente memoria para las aplicaciones actuales, utilizar los 64 bits provocaría tablas de páginas enormes bajando el rendimiento del sistema sin necesidad. No hay ni memoria secundaria para tanta memoria virtual.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_glosario">43.9. Glosario</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Espacios: Logic (segmentation) &#8594; Logic Linear (virtual,pagination) &#8594; Physical Linear</p>
+</li>
+<li>
+<p>VP: Virtual Page</p>
+</li>
+<li>
+<p>VA: Virtual Address</p>
+</li>
+<li>
+<p>PP: Physical Page</p>
+</li>
+<li>
+<p>PA: Physical Address</p>
+</li>
+<li>
+<p>VPO:VP offset</p>
+</li>
+<li>
+<p>VPN:VP number</p>
+</li>
+<li>
+<p>TLB: Translation lookaside Buffer: buffer (cache) de anticipación de la tabla de páginas. Residente en la MMU.</p>
+</li>
+<li>
+<p>PTE: Page Table Entry &#8594; (index/contenido)&#8594;(VPN/PPN)</p>
+</li>
+<li>
+<p>PTBR: Registro de control de la CPU: page table base register: pointer to TLB</p>
+</li>
+<li>
+<p>TLBI:TLB index &#8594; campo set de la cache</p>
+</li>
+<li>
+<p>TLBT: TLB tag</p>
+</li>
+<li>
+<p>PPO: PP offset</p>
+</li>
+<li>
+<p>PPN: PP number</p>
+</li>
+<li>
+<p>CO: Cache offset en el superbloque</p>
+</li>
+<li>
+<p>CT: Cache tag</p>
+</li>
+<li>
+<p>CI: Cache index ó línea</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_traducción_dirección_virtual_a_fisica">43.10. Traducción: dirección virtual a fisica</h3>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/virtualtoframe.png" alt="MMU">
+</div>
+<div class="title">Figure 123. Traducción Virtual &#8594; Física</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/mmu_hit.png" alt="MMU" height="200">
+</div>
+<div class="title">Figure 124. Resultado con éxito</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>CPU: vuelca la dirección de memoria virtual</p>
+</li>
+<li>
+<p>MMU: apunta a la entrada de la tabla de páginas ubicada en la memoria principal</p>
+</li>
+<li>
+<p>Memoria Principal: devuelve el contenido de la entrada de la tabla. MMU: A partir de la dirección lógica obtiene al dirección física.</p>
+</li>
+<li>
+<p>MMU: vuelca la dirección física en el bus de direcciones del bus del sistema.</p>
+</li>
+<li>
+<p>El dato referenciado puede estar en la memoria caché o en la memoria principal.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/mmu_fault.png" alt="MMU" height="300">
+</div>
+<div class="title">Figure 125. Resultado con fracaso</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_translation_lookaside_buffer">43.11. Translation Lookaside Buffer</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>TLB</p>
+</li>
+<li>
+<p>Es una Caché de la tabla de páginas virtuales TPV. Además de residir la tabla de páginas en la memoria principal se tiene una copia parcial de dicha tabla en una unidad de memoria interna de la MMU. Objetivo: aumentar la velocidad de acceso a la tabla ya que la solución de múltiples tablas en niveles jerárquicos requiere múltiples accesos a la memoria principal externa.</p>
+</li>
+<li>
+<p>Formato de dirección virtual si la TLB es una caché con función de correspondencia asociativa</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El índice es el campo set o superbloque típico de la cache</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/tlb_connection.png" alt="MMU">
+</div>
+<div class="title">Figure 126. Operación con TLB</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/tlb_entry.png" alt="MMU" height="100">
+</div>
+<div class="title">Figure 127. Formato Virtual con TLB</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>TLBTag</p>
+</li>
+<li>
+<p>TLBIndex</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ejercicio">43.12. Ejercicio</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>La arquitectura de una computadora dispone de TLB y L1 d-Cache. La memoria es direccionable byte a byte y tiene palabras de 1 byte.</p>
+</li>
+<li>
+<p>La MMU tiene una Tabla TLB (Translation Lookup Buffer)   y una memoria d-Cache según las figuras</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/tabla_cache_ejercicio.png" alt="MMU">
+</div>
+<div class="title">Figure 128. TLB y d-cache </div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Virtual addresses are 14 bits wide (n = 14).</p>
+</li>
+<li>
+<p>Physical addresses are 12 bits wide (m = 12).</p>
+</li>
+<li>
+<p>The page size is 64 bytes (P = 64).</p>
+</li>
+<li>
+<p>The TLB is four-way set associative with 16 total entries.</p>
+</li>
+<li>
+<p>The L1 d-cache is physically addressed and direct mapped, with a 4-byte line size and 16 total set.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Calcular la dirección física de la DIRECCION VIRTUAL <strong>0x03d4</strong></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Formato de Direcciones</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Dimensión de VPO</p>
+</li>
+<li>
+<p>Dimensión de PPO</p>
+</li>
+<li>
+<p>Dimensión de VPN</p>
+</li>
+<li>
+<p>Dimensión de PPN</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Número de entradas de la tabla de páginas en memoria principal y la caché TLB</p>
+</li>
+<li>
+<p>TLB</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Líneas por set de TLB</p>
+</li>
+<li>
+<p>Sets de TLB</p>
+</li>
+<li>
+<p>Tamaño TLBI</p>
+</li>
+<li>
+<p>Tamaño TLBT</p>
+</li>
+<li>
+<p>Bits por Word</p>
+</li>
+<li>
+<p>Words por línea de TLB</p>
+</li>
+<li>
+<p>Valores TLBI-TLBT</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Está PPN en TLB?</p>
+</li>
+<li>
+<p>Valor de PPN</p>
+</li>
+<li>
+<p>Valor de PA</p>
+</li>
+<li>
+<p>d-Cache</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Memory Cache: Tipo</p>
+</li>
+<li>
+<p>Sets</p>
+</li>
+<li>
+<p>Líneas/Set</p>
+</li>
+<li>
+<p>Words/Línea</p>
+</li>
+<li>
+<p>Bytes/Word</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Formato Dirección Física</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>CO</p>
+</li>
+<li>
+<p>CI</p>
+</li>
+<li>
+<p>CT</p>
+</li>
+<li>
+<p>Valores CT/CI/CO &#8594; PA</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Está PA en la caché?</p>
+</li>
+<li>
+<p>Contenido de la PA</p>
+</li>
+<li>
+<p>Resumen del resultado final</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_desarrollo">43.12.1. Desarrollo</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Respuestas</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>El formato de direcciones es</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>VO y PO &#8594; tamaño de página : 64 bytes &#8594; 2<sup>6</sup> &#8594; 6 bits de offset tanto virtual como físico</p>
+</li>
+<li>
+<p>bits VPN= VA-VPO=14-6=8 bits &#8594; 2<sup>8</sup> = 256 páginas virtuales</p>
+</li>
+<li>
+<p>bits PPN= PA-PPO=12-6=6 bits &#8594; 2<sup>6</sup> = 64 marcos de página</p>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/formato_direcciones.png" alt="MMU">
+</div>
+<div class="title">Figure 129. Formato de Direcciones</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Valores de VPN y VPO</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La dirección virtual VA de 14 bits 0x03D4 se codifica en binario como: 00-0011-1101-0100 &#8594; 00001111-010100 &#8594; VPN-VPO</p>
+<div class="ulist">
+<ul>
+<li>
+<p>VPO=PPO=010100=01x4</p>
+</li>
+<li>
+<p>VPN=00001111=0x0F</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tabla de páginas</p>
+<div class="ulist">
+<ul>
+<li>
+<p>256 puntos de entrada. Cada entrada contiene la dirección de uno de los 64 marcos de página. Es decir una tabla de 256 direcciones y palabras de 6 bits más los bits de validación, protección, etc</p>
+</li>
+<li>
+<p>La tabla en MP son 256 entradas, en cambio la TLB en caché tiene 16 entradas &#8594; direccionables con 4 bits.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>TLB</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Líneas por set de TLB: 4 vías &#8594; 4 líneas/set</p>
+</li>
+<li>
+<p>Sets de TLB: 16 entradas son 16 líneas en total agrupadas por 4 líneas/set = 4 sets</p>
+</li>
+<li>
+<p>Tamaño TLBI : para 4 set son necesarios 2 bits</p>
+</li>
+<li>
+<p>Tamaño TLBT :</p>
+<div class="ulist">
+<ul>
+<li>
+<p>De los 8 bits necesarios para direccionar 256 entradas si 2 son para el índice TLBI, 6 serán para la etiqueta TLBT</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Bits por Word: 1 byte por palabra según el enunciado</p>
+</li>
+<li>
+<p>Words por línea de TLB</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Si me fijo en el díbujo de la tabla, cada línea contiene únicamente un PPN+tag, es decir, una palabra.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Valores TLBI-TLBT</p>
+<div class="ulist">
+<ul>
+<li>
+<p>VPN es una dirección de la tabla de páginas en la memoria RAM. El controlador de caché la descompone en TLBT-TLBI</p>
+</li>
+<li>
+<p>VPN=00001111=000011-11=TLBT-TLBI=0x3-0x3</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Está PPN en TLB?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>busco en el set 0x3 de TLB si alguno de las líneas tiene un tag TLBT de 0x3 y lo tiene la segunda línea.</p>
+</li>
+<li>
+<p>La segunda línea del set 3 tiene el bit de validación a 1 por lo que la página virtual está en la memoria principal y/o d-cache.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Valor de PPN</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La segunda línea del set 3 tiene el contenido PPN=0x0D</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Valor de PA</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Son 12 bits</p>
+</li>
+<li>
+<p>La concatenación PPN(6)-PPO(6): 001101-010100=001101010100=0011-0101-0100= <strong>0x354</strong> =PA</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>d-Cache</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Memory Cache: Tipo : mapeo directo</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Al ser de mapeo directo los set son de 1 línea por lo que es lo mismo decir set que línea.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Sets</p>
+<div class="ulist">
+<ul>
+<li>
+<p>16 líneas</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Líneas/Set : 1</p>
+</li>
+<li>
+<p>Words/Línea: 4</p>
+</li>
+<li>
+<p>Bytes/Word: 1</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Formato dirección física</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>CO: para direccionar 4 palabras son necesarios 2 bits</p>
+</li>
+<li>
+<p>CI: para direccionar 16 líneas son necesarios 4 bits</p>
+</li>
+<li>
+<p>CT: la dirección física PA son 12 bits &#8594; CT=PA-DI-CO=12-4-2=6 bits</p>
+</li>
+<li>
+<p>Valores CT/CI/CO &#8594; PA=001101010100=001101-0101-00</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Línea 0005; Palabra 00: Tag 001101=0x0D</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Está PA en la d-Cache?</p>
+<div class="ulist">
+<ul>
+<li>
+<p>En la línea 5 el tag es 0D &#8594; coíncide con el tag de la dirección física &#8594; acierto &#8594; el dato está en d-cache</p>
+</li>
+<li>
+<p>El bit de validación es 1 por lo que su contenido está actualizado y por lo tanto válido.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Contenido de la PA:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El contenido de la palabra 0 de la linea 5 de la d-cache es el byte <strong>0x36</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Resumen del resultado final.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>La dirección virtual <strong>0x03d4</strong> se corresponde con la dirección física <strong>0x354</strong> cuyo contenido es <strong>0x36</strong></p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_intel_core_i7">43.13. Intel Core i7</h3>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/corei7_virtual_memory.png" alt="MMU">
+</div>
+<div class="title">Figure 130. Memoria Core i7</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/corei7_mmu.png" alt="MMU">
+</div>
+<div class="title">Figure 131. Operación MMU</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/corei7_tlb_entry_123.png" alt="MMU">
+</div>
+<div class="title">Figure 132. Formato para las tablas de los tres primeros niveles</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/corei7_tlb_entry_4.png" alt="MMU">
+</div>
+<div class="title">Figure 133. Formato de la tabla del 4º nivel </div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="./images/memvirtual/corei7_address_translation.png" alt="MMU">
+</div>
+<div class="title">Figure 134. Linux: 4 niveles</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph nav-footer">
+<p>← Previous: <a href="apendice_segmentos_secciones.html">Memoria Virtual Segmentada</a> | ↑ Up: <a href="_apéndice_memoria_virtual.html">Apéndice: Memoria Virtual</a> | ⌂ Home: <a href="eecc_book.html">Estructura de Computadores  (240306)</a> | Next: <a href="_sistemas_operativos_gestión_de_la_memoria_2.html">Sistemas Operativos: Gestión de la Memoria</a> →</p>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-10-11 14:37:36 +0200
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains("stemblock")) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2023-10-11</span>
+<span id="revdate">2023-10-23</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -92,7 +92,19 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 </li>
 <li><a href="_apéndice_unidad_cpu.html"><span class="toc-current">32. Apéndice: Unidad CPU</span></a>
 <ul class="sectlevel2">
-<li><a href="_apéndice_unidad_cpu.html#apendice_cpu">32.1. Microarquitecturas Modernas (Año 2000 en adelante)</a>
+<li><a href="_apéndice_unidad_cpu.html#apendice_cpu">32.1. Modern CPU Architecture: Microarchitecture</a>
+<ul class="sectlevel3">
+<li><a href="_apéndice_unidad_cpu.html#_key_building_blocks_in_a_cpus_isa">32.1.1. Key Building Blocks in a CPU’s ISA</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html#_pipeline_depth">32.1.2. Pipeline Depth</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html#_speculation">32.1.3. Speculation</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html#_front_end_predict_and_fetch">32.1.4. Front End: Predict and Fetch</a>
+</li>
+<li><a href="_apéndice_unidad_cpu.html#_front_end_decode">32.1.5. Front End: Decode</a>
+</li>
+</ul>
 </li>
 <li><a href="_apéndice_unidad_cpu.html#_intel_3">32.2. Intel</a>
 </li>
@@ -156,11 +168,93 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <h2 id="_apéndice_unidad_cpu">32. Apéndice: Unidad CPU</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="apendice_cpu">32.1. Microarquitecturas Modernas (Año 2000 en adelante)</h3>
+<h3 id="apendice_cpu">32.1. Modern CPU Architecture: Microarchitecture</h3>
+<div class="paragraph">
+<p><a href="https://mitterandekole.medium.com/modern-cpu-architecture-2-microarchitecture-8bcd80ce52ae">Blog Medium: mitterandekole</a></p>
+</div>
+<div class="paragraph">
+<p>In the last article we talked about the modern CPU architecture. We discussed what a CPU was, a brief history of the CPU, we explained the concept of computing abstraction layers, and Instruction Set Architectures. The ISA is what we normally refer to as the architecture of the CPU.</p>
+</div>
+<div class="paragraph">
+<p>Today we will delve into what the microarchitecture of the CPU is made up of. In other words how exactly are ISAs implemented, what are it’s building blocks and how does it operate. This is an in-depth explanation.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cpu/nehalem.webp" alt="Intel Nehalem CPU Microarchitecture">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_key_building_blocks_in_a_cpus_isa">32.1.1. Key Building Blocks in a CPU’s ISA</h4>
+<div class="paragraph">
+<p>A microarchitecture is an implementation of an Instruction Set Architecture. The microarchitecture operates on the four step cycle:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://mitterandekole.medium.com/modern-cpu-architecture-2-microarchitecture-8bcd80ce52ae">Blog Medimu: mitterandekole</a></p>
+<p>The first step “Fetch” is to extract information from memory so the CPU knows exactly what the program wants executed.</p>
+</li>
+<li>
+<p>The next step “Decode” requires that the information is broken down into chunks of bits of data(native operations). At this stage there is a creation of multiple internal operations as a result of chunks of instructions being broken down.</p>
+</li>
+<li>
+<p>Once instructions have been decoded, the CPU needs to execute them, that brings us to the next step “Execute”. There are numerous types of execution operations, like arithmetic operations(add, multiply, divide etc.), Boolean operations(AND, NOT, OR, XOR etc.), data comparison and decision operations(chooses where next to go in the code), operation as such are known as “branches” as they can steer code to different places. The execute stage of a CPU varies depending on the ISA, as many CPU with more sophisticated ISAs can perform much more operations.</p>
+</li>
+<li>
+<p>Finally the CPU stores the results, sometimes these results are stored locally in Registers, or Memory, this is known as the Write back step.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These operations make up the fundamental building blocks of a CPU, when put together they are referred to as a CPUs “Pipeline”</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/cpu/pipeline_3etapas.webp" alt="CPU with 3 Pipelines">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_pipeline_depth">32.1.2. Pipeline Depth</h4>
+<div class="paragraph">
+<p>Now that we have described what a pipeline looks like, what do modern microprocessors look like? Over the years the average number of pipeline stages have grown. A pipeline is similar to an assembly line. The more stages are added, the less is done at each individual stage. The more pipeline stages you have the faster each stage can run and more stages are being done in parallel. A modern microprocessor has about 15–20 stages.</p>
+</div>
+<div class="paragraph">
+<p>The Fetch and Decode cycle typically have 6–10 stages, collectively these are called the frontend of the microprocessor. The Execute and Write back have also grown roughly into 6 to 10 stages. These are called the backend of the microprocessor. A CPU’s pipeline is synchronous, and what that means is each pipeline is controlled by a clock signal, and each data goes from one pipeline stage to the next as a CPU clock completes a cycle. The number of stages partially determines what the peak frequency of the CPU is. Modern CPUs can run up to 5GHz, the amount of logic in these stages determines how fast the stages or clock can operate. If a CPU runs at 5GHz this implies each stage need to run and complete at 5billionths of a second.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_speculation">32.1.3. Speculation</h4>
+<div class="paragraph">
+<p>If you recall the basic pipeline illustrated above, at the beginning we fetch the instructions and towards the end we execute these instructions. Some of these instructions are known as branches . This represents a decision point or “fork in the road” like an exit on a highway. Do we want to keep going or exit now and follow a different path? When a branch is being executed, you are making that decision. As the pipeline grows you get farther and farther away from the answer of which path to take. When the branch says to take a different path we need to tell the beginning of the pipeline to redirect to a different instruction. The work that was in progress is thrown away.</p>
+</div>
+<div class="paragraph">
+<p>This is both bad for performance and as well as for power, since we have spent time executing instructions that were not needed for the program’s execution. We could avoid speculation by simply stopping every time we saw a branch and just wait for it to execute and tell us what path in the code to go. This would be safe, but will be very slow. However there lots of branches in most codes, that implies a lot of time spent waiting.</p>
+</div>
+<div class="paragraph">
+<p>As pipelines get longer, the penalty for guessing wrong gets worse. Fetch becomes further away from execute, which means it takes us much stages to realize that we are executing on a wrong path. To remedy this, microprocessors invest heavily in design to make accurate predictions at the beginning of the pipeline. We call this the art of branch prediction.</p>
+</div>
+<div class="paragraph">
+<p>When we see that we have gone down the wrong path, we can update or refine the prediction with what the right path was. Then the next time we see that address the branch predictor can tell us to go to a different address. Modern CPU architectures can often predict branches with a near perfect accuracy that makes them seem almost clairvoyant. When a microprocessor executes newer instructions than a branch without knowing if that branch is taken or not , it is referred to as Speculative Execution.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_front_end_predict_and_fetch">32.1.4. Front End: Predict and Fetch</h4>
+<div class="paragraph">
+<p>Branch predictors have become incredibly complex in order to improve their accuracy while still able to steer fetching of instructions at high frequencies. Branch predictors today can often times record, and understand, learn past history of hundreds, thousands of branches before them in order to make a single prediction of the next branch and where it is going. The sophistication of modern day branch predictors is really kind of a precursor if one might think in terms of artificial intelligence, in terms of learning from past behavior and how the future will behave. They’ve become so accurate, they are now in charge of deciding which address to fetch next, even if the prediction ends up being “keep calm and carry on”.</p>
+</div>
+<div class="paragraph">
+<p>Now CPU frequencies have increased much faster than memory speeds, this means it takes longer to fetch data from memory, and to help offset the long round trip time to main memory and back, we keep local copies of main memory internally in structures known as Caches . The frontend has an instruction cache so that it can read instructions in just one to two cycles instead of the hundreds that may take to go to main memory. For power and performance optimization, many adjacent instructions are fetched at the same time, which are then handed off to the decoders. If the instruction cache does not have the data, then the data is requested from the memory’s subsystem. The main goal of the frontend of a pipeline is to ensure there are always enough instructions for the backend to execute and to avoid the idle time spent waiting for instruction bytes from memory.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_front_end_decode">32.1.5. Front End: Decode</h4>
+<div class="paragraph">
+<p>The second half of the frontend is where program instructions are decoded into the microarchitectures internal operations which are called micro-operations. This is the strongest connection between the ISA and the microarchitecture. ISA instructions often include additional bits of data that gives the CPU more information relevant to the operation, which the CPU uses to decode and execute the instruction in an efficient way according to it’s microarchitecture. Microarchitectures are typically built so that most instructions map directly into a single micro-operation, but not all. This helps us to simplify the backend of the pipeline . However there are often some instructions which are more complex and may require the generation of multiple micro-operations. The frontend is always looking at how to decode and prepare those instructions to be executed efficiently. Some microarchitectures decode cache and save these micro-operations for the next time they need to be decoded. This saves the energy require to decode them and improves performance when one to many expansion is common. After instructions are decoded or read from the decode cache, they are then passed to the backend of the pipeline.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Arquitecturas Modernas: Año 2000 en adelante</p>
 </li>
 <li>
 <p>branch prediction : La cpu tiene capacidad para adelantarse a las instrucciones de salto y predecir la dirección del salto. De esta forma no se producen fallos en la ejecución "pipeline" y se puede "predecir" que instrucciones se van a ejecutar antes de comenzar sus ciclos de instrucción asociados.</p>
@@ -169,9 +263,10 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <p>ejecución especulativa: consiste en comenzar el ciclo de instrucción de instrucciones que no se sabe si van a ser finalmente ejecutadas.</p>
 </li>
 <li>
-<p>Front End: El bloque Front End de la Unidad de Control consiste en predecir que instrucciones se van a ejecutar, capturarlas de la memoria Caché y decodificarlas en microoperanciones antes de que llegue su turno &#8594; Pre-Fetch (Pre-Captura). Se precapturan y se guardan en el buffer del Front-End. De esta forma cuando comience el ciclo de instrucción de las instrucciones precapturadas ya están decodificadas, es decir, tienen las primeras fases del ciclo de instrucción ya realizadas.</p>
+<p>Front End: El bloque Front End de la Unidad de Control consiste en las dos primeras etapas: Fetch y Decode. En la etapa Fetch se predice que instrucciones se van a ejecutar, capturarlas de la memoria Caché del decodificador y decodificarlas en microoperanciones antes de que llegue su turno &#8594; Pre-Fetch (Pre-Captura). Se precapturan y se guardan en el buffer del Front-End haciendo cola. De esta forma cuando comience el ciclo de instrucción de las instrucciones precapturadas ya están decodificadas, es decir, tienen las primeras fases del ciclo de instrucción ya realizadas.</p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 <div class="sect2">
