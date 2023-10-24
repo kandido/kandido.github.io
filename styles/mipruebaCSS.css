@@ -46,7 +46,7 @@
 
 /* TAULAK */
 
-section[data-state="taula"]  {
+section[data-state="taula"] table {
     font-family: 'Neuton', sans-serif;
     font-size: 0.5em;
     margin-top: 0em;
@@ -67,7 +67,29 @@ section[data-state="taula_ta"] table  {
     padding: 0.01em;
     background: #f8f8f7;
 }
+.reveal thead th,
+.reveal tfoot th {
+  font-family: "Rock Salt", cursive;
+}
 
+.reveal th {
+  letter-spacing: 2px;
+}
+
+.reveal td {
+  letter-spacing: 1px;
+  padding: 0px;
+  border:0px;
+  margin:0px;
+}
+
+.reveal tbody td {
+  text-align: center;
+}
+
+.reveal tfoot th {
+  text-align: right;
+}
 
 /*LISTAS*/
 
@@ -77,6 +99,16 @@ section[data-state="taula_ta"] table  {
 	text-indent: 1px;
 	font-size: 0.80em;
 	font-weight: 400;
+	padding:0.0em;
+	border:0px;
+	margin:0px;
+}
+
+.reveal ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 
 /*COLUMNAS*/
