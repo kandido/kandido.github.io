@@ -38,11 +38,11 @@
 //:ascii-ids:
 //eecc_slides-docinfo-footer.html contiene la carga y registro del lenguaje x86asmatt, de chalkboard y de notes icon
 
-//:docinfo: private
-//:show-link-uri:
+:docinfo: private
+:show-link-uri:
 :asciidoctor-fetch-kroki: 
-//:experimental:
-//:notitle:
+:experimental:
+:notitle:
 
 
 
@@ -1981,11 +1981,13 @@ sumMtoN:
 * Comprender completamente link:https://diveintosystems.org/book/C8-IA32/recursion.html[La Animación de Recursión]: Analizar la función sumr en C y en ASM. Bajar al apartado 8.6.1. Animation: Observing How the Call Stack Changes. 
 * Ejercicio: Desarrollar el código "sum1toN.s" como subrutina recursiva 
 
-
+[state=txikia]
 === Ejemplo: Subrutina sumMtoN.s
+
 
 * Código:
 +
+
 
 [source,x86asm]
 ----
@@ -2227,41 +2229,175 @@ image::./cpu/puntosdevista_isa_uarch.svg[width=900,height=500,align="center", ti
 
 === Fases de ejecución de una instrucción
 
-image::./cpu/12_5.jpg[title="Diagrama de Estados", scaledwidth="100%",align="center" ]
-Fetch-I I-Decode O-Fetch  Execute-I  Write-O  Interrupt-I  Next-I
+image::./cpu/12_5.jpg[title="Diagrama de Estados del Ciclo de Instrucción", scaledwidth="100%",align="center" ]
 
-=== Unidad de Control: Microoperaciones
+**I**-nstruction  and **O**-perand
 
-* Microoperaciones: operaciones realizadas por la CPU internamente, al ejecutar una Instrucción Máquina.
-** Ejemplos: escribir en el registro MAR, orden de lectura a la MPrincipal, leer de MBR, interpretar de IR, incrementar PC, etc
-** Ejecución Síncrona con el reloj de la CPU:
-+
+I-Fetch / I-Decode / O-Fetch / I-Execute / O-Write / I-Interrupt / Next-I
+
+[.columns]
+=== Sincronismo de las operaciones: señal de reloj
+ 
+[.column]
+--
+* Señal de Reloj: Señal binaria (niveles 0 y 1) periódica (cada ciclo de la señal se repite)
+* Físicamente es una señal electrónica: puede ser una tensión (microvoltios) ó una corriente (microamperios) 
+
 
 [ditaa]
 ----------------------------------------------------------------------
-          T = 1/f
-<-------------------->
 
-               +-----+               +-----+               +-----+               +-----+            
-               |     |               |     |               |     |               |     |  
-               |     |               |     |               |     |               |     |         
-               |     |               |     |               |     |               |     |             
-               |     v               |     v               |     v               |     v    
-               |     |               |     |               |     |               |     |               
-               |     |               |     |               |     |               |     |     
-               |     |               |     |               |     |               |     |               
-+--------------+     +---------------+     +---------------+     +---------------+     +
+microvoltios
+^
+|          T ==> 1/f
+| <-------------------->
+|                                                              1
+|               +-----+               +-----+               +-----+               +-----+            
+|               |     |               |     |               |     |               |     |  
+|               |     |               |     |               |     |               |     |         
+|               |     |               |     |               |     |               |     |             
+|               |     v               |     v               |     v               |     v    
+|               |     |               |     |               |     |               |     |               
+|               |     |               |     |               |     |               |     |     
+|               |     |               |     |       0       |     |               |     |               
+|+--------------+     +---------------+     +---------------+     +---------------+     +---
+|                                                                                             nanosegundos
++--------------------------------------------------------------------------------------------------->
+
 ----------------------------------------------------------------------
 
-*** Flancos de reloj: Cambio de nivel 0->1 (positivos) o  1->0 (negativos) 
+** Flancos de reloj: Cambio de nivel 0->1 (positivos) o  1->0 (negativos) 
+--
+
+[.column]
+* El reloj se utiliza para poder sincronizar las operaciones de los circuitos electrónicos
+** Pej : instantes en que cambian las salidas de un registro
+** Pej : instantes en que cambian las salidas de la memoria
+** Pej : instantes en que cambian las microórdenes de la unidad de control
+* El objetivo es facilitar el diseño de los circuitos electrónicos digitales con que se implementan
+
+=== Unidad de Control y Ruta de datos
+
+* Primero diseñaremos la Ruta de Datos de cada Instrucción y finalmente la Unidad de Control que gestiona la ruta de datos de cada instrucción
+* Es necesario diseñar una ruta de datos diferente para cada instrucción y una única Unidad de Control para todas las instrucciones
+
+image::./von_neumann/ias_operation.png[scaledwidth="50%",align="center",title="IAS Operation"]
+
+
+=== Rutas de Datos
+
+image::./cpu/singlecycle.jpg[scaledwidth="50%",align="center",title="Data Path Single Cycle"]
+
+[.columns]
+=== Rutas de Datos
+
+[.column]
+--
+* Los bloques que forman parte de la ruta de datos se encuentran interconectados uno a uno mediante hilos (pistas o cables)
+* En la imagen se distinguen los hilos de la ruta de datos de los nombres de las microoperaciones (subrayados)
+* Ins7-6 : son los bits 7-6 del campo de operación para cada instrucción -> Dependiendo del valor de estos dos bits la ruta de datos cambia
+* InstM-N: son la secuencia de bits M(M-1) hasta N del campo de operaciones para cada instrucción. Mismo concepto que para Inst7-6 
+--
+
+[.column]
+--
+* Función del multiplexor: 
+* se conecta sólo una de las 4 entradas a la salida. La entrada INx se selecciona con S1S0 
++
+
+[ditaa]
+-----
+
+       |\
+ IN1---| \
+ IN2---|  |____ OUT
+ IN3---|  |
+ IN4---| /
+       |/||   
+         ||
+        S1S0
+-----
+
+--
+
+
+=== Unidad de Control: Microoperaciones y Ruta de Datos
+
+* La Unidad de Control gobierna la ruta de datos para completar todas las fases del ciclo de instrucción de cada instrucción del juego ISA
+* Microoperaciones: operaciones realizadas por la CPU internamente, al ejecutar cada fase del ciclo de instrucción de una Instrucción Máquina.
+** Ejemplos de microoperacioones: escribir en el registro MAR, orden de lectura a la MPrincipal, leer de MBR, interpretar de IR, incrementar PC, etc
+** Microoperaciones síncronas con el flanco positivo del reloj del secuenciador (unidad de control) de la cpu
+
+
+=== Unidad de Control: Secuenciador o Máquina de Estados Finitos
+
+
+image::./cpu/microoperaciones_tabla.png[Tabla de microoperaciones]
+
+
+* El circuito electrónico controlador es un secuenciador digital síncrono o máquina de estados finitos
+* La tabla presenta las entradas y salidas del  secuenciador para cada instrucción
+* Las entradas del secuenciador son: el código del campo de operaciones de la instrucción, el código del registro de flags, la etapa del ciclo de instrucción y el RELOJ.
+* La salida es el conjunto de microoperaciones para esa entrada que cambiará sincronamente con el RELOJ.
+
+
+[.columns]
+=== Unidad de Control: Secuenciador o Máquina de Estados Finitos
+
+[.column]
+--
+image::./cpu/secuenciador_fases.png[Secuencia de Fases de cada Instrucción]
+--
+
+[.column]
+--
+* Cada instrucción tiene su propia secuencia
+* En cada fase será necesario ejecutar las microoperaciones para completar dicha fase
+* La unidad de control se diseña para que cada fase se complete en un ciclo de reloj 
+--
+
 
 === Unidad de control: micro-operaciones
 
 image::./von_neumann/ias_operation.png[scaledwidth="50%",align="center",title="IAS Operation"]
 
-=== Ruta de datos
+[.columns]
+=== Microarquitecturas: RISC y CISC
 
-=== Conjunto de instrucciones
+[.column]
+* CISC: Complex Instruction Set Computer
+** Intel
+** elevado número de códigos de operación 
+** instrucciones máquina que realizan operaciones "complejas" y múltiples modos de direccionamiento complejos
+** Ventajas: fácil de compilar, módulo binario reducido
+** Inconvenientes: Unidad de Control compleja, alto consumo y elevado coste
+** Aplicación : servidores
+
+[.column]
+* RISC: Reduced Instruction Set Computer
+** ARM
+** reducido número de códigos de operación
+** operaciones "sencillas" y modos de direccionamiento sencillos
+** Ventajas: unidad de control sencilla, bajo consumo y bajo coste
+** Inconvenientes: no puede competir en número de procesos a ejecutar y a alta velocidad,
+** Aplicación: computación portátil
+
+=== Microarquitectura Segmentada 
+
+* Pipeline -> tuberías
+* Ejemplo de la cadena para la limpieza automática de coches
+* Múltiples fases del ciclo de instrucción ejecutándose simultáneamente: paralelismo
+* Calcular el Througput: instrucciones ejectudas por unidad de tiempo
+
+=== Arquitectura VLIW vs Superscalar
+
+* VLIW: Very Large Instruction Word
+* Superscalar
+* Múltiples Unidades de Ejecución: ¿Cómo se distribuyen las instrucciones para cada Unidad de Ejecución?
+
+=== Investigar la microarquitectura del ordenador personal
+
+* Herramientas
 
 [#Tema8_IO]
 == Tema 8:  Mecanismos de Entrada/Salida
