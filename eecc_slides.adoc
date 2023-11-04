@@ -2735,6 +2735,7 @@ image::./dram/ddr3_frequency.png[]
 ** f_bm=f_ebm/2=400MHz -> f_a=f_ebm/8=100MHz 
 ** 5-5-5-10 : diferentes tiempos de sincronismo (tCL-tRCD-tRP-tRAS) del bus de control expresados en número de ciclos de reloj (1/f_bm = 2.5ns) -> tRAS=10*2.5ns=25ns
 
+=== Memoria Cache 
 
 === Memoria Cache : Arquitectura
 
@@ -2849,13 +2850,30 @@ image::./cache/cache_directmap_controller.png[]
 
 * Si la CPU escribe un resultado en una línea de la caché, su bloque principal correspondiente no será idéntico por lo que será necesario copiar la línea de la caché en el bloque principal correspondiente. Es necesaría un política de reescritura para indicar cuál es el momento de realizar dicha copia, si justo después de haber modificado la línea de la caché o más tarde.
 
-== Memoria Virtual lógica
+=== Memoria Virtual
+
+=== Memoria Virtual lógica: Secciones y Segmentos
 
 
 image::./memvirtual/linksections.png[float="left"]
 
 [%hardbreaks]
-El espacio de direcciones virtual es un espacio abstracto que se particiona de forma lógica en páginas y la unidad MMU traduce las direcciones de página virtual en direcciones físicas de la memoria DRAM  
 La memoria virtual de un programa binario está organizada en segmentos de datos, instrucciones, pila, heap, etc
-La memoria virtual de los módulos binarios antes de ser linkados están organizados en secciones de datos, instrucciones, pila, heap, etc donde cada segmento ocupará un determinado número de páginas.
+La memoria virtual de los módulos binarios antes de ser linkados están organizados en secciones de datos, instrucciones, pila, heap, etc. El linker resuelve los valores de direcciones de las etiquetas de cada sección y los entrelaza. Posteriormente el linker agrupa las diferentes secciones se en segmentos. 
+
+
+=== Memoria Virtual lógica: Mapa de Memoria en un entorno Linux
+
+image::./memvirtual/linux_vm_map.png[]
+
+
+=== Memoria Virtual lógica: Paginación
+
+El espacio de direcciones virtual es un espacio abstracto que se particiona de forma lógica en páginas y la unidad MMU traduce las direcciones de página virtual en direcciones físicas de la memoria DRAM  
+
+image:./memvirtual/vm_table.png[]
+
+
+== Mecanismos de Entrada/Salida
+
 
