@@ -24,7 +24,7 @@
 :revealjs_center: false
 //:revealjs_width: "100%"
 //:revealjs_height: "100%"
-//:revealjs_margin: 0
+:revealjs_margin: 0
 //:revealjs_minScale: 1,
 //:revealjs_maxScale: 1
 // plugins copiados de tutoriales/asciidoctor-revealjs/../primer.js
@@ -39,11 +39,12 @@
 //eecc_slides-docinfo-footer.html contiene la carga y registro del lenguaje x86asmatt, de chalkboard y de notes icon
 
 :docinfo: private
+:docinfo1:
 :show-link-uri:
 :asciidoctor-fetch-kroki: 
 :experimental:
 :notitle:
-
+:figure-caption: Logo
 
 
 :ruta-transpas: /home/candido/Dropbox/apuntes/apuntes_Estr_Computadores/upna/apuntes_repositorio/transpas_eecc
@@ -2404,4 +2405,457 @@ image::./von_neumann/ias_operation.png[scaledwidth="50%",align="center",title="I
 
 [#Tema9_MEM]
 == Tema 9: Unidad de Memoria
+
+[.columns]
+=== Introducción
+
+[.column]
+* ¿ Qué hemos visto relacionado con la Memoria de una Computadora ?
+* John von Neumann 1950 : Computadora con programa almacenado
+** Unidad de Memoria: programación binaria -> Instrucciones máquina y datos
+** Arquitectura von Neumann: CPU+Unidad de Memoria+I/O+buses
+* Memoria: Registros de la CPU y Memoria Principal (Externa a la CPU)
+* Ciclo de Instrucción: Captura de Instrucciones y Operandos de la Memoria Principal 
+
+[.column]
+* Objetivo de la Memoria Principal:
+** Aumentar la Capacidad de Almacenamiento: En las computadoras multiproceso se ejecutan simultáneamente múltiples programas (centenares) que han de estar accesibles a la CPU. 
+** Reducir la Latencia (tiempo de acceso o captura): Hay instrucciones que la cpu ejecuta en un ciclo de reloj (del orden de 1 ns) y el tiempo de captura de la instrucción o dato es del orden de 100 ciclos de reloj.
+
+=== Perspectivas de estudio
+
+* La memoria es estudiada desde puntos de vista diferentes dependiendo del entorno de estudio.
+* Sistemas Operativos: Gestor de Memoria Virtual
+* Compilador, Linker,...: secciones de memoria ( datos, instrucciones, pila, ...), resolución de direcciones de etiquetas, etc 
+* ISA: etiquetas, modos de direccionamiento, tamaño de los datos, instrucciones de movimiento de bloques de datos, directivas, etc 
+* Programador: Variables ordinarias, arrays, estructuras de datos, etc 
+* Hardware: Organización y Estructura de la Memoria
+
+=== Jerarquía de Memoria
+
+image::./memoria/MemoryHierarchy.png[width=80%,title="Jerarquía de Memoria"]
+
+* Capacidad vs Latencia
+* Concepto de Caching
+
+
+=== Registros
+
+image::./instrucciones_representacion/registers_1200x800.png[width=70%,title="Registros x86"]
+
+=== Registros
+
+image::./memoria/Table_of_x86_Registers_svg.png[width=100%,title="Registros arquitectura amd64"]
+
+
+[state=taula_ta]
+=== Memoria de Semiconductor
+
+
+[width="90%",cols="5*<m",frame="topbot",options="header"]
+|============================================================================
+|Memory Type 	|Category	| Erasure	|Write Mechanism |Volatility
+|Random-access memory (RAM) |Read-write memory |Electrically, byte-level |Electrically |Volatile
+|Read-only memory (ROM) .2+|Read-only memory .2+|Not possible |Masks .5+|Nonvolatile
+|Programmable ROM (PROM) .4+|Electrically
+|Erasable PROM (EPROM) .3+| Read-mostly memory |UV light,chip-level 
+|Electrically Erasable PROM (EEPROM) | Electrically, byte-level
+|Flash memory |Electrically,block-level
+|============================================================================
+
+[.columns]
+=== Memoria RAM Dinámica: Celda DRAM
+
+[.column]
+[.text-left]
+--
+image:./dram/cell_1t1c.png[float="left",title="cell_1t1c"]
+
+* Celda DRAM: 1 Transistor (14nm) y 1 Condensador (3nm)
+* Celda de área reducida y bajo consumo -> alto nivel de integración -> Memoria Principal
+* Fugas de carga del condensador: necesidad de reescritura (Refresco) -> Estado Dinámico
+--
+
+[.column]
+--
+image:./dram/cell_capacitor.png[float="left",title="cell_capacitor"]
+--
+
+=== Memoria RAM eStática: Celda SRAM
+
+
+image::./cache/sram_cell_6T.png[align="center",title="SRAM-cell"]
+
+[.text-left]
+* Celda SRAM : 6 Transistores
+* Memoria Caché: latencia reducida
+* Sin fugas: Estado Estático 
+
+
+[.columns]
+=== Memoria DRAM: Demultiplexor
+
+[.column]
+--
+* ¿Cómo se pueden organizar y estructurar miles de millones de celdas?
+* Una memoria con un bus de direcciones de 30 hilos qué decodificador necesitaría?
+** Con 30 hilos se pueden direccionar 2^30^ bits
+** Entrada binaria: 30 hilos
+** Salida decimal: 2^30^ = 1.073.741.824 salidas -> IMPOSIBLE DE FABRICAR en un chip
+--
+
+[.column]
+--
+image::./dram/demux.png[width=50%,title="Demultiplexor del bus de Direcciones"]
+--
+ 
+[.columns]
+=== Memoria DRAM: Array Bidimensional
+
+[.column]
+--
+* Solución
+** 2^30^ = 2^15^ * 2^15^ 
+** 2^15^ =  32.768 
+** La solución son dos multiplexores de 15 entradas y 32.768 salidas cada uno.
+** La organización de las celdas es una matriz de dos dimensiones. Filas y Columnas cuya intersección es una celda de memoria.
+** De los 30 hilos del bus de direcciones 15 son la entrada del multiplexor de Filas y las otra 15 del multiplexor de columnas
+* Otros Componentes: Amplificador de Salida y Buffer I/O de datos
+--
+ 
+[.column]
+--
+image::./dram/array2.png[width=120%,title="Array 2D"]
+--
+
+
+=== Memoria DRAM: Banco
+
+* Con un Array tenemos datos de un sólo bit
+* Mediante el agrupamiento de N arrays tenemos datos de N bits -> xN
+* Agrupando múltiples arrays organizamos las celdas de memoria en 3 dimensiones
+* Un agrupamiento de arrays recibe el nombre de *Bank*
+
+
+image:./dram/bank1.png[Banco]
+
+
+=== Memoria DRAM: Chip
+
+* Un chip de memoria consiste en el agrupamiento de múltiples Bancos
+* Un chip de memoria tiene un *Buffer I/O* para todos los bancos. Almacena el dato a escribir o leer
+* El tamaño del Buffer I/O se indica mediante el prefijo xN 
+
+image::./dram/bank2.png[title="Chip"]
+
+
+[.columns]
+=== Memoria DRAM: Ejemplo de un Chipx16
+
+[.column]
+--
+* Control Logic: Circuitería para Direccionamiento, Lectura, Escritura, Refresco, ...
+* Un banco -> 3D: 8196 x 512 x 16 -> Filas x Columnas x Nº_de_Arrays/Banco -> 2^13^ x 2^9^ x 16
+** Demultiplexor del direccionamiento de Filas : 13 entradas y 8196 salidas
+** Demultiplexor del direccionamiento de Columnas: 9 entradas y 512 salidas
+** Capacidad de Memoria del Banco: 2^22^ x 16bits = 2^22^ x 2^1^Bytes = 2^23^ Bytes = 2^3^ x 2^20^ = 8MB 
+** Bus de direcciones: 2^23^ -> 23 hilos
+** *Espacio de Direcciones* -> (Fila,Columna) -> Se seleccionan 2 Bytes de forma NO Lineal.
+
+--
+
+[.column]
+--
+* *Ejemplo*: Dirección Lineal 0x7A4E6B de un byte
+** Espacio no lineal: (Fila 111-1010-0100-11 , Columna 10-0110-1010) -> (0x1E93 , 0x26B)
+** Se seleccionan 2 bytes para las direcciones lineales 0x7A4E6A y el 0x7A4E6B ubicados en la posición (0x1E93 , 0x26B) del Banco
+* Chip
+** Buffer i/o del chip= 16 bits de datos = 2Bytes
+** Capacidad de Memoria del chip: 4 Bancos x 8MB = 32MB
+** Espacio de direcciones NO lineal *(Banco,Fila,Columna)*
+** La lógica electrónica del Chip debe de realizar la conversión: espacio lineal-> espacio no lineal
+--
+
+
+
+=== Memoria DRAM: Tarjeta ó Módulo DIMM
+
+image:./dram/tarjeta_micron_1.png[]
+
+* DIMM: Dual In-Line Memory Module : Chips por las dos caras de la tarjeta
+
+=== Row Buffer
+
+image::./dram/row-buffer_2.svg[]
+
+
+=== Row Buffer
+
+* Actúa como caché dentro del propio módulo de memoria DRAM
+* Capturas sucesivas de operandos -> no es necesario volver a leer los condensadores
+* Optimización al programar estructuras de datos 
+
+
+=== Memoria DRAM: Rank   
+
+image:./dram/rank1.png[]
+
+Chip Select: Activa los chips para que se conecten a los buses
+
+
+=== Espacios de Direccionamiento de Memoria
+
+* Espacio de Direcciones: Formato del modo de direccionamiento
+** Ejemplo no lineal: Prof Cándido Aramburu, Dpto Ingeniería Eléctrónica y Comunicaciones, Campus Arrosadía, UPNA, Av/Cataluña, Pamplona 31006, Navarra
+** Ejemplo lineal : DNI 17.987.XXX
+* Programador lenguaje ensamblador: espacio de memoria en secciones, etiquetas, ... 
+* Programa lenguaje binario : espacio de memoria virtual -> direccionamiento lógico no lineal -> (sección datos , dirección 0x000012AF)
+* CPU: espacio de memoria virtual -> direccionamiento lógico no lineal -> (segmento datos, dirección 0xBC007100)
+* Módulo DRAM -> espacio (rank,bank,row,column)
+
+=== Controlador de Memoria
+
+* Unidad Intermedia entre la CPU y los módulos de Memoria DRAM
+* Realiza tareas de: Refresco, Sincronismo de la transferencia de datos, Traductor de espacios de direcciones: virtual, lineal, no lineal, etc
+
+image::./dram/system.png[]
+
+
+=== Memoria DRAM: Channel
+
+* Un canal de memoria selecciona un grupo de tarjetas DIMM. Cada canal tiene su propio espacio de direccionamiento. 
+* El Controlador de Memoria puede operar simultáneamente con diferentes canales
+
+
+
+=== Controlador de Memoria DRAM
+
+* Unidad Memory Managment Unit (MMU): traduce la dirección virtual lógica en una dirección física lineal
+* Traductor físico lineal a físico no lineal (canal,rank,bank,row,column)
+
+===  Intel® 82946GZ Graphics and Memory Controller Hub 
+
+[.text-left%hardbreaks]
+El manual del controlador de memoria de Intel ( Intel ® 946 Express Chipset Family año 2006) en el apartado 1.3.2 (System Memory Interface) dice:
+• The (G)MCH integrates a system *memory* DDR2 (Double Data Rate 2 generation) *controller* with two, 64-bit wide interfaces. Capabilities of the system memory interface include:
+• Supports 256-Mb, 512-Mb, and 1-Gb technologies for x8 and x16 devices
+• Supports four banks for all DDR2 devices up to 512-Mbit density. Supports eight banks for 1-Gbit DDR2 devices
+• By using 1 Gb technology in Dual Channel Interleaved Mode, the largest *memory capacity* possible is 4 GB. (16 K rows x 1 K columns x 1 cell/(row x column) x 8 b/cell x 8 banks/device x 8 devices/DIMM-side x 2 DIMM-sides/channel x 2 channels x 1 B/8 b x 1 G/1024 M x 1 M/(KxK)
+ = (2^14^ rows x 2^10^ columns x 1 cell/(row x column) x 2^3^ b/cell x 2^3^ banks/device x 2^3^ devices/DIMM-side x 2^1^ DIMM-sides/channel x 2^1^
+channels x 1Byte/8bits x 1KB/1024B x 1MB/1024KB x 1GB/1024MB   = 2^(14+10+3+3+3+1+1-3-10-10-10)^GB = 2^(35-33)^GB=4GB
+• Maximum DRAM address decode space is 4 GB (assuming 36-bit addressing)
+• Supports up to 32 simultaneous *open pages* per channel (assuming 4 ranks of 8 bank devices)
+
+
+[.columns]
+=== Sincronismo de la Memoria DRAM : SDRAM
+
+[.column]
+--
+* La transferencia de datos entre la CPU y los módulos DRAM se realiza de forma síncrona con el reloj propio del bus de memoria.
+* El flanco del reloj es el patrón de comienzo y fin de las operaciones
+* *DDR (Double Data Rate)*
+** Permite transferir el bit tanto en el flanco de *bajada* como de *subida* del reloj (*doble bombeo*)
+** Arquitectura amd64 -> Bus de datos de 64  bits conectado al *Buffer i/o* de la memoria
+* Frecuencia del buffer i/o
+** El buffer i/o de la memoria pude ir a frecuencias x2, x4 y x8 respecto de la frecuencia de acceso a la celda.
+** *Supercelda* ó *Macrocelda*:Ahora una selección (fila,columna) de un array supone no la seleccion de 1 celda sino la de una macrocelda de 2, 4 u 8 CELDAS de cada Banco.
+--
+
+[.column]
+--
+* DDR1: una macrocelda de 2^1^ celdas -> 2 celdas
+** 1ª Generación:  año 2000
+** El buffer i/o del chip tiene 2 registros, cada uno de 64 bits.
+* DDR2: una macrocelda de 2^2^ celdas -> 4 celdas
+** 2ª Generación:  año 2006
+** El buffer i/o del chip tiene 4 registros
+* DDR3: una macrocelda de 2^3^ celdas -> 8 celdas
+** 3ª Generación:  año 2011
+** El buffer i/o del chip tiene 8 registros
+* DDR4: una macrocelda de 2^4^ celdas -> 16 celdas
+** 4ª Generación:  año 2014
+** El buffer i/o del chip tiene 16 registros
+* DDR5: una macrocelda de 2^5^ celdas -> 32 celdas
+** 5ª Generación:  año 2020
+** El buffer i/o del chip tiene 32 registros
+--
+
+
+
+=== Sincronismo  de la Memoria DRAM : Synchronous DRAM -> SDRAM 
+
+
+--
+image::./dram/ddr1_frequency.png[float="left"]
+--
+
+[%hardbreaks]
+*DDR*
+ En cada acceso a la macrocelda se leen 2^1^ celdas, es decir, dos datos. Los 2 datos se almacenan en los 2 registos del buffer i/o
+ En el período del reloj del bus de memoria f_bm se realizan 2 transferencias (una en el flanco de bajada y otra en el flanco de subida), a través del bus de datos, de 64 bits (8Bytes) cada una.  
+ Las 2 transferencias de los 2 registros i/o necesitan por lo tanto 1 período a la frecuencia f_bm. 
+ Durante el período f_bm que dura el vaciado de los 2 registros i/o es necesario el acceso una macrocelda, por lo que la frecuencia de acceso a la macrocelda f_a = f_bm  
+ La frecuencia efectiva (frecuencia de transferencia de datos de 8Bytes) del bus de memoria f_ebm es el el doble de la frecuencia f_bm por realizarse dos transferencias en un período  -> f_ebm = 2f_bm = 2f_a -> f_ebm transferencias por segundo -> f_ebm*8Bytes por segundo
+
+image::./dram/ddr2_frequency.png[float="left"]
+*DDR2*
+
+=== Sincronismo  de la Memoria DRAM : Synchronous DRAM -> SDRAM 
+
+
+image::./dram/ddr3_frequency.png[]
+
+[%hardbreaks]
+*DDR3*
+ En cada acceso a la macrocelda se leen 2^3^ celdas, es decir, 8 datos. Los 8 datos se almacenan en los 8 registos del buffer i/o
+ En el período del reloj del bus de memoria f_bm se realizan 2 transferencias (una en el flanco de bajada y otra en el flanco de subida), a través del bus de datos, de 64 bits (8Bytes)cada una.
+ Las 8 transferencias de los 8 registros i/o necesitan por lo tanto 4 períodos a la frecuencia f_bm. 
+ Durante los 4 períodos f_bm que dura el vaciado de los 8 registros i/o es necesario el acceso una macrocelda, por lo que la frecuencia f_bm = 4f_a
+ La frecuencia efectiva del bus de memoria f_ebm es el el doble de la frecuencia f_bm por realizarse dos transferencias en un período -> f_ebm = 2f_bm = 8f_a -> f_ebm transferencias por segundo -> f_ebm*8Bytes por segundo
+
+
+[.columns]
+=== Sincronismo  de la Memoria DRAM: Nominación de los módulos de memoria
+
+[.column]
+* PC2-6400 (DDR2-800) 5-5-5-16
+** DDR 2ª generación -> Macroceldas de 4 celdas -> Buffer i/o de 4 registros
+** Ancho de banda BW = 6400 MB/s 
+** f_ebm = 800MHz -> BW=8Bytes/transferencia*800*10^6^transferencias/seg = 6400 MB/s
+** f_bm=f_ebm/2=400MHz -> f_a=f_ebm/4=200MHz
+** 5-5-5-16 : diferentes tiempos de sincronismo (tCL-tRCD-tRP-tRAS) del bus de control expresados en número de ciclos de reloj (1/f_bm = 2.5ns) -> tRAS=16*2.5ns=40ns -> da una idea del orden del tiempo de latencia o tiempo de acceso a la memoria.
+** Si a la CPU le llegan datos a la frecuencia de 800MHz quiere decir que las fases de captura de instrucciones y operandos duran como mínimo 1/800 microsegundos -> 1.25 nanosegundos
+
+[.column] 
+* PC3-6400 (DDR3-800) 5-5-5-10 
+** DDR 3ª generación -> Macroceldas de 8 celdas -> Buffer i/o de 8 registros
+** Ancho de banda BW = 6400 MB/s 
+** f_ebm = 800MHz -> BW=8Bytes/transferencia*800*10^6^transferencias/seg = 6400 MB/s
+** f_bm=f_ebm/2=400MHz -> f_a=f_ebm/8=100MHz 
+** 5-5-5-10 : diferentes tiempos de sincronismo (tCL-tRCD-tRP-tRAS) del bus de control expresados en número de ciclos de reloj (1/f_bm = 2.5ns) -> tRAS=10*2.5ns=25ns
+
+
+=== Memoria Cache : Arquitectura
+
+image::./cache/cache_mmu_dram.png[]
+
+=== Memoria Cache : Introducción
+
+* Función:
+**   Reducir la latencia de las fases de captura del ciclo de instrucción
+* Implementación:
+** Memoria estática -> la latencia caché es un 10% la latencia de la memoria DRAM
+* Unidades:
+** MMU: Memory Managment Unit -> traducción de direcciones virtuales (lógicas no lineales) a direcciones físicas (líneales)
+** Memoria dinámica SDRAM -> memoria principal
+** Memoria estática SSRAM -> memoria caché
+** La interfaz entre la CPU y la Memoria SDRAM es el controlador de memoria SDRAM
+** La interfaz entre la CPU y la Memoria Caché es el controlador de memoria caché
+
+
+=== Memoria Cache: Read Operation
+
+image::./cache/cache_read_operation.png[]
+
+=== Memoria Caché: Organización
+
+image::./cache/cache_dram_block.png[]
+
+=== Memoria Caché: bloques,líneas,palabras
+
+* La memoria principal:
+** se organiza en bloques y direcciones de bloque: cada bloque se divide en palabras y cada palabra en bytes
+* la memoria caché:
+** se organiza en líneas y direcciones de la línea
+** cada línea de la memoria caché se corresponde con un bloque de la memoria principal según la función de correspondencia del controlador de la caché
+** el bloque de la línea por lo tanto se organiza en palabras y las palabras en bytes
+** cada línea tiene dos campos: la marga TAG y el bloque de la memoria principal correspondiente
+** el campo TAG de una línea informa sobre qué bloque principal corresponde a dicha línea caché
+
+===  Funciones de correspondecia: directa, totalmente asociativa, asociativa por conjuntos
+
+* Función directa
+** A cada bloque principal le corresponde una *dirección fija* de una línea 
+* Función totalmente asociativa
+** Cada bloque puede copiarse en *cualquier* dirección de línea 
+* Función asociativa por conjuntos
+** Cada bloque principal puede copiarse de manera de forma libre dentro un pequeño conjunto de líneas
+
+[.columns]
+=== Ejemplo: Función de correspondencia directa
+
+[.column]
+* Enunciado:
+** m : capacidad de la memoria caché : 64KB
+** Word size : 1 byte
+** K: Palabras / bloque : 4
+** M : capacidad de la memoria principal : 16 MB
+** ¿Correspondencia de la dirección MP 0xA912AB?
+
+[.column]
+* MP
+** Formato dirección MP : Bloque-Palabra 
+** Dirección línea caché: 64KB=2^16^ -> 16bits
+** Dirección MP: 16MB=2^24^ -> 24bits
+** Dirección Bloque MP: 1 línea <-> 1 bloque -> 16bits
+** Dirección palabra : 4 palabras -> 2^2^ -> 2bits
+
+[.column]
+* Direccionamiento bloque-palabra
+** los primeros 22 bits son el bloque y los 2 últimos bits la palabra
+** hay 2^22^ bloques que se pueden corresponder con una de las 2^16^ líneas
+** de los 22 bits de bloque los últimos 16 son la dirección de línea y los 6 primeros son el TAG
+
+[.columns]
+=== Ejemplo: Función de correspondencia directa
+
+[.column]
+* Función de *correspondencia directa*: 
+** el bloque 0 se corresponde con la línea de dirección 0 y así sucesivamente
+** el bloque 1 se corresponde con la línea de dirección 1
+** el bloque (2^16^-1) se corresponde con la línea de dirección (2^16^-1)
+** el bloque 2^16^ se corresponde con la línea de dirección 0 
+** el bloque "j" se corresponde con la línea de dirección i = j MOD[m]
+
+[.column]
+image::./cache/cache_directmap_controller.png[]
+
+[.columns]
+=== Ejemplo: Función de correspondencia directa
+
+[.column]
+* Direcciones de los bloques
+** el bloque "j" se corresponde con la dirección j*4
+** multiplicar por 2^2^ equivale a un desplazamiento de 2 bits hacia la izda
+** dividir por 2^2^ equivale a un desplazamiento de 2 bits hacia la derecha
+
+[.column]
+* Dirección MP 0xA912AB -> 1010 1001 0001 0010 1010 1011
+** Dirección de bloque 1010 1001 0001 0010 1010 10 -> 10 1010 0100 0100 1010 1010 : 0x2A44AA 
+** Dirección de palabra 11 : 3
+** Método 1º: Dirección de línea 01 0001 0010 1010 10 -> 0100 0100 1010 1010 -> 0x44AA
+** Método 2º: 0x2A44AA MOD [2^16^] -> Resto de 0x2A44AA / 2^16^
+*** 0x2A44AA/ 2^16^ = 0x00002A.44AA -> Resto=0x0.44AA*2^16^=0x44AA
+*** Divi=Coc*Disor+Resto -> Divi/Coc=Disor+Resto/Coc -> Resto=Fracción*Cociente
+
+=== Ejemplo: Función de correspondencia Asociativa Total
+
+* No hay función de correspondecia ya que a los bloques principales se le puede cualquier línea.
+* Se le correspondería una línea que no estuviera ocupada por un bloque
+* Si están todas ocupadas es necesaria una "política de reemplazo": Por ejemplo la línea que más tiempo lleva sin ser accedida por la CPU conocida como política "least-recently used (LRU)"
+
+=== Política de Escritura en la Caché
+
+* Si la CPU escribe un resultado en una línea de la caché, su bloque principal correspondiente no será idéntico por lo que será necesario copiar la línea de la caché en el bloque principal correspondiente. Es necesaría un política de reescritura para indicar cuál es el momento de realizar dicha copia, si justo después de haber modificado la línea de la caché o más tarde.
+
+== Memoria Virtual lógica
+
+
+image::./memvirtual/linksections.png[float="left"]
+
+[%hardbreaks]
+El espacio de direcciones virtual es un espacio abstracto que se particiona de forma lógica en páginas y la unidad MMU traduce las direcciones de página virtual en direcciones físicas de la memoria DRAM  
+La memoria virtual de un programa binario está organizada en segmentos de datos, instrucciones, pila, heap, etc
+La memoria virtual de los módulos binarios antes de ser linkados están organizados en secciones de datos, instrucciones, pila, heap, etc donde cada segmento ocupará un determinado número de páginas.
 
