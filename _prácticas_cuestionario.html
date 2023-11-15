@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2023-10-23</span>
+<span id="revdate">2023-11-14</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -107,6 +107,10 @@ h1, h2, h3, h4, h5, h6, #toctitle,
 <li><a href="_prácticas_cuestionario.html#_módulo_summton_aviso_c">20.5.1. Módulo sumMtoN_aviso.c</a>
 </li>
 <li><a href="_prácticas_cuestionario.html#_módulo_summton_aviso_s">20.5.2. Módulo sumMtoN_aviso.s</a>
+</li>
+<li><a href="_prácticas_cuestionario.html#_módulo_power_s">20.5.3. Módulo power.s</a>
+</li>
+<li><a href="_prácticas_cuestionario.html#_módulo_power_input_s">20.5.4. Módulo power_input.s</a>
 </li>
 </ul>
 </li>
@@ -617,6 +621,72 @@ call sistema_operativo</pre>
 <ul>
 <li>
 <p>Añadir al programa fuente <em>sumMtoN.s</em> un mensaje de aviso en caso de error indicando la relación correcta entre los parámetros 1º sumando y 2º sumando.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_módulo_power_s">20.5.3. Módulo power.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Desarrollar el programa <em>power.s</em> que contenga la subrutina "power" equivalente a la función power(base,exponente) que calcula la potencia base<sup>exponente</sup> donde tanto la base como el exponente son números enteros positivos.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_módulo_power_input_s">20.5.4. Módulo power_input.s</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Desarrollar el programa "power_input.s" que  contenga la subrutina "power" equivalente a la función power(base,exponente) que calcula la potencia base<sup>exponente</sup> donde tanto la base como el exponente son números enteros positivos. La base y el etxponente han de introducirse como argumentos del programa "power_input" en la misma línea de comandos desde donde se ejecuta el programa, es decir, para calcular la potencia 2<sup>7</sup>, se ejecutaría</p>
+<div class="listingblock">
+<div class="content">
+<pre>linux@upna:~$ power_input 2 7</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Los tres <strong>strings</strong> de la línea de comandos los guarda el sistema operativo en la pila al inicio de la ejecución del prrograma como un array <strong>argv</strong> de punteros a string:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>argv[0] apunta al string "power_input"</p>
+</li>
+<li>
+<p>argv[1] apunta al string "2" cuyo código ASCII es 0x32</p>
+</li>
+<li>
+<p>argv[2] apunta al string "7" cuyo código ASCII es 0x37</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El número de argumentos <strong>argc</strong> de la línea de comandos es el valor entero 3 ya que la línea de comandos tiene tres strings y también es guardado por el sistema operativo en la pila</p>
+</li>
+<li>
+<p>Contenido de la pila al inicio del programa power_input:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>El stack pointer <strong>sp</strong> apunta a <strong>argc</strong></p>
+</li>
+<li>
+<p><strong>sp+4</strong> apunta al puntero *argv[0]</p>
+</li>
+<li>
+<p><strong>sp+8</strong> apunta al puntero *argv[1]</p>
+</li>
+<li>
+<p><strong>sp+12</strong> apunta al puntero *argv[2]</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>El programa "power_input" debe de capturar los strings "2" y "7" y realizar la conversión de ASCII a número entero antes de calcular la potencia 2<sup>7</sup>. Lógicamente el programa debe de funcionar para cualquier valor de la base y del exponente.</p>
 </li>
 </ul>
 </div>
