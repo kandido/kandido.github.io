@@ -2403,6 +2403,513 @@ image::./von_neumann/ias_operation.png[scaledwidth="50%",align="center",title="I
 [#Tema8_IO]
 == Tema 8:  Mecanismos de Entrada/Salida
 
+=== Periféricos
+
+* Modelo: 
+** Media: magnético, óptico, electrónico, etc
+** Driver HW : interfaz electrónica con ... brazo mecánico, láser , ink, altavoz, monitor pixel, etc 
+*** http://theithollow.com/2013/11/disk-latency-concepts/[Hard Disk]
+** Controlador del Periférico : Secuenciador para ¿? Ej link:https://en.wikipedia.org/wiki/Disk_buffer[Disk Buffer]
+** Firmware -> software para ¿?, comandos, programas, lenguajes (SCSI, SATA, etc), ...
+
+[ditaa]
+---------------------------------------------------------------------------------------------
++-------------------+     +-------------------+    +----------------------+          +-------+
+| Keyboard  Layout  | ->  | Keyboard Encoder  | -> | Keyboard Controller  |    ->    | CPU   |
++-------------------+     +-------------------+    +----------------------+          +-------+
+---------------------------------------------------------------------------------------------
+
+=== Arquitectura Von Neumann
+
+* Controladores E/S
+* Intel: Chipset
+* Comunicación entre el Controlador E/S de la CPU y el Controlador del Periférico
+** Modelo BUSES CPU-Memoria Principal
+** Protocolo de Comunicaciones (buses), Memoria de acceso E/S (Puertos de Entrada/Salida)
+
+[ditaa]
+---------------------------------------------------------------------------------------------
++------------------------------+    +----------------------+          +--------------------------------+
+| Unidad de Control de la CPU  | -> |    Controlador I/O   |    ->    | Controlador del Periférico  MCU|
++------------------------------+    +----------------------+          +--------------------------------+
+---------------------------------------------------------------------------------------------
+
+=== Controlador I/O
+
+[ditaa]
+---------------------------------------------------------------------------------------------
++---------------+    +---------------+    +------+   +----------------------+     +---------+    +-----+
+|Controlador CPU| -> |Controlador I/O| -> |Puerto|-> |Controlador Periférico|  -> |Driver HW| -> |Media|
++-----+---------+    +---------------+    +------+   +----------------------+     +---------+    +-----+
+      |                                                          | 
+  +---+---+                                                  +---+---+
+  |Memoria|                                                  |Memoria|
+  +-------+                                                  +-------+       
+    Driver                                                    Firmware
+---------------------------------------------------------------------------------------------
+
+=== Puertos
+
+
+[ditaa]
+----------------------------------------------------------------------
+controlador i/o
+puerto
+
+               +------------+
+               |  IN        |<--periférico
+               +------------+
+               |  OUT       |-->periférico
+               +------------+
+        cpu <--|  STATUS    |
+               +------------+
+        cpu -->|  CONTROL   |
+               +------------+
+----------------------------------------------------------------------
+
+* Espacio de direcciones:
+** *MMIO*
+** *PMIO*
+
+=== Espacio de Direcciones
+
+
+[ditaa]
+----------------------------------------------------------------------
+
+               CPU                               DEVICE
+             Virtual                            Address
+             Address                             Space
+              Space                
+
+            +-------+                          +------+
+            |       |                Offset    |      |
+            |       |  Virtual       applied   |      |
+          C +-------+ -------->    ----------> +------+ A
+            |       |  mapping     Controlador |      |
+  +-----+   |       |                   io     |      |   +--------+
+  |     |   |       |                          |      |   |        |
+  | CPU |   |       |                          |      |   | Device |
+  |     |   |       |                          |      |   |        |
+  +-----+   +-------+                          +------+   +--------+
+            |       |                Mapping   |      |
+          X +-------+ --------     <---------- +------+ Z
+            |       |               Controlador
+            |       |                   io
+            |       |             
+            +-------+             
+----------------------------------------------------------------------
+
+=== Buses
+
+[ditaa]
+---------------------------------------------------------------------------------------------
++-------+    Expansion Bus i/o      +---------------------+    Peripheral Bus     +------------+
+|  CPU  | ------------------------> |   Controlador I/O   | ------------------>   | Periférico |
++-------+                           +---------------------+                       +------------+
+---------------------------------------------------------------------------------------------
+
+* Buses
+** del sistema : memoria e i/o
+** local: PCI
+** expansión: EISA
+** periférico: USB, HDMI,
+
+image::./io/Intel_5_Series_architecture.png[align="center",title="Lenovo T520",align="center"]
+
+=== Nivel de Integración
+
+* Evolución de Intel
+** Puentes Norte y Sur
+** La CPU integra el controlador de memoria integrado (IMC) y controladores i/o de video (PCI-E Graphics)
+** El chip PCH es un hub de controladores i/o
+
+=== Programa de entrada/salida
+
+* Programmed i/o (PIO): Las transferencias de datos mediante mecanismos de E/S por consulta la realiza un programa i/o (PIO) que ejecuta la CPU. La CPU en cada transferencia de datos entre la memoria y el periférico debe de ESPERAR a que dicha transferencia termine.
+
+
+* Transferencia de 512 bytes entre el puerto 0x380 y un buffer.
++
+
+[source,c]
+----------------------------------------------------------------------
+      mov %bx,buf ; destination address. BX es un puntero a un buffer
+      mov $512,%si ; count. Número de bytes a transferir
+      mov $0x380,%dx ; source port. DX es un puntero al puerto
+loop:
+      in %dx,%al ; get byte from i/o port. AL<-DX
+      mov %al,(%bx) ; store in buffer      M[bx]<-AL
+      inc %bx ; next memory location in buf      
+      dec %si ; decrement bytes left
+      jnz loop
+----------------------------------------------------------------------
+
+* ISA:
+** IN: leer un dato del puerto
+** OUT: escribir un dato en el puerto
+
+=== Espacio usuario-kernel-periférico
+
+
+* Ejemplo: Escritura de un fichero en el disco duro
+**  write -> syscall -> OUT -> comando propio del HD
+
+
+[ditaa]
+---------------------------------------------------------------------------------------------
++---------------+    +----------------------+            +------+             +-------------------------------------+
+|     write     | -> |       syscall        |    ->      | OUT  |      ->     |Comando propio del disco duro y Datos|
++---------------+    +----------------------+            +------+             +-------------------------------------+
+                                                  |                     |
+               Espacio de Usuario                 |    Espacio Kernel   |          Espacio Periférico
+      Write() Interfaz Function                   |     Write() Exec    |                   
+---------------------------------------------------------------------------------------------
+
+
+
+=== Sistema Operativo
+
+* Las funciones open, write, read, close interactuan con el sistema de ficheros virtual
++
+
+[ditaa]
+---------------------------------------------------------------------------------------------
++---------------+      +--------------------------------------+      +----------------------------+
+| Aplicación SW |  ->  |       Fichero tipo Device            |  ->  |      Kernel Driver Sw      |
+|  (API)        |      |(abstracción de cualquier periférico) |      |(específico del periférico) |      
++---------------+      +--------------------------------------+      +----------------------------+
+
+Application Program Interfaz (API) Function -> Write()
+Periférico --> Fichero virtual
+Tipos --> bloque (disco duro), caracter (teclado)
+---------------------------------------------------------------------------------------------
+
+
+
+=== Mecanismos de Implementación de la Interfaz E/S
+
+
+* All data manipulation not directly performed in the CPU or between CPU and primary memory is I/O.
+* PIO:Polling 
+* Interruption
+* DMA: Direct Memory Access
+
+=== Sincronización por Encuesta
+
+* Polling: encuesta
+* Query: encuesta
+* Mecanismo
+** Comprobación del estado o 'encuesta-polling'
+*** La *CPU consulta* el registro de estado de cada *puerto* al que están conectados los periféricos. Comprueba si algún periférico requiere el servicio de la CPU. Reserves a register for each I/O device. Each register is continually polled to detect data arrival.
+** Es necesario ejecutar programas de atención al periférico cuando este lo requiera: *Sincronización* . Sincronizar significa especificar o indicar cuando se va a realizar la transferencia entre el host(anfitrión) y el periférico.
+* CPU
+** Ejecuta el *programa i/o*: un programa que controla DIRECTAMENTE la operación E/S: Programmed I/O -> PIO
+** realiza las *transferencias* entre la memoria principal y el  controlador i/o
+** *'espera'* al periférico hasta que termine. La CPU espera hasta que concluya la operación E/S.
+
+=== Sincronización por Interrupción
+
+
+* Interrupt-Driven I/O (Mecanismo de E/S por Interrupción)
+* Estructura
+** CPU:
+*** Ejecuta el programa de atención a la interrupción. Un programa que controla DIRECTAMENTE la operación E/S. 
+*** realiza las transferencias entre la memoria principal y el controlador i/o
+*** *no espera* al periférico hasta que termine. Es 'interrumpido' cada vez que es necesario realizar una transferencia
+**** Al finalizar el ciclo de instrucción de cada instrucción que ejecuta la CPU, se comprueba si la señal de petición de interrupción está activada.
+
+=== Estructura del Mecanismo de Interrupción
+
+
+* El periférico a través de una línea eléctrica de entrada de la CPU, solicita al controlador i/o los servicios del kernel
+** El kernel va a ser *INTERRUMPIDO*
+* La CPU tiene dos líneas de interrupción:
+** Línea Interrupt ReQuest '(IRQ)' : Maskable
+** Línea Non Maskable Interrupt '(NMI)'
+** La CPU en el ciclo de instrucción tiene en su última fase la fase de Chequeo de Interrupción
+*** Si se está solicitando un servicio al kernel, la CPU entra en modo atención a la interrupción y pasa el control al módulo de *Gestión de Interrupciones* del Kernel
+* Las lineas de los periféricos para solicitar la interrupción se denominan '(IRQ)'.
+
+
+=== Sincronización por Interrupción: Programmable Interrupt Controller
+
+* Las líneas de interrupción de los periféricos (IRQ) se conectan y son controladas por el dispositivo  "Programmable Interrupt Controller"
++
+
+[ditaa]
+----------------------------------------------------------------------
+
++---------+
+|         |
+|   CPU   |    
+|         |
+|   INT   |
++----+----+
+     |
+     ^
+     |      +--------+                                 
+     |      |        |                                 
+     +----<-+ INT    +<--- IRQ0                        
+            |        |                                 
+            |        +<--- IRQ1                        
+            |        |                                 
+            |        +<--- IRQ2                        
+            |        |                                 
+            | PIC    +<--- IRQ3                        
+            | MAESTRO|                                 
+            |        +<--- IRQ4                        
+            |        |                                 
+            |        +<--- IRQ5                        
+            |        |                                 
+            |        +<--- IRQ6    +--------+          
+            |        |             |        |          
+            |        +<--- IRQ7----+        +<--- IRQ8 
+            |        |             |        |          
+            +--------+             | PIC    +<--- IRQ9 
+                                   | ESCLAVO|          
+                                   |        +<--- IRQ10
+                                   |        |          
+                                   |        +<--- IRQ11
+                                   |        |          
+                                   |        +<--- IRQ12
+                                   |        |          
+                                   |        +<--- IRQ13
+                                   |        |          
+                                   |        +<--- IRQ14
+                                   |        |          
+                                   |        +<--- IRQ15
+                                   |        |          
+                                   +--------+          
+                           
+----------------------------------------------------------------------
+
+
+* *Acciones*  que realiza el controlador PIC
+** Chequea si se activa alguna señal (Monitorización). En caso de activarse más de una se dar prioridad a la de menor nivel y procede:
+*** Convierte la línea activada IRQn en un *vector* (0x00-0xFF)
+*** Escribe en el puerto i/o del PIC el vector. El puerto es accesible por parte de la CPU. El  *apunta* a la entrada de una *tabla* que contiene un puntero a la rutina de atención a la interrupción (*ISR*)
+*** Activa la señal INTR de la CPU
+*** Si la CPU lee el valor del vector se desactiva la señal INTR
+* A la línea IRQn le corresponde, por defecto según Intel, el vector 'n+32'. Este mapeo lo puede alterar el Sistema Operativo programando el PIC.
+** A la línea IRQ0 le corresponde el vector 0x20
+* Cada línea IRQ se puede desautorizar por programa pero dicha interrupción no se pierde.
+* Mediante la instruccion +cli+ se hace un clear del flag IF del registro EFLAGS, ignorando la CPU todas las interrupciones hardware.
+** Mediante la instrucción +sli+ hacemos un set de IF.
+
+
+=== Tabla del Vector de Interrupciones
+
+
+* Tabla IVT: Modo Real (antes de cargar el Sistema Operativo)
++
+
+[source,sh]
+----------------------------------------------------------------------
+Interrupt Address 	Type            Description
+
+00h 	0000:0000h 	Processor 	Divide by zero
+01h 	0000:0004h 	Processor 	Single step
+02h 	0000:0008h 	Processor 	Non maskable interrupt (NMI)
+03h 	0000:000Ch 	Processor 	Breakpoint
+04h 	0000:0010h 	Processor 	Arithmetic overflow
+05h 	0000:0014h 	Software 	Print screen
+06h 	0000:0018h 	Processor 	Invalid op code
+07h 	0000:001Ch 	Processor 	Coprocessor not available
+08h 	0000:0020h 	Hardware 	System timer service routine
+09h 	0000:0024h 	Hardware 	Keyboard device service routine
+0Ah 	0000:0028h 	Hardware 	Cascade from 2nd programmable interrupt controller
+0Bh 	0000:002Ch 	Hardware 	Serial port service - COM post 2
+0Ch 	0000:0030h 	Hardware 	Serial port service - COM port 1
+0Dh 	0000:0034h 	Hardware 	Parallel printer service - LPT 2
+0Eh 	0000:0038h 	Hardware 	Floppy disk service
+0Fh 	0000:003Ch 	Hardware 	Parallel printer service - LPT 1
+10h 	0000:0040h 	Software 	Video service routine
+11h 	0000:0044h 	Software 	Equipment list service routine
+12h 	0000:0048H 	Software 	Memory size service routine
+13h 	0000:004Ch 	Software 	Hard disk drive service
+14h 	0000:0050h 	Software 	Serial communications service routines
+15h 	0000:0054h 	Software 	System services support routines
+16h 	0000:0058h 	Software 	Keyboard support service routines
+17h 	0000:005Ch 	Software 	Parallel printer support services
+18h 	0000:0060h 	Software 	Load and run ROM BASIC
+19h 	0000:0064h 	Software 	DOS loading routine
+1Ah 	0000:0068h 	Software 	Real time clock service routines
+1Bh 	0000:006Ch 	Software 	CRTL - BREAK service routines
+1Ch 	0000:0070h 	Software 	User timer service routine
+1Dh 	00000074h 	Software 	Video control parameter table
+1Eh 	0000:0078h 	Software 	Floppy disk parameter routine
+1Fh 	0000:007Ch 	Software 	Video graphics character routine
+20h-3Fh 0000:0080f-0000:00FCh SW        DOS interrupt points
+40h 	0000:0100h 	Software 	Floppy disk revector routine
+41h 	0000:0104h 	Software 	hard disk drive C: parameter table
+42h 	0000:0108h 	Software 	EGA default video driver
+43h 	0000:010Ch 	Software 	Video graphics characters
+44h 	0000:0110h 	Software 	Novel Netware API
+45h 	0000:0114h 	Software 	Not used
+46h 	0000:0118h 	Software 	Hard disk drive D: parameter table
+47h 	0000:011Ch - 	Software 	Not used
+48h 	  	Software 	Not used
+49h 	0000:0124h 	Software 	Not used
+4Ah 	0000:0128h 	Software 	User alarm
+4Bh-63h 	0000:012Ch - 	Software 	Not used
+64h 	  	Software 	Novel Netware IPX
+65h-66h 	  	Software 	Not used
+67h 	  	Software 	EMS support routines
+68h-6Fh 	0000:01BCh 	Software 	Not used
+70h 	0000:01c0h 	Hardware 	Real time clock
+71h 	0000:01C4h 	Hardware 	Redirect interrupt cascade
+72h-74h 	0000:01C8h - 0000:01D0h 	Hardware 	Reserved - Do not use
+75h 	0000:01D4h 	Hardware 	Math coprocessor exception
+76h 	0000:01D8h 	Hardware 	Hard disk support
+77h 	0000:01DCh 	Hardware 	Suspend request
+78h-79h 	0000:01E0h - 	Hardware 	Not used
+7Ah 	  	Software 	Novell Netware API
+78h-FFh 	0000:03FCh 	Software 	Not used
+
+----------------------------------------------------------------------
+
+* Tipos de interrupciones
+** The first 32 vectors are reserved for the processor's internal 'exceptions' (0x00-0x1F)
+** Las interrupciones 0x20-0xFF son interrupciones 'hardware' IRQ.
+** PIC
+*** El controlador PIC es el encargado de mapear la señal IRQ a un vector de entrada a la tabla.
+*** Periférico IRQ0 -> PIC vector 0x20 -> Tabla IVT puntero 0000:0080f (RAM) -> El puntero contiene la dirección de la función ISR de atención al periférico IRQ0 (RAM). Si esa dirección se carga en el PC, se llama a la función ISR.
+
+=== Tabla IDT: Modo Protegido
+
+* Modo protegido por el sistema operativo. El S.O. configura la tabla de descripción de interrupciones IDT
++
+
+[ditaa]
+----------------------------------------------------------------------
+
+IDT Offset | INT #     | Description
+-----------+-----------+-----------------------------------
+0x0000     | 0x00      | Divide by 0
+0x0004     | 0x01      | Reserved
+0x0008     | 0x02      | NMI Interrupt
+0x000C     | 0x03      | Breakpoint (INT3)
+0x0010     | 0x04      | Overflow (INTO)
+0x0014     | 0x05      | Bounds range exceeded (BOUND)
+0x0018     | 0x06      | Invalid opcode (UD2)
+0x001C     | 0x07      | Device not available (WAIT/FWAIT)
+0x0020     | 0x08      | Double fault
+0x0024     | 0x09      | Coprocessor segment overrun
+0x0028     | 0x0A      | Invalid TSS
+0x002C     | 0x0B      | Segment not present
+0x0030     | 0x0C      | Stack-segment fault
+0x0034     | 0x0D      | General protection fault
+0x0038     | 0x0E      | Page fault
+0x003C     | 0x0F      | Reserved
+0x0040     | 0x10      | x87 FPU error
+0x0044     | 0x11      | Alignment check
+0x0048     | 0x12      | Machine check
+0x004C     | 0x13      | SIMD Floating-Point Exception
+0x00xx     | 0x14-0x1F | Reserved
+0x0xxx     | 0x20-0xFF | User definable   -> IRQ, SW interrupts
+----------------------------------------------------------------------
+
+** El contenido depende del kernel del S.O.
+** Primera columna: offset a la rutina de antención a interrupción ISR
+** Segunda columna: número del vector de interrupción.
+** tipos de interrupción
+*** 0-0x1F: 'exceptions ERROR' y NMI
+*** 0x20-0x2F: INT maskable: IRQ0-----IRQ15
+*** 0x30-0xFF: 'exceptions SW'
+*** 0x80 -> LLAMADAS AL SISTEMA
+**** isa x86-64: 'syscall'
+**** isa x86: 'int $0x80'
+** ¿A que rutina apunta el vector 0x0E? -> Page Fault
+
+
+=== IRQ
+
+
+[source,sh]
+----------------------------------------------------------------------
+IRQ 	Interrupt Hardware Device (vector de la tabla)
+0 	32 Timer
+1 	33 Keyboard
+2 	34 PIC Cascade
+3 	35 Second Serial Port (COM2)
+4 	36 First Serial Port (COM 1)
+5 	37 <Free>
+6 	38 Floppy Disk
+7 	39 <Free>
+8 	40 System Clock
+9 	41 <Free>
+10 	42 Network Interface Card(NIC)
+11 	43 USB Port, and Sound Card
+12 	44 Mouse (PS2)
+13 	45 Math Co-Processor
+14 	46 IDE Channel 1
+15 	47 IDE Channel 2
+
+Note: Linux* requires IRQ 0, 2, and 13 to be as shown. 
+----------------------------------------------------------------------
+
+
+
+=== Proceso de Atención a las Interrupciones
+
+image::./io/interruption_flow.jpg[aligned="center", title="Flujo de Operaciones"]
+
+=== Ejemplo: Interrupción realizada al pulsar una tecla
+
+image::./io/keyboard_interruption.jpg[aligned="center", title="Interrupción del Teclado"]
+
+== DMA
+
+
+[ditaa]
+---------------------------------------------------------------------------------------------
++---------------+    +---------------+    +------+   +----------------------+     +---------+    +-----+
+|Controlador CPU| -> |Controlador I/O| -> |Puerto|-> |Controlador Periférico|  -> |Driver HW| -> |Media|
++-----+---------+    +---------------+    +------+   +----------------------+     +---------+    +-----+
+      |                    ^                                     | 
+  +---+---+                |                                 +---+---+
+  |Memoria|<---------------+                                 |Memoria|
+  +-------+                                                  +-------+       
+    Driver                                                    Firmware
+---------------------------------------------------------------------------------------------
+
+
+* Mapeo de direcciones
+* Hará falta una unidad hardware de traducción del espacio de direcciones del DISPOSITIVO a direcciones físicas de la Memoria Principal : *iommu*
++
+
+[ditaa]
+----------------------------------------------------------------------
+
+               CPU                  CPU                 DEVICE
+             Virtual              Physical             Address
+             Address              Address               Space
+              Space                Space
+
+            +-------+             +------+             +------+
+            |       |             |MMIO  |   Offset    |      |
+            |       |  Virtual    |Space |   applied   |      |
+          C +-------+ --------> B +------+ ----------> +------+ A
+            |       |  mapping    |      |   by host   |      |
+  +-----+   |       |             |      |   bridge    |      |   +--------+
+  |     |   |       |             +------+             |      |   |        |
+  | CPU |   |       |             | RAM  |             |      |   | Device |
+  |     |   |       |             |      |             |      |   |        |
+  +-----+   +-------+             +------+             +------+   +--------+
+            |       |  Virtual    |Buffer|   Mapping   |      |
+          X +-------+ --------> Y +------+ <---------- +------+ Z
+            |       |  mapping    | RAM  |   by IOMMU
+            |       |             |      |
+            |       |             |      |
+            +-------+             +------+
+----------------------------------------------------------------------
+
+* MMIO: Memory Mapped IO : cpu<-->DMA
+* Buffer:  io transfer data controlled by DMA firmware
+
+
+
 [#Tema9_MEM]
 == Tema 9: Unidad de Memoria
 
@@ -2795,9 +3302,12 @@ image::./cache/cache_dram_block.png[]
 ** ¿Correspondencia de la dirección MP 0xA912AB?
 
 [.column]
+* Caché
+** Dirección de byte de la M. caché: 64KB=2^16^ -> 16bits
+** Dirección de palabra de la M. caché: 64Kword=2^16^ -> 16bits
+** Dirección línea caché: 4 palabras/línea 64Kword/4=2^14^ -> 14bits
 * MP
 ** Formato dirección MP : Bloque-Palabra 
-** Dirección línea caché: 64KB=2^16^ -> 16bits
 ** Dirección MP: 16MB=2^24^ -> 24bits
 ** Dirección Bloque MP: 1 línea <-> 1 bloque -> 16bits
 ** Dirección palabra : 4 palabras -> 2^2^ -> 2bits
@@ -2805,8 +3315,11 @@ image::./cache/cache_dram_block.png[]
 [.column]
 * Direccionamiento bloque-palabra
 ** los primeros 22 bits son el bloque y los 2 últimos bits la palabra
-** hay 2^22^ bloques que se pueden corresponder con una de las 2^16^ líneas
-** de los 22 bits de bloque los últimos 16 son la dirección de línea y los 6 primeros son el TAG
+** hay 2^22^ bloques que se pueden corresponder con una de las 2^14^ líneas
+** de los 22 bits de bloque los últimos 14 son la dirección de línea y los 8 primeros son el TAG
+* Formato
+** Bloque/Word -> 22/2
+** Tag/Linea/Word -> 8/14/2
 
 [.columns]
 === Ejemplo: Función de correspondencia directa
@@ -2815,9 +3328,9 @@ image::./cache/cache_dram_block.png[]
 * Función de *correspondencia directa*: 
 ** el bloque 0 se corresponde con la línea de dirección 0 y así sucesivamente
 ** el bloque 1 se corresponde con la línea de dirección 1
-** el bloque (2^16^-1) se corresponde con la línea de dirección (2^16^-1)
-** el bloque 2^16^ se corresponde con la línea de dirección 0 
-** el bloque "j" se corresponde con la línea de dirección i = j MOD[m]
+** el bloque (2^14^-1) se corresponde con la línea de dirección (2^14^-1)
+** el bloque 2^14^ se corresponde con la línea de dirección 0 
+** el bloque "j" se corresponde con la línea de dirección i = j MOD[m] donde m es la capacidad de líneas de la M. caché.
 
 [.column]
 image::./cache/cache_directmap_controller.png[]
@@ -2832,12 +3345,14 @@ image::./cache/cache_directmap_controller.png[]
 ** dividir por 2^2^ equivale a un desplazamiento de 2 bits hacia la derecha
 
 [.column]
-* Dirección MP 0xA912AB -> 1010 1001 0001 0010 1010 1011
-** Dirección de bloque 1010 1001 0001 0010 1010 10 -> 10 1010 0100 0100 1010 1010 : 0x2A44AA 
-** Dirección de palabra 11 : 3
-** Método 1º: Dirección de línea 01 0001 0010 1010 10 -> 0100 0100 1010 1010 -> 0x44AA
-** Método 2º: 0x2A44AA MOD [2^16^] -> Resto de 0x2A44AA / 2^16^
-*** 0x2A44AA/ 2^16^ = 0x00002A.44AA -> Resto=0x0.44AA*2^16^=0x44AA
+* Dirección MP 0xA912AB -> 1010 1001 0001 0010 1010 1011 
+** Bloque/palabra -> 22/2
+** Dirección de bloque 1010 1001 0001 0010 1010 10 -> 10 1010 0100 0100 1010 1010 -> 0x2A44AA 
+** Dirección de palabra 11 -> 3
+** Tag/línea/Word -> 8/14/2
+** Método 1º: Dirección de línea  0001 0010 1010 10 -> 00 0100 1010 1010 -> 0x04AA
+** Método 2º: 0x2A44AA MOD [2^14^] -> Resto de 0x2A44AA / 2^14^
+*** 0x2A44AA/ 2^14^ = 0xA9.12A8 -> Resto=0x0.12A8*2^14^=14 bits MSb de 0x12A8 -> 0001 0010 1010 10 
 *** Divi=Coc*Disor+Resto -> Divi/Coc=Disor+Resto/Coc -> Resto=Fracción*Cociente
 
 === Ejemplo: Función de correspondencia Asociativa Total
@@ -2850,7 +3365,14 @@ image::./cache/cache_directmap_controller.png[]
 
 * Si la CPU escribe un resultado en una línea de la caché, su bloque principal correspondiente no será idéntico por lo que será necesario copiar la línea de la caché en el bloque principal correspondiente. Es necesaría un política de reescritura para indicar cuál es el momento de realizar dicha copia, si justo después de haber modificado la línea de la caché o más tarde.
 
-=== Memoria Virtual
+=== Memoria Virtual: Introducción
+
+* ¿Qué es? ¿donde está?
+* Programador
+** Etiquetas, punteros, etc
+** Compilador, Linker -> módulo binario ejecutable
+* Disco
+
 
 === Memoria Virtual lógica: Secciones y Segmentos
 
@@ -2873,7 +3395,64 @@ El espacio de direcciones virtual es un espacio abstracto que se particiona de f
 
 image:./memvirtual/vm_table.png[]
 
+== Ejercicios: Libro de texto "Computer Organizations 7ªed, Stalling, Williams
 
-== Mecanismos de Entrada/Salida
+[%hardbreaks]
+Tema 1. Arquitectura de Von Neumann: Capítulo 10.2: Ejercicios 13,14
+Tema 7. CPU: Capítulo 10.13 (Processor Structure and Function): Ejercicios 3,7,8
+             Capítulo 10.14 (RISC): Ejercicio 1
+Tema 9. Memoria: DRAM (Ejemplos en los apuntes de teoría)
+                 Cache : Capítulo 10.9: Ejercicios 1,2,3,4,5
+Tema 8. Entrada/Salida: Capítulo 10.2 (Arquitectura Von Neumman): Ejercicio 9
+                        Capítulo 10.11 (Entrada/Salida): Ejercicios 1,3
 
+== Ejercicios
+
+----
+** Arquitectura de Von Neumann: Capítulo 10.2
+
+ 13- The Intel 8088 microprocessor has a read bus timing similar to that of Figure 3.19, but requires four processor clock cycles. The valid data is on the bus for an amount of time that extends into the fourth processor clock cycle. Assume a processor clock rate of 8 MHz.
+
+ 14- The Intel 8086 is a 16-bit processor similar in many ways to the 8-bit 8088. The 8086 uses a 16-bit bus that can transfer 2 bytes at a time, provided that the lower-order byte has an even address. However, the 8086 allows both even- and odd-aligned word operands. If an odd-aligned word is referenced, two memory cycles, each consisting of four bus cycles, are required to transfer the word. Consider an instruction on the 8086 that involves two 16-bit operands. How long does it take to fetch the operands? Give the range of possible answers. Assume a clocking rate of 4 MHz and no wait states
+
+** Processor Structure and Function: Capítulo 10.13
+ 3- A microprocessor provides an instruction capable of moving a string of bytes from one area of memory to another. The fetching and initial decoding of the instruction takes 10 clock cycles. Thereafter, it takes 15 clock cycles to transfer each byte. The microprocessor is clocked at a rate of 10 GHz.
+a)Determine the length of the instruction cycle for the case of a string of 64 bytes.
+b)What is the worst-case delay for acknowledging an interrupt if the instruction is noninterruptible?
+c)Repeat part (b) assuming the instruction can be interrupted at the beginning of each byte transfer
+
+7- A pipelined processor has a clock rate of 2.5 GHz and executes a program with 1.5 million instructions. The pipeline has five stages, and instructions are issued at a rate of one per clock cycle. Ignore penalties due to branch instructions and outof-sequence executions.
+a)What is the speedup of this processor for this program compared to a nonpipelined processor, making the same assumptions used in Section 12.4?
+b)What is throughput (in MIPS) of the pipelined processor?
+
+8- Consider an instruction sequence of length n that is streaming through the instruction pipeline. Let p be the probability of encountering a conditional or unconditional branch instruction, and let be the probability that execution of a branch instruction I causes a jump to a nonconsecutive address. Assume that each such jump requires the pipeline to be cleared, destroying all ongoing instruction processing, when I emerges from the last stage. Revise Equations (12.1) and (12.2) to take these probabilities into account.
+
+** RISC: Capítulo 10.14
+1- We wish to determine the execution time for a given program using the various pipelining schemes discussed in Section 13.5. Let N = number of executed instructions, J = number of jump instructions, D = number of memory accesses. For the simple sequential scheme (Figure 13.6a) for a RISC architecture, the execution time is 2N+D stages. Derive formulas for two-stage, three-stage, and four-stage pipelining.
+
+** Cache : Capítulo 10.9
+1- Calcular para una controladora de Caché con Asociación de Mapeo Directo, qué línea de la memoria caché (tag/línea/word) está asociada a la dirección 0x02ABCD de la memoria principal. 
+
+2- Repetir el ejercicio anterior mediante multiplicaciones y divisiones binarias respondiendo a los siguientes apartados:
+
+3- The system has a Cache memory of 64KB and Main Memory of 16MB with a byte word size and four word block size. For a cache controller with direct mapping correspondence function search the main memory block addresses correspondences to cache memory 0x0CE7 number line .
+
+4- A set-associative cache consists of 64 lines, or slots, divided into four-line sets. Main memory contains 4K blocks of 128 words each. Show the format of main memory addresses. Calculate the 0x7FAFA memory address show in hexadecimal code the cache format. How know the cache controller if the 0x7FAFA is in cache memory.
+
+5- For the hexadecimal main memory addresses 111111, 666666,BBBBBB, show the following information, in hexadecimal format:
+
+**Arquitectura Von Neumman: Capítulo 10.2:
+ 9
+
+** Entrada Salida :Capítulo 10.11:
+ 1- On a typical microprocessor, a distinct I/O address is used to refer to the I/O data registers and a distinct address for the control and status registers in an I/O controller for a given device. Such registers are referred to as ports. In the Intel 8088, two I/O instruction formats are used. In one format, the 8-bit opcode specifies an I/O operation; this is followed by an 8-bit port address. Other I/O opcodes imply that the port address is in the 16-bit DX register. How many ports can the 8088 address in each I/O addressing mode? .
+ 3- A system is based on an 8-bit microprocessor and has two I/O devices. The I/O controllers for this system use separate control and status registers. Both devices handle data on a 1-byte-at-a-time basis.The first device has two status lines and three control lines.The second device has three status lines and four control lines.
+  How many 8-bit I/O control module registers do we need for status reading and control of each device?
+  What is the total number of needed control module registers given that the first device is an output-only device?
+  How many distinct addresses are needed to control the two devices?
+Consider a hypothetical microprocessor generating a 16-bit address (for example, assume that the program counter and the address registers are 16 bits wide) and having a 16-bit data bus.
+ What is the maximum memory address space that the processor can access directly if it is connected to a “16-bit memory”?
+ What is the maximum memory address space that the processor can access directly if it is connected to an “8-bit memory”?
+ What architectural features will allow this microprocessor to access a separate “I/O space”? many 8-bit I/O ports can the microprocessor support? How many 16-bit I/O ports? Explain.
+----
 
