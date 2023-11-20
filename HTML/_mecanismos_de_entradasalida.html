@@ -262,7 +262,7 @@ pre.rouge {
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2023-10-23</span>
+<span id="revdate">2023-11-20</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -1336,16 +1336,12 @@ pre.rouge {
 </li>
 <li>
 <p>Capas SW:</p>
-</li>
-</ul>
-</div>
 <div class="imageblock kroki">
 <div class="content">
-<img src="https://kroki.io/ditaa/svg/eNq9kDFuhDAQRXuf4pcghwtssVIklCZNpOwFzDCrjGRhdjCk4UIpttojcLE1bBRCKqq8xvLo2TPzbbHFYsEWu9hjWzPiufVCjmS6NXj_xAgUR8zHwovQB2tAlDag5EGI8Yut_crasEepMrDOnz0cM2LL933MXNVFdfRoXjOod_7SS3rcssp5-lKhkK8-dy3TdD2natL9H8vYfwjMvK09Dz_xDKIxzW5OKabuAFQ-XHpGVks3j9pryJ9ALu0a03JZZPKuDvkduF17ng==" alt="Diagram">
+<img src="https://kroki.io/ditaa/svg/eNq9kLEOgjAQhvc-xY2QyiuYmBAXFxN9gXIc8ZKG4lFw4YUcnHwEXswCGsSJyW9p2n7t3X86WaJhRCerWGNr1cGusowGuX-WcLpBB5BsYVhG9owXEgeeKwcptYwEXyztA0lJFlLhlmT4bHJUB0ve-y4yWe3F4FQ8J8DG2GvD4XFFwkV_F0YXzz7VFWH_KMJp0O2PpfQfBqaOc01IQvjPhFoWH9pX5zCperzJrLs2BFHO9dBvIy7eAJoQ2IeEkSe0JnfxC_PufHo=" alt="Diagram">
 </div>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
 <p>Ejemplo: Escritura de un fichero en el disco duro</p>
 <div class="ulist">
@@ -1676,13 +1672,13 @@ pre.rouge {
 <p>es el controlador DMA</p>
 </li>
 <li>
-<p>Puertos: los puertos  ahora no son para los datos de transferencia, unicamente para el control CPU-DMA</p>
+<p>Puertos: los puertos del controlador E/S ahora no son para los datos de transferencia, unicamente para el control CPU-DMA</p>
 </li>
 <li>
 <p>transfiere los datos entre la memoria principal y el periférico</p>
 </li>
 <li>
-<p>el controlador no espera al periférico</p>
+<p>el controlador E/S no espera al periférico</p>
 </li>
 <li>
 <p>Direct Memory Access controller.</p>
@@ -2271,7 +2267,7 @@ pre.rouge {
 1Ah 	0000:0068h 	Software 	Real <span class="nb">time </span>clock service routines
 1Bh 	0000:006Ch 	Software 	CRTL - BREAK service routines
 1Ch 	0000:0070h 	Software 	User timer service routine
-1Dh 	00000074h 	Software 	Video control parameter table
+1Dh 	0000:0074h 	Software 	Video control parameter table
 1Eh 	0000:0078h 	Software 	Floppy disk parameter routine
 1Fh 	0000:007Ch 	Software 	Video graphics character routine
 20h-3Fh 0000:0080f-0000:00FCh SW        DOS interrupt points
@@ -2311,7 +2307,7 @@ pre.rouge {
 <p>Primera columna: Número del vector de interrupción. Número de la entrada a la tabla de vectores.</p>
 </li>
 <li>
-<p>Segunda columna: el offset en la tabla del número de vecto de interrupción</p>
+<p>Segunda columna: el offset en la tabla del número de vector de interrupción</p>
 </li>
 <li>
 <p>Columna X: Falta en la tabla.</p>
@@ -2359,7 +2355,7 @@ pre.rouge {
 <p>The first 32 vectors are reserved for the processor&#8217;s internal <em>exceptions</em> (0x00-0x1F)</p>
 </li>
 <li>
-<p>Las interrupciones 0x20-0xFF son interrupciones <em>hadware</em> IRQ.</p>
+<p>Las interrupciones 0x20-0xFF son interrupciones <em>hardware</em> IRQ.</p>
 </li>
 <li>
 <p>PIC</p>
