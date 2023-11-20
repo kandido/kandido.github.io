@@ -3442,17 +3442,16 @@ b)What is throughput (in MIPS) of the pipelined processor?
 5- For the hexadecimal main memory addresses 111111, 666666,BBBBBB, show the following information, in hexadecimal format:
 
 **Arquitectura Von Neumman: Capítulo 10.2:
- 9
-
-** Entrada Salida :Capítulo 10.11:
- 1- On a typical microprocessor, a distinct I/O address is used to refer to the I/O data registers and a distinct address for the control and status registers in an I/O controller for a given device. Such registers are referred to as ports. In the Intel 8088, two I/O instruction formats are used. In one format, the 8-bit opcode specifies an I/O operation; this is followed by an 8-bit port address. Other I/O opcodes imply that the port address is in the 16-bit DX register. How many ports can the 8088 address in each I/O addressing mode? .
- 3- A system is based on an 8-bit microprocessor and has two I/O devices. The I/O controllers for this system use separate control and status registers. Both devices handle data on a 1-byte-at-a-time basis.The first device has two status lines and three control lines.The second device has three status lines and four control lines.
-  How many 8-bit I/O control module registers do we need for status reading and control of each device?
-  What is the total number of needed control module registers given that the first device is an output-only device?
-  How many distinct addresses are needed to control the two devices?
-Consider a hypothetical microprocessor generating a 16-bit address (for example, assume that the program counter and the address registers are 16 bits wide) and having a 16-bit data bus.
+9-Consider a hypothetical microprocessor generating a 16-bit address (for example, assume that the program counter and the address registers are 16 bits wide) and having a 16-bit data bus.
  What is the maximum memory address space that the processor can access directly if it is connected to a “16-bit memory”?
  What is the maximum memory address space that the processor can access directly if it is connected to an “8-bit memory”?
  What architectural features will allow this microprocessor to access a separate “I/O space”? many 8-bit I/O ports can the microprocessor support? How many 16-bit I/O ports? Explain.
+
+** Entrada Salida :Capítulo 10.11:
+1- On a typical microprocessor, a distinct I/O address is used to refer to the I/O data registers and a distinct address for the control and status registers in an I/O controller for a given device. Such registers are referred to as ports. In the Intel 8088, two I/O instruction formats are used. In one format, the 8-bit opcode specifies an I/O operation; this is followed by an 8-bit port address. Other I/O opcodes imply that the port address is in the 16-bit DX register. How many ports can the 8088 address in each I/O addressing mode? .
+3- A system is based on an 8-bit microprocessor and has two I/O devices. The I/O controllers for this system use separate control and status registers. Both devices handle data on a 1-byte-at-a-time basis.The first device has two status lines and three control lines.The second device has three status lines and four control lines.
+  How many 8-bit I/O control module registers do we need for status reading and control of each device?
+  What is the total number of needed control module registers given that the first device is an output-only device?
+  How many distinct addresses are needed to control the two devices?
 ----
 
