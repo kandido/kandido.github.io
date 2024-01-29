@@ -2,12 +2,15 @@
  * Custom training CSS, to practise a bit the Reveal.js back-end of AsciiDoctor
  */
 
+/*400,700,800,400*/
 @import 'http://fonts.googleapis.com/css?family=Neuton:400,700,800,400italic';
+@import "https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css";
 
 /* Use Google Neuton font for the text of all slides */
 .reveal {
 	font-family: 'Neuton', sans-serif;
-        border: 2px solid blue;
+        border: 0px solid blue;
+	margin: 1px;
         
          
 }
@@ -30,6 +33,16 @@
 }
 
 
+/* Anulo los bordes de las imagens que crea el THEME importado */
+.reveal section img {
+    border: none;
+    box-shadow: none;
+/*  especificar el tamaño de los pies de figura*/
+}
+
+
+
+
 /* Customization of the code elements on the model of DZSlides */
 .reveal section *:not(pre) > code {
     font-family: Consolas, 'Liberation Mono', Courier, monospace;
@@ -42,6 +55,17 @@
     font-size: 0.6em;
     border-radius: 4px;
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* TAULAK */
@@ -62,7 +86,7 @@ section[data-state="taula_txi"] table {
 
 section[data-state="taula_ta"] table  {
     font-family: 'Neuton', sans-serif;
-    font-size: 0.5em;
+    font-size: 0.7em;
     margin-top: 0.1em;
     padding: 0.01em;
     background: #f8f8f7;
