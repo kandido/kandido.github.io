@@ -22,6 +22,63 @@
 }
 
 
+/* CODE */
+
+
+/* Customization of the code elements on the model of DZSlides */
+
+/*
+.reveal section *:not(pre) > code {   ---> elemento CODE que no es hijo del elemento PREFORMATED (TEXTO LITERAL ----)
+    font-family: Consolas, 'Liberation Mono', Courier, monospace;
+    color: #6D180B;
+    border: 1px solid #CCC;
+    background-color: #F2F2F2;
+    white-space: nowrap; -> sin SALTOS DE LINEA
+    padding: 1px 3px 0;
+    font-size: 0.4em;
+    border-radius: 4px;
+}
+*/
+
+.reveal pre code {
+    font-family: Consolas, 'Liberation Mono', Courier, monospace;
+    color: #EEEE0B; /* amarillo*/
+    padding: 1px 3px 0;
+    border: 1px solid #ccc;
+    font-size: 0.4em;
+    line-height: 1.5em;
+}
+
+
+.admonitionblock .content {
+    text-align: justify;
+}
+
+.admonitionblock table{
+	margin-left: 0px
+}
+.admonitionblock td {
+    text-align: center;
+    font-size:36px;
+}
+
+.admonitionblock td.icon{
+    width:80px;
+    text-align: center;
+    color:#19407c
+}
+
+.admonitionblock table td.content{
+	padding-left:1.125em;
+	padding-right:1.25em;
+	border-left:1px solid #dddddf;
+	color:rgba(0,0,0,.6)
+}
+
+
+
+
+
 
 /* EL CONTENIDO A LA IZDA: imagenes incluidas*/
 /* if we want all slides to be left-aligned */ 
@@ -32,6 +89,9 @@
         padding: 1px;
 }
 
+section[data-state="txikiago"] p {
+    font-size: 0.6em;
+    line-height: 1;
 
 /* Anulo los bordes de las imagens que crea el THEME importado */
 .reveal section img {
@@ -40,32 +100,9 @@
 /*  especificar el tamaño de los pies de figura*/
 }
 
-
-
-
-/* Customization of the code elements on the model of DZSlides */
-.reveal section *:not(pre) > code {
-    font-family: Consolas, 'Liberation Mono', Courier, monospace;
-    color: #6D180B;
-    color: #FF0000;
-    border: 1px solid #CCC;
-    background-color: #F2F2F2;
-    white-space: nowrap;
-    padding: 1px 3px 0;
-    font-size: 0.6em;
-    border-radius: 4px;
+.reveal .slides section figcaption {
+	font-size: 0.2em;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* TAULAK */
@@ -128,6 +165,18 @@ section[data-state="taula_ta"] table  {
 	margin:0px;
 }
 
+section[data-state="ul-txikia"] ul {
+	font-family: 'Neuton', sans-serif;
+	text-align: left;
+	text-indent: 1px;
+	font-size: 0.40em;
+        line-height: 1;
+	font-weight: 400;
+	padding:0.0em;
+	border:0px;
+	margin:0px;
+}
+
 .reveal ul {
   list-style-type: none;
   margin: 0px;
@@ -143,4 +192,29 @@ section[data-state="taula_ta"] table  {
   font-size: 0.6em;
   top: 1px;
   left: 0.5em;
+}
+
+/* a class selector, to custom some given text using the syntax "[CYAN]#some text#" */
+.CYAN {
+    color: cyan;
+}
+
+.myOrange {
+    color: #FF6A00;
+}
+
+.naranja {
+    color: #FF6A00;
+}
+
+.azul {
+    color: #0000FF;
+}
+
+.verde {
+    color: #00FF00;
+}
+
+.reveal latexmath {
+  font-size: 0.6em
 }
