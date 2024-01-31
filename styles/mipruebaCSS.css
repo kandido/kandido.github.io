@@ -75,6 +75,28 @@
 	color:rgba(0,0,0,.6)
 }
 
+/*LISTAS*/
+
+
+.reveal ul {
+  list-style-type: circle;
+  padding: 0px;
+  margin: 0px;
+  font-size: 1.00em;
+  text-indent: 0.1em
+}
+
+.reveal li {
+	font-family: 'Neuton', sans-serif;
+	text-align: left;
+	text-indent: 3px;
+	font-size: 0.8em;
+	font-weight: 400;
+	padding:0.0em;
+	border:0px;
+	margin:0px
+}
+
 
 
 
@@ -92,17 +114,14 @@
 section[data-state="txikiago"] p {
     font-size: 0.6em;
     line-height: 1;
-
+}
 /* Anulo los bordes de las imagens que crea el THEME importado */
+
 .reveal section img {
     border: none;
-    box-shadow: none;
+    box-shadow: none
+}
 /*  especificar el tamaño de los pies de figura*/
-}
-
-.reveal .slides section figcaption {
-	font-size: 0.2em;
-}
 
 
 /* TAULAK */
@@ -152,37 +171,8 @@ section[data-state="taula_ta"] table  {
   text-align: right;
 }
 
-/*LISTAS*/
 
-.reveal li {
-	font-family: 'Neuton', sans-serif;
-	text-align: left;
-	text-indent: 1px;
-	font-size: 0.80em;
-	font-weight: 400;
-	padding:0.0em;
-	border:0px;
-	margin:0px;
-}
 
-section[data-state="ul-txikia"] ul {
-	font-family: 'Neuton', sans-serif;
-	text-align: left;
-	text-indent: 1px;
-	font-size: 0.40em;
-        line-height: 1;
-	font-weight: 400;
-	padding:0.0em;
-	border:0px;
-	margin:0px;
-}
-
-.reveal ul {
-  list-style-type: none;
-  margin: 0px;
-  padding: 0px;
-  margin: 0px;
-}
 
 /*COLUMNAS*/
 
@@ -191,7 +181,7 @@ section[data-state="ul-txikia"] ul {
   position: relative;
   font-size: 0.6em;
   top: 1px;
-  left: 0.5em;
+  left: 0.1em;
 }
 
 /* a class selector, to custom some given text using the syntax "[CYAN]#some text#" */
@@ -215,6 +205,3 @@ section[data-state="ul-txikia"] ul {
     color: #00FF00;
 }
 
-.reveal latexmath {
-  font-size: 0.6em
-}
