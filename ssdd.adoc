@@ -167,9 +167,10 @@ Martes,Viernes
 Martes,Martes
 
 5-Tema6:Multiplexor-Decodificador,12-Tema6:BCD y Ejercicios Examen
-19-Tema7:Sist.Secu-Introducción y Ejercicios Examen ,26-Tema7:Sist.Secu-Ascensor y Ejercicios *Examen* 13 de Abril
+19-Tema7:Sist.Secu-Introducción y Ejercicios Examen 23 de Marzo,26-Tema7:Sist.Secu-Ascensor 
 |===
 
+* 23 de Marzo 9:00: EXAMEN 1º PARCIAL
 
 [state=topleft]
 === Abril
@@ -183,7 +184,7 @@ Martes,Martes
 30-Tema9: Lógica Programable y Ejercicios
 |===
 
-* 13 de Abril 9:00: EXAMEN 1º PARCIAL
+
 
 [state=topleft]
 === Mayo
@@ -198,7 +199,7 @@ Martes,Martes
 
 === EXAMENES
 
-* 13 de Abril 9:00: EXAMEN 1º PARCIAL
+* 23 de Marzo 9:00: EXAMEN 1º PARCIAL
 * 17 de Mayo 15:00: EXAMEN PRACTICO 
 * 22 de Mayo 08:00: EXAMEN ORDINARIO 
 * 8 de Junio 08:00: EXAMEN RECUPERACION
@@ -430,8 +431,11 @@ El horario: 8 a 14:30. Precio 8.5$.
 
 [#Tema2_RepInf]
 [state=txikiago]
+[.columns]
 == Tema 2 : Representación Digital de la Información
 
+[.column]
+--
 * Información: números, caracteres, imagen, sonido, etc ..
 * Números
 ** Sistemas posicionales: base 10 (decimales), base 2 (binaria)
@@ -439,11 +443,22 @@ El horario: 8 a 14:30. Precio 8.5$.
 ** Enteros: Signo Magnitud, Complemento a la base-1, Complemento a la base
 ** Operaciones aritméticas: Suma,Resta
 ** Reales: coma fija y coma flotante
+--
+
+[.column]
+--
+* Otros Códigos Binarios
+** Binary Coded Decimal (BCD) natural
+** BCD Aiken
+** BCD exceso 3
+** Gray
+** Johnson
+
 * Caracteres
 ** Alfanuméricos y Signos de Puntuación
 ** ASCII standard y extendido
 ** Unicode: UTF-8 
-
+--
 
 
 === Representación de los Números 
