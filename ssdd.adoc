@@ -1417,15 +1417,24 @@ image::circuito_logic.png[]
 
 image::tema3_genfun_nand.png[]
 
+=== Síntesis matemática de una función lógica
+
+
+* La síntesis matemática consiste en obtener la expresión matemática de una función lógica que cumpla las condiciones lógicas que describen dicha función. Es decir, a partir de un enunciado que describe de forma natural la funcionalidad de un sistema digital obtener la misma descripción mediante una expresión matemática. Se dice que se ha generado una función lógica. 
+
+* Hay distintas herramientas para sintetizar una función lógica y en este capítulo se van a ver las principales herramientas manuales o racionales a diferencia de las herramientas con ayuda de aplicaciones computacionales.
+
+* Herramientas manuales o racionales:
+** Analíticas: Formas matemáticas canónicas: SOP y POS
+** Gráficas: Tablas de la Verdad y Diagramas de Karnaugh.
 
 === Formas Canónicas de una Función: Síntesis por minitérminos y maxitérminos
-
 
 * Hay dos formas canónicas (standard) de expresar una función
 ** suma de productos (SOP) de variables
 ** producto de sumas (POS) de variables
 
-[.columns, state=taula]
+[.columns, state=taula_ta]
 === Lógica Positiva/Negativa: Relación y/o con */+
 
 [.column]
@@ -1445,7 +1454,7 @@ image::tema3_genfun_nand.png[]
 |===
 
 [.column.is-two-third]
-Z= *0* si "X" *e* "Y"  valen *0* -> z=(x+y) +
+Z= *0* si "X" *e* "Y"  valen *0* -> z=(&#773;x &#8729; &#773;y) +
 Z= *1* si "X" *o* "Y"  valen *1* -> z=(x+y)
 
 
@@ -1461,8 +1470,38 @@ Z= *1* si "X" *o* "Y"  valen *1* -> z=(x+y)
 |===
 
 [.column.is-two-third]
-Z= *0* si "X" *o* "Y"  valen *0* -> (z=x &#8729; y) +
+Z= *0* si "X" *o* "Y"  valen *0* -> (z=x+y) +
 Z= *1* si "X" *e* "Y"  valen *1* -> (z=x &#8729; y)
+
+=== Razonamiento de Y / O
+
+* Ejemplo de una proposición lógica
+** Para ganar dinero es necesario trabajar O/Y que te toque la lotería
+* Traducción a matemática binaria: Función binaria? Variables binarias?  
+* Herramienta: Tabla de la Verdad 
+* ¿Por qué la preposición Y de una proposición del lenguaje natural lleva asociada la multiplicación lógica?
+* ¿Por qué la preposición O de una proposición del lenguaje natural lleva asociada la suma lógica?
+* Síntesis matemática:
+** Forma canónica SOP
+** Forma canónica POS
+* Relación SOP/POS -> Función negada
+* Ley de Karnaugh
+* Herramienta gráfica para la síntesis matemática: Diagrama de Karnaugh DK -> matriz
+** Celdas
+** Simplificación: agrupar celdas
+** Relación agrupar celdas con agrupar minitérminos o maxitérminos
+
+=== Ejercicio: Síntesis Función XOR
+
+* Tabla de la Verdad
+* Lenguaje natural -> minitérminos
+* Lógica positiva -> minitérminos
+* Lógica negativa -> minitérminos
+* Formas canónicas SOP/POS
+** minitérminos/maxitérminos
+** conversión función negada
+* Diagrama de Karnaugh 
+** agrupar celdas
 
 [.columns, state=taula_ta]
 === Forma Canónica SOP: Suma de Minitérminos
