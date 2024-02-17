@@ -3078,7 +3078,7 @@ image::upload_device.png[Transferir el Diseño al Servidor de Tarjetas]
 * Pulsar el *Botón Upload Now* para transferir Diseño al Servidor de Tarjetas FPGA y abrirse una nueva ventana:
 +
 
-image::/unifesp_1.png[Tarjeta con la FPGA]
+image::unifesp_1.png[Tarjeta con la FPGA]
 
 
 * En este caso el sistema ha seleccionado la tarjeta DE2-115 del laboratorio remoto de la Universidad UNIFESP en Sao Paulo, Brasil. El Laboratorio remoto de la Upna y de Unifesp dispone de 10 tarjetas DE1-SoC y 4 DE2-115.
@@ -3196,7 +3196,7 @@ VHDL: Hoja de Referencia Básica
 
 
 .An example table
-[width="100%",cols="2<m,3<m,3m",frame="all",options="header"]
+[width="100%",cols="2<m,3<m,3<m"]
 |==========================
 |Category | Definition| Example
 |Identifer Names       |Can contain any letter, digit, or + 
@@ -3206,7 +3206,7 @@ VHDL: Hoja de Referencia Básica
                         keyword + 
                         Case insensitive   |q0 + 
                                             Prime_number + 
-                                            lteflg +   
+                                            lteflg 
 |Signal Values       | ‘0’ = logic value 0 + 
                        ‘1’ = logic value 1 + 
                        ‘Z’ = high impedance + 
@@ -3373,8 +3373,6 @@ structure| *library*  IEEE; +
            *map* (port_association_list);|M1 : mux21a *port map*( a => c(0), +
                                             b => c(1),
                                             s => s(0), y => v);
-
-
 |==========================
 
 <<<

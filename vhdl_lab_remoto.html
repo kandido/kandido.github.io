@@ -5230,7 +5230,7 @@ El Laboratorio Remoto se encuentra en fase de verificación. Si durante la progr
 <p>Pulsar el <strong>Botón Upload Now</strong> para transferir Diseño al Servidor de Tarjetas FPGA y abrirse una nueva ventana:</p>
 <div class="imageblock">
 <div class="content">
-<img src="/unifesp_1.png" alt="Tarjeta con la FPGA">
+<img src="images/unifesp_1.png" alt="Tarjeta con la FPGA">
 </div>
 </div>
 </li>
@@ -5388,109 +5388,79 @@ HEX5: in std_logic_vector(6 downto 0) 	Display 7-segmentos número 5.</code></pr
 <table class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. An example table</caption>
 <colgroup>
-<col style="width: 100%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Category</th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Definition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Category</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Example</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Example</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Identifer Names</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Can contain any letter, digit, or<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identifer Names</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can contain any letter, digit, or<br>
                         underscore <em>_</em><br>
                         Must start with alphabetic letter<br>
                         Can not end with underscore or be a<br>
                         keyword<br>
-                        Case insensitive</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>q0<br>
+                        Case insensitive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">q0<br>
                                             Prime_number<br>
-                                            lteflg<br></code></p></td>
+                                            lteflg</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Signal Values</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>‘0’ = logic value 0<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signal Values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">‘0’ = logic value 0<br>
                        ‘1’ = logic value 1<br>
                        ‘Z’ = high impedance<br>
-                       ‘X’ = unknown value</code></p></td>
-</tr>
-<tr>
+                       ‘X’ = unknown value</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Numbers and
-Bit Strings</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;base&gt;#xxx#<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Numbers and
+Bit Strings</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;base&gt;#xxx#<br>
                       B = binary<br>
                       X = hexadecimal<br>
-                      O = octal</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>35 (default decimal)<br>
+                      O = octal</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">35 (default decimal)<br>
                                  16#C# = “1100”<br>
                                  X”3C” = B”00111100”<br>
-                                 O”234” = B”010011100”</code></p></td>
+                                 O”234” = B”010011100”</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Generic
-statement</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Associates an identifer name with a
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generic
+statement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Associates an identifer name with a
                    value that can be overridden with the
-                   <strong>generic map</strong> statement</code></p></td>
+                   <strong>generic map</strong> statement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>generic</strong> ( N:integer := 8);</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>generic</strong> ( N:integer := 8);</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Generic map</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Assigns a value to a generic parameter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>generic map</strong> (N &#8658; 16)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Generic map</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Assigns a value to a generic parameter</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>generic map</strong> (N &#8658; 16)</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Signals and
-Variables Types</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>signal</strong> (used to connect one logic<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Signals and
+Variables Types</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>signal</strong> (used to connect one logic<br>
                 element to another)<br>
                 <strong>variable</strong> (variables assigned values in<br>
                 process)<br>
                 <strong>integer</strong> (useful for loop control<br>
-                variables)</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>signal</strong> d : std_logic_vector(0 to 3);<br>
+                variables)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>signal</strong> d : std_logic_vector(0 to 3);<br>
                            <strong>signal</strong> led: std_logic;<br>
                            <strong>variable</strong> q: std_logic_vector(7 downto 0);<br>
-			   <strong>variable</strong> k: integer;<br></code></p></td>
+			   <strong>variable</strong> k: integer;<br></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Program
-structure</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>library</strong>  IEEE;<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Program
+structure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>library</strong>  IEEE;<br>
            <strong>use</strong> IEEE.STD_LOGIC_1164.<strong>all</strong>;<br>
            <strong>entity</strong> &lt;identifier&gt; <strong>is</strong><br>
            .&#160;&#160;&#160;&#160; <strong>port</strong> (<br>
@@ -5503,10 +5473,8 @@ structure</code></p></td>
           .&#160;&#160;&#160;&#160; <strong>begin</strong><br>
           .&#160;&#160;&#160;&#160;&#160;&#160; {concurrent_statement}<br>
           .&#160;&#160;&#160;&#160; <strong>end</strong> &lt;identifier&gt;;<br>
-          <strong>end</strong></code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>library</strong> IEEE;<br>
+          <strong>end</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>library</strong> IEEE;<br>
                   <strong>use</strong> IEEE.STD_LOGIC_1164.<strong>all</strong>;<br>
                  <br>
                   <strong>entity</strong> Dff<br>
@@ -5527,115 +5495,83 @@ structure</code></p></td>
                   .&#160;&#160;&#160; q &#8656; D;<br>
                   .&#160;&#160; <strong>end if</strong>;<br>
                   .&#160; <strong>end process</strong>;<br>
-                  <strong>end</strong> Dff;</code></p></td>
+                  <strong>end</strong> Dff;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Logic operators</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>not</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Logic operators</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>not</strong><br>
                  <strong>and</strong><br>
                  <strong>or</strong><br>
                  <strong>nand</strong><br>
                  <strong>nor</strong><br>
                  <strong>xor</strong><br>
-                 <strong>xnor</strong></code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>z &#8656; <strong>not</strong> y;<br>
+                 <strong>xnor</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">z &#8656; <strong>not</strong> y;<br>
                        c &#8656; a <strong>and</strong> b;<br>
                        z &#8656; x <strong>or</strong> y;<br>
                        w &#8656; u <strong>nand</strong> v;<br>
                        r &#8656; s <strong>nor</strong> t;<br>
                        z &#8656; x <strong>xor</strong> y;<br>
-                       d &#8656; a <strong>xnor</strong> b;</code></p></td>
+                       d &#8656; a <strong>xnor</strong> b;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Arithmetic operators</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>+ (addition)<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Arithmetic operators</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">+ (addition)<br>
                       - (subtraction)<br>
                       <em>*</em> (multiplication)<br>
                       / (division) (not synthesizable<br>
-                      rem (remainder)</code></p></td>
+                      rem (remainder)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">count &#8656; count + 1;<br>
+                                      q &#8656; q – 1;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>count &#8656; count + 1;<br>
-                                      q &#8656; q – 1;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relational operators</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">=, /=, &gt;, &lt;, &gt;=, &#8656;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>if</strong> a &#8656; b <strong>then</strong><br>
+                                           <strong>if</strong> clr = ‘1’ <strong>then</strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Relational operators</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shift operators</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>shl</strong> (arg,count)<br>
+                  <strong>shr</strong> (arg,count)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">c = <strong>shl</strong>(a,3);<br>
+                                    c = <strong>shr</strong>(a,4);</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>=, /=, &gt;, &lt;, &gt;=, &#8656;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Assignment operator</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>:=</strong> (variable)<br>
+                      <strong>&#8656;</strong>  (signal)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">z <strong>:=</strong> z + x(i);<br>
+                                 count <strong>&#8656;</strong> count <em>+</em> 1;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>if</strong> a &#8656; b <strong>then</strong><br>
-                                           <strong>if</strong> clr = ‘1’ <strong>then</strong></code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Shift operators</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>shl</strong> (arg,count)<br>
-                  <strong>shr</strong> (arg,count)</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>c = <strong>shl</strong>(a,3);<br>
-                                    c = <strong>shr</strong>(a,4);</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Assignment operator</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>:=</strong> (variable)<br>
-                      <strong>&#8656;</strong>  (signal)</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>z <strong>:=</strong> z + x(i);<br>
-                                 count <strong>&#8656;</strong> count <em>+</em> 1;</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Conditional Signal Assig.</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>signal &#8656; expression <strong>when</strong> (condition)<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Conditional Signal Assig.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">signal &#8656; expression <strong>when</strong> (condition)<br>
                                  .&#160;&#160; {expression <strong>when</strong> (condition) <strong>else</strong>}<br>
-                                 expression ;</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>F3 &#8656; ‘1’ <strong>when</strong> (L = ‘0’ AND M = ‘0’ AND N = ‘1’)<br>
+                                 expression ;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F3 &#8656; ‘1’ <strong>when</strong> (L = ‘0’ AND M = ‘0’ AND N = ‘1’)<br>
                                  .&#160;&#160;‘1’ <strong>when</strong> (L = ‘1’ AND M = ‘1’) <strong>else</strong><br>
-                                 ‘0’;</code></p></td>
+                                 ‘0’;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Selective Signal Assig.</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>with</strong> ( (select expression) <strong>select</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selective Signal Assig.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>with</strong> ( (select expression) <strong>select</strong><br>
                                      .&#160; {{assign expresion} <strong>when</strong> {select value},}<br>
-                                     .&#160; {assign expresion} <strong>when others</strong> (REQUIRED);</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>with</strong> ( (L = ’0’ <strong>and</strong> M = ’0’ <strong>and</strong> N = ’1’)<br>
+                                     .&#160; {assign expresion} <strong>when others</strong> (REQUIRED);</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>with</strong> ( (L = ’0’ <strong>and</strong> M = ’0’ <strong>and</strong> N = ’1’)<br>
                                      .&#160; <strong>or</strong> (L = ’1’ <strong>and</strong> M = ’1’) ) <strong>select</strong><br>
                                      .&#160;&#160; F3 &#8656; ‘1’ <strong>when</strong> ‘1’,<br>
                                      .&#160;&#160; ‘0’ <strong>when</strong> ‘0’,<br>
-                                     .&#160;&#160; ‘0’ <strong>when others</strong> (REQUIRED);</code></p></td>
+                                     .&#160;&#160; ‘0’ <strong>when others</strong> (REQUIRED);</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>process</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[&lt;id&gt;] <strong>process</strong>(&lt;sensitivity list&gt;)<br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">process</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[&lt;id&gt;] <strong>process</strong>(&lt;sensitivity list&gt;)<br>
                   {{process declaration}}<br>
                 <strong>begin</strong><br>
                   {{sequential statement}}<br>
-                <strong>end process</strong> [&lt;id&gt;]</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>process</strong> (a)<br>
+                <strong>end process</strong> [&lt;id&gt;]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>process</strong> (a)<br>
                                        variable j: integer;<br>
                                        <strong>begin</strong><br>
                                        .&#160;&#160;&#160; j := conv_integer(a);<br>
@@ -5646,93 +5582,73 @@ structure</code></p></td>
                                               .&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; y(i) &#8656; <em>0</em>;<br>
                                             .&#160;&#160;&#160;&#160;&#160;&#160;&#160; <strong>end if</strong>;<br>
                                           .&#160;&#160;&#160;&#160;{nsbp} <strong>end loop</strong>;<br>
-                                        <strong>end process</strong>;</code></p></td>
+                                        <strong>end process</strong>;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>if statement</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>if</strong> (expression1) <strong>then</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">if statement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>if</strong> (expression1) <strong>then</strong><br>
                .&#160; {{statement;}}<br>
                {{ <strong>elsif</strong> (expression2) <strong>then</strong><br>
                .&#160; {{statement;}} }}<br>
              [[<strong>else</strong> (OPTIONAL)<br>
                .&#160; {{statement;}} ]]<br>
-              <strong>end if</strong> ;</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>if</strong> (clr = <em>1</em>) <strong>then</strong><br>
+              <strong>end if</strong> ;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>if</strong> (clr = <em>1</em>) <strong>then</strong><br>
                         .&#160;&#160; q &#8656; <em>0</em>;<br>
                       <strong>elsif</strong>(clk&#8217;event and clk = <em>1</em>) <strong>then</strong><br>
                         .&#160;&#160; q &#8656; D;<br>
-                      <strong>end if</strong> ;</code></p></td>
+                      <strong>end if</strong> ;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>case statement</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>case</strong> expression <strong>is</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">case statement</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>case</strong> expression <strong>is</strong><br>
                 .&#160;<strong>when</strong> choices &#8658; {sequential +                  .&#160;&#160; statement;}}<br>
                 {{ … }}<br>
                 .&#160; <strong>when others</strong> (OPTIONAL) &#8658; {sequential<br>
                  .&#160;&#160; statement;}}<br>
-                <strong>end case</strong>;</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>case</strong> s <strong>is</strong><br>
+                <strong>end case</strong>;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>case</strong> s <strong>is</strong><br>
                              .&#160;&#160;&#160;&#160; <strong>when</strong> "00" &#8658; z &#8656; c(0);<br>
                              .&#160;&#160;&#160;&#160; <strong>when</strong> "01" &#8658; z &#8656; c(1);<br>
                              .&#160;&#160;&#160;&#160; <strong>when</strong> "10" &#8658; z &#8656; c(2);<br>
                              .&#160;&#160;&#160;&#160; <strong>when</strong> "11" &#8658; z &#8656; c(3);<br>
                              .&#160;&#160;&#160;&#160; <strong>when others</strong> ) &#8658; z &#8656; c(0);<br>
-                          <strong>end case</strong>;</code></p></td>
+                          <strong>end case</strong>;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>for loop</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>for</strong> identifier <strong>in</strong> range <strong>loop</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">for loop</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>for</strong> identifier <strong>in</strong> range <strong>loop</strong><br>
             \{sequential statement}<br>
-          <strong>end loop;</strong></code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zv := x(1);<br>
+          <strong>end loop;</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">zv := x(1);<br>
                       <strong>for</strong> i <strong>in</strong> 2 to 4 <strong>loop</strong><br>
                          .&#160;&#160;&#160;&#160; zv := zv <strong>and</strong> x(i);<br>
                       <strong>end loop;</strong><br>
-                       z <strong>&#8656;</strong> zv;</code></p></td>
+                       z <strong>&#8656;</strong> zv;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Component</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>component</strong> entity_name <strong>is</strong><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>component</strong> entity_name <strong>is</strong><br>
                  .&#160; <strong>port</strong> (<br>
                     .&#160;&#160;(port_association_list);<br>
                  .&#160; );<br>
-            <strong>end component</strong>;</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code><strong>component</strong> mux2x1 <strong>is</strong><br>
+            <strong>end component</strong>;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>component</strong> mux2x1 <strong>is</strong><br>
                                       .&#160; <strong>port</strong> (<br>
                                       .&#160;&#160; D: <strong>in</strong> std_logic_vector(1 <strong>downto</strong> 0);<br>
                                       .&#160;&#160; C: <strong>in</strong> std_logic;<br>
                                       .&#160;&#160; S: <strong>out</strong> std_logic<br>
                                       .&#160;);<br>
-                 <strong>end component</strong>;</code></p></td>
+                 <strong>end component</strong>;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Port map</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>instance_name <strong>:</strong> component_name
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port map</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">instance_name <strong>:</strong> component_name
           <strong>port</strong><br>
-           <strong>map</strong> (port_association_list);</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>M1 : mux21a <strong>port map</strong>( a &#8658; c(0),<br>
+           <strong>map</strong> (port_association_list);</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">M1 : mux21a <strong>port map</strong>( a &#8658; c(0),<br>
                                             b &#8658; c(1),
-                                            s &#8658; s(0), y &#8658; v);</code></p></td>
+                                            s &#8658; s(0), y &#8658; v);</p></td>
 </tr>
 </tbody>
 </table>
@@ -5908,7 +5824,7 @@ end mux4t1_2;</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-17 03:52:30 +0100
+Last updated 2024-02-17 05:15:12 +0100
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
