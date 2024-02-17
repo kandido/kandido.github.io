@@ -254,7 +254,7 @@ Operación básica
 
 [source,vhdl]
 ----
-entity of light_bit is
+entity light_bit is
   port (
     x   : in bit;
     z   : out bit
@@ -508,7 +508,7 @@ Descripción HW: VHDL
 -- Descripción VHDL Primavera 2023
 -- Circuito light_bit.vhd:
 -- Puerta lógica XOR extendida
-entity of light_bit is
+entity light_bit is
   port (
     x,y : in bit;
     z   : out bit
@@ -589,7 +589,7 @@ Circuito Digital  "light_bit.vhdl"
 library std; <2>
 use std.standard.all;
 
-entity of light_bit is  <3>
+entity light_bit is  <3>
   port (
     x   : in bit_vector(1 downto 0);
     z   : out bit
@@ -751,7 +751,7 @@ CAUTION: En el escritorio virtual de la Upna al utilizar el programa Quartus no 
 -- Sistemas Digitales : Descripción VHDL Curso Primavera 2023
 -- Circuito light_bit.vhd: Puerta lógica XOR extendida
 
-entity of light_bit is
+entity light_bit is
   port (
     x,y : in bit;
     z   : out bit
@@ -1320,7 +1320,7 @@ Tutorial quartus -> light_process.vhd (VI)
 -- Descripción VHDL Primavera 2023
 -- Circuito light_bit.vhd:
 -- Puerta lógica XOR extendida
-entity of light_bit is
+entity light_bit is
   port (
     SW : in std_logic_vector(1 downto 0);
     LEDR   : out std_logic_vector(0 downto 0)

@@ -18,7 +18,7 @@
 <div class="details">
 <span id="author" class="author">Cándido Aramburu</span><br>
 <span id="email" class="email"><a href="mailto:candido@unavarra.es">candido@unavarra.es</a></span><br>
-<span id="revdate">2023-04-01</span>
+<span id="revdate">2024-02-17</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -713,7 +713,7 @@ En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar 
 <p>Editar el fichero <em>light_bit.vhd</em>: Descripción del circuito minimalista <strong>z=x</strong> : El objetivo de este código es ser lo suficientemente simple para no dificultar su comprensión y centrarse en poner a punto la herramienta de desarrollo <strong>Intel Quartus Prime Lite</strong> desde cualquier computadora utilizando los recursos remotos de la UPNA.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">entity of light_bit is
+<pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">entity light_bit is
   port (
     x   : in bit;
     z   : out bit
@@ -1280,7 +1280,7 @@ _____________________ 0 voltios</pre>
 -- Descripción VHDL Primavera 2023
 -- Circuito light_bit.vhd:
 -- Puerta lógica XOR extendida
-entity of light_bit is
+entity light_bit is
   port (
     x,y : in bit;
     z   : out bit
@@ -1389,7 +1389,7 @@ y en la línea 3 del código
 library std; <i class="conum" data-value="2"></i><b>(2)</b>
 use std.standard.all;
 
-entity of light_bit is  <i class="conum" data-value="3"></i><b>(3)</b>
+entity light_bit is  <i class="conum" data-value="3"></i><b>(3)</b>
   port (
     x   : in bit_vector(1 downto 0);
     z   : out bit
@@ -1684,7 +1684,7 @@ En el escritorio virtual de la Upna al utilizar el programa Quartus no utilizar 
 <pre class="highlightjs highlight"><code class="language-vhdl hljs" data-lang="vhdl">-- Sistemas Digitales : Descripción VHDL Curso Primavera 2023
 -- Circuito light_bit.vhd: Puerta lógica XOR extendida
 
-entity of light_bit is
+entity light_bit is
   port (
     x,y : in bit;
     z   : out bit
@@ -2766,7 +2766,7 @@ END TablaVerdad ;</code></pre>
 -- Descripción VHDL Primavera 2023
 -- Circuito light_bit.vhd:
 -- Puerta lógica XOR extendida
-entity of light_bit is
+entity light_bit is
   port (
     SW : in std_logic_vector(1 downto 0);
     LEDR   : out std_logic_vector(0 downto 0)
@@ -5908,7 +5908,7 @@ end mux4t1_2;</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-04-01 17:40:22 +0200
+Last updated 2024-02-17 03:52:30 +0100
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
