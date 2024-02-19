@@ -67,7 +67,7 @@ h| 7-12   | Very advanced stuff      | Sheila
 
 == Transparencias en Formato PDF
 
-* link:{ruta-gh-pages}/PDF/ssdd.pdf[Transparencias PDF]
+* link:{ruta-gh-pages}/PDF/ssdd.pdf?download=[Transparencias PDF]
 * Si hay algún error de forma en el documento PDF que dificulte su interpretación enviar un mensaje para su correción. Gracias.
 
 
@@ -2626,11 +2626,11 @@ image::tema5_sumpaacse.png[]
 ** Más rápido pero más complejo
 
 [state=taula_ta]
-=== Sumador Paralelo A. Paralelo
+=== Sumador Paralelo Acarreo Paralelo
 
 
 .Funciones de Generación y Propagación del Acarreo
-[width=70%,cols="4*^1,1*^3,2*^1"]
+[width=100%,cols="4*^1,1*^3,2*^1"]
 |===
 |A_i|B_i|C_i-1|C_i| Descripción | *G*|*P*
 | 0| 0| 0 | *0* .2+|  Ni se Genera Ni se Propaga |0| 0 
