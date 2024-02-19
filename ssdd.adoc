@@ -1769,6 +1769,11 @@ IMPORTANT: celdas adyacentes equivale a minitérminos con factores comunes, que 
 
 * 1.1, 1.2, 1.4, 1.5, 1.6, 1.8, 1.9
 * Metodología: antes de comenzar a resolver el ejercicio hay que describir el método a seguir para resolver el ejercicio.
+* Herramientas a emplear de diferentes categorías:
+** Gráficas : TV,DK ->  formas canónicas SOP/POS ó agrupar celdas para simplirficar la función
+** Lenguaje Natural: lógica positiva / lógica negativa , Y/O -> convertir en operadores lógicos +/*
+** Algebra de Boole : propiedades (distributiva, absorción, idempotencia, etc) , Ley de Morgan, etc
+** Relacionar herramientas de distintas categorías
 
 [.columns, state=txikiago]
 === Planteamiento de los Ejercicios Capítulo 1
@@ -1934,7 +1939,7 @@ image::tema3_BCD.png[align="center",350,250]
 -- Descripción VHDL Primavera 2023
 -- Circuito light_bit.vhd:
 -- Puerta lógica XOR extendida
-entity of light_bit is
+entity light_bit is
   port (
     x,y : in bit;
     z   : out bit
@@ -1989,6 +1994,39 @@ Desde el punto de vista lógico un bus es un vector o un array de dimensión "n"
 El tipo de datos de los buses *A* y *B* de 32 bits se podrían declarar como: +
 -[naranja]#signal A,B :bit_vector(31 downto 0);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_31] y el bit LSB(más a la derecha) el bit asciimath:[A_0] y lo mismo con el bus B +
 - [naranja]#signal A,B :bit_vector(0 to 31);# donde el bit MSB(más a la izquierda) sería el hilo asciimath:[A_0]y el bit LSB(más a la derecha) el bit asciimath:[A_31] y lo mismo con el bus B
+
+=== Señales VHDL : Buses
+
+[source,vhdl]
+----
+-- Sistemas Digitales I año 2022			
+-- Laboratorio Remoto de la Upna
+-- FICHERO light_bit.vhdl : OBLIGATORIAMENTE debe ser el MISMO nombre que el utilizado en ENTITY.
+-- tutorial: primera práctica en aula
+
+-- El tipo de señal "bit" se define en el paquete standard.vhdl
+
+library std;  -- La librería std no es necesario declararla
+use std.standard.all; -- Si no se declara la librería std, tampoco el paquete standard
+
+-- Entidad						
+entity light_bit is
+    port (
+      x   : in bit_vector(1 downto 0);
+      z   : out bit
+    );
+end gate_and;
+
+--ARQUITECTURA						
+architecture rtl of light_bit is
+begin
+ s <= NOT x(0);
+ t <= NOT x(1);
+ u <= x(0) AND t;
+ v <= x(1) AND s;
+ z <= u OR v;            
+end rtl;
+----
 
 
 [.columns]
@@ -2116,7 +2154,7 @@ Las señales cuyos datos son de tipo [naranja]#BIT# admiten los valores [naranja
 
 .Sintaxis
 [source,vhdl]
-entity of light_bit is
+entity light_bit is
   port (
     x,y : in bit;
     z   : out bit
@@ -2137,7 +2175,7 @@ La descripción más sencilla es la *behavioral* ... pero también es la que exi
 
 
 [.columns]
-=== Arquitectura ===
+=== Arquitectura "Lógica Transferencia entre Registros" (RTL) ===
 
 [.column]
 .Sintaxis
@@ -2165,6 +2203,33 @@ Las señales internas hay que declararlas con el keyword [naranja]#signal# y def
 La relación entre las señales (puertos e internas) se define mediante "sentencias vhdl" entre los keywords [naranja]#begin# y [naranja]#end# +
 
 --
+
+=== Arquitectura "Funcional" ===
+
+
+* Arquitectura Funcional: Describimos el circuito mediante su FUNCIÓN, no mediante su expresión matemática
+** La función se puede expresar de distintas formas, una de ellas sería la "Tabla de la Verdad": Si la entrada *x vale "00"* entonces la salida *z vale '1'*, etc
+ 
+* sentencia CSA (Conditional Signal Assignment)
++
+
+[source,vhdl]
+----
+
+ENTITY light_csa IS
+PORT(x : IN bit_vector (1 downto 0) ;
+     z : OUT bit_vector (0 downto 0));
+END light_csa ;
+
+ARCHITECTURE TablaVerdad OF light_csa IS
+BEGIN
+ LEDR(0) <= 
+	'1' when x(0)='0' AND x(1)='1' else
+	'1' when x(0)='1' AND x(1)='0' else
+	'0'; -- CASO DEFAULT :  NO es obligatorio
+
+END TablaVerdad ;
+----
 
 === Hojas de Referencia
 
@@ -2223,7 +2288,7 @@ La librería std *NO* es obligado declararla
 [source,vhdl]
 library std;
 use std.standard.all;
-entity of light_bit is
+entity light_bit is
   port (
     x,y : in bit;
     z   : out bit
@@ -2247,7 +2312,7 @@ Descripción del circuito minimalista *z=x* +
 
 [#mini]
 ----
-entity of light_bit is
+entity light_bit is
   port (
     x   : in bit;
     z   : out bit
@@ -2265,7 +2330,7 @@ end minima;
 Para poder ser fabricado en el laboratorio Remoto, es necesario que los puertos tenga los mismos nombres que se utilizan en el servidor del laboratorio Remoto. En este ejemplo la entrada serán los switches [naranja]#SW# y la salida los leds rojos [naranja]#LEDR#.
 
 ----
-entity of light_bit is
+entity light_bit is
   port (
     SW   : in bit_vector (0 downto 0);
     LEDR   : out bit_vector (0 downto 0);
@@ -2438,11 +2503,12 @@ image::tema5_HA.png[]
 * Suma aritmética -> latexmath:[S_i=A_i+B_i+C_{i-1}]
 * Resultado: 2 funciones : latexmath:[S_i] y el acarreo -> latexmath:[C_i]
 * Diseño: dibujar diagrama de bloques del circuito 
-** Dos funciones y tres variables ->  TV, DK -> expresión lógica positiva
+** Dos funciones y tres variables -> Herramienta TV, DK -> expresión lógica positiva
 * latexmath:[S_i=\overline A_i\cdot \overline B_i\cdot C_{i-1} + \overline A_i\cdot B_i\cdot \overline C_{i-1} + A_i\cdot B_i\cdot C_{i-1} +  A_i\cdot \overline B_i\cdot \overline C_{i-1}= \\ 
 \overline A_i\cdot (\overline B_i\cdot C_{i-1} + B_i\cdot \overline C_{i-1}) + A_i\cdot ( B_i\cdot C_{i-1} + \overline B_i\cdot \overline C_{i-1}) = \\
 \overline A_i\cdot (B_i \oplus C_{i-1} ) + A_i\cdot \overline {(B_i \oplus C_{i-1} )} = A_i \oplus B_i \oplus C_{i-1}] 
 * latexmath:[C_i=A_i\cdot B_i + A_i\cdot C_{i-1}+ B_i\cdot C_{i-1}]
+* Herramienta alternativa: proposiciones en lenguaje natural Y/O
 
 === Full Adder
 
@@ -2457,36 +2523,31 @@ IMPORTANT: Concepto nuevo: Diseñar un circuito no como combinación de puertas 
 IMPORTANT: Concepto nuevo: introducir en la tabla de la verdad variables-funcion nuevas como Sa,Ca,Sb,Cb para obtener las funciones C1 y S1 en función de ellas. 
 
 
-[.columns, state="txikiago"]
 === Sumador Completo usando semi-sumadores
 
-[.column.is-two-fifths]
---
+
 Particionamiento: utilizar señales intermedias +
-A_i+B_i puede ser sustituido por un Half Adder +
+A_1+B_1 puede ser sustituido por un Half Adder +
 Razonar la suma de 3 bits con sumas parciales de 2 bits +
 
 -----
-         1            1
-         1          + 1
-       + 1     ->   ---
-         ---     C_aS_a
-                    + 1
-                 C_b
-                    ---
-                 C_1S_b 
+   A_1        1              
+   B_1        1                   A_1          S_a
++  C_0      + 1        ->       + B_1        + C_0                 
+  ----      ---                 -----        ----- 
+C_1S_1       11               C_a S_a      C_b S_b
+            
 -----
-
 S_1=S_b +
-¿ C1 ?
+ +
+¿ C_1 ?
 
 
---
 
 
+[state="txikiago"]
+=== Sumador Completo usando semi-sumadores
 
-[.column]
---
 latexmath:[Suma=(A_1+B_1)+C_0=(S_a,C_a)+C_0=\\
  C_a, (S_a+C_0) = C_a, (S_b,C_b)=(S_1,C_1)]
 
@@ -2495,12 +2556,6 @@ HA_a -> (S_a,C_a)
 HA_b -> (S_b,C_b)
 
 ¿ C1 ?
-
-
-
---
-
-
 
 [.columns, state=taula]
 === Sumador Completo usando semisumadores
@@ -2514,7 +2569,7 @@ latexmath:[C1=\overline C_a \cdot Cb + C_a \cdot \overline  Cb = C_a \oplus C_b]
 
 image:tema5_FA_HA_c1.png[]
 
-latexmath:[C1=C_a + C_b]
+latexmath:[C1=C_a + C_b]  -> interpretarlo con lógica negativa
 --
 
 [.column]
