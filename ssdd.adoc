@@ -1416,7 +1416,7 @@ image::circuito_logic.png[]
 === Link: algebra de conmutación funciones.pdf
 
 
-* link:./PDF/03_algebra_de_conmutacion_funciones_logicas.pdf[Algebra de Boole. Funciones Lógicas]
+* link:{ruta-gh-pages}/PDF/03_algebra_de_conmutacion_funciones_logicas.pdf?download=[PDF 2020:Algebra de Boole. Funciones Lógicas]
 
 
 === Generación de Funciones mediante puertas Lógicas NAND 
@@ -2239,9 +2239,12 @@ END TablaVerdad ;
 
 === Hojas de Referencia
 
-link:./PDF/VHDL_Cheat_Sheet.pdf[Hoja de referencia simple]
 
-link:./PDF/VHDL_QRC__01.pdf[Hoja de referencia completa]
+link:{ruta-gh-pages}/PDF/VHDL_Cheat_Sheet.pdf?download=[PDF: Hoja de referencia simple]
+
+
+link:{ruta-gh-pages}/PDF/VHDL_QRC__01.pdf?download=[PDF: Hoja de referencia completa]
+
 
 [.columns]
 === Síntesis: Herramienta Quartus ===
@@ -2354,7 +2357,10 @@ end minima;
 
 // * link:./PDF/vhdl_lab_remoto.pdf[VHDL mediante recursos Remotos]:PDF 
 
+
+
 * link:vhdl_lab_remoto.html[Tutorial de VHDL mediante recursos Remotos: Quartus Prime Lite, Questa Intel, Laboratorio de dispositivos FPGA]
+* link:{ruta-gh-pages}/PDF/vhdl_lab_remoto.pdf?download=[PDF: Tutorial de VHDL mediante recursos Remotos: Quartus Prime Lite, Questa Intel, Laboratorio de dispositivos FPGA]
 
 * La única forma de aprender un lenguaje de descripción de HW o de programación es practicando.
 * La Upna brinda la posibilidad de utilizar los recursos EDA de diseño automático de circuitos integrados de forma remota, bien desde dentro del Campus Universitario o desde fuera de él, sin la necesidad de realiza ningún tipo de instalación en el portátil personal ni de acceder a ningún laboratorio.
@@ -2452,7 +2458,7 @@ END light_de1soc ;
 
 
 
-* link:PDF/04_circuitos_aritmeticos.pdf[Tema4 Circuitos Aritméticos]: PDF
+* link:{ruta-gh-pages}/PDF/04_circuitos_aritmeticos.pdf?download=[PDF 2020: Tema4 Circuitos Aritméticos] 
 * Operaciones Aritméticas: Suma, Resta, Complemento C1-C2, Multiplicación
 * Circuitos sumadores
 * Circuitos restadores
@@ -2771,8 +2777,7 @@ image::tema5_sumarestac1c2.png[]
 [state=txikiago]
 == Tema 6: Otros Circuitos Combinacionales
 
-
-*  link:PDF/05_otros_circuitos_combinacionales.pdf[Tema5 Otros Circuitos Combinacionales]: PDF
+* link:{ruta-gh-pages}/PDF/05_otros_circuitos_combinacionales.pdf?download=[PDF 2020: Tema5 Otros Circuitos Combinacionales] 
 . <<circ_combi, Circuitos Combinacionales.>>
 . <<mux,Multiplexor>>
 . <<codi,Codificador (Encoder)>>
