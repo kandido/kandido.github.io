@@ -1936,7 +1936,15 @@ end behavioral;
 
 
 
-Ejercicio 1.5: Matricula
+Ejercicio 1.5: Matriculab[source,vhdl]
+entity light_bit is
+  port (
+    x,y : in bit;
+    z   : out bit
+);
+end entity;
+--
+t
 ------------------------
 
 Arquitectura rtl
