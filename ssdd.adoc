@@ -2656,7 +2656,9 @@ Conclusión: P_i y G_i permiten expresar el acarreo de forma más clara.
 
 latexmath:[C_1=G_1 + P_1 \cdot C_0] +
 latexmath:[C_2=G_2 + P_2 \cdot C_1 = G_2 + P_2G_1 + P_2P_1C_0 ] +
-latexmath:[C_3=G_3 + P_3 \cdot C_2 = ... = G_3 + P_3P_2 + P_3P_2G_1 + P_3P_2P_1C_0 ] 
+latexmath:[C_3=G_3 + P_3 \cdot C_2 = ... = G_3 + P_3P_2 + P_3P_2G_1 + P_3P_2P_1C_0 ] +
+
+Interpretar el resultado mediante su descripción proposicional Y/O
 
 
 [state=txikiago]
