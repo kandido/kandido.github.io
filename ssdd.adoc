@@ -2829,10 +2829,14 @@ latexmath:[F=lógica \: positiva=\overline S_1 \overline S_0 I_0 + \overline S_1
 |===
 | I3 | I2 | I1 | I0 | S2 | S1 | F
 
-| X  | X  | X  | X  | 0  |  0 | I0
-| X  | X  | X  | X  | 0  |  1 | I1
-| X  | X  | X  | X  | 1  |  0 | I2
-| X  | X  | X  | X  | 1  |  1 | I3
+| X  | X  | X  | 0  | 0  |  0 | 0
+| X  | X  | X  | 1  | 0  |  0 | 1
+| X  | X  | 0  | X  | 0  |  1 | 0
+| X  | X  | 1  | X  | 0  |  1 | 1
+| X  | 0  | X  | X  | 1  |  0 | 0
+| X  | 1  | X  | X  | 1  |  0 | 1
+| 0  | X  | X  | X  | 1  |  1 | 0
+| 1  | X  | X  | X  | 1  |  1 | 1
 |===
 
 === Diseño
@@ -2934,8 +2938,8 @@ image::tema6_codificador-hex.png[]
 ** vale 1 si: filas 1ª,3ª,5ª...15ª
 *** fila 1ª: 0000000000000010 -> es el minitérmino latexmath:[m_2] de 16 variables -> optimización: ¿se puede reducir el Nº de variables?
 *** Si de las filas RESTO capturo todas las filas latexmath:[m_i] donde latexmath:[E_1] valga 1 y las sumo a la fila 1ª -> puedo sacar factor común latexmath:[E_1]
-*** latexmath:[E_1*\sum(m_i)=E_1 \cdot 1] y así con las filas 3ª,5ª, etc
-** latexmath:[S_0=E_1+E_3+E_5+E_7+E_9+E_11+E_13+E_15]
+*** latexmath:[E_1*\sum(p_i)=E_1 \cdot 1] donde latexmath:[p_i] son los minitérminos de 15 variables. Y así con las filas 3ª para latexmath:[E_3],5ª, etc, 
+** latexmath:[S_0=E_1+E_3+E_5+E_7+E_9+E_{11}+E_{13}+E_{15}]
 
 === Codificador Hexadecimal : Diseño
 
@@ -2975,9 +2979,9 @@ Ejemplo 1 : Codificador 4x2 con prioridad latexmath:[E_3 > E_2 > E_1 > E_0] +
 
 [.column]
 * lógica positiva
-** latexmath:[S_0=E_3+\overline {E_3}\overline {E_2} E_1 ] = optimizar = latexmath:[E_3(1+\overline {E_2} E_1)+ \overline {E_3}\overline {E_2} E_1  = E_3+E_3 \overline {E_2} E_1+\overline {E_3}\overline {E_2} E_1 = E_3+ (E_3+ \overline E_3) \overline {E_2} E_1 = E_3+\overline {E_2} E_1] 
+** latexmath:[S_0=E_3+\overline {E_3}\overline {E_2} E_1 = optimizar =]  latexmath:[E_3(1+\overline {E_2} E_1)+ \overline {E_3}\overline {E_2} E_1  = E_3+E_3 \overline {E_2} E_1+\overline {E_3}\overline {E_2} E_1 = E_3+ (E_3+ \overline E_3) \overline {E_2} E_1 = E_3+\overline {E_2} E_1] 
 
-** latexmath:[S_1=E_3+ \overline E_3 E_2]= optimizar = latexmath:[ E_3(1 + E_2)+ \overline E_3 E_2 = E_3+E_3E_2+ \overline E_3 E_2 = E_3+ (E_3+ \overline E_3) E_2 = E_3+E_2]
+** latexmath:[S_1=E_3+ \overline E_3 E_2 = optimizar =] latexmath:[ E_3(1 + E_2)+ \overline E_3 E_2 = E_3+E_3E_2+ \overline E_3 E_2 = E_3+ (E_3+ \overline E_3) E_2 = E_3+E_2]
 ** Las optimizaciones realizadas mediante el algebra se pueden realizar también mediante el diagrama DK.
 
 
@@ -3142,11 +3146,11 @@ Los 7 LEDs del Display se nombran con 7 letras según su posición.
 
 Los 7 LEDs del Display tienen el Anodo ó el Cátodo común.
 
-Si el Display es de *Anodo Común*, se puede controlar el Cátodo de cada LED libremente con un *0* : lógica negativa. +
+Si el Display es de *Anodo Común*, se puede controlar el Cátodo de cada LED libremente con un *0 : lógica negativa*. +
 -Iluminar el 0 : activar los segmentos f-e-d-c-b-a -> 1000000. +
 -Iluminar el 5: activar los segmentos  g-f-d-c-a -> 0010010.
 
-Si el Display es de *Cátodo Común*, se puede controlar el Anodo de cada LED libremente con un *1* : lógica positiva. +
+Si el Display es de *Cátodo Común*, se puede controlar el Anodo de cada LED libremente con un *1 : lógica positiva*. +
 -Iluminar el 0 : activar los segmentos f-e-d-c-b-a -> 0111111. +
 -Iluminar el 5: activar los segmentos g-f-d-c-a -> 1101101.
 
@@ -3154,7 +3158,7 @@ Si el Display es de *Cátodo Común*, se puede controlar el Anodo de cada LED li
 
 === Decodificador Display 7 Segmentos
 
-* Mediante un decodificador 4x7 Binario/7seg_code podemos visualizar en el display un dígito hexadecimal codificado en binario.
+* Mediante un decodificador 4x7  (Binario/7seg_code) podemos visualizar en el display un dígito hexadecimal codificado en binario.
 * Diseñar un Decodificador BIN_HEX a Display_7_segmentos de Anódo Común en código VHDL. Verificar su funcionamiento mediante la tarjeta DE1-SoC
 ** Utilizar como puerto de entrada las señales de los switches SW(3 downto 0) -> el hexadecimal x"F" equivale al binario "1111"
 ** Utilizar como puerto de salida las señales del Display de 7 segmentos HEX0(6 downto 0) -> g-f-e-d-c-b-a
@@ -3241,7 +3245,7 @@ image::tema6_LED_decod_5.png[]
 
 image::tema6_decoder_func.png[]
 
-* Si la función se expresa según la 2ª forma canónica sustituiríamos la puerta OR de salida por una puerta AND.
+* Si la función se expresa según la 2ª forma canónica sustituiríamos la puerta OR de salida por una puerta AND, NEGARIAMOS los minitérminos para convertirlos en maxitérminos y conectaríamos solo los maxitérminos que hacen cero a la función.
 
 [.columns, state=txikiago]
 === Aplicaciones: Conversor Serie Paralelo
