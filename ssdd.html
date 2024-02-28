@@ -863,7 +863,30 @@ use ieee.std_logic_1164.all;
 ENTITY light_de1soc IS
 PORT(SW : IN std_logic_vector (1 downto 0) ;
      LEDR : OUT std_logic);
-END light_de1soc ;</code></pre></div></div></li><li><p>El paquete <span class="naranja">std_logic_1164</span> está localizado en: C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/ieee/stdlogic.vhdl</p></li></ul></div></div></section><section id="_simulación_y_fabricación"><h2>Simulación y Fabricación</h2><div class="slide-content"><div class="ulist"><ul><li><p>Simulación</p><div class="ulist"><ul><li><p>Simulador Questa</p></li><li><p>Simulador Waveform</p></li></ul></div></li><li><p>Fabricación: acceso a través de Miaulario : Pestaña <strong>DE1-SoC&#8594;&gt;&gt;Remoto</strong></p></li></ul></div></div></section></section>
+END light_de1soc ;</code></pre></div></div></li><li><p>El paquete <span class="naranja">std_logic_1164</span> está localizado en: C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/ieee/stdlogic.vhdl</p></li></ul></div></div></section><section id="_variables_vs_señales"><h2>Variables vs Señales</h2><div class="slide-content"><div class="ulist"><ul><li><p>Las variables se declaran dentro de los procesos y se les asigna un valor o expresión mediante el operador :=</p></li><li><p>La variable actualiza su nuevo valor en el preciso  instante en que se ejecuta sin esperar a que finalice el proceso.</p></li><li><p>Ejemplo:Descripción de la función "d1 AND d2 XOR d3" de dos formas diferentes: mediante el proceso proc1 y mediante el proceso proc2</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-python, vhdl hljs" data-noescape="true" data-lang="python, vhdl">entity sig_var is
+  port( d1, d2, d3: in std_logic;
+    res1, res2: out std_logic);
+end sig_var;
+
+architecture behv of sig_var is
+  signal sig_s1: std_logic;
+begin
+
+  proc1: process(d1,d2,d3)
+    variable var_s1: std_logic;   --DECLARACION DE LA VARIABLE var_s1 DENTRO DEL PROCESO
+  begin
+    var_s1 := d1 and d2;          --ASIGNACION DE UN VALOR a la variable var_s1 mediante el operador :=
+    res1 &lt;= var_s1 xor d3;
+  end process;
+
+  proc2: process(d1,d2,d3)
+  begin
+    sig_s1 &lt;= d1 and d2;
+    res2 &lt;= sig_s1 xor d3;
+  end process;
+
+end behv;</code></pre></div></div></li></ul></div></div></section><section id="_variables_vs_señales_2"><h2>Variables vs Señales</h2><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="images/var_sig.png" alt="var_sig" width="900" height="400"></span></p></div>
+<div class="ulist"><ul><li><p>¿ Por qué la señal res1 conmuta al valor 1 antes que la señal res2 si las expresiones matemáticas son las mismas?</p></li></ul></div></div></section><section id="_simulación_y_fabricación"><h2>Simulación y Fabricación</h2><div class="slide-content"><div class="ulist"><ul><li><p>Simulación</p><div class="ulist"><ul><li><p>Simulador Questa</p></li><li><p>Simulador Waveform</p></li></ul></div></li><li><p>Fabricación: acceso a través de Miaulario : Pestaña <strong>DE1-SoC&#8594;&gt;&gt;Remoto</strong></p></li></ul></div></div></section></section>
 <section><section id="Tema5_CircArit" data-state="txikiago"><h2>Tema 5: Circuitos Aritméticos</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="https://github.com/kandido/kandido.github.io/raw/gh-pages/PDF/04_circuitos_aritmeticos.pdf?download=">PDF 2020: Tema4 Circuitos Aritméticos</a></p></li><li><p>Operaciones Aritméticas: Suma, Resta, Complemento C1-C2, Multiplicación</p></li><li><p>Circuitos sumadores</p></li><li><p>Circuitos restadores</p></li><li><p>Ciruitos sumador/restador</p></li><li><p>Circuito Multiplicador</p></li><li><p>Unidad Aritmetico-Lógica (ALU)</p></li></ul></div></div></section><section id="_operaciones_aritméticas"><h2>Operaciones Aritméticas</h2><div class="slide-content"><div class="ulist"><ul><li><p>Suma y Resta : binario, hexadecimal y números enteros C1-C2</p></li><li><p>Multiplicación</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-python, vhdl hljs" data-noescape="true" data-lang="python, vhdl">                         1 0 1 1 0 1   -&gt; 45
                        x 1 0 1 1 0 1   -&gt; 45
                         ------------

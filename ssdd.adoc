@@ -2444,6 +2444,47 @@ END light_de1soc ;
 
 * El paquete [naranja]#std_logic_1164# está localizado en: C:/intelFPGA_lite/21.1/questa_fse/vhdl_src/ieee/stdlogic.vhdl
 
+=== Variables vs Señales
+
+* Las variables se declaran dentro de los procesos y se les asigna un valor o expresión mediante el operador :=
+* La variable actualiza su nuevo valor en el preciso  instante en que se ejecuta sin esperar a que finalice el proceso.
+* Ejemplo:Descripción de la función "d1 AND d2 XOR d3" de dos formas diferentes: mediante el proceso proc1 y mediante el proceso proc2
++
+
+----
+entity sig_var is
+  port( d1, d2, d3: in std_logic;
+    res1, res2: out std_logic);
+end sig_var;
+
+architecture behv of sig_var is
+  signal sig_s1: std_logic;
+begin
+
+  proc1: process(d1,d2,d3)
+    variable var_s1: std_logic;   --DECLARACION DE LA VARIABLE var_s1 DENTRO DEL PROCESO
+  begin
+    var_s1 := d1 and d2;          --ASIGNACION DE UN VALOR a la variable var_s1 mediante el operador :=
+    res1 <= var_s1 xor d3;
+  end process;
+
+  proc2: process(d1,d2,d3)
+  begin
+    sig_s1 <= d1 and d2;
+    res2 <= sig_s1 xor d3;
+  end process;
+
+end behv;
+----
+
+
+
+=== Variables vs Señales
+
+image:var_sig.png[var_sig,900,400]
+
+* ¿ Por qué la señal res1 conmuta al valor 1 antes que la señal res2 si las expresiones matemáticas son las mismas?
+
 === Simulación y Fabricación
 
 * Simulación
