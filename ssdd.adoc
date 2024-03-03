@@ -977,7 +977,7 @@ El segmento o distancia del cero (1111) es [verde]#UNO#, el del -1 es DOS, el de
 
 Ejemplos a completar para A=2 y B=5 :
 
-image::tema2_c1_suma-resta.png[]
+image::tema2_c1_suma-resta.png[align="center"]
 
 
 [state=txikiago]
@@ -1228,7 +1228,7 @@ BCD en exceso a 3 : Al valor a representar se le suma 3 antes de la codificació
 Codificación de números Naturales +
 Es un  código reflejado -> Espejo +
 
-image::tema2_gray.svg[]
+image::tema2_gray.svg[align="center"]
 
 El valor 4 en código Gray: 110, 0110, 00110, etc +
 La secuencia de los números es adyacente: únicamente cambia un bit
@@ -1392,7 +1392,7 @@ Codificador gray -> binario: +
 === Puertas Lógicas
 
 
-image::puertas_logicas.png[]
+image::puertas_logicas.png[align="center"]
 
 
 [.columns]
@@ -1405,7 +1405,7 @@ F(x,y,z)= x&#773;y&#773;z&#773; + xyz&#773; + x&#773;yz + xyz&#773;.
 Circuito digital en 3 niveles: not-and-or.
 
 [.column]
-image::circuito_logic.png[]
+image::circuito_logic.png[align="center"]
 
 [.columns, state=txiki]
 === Algebra de Boole
@@ -1439,7 +1439,7 @@ image::circuito_logic.png[]
 
 === Generación de Funciones mediante puertas Lógicas NAND 
 
-image::tema3_genfun_nand.png[]
+image::tema3_genfun_nand.png[align="center"]
 
 === Síntesis matemática de una función lógica
 
@@ -1651,7 +1651,7 @@ La síntesis función F tendría un nivel de puertas OR de 3 entradas y un nivel
 === Diagrama de Karnaugh de la funcion F(x1,x2,x3)
 
 [.column]
-image::tema3_DK_1.png[]
+image::tema3_DK_1.png[align="center"]
 
 [.column]
 
@@ -1661,7 +1661,7 @@ image::tema3_DK_1.png[]
 
 === Simplificación de la Función mediante DK
 
-image::tema3_DK_2.png[]
+image::tema3_DK_2.png[align="center"]
 
 Si sumamos los miniterminos de la 4ª columna  latexmath:[Y=f(x_1,x_2,x_3)=m_4+m_5=x_1\overline x_2\overline x_3+ x_1\overline x_2x_3 = x_1\overline x_2 (\overline x_3+x_3) = x_1\overline x_2], se ha simplificado el número de variables de 3 a dos. La función simplificada es latexmath:[Y= \overline x_1 x_2x_3+x_1\overline x_2] +
 Sumar dos miniterminos adyacentes equivale a agrupar dos celdas adyacentes y reducir una variable.
@@ -1702,7 +1702,7 @@ image::tema3_absorcion_conjunto_2.png[align=left]
 [state="txikiago"]
 === Ejercicios básicos matemáticos en el dominio del Algebra de Boole
 
-image::tema3_distributiva.png[]
+image::tema3_distributiva.png[align="center"]
 latexmath:[F=a_1a_2 + b_1b_2 + c_1c_2c_3 = (a_1+b_1+c_1)(a_1+b_1+c_2)(a_1+b_1+c_3)\cdot\\   
  \cdot (a_1+b_2+c_1)(a_1+b_2+c_2)(a_1+b_2+c_3)\cdot\\
  \cdot (a_2+b_1+c_1)(a_2+b_1+c_2)(a_2+b_1+c_3)\cdot\\
@@ -2172,7 +2172,7 @@ Además del *modo* de la señal (IN-OUT-BUFFER) es necesario declarar el tipo de
 
 [.column.is-vcentered.iturri]
 --
-image::tema4_entity_light.png[] 
+image::tema4_entity_light.png[align="center"] 
 
 Las señales cuyos datos son de tipo [naranja]#BIT# admiten los valores [naranja]#'0'# y [naranja]#'1'#
 
@@ -2269,13 +2269,13 @@ link:{ruta-gh-pages}/PDF/VHDL_QRC__01.pdf?download=[PDF: Hoja de referencia comp
 
 [.column]
 --
-image::quartus_front-end.png[] 
+image::quartus_front-end.png[align="center"] 
 
 Entrada: código VHDL "light_bit.vhd"
 --
 [.column]
 --
-image::quartus_compilation.png[]
+image::quartus_compilation.png[align="center"]
 
 Salida: simulación y síntesis : bitstream "quartus_light.sof"
 --
@@ -2284,11 +2284,11 @@ Salida: simulación y síntesis : bitstream "quartus_light.sof"
 === Simulación: Herramienta Modelsim/Questa
 
 [.column]
-image::questa_front-end.png[]
+image::questa_front-end.png[align="center"]
 
 [.column]
 --
-image::light_xor.bmp[]
+image::light_xor.bmp[align="center"]
 
 Verificar el correcto funcionamiento del circuito antes de su Fabricación
 --
@@ -2423,7 +2423,7 @@ use std.standard.all;
 --
 *Señales binarias distorsionadas* 
 
-image::tema4_signal_stdlogic.png[]
+image::tema4_signal_stdlogic.png[align="center"]
 --
 
 * 8 Umbrales para definir el valor de la señal binaria
@@ -2435,7 +2435,7 @@ image::tema4_signal_stdlogic.png[]
 --
 *Valores Medibles* : 8 umbrales
 
-image::tema4_umbral_stdlogic.png[]
+image::tema4_umbral_stdlogic.png[align="center"]
 --
 
 [.column]
@@ -2570,7 +2570,7 @@ El resultado de la multiplicación tiene un tamaño de bits suma del número de 
 * latexmath:[S_i=\overline A_i\cdot B_i+A_i\cdot \overline B_i = A_i \oplus B_i] 
 * latexmath:[C_i=A_i\cdot B_i]
 
-image::tema5_HA.png[]
+image::tema5_HA.png[align="center"]
 
 
 === Sumador Completo (Full Adder)
@@ -2589,7 +2589,7 @@ image::tema5_HA.png[]
 === Full Adder
 
 .Full Adder
-image::tema5_FA_symbol.png[]
+image::tema5_FA_symbol.png[align="center"]
 
 
 === Sumador Completo usando semi-sumadores
@@ -2643,7 +2643,7 @@ latexmath:[A_1, B_1, C_0, S_a, C_a, S_b, C_b, C_1, S_1] +
 latexmath:[S_1=S_b] +
 latexmath:[C1=\overline C_a \cdot Cb + C_a \cdot \overline  Cb = C_a \oplus C_b] +
 
-image:tema5_FA_HA_c1.png[]
+image:tema5_FA_HA_c1.png[align="center"]
 
 latexmath:[C1=C_a + C_b]  -> interpretarlo con lógica negativa
 --
@@ -2676,14 +2676,14 @@ latexmath:[C1=C_a + C_b]  -> interpretarlo con lógica negativa
 === Sumador Completo usando semisumadores
 
 
-image::tema5_FA.png[]
+image::tema5_FA.png[align="center"]
 
 
 === Sumador Paralelo Acarreo Serie
 
 
 .Full Adders en Cadena
-image::tema5_sumpaacse.png[]
+image::tema5_sumpaacse.png[align="center"]
 
 
 === Sumador Paralelo Acarreo Paralelo
@@ -2724,7 +2724,7 @@ image::tema5_sumpaacse.png[]
 latexmath:[C_i=\overline A_i B_i C_{i-1} + A_i \overline B_i C_{i-1} +  A_i B_i \overline C_{i-1} +  A_i B_i C_{i-1}=\\
 =(A_i \oplus B_i) \cdot C_{i-1} + A_i B_i = P_i \cdot C_{i-1} + G_i ]
 
-image:tema5_sumpaacpaprop.png[]   image:tema5_sumpaacpagen.png[]
+image:tema5_sumpaacpaprop.png[align="center"]   image:tema5_sumpaacpagen.png[align="center"]
 
 Conclusión: P_i y G_i permiten expresar el acarreo de forma más clara. 
 
@@ -2746,7 +2746,7 @@ Sumador serie: +
 -Puerta de bloqueo: mientras el *reloj* está a cero los sumandos valen cero +
 -Dispositivo de *sincronismo*: el reloj
 
-image::tema5_sum-serie.png[]
+image::tema5_sum-serie.png[align="center"]
 
 
 [.columns]
@@ -2786,7 +2786,7 @@ image::tema5_sum-serie.png[]
 --
 latexmath:[Salida_i=\overline {Control \oplus Entrada_i}]
 
-image::tema5_complementador.png[]
+image::tema5_complementador.png[align="center"]
 
 latexmath:[Control=1  \:\:  O_i=B_i]
 
@@ -2794,12 +2794,12 @@ latexmath:[Control=0  \:\:   O_i=\overline B_i]
 --
 === Sumador/Restador de 4 bits
 
-image::tema5_sumador-restador.png[]
+image::tema5_sumador-restador.png[align="center"]
 
 
 === Sumador/Restador de 4 bits
 
-image::tema5_sumarestac1c2.png[]
+image::tema5_sumarestac1c2.png[align="center"]
 
 === Semi-Restador
 
@@ -2875,7 +2875,7 @@ image::tema5_sumarestac1c2.png[]
 El circuito multiplexor de N entradas de datos y 1 salida de datos tiene la función de seleccionar una de las entradas y conectarla a la salida. Para ello se sirve de M entradas de control donde 2^M^=N +
 
 .Multiplexor 4x1
-image::tema6_multiplexor.png[]
+image::tema6_multiplexor.png[align="center"]
 --
 
 [.column]
@@ -2910,7 +2910,7 @@ Gráfica de 2^6^=64 celdas +
 4 matrices de 16 celdas cada una, representadas en 3 dimensiones +
 1 matriz de variables latexmath:[I_3, I_2, I_1, I_0] para cada combinación latexmath:[S_2S_1] +
 
-image::tema6_mux_dk.png[]
+image::tema6_mux_dk.png[align="center"]
 
 
 
@@ -2924,7 +2924,7 @@ image::tema6_mux-esqelec.svg[width=340,heigth=280]
 
 === Hoja de Características Comercial
 
-image::tema6_mux-comercial.png[]
+image::tema6_mux-comercial.png[align="center"]
 
 
 === Extensión de Multiplexores
@@ -2973,7 +2973,7 @@ image::tema6_mux-extension.svg[width=440,heigth=340]
 * Un codificador realiza la conversión de un número con cualquier tipo de código no binario a código binario.
 * Pej: un codificador de código hexadecimal a código binario se implementa mediante un circuito con un bus de datos de entrada de 16 hilos donde únicamente (codificador sin prioridad) se activa el hilo asociado a uno de los 16 dígitos hexadecimales. Para codificar en binario los 16 dígitos son necesarios 4 bits (2^4^ combinaciones), por lo que el bus de datos de entrada tiene un tamaño de 16 pistas y el de salida tiene un tamaño de 4 pistas.
 
-image::tema6_codificador-hex.png[]
+image::tema6_codificador-hex.png[align="center"]
 
 [state=taula]
 === Codificador Hexadecimal sin Prioridad : Diseño
@@ -3573,7 +3573,7 @@ image::tema6_comparador_ascen-descen.svg[500,500]
 * El comparador de segundo nivel tiene como entradas de datos las salidas GEL de los 4 comparadores del primer nivel (latexmath:[C_B,C_C,C_D \: y \: C_E]) y como entrada GEL la salida GEL del comparador  latexmath:[C_A].
 
 [.column]
-image::tema6_comparador_24.svg[]
+image::tema6_comparador_24.svg[align="center"]
 
 
 == Ejercicios de Análisis
@@ -3581,56 +3581,56 @@ image::tema6_comparador_24.svg[]
 
 === BCD_adder_onedigit
 
-image:app_BCD_adder_twodigit.png[]
+image:app_BCD_adder_twodigit.png[align="center"]
 
 === BCD_sum_2digitos
 
-image::app_BCD_sum_2digitos.png[]
+image::app_BCD_sum_2digitos.png[align="center"]
 
 === mux_2displays
 
-image:app_mux_2displays.png[]
+image:app_mux_2displays.png[align="center"]
 
 === demultiplexor
 
-image:app_demultiplexor.png[]
+image:app_demultiplexor.png[align="center"]
 
 === mux_extension_decod
 
-image:app_mux_extension_decod.png[]
+image:app_mux_extension_decod.png[align="center"]
 
 === paridad_tx_rx
 
-image:app_paridad_tx_rx.png[]
+image:app_paridad_tx_rx.png[align="center"]
 
 === Wind Meter: veleta_encoder
 
-image:app_wind_veleta_encoder.png[]
+image:app_wind_veleta_encoder.png[width=400,heigth=400,align="center"]
 
 === Wind Meter: transductor
 
-image:app_wind_transductor.png[]
+image:app_wind_transductor.png[width=400,heigth=400,align="center"]
 
 === Wind Meter:gray_bin_encode
 
-image:app_wind_gray_bin_encoder_1.png[]
+image:app_wind_gray_bin_encoder_1.png[align="center"]
 
 === Wind Meter:encoder operation
 
-image:app_wind_encoder_dynamic.gif[]
+image:app_wind_encoder_dynamic.gif[align="center"]
 
 === Wind Meter: input/output system
 
-image:app_wind_elec_io_entity.png[]
+image:app_wind_elec_io_entity.png[width=400,heigth=400,align="center"]
 
 === Wind Meter: electrical blocks
 
-image:app_wind_elec_blocks_diagram.png[]
+image:app_wind_elec_blocks_diagram.png[align="center"]
 
 
 === recuento_pastillas
 
-image:app_recuento_pastillas.png[]
+image:app_recuento_pastillas.png[align="center"]
 
 
 
