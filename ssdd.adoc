@@ -1048,6 +1048,24 @@ image::tema2_c1_suma-resta.png[]
  63 62         52 51                     0   <-- bit pos 0 a la dcha      
 ----------------------------------------------------------------------
 
+=== IEEE 754: Números especiales
+
+* Cero
+** bit de signo = 0
+** exponente en exceso: todo con bits 0
+** fracción mantisa: todo con bits 0
+
+
+* Infinito positivo y negativo
+** exponente en exceso = todo con bits  1
+** fracción mantisa: todo con bits 0
+
+
+* NaN (Not-A-Number)
+** exponente en exceso = todo con bits  1
+** fracción mantisa = distinto de todos los bits a cero
+
+
 [.columns, state=txikiago]
 === El Nº -5.5/1024 en los dos Formatos IEEE-754
 
@@ -2447,7 +2465,12 @@ END light_de1soc ;
 === Variables vs Señales
 
 * Las variables se declaran dentro de los procesos y se les asigna un valor o expresión mediante el operador :=
+** Las señales pueden utilizarse dentro y fuera de los procesos
 * La variable actualiza su nuevo valor en el preciso  instante en que se ejecuta sin esperar a que finalice el proceso.
+** La sentencia <= se ejecuta cuando hay un evento en una señal sensible a la sentencia.
+** Los valores de las señales se actualizan cuando el proceso esta en estado de pausa  
+* Una variable que es utilizada en un proceso no se puede compartir (no se puede ver) en otro proceso.
+** Una misma señal puede ser utilizada en múltiples procesos.
 * Ejemplo:Descripción de la función "d1 AND d2 XOR d3" de dos formas diferentes: mediante el proceso proc1 y mediante el proceso proc2
 +
 
@@ -3553,16 +3576,41 @@ image::tema6_comparador_ascen-descen.svg[500,500]
 image::tema6_comparador_24.svg[]
 
 
+== Ejercicios de Análisis
+
+
+=== BCD_adder_onedigit
+
+image:app_BCD_adder_twodigit.png[]
+
+=== BCD_sum_2digitos
+
+image:app_BCD_sum_2digitos.png[]
+
+=== mux_2displays
+
+image:app_mux_2displays.png[]
+
+=== demultiplexor
+
+image:app_demultiplexor.png[]
+
+=== mux_extension_decod
+
+image:app_mux_extension_decod.png[]
+
+
+=== paridad_tx_rx
+
+image:app_paridad_tx_rx.png[]
+
+=== recuento_pastillas
+
+image:app_recuento_pastillas.png[]
 
 
 
-
- 
-
-
-
-
-== Ejercicios ==
+== Ejercicios Libro Curso ==
 
 * Capítulo 4: 4.2, 4.4, 4.6
 * Capítulo 5: 5.2, 5.3, 5.4
