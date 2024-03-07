@@ -2465,12 +2465,15 @@ END light_de1soc ;
 === Variables vs Señales
 
 * Las variables se declaran dentro de los procesos y se les asigna un valor o expresión mediante el operador :=
-** Las señales pueden utilizarse dentro y fuera de los procesos
+** En cambio, Las [naranja]#señales# pueden utilizarse dentro y fuera de los procesos
 * La variable actualiza su nuevo valor en el preciso  instante en que se ejecuta sin esperar a que finalice el proceso.
-** La sentencia <= se ejecuta cuando hay un evento en una señal sensible a la sentencia.
-** Los valores de las señales se actualizan cuando el proceso esta en estado de pausa  
+** En cambio, La sentencia <= se ejecuta cuando hay un evento en una [naranja]#señal# sensible a la sentencia.
+** En cambio, Los valores de las [naranja]#señales# se actualizan cuando el proceso esta en estado de pausa  
 * Una variable que es utilizada en un proceso no se puede compartir (no se puede ver) en otro proceso.
-** Una misma señal puede ser utilizada en múltiples procesos.
+** En cambio, Una misma [naranja]#señal# puede ser utilizada en múltiples procesos.
+
+=== Variables vs Señales
+
 * Ejemplo:Descripción de la función "d1 AND d2 XOR d3" de dos formas diferentes: mediante el proceso proc1 y mediante el proceso proc2
 +
 
@@ -3579,7 +3582,11 @@ image::tema6_comparador_24.svg[align="center"]
 == Ejercicios de Análisis
 
 
-=== BCD_adder_onedigit
+=== BCD_adder_one_digit
+
+image::app_BCD_adder_onedigit.png[align="center"]
+
+=== BCD_adder_2digitos
 
 image::app_BCD_adder_twodigit.png[align="center"]
 
