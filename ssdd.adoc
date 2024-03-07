@@ -2490,7 +2490,7 @@ begin
   proc1: process(d1,d2,d3)
     variable var_s1: std_logic;   --DECLARACION DE LA VARIABLE var_s1 DENTRO DEL PROCESO
   begin
-    var_s1 := d1 and d2;          --ASIGNACION DE UN VALOR a la variable var_s1 mediante el operador :=
+    var_s1 := d1 and d2;       --ASIGNACION DE UN VALOR a la variable var_s1 mediante el operador :=
     res1 <= var_s1 xor d3;
   end process;
 
