@@ -886,7 +886,8 @@ begin
   end process;
 
 end behv;</code></pre></div></div></li></ul></div></div></section><section id="_variables_vs_señales_3"><h2>Variables vs Señales</h2><div class="slide-content"><div class="paragraph"><p><span class="image"><img src="images/var_sig.png" alt="var_sig" width="900" height="400"></span></p></div>
-<div class="ulist"><ul><li><p>¿ Por qué la señal res1 conmuta al valor 1 antes que la señal res2 si las expresiones matemáticas son las mismas?</p></li></ul></div></div></section><section id="_variables_vs_señales_4" data-state="txiki"><h2>Variables vs Señales</h2><div class="slide-content"><div class="literalblock"><div class="content"><pre>                d1: 0-1-0-1-0-1-0-1
+<div class="ulist"><ul><li><p>¿ Por qué la señal res1 conmuta al valor 1 antes que la señal res2 si las expresiones matemáticas son las mismas?</p></li></ul></div>
+<aside class="notes"><div class="literalblock"><div class="content"><pre>                d1: 0-1-0-1-0-1-0-1
                 d2: 1-1-0-0-1-1-0-0
       s1:d1 and d2: 0-1-0-0-0-1-0-0
                 d3: 0-0-1-1-1-1-0-0
@@ -907,7 +908,7 @@ d1 cambia a 0, d2 cambia a 0, d3 cambia a 1
 d1 cambia a 1
   - sig_s1: 1 and 0 -&gt;0
   - res2: sig_s1(sin actualizar, valor anterior 0 ) -&gt; 0 xor 1 -&gt;1</pre></div></div>
-<div class="literalblock"><div class="content"><pre>res2: 0-0-0-1-</pre></div></div></div></section><section id="_simulación_y_fabricación"><h2>Simulación y Fabricación</h2><div class="slide-content"><div class="ulist"><ul><li><p>Simulación</p><div class="ulist"><ul><li><p>Simulador Questa</p></li><li><p>Simulador Waveform</p></li></ul></div></li><li><p>Fabricación: acceso a través de Miaulario : Pestaña <strong>DE1-SoC&#8594;&gt;&gt;Remoto</strong></p></li></ul></div></div></section></section>
+<div class="literalblock"><div class="content"><pre>res2: 0-0-0-1-</pre></div></div></aside></div></section><section id="_simulación_y_fabricación"><h2>Simulación y Fabricación</h2><div class="slide-content"><div class="ulist"><ul><li><p>Simulación</p><div class="ulist"><ul><li><p>Simulador Questa</p></li><li><p>Simulador Waveform</p></li></ul></div></li><li><p>Fabricación: acceso a través de Miaulario : Pestaña <strong>DE1-SoC&#8594;&gt;&gt;Remoto</strong></p></li></ul></div></div></section></section>
 <section><section id="Tema5_CircArit" data-state="txikiago"><h2>Tema 5: Circuitos Aritméticos</h2><div class="slide-content"><div class="ulist"><ul><li><p><a href="https://github.com/kandido/kandido.github.io/raw/gh-pages/PDF/04_circuitos_aritmeticos.pdf?download=">PDF 2020: Tema4 Circuitos Aritméticos</a></p></li><li><p>Operaciones Aritméticas: Suma, Resta, Complemento C1-C2, Multiplicación</p></li><li><p>Circuitos sumadores</p></li><li><p>Circuitos restadores</p></li><li><p>Ciruitos sumador/restador</p></li><li><p>Circuito Multiplicador</p></li><li><p>Unidad Aritmetico-Lógica (ALU)</p></li></ul></div></div></section><section id="_operaciones_aritméticas"><h2>Operaciones Aritméticas</h2><div class="slide-content"><div class="ulist"><ul><li><p>Suma y Resta : binario, hexadecimal y números enteros C1-C2</p></li><li><p>Multiplicación</p><div class="listingblock"><div class="content"><pre class="highlightjs highlight"><code class="language-python, vhdl hljs" data-noescape="true" data-lang="python, vhdl">                         1 0 1 1 0 1   -&gt; 45
                        x 1 0 1 1 0 1   -&gt; 45
                         ------------
