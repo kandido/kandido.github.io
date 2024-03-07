@@ -2511,6 +2511,36 @@ image:var_sig.png[var_sig,900,400]
 
 * ¿ Por qué la señal res1 conmuta al valor 1 antes que la señal res2 si las expresiones matemáticas son las mismas?
 
+=== Variables vs Señales
+
+                  d1: 0-1-0-1-0-1-0-1
+                  d2: 1-1-0-0-1-1-0-0
+        s1:d1 and d2: 0-1-0-0-0-1-0-0
+                  d3: 0-0-1-1-1-1-0-0
+  res1:var_s1 xor d3: 0-1-1-1-1-0-0-0
+  res2:sig_s1 xor d3: 0-?-?-?
+
+  1º intervalo: d1 empieza en 0, d2 en 1, d3 en 0, res2 empieza con el valor 0
+
+  2º intervalo:
+  d1 cambia a 1 y se ejecuta el proceso (cuyas sentencias son secuenciales)
+    - sig_s1 tomará (cuando se actualice la señal sig_s1) el valor 1 and 1 ->1
+    - res2 tomará (cuando se actualice la señal res2) el valor sig_s1(sin actualizar, valor anterior 0 ) xor d3 -> 0 xor 0
+    - actualizacion sig1 1 y res2 0
+
+  3º intervalo:
+  d1 cambia a 0, d2 cambia a 0, d3 cambia a 1
+    - sig_s1: 0 and 0 ->0
+    - res2: sig_s1(sin actualizar, valor anterior 1) -> 1 xor 1 ->0
+    - actualizacion sig1 0 y res2 0
+
+  4º intervalo:
+  d1 cambia a 1
+    - sig_s1: 1 and 0 ->0
+    - res2: sig_s1(sin actualizar, valor anterior 0 ) -> 0 xor 1 ->1 
+
+  res2: 0-0-0-1-
+
 === Simulación y Fabricación
 
 * Simulación
